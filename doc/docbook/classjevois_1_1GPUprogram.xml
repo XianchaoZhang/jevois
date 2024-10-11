@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GPUprogram">
+<title>jevois::GPUprogram Class Reference</title>
+<indexterm><primary>jevois::GPUprogram</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GPUprogram.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Simple class to load and compile some OpenGL-ES program. </para>
+<para>
+Definition at line 25 of file GPUprogram.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GPUprogram_1a3290d2cd9d28e67b47adfa28a76123a9">GPUprogram</link> (char const *vertex_shader, char const *fragment_shader)</para>
+
+<para>Constructor, loads and compiles the program, assigns it a program ID. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GPUprogram_1aeddd8fc9243d2ffed044656df98db179">~GPUprogram</link> ()</para>
+
+<para>Destructor, deletes the program from OpenGL and frees up the ID. </para>
+</listitem>
+            <listitem><para>GLuint <link linkend="_classjevois_1_1GPUprogram_1a5366a4733bdc9a4b8e982218e4ff41f1">id</link> () const</para>
+
+<para>Get the program ID so we can tell OpenGL to use this program. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUprogram_1a3290d2cd9d28e67b47adfa28a76123a9"/>    <section>
+    <title>GPUprogram()</title>
+<indexterm><primary>GPUprogram</primary><secondary>jevois::GPUprogram</secondary></indexterm>
+<indexterm><primary>jevois::GPUprogram</primary><secondary>GPUprogram</secondary></indexterm>
+<para><computeroutput>jevois::GPUprogram::GPUprogram (char const * vertex_shader, char const * fragment_shader)</computeroutput></para><para>
+
+<para>Constructor, loads and compiles the program, assigns it a program ID. </para>
+</para>
+
+<para>If shader names start with a #, assume they are code, otherwise filenames. </para>
+<para>
+Definition at line 21 of file GPUprogram.C.</para>
+<para>
+References GL_CHECK, jevois::GPUshader::id(), LDEBUG, jevois::GPUshader::load(), and jevois::GPUshader::set().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUprogram_1aeddd8fc9243d2ffed044656df98db179"/>    <section>
+    <title>~GPUprogram()</title>
+<indexterm><primary>~GPUprogram</primary><secondary>jevois::GPUprogram</secondary></indexterm>
+<indexterm><primary>jevois::GPUprogram</primary><secondary>~GPUprogram</secondary></indexterm>
+<para><computeroutput>jevois::GPUprogram::~GPUprogram ( )</computeroutput></para><para>
+
+<para>Destructor, deletes the program from OpenGL and frees up the ID. </para>
+</para>
+<para>
+Definition at line 45 of file GPUprogram.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUprogram_1a5366a4733bdc9a4b8e982218e4ff41f1"/>    <section>
+    <title>id()</title>
+<indexterm><primary>id</primary><secondary>jevois::GPUprogram</secondary></indexterm>
+<indexterm><primary>jevois::GPUprogram</primary><secondary>id</secondary></indexterm>
+<para><computeroutput>GLuint jevois::GPUprogram::id ( ) const</computeroutput></para><para>
+
+<para>Get the program ID so we can tell OpenGL to use this program. </para>
+</para>
+<para>
+Definition at line 57 of file GPUprogram.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GPUprogram_8H">GPUprogram.H</link>src/jevois/GPU/<link linkend="_GPUprogram_8C">GPUprogram.C</link></section>
+</section>

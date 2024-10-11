@@ -1,0 +1,204 @@
+\hypertarget{GUIhelper_8C}{}\doxysubsection{src/jevois/\+G\+P\+U/\+G\+U\+Ihelper.C File Reference}
+\label{GUIhelper_8C}\index{src/jevois/GPU/GUIhelper.C@{src/jevois/GPU/GUIhelper.C}}
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$imgui.\+h$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+internal.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ihelper.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iconsole.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Uimage.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Module.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ieditor.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iserial.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Sys\+Info.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Python\+Exception.\+H$>$}\newline
+{\ttfamily \#include $<$glm/gtc/matrix\+\_\+transform.\+hpp$>$}\newline
+{\ttfamily \#include $<$glm/gtx/euler\+\_\+angles.\+hpp$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+Include dependency graph for G\+U\+Ihelper.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{GUIhelper_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structTinyImGUIdemo}{Tiny\+Im\+G\+U\+Idemo}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_adf4d73301961430d50d7edd96f92ce38}{I\+M\+G\+U\+I\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+M\+A\+T\+H\+\_\+\+O\+P\+E\+R\+A\+T\+O\+RS}}
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}(i,  x,  y,  z)~for(\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}} i=x;i$<$y;i+=z)
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}}(y)~sin((y+t)$\ast$.\+03)$\ast$(1-\/sin(t$\ast$3)$\ast$cos(y/99+t))$\ast$9
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}{H}}(p,  w)~\mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}(k,0,5,1)d-\/$>$Add\+Circle\+Filled(p+\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}(1,-\/1)$\ast$w$\ast$k/8,w$\ast$(1-\/k/5),k$<$4?0xff000000+k$\ast$0x554400\+:-\/1);
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_a518af4e11e6c072ade65a5e299f09bc9}{J}}(b)~\mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}(i,0,\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}},1)\{\mbox{\hyperlink{structTinyImGUIdemo}{Tiny\+Im\+G\+U\+Idemo}}\&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}=\mbox{\hyperlink{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}{G}}\mbox{[}int(i)\mbox{]};if(b$\ast$o.\+z$>$0)\mbox{\hyperlink{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}{H}}(o.\+p,(o.\+z$\ast$.\+3+4)$\ast$o.\+w)\}
+\item 
+\#define \mbox{\hyperlink{GUIhelper_8C_a66056ccf8d4fa1692ec296f02710f197}{O}}(b)~i=t+1.\+6+j/99;if(b$\ast$sin(i)$>$0)\mbox{\hyperlink{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}{H}}(c+v$\ast$j+u$\ast$(cos(i)$\ast$40+\mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}}(j)),30)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} = Im\+Vec2
+\item 
+using \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}} = float
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{GUIhelper_8C_a05d68c2cfcae72873423c466fb09d82d}{draw\+Tiny\+Im\+G\+U\+Idemo}} (Im\+Draw\+List $\ast$d, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} a, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} b, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}, Im\+Vec4, \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}} t)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}
+\item 
+\mbox{\hyperlink{structTinyImGUIdemo}{Tiny\+Im\+G\+U\+Idemo}} \mbox{\hyperlink{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}{G}} \mbox{[}999\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}\label{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}} 
+\index{GUIhelper.C@{GUIhelper.C}!H@{H}}
+\index{H@{H}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{H}{H}}
+{\footnotesize\ttfamily \#define H(\begin{DoxyParamCaption}\item[{}]{p,  }\item[{}]{w }\end{DoxyParamCaption})~\mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}(k,0,5,1)d-\/$>$Add\+Circle\+Filled(p+\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}(1,-\/1)$\ast$w$\ast$k/8,w$\ast$(1-\/k/5),k$<$4?0xff000000+k$\ast$0x554400\+:-\/1);}
+
+
+
+Definition at line 2494 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_adf4d73301961430d50d7edd96f92ce38}\label{GUIhelper_8C_adf4d73301961430d50d7edd96f92ce38}} 
+\index{GUIhelper.C@{GUIhelper.C}!IMGUI\_DEFINE\_MATH\_OPERATORS@{IMGUI\_DEFINE\_MATH\_OPERATORS}}
+\index{IMGUI\_DEFINE\_MATH\_OPERATORS@{IMGUI\_DEFINE\_MATH\_OPERATORS}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{IMGUI\_DEFINE\_MATH\_OPERATORS}{IMGUI\_DEFINE\_MATH\_OPERATORS}}
+{\footnotesize\ttfamily \#define I\+M\+G\+U\+I\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+M\+A\+T\+H\+\_\+\+O\+P\+E\+R\+A\+T\+O\+RS}
+
+
+
+Definition at line 23 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_a518af4e11e6c072ade65a5e299f09bc9}\label{GUIhelper_8C_a518af4e11e6c072ade65a5e299f09bc9}} 
+\index{GUIhelper.C@{GUIhelper.C}!J@{J}}
+\index{J@{J}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{J}{J}}
+{\footnotesize\ttfamily \#define J(\begin{DoxyParamCaption}\item[{}]{b }\end{DoxyParamCaption})~\mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}(i,0,\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}},1)\{\mbox{\hyperlink{structTinyImGUIdemo}{Tiny\+Im\+G\+U\+Idemo}}\&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}=\mbox{\hyperlink{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}{G}}\mbox{[}int(i)\mbox{]};if(b$\ast$o.\+z$>$0)\mbox{\hyperlink{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}{H}}(o.\+p,(o.\+z$\ast$.\+3+4)$\ast$o.\+w)\}}
+
+
+
+Definition at line 2495 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}\label{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}} 
+\index{GUIhelper.C@{GUIhelper.C}!L@{L}}
+\index{L@{L}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \#define L(\begin{DoxyParamCaption}\item[{}]{i,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{z }\end{DoxyParamCaption})~for(\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}} i=x;i$<$y;i+=z)}
+
+
+
+Definition at line 2492 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_a66056ccf8d4fa1692ec296f02710f197}\label{GUIhelper_8C_a66056ccf8d4fa1692ec296f02710f197}} 
+\index{GUIhelper.C@{GUIhelper.C}!O@{O}}
+\index{O@{O}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{O}{O}}
+{\footnotesize\ttfamily \#define O(\begin{DoxyParamCaption}\item[{}]{b }\end{DoxyParamCaption})~i=t+1.\+6+j/99;if(b$\ast$sin(i)$>$0)\mbox{\hyperlink{GUIhelper_8C_a251ee9f915563bc8c09c1623b5e29e31}{H}}(c+v$\ast$j+u$\ast$(cos(i)$\ast$40+\mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}}(j)),30)}
+
+
+
+Definition at line 2496 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}\label{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}} 
+\index{GUIhelper.C@{GUIhelper.C}!Q@{Q}}
+\index{Q@{Q}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{Q}{Q}}
+{\footnotesize\ttfamily \#define Q(\begin{DoxyParamCaption}\item[{}]{y }\end{DoxyParamCaption})~sin((y+t)$\ast$.\+03)$\ast$(1-\/sin(t$\ast$3)$\ast$cos(y/99+t))$\ast$9}
+
+
+
+Definition at line 2493 of file G\+U\+Ihelper.\+C.
+
+
+
+\doxysubsubsection{Typedef Documentation}
+\mbox{\Hypertarget{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}\label{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}} 
+\index{GUIhelper.C@{GUIhelper.C}!F@{F}}
+\index{F@{F}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{F}{F}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}} =  float}
+
+
+
+Definition at line 2491 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}\label{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}} 
+\index{GUIhelper.C@{GUIhelper.C}!V@{V}}
+\index{V@{V}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{V}{V}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} =  Im\+Vec2}
+
+
+
+Definition at line 2491 of file G\+U\+Ihelper.\+C.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{GUIhelper_8C_a05d68c2cfcae72873423c466fb09d82d}\label{GUIhelper_8C_a05d68c2cfcae72873423c466fb09d82d}} 
+\index{GUIhelper.C@{GUIhelper.C}!drawTinyImGUIdemo@{drawTinyImGUIdemo}}
+\index{drawTinyImGUIdemo@{drawTinyImGUIdemo}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{drawTinyImGUIdemo()}{drawTinyImGUIdemo()}}
+{\footnotesize\ttfamily void draw\+Tiny\+Im\+G\+U\+Idemo (\begin{DoxyParamCaption}\item[{Im\+Draw\+List $\ast$}]{d,  }\item[{\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}}]{a,  }\item[{\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}}]{b,  }\item[{\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}}]{,  }\item[{Im\+Vec4}]{,  }\item[{\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}}]{t }\end{DoxyParamCaption})}
+
+
+
+Definition at line 2497 of file G\+U\+Ihelper.\+C.
+
+
+
+References G, h, J, L, O, and Q.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+Tweaks().
+
+
+
+\doxysubsubsection{Variable Documentation}
+\mbox{\Hypertarget{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}\label{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}} 
+\index{GUIhelper.C@{GUIhelper.C}!G@{G}}
+\index{G@{G}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{G}{G}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structTinyImGUIdemo}{Tiny\+Im\+G\+U\+Idemo}} G\mbox{[}999\mbox{]}}
+
+
+
+Definition at line 2491 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by convert\+Y\+U\+Y\+Vto\+R\+G\+B24(), convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+L(), convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+Linternal(), and draw\+Tiny\+Im\+G\+U\+Idemo().
+
+\mbox{\Hypertarget{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}\label{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}} 
+\index{GUIhelper.C@{GUIhelper.C}!h@{h}}
+\index{h@{h}!GUIhelper.C@{GUIhelper.C}}
+\doxyparagraph{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int h}
+
+
+
+Definition at line 2491 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by convert\+Y\+U\+Y\+Vto\+R\+G\+B24(), convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+L(), jevois\+::\+G\+P\+Uimage\+::draw(), jevois\+::rawimage\+::draw\+Filled\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Image(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image1(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image2(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image3(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame2(), jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Input\+Frame2(), jevois\+::rawimage\+::draw\+Line(), jevois\+::rawimage\+::draw\+Rect(), draw\+Tiny\+Im\+G\+U\+Idemo(), jevois\+::\+Video\+Display\+Backend\+::get\+Window\+Size(), jevois\+::\+G\+U\+Ihelper\+::\+G\+U\+Ihelper(), jevois\+::coords\+::img\+To\+Std\+Size(), jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::init(), jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), jevois\+::\+Video\+Display\+Backend\+::new\+Frame(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::process(), jevois\+::\+Raw\+Image\+::require(), jevois\+::\+G\+U\+Ihelper\+::resetstate(), jevois\+::rawimage\+::roipaste(), jevois\+::\+Camera\+Calibration\+::save(), jevois\+::\+Video\+Display\+G\+U\+I\+::send(), jevois\+::\+Video\+Display\+G\+L\+::send(), jevois\+::\+Std\+Module\+::send\+Serial\+Img2\+D(), jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2\+D(), jevois\+::\+Std\+Module\+::send\+Serial\+Std2\+D(), jevois\+::\+Std\+Module\+::send\+Serial\+Std3\+D(), jevois\+::\+G\+U\+Ihelper\+::start\+Frame(), jevois\+::\+G\+U\+Ihelper\+Python\+::start\+Frame(), jevois\+::coords\+::std\+To\+Img\+Size(), and jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image().
+

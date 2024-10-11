@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Coordinates_8H">
+<title>include/jevois/Util/Coordinates.H File Reference</title>
+<indexterm><primary>include/jevois/Util/Coordinates.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Image/RawImage.H&gt;
+</programlisting>Include dependency graph for Coordinates.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Coordinates_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Coordinates_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1coords">jevois::coords</link></para>
+
+<para>用于将坐标从相机分辨率转换为标准坐标的辅助函数的命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__coordhelpers_1ga1d1cce429f3dc409417001eccf6b85b6">JEVOIS_CAMERA_ASPECT</link>   (16.0 / 9.0)</para>
+
+<para>JeVois 相机的纵横比 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb">jevois::coords::imgToStd</link> (float &amp;x, float &amp;y, RawImage const &amp;camimg, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 将相机坐标就地转换为标准化坐标，以确定图像大小 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1_1coords_1ae621e121aecf4517d49ee93a047b9a7d">jevois::coords::imgToStd</link> (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度从相机现场转换为标准化坐标 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga22830c058b06d45804ac9acc9e43d939">jevois::coords::imgToStdX</link> (float &amp;x, unsigned int const width, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga3c03b605134727c861576a87ccd0fcb7">jevois::coords::imgToStdY</link> (float &amp;y, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1gac6b2bbdd9348f3da2e4f9dd304bf3343">jevois::coords::imgToStdSize</link> (float &amp;w, float &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5">jevois::coords::stdToImg</link> (float &amp;x, float &amp;y, RawImage const &amp;camimg, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1gadc6d1e599f2c8e464a69f25b54fd6f45">jevois::coords::stdToImg</link> (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1_1coords_1af348fba8df5bc4a080b59955dcccaae1">jevois::coords::stdToImgSize</link> (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将尺寸从标准化转换为图像 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

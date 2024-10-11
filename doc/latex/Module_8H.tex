@@ -1,0 +1,101 @@
+\hypertarget{Module_8H}{}\doxysubsection{include/jevois/\+Core/\+Module.H File Reference}
+\label{Module_8H}\index{include/jevois/Core/Module.H@{include/jevois/Core/Module.H}}
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Input\+Frame.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Output\+Frame.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Buf.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+User\+Interface.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Component/\+Component.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Obj\+Reco.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Obj\+Detect.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Enum.\+H$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ihelper.\+H$>$}\newline
+{\ttfamily \#include $<$glm/gtc/matrix\+\_\+transform.\+hpp$>$}\newline
+Include dependency graph for Module.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Module_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Module_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Module}{jevois\+::\+Module}}
+\begin{DoxyCompactList}\small\item\em 视觉处理模块的虚基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}}
+\begin{DoxyCompactList}\small\item\em 支持标准化串行消息的模块的基类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{J\+E\+V\+O\+I\+S\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+M\+O\+D\+U\+LE}}(M\+O\+D\+U\+L\+E\+N\+A\+ME)
+\begin{DoxyCompactList}\small\item\em 注册一个模块，允许它从 .so 文件动态加载 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Module_8H_a4bd01f80534e626c397ce5bd0e88b7ca}{J\+E\+V\+O\+I\+S\+\_\+\+D\+I\+S\+A\+B\+L\+E\+D\+\_\+\+M\+O\+D\+U\+LE}}(M\+O\+D\+U\+L\+E\+N\+A\+ME)
+\begin{DoxyCompactList}\small\item\em 创建并注册一个已禁用的模块，允许它从 .so 文件动态加载 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Module_8H_a4bd01f80534e626c397ce5bd0e88b7ca}\label{Module_8H_a4bd01f80534e626c397ce5bd0e88b7ca}} 
+\index{Module.H@{Module.H}!JEVOIS\_DISABLED\_MODULE@{JEVOIS\_DISABLED\_MODULE}}
+\index{JEVOIS\_DISABLED\_MODULE@{JEVOIS\_DISABLED\_MODULE}!Module.H@{Module.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DISABLED\_MODULE}{JEVOIS\_DISABLED\_MODULE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+I\+S\+A\+B\+L\+E\+D\+\_\+\+M\+O\+D\+U\+LE(\begin{DoxyParamCaption}\item[{}]{M\+O\+D\+U\+L\+E\+N\+A\+ME }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{class }MODULENAME : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}} \{                            \(\backslash\)}
+\DoxyCodeLine{    public:                                                             \(\backslash\)}
+\DoxyCodeLine{      MODULENAME(std::string \textcolor{keyword}{const} \& instancename) : \mbox{\hyperlink{namespacejevois}{jevois}}::Module(instancename) \(\backslash\)}
+\DoxyCodeLine{        \{ \textcolor{keywordflow}{throw} std::runtime\_error(\textcolor{stringliteral}{"This module is disabled on your hardware configuration"}); \} \(\backslash\)}
+\DoxyCodeLine{  \};                                                                    \(\backslash\)}
+\DoxyCodeLine{  extern \textcolor{stringliteral}{"C"} std::shared\_ptr<jevois::Module> MODULENAME\#\#\_create(std::string \textcolor{keyword}{const} \& instanceid) \(\backslash\)}
+\DoxyCodeLine{  \{ \textcolor{keywordflow}{return} std::shared\_ptr<jevois::Module>(\textcolor{keyword}{new} MODULENAME(instanceid)); \} \(\backslash\)}
+\DoxyCodeLine{  extern \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{int} MODULENAME\#\#\_version\_major() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{JEVOIS\_VERSION\_MAJOR}}; \} \(\backslash\)}
+\DoxyCodeLine{  extern \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{int} MODULENAME\#\#\_version\_minor() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{JEVOIS\_VERSION\_MINOR}}; \} \(\backslash\)}
+
+\end{DoxyCode}
+
+
+创建并注册一个已禁用的模块，允许它从 .so 文件动态加载 
+
+
+
+Definition at line 327 of file Module.\+H.
+
+\mbox{\Hypertarget{Module_8H_a19a74668397740a2cd4813240e547179}\label{Module_8H_a19a74668397740a2cd4813240e547179}} 
+\index{Module.H@{Module.H}!JEVOIS\_REGISTER\_MODULE@{JEVOIS\_REGISTER\_MODULE}}
+\index{JEVOIS\_REGISTER\_MODULE@{JEVOIS\_REGISTER\_MODULE}!Module.H@{Module.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_REGISTER\_MODULE}{JEVOIS\_REGISTER\_MODULE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+M\+O\+D\+U\+LE(\begin{DoxyParamCaption}\item[{}]{M\+O\+D\+U\+L\+E\+N\+A\+ME }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} std::shared\_ptr<jevois::Module> MODULENAME\#\#\_create(std::string \textcolor{keyword}{const} \& instanceid) \(\backslash\)}
+\DoxyCodeLine{  \{ \textcolor{keywordflow}{return} std::shared\_ptr<jevois::Module>(\textcolor{keyword}{new} MODULENAME(instanceid)); \} \(\backslash\)}
+\DoxyCodeLine{  extern \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{int} MODULENAME\#\#\_version\_major() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{JEVOIS\_VERSION\_MAJOR}}; \} \(\backslash\)}
+\DoxyCodeLine{  extern \textcolor{stringliteral}{"C"} \textcolor{keywordtype}{int} MODULENAME\#\#\_version\_minor() \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{JEVOIS\_VERSION\_MINOR}}; \} \(\backslash\)}
+
+\end{DoxyCode}
+
+
+注册一个模块，允许它从 .so 文件动态加载 
+
+
+
+Definition at line 304 of file Module.\+H.
+

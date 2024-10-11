@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Log_8H">
+<title>include/jevois/Debug/Log.H File Reference</title>
+<indexterm><primary>include/jevois/Debug/Log.H</primary></indexterm>
+<programlisting>#include &lt;sys/syslog.h&gt;
+#include &lt;string.h&gt;
+#include &lt;string&gt;
+#include &lt;sstream&gt;
+#include &lt;cstdint&gt;
+#include &lt;mutex&gt;
+</programlisting>Include dependency graph for Log.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Log_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Log_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Log">jevois::Log&lt; Level &gt;</link></para>
+
+<para>Logger 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1timed__lock__guard">jevois::timed_lock_guard</link></para>
+
+<para>在 std::timed_mutex 上获取锁对象，或在等待 1 秒后 LFATAL </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG</link>(msg)</para>
+
+<para>方便用户打印出控制台或系统日志消息的宏，DEBUG 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gad545842aa2c640a2cbbd12bd249f1c66">PLDEBUG</link>(msg)</para>
+
+<para>与 LDEBUG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gadf127ca2262cc160830da49c37d04e85">LINFO</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏，INFO 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gaea08c108b85ea1f927c0066dc146dafe">PLINFO</link>(msg)</para>
+
+<para>与 LINFO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏， ERROR level </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga423f8c25512020248b543a103130cabf">PLERROR</link>(msg)</para>
+
+<para>与 LERROR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(msg)</para>
+
+<para>Convenience macro for users to print out console or syslog messages, FATAL level. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga905cdef856c6a279bdc4a5f037a25c52">PLFATAL</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏，FATAL 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Log_8H_1a8e3f8ce22d435337fb988c530e098b25">LTHROW</link>(msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga16c96efb84f03f7ded9bfdd977405596">JEVOIS_ASSERT</link>(cond)</para>
+
+<para>测试某事是否为真，如果不是，则发出 LFATAL </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga9061a9b1a920652dd863efb219c0d9d4">JEVOIS_TRACE</link>(level)</para>
+
+<para>Trace object. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga36695a40a90d579eef600d90c82484f5">JEVOIS_TIMED_LOCK</link>(mtx)</para>
+
+<para>辅助宏用于创建 timed_lock_guard 对象 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Log_8H_1a9449c6d446e218bd2184b9830b55ad1e">JEVOIS_WAIT_FOR_FUTURE</link>(f)</para>
+
+<para>等待未来准备就绪，5 秒后抛出 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Log_8H_1ac3d436286f1c1018df01da4d53bb7e59">JEVOIS_WAIT_GET_FUTURE</link>(f)</para>
+
+<para>等待未来 5 秒内准备就绪，get(), 警告并忽略异常，报告超时 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__debugging_1gac5f7014e430b19db36d4284254f886ef">jevois::warnAndRethrowException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并重新抛出它 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga7460b83ad6c4523ba897c81362742027">jevois::warnAndIgnoreException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并忽略它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1gac577d140e95998b907a3d8ee82d8f9c5">jevois::warnAndRethrowParamCallbackException</link> (std::string const &amp;descriptor, std::string const &amp;strval)</para>
+
+<para>参数回调异常的便捷函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1a702884502b6ac843dada7c3f24e6e1fb">jevois::drawErrorImage</link> (std::string const &amp;errmsg, RawImage &amp;videoerrimg)</para>
+
+<para>将错误消息显示到 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1ga41793c253cf663f59b715c0bd2dcc2ad">jevois::logSetEngine</link> (Engine *e)</para>
+
+<para>设置引擎，以便所有日志消息都转发到其串行端口 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1a98e29073164f0fa721c39c968bcafb36">jevois::logEnd</link> ()</para>
+
+<para>终止日志服务 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link> = LOG_INFO</para>
+
+<para>当前日志级别 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__debugging_1ga293cae43e521f4f49ae381d1c931c7b2">jevois::traceLevel</link> = 0</para>
+
+<para>当前跟踪级别 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Log_8H_1a9449c6d446e218bd2184b9830b55ad1e"/>    <section>
+    <title>JEVOIS_WAIT_FOR_FUTURE</title>
+<indexterm><primary>JEVOIS_WAIT_FOR_FUTURE</primary><secondary>Log.H</secondary></indexterm>
+<indexterm><primary>Log.H</primary><secondary>JEVOIS_WAIT_FOR_FUTURE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_WAIT_FOR_FUTURE( f)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting><emphasis role="keywordflow">do</emphasis>&#32;{&#32;<emphasis role="keywordflow">if</emphasis>&#32;(f.valid()&#32;&amp;&amp;&#32;f.wait_for(std::chrono::seconds(2))&#32;==&#32;\
+std::future_status::timeout)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;Timeout&#32;waiting&#32;for&#32;future&#32;&quot;</emphasis>&#32;#f);&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(<emphasis role="keyword">false</emphasis>)
+</programlisting><para>
+
+<para>等待未来准备就绪，5 秒后抛出 </para>
+</para>
+<para>
+Definition at line 314 of file Log.H.</para>
+    </section><anchor xml:id="_Log_8H_1ac3d436286f1c1018df01da4d53bb7e59"/>    <section>
+    <title>JEVOIS_WAIT_GET_FUTURE</title>
+<indexterm><primary>JEVOIS_WAIT_GET_FUTURE</primary><secondary>Log.H</secondary></indexterm>
+<indexterm><primary>Log.H</primary><secondary>JEVOIS_WAIT_GET_FUTURE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_WAIT_GET_FUTURE( f)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;<emphasis role="keywordflow">if</emphasis>&#32;(f.valid())&#32;{&#32;\
+&#32;&#32;if&#32;(f.wait_for(std::chrono::seconds(5))&#32;==&#32;std::future_status::timeout)&#32;<link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(<emphasis role="stringliteral">&quot;Timeout&#32;waiting&#32;for&#32;future&#32;&quot;</emphasis>&#32;#f);&#32;\
+&#32;&#32;try&#32;{&#32;f.get();&#32;}&#32;<emphasis role="keywordflow">catch</emphasis>&#32;(...)&#32;{&#32;<link linkend="_group__debugging_1ga7460b83ad6c4523ba897c81362742027">jevois::warnAndIgnoreException</link>();&#32;}&#32;}&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(<emphasis role="keyword">false</emphasis>)
+</programlisting><para>
+
+<para>等待未来 5 秒内准备就绪，get(), 警告并忽略异常，报告超时 </para>
+</para>
+<para>
+Definition at line 318 of file Log.H.</para>
+    </section><anchor xml:id="_Log_8H_1a8e3f8ce22d435337fb988c530e098b25"/>    <section>
+    <title>LTHROW</title>
+<indexterm><primary>LTHROW</primary><secondary>Log.H</secondary></indexterm>
+<indexterm><primary>Log.H</primary><secondary>LTHROW</secondary></indexterm>
+<para><computeroutput>#define LTHROW( msg)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;std::string&#32;str;&#32;{&#32;<link linkend="_classjevois_1_1Log">jevois::Log&lt;LOG_ALERT&gt;</link>(<emphasis role="keyword">nullptr</emphasis>,&#32;<emphasis role="keyword">nullptr</emphasis>,&#32;&amp;str)&#32;&lt;&lt;&#32;msg;&#32;}&#32;\
+&#32;&#32;&#32;&#32;throw&#32;std::runtime_error(str);&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(<emphasis role="keyword">false</emphasis>)
+</programlisting><para>
+Definition at line 235 of file Log.H.</para>
+</section>
+</section>
+</section>

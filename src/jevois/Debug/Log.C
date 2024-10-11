@@ -44,11 +44,11 @@ template <>
 jevois::Log<LOG_ALERT>::Log(char const * /*fullFileName*/, char const * /*functionName*/, std::string * outstr) :
     itsOutStr(outstr)
 {
-  // No prefix added here, will just throw the user message
+  // 这里没有添加前缀，只会抛出用户消息
 }
 
 // ##############################################################################################################
-// Explicit instantiations:
+// 显式实例化：
 namespace jevois
 {
   template class Log<LOG_DEBUG>;
@@ -62,7 +62,7 @@ namespace jevois
 #ifdef JEVOIS_USE_SYNC_LOG
 namespace jevois
 {
-  // Mutex used to avoid clashing synchronous outputs from multiple threads
+  // 用于避免多个线程同步输出冲突的互斥锁
   std::mutex logOutputMutex;
 }
 
@@ -93,13 +93,13 @@ namespace
 
       virtual ~LogCore()
       {
-        // Tell run() thread to quit:
+        // 告诉 run() 线程退出：
         itsRunning = false;
         
-        // Push a message so we unblock our run() thread in case the buffer was empty:
+        // 推送一条消息，以便在缓冲区为空的情况下解除对 run() 线程的阻塞：
         itsBuffer.push("Terminating Log service");
 
-        // Wait for the run() thread to complete:
+        // 等待 run() 线程完成：
         JEVOIS_WAIT_GET_FUTURE(itsRunFuture);
       }
 
@@ -112,9 +112,8 @@ namespace
           itsStream << msg << std::endl;
 #else
 #ifdef JEVOIS_PLATFORM         
-          // When using the serial port debug on platform and screen connected to it, screen gets confused if we do not
-          // send a CR here, since some other messages do send CR (and screen might get confused as to which line end to
-          // use). So send a CR too:
+          // 当在平台上使用串行端口调试并将屏幕连接到它时，如果我们不在这里发送 CR，屏幕就会感到困惑，因为其他一些消
+		  // 息会发送 CR（并且屏幕可能会对要使用哪个行结束感到困惑）。因此也发送一个 CR：
           std::cerr << msg << '\r' << std::endl;
 #else
           std::cerr << msg << std::endl;
@@ -127,7 +126,7 @@ namespace
       void abort()
       {
         itsRunning = false;
-        // One more message to make sure our run() thread will not be stuck on pop():
+        // 再发送一条消息以确保我们的 run() 线程不会卡在 pop() 上：
         LINFO("Terminating log facility.");
       }
       
@@ -150,13 +149,13 @@ template <int Level>
 jevois::Log<Level>::Log(char const * fullFileName, char const * functionName, std::string * outstr) :
     itsOutStr(outstr)
 {
-  // Strip out the file path and extension from the full file name
+  // 从完整文件名中去除文件路径和扩展名
   std::string const fn(fullFileName);
   size_t const lastSlashPos = fn.rfind('/');
   size_t const lastDotPos = fn.rfind('.');
   std::string const partialFileName = fn.substr(lastSlashPos+1, lastDotPos-lastSlashPos-1);
 
-  // Print out a pretty prefix to the log message
+  // 打印出日志消息的漂亮前缀
   itsLogStream << levelStr<Level>() << ' ' << partialFileName << "::" << functionName << ": ";
 }
 
@@ -205,7 +204,7 @@ void jevois::warnAndRethrowException(std::string const & prefix)
   std::string pfx;
   if (prefix.empty() == false) pfx = prefix + ": ";
   
-  // great trick to get back the type of an exception caught via a catch(...), just rethrow it and catch again:
+  // 很棒的技巧，可以返回通过 catch(...) 捕获的异常的类型，只需重新抛出它并再次捕获：
   try { throw; }
 
   catch (std::exception const & e)
@@ -240,7 +239,7 @@ std::string jevois::warnAndIgnoreException(std::string const & prefix)
 
   std::vector<std::string> retvec;
 
-  // great trick to get back the type of an exception caught via a catch(...), just rethrow it and catch again:
+  // 很棒的技巧，可以返回通过 catch(...) 捕获的异常的类型，只需重新抛出它并再次捕获：
   try { throw; }
 
   catch (std::exception const & e)
@@ -276,7 +275,7 @@ void jevois::warnAndRethrowParamCallbackException[[noreturn]](std::string const 
 {
   LERROR("Parameter " << descriptor << ": Provided value [" << strval << "] rejected by callback:");
   
-  // great trick to get back the type of an exception caught via a catch(...), just rethrow it and catch again:
+  // 很棒的技巧，可以返回通过 catch(...) 捕获的异常的类型，只需重新抛出它并再次捕获：
   try { throw; }
 
   catch (std::exception const & e)
@@ -327,14 +326,14 @@ void jevois::drawErrorImage(std::string const & errmsg, jevois::RawImage & video
   for (std::string & m : lines)
   {
     // Do some simple linewrap:
-    unsigned int nchar = (videoerrimg.width - 6) / fw; // yes this will be a huge number if width < 6
+    unsigned int nchar = (videoerrimg.width - 6) / fw; // 是的，如果 width < 6，这将是一个巨大的数字
     while (m.size() > nchar)
     {
       jevois::rawimage::writeText(videoerrimg, m.substr(0, nchar), 3, ypos, white, font);
       ypos += fh + 2;
       m = m.substr(nchar, m.npos);
     }
-    // Print out the last chunk (or the whole thing if it was short):
+    // 打印出最后一块（如果很短，则打印整个内容）：
     jevois::rawimage::writeText(videoerrimg, m, 3, ypos, white, font);
     ypos += fh + 2;
   }

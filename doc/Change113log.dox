@@ -1,11 +1,11 @@
-/*! \page Change113log Changes and new features in JeVois 1.13
+/*! \page Change113log JeVois 1.13 中的变化和新功能
 
 
-JeVois 1.13 brings the following new features:
+JeVois 1.13 带来以下新功能：
 
-- Bumped to OpenCV 4.1.0 with all contrib modules including deep neural networks (DNN) and non-free.
+- 升级到 OpenCV 4.1.0，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。
 
-- Upgraded to buildroot 2019.05-rc2 with
+- 升级到 buildroot 2019.05-rc2，其中包含
   + \a UPGRADED gcc/g++/gfortran 8.3
   + \a UPGRADED \b boost-1.70.0
   + \a UPGRADED binutils-2.32
@@ -13,16 +13,10 @@ JeVois 1.13 brings the following new features:
   + \a UPGRADED \b python-3.7.3
   + \a UPGRADED \b python-numpy-1.16.3
   + \a NEW \b python-scipy-1.3.0
-  + \a NEW \b python-pip-19.1 which can be invoked to install new python packages (for now, only pure-python packages
-    with no compiled dependencies can be easily installed. We are working on a variant of piwheels to allow one to
-    install any available python packages, coming soon!)
-    
-- For the impatients, here is a mini tutorial for \a pip:
-  + Copy a wheel that does not have any compiled C++ code to your microSD card somewhere (e.g., in
-    <b>JEVOIS:/packages/</b>). For example, \c jsondiff-1.1.2-py3-none-any.whl from http://piwheels.org (see JeVois User
-    Tutorials for how to copy the file to microSD). A wheel that does not say \b none-any in its name will likely NOT
-    work.
-  + In the Console of JeVois Inventor, type:
+  + \a 新的 \b python-pip-19.1 ，可以调用它安装新的 python 包（目前，只有没有编译依赖项的纯 python 包才可以轻松安装。我们正在开发 piwheels 的变体，以允许安装任何可用的 python 包，即将推出！）
+- 对于不耐烦的人，这里有一个 \a pip 的迷你教程：
+  + 将没有任何编译的 C++ 代码的轮子复制到 microSD 卡的某个位置（例如，在 <b>JEVOIS:/packages/</b> 中）。例如，\c jsondiff-1.1.2-py3-none-any.whl 来自 http://piwheels.org（请参阅 JeVois 用户教程，了解如何将文件复制到 microSD）。名称中没有 \b none-any 的轮子可能无法工作。
+  + 在 JeVois Inventor 的控制台中，输入：
   \verbatim
 shell pip install /jevois/packages/jsondiff-1.1.2-py3-none-any.whl
   \endverbatim
@@ -35,10 +29,9 @@ Installing collected packages: jsondiff
 Successfully installed jsondiff-1.1.2
 OK
   \endverbatim
-  + and that's it! You can now `import jsondiff` in your python modules.
-  Again, this will fail if your wheel has dependencies, especially compiled ones. We are working on it.
-
-- This update also provides more pre-installed python packages and other libraries and utilities. The full list is:
+  + 就是这样！现在您可以在 Python 模块中 `import jsondiff`。
+  同样，如果您的 wheel 有依赖项，尤其是编译的依赖项，此操作将失败。我们正在努力解决此问题。
+- 本次更新还提供了更多预安装的 Python 包以及其他库和实用程序。完整列表如下：
   + attr-2.4.48
   + bayer2rgb-neon-bef3ecafe290d61a50fd27da3e5d0df6f4b88045
   + binutils-2.32
@@ -274,3 +267,4 @@ OK
   + zxing-cpp-0db7f855135222becff193671faae79c083424b6
 
 */
+

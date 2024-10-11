@@ -1,0 +1,76 @@
+\hypertarget{ColorConversion_8c}{}\doxysubsection{src/jevois/\+Image/\+Color\+Conversion.c File Reference}
+\label{ColorConversion_8c}\index{src/jevois/Image/ColorConversion.c@{src/jevois/Image/ColorConversion.c}}
+{\ttfamily \#include $<$jevois/\+Image/\+Color\+Conversion.\+h$>$}\newline
+Include dependency graph for Color\+Conversion.\+c\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{ColorConversion_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ColorConversion_8c_ac00ae6f2d25810c0b2076e2d23eb1dc4}{C\+L\+A\+MP}}(value)~if (value $<$ 0) value = 0; else if (value $>$ 255) value = 255;
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ColorConversion_8c_ae0782c9c018b6ce88a82212033bb0491}{convert\+Y\+U\+Y\+Vto\+R\+G\+B24}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned char const $\ast$srcptr, unsigned char $\ast$dstptr)
+\begin{DoxyCompactList}\small\item\em 从 Y\+U\+YV 转换为 R\+G\+B，主要用于内部使用。大多数情况下，请使用 Raw\+Image 函数。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ColorConversion_8c_a0a834b95e1a7f003cf287a7fe5bb3195}{convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+Linternal}} (int R, int \mbox{\hyperlink{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}{G}}, int B, int $\ast$dstrg, int $\ast$dstby, int $\ast$dstlum, int thresh, int lshift, int lumlshift)
+\item 
+void \mbox{\hyperlink{group__image_gabc1de0ec8bdb25ffacf5b0d25dc11469}{convert\+Y\+U\+Y\+Vto\+R\+G\+B\+YL}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned char const $\ast$srcptr, int $\ast$dstrg, int $\ast$dstby, int $\ast$dstlum, int thresh, int inputbits)
+\begin{DoxyCompactList}\small\item\em 将 Y\+U\+YV 转换为 R\+G、\+BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ColorConversion_8c_ac00ae6f2d25810c0b2076e2d23eb1dc4}\label{ColorConversion_8c_ac00ae6f2d25810c0b2076e2d23eb1dc4}} 
+\index{ColorConversion.c@{ColorConversion.c}!CLAMP@{CLAMP}}
+\index{CLAMP@{CLAMP}!ColorConversion.c@{ColorConversion.c}}
+\doxyparagraph{\texorpdfstring{CLAMP}{CLAMP}}
+{\footnotesize\ttfamily \#define C\+L\+A\+MP(\begin{DoxyParamCaption}\item[{}]{value }\end{DoxyParamCaption})~if (value $<$ 0) value = 0; else if (value $>$ 255) value = 255;}
+
+
+
+Definition at line 20 of file Color\+Conversion.\+c.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{ColorConversion_8c_ae0782c9c018b6ce88a82212033bb0491}\label{ColorConversion_8c_ae0782c9c018b6ce88a82212033bb0491}} 
+\index{ColorConversion.c@{ColorConversion.c}!convertYUYVtoRGB24@{convertYUYVtoRGB24}}
+\index{convertYUYVtoRGB24@{convertYUYVtoRGB24}!ColorConversion.c@{ColorConversion.c}}
+\doxyparagraph{\texorpdfstring{convertYUYVtoRGB24()}{convertYUYVtoRGB24()}}
+{\footnotesize\ttfamily void convert\+Y\+U\+Y\+Vto\+R\+G\+B24 (\begin{DoxyParamCaption}\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned char const $\ast$}]{srcptr,  }\item[{unsigned char $\ast$}]{dstptr }\end{DoxyParamCaption})}
+
+
+
+从 Y\+U\+YV 转换为 R\+G\+B，主要用于内部使用。大多数情况下，请使用 Raw\+Image 函数。 
+
+
+
+Definition at line 23 of file Color\+Conversion.\+c.
+
+
+
+References C\+L\+A\+MP, G, and h.
+
+\mbox{\Hypertarget{ColorConversion_8c_a0a834b95e1a7f003cf287a7fe5bb3195}\label{ColorConversion_8c_a0a834b95e1a7f003cf287a7fe5bb3195}} 
+\index{ColorConversion.c@{ColorConversion.c}!convertYUYVtoRGBYLinternal@{convertYUYVtoRGBYLinternal}}
+\index{convertYUYVtoRGBYLinternal@{convertYUYVtoRGBYLinternal}!ColorConversion.c@{ColorConversion.c}}
+\doxyparagraph{\texorpdfstring{convertYUYVtoRGBYLinternal()}{convertYUYVtoRGBYLinternal()}}
+{\footnotesize\ttfamily void convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+Linternal (\begin{DoxyParamCaption}\item[{int}]{R,  }\item[{int}]{G,  }\item[{int}]{B,  }\item[{int $\ast$}]{dstrg,  }\item[{int $\ast$}]{dstby,  }\item[{int $\ast$}]{dstlum,  }\item[{int}]{thresh,  }\item[{int}]{lshift,  }\item[{int}]{lumlshift }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 57 of file Color\+Conversion.\+c.
+
+
+
+References C\+L\+A\+MP, G, and L.
+
+
+
+Referenced by convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+L().
+

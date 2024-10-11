@@ -112,7 +112,7 @@ namespace pbcvt
         if (data != nullptr)
         {
           CV_Error(Error::StsAssert, "The data should normally be NULL!");
-          // probably this is safe to do in such extreme case
+          // 在这种极端情况下这样做可能是安全的
           return stdAllocator->allocate(dims0, sizes, type, data, step, flags, usageFlags);
         }
         PyEnsureGIL gil;
@@ -231,10 +231,10 @@ namespace pbcvt
       
       for (int i = ndims - 1; i >= 0 && !needcopy; i--)
       {
-        // these checks handle cases of
-        //  a) multi-dimensional (ndims > 2) arrays, as well as simpler 1- and 2-dimensional cases
-        //  b) transposed arrays, where _strides[] elements go in non-descending order
-        //  c) flipped arrays, where some of _strides[] elements are negative
+        // 这些检查处理以下情况 
+        // a) 多维（ndims > 2）数组，以及更简单的一维和二维情况 
+        // b) 转置数组，其中 _strides[] 元素按非降序排列 
+        // c) 翻转数组，其中一些 _strides[] 元素为负数
         if ((i == ndims - 1 && (size_t) _strides[i] != elemsize) || (i < ndims - 1 && _strides[i] < _strides[i + 1]))
           needcopy = true;
       }
@@ -302,7 +302,7 @@ namespace pbcvt
     boost::python::converter::registry::push_back(convertible, construct, boost::python::type_id<Mat>());
   }
   
-  // Check if PyObject is an array and can be converted to OpenCV matrix.
+  // 检查 PyObject 是否是一个数组并且可以转换为 OpenCV 矩阵。
   void* matFromNDArrayBoostConverter::convertible(PyObject* object)
   {
     if (!PyArray_Check(object)) {
@@ -329,20 +329,19 @@ namespace pbcvt
     return object;
   }
   
-  // Construct a Mat from an NDArray object.
+  // 从 NDArray 对象构造一个 Mat。
   void matFromNDArrayBoostConverter::construct(PyObject* object,
                                                boost::python::converter::rvalue_from_python_stage1_data* data) {
     namespace python = boost::python;
-    // Object is a borrowed reference, so create a handle indicting it is borrowed for proper reference counting.
+    // 对象是借用的引用，因此创建一个句柄表明它是借用的，以便进行正确的引用计数。
     python::handle<> handle(python::borrowed(object));
     
-    // Obtain a handle to the memory block that the converter has allocated for the C++ type.
+    // 获取转换器为 C++ 类型分配的内存块的句柄。
     typedef python::converter::rvalue_from_python_storage<Mat> storage_type;
     void* storage = reinterpret_cast<storage_type*>(data)->storage.bytes;
     
-    // Allocate the C++ type into the converter's memory block, and assign its handle to the converter's convertible
-    // variable.  The C++ container is populated by passing the begin and end iterators of the python object to the
-    // container's constructor.
+    // 将 C++ 类型分配到转换器的内存块中，并将其句柄分配给转换器的可转换变量。通过将 Python 对象的开始和结束迭代器传递给 
+    // 容器的构造函数来填充 C++ 容器。
     PyArrayObject* oarr = (PyArrayObject*) object;
     
     bool needcopy = false, needcast = false;
@@ -374,10 +373,10 @@ namespace pbcvt
     bool ismultichannel = ndims == 3 && _sizes[2] <= CV_CN_MAX;
     
     for (int i = ndims - 1; i >= 0 && !needcopy; i--) {
-      // these checks handle cases of
-      //  a) multi-dimensional (ndims > 2) arrays, as well as simpler 1- and 2-dimensional cases
-      //  b) transposed arrays, where _strides[] elements go in non-descending order
-      //  c) flipped arrays, where some of _strides[] elements are negative
+      // 这些检查处理以下情况
+      // a) 多维 (ndims > 2) 数组，以及更简单的一维和二维情况
+      // b) 转置数组，其中 _strides[] 元素按非降序排列
+      // c) 翻转数组，其中一些 _strides[] 元素为负数
       if ((i == ndims - 1 && (size_t) _strides[i] != elemsize)
           || (i < ndims - 1 && _strides[i] < _strides[i + 1]))
         needcopy = true;

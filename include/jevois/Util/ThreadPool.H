@@ -39,10 +39,9 @@
 
 namespace jevois
 {
-  //! A thread pool with CPU affinity
-  /*! Thread pool with extra settings to enforce that passed tasks run on some particular cores. Used by JeVois-Pro
-      Platform to enforce that machine vision tasks run on big cores (ARM A73) while non-critical tasks run on slower
-      little cores (ARM A53).  \ingroup utils */
+  //! 具有 CPU 亲和力的线程池 
+  /*! 具有额外设置的线程池，用于强制传递的任务在某些特定核心上运行。JeVois-Pro 平台使用它来强制机器视觉任务在大核心（ARM A73）
+      上运行，而非关键任务在较慢的小核心（ARM A53）上运行。  \ingroup utils */
   class ThreadPool
   {
     public:

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__python">
+<title>支持用 Python 编写的 JeVois 模块</title>
+<indexterm><primary>支持用 Python 编写的 JeVois 模块</primary></indexterm>
+<section>
+<title> </title>
+
+<para>除了用 C++ 编写模块外，JeVois 还支持用 Python 编写模块。JeVois 提供双向映射： </para>
+
+<para><itemizedlist>
+<listitem>
+<para>通过导入 Python 包 <computeroutput>libjevois</computeroutput> ，可以在 Python 中访问 JeVois 的 C++ 函数和类</para>
+</listitem><listitem>
+<para>JeVois 引擎可以直接调用实现机器视觉处理模块的 Python 类的类成员函数 </para>
+</listitem></itemizedlist>
+</para>
+Collaboration diagram for 支持用 Python 编写的 JeVois 模块:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__python.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFramePython">jevois::InputFramePython</link></para>
+
+<para>包装 Python 使用的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1OutputFramePython">jevois::OutputFramePython</link></para>
+
+<para>Python 使用的 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIhelperPython">jevois::GUIhelperPython</link></para>
+
+<para>包装 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 以供 Python 使用 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonModule">jevois::PythonModule</link></para>
+
+<para>包装器模块允许用户开发用 Python 编写的新模块 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython">jevois::dnn::PreProcessorForPython</link></para>
+
+<para>Pre-Processor interface exposed to the python side. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1python_1_1PyParHelperBase">jevois::python::PyParHelperBase</link></para>
+
+<para>允许在 python 中创建参数的基本帮助类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1python_1_1PyParHelper">jevois::python::PyParHelper&lt; T &gt;</link></para>
+
+<para>类型化类，允许在 Python 中创建参数 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonParameter">jevois::PythonParameter</link></para>
+
+<para>python 中 jevois 参数的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonWrapper">jevois::PythonWrapper</link></para>
+
+<para>辅助类，用于从 C++ 运行 Python 代码 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__pysupport">Python 支持函数</link></para>
+
+<para>帮助程序促进与 Python 之间的数据传输 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+</section>

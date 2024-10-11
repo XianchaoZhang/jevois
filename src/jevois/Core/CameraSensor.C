@@ -32,12 +32,11 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
 #ifdef JEVOIS_PRO
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::imx290:
-    // This sensor supports: BAYER, GREY, YUYV, RGB24, ARGB32, and more. Native size is 1920x1080 at up to
-    // 120fps. Sensor also supports 1280x720 and cropping from 1920x1080, but the A311D ISP has issues with these (frame
-    // collision as soon as capture height is not 1080). So we always capture at 1920x1080 and use the ISP to
-    // crop/rescale to any other resolution. Any size (multiple of 4) is supported through cropping & rescaling.
+    // 此传感器支持：BAYER、GREY、YUYV、RGB24、ARGB32 等。原始尺寸为 1920x1080，最高可达 120fps。传感器还支持 
+    // 1280x720 从 1920x1080 裁剪，但 A311D ISP 存在这些问题（只要捕获高度不是 1080，就会发生帧冲突）。因此，我们
+    // 始终以 1920x1080 进行捕获，并使用 ISP 裁剪/重新缩放到任何其他分辨率。通过裁剪和重新缩放支持任何尺寸（4 的倍数）。 
     
-    /* Supported formats as reported by the Amlogic camera ISP kernel driver:
+    /* Amlogic 相机 ISP 内核驱动程序报告的支持格式：
        
        Supported format 0 is [32-bit A/XRGB 8-8-8-8] fcc 0x34424752 [RGB4]
        Supported format 1 is [24-bit RGB 8-8-8] fcc 0x33424752 [RGB3]
@@ -63,21 +62,19 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     default: return false;
     }
     
-    // Any size up to 1080P is supported. Beware that some image processing algorithms may require image width to be a
-    // multiple of 8 or 16. Here, we do not impose this constraint as some neural nets do not have it (some even use odd
-    // input image sizes). The sensor supports up to 120fps:
+    // 支持高达 1080P 的任何尺寸。请注意，某些图像处理算法可能要求图像宽度为 8 或 16 的倍数。在这里，我们不施加此约束，
+	// 因为某些神经网络没有它（有些甚至使用奇数输入图像大小）。传感器最高支持 120fps：
     if (m.cw <= 1920 && m.ch <= 1080 && m.cfps <= 120.0) return true;
     
     return false;
     
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::os08a10:
-    // This sensor supports: BAYER, GREY, YUYV, RGB24, ARGB32, and more. Native size is 3840x2160 at up to 60fps. Sensor
-    // also supports 1920x1080, 1280x720 and cropping, but the A311D ISP may have issues with these (frame collision
-    // problem as with the imx290 when not at native resolution). Any size (multiple of 4) is supported through cropping
-    // & rescaling.
+    // 此传感器支持：BAYER、GREY、YUYV、RGB24、ARGB32 等。原始尺寸为 3840x2160，最高可达 60fps。传感器还支持 1920x1080、
+	// 1280x720 和裁剪，但 A311D ISP 可能会遇到这些问题（帧冲突 // 问题与 imx290 一样，当分辨率不是原始分辨率时）。通过
+	// 裁剪和重新缩放，支持任何尺寸（4 的倍数）。
     
-    /* Supported formats as reported by the Amlogic camera ISP kernel driver:
+    /* Amlogic 相机 ISP 内核驱动程序报告的支持格式：
        
        Supported format 0 is [32-bit A/XRGB 8-8-8-8] fcc 0x34424752 [RGB4]
        Supported format 1 is [24-bit RGB 8-8-8] fcc 0x33424752 [RGB3]
@@ -103,21 +100,19 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     default: return false;
     }
     
-    // Any size up to 4k is supported. Beware that some image processing algorithms may require image width to be a
-    // multiple of 8 or 16. Here, we do not impose this constraint as some neural nets do not have it (some even use odd
-    // input image sizes). The sensor supports up to 60fps:
+    // 支持最大 4k 的任何尺寸。请注意，某些图像处理算法可能要求图像宽度为 8 或 16 的倍数。在这里，我们不施加此约束，因为
+	// 某些神经网络没有它（有些甚至使用奇数输入图像大小）。传感器支持高达 60fps：
     if (m.cw <= 3840 && m.ch <= 2160 && m.cfps <= 60.0) return true;
     
     return false;
 
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::ar0234:
-    // This sensor supports: BAYER, GREY, YUYV, RGB24, ARGB32, and more. Native size is 1920x1200 at up to
-    // 120fps. Sensor also supports 1920x1080, 1280x720 and cropping, but the A311D ISP may have issues with these
-    // (frame collision problem as with the imx290 when not at native resolution). Any size (multiple of 4) is supported
-    // through cropping & rescaling.
+    // 此传感器支持：BAYER、GREY、YUYV、RGB24、ARGB32 等。原始尺寸为 1920x1200，最高可达 120fps。传感器还支持 1920x1080、
+	// 1280x720 和裁剪，但 A311D ISP 可能会出现这些问题 //（与 imx290 一样，当分辨率不是原始分辨率时，会出现帧冲突问题）。
+	// 通过裁剪和重新缩放，支持任何尺寸（4 的倍数）。
     
-    /* Supported formats as reported by the Amlogic camera ISP kernel driver:
+    /* Amlogic 相机 ISP 内核驱动程序报告的支持格式：
        
        Supported format 0 is [32-bit A/XRGB 8-8-8-8] fcc 0x34424752 [RGB4]
        Supported format 1 is [24-bit RGB 8-8-8] fcc 0x33424752 [RGB3]
@@ -143,9 +138,8 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     default: return false;
     }
     
-    // Any size up to 1920x1200 is supported. Beware that some image processing algorithms may require image width to be
-    // a multiple of 8 or 16. Here, we do not impose this constraint as some neural nets do not have it (some even use
-    // odd input image sizes). The sensor supports up to 120fps:
+    // 支持最大 1920x1200 的任何尺寸。请注意，某些图像处理算法可能要求图像宽度为 8 或 16 的倍数。在这里，我们不施加此
+	// 约束，因为某些神经网络没有它（有些甚至使用奇数输入图像大小）。传感器最高支持 120fps：
     if (m.cw <= 1920 && m.ch <= 1200 && m.cfps <= 120.0) return true;
     
     return false;
@@ -154,8 +148,8 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::ov9650:
 
-    if (m.wdr != jevois::WDRtype::Linear) return false; // Wide dynamic range not supported by this sensor
-    if (m.crop == jevois::CropType::CropScale) return false; // Dual-stream capture not supported by this sensor
+    if (m.wdr != jevois::WDRtype::Linear) return false; // 此传感器不支持宽动态范围
+    if (m.crop == jevois::CropType::CropScale) return false; // 此传感器不支持双流捕获
 
     // This sensor supports: YUYV, BAYER, RGB565
     //  SXGA (1280 x 1024): up to 15 fps
@@ -181,8 +175,8 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::ov2640:
 
-    if (m.wdr != jevois::WDRtype::Linear) return false; // Wide dynamic range not supported by this sensor
-    if (m.crop == jevois::CropType::CropScale) return false; // Dual-stream capture not supported by this sensor
+    if (m.wdr != jevois::WDRtype::Linear) return false; // 此传感器不支持宽动态范围
+    if (m.crop == jevois::CropType::CropScale) return false; // 此传感器不支持双流捕获
 
     // This sensor supports: YUYV, BAYER, RGB565
     //  UXGA (1600 x 1200): up to 15 fps
@@ -216,8 +210,8 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::ov7725:
 
-    if (m.wdr != jevois::WDRtype::Linear) return false; // Wide dynamic range not supported by this sensor
-    if (m.crop == jevois::CropType::CropScale) return false; // Dual-stream capture not supported by this sensor
+    if (m.wdr != jevois::WDRtype::Linear) return false; // 此传感器不支持宽动态范围
+    if (m.crop == jevois::CropType::CropScale) return false; // 此传感器不支持双流捕获
 
     // This sensor supports: YUYV, BAYER, RGB565
     //   VGA ( 640 x  480): up to 60 fps
@@ -241,8 +235,8 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     // ----------------------------------------------------------------------------------------------------
   case jevois::CameraSensor::ar0135:
 
-    if (m.wdr != jevois::WDRtype::Linear) return false; // Wide dynamic range not supported by this sensor
-    if (m.crop == jevois::CropType::CropScale) return false; // Dual-stream capture not supported by this sensor
+    if (m.wdr != jevois::WDRtype::Linear) return false; // 此传感器不支持宽动态范围
+    if (m.crop == jevois::CropType::CropScale) return false; // 此传感器不支持双流捕获
 
     // This sensor supports: BAYER or MONO
     //  SXGA (1280 x  960): up to 54 fps
@@ -254,7 +248,7 @@ bool jevois::sensorSupportsFormat(jevois::CameraSensor s, jevois::VideoMapping c
     // QQVGA ( 160 x  120): up to 54 fps (central crop of binned version of SXGA)
     //   90p ( 160 x   90): up to 60 fps
 
-    // We support native Bayer or Mono, and YUYV through Bayer/mono to YUYV conversion in the Camera class:
+    // 我们支持原生 Bayer 或 Mono，以及在 Camera 类中通过 Bayer/mono 到 YUYV 的转换实现 YUYV：
     if (m.cfmt != V4L2_PIX_FMT_SRGGB8 && m.cfmt != V4L2_PIX_FMT_GREY && m.cfmt != V4L2_PIX_FMT_YUYV) return false;
 
     if (m.cw == 1280 && m.ch ==  960) { if (m.cfps <=  54.0F) return true; else return false; }
@@ -302,7 +296,7 @@ void jevois::sensorPrepareSetFormat(jevois::CameraSensor s, jevois::VideoMapping
 {
   if (jevois::sensorSupportsFormat(s, m) == false) throw std::runtime_error("Requested format not supported by sensor");
 
-  // Keep this code in sync with the kernel drivers:
+  // 使此代码与内核驱动程序保持同步：
   switch(s)
   {
 #ifdef JEVOIS_PRO
@@ -367,7 +361,7 @@ void jevois::sensorPrepareSetFormat(jevois::CameraSensor s, jevois::VideoMapping
 #endif // JEVOIS_PRO
     
   default:
-    // Just capture as specified, sensorSupportsFormat() already removed invalid modes:
+    // 仅按指定方式捕获，sensorSupportsFormat() 已删除无效模式：
     capw = m.cw; caph = m.ch; preset = -1;
   }
 }

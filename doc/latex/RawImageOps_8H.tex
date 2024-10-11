@@ -1,0 +1,118 @@
+\hypertarget{RawImageOps_8H}{}\doxysubsection{include/jevois/\+Image/\+Raw\+Image\+Ops.H File Reference}
+\label{RawImageOps_8H}\index{include/jevois/Image/RawImageOps.H@{include/jevois/Image/RawImageOps.H}}
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+Include dependency graph for Raw\+Image\+Ops.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RawImageOps_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RawImageOps_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1rawimage}{jevois\+::rawimage}}
+\begin{DoxyCompactList}\small\item\em 用于 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换、处理、绘制的函数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{jevois\+::rawimage\+::\+Font}} \{ \newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e}{jevois\+::rawimage\+::\+Font5x7}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{jevois\+::rawimage\+::\+Font6x10}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388}{jevois\+::rawimage\+::\+Font7x13}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b}{jevois\+::rawimage\+::\+Font8x13bold}}, 
+\newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8}{jevois\+::rawimage\+::\+Font9x15bold}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4}{jevois\+::rawimage\+::\+Font10x20}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69}{jevois\+::rawimage\+::\+Font11x22}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340}{jevois\+::rawimage\+::\+Font12x22}}, 
+\newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494}{jevois\+::rawimage\+::\+Font14x26}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0}{jevois\+::rawimage\+::\+Font15x28}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b}{jevois\+::rawimage\+::\+Font16x29}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c}{jevois\+::rawimage\+::\+Font20x38}}
+ \}
+\begin{DoxyCompactList}\small\item\em 可用于 \mbox{\hyperlink{group__image_ga893e982b449643c8853afe424fb72c09}{write\+Text()}} 的字体 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga20c3651602d9b2d003988b9bcd674f03}{jevois\+::rawimage\+::cv\+Image}} (Raw\+Image const \&src)
+\begin{DoxyCompactList}\small\item\em 从现有 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据创建 Open\+CV 图像，共享像素内存而不是复制它 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{namespacejevois_1_1rawimage_a28053035013862dd0dd48c4601216655}{jevois\+::rawimage\+::convert\+To\+Cv\+Gray}} (Raw\+Image const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素执行颜色转换为 Open\+CV 灰度字节 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga6f005034f93fc03530498eae898f9b22}{jevois\+::rawimage\+::convert\+To\+Cv\+B\+GR}} (Raw\+Image const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素执行颜色转换为 Open\+CV B\+GR 字节 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga41c623fdf6e26eca8908b1129b56312f}{jevois\+::rawimage\+::convert\+To\+Cv\+R\+GB}} (Raw\+Image const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+GB 字节进行颜色转换 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga028f56e85446eef9d27bd51c71867dd2}{jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+BA}} (Raw\+Image const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+G\+B-\/A 字节进行颜色转换 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gac56b219fa6df460b3a9beaf7712d5c77}{jevois\+::rawimage\+::byte\+Swap}} (Raw\+Image \&img)
+\begin{DoxyCompactList}\small\item\em 交换 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中的字节对 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga05c4650464e447a89a2a2c60d1956748}{jevois\+::rawimage\+::paste}} (Raw\+Image const \&src, Raw\+Image \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将一张图像粘贴到另一张相同像素类型的图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae83668f61639d6a6f4de5e11d02ca015}{jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+YV}} (cv\+::\+Mat const \&src, Raw\+Image \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将灰度字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae9f19d7535b689d5c0b4bb31133463da}{jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+YV}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR 字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga3ff72f69a31242d3d77ac1c61e82c4d6}{jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+YV}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB 字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa8a5444f39661f76fb160f1f6eead381}{jevois\+::rawimage\+::roipaste}} (Raw\+Image const \&src, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, Raw\+Image \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将图像中的 R\+OI 粘贴到相同像素类型的另一个图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga529a42aed4e4681e38910e8793e6064c}{jevois\+::rawimage\+::draw\+Disk}} (Raw\+Image \&img, int x, int y, unsigned int rad, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一个圆盘 disk \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae7d102e1c456f87337d66a9a2fc11a58}{jevois\+::rawimage\+::draw\+Circle}} (Raw\+Image \&img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在\+Y\+U\+Y\+V图像中绘制一个圆圈 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__image_ga0d1d1903484f89b7a8db5485fe1784a7}{jevois\+::rawimage\+::clip\+Line}} (int wxmin, int wymin, int wxmax, int wymax, int \&x1, int \&y1, int \&x2, int \&y2)
+\begin{DoxyCompactList}\small\item\em 剪裁一条线以适合 viewport \mbox{[}wxmin...wxmax\mbox{[} x \mbox{[}wymin...wymax\mbox{]} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga7cf2b2c4e6460835fbc671367a60feb9}{jevois\+::rawimage\+::draw\+Line}} (Raw\+Image \&img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一条线 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa32b3e227c9904699d616e2a32c9506d}{jevois\+::rawimage\+::draw\+Rect}} (Raw\+Image \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一个矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa023840c2ca7c4997b4b456927131cdf}{jevois\+::rawimage\+::draw\+Rect}} (Raw\+Image \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga458eebde298cccaa70c778878223c17b}{jevois\+::rawimage\+::draw\+Filled\+Rect}} (Raw\+Image \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制填充矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga2696d3febc217f295d5532c26255c26b}{jevois\+::rawimage\+::write\+Text}} (Raw\+Image \&img, std\+::string const \&txt, int x, int y, unsigned int col, Font font=Font6x10)
+\begin{DoxyCompactList}\small\item\em 在图像中写一些文字 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga893e982b449643c8853afe424fb72c09}{jevois\+::rawimage\+::write\+Text}} (Raw\+Image \&img, char const $\ast$txt, int x, int y, unsigned int col, Font font=Font6x10)
+\begin{DoxyCompactList}\small\item\em 在图像中写一些文字 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacejevois_1_1rawimage_ade194717387b31534b54f3e4db39eff0}{jevois\+::rawimage\+::itext}} (Raw\+Image \&img, std\+::string const \&txt, int y=3, unsigned int col=\mbox{\hyperlink{namespacejevois_1_1yuyv_a76df58773f59d7f784b5fb1804f15387}{jevois\+::yuyv\+::\+White}}, Font font=Font6x10)
+\begin{DoxyCompactList}\small\item\em 在图像中简写一些文本，x = 3 并返回下一个 y 位置 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacejevois_1_1rawimage_ae7bcb207e1bdbd84d96aad62da0ad7c8}{jevois\+::rawimage\+::itext}} (Raw\+Image \&img, char const $\ast$txt, int y=3, unsigned int col=\mbox{\hyperlink{namespacejevois_1_1yuyv_a76df58773f59d7f784b5fb1804f15387}{jevois\+::yuyv\+::\+White}}, Font font=Font6x10)
+\begin{DoxyCompactList}\small\item\em 在图像中简写一些文本，x = 3 并返回下一个 y 位置 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga748b79664f7d9c00f2706e726276a09f}{jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga8d0578936bcb62de35eec980b933de52}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga5c34b763c90ed987d80a1dc58e75524c}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 使用已分配的像素和像素类型将 R\+G\+BA cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gad05785dce156be8a1e4d473ea07e3f67}{jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 使用已分配的像素和像素类型将灰色 cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_1_1rawimage_a8d4333176ceabdbadb22ffcb6b2d9d52}{jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image}} (cv\+::\+Mat const \&src, Raw\+Image \&dst)
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 分割成 4 倍高的灰色 Raw\+Image，其中已分配像素 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa830449161c068b13cd986844a2c428e}{jevois\+::rawimage\+::h\+Flip\+Y\+U\+YV}} (Raw\+Image \&img)
+\begin{DoxyCompactList}\small\item\em 水平翻转 Y\+U\+YV \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 同时保留颜色信息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga887e3d1b0329cc864014c04a90689f59}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga2865d43005acc85a1f49b868eedc76cc}{jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga13704ff98cb3e041adea2154fd42499c}{jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gad00957ca65ed08071e6b05d6cfe19fc3}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_1_1rawimage_a49a5d99c4f6ce1c5610076bc16945147}{jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+YV}} (Raw\+Image const \&src, Raw\+Image \&dst)
+\begin{DoxyCompactList}\small\item\em 从 Bayer 转换为 Y\+U\+Y\+V，仅供 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 类内部使用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_1_1rawimage_a66e0d4c68f4490cbe8b34b84661f65c2}{jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+YV}} (Raw\+Image const \&src, Raw\+Image \&dst)
+\begin{DoxyCompactList}\small\item\em 从灰色（单色）转换为 Y\+U\+Y\+V，仅供 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 类内部使用 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga6607626cad0258d69b6ead8d1ced4f52}{jevois\+::rescale\+Cv}} (cv\+::\+Mat const \&img, cv\+::\+Size const \&newdims)
+\begin{DoxyCompactList}\small\item\em 重新缩放 Open\+CV 图像，选择正确的插值类型 \end{DoxyCompactList}\end{DoxyCompactItemize}

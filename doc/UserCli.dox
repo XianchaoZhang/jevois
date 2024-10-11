@@ -1,59 +1,42 @@
-/*! \page UserCli Command-line interface user guide
+/*! \page UserCli 命令行界面用户指南
 
-// ##############################################################################################################
-\section cmdline Command-line interface overview
+// ############################################################################################################# 
+\section cmdline 命令行界面概述
 
-In addition to interacting with your JeVois camera through a video capture software, you can also use any of two
-available serial ports:
+除了通过视频捕捉软件与 JeVois 相机交互之外，您还可以使用两个可用串行端口中的任意一个：
 
-- Hardware serial port through the 4-pin connector on the smart camera (see above).
-- Serial-over-USB port that appears to your host computer at the same time as the video camera appears on the serial
-  bus.
-- On \jvpro, the Console of the graphical user interface.
+- 通过智能相机上的 4 针连接器的硬件串行端口（见上文）。
+- 当摄像机出现在串行总线上时，USB 串行端口也会同时出现在主机上。
+- 在 \jvpro 上，图形用户界面的控制台。
 
-You, or another machine (e.g., an Arduino) can connect to JeVois and issue simple commands to the smart camera. These
-commands allow one to tune camera parameters, vision processing parameters, and general operation of the JeVois smart
-camera.
+您或其他机器（例如 Arduino）可以连接到 JeVois 并向智能相机发出简单命令。这些命令允许调整相机参数、视觉处理参数以及 JeVois 智能相机的一般操作。
 
-Things you can do with the JeVois command-line interface include:
-- adjust contrast, exposure, gain, white balance, etc of the camera sensor.
-- show basic information about JeVois, such as free RAM memory, CPU frequency, CPU temperature.
-- adjust machine vision parameters, depending on which vision module is currently loaded and running. Many machine
-  vision modules expose parameters for thresholds, operating modes, etc which you can tune using the JeVois command-line
-  interface.
-- run a script that contains any number of valid commands.
-- decide where to send output and log serial messages (to the hardware serial port, to serial-ver-USB, to both, or to
-  none).
-- examine available video modes and machine vision algorithms, and select a particular one.
-- possibly execute custom commands that may be provided by a particular machine vision module.
+您可以使用 JeVois 命令行界面执行的操作包括：
+- 调整相机传感器的对比度、曝光度、增益、白平衡等。
+- 显示有关 JeVois 的基本信息，例如可用 RAM 内存、CPU 频率、CPU 温度。
+- 根据当前加载和运行的视觉模块调整机器视觉参数。许多机器视觉模块会公开阈值、操作模式等参数，您可以使用 JeVois 命令行界面进行调整。
+- 运行包含任意数量有效命令的脚本。
+- 决定将输出和日志串行消息发送到何处（发送到硬件串行端口、发送到 serial-ver-USB、发送到两者或不发送到任何位置）。
+- 检查可用的视频模式和机器视觉算法，然后选择特定的一种。
+- 可能执行特定机器视觉模块可能提供的自定义命令。
 
-\note Note that by default, command echo is turned off, which means that, when you connect to JeVois over a serial link,
-you will not see what you type. This is to avoid sending back to an Arduino all the commands it might want to send to
-the JeVois camera. Most serial communication software have an option to "turn on local echo" which will allow you to see
-what you type but will be handled by your serial terminal program as opposed to having JeVois send back all the
-characters you type.
+\note 请注意，默认情况下，命令回显处于关闭状态，这意味着，当您通过串行链路连接到 JeVois 时，您将看不到您输入的内容。这是为了避免将所有可能要发送到 JeVois 相机的命令发回 Arduino。大多数串行通信软件都有一个 "turn on local echo" 选项，这将允许您查看您输入的内容，但将由您的串行终端程序处理，而不是让 JeVois 发回您输入的所有字符。
 
-\note Because the command-line interface is mainly intended for machine-to-machine communication, no editing capability
-is provided at this point. That means that if you type an incorrect character and try to delete it, both the incorrect
-character and then the delete character will be sent to JeVois, and your command will just fail. If you have a tendency
-to make many typos as you type, just type your commands in any editor of your choice, and then simply copy and paste
-them into the JeVois command-line interface.
+\note 由于命令行界面主要用于机器对机器通信，因此目前不提供编辑功能。这意味着如果您输入了错误的字符并尝试删除它，则错误字符和删除字符都将发送到 JeVois，您的命令将失败。如果您在输入时容易出现许多拼写错误，只需在您选择的任何编辑器中输入命令，然后将其复制并粘贴到 JeVois 命令行界面中即可。
 
-Follow these instructions to connect to JeVois using serial-over-USB:
+按照以下说明使用串行 USB 连接到 JeVois：
 
 - \subpage USBserialLinux
 - \subpage USBserialWindows
 - \subpage USBserialMac
 - \subpage UserProUSBserial
 
-\note When running JeVois software in \b host mode, you can simply interact with JeVois by typing commands directly in
-the terminal window from which you started jevois-daemon. See \ref JeVoisDaemon for more details.
+\note 在 \b host 模式下运行 JeVois 软件时，您只需在启动 jevois-daemon 的终端窗口中直接输入命令即可与 JeVois 进行交互。有关更多详细信息，请参阅 \ref JeVoisDaemon 。
 
-// ##############################################################################################################
-\section cmdlinestart Command-line interface getting started
+// ############################################################################################################# 
+\section cmdlinestart 命令行界面入门
 
-Once connected, you can use the command-line interface. Supported commands, general operation parameters, and camera
-sensor controls are as follows (further detailed in the following sections):
+连接后，您可以使用命令行界面。支持的命令、常规操作参数和相机传感器控制如下（以下部分将进一步详细说明）：
 
 \verbatim
 help - print help message
@@ -73,224 +56,178 @@ usbsd - export the JEVOIS partition of the microSD card as a virtual USB drive
 sync - commit any pending data write to microSD
 restart - restart the JeVois smart camera
 
-General Options:  
-  --tracelevel (unsigned int) default=[0]
-    Set the minimum trace level to display
-       Exported By: engine
+常规选项：
+  --tracelevel (无符号整数) 默认值为 [0] 
+    设置要显示的最低跟踪级别 
+       导出者：引擎
 
-  --nickname (string) default=[jevois]
-    Nickname associated with this camera, useful when multiple JeVois cameras are connected to a same USB bus
-       Exported By: engine
+--nickname (string) 默认=[jevois] 
+  与此相机关联的昵称，当多个 JeVois 相机连接到同一个 USB 总线时很有用 
+     导出者：engine
 
-  --help (bool) default=[false]
-    Print this help message
-       Exported By: engine value=[true]
+--help (bool) default=[false] 
+  打印此帮助消息 
+     导出者：引擎值=[true]
 
-  --loglevel (jevois::manager::LogLevel) default=[info] List:[fatal|error|info]
-    Set the minimum log level to display
-       Exported By: engine
+--loglevel (jevois::manager::LogLevel) default=[info] List:[fatal|error|info] 
+  设置要显示的最低日志级别 
+     导出者：engine
 
 
-Engine Options:  
-  --videoerrors (bool) default=[true]
-    Show any machine vision module errors (exceptions) in the video stream. Only takes effect if streaming video to USB.
-       Exported By: engine
+Engine Options: 
+  --videoerrors (bool) 默认=[true] 
+    显示视频流中的任何机器视觉模块错误（异常）。仅在将视频流式传输到 USB 时生效。
+       导出者：引擎
 
-  --cpumode (jevois::engine::CPUmode) default=[Performance] List:[PowerSave|Conservative|OnDemand|Interactive|Performance]
-    CPU frequency modulation mode
-       Exported By: engine
+--cpumode (jevois::engine::CPUmode) default=[Performance] List:[PowerSave|Conservative|OnDemand|Interactive|Performance] 
+  CPU 频率调节模式 
+     由 engine 导出
 
-  --videomapping (int) default=[-1]
-    Index of Video Mapping to use, or -1 to use the default mapping
-       Exported By: engine
+--videomapping (int) default=[-1] 
+  要使用的视频映射索引，或 -1 使用默认映射 
+     导出者：engine
 
-  --cpumax (unsigned int) default=[1344] List:[120|240|312|408|480|504|600|648|720|816|912|1008|1044|1056|1080|1104|1116|1152|1200|1224|1248|1296|1344]
-    CPU maximum frequency in MHz
-       Exported By: engine
+--cpumax (无符号整数) 默认值 = [1344] 列表：[120|240|312|408|480|504|600|648|720|816|912|1008|1044|1056|1080|1104|1116|1152|1200|1224|1248|1296|1344] 
+  CPU 最大频率（MHz） 
+     导出者：engine
 
-  --serialdev (string) default=[stdio]
-    Hardware (4-pin connector) serial device name, or 'stdio' to use the console, or empty for no hardware serial port
-       Exported By: engine
+--serialdev (字符串) 默认值 = [stdio] 
+  硬件（4 针连接器）串行设备名称，或 'stdio' 以使用控制台，或为空以表示没有硬件串行端口 
+     导出者：引擎
 
-  --serlog (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB]
-    Show log and debug messages on selected serial port(s)
-       Exported By: engine
+--serlog (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] 
+  显示选定串行端口上的日志和调试消息 
+     导出者：engine
 
-  --serout (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB]
-    Send module serial messages to selected serial port(s)
-       Exported By: engine
+--serout (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] 将模块串行消息发送到选定的串行端口 导出者：engine
 
-  --camturbo (bool) default=[false]
-    Enable camera turbo mode by relaxing the need for DMA-coherent video buffer memory. This can accelerate severalfolds access to the captured image data, but it may also yield stripe artifacts with some modules, such as PassThrough. The stripes are pieces of incorrect data in the cache. You should experiment with each particular module. Turbo mode is not recommended for any production-grade application.
-       Exported By: engine value=[true]
+--camturbo (bool) default=[false] 通过放宽对 DMA 相干视频缓冲内存的需求来启用相机 turbo 模式。这可以将对捕获的图像数据的访问速度提高几倍，但也可能会在某些模块（如 PassThrough）中产生条纹​​伪影。条纹是缓存中的不正确数据。您应该尝试每个特定模块。不建议将 Turbo 模式用于任何生产级应用程序。导出者：引擎值=[true]
 
-  --usbserialdev (string) default=[]
-    Over-the-USB serial device name, or empty
-       Exported By: engine
+--usbserialdev (字符串) 默认值=[] USB 串行设备名称，或为空 导出者：引擎
 
-  --camreg (bool) default=[false]
-    Enable raw access to camera registers through setcamreg and getcamreg
-       Exported By: engine
+--camreg (bool) default=[false] 通过 setcamreg 和 getcamreg 启用对相机寄存器的原始访问 导出者：engine
 
-  --python (bool) default=[true]
-    When true, enable support for modules written in Python. Otherwise, attempting to load a python module will throw an exception. Disabling python saves a lot of memory and may be useful when using C++ modules that run large deep neural networks.
-       Exported By: engine
+--python (bool) 默认值为 [true] 为 true 时，启用对用 Python 编写的模块的支持。否则，尝试加载 Python 模块将引发异常。禁用 Python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。导出者：引擎
 
-  --cameradev (string) default=[/dev/video0]
-    Camera device name (if starting with /dev/v...), or movie file name (e.g., movie.mpg) or image sequence (e.g., im%02d.jpg, to read frames im00.jpg, im01.jpg, etc).
-       Exported By: engine
+--cameradev (字符串) 默认=[/dev/video0] 相机设备名称（如果以 /dev/v... 开头），或电影文件名（例如 movie.mpg）或图像序列（例如 im%02d.jpg，用于读取帧 im00.jpg、im01.jpg 等）。导出者：引擎
 
-  --cameranbuf (unsigned int) default=[0]
-    Number of video input (camera) buffers, or 0 for automatic.
-       Exported By: engine
+--cameranbuf (无符号整数) 默认值=[0] 视频输入（摄像头）缓冲区的数量，或 0 表示自动。导出者：引擎
 
-  --gadgetdev (string) default=[]
-    Gadget device name. This is used on platform hardware only. On host hardware, a display window will be used unless gadgetdev is None (useful for benchmarking) or is a file stem for a movie file that does not start with /dev/ (and which should contain a printf-style directive for a single int argument, the movie number).
-       Exported By: engine
+--gadgetdev (字符串) 默认=[] 小工具设备名称。这仅在平台硬件上使用。在主机硬件上，除非 gadgetdev 为 None（用于基准测试）或不是以 /dev/ 开头的电影文件的文件词干（并且应该包含单个 int 参数的 printf 样式指令，即电影编号），否则将使用显示窗口。导出者：引擎
 
-  --serlimit (unsigned long) default=[0]
-    Maximum number of serial messages that can be sent by a module using sendSerial(), for each video frame, or 0 for no limit. Any message sent by the module beyond the first serlimit ones will be dropped. This is useful to avoid overloading the serial link, for example in case one is running a ArUco detector and a large number of ArUco tags are present in the field of view of JeVois.
-       Exported By: engine
+--serlimit (无符号长整型) 默认值=[0] 模块使用 sendSerial() 可以发送的最大串行消息数，对于每个视频帧，或 0 表示无限制。模块发送的任何超过第一个 serlimit 的消息都将被丢弃。这有利于避免串行链路过载，例如，在运行 ArUco 检测器并且 JeVois 的视野中存在大量 ArUco 标签的情况下。导出者：引擎
 
-  --gadgetnbuf (unsigned int) default=[0]
-    Number of video output (USB video) buffers, or 0 for auto
-       Exported By: engine
+--gadgetnbuf (无符号整数) 默认值=[0] 视频输出 (USB 视频) 缓冲区的数量，或 0 表示自动 导出者：引擎
 
-  --multicam (bool) default=[false]
-    Allow up to 3 JeVois cameras on one USB bus. Enabling this reduces the amount of USB bandwidth used by each JeVois camera, from 3kb per USB isochronous microframe to 1kb. All 3 JeVois cameras must have this option enabled, and the JeVois linux kernel module should also have been loaded with multicam on.
-       Exported By: engine
+--multicam (bool) default=[false] 允许一个 USB 总线上最多 3 个 JeVois 摄像头。启用此选项可减少每个 JeVois 摄像头使用的 USB 带宽量，从每个 USB 同步微帧 3kb 减少到 1kb。所有 3 个 JeVois 摄像头都必须启用此选项，并且 JeVois Linux 内核模块也应该已加载多摄像头。导出者：引擎
 
-  --quietcmd (bool) default=[false]
-    When true, do not issue a message 'OK' after every correct command received at the command-line interface. Recommended for advanced users only.
-       Exported By: engine
+--quietcmd (bool) 默认值=[false] 设置为 true 时，在命令行界面收到每个正确命令后不发出“OK”消息。仅推荐高级用户使用。导出者：engine
 
-AVAILABLE CAMERA CONTROLS:
+可用的相机控制：
 
-- brightness [int] min=-3 max=3 step=1 def=0 curr=0
-- contrast [int] min=0 max=6 step=1 def=3 curr=3
-- saturation [int] min=0 max=4 step=1 def=2 curr=2
-- autowb [bool] default=1 curr=0
-- dowb [int] min=0 max=1 step=1 def=0 curr=1
-- redbal [int] min=0 max=255 step=1 def=128 curr=125
-- bluebal [int] min=0 max=255 step=1 def=128 curr=151
-- autogain [bool] default=1 curr=1
-- gain [int] min=16 max=1023 step=1 def=16 curr=58
-- hflip [bool] default=0 curr=0
-- vflip [bool] default=0 curr=0
-- powerfreq [menu] values 0:disabled 1:50hz 2:60hz curr=2
-- sharpness [int] min=0 max=32 step=1 def=6 curr=6
-- autoexp [menu] values 0:auto 1:manual curr=0
-- absexp [int] min=1 max=1000 step=1 def=1000 curr=500
-- presetwb [menu] values 0:manual 1:auto 2:incandescent 3:fluorescent 4:fluorescent_h 5:horizon 6:daylight 7:flash 8:cloudy 9:shade curr=1
+- 亮度 [int] 最小值=-3 最大值=3 步长=1 默认值=0 curr=0
+- 对比度 [int] 最小值=0 最大值=6 步长=1 默认值=3 curr=3
+- 饱和度 [int] 最小值=0 最大值=4 步长=1 默认值=2 curr=2
+- autowb [bool] 默认值=1 curr=0
+- dowb [int] 最小值=0 最大值=1 步长=1 默认值=0 curr=1
+- redbal [int] 最小值=0 最大值=255 步长=1 默认值=128 curr=125
+- bluebal [int] 最小值=0 最大值=255 步长=1 默认值=128 curr=151
+- autogain [bool] 默认值=1 curr=1
+- gain [int] 最小值=16 最大值=1023 步长=1 默认值=16 curr=58
+- hflip [bool] 默认值=0 curr=0
+- vflip [bool] 默认值=0 curr=0
+- powerfreq [菜单] 值 0：禁用 1：50hz 2：60hz curr=2
+- 锐度 [int] 最小值=0 最大值=32 步长=1 def=6 curr=6
+- autoexp [菜单] 值 0：自动 1：手动 curr=0
+- absexp [int] 最小值=1 最大值=1000 步长=1 def=1000 curr=500
+- presetwb [菜单] 值 0：手动 1：自动 2：白炽灯 3：荧光灯 4：荧光灯_h 5：地平线 6：日光 7：闪光 8：多云 9：阴影 curr=1
 
 \endverbatim
 
-Additional parameters and additional commands may be available depending on which machine vision module is currently
-loaded. For example, the \b SaveVideo module allows two new commands, `start` (to start recording video to disk) and
-`stop` (to stop recording to disk). It also brings in a few new options which are specific to video encoding. When this
-module is loaded (by selecting the corresponding video resolution in your camera viewer software), typing `help` will
-show these new sections:
+根据当前加载的机器视觉模块，可能会有其他参数和其他命令可用。例如，\b SaveVideo 模块允许两个新命令，“start”（开始将视频录制到磁盘）和“stop”（停止将视频录制到磁盘）。它还带来了一些特定于视频编码的新选项。加载此模块时（通过在相机查看器软件中选择相应的视频分辨率），输入“help”将显示以下新部分：
 
 \verbatim
 
 PARAMETERS:
 
 Video Saving Options:  
-  --fourcc (string) default=[MJPG] Regex:[^\w{4}$]
-    FourCC of the codec to use. The OpenCV VideoWriter doc is unclear as to which codecs are supported. Presumably, the ffmpeg library is used inside OpenCV. Hence any video encoder supported by ffmpeg should work. Tested codecs include: MJPG, MP4V, AVC1. Make sure you also pick the right filename extension (e.g., .avi for MJPG, .mp4 for MP4V, etc)
-       Exported By: SaveVideo
+  --fourcc（字符串）默认值=[MJPG] Regex:[^\w{4}$] 
+    要使用的编解码器的 FourCC。OpenCV VideoWriter 文档未明确说明支持哪些编解码器。据推测，ffmpeg 库在 OpenCV 内部使用。因此，ffmpeg 支持的任何视频编码器都应该可以使用。经过测试的编解码器包括：MJPG、MP4V、AVC1。请确保您还选择了正确的文件扩展名（例如，MJPG 为 .avi，MP4V 为 .mp4，等等）
+        导出者：SaveVideo
 
-  --fps (double) default=[30]
-    Video frames/sec as stored in the file and to be used during playback
-       Exported By: SaveVideo
+  --fps (双精度) 默认值=[30] 
+    文件中存储的视频帧/秒，用于播放期间
+       导出者：SaveVideo
 
-  --filename (string) default=[video%06d.avi]
-    Name of the video file to write. If path is not absolute, /jevois/data/savevideo/ will be prepended to it. Name should contain a printf-like directive for one int argument, which will start at 0 and be incremented on each streamoff command.
-       Exported By: SaveVideo
+--filename (string) default=[video%06d.avi] 
+  要写入的视频文件的名称。如果路径不是绝对路径，则将在其前面添加 /jevois/data/savevideo/。名称应包含一个 int 参数的类似 printf 的指令，该指令将从 0 开始，并在每个 streamoff 命令上递增。
+     导出者：SaveVideo 
 \endverbatim
 
-and
-\verbatim
+和 
+\verbatim 
 MODULE-SPECIFIC COMMANDS:
 
 start - start saving video
 stop - stop saving video and increment video file number
 \endverbatim
 
-You can also use `help2` to only show the parameters and commands of the currenly loaded module.
+您还可以使用 `help2` 仅显示当前加载模块的参数和命令。
 
-// ##############################################################################################################
-\section cmdline2 Command-line interface usage
+// ############################################################################################################# 
+\section cmdline2 命令行界面使用
 
-Commands are case-sensitive and must be entered exactly as shown here. Because the command-line interface is mostly for
-use by machines (e.g., an Arduino) and to optimize speed, as mentioned above only very minimal forgiveness for typos and
-other deviations from the required command format are tolerated.
+命令区分大小写，必须完全按照此处所示输入。由于命令行界面主要供机器（例如 Arduino）使用，并且为了优化速度，如上所述，对于拼写错误和其他与所需命令格式的偏差，我们只能容忍极小的宽容。
 
-\subsection cmdsertype Serial communication types
+\subsection cmdsertype 串行通信类型
 
-JeVois distinguishes between two types of serial communications:
+JeVois 区分两种类型的串行通信：
 
-1) <b>serlog:</b> For log messages (error messages, notices to users, etc). Log messages are categorized into severity
-tiers, and always start with `DBG` (for debug level), `INF` (info level), `ERR` (error level), or `FTL` (fatal error
-level).
+1) <b>serlog：</b>用于日志消息（错误消息、用户通知等）。日志消息按严重性等级分类，并且始终以“DBG”（调试级别）、“INF”（信息级别）、“ERR”（错误级别）或“FTL”（致命错误级别）开头。
 
-2) <b>serout:</b> For text-based outputs intended to be consumed by a machine (e.g., coordinates of an object detected
-by JeVois, to send to an Arduino).
+2）<b>serout：</b>用于机器使用的基于文本的输出（例如，JeVois 检测到的物体的坐标，发送到 Arduino）。
 
-The assignment of actual ports, such as hardware 4-pin connector vs serial-over-USB port, to \p serlog and \p serout is
-controlled by parameters, detailed below. The assignment is very flexible, for example, you can decide to send \p serlog
-messages to both the 4-pin hardware serial port and to the serial-over-USB port, or or to no port, or to just one port,
-etc while sending \p serout messages to the hardware 4-pin serial port only, or all ports, no ports, etc.
+实际端口（例如硬件 4 针连接器与 USB 串行端口）到 \p serlog 和 \p serout 的分配由参数控制，详情如下。分配非常灵活，例如，您可以决定将 \p serlog 消息发送到 4 针硬件串行端口和 USB 串行端口，或者不发送到任何端口，或者只发送到一个端口等，而将 \p serout 消息仅发送到硬件 4 针串行端口，或者发送到所有端口，不发送到任何端口等。
 
-Note how parameter \p serlimit can be set to limit the number of serial messages that are sent on every video frame, to
-avoid overloading the serial link. For example, if a module sends one message for each detected item, but many items are
-present, \p serlimit can be used to limit the number of items that will be reported over serial port.
+请注意，可以设置参数 \p serlimit 来限制每个视频帧上发送的串行消息数量，以避免串行链路过载。例如，如果模块为每个检测到的项目发送一条消息，但存在许多项目，则可以使用 \p serlimit 来限制将通过串行端口报告的项目数量。
 
-\subsection cmdbehavior Command-line general behavior
+\subsection cmdbehavior 命令行一般行为
 
-When a command is received by the JeVois engine on a given serial port, it is executed and any output is sent back to
-that same serial port.
+当 JeVois 引擎在给定的串行端口上收到命令时，就会执行该命令并将任何输出发送回同一串行端口。
 
-All successful commands end with a final line that says
+所有成功的命令都以最后一行结束，内容是 
 \verbatim
 OK
 \endverbatim
 
-Failed commands issue some error message instead, which always starts with `ERR`, such as:
+失败的命令会发出一些错误消息，该消息始终以“ERR”开头，例如：
 \verbatim
 ERR Unsupported command
 \endverbatim
 
-Many commands do not produce any additional outputs, and hence only return either a line that says `OK` or one that
-starts with `ERR`.
+许多命令不会产生任何额外的输出，因此只返回一行“OK”或以“ERR”开头的行。
 
-\subsection cmdeol Command-line end-of-line markers
+\subsection cmdeol 命令行行尾标记
 
-The default end-of-line behavior for JeVois is \a sloppy which consists of:
+JeVois 的默认行尾行为是 \a sloppy，其包括：
 
-- on input (strings sent to JeVois), any of CR (0x0d or [\\r]), LF (0x0a or [\\n]), CRLF, 0xd0 (issued by some keyboards
-  instead of Return), or 0x00 [\\0] are accepted as valid end-of-line markers. Characters received up to the end-of-line
-  marker and exclusive of it will be considered one command which will be parsed and executed.
+- 在输入（发送到 JeVois 的字符串）时，CR（0x0d 或 [\\r]）、LF（0x0a 或 [\\n]）、CRLF、0xd0（由某些键盘发出而不是 Return）或 0x00 [\\0] 中的任何一个都被接受为有效的行尾标记。 接收到的行尾标记之前且不包括行尾标记的字符将被视为一个将被解析和执行的命令。
 
-- for outputs (strings sent by JeVois), the JeVois camera issues CRLF end of line characters.
+- 对于输出（JeVois 发送的字符串），JeVois 相机发出 CRLF 行尾字符。
 
-This is configurable upon startup of the JeVois smart camera. Please see the jevois::serial::linestyle parameter of
-jevois::Serial for details. Note, however, that this paremeter becomes hidden after JeVois has started. Hence, you can
-only change serial end-of-line behavior through the initscript.cfg script that is executed upon boot up of the JeVois
-smart camera. See \ref JeVoisDaemon for details.
+这是在 JeVois 智能相机启动时可配置的。有关详细信息，请参阅 jevois::Serial 的 jevois::serial::linestyle 参数。但请注意，此参数在 JeVois 启动后变为隐藏。因此，您只能通过 JeVois 智能相机启动时执行的 initscript.cfg 脚本更改串行行尾行为。有关详细信息，请参阅 \ref JeVoisDaemon。
 
-\subsection cmdgeneral Command-line general commands and parameters
+\subsection cmdgeneral 命令行通用命令和参数
 
-General commands always available irrespective of which vision module is loaded are described here.
+这里描述了无论加载哪个视觉模块始终可用的通用命令。
 
-\subsubsection cmdhelp help - print help message
+\subsubsection cmdhelp 帮助 - 打印帮助信息
 
-Prints the help message. The help message is sent to the serial port that issued the help command only.
+打印帮助信息。帮助信息仅发送到发出帮助命令的串行端口。
 
-\subsubsection cmdinfo info - show system information including CPU speed, load and temperature
+\subsubsection cmdinfo info - 显示系统信息，包括 CPU 速度、负载和温度
 
-Shows some vital information about the JeVois smart camera:
-\verbatim
+显示有关 JeVois 智能相机的一些重要信息：\verbatim
 INFO: JeVois 1.1
 INFO: Linux version 3.4.39
 INFO: CPU: 1344MHz, 32C, load: 1.02 1.01 0.86 1/50 83
@@ -299,10 +236,9 @@ INFO: OUT: YUYV 640x300 @ 60fps CAM: YUYV 320x240 @ 60fps MOD: JeVois:DemoSalien
 OK
 \endverbatim
 
-\subsubsection cmdsetpar setpar <name> <val> - set a parameter value
+\subsubsection cmdsetpar setpar <name> <val> - 设置参数值
 
-For example, the command
-\verbatim
+例如，命令 \verbatim
 setpar cpumax 1200
 \endverbatim
 returns
@@ -323,10 +259,9 @@ INFO: OUT: YUYV 640x300 @ 60fps CAM: YUYV 320x240 @ 60fps MOD: JeVois:DemoSalien
 OK
 \endverbatim
 
-\subsubsection cmdgetpar getpar <name> - get a parameter value(s)
+\subsubsection cmdgetpar getpar <name> - 获取参数值
 
-The answer to this command consists of the parameter name followed by the current parameter value. For example, the
-command
+此命令的答案由参数名称和当前参数值组成。例如，命令
 
 \verbatim
 getpar cpumax
@@ -338,27 +273,22 @@ OK
 \endverbatim
 
 
-\subsubsection cmdrunscript runscript <filename> - run script commands in specified file
+\subsubsection cmdrunscript runscript <filename> - 在指定文件中运行脚本命令
 
-Runs a script, which is just a file that contains commands in exactly the same format as they would be typed
-interactively over the command-line interface. If the filename is not absolute (does not start with a / symbol), then
-the filename is assumed to be relative to the location of the currently-loaded vision module.
+运行脚本，该脚本只是一个文件，其中包含的命令格式与通过命令行界面交互输入的命令格式完全相同。如果文件名不是绝对的（不以 / 符号开头），则假定文件名相对于当前加载的视觉模块的位置。
 
-\subsubsection cmdsetcam setcam <ctrl> <val> - set camera control <ctrl> to value <val>
+\subsubsection cmdsetcam setcam <ctrl> <val> - 将相机控制 <ctrl> 设置为值 <val>
 
-Set a camera control. The help message gives a list of available camera controls and their permitted values. Beware that
-some controls are not effective in some modes, for example, you should turn \p autoexp (auto exposure control) off
-before you try setting a value to \p absexp (manual exposure value).
+设置相机控制。帮助消息提供了可用相机控制及其允许值的列表。请注意，某些控制在某些模式下无效，例如，在尝试将值设置为 \p absexp（手动曝光值）之前，您应该关闭 \p autoexp（自动曝光控制）。
 
-For example
-\verbatim
+例如 \verbatim
 setcam autogain 0
 setcam gain 232
 \endverbatim
 
-\subsubsection cmdgetcam getcam <ctrl> - get value of camera control <ctrl>
+\subsubsection cmdgetcam getcam <ctrl> - 获取相机控制 <ctrl> 的值
 
-For example, following the above \c setcam commands, issuing
+例如，在上述 \c setcam 命令之后，发出
 
 \verbatim
 getcam gain
@@ -370,21 +300,18 @@ gain 232
 OK
 \endverbatim
 
-Note that sometimes the camera sensor hardware will modify values given through \c setcam, for example round them off,
-clip them, etc and \c getcam allows you to get back the value that was actually set into the sensor chip.
 
-\subsubsection cmdlistmappings listmappings - list all available video mappings
+请注意，有时相机传感器硬件会修改通过 \c setcam 给出的值，例如对其进行四舍五入、剪切等，而 \c getcam 允许您取回实际设置到传感器芯片中的值。
 
-Lists all the video mappings, which define the associations between a camera image size, frame rate, and pixel format, a
-USB output image size, frame rate, and pixel format, and which machine vision module to run. The definitions of mappings
-are in the videomappings.cfg file. The `listmappings` command allow you to obtain the numerical index of a given
-mapping in the list, shich you can later use with the `setmapping` command. For example:
+\subsubsection cmdlistmappings listmappings - 列出所有可用的视频映射
+
+列出所有视频映射，定义相机图像大小、帧速率和像素格式、USB 输出图像大小、帧速率和像素格式以及要运行的机器视觉模块之间的关联。映射的定义位于 videomappings.cfg 文件中。`listmappings` 命令允许您获取列表中给定映射的数字索引，稍后您可以使用 `setmapping` 命令使用它。例如：
 
 \verbatim
 listmappings
 \endverbatim
 
-may return a list like (depending on the contents of videomappings.cfg)
+可能会返回类似的列表（取决于 videomappings.cfg 的内容）
 
 \verbatim
 AVAILABLE VIDEO MAPPINGS:
@@ -431,27 +358,20 @@ AVAILABLE VIDEO MAPPINGS:
 OK
 \endverbatim
 
-See \ref UserModes for more information about video mappings.
+有关视频映射的更多信息，请参阅 \ref UserModes。
 
-\subsubsection cmdsetmapping setmapping <num> - select video mapping <num>, only possible while not streaming
+\subsubsection cmdsetmapping setmapping <num> - 选择视频映射 <num>，仅在非流媒体时可用
 
 
-\note \b Beware that this command is only useful in some exceptional cases, and may be confusing. In most cases,
-selection of which machine vision module runs on JeVois is done either 1) by selecting a video resolution on a video
-capture software running on a host computer connected to JeVois (this is operation with streaming video output), or 2)
-using the \c setmapping2 command detailed below (operation with no streaming video output, for embedded robots).
+\note \b 请注意，此命令仅在某些特殊情况下有用，并且可能会造成混淆。在大多数情况下，选择在 JeVois 上运行哪个机器视觉模块可以通过以下方式完成：1) 通过在连接到 JeVois 的主机上运行的视频捕获软件上选择视频分辨率（这是带有流式视频输出的操作），或 2) 使用下面详述的 \c setmapping2 命令（对于嵌入式机器人，没有流式视频输出的操作）。
 
-Usually, video mappings are selected by the host computer, by selecting a given video resolution, frame rate, and pixel
-format. In some instances, however, \c setmapping is useful:
+通常，视频映射由主机通过选择给定的视频分辨率、帧速率和像素格式来选择。但是，在某些情况下，\c setmapping 很有用：
 
-1. If the current mapping has a USB output pixel format of `NONE`, i.e., there currently is no video being streamed
-over USB.
+1. 如果当前映射的 USB 输出像素格式为“NONE”，即当前没有通过 USB 传输视频。
 
-2. If the host is currently not streaming from the JeVois camera and one (or an Arduino) wants to select a particular
-mapping (typically, this is useful to select a mapping with NONE usb output, as mappings with streaming video over USB
-will be selected when one starts a video camera software on the host computer anyway).
+2. 如果主机当前没有从 JeVois 相机流式传输，并且主机（或 Arduino）想要选择特定的映射（通常，选择无 USB 输出的映射很有用，因为无论如何在主机上启动摄像机软件时都会选择通过 USB 流式传输视频的映射）。
 
-Example:
+例子：
 
 \verbatim
 setmapping 0
@@ -462,97 +382,66 @@ will return
 OK
 \endverbatim
 
-if the host computer is not currently streaming video from JeVois over USB, and the mapping will then be changed to
-0. But if video is streaming to the host computer, the answer will be:
 
+如果主机当前没有通过 USB 从 JeVois 流式传输视频，则映射将更改为 0。但如果视频正在流式传输到主机，答案将是：
 \verbatim
 ERR Command error [setmapping 0]: Cannot set mapping while streaming: Stop your webcam program on the host computer first.
 \endverbatim
 
-Simply close your camera capture software on the host computer and try again.
+只需关闭主机上的相机捕捉软件并重试即可。
 
-\note If you issue a \b setmapping command and then open a video viewing software on your host computer, most likely
-that software will override what you just did with \b setmapping, and will select a mapping of its own choice
-anyway. Hence, indeed, \b setmapping is usually only useful to select modes with NONE USB output. Also see \b
-setmapping2 which may be better in terms of avoiding confusion that may arise when setting a mapping by index, where
-that index may change as the \b videomapping.cfg file is edited.
+\note 如果您发出 \b setmapping 命令，然后在主机上打开视频观看软件，则该软件很可能会覆盖您刚刚使用 \b setmapping 执行的操作，并且无论如何都会选择其自己的映射。因此，实际上，\b setmapping 通常仅适用于选择无 USB 输出的模式。另请参阅 \b setmapping2，它可能在避免通过索引设置映射时可能出现的混淆方面更好，因为该索引可能会随着 \b videomapping.cfg 文件的编辑而发生变化。
 
-\note For mappings that stream output video over USB, the host computer also determines when to start streaming (when
-you start your camera capture software on the host) and when to stop streaming (when you quit that program). However,
-for mappings where USB output is NONE, there is no camera capture software running on the host and hence one needs to
-instruct the JeVois camera to start or stop streaming (see \c streamon and \c streamoff commands below).
+\note 对于通过 USB 流式传输输出视频的映射，主机还确定何时开始流式传输（当您在主机上启动相机捕获软件时）以及何时停止流式传输（当您退出该程序时）。但是，对于 USB 输出为 NONE 的映射，主机上没有运行相机捕获软件，因此需要指示 JeVois 相机开始或停止流式传输（请参阅下面的 \c streamon 和 \c streamoff 命令）。
 
-\note We do not automatically start sreaming when a mode with NONE USB output is selected because one may want to first
-do addtional configurations before streaming. For example, one may select a mode with the SaveVideo module that will
-save camera frames to disk, then set parameters of that module to select a given file name and video encoding format,
-and only then start streaming.
+\note 当选择无 USB 输出模式时，我们不会自动开始流式传输，因为用户可能希望在流式传输之前先进行其他配置。例如，用户可能选择带有 SaveVideo 模块的模式，该模块会将摄像机帧保存到磁盘，然后设置该模块的参数以选择给定的文件名和视频编码格式，然后才开始流式传输。
 
-When a mode with USB output of type NONE is selected, two additional commands become available: \b streamon and \b
-streamoff, detailed below.
+当选择 USB 输出类型为 NONE 的模式时，将有两个附加命令可用：\b streamon 和 \b streamoff，详情如下。
 
-\subsubsection cmdsetmapping2 setmapping2 <CAMmode> <CAMwidth> <CAMheight> <CAMfps> <Vendor> <Module> - set no-USB-out video mapping defined on the fly, while not streaming
+\subsubsection cmdsetmapping2 setmapping2 <CAMmode> <CAMwidth> <CAMheight> <CAMfps> <Vendor> <Module> - 设置非 USB 输出视频映射，在非流式传输时进行动态定义
 
-This allows one to define and set on the fly a new video mapping that has no USB output.
+这允许人们动态定义和设置没有 USB 输出的新视频映射。
 
-This command is very useful to configure the JeVois smart camera from an embedded system like an Arduino, which may not
-have knowledge of the mapping number in \b videomappings.cfg for a particular mapping it wishes to use.
+此命令对于从 Arduino 等嵌入式系统配置 JeVois 智能相机非常有用，因为它可能不知道 \b videomappings.cfg 中它希望使用的特定映射的映射号。
 
-See \ref UserModes for details. Here, because there is no USB output, we only need to specify camera format, resolution,
-and framerate, and which machine vision module to use.
+详情请参阅 \ref UserModes。这里因为没有 USB 输出，我们只需要指定相机格式、分辨率和帧速率，以及要使用哪个机器视觉模块。
 
-For example:
+例如：
 
 \verbatim
 setmapping2 YUYV 640 480 20.0 JeVois DemoArUco
 \endverbatim
-will load up the \b DemoArUco module and run it with the camera configured for 640x480 \@ 20fps YUYV video caoture.
+将加载 \b DemoArUco 模块并使用配置为 640x480 \@ 20fps YUYV 视频图像的相机运行它。
 
-\note A similar command for mappings with USB output is not possible because the JeVois smart camera must announce to
-the host computer the complete list of all supported video resolutions that it can stream over USB, at the time it is
-first connected to the host computer.
+\note 无法使用类似的命令进行 USB 输出映射，因为 JeVois 智能相机必须在首次连接到主机时向主机公布可以通过 USB 传输的所有支持视频分辨率的完整列表。
 
-\note For mappings with no video streaming over USB (as set using \c setmmapping2), there is no camera capture software
-running on the host that would instruct JeVois to start streaming video. Hence one needs to instruct the JeVois camera
-to start or stop streaming (see \c streamon and \c streamoff commands below). This is done manually so that users can
-decide when to start and stop streaming.
+\note 对于没有通过 USB 进行视频流传输的映射（使用 \c setmmapping2 设置），主机上没有运行摄像头捕获软件来指示 JeVois 开始视频流传输。因此，需要指示 JeVois 摄像头开始或停止流传输（请参阅下面的 \c streamon 和 \c streamoff 命令）。这是手动完成的，以便用户可以决定何时开始和停止流传输。
 
-\note \c setmapping2 should be used only with machine vision modules that support processing with no USB output. Those
-will have a <b>process(InputFrame && inframe)</b> function in their source code. If your JeVois smart camera seems to
-not work after a given \c setmapping2 command, try a <code>setpar serlog USB</code> and connect to JeVois using a
-terminal and the serial-over-USB connection. If you see no messages, probably you forgot the \c streamon command. If you
-see error messages, probably your module does not supportprocessing with no USB output.
+\note \c setmapping2 应仅与支持无 USB 输出处理的机器视觉模块一起使用。这些模块的源代码中将有一个 <b>process(InputFrame && inframe)</b> 函数。如果您的 JeVois 智能相机在给定的 \c setmapping2 命令后似乎无法工作，请尝试 <code>setpar serlog USB</code> 并使用终端和串行 USB 连接连接到 JeVois。如果您看不到任何消息，可能是您忘记了 \c streamon 命令。如果您看到错误消息，可能是您的模块不支持无 USB 输出处理。
 
-\subsubsection cmdstreamon streamon - start camera video streaming
+\subsubsection cmdstreamon streamon - 启动摄像头视频流
 
-This command will only exist if the current video mapping has a USB output of type NONE (including modes selected using
-\c setmapping2).
+仅当当前视频映射具有 NONE 类型的 USB 输出（包括使用 \c setmapping2 选择的模式）时，此命令才会存在。
 
-It will instruct the JeVois smart camera to start streaming video frames from the camera sensor. It is necessary to
-issue a \c streamon command after a video mode with no USB output has been selected. Otherwise, the smart camera will
-just wait for this command indefinitely.
+它将指示 JeVois 智能相机开始从相机传感器流式传输视频帧。选择没有 USB 输出的视频模式后，需要发出 \c streamon 命令。否则，智能相机将无限期地等待此命令。
 
-\subsubsection cmdstreamoff streamoff - stop camera video streaming
+\subsubsection cmdstreamoff streamoff - 停止摄像头视频流
 
-This command will only exist if the current video mapping has a USB output of type NONE (including modes selected using
-\c setmapping2). It will instruct the JeVois smart camera to stop streaming video frames from the camera sensor.
+此命令仅在当前视频映射具有 NONE 类型的 USB 输出时才会存在（包括使用 \c setmapping2 选择的模式）。它将指示 JeVois 智能相机停止从相机传感器流式传输视频帧。
 
-When using a mapping with USB output of type NONE, you must manually issue a \c streamoff command before you can issue
-your next \c setmapping or \c setmapping2 command.
+当使用类型为 NONE 的 USB 输出映射时，必须手动发出 \c streamoff 命令，然后才能发出下一个 \c setmapping 或 \c setmapping2 命令。
 
-\subsubsection cmdping ping - returns 'ALIVE'
+\subsubsection cmdping ping - 返回‘ALIVE’
 
-The purpose of this command is to check whether the JeVois smart camera has crashed, for example while testing a new
-machine vision module currently vbeing developed and debugged.
+该命令的目的是检查 JeVois 智能相机是否崩溃，例如在测试当前正在开发和调试的新机器视觉模块时。
 
-\subsubsection cmdserlog serlog <string> - forward string to the serial port(s) specified by the serlog parameter
+\subsubsection cmdserlog serlog <string> - 将字符串转发到 serlog 参数指定的串行端口
 
-This works in conjunction with the \c serlog parameter, which determines which serial port is used for log messages. The
-\c serlog command just forwards the given string to the serial port selected by the \c serlog parameter.
+它与 \c serlog 参数配合使用，该参数确定哪个串行端口用于日志消息。\c serlog 命令只是将给定的字符串转发到 \c serlog 参数选择的串行端口。
 
-This is useful, for example, to allow an Arduino connected to the hardware serial port of JeVois to send debug messages
-that can be read by a human connected to the serial-over-USB port of JeVois.
+例如，这很有用，允许连接到 JeVois 硬件串行端口的 Arduino 发送调试消息，这些消息可以被连接到 JeVois 的串行 USB 端口的人读取。
 
-For example, an Arduino connected to the hardware 4-pin connector of JeVois may issue over its serial port:
+例如，连接到 JeVois 硬件 4 针连接器的 Arduino 可能会通过其串行端口发出：
 
 \verbatim
 setpar serlog USB
@@ -560,26 +449,20 @@ serlog Arduino started
 serlog Arduino compass calibrated
 \endverbatim
 
-and a human (or another machine) connected to the JeVois camera using the serial-over-USB port would then see:
+然后使用串行 USB 端口连接到 JeVois 相机的人（或其他机器）将看到：
 
 \verbatim
 Arduino started
 Arduino compass calibrated
 \endverbatim
 
-Remember that log messages (e.g., error messages) issued by the JeVois camera itself are also sent to the port selected
-by the \c serlog parameter.
+请记住，JeVois 相机本身发出的日志消息（例如错误消息）也会发送到 \c serlog 参数选择的端口。
 
-\subsubsection cmdserout serout <string> - forward string to the serial port(s) specified by the serout parameter
+\subsubsection cmdserout serout <string> - 将字符串转发到 serout 参数指定的串行端口
 
-This operates like the \c serlog command but uses the serial port selected by the \c serout parameter.
+其操作类似于 \c serlog 命令，但使用 \c serout 参数选择的串行端口。
 
-For example, to interactively debug some Arduino code, one may want to manually type the kinds of strings that a JeVois
-machine vision module would issue, to make sure that the Arduino always correctly interprets them. Assume that we are
-debugging the pan/tilt Arduino code provided with JeVois. One may want to try to issue a number of "T2 targetx targety"
-messages by hand to check that the pan/tilt camera moves in the correct way. With the Arduino connected to the 4-pin
-hardware serial port of JeVois, and a human interacting with JeVois through the serial-over-USB port, the human could
-type:
+例如，要以交互方式调试某些 Arduino 代码，可能需要手动输入 JeVois 机器视觉模块会发出的字符串类型，以确保 Arduino 始终正确解释它们。假设我们正在调试 JeVois 提供的平移/倾斜 Arduino 代码。可能需要尝试手动发出一些“T2 targetx targety”消息，以检查平移/倾斜摄像头是否以正确的方式移动。将 Arduino 连接到 JeVois 的 4 针硬件串行端口，并通过串行 USB 端口与 JeVois 交互，人类可以输入：
 
 \verbatim
 setpar serout Hard
@@ -589,63 +472,46 @@ serout T2 -1000 -1000
 serout T2 &^%$@ try to crash arduino by using buggy T2 command
 \endverbatim
 
-The "T2 x y" strings would then be forwarded to the Arduino, which should move the pan/tilt motors accordingly. With
-the last (ill-formatted) T2 command, the Arduino should correctly reject it and not move the motors.
+然后，“T2 x y”字符串将被转发到 Arduino，Arduino 应相应地移动平移/倾斜电机。对于最后一个（格式错误的）T2 命令，Arduino 应正确拒绝它并且不移动电机。
 
-Remember that module data output messages (e.g., coordinates of a detected target object) issued by the JeVois camera
-itself are also sent to the port selected by the \c serout parameter.
+请记住，JeVois 相机本身发出的模块数据输出消息（例如，检测到的目标物体的坐标）也会发送到 \c serout 参数选择的端口。
 
-\subsubsection cmdusbsd usbsd - export the JEVOIS partition of the microSD card as a virtual USB drive
+\subsubsection cmdusbsd usbsd - 将 microSD 卡的 JEVOIS 分区导出为虚拟 USB 驱动器
 
 \jvversion{1.1}
 
-This command allows one to access over USB the JEVOIS partition of the microSD card that is inside JeVois, as if it was
-a USB thumbdrive connected to the host computer. This command only works when not streaming video.
+此命令允许通过 USB 访问 JeVois 内部 microSD 卡的 JEVOIS 分区，就像它是连接到主机的 USB 拇指驱动器一样。此命令仅在不流式传输视频时有效。
 
-Writing to the microSD inside JeVois as it is also being used by JeVois poses data caching and synchronization problems,
-which are currently resolved as follows:
+在 JeVois 内部使用 microSD 进行写入时，会出现数据缓存和同步问题，目前已按如下方式解决：
 
-- When the \c usbsd command is issued on the command line interface, the JEVOIS partition of the microSD is first made
-  read-only to the JeVois processor. This means that JeVois will not be able to save data anymore (e.g., video files
-  saved by some modules), and it will not be able to do other things that need to write to the microSD, such as
-  automatically compiling Python modules as they are loaded up. The JEVOIS partition is then exported to the host
-  computer as a virtual USB flash drive, with read and write access.
+- 在命令行界面上发出 \c usbsd 命令时，microSD 的 JEVOIS 分区首先对 JeVois 处理器变为只读。这意味着 JeVois 将无法再保存数据（例如，某些模块保存的视频文件），并且无法执行需要写入 microSD 的其他操作，例如在加载 Python 模块时自动编译它们。然后，JEVOIS 分区将作为虚拟 USB 闪存驱动器导出到主机，具有读写访问权限。
 
-- Users are then free to browse the contents of the microSD, add files, delete files, and modify files. JeVois will not
-  immediately be made aware of these changes, though.
+- 用户随后可以自由浏览 microSD 的内容、添加文件、删除文件和修改文件。不过 JeVois 不会立即知道这些更改。
 
-- Users should then properly eject the virtual USB drive. JeVois will detect this and will restart to be able to use the
-  modifications made by the users.
+- 然后用户应该正确弹出虚拟 USB 驱动器。JeVois 将检测到此情况并重新启动以便能够使用用户所做的修改。
 
 
-\subsubsection cmdsync sync - commit any pending data write to microSD
+\subsubsection cmdsync sync - 将任何待处理的数据写入 microSD
 
 \jvversion{1.1}
 
-Issue this command to ensure that data being writtent to microSD has been committed to the card, for example before you
-restart or disconnect JeVois.
+发出此命令以确保写入 microSD 的数据已提交到卡中，例如在您重新启动或断开 JeVois 之前。
 
-\subsubsection cmddate date [date and time] - get or set the system date and time
+\subsubsection cmddate 日期 [日期和时间] - 获取或设置系统日期和时间
 
 \jvversion{1.1}
 
-JeVois platform hardware does not have a battery for a real-time clock. Hence, its time gets reset to The Epoch (January
-1, 1970 UTC) on each reboot. Use this command to set the date and time or to get it. Syntax is the same as the Unix
-`date` command. This is useful, for example, to get accurate time stamps when recording videos. Since JeVois does not
-have a battery-powered clock, any date setting will be lost at the next power off.
+JeVois 平台硬件没有用于实时时钟的电池。因此，每次重启时，其时间都会重置为纪元（1970 年 1 月 1 日 UTC）。使用此命令设置日期和时间或获取日期和时间。语法与 Unix `date` 命令相同。这很有用，例如，在录制视频时获取准确的时间戳。由于 JeVois 没有电池供电的时钟，因此下次断电时任何日期设置都将丢失。
 
-See, for example, [here](http://man7.org/linux/man-pages/man1/date.1.html) for the more information about the Unix date
-command. The format to use to set the date is:
+例如，请参阅[此处](http://man7.org/linux/man-pages/man1/date.1.html) 了解有关 Unix date 命令的更多信息。用于设置日期的格式为：
 
 \verbatim
 MMDDhhmm[[CC]YY][.ss]]
 \endverbatim
 
-Where square brackets denote optional fields, and \b MM is the month, \b DD is the day, \b hh is the hour, \b mm is the
-minute, \b CC are the first two (century) digits of the year, \b YY are the last two digits of the year, and \b ss is
-the seconds.
+其中方括号表示可选字段，\b MM 是月份，\b DD 是日期，\b hh 是小时，\b mm 是分钟，\b CC 是年份的前两位（世纪）数字，\b YY 是年份的后两位数字，\b ss 是秒。
 
-For example, issuing the following `date` command to JeVois in a serial terminal connected to JeVois:
+例如，在连接到 JeVois 的串行终端中向 JeVois 发出以下“date”命令：
 
 \verbatim
 date 0504153018
@@ -658,155 +524,114 @@ date now Fri May  4 15:30:00 UTC 2018
 OK
 \endverbatim
 
-On a Linux host computer, to set the date and time on your JeVois camera to the same as your host, you can just forward
-the output of the Linux date command as input to the JeVois date command: in a terminal window of your Linux host, type:
+在 Linux 主机上，要将 JeVois 相机上的日期和时间设置为与主机相同，您只需将 Linux date 命令的输出转发为 JeVois date 命令的输入：在 Linux 主机的终端窗口中，输入：
 
 \code{.py}
 jevois-cmd date `date +%m%d%H%M%Y.%S`
 \endcode
 
-\subsubsection cmdrestart restart - restart the JeVois smart camera
+\subsubsection cmdrestart restart - 重新启动 JeVois 智能相机
 
 \jvplatform \jvversion{1.1}
 
-This command simply restarts the JeVois smart camera.
+此命令只是重新启动 JeVois 智能相机。
 
-\subsubsection cmdquit quit - quit this program
+\subsubsection cmdquit quit – 退出该程序
 
 \jvhost
 
-When running in host mode, one can quit \c jevois-daemon by simply typing 'quit' in the terminal in which it was
-started.
+在主机模式下运行时，只需在启动它的终端中输入“quit”即可退出 \c jevois-daemon。
 
-\subsubsection cmdshell shell <command> - execute a Unix command on JeVois
+\subsubsection cmdshell shell <command> - 在 JeVois 上执行 Unix 命令
 
-Use this with caution as you could corrupt the operating system of
-JeVois. This is useful mainly for debugging. For example, try:
+请谨慎使用此功能，因为您可能会破坏 JeVois 的操作系统。这主要用于调试。例如，尝试：
 
 \verbatim
 shell dmesg
 \endverbatim
 
-to see the boot log of JeVois.
+查看 JeVois 的启动日志。
 
-\subsubsection moreclicmds More commands may be available
+\subsubsection moreclicmds 可能有更多命令可用
 
-As this documentation may fall behind of the actual software running on JeVois,
-check `help` in the JeVois console for any new commands not yet
-documented here.
+由于该文档可能落后于 JeVois 上运行的实际软件，请检查 JeVois 控制台中的“帮助”以查找任何尚未在此处记录的新命令。
 
-\subsection cmdpar General parameters available on the command line
+\subsection cmdpar 命令行上可用的常规参数
 
-As mentioned above, different machine vision modules will add parameters (and possibly new commands) available to users
-over the command line. Here we describe the parameters that are exported by the Engine. Those are always available,
-regardless of which machine vision module is currently loaded:
+如上所述，不同的机器视觉模块将添加用户可通过命令行使用的参数（可能还有新命令）。这里我们描述了引擎导出的参数。无论当前加载了哪个机器视觉模块，这些参数始终可用：
 
-\subsubsection parloglevel loglevel (jevois::manager::LogLevel) default=[info] List:[fatal|error|info|debug] - Set the minimum log level to display
+\subsubsection parloglevel loglevel (jevois::manager::LogLevel) default=[info] List:[fatal|error|info|debug] - 设置要显示的最低日志级别
 
-Log messages are issued by JeVois code using provided commands LDEBUG(), LINFO(), LERROR() and LFATAL(). The loglevel
-parameter allows a user to select at runtime the level of log verbosity. Messages at the selected level or more severe
-will be displayed. For example, when selecting a \c loglevel of \c info, LINFO(), LERROR() and LFATAL() messages will be
-displayed.
+JeVois 代码使用提供的命令 LDEBUG()、LINFO()、LERROR() 和 LFATAL() 发出日志消息。loglevel 参数允许用户在运行时选择日志详细程度。将显示所选级别或更严重的消息。例如，当选择 \c loglevel 为 \c info 时，将显示 LINFO()、LERROR() 和 LFATAL() 消息。
 
-\note As an optimization of speed, one can disable at compile-time the DEBUG level log messages, thereby avoiding
-wasting some CPU to test for the current value of loglevel and to then decide whether or not to issue a debug
-message. When JEVOIS_LDEBUG_ENABLE is turned off during compilation of JeVois those tests are bypassed at compile-time
-and all LDEBUG() commands are simply no-operations (they do nothing and do not use any CPU, as if they just had been
-removed).
+\note 作为速度优化，可以在编译时禁用 DEBUG 级别日志消息，从而避免浪费一些 CPU 来测试日志级别的当前值，然后决定是否发出调试消息。在 JeVois 编译期间关闭 JEVOIS_LDEBUG_ENABLE 时，这些测试将在编译时被绕过，并且所有 LDEBUG() 命令都只是无操作（它们不执行任何操作，也不使用任何 CPU，就像它们刚刚被删除一样）。
 
-\note Hence, the possible value \c debug will not appear as one of the possible \c loglevel values if
-JEVOIS_LDEBUG_ENABLE was off during compilation of JeVois.
+\note 因此，如果在编译 JeVois 期间 JEVOIS_LDEBUG_ENABLE 处于关闭状态，则可能的值 \c debug 将不会作为可能的 \c loglevel 值之一出现。
 
-\subsubsection partracelevel tracelevel (unsigned int) default=[0] - Set the minimum trace level to display
+\subsubsection partracelevel tracelevel (unsigned int) default=[0] - 设置要显示的最低跟踪级别
 
-Programmers may use the JEVOIS_TRACE() macro to issue debugging messages that will tell a user when a particular
-function is executed. JEVOIS_TRACE() will issue one message when the function starts, and another when it ends. This is
-useful to detect where a module under development might be locking up and should be fixed.
+程序员可以使用 JEVOIS_TRACE() 宏发出调试消息，告知用户某个特定函数何时执行。JEVOIS_TRACE() 将在函数启动时发出一条消息，在函数结束时发出另一条消息。这对于检测正在开发的模块可能在哪里锁定并应进行修复非常有用。
 
-JEVOIS_TRACE takes one argument, which is an integer number called \c level. The \c tracelevel parameter can then be
-adjusted to only show trace messages that have a level below the current value of \c tracelevel. The higher the
-tracelevel, the more messages you will see. Programmers decide on which trace level to use in various functions.
+JEVOIS_TRACE 接受一个参数，即一个整数，称为 \c level。然后可以调整 \c tracelevel 参数以仅显示级别低于 \c tracelevel 当前值的跟踪消息。跟踪级别越高，您将看到的消息越多。程序员决定在各种函数中使用哪个跟踪级别。
 
-\note Because JEVOIS_TRACE() issues its trace messages using LDEBUG(), those will not appear unless JeVois was compiled
-with JEVOIS_LDEBUG_ENABLE turned on, which is not the case by default. The reason for this is to avoid wasting time
-doing tests for whether or not we should issue a debug message when running in production model. Likewise, JeVois must
-have been compiled with JEVOIS_TRACE_ENABLE turned on for trace messages to work.
+\note 因为 JEVOIS_TRACE() 使用 LDEBUG() 发出其跟踪消息，所以除非 JeVois 在编译时启用了 JEVOIS_LDEBUG_ENABLE（默认情况下并非如此），否则这些消息不会出现。这样做的原因是为了避免在生产模型中运行时浪费时间进行测试以确定我们是否应该发出调试消息。同样，JeVois 必须在启用 JEVOIS_TRACE_ENABLE 的情况下进行编译，跟踪消息才能正常工作。
 
 
-\subsubsection parserout serout (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] - Send module serial messages to selected serial port(s)
+\subsubsection parserout serout (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] - 将模块串行消息发送到选定的串行端口
 
-The value of this parameter indicates to which serial port(s) messages of type serout will be sent.
+此参数的值表示 serout 类型的消息将被发送到哪个串行端口。
 
-See discussion of the \c serout command above.
+参见上面关于 \c serout 命令的讨论。
 
-\subsubsection parserlog serlog (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] - Show log and debug messages on selected serial port(s)
+\subsubsection parserlog serlog (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB] - 显示选定串行端口上的日志和调试消息
 
-The value of this parameter indicates to which serial port(s) messages of type serlog will be sent.
+此参数的值表示 serlog 类型的消息将被发送到哪个串行端口。
 
-See discussion of the \c serlog command above.
+参见上面关于 \c serlog 命令的讨论。
 
-\subsubsection parcpumax cpumax (unsigned int) default=[1344] List:[120|240|312|408|480|504|600|648|720|816|912|1008|1044|1056|1080|1104|1116|1152|1200|1224|1248|1296|1344] - CPU maximum frequency in MHz
+\subsubsection parcpumax cpumax (无符号整数) 默认值=[1344] 列表:[120|240|312|408|480|504|600|648|720|816|912|1008|1044|1056|1080|1104|1116|1152|1200|1224|1248|1296|1344] - CPU 最大频率（MHz）
 
-Allows a user (or Arduino) to set the maximum frequency at which the JeVois CPU will run. This may be useful in some
-situations to limit CPU speed, for example when powering JeVois from a battery that is running low.
+允许用户（或 Arduino）设置 JeVois CPU 的最大运行频率。这在某些情况下可能有助于限制 CPU 速度，例如当使用电量不足的电池为 JeVois 供电时。
 
 
-\subsubsection parcpumode cpumode (jevois::engine::CPUmode) default=[Performance] List:[PowerSave|Conservative|OnDemand|Interactive|Performance] - CPU frequency modulation mode
+\subsubsection parcpumode cpumode (jevois::engine::CPUmode) default=[Performance] List:[PowerSave|Conservative|OnDemand|Interactive|Performance] - CPU 频率调制模式
 
-Allows users to select different schemes for hoe the JeVois CPU frequency may be adjusted on the fly during
-operation. This is also known as a frequency governor in the Linux community.
+允许用户选择不同的方案，以便在运行过程中动态调整 JeVois CPU 频率。这在 Linux 社区中也称为频率调节器。
 
-By default, the assumption is that a JeVois smart camera will always be processing video at its maximum possible
-speed. Hence, by default \c cpumode is set to \c Performance. Other modes will slow the CPU down when it is not heavily
-used, for example while the CPU is waiting for the next image from the camera.
+默认情况下，假设 JeVois 智能相机将始终以最大可能速度处理视频。因此，默认情况下 \c cpumode 设置为 \c Performance。当 CPU 使用率不高时，其他模式会降低 CPU 速度，例如当 CPU 正在等待相机的下一张图像时。
 
-\note Generally speaking, unless you are using your JeVois camera in some extreme situation, we recommend keeping \c
-cpumode at its default setting of \c Performance, as this will provide the most reliable frame rates. Large fluctuations
-in frame rates may appear when using other modes.
+\note 一般而言，除非您在某些极端情况下使用 JeVois 相机，否则我们建议将 \c cpumode 保持为其默认设置 \c Performance，因为这将提供最可靠的帧速率。使用其他模式时，帧速率可能会出现较大波动。
 
-\subsubsection parcamreg camreg (bool) default=[false] - Enable raw access to camera registers through setcamreg and getcamreg
+\subsubsection parcamreg camreg (bool) default=[false] - 通过 setcamreg 和 getcamreg 启用对相机寄存器的原始访问
 
-This command allows one to enable direct access to the low-level registers on the sensor chip of the JeVois smart
-camera. It is turned off by default. This is for low-level hackers only, who are trying to improve image quality by
-trying different settings of the low-level camera sensor registers.
+此命令允许直接访问 JeVois 智能相机传感器芯片上的低级寄存器。默认情况下，此功能处于关闭状态。此功能仅适用于低级黑客，他们试图通过尝试低级相机传感器寄存器的不同设置来提高图像质量。
 
-\warning It is very easy to crash your JeVois smart camera when you fiddle with the low-level registers. You have been
-warned. One wrong value and the whole smart camera goes down.
+\warning 当你摆弄低级寄存器时，你的 JeVois 智能相机很容易崩溃。你已收到警告。一个错误的值会导致整个智能相机崩溃。
 
-When parameter \c camreg is set to true, two new commands become available:
+当参数 \c camreg 设置为 true 时，两个新命令变得可用：
 
-<ul>
-<li>setcamreg \c reg \c val - set raw camera register \c reg to value \c val
-<li>getcamreg \c reg - get value of raw camera register \c reg
-</ul>
+<ul> <li>setcamreg \c reg \c val - 将原始相机寄存器 \c reg 设置为值 \c val <li>getcamreg \c reg - 获取原始相机寄存器的值 \c reg </ul>
 
-In both cases, \c reg and \c val are unsigned 8-bit values. For convenience, both decimal values and hexadecimal values
-(using a prefix \c 0x to indicate hexadecimal) are supported.
+在这两种情况下，\c reg 和 \c val 都是无符号的 8 位值。为方便起见，十进制值和十六进制值（使用前缀 \c 0x 表示十六进制）均受支持。
 
-On modified JeVois units with the AR0135 global shutter and ICM-20948 IMU, the following commands also become available:
-- setimureg \c reg \c val - set raw IMU register \c reg to value \c val
-- getimureg \c reg - get value of raw IMU register \c reg
-- setimuregs \c reg \c num \c val1 ... \c valn - set array of raw IMU register values
-- getimuregs \c reg \c num - get array of raw IMU register values
-- setdmpreg \c reg \c val - set raw DMP register \c reg to value \c val
-- getdmpreg \c reg - get value of raw DMP register \c reg
-- setdmpregs \c reg \c num \c val1 ... \c valn - set array of raw DMP register values
-- getdmpregs \c reg \c num - get array of raw DMP register values
+在配备 AR0135 全局快门和 ICM-20948 IMU 的改进型 JeVois 装置上，以下命令也可用：
+- setimureg \c reg \c val - 将原始 IMU 寄存器 \c reg 设置为值 \c val
+- getimureg \c reg - 获取原始 IMU 寄存器的值 \c reg
+- setimuregs \c reg \c num \c val1 ... \c valn - 设置原始 IMU 寄存器值数组
+- getimuregs \c reg \c num - 获取原始 IMU 寄存器值数组
+- setdmpreg \c reg \c val - 将原始 DMP 寄存器 \c reg 设置为值 \c val
+- getdmpreg \c reg - 获取原始 DMP 寄存器的值 \c reg
+- setdmpregs \c reg \c num \c val1 ... \c valn - 设置原始 DMP 寄存器值数组
+- getdmpregs \c reg \c num - 获取原始 DMP 寄存器值数组
 
-// ##############################################################################################################
-\section cmdscr Command-line scripts
+// ############################################################################################################# 
+\section cmdscr 命令行脚本
 
-Sometimes, it is useful to set some parameters or execute some commands when a module is loaded.
+有时，在加载模块时设置一些参数或执行一些命令很有用。
 
-JeVois allows you to store parameter settings and commands in a file named \b script.cfg stored in the directory of a
-module. The file \b script.cfg may contain any sequence of commands as you would type them interactively in the JeVois
-command-line interface.
+JeVois 允许您将参数设置和命令存储在模块目录中名为 \b script.cfg 的文件中。文件 \b script.cfg 可能包含任何命令序列，就像您在 JeVois 命令行界面中以交互方式输入它们一样。
 
-Here is an example for the ObjectTracker module, which tracks objects based on their color. For this module, it is a
-good idea to set the JeVois camera sensor to full manual mode, as automatic gain, exposure, and white balance would
-otherwise affect the RGB pixel values of the same object under different viewpoints and locations with respect to the
-light sources. Since tracking in the ObjectTracker is based on the color values returned by the sensor, full manual
-camera mode gives more reliable tracking.
+以下是 ObjectTracker 模块的示例，该模块根据颜色跟踪对​​象。对于此模块，最好将 JeVois 相机传感器设置为全手动模式，因为自动增益、曝光和白平衡会影响同一物体在不同视点和光源位置下的 RGB 像素值。由于 ObjectTracker 中的跟踪基于传感器返回的颜色值，因此全手动相机模式可以提供更可靠的跟踪。
 
 \code{.py}
 # Demo configuration script for ObjectTracker module.
@@ -828,8 +653,7 @@ setpar srange 100...255
 setpar vrange 60...253
 \endcode
 
-The \b script.cfg file for ObjectTracker is stored on your microSD at
-<b>JEVOIS:/modules/JeVois/ObjectTracker/script.cfg</b> source in
-<b>~/jevoisbase/src/Modules/ObjectTracker/script.cfg</b>.
+ObjectTracker 的 \b script.cfg 文件存储在您的 microSD 上的 <b>JEVOIS:/modules/JeVois/ObjectTracker/script.cfg</b> 源中，位于 <b>~/jevoisbase/src/Modules/ObjectTracker/script.cfg</b>。
 
 */
+

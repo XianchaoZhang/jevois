@@ -1,0 +1,530 @@
+\hypertarget{Config_8H}{}\doxysubsection{include/jevois/\+Config/\+Config.H File Reference}
+\label{Config_8H}\index{include/jevois/Config/Config.H@{include/jevois/Config/Config.H}}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}~1
+\begin{DoxyCompactList}\small\item\em Variables set by C\+Make. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}~20
+\item 
+\#define \mbox{\hyperlink{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH}}~0
+\item 
+\#define \mbox{\hyperlink{Config_8H_a132e28df9d621b55de9228283d33c12e}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+N\+D\+OR}}~\char`\"{}Je\+Vois\char`\"{}
+\item 
+\#define \mbox{\hyperlink{Config_8H_af958880a9f793ef43804681bcae13bb3}{J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+M\+A\+J\+OR}}~4
+\item 
+\#define \mbox{\hyperlink{Config_8H_a1aeb18646421263c9cefa844a09d2db5}{J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+M\+I\+N\+OR}}~8
+\item 
+\#define \mbox{\hyperlink{Config_8H_aebc2e6a6929f0113ec2e4d6b05c1d9fe}{J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+A\+T\+CH}}~0
+\item 
+\#define \mbox{\hyperlink{Config_8H_a6e3f1098ce52589777d8462943e64820}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+A\+J\+OR}}~3
+\item 
+\#define \mbox{\hyperlink{Config_8H_a6312326d21459ad24a6ab2ffdc89c266}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+I\+N\+OR}}~8
+\item 
+\#define \mbox{\hyperlink{Config_8H_a6b8ca169c8febd0dfb7b52d10794ba66}{J\+E\+V\+O\+I\+S\+\_\+\+A33}}
+\begin{DoxyCompactList}\small\item\em Target hardware selection\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_ae46c451d7b624cf6232a195bfec1baed}{J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+P\+RO}}
+\begin{DoxyCompactList}\small\item\em Shortcuts to allow detection of a specific platform instead of testing J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+RM and J\+E\+V\+O\+I\+S\+\_\+\mbox{[}A33$\vert$\+P\+R\+O$\vert$...\mbox{]}. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a3771a7b2b149ecea8542e294b5ae4a48}{J\+E\+V\+O\+IS}}~\char`\"{}jevois\char`\"{}
+\begin{DoxyCompactList}\small\item\em Helper string that evaluates to \char`\"{}jevois\char`\"{} or \char`\"{}jevoispro\char`\"{} depending on values of J\+E\+V\+O\+I\+S\+\_\+\+A33 and J\+E\+V\+O\+I\+S\+\_\+\+P\+RO\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_aad8a7e928fbc07781f9a1890ef08778c}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+ON}}~( ((\mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}) $<$$<$ 16) + ((\mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}) $<$$<$ 8) + (\mbox{\hyperlink{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH}}) )
+\begin{DoxyCompactList}\small\item\em Software version, combined. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(s)~\mbox{\hyperlink{Config_8H_a2e30bac9e6fe1870c8d85b1d74418444}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+TR}}(s)
+\begin{DoxyCompactList}\small\item\em Macro to stringify a value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a2e30bac9e6fe1870c8d85b1d74418444}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+TR}}(s)~\#s
+\begin{DoxyCompactList}\small\item\em Macro to stringify a value. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a5b4e916cd4073891cefa5f14efafdba9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG}}~\mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}) \char`\"{}.\char`\"{} \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}) \char`\"{}.\char`\"{} \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH}})
+\begin{DoxyCompactList}\small\item\em Software version, as string. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}}~\char`\"{}/jevois\char`\"{}
+\begin{DoxyCompactList}\small\item\em Root path for runtime jevois config files, videomappings.\+cfg, modules, etc. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a0ccd158cf6aec5f3291d277bfd056298}{J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH}}~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/modules\char`\"{}
+\begin{DoxyCompactList}\small\item\em Base path for modules. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}}~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/config\char`\"{}
+\begin{DoxyCompactList}\small\item\em Base path for config files. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}}~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/share\char`\"{}
+\begin{DoxyCompactList}\small\item\em Base path for shared files (e.\+g., neural network weights, etc) \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a698371fad542c01cf515e9bedfb66754}{J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+P\+A\+TH}}~\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}} \char`\"{}/dnn/custom\char`\"{}
+\begin{DoxyCompactList}\small\item\em Directory where custom D\+NN models are stored\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_adc34ac56d67aa02a152bcffbf38ab0e7}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+D\+N\+N\+\_\+\+P\+A\+TH}}~\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}} \char`\"{}/pydnn\char`\"{}
+\begin{DoxyCompactList}\small\item\em Directory where python pre/net/post D\+NN processors are stored\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a0fc6e35e1f36801cacff702d7d2121ef}{J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+U\+RL}}~\char`\"{}https\+://jevois.\+usc.\+edu/mc/d\char`\"{}
+\begin{DoxyCompactList}\small\item\em U\+RL where custom converted D\+NN models can be downloaded\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a71b90ca71bf68f8526f0d23e9c4106b6}{J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+F\+I\+LE}}~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/videomappings.\+cfg\char`\"{}
+\begin{DoxyCompactList}\small\item\em Location of the engine videomappings.\+cfg definition file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_ac3526046ce60a164f567df0e04d2b782}{J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+I\+N\+I\+T\+\_\+\+S\+C\+R\+I\+PT}}~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/initscript.\+cfg\char`\"{}
+\begin{DoxyCompactList}\small\item\em Location of the engine init script file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_aaa5fef920568ebcf30257298f8bbdb32}{J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+D\+E\+M\+O\+\_\+\+D\+A\+T\+A\+\_\+\+F\+I\+LE}}~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/demodata.\+yml\char`\"{}
+\begin{DoxyCompactList}\small\item\em Location of the jevois-\/pro demo data definition file. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a23dbc45a1bb2824da64faca468247c1a}{J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+F\+I\+L\+E\+N\+A\+ME}}~\char`\"{}params.\+cfg\char`\"{}
+\begin{DoxyCompactList}\small\item\em Relative name of optinal default parameters to load for each Module. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_af1a4569a2d3e50adb4fad726a8c1621d}{J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+S\+C\+R\+I\+P\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME}}~\char`\"{}script.\+cfg\char`\"{}
+\begin{DoxyCompactList}\small\item\em Relative name of an Engine script to load for each Module. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a011babbef4150f308b2e193cc7ee25e5}{J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+D\+\_\+\+F\+I\+LE}}~\char`\"{}/dev/mmcblk0p3\char`\"{}
+\begin{DoxyCompactList}\small\item\em Disk partition or file that we can export over U\+SB using Engine command \textquotesingle{}usbsd\textquotesingle{}. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a6241d5865d4df3096f0359c327b78524}{J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+D\+\_\+\+S\+YS}}~\char`\"{}/sys/devices/platform/sunxi\+\_\+usb\+\_\+udc/gadget/lun0/file\char`\"{}
+\begin{DoxyCompactList}\small\item\em Sysfs location to change the exported partition or file over U\+SB using Engine command \textquotesingle{}usbsd". \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a69af30fab530dc8e6b12238351347440}{J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+G\+S\+E\+R\+I\+A\+L\+\_\+\+F\+I\+LE}}~\char`\"{}/.jevoispro\+\_\+use\+\_\+gserial\char`\"{}
+\begin{DoxyCompactList}\small\item\em Flag file for whether to enable g\+\_\+serial at boot on jevoispro. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_abda868905a1c9bf94f03db009e7a06d9}{J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+R\+E\+F\+IX}}~\char`\"{}/usr\char`\"{}
+\begin{DoxyCompactList}\small\item\em Installed location of Open\+CV compiled for Je\+Vois, needed for Python to find cv2 module\+: \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Config_8H_a434ba505c47776472ef68d2810f22131}{J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+P\+A\+TH}}
+\item 
+\#define \mbox{\hyperlink{Config_8H_a5274a06482c1a0c5c03ca1865429fbae}{J\+E\+V\+O\+I\+S\+\_\+\+U\+N\+U\+S\+E\+D\+\_\+\+P\+A\+R\+AM}}(x)~x
+\item 
+\#define \mbox{\hyperlink{Config_8H_aed07fedb0ed03848ed96860264e58aa1}{J\+E\+V\+O\+I\+S\+\_\+\+U\+N\+U\+S\+E\+D\+\_\+\+F\+U\+NC}}(x)~x
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Config_8H_a3771a7b2b149ecea8542e294b5ae4a48}\label{Config_8H_a3771a7b2b149ecea8542e294b5ae4a48}} 
+\index{Config.H@{Config.H}!JEVOIS@{JEVOIS}}
+\index{JEVOIS@{JEVOIS}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS}{JEVOIS}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+IS~\char`\"{}jevois\char`\"{}}
+
+
+
+Helper string that evaluates to \char`\"{}jevois\char`\"{} or \char`\"{}jevoispro\char`\"{} depending on values of J\+E\+V\+O\+I\+S\+\_\+\+A33 and J\+E\+V\+O\+I\+S\+\_\+\+P\+RO\+: 
+
+
+
+Definition at line 58 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a6b8ca169c8febd0dfb7b52d10794ba66}\label{Config_8H_a6b8ca169c8febd0dfb7b52d10794ba66}} 
+\index{Config.H@{Config.H}!JEVOIS\_A33@{JEVOIS\_A33}}
+\index{JEVOIS\_A33@{JEVOIS\_A33}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_A33}{JEVOIS\_A33}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+A33}
+
+
+
+Target hardware selection\+: 
+
+
+
+Definition at line 36 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a83b3d845e173fbb5fe93589c0c716914}\label{Config_8H_a83b3d845e173fbb5fe93589c0c716914}} 
+\index{Config.H@{Config.H}!JEVOIS\_CONFIG\_PATH@{JEVOIS\_CONFIG\_PATH}}
+\index{JEVOIS\_CONFIG\_PATH@{JEVOIS\_CONFIG\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CONFIG\_PATH}{JEVOIS\_CONFIG\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/config\char`\"{}}
+
+
+
+Base path for config files. 
+
+
+
+Definition at line 79 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a698371fad542c01cf515e9bedfb66754}\label{Config_8H_a698371fad542c01cf515e9bedfb66754}} 
+\index{Config.H@{Config.H}!JEVOIS\_CUSTOM\_DNN\_PATH@{JEVOIS\_CUSTOM\_DNN\_PATH}}
+\index{JEVOIS\_CUSTOM\_DNN\_PATH@{JEVOIS\_CUSTOM\_DNN\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CUSTOM\_DNN\_PATH}{JEVOIS\_CUSTOM\_DNN\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+P\+A\+TH~\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}} \char`\"{}/dnn/custom\char`\"{}}
+
+
+
+Directory where custom D\+NN models are stored\+: 
+
+
+
+Definition at line 85 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a0fc6e35e1f36801cacff702d7d2121ef}\label{Config_8H_a0fc6e35e1f36801cacff702d7d2121ef}} 
+\index{Config.H@{Config.H}!JEVOIS\_CUSTOM\_DNN\_URL@{JEVOIS\_CUSTOM\_DNN\_URL}}
+\index{JEVOIS\_CUSTOM\_DNN\_URL@{JEVOIS\_CUSTOM\_DNN\_URL}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CUSTOM\_DNN\_URL}{JEVOIS\_CUSTOM\_DNN\_URL}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+U\+RL~\char`\"{}https\+://jevois.\+usc.\+edu/mc/d\char`\"{}}
+
+
+
+U\+RL where custom converted D\+NN models can be downloaded\+: 
+
+
+
+Definition at line 91 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a71b90ca71bf68f8526f0d23e9c4106b6}\label{Config_8H_a71b90ca71bf68f8526f0d23e9c4106b6}} 
+\index{Config.H@{Config.H}!JEVOIS\_ENGINE\_CONFIG\_FILE@{JEVOIS\_ENGINE\_CONFIG\_FILE}}
+\index{JEVOIS\_ENGINE\_CONFIG\_FILE@{JEVOIS\_ENGINE\_CONFIG\_FILE}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_ENGINE\_CONFIG\_FILE}{JEVOIS\_ENGINE\_CONFIG\_FILE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+F\+I\+LE~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/videomappings.\+cfg\char`\"{}}
+
+
+
+Location of the engine videomappings.\+cfg definition file. 
+
+
+
+Definition at line 94 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_ac3526046ce60a164f567df0e04d2b782}\label{Config_8H_ac3526046ce60a164f567df0e04d2b782}} 
+\index{Config.H@{Config.H}!JEVOIS\_ENGINE\_INIT\_SCRIPT@{JEVOIS\_ENGINE\_INIT\_SCRIPT}}
+\index{JEVOIS\_ENGINE\_INIT\_SCRIPT@{JEVOIS\_ENGINE\_INIT\_SCRIPT}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_ENGINE\_INIT\_SCRIPT}{JEVOIS\_ENGINE\_INIT\_SCRIPT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+I\+N\+I\+T\+\_\+\+S\+C\+R\+I\+PT~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/initscript.\+cfg\char`\"{}}
+
+
+
+Location of the engine init script file. 
+
+
+
+Definition at line 97 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a2e30bac9e6fe1870c8d85b1d74418444}\label{Config_8H_a2e30bac9e6fe1870c8d85b1d74418444}} 
+\index{Config.H@{Config.H}!JEVOIS\_MACRO\_STR@{JEVOIS\_MACRO\_STR}}
+\index{JEVOIS\_MACRO\_STR@{JEVOIS\_MACRO\_STR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_MACRO\_STR}{JEVOIS\_MACRO\_STR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+TR(\begin{DoxyParamCaption}\item[{}]{s }\end{DoxyParamCaption})~\#s}
+
+
+
+Macro to stringify a value. 
+
+
+
+Definition at line 67 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}\label{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}} 
+\index{Config.H@{Config.H}!JEVOIS\_MACRO\_STRING@{JEVOIS\_MACRO\_STRING}}
+\index{JEVOIS\_MACRO\_STRING@{JEVOIS\_MACRO\_STRING}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_MACRO\_STRING}{JEVOIS\_MACRO\_STRING}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG(\begin{DoxyParamCaption}\item[{}]{s }\end{DoxyParamCaption})~\mbox{\hyperlink{Config_8H_a2e30bac9e6fe1870c8d85b1d74418444}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+TR}}(s)}
+
+
+
+Macro to stringify a value. 
+
+
+
+Definition at line 64 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a23dbc45a1bb2824da64faca468247c1a}\label{Config_8H_a23dbc45a1bb2824da64faca468247c1a}} 
+\index{Config.H@{Config.H}!JEVOIS\_MODULE\_PARAMS\_FILENAME@{JEVOIS\_MODULE\_PARAMS\_FILENAME}}
+\index{JEVOIS\_MODULE\_PARAMS\_FILENAME@{JEVOIS\_MODULE\_PARAMS\_FILENAME}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_MODULE\_PARAMS\_FILENAME}{JEVOIS\_MODULE\_PARAMS\_FILENAME}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+F\+I\+L\+E\+N\+A\+ME~\char`\"{}params.\+cfg\char`\"{}}
+
+
+
+Relative name of optinal default parameters to load for each Module. 
+
+
+
+Definition at line 103 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a0ccd158cf6aec5f3291d277bfd056298}\label{Config_8H_a0ccd158cf6aec5f3291d277bfd056298}} 
+\index{Config.H@{Config.H}!JEVOIS\_MODULE\_PATH@{JEVOIS\_MODULE\_PATH}}
+\index{JEVOIS\_MODULE\_PATH@{JEVOIS\_MODULE\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_MODULE\_PATH}{JEVOIS\_MODULE\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/modules\char`\"{}}
+
+
+
+Base path for modules. 
+
+
+
+Definition at line 76 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_af1a4569a2d3e50adb4fad726a8c1621d}\label{Config_8H_af1a4569a2d3e50adb4fad726a8c1621d}} 
+\index{Config.H@{Config.H}!JEVOIS\_MODULE\_SCRIPT\_FILENAME@{JEVOIS\_MODULE\_SCRIPT\_FILENAME}}
+\index{JEVOIS\_MODULE\_SCRIPT\_FILENAME@{JEVOIS\_MODULE\_SCRIPT\_FILENAME}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_MODULE\_SCRIPT\_FILENAME}{JEVOIS\_MODULE\_SCRIPT\_FILENAME}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+S\+C\+R\+I\+P\+T\+\_\+\+F\+I\+L\+E\+N\+A\+ME~\char`\"{}script.\+cfg\char`\"{}}
+
+
+
+Relative name of an Engine script to load for each Module. 
+
+
+
+Definition at line 106 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_af958880a9f793ef43804681bcae13bb3}\label{Config_8H_af958880a9f793ef43804681bcae13bb3}} 
+\index{Config.H@{Config.H}!JEVOIS\_OPENCV\_MAJOR@{JEVOIS\_OPENCV\_MAJOR}}
+\index{JEVOIS\_OPENCV\_MAJOR@{JEVOIS\_OPENCV\_MAJOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_OPENCV\_MAJOR}{JEVOIS\_OPENCV\_MAJOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+M\+A\+J\+OR~4}
+
+
+
+Definition at line 29 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a1aeb18646421263c9cefa844a09d2db5}\label{Config_8H_a1aeb18646421263c9cefa844a09d2db5}} 
+\index{Config.H@{Config.H}!JEVOIS\_OPENCV\_MINOR@{JEVOIS\_OPENCV\_MINOR}}
+\index{JEVOIS\_OPENCV\_MINOR@{JEVOIS\_OPENCV\_MINOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_OPENCV\_MINOR}{JEVOIS\_OPENCV\_MINOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+M\+I\+N\+OR~8}
+
+
+
+Definition at line 30 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_aebc2e6a6929f0113ec2e4d6b05c1d9fe}\label{Config_8H_aebc2e6a6929f0113ec2e4d6b05c1d9fe}} 
+\index{Config.H@{Config.H}!JEVOIS\_OPENCV\_PATCH@{JEVOIS\_OPENCV\_PATCH}}
+\index{JEVOIS\_OPENCV\_PATCH@{JEVOIS\_OPENCV\_PATCH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_OPENCV\_PATCH}{JEVOIS\_OPENCV\_PATCH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+A\+T\+CH~0}
+
+
+
+Definition at line 31 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_abda868905a1c9bf94f03db009e7a06d9}\label{Config_8H_abda868905a1c9bf94f03db009e7a06d9}} 
+\index{Config.H@{Config.H}!JEVOIS\_OPENCV\_PREFIX@{JEVOIS\_OPENCV\_PREFIX}}
+\index{JEVOIS\_OPENCV\_PREFIX@{JEVOIS\_OPENCV\_PREFIX}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_OPENCV\_PREFIX}{JEVOIS\_OPENCV\_PREFIX}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+R\+E\+F\+IX~\char`\"{}/usr\char`\"{}}
+
+
+
+Installed location of Open\+CV compiled for Je\+Vois, needed for Python to find cv2 module\+: 
+
+
+
+Definition at line 119 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a434ba505c47776472ef68d2810f22131}\label{Config_8H_a434ba505c47776472ef68d2810f22131}} 
+\index{Config.H@{Config.H}!JEVOIS\_OPENCV\_PYTHON\_PATH@{JEVOIS\_OPENCV\_PYTHON\_PATH}}
+\index{JEVOIS\_OPENCV\_PYTHON\_PATH@{JEVOIS\_OPENCV\_PYTHON\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_OPENCV\_PYTHON\_PATH}{JEVOIS\_OPENCV\_PYTHON\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+P\+A\+TH}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \mbox{\hyperlink{Config_8H_abda868905a1c9bf94f03db009e7a06d9}{JEVOIS\_OPENCV\_PREFIX}} \textcolor{stringliteral}{"/lib/python"} \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{JEVOIS\_MACRO\_STRING}}(\mbox{\hyperlink{Config_8H_a6e3f1098ce52589777d8462943e64820}{JEVOIS\_PYTHON\_MAJOR}}) \textcolor{stringliteral}{"."} \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_MACRO\_STRING(\mbox{\hyperlink{Config_8H_a6312326d21459ad24a6ab2ffdc89c266}{JEVOIS\_PYTHON\_MINOR}}) \textcolor{stringliteral}{"/site-\/packages"}}
+
+\end{DoxyCode}
+
+
+Definition at line 120 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_ae46c451d7b624cf6232a195bfec1baed}\label{Config_8H_ae46c451d7b624cf6232a195bfec1baed}} 
+\index{Config.H@{Config.H}!JEVOIS\_PLATFORM\_PRO@{JEVOIS\_PLATFORM\_PRO}}
+\index{JEVOIS\_PLATFORM\_PRO@{JEVOIS\_PLATFORM\_PRO}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PLATFORM\_PRO}{JEVOIS\_PLATFORM\_PRO}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+P\+RO}
+
+
+
+Shortcuts to allow detection of a specific platform instead of testing J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+RM and J\+E\+V\+O\+I\+S\+\_\+\mbox{[}A33$\vert$\+P\+R\+O$\vert$...\mbox{]}. 
+
+Use \#ifdef J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M\+\_\+\+A33 as you would \#if defined(\+J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+R\+M) \&\& defined(\+J\+E\+V\+O\+I\+S\+\_\+\+A33). Use \#ifdef J\+E\+V\+O\+I\+S\+\_\+\+H\+O\+S\+T\+\_\+\+A33 as you would \#if !defined(J\+E\+V\+O\+I\+S\+\_\+\+P\+L\+A\+T\+F\+O\+RM) \&\& defined(\+J\+E\+V\+O\+I\+S\+\_\+\+A33) 
+
+Definition at line 44 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_adc34ac56d67aa02a152bcffbf38ab0e7}\label{Config_8H_adc34ac56d67aa02a152bcffbf38ab0e7}} 
+\index{Config.H@{Config.H}!JEVOIS\_PYDNN\_PATH@{JEVOIS\_PYDNN\_PATH}}
+\index{JEVOIS\_PYDNN\_PATH@{JEVOIS\_PYDNN\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYDNN\_PATH}{JEVOIS\_PYDNN\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+D\+N\+N\+\_\+\+P\+A\+TH~\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}} \char`\"{}/pydnn\char`\"{}}
+
+
+
+Directory where python pre/net/post D\+NN processors are stored\+: 
+
+
+
+Definition at line 88 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a6e3f1098ce52589777d8462943e64820}\label{Config_8H_a6e3f1098ce52589777d8462943e64820}} 
+\index{Config.H@{Config.H}!JEVOIS\_PYTHON\_MAJOR@{JEVOIS\_PYTHON\_MAJOR}}
+\index{JEVOIS\_PYTHON\_MAJOR@{JEVOIS\_PYTHON\_MAJOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_MAJOR}{JEVOIS\_PYTHON\_MAJOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+A\+J\+OR~3}
+
+
+
+Definition at line 32 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a6312326d21459ad24a6ab2ffdc89c266}\label{Config_8H_a6312326d21459ad24a6ab2ffdc89c266}} 
+\index{Config.H@{Config.H}!JEVOIS\_PYTHON\_MINOR@{JEVOIS\_PYTHON\_MINOR}}
+\index{JEVOIS\_PYTHON\_MINOR@{JEVOIS\_PYTHON\_MINOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_MINOR}{JEVOIS\_PYTHON\_MINOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+I\+N\+OR~8}
+
+
+
+Definition at line 33 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}\label{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}} 
+\index{Config.H@{Config.H}!JEVOIS\_ROOT\_PATH@{JEVOIS\_ROOT\_PATH}}
+\index{JEVOIS\_ROOT\_PATH@{JEVOIS\_ROOT\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_ROOT\_PATH}{JEVOIS\_ROOT\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH~\char`\"{}/jevois\char`\"{}}
+
+
+
+Root path for runtime jevois config files, videomappings.\+cfg, modules, etc. 
+
+
+
+Definition at line 73 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}\label{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}} 
+\index{Config.H@{Config.H}!JEVOIS\_SHARE\_PATH@{JEVOIS\_SHARE\_PATH}}
+\index{JEVOIS\_SHARE\_PATH@{JEVOIS\_SHARE\_PATH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_SHARE\_PATH}{JEVOIS\_SHARE\_PATH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH~\mbox{\hyperlink{Config_8H_af46b2b7cac52d5c6102ef36c2ddab49b}{J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH}} \char`\"{}/share\char`\"{}}
+
+
+
+Base path for shared files (e.\+g., neural network weights, etc) 
+
+
+
+Definition at line 82 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_aed07fedb0ed03848ed96860264e58aa1}\label{Config_8H_aed07fedb0ed03848ed96860264e58aa1}} 
+\index{Config.H@{Config.H}!JEVOIS\_UNUSED\_FUNC@{JEVOIS\_UNUSED\_FUNC}}
+\index{JEVOIS\_UNUSED\_FUNC@{JEVOIS\_UNUSED\_FUNC}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_UNUSED\_FUNC}{JEVOIS\_UNUSED\_FUNC}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+U\+N\+U\+S\+E\+D\+\_\+\+F\+U\+NC(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~x}
+
+
+
+Definition at line 131 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a5274a06482c1a0c5c03ca1865429fbae}\label{Config_8H_a5274a06482c1a0c5c03ca1865429fbae}} 
+\index{Config.H@{Config.H}!JEVOIS\_UNUSED\_PARAM@{JEVOIS\_UNUSED\_PARAM}}
+\index{JEVOIS\_UNUSED\_PARAM@{JEVOIS\_UNUSED\_PARAM}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_UNUSED\_PARAM}{JEVOIS\_UNUSED\_PARAM}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+U\+N\+U\+S\+E\+D\+\_\+\+P\+A\+R\+AM(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~x}
+
+
+
+Definition at line 130 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a011babbef4150f308b2e193cc7ee25e5}\label{Config_8H_a011babbef4150f308b2e193cc7ee25e5}} 
+\index{Config.H@{Config.H}!JEVOIS\_USBSD\_FILE@{JEVOIS\_USBSD\_FILE}}
+\index{JEVOIS\_USBSD\_FILE@{JEVOIS\_USBSD\_FILE}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_USBSD\_FILE}{JEVOIS\_USBSD\_FILE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+D\+\_\+\+F\+I\+LE~\char`\"{}/dev/mmcblk0p3\char`\"{}}
+
+
+
+Disk partition or file that we can export over U\+SB using Engine command \textquotesingle{}usbsd\textquotesingle{}. 
+
+
+
+Definition at line 109 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a6241d5865d4df3096f0359c327b78524}\label{Config_8H_a6241d5865d4df3096f0359c327b78524}} 
+\index{Config.H@{Config.H}!JEVOIS\_USBSD\_SYS@{JEVOIS\_USBSD\_SYS}}
+\index{JEVOIS\_USBSD\_SYS@{JEVOIS\_USBSD\_SYS}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_USBSD\_SYS}{JEVOIS\_USBSD\_SYS}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+D\+\_\+\+S\+YS~\char`\"{}/sys/devices/platform/sunxi\+\_\+usb\+\_\+udc/gadget/lun0/file\char`\"{}}
+
+
+
+Sysfs location to change the exported partition or file over U\+SB using Engine command \textquotesingle{}usbsd". 
+
+
+
+Definition at line 112 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a132e28df9d621b55de9228283d33c12e}\label{Config_8H_a132e28df9d621b55de9228283d33c12e}} 
+\index{Config.H@{Config.H}!JEVOIS\_VENDOR@{JEVOIS\_VENDOR}}
+\index{JEVOIS\_VENDOR@{JEVOIS\_VENDOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VENDOR}{JEVOIS\_VENDOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+N\+D\+OR~\char`\"{}Je\+Vois\char`\"{}}
+
+
+
+Definition at line 23 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_aad8a7e928fbc07781f9a1890ef08778c}\label{Config_8H_aad8a7e928fbc07781f9a1890ef08778c}} 
+\index{Config.H@{Config.H}!JEVOIS\_VERSION@{JEVOIS\_VERSION}}
+\index{JEVOIS\_VERSION@{JEVOIS\_VERSION}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VERSION}{JEVOIS\_VERSION}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+ON~( ((\mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}) $<$$<$ 16) + ((\mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}) $<$$<$ 8) + (\mbox{\hyperlink{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH}}) )}
+
+
+
+Software version, combined. 
+
+
+
+Definition at line 61 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}\label{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}} 
+\index{Config.H@{Config.H}!JEVOIS\_VERSION\_MAJOR@{JEVOIS\_VERSION\_MAJOR}}
+\index{JEVOIS\_VERSION\_MAJOR@{JEVOIS\_VERSION\_MAJOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VERSION\_MAJOR}{JEVOIS\_VERSION\_MAJOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR~1}
+
+
+
+Variables set by C\+Make. 
+
+
+
+Definition at line 20 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}\label{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}} 
+\index{Config.H@{Config.H}!JEVOIS\_VERSION\_MINOR@{JEVOIS\_VERSION\_MINOR}}
+\index{JEVOIS\_VERSION\_MINOR@{JEVOIS\_VERSION\_MINOR}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VERSION\_MINOR}{JEVOIS\_VERSION\_MINOR}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR~20}
+
+
+
+Definition at line 21 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}\label{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}} 
+\index{Config.H@{Config.H}!JEVOIS\_VERSION\_PATCH@{JEVOIS\_VERSION\_PATCH}}
+\index{JEVOIS\_VERSION\_PATCH@{JEVOIS\_VERSION\_PATCH}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VERSION\_PATCH}{JEVOIS\_VERSION\_PATCH}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH~0}
+
+
+
+Definition at line 22 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a5b4e916cd4073891cefa5f14efafdba9}\label{Config_8H_a5b4e916cd4073891cefa5f14efafdba9}} 
+\index{Config.H@{Config.H}!JEVOIS\_VERSION\_STRING@{JEVOIS\_VERSION\_STRING}}
+\index{JEVOIS\_VERSION\_STRING@{JEVOIS\_VERSION\_STRING}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_VERSION\_STRING}{JEVOIS\_VERSION\_STRING}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG~\mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a8edfdbe0ea168418ee4db6ca35b23c09}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+A\+J\+OR}}) \char`\"{}.\char`\"{} \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a6ff8cf01f1f2ea926783950e5839fa35}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+M\+I\+N\+OR}}) \char`\"{}.\char`\"{} \mbox{\hyperlink{Config_8H_a1467da9977bb4bf6f1e784dac6668c71}{J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+\+S\+T\+R\+I\+NG}}(\mbox{\hyperlink{Config_8H_a5f4c8f93e184487b8304d1b07c4af3b9}{J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+P\+A\+T\+CH}})}
+
+
+
+Software version, as string. 
+
+
+
+Definition at line 70 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_aaa5fef920568ebcf30257298f8bbdb32}\label{Config_8H_aaa5fef920568ebcf30257298f8bbdb32}} 
+\index{Config.H@{Config.H}!JEVOISPRO\_DEMO\_DATA\_FILE@{JEVOISPRO\_DEMO\_DATA\_FILE}}
+\index{JEVOISPRO\_DEMO\_DATA\_FILE@{JEVOISPRO\_DEMO\_DATA\_FILE}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOISPRO\_DEMO\_DATA\_FILE}{JEVOISPRO\_DEMO\_DATA\_FILE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+D\+E\+M\+O\+\_\+\+D\+A\+T\+A\+\_\+\+F\+I\+LE~\mbox{\hyperlink{Config_8H_a83b3d845e173fbb5fe93589c0c716914}{J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH}} \char`\"{}/demodata.\+yml\char`\"{}}
+
+
+
+Location of the jevois-\/pro demo data definition file. 
+
+
+
+Definition at line 100 of file Config.\+H.
+
+\mbox{\Hypertarget{Config_8H_a69af30fab530dc8e6b12238351347440}\label{Config_8H_a69af30fab530dc8e6b12238351347440}} 
+\index{Config.H@{Config.H}!JEVOISPRO\_GSERIAL\_FILE@{JEVOISPRO\_GSERIAL\_FILE}}
+\index{JEVOISPRO\_GSERIAL\_FILE@{JEVOISPRO\_GSERIAL\_FILE}!Config.H@{Config.H}}
+\doxyparagraph{\texorpdfstring{JEVOISPRO\_GSERIAL\_FILE}{JEVOISPRO\_GSERIAL\_FILE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+G\+S\+E\+R\+I\+A\+L\+\_\+\+F\+I\+LE~\char`\"{}/.jevoispro\+\_\+use\+\_\+gserial\char`\"{}}
+
+
+
+Flag file for whether to enable g\+\_\+serial at boot on jevoispro. 
+
+
+
+Definition at line 115 of file Config.\+H.
+

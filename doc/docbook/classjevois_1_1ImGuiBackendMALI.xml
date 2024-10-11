@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ImGuiBackendMALI">
+<title>jevois::ImGuiBackendMALI Class Reference</title>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/ImGuiBackendMALI.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>BackendMALI for ImGui on JeVois-Pro. </para>
+
+
+
+<para>This abstract base class provides an interface used by <link linkend="_classjevois_1_1VideoDisplayGUI">VideoDisplayGUI</link>. Derived implementations are available for SDL2 and Mali framebuffer + evdev.</para>
+
+<para>JeVois Pro hardware reports the following:</para>
+
+<para>EGL v1.4 EGL API is EGL_OPENGL_ES_API OpenGL ES 3.2 git.c8adbf9.122c9daed32dbba4b3056f41a2f23c58 ARM (Mali-G52) GL_VER=3.2</para>
+
+<para>OpenGL extensions: GL_ARM_rgba8 GL_ARM_mali_shader_binary GL_OES_depth24 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_packed_depth_stencil GL_OES_rgb8_rgba8 GL_EXT_read_format_bgra GL_OES_compressed_paletted_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_standard_derivatives GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_texture_npot GL_OES_vertex_half_float GL_OES_required_internalformat GL_OES_vertex_array_object GL_OES_mapbuffer GL_EXT_texture_format_BGRA8888 GL_EXT_texture_rg GL_EXT_texture_type_2_10_10_10_REV GL_OES_fbo_render_mipmap GL_OES_element_index_uint GL_EXT_shadow_samplers GL_OES_texture_compression_astc GL_KHR_texture_compression_astc_ldr GL_KHR_texture_compression_astc_hdr GL_KHR_texture_compression_astc_sliced_3d GL_EXT_texture_compression_astc_decode_mode GL_EXT_texture_compression_astc_decode_mode_rgb9e5 GL_KHR_debug GL_EXT_occlusion_query_boolean GL_EXT_disjoint_timer_query GL_EXT_blend_minmax GL_EXT_discard_framebuffer GL_OES_get_program_binary GL_OES_texture_3D GL_EXT_texture_storage GL_EXT_multisampled_render_to_texture GL_OES_surfaceless_context GL_OES_texture_stencil8 GL_EXT_shader_pixel_local_storage GL_ARM_shader_framebuffer_fetch GL_ARM_shader_framebuffer_fetch_depth_stencil GL_ARM_mali_program_binary GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_texture_sRGB_decode GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_OES_texture_storage_multisample_2d_array GL_OES_shader_image_atomic GL_EXT_robustness GL_EXT_draw_buffers_indexed GL_OES_draw_buffers_indexed GL_EXT_texture_border_clamp GL_OES_texture_border_clamp GL_EXT_texture_cube_map_array GL_OES_texture_cube_map_array GL_OES_sample_variables GL_OES_sample_shading GL_OES_shader_multisample_interpolation GL_EXT_shader_io_blocks GL_OES_shader_io_blocks GL_EXT_tessellation_shader GL_OES_tessellation_shader GL_EXT_primitive_bounding_box GL_OES_primitive_bounding_box GL_EXT_geometry_shader GL_OES_geometry_shader GL_ANDROID_extension_pack_es31a GL_EXT_gpu_shader5 GL_OES_gpu_shader5 GL_EXT_texture_buffer GL_OES_texture_buffer GL_EXT_copy_image GL_OES_copy_image GL_EXT_shader_non_constant_global_initializers GL_EXT_color_buffer_half_float GL_EXT_color_buffer_float GL_EXT_YUV_target GL_OVR_multiview GL_OVR_multiview2 GL_OVR_multiview_multisampled_render_to_texture GL_KHR_robustness GL_KHR_robust_buffer_access_behavior GL_EXT_draw_elements_base_vertex GL_OES_draw_elements_base_vertex GL_EXT_buffer_storage GL_EXT_texture_filter_anisotropic</para>
+
+<para>To get correct UTF-8 keyboard translation, you need env var LC_CTYPE to be set, e.g., en_US.UTF-8 </para>
+<para>
+Definition at line 86 of file ImGuiBackendMALI.H.</para>
+Inheritance diagram for jevois::ImGuiBackendMALI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ImGuiBackendMALI__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ImGuiBackendMALI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ImGuiBackendMALI__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiBackendMALI_1a68e17c985539d1a91ca298a8b75e1754">ImGuiBackendMALI</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ImGuiBackendMALI_1abcaebf0d0ba5ebeaf3780a0ea37f40f2">~ImGuiBackendMALI</link> ()</para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackendMALI_1abf33a5d66fe878f4c16918db411d9db1">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false, float scale=1.0f, bool conslock=true)</para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1ImGuiBackendMALI_1a7a5c04eb60cd37869d5074d421ff33fe">pollEvents</link> (bool &amp;shouldclose) override</para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to ImGui. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackendMALI_1ae0f79d68f6df7a7b66b16c1e548d133d">newFrame</link> () override</para>
+
+<para>Start a new frame and clear the window/framebuffer. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackendMALI_1ac33528e084ff41de7741179589d580e4">render</link> () override</para>
+
+<para>Render the ImGui graphics. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackendMALI_1a9c839f0bd1d11929a50ddd5708f91c97">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false) override</para>
+
+<para>Avoid masking virtual overloads. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiBackendMALI_1a6b8507e7d2eeddb034f0d3ab5105853a">scanDevices</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiBackendMALI_1a1336f72b53a676983587d86fc1475d7e">addDevice</link> (size_t num, int fd)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiBackendMALI_1a24252886e9f84155fb9f28d56197d0aa">removeDevice</link> (size_t num)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::chrono::time_point&lt; std::chrono::steady_clock &gt; <link linkend="_classjevois_1_1ImGuiBackendMALI_1abff620790f05171ab9b335d06e965b71">itsLastNewFrameTime</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1aaa368bb8f58e7503d4516e3f685a037f">itsFd</link> [32]</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1a1f757ccd12a191c23cafebf0841ca8ff">itsMouseX</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1a2b9c9e494b92c40e1aa6df5f7652cf4e">itsMouseY</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ImGuiBackendMALI_1a6b796b30b429c41b29f7f40f13b82af5">itsMouseButton</link> [5]</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1a4987ddef50b51de39186cdc19cfc46cf">itsConsoleFd</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1a9b205a6b9a06ddb5c368494a14e90fd6">itsTTY</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1ab8f0777ba00b8f7c77d2c073b2609833">itsKBmode</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1a420e629f708f1592b401126d10a23050">itsWidth</link> = 0</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ImGuiBackendMALI_1aca5e1bf18fbe2b01811bf4eb1622ef10">itsHeight</link> = 0</para>
+</listitem>
+            <listitem><para>std::array&lt; wchar_t, 49 &gt; <link linkend="_classjevois_1_1ImGuiBackendMALI_1a50f1aaad74eb9f0b9961ce24118c08d3">itsCharKeys</link> { <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>&quot;1234567890-=qwertyuiop[]asdfghjkl;&apos;`\\zxcvbnm,./&lt;&quot; }</para>
+</listitem>
+            <listitem><para>std::array&lt; wchar_t, 49 &gt; <link linkend="_classjevois_1_1ImGuiBackendMALI_1a0aa749e058ead6e72c0b7cab6cfac9af">itsShiftKeys</link> { <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>&quot;!@#$%^&amp;*()_+QWERTYUIOP{}ASDFGHJKL:\&quot;~|ZXCVBNM&lt;&gt;?&gt;&quot; }</para>
+</listitem>
+            <listitem><para>std::array&lt; wchar_t, 49 &gt; <link linkend="_classjevois_1_1ImGuiBackendMALI_1afe5209624a9ac65b3b0eaaafc052f881">itsAltgrKeys</link> = { 0 }</para>
+</listitem>
+            <listitem><para><link linkend="_structinput__event__state">input_event_state</link> <link linkend="_classjevois_1_1ImGuiBackendMALI_1aeddf2abc7ccc5f415ac264f5cff9a563">itsInputState</link> = { }</para>
+</listitem>
+            <listitem><para>char <link linkend="_classjevois_1_1ImGuiBackendMALI_1a836ded4f366b8c91e43dc75394d10c46">itsInputBuffer</link> [256] = { 0 }</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ImGuiBackendMALI_1a49842e3a61c7e847f0eafe662052e883">itsInitialized</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>static constexpr wchar_t <link linkend="_classjevois_1_1ImGuiBackendMALI_1a74c998564aea7e6b523f81fda2892515">itsFuncKeys</link> [58][8]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a68e17c985539d1a91ca298a8b75e1754"/>    <section>
+    <title>ImGuiBackendMALI()</title>
+<indexterm><primary>ImGuiBackendMALI</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>ImGuiBackendMALI</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiBackendMALI::ImGuiBackendMALI ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 368 of file ImGuiBackendMALI.C.</para>
+<para>
+References itsAltgrKeys, itsCharKeys, itsFd, itsMouseButton, itsShiftKeys, and NELEMS.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1abcaebf0d0ba5ebeaf3780a0ea37f40f2"/>    <section>
+    <title>~ImGuiBackendMALI()</title>
+<indexterm><primary>~ImGuiBackendMALI</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>~ImGuiBackendMALI</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiBackendMALI::~ImGuiBackendMALI ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</para>
+<para>
+Definition at line 379 of file ImGuiBackendMALI.C.</para>
+<para>
+References jevois::unMuteKeyboard(), and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a1336f72b53a676983587d86fc1475d7e"/>    <section>
+    <title>addDevice()</title>
+<indexterm><primary>addDevice</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>addDevice</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::addDevice (size_t num, int fd)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 707 of file ImGuiBackendMALI.C.</para>
+<para>
+References LERROR, LFATAL, LINFO, and NELEMS.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a9c839f0bd1d11929a50ddd5708f91c97"/>    <section>
+    <title>init()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackendMALI::init<computeroutput>[override]</computeroutput></computeroutput></para><para>
+
+<para>Avoid masking virtual overloads. </para>
+</para>
+<para>
+Definition at line 35 of file VideoDisplayBackendMALI.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1abf33a5d66fe878f4c16918db411d9db1"/>    <section>
+    <title>init()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::init (unsigned short w, unsigned short h, bool fullscreen = <computeroutput>false</computeroutput>
+, float scale = <computeroutput>1.0f</computeroutput>
+, bool conslock = <computeroutput>true</computeroutput>
+)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</para>
+
+<para>The init starts with the given initial window/framebuffer size. If conslock is true, we lock the console and the framebuffer; set to false when running in gdb for debugging, using gdb &#8211;args jevoispro-daemon &#8211;conslock=false </para>
+<para>
+Definition at line 399 of file ImGuiBackendMALI.C.</para>
+<para>
+References jevois::getActiveTTY(), jevois::getConsoleFd(), h, jevois::VideoDisplayBackendMALI::init(), jevois::muteKeyboard(), and jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1ae0f79d68f6df7a7b66b16c1e548d133d"/>    <section>
+    <title>newFrame()</title>
+<indexterm><primary>newFrame</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>newFrame</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::newFrame ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start a new frame and clear the window/framebuffer. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1VideoDisplayBackend_1a3c7c973ef625730022148241cce34e6f">jevois::VideoDisplayBackend</link>.</para>
+<para>
+Definition at line 674 of file ImGuiBackendMALI.C.</para>
+<para>
+References LERROR, and jevois::VideoDisplayBackend::newFrame().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a7a5c04eb60cd37869d5074d421ff33fe"/>    <section>
+    <title>pollEvents()</title>
+<indexterm><primary>pollEvents</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>pollEvents</secondary></indexterm>
+<para><computeroutput>bool jevois::ImGuiBackendMALI::pollEvents (bool &amp; shouldclose)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to ImGui. </para>
+</para>
+
+<para>Returns true if some events were received, which can be used to turn on mouse pointer and GUI. </para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1ac40174958faa9a66874d10b4a5082906">jevois::VideoDisplayBackendMALI</link>.</para>
+<para>
+Definition at line 509 of file ImGuiBackendMALI.C.</para>
+<para>
+References LERROR, and NELEMS.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a24252886e9f84155fb9f28d56197d0aa"/>    <section>
+    <title>removeDevice()</title>
+<indexterm><primary>removeDevice</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>removeDevice</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::removeDevice (size_t num)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 715 of file ImGuiBackendMALI.C.</para>
+<para>
+References LERROR, LFATAL, LINFO, and NELEMS.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1ac33528e084ff41de7741179589d580e4"/>    <section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::render ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Render the ImGui graphics. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1VideoDisplayBackend_1a6164ed80b2f3628f23bd45919750858e">jevois::VideoDisplayBackend</link>.</para>
+<para>
+Definition at line 699 of file ImGuiBackendMALI.C.</para>
+<para>
+References jevois::VideoDisplayBackend::render().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a6b8507e7d2eeddb034f0d3ab5105853a"/>    <section>
+    <title>scanDevices()</title>
+<indexterm><primary>scanDevices</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>scanDevices</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiBackendMALI::scanDevices ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 725 of file ImGuiBackendMALI.C.</para>
+<para>
+References jevois::isInputDevice(), NELEMS, and jevois::to_string().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1afe5209624a9ac65b3b0eaaafc052f881"/>    <section>
+    <title>itsAltgrKeys</title>
+<indexterm><primary>itsAltgrKeys</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsAltgrKeys</secondary></indexterm>
+<para><computeroutput>std::array&lt;wchar_t, 49&gt; jevois::ImGuiBackendMALI::itsAltgrKeys = { 0 }<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 130 of file ImGuiBackendMALI.H.</para>
+<para>
+Referenced by ImGuiBackendMALI().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a50f1aaad74eb9f0b9961ce24118c08d3"/>    <section>
+    <title>itsCharKeys</title>
+<indexterm><primary>itsCharKeys</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsCharKeys</secondary></indexterm>
+<para><computeroutput>std::array&lt;wchar_t, 49&gt; jevois::ImGuiBackendMALI::itsCharKeys { <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>&quot;1234567890-=qwertyuiop[]asdfghjkl;&apos;`\\zxcvbnm,./&lt;&quot; }<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 128 of file ImGuiBackendMALI.H.</para>
+<para>
+Referenced by ImGuiBackendMALI().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a4987ddef50b51de39186cdc19cfc46cf"/>    <section>
+    <title>itsConsoleFd</title>
+<indexterm><primary>itsConsoleFd</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsConsoleFd</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsConsoleFd<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 123 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1aaa368bb8f58e7503d4516e3f685a037f"/>    <section>
+    <title>itsFd</title>
+<indexterm><primary>itsFd</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsFd</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsFd[32]<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 117 of file ImGuiBackendMALI.H.</para>
+<para>
+Referenced by ImGuiBackendMALI().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a74c998564aea7e6b523f81fda2892515"/>    <section>
+    <title>itsFuncKeys</title>
+<indexterm><primary>itsFuncKeys</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsFuncKeys</secondary></indexterm>
+<para><computeroutput>constexpr wchar_t jevois::ImGuiBackendMALI::itsFuncKeys[58][8]<computeroutput>[static]</computeroutput>, <computeroutput>[constexpr]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=
+&#32;&#32;&#32;&#32;&#32;&#32;{
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Esc&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;BckSp&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Tab&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Enter&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;LCtrl&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;LShft&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;RShft&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP*&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;LAlt&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&#32;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;CpsLk&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F1&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F2&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F3&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F4&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F5&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F6&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F7&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F8&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F9&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F10&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;NumLk&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;ScrLk&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP7&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP8&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP9&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP-&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP4&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP5&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP6&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP+&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP1&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP2&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP3&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP0&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP.&gt;&quot;</emphasis>,&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F11&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;F12&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KPEnt&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;RCtrl&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;KP/&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;PrtSc&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;AltGr&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Break&gt;&quot;</emphasis>&#32;,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Home&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Up&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;PgUp&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Left&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Right&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;End&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Down&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;PgDn&gt;&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Ins&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Del&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Pause&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;LMeta&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;RMeta&gt;&quot;</emphasis>,&#32;<link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link><emphasis role="stringliteral">&quot;&lt;Menu&gt;&quot;</emphasis>
+&#32;&#32;&#32;&#32;&#32;&#32;}
+</programlisting><para>
+Definition at line 131 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1aca5e1bf18fbe2b01811bf4eb1622ef10"/>    <section>
+    <title>itsHeight</title>
+<indexterm><primary>itsHeight</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsHeight</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsHeight = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 126 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a49842e3a61c7e847f0eafe662052e883"/>    <section>
+    <title>itsInitialized</title>
+<indexterm><primary>itsInitialized</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsInitialized</secondary></indexterm>
+<para><computeroutput>bool jevois::ImGuiBackendMALI::itsInitialized = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 146 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a836ded4f366b8c91e43dc75394d10c46"/>    <section>
+    <title>itsInputBuffer</title>
+<indexterm><primary>itsInputBuffer</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsInputBuffer</secondary></indexterm>
+<para><computeroutput>char jevois::ImGuiBackendMALI::itsInputBuffer[256] = { 0 }<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 145 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1aeddf2abc7ccc5f415ac264f5cff9a563"/>    <section>
+    <title>itsInputState</title>
+<indexterm><primary>itsInputState</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsInputState</secondary></indexterm>
+<para><computeroutput><link linkend="_structinput__event__state">input_event_state</link> jevois::ImGuiBackendMALI::itsInputState = { }<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 144 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1ab8f0777ba00b8f7c77d2c073b2609833"/>    <section>
+    <title>itsKBmode</title>
+<indexterm><primary>itsKBmode</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsKBmode</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsKBmode<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 125 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1abff620790f05171ab9b335d06e965b71"/>    <section>
+    <title>itsLastNewFrameTime</title>
+<indexterm><primary>itsLastNewFrameTime</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsLastNewFrameTime</secondary></indexterm>
+<para><computeroutput>std::chrono::time_point&lt;std::chrono::steady_clock&gt; jevois::ImGuiBackendMALI::itsLastNewFrameTime<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 116 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a6b796b30b429c41b29f7f40f13b82af5"/>    <section>
+    <title>itsMouseButton</title>
+<indexterm><primary>itsMouseButton</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsMouseButton</secondary></indexterm>
+<para><computeroutput>bool jevois::ImGuiBackendMALI::itsMouseButton[5]<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 122 of file ImGuiBackendMALI.H.</para>
+<para>
+Referenced by ImGuiBackendMALI().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a1f757ccd12a191c23cafebf0841ca8ff"/>    <section>
+    <title>itsMouseX</title>
+<indexterm><primary>itsMouseX</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsMouseX</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsMouseX<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 121 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a2b9c9e494b92c40e1aa6df5f7652cf4e"/>    <section>
+    <title>itsMouseY</title>
+<indexterm><primary>itsMouseY</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsMouseY</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsMouseY<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 121 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a0aa749e058ead6e72c0b7cab6cfac9af"/>    <section>
+    <title>itsShiftKeys</title>
+<indexterm><primary>itsShiftKeys</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsShiftKeys</secondary></indexterm>
+<para><computeroutput>std::array&lt;wchar_t, 49&gt; jevois::ImGuiBackendMALI::itsShiftKeys { <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>&quot;!@#$%^&amp;*()_+QWERTYUIOP{}ASDFGHJKL:\&quot;~|ZXCVBNM&lt;&gt;?&gt;&quot; }<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 129 of file ImGuiBackendMALI.H.</para>
+<para>
+Referenced by ImGuiBackendMALI().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a9b205a6b9a06ddb5c368494a14e90fd6"/>    <section>
+    <title>itsTTY</title>
+<indexterm><primary>itsTTY</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsTTY</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsTTY<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 124 of file ImGuiBackendMALI.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackendMALI_1a420e629f708f1592b401126d10a23050"/>    <section>
+    <title>itsWidth</title>
+<indexterm><primary>itsWidth</primary><secondary>jevois::ImGuiBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackendMALI</primary><secondary>itsWidth</secondary></indexterm>
+<para><computeroutput>int jevois::ImGuiBackendMALI::itsWidth = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 126 of file ImGuiBackendMALI.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_ImGuiBackendMALI_8H">ImGuiBackendMALI.H</link>src/jevois/GPU/<link linkend="_ImGuiBackendMALI_8C">ImGuiBackendMALI.C</link></section>
+</section>

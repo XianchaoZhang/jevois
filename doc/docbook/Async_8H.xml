@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Async_8H">
+<title>include/jevois/Util/Async.H File Reference</title>
+<indexterm><primary>include/jevois/Util/Async.H</primary></indexterm>
+<programlisting>#include &lt;future&gt;
+#include &lt;vector&gt;
+#include &lt;jevois/Util/details/AsyncImpl.H&gt;
+</programlisting>Include dependency graph for Async.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Async_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Async_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;class Function , class... Args&gt; </para><para>std::future&lt; std::invoke_result_t&lt; std::decay_t&lt; Function &gt;, std::decay_t&lt; Args &gt;... &gt; &gt; <link linkend="_namespacejevois_1a5c82f5b2b9dd4a98d343f9e54eea0fff">jevois::async</link> (Function &amp;&amp;f, Args &amp;&amp;... args)</para>
+
+<para>使用线程池异步执行 </para>
+</listitem>
+            <listitem><para>template&lt;class Function , class... Args&gt; </para><para>std::future&lt; std::invoke_result_t&lt; std::decay_t&lt; Function &gt;, std::decay_t&lt; Args &gt;... &gt; &gt; <link linkend="_namespacejevois_1a5dbfbd62f0701adcef770280e0bc31f6">jevois::async_little</link> (Function &amp;&amp;f, Args &amp;&amp;... args)</para>
+
+<para>使用线程池异步执行 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; T &gt; <link linkend="_group__utils_1ga7649d6ce325acac1606bceec036f171b">jevois::joinall</link> (std::vector&lt; std::future&lt; T &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga019e31f64c16f1b7a51bd2676acddfb9">jevois::joinall</link> (std::vector&lt; std::future&lt; void &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ValidValuesSpecList">
+<title>jevois::ValidValuesSpecList&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ValidValuesSpec.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::ValidValuesSpecList&lt; T &gt;</title></simplesect>
+
+
+<para>有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 </para>
+<para>
+Definition at line 85 of file ValidValuesSpec.H.</para>
+Inheritance diagram for jevois::ValidValuesSpecList&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecList__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ValidValuesSpecList&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecList__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ValidValuesSpecList_1a8e3fbba3f721c0ac3cd958a9b870a56e">ValidValuesSpecList</link> ()=delete</para>
+
+<para>没有默认构造函数，始终需要提供一个列表 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ValidValuesSpecList_1a946948487b13a6190fc322174c912508">ValidValuesSpecList</link> (std::vector&lt; T &gt; const &amp;valid_list)</para>
+
+<para>从向量中给定的有效值列表构造 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ValidValuesSpecList_1a3c4eee3c3836a6ae8778a04ed37140e1">~ValidValuesSpecList</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecList_1a63ff2546ce2aa835022ca230a4277b68">checkValueValidity</link> (T const &amp;val) const</para>
+
+<para>检查提议的值是否有效，当且仅当值在我们的列表中时返回 true </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecList_1a3f6eebccf8a1af9dd773491c05cee7b3">str</link> () const</para>
+
+<para>转换为可读字符串 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const std::vector&lt; T &gt; <link linkend="_classjevois_1_1ValidValuesSpecList_1ac7d193be631719a830abadafff785447">itsValidList</link></para>
+
+<para>Our list of valid values. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecList_1a8e3fbba3f721c0ac3cd958a9b870a56e"/>    <section>
+    <title>ValidValuesSpecList()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>ValidValuesSpecList</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>ValidValuesSpecList</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::<link linkend="_classjevois_1_1ValidValuesSpecList">ValidValuesSpecList</link> ( )<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>没有默认构造函数，始终需要提供一个列表 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecList_1a946948487b13a6190fc322174c912508"/>    <section>
+    <title>ValidValuesSpecList()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>ValidValuesSpecList</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>ValidValuesSpecList</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::<link linkend="_classjevois_1_1ValidValuesSpecList">ValidValuesSpecList</link> (std::vector&lt; T &gt; const &amp; valid_list)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>从向量中给定的有效值列表构造 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecList_1a3c4eee3c3836a6ae8778a04ed37140e1"/>    <section>
+    <title>~ValidValuesSpecList()</title>
+<indexterm><primary>~ValidValuesSpecList</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>~ValidValuesSpecList</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual <link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::~<link linkend="_classjevois_1_1ValidValuesSpecList">ValidValuesSpecList</link> ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecList_1a63ff2546ce2aa835022ca230a4277b68"/>    <section>
+    <title>checkValueValidity()</title>
+<indexterm><primary>checkValueValidity</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>checkValueValidity</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::checkValueValidity (T const &amp; val) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>检查提议的值是否有效，当且仅当值在我们的列表中时返回 true </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac1198c7ddd9c246cc9f6e68b0c20b4f9">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecList_1a3f6eebccf8a1af9dd773491c05cee7b3"/>    <section>
+    <title>str()</title>
+<indexterm><primary>str</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>str</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::str ( ) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>转换为可读字符串 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac354706e1ae5638204584d660b0b6f47">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecList_1ac7d193be631719a830abadafff785447"/>    <section>
+    <title>itsValidList</title>
+<indexterm><primary>itsValidList</primary><secondary>jevois::ValidValuesSpecList&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecList&lt; T &gt;</primary><secondary>itsValidList</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const std::vector&lt;T&gt; <link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList</link>&lt; T &gt;::itsValidList<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our list of valid values. </para>
+</para>
+<para>
+Definition at line 105 of file ValidValuesSpec.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_ValidValuesSpec_8H">ValidValuesSpec.H</link></section>
+</section>

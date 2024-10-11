@@ -1,0 +1,215 @@
+\hypertarget{classjevois_1_1VideoOutputNone}{}\doxysubsection{jevois\+::Video\+Output\+None Class Reference}
+\label{classjevois_1_1VideoOutputNone}\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Output\+None.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+No-\/op \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} derivative for when there is no video output 当没有视频输出时，无操作 \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} 派生类 ~\newline
+
+
+这个从 \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} 派生的类几乎不执行任何操作，可以在不需要视频输出时由 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 使用它。 
+
+Definition at line 28 of file Video\+Output\+None.\+H.
+
+
+
+Inheritance diagram for jevois\+::Video\+Output\+None\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=218pt]{classjevois_1_1VideoOutputNone__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Video\+Output\+None\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1VideoOutputNone__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1VideoOutputNone_afbe41385f9bbcf3fcfa426f6830d91f3}{$\sim$\+Video\+Output\+None}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a97a8762ecc4858e32a492e786080939b}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_abbcffaff5cc4f8598b699839a4e6bfc8}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a5098384ddb2b6a98be345d60a5929804}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img) override
+\begin{DoxyCompactList}\small\item\em Send an image out. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_ae045404603f6a560085cb4102e1e2bcf}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a43d7042bdaebcf90fa03f6f527c20deb}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a0b81122d31d106cda61d3ae1f195012a}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a2ca37c0f77d07c5a74bfb6c9357ca93e}{its\+Buffer}}
+\item 
+\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a3ce9dc6b8aafd1980249f15edb0fe098}{its\+Image}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_afbe41385f9bbcf3fcfa426f6830d91f3}\label{classjevois_1_1VideoOutputNone_afbe41385f9bbcf3fcfa426f6830d91f3}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!````~VideoOutputNone@{$\sim$VideoOutputNone}}
+\index{````~VideoOutputNone@{$\sim$VideoOutputNone}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoOutputNone()}{~VideoOutputNone()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Output\+None\+::$\sim$\+Video\+Output\+None (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 22 of file Video\+Output\+None.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a43d7042bdaebcf90fa03f6f527c20deb}\label{classjevois_1_1VideoOutputNone_a43d7042bdaebcf90fa03f6f527c20deb}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Abort streaming. 
+
+In \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}}, this is a no-\/op. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 53 of file Video\+Output\+None.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_abbcffaff5cc4f8598b699839a4e6bfc8}\label{classjevois_1_1VideoOutputNone_abbcffaff5cc4f8598b699839a4e6bfc8}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!get@{get}}
+\index{get@{get}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 41 of file Video\+Output\+None.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a5098384ddb2b6a98be345d60a5929804}\label{classjevois_1_1VideoOutputNone_a5098384ddb2b6a98be345d60a5929804}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!send@{send}}
+\index{send@{send}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Send an image out. 
+
+In \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}}, this is a no-\/op. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 45 of file Video\+Output\+None.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a97a8762ecc4858e32a492e786080939b}\label{classjevois_1_1VideoOutputNone_a97a8762ecc4858e32a492e786080939b}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧速率 
+
+在 \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}} 中，这是一个无操作。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 26 of file Video\+Output\+None.\+C.
+
+
+
+References jevois\+::\+Video\+Mapping\+::ofmt, jevois\+::\+Video\+Mapping\+::ofps, jevois\+::\+Video\+Mapping\+::oh, jevois\+::\+Video\+Mapping\+::osize(), and jevois\+::\+Video\+Mapping\+::ow.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a0b81122d31d106cda61d3ae1f195012a}\label{classjevois_1_1VideoOutputNone_a0b81122d31d106cda61d3ae1f195012a}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+In \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}}, this is a no-\/op. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 57 of file Video\+Output\+None.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_ae045404603f6a560085cb4102e1e2bcf}\label{classjevois_1_1VideoOutputNone_ae045404603f6a560085cb4102e1e2bcf}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Output\+None\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+In \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}}, this is a no-\/op. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 49 of file Video\+Output\+None.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a2ca37c0f77d07c5a74bfb6c9357ca93e}\label{classjevois_1_1VideoOutputNone_a2ca37c0f77d07c5a74bfb6c9357ca93e}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!itsBuffer@{itsBuffer}}
+\index{itsBuffer@{itsBuffer}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{itsBuffer}{itsBuffer}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ jevois\+::\+Video\+Output\+None\+::its\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 60 of file Video\+Output\+None.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutputNone_a3ce9dc6b8aafd1980249f15edb0fe098}\label{classjevois_1_1VideoOutputNone_a3ce9dc6b8aafd1980249f15edb0fe098}} 
+\index{jevois::VideoOutputNone@{jevois::VideoOutputNone}!itsImage@{itsImage}}
+\index{itsImage@{itsImage}!jevois::VideoOutputNone@{jevois::VideoOutputNone}}
+\doxyparagraph{\texorpdfstring{itsImage}{itsImage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} jevois\+::\+Video\+Output\+None\+::its\+Image\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 61 of file Video\+Output\+None.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoOutputNone_8H}{Video\+Output\+None.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoOutputNone_8C}{Video\+Output\+None.\+C}}\end{DoxyCompactItemize}

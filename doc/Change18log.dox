@@ -1,33 +1,19 @@
-/*! \page Change18log Changes and new features in JeVois 1.8
+/*! \page Change18log JeVois 1.8 中的变化和新功能
 
-JeVois 1.8 brings the following new features:
+JeVois 1.8 带来以下新功能：
 
-- Support for the mobile-optimized TensorFlow Lite, which allows one to run TensorFlow deep neural networks on
-  JeVois. See \jvmod{TensorFlowSingle}, \jvmod{TensorFlowEasy}, and \jvmod{TensorFlowSaliency} for example modules using
-  mobilenet and compressed mobilenet pre-trained networks that can recognize 1000 different object categories. These
-  networks can run at up to 83 inferences/s (mobilenet_v1_0.25_128_quant) on the small processor inside JeVois.
+- 支持针对移动设备优化的 TensorFlow Lite，允许在 JeVois 上运行 TensorFlow 深度神经网络。请参阅 \jvmod{TensorFlowSingle}、\jvmod{TensorFlowEasy} 和 \jvmod{TensorFlowSaliency}，了解使用 mobilenet 和压缩 mobilenet 预训练网络的示例模块，这些网络可以识别 1000 种不同的目标类别。这些网络可以在 JeVois 内部的小型处理器上以高达 83 次推理/秒 (mobilenet_v1_0.25_128_quant) 的速度运行。
 
-- Bugfix: absolute exposure settings (using `setcam autoexp 1` and then `setcam absexp 123`) can now properly be read
-  back from the sensor (using `getcam absexp`). Note that the value read back may be truncated depending on frame rate
-  which may limit exposure time.
+- Bugfix：现在可以从传感器（使用 `getcam absexp`）正确读回绝对曝光设置（使用 `setcam autoexp 1` and then `setcam absexp 123`）。请注意，根据帧速率，读回的值可能会被截断，这可能会限制曝光时间。
 
-- Added a boot option (disabled by default) to connect stream video from 3 JeVois cameras connected to a single USB
-  bus. See \ref Multicam for details.
+- 添加了启动选项（默认情况下禁用），用于连接连接到单个 USB 总线的 3 个 JeVois 摄像机的流视频。有关详细信息，请参阅 \ref Multicam 。
 
-- Added an option (enabled by default) to silently drop serial messages when the serial buffer is full. This avoids
-  issues with JeVois appearing to hang when it is actually trying to send serial messages over the USB connection but
-  there is nobody listening to them on the host computer.
+- 添加了选项（默认启用），当串行缓冲区已满时，静默丢弃串行消息。这避免了 JeVois 在尝试通过 USB 连接发送串行消息但主机上无人监听时出现挂起的问题。
 
-- Changed \c jevois-cmd host script to use python serial port handling instead of simple shell commands. Should improve
-  reliability in some newer host Linux versions.
+- 更改了 \c jevois-cmd 主机脚本以使用 python 串行端口处理而不是简单的 shell 命令。应该可以提高某些较新主机 Linux 版本的可靠性。
 
-- Added support for operation with no video streaming over USB in \jvmod{ObjectDetect}.
+- 在 \jvmod{ObjectDetect} 中添加了对无 USB 视频流操作的支持。
 
-- New boot option: Create an empty file \b BOOT:quietcmd to suppress sending 'OK' back to the user after every
-  successful command received at the command line. Recommended for advanced users only.
-  
-- New boot option: Create an empty file \b BOOT:nopython to disable support for modules written in python. When
-  activated, attempting to load a python module will throw an exception. Disabling python saves a lot of memory and may
-  be useful when using C++ modules that run large deep neural networks.
-  
-*/
+- 新的启动选项：创建一个空文件 \b BOOT:quietcmd，以禁止在命令行上收到每个成功命令后向用户发送 'OK'。仅推荐高级用户使用。
+- 新的启动选项：创建一个空文件 \b BOOT:nopython，以禁用对用 python 编写的模块的支持。激活后，尝试加载 python 模块将引发异常。禁用 python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。*/
+

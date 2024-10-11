@@ -28,33 +28,33 @@ namespace jevois
   class Component;
   class ParameterBase;
 
-  //! A simple registry of all parameters associated with a Component
-  /*! This registry allows one to loop over or search for given parameters in a Component. \ingroup parameter */
+  //! 与组件相关的所有参数的简单注册表 
+  /*! 此注册表允许循环或搜索组件中的给定参数。 \ingroup parameter */
   class ParameterRegistry
   {
     public:
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚析构函数
       virtual ~ParameterRegistry();
 
     protected:
-      //! The Parameter class uses this method to register itself on construction with its owning Component
+      //! Parameter 类使用此方法在构造时向其所属的 Component 注册自身
       void addParameter(ParameterBase * const param);
 
-      //! The Parameter class uses this method to un-register itself on destruction with its owning Component
+      //! Parameter 类使用此方法在其所属的 Component 销毁时取消注册
       void removeParameter(ParameterBase * const param);
 
-      //! For all parameters that have a callback which has never been called, call it with the default param value
+      //! 对于所有具有从未调用过的回调的参数，使用默认参数值调用它；
       void callbackInitCall();
 
     private:
-      //! Allow Component and DynamicParameter to access our registry data, everyone else is locked out
+      //! 允许 Component 和 DynamicParameter 访问我们的注册表数据，其他所有人都被锁定
       friend class Component;
       template <typename T> friend class DynamicParameter;
       
-      // A list of pointers to all Parameters registered with this Component
+      // 指向使用此组件注册的所有参数的指针列表
       std::map<std::string, ParameterBase *> itsParameterList;
 
-      // Mutex to protect our list of parameters
+      // 互斥锁保护我们的参数列表
       mutable boost::shared_mutex itsParamMtx;
   };
 

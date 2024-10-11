@@ -1,38 +1,33 @@
-/*! \page Change110log Changes and new features in JeVois 1.10
+/*! \page Change110log JeVois 1.10 中的变化和新功能
 
 
-JeVois 1.10 brings the following new features:
+JeVois 1.10 带来以下新功能：
 
-- Improved JeVois Inventor allows for testing of headless (no USB video output) operation of JeVois
+- 改进的 JeVois Inventor 允许测试 JeVois 的无头（无 USB 视频输出）操作
 
-- Bumped to OpenCV 4.0.0-beta, with all contrib modules including deep neural networks (DNN) and non-free
+- 升级到 OpenCV 4.0.0-beta，所有贡献模块包括深度神经网络 (DNN) 和非免费
 
-- YOLO v3 is now supported by \jvmod{DarknetYOLO}, faster, more accurate, less memory, and 80 object classes.
+- \jvmod{DarknetYOLO} 现在支持 YOLO v3，速度更快、更准确、占用内存更少，并有 80 个对象类别。
 
-- New module \jvmod{PyClassificationDNN} show how to use object recognition deep neural
-  networks using the OpenCV DNN framework, in Python. Supported network formats are Caffe, TensorFlow, Darknet,
-  Torch, and ONNX. Examples are provided which include:
-  + SqueezeNet v1.1 trained on ImageNet (1000 object categories), Caffe model
-  + More soon! Please contribute!
+- 新模块 \jvmod{PyClassificationDNN} 展示了如何使用 OpenCV DNN 框架（Python 版）使用对象识别深度神经网络。支持的网络格式包括 Caffe、TensorFlow、Darknet、Torch 和 ONNX。提供的示例包括：
++ 在 ImageNet 上训练的 SqueezeNet v1.1（1000 个对象类别），Caffe 模型
++ 即将推出更多内容！请贡献力量！
 
-- Several new tutorials about optical flow implementation in python, headless operation, etc.
+- 关于用 Python 实现光流、无头操作等的几个新教程。
 
-- Added support for different camera sensors. ov7725 is working great, still work in progress for ov2640 and AR0135
-  (global shutter, M12 lens mount) with ICM-20948 9-DOF IMU placed right behind the image sensor. More on that coming in
-  the next release.
+- 增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 和 AR0135（全局快门，M12 镜头支架）的开发仍在进行中，ICM-20948 9-DOF IMU 位于图像传感器的正后方。下一版本将提供更多信息。
 
-- Added support for on-the-fly conversion from raw BAYER camera frames to YUYV. Useful for sensors which can only output
-  BAYER, like the AR0135 global shutter sensor.
+- 增加了从原始 BAYER 相机帧到 YUYV 的即时转换支持。对于只能输出 BAYER 的传感器（如 AR0135 全局快门传感器）非常有用。
 
-- Bugfix of `jevois-usbsd` which was not working for some users.
+- 修复了‘jevois-usbsd’对某些用户无法正常工作的问题。
 
-- Better handling of module startup errors, config file errors, etc so that the Inventor does not get stuck even if a
-  viion module completely fails to load or some config file is bogus.
+- 更好地处理模块启动错误、配置文件错误等，这样即使 viion 模块完全加载失败或某些配置文件是伪造的，Inventor 也不会卡住。
 
-- Additional support for accessing raw camera sensor registers and raw IMU registers, both from C++ and Python.
+- 附加支持从 C++ 和 Python 访问原始相机传感器寄存器和原始 IMU 寄存器。
 
-- More docs about optional lenses, optional sensors, etc.
+- 有关可选镜头、可选传感器等的更多文档。
 
-- Patch for missing CPU_SETSIZE definition on some machines (needed to compile TensorFlow in jevoisbase).
+- 修补某些机器上缺少的 CPU_SETSIZE 定义（需要在 jevoisbase 中编译 TensorFlow）。
 
 */
+

@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1OutputFrame">
+<title>jevois::OutputFrame Class Reference</title>
+<indexterm><primary>jevois::OutputFrame</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/OutputFrame.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>围绕要通过 USB 发送的原始图像的异常安全包装器 </para>
+
+
+
+<para>此包装器的操作方式与标准 C++11 中的 std:future 非常相似。用户可以通过调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link> 获取下一个要通过 USB 发送的内存分 配但空白的图像，如果 <link linkend="_classjevois_1_1Gadget">Gadget</link> 仍在通过 USB 发送所有缓冲区并且没有可用的空白缓冲区，则可能会阻塞，或者如果由于某种原 因（例如，USB 断开连接，用户刚刚在其网络摄像头软件中更改了视频模式或关闭了它）获取该缓冲区失败，则可能会抛出异常 。分配的图像大小和像素类型由当前 VideoMapping、USB 部分定义，即它是用户当前选择的 USB 视频模式。为了节省时间，图 像缓冲区不会被清零，因此您不应假设图像填充了黑色像素，它可能包含随机像素或先前的输出帧。此外，还提供了 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 函 数，用户在将像素数据写入通过 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link> 获取的图像后即可使用该函数，以允许 USB 驱动程序将该图像发送到连接的主机。如果 在 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 被销毁时尚未调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>，则如果已调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>，则会自动调用该函数。</para>
+
+<para><link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 实现了对输出视频帧的零拷贝、零等待访问，即：</para>
+
+<para><orderedlist>
+<listitem>
+<para>您通过 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link> 获取的图像的像素数据直接是内存映射像素缓冲区，JeVois 芯片上的硅硬件将通过直接内存访问 (DMA) 使用 该缓冲区通过 USB 链路将数据流出；</para>
+</listitem><listitem>
+<para>只要您调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>，该缓冲区就会排队等待通过 USB 发送（而不是以固定的、有规律的间隔流出图像）。Gadget 有多个图 像缓冲区，允许一个缓冲区通过 USB 流出，而另一个缓冲区则通过 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link> 由您的应用程序填充。这些缓冲区是可回收的， 即一旦调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>，底层缓冲区就会通过 USB 流出，然后发送回 <link linkend="_classjevois_1_1Gadget">Gadget</link> 以供您的代码将来访问。 </para>
+</listitem></orderedlist>
+</para>
+<para>
+Definition at line 48 of file OutputFrame.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1OutputFrame_1a18713cd4e71a637f6d3be8032ad62093">OutputFrame</link> (<link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp;other)=default</para>
+
+<para>Move constructor. </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get</link> () const</para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 通过 USB 发送出去 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send</link> () const</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a8074a61ff928d7812b08b4b48d88c38f">sendCv</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 cv::Mat 转换/缩放为当前输出格式后发送的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a8d3aa4fe5143b55b7bf2852dc6501f68">sendCvGRAY</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a5018efc55e0fb7a5300ee3fad73d45a6">sendCvBGR</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 BGR cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1ad3e870ad348b0158243d4514abd2bc06">sendCvRGB</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 RGB cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1ad82a3955ca32e37d277b3959f83d7374">sendCvRGBA</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a305564548b1d620113d469f552e3374f">sendScaledCvGRAY</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1ad2af232de59d25ca0d271f489ca1e43d">sendScaledCvBGR</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 BGR cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a75a18b108f185f115631f857c2b18aaf">sendScaledCvRGB</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 RGB cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFrame_1a71deb595dc640af99914a4b2c72cbcaa">sendScaledCvRGBA</link> (cv::Mat const &amp;img, int quality=75) const</para>
+
+<para>将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1OutputFrame_1aad21e8af1b54482681c66e8e5dab9d55">~OutputFrame</link> ()</para>
+
+<para>析构函数，根据需要将缓冲区返回给驱动程序 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1OutputFrame_1a3e1914489e4bed4f9f23cdeab34a43dc">Engine</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1OutputFrame_1a18713cd4e71a637f6d3be8032ad62093"/>    <section>
+    <title>OutputFrame()</title>
+<indexterm><primary>OutputFrame</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>OutputFrame</secondary></indexterm>
+<para><computeroutput>jevois::OutputFrame::OutputFrame (<link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Move constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1aad21e8af1b54482681c66e8e5dab9d55"/>    <section>
+    <title>~OutputFrame()</title>
+<indexterm><primary>~OutputFrame</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>~OutputFrame</secondary></indexterm>
+<para><computeroutput>jevois::OutputFrame::~OutputFrame ( )</computeroutput></para><para>
+
+<para>析构函数，根据需要将缓冲区返回给驱动程序 </para>
+</para>
+<para>
+Definition at line 31 of file OutputFrame.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::OutputFrame::get ( ) const</computeroutput></para><para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 通过 USB 发送出去 </para>
+</para>
+
+<para>如果没有可用的缓冲区，则可能会抛出，即，所有内容都已排队等待发送到主机但尚未发送。应用程序代码必须为每个 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link> 平衡一个 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。 </para>
+<para>
+Definition at line 54 of file OutputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::send ( ) const</computeroutput></para><para>
+Definition at line 62 of file OutputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a8074a61ff928d7812b08b4b48d88c38f"/>    <section>
+    <title>sendCv()</title>
+<indexterm><primary>sendCv</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendCv</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendCv (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 cv::Mat 转换/缩放为当前输出格式后发送的简写 </para>
+</para>
+
+<para>这主要针对 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的尺寸。</para>
+
+<para>给定的 cv::Mat 的像素格式猜测如下：<itemizedlist>
+<listitem>
+<para>如果 img.type() == CV_8UC3，则假设为 BGR 像素</para>
+</listitem><listitem>
+<para>如果 img.type() == CV_8UC1，则假设为 GRAY 像素</para>
+</listitem><listitem>
+<para>如果 img.type() == CV_8UC4，则假设为 RGBA 像素</para>
+</listitem></itemizedlist>
+</para>
+
+<para>C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 组合，因为这可提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、 将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 70 of file OutputFrame.C.</para>
+<para>
+References jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a5018efc55e0fb7a5300ee3fad73d45a6"/>    <section>
+    <title>sendCvBGR()</title>
+<indexterm><primary>sendCvBGR</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendCvBGR</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendCvBGR (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 BGR cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的尺寸。 C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为 目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 90 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvBGRtoRawImage().</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a8d3aa4fe5143b55b7bf2852dc6501f68"/>    <section>
+    <title>sendCvGRAY()</title>
+<indexterm><primary>sendCvGRAY</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendCvGRAY</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendCvGRAY (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的尺寸。 C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为 目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 82 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvGRAYtoRawImage().</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1ad3e870ad348b0158243d4514abd2bc06"/>    <section>
+    <title>sendCvRGB()</title>
+<indexterm><primary>sendCvRGB</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendCvRGB</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendCvRGB (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 RGB cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的暗淡度。 C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为 目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>，将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 97 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvRGBtoRawImage().</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1ad82a3955ca32e37d277b3959f83d7374"/>    <section>
+    <title>sendCvRGBA()</title>
+<indexterm><primary>sendCvRGBA</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendCvRGBA</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendCvRGBA (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的暗淡度。 C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为 目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>，将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 105 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvRGBAtoRawImage().</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1ad2af232de59d25ca0d271f489ca1e43d"/>    <section>
+    <title>sendScaledCvBGR()</title>
+<indexterm><primary>sendScaledCvBGR</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendScaledCvBGR</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendScaledCvBGR (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 BGR cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的大小 。C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换 为目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 122 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvBGRtoRawImage(), jevois::RawImage::height, jevois::rescaleCv(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a305564548b1d620113d469f552e3374f"/>    <section>
+    <title>sendScaledCvGRAY()</title>
+<indexterm><primary>sendScaledCvGRAY</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendScaledCvGRAY</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendScaledCvGRAY (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗度。 C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为 目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 113 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvGRAYtoRawImage(), jevois::RawImage::height, jevois::rescaleCv(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a75a18b108f185f115631f857c2b18aaf"/>    <section>
+    <title>sendScaledCvRGB()</title>
+<indexterm><primary>sendScaledCvRGB</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendScaledCvRGB</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendScaledCvRGB (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 RGB cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗淡 程度。C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或 转换为目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调 用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介 于 1 和 100 之间。 </para>
+<para>
+Definition at line 130 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvRGBtoRawImage(), jevois::RawImage::height, jevois::rescaleCv(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFrame_1a71deb595dc640af99914a4b2c72cbcaa"/>    <section>
+    <title>sendScaledCvRGBA()</title>
+<indexterm><primary>sendScaledCvRGBA</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>sendScaledCvRGBA</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFrame::sendScaledCvRGBA (cv::Mat const &amp; img, int quality = <computeroutput>75</computeroutput>
+) const</computeroutput></para><para>
+
+<para>将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 </para>
+</para>
+
+<para>这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗度 。C++ 模块编写者应坚持使用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换 为目标 RawImage，然后通过调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link> 立即发送出去，因此用户在使用此函数后不应调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。此函数基本上等同于调用 <link linkend="_classjevois_1_1OutputFrame_1ab0d1fea6060ee24de281934f048f07fb">get()</link>、将给定的 cv::Mat 转换为正确的输出格式，然后调用 <link linkend="_classjevois_1_1OutputFrame_1ae6dafb6fab88b4166dc4b206c21c56a8">send()</link>。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 100 之间。 </para>
+<para>
+Definition at line 139 of file OutputFrame.C.</para>
+<para>
+References jevois::rawimage::convertCvRGBAtoRawImage(), jevois::RawImage::height, jevois::rescaleCv(), and jevois::RawImage::width.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1OutputFrame_1a3e1914489e4bed4f9f23cdeab34a43dc"/>    <section>
+    <title>Engine</title>
+<indexterm><primary>Engine</primary><secondary>jevois::OutputFrame</secondary></indexterm>
+<indexterm><primary>jevois::OutputFrame</primary><secondary>Engine</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Engine">Engine</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 150 of file OutputFrame.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_OutputFrame_8H">OutputFrame.H</link>src/jevois/Core/<link linkend="_OutputFrame_8C">OutputFrame.C</link></section>
+</section>

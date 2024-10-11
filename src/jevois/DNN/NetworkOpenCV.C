@@ -50,7 +50,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkOpenCV::outputShapes()
 // ####################################################################################################
 void jevois::dnn::NetworkOpenCV::load()
 {
-  // Need to nuke the network first if it exists or we could run out of RAM:
+  // 如果网络存在，则需要先将其删除，否则我们可能会耗尽 RAM：
   if (itsNet.empty() == false) itsNet = cv::dnn::Net();
 
   std::string const m = jevois::absolutePath(dataroot::get(), model::get());
@@ -84,7 +84,7 @@ void jevois::dnn::NetworkOpenCV::load()
   }
   LINFO("Backend: " << backend::get() << ", Target: " << target::get());
   
-  // Get names of the network's output layers:
+  // 获取网络输出层的名称：
   itsOutNames = itsNet.getUnconnectedOutLayersNames();
   int i = 0;
   for (auto const & s : itsOutNames) LINFO("Output layer " << i++ << ": " << s);

@@ -1,0 +1,2475 @@
+\hypertarget{ICM20948__regs_8H}{}\doxysubsection{include/jevois/\+Core/\+I\+C\+M20948\+\_\+regs.H File Reference}
+\label{ICM20948__regs_8H}\index{include/jevois/Core/ICM20948\_regs.H@{include/jevois/Core/ICM20948\_regs.H}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ICM20948__regs_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae5f52b3c30696d160dc1c37d5337600d}{I\+C\+M20948\+\_\+\+S\+P\+I\+\_\+\+R\+E\+AD}}~0x80
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4d65b7cab4b646809c0704298b9cdf69}{I\+C\+M20948\+\_\+\+S\+P\+I\+\_\+\+W\+R\+I\+TE}}~0x00
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0bc6135d147ede729350d9f2164f6607}{D\+M\+P\+\_\+\+C\+F\+G\+\_\+\+F\+I\+F\+O\+\_\+\+S\+I\+ZE}}~(4222)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a02e5d02d71c980f1c8c4b1508254f259}{D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+O\+U\+T\+\_\+\+C\+T\+L1}}~(4 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aba50a06bdafe060a850c566c0ca25f9b}{D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+O\+U\+T\+\_\+\+C\+T\+L2}}~(4 $\ast$ 16 + 2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a54d0182209cdb7091a951c787bf72db5}{D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+I\+N\+T\+R\+\_\+\+C\+TL}}~(4 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a8a04860d6ccdd5d7303b2fb2d0bd5487}{D\+M\+P\+\_\+\+F\+I\+F\+O\+\_\+\+W\+A\+T\+E\+R\+M\+A\+RK}}~(31 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a91a080afc81550d4d9a804f3c6a83182}{D\+M\+P\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+E\+V\+E\+N\+T\+\_\+\+C\+TL}}~(4 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_accc2ba51183326b43814d52f5a9b2380}{D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+R\+D\+Y\+\_\+\+S\+T\+A\+T\+US}}~(8 $\ast$ 16 + 10)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0a92d1b09512287a756b28043dcbb8b3}{D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+C\+N\+TR}}~(27 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac6a2d1aca9a31340da83305a2a939fb9}{D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+T\+H\+LD}}~(19 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aba95b3b350650550c8229d57bb5e7931}{D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+A\+SK}}~(21 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a5c265b85b11dc0da0439fee2c926b087}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+A\+C\+C\+EL}}~(11 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab6fb6d472c4467a5e41f85f500762290}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+Y\+RO}}~(11 $\ast$ 16 + 10)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad87bd610f57519581746d81df2cacf0a}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+P\+A\+SS}}~(11 $\ast$ 16 +  6)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_afbc5f31380ce00a04f0df67a3b741715}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+A\+LS}}~(11 $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9c6902b2505f821b7fa41c309b850850}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+Q\+U\+A\+T6}}~(10 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae895c52fb77cead74d14d007a5f7af0c}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+Q\+U\+A\+T9}}~(10 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae843242671724e60bf489f684a69c5d9}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+P\+Q\+U\+A\+T6}}~(10 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a358ce0686e6844be4429716602d3aaef}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+E\+O\+M\+AG}}~(10 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a602deea1c4f615e19b6bd08a54d31048}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+P\+R\+E\+S\+S\+U\+RE}}~(11 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a15c338040c08d6046a81fe38e5409988}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR}}~(11 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9d2640f234cf4fd1a32817a423df5268}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR}}~(11 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4255a4f2f3aef4a61a22ddcf96a9c197}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+A\+C\+C\+EL}}~(9 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9c7b5934cd80afbea237af1dfef83e81}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+Y\+RO}}~(9 $\ast$ 16 + 10)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0c5ecaa1081ab6bb37a328203fc1f229}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+C\+P\+A\+SS}}~(9 $\ast$ 16 +  6)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abb113fe8811bb00402400c0dc7181f38}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+A\+LS}}~(9 $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab860507f6cefae89475da968df47b99b}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+Q\+U\+A\+T6}}~(8 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa2628cb13951c057d7f4da3f2439c4b3}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+Q\+U\+A\+T9}}~(8 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae27bc54e00172024772e83365844cc53}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+P\+Q\+U\+A\+T6}}~(8 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9806572538ccef0de8c08ed9b7f57b28}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+E\+O\+M\+AG}}~(8 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a46c6a430d8c129e016845fcfa9368a0a}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+P\+R\+E\+S\+S\+U\+RE}}~(9 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a768ff08df66a7b8c1d6c39a94343d5b7}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR}}~(9 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab2fe7aa9534db2b7fb892847b281ebf2}{D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR}}~(9 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af3cf7c596eaa9aa4ddbcad213928e7ff}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+00}}~(23 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a5f84509686e5137c528aa2d36d3b8d0c}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+01}}~(23 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae998d16f29f3297001b737924618e5ca}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+02}}~(23 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a8a382abd5cc8395fa813351338c959ad}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+10}}~(23 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a8b6d5992e83e5e2fa3dbb439551da525}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+11}}~(24 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aba3764f2cedf01f2e4df4ba6f2d86a10}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+12}}~(24 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a3b45eaed7593f38186f805010f23a3f4}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+20}}~(24 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac7a7d20472e8f761f2a0fcf9f5783f11}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+21}}~(24 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a14484271fd8f6f4b8d965c1f30f76e2c}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+22}}~(25 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad8bea3d7d1fb22b362afdb3ad6e646cf}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+SF}}~(19 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a49765ea4cc8cd20b5c6bb011513e1e5f}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+F\+B\+\_\+\+G\+A\+IN}}~(34 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a8f61a2edd34d0c4981d721858e659808}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+O\+N\+L\+Y\+\_\+\+G\+A\+IN}}~(16 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0de6d60b13cc0966e1462385fb3337c5}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+X}}~(139 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4b48919414a90bd0fdf6eef33b3f576f}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+Y}}~(139 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_adf8bf18ddbac3d35f469ac2e3d5f7206}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+Z}}~(139 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9ebf39784760509f273caaadc5dc1e23}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY}}~(138 $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a85f0d2fb3df2318c12dc1eae583c6823}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+S\+ET}}~(138 $\ast$ 16 +  6)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a372b4fd834f9050822dbb439660696a7}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+L\+A\+S\+T\+\_\+\+T\+E\+M\+PR}}~(134 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a07427b121d4e28c6c820974fb3e6635f}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+X}}~( 78 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa32e65235c8fafb46572dd00b3cffacb}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+Y}}~( 78 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa1f8f6f35f179d5ba129b3a0e7807b8d}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+Z}}~( 78 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a923872bb6a5abd109592e0edb3186364}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+X}}~(110 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af7907ac5a25e121e6fbd1d00199f8924}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+Y}}~(110 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a90c4dfe99d49de18df117a9a92e138d1}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+Z}}~(110 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aaacc9b1f58306cf2fdecf8a1ca516428}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY}}~(97 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ada1dddd043f433424a06234ca61ac18a}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+R\+E\+S\+ET}}~(77 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab8d3c97b30e0830fa2f86d641d2e6a58}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+T\+H\+R\+E\+SH}}~(93 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab6ec5d9e5f64b5799711237569b32315}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+R\+A\+TE}}~(94 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0fdb318eb9502ec7f7a4b168802cc358}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+P\+R\+E\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+D\+A\+TA}}~(97 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0e89a79bb0e78281e2441566a7e11c1f}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+CE}}~(101 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_afabea4b942c5b2370e46b3282ad63b47}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+L\+P\+H\+A\+\_\+\+V\+AR}}~(91 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af0fa3513e11a22bf0a5191ee4acf54e0}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+\_\+\+V\+AR}}~(92 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6f940cd59b0690a699e385955e9f9ac9}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+I\+N\+IT}}~(94 $\ast$ 16 + 2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab4626658dc11dfcca7479f695d03f18a}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+S\+C\+A\+L\+E\+\_\+\+C\+O\+V\+Q\+\_\+\+I\+N\+\_\+\+R\+A\+N\+GE}}~(194 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4bc8776ffc26a1a19cf2e91ed3fd1e3d}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+S\+C\+A\+L\+E\+\_\+\+C\+O\+V\+Q\+\_\+\+O\+U\+T\+\_\+\+R\+A\+N\+GE}}~(195 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aaf8ba2495a00e53d663aecc807d0911c}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+T\+E\+M\+P\+E\+R\+A\+T\+U\+R\+E\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+TY}}~(194 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0bf446c4ca28b815004638e6d8c37a85}{D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+T\+E\+M\+P\+E\+R\+A\+T\+U\+R\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+T\+R\+IM}}~(194 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a810d59d445ddf086ff3724e6c54dadcd}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+X}}~(126 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_acf56b8bf0226761c92ed608052ac0313}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+Y}}~(126 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af62e7fdd256a4efef1d614a0e3027441}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+Z}}~(126 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae121461af3ab846931624de4ec07cb70}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY}}~(37 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4eda0d2503a93f974fb30b3971d32e6e}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+\+S\+ET}}~(34 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a88d069562de092d7e6ee598d39e74bdf}{D\+M\+P\+\_\+\+M\+A\+R\+\_\+\+M\+O\+DE}}~(37 $\ast$ 16 + 2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad2e9711f07de99176236042150d09e2e}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+CE}}~(115 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_acb7870923d6e00cc41e3cd5f4758633b}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+C\+UR}}~(118 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad7f4fec13f1f1d19276ef54ef5afabbd}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+R\+E\+F\+\_\+\+M\+A\+G\+\_\+3D}}~(122 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a412d173e1c15bc179f171ebc47c6543c}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+\_\+\+I\+N\+IT}}~(114 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aab82a386cf3fd0c198301b679c732cbe}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+E\+S\+T\+\_\+\+F\+I\+R\+S\+T\+\_\+\+B\+I\+AS}}~(113 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a24813fc73ee09080402a4f9bd6d6d183}{D\+M\+P\+\_\+\+M\+A\+G\+\_\+\+D\+I\+S\+T\+U\+R\+B\+\_\+\+S\+T\+A\+TE}}~(113 $\ast$ 16 + 2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a7e49ff06ab92c6e282e8d58b1d39d790}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+V\+A\+R\+\_\+\+C\+O\+U\+NT}}~(112 $\ast$ 16 + 6)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af3e1ceeaf5e498910d8a8eacdafd7a6f}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+7}}~( 87 $\ast$ 16 + 2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a645f06a0aeb4c13069d1b168670b76ea}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+A\+X\+\_\+\+I\+N\+NO}}~(124 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a868e30b118d7453c90fdb6d032c83cef}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+\+O\+F\+F\+S\+ET}}~(113 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a80e02dbef7ae0dbe863392e50e0c01b5}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+U\+R\+\_\+\+B\+I\+A\+S\+\_\+\+O\+F\+F\+S\+ET}}~(114 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abb9c2fcc740228e085e81da055b28031}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+P\+R\+E\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+D\+A\+TA}}~( 87 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a19afdaaf910bb7ce9ea60f2403d4f336}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+T\+I\+M\+E\+\_\+\+B\+U\+F\+F\+ER}}~(112 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_acc758e35c29cbb56699359f91338bb30}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+R\+A\+D\+I\+U\+S\+\_\+3\+D\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+A\+N\+O\+M\+A\+LY}}~(112 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aab1af1720e7eee916d7e029bc6fba474}{D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+HK}}~(25 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aca6ed9d97f5043745460df47c88ebf2c}{D\+M\+P\+\_\+\+M\+A\+G\+N\+\_\+\+T\+H\+R\+\_\+9X}}~(80 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a920e5042fee52515c24c6da37b9fcce8}{D\+M\+P\+\_\+\+M\+A\+G\+N\+\_\+\+L\+P\+F\+\_\+\+T\+H\+R\+\_\+9X}}~(80 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae643e7abcd5c4db8aba3396d866ac3a5}{D\+M\+P\+\_\+\+Q\+F\+B\+\_\+\+T\+H\+R\+\_\+9X}}~(80 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aead48addf5991151d33ee3ac76e0d21e}{D\+M\+P\+\_\+\+D\+M\+P\+R\+A\+T\+E\+\_\+\+C\+N\+TR}}~(18 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a74f683518309d143cc95a483a521ed17}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+B}}~(49 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a48b0b638d7b60d6d59e93f510cfa9d7b}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A4}}~(52 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4f4a8b8fe4d93817de859d727b0f96f7}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A3}}~(52 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_adf339947a0a2215b85954a02d53bab23}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A2}}~(52 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a84741b3867263e243d8e3c9b61aeba03}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A1}}~(52 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a1512ad6970a25717a7ca99f58a4e1c34}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+SB}}~(50 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab2de66d53386e6776c0475527cefcb15}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+B\+\_\+\+T\+I\+ME}}~(50 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0e119d661d84b37ccc390530e9ffb9b2}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+P\+E\+A\+K\+T\+H\+R\+SH}}~(57 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4863f070ea23f5d23627d35b60a51acf}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+ML}}~(50 $\ast$ 16 + 10)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abaccce000c22f2faaf9e3cd20910d4a5}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+MH}}~(50 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a87e8f1008b6dd691724ece07fd654633}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+P\+E\+AK}}~(57 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_adc4b58513ed8beb15c8078b58fe56e4a}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+T\+E\+P\+C\+TR}}~(54 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a2dbc9220f6367e598b4b847e05a014b9}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+T\+E\+P\+C\+T\+R2}}~(58 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa2762db3824e007efc1285cd173cd1a3}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+M\+E\+C\+TR}}~(60 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aade2fd512d2db8a140412f96f3ad0241}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+D\+E\+CI}}~(58 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae84d7bdbec738b395d5094c578d109f0}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+B2}}~(60 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac67073e8c4c0bdce795630c6d197fa09}{D\+M\+P\+\_\+\+S\+T\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP}}~(18 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a30ad972ccd471984d235d5d9a00f840e}{D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+E\+P\+\_\+\+I\+ND}}~(19 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a409aec86cb7246451a66c5271845f39e}{D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+Y\+\_\+\+R\+A\+T\+IO}}~(17 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_adc487a4385f0370a6ae56151da68b7a8}{D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+V\+A\+R\+\_\+\+TH}}~(141 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a594d5c0428faf20222ee141ba809f657}{D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+V\+A\+R\+\_\+\+T\+H\+\_\+\+D\+R\+I\+VE}}~(143 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abf458f7f7c9cd35026d554ed5880d3bf}{D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+D\+R\+I\+V\+E\+\_\+\+T\+I\+M\+E\+R\+\_\+\+TH}}~(143 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a5691bd331ec260d0fe0fd0a1da433914}{D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+T\+I\+L\+T\+\_\+\+A\+N\+G\+L\+E\+\_\+\+TH}}~(179 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa7c096463183eeeaae42bb427f950d08}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+S\+T\+\_\+\+TH}}~(179 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a259367de74b896fc105b565bc3464583}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+\_\+\+A\+L\+P\+H\+A4}}~(180 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abdae06f3ef6ba578fe55058cbaf574ee}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+\_\+\+A\+L\+P\+H\+A4A}}~(176 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a5749328cbc2d281e1ad2aee3b4b68bfe}{D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+E\+N\+A\+B\+LE}}~(64 $\ast$ 16 + 14)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a3ed9b2377ed70f6036ee3d304bfabcd1}{D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+S\+T\+A\+T\+US}}~(64 $\ast$ 16 + 6)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa23c75bc821f9da39f2009e7bd50a8f0}{D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}~(64 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac5f9b2f33e3af72e1600abc3cc53eee0}{D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+C\+N\+T\+R\+\_\+\+TH}}~(64 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a87c9867e9b7444fc16ae0325b8ef662d}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+A\+TE}}~(48  $\ast$ 16 + 10)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a77b61a771858d86f204616162d71158c}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+TE}}~(179 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a3595228131947c73379ddeae2dea928b}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+EV}}~(179 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9ffaf1c5fe11ee85bdfcf9c8f5de53ed}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+ON}}~(182 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae014927575216291d8acc5927b2579ac}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+FF}}~(183 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a2e5ac23435bbc71152f93de8075444db}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+L\+L\+\_\+\+S\+\_\+F}}~(177 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af49a9d90dec6db3d252fdf3a0ce6dce4}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+U\+N\+\_\+\+S\+\_\+F}}~(177 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae2885cfce80f625ce111f3793f5cb954}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+V\+E\+\_\+\+S\+\_\+F}}~(178 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac7eb0bf5f491d24116a70a9dbc0e7bf2}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+L\+K\+\_\+\+S\+\_\+F}}~(178 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac2e17fb59581b896da9e2c8ff11953dd}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+S\+\_\+F}}~(178 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab49b7d22b0b845043b6ddd3db3af54aa}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+S\+\_\+F}}~(178 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a51008cbf42baccb98615618ac8f11296}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E1\+\_\+\+S\+H\+O\+RT}}~(146 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a53a1711ad294219714d8cbc57727f587}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E2\+\_\+\+S\+H\+O\+RT}}~(146 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a3020d8edc704952d8d876a56dd40c39e}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E3\+\_\+\+S\+H\+O\+RT}}~(146 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a0b00c950bcf774db08c5dfb258c88117}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+V\+A\+R\+\_\+\+R\+UN}}~(148 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad63d0b91902a460ba7c0fd2f89968439}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+L\+T\+\_\+\+I\+N\+IT}}~(181 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ada77b31f0f6e5c0f562fcd9d5930eb2a}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+A\+G\+\_\+\+ON}}~(225 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a73d82b2e43e7a5ffe6bedccab09744b5}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+P\+S\+\_\+\+ON}}~(74  $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ac8537d2c4e6949cc7ac8f8223c9acf45}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+CE}}~(173 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a522b96df9c2e48fac4db5533486e77a6}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+A\+G\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}}~(229 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a777e5c1d9c3c20207fabaff0d14fc576}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+P\+S\+\_\+\+I2\+C\+\_\+\+A\+D\+DR}}~(75  $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aac89d9062b24a0fc980e8b871d831050}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+V\+E\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(144 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6acae9093b4d25ff0b002a2ed1d8584b}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+L\+K\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(144 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae6de7d8c186203cac7ab54ff7dad8e7e}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(144 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a42185033ce471da3e4fa6ae54c502219}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(144 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a46e2f032b56663e770499a4d7c1e0d9b}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+L\+L\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(145 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a40f633262ef3de427003cf1abcf8efaa}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+U\+N\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE}}~(145 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a95468a13a0ea38ecb5a639890bdd3424}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+O\+D\+E\+\_\+\+C\+N\+TR}}~(150 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a92d63cddf6ae6173560140b3fec88b1e}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+\_\+\+P\+R\+EV}}~(185 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a710c7e62f2f7414d83a138feee5b7cba}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+T\+\_\+\+ON}}~(184 $\ast$ 16 +  0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a5a3318511f731757d173b4fee3da4d8a}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+T\+\_\+\+O\+FF}}~(184 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af22405f047fa74a8152f3117403986a2}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+W\+R\+D\+B\+S\+\_\+\+P\+R\+EV}}~(185 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aee9a18ddec39756b63b611381ed0131c}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+W\+R\+D\+B\+S\+\_\+\+ON}}~(184 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab5bdf23adfc54f3d476131f2ad54f9b3}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+W\+R\+D\+B\+S\+\_\+\+O\+FF}}~(184 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6e75306f1f7a9a747d57f0da61c504c9}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+N\+\_\+\+O\+FF}}~(190 $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_abd01102e9cbef1e07ecf83329e350314}{D\+M\+P\+\_\+\+P\+R\+E\+V\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+N\+\_\+\+O\+FF}}~(188 $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad5fff7ef700fd47d42df32beee9cce4d}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+C\+N\+TR}}~(48  $\ast$ 16 +  2)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af8dee60081b4cad80af437c058e9102e}{D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+A\+R\+\_\+\+A\+L\+P\+HA}}~(245 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ab44d51d121f0e48be906b1ebb1cf9bc1}{D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH}}~(246 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a1d1b9574da2c920d36b2eaa3ed8f4478}{D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+I\+D\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH}}~(244 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a76f83bf5fd45ced6d4733a314cdc3d69}{D\+M\+P\+\_\+\+F\+P\+\_\+\+N\+O\+T\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH}}~(246 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a866de78975f5a2f28ce0b8f37279ea02}{D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+I\+B\+\_\+\+R\+E\+J\+\_\+\+TH}}~(241 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a86c17f923f43e8b91dd97f70ab19ebbc}{D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+A\+X\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+T\+\_\+\+TH}}~(244 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae58aeb6d2d808e0acaab6084fcd3c48f}{D\+M\+P\+\_\+\+F\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+TH}}~(248 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af0d2d989e04ca473f1e0d3098a854cae}{D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+I\+L\+L\+\_\+\+C\+O\+N\+S\+T\+\_\+\+TH}}~(246 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a7b68d7c518a5008de64cea9a26c4245b}{D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+TH}}~(240 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a9da7a37b14043d4108cf0bcc47296786}{D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+I\+B\+\_\+\+C\+O\+U\+N\+T\+\_\+\+TH}}~(242 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6b29ec9f0dd72ca5a2b0f34d5453d3a4}{D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+E\+A\+D\+Y\+\_\+\+T\+I\+L\+T\+\_\+\+TH}}~(247 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a1f0f61d431ec3534064b44de84134b77}{D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+E\+A\+D\+Y\+\_\+\+T\+I\+L\+T\+\_\+\+U\+P\+\_\+\+TH}}~(242 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa6f5e4607a1dfc639abf91ac15a9244a}{D\+M\+P\+\_\+\+F\+P\+\_\+\+Z\+\_\+\+F\+L\+A\+T\+\_\+\+T\+H\+\_\+\+M\+I\+N\+US}}~(243 $\ast$ 16 +  8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6417d1124ab8fb2896405dadc8dcd553}{D\+M\+P\+\_\+\+F\+P\+\_\+\+Z\+\_\+\+F\+L\+A\+T\+\_\+\+T\+H\+\_\+\+P\+L\+US}}~(243 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a25ca49b6a3f1058ee41151ef3de25cfa}{D\+M\+P\+\_\+\+F\+P\+\_\+\+D\+E\+V\+\_\+\+I\+N\+\_\+\+P\+O\+C\+K\+E\+T\+\_\+\+TH}}~(76  $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af72e550cf5b1047e1321350859741412}{D\+M\+P\+\_\+\+F\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+C\+N\+TR}}~(247 $\ast$ 16 +  4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a526abd8170b968c2fb5f512795d9f568}{D\+M\+P\+\_\+\+F\+P\+\_\+\+R\+A\+TE}}~(240 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ae607f83da84987f4759d28a674558792}{D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+F\+U\+L\+L\+S\+C\+A\+LE}}~(72 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a79c9244798cda44f99854e0acd3bd971}{D\+M\+P\+\_\+\+A\+C\+C\+\_\+\+S\+C\+A\+LE}}~(30 $\ast$ 16 + 0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a7e25fb3fc658883a380d1ce0a3c5ca6f}{D\+M\+P\+\_\+\+A\+C\+C\+\_\+\+S\+C\+A\+L\+E2}}~(79 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a342d30c8e1f2f3daaa0666449e66674e}{D\+M\+P\+\_\+\+E\+I\+S\+\_\+\+A\+U\+T\+H\+\_\+\+I\+N\+P\+UT}}~(160 $\ast$ 16 +   4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa05fdfc7f6b266c8bcc685be1fba852d}{D\+M\+P\+\_\+\+E\+I\+S\+\_\+\+A\+U\+T\+H\+\_\+\+O\+U\+T\+P\+UT}}~(160 $\ast$ 16 +   0)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6d553d88ea61e9c0e60cfaeec38e34b9}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+R\+A\+TE}}~(48  $\ast$ 16 +   8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a274da14a5c0a3d8823ba432520960ef6}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+00}}~(208 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a61f8ade32965f12c9c3c2c1037714f4d}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+01}}~(208 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a4f463a3bb64147fbfa586a22459b9c47}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+02}}~(208 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a556cadac5625a5209e58c1403c6fac27}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+10}}~(208 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_afbf5355cc40032770334b5d3edbf143c}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+11}}~(209 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_af324620e8e511317a85987197e2edee1}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+12}}~(209 $\ast$ 16 + 4)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a1f088f9b2f35c8a59c42716038d7a556}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+20}}~(209 $\ast$ 16 + 8)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a8e0070b6bd23c600864032233b0b13bd}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+21}}~(209 $\ast$ 16 + 12)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a2e31d2e9cc26a0fbf6943f847145f671}{D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+22}}~(210 $\ast$ 16)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a6b486d71c2ddb81811c12b604324bc8d}{D\+M\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+A\+D\+D\+R\+E\+SS}}~((unsigned short)0x1000)
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a3f8983d47d9670c0469d20b41e545873}{D\+M\+P\+\_\+\+M\+E\+M\+\_\+\+B\+A\+N\+K\+\_\+\+S\+I\+ZE}}~256
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a1a96fcda86b5349d3c13573f0593a800}{D\+M\+P\+\_\+\+L\+O\+A\+D\+\_\+\+S\+T\+A\+RT}}~0x90
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a304702b72a030fceea30b45d1ab53a5c}{D\+M\+P\+\_\+\+C\+O\+D\+E\+\_\+\+S\+I\+ZE}}~14301
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aac5a9f3a1598dfb9e2a86a4371c9fe7a}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+VE}}~0x01
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_aa50157bec343be5c91bc61251baeed28}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+LK}}~0x02
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_ad845a909137aacd227aa418cd1736e71}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+UN}}~0x04
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a735862aa0f5707caea0ec501960a5b12}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+KE}}~0x08
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a2219ff8e90832d81910cc31a786bdf39}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+LT}}~0x10
+\item 
+\#define \mbox{\hyperlink{ICM20948__regs_8H_a733c2a0ddeafb2454859798b25245974}{D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+LL}}~0x20
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ICM20948__regs_8H_a79c9244798cda44f99854e0acd3bd971}\label{ICM20948__regs_8H_a79c9244798cda44f99854e0acd3bd971}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACC\_SCALE@{DMP\_ACC\_SCALE}}
+\index{DMP\_ACC\_SCALE@{DMP\_ACC\_SCALE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACC\_SCALE}{DMP\_ACC\_SCALE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+\_\+\+S\+C\+A\+LE~(30 $\ast$ 16 + 0)}
+
+
+
+Definition at line 621 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a7e25fb3fc658883a380d1ce0a3c5ca6f}\label{ICM20948__regs_8H_a7e25fb3fc658883a380d1ce0a3c5ca6f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACC\_SCALE2@{DMP\_ACC\_SCALE2}}
+\index{DMP\_ACC\_SCALE2@{DMP\_ACC\_SCALE2}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACC\_SCALE2}{DMP\_ACC\_SCALE2}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+\_\+\+S\+C\+A\+L\+E2~(79 $\ast$ 16 + 4)}
+
+
+
+Definition at line 622 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af0fa3513e11a22bf0a5191ee4acf54e0}\label{ICM20948__regs_8H_af0fa3513e11a22bf0a5191ee4acf54e0}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_A\_VAR@{DMP\_ACCEL\_A\_VAR}}
+\index{DMP\_ACCEL\_A\_VAR@{DMP\_ACCEL\_A\_VAR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_A\_VAR}{DMP\_ACCEL\_A\_VAR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+\_\+\+V\+AR~(92 $\ast$ 16)}
+
+
+
+Definition at line 483 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aaacc9b1f58306cf2fdecf8a1ca516428}\label{ICM20948__regs_8H_aaacc9b1f58306cf2fdecf8a1ca516428}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_ACCURACY@{DMP\_ACCEL\_ACCURACY}}
+\index{DMP\_ACCEL\_ACCURACY@{DMP\_ACCEL\_ACCURACY}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_ACCURACY}{DMP\_ACCEL\_ACCURACY}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY~(97 $\ast$ 16)}
+
+
+
+Definition at line 476 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_afabea4b942c5b2370e46b3282ad63b47}\label{ICM20948__regs_8H_afabea4b942c5b2370e46b3282ad63b47}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_ALPHA\_VAR@{DMP\_ACCEL\_ALPHA\_VAR}}
+\index{DMP\_ACCEL\_ALPHA\_VAR@{DMP\_ACCEL\_ALPHA\_VAR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_ALPHA\_VAR}{DMP\_ACCEL\_ALPHA\_VAR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+L\+P\+H\+A\+\_\+\+V\+AR~(91 $\ast$ 16)}
+
+
+
+Definition at line 482 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a923872bb6a5abd109592e0edb3186364}\label{ICM20948__regs_8H_a923872bb6a5abd109592e0edb3186364}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_BIAS\_X@{DMP\_ACCEL\_BIAS\_X}}
+\index{DMP\_ACCEL\_BIAS\_X@{DMP\_ACCEL\_BIAS\_X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_BIAS\_X}{DMP\_ACCEL\_BIAS\_X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+X~(110 $\ast$ 16 +  4)}
+
+
+
+Definition at line 473 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af7907ac5a25e121e6fbd1d00199f8924}\label{ICM20948__regs_8H_af7907ac5a25e121e6fbd1d00199f8924}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_BIAS\_Y@{DMP\_ACCEL\_BIAS\_Y}}
+\index{DMP\_ACCEL\_BIAS\_Y@{DMP\_ACCEL\_BIAS\_Y}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_BIAS\_Y}{DMP\_ACCEL\_BIAS\_Y}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+Y~(110 $\ast$ 16 +  8)}
+
+
+
+Definition at line 474 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a90c4dfe99d49de18df117a9a92e138d1}\label{ICM20948__regs_8H_a90c4dfe99d49de18df117a9a92e138d1}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_BIAS\_Z@{DMP\_ACCEL\_BIAS\_Z}}
+\index{DMP\_ACCEL\_BIAS\_Z@{DMP\_ACCEL\_BIAS\_Z}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_BIAS\_Z}{DMP\_ACCEL\_BIAS\_Z}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+B\+I\+A\+S\+\_\+Z~(110 $\ast$ 16 + 12)}
+
+
+
+Definition at line 475 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6f940cd59b0690a699e385955e9f9ac9}\label{ICM20948__regs_8H_a6f940cd59b0690a699e385955e9f9ac9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_INIT@{DMP\_ACCEL\_CAL\_INIT}}
+\index{DMP\_ACCEL\_CAL\_INIT@{DMP\_ACCEL\_CAL\_INIT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_INIT}{DMP\_ACCEL\_CAL\_INIT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+I\+N\+IT~(94 $\ast$ 16 + 2)}
+
+
+
+Definition at line 484 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab6ec5d9e5f64b5799711237569b32315}\label{ICM20948__regs_8H_ab6ec5d9e5f64b5799711237569b32315}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_RATE@{DMP\_ACCEL\_CAL\_RATE}}
+\index{DMP\_ACCEL\_CAL\_RATE@{DMP\_ACCEL\_CAL\_RATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_RATE}{DMP\_ACCEL\_CAL\_RATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+R\+A\+TE~(94 $\ast$ 16 + 4)}
+
+
+
+Definition at line 479 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ada1dddd043f433424a06234ca61ac18a}\label{ICM20948__regs_8H_ada1dddd043f433424a06234ca61ac18a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_RESET@{DMP\_ACCEL\_CAL\_RESET}}
+\index{DMP\_ACCEL\_CAL\_RESET@{DMP\_ACCEL\_CAL\_RESET}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_RESET}{DMP\_ACCEL\_CAL\_RESET}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+R\+E\+S\+ET~(77 $\ast$ 16)}
+
+
+
+Definition at line 477 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab4626658dc11dfcca7479f695d03f18a}\label{ICM20948__regs_8H_ab4626658dc11dfcca7479f695d03f18a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE@{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE}}
+\index{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE@{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE}{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_IN\_RANGE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+S\+C\+A\+L\+E\+\_\+\+C\+O\+V\+Q\+\_\+\+I\+N\+\_\+\+R\+A\+N\+GE~(194 $\ast$ 16)}
+
+
+
+Definition at line 485 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4bc8776ffc26a1a19cf2e91ed3fd1e3d}\label{ICM20948__regs_8H_a4bc8776ffc26a1a19cf2e91ed3fd1e3d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE@{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE}}
+\index{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE@{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE}{DMP\_ACCEL\_CAL\_SCALE\_COVQ\_OUT\_RANGE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+S\+C\+A\+L\+E\+\_\+\+C\+O\+V\+Q\+\_\+\+O\+U\+T\+\_\+\+R\+A\+N\+GE~(195 $\ast$ 16)}
+
+
+
+Definition at line 486 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0bf446c4ca28b815004638e6d8c37a85}\label{ICM20948__regs_8H_a0bf446c4ca28b815004638e6d8c37a85}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM@{DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM}}
+\index{DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM@{DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM}{DMP\_ACCEL\_CAL\_TEMPERATURE\_OFFSET\_TRIM}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+T\+E\+M\+P\+E\+R\+A\+T\+U\+R\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+T\+R\+IM~(194 $\ast$ 16 + 12)}
+
+
+
+Definition at line 488 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aaf8ba2495a00e53d663aecc807d0911c}\label{ICM20948__regs_8H_aaf8ba2495a00e53d663aecc807d0911c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY@{DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY}}
+\index{DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY@{DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY}{DMP\_ACCEL\_CAL\_TEMPERATURE\_SENSITIVITY}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+T\+E\+M\+P\+E\+R\+A\+T\+U\+R\+E\+\_\+\+S\+E\+N\+S\+I\+T\+I\+V\+I\+TY~(194 $\ast$ 16 + 4)}
+
+
+
+Definition at line 487 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0e89a79bb0e78281e2441566a7e11c1f}\label{ICM20948__regs_8H_a0e89a79bb0e78281e2441566a7e11c1f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_COVARIANCE@{DMP\_ACCEL\_COVARIANCE}}
+\index{DMP\_ACCEL\_COVARIANCE@{DMP\_ACCEL\_COVARIANCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_COVARIANCE}{DMP\_ACCEL\_COVARIANCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+CE~(101 $\ast$ 16 + 8)}
+
+
+
+Definition at line 481 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a49765ea4cc8cd20b5c6bb011513e1e5f}\label{ICM20948__regs_8H_a49765ea4cc8cd20b5c6bb011513e1e5f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_FB\_GAIN@{DMP\_ACCEL\_FB\_GAIN}}
+\index{DMP\_ACCEL\_FB\_GAIN@{DMP\_ACCEL\_FB\_GAIN}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_FB\_GAIN}{DMP\_ACCEL\_FB\_GAIN}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+F\+B\+\_\+\+G\+A\+IN~(34 $\ast$ 16)}
+
+
+
+Definition at line 459 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a8f61a2edd34d0c4981d721858e659808}\label{ICM20948__regs_8H_a8f61a2edd34d0c4981d721858e659808}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_ONLY\_GAIN@{DMP\_ACCEL\_ONLY\_GAIN}}
+\index{DMP\_ACCEL\_ONLY\_GAIN@{DMP\_ACCEL\_ONLY\_GAIN}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_ONLY\_GAIN}{DMP\_ACCEL\_ONLY\_GAIN}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+O\+N\+L\+Y\+\_\+\+G\+A\+IN~(16 $\ast$ 16 + 12)}
+
+
+
+Definition at line 460 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0fdb318eb9502ec7f7a4b168802cc358}\label{ICM20948__regs_8H_a0fdb318eb9502ec7f7a4b168802cc358}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_PRE\_SENSOR\_DATA@{DMP\_ACCEL\_PRE\_SENSOR\_DATA}}
+\index{DMP\_ACCEL\_PRE\_SENSOR\_DATA@{DMP\_ACCEL\_PRE\_SENSOR\_DATA}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_PRE\_SENSOR\_DATA}{DMP\_ACCEL\_PRE\_SENSOR\_DATA}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+P\+R\+E\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+D\+A\+TA~(97 $\ast$ 16 + 4)}
+
+
+
+Definition at line 480 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab8d3c97b30e0830fa2f86d641d2e6a58}\label{ICM20948__regs_8H_ab8d3c97b30e0830fa2f86d641d2e6a58}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ACCEL\_VARIANCE\_THRESH@{DMP\_ACCEL\_VARIANCE\_THRESH}}
+\index{DMP\_ACCEL\_VARIANCE\_THRESH@{DMP\_ACCEL\_VARIANCE\_THRESH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ACCEL\_VARIANCE\_THRESH}{DMP\_ACCEL\_VARIANCE\_THRESH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+T\+H\+R\+E\+SH~(93 $\ast$ 16)}
+
+
+
+Definition at line 478 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a274da14a5c0a3d8823ba432520960ef6}\label{ICM20948__regs_8H_a274da14a5c0a3d8823ba432520960ef6}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_00@{DMP\_B2S\_MTX\_00}}
+\index{DMP\_B2S\_MTX\_00@{DMP\_B2S\_MTX\_00}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_00}{DMP\_B2S\_MTX\_00}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+00~(208 $\ast$ 16)}
+
+
+
+Definition at line 631 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a61f8ade32965f12c9c3c2c1037714f4d}\label{ICM20948__regs_8H_a61f8ade32965f12c9c3c2c1037714f4d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_01@{DMP\_B2S\_MTX\_01}}
+\index{DMP\_B2S\_MTX\_01@{DMP\_B2S\_MTX\_01}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_01}{DMP\_B2S\_MTX\_01}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+01~(208 $\ast$ 16 + 4)}
+
+
+
+Definition at line 632 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4f463a3bb64147fbfa586a22459b9c47}\label{ICM20948__regs_8H_a4f463a3bb64147fbfa586a22459b9c47}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_02@{DMP\_B2S\_MTX\_02}}
+\index{DMP\_B2S\_MTX\_02@{DMP\_B2S\_MTX\_02}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_02}{DMP\_B2S\_MTX\_02}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+02~(208 $\ast$ 16 + 8)}
+
+
+
+Definition at line 633 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a556cadac5625a5209e58c1403c6fac27}\label{ICM20948__regs_8H_a556cadac5625a5209e58c1403c6fac27}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_10@{DMP\_B2S\_MTX\_10}}
+\index{DMP\_B2S\_MTX\_10@{DMP\_B2S\_MTX\_10}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_10}{DMP\_B2S\_MTX\_10}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+10~(208 $\ast$ 16 + 12)}
+
+
+
+Definition at line 634 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_afbf5355cc40032770334b5d3edbf143c}\label{ICM20948__regs_8H_afbf5355cc40032770334b5d3edbf143c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_11@{DMP\_B2S\_MTX\_11}}
+\index{DMP\_B2S\_MTX\_11@{DMP\_B2S\_MTX\_11}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_11}{DMP\_B2S\_MTX\_11}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+11~(209 $\ast$ 16)}
+
+
+
+Definition at line 635 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af324620e8e511317a85987197e2edee1}\label{ICM20948__regs_8H_af324620e8e511317a85987197e2edee1}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_12@{DMP\_B2S\_MTX\_12}}
+\index{DMP\_B2S\_MTX\_12@{DMP\_B2S\_MTX\_12}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_12}{DMP\_B2S\_MTX\_12}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+12~(209 $\ast$ 16 + 4)}
+
+
+
+Definition at line 636 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a1f088f9b2f35c8a59c42716038d7a556}\label{ICM20948__regs_8H_a1f088f9b2f35c8a59c42716038d7a556}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_20@{DMP\_B2S\_MTX\_20}}
+\index{DMP\_B2S\_MTX\_20@{DMP\_B2S\_MTX\_20}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_20}{DMP\_B2S\_MTX\_20}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+20~(209 $\ast$ 16 + 8)}
+
+
+
+Definition at line 637 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a8e0070b6bd23c600864032233b0b13bd}\label{ICM20948__regs_8H_a8e0070b6bd23c600864032233b0b13bd}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_21@{DMP\_B2S\_MTX\_21}}
+\index{DMP\_B2S\_MTX\_21@{DMP\_B2S\_MTX\_21}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_21}{DMP\_B2S\_MTX\_21}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+21~(209 $\ast$ 16 + 12)}
+
+
+
+Definition at line 638 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a2e31d2e9cc26a0fbf6943f847145f671}\label{ICM20948__regs_8H_a2e31d2e9cc26a0fbf6943f847145f671}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_MTX\_22@{DMP\_B2S\_MTX\_22}}
+\index{DMP\_B2S\_MTX\_22@{DMP\_B2S\_MTX\_22}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_MTX\_22}{DMP\_B2S\_MTX\_22}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+M\+T\+X\+\_\+22~(210 $\ast$ 16)}
+
+
+
+Definition at line 639 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6d553d88ea61e9c0e60cfaeec38e34b9}\label{ICM20948__regs_8H_a6d553d88ea61e9c0e60cfaeec38e34b9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_B2S\_RATE@{DMP\_B2S\_RATE}}
+\index{DMP\_B2S\_RATE@{DMP\_B2S\_RATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_B2S\_RATE}{DMP\_B2S\_RATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B2\+S\+\_\+\+R\+A\+TE~(48  $\ast$ 16 +   8)}
+
+
+
+Definition at line 629 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae014927575216291d8acc5927b2579ac}\label{ICM20948__regs_8H_ae014927575216291d8acc5927b2579ac}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_OFF@{DMP\_BAC\_ACT\_OFF}}
+\index{DMP\_BAC\_ACT\_OFF@{DMP\_BAC\_ACT\_OFF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_OFF}{DMP\_BAC\_ACT\_OFF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+FF~(183 $\ast$ 16 +  0)}
+
+
+
+Definition at line 564 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9ffaf1c5fe11ee85bdfcf9c8f5de53ed}\label{ICM20948__regs_8H_a9ffaf1c5fe11ee85bdfcf9c8f5de53ed}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_ON@{DMP\_BAC\_ACT\_ON}}
+\index{DMP\_BAC\_ACT\_ON@{DMP\_BAC\_ACT\_ON}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_ON}{DMP\_BAC\_ACT\_ON}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+ON~(182 $\ast$ 16 +  0)}
+
+
+
+Definition at line 563 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6e75306f1f7a9a747d57f0da61c504c9}\label{ICM20948__regs_8H_a6e75306f1f7a9a747d57f0da61c504c9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_ON\_OFF@{DMP\_BAC\_ACT\_ON\_OFF}}
+\index{DMP\_BAC\_ACT\_ON\_OFF@{DMP\_BAC\_ACT\_ON\_OFF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_ON\_OFF}{DMP\_BAC\_ACT\_ON\_OFF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+N\+\_\+\+O\+FF~(190 $\ast$ 16 +  2)}
+
+
+
+Definition at line 594 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a5a3318511f731757d173b4fee3da4d8a}\label{ICM20948__regs_8H_a5a3318511f731757d173b4fee3da4d8a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_T\_OFF@{DMP\_BAC\_ACT\_T\_OFF}}
+\index{DMP\_BAC\_ACT\_T\_OFF@{DMP\_BAC\_ACT\_T\_OFF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_T\_OFF}{DMP\_BAC\_ACT\_T\_OFF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+T\+\_\+\+O\+FF~(184 $\ast$ 16 +  4)}
+
+
+
+Definition at line 590 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a710c7e62f2f7414d83a138feee5b7cba}\label{ICM20948__regs_8H_a710c7e62f2f7414d83a138feee5b7cba}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_T\_ON@{DMP\_BAC\_ACT\_T\_ON}}
+\index{DMP\_BAC\_ACT\_T\_ON@{DMP\_BAC\_ACT\_T\_ON}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_T\_ON}{DMP\_BAC\_ACT\_T\_ON}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+T\+\_\+\+ON~(184 $\ast$ 16 +  0)}
+
+
+
+Definition at line 589 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab5bdf23adfc54f3d476131f2ad54f9b3}\label{ICM20948__regs_8H_ab5bdf23adfc54f3d476131f2ad54f9b3}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_WRDBS\_OFF@{DMP\_BAC\_ACT\_WRDBS\_OFF}}
+\index{DMP\_BAC\_ACT\_WRDBS\_OFF@{DMP\_BAC\_ACT\_WRDBS\_OFF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_WRDBS\_OFF}{DMP\_BAC\_ACT\_WRDBS\_OFF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+W\+R\+D\+B\+S\+\_\+\+O\+FF~(184 $\ast$ 16 + 12)}
+
+
+
+Definition at line 593 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aee9a18ddec39756b63b611381ed0131c}\label{ICM20948__regs_8H_aee9a18ddec39756b63b611381ed0131c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ACT\_WRDBS\_ON@{DMP\_BAC\_ACT\_WRDBS\_ON}}
+\index{DMP\_BAC\_ACT\_WRDBS\_ON@{DMP\_BAC\_ACT\_WRDBS\_ON}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ACT\_WRDBS\_ON}{DMP\_BAC\_ACT\_WRDBS\_ON}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+W\+R\+D\+B\+S\+\_\+\+ON~(184 $\ast$ 16 +  8)}
+
+
+
+Definition at line 592 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a735862aa0f5707caea0ec501960a5b12}\label{ICM20948__regs_8H_a735862aa0f5707caea0ec501960a5b12}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_BIKE@{DMP\_BAC\_BIKE}}
+\index{DMP\_BAC\_BIKE@{DMP\_BAC\_BIKE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_BIKE}{DMP\_BAC\_BIKE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+KE~0x08}
+
+
+
+Definition at line 651 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a42185033ce471da3e4fa6ae54c502219}\label{ICM20948__regs_8H_a42185033ce471da3e4fa6ae54c502219}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_BIKE\_CONFIDENCE@{DMP\_BAC\_BIKE\_CONFIDENCE}}
+\index{DMP\_BAC\_BIKE\_CONFIDENCE@{DMP\_BAC\_BIKE\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_BIKE\_CONFIDENCE}{DMP\_BAC\_BIKE\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(144 $\ast$ 16 + 12)}
+
+
+
+Definition at line 584 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac8537d2c4e6949cc7ac8f8223c9acf45}\label{ICM20948__regs_8H_ac8537d2c4e6949cc7ac8f8223c9acf45}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_BIKE\_PREFERENCE@{DMP\_BAC\_BIKE\_PREFERENCE}}
+\index{DMP\_BAC\_BIKE\_PREFERENCE@{DMP\_BAC\_BIKE\_PREFERENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_BIKE\_PREFERENCE}{DMP\_BAC\_BIKE\_PREFERENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+P\+R\+E\+F\+E\+R\+E\+N\+CE~(173 $\ast$ 16 +  8)}
+
+
+
+Definition at line 578 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab49b7d22b0b845043b6ddd3db3af54aa}\label{ICM20948__regs_8H_ab49b7d22b0b845043b6ddd3db3af54aa}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_BIKE\_S\_F@{DMP\_BAC\_BIKE\_S\_F}}
+\index{DMP\_BAC\_BIKE\_S\_F@{DMP\_BAC\_BIKE\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_BIKE\_S\_F}{DMP\_BAC\_BIKE\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+K\+E\+\_\+\+S\+\_\+F~(178 $\ast$ 16 + 12)}
+
+
+
+Definition at line 570 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad5fff7ef700fd47d42df32beee9cce4d}\label{ICM20948__regs_8H_ad5fff7ef700fd47d42df32beee9cce4d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_CNTR@{DMP\_BAC\_CNTR}}
+\index{DMP\_BAC\_CNTR@{DMP\_BAC\_CNTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_CNTR}{DMP\_BAC\_CNTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+C\+N\+TR~(48  $\ast$ 16 +  2)}
+
+
+
+Definition at line 596 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aac5a9f3a1598dfb9e2a86a4371c9fe7a}\label{ICM20948__regs_8H_aac5a9f3a1598dfb9e2a86a4371c9fe7a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_DRIVE@{DMP\_BAC\_DRIVE}}
+\index{DMP\_BAC\_DRIVE@{DMP\_BAC\_DRIVE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_DRIVE}{DMP\_BAC\_DRIVE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+VE~0x01}
+
+
+
+Definition at line 648 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aac89d9062b24a0fc980e8b871d831050}\label{ICM20948__regs_8H_aac89d9062b24a0fc980e8b871d831050}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_DRIVE\_CONFIDENCE@{DMP\_BAC\_DRIVE\_CONFIDENCE}}
+\index{DMP\_BAC\_DRIVE\_CONFIDENCE@{DMP\_BAC\_DRIVE\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_DRIVE\_CONFIDENCE}{DMP\_BAC\_DRIVE\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+V\+E\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(144 $\ast$ 16 +  0)}
+
+
+
+Definition at line 581 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae2885cfce80f625ce111f3793f5cb954}\label{ICM20948__regs_8H_ae2885cfce80f625ce111f3793f5cb954}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_DRIVE\_S\_F@{DMP\_BAC\_DRIVE\_S\_F}}
+\index{DMP\_BAC\_DRIVE\_S\_F@{DMP\_BAC\_DRIVE\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_DRIVE\_S\_F}{DMP\_BAC\_DRIVE\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+V\+E\+\_\+\+S\+\_\+F~(178 $\ast$ 16 +  0)}
+
+
+
+Definition at line 567 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a51008cbf42baccb98615618ac8f11296}\label{ICM20948__regs_8H_a51008cbf42baccb98615618ac8f11296}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_E1\_SHORT@{DMP\_BAC\_E1\_SHORT}}
+\index{DMP\_BAC\_E1\_SHORT@{DMP\_BAC\_E1\_SHORT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_E1\_SHORT}{DMP\_BAC\_E1\_SHORT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E1\+\_\+\+S\+H\+O\+RT~(146 $\ast$ 16 +  0)}
+
+
+
+Definition at line 571 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a53a1711ad294219714d8cbc57727f587}\label{ICM20948__regs_8H_a53a1711ad294219714d8cbc57727f587}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_E2\_SHORT@{DMP\_BAC\_E2\_SHORT}}
+\index{DMP\_BAC\_E2\_SHORT@{DMP\_BAC\_E2\_SHORT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_E2\_SHORT}{DMP\_BAC\_E2\_SHORT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E2\+\_\+\+S\+H\+O\+RT~(146 $\ast$ 16 +  4)}
+
+
+
+Definition at line 572 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a3020d8edc704952d8d876a56dd40c39e}\label{ICM20948__regs_8H_a3020d8edc704952d8d876a56dd40c39e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_E3\_SHORT@{DMP\_BAC\_E3\_SHORT}}
+\index{DMP\_BAC\_E3\_SHORT@{DMP\_BAC\_E3\_SHORT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_E3\_SHORT}{DMP\_BAC\_E3\_SHORT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+E3\+\_\+\+S\+H\+O\+RT~(146 $\ast$ 16 +  8)}
+
+
+
+Definition at line 573 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a522b96df9c2e48fac4db5533486e77a6}\label{ICM20948__regs_8H_a522b96df9c2e48fac4db5533486e77a6}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_MAG\_I2C\_ADDR@{DMP\_BAC\_MAG\_I2C\_ADDR}}
+\index{DMP\_BAC\_MAG\_I2C\_ADDR@{DMP\_BAC\_MAG\_I2C\_ADDR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_MAG\_I2C\_ADDR}{DMP\_BAC\_MAG\_I2C\_ADDR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+A\+G\+\_\+\+I2\+C\+\_\+\+A\+D\+DR~(229 $\ast$ 16 +  8)}
+
+
+
+Definition at line 579 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ada77b31f0f6e5c0f562fcd9d5930eb2a}\label{ICM20948__regs_8H_ada77b31f0f6e5c0f562fcd9d5930eb2a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_MAG\_ON@{DMP\_BAC\_MAG\_ON}}
+\index{DMP\_BAC\_MAG\_ON@{DMP\_BAC\_MAG\_ON}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_MAG\_ON}{DMP\_BAC\_MAG\_ON}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+A\+G\+\_\+\+ON~(225 $\ast$ 16 +  0)}
+
+
+
+Definition at line 576 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a95468a13a0ea38ecb5a639890bdd3424}\label{ICM20948__regs_8H_a95468a13a0ea38ecb5a639890bdd3424}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_MODE\_CNTR@{DMP\_BAC\_MODE\_CNTR}}
+\index{DMP\_BAC\_MODE\_CNTR@{DMP\_BAC\_MODE\_CNTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_MODE\_CNTR}{DMP\_BAC\_MODE\_CNTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+M\+O\+D\+E\+\_\+\+C\+N\+TR~(150 $\ast$ 16)}
+
+
+
+Definition at line 587 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a777e5c1d9c3c20207fabaff0d14fc576}\label{ICM20948__regs_8H_a777e5c1d9c3c20207fabaff0d14fc576}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_PS\_I2C\_ADDR@{DMP\_BAC\_PS\_I2C\_ADDR}}
+\index{DMP\_BAC\_PS\_I2C\_ADDR@{DMP\_BAC\_PS\_I2C\_ADDR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_PS\_I2C\_ADDR}{DMP\_BAC\_PS\_I2C\_ADDR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+P\+S\+\_\+\+I2\+C\+\_\+\+A\+D\+DR~(75  $\ast$ 16 +  4)}
+
+
+
+Definition at line 580 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a73d82b2e43e7a5ffe6bedccab09744b5}\label{ICM20948__regs_8H_a73d82b2e43e7a5ffe6bedccab09744b5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_PS\_ON@{DMP\_BAC\_PS\_ON}}
+\index{DMP\_BAC\_PS\_ON@{DMP\_BAC\_PS\_ON}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_PS\_ON}{DMP\_BAC\_PS\_ON}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+P\+S\+\_\+\+ON~(74  $\ast$ 16 +  0)}
+
+
+
+Definition at line 577 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a87c9867e9b7444fc16ae0325b8ef662d}\label{ICM20948__regs_8H_a87c9867e9b7444fc16ae0325b8ef662d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_RATE@{DMP\_BAC\_RATE}}
+\index{DMP\_BAC\_RATE@{DMP\_BAC\_RATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_RATE}{DMP\_BAC\_RATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+A\+TE~(48  $\ast$ 16 + 10)}
+
+
+
+Definition at line 560 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad845a909137aacd227aa418cd1736e71}\label{ICM20948__regs_8H_ad845a909137aacd227aa418cd1736e71}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_RUN@{DMP\_BAC\_RUN}}
+\index{DMP\_BAC\_RUN@{DMP\_BAC\_RUN}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_RUN}{DMP\_BAC\_RUN}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+UN~0x04}
+
+
+
+Definition at line 650 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a40f633262ef3de427003cf1abcf8efaa}\label{ICM20948__regs_8H_a40f633262ef3de427003cf1abcf8efaa}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_RUN\_CONFIDENCE@{DMP\_BAC\_RUN\_CONFIDENCE}}
+\index{DMP\_BAC\_RUN\_CONFIDENCE@{DMP\_BAC\_RUN\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_RUN\_CONFIDENCE}{DMP\_BAC\_RUN\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+U\+N\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(145 $\ast$ 16 +  4)}
+
+
+
+Definition at line 586 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af49a9d90dec6db3d252fdf3a0ce6dce4}\label{ICM20948__regs_8H_af49a9d90dec6db3d252fdf3a0ce6dce4}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_RUN\_S\_F@{DMP\_BAC\_RUN\_S\_F}}
+\index{DMP\_BAC\_RUN\_S\_F@{DMP\_BAC\_RUN\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_RUN\_S\_F}{DMP\_BAC\_RUN\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+U\+N\+\_\+\+S\+\_\+F~(177 $\ast$ 16 +  4)}
+
+
+
+Definition at line 566 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae6de7d8c186203cac7ab54ff7dad8e7e}\label{ICM20948__regs_8H_ae6de7d8c186203cac7ab54ff7dad8e7e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_SMD\_CONFIDENCE@{DMP\_BAC\_SMD\_CONFIDENCE}}
+\index{DMP\_BAC\_SMD\_CONFIDENCE@{DMP\_BAC\_SMD\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_SMD\_CONFIDENCE}{DMP\_BAC\_SMD\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(144 $\ast$ 16 +  8)}
+
+
+
+Definition at line 583 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac2e17fb59581b896da9e2c8ff11953dd}\label{ICM20948__regs_8H_ac2e17fb59581b896da9e2c8ff11953dd}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_SMD\_S\_F@{DMP\_BAC\_SMD\_S\_F}}
+\index{DMP\_BAC\_SMD\_S\_F@{DMP\_BAC\_SMD\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_SMD\_S\_F}{DMP\_BAC\_SMD\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+S\+\_\+F~(178 $\ast$ 16 +  8)}
+
+
+
+Definition at line 569 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa7c096463183eeeaae42bb427f950d08}\label{ICM20948__regs_8H_aa7c096463183eeeaae42bb427f950d08}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_SMD\_ST\_TH@{DMP\_BAC\_SMD\_ST\_TH}}
+\index{DMP\_BAC\_SMD\_ST\_TH@{DMP\_BAC\_SMD\_ST\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_SMD\_ST\_TH}{DMP\_BAC\_SMD\_ST\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+M\+D\+\_\+\+S\+T\+\_\+\+TH~(179 $\ast$ 16 +  8)}
+
+
+
+Definition at line 549 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a259367de74b896fc105b565bc3464583}\label{ICM20948__regs_8H_a259367de74b896fc105b565bc3464583}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ST\_ALPHA4@{DMP\_BAC\_ST\_ALPHA4}}
+\index{DMP\_BAC\_ST\_ALPHA4@{DMP\_BAC\_ST\_ALPHA4}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ST\_ALPHA4}{DMP\_BAC\_ST\_ALPHA4}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+\_\+\+A\+L\+P\+H\+A4~(180 $\ast$ 16 + 12)}
+
+
+
+Definition at line 550 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abdae06f3ef6ba578fe55058cbaf574ee}\label{ICM20948__regs_8H_abdae06f3ef6ba578fe55058cbaf574ee}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_ST\_ALPHA4A@{DMP\_BAC\_ST\_ALPHA4A}}
+\index{DMP\_BAC\_ST\_ALPHA4A@{DMP\_BAC\_ST\_ALPHA4A}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_ST\_ALPHA4A}{DMP\_BAC\_ST\_ALPHA4A}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+\_\+\+A\+L\+P\+H\+A4A~(176 $\ast$ 16 + 12)}
+
+
+
+Definition at line 551 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a77b61a771858d86f204616162d71158c}\label{ICM20948__regs_8H_a77b61a771858d86f204616162d71158c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STATE@{DMP\_BAC\_STATE}}
+\index{DMP\_BAC\_STATE@{DMP\_BAC\_STATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STATE}{DMP\_BAC\_STATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+TE~(179 $\ast$ 16 +  0)}
+
+
+
+Definition at line 561 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a3595228131947c73379ddeae2dea928b}\label{ICM20948__regs_8H_a3595228131947c73379ddeae2dea928b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STATE\_PREV@{DMP\_BAC\_STATE\_PREV}}
+\index{DMP\_BAC\_STATE\_PREV@{DMP\_BAC\_STATE\_PREV}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STATE\_PREV}{DMP\_BAC\_STATE\_PREV}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+P\+R\+EV~(179 $\ast$ 16 +  4)}
+
+
+
+Definition at line 562 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a92d63cddf6ae6173560140b3fec88b1e}\label{ICM20948__regs_8H_a92d63cddf6ae6173560140b3fec88b1e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STATE\_T\_PREV@{DMP\_BAC\_STATE\_T\_PREV}}
+\index{DMP\_BAC\_STATE\_T\_PREV@{DMP\_BAC\_STATE\_T\_PREV}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STATE\_T\_PREV}{DMP\_BAC\_STATE\_T\_PREV}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+T\+\_\+\+P\+R\+EV~(185 $\ast$ 16 +  4)}
+
+
+
+Definition at line 588 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af22405f047fa74a8152f3117403986a2}\label{ICM20948__regs_8H_af22405f047fa74a8152f3117403986a2}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STATE\_WRDBS\_PREV@{DMP\_BAC\_STATE\_WRDBS\_PREV}}
+\index{DMP\_BAC\_STATE\_WRDBS\_PREV@{DMP\_BAC\_STATE\_WRDBS\_PREV}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STATE\_WRDBS\_PREV}{DMP\_BAC\_STATE\_WRDBS\_PREV}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+A\+T\+E\+\_\+\+W\+R\+D\+B\+S\+\_\+\+P\+R\+EV~(185 $\ast$ 16 +  8)}
+
+
+
+Definition at line 591 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a733c2a0ddeafb2454859798b25245974}\label{ICM20948__regs_8H_a733c2a0ddeafb2454859798b25245974}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STILL@{DMP\_BAC\_STILL}}
+\index{DMP\_BAC\_STILL@{DMP\_BAC\_STILL}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STILL}{DMP\_BAC\_STILL}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+LL~0x20}
+
+
+
+Definition at line 653 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a46e2f032b56663e770499a4d7c1e0d9b}\label{ICM20948__regs_8H_a46e2f032b56663e770499a4d7c1e0d9b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STILL\_CONFIDENCE@{DMP\_BAC\_STILL\_CONFIDENCE}}
+\index{DMP\_BAC\_STILL\_CONFIDENCE@{DMP\_BAC\_STILL\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STILL\_CONFIDENCE}{DMP\_BAC\_STILL\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+L\+L\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(145 $\ast$ 16 +  0)}
+
+
+
+Definition at line 585 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a2e5ac23435bbc71152f93de8075444db}\label{ICM20948__regs_8H_a2e5ac23435bbc71152f93de8075444db}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_STILL\_S\_F@{DMP\_BAC\_STILL\_S\_F}}
+\index{DMP\_BAC\_STILL\_S\_F@{DMP\_BAC\_STILL\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_STILL\_S\_F}{DMP\_BAC\_STILL\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+L\+L\+\_\+\+S\+\_\+F~(177 $\ast$ 16 +  0)}
+
+
+
+Definition at line 565 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a2219ff8e90832d81910cc31a786bdf39}\label{ICM20948__regs_8H_a2219ff8e90832d81910cc31a786bdf39}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_TILT@{DMP\_BAC\_TILT}}
+\index{DMP\_BAC\_TILT@{DMP\_BAC\_TILT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_TILT}{DMP\_BAC\_TILT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+LT~0x10}
+
+
+
+Definition at line 652 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad63d0b91902a460ba7c0fd2f89968439}\label{ICM20948__regs_8H_ad63d0b91902a460ba7c0fd2f89968439}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_TILT\_INIT@{DMP\_BAC\_TILT\_INIT}}
+\index{DMP\_BAC\_TILT\_INIT@{DMP\_BAC\_TILT\_INIT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_TILT\_INIT}{DMP\_BAC\_TILT\_INIT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+L\+T\+\_\+\+I\+N\+IT~(181 $\ast$ 16 +  0)}
+
+
+
+Definition at line 575 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0b00c950bcf774db08c5dfb258c88117}\label{ICM20948__regs_8H_a0b00c950bcf774db08c5dfb258c88117}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_VAR\_RUN@{DMP\_BAC\_VAR\_RUN}}
+\index{DMP\_BAC\_VAR\_RUN@{DMP\_BAC\_VAR\_RUN}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_VAR\_RUN}{DMP\_BAC\_VAR\_RUN}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+V\+A\+R\+\_\+\+R\+UN~(148 $\ast$ 16 + 12)}
+
+
+
+Definition at line 574 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa50157bec343be5c91bc61251baeed28}\label{ICM20948__regs_8H_aa50157bec343be5c91bc61251baeed28}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_WALK@{DMP\_BAC\_WALK}}
+\index{DMP\_BAC\_WALK@{DMP\_BAC\_WALK}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_WALK}{DMP\_BAC\_WALK}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+LK~0x02}
+
+
+
+Definition at line 649 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6acae9093b4d25ff0b002a2ed1d8584b}\label{ICM20948__regs_8H_a6acae9093b4d25ff0b002a2ed1d8584b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_WALK\_CONFIDENCE@{DMP\_BAC\_WALK\_CONFIDENCE}}
+\index{DMP\_BAC\_WALK\_CONFIDENCE@{DMP\_BAC\_WALK\_CONFIDENCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_WALK\_CONFIDENCE}{DMP\_BAC\_WALK\_CONFIDENCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+L\+K\+\_\+\+C\+O\+N\+F\+I\+D\+E\+N\+CE~(144 $\ast$ 16 +  4)}
+
+
+
+Definition at line 582 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac7eb0bf5f491d24116a70a9dbc0e7bf2}\label{ICM20948__regs_8H_ac7eb0bf5f491d24116a70a9dbc0e7bf2}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BAC\_WALK\_S\_F@{DMP\_BAC\_WALK\_S\_F}}
+\index{DMP\_BAC\_WALK\_S\_F@{DMP\_BAC\_WALK\_S\_F}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BAC\_WALK\_S\_F}{DMP\_BAC\_WALK\_S\_F}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+L\+K\+\_\+\+S\+\_\+F~(178 $\ast$ 16 +  4)}
+
+
+
+Definition at line 568 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0a92d1b09512287a756b28043dcbb8b3}\label{ICM20948__regs_8H_a0a92d1b09512287a756b28043dcbb8b3}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BM\_BATCH\_CNTR@{DMP\_BM\_BATCH\_CNTR}}
+\index{DMP\_BM\_BATCH\_CNTR@{DMP\_BM\_BATCH\_CNTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BM\_BATCH\_CNTR}{DMP\_BM\_BATCH\_CNTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+C\+N\+TR~(27 $\ast$ 16)}
+
+
+
+Definition at line 417 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aba95b3b350650550c8229d57bb5e7931}\label{ICM20948__regs_8H_aba95b3b350650550c8229d57bb5e7931}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BM\_BATCH\_MASK@{DMP\_BM\_BATCH\_MASK}}
+\index{DMP\_BM\_BATCH\_MASK@{DMP\_BM\_BATCH\_MASK}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BM\_BATCH\_MASK}{DMP\_BM\_BATCH\_MASK}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+A\+SK~(21 $\ast$ 16 + 14)}
+
+
+
+Definition at line 419 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac6a2d1aca9a31340da83305a2a939fb9}\label{ICM20948__regs_8H_ac6a2d1aca9a31340da83305a2a939fb9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_BM\_BATCH\_THLD@{DMP\_BM\_BATCH\_THLD}}
+\index{DMP\_BM\_BATCH\_THLD@{DMP\_BM\_BATCH\_THLD}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_BM\_BATCH\_THLD}{DMP\_BM\_BATCH\_THLD}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+B\+M\+\_\+\+B\+A\+T\+C\+H\+\_\+\+T\+H\+LD~(19 $\ast$ 16 + 12)}
+
+
+
+Definition at line 418 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0bc6135d147ede729350d9f2164f6607}\label{ICM20948__regs_8H_a0bc6135d147ede729350d9f2164f6607}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CFG\_FIFO\_SIZE@{DMP\_CFG\_FIFO\_SIZE}}
+\index{DMP\_CFG\_FIFO\_SIZE@{DMP\_CFG\_FIFO\_SIZE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CFG\_FIFO\_SIZE}{DMP\_CFG\_FIFO\_SIZE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+F\+G\+\_\+\+F\+I\+F\+O\+\_\+\+S\+I\+ZE~(4222)}
+
+
+
+Definition at line 399 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a304702b72a030fceea30b45d1ab53a5c}\label{ICM20948__regs_8H_a304702b72a030fceea30b45d1ab53a5c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CODE\_SIZE@{DMP\_CODE\_SIZE}}
+\index{DMP\_CODE\_SIZE@{DMP\_CODE\_SIZE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CODE\_SIZE}{DMP\_CODE\_SIZE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+O\+D\+E\+\_\+\+S\+I\+ZE~14301}
+
+
+
+Definition at line 645 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae121461af3ab846931624de4ec07cb70}\label{ICM20948__regs_8H_ae121461af3ab846931624de4ec07cb70}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_ACCURACY@{DMP\_CPASS\_ACCURACY}}
+\index{DMP\_CPASS\_ACCURACY@{DMP\_CPASS\_ACCURACY}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_ACCURACY}{DMP\_CPASS\_ACCURACY}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY~(37 $\ast$ 16)}
+
+
+
+Definition at line 493 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a868e30b118d7453c90fdb6d032c83cef}\label{ICM20948__regs_8H_a868e30b118d7453c90fdb6d032c83cef}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_BIAS\_OFFSET@{DMP\_CPASS\_BIAS\_OFFSET}}
+\index{DMP\_CPASS\_BIAS\_OFFSET@{DMP\_CPASS\_BIAS\_OFFSET}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_BIAS\_OFFSET}{DMP\_CPASS\_BIAS\_OFFSET}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+\+O\+F\+F\+S\+ET~(113 $\ast$ 16 + 4)}
+
+
+
+Definition at line 505 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4eda0d2503a93f974fb30b3971d32e6e}\label{ICM20948__regs_8H_a4eda0d2503a93f974fb30b3971d32e6e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_BIAS\_SET@{DMP\_CPASS\_BIAS\_SET}}
+\index{DMP\_CPASS\_BIAS\_SET@{DMP\_CPASS\_BIAS\_SET}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_BIAS\_SET}{DMP\_CPASS\_BIAS\_SET}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+\+S\+ET~(34 $\ast$ 16 + 14)}
+
+
+
+Definition at line 494 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a810d59d445ddf086ff3724e6c54dadcd}\label{ICM20948__regs_8H_a810d59d445ddf086ff3724e6c54dadcd}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_BIAS\_X@{DMP\_CPASS\_BIAS\_X}}
+\index{DMP\_CPASS\_BIAS\_X@{DMP\_CPASS\_BIAS\_X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_BIAS\_X}{DMP\_CPASS\_BIAS\_X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+X~(126 $\ast$ 16 +  4)}
+
+
+
+Definition at line 490 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_acf56b8bf0226761c92ed608052ac0313}\label{ICM20948__regs_8H_acf56b8bf0226761c92ed608052ac0313}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_BIAS\_Y@{DMP\_CPASS\_BIAS\_Y}}
+\index{DMP\_CPASS\_BIAS\_Y@{DMP\_CPASS\_BIAS\_Y}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_BIAS\_Y}{DMP\_CPASS\_BIAS\_Y}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+Y~(126 $\ast$ 16 +  8)}
+
+
+
+Definition at line 491 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af62e7fdd256a4efef1d614a0e3027441}\label{ICM20948__regs_8H_af62e7fdd256a4efef1d614a0e3027441}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_BIAS\_Z@{DMP\_CPASS\_BIAS\_Z}}
+\index{DMP\_CPASS\_BIAS\_Z@{DMP\_CPASS\_BIAS\_Z}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_BIAS\_Z}{DMP\_CPASS\_BIAS\_Z}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+B\+I\+A\+S\+\_\+Z~(126 $\ast$ 16 + 12)}
+
+
+
+Definition at line 492 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a412d173e1c15bc179f171ebc47c6543c}\label{ICM20948__regs_8H_a412d173e1c15bc179f171ebc47c6543c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_CAL\_INIT@{DMP\_CPASS\_CAL\_INIT}}
+\index{DMP\_CPASS\_CAL\_INIT@{DMP\_CPASS\_CAL\_INIT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_CAL\_INIT}{DMP\_CPASS\_CAL\_INIT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+\_\+\+I\+N\+IT~(114 $\ast$ 16)}
+
+
+
+Definition at line 499 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af3e1ceeaf5e498910d8a8eacdafd7a6f}\label{ICM20948__regs_8H_af3e1ceeaf5e498910d8a8eacdafd7a6f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_COUNT\_7@{DMP\_CPASS\_COUNT\_7}}
+\index{DMP\_CPASS\_COUNT\_7@{DMP\_CPASS\_COUNT\_7}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_COUNT\_7}{DMP\_CPASS\_COUNT\_7}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+U\+N\+T\+\_\+7~( 87 $\ast$ 16 + 2)}
+
+
+
+Definition at line 503 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad2e9711f07de99176236042150d09e2e}\label{ICM20948__regs_8H_ad2e9711f07de99176236042150d09e2e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_COVARIANCE@{DMP\_CPASS\_COVARIANCE}}
+\index{DMP\_CPASS\_COVARIANCE@{DMP\_CPASS\_COVARIANCE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_COVARIANCE}{DMP\_CPASS\_COVARIANCE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+CE~(115 $\ast$ 16)}
+
+
+
+Definition at line 496 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_acb7870923d6e00cc41e3cd5f4758633b}\label{ICM20948__regs_8H_acb7870923d6e00cc41e3cd5f4758633b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_COVARIANCE\_CUR@{DMP\_CPASS\_COVARIANCE\_CUR}}
+\index{DMP\_CPASS\_COVARIANCE\_CUR@{DMP\_CPASS\_COVARIANCE\_CUR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_COVARIANCE\_CUR}{DMP\_CPASS\_COVARIANCE\_CUR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+O\+V\+A\+R\+I\+A\+N\+C\+E\+\_\+\+C\+UR~(118 $\ast$ 16 +  8)}
+
+
+
+Definition at line 497 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a80e02dbef7ae0dbe863392e50e0c01b5}\label{ICM20948__regs_8H_a80e02dbef7ae0dbe863392e50e0c01b5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_CUR\_BIAS\_OFFSET@{DMP\_CPASS\_CUR\_BIAS\_OFFSET}}
+\index{DMP\_CPASS\_CUR\_BIAS\_OFFSET@{DMP\_CPASS\_CUR\_BIAS\_OFFSET}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_CUR\_BIAS\_OFFSET}{DMP\_CPASS\_CUR\_BIAS\_OFFSET}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+U\+R\+\_\+\+B\+I\+A\+S\+\_\+\+O\+F\+F\+S\+ET~(114 $\ast$ 16 + 4)}
+
+
+
+Definition at line 506 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aab82a386cf3fd0c198301b679c732cbe}\label{ICM20948__regs_8H_aab82a386cf3fd0c198301b679c732cbe}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_EST\_FIRST\_BIAS@{DMP\_CPASS\_EST\_FIRST\_BIAS}}
+\index{DMP\_CPASS\_EST\_FIRST\_BIAS@{DMP\_CPASS\_EST\_FIRST\_BIAS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_EST\_FIRST\_BIAS}{DMP\_CPASS\_EST\_FIRST\_BIAS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+E\+S\+T\+\_\+\+F\+I\+R\+S\+T\+\_\+\+B\+I\+AS~(113 $\ast$ 16)}
+
+
+
+Definition at line 500 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a645f06a0aeb4c13069d1b168670b76ea}\label{ICM20948__regs_8H_a645f06a0aeb4c13069d1b168670b76ea}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MAX\_INNO@{DMP\_CPASS\_MAX\_INNO}}
+\index{DMP\_CPASS\_MAX\_INNO@{DMP\_CPASS\_MAX\_INNO}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MAX\_INNO}{DMP\_CPASS\_MAX\_INNO}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+A\+X\+\_\+\+I\+N\+NO~(124 $\ast$ 16)}
+
+
+
+Definition at line 504 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af3cf7c596eaa9aa4ddbcad213928e7ff}\label{ICM20948__regs_8H_af3cf7c596eaa9aa4ddbcad213928e7ff}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_00@{DMP\_CPASS\_MTX\_00}}
+\index{DMP\_CPASS\_MTX\_00@{DMP\_CPASS\_MTX\_00}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_00}{DMP\_CPASS\_MTX\_00}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+00~(23 $\ast$ 16)}
+
+
+
+Definition at line 448 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a5f84509686e5137c528aa2d36d3b8d0c}\label{ICM20948__regs_8H_a5f84509686e5137c528aa2d36d3b8d0c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_01@{DMP\_CPASS\_MTX\_01}}
+\index{DMP\_CPASS\_MTX\_01@{DMP\_CPASS\_MTX\_01}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_01}{DMP\_CPASS\_MTX\_01}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+01~(23 $\ast$ 16 + 4)}
+
+
+
+Definition at line 449 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae998d16f29f3297001b737924618e5ca}\label{ICM20948__regs_8H_ae998d16f29f3297001b737924618e5ca}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_02@{DMP\_CPASS\_MTX\_02}}
+\index{DMP\_CPASS\_MTX\_02@{DMP\_CPASS\_MTX\_02}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_02}{DMP\_CPASS\_MTX\_02}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+02~(23 $\ast$ 16 + 8)}
+
+
+
+Definition at line 450 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a8a382abd5cc8395fa813351338c959ad}\label{ICM20948__regs_8H_a8a382abd5cc8395fa813351338c959ad}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_10@{DMP\_CPASS\_MTX\_10}}
+\index{DMP\_CPASS\_MTX\_10@{DMP\_CPASS\_MTX\_10}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_10}{DMP\_CPASS\_MTX\_10}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+10~(23 $\ast$ 16 + 12)}
+
+
+
+Definition at line 451 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a8b6d5992e83e5e2fa3dbb439551da525}\label{ICM20948__regs_8H_a8b6d5992e83e5e2fa3dbb439551da525}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_11@{DMP\_CPASS\_MTX\_11}}
+\index{DMP\_CPASS\_MTX\_11@{DMP\_CPASS\_MTX\_11}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_11}{DMP\_CPASS\_MTX\_11}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+11~(24 $\ast$ 16)}
+
+
+
+Definition at line 452 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aba3764f2cedf01f2e4df4ba6f2d86a10}\label{ICM20948__regs_8H_aba3764f2cedf01f2e4df4ba6f2d86a10}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_12@{DMP\_CPASS\_MTX\_12}}
+\index{DMP\_CPASS\_MTX\_12@{DMP\_CPASS\_MTX\_12}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_12}{DMP\_CPASS\_MTX\_12}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+12~(24 $\ast$ 16 + 4)}
+
+
+
+Definition at line 453 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a3b45eaed7593f38186f805010f23a3f4}\label{ICM20948__regs_8H_a3b45eaed7593f38186f805010f23a3f4}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_20@{DMP\_CPASS\_MTX\_20}}
+\index{DMP\_CPASS\_MTX\_20@{DMP\_CPASS\_MTX\_20}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_20}{DMP\_CPASS\_MTX\_20}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+20~(24 $\ast$ 16 + 8)}
+
+
+
+Definition at line 454 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac7a7d20472e8f761f2a0fcf9f5783f11}\label{ICM20948__regs_8H_ac7a7d20472e8f761f2a0fcf9f5783f11}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_21@{DMP\_CPASS\_MTX\_21}}
+\index{DMP\_CPASS\_MTX\_21@{DMP\_CPASS\_MTX\_21}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_21}{DMP\_CPASS\_MTX\_21}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+21~(24 $\ast$ 16 + 12)}
+
+
+
+Definition at line 455 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a14484271fd8f6f4b8d965c1f30f76e2c}\label{ICM20948__regs_8H_a14484271fd8f6f4b8d965c1f30f76e2c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_MTX\_22@{DMP\_CPASS\_MTX\_22}}
+\index{DMP\_CPASS\_MTX\_22@{DMP\_CPASS\_MTX\_22}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_MTX\_22}{DMP\_CPASS\_MTX\_22}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+M\+T\+X\+\_\+22~(25 $\ast$ 16)}
+
+
+
+Definition at line 456 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abb9c2fcc740228e085e81da055b28031}\label{ICM20948__regs_8H_abb9c2fcc740228e085e81da055b28031}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_PRE\_SENSOR\_DATA@{DMP\_CPASS\_PRE\_SENSOR\_DATA}}
+\index{DMP\_CPASS\_PRE\_SENSOR\_DATA@{DMP\_CPASS\_PRE\_SENSOR\_DATA}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_PRE\_SENSOR\_DATA}{DMP\_CPASS\_PRE\_SENSOR\_DATA}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+P\+R\+E\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+D\+A\+TA~( 87 $\ast$ 16 + 4)}
+
+
+
+Definition at line 507 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_acc758e35c29cbb56699359f91338bb30}\label{ICM20948__regs_8H_acc758e35c29cbb56699359f91338bb30}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY@{DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY}}
+\index{DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY@{DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY}{DMP\_CPASS\_RADIUS\_3D\_THRESH\_ANOMALY}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+R\+A\+D\+I\+U\+S\+\_\+3\+D\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+A\+N\+O\+M\+A\+LY~(112 $\ast$ 16 + 8)}
+
+
+
+Definition at line 511 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad7f4fec13f1f1d19276ef54ef5afabbd}\label{ICM20948__regs_8H_ad7f4fec13f1f1d19276ef54ef5afabbd}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_REF\_MAG\_3D@{DMP\_CPASS\_REF\_MAG\_3D}}
+\index{DMP\_CPASS\_REF\_MAG\_3D@{DMP\_CPASS\_REF\_MAG\_3D}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_REF\_MAG\_3D}{DMP\_CPASS\_REF\_MAG\_3D}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+R\+E\+F\+\_\+\+M\+A\+G\+\_\+3D~(122 $\ast$ 16)}
+
+
+
+Definition at line 498 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aab1af1720e7eee916d7e029bc6fba474}\label{ICM20948__regs_8H_aab1af1720e7eee916d7e029bc6fba474}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_STATUS\_CHK@{DMP\_CPASS\_STATUS\_CHK}}
+\index{DMP\_CPASS\_STATUS\_CHK@{DMP\_CPASS\_STATUS\_CHK}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_STATUS\_CHK}{DMP\_CPASS\_STATUS\_CHK}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+S\+T\+A\+T\+U\+S\+\_\+\+C\+HK~(25 $\ast$ 16 + 12)}
+
+
+
+Definition at line 513 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a19afdaaf910bb7ce9ea60f2403d4f336}\label{ICM20948__regs_8H_a19afdaaf910bb7ce9ea60f2403d4f336}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_TIME\_BUFFER@{DMP\_CPASS\_TIME\_BUFFER}}
+\index{DMP\_CPASS\_TIME\_BUFFER@{DMP\_CPASS\_TIME\_BUFFER}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_TIME\_BUFFER}{DMP\_CPASS\_TIME\_BUFFER}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+T\+I\+M\+E\+\_\+\+B\+U\+F\+F\+ER~(112 $\ast$ 16 + 14)}
+
+
+
+Definition at line 510 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a7e49ff06ab92c6e282e8d58b1d39d790}\label{ICM20948__regs_8H_a7e49ff06ab92c6e282e8d58b1d39d790}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_CPASS\_VAR\_COUNT@{DMP\_CPASS\_VAR\_COUNT}}
+\index{DMP\_CPASS\_VAR\_COUNT@{DMP\_CPASS\_VAR\_COUNT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_CPASS\_VAR\_COUNT}{DMP\_CPASS\_VAR\_COUNT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+V\+A\+R\+\_\+\+C\+O\+U\+NT~(112 $\ast$ 16 + 6)}
+
+
+
+Definition at line 502 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a54d0182209cdb7091a951c787bf72db5}\label{ICM20948__regs_8H_a54d0182209cdb7091a951c787bf72db5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_DATA\_INTR\_CTL@{DMP\_DATA\_INTR\_CTL}}
+\index{DMP\_DATA\_INTR\_CTL@{DMP\_DATA\_INTR\_CTL}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_DATA\_INTR\_CTL}{DMP\_DATA\_INTR\_CTL}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+I\+N\+T\+R\+\_\+\+C\+TL~(4 $\ast$ 16 + 12)}
+
+
+
+Definition at line 404 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a02e5d02d71c980f1c8c4b1508254f259}\label{ICM20948__regs_8H_a02e5d02d71c980f1c8c4b1508254f259}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_DATA\_OUT\_CTL1@{DMP\_DATA\_OUT\_CTL1}}
+\index{DMP\_DATA\_OUT\_CTL1@{DMP\_DATA\_OUT\_CTL1}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_DATA\_OUT\_CTL1}{DMP\_DATA\_OUT\_CTL1}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+O\+U\+T\+\_\+\+C\+T\+L1~(4 $\ast$ 16)}
+
+
+
+Definition at line 402 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aba50a06bdafe060a850c566c0ca25f9b}\label{ICM20948__regs_8H_aba50a06bdafe060a850c566c0ca25f9b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_DATA\_OUT\_CTL2@{DMP\_DATA\_OUT\_CTL2}}
+\index{DMP\_DATA\_OUT\_CTL2@{DMP\_DATA\_OUT\_CTL2}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_DATA\_OUT\_CTL2}{DMP\_DATA\_OUT\_CTL2}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+O\+U\+T\+\_\+\+C\+T\+L2~(4 $\ast$ 16 + 2)}
+
+
+
+Definition at line 403 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_accc2ba51183326b43814d52f5a9b2380}\label{ICM20948__regs_8H_accc2ba51183326b43814d52f5a9b2380}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_DATA\_RDY\_STATUS@{DMP\_DATA\_RDY\_STATUS}}
+\index{DMP\_DATA\_RDY\_STATUS@{DMP\_DATA\_RDY\_STATUS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_DATA\_RDY\_STATUS}{DMP\_DATA\_RDY\_STATUS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+D\+A\+T\+A\+\_\+\+R\+D\+Y\+\_\+\+S\+T\+A\+T\+US~(8 $\ast$ 16 + 10)}
+
+
+
+Definition at line 414 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aead48addf5991151d33ee3ac76e0d21e}\label{ICM20948__regs_8H_aead48addf5991151d33ee3ac76e0d21e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_DMPRATE\_CNTR@{DMP\_DMPRATE\_CNTR}}
+\index{DMP\_DMPRATE\_CNTR@{DMP\_DMPRATE\_CNTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_DMPRATE\_CNTR}{DMP\_DMPRATE\_CNTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+D\+M\+P\+R\+A\+T\+E\+\_\+\+C\+N\+TR~(18 $\ast$ 16 + 4)}
+
+
+
+Definition at line 521 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a342d30c8e1f2f3daaa0666449e66674e}\label{ICM20948__regs_8H_a342d30c8e1f2f3daaa0666449e66674e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_EIS\_AUTH\_INPUT@{DMP\_EIS\_AUTH\_INPUT}}
+\index{DMP\_EIS\_AUTH\_INPUT@{DMP\_EIS\_AUTH\_INPUT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_EIS\_AUTH\_INPUT}{DMP\_EIS\_AUTH\_INPUT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+E\+I\+S\+\_\+\+A\+U\+T\+H\+\_\+\+I\+N\+P\+UT~(160 $\ast$ 16 +   4)}
+
+
+
+Definition at line 625 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa05fdfc7f6b266c8bcc685be1fba852d}\label{ICM20948__regs_8H_aa05fdfc7f6b266c8bcc685be1fba852d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_EIS\_AUTH\_OUTPUT@{DMP\_EIS\_AUTH\_OUTPUT}}
+\index{DMP\_EIS\_AUTH\_OUTPUT@{DMP\_EIS\_AUTH\_OUTPUT}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_EIS\_AUTH\_OUTPUT}{DMP\_EIS\_AUTH\_OUTPUT}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+E\+I\+S\+\_\+\+A\+U\+T\+H\+\_\+\+O\+U\+T\+P\+UT~(160 $\ast$ 16 +   0)}
+
+
+
+Definition at line 626 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a8a04860d6ccdd5d7303b2fb2d0bd5487}\label{ICM20948__regs_8H_a8a04860d6ccdd5d7303b2fb2d0bd5487}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FIFO\_WATERMARK@{DMP\_FIFO\_WATERMARK}}
+\index{DMP\_FIFO\_WATERMARK@{DMP\_FIFO\_WATERMARK}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FIFO\_WATERMARK}{DMP\_FIFO\_WATERMARK}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+I\+F\+O\+\_\+\+W\+A\+T\+E\+R\+M\+A\+RK~(31 $\ast$ 16 + 14)}
+
+
+
+Definition at line 405 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a25ca49b6a3f1058ee41151ef3de25cfa}\label{ICM20948__regs_8H_a25ca49b6a3f1058ee41151ef3de25cfa}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_DEV\_IN\_POCKET\_TH@{DMP\_FP\_DEV\_IN\_POCKET\_TH}}
+\index{DMP\_FP\_DEV\_IN\_POCKET\_TH@{DMP\_FP\_DEV\_IN\_POCKET\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_DEV\_IN\_POCKET\_TH}{DMP\_FP\_DEV\_IN\_POCKET\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+D\+E\+V\+\_\+\+I\+N\+\_\+\+P\+O\+C\+K\+E\+T\+\_\+\+TH~(76  $\ast$ 16 + 12)}
+
+
+
+Definition at line 613 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a86c17f923f43e8b91dd97f70ab19ebbc}\label{ICM20948__regs_8H_a86c17f923f43e8b91dd97f70ab19ebbc}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_MAX\_PICKUP\_T\_TH@{DMP\_FP\_MAX\_PICKUP\_T\_TH}}
+\index{DMP\_FP\_MAX\_PICKUP\_T\_TH@{DMP\_FP\_MAX\_PICKUP\_T\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_MAX\_PICKUP\_T\_TH}{DMP\_FP\_MAX\_PICKUP\_T\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+A\+X\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+T\+\_\+\+TH~(244 $\ast$ 16 + 12)}
+
+
+
+Definition at line 604 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a1d1b9574da2c920d36b2eaa3ed8f4478}\label{ICM20948__regs_8H_a1d1b9574da2c920d36b2eaa3ed8f4478}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_MID\_STILL\_TH@{DMP\_FP\_MID\_STILL\_TH}}
+\index{DMP\_FP\_MID\_STILL\_TH@{DMP\_FP\_MID\_STILL\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_MID\_STILL\_TH}{DMP\_FP\_MID\_STILL\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+I\+D\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH~(244 $\ast$ 16 +  8)}
+
+
+
+Definition at line 601 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a7b68d7c518a5008de64cea9a26c4245b}\label{ICM20948__regs_8H_a7b68d7c518a5008de64cea9a26c4245b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_MOTION\_CONST\_TH@{DMP\_FP\_MOTION\_CONST\_TH}}
+\index{DMP\_FP\_MOTION\_CONST\_TH@{DMP\_FP\_MOTION\_CONST\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_MOTION\_CONST\_TH}{DMP\_FP\_MOTION\_CONST\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+C\+O\+N\+S\+T\+\_\+\+TH~(240 $\ast$ 16 +  8)}
+
+
+
+Definition at line 607 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a76f83bf5fd45ced6d4733a314cdc3d69}\label{ICM20948__regs_8H_a76f83bf5fd45ced6d4733a314cdc3d69}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_NOT\_STILL\_TH@{DMP\_FP\_NOT\_STILL\_TH}}
+\index{DMP\_FP\_NOT\_STILL\_TH@{DMP\_FP\_NOT\_STILL\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_NOT\_STILL\_TH}{DMP\_FP\_NOT\_STILL\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+N\+O\+T\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH~(246 $\ast$ 16 +  8)}
+
+
+
+Definition at line 602 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af72e550cf5b1047e1321350859741412}\label{ICM20948__regs_8H_af72e550cf5b1047e1321350859741412}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_PICKUP\_CNTR@{DMP\_FP\_PICKUP\_CNTR}}
+\index{DMP\_FP\_PICKUP\_CNTR@{DMP\_FP\_PICKUP\_CNTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_PICKUP\_CNTR}{DMP\_FP\_PICKUP\_CNTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+C\+N\+TR~(247 $\ast$ 16 +  4)}
+
+
+
+Definition at line 614 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae58aeb6d2d808e0acaab6084fcd3c48f}\label{ICM20948__regs_8H_ae58aeb6d2d808e0acaab6084fcd3c48f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_PICKUP\_TIMEOUT\_TH@{DMP\_FP\_PICKUP\_TIMEOUT\_TH}}
+\index{DMP\_FP\_PICKUP\_TIMEOUT\_TH@{DMP\_FP\_PICKUP\_TIMEOUT\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_PICKUP\_TIMEOUT\_TH}{DMP\_FP\_PICKUP\_TIMEOUT\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+TH~(248 $\ast$ 16 +  8)}
+
+
+
+Definition at line 605 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a526abd8170b968c2fb5f512795d9f568}\label{ICM20948__regs_8H_a526abd8170b968c2fb5f512795d9f568}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_RATE@{DMP\_FP\_RATE}}
+\index{DMP\_FP\_RATE@{DMP\_FP\_RATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_RATE}{DMP\_FP\_RATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+R\+A\+TE~(240 $\ast$ 16 + 12)}
+
+
+
+Definition at line 615 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6b29ec9f0dd72ca5a2b0f34d5453d3a4}\label{ICM20948__regs_8H_a6b29ec9f0dd72ca5a2b0f34d5453d3a4}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_STEADY\_TILT\_TH@{DMP\_FP\_STEADY\_TILT\_TH}}
+\index{DMP\_FP\_STEADY\_TILT\_TH@{DMP\_FP\_STEADY\_TILT\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_STEADY\_TILT\_TH}{DMP\_FP\_STEADY\_TILT\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+E\+A\+D\+Y\+\_\+\+T\+I\+L\+T\+\_\+\+TH~(247 $\ast$ 16 +  8)}
+
+
+
+Definition at line 609 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a1f0f61d431ec3534064b44de84134b77}\label{ICM20948__regs_8H_a1f0f61d431ec3534064b44de84134b77}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_STEADY\_TILT\_UP\_TH@{DMP\_FP\_STEADY\_TILT\_UP\_TH}}
+\index{DMP\_FP\_STEADY\_TILT\_UP\_TH@{DMP\_FP\_STEADY\_TILT\_UP\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_STEADY\_TILT\_UP\_TH}{DMP\_FP\_STEADY\_TILT\_UP\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+E\+A\+D\+Y\+\_\+\+T\+I\+L\+T\+\_\+\+U\+P\+\_\+\+TH~(242 $\ast$ 16 + 12)}
+
+
+
+Definition at line 610 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af0d2d989e04ca473f1e0d3098a854cae}\label{ICM20948__regs_8H_af0d2d989e04ca473f1e0d3098a854cae}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_STILL\_CONST\_TH@{DMP\_FP\_STILL\_CONST\_TH}}
+\index{DMP\_FP\_STILL\_CONST\_TH@{DMP\_FP\_STILL\_CONST\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_STILL\_CONST\_TH}{DMP\_FP\_STILL\_CONST\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+I\+L\+L\+\_\+\+C\+O\+N\+S\+T\+\_\+\+TH~(246 $\ast$ 16 + 12)}
+
+
+
+Definition at line 606 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab44d51d121f0e48be906b1ebb1cf9bc1}\label{ICM20948__regs_8H_ab44d51d121f0e48be906b1ebb1cf9bc1}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_STILL\_TH@{DMP\_FP\_STILL\_TH}}
+\index{DMP\_FP\_STILL\_TH@{DMP\_FP\_STILL\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_STILL\_TH}{DMP\_FP\_STILL\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+S\+T\+I\+L\+L\+\_\+\+TH~(246 $\ast$ 16 +  4)}
+
+
+
+Definition at line 600 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_af8dee60081b4cad80af437c058e9102e}\label{ICM20948__regs_8H_af8dee60081b4cad80af437c058e9102e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_VAR\_ALPHA@{DMP\_FP\_VAR\_ALPHA}}
+\index{DMP\_FP\_VAR\_ALPHA@{DMP\_FP\_VAR\_ALPHA}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_VAR\_ALPHA}{DMP\_FP\_VAR\_ALPHA}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+A\+R\+\_\+\+A\+L\+P\+HA~(245 $\ast$ 16 +  8)}
+
+
+
+Definition at line 599 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9da7a37b14043d4108cf0bcc47296786}\label{ICM20948__regs_8H_a9da7a37b14043d4108cf0bcc47296786}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_VIB\_COUNT\_TH@{DMP\_FP\_VIB\_COUNT\_TH}}
+\index{DMP\_FP\_VIB\_COUNT\_TH@{DMP\_FP\_VIB\_COUNT\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_VIB\_COUNT\_TH}{DMP\_FP\_VIB\_COUNT\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+I\+B\+\_\+\+C\+O\+U\+N\+T\+\_\+\+TH~(242 $\ast$ 16 +  8)}
+
+
+
+Definition at line 608 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a866de78975f5a2f28ce0b8f37279ea02}\label{ICM20948__regs_8H_a866de78975f5a2f28ce0b8f37279ea02}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_VIB\_REJ\_TH@{DMP\_FP\_VIB\_REJ\_TH}}
+\index{DMP\_FP\_VIB\_REJ\_TH@{DMP\_FP\_VIB\_REJ\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_VIB\_REJ\_TH}{DMP\_FP\_VIB\_REJ\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+V\+I\+B\+\_\+\+R\+E\+J\+\_\+\+TH~(241 $\ast$ 16 +  8)}
+
+
+
+Definition at line 603 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa6f5e4607a1dfc639abf91ac15a9244a}\label{ICM20948__regs_8H_aa6f5e4607a1dfc639abf91ac15a9244a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_Z\_FLAT\_TH\_MINUS@{DMP\_FP\_Z\_FLAT\_TH\_MINUS}}
+\index{DMP\_FP\_Z\_FLAT\_TH\_MINUS@{DMP\_FP\_Z\_FLAT\_TH\_MINUS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_Z\_FLAT\_TH\_MINUS}{DMP\_FP\_Z\_FLAT\_TH\_MINUS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+Z\+\_\+\+F\+L\+A\+T\+\_\+\+T\+H\+\_\+\+M\+I\+N\+US~(243 $\ast$ 16 +  8)}
+
+
+
+Definition at line 611 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6417d1124ab8fb2896405dadc8dcd553}\label{ICM20948__regs_8H_a6417d1124ab8fb2896405dadc8dcd553}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_FP\_Z\_FLAT\_TH\_PLUS@{DMP\_FP\_Z\_FLAT\_TH\_PLUS}}
+\index{DMP\_FP\_Z\_FLAT\_TH\_PLUS@{DMP\_FP\_Z\_FLAT\_TH\_PLUS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_FP\_Z\_FLAT\_TH\_PLUS}{DMP\_FP\_Z\_FLAT\_TH\_PLUS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+F\+P\+\_\+\+Z\+\_\+\+F\+L\+A\+T\+\_\+\+T\+H\+\_\+\+P\+L\+US~(243 $\ast$ 16 + 12)}
+
+
+
+Definition at line 612 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9ebf39784760509f273caaadc5dc1e23}\label{ICM20948__regs_8H_a9ebf39784760509f273caaadc5dc1e23}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_ACCURACY@{DMP\_GYRO\_ACCURACY}}
+\index{DMP\_GYRO\_ACCURACY@{DMP\_GYRO\_ACCURACY}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_ACCURACY}{DMP\_GYRO\_ACCURACY}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY~(138 $\ast$ 16 +  2)}
+
+
+
+Definition at line 466 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a85f0d2fb3df2318c12dc1eae583c6823}\label{ICM20948__regs_8H_a85f0d2fb3df2318c12dc1eae583c6823}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_BIAS\_SET@{DMP\_GYRO\_BIAS\_SET}}
+\index{DMP\_GYRO\_BIAS\_SET@{DMP\_GYRO\_BIAS\_SET}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_BIAS\_SET}{DMP\_GYRO\_BIAS\_SET}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+S\+ET~(138 $\ast$ 16 +  6)}
+
+
+
+Definition at line 467 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0de6d60b13cc0966e1462385fb3337c5}\label{ICM20948__regs_8H_a0de6d60b13cc0966e1462385fb3337c5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_BIAS\_X@{DMP\_GYRO\_BIAS\_X}}
+\index{DMP\_GYRO\_BIAS\_X@{DMP\_GYRO\_BIAS\_X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_BIAS\_X}{DMP\_GYRO\_BIAS\_X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+X~(139 $\ast$ 16 +  4)}
+
+
+
+Definition at line 463 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4b48919414a90bd0fdf6eef33b3f576f}\label{ICM20948__regs_8H_a4b48919414a90bd0fdf6eef33b3f576f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_BIAS\_Y@{DMP\_GYRO\_BIAS\_Y}}
+\index{DMP\_GYRO\_BIAS\_Y@{DMP\_GYRO\_BIAS\_Y}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_BIAS\_Y}{DMP\_GYRO\_BIAS\_Y}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+Y~(139 $\ast$ 16 +  8)}
+
+
+
+Definition at line 464 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_adf8bf18ddbac3d35f469ac2e3d5f7206}\label{ICM20948__regs_8H_adf8bf18ddbac3d35f469ac2e3d5f7206}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_BIAS\_Z@{DMP\_GYRO\_BIAS\_Z}}
+\index{DMP\_GYRO\_BIAS\_Z@{DMP\_GYRO\_BIAS\_Z}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_BIAS\_Z}{DMP\_GYRO\_BIAS\_Z}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+Z~(139 $\ast$ 16 + 12)}
+
+
+
+Definition at line 465 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae607f83da84987f4759d28a674558792}\label{ICM20948__regs_8H_ae607f83da84987f4759d28a674558792}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_FULLSCALE@{DMP\_GYRO\_FULLSCALE}}
+\index{DMP\_GYRO\_FULLSCALE@{DMP\_GYRO\_FULLSCALE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_FULLSCALE}{DMP\_GYRO\_FULLSCALE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+F\+U\+L\+L\+S\+C\+A\+LE~(72 $\ast$ 16 + 12)}
+
+
+
+Definition at line 618 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a372b4fd834f9050822dbb439660696a7}\label{ICM20948__regs_8H_a372b4fd834f9050822dbb439660696a7}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_LAST\_TEMPR@{DMP\_GYRO\_LAST\_TEMPR}}
+\index{DMP\_GYRO\_LAST\_TEMPR@{DMP\_GYRO\_LAST\_TEMPR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_LAST\_TEMPR}{DMP\_GYRO\_LAST\_TEMPR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+L\+A\+S\+T\+\_\+\+T\+E\+M\+PR~(134 $\ast$ 16)}
+
+
+
+Definition at line 468 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad8bea3d7d1fb22b362afdb3ad6e646cf}\label{ICM20948__regs_8H_ad8bea3d7d1fb22b362afdb3ad6e646cf}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_SF@{DMP\_GYRO\_SF}}
+\index{DMP\_GYRO\_SF@{DMP\_GYRO\_SF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_SF}{DMP\_GYRO\_SF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+SF~(19 $\ast$ 16)}
+
+
+
+Definition at line 458 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a07427b121d4e28c6c820974fb3e6635f}\label{ICM20948__regs_8H_a07427b121d4e28c6c820974fb3e6635f}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_SLOPE\_X@{DMP\_GYRO\_SLOPE\_X}}
+\index{DMP\_GYRO\_SLOPE\_X@{DMP\_GYRO\_SLOPE\_X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_SLOPE\_X}{DMP\_GYRO\_SLOPE\_X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+X~( 78 $\ast$ 16 +  4)}
+
+
+
+Definition at line 469 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa32e65235c8fafb46572dd00b3cffacb}\label{ICM20948__regs_8H_aa32e65235c8fafb46572dd00b3cffacb}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_SLOPE\_Y@{DMP\_GYRO\_SLOPE\_Y}}
+\index{DMP\_GYRO\_SLOPE\_Y@{DMP\_GYRO\_SLOPE\_Y}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_SLOPE\_Y}{DMP\_GYRO\_SLOPE\_Y}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+Y~( 78 $\ast$ 16 +  8)}
+
+
+
+Definition at line 470 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa1f8f6f35f179d5ba129b3a0e7807b8d}\label{ICM20948__regs_8H_aa1f8f6f35f179d5ba129b3a0e7807b8d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_GYRO\_SLOPE\_Z@{DMP\_GYRO\_SLOPE\_Z}}
+\index{DMP\_GYRO\_SLOPE\_Z@{DMP\_GYRO\_SLOPE\_Z}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_GYRO\_SLOPE\_Z}{DMP\_GYRO\_SLOPE\_Z}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+S\+L\+O\+P\+E\+\_\+Z~( 78 $\ast$ 16 + 12)}
+
+
+
+Definition at line 471 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a1a96fcda86b5349d3c13573f0593a800}\label{ICM20948__regs_8H_a1a96fcda86b5349d3c13573f0593a800}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_LOAD\_START@{DMP\_LOAD\_START}}
+\index{DMP\_LOAD\_START@{DMP\_LOAD\_START}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_LOAD\_START}{DMP\_LOAD\_START}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+L\+O\+A\+D\+\_\+\+S\+T\+A\+RT~0x90}
+
+
+
+Definition at line 643 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a24813fc73ee09080402a4f9bd6d6d183}\label{ICM20948__regs_8H_a24813fc73ee09080402a4f9bd6d6d183}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MAG\_DISTURB\_STATE@{DMP\_MAG\_DISTURB\_STATE}}
+\index{DMP\_MAG\_DISTURB\_STATE@{DMP\_MAG\_DISTURB\_STATE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MAG\_DISTURB\_STATE}{DMP\_MAG\_DISTURB\_STATE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+A\+G\+\_\+\+D\+I\+S\+T\+U\+R\+B\+\_\+\+S\+T\+A\+TE~(113 $\ast$ 16 + 2)}
+
+
+
+Definition at line 501 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a920e5042fee52515c24c6da37b9fcce8}\label{ICM20948__regs_8H_a920e5042fee52515c24c6da37b9fcce8}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MAGN\_LPF\_THR\_9X@{DMP\_MAGN\_LPF\_THR\_9X}}
+\index{DMP\_MAGN\_LPF\_THR\_9X@{DMP\_MAGN\_LPF\_THR\_9X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MAGN\_LPF\_THR\_9X}{DMP\_MAGN\_LPF\_THR\_9X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+A\+G\+N\+\_\+\+L\+P\+F\+\_\+\+T\+H\+R\+\_\+9X~(80 $\ast$ 16 +  8)}
+
+
+
+Definition at line 517 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aca6ed9d97f5043745460df47c88ebf2c}\label{ICM20948__regs_8H_aca6ed9d97f5043745460df47c88ebf2c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MAGN\_THR\_9X@{DMP\_MAGN\_THR\_9X}}
+\index{DMP\_MAGN\_THR\_9X@{DMP\_MAGN\_THR\_9X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MAGN\_THR\_9X}{DMP\_MAGN\_THR\_9X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+A\+G\+N\+\_\+\+T\+H\+R\+\_\+9X~(80 $\ast$ 16)}
+
+
+
+Definition at line 516 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a88d069562de092d7e6ee598d39e74bdf}\label{ICM20948__regs_8H_a88d069562de092d7e6ee598d39e74bdf}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MAR\_MODE@{DMP\_MAR\_MODE}}
+\index{DMP\_MAR\_MODE@{DMP\_MAR\_MODE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MAR\_MODE}{DMP\_MAR\_MODE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+A\+R\+\_\+\+M\+O\+DE~(37 $\ast$ 16 + 2)}
+
+
+
+Definition at line 495 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a3f8983d47d9670c0469d20b41e545873}\label{ICM20948__regs_8H_a3f8983d47d9670c0469d20b41e545873}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MEM\_BANK\_SIZE@{DMP\_MEM\_BANK\_SIZE}}
+\index{DMP\_MEM\_BANK\_SIZE@{DMP\_MEM\_BANK\_SIZE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MEM\_BANK\_SIZE}{DMP\_MEM\_BANK\_SIZE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+E\+M\+\_\+\+B\+A\+N\+K\+\_\+\+S\+I\+ZE~256}
+
+
+
+Definition at line 642 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a91a080afc81550d4d9a804f3c6a83182}\label{ICM20948__regs_8H_a91a080afc81550d4d9a804f3c6a83182}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_MOTION\_EVENT\_CTL@{DMP\_MOTION\_EVENT\_CTL}}
+\index{DMP\_MOTION\_EVENT\_CTL@{DMP\_MOTION\_EVENT\_CTL}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_MOTION\_EVENT\_CTL}{DMP\_MOTION\_EVENT\_CTL}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+M\+O\+T\+I\+O\+N\+\_\+\+E\+V\+E\+N\+T\+\_\+\+C\+TL~(4 $\ast$ 16 + 14)}
+
+
+
+Definition at line 408 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a5c265b85b11dc0da0439fee2c926b087}\label{ICM20948__regs_8H_a5c265b85b11dc0da0439fee2c926b087}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_ACCEL@{DMP\_ODR\_ACCEL}}
+\index{DMP\_ODR\_ACCEL@{DMP\_ODR\_ACCEL}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_ACCEL}{DMP\_ODR\_ACCEL}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+A\+C\+C\+EL~(11 $\ast$ 16 + 14)}
+
+
+
+Definition at line 422 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_afbc5f31380ce00a04f0df67a3b741715}\label{ICM20948__regs_8H_afbc5f31380ce00a04f0df67a3b741715}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_ALS@{DMP\_ODR\_ALS}}
+\index{DMP\_ODR\_ALS@{DMP\_ODR\_ALS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_ALS}{DMP\_ODR\_ALS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+A\+LS~(11 $\ast$ 16 +  2)}
+
+
+
+Definition at line 425 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4255a4f2f3aef4a61a22ddcf96a9c197}\label{ICM20948__regs_8H_a4255a4f2f3aef4a61a22ddcf96a9c197}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_ACCEL@{DMP\_ODR\_CNTR\_ACCEL}}
+\index{DMP\_ODR\_CNTR\_ACCEL@{DMP\_ODR\_CNTR\_ACCEL}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_ACCEL}{DMP\_ODR\_CNTR\_ACCEL}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+A\+C\+C\+EL~(9 $\ast$ 16 + 14)}
+
+
+
+Definition at line 435 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abb113fe8811bb00402400c0dc7181f38}\label{ICM20948__regs_8H_abb113fe8811bb00402400c0dc7181f38}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_ALS@{DMP\_ODR\_CNTR\_ALS}}
+\index{DMP\_ODR\_CNTR\_ALS@{DMP\_ODR\_CNTR\_ALS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_ALS}{DMP\_ODR\_CNTR\_ALS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+A\+LS~(9 $\ast$ 16 +  2)}
+
+
+
+Definition at line 438 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0c5ecaa1081ab6bb37a328203fc1f229}\label{ICM20948__regs_8H_a0c5ecaa1081ab6bb37a328203fc1f229}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_CPASS@{DMP\_ODR\_CNTR\_CPASS}}
+\index{DMP\_ODR\_CNTR\_CPASS@{DMP\_ODR\_CNTR\_CPASS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_CPASS}{DMP\_ODR\_CNTR\_CPASS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+C\+P\+A\+SS~(9 $\ast$ 16 +  6)}
+
+
+
+Definition at line 437 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab2fe7aa9534db2b7fb892847b281ebf2}\label{ICM20948__regs_8H_ab2fe7aa9534db2b7fb892847b281ebf2}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_CPASS\_CALIBR@{DMP\_ODR\_CNTR\_CPASS\_CALIBR}}
+\index{DMP\_ODR\_CNTR\_CPASS\_CALIBR@{DMP\_ODR\_CNTR\_CPASS\_CALIBR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_CPASS\_CALIBR}{DMP\_ODR\_CNTR\_CPASS\_CALIBR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR~(9 $\ast$ 16 +  4)}
+
+
+
+Definition at line 445 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9806572538ccef0de8c08ed9b7f57b28}\label{ICM20948__regs_8H_a9806572538ccef0de8c08ed9b7f57b28}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_GEOMAG@{DMP\_ODR\_CNTR\_GEOMAG}}
+\index{DMP\_ODR\_CNTR\_GEOMAG@{DMP\_ODR\_CNTR\_GEOMAG}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_GEOMAG}{DMP\_ODR\_CNTR\_GEOMAG}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+E\+O\+M\+AG~(8 $\ast$ 16 +  0)}
+
+
+
+Definition at line 442 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9c7b5934cd80afbea237af1dfef83e81}\label{ICM20948__regs_8H_a9c7b5934cd80afbea237af1dfef83e81}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_GYRO@{DMP\_ODR\_CNTR\_GYRO}}
+\index{DMP\_ODR\_CNTR\_GYRO@{DMP\_ODR\_CNTR\_GYRO}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_GYRO}{DMP\_ODR\_CNTR\_GYRO}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+Y\+RO~(9 $\ast$ 16 + 10)}
+
+
+
+Definition at line 436 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a768ff08df66a7b8c1d6c39a94343d5b7}\label{ICM20948__regs_8H_a768ff08df66a7b8c1d6c39a94343d5b7}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_GYRO\_CALIBR@{DMP\_ODR\_CNTR\_GYRO\_CALIBR}}
+\index{DMP\_ODR\_CNTR\_GYRO\_CALIBR@{DMP\_ODR\_CNTR\_GYRO\_CALIBR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_GYRO\_CALIBR}{DMP\_ODR\_CNTR\_GYRO\_CALIBR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR~(9 $\ast$ 16 +  8)}
+
+
+
+Definition at line 444 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae27bc54e00172024772e83365844cc53}\label{ICM20948__regs_8H_ae27bc54e00172024772e83365844cc53}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_PQUAT6@{DMP\_ODR\_CNTR\_PQUAT6}}
+\index{DMP\_ODR\_CNTR\_PQUAT6@{DMP\_ODR\_CNTR\_PQUAT6}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_PQUAT6}{DMP\_ODR\_CNTR\_PQUAT6}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+P\+Q\+U\+A\+T6~(8 $\ast$ 16 +  4)}
+
+
+
+Definition at line 441 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a46c6a430d8c129e016845fcfa9368a0a}\label{ICM20948__regs_8H_a46c6a430d8c129e016845fcfa9368a0a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_PRESSURE@{DMP\_ODR\_CNTR\_PRESSURE}}
+\index{DMP\_ODR\_CNTR\_PRESSURE@{DMP\_ODR\_CNTR\_PRESSURE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_PRESSURE}{DMP\_ODR\_CNTR\_PRESSURE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+P\+R\+E\+S\+S\+U\+RE~(9 $\ast$ 16 + 12)}
+
+
+
+Definition at line 443 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab860507f6cefae89475da968df47b99b}\label{ICM20948__regs_8H_ab860507f6cefae89475da968df47b99b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_QUAT6@{DMP\_ODR\_CNTR\_QUAT6}}
+\index{DMP\_ODR\_CNTR\_QUAT6@{DMP\_ODR\_CNTR\_QUAT6}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_QUAT6}{DMP\_ODR\_CNTR\_QUAT6}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+Q\+U\+A\+T6~(8 $\ast$ 16 + 12)}
+
+
+
+Definition at line 439 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa2628cb13951c057d7f4da3f2439c4b3}\label{ICM20948__regs_8H_aa2628cb13951c057d7f4da3f2439c4b3}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CNTR\_QUAT9@{DMP\_ODR\_CNTR\_QUAT9}}
+\index{DMP\_ODR\_CNTR\_QUAT9@{DMP\_ODR\_CNTR\_QUAT9}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CNTR\_QUAT9}{DMP\_ODR\_CNTR\_QUAT9}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+R\+\_\+\+Q\+U\+A\+T9~(8 $\ast$ 16 +  8)}
+
+
+
+Definition at line 440 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ad87bd610f57519581746d81df2cacf0a}\label{ICM20948__regs_8H_ad87bd610f57519581746d81df2cacf0a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CPASS@{DMP\_ODR\_CPASS}}
+\index{DMP\_ODR\_CPASS@{DMP\_ODR\_CPASS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CPASS}{DMP\_ODR\_CPASS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+P\+A\+SS~(11 $\ast$ 16 +  6)}
+
+
+
+Definition at line 424 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9d2640f234cf4fd1a32817a423df5268}\label{ICM20948__regs_8H_a9d2640f234cf4fd1a32817a423df5268}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_CPASS\_CALIBR@{DMP\_ODR\_CPASS\_CALIBR}}
+\index{DMP\_ODR\_CPASS\_CALIBR@{DMP\_ODR\_CPASS\_CALIBR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_CPASS\_CALIBR}{DMP\_ODR\_CPASS\_CALIBR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR~(11 $\ast$ 16 +  4)}
+
+
+
+Definition at line 432 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a358ce0686e6844be4429716602d3aaef}\label{ICM20948__regs_8H_a358ce0686e6844be4429716602d3aaef}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_GEOMAG@{DMP\_ODR\_GEOMAG}}
+\index{DMP\_ODR\_GEOMAG@{DMP\_ODR\_GEOMAG}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_GEOMAG}{DMP\_ODR\_GEOMAG}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+E\+O\+M\+AG~(10 $\ast$ 16 +  0)}
+
+
+
+Definition at line 429 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab6fb6d472c4467a5e41f85f500762290}\label{ICM20948__regs_8H_ab6fb6d472c4467a5e41f85f500762290}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_GYRO@{DMP\_ODR\_GYRO}}
+\index{DMP\_ODR\_GYRO@{DMP\_ODR\_GYRO}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_GYRO}{DMP\_ODR\_GYRO}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+Y\+RO~(11 $\ast$ 16 + 10)}
+
+
+
+Definition at line 423 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a15c338040c08d6046a81fe38e5409988}\label{ICM20948__regs_8H_a15c338040c08d6046a81fe38e5409988}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_GYRO\_CALIBR@{DMP\_ODR\_GYRO\_CALIBR}}
+\index{DMP\_ODR\_GYRO\_CALIBR@{DMP\_ODR\_GYRO\_CALIBR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_GYRO\_CALIBR}{DMP\_ODR\_GYRO\_CALIBR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR~(11 $\ast$ 16 +  8)}
+
+
+
+Definition at line 431 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae843242671724e60bf489f684a69c5d9}\label{ICM20948__regs_8H_ae843242671724e60bf489f684a69c5d9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_PQUAT6@{DMP\_ODR\_PQUAT6}}
+\index{DMP\_ODR\_PQUAT6@{DMP\_ODR\_PQUAT6}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_PQUAT6}{DMP\_ODR\_PQUAT6}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+P\+Q\+U\+A\+T6~(10 $\ast$ 16 +  4)}
+
+
+
+Definition at line 428 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a602deea1c4f615e19b6bd08a54d31048}\label{ICM20948__regs_8H_a602deea1c4f615e19b6bd08a54d31048}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_PRESSURE@{DMP\_ODR\_PRESSURE}}
+\index{DMP\_ODR\_PRESSURE@{DMP\_ODR\_PRESSURE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_PRESSURE}{DMP\_ODR\_PRESSURE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+P\+R\+E\+S\+S\+U\+RE~(11 $\ast$ 16 + 12)}
+
+
+
+Definition at line 430 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a9c6902b2505f821b7fa41c309b850850}\label{ICM20948__regs_8H_a9c6902b2505f821b7fa41c309b850850}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_QUAT6@{DMP\_ODR\_QUAT6}}
+\index{DMP\_ODR\_QUAT6@{DMP\_ODR\_QUAT6}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_QUAT6}{DMP\_ODR\_QUAT6}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+Q\+U\+A\+T6~(10 $\ast$ 16 + 12)}
+
+
+
+Definition at line 426 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae895c52fb77cead74d14d007a5f7af0c}\label{ICM20948__regs_8H_ae895c52fb77cead74d14d007a5f7af0c}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_ODR\_QUAT9@{DMP\_ODR\_QUAT9}}
+\index{DMP\_ODR\_QUAT9@{DMP\_ODR\_QUAT9}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_ODR\_QUAT9}{DMP\_ODR\_QUAT9}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+Q\+U\+A\+T9~(10 $\ast$ 16 +  8)}
+
+
+
+Definition at line 427 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a409aec86cb7246451a66c5271845f39e}\label{ICM20948__regs_8H_a409aec86cb7246451a66c5271845f39e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PED\_Y\_RATIO@{DMP\_PED\_Y\_RATIO}}
+\index{DMP\_PED\_Y\_RATIO@{DMP\_PED\_Y\_RATIO}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PED\_Y\_RATIO}{DMP\_PED\_Y\_RATIO}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+Y\+\_\+\+R\+A\+T\+IO~(17 $\ast$ 16 +  0)}
+
+
+
+Definition at line 542 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a84741b3867263e243d8e3c9b61aeba03}\label{ICM20948__regs_8H_a84741b3867263e243d8e3c9b61aeba03}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_BP\_A1@{DMP\_PEDSTD\_BP\_A1}}
+\index{DMP\_PEDSTD\_BP\_A1@{DMP\_PEDSTD\_BP\_A1}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_BP\_A1}{DMP\_PEDSTD\_BP\_A1}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A1~(52 $\ast$ 16 + 12)}
+
+
+
+Definition at line 528 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_adf339947a0a2215b85954a02d53bab23}\label{ICM20948__regs_8H_adf339947a0a2215b85954a02d53bab23}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_BP\_A2@{DMP\_PEDSTD\_BP\_A2}}
+\index{DMP\_PEDSTD\_BP\_A2@{DMP\_PEDSTD\_BP\_A2}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_BP\_A2}{DMP\_PEDSTD\_BP\_A2}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A2~(52 $\ast$ 16 +  8)}
+
+
+
+Definition at line 527 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4f4a8b8fe4d93817de859d727b0f96f7}\label{ICM20948__regs_8H_a4f4a8b8fe4d93817de859d727b0f96f7}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_BP\_A3@{DMP\_PEDSTD\_BP\_A3}}
+\index{DMP\_PEDSTD\_BP\_A3@{DMP\_PEDSTD\_BP\_A3}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_BP\_A3}{DMP\_PEDSTD\_BP\_A3}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A3~(52 $\ast$ 16 +  4)}
+
+
+
+Definition at line 526 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a48b0b638d7b60d6d59e93f510cfa9d7b}\label{ICM20948__regs_8H_a48b0b638d7b60d6d59e93f510cfa9d7b}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_BP\_A4@{DMP\_PEDSTD\_BP\_A4}}
+\index{DMP\_PEDSTD\_BP\_A4@{DMP\_PEDSTD\_BP\_A4}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_BP\_A4}{DMP\_PEDSTD\_BP\_A4}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+\+A4~(52 $\ast$ 16)}
+
+
+
+Definition at line 525 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a74f683518309d143cc95a483a521ed17}\label{ICM20948__regs_8H_a74f683518309d143cc95a483a521ed17}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_BP\_B@{DMP\_PEDSTD\_BP\_B}}
+\index{DMP\_PEDSTD\_BP\_B@{DMP\_PEDSTD\_BP\_B}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_BP\_B}{DMP\_PEDSTD\_BP\_B}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+B\+P\+\_\+B~(49 $\ast$ 16 + 12)}
+
+
+
+Definition at line 524 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aade2fd512d2db8a140412f96f3ad0241}\label{ICM20948__regs_8H_aade2fd512d2db8a140412f96f3ad0241}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_DECI@{DMP\_PEDSTD\_DECI}}
+\index{DMP\_PEDSTD\_DECI@{DMP\_PEDSTD\_DECI}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_DECI}{DMP\_PEDSTD\_DECI}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+D\+E\+CI~(58 $\ast$ 16)}
+
+
+
+Definition at line 538 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a87e8f1008b6dd691724ece07fd654633}\label{ICM20948__regs_8H_a87e8f1008b6dd691724ece07fd654633}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_PEAK@{DMP\_PEDSTD\_PEAK}}
+\index{DMP\_PEDSTD\_PEAK@{DMP\_PEDSTD\_PEAK}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_PEAK}{DMP\_PEDSTD\_PEAK}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+P\+E\+AK~(57 $\ast$ 16 +  4)}
+
+
+
+Definition at line 534 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a0e119d661d84b37ccc390530e9ffb9b2}\label{ICM20948__regs_8H_a0e119d661d84b37ccc390530e9ffb9b2}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_PEAKTHRSH@{DMP\_PEDSTD\_PEAKTHRSH}}
+\index{DMP\_PEDSTD\_PEAKTHRSH@{DMP\_PEDSTD\_PEAKTHRSH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_PEAKTHRSH}{DMP\_PEDSTD\_PEAKTHRSH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+P\+E\+A\+K\+T\+H\+R\+SH~(57 $\ast$ 16 +  8)}
+
+
+
+Definition at line 531 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a1512ad6970a25717a7ca99f58a4e1c34}\label{ICM20948__regs_8H_a1512ad6970a25717a7ca99f58a4e1c34}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_SB@{DMP\_PEDSTD\_SB}}
+\index{DMP\_PEDSTD\_SB@{DMP\_PEDSTD\_SB}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_SB}{DMP\_PEDSTD\_SB}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+SB~(50 $\ast$ 16 +  8)}
+
+
+
+Definition at line 529 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae84d7bdbec738b395d5094c578d109f0}\label{ICM20948__regs_8H_ae84d7bdbec738b395d5094c578d109f0}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_SB2@{DMP\_PEDSTD\_SB2}}
+\index{DMP\_PEDSTD\_SB2@{DMP\_PEDSTD\_SB2}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_SB2}{DMP\_PEDSTD\_SB2}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+B2~(60 $\ast$ 16 + 14)}
+
+
+
+Definition at line 539 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ab2de66d53386e6776c0475527cefcb15}\label{ICM20948__regs_8H_ab2de66d53386e6776c0475527cefcb15}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_SB\_TIME@{DMP\_PEDSTD\_SB\_TIME}}
+\index{DMP\_PEDSTD\_SB\_TIME@{DMP\_PEDSTD\_SB\_TIME}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_SB\_TIME}{DMP\_PEDSTD\_SB\_TIME}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+B\+\_\+\+T\+I\+ME~(50 $\ast$ 16 + 12)}
+
+
+
+Definition at line 530 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_adc4b58513ed8beb15c8078b58fe56e4a}\label{ICM20948__regs_8H_adc4b58513ed8beb15c8078b58fe56e4a}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_STEPCTR@{DMP\_PEDSTD\_STEPCTR}}
+\index{DMP\_PEDSTD\_STEPCTR@{DMP\_PEDSTD\_STEPCTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_STEPCTR}{DMP\_PEDSTD\_STEPCTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+T\+E\+P\+C\+TR~(54 $\ast$ 16)}
+
+
+
+Definition at line 535 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a2dbc9220f6367e598b4b847e05a014b9}\label{ICM20948__regs_8H_a2dbc9220f6367e598b4b847e05a014b9}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_STEPCTR2@{DMP\_PEDSTD\_STEPCTR2}}
+\index{DMP\_PEDSTD\_STEPCTR2@{DMP\_PEDSTD\_STEPCTR2}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_STEPCTR2}{DMP\_PEDSTD\_STEPCTR2}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+S\+T\+E\+P\+C\+T\+R2~(58 $\ast$ 16 +  8)}
+
+
+
+Definition at line 536 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa2762db3824e007efc1285cd173cd1a3}\label{ICM20948__regs_8H_aa2762db3824e007efc1285cd173cd1a3}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_TIMECTR@{DMP\_PEDSTD\_TIMECTR}}
+\index{DMP\_PEDSTD\_TIMECTR@{DMP\_PEDSTD\_TIMECTR}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_TIMECTR}{DMP\_PEDSTD\_TIMECTR}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+M\+E\+C\+TR~(60 $\ast$ 16 +  4)}
+
+
+
+Definition at line 537 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abaccce000c22f2faaf9e3cd20910d4a5}\label{ICM20948__regs_8H_abaccce000c22f2faaf9e3cd20910d4a5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_TIMH@{DMP\_PEDSTD\_TIMH}}
+\index{DMP\_PEDSTD\_TIMH@{DMP\_PEDSTD\_TIMH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_TIMH}{DMP\_PEDSTD\_TIMH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+MH~(50 $\ast$ 16 + 14)}
+
+
+
+Definition at line 533 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4863f070ea23f5d23627d35b60a51acf}\label{ICM20948__regs_8H_a4863f070ea23f5d23627d35b60a51acf}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTD\_TIML@{DMP\_PEDSTD\_TIML}}
+\index{DMP\_PEDSTD\_TIML@{DMP\_PEDSTD\_TIML}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTD\_TIML}{DMP\_PEDSTD\_TIML}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+D\+\_\+\+T\+I\+ML~(50 $\ast$ 16 + 10)}
+
+
+
+Definition at line 532 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a30ad972ccd471984d235d5d9a00f840e}\label{ICM20948__regs_8H_a30ad972ccd471984d235d5d9a00f840e}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PEDSTEP\_IND@{DMP\_PEDSTEP\_IND}}
+\index{DMP\_PEDSTEP\_IND@{DMP\_PEDSTEP\_IND}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PEDSTEP\_IND}{DMP\_PEDSTEP\_IND}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+E\+D\+S\+T\+E\+P\+\_\+\+I\+ND~(19 $\ast$ 16 +  4)}
+
+
+
+Definition at line 541 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abd01102e9cbef1e07ecf83329e350314}\label{ICM20948__regs_8H_abd01102e9cbef1e07ecf83329e350314}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_PREV\_BAC\_ACT\_ON\_OFF@{DMP\_PREV\_BAC\_ACT\_ON\_OFF}}
+\index{DMP\_PREV\_BAC\_ACT\_ON\_OFF@{DMP\_PREV\_BAC\_ACT\_ON\_OFF}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_PREV\_BAC\_ACT\_ON\_OFF}{DMP\_PREV\_BAC\_ACT\_ON\_OFF}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+P\+R\+E\+V\+\_\+\+B\+A\+C\+\_\+\+A\+C\+T\+\_\+\+O\+N\+\_\+\+O\+FF~(188 $\ast$ 16 +  2)}
+
+
+
+Definition at line 595 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae643e7abcd5c4db8aba3396d866ac3a5}\label{ICM20948__regs_8H_ae643e7abcd5c4db8aba3396d866ac3a5}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_QFB\_THR\_9X@{DMP\_QFB\_THR\_9X}}
+\index{DMP\_QFB\_THR\_9X@{DMP\_QFB\_THR\_9X}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_QFB\_THR\_9X}{DMP\_QFB\_THR\_9X}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+Q\+F\+B\+\_\+\+T\+H\+R\+\_\+9X~(80 $\ast$ 16 + 12)}
+
+
+
+Definition at line 518 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_abf458f7f7c9cd35026d554ed5880d3bf}\label{ICM20948__regs_8H_abf458f7f7c9cd35026d554ed5880d3bf}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_SMD\_DRIVE\_TIMER\_TH@{DMP\_SMD\_DRIVE\_TIMER\_TH}}
+\index{DMP\_SMD\_DRIVE\_TIMER\_TH@{DMP\_SMD\_DRIVE\_TIMER\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_SMD\_DRIVE\_TIMER\_TH}{DMP\_SMD\_DRIVE\_TIMER\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+D\+R\+I\+V\+E\+\_\+\+T\+I\+M\+E\+R\+\_\+\+TH~(143 $\ast$ 16 +  8)}
+
+
+
+Definition at line 547 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a5691bd331ec260d0fe0fd0a1da433914}\label{ICM20948__regs_8H_a5691bd331ec260d0fe0fd0a1da433914}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_SMD\_TILT\_ANGLE\_TH@{DMP\_SMD\_TILT\_ANGLE\_TH}}
+\index{DMP\_SMD\_TILT\_ANGLE\_TH@{DMP\_SMD\_TILT\_ANGLE\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_SMD\_TILT\_ANGLE\_TH}{DMP\_SMD\_TILT\_ANGLE\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+T\+I\+L\+T\+\_\+\+A\+N\+G\+L\+E\+\_\+\+TH~(179 $\ast$ 16 + 12)}
+
+
+
+Definition at line 548 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_adc487a4385f0370a6ae56151da68b7a8}\label{ICM20948__regs_8H_adc487a4385f0370a6ae56151da68b7a8}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_SMD\_VAR\_TH@{DMP\_SMD\_VAR\_TH}}
+\index{DMP\_SMD\_VAR\_TH@{DMP\_SMD\_VAR\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_SMD\_VAR\_TH}{DMP\_SMD\_VAR\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+V\+A\+R\+\_\+\+TH~(141 $\ast$ 16 + 12)}
+
+
+
+Definition at line 545 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a594d5c0428faf20222ee141ba809f657}\label{ICM20948__regs_8H_a594d5c0428faf20222ee141ba809f657}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_SMD\_VAR\_TH\_DRIVE@{DMP\_SMD\_VAR\_TH\_DRIVE}}
+\index{DMP\_SMD\_VAR\_TH\_DRIVE@{DMP\_SMD\_VAR\_TH\_DRIVE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_SMD\_VAR\_TH\_DRIVE}{DMP\_SMD\_VAR\_TH\_DRIVE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+V\+A\+R\+\_\+\+T\+H\+\_\+\+D\+R\+I\+VE~(143 $\ast$ 16 + 12)}
+
+
+
+Definition at line 546 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a6b486d71c2ddb81811c12b604324bc8d}\label{ICM20948__regs_8H_a6b486d71c2ddb81811c12b604324bc8d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_START\_ADDRESS@{DMP\_START\_ADDRESS}}
+\index{DMP\_START\_ADDRESS@{DMP\_START\_ADDRESS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_START\_ADDRESS}{DMP\_START\_ADDRESS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+A\+D\+D\+R\+E\+SS~((unsigned short)0x1000)}
+
+
+
+Definition at line 641 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac67073e8c4c0bdce795630c6d197fa09}\label{ICM20948__regs_8H_ac67073e8c4c0bdce795630c6d197fa09}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_STPDET\_TIMESTAMP@{DMP\_STPDET\_TIMESTAMP}}
+\index{DMP\_STPDET\_TIMESTAMP@{DMP\_STPDET\_TIMESTAMP}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_STPDET\_TIMESTAMP}{DMP\_STPDET\_TIMESTAMP}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+S\+T\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+MP~(18 $\ast$ 16 +  8)}
+
+
+
+Definition at line 540 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ac5f9b2f33e3af72e1600abc3cc53eee0}\label{ICM20948__regs_8H_ac5f9b2f33e3af72e1600abc3cc53eee0}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_WOM\_CNTR\_TH@{DMP\_WOM\_CNTR\_TH}}
+\index{DMP\_WOM\_CNTR\_TH@{DMP\_WOM\_CNTR\_TH}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_WOM\_CNTR\_TH}{DMP\_WOM\_CNTR\_TH}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+C\+N\+T\+R\+\_\+\+TH~(64 $\ast$ 16 + 12)}
+
+
+
+Definition at line 557 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a5749328cbc2d281e1ad2aee3b4b68bfe}\label{ICM20948__regs_8H_a5749328cbc2d281e1ad2aee3b4b68bfe}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_WOM\_ENABLE@{DMP\_WOM\_ENABLE}}
+\index{DMP\_WOM\_ENABLE@{DMP\_WOM\_ENABLE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_WOM\_ENABLE}{DMP\_WOM\_ENABLE}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+E\+N\+A\+B\+LE~(64 $\ast$ 16 + 14)}
+
+
+
+Definition at line 554 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a3ed9b2377ed70f6036ee3d304bfabcd1}\label{ICM20948__regs_8H_a3ed9b2377ed70f6036ee3d304bfabcd1}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_WOM\_STATUS@{DMP\_WOM\_STATUS}}
+\index{DMP\_WOM\_STATUS@{DMP\_WOM\_STATUS}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_WOM\_STATUS}{DMP\_WOM\_STATUS}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+S\+T\+A\+T\+US~(64 $\ast$ 16 + 6)}
+
+
+
+Definition at line 555 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_aa23c75bc821f9da39f2009e7bd50a8f0}\label{ICM20948__regs_8H_aa23c75bc821f9da39f2009e7bd50a8f0}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!DMP\_WOM\_THRESHOLD@{DMP\_WOM\_THRESHOLD}}
+\index{DMP\_WOM\_THRESHOLD@{DMP\_WOM\_THRESHOLD}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{DMP\_WOM\_THRESHOLD}{DMP\_WOM\_THRESHOLD}}
+{\footnotesize\ttfamily \#define D\+M\+P\+\_\+\+W\+O\+M\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD~(64 $\ast$ 16)}
+
+
+
+Definition at line 556 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_ae5f52b3c30696d160dc1c37d5337600d}\label{ICM20948__regs_8H_ae5f52b3c30696d160dc1c37d5337600d}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!ICM20948\_SPI\_READ@{ICM20948\_SPI\_READ}}
+\index{ICM20948\_SPI\_READ@{ICM20948\_SPI\_READ}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{ICM20948\_SPI\_READ}{ICM20948\_SPI\_READ}}
+{\footnotesize\ttfamily \#define I\+C\+M20948\+\_\+\+S\+P\+I\+\_\+\+R\+E\+AD~0x80}
+
+
+
+Definition at line 19 of file I\+C\+M20948\+\_\+regs.\+H.
+
+\mbox{\Hypertarget{ICM20948__regs_8H_a4d65b7cab4b646809c0704298b9cdf69}\label{ICM20948__regs_8H_a4d65b7cab4b646809c0704298b9cdf69}} 
+\index{ICM20948\_regs.H@{ICM20948\_regs.H}!ICM20948\_SPI\_WRITE@{ICM20948\_SPI\_WRITE}}
+\index{ICM20948\_SPI\_WRITE@{ICM20948\_SPI\_WRITE}!ICM20948\_regs.H@{ICM20948\_regs.H}}
+\doxyparagraph{\texorpdfstring{ICM20948\_SPI\_WRITE}{ICM20948\_SPI\_WRITE}}
+{\footnotesize\ttfamily \#define I\+C\+M20948\+\_\+\+S\+P\+I\+\_\+\+W\+R\+I\+TE~0x00}
+
+
+
+Definition at line 20 of file I\+C\+M20948\+\_\+regs.\+H.
+

@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1NetworkHailo">
+<title>jevois::dnn::NetworkHailo Class Reference</title>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/NetworkHailo.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>在 Hailo8 神经加速器上运行的 DNN 神经网络的包装器 </para>
+
+
+
+<para>请注意，此网络类型不支持在外部设置张力器或输出张力器，这些在 HEF 文件中已修复。 </para>
+<para>
+Definition at line 33 of file NetworkHailo.H.</para>
+Inheritance diagram for jevois::dnn::NetworkHailo:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkHailo__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::NetworkHailo:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkHailo__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1aa55c62f560a4077cd2a4b080e62f6a2d">NetworkHailo</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a6b9b7cb59146eea88ff6db29a0b47a50">~NetworkHailo</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a7928fd357d2f109b44d43e5a0b6bd1a4">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a9e4569480c55437139e7bfd0988c700a">inputShapes</link> () override</para>
+
+<para>Get shapes of all input tensors. </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1aa7b970fa3ecc6ffe76ca1e83c2ad078c">outputShapes</link> () override</para>
+
+<para>Get shapes of all output tensors. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a33faa2d76284bfd55d80c40135fbb7f2">load</link> () override</para>
+
+<para>Load from disk. </para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a2220cd1364ff986705a09399dd04481c">doprocess</link> (std::vector&lt; cv::Mat &gt; const &amp;blobs, std::vector&lt; std::string &gt; &amp;info) override</para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a725842f25ce98439ba8545c69ae627e4">onParamChange</link> (network::turbo const &amp;par, bool const &amp;newval) override</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1acd790480035e13fb5c1067079bcbcc29">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (turbo, bool, &quot;Turbo mode. Has no significant effect on small or &quot; &quot;fast networks. Use with caution as it may lead to overheating, not &quot; &quot;recommended for production&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1aa55c62f560a4077cd2a4b080e62f6a2d"/>    <section>
+    <title>NetworkHailo()</title>
+<indexterm><primary>NetworkHailo</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>NetworkHailo</secondary></indexterm>
+<para><computeroutput>jevois::dnn::NetworkHailo::NetworkHailo (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 35 of file NetworkHailo.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a6b9b7cb59146eea88ff6db29a0b47a50"/>    <section>
+    <title>~NetworkHailo()</title>
+<indexterm><primary>~NetworkHailo</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>~NetworkHailo</secondary></indexterm>
+<para><computeroutput>jevois::dnn::NetworkHailo::~NetworkHailo ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 64 of file NetworkHailo.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a2220cd1364ff986705a09399dd04481c"/>    <section>
+    <title>doprocess()</title>
+<indexterm><primary>doprocess</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>doprocess</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::NetworkHailo::doprocess (std::vector&lt; cv::Mat &gt; const &amp; blobs, std::vector&lt; std::string &gt; &amp; info)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a0715f8cd89af48245f39ed1bd00c0849">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 168 of file NetworkHailo.C.</para>
+<para>
+References jevois::async(), jevois::dnn::attrmatch(), jevois::dnn::attrstr(), jevois::dnn::dequantize(), jevois::joinall(), LFATAL, jevois::sformat(), jevois::dnn::shapestr(), and jevois::to_string().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a7928fd357d2f109b44d43e5a0b6bd1a4"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkHailo::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1dnn_1_1Network_1af49aabe3e1317946de848f356970fa8d">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 72 of file NetworkHailo.C.</para>
+<para>
+References jevois::dnn::Network::freeze().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a9e4569480c55437139e7bfd0988c700a"/>    <section>
+    <title>inputShapes()</title>
+<indexterm><primary>inputShapes</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>inputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkHailo::inputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all input tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a5c4daabb6b084f87ce330f98159ebaa7">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 56 of file NetworkHailo.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a33faa2d76284bfd55d80c40135fbb7f2"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkHailo::load ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Load from disk. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 80 of file NetworkHailo.C.</para>
+<para>
+References jevois::absolutePath(), jevois::dnn::attrdims(), jevois::dnn::attrmat(), jevois::dnn::attrstr(), HAILO_CHECK, LERROR, LFATAL, LINFO, and jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1a725842f25ce98439ba8545c69ae627e4"/>    <section>
+    <title>onParamChange()</title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkHailo::onParamChange (network::turbo const &amp; par, bool const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 162 of file NetworkHailo.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1aa7b970fa3ecc6ffe76ca1e83c2ad078c"/>    <section>
+    <title>outputShapes()</title>
+<indexterm><primary>outputShapes</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>outputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkHailo::outputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all output tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a98a8d50e49ba4d9f827ff9b5d4c8b68f">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 60 of file NetworkHailo.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkHailo_1acd790480035e13fb5c1067079bcbcc29"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()</title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::NetworkHailo</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkHailo</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (turbo , bool , &quot;Turbo mode. Has no significant effect on small or &quot; &quot;fast networks. Use with caution as it may lead to overheating, not &quot; &quot;recommended for production&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_NetworkHailo_8H">NetworkHailo.H</link>include/jevois/DNN/<link linkend="_Network_8H">Network.H</link>src/jevois/DNN/<link linkend="_NetworkHailo_8C">NetworkHailo.C</link></section>
+</section>

@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1CameraDevice">
+<title>jevois::CameraDevice Class Reference</title>
+<indexterm><primary>jevois::CameraDevice</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/CameraDevice.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>附件类，用于保存与 V4L2 相机设备相关的所有数据 </para>
+
+
+
+<para>此类由 <link linkend="_classjevois_1_1Camera">jevois::Camera</link> 内部使用，对最终用户用处不大。 </para>
+<para>
+Definition at line 32 of file CameraDevice.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1CameraDevice_1a33f9c23d7db8e7755f87a7df6807b64e">CameraDevice</link> (std::string const &amp;devname, unsigned int const nbufs, bool dummy)</para>
+
+<para>构造函数打开设备，检查其功能，启动运行线程 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1CameraDevice_1aa0587eda00eb84ccf5b09977b3c3b411">~CameraDevice</link> ()</para>
+
+<para>析构函数释放所有缓冲区并关闭设备 </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1CameraDevice_1a757a8be12d288524eebee9399d06985b">getFd</link> () const</para>
+
+<para>获取我们的 fd；由 <link linkend="_classjevois_1_1Camera">Camera</link> 用来访问 controls </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1adaf8747b649d26ba7e5ad497adc0e010">streamOn</link> ()</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1ae78ce53d2f06d5b266b309804b677079">abortStream</link> ()</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1a9d40a031fb6834b93523b949aa877e0e">streamOff</link> ()</para>
+
+<para>Stop streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1a23d56b2732ceff9a5464f60405f2c038">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>获取下一个捕获的缓冲区 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1acb42f7fbe88c12dfe5cacffbd8500662">done</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>表示用户已完成先前通过 <link linkend="_classjevois_1_1CameraDevice_1a23d56b2732ceff9a5464f60405f2c038">get()</link> 获取的图像处理 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraDevice_1a1935788736cfab2131b34127ee5ff21b">setFormat</link> (unsigned int const fmt, unsigned int const capw, unsigned int const caph, float const fps, unsigned int const cropw, unsigned int const croph, int preset=-1)</para>
+
+<para>设置视频格式和帧率 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1CameraDevice_1a33f9c23d7db8e7755f87a7df6807b64e"/>    <section>
+    <title>CameraDevice()</title>
+<indexterm><primary>CameraDevice</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>CameraDevice</secondary></indexterm>
+<para><computeroutput>jevois::CameraDevice::CameraDevice (std::string const &amp; devname, unsigned int const nbufs, bool dummy)</computeroutput></para><para>
+
+<para>构造函数打开设备，检查其功能，启动运行线程 </para>
+</para>
+
+<para>当 dummy 为 true 时，我们将仅出队并重新排队缓冲区而不进行任何处理。 </para>
+<para>
+Definition at line 76 of file CameraDevice.C.</para>
+<para>
+References jevois::async_little(), jevois::fccstr(), FDLDEBUG, FDLFATAL, FDLINFO, JEVOIS_TRACE, LFATAL, jevois::to_string(), XIOCTL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1aa0587eda00eb84ccf5b09977b3c3b411"/>    <section>
+    <title>~CameraDevice()</title>
+<indexterm><primary>~CameraDevice</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>~CameraDevice</secondary></indexterm>
+<para><computeroutput>jevois::CameraDevice::~CameraDevice ( )</computeroutput></para><para>
+
+<para>析构函数释放所有缓冲区并关闭设备 </para>
+</para>
+<para>
+Definition at line 172 of file CameraDevice.C.</para>
+<para>
+References FDLERROR, JEVOIS_TRACE, JEVOIS_WAIT_GET_FUTURE, and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1CameraDevice_1ae78ce53d2f06d5b266b309804b677079"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::abortStream ( )</computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+<para>
+Definition at line 365 of file CameraDevice.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1acb42f7fbe88c12dfe5cacffbd8500662"/>    <section>
+    <title>done()</title>
+<indexterm><primary>done</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>done</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::done (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)</computeroutput></para><para>
+
+<para>表示用户已完成先前通过 <link linkend="_classjevois_1_1CameraDevice_1a23d56b2732ceff9a5464f60405f2c038">get()</link> 获取的图像处理 </para>
+</para>
+<para>
+Definition at line 471 of file CameraDevice.C.</para>
+<para>
+References jevois::RawImage::bufindex, JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LDEBUG.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1a23d56b2732ceff9a5464f60405f2c038"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::get (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)</computeroutput></para><para>
+
+<para>获取下一个捕获的缓冲区 </para>
+</para>
+<para>
+Definition at line 418 of file CameraDevice.C.</para>
+<para>
+References jevois::RawImage::bufindex, jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertGreyToYUYV(), FDLFATAL, jevois::RawImage::invalidate(), JEVOIS_TRACE, and LDEBUG.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1a757a8be12d288524eebee9399d06985b"/>    <section>
+    <title>getFd()</title>
+<indexterm><primary>getFd</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>getFd</secondary></indexterm>
+<para><computeroutput>int jevois::CameraDevice::getFd ( ) const</computeroutput></para><para>
+
+<para>获取我们的 fd；由 <link linkend="_classjevois_1_1Camera">Camera</link> 用来访问 controls </para>
+</para>
+<para>
+Definition at line 195 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1a1935788736cfab2131b34127ee5ff21b"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::setFormat (unsigned int const fmt, unsigned int const capw, unsigned int const caph, float const fps, unsigned int const cropw, unsigned int const croph, int preset = <computeroutput>-1</computeroutput>
+)</computeroutput></para><para>
+
+<para>设置视频格式和帧率 </para>
+</para>
+<para>
+Definition at line 486 of file CameraDevice.C.</para>
+<para>
+References jevois::fccstr(), FDLDEBUG, FDLERROR, FDLFATAL, FDLINFO, jevois::VideoMapping::fpsToV4l2(), JEVOIS_TIMED_LOCK, JEVOIS_TRACE, V4L2_COLORSPACE_DEFAULT, V4L2_MODE_VIDEO, XIOCTL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1a9d40a031fb6834b93523b949aa877e0e"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::streamOff ( )</computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Definition at line 377 of file CameraDevice.C.</para>
+<para>
+References FDLDEBUG, JEVOIS_TRACE, LDEBUG, jevois::warnAndIgnoreException(), and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1CameraDevice_1adaf8747b649d26ba7e5ad497adc0e010"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::CameraDevice</secondary></indexterm>
+<indexterm><primary>jevois::CameraDevice</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::CameraDevice::streamOn ( )</computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Definition at line 314 of file CameraDevice.C.</para>
+<para>
+References FDLDEBUG, FDLERROR, FDLFATAL, FDLINFO, JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LDEBUG, jevois::v4l2ImageSize(), and XIOCTL.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_CameraDevice_8H">CameraDevice.H</link>src/jevois/Core/<link linkend="_CameraDevice_8C">CameraDevice.C</link></section>
+</section>

@@ -26,7 +26,7 @@ namespace jevois
   {
     class NetworkPythonImpl;
 
-    //! Wrapper around an DNN neural network invoked through python
+    //! 通过 python 调用的 DNN 神经网络的包装器
     /*! \ingroup dnn */
     class NetworkPython : public Network, public Parameter<network::pynet>
     {
@@ -37,7 +37,7 @@ namespace jevois
         //! Destructor
         virtual ~NetworkPython();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻参数，用户在运行时不应更改
         void freeze(bool doit) override;
 
         //! Get shapes of all input tensors
@@ -54,12 +54,11 @@ namespace jevois
                                        std::vector<std::string> & info) override;
 
       protected:
-        // Load the python code as soon as the file is set, and call init() on it if defined
+        // 设置文件后立即加载 python 代码，如果定义了，则调用 init()；
         void onParamChange(network::pynet const & param, std::string const & newval) override;
 
-        // Python init() may create new dynamic parameters, but in onParamChange() we are locked up, so we need to use a
-        // sub-Component for our actual implementation, and the sub can get its dynamic parameters created while our own
-        // params are locked up...
+        // Python init() 可能会创建新的动态参数，但在 onParamChange() 中我们被锁定，因此我们需要使用子组件进行实际实现，并且子
+        // 组件可以在我们自己的参数被锁定时获取其创建的动态参数……
         std::shared_ptr<NetworkPythonImpl> itsImpl;
     };
     

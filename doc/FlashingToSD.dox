@@ -1,61 +1,47 @@
-/*! \page FlashingToSD Flashing to microSD card
+/*! \page FlashingToSD 刷入 microSD 卡
 
-Because \jvpro runs a full Ubuntu operating system, with Debian package manager, re-flashing the microSD should be
-very rate and only if you have corrupted it badly.
+因为 \jvpro 运行完整的 Ubuntu 操作系统，并带有 Debian 包管理器，所以重新刷新 microSD 应该非常容易，并且只有在它严重损坏时才需要这样做。
 
-On \jva33, re-flashing is more common as it is the only way to update core software, since the \jva33 operating system
-is barebones and does not have a package manager.
+在 \jva33 上，重新刷新更为常见，因为这是更新核心软件的唯一方法，因为 \jva33 操作系统是准系统并且没有包管理器。
 
-Procedure for JeVois-Pro
+JeVois-Pro 流程
+===========================
+
+- 如果您只需要安装软件包，例如 \b jevois 和 \b jevoisbase 的定制版本，请按照 \ref CompilingJeVois 和 \ref CompilingJeVoisBase 末尾的说明进行操作
+
+- 如果您的 microSD 严重损坏，请从 http://jevois.org/start/software.html 下载 microSD 映像或按照 \ref ProgrammerSource（上一节）中的说明从源代码构建一个。
+
+- 然后按照 \ref NewMicroSD 中的说明进行操作
+
+JeVois-A33 流程
 ========================
 
-- If you just need to install packages, for example customized versions of \b jevois and \b jevoisbase, follow the
-  instructions towards the end of \ref CompilingJeVois and \ref CompilingJeVoisBase
+当您在 \b jevois 和 \b jevoisbase 中运行 `./rebuild-platform.sh` 时，编译后的文件将安装到暂存区（参见 \ref ProgrammerOrganization）。
 
-- If your microSD is badly corrupt, either download a microSD image from http://jevois.org/start/software.html or build
-  one from source as described in \ref ProgrammerSource (last section).
+在 JeVois 智能相机上运行它们的最后一步是将整个 Linux 操作系统、内核、JeVois 框架（包括 \c jevois-daemon）和 jevoisbase 模块刷入 microSD。
 
-- Then proceed as described in \ref NewMicroSD
-
-Procedure for JeVois-A33
-========================
-
-When you run `./rebuild-platform.sh` in \b jevois and in \b jevoisbase, compiled files
-get installed into the staging area (see \ref ProgrammerOrganization).
-
-The last step to run them on the JeVois smart camera is to flash the whole Linux OS, kernel, JeVois framework (including
-\c jevois-daemon), and jevoisbase modules to microSD.
-
-To do this, run
+为此，运行
 
 \verbatim
 jevois-flash-card
 \endverbatim
 
-and answer the questions interactively.
+并以交互方式回答问题。
 
-\c jevois-flash-card is instaled in <b>/usr/bin/</b> when you install the JeVois Ubuntu packages or when you run \c
-jevois-build.sh to rebuild the entire buildroot from source. Its source is in
-<b>jevois-sdk/jevois-build/jevois-flash-card</b>.
+当您安装 JeVois Ubuntu 软件包或运行 \c jevois-build.sh 从源代码重建整个 buildroot 时，\c jevois-flash-card 会安装在 <b>/usr/bin/</b> 中。其源代码位于 <b>jevois-sdk/jevois-build/jevois-flash-card</b> 中。
 
-Once you have done this a few times and you are confident that you know what you are doing, you can instruct \c
-jevois-flash-card to not ask any questions. Just be absolutely certain that you are using the right device for your SD
-card, so that you do not destroy your main hard drive because of a small typo:
+一旦你这样做了几次，并且确信自己知道自己在做什么，你可以指示 \c jevois-flash-card 不要询问任何问题。只要绝对确定你为你的 SD 卡使用了正确的设备，这样你就不会因为一个小打字错误而毁掉你的主硬盘：
 
 \verbatim
 jevois-flash-card -y /dev/sdX
 \endverbatim
 
-where you replace \b /dev/sdX by the device that gets assigned to your microSD card. On some laptops, the device is
-called \b /dev/mmcblkX instead.
+其中，您将 \b /dev/sdX 替换为分配给 microSD 卡的设备。在某些笔记本电脑上，该设备被称为 \b /dev/mmcblkX。
 
-\note If you do a lot of development that requires re-flashing (e.g., developing kernel code for JeVois), it may be
-worth investing in a super-fast microSD card. While it can take about 5 minutes to run jevois-flash-card with a regular
-class 10 microSD card, we have been able to get this time down to less than 40 seconds using 1800x, 1900x, or V30, V60,
-or V90, UHS-II microSD cards.
+\note 如果您进行大量需要重新刷新的开发（例如，为 JeVois 开发内核代码），那么投资购买超快 microSD 卡可能是值得的。虽然使用普通的 10 级 microSD 卡运行 jevois-flash-card 可能需要大约 5 分钟，但我们已经能够使用 1800x、1900x 或 V30、V60 或 V90 UHS-II microSD 卡将此时间缩短到 40 秒以内。
 
-Re-flashing after some code update - full recompilation
--------------------------------------------------------
+更新一些代码后重新刷新-完全重新编译
+------------------------------------------------------
 
 \verbatim
 cd ~/jevois && ./rebuild-platform.sh
@@ -64,7 +50,7 @@ cd ~/mymodule && ./rebuild-platform.sh     # optional: for your own modules
 jevois-flash-card -y /dev/sdX
 \endverbatim
 
-Re-flashing after some code update - partial recompilation
+部分代码更新后重新刷新
 ----------------------------------------------------------
 
 \verbatim
@@ -74,7 +60,7 @@ cd ~/mymodule && make -j     # optional: for your own modules
 jevois-flash-card -y /dev/sdX
 \endverbatim
 
-Pulling the latest from github and re-flashing - full recompilation
+从 github 提取最新版本并重新刷新 - 完全重新编译 
 -------------------------------------------------------------------
 
 \verbatim
@@ -84,7 +70,7 @@ cd ~/mymodule && ./rebuild-platform.sh     # optional: for your own modules
 jevois-flash-card -y /dev/sdX
 \endverbatim
 
-Pulling the latest from github and re-flashing - partial recompilation
+从 github 拉取最新版本并重新刷新 - 部分重新编译 
 ----------------------------------------------------------------------
 
 \verbatim
@@ -96,3 +82,4 @@ jevois-flash-card -y /dev/sdX
 
 
 */
+

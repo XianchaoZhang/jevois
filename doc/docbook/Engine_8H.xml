@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Engine_8H">
+<title>include/jevois/Core/Engine.H File Reference</title>
+<indexterm><primary>include/jevois/Core/Engine.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/VideoMapping.H&gt;
+#include &lt;jevois/Component/Manager.H&gt;
+#include &lt;jevois/Types/Enum.H&gt;
+#include &lt;jevois/Image/RawImage.H&gt;
+#include &lt;jevois/Core/CameraCalibration.H&gt;
+#include &lt;jevois/Debug/Watchdog.H&gt;
+#include &lt;memory&gt;
+#include &lt;mutex&gt;
+#include &lt;vector&gt;
+#include &lt;list&gt;
+#include &lt;atomic&gt;
+</programlisting>Include dependency graph for Engine.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Engine_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Engine_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Engine">jevois::Engine</link></para>
+
+<para>JeVois processing engine - 从相机传感器获取图像，对其进行处理，并通过 USB 发送结果。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Engine_8H_1a2946b1e1627169e3e971ea8187f766f8">JEVOIS_CAMERA_DEFAULT</link>   &quot;/dev/video0&quot;</para>
+
+<para>在平台硬件上，相机传感器设备 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8H_1a63fb01c4b3d97d9f02ed5e283a924dd6">JEVOIS_GADGET_DEFAULT</link>   &quot;&quot;</para>
+
+<para>在平台硬件上，USB gadget 驱动程序的设备（通过 USB 将视频帧发送到主机） </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8H_1a68d7a82071d6b6e2005c52f38f9d204c">JEVOIS_SERIAL_DEFAULT</link>   &quot;/dev/ttyS4&quot;</para>
+
+<para>在平台硬件上，4 针硬件串口设备 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8H_1a6ae242fd651e29cc5662523966ee7654">JEVOIS_USBSERIAL_DEFAULT</link>   &quot;&quot;</para>
+
+<para>在平台硬件上，用于串行 USB 端口的设备 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8H_1a2408641d6661198d265548aea4c76765">JEVOIS_CAMERASENS_DEFAULT</link>   CameraSensor::any</para>
+
+<para>默认相机传感器 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8H_1ab645b4d65509897d82a7703bd270d994">JEVOIS_IMUSPI_DEFAULT</link>   &quot;/dev/spidev32766.0&quot;</para>
+
+<para>默认 IMU spi 设备 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Engine_8H_1a2946b1e1627169e3e971ea8187f766f8"/>    <section>
+    <title>JEVOIS_CAMERA_DEFAULT</title>
+<indexterm><primary>JEVOIS_CAMERA_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_CAMERA_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CAMERA_DEFAULT   &quot;/dev/video0&quot;</computeroutput></para><para>
+
+<para>在平台硬件上，相机传感器设备 </para>
+</para>
+<para>
+Definition at line 65 of file Engine.H.</para>
+    </section><anchor xml:id="_Engine_8H_1a2408641d6661198d265548aea4c76765"/>    <section>
+    <title>JEVOIS_CAMERASENS_DEFAULT</title>
+<indexterm><primary>JEVOIS_CAMERASENS_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_CAMERASENS_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CAMERASENS_DEFAULT   CameraSensor::any</computeroutput></para><para>
+
+<para>默认相机传感器 </para>
+</para>
+<para>
+Definition at line 78 of file Engine.H.</para>
+    </section><anchor xml:id="_Engine_8H_1a63fb01c4b3d97d9f02ed5e283a924dd6"/>    <section>
+    <title>JEVOIS_GADGET_DEFAULT</title>
+<indexterm><primary>JEVOIS_GADGET_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_GADGET_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_GADGET_DEFAULT   &quot;&quot;</computeroutput></para><para>
+
+<para>在平台硬件上，USB gadget 驱动程序的设备（通过 USB 将视频帧发送到主机） </para>
+</para>
+<para>
+Definition at line 68 of file Engine.H.</para>
+    </section><anchor xml:id="_Engine_8H_1ab645b4d65509897d82a7703bd270d994"/>    <section>
+    <title>JEVOIS_IMUSPI_DEFAULT</title>
+<indexterm><primary>JEVOIS_IMUSPI_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_IMUSPI_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_IMUSPI_DEFAULT   &quot;/dev/spidev32766.0&quot;</computeroutput></para><para>
+
+<para>默认 IMU spi 设备 </para>
+</para>
+<para>
+Definition at line 81 of file Engine.H.</para>
+    </section><anchor xml:id="_Engine_8H_1a68d7a82071d6b6e2005c52f38f9d204c"/>    <section>
+    <title>JEVOIS_SERIAL_DEFAULT</title>
+<indexterm><primary>JEVOIS_SERIAL_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_SERIAL_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_SERIAL_DEFAULT   &quot;/dev/ttyS4&quot;</computeroutput></para><para>
+
+<para>在平台硬件上，4 针硬件串口设备 </para>
+</para>
+<para>
+Definition at line 71 of file Engine.H.</para>
+    </section><anchor xml:id="_Engine_8H_1a6ae242fd651e29cc5662523966ee7654"/>    <section>
+    <title>JEVOIS_USBSERIAL_DEFAULT</title>
+<indexterm><primary>JEVOIS_USBSERIAL_DEFAULT</primary><secondary>Engine.H</secondary></indexterm>
+<indexterm><primary>Engine.H</primary><secondary>JEVOIS_USBSERIAL_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_USBSERIAL_DEFAULT   &quot;&quot;</computeroutput></para><para>
+
+<para>在平台硬件上，用于串行 USB 端口的设备 </para>
+</para>
+<para>
+Definition at line 74 of file Engine.H.</para>
+</section>
+</section>
+</section>

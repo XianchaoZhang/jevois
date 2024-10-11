@@ -1,32 +1,23 @@
-/*! \page ProUserConnect Connecting JeVois-Pro to Power and Data
+/*! \page ProUserConnect 将 JeVois-Pro 连接到电源和数据
 
 
-Use JeVois-Pro like a standard computer:
+像标准计算机一样使用 JeVois-Pro：
 
 \jvimg{proconnect.png, 40%}
 
-For power, use the included power adapter. JeVois-Pro can accept 6-24V DC input on a 5.5x2.5mm barrel jack with positive
-in the center pin.
+如需供电，请使用随附的电源适配器。JeVois-Pro 可通过 5.5x2.5mm 圆柱插孔接受 6-24V DC 输入，中心针脚为正极。
 
-This means that you can power JeVois-Pro from a car battery or cigar adapter, or from a 2S-5S Lithium battery (2 to 5
-lithium cells in series). Make sure your battery is equipped with undervoltage protection so that it does not get
-damaged by being fully drained out.
+这意味着您可以使用汽车电池或雪茄适配器或 2S-5S 锂电池（2 到 5 个串联锂电池）为 JeVois-Pro 供电。确保您的电池配备欠压保护，以免电池完全耗尽而损坏。
 
-The power supply included with JeVois-Pro has 36 Watts (12V at 3A). When budgeting for power, this is the recommended
-wattage. However, this is also the worst-case scenario, where JeVois outputs significant power to connected peripherals
-through its USB and AUX power ports. If you will not connect power-hungry peripherals, you may be able to use a
-lower-wattage power supply or battery.
+JeVois-Pro 附带的电源功率为 36 瓦（12V，3A）。在预算功率时，这是建议的功率。但是，这也是最坏的情况，JeVois 通过其 USB 和 AUX 电源端口向连接的外围设备输出大量功率。如果您不连接耗电的外围设备，则可以使用功率较低的电源或电池。
 
-Here are a few points of reference, with only USB keyboard, mouse, and HDMI display, and one TPU (Google Coral neural
-accelerator, M.2 card inside JeVois-Pro) and one VPU (Intel Myriad-X USB accelerator):
+以下是一些参考点，仅配备 USB 键盘、鼠标和 HDMI 显示器，以及一个 TPU（Google Coral 神经加速器、JeVois-Pro 内部的 M.2 卡）和一个 VPU（Intel Myriad-X USB 加速器）：
 
-- Idle: 3 Watts (includes fan)
-- Running YOLOv2 on neural processing unit (NPU) integrated in the JeVois-Pro CPU: 5.3 Watts
-- Running CPU+NPU+TPU+VPU quad YOLO/SSD deep networks: 12 Watts
+- 空闲：3 瓦（包括风扇）
+- 在 JeVois-Pro CPU 中集成的神经处理单元 (NPU) 上运行 YOLOv2：5.3 瓦
+- 运行 CPU+NPU+TPU+VPU 四重 YOLO/SSD 深度网络：12 瓦
 
-When designing a custom power supply, e.g., to use JeVois-Pro on a robot, you should measure actual wattage used by
-your vision algorithms running on JeVois-Pro, and then add a safety margin (e.g., budget 20% more wattage than the
-highest you measured).
+在设计定制电源时（例如，在机器人上使用 JeVois-Pro），您应该测量在 JeVois-Pro 上运行的视觉算法所使用的实际瓦数，然后添加安全边际（例如，预算比您测量的最高瓦数多 20％ 的瓦数）。
 
 */
 

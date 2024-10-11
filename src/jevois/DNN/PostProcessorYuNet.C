@@ -186,11 +186,11 @@ void jevois::dnn::PostProcessorYuNet::process(std::vector<cv::Mat> const & outs,
   float const nmsThreshold = nms::get() * 0.01F;
   itsImageSize = preproc->imagesize();
 
-  // To draw boxes, we will need to:
-  // - scale from [0..1]x[0..1] to blobw x blobh
-  // - scale and center from blobw x blobh to input image w x h, provided by PreProcessor::b2i()
-  // - when using the GUI, we further scale and translate to OpenGL display coordinates using GUIhelper::i2d()
-  // Here we assume that the first blob sets the input size.
+  // 要绘制框，我们需要： 
+  // - 从 [0..1]x[0..1] 缩放到 blobw x blobh 
+  // - 从 blobw x blobh 缩放并居中到输入图像 w x h，由 PreProcessor::b2i() 提供 
+  // - 当使用 GUI 时，我们使用 GUIhelper::i2d() 进一步缩放和平移到 OpenGL 显示坐标 
+  // 在这里我们假设第一个 blob 设置输入大小。
   cv::Size const bsiz = preproc->blobsize(0);
 
   // Initialize PriorBox on first inference:
@@ -212,7 +212,7 @@ void jevois::dnn::PostProcessorYuNet::process(std::vector<cv::Mat> const & outs,
     for (size_t i = 0; i < keep_idx.size(); i++) itsDetections.emplace_back(dets[keep_idx[i]]);
   }
 
-  // Now clamp boxes to be within blob, and adjust the boxes from blob size to input image size:
+  // 现在将盒子限制在 blob 内，并将盒子从 blob 大小调整为输入图像大小：
   for (jevois::dnn::yunet::Face & f : itsDetections)
   {
     jevois::dnn::yunet::Box & b = f.bbox_tlwh;

@@ -43,26 +43,26 @@
 #include <jevois/Core/PythonOpenCV.H>
 
 // ####################################################################################################
-// Convenience macro to define a Python binding for a free function in the jevois namespace
+// 便捷宏用于为 jevois 命名空间中的自由函数定义 Python 绑定
 #define JEVOIS_PYTHON_FUNC(funcname) boost::python::def(#funcname, jevois::funcname)
 
-// Convenience macro to define a Python binding for a free function in the jevois::rawimage namespace
+// 便捷宏用于为 jevois::rawimage 命名空间中的自由函数定义 Python 绑定
 #define JEVOIS_PYTHON_RAWIMAGE_FUNC(funcname) boost::python::def(#funcname, jevois::rawimage::funcname)
 
-// Convenience macro to define a python enum value where the value is in jevois::rawimage
+// 便捷宏定义一个 python 枚举值，其中值位于 jevois::rawimage 中
 #define JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL(val) value(#val, jevois::rawimage::val)
 
-// Convenience macro to define a python enum value where the value is in jevois::python
+// 便捷宏定义一个 python 枚举值，其中值位于 jevois::python
 #define JEVOIS_PYTHON_ENUM_VAL(val) value(#val, jevois::python::val)
 
-// Convenience macro to define a constant that exists in the global C++ namespace
+// 便捷宏定义存在于全局 C++ 命名空间中的常量
 #define JEVOIS_PYTHON_CONSTANT(cst) boost::python::scope().attr(#cst) = cst;
 
-// Convenience macro to define a Python binding for a free function in the jevois:dnn namespace
+// 便捷宏，用于为 jevois:dnn 命名空间中的自由函数定义
 #define JEVOIS_PYTHON_DNN_FUNC(funcname) boost::python::def(#funcname, jevois::dnn::funcname)
 
 // ####################################################################################################
-// Helper to provide jevois.sendSerial() function that emulates a C++ module's sendSerial()
+// 助手提供 jevois.sendSerial() 函数，模拟 C++ 模块的 sendSerial()
 namespace jevois
 {
   namespace python
@@ -119,7 +119,7 @@ bool jevois::python::hasattr(boost::python::object & o, char const * name)
 }
 
 // ####################################################################################################
-// Thin wrappers to handle default arguments or overloads in free functions
+// 用于处理自由函数中的默认参数或重载的薄包装器
 
 namespace
 {
@@ -209,7 +209,7 @@ namespace jevois
 {
   namespace python
   {
-    // Aux enum for YUYV colors - keep this in sync with RawImage.H:
+    // YUYV 颜色的辅助枚举 - 与 RawImage.H 保持同步：
     enum YUYV { Black = 0x8000, DarkGrey = 0x8050, MedGrey = 0x8080, LightGrey = 0x80a0, White = 0x80ff,
                 DarkGreen = 0x0000, MedGreen = 0x0040, LightGreen = 0x00ff, DarkTeal = 0x7070, MedTeal = 0x7090,
                 LightTeal = 0x70b0, DarkPurple = 0xa030, MedPurple = 0xa050, LightPurple = 0xa080,
@@ -224,19 +224,19 @@ BOOST_PYTHON_MODULE(libjevoispro)
 BOOST_PYTHON_MODULE(libjevois)
 #endif
 {
-  // #################### Initialize converters for cv::Mat support:
+  // #################### 初始化转换器以支持 cv::Mat：
   boost::python::to_python_converter<cv::Mat, pbcvt::matToNDArrayBoostConverter>();
   pbcvt::matFromNDArrayBoostConverter();
   
-  // #################### Define a few constants for python users:
-  // jevois.pro is True if running on JeVois-Pro
+  // #################### 为 python 用户定义一些常量：
+  // 如果在 JeVois-Pro 上运行，则 jevois.pro 为 True
 #ifdef JEVOIS_PRO
   boost::python::scope().attr("pro") = true;
 #else
   boost::python::scope().attr("pro") = false;
 #endif
 
-  // jevois.platform is True if running on platform hardware
+  // 如果在平台硬件上运行，jevois.platform 为 True
 #ifdef JEVOIS_PLATFORM
   boost::python::scope().attr("platform") = true;
 #else
@@ -248,11 +248,11 @@ BOOST_PYTHON_MODULE(libjevois)
   boost::python::scope().attr("version_minor") = JEVOIS_VERSION_MINOR;
   boost::python::scope().attr("version_patch") = JEVOIS_VERSION_PATCH;
 
-  // Location of shared directories: jevois.share points to /jevois/share or /jevoispro/share
+  // 共享目录的位置：jevois.share 指向 /jevois/share 或 /jevoispro/share 
   boost::python::scope().attr("share") = JEVOIS_SHARE_PATH;
   boost::python::scope().attr("pydnn") = JEVOIS_PYDNN_PATH;
 
-  // #################### module sendSerial() and other functions emulation:
+  // #################### 模块 sendSerial() 和其他函数模拟：
   boost::python::def("sendSerial", pythonSendSerial);
   boost::python::def("frameNum", pythonFrameNum);
   boost::python::def("writeCamRegister", pythonWriteCamRegister);
@@ -581,8 +581,8 @@ BOOST_PYTHON_MODULE(libjevois)
     .def("setCallback", &jevois::PythonParameter::setCallback)
     ;
 
-  // #################### Allow python code to access dnn::PreProcessor helper functions:
-  // python cannot construct PreProcessor, but PostProcessorPython can use an existing one.
+  // #################### 允许 python 代码访问 dnn::PreProcessor 辅助函数：
+  // python 无法构造 PreProcessor，但 PostProcessorPython 可以使用现有的。
   boost::python::class_<jevois::dnn::PreProcessorForPython>("PreProcessor", boost::python::no_init)
     .def("imagesize", &jevois::dnn::PreProcessorForPython::imagesize)
     .def("blobs", &jevois::dnn::PreProcessorForPython::blobs)
@@ -592,7 +592,7 @@ BOOST_PYTHON_MODULE(libjevois)
     .def("i2b", &jevois::dnn::PreProcessorForPython::i2b)
     ;
 
-  // #################### Allow python code to use PostProcessorDetectYOLOforPython
+  // #################### 允许 python 代码使用 PostProcessorDetectYOLOforPython
   boost::python::class_<jevois::dnn::PostProcessorDetectYOLOforPython>("PyPostYOLO")
     .def("freeze", &jevois::dnn::PostProcessorDetectYOLOforPython::freeze)
     .def("yolo", &jevois::dnn::PostProcessorDetectYOLOforPython::yolo)

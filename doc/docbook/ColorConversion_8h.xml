@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ColorConversion_8h">
+<title>include/jevois/Image/ColorConversion.h File Reference</title>
+<indexterm><primary>include/jevois/Image/ColorConversion.h</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ColorConversion_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_ColorConversion_8h_1a471b6d7fb2f378f4177041940bc47840">convertYUYVtoRGB24</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned char const *src, unsigned char *dst)</para>
+
+<para>从 YUYV 转换为 RGB，主要用于内部使用。大多数情况下，请使用 RawImage 函数。 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gabc1de0ec8bdb25ffacf5b0d25dc11469">convertYUYVtoRGBYL</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned char const *src, int *dstrg, int *dstby, int *dstlum, int thresh, int inputbits)</para>
+
+<para>将 YUYV 转换为 RG、BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_ColorConversion_8h_1a471b6d7fb2f378f4177041940bc47840"/>    <section>
+    <title>convertYUYVtoRGB24()</title>
+<indexterm><primary>convertYUYVtoRGB24</primary><secondary>ColorConversion.h</secondary></indexterm>
+<indexterm><primary>ColorConversion.h</primary><secondary>convertYUYVtoRGB24</secondary></indexterm>
+<para><computeroutput>void convertYUYVtoRGB24 (unsigned int w, unsigned int h, unsigned char const * src, unsigned char * dst)</computeroutput></para><para>
+
+<para>从 YUYV 转换为 RGB，主要用于内部使用。大多数情况下，请使用 RawImage 函数。 </para>
+</para>
+<para>
+Definition at line 23 of file ColorConversion.c.</para>
+<para>
+References CLAMP, G, and h.</para>
+</section>
+</section>
+</section>

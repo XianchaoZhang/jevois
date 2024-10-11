@@ -1,0 +1,504 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Camera">
+<title>jevois::Camera Class Reference</title>
+<indexterm><primary>jevois::Camera</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/Camera.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>JeVois camera driver class - 从 Video4Linux 相机传感器抓取帧 </para>
+
+
+
+<para>在平台硬件上，Camera 类提供对并行相机总线 (CSI-DVP) 上的相机传感器的访问。在其他硬件上，它可以提供对任何 Video4Linux2 相机（例如，USB 网络摄像头）的访问，但有一些限制，例如：<itemizedlist>
+<listitem>
+<para>无法读取/写入原始相机寄存器。</para>
+</listitem><listitem>
+<para>通常无法选择任何帧/秒，而是限制为几个固定值，如 15fps、30fps。</para>
+</listitem><listitem>
+<para>通常限制为最大 30fps（没有 60fps 或 120fps 模式）</para>
+</listitem><listitem>
+<para>通常可用的控件数量有限（曝光、增益等）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>相机运行一个线程来自动处理帧的捕获。用户可以使用 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 访问下一个抓取的帧，这可能会阻塞，直到帧被完全捕获。 一旦他们完成了通过 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 获得的帧，用户应该通过调用 <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done()</link> 将其交还给相机。当使用 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 和 <link linkend="_classjevois_1_1Module">Module</link> 时， 通过使用 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 类，get() 和 <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done()</link> 会以异常安全的方式自动调用。实际上，视频抓取使用一组固定的图像缓冲区， 这些缓冲区由 Linux 内核在配置视频格式时分配，然后相机硬件循环通过缓冲区。在平台上，相机图像缓冲区分配在 ION carveout 内存区域中，这是在 Linux 内核中配置的保留内存区域，USB 输出缓冲区也分配在该区域中。为了避免保留 太多不会使用的内存，ION carveout 保留默认很小，但足以容纳 3 个 1280x1024 YUYV 缓冲区。</para>
+
+<para>相机实现了对输入视频帧的零复制、零等待访问，即：<itemizedlist>
+<listitem>
+<para>您通过 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 获取的图像的像素数据直接是内存映射的像素缓冲区，JeVois 芯片上的硅硬件通过直接内存访问 (DMA) 使 用该缓冲区将像素数据从相机芯片传输到处理器内存；</para>
+</listitem><listitem>
+<para>一旦相机硬件捕获图像，get() 就会解除阻塞并返回该图像（而不是以固定的、有规律的间隔来获取图像）。相机有多个 图像缓冲区，允许捕获一个图像缓冲区，同时将另一个图像缓冲区通过 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 交由其处理。这些缓冲区会被回收，即一旦 调用 <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done()</link>，底层缓冲区就会被发送回相机硬件以供将来捕获。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>如果用户代码处理帧的速度不够快，相机就会丢帧。也就是说，如果所有缓冲区都已抓取但尚未通过 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 移交并由 <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done()</link> 返回，则下一个相机传感器帧将被丢弃。</para>
+
+<para>大多数程序员永远不会直接使用 Camera，而是使用 <link linkend="_classjevois_1_1Engine">Engine</link> 和 InputFrame。 </para>
+<para>
+Definition at line 54 of file Camera.H.</para>
+Inheritance diagram for jevois::Camera:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Camera__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Camera:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Camera__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Camera_1a627d16e4e503f9385e01954f2363734c">Camera</link> (std::string const &amp;devname, jevois::CameraSensor s=jevois::CameraSensor::any, unsigned int const nbufs=0)</para>
+
+<para>构造并打开设备 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Camera_1a4dc265e8d7446a1d403ef534180bb61a">~Camera</link> ()</para>
+
+<para>关闭设备并释放所有资源 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a9888f5aac31024838590f415153078fc">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a118d9f6fbf054d6151de5a9246921703">abortStream</link> () override</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1ae416409d1cb569b05bc7c6cd5ceb97d3">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>获取下一个捕获的缓冲区 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Camera_1a677a74c07ec3abe00c82384bdd1a8da9">hasScaledImage</link> () const override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a6acf12da6f922f6b364769a4e677dddf">get2</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a64f3d7da98956617d69cb627d699c1e5">done2</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1ae17dc75b0eb70fb9e77b087399e4a6f3">queryControl</link> (struct v4l2_queryctrl &amp;qc) const override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1ab4fa4d63d4a2ceed19bce872a5d761d9">queryMenu</link> (struct v4l2_querymenu &amp;qm) const override</para>
+
+<para>获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a39a670a584e4dbf2622e39c5a55ab2b4">getControl</link> (struct v4l2_control &amp;ctrl) const</para>
+
+<para>获取 control 的当前值，如果硬件不支持则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a9f7fa31bf5c5a98445db9accf9ab54f2">setControl</link> (struct v4l2_control const &amp;ctrl) override</para>
+
+<para>设置 control，如果 control 不受支持或硬件拒绝该值则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a4f3b5aca0a0566a0b6f1c40a43e030ad">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧率 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1ae6c898091d69e83905f41e2baa7adb8f">writeRegister</link> (unsigned short reg, unsigned short val)</para>
+
+<para>将值写入相机的某个寄存器 </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_classjevois_1_1Camera_1a21b86ec6637602bd53e994ff79afdb99">readRegister</link> (unsigned short reg)</para>
+
+<para>从相机的一个寄存器读取一个值 </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1Camera_1ac77700d475ed1e7315c1fde5284241c5">lock</link> ()</para>
+
+<para>锁定相机并返回其文件描述符 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Camera_1a80fe3151c1dbe27cf0f16661442f0ed8">unlock</link> ()</para>
+
+<para>解锁先前通过 <link linkend="_classjevois_1_1Camera_1ac77700d475ed1e7315c1fde5284241c5">lock()</link> 锁定的相机 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Types    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509e">Flags</link> { <link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea46f55b1bfadd1ae5068612297c29f39c">JEVOIS_SENSOR_COLOR</link> = 0x00, 
+<link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea88413eaa00cff53dce353ba10edaeea7">JEVOIS_SENSOR_MONO</link> = 0x01, 
+<link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea93905d1c56e83c9d26b2dae97c1d169c">JEVOIS_SENSOR_ICM20948</link> = 0x02
+ }</para>
+
+<para>Sensor flags. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509e">Flags</link> <link linkend="_classjevois_1_1Camera_1aafd2c5669bd7d0d57c4811036fca4175">readFlags</link> ()</para>
+
+<para>Get the sensor flags. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Member Enumeration Documentation</title>
+<anchor xml:id="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509e"/>    <section>
+    <title>Flags</title>
+<indexterm><primary>Flags</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>Flags</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509e">jevois::Camera::Flags</link><computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Sensor flags. </para>
+</para>
+
+<para>Keep this in sync with jevois-sdk/linux-3.4/drivers/media/video/sunxi-vfe/device/camera.h </para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>JEVOIS_SENSOR_COLOR</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>JEVOIS_SENSOR_COLOR</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea46f55b1bfadd1ae5068612297c29f39c"/>JEVOIS_SENSOR_COLOR</entry><entry></entry></row><row><entry><indexterm><primary>JEVOIS_SENSOR_MONO</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>JEVOIS_SENSOR_MONO</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea88413eaa00cff53dce353ba10edaeea7"/>JEVOIS_SENSOR_MONO</entry><entry></entry></row><row><entry><indexterm><primary>JEVOIS_SENSOR_ICM20948</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>JEVOIS_SENSOR_ICM20948</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509ea93905d1c56e83c9d26b2dae97c1d169c"/>JEVOIS_SENSOR_ICM20948</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 143 of file Camera.H.</para>
+</section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Camera_1a627d16e4e503f9385e01954f2363734c"/>    <section>
+    <title>Camera()</title>
+<indexterm><primary>Camera</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>Camera</secondary></indexterm>
+<para><computeroutput>jevois::Camera::Camera (std::string const &amp; devname, jevois::CameraSensor s = <computeroutput>jevois::CameraSensor::any</computeroutput>
+, unsigned int const nbufs = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>构造并打开设备 </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>devname</entry>
+                                <entry>
+<para>设备名称，例如 /dev/video0 </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>s</entry>
+                                <entry>
+<para>当前安装的摄像头传感器 </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>nbufs</entry>
+                                <entry>
+<para>视频抓取缓冲区的数量，或 0 表示自动。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line 34 of file Camera.C.</para>
+<para>
+References JEVOIS_SENSOR_ICM20948, JEVOIS_SENSOR_MONO, JEVOIS_TRACE, LDEBUG, and readFlags().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a4dc265e8d7446a1d403ef534180bb61a"/>    <section>
+    <title>~Camera()</title>
+<indexterm><primary>~Camera</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>~Camera</secondary></indexterm>
+<para><computeroutput>jevois::Camera::~Camera ( )</computeroutput></para><para>
+
+<para>关闭设备并释放所有资源 </para>
+</para>
+<para>
+Definition at line 150 of file Camera.C.</para>
+<para>
+References JEVOIS_TRACE, and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Camera_1a118d9f6fbf054d6151de5a9246921703"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>这只会取消未来的 <link linkend="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529">get()</link> 和 <link linkend="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807">done()</link> 调用，仍应调用 <link linkend="_classjevois_1_1Camera_1ae416409d1cb569b05bc7c6cd5ceb97d3">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a8174d4f9d1472537254b96c3c47dfa49">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 171 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ae689f13a9c372f82338916adac635807"/>    <section>
+    <title>done()</title>
+<indexterm><primary>done</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>done</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::done (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a214001a66dbf369f15fe80e739897af1">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 214 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LFATAL.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a64f3d7da98956617d69cb627d699c1e5"/>    <section>
+    <title>done2()</title>
+<indexterm><primary>done2</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>done2</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::done2 (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1ab3409889a6d425ba0634154fccc045bb">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 223 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a60da93aa7918693feaebacef95545529"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::get (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取下一个捕获的缓冲区 </para>
+</para>
+
+<para>如果我们未进行流式传输或阻塞直到图像可用（已捕获），则抛出。图像 img 应该由调用者分配，并将由我们从此处的设 备接收到的内容填充。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1acff6f2844e64a7a36cf974982adc2d74">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 189 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LFATAL.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a6acf12da6f922f6b364769a4e677dddf"/>    <section>
+    <title>get2()</title>
+<indexterm><primary>get2</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>get2</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::get2 (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1aad25ccc42637b6d5ef6070505c6bf703">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 204 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a39a670a584e4dbf2622e39c5a55ab2b4"/>    <section>
+    <title>getControl()</title>
+<indexterm><primary>getControl</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>getControl</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::getControl (struct v4l2_control &amp; ctrl) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取 control 的当前值，如果硬件不支持则抛出 </para>
+</para>
+
+<para>这只是传递到 VIDIOC_G_CTRL，用户应将 ctrl 清零，然后在 ctrl.id 中设置所需的控件 ID。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a7750b74bc3735beac18130978689dbc3">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 248 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LFATAL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a677a74c07ec3abe00c82384bdd1a8da9"/>    <section>
+    <title>hasScaledImage()</title>
+<indexterm><primary>hasScaledImage</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>hasScaledImage</secondary></indexterm>
+<para><computeroutput>bool jevois::Camera::hasScaledImage ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1a41102ca791ba4febde317d33d2cf7716">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 198 of file Camera.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ac77700d475ed1e7315c1fde5284241c5"/>    <section>
+    <title>lock()</title>
+<indexterm><primary>lock</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>lock</secondary></indexterm>
+<para><computeroutput>int jevois::Camera::lock ( )</computeroutput></para><para>
+
+<para>锁定相机并返回其文件描述符 </para>
+</para>
+
+<para>由 <link linkend="_classjevois_1_1IMUi2c">IMUi2c</link> 使用，通过与相机传感器共享的 I2C 总线访问 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器。请谨慎使用并确保捕获异常，这样您就可以保证调用 <link linkend="_classjevois_1_1Camera_1a80fe3151c1dbe27cf0f16661442f0ed8">unlock()</link>， 否则您的相机将卡住并启用流式传输。 </para>
+<para>
+Definition at line 309 of file Camera.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ae17dc75b0eb70fb9e77b087399e4a6f3"/>    <section>
+    <title>queryControl()</title>
+<indexterm><primary>queryControl</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>queryControl</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::queryControl (struct v4l2_queryctrl &amp; qc) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a77cba2f7ad186e1248626791ba43fce3">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 232 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LFATAL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ab4fa4d63d4a2ceed19bce872a5d761d9"/>    <section>
+    <title>queryMenu()</title>
+<indexterm><primary>queryMenu</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>queryMenu</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::queryMenu (struct v4l2_querymenu &amp; qm) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 </para>
+</para>
+
+<para>调用者应将 qm 清零，然后将 id 和 index 字段设置为所需的控件 id 和菜单项索引。有关更多信息，请参阅 VIDIOC_QUERYMENU。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a866ddfa5dafbc1822d1ebaf543829b98">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 240 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LFATAL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1aafd2c5669bd7d0d57c4811036fca4175"/>    <section>
+    <title>readFlags()</title>
+<indexterm><primary>readFlags</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>readFlags</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1Camera_1aa8866c5eb6938dba50f2bab95ad5509e">jevois::Camera::Flags</link> jevois::Camera::readFlags ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Get the sensor flags. </para>
+</para>
+<para>
+Definition at line 323 of file Camera.C.</para>
+<para>
+References JEVOIS_SENSOR_COLOR, LERROR, and XIOCTL.</para>
+<para>
+Referenced by Camera().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a21b86ec6637602bd53e994ff79afdb99"/>    <section>
+    <title>readRegister()</title>
+<indexterm><primary>readRegister</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>readRegister</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::Camera::readRegister (unsigned short reg)</computeroutput></para><para>
+
+<para>从相机的一个寄存器读取一个值 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳相机设置，不应在正常操作中使用，否则可能会导致系统崩溃。 </para>
+<para>
+Definition at line 288 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LDEBUG, LFATAL, jevois::sformat(), and XIOCTL.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a9f7fa31bf5c5a98445db9accf9ab54f2"/>    <section>
+    <title>setControl()</title>
+<indexterm><primary>setControl</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>setControl</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::setControl (struct v4l2_control const &amp; ctrl)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置 control，如果 control 不受支持或硬件拒绝该值则抛出 </para>
+</para>
+
+<para>这只是传递到 VIDIOC_S_CTRL </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a749b4ea4c3bd2a5f140a30d5649be248">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 260 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LFATAL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a4f3b5aca0a0566a0b6f1c40a43e030ad"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::setFormat (<link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧率 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a684d1d126adbab60f5d6498908c79770">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 49 of file Camera.C.</para>
+<para>
+References jevois::VideoMapping::c2fmt, jevois::VideoMapping::c2h, jevois::VideoMapping::c2w, jevois::VideoMapping::cfmt, jevois::VideoMapping::cfps, jevois::VideoMapping::ch, jevois::VideoMapping::crop, jevois::VideoMapping::cw, ISP_META_HEIGHT, ISP_META_WIDTH, ISP_V4L2_PIX_FMT_META, JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LFATAL, LINFO, jevois::sensorPrepareSetFormat(), and jevois::to_string().</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ae416409d1cb569b05bc7c6cd5ceb97d3"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a3f510040f77ca90428e5808d0fe58397">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 180 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and jevois::warnAndIgnoreException().</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a9888f5aac31024838590f415153078fc"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a813adf4eabcd417e7aae21f43db80af4">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 162 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and jevois::warnAndIgnoreException().</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1a80fe3151c1dbe27cf0f16661442f0ed8"/>    <section>
+    <title>unlock()</title>
+<indexterm><primary>unlock</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>unlock</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::unlock ( )</computeroutput></para><para>
+
+<para>解锁先前通过 <link linkend="_classjevois_1_1Camera_1ac77700d475ed1e7315c1fde5284241c5">lock()</link> 锁定的相机 </para>
+</para>
+<para>
+Definition at line 317 of file Camera.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Camera_1ae6c898091d69e83905f41e2baa7adb8f"/>    <section>
+    <title>writeRegister()</title>
+<indexterm><primary>writeRegister</primary><secondary>jevois::Camera</secondary></indexterm>
+<indexterm><primary>jevois::Camera</primary><secondary>writeRegister</secondary></indexterm>
+<para><computeroutput>void jevois::Camera::writeRegister (unsigned short reg, unsigned short val)</computeroutput></para><para>
+
+<para>将值写入相机的某个寄存器 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳相机设置，不应在正常操作中使用，否则可能会导致系统崩溃。 </para>
+<para>
+Definition at line 272 of file Camera.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, LDEBUG, LFATAL, jevois::sformat(), and XIOCTL.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_Camera_8H">Camera.H</link>src/jevois/Core/<link linkend="_Camera_8C">Camera.C</link></section>
+</section>

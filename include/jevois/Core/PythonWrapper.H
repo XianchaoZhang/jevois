@@ -22,26 +22,25 @@
 
 namespace jevois
 {
-  //! Helper class to run python code from C++
-  /*! This class loads python code and makes it accessible through pyinst(). It is designed to be composed with other
-      classes that will actually execute some python code via pyinst().
-
-      The main convention here is that the python code will define a class with the exact same name as the python
-      filename (without trailing .py extension). This is the class that will then become accessible via pyinst().
-
-      Note that constructors and pythonload() will not throw, but pyinst() will if an error occurred at construction.
-
-      Often this class is inherited from by a class that also inherits from Component, to create a Component derivative
-      that can run python code. In such case, PythonWrapper will register that sibling association with Engine when the
-      python code is loaded. It is critical that you inherit from Component (or a derivative) before you inherit from
-      PythonWrapper, so that by the time the PythonWrapper destructor is called the Component base should not yet have
-      been destroyed, and it will be unregistered from Engine.
+  //! 辅助类，用于从 C++ 运行 Python 代码 
+  /*! 此类加载 Python 代码并使其可通过 pyinst() 访问。它旨在与其他类组合，这些类实际上将通过 pyinst() 执行一些 Python
+       代码。
+	   
+	   这里的主要约定是，python 代码将定义一个与 python 文件名完全相同的类（不带尾随的 .py 扩展名）。该类随后可通过 
+	   pyinst() 访问。
+	   
+	   请注意，构造函数和 pythonload() 不会抛出错误，但如果在构造过程中发生错误，pyinst() 将会抛出错误
+	   
+	   通常，此类由从 Component 继承的类继承，以创建可以运行 Python 代码的 Component 派生类。在这种情况下，
+	   PythonWrapper 将在加载 Python 代码时将该同级关联注册到 Engine 。在从 PythonWrapper 继承之前从 Component（或派
+	   生类）继承至关重要，这样当调用 PythonWrapper 析构函数时，Component 基类应该尚未被销毁，并且它将从 Engine 中取
+	   消注册。
 
       \ingroup python */
   class PythonWrapper
   {
     public:
-      //! Default constructor. Will need to call pythonload() later
+      //! 默认构造函数。稍后需要调用 pythonload()
       PythonWrapper();
 
       //! Destructor
@@ -50,10 +49,10 @@ namespace jevois
       //! Construct from path
       PythonWrapper(std::string const & path);
 
-      //! Init from path if default constructor was used
+      //! 如果使用了默认构造函数，则从 path 初始化
       void pythonload(std::string const & path);
 
-      //! Get the python class pyinst, or throw if construction error occurred (e.g., file not found)
+      //! 获取 python 类 pyinst，或者如果发生构造错误（例如，找不到文件）则抛出
       boost::python::object & pyinst();
 
       //! Get the main module
@@ -62,13 +61,13 @@ namespace jevois
       //! Get the main namespace
       boost::python::object & mainNamespace();
 
-      //! Get the construction error if any, or empty string
+      //! 获取构造错误（如果有）或空字符串
       std::string const & constructionError() const;
 
     private:
       boost::python::object itsMainModule, itsMainNamespace, itsInstance;
       std::string itsConstructionError;
-      mutable std::mutex itsMtx; // make sure we don't get destroyed while loading python code
+      mutable std::mutex itsMtx; // 确保在加载 python 代码时不会被销毁
   };
 
 } // namespace jevois

@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__console">
+<title>控制台访问实用程序</title>
+<indexterm><primary>控制台访问实用程序</primary></indexterm>
+<section>
+<title> </title>
+
+<para>控制台相关的实用程序和帮助函数。 </para>
+Collaboration diagram for 控制台访问实用程序:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__console.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__console_1gadb6b6c4de8c91afbd75b26fd21e1267c">jevois::isInputDevice</link> (int fd)</para>
+
+<para>指示此 fd（应来自 /dev/input/eventX）是否是键盘、鼠标等 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gac71712656cfebf518ed5700bf3e9e3ed">jevois::getConsoleFd</link> ()</para>
+
+<para>获取控制台的文件描述符 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gab9a802bcfa42386853cc58f86c5d023f">jevois::getActiveTTY</link> ()</para>
+
+<para>获取当前活动 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga4a8b4e6208cca24fc399107e48eb133c">jevois::muteKeyboard</link> (int tty, int &amp;kb_mode)</para>
+
+<para>防止 keystrokes 到达 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga5fffa3f01add1a9dab7f031361a01282">jevois::unMuteKeyboard</link> (int tty, int kb_mode)</para>
+
+<para>恢复给定 tty 的键盘模式 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__console_1gab9a802bcfa42386853cc58f86c5d023f"/>    <section>
+    <title>getActiveTTY()</title>
+<indexterm><primary>getActiveTTY</primary><secondary>控制台访问实用程序</secondary></indexterm>
+<indexterm><primary>控制台访问实用程序</primary><secondary>getActiveTTY</secondary></indexterm>
+<para><computeroutput>int jevois::getActiveTTY ( )</computeroutput></para><para>
+
+<para>获取当前活动 tty </para>
+</para>
+<para>
+Definition at line 121 of file Console.C.</para>
+<para>
+References IS_CONSOLE.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::init(), and main().</para>
+    </section><anchor xml:id="_group__console_1gac71712656cfebf518ed5700bf3e9e3ed"/>    <section>
+    <title>getConsoleFd()</title>
+<indexterm><primary>getConsoleFd</primary><secondary>控制台访问实用程序</secondary></indexterm>
+<indexterm><primary>控制台访问实用程序</primary><secondary>getConsoleFd</secondary></indexterm>
+<para><computeroutput>int jevois::getConsoleFd ( )</computeroutput></para><para>
+
+<para>获取控制台的文件描述符 </para>
+</para>
+<para>
+Definition at line 85 of file Console.C.</para>
+<para>
+References NELEMS.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::init(), and main().</para>
+    </section><anchor xml:id="_group__console_1gadb6b6c4de8c91afbd75b26fd21e1267c"/>    <section>
+    <title>isInputDevice()</title>
+<indexterm><primary>isInputDevice</primary><secondary>控制台访问实用程序</secondary></indexterm>
+<indexterm><primary>控制台访问实用程序</primary><secondary>isInputDevice</secondary></indexterm>
+<para><computeroutput>bool jevois::isInputDevice (int fd)</computeroutput></para><para>
+
+<para>指示此 fd（应来自 /dev/input/eventX）是否是键盘、鼠标等 </para>
+</para>
+
+<para>受 SFML-rpi 启发 </para>
+<para>
+Definition at line 36 of file Console.C.</para>
+<para>
+References NBITS, and test_bit.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::scanDevices().</para>
+    </section><anchor xml:id="_group__console_1ga4a8b4e6208cca24fc399107e48eb133c"/>    <section>
+    <title>muteKeyboard()</title>
+<indexterm><primary>muteKeyboard</primary><secondary>控制台访问实用程序</secondary></indexterm>
+<indexterm><primary>控制台访问实用程序</primary><secondary>muteKeyboard</secondary></indexterm>
+<para><computeroutput>void jevois::muteKeyboard (int tty, int &amp; kb_mode)</computeroutput></para><para>
+
+<para>防止 keystrokes 到达 tty </para>
+</para>
+<para>
+Definition at line 103 of file Console.C.</para>
+<para>
+References IS_CONSOLE, K_OFF, KDSKBMODE, and KDSKBMUTE.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::init().</para>
+    </section><anchor xml:id="_group__console_1ga5fffa3f01add1a9dab7f031361a01282"/>    <section>
+    <title>unMuteKeyboard()</title>
+<indexterm><primary>unMuteKeyboard</primary><secondary>控制台访问实用程序</secondary></indexterm>
+<indexterm><primary>控制台访问实用程序</primary><secondary>unMuteKeyboard</secondary></indexterm>
+<para><computeroutput>void jevois::unMuteKeyboard (int tty, int kb_mode)</computeroutput></para><para>
+
+<para>恢复给定 tty 的键盘模式 </para>
+</para>
+
+<para>使用 <link linkend="_group__console_1ga4a8b4e6208cca24fc399107e48eb133c">muteKeyboard()</link> 返回的 kd_mode。 </para>
+<para>
+Definition at line 114 of file Console.C.</para>
+<para>
+References KDSKBMODE, and KDSKBMUTE.</para>
+<para>
+Referenced by main(), and jevois::ImGuiBackendMALI::~ImGuiBackendMALI().</para>
+</section>
+</section>
+</section>

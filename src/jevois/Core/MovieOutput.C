@@ -38,13 +38,13 @@ jevois::MovieOutput::MovieOutput(std::string const & fn) :
 // ####################################################################################################
 jevois::MovieOutput::~MovieOutput()
 {
-  // Signal end of run:
+  // 信号运行结束：
   itsRunning.store(false);
       
-  // Push an empty frame into our buffer to signal the end of video to our thread:
+  // 将一个空帧推入我们的缓冲区，向我们的线程发出视频结束信号：
   itsBuf.push(cv::Mat());
 
-  // Wait for the thread to complete:
+  // 等待线程完成：
   LINFO("Waiting for writer thread to complete, " << itsBuf.filled_size() << " frames to go...");
   try { itsRunFut.get(); } catch (...) { jevois::warnAndIgnoreException(); }
   LINFO("Writer thread completed. Syncing disk...");
@@ -55,7 +55,7 @@ jevois::MovieOutput::~MovieOutput()
 // ##############################################################################################################
 void jevois::MovieOutput::setFormat(VideoMapping const & m)
 {
-  // Store the mapping so we can check frame size and format when giving out our buffer:
+  // 存储映射，以便我们在给出缓冲区时检查帧大小和格式：
   itsMapping = m;
 }
 
@@ -64,7 +64,7 @@ void jevois::MovieOutput::get(RawImage & img)
 {
   if (itsSaving.load())
   {
-    // Reset our VideoBuf using the current format:
+    // 使用当前格式重置我们的 VideoBuf：
     itsBuffer.reset(new jevois::VideoBuf(-1, itsMapping.osize(), 0, -1));
 
     img.width = itsMapping.ow;
@@ -82,7 +82,7 @@ void jevois::MovieOutput::send(RawImage const & img)
 {
   if (itsSaving.load())
   {
-    // Our thread will do the actual encoding:
+    // 我们的线程将进行实际编码：
     if (itsBuf.filled_size() > 1000) LERROR("Image queue too large, video writer cannot keep up - DROPPING FRAME");
     else itsBuf.push(jevois::rawimage::convertToCvBGR(img));
 
@@ -109,7 +109,7 @@ void jevois::MovieOutput::streamOff()
 {
   itsSaving.store(false);
 
-  // Push an empty frame into our buffer to signal the end of video to our thread:
+  // 将一个空帧推送到我们的缓冲区以向我们的线程发出视频结束信号：
   itsBuf.push(cv::Mat());
 
   // Wait for the thread to empty our image buffer:
@@ -128,8 +128,7 @@ void jevois::MovieOutput::run() // Runs in a thread
 {
   while (itsRunning.load())
   {
-    // Create a VideoWriter here, since it has no close() function, this will ensure it gets destroyed and closes
-    // the movie once we stop the recording:
+    // 在此创建一个 VideoWriter，因为它没有 close() 函数，这将确保一旦我们停止录制它就会被销毁并关闭影片：
     cv::VideoWriter writer;
     int frame = 0;
       
@@ -138,26 +137,26 @@ void jevois::MovieOutput::run() // Runs in a thread
       // Get next frame from the buffer:
       cv::Mat im = itsBuf.pop();
 
-      // An empty image will be pushed when we are ready to close the video file:
+      // 当我们准备关闭视频文件时，将会推送一个空图像：
       if (im.empty()) break;
         
-      // Start the encoder if it is not yet running:
+      // 如果编码器尚未运行，则启动它：
       if (writer.isOpened() == false)
       {
         std::string const fcc = "MJPG";
         //std::string const fcc = "MP4V";
         int const cvfcc = cv::VideoWriter::fourcc(fcc[0], fcc[1], fcc[2], fcc[3]);
           
-        // Add path prefix if given filename is relative:
+        // 如果给定的文件名是相对的，则添加路径前缀：
         std::string fn = itsFilebase;
         if (fn.empty()) LFATAL("Cannot save to an empty filename");
         if (fn[0] != '/') fn = PATHPREFIX + fn;
 
-        // Create directory just in case it does not exist:
+        // 万一目录不存在则创建它：
         std::string const cmd = "/bin/mkdir -p " + fn.substr(0, fn.rfind('/'));
         if (std::system(cmd.c_str())) LERROR("Error running [" << cmd << "] -- IGNORED");
 
-        // Fill in the file number; be nice and do not overwrite existing files:
+        // 填写文件编号；尽量不要覆盖现有文件：
         while (true)
         {
           char tmp[2048];
@@ -175,11 +174,11 @@ void jevois::MovieOutput::run() // Runs in a thread
       // Write the frame:
       writer << im;
       
-      // Report what is going on once in a while:
+      // 偶尔报告一下发生了什么：
       if ((++frame % 100) == 0) LINFO("Written " << frame << " video frames");
     }
     
-    // Our writer runs out of scope and closes the file here.
+    // 我们的 writer 超出范围并在此关闭文件。
     ++itsFileNum;
   }
 }

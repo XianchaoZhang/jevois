@@ -1,0 +1,108 @@
+\hypertarget{RawImage_8H}{}\doxysubsection{include/jevois/\+Image/\+Raw\+Image.H File Reference}
+\label{RawImage_8H}\index{include/jevois/Image/RawImage.H@{include/jevois/Image/RawImage.H}}
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$linux/videodev2.\+h$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/details/\+Raw\+Image\+Impl.\+H$>$}\newline
+Include dependency graph for Raw\+Image.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RawImage_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{RawImage_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}}
+\begin{DoxyCompactList}\small\item\em 来自 V4\+L2 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和/或发送到 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 的原始图像 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1yuyv}{jevois\+::yuyv}}
+\begin{DoxyCompactList}\small\item\em 辅助 Y\+U\+YV 颜色 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1rgb565}{jevois\+::rgb565}}
+\begin{DoxyCompactList}\small\item\em 辅助 R\+G\+B565 颜色 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_aad6cf7ac43e2ad7e8ef6918470f40a83}{jevois\+::yuyv\+::\+Black}} = 0x8000
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a4f155791d15554e071aef3dfb37beb95}{jevois\+::yuyv\+::\+Dark\+Grey}} = 0x8050
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_aa3b6295010136553868f606e6a993b49}{jevois\+::yuyv\+::\+Med\+Grey}} = 0x8080
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a5f206e015ca7e099028a1a3cae787e6a}{jevois\+::yuyv\+::\+Light\+Grey}} = 0x80a0
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a76df58773f59d7f784b5fb1804f15387}{jevois\+::yuyv\+::\+White}} = 0x80ff
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a91969a50979e79d4974c8f459f99bdce}{jevois\+::yuyv\+::\+Dark\+Green}} = 0x0000
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_ab086c9ac9e1997469b664642f59f8145}{jevois\+::yuyv\+::\+Med\+Green}} = 0x0040
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a66fc676e658366005821f3331101beb8}{jevois\+::yuyv\+::\+Light\+Green}} = 0x00ff
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a303ff8a5d1a4ec77e2570b87637a4bec}{jevois\+::yuyv\+::\+Dark\+Teal}} = 0x7070
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a461de62e75a0cfc31802e36b6f310e1b}{jevois\+::yuyv\+::\+Med\+Teal}} = 0x7090
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_ade13f94333592e4ec10742bb07e0160d}{jevois\+::yuyv\+::\+Light\+Teal}} = 0x70b0
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_acc314d90a43dbd39d4f479ed9749ba80}{jevois\+::yuyv\+::\+Dark\+Purple}} = 0xa030
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a04820055cb96407ed6444e8532d0a63e}{jevois\+::yuyv\+::\+Med\+Purple}} = 0xa050
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a78b7c2b2cefbba2a67f749af7a736a03}{jevois\+::yuyv\+::\+Light\+Purple}} = 0xa080
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a5ad84b6d7bcef10df48d4c3d2fb85a48}{jevois\+::yuyv\+::\+Dark\+Pink}} = 0xff00
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a8c48179cf75fc20abacb02f29f5f1e33}{jevois\+::yuyv\+::\+Med\+Pink}} = 0xff80
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1yuyv_a327a3ef5e6651921d87c3d3c23b933d9}{jevois\+::yuyv\+::\+Light\+Pink}} = 0xffff
+\begin{DoxyCompactList}\small\item\em Y\+U\+YV color value. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a32dec84c4d207a525c81ed0f0a84dd06}{jevois\+::rgb565\+::\+Black}} = 0x0000
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 0, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a0f9fbdb23cbf551036a1fbc449a4b465}{jevois\+::rgb565\+::\+Navy}} = 0x000F
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 0, 128. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_aac739f94be03329393d1d3ce41807e9d}{jevois\+::rgb565\+::\+Dark\+Green}} = 0x03\+E0
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 128, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a3ff3ae96ecf98a43cb0535fdabb6bf86}{jevois\+::rgb565\+::\+Dark\+Cyan}} = 0x03\+EF
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 128, 128. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a742aae7ffc1aec2efbdbccf9ac904376}{jevois\+::rgb565\+::\+Maroon}} = 0x7800
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 128, 0, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a4bbb8a5bf0fbbe4e25279a3d6ea714a0}{jevois\+::rgb565\+::\+Purple}} = 0x780F
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 128, 0, 128. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a5a5821324ec3ba7022611cfeaf01ba9b}{jevois\+::rgb565\+::\+Olive}} = 0x7\+B\+E0
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 128, 128, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a533042ff36fc263f8462e2cec9943247}{jevois\+::rgb565\+::\+Light\+Grey}} = 0x\+C618
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 192, 192, 192. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a8c067d0f3ff38964d39c1e952d6bb34b}{jevois\+::rgb565\+::\+Dark\+Grey}} = 0x7\+B\+EF
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 128, 128, 128. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_ac19360e9b5fc49b14411496065c86e27}{jevois\+::rgb565\+::\+Blue}} = 0x001F
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 0, 255. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_acee23946f5913d7a62d94aa6fbd7f396}{jevois\+::rgb565\+::\+Green}} = 0x07\+E0
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 255, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a16eb2dcf1f0f242ee58d946e0307d2d1}{jevois\+::rgb565\+::\+Cyan}} = 0x07\+FF
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 0, 255, 255. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a100db7e327ca883384142613343318e2}{jevois\+::rgb565\+::\+Red}} = 0x\+F800
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 255, 0, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a4724d8fd5c05556d3850c365610c30e9}{jevois\+::rgb565\+::\+Magenta}} = 0x\+F81F
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 255, 0, 255. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_af5283a1164a9b6073611cba424920bf4}{jevois\+::rgb565\+::\+Yellow}} = 0x\+F\+F\+E0
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 255, 255, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_a1f5d465ee3d1071e39d9f09293167580}{jevois\+::rgb565\+::\+White}} = 0x\+F\+F\+FF
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 255, 255, 255. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_ac9b991a2a73098987da7a670091fb590}{jevois\+::rgb565\+::\+Orange}} = 0x\+F\+D20
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 255, 165, 0. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_ad66a4aacfdefc7f6c851c7b92d5cd2c3}{jevois\+::rgb565\+::\+Green\+Yellow}} = 0x\+A\+F\+E5
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: 173, 255, 47. \end{DoxyCompactList}\item 
+unsigned constexpr short \mbox{\hyperlink{namespacejevois_1_1rgb565_abe57292d3c48b2de289af50ee42a281a}{jevois\+::rgb565\+::\+Pink}} = 0x\+F618
+\begin{DoxyCompactList}\small\item\em R\+G\+B565 value for\+: F4 C2 C2. \end{DoxyCompactList}\end{DoxyCompactItemize}

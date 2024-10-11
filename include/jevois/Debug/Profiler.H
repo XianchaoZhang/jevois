@@ -24,12 +24,11 @@
 
 namespace jevois
 {
-  //! Simple profiler class
-  /*! This class reports the time spent between start() and each of the checkpoint() calls, separately computed for each
-      checkpoint string, at specified intervals. Because JeVois modules typically work at video rates, this class only
-      reports the average time after some number of iterations through the start(), checkpoint(), and stop(). Thus, even
-      if the time between two checkpoints is only a few microseconds, by reporting it only every 100 frames one will not
-      slow down the overall framerate too much. See Timer for a lighter class with only start() and stop().
+  //! 简单的 profiler 类
+  /*! 此类报告在指定的间隔内针对每个检查点字符串分别计算的 start() 和每个 checkpoint() 调用之间所花费的时间。 由于 
+      JeVois 模块通常以视频速率工作，因此此类仅报告通过 start()、checkpoint() 和 stop() 进行一定次数迭代后的平均时间。 
+	    因此，即使两个检查点之间的时间只有几微秒，通过每 100 帧仅报告一次，也不会使整体帧速率降低太多。 请参阅 Timer 以获
+	    取仅具有 start() 和 stop() 的更轻量级类。
       \ingroup debugging */
   class Profiler
   {
@@ -37,18 +36,17 @@ namespace jevois
       //! Constructor
       Profiler(char const * prefix, size_t interval = 100, int loglevel = LOG_INFO);
 
-      //! Start a time measurement period
+      //! 开始时间测量周期
       void start();
 
-      //! Note the time for a particular event
-      /*! The delta time between this event and the previous one (or start() for the first checkpoint) will be
-          reported. Note that we create a new unique entry in our tables for each description value, so you should keep
-          the number of unique descriptions passed small (do not include a frame number or some parameter value). The
-          description is passed as a raw C string to encourage you to just use a string literal for it. */
+      //! 注意特定事件的时间 
+	    /*! 将报告此事件与前一个事件（或第一个检查点的 start()）之间的增量时间。请注意，我们在表中为每个描述值创建了一个
+	        新的唯一条目，因此您应保持传递的唯一描述数量较少（不包括帧号或某些参数值）。描述以原始 C 字符串的形式传递，以
+		      鼓励您仅使用字符串文字。 */
       void checkpoint(char const * description);
       
-      //! End a time measurement period, report time spent for each checkpoint if reporting interval is reached
-      /*! The time reported is from start to each checkpoint. */
+      //! 结束时间测量期，如果达到报告间隔，则报告每个检查点所花费的时间 
+	    /*! 报告的时间是从开始到每个检查点。 */
       void stop();
 
     private:

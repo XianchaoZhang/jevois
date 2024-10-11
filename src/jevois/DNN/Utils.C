@@ -44,10 +44,10 @@ std::map<int, std::string> jevois::dnn::readLabelsFile(std::string const & fname
     }
     else classname = line.substr(idx1, idx2 + 1 - idx1);
 
-    // Possibly replace two double quotes by one:
+    // 可能将两个双引号替换为一个：
     jevois::replaceStringAll(classname, "\"\"", "\"");
 
-    // Possibly remove enclosing double quotes:
+    // 可能删除括起来的双引号：
     size_t len = classname.length();
     if (len > 1 && classname[0] == '"' && classname[len-1] == '"') classname = classname.substr(1, len-2);
     
@@ -432,7 +432,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::parseTensorSpecs(std::string cons
     for (size_t i = 0; i < attr.dim_num; ++i) attr.size[attr.dim_num - 1 - i] = dims[i];
     ++n; // next token
     
-    // Decode optional quantization type and its possible extra parameters:
+    // 解码可选的量化类型及其可能的额外参数：
     if (n == tok.size() || tok[n] == "NONE")
     {
       attr.dtype.qnt_type = VSI_NN_QNT_TYPE_NONE;
@@ -445,7 +445,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::parseTensorSpecs(std::string cons
       attr.dtype.fl = std::stoi(tok[n+1]);
     }
     
-    else if (tok[n] == "AA" || tok[n] == "AS") // affine asymmetric and symmetric same, see ovxlib/vsi_nn_tensor.h
+    else if (tok[n] == "AA" || tok[n] == "AS") // 仿射非对称和对称相同，参见 ovxlib/vsi_nn_tensor.h
     {
       attr.dtype.qnt_type = VSI_NN_QNT_TYPE_AFFINE_ASYMMETRIC;
       if (tok.size() != n+3)
@@ -499,7 +499,7 @@ cv::Size jevois::dnn::attrsize(vsi_nn_tensor_attr_t const & attr)
   case VSI_NN_DIM_FMT_AUTO:
     if (attr.dim_num < 2) return cv::Size(attr.size[0], 1);
     if (attr.dim_num < 3) return cv::Size(attr.size[0], attr.size[1]);
-    // ok, size[] starts with either CWH (when dim index goes 0..2) or WHC, assume C<H
+    // ok，size[] 以 CWH（当 dim 索引变为 0..2 时）或 WHC 开头，假设 C<H
     if (attr.size[0] > attr.size[2]) return cv::Size(attr.size[0], attr.size[1]); // WHCN
     else return cv::Size(attr.size[1], attr.size[2]); // CWHN
     
@@ -587,7 +587,7 @@ vsi_nn_tensor_attr_t jevois::dnn::tensorattr(TfLiteTensor const * t)
   attr.dim_num = dims.size;
   for (int i = 0; i < dims.size; ++i) attr.size[dims.size - 1 - i] = dims.data[i];
 
-  // Set the fmt to NCHW or NHWC if possible:
+  // 如果可能，将 fmt 设置为 NCHW 或 NHWC：
   if (attr.dim_num == 4)
   {
     if (attr.size[0] > attr.size[2]) attr.dtype.fmt = VSI_NN_DIM_FMT_NCHW; // assume H>C
@@ -655,7 +655,7 @@ vsi_nn_tensor_attr_t jevois::dnn::tensorattr(hailo_vstream_info_t const & vi)
   default: throw std::range_error("tensorattr: Unsupported Hailo order " +std::to_string(vi.format.order));
   }
 
-  // Hailo only supports one quantization type:
+  // Hailo 仅支持一种量化类型：
   attr.dtype.qnt_type = VSI_NN_QNT_TYPE_AFFINE_ASYMMETRIC;
   attr.dtype.scale = vi.quant_info.qp_scale;
   attr.dtype.zero_point = int32_t(vi.quant_info.qp_zp);
@@ -703,7 +703,7 @@ size_t jevois::dnn::softmax(float const * input, size_t const n, size_t const st
 // ##############################################################################################################
 bool jevois::dnn::attrmatch(vsi_nn_tensor_attr_t const & attr, cv::Mat const & blob)
 {
-  // Check that blob and tensor are a complete match:
+  // 检查 blob 和 tensor 是否完全匹配：
   if (blob.channels() != 1) return false;
   if (blob.depth() != jevois::dnn::vsi2cv(attr.dtype.vx_type)) return false;
   if (uint32_t(blob.size.dims()) != attr.dim_num) return false;
@@ -719,7 +719,7 @@ cv::Mat jevois::dnn::quantize(cv::Mat const & m, vsi_nn_tensor_attr_t const & at
 {
   if (m.depth() != CV_32F) LFATAL("Tensor to quantize must be 32F");
   
-  // Do a sloppy match for total size only since m may still be 2D RGB packed vs 4D attr...
+  // 仅对总大小进行草率匹配，因为 m 可能仍然是 2D RGB 打包与 4D 属性…… 
   std::vector<int> adims = jevois::dnn::attrdims(attr);
   size_t tot = 1; for (int d : adims) tot *= d;
   
@@ -811,7 +811,7 @@ cv::Mat jevois::dnn::dequantize(cv::Mat const & m, vsi_nn_tensor_attr_t const & 
     return ret;
   }
   
-  case VSI_NN_QNT_TYPE_AFFINE_ASYMMETRIC: // same value as VSI_NN_QNT_TYPE_AFFINE_SYMMETRIC:
+  case VSI_NN_QNT_TYPE_AFFINE_ASYMMETRIC: // 与 VSI_NN_QNT_TYPE_AFFINE_SYMMETRIC 相同的值：
   {
     cv::Mat ret;
     m.convertTo(ret, CV_32F);
@@ -848,12 +848,12 @@ cv::Mat jevois::dnn::concatenate(std::vector<cv::Mat> const & tensors, int axis)
   int const ndims = ms.dims();
   auto const typ = tensors[0].type();
   
-  // Convert negative axis to positive and check within bounds:
+  // 将负轴转换为正轴并检查在界限内： 
   if (axis < - ndims || axis >= ndims)
     LFATAL("Incorrect axis " << axis << ": must be in [" << -ndims << " ... " << ndims - 1 << ']');
   if (axis < 0) axis = ndims - axis;
 
-  // Check number of dimensions and data type; compute new size along concatenated axis:
+  // 检查维数和数据类型；沿连接轴计算新的大小：
   size_t newsize = tensors[0].size[axis];
 
   for (size_t i = 1; i < tensors.size(); ++i)
@@ -869,7 +869,7 @@ cv::Mat jevois::dnn::concatenate(std::vector<cv::Mat> const & tensors, int axis)
     newsize += tensors[i].size[axis];
   }
   
-  // Check that all other dims match:
+  // 检查所有其他 dims 是否匹配：
   for (int a = 0; a < ndims; ++a)
     if (a != axis)
       for (size_t i = 1; i < tensors.size(); ++i)

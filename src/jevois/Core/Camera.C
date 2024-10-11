@@ -37,7 +37,7 @@ jevois::Camera::Camera(std::string const & devname, jevois::CameraSensor s, unsi
   JEVOIS_TRACE(1);
 
 #ifdef JEVOIS_PLATFORM_A33
-  // Get the sensor flags (if supported, currently only JeVois-A33 platform):
+  // 获取传感器标志（如果支持，目前仅限 JeVois-A33 平台）： 
   itsFlags = readFlags();
   LDEBUG("Sensor " << s << (itsFlags & JEVOIS_SENSOR_MONO) ? " Monochrome" : " Color" <<
          (itsFlags & JEVOIS_SENSOR_ICM20948) ? " with ICM20948 IMU" : " ");
@@ -52,10 +52,10 @@ void jevois::Camera::setFormat(jevois::VideoMapping const & m)
 
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // Destroy our devices, if any, in reverse order of creation:
+  // 销毁我们的设备（如果有）以与创建相反的顺序：
   while (itsDev.empty() == false) itsDev.pop_back();
 
-  // Load sensor preset sequence if needed, get the native sensor capture dims for requested format:
+  // 如果需要，加载传感器预设序列，获取请求格式的本机传感器捕获尺寸：
   unsigned int capw = m.cw, caph = m.ch; int preset = -1;
   jevois::sensorPrepareSetFormat(itsSensor, m, capw, caph, preset);
   std::string pstr; if (preset != -1) pstr = " [preset " + std::to_string(preset) + ']';
@@ -66,13 +66,12 @@ void jevois::Camera::setFormat(jevois::VideoMapping const & m)
   {
   case jevois::CropType::Scale:
   {
-    // Start 3 streams to get the scaled image in the third one. If desired capture size is the same as native sensor
-    // size, revert to single-stream crop mode instead of scale:
+    // 启动 3 个流以在第三个流中获取缩放图像。如果所需的捕获尺寸与原生传感器尺寸相同，则恢复为单流裁剪模式而不是缩放：
     if (capw != m.cw || caph != m.ch)
     {
       LINFO("Capture: " << capw << 'x' << caph << ", rescale to " << m.cw << 'x' << m.ch);
 
-      // Open 3 devices: raw frame, meta data, scaled frame, and set their formats:
+      // 打开3个设备：原始帧、元数据、缩放帧，并设置它们的格式：
       itsDev.push_back(std::make_shared<jevois::CameraDevice>(itsDevName, 2, true)); // raw frame
       itsDev.back()->setFormat(m.cfmt, capw, caph, m.cfps, m.cw, m.ch, preset);
       
@@ -108,7 +107,7 @@ void jevois::Camera::setFormat(jevois::VideoMapping const & m)
   {
     LINFO("Capture: " << capw << 'x' << caph << ", plus ISP scaled to " << m.c2w << 'x' << m.c2h);
 
-    // Open 3 devices: raw frame, meta data, scaled frame, and set their formats:
+    // 打开 3 个设备：原始帧、元数据、缩放帧，并设置它们的格式：
     itsDev.push_back(std::make_shared<jevois::CameraDevice>(itsDevName, 2, false)); // raw frame
     itsDev.back()->setFormat(m.cfmt, capw, caph, m.cfps, m.cw, m.ch, preset);
 
@@ -136,10 +135,10 @@ void jevois::Camera::setFormat(jevois::VideoMapping const & m)
 
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // Destroy our devices, if any, in reverse order of creation:
+  // 按照与创建相反的顺序销毁我们的设备（如果有）：
   while (itsDev.empty() == false) itsDev.pop_back();
   
-  // Open one device: raw frame, no cropping or scaling supported:
+  // 打开一个设备：原始帧，不支持裁剪或缩放：
   itsDev.push_back(std::make_shared<jevois::CameraDevice>(itsDevName, itsNbufs, false));
   itsDev.back()->setFormat(m.cfmt, m.cw, m.ch, m.cfps, m.cw, m.ch);
   itsFd = itsDev.back()->getFd(); itsDevIdx = itsDev.size() - 1;
@@ -152,7 +151,7 @@ jevois::Camera::~Camera()
 {
   JEVOIS_TRACE(1);
 
-  // Turn off streaming if it was on:
+  // 如果流式传输已打开，则关闭它：
   try { streamOff(); } catch (...) { jevois::warnAndIgnoreException(); }
 
   // Close all devices:

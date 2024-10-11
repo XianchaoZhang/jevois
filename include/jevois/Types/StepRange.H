@@ -54,15 +54,14 @@
 
 namespace jevois
 {
-  //! A generic range class with a step
-  /*! The StepRange class is used to represent a range from [min .. (step) .. max]
+  //! 具有 step 的通用 range 类 
+  /*! StepRange 类用于表示从 [min .. (step) .. max] 的范围
 
-      Valid values are min, min+step, min+2*step, min+3*step, ... max. Note that max is a valid value even if it is not
-      equal to min+N*step for some integer N. Note that T must be a numeric type (can be cast to double). Throws if step
-      is not a positive or zero number.
+      有效值为 min、min+step、min+2*step、min+3*step、...max。请注意，即使 max 不等于某个整数 N 的 min+N*step，它也是有效值。
+      请注意，T 必须是数字类型（可以转换为双精度）。如果 step 不是正数或零，则抛出异常。
 
-      Because StepRange is typically only used for limited specific purposes (e.g., defining paremeters for controls in
-      video4linux framegrabbers), the interface provided is minimal (much more limited than that of jevois::Range).
+      因为 StepRange 通常仅用于有限的特定目的（例如，定义 video4linux 帧抓取器中的控件的参数），所以提供的接口很少（比 
+      jevois::Range 的接口有限得多）。
 
       \ingroup types */
   template <typename T>
@@ -81,18 +80,16 @@ namespace jevois
       //! Move constructor
       StepRange(StepRange<T> && other) = default;
 
-      //! Copy-conversion constructor, uses jevois::clamped_convert<T,U> internally
-      /*! Note that this constructor is \e explicit, i.e., you need to explicitly mention it. This is to avoid
-          conversions to happen without a programmer being aware of it. For example:
+      //! 复制转换构造函数，内部使用 jevois::clamped_convert<T,U> 
+      /*! 请注意，此构造函数是 \e explicit 的，即您需要显式提及它。这是为了避免在程序员不知情的情况下发生转换。例如：
           @code
           void myFunc(jevois::StepRange<float> const & rng) { ... }
           jevois::StepRange<int> r1(0, 5, 100);
           jevois::StepRange<float> r2(r1); // ok, explicit constructor call
           myFunc(r2);  // ok, no conversion necessary
-          //myFunc(r1) // NO: passing StepRange<int> to function that takes a StepRange<float> arg fails to compile
-          myFunc(jevois::StepRange<float>(r1)); // ok, nice and explicit; and you can think about whether r1 should 
-                                         // have been a StepRange<float> in the first place so you don't waste CPU
-                                         // doing this conversion (as opposed to just not being aware of the wasting)
+          //myFunc(r1) // NO: 将 StepRange<int> 传递给接受 StepRange<float> 参数的函数编译失败
+          myFunc(jevois::StepRange<float>(r1)); // ok, nice and explicit; 并且您可以首先考虑 r1 是否应该是一个 
+                                          // StepRange<float>，这样您就不会浪费 CPU 进行这种转换（而不是只是没有意识到浪费）
           @endcode */
       template <typename U>
       explicit StepRange(StepRange<U> const & other);
@@ -115,7 +112,7 @@ namespace jevois
       //! Return whether min() == max()
       bool empty() const;
 
-      //! Return true if a value is valid (i.e., it is min, min+step, min+step*2, ... or max)
+      //! 如果值有效则返回 true (i.e., it is min, min+step, min+step*2, ... or max)
       bool isValueValid(T const val) const;
 
     private:

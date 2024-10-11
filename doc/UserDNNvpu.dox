@@ -1,240 +1,145 @@
-/*! \page UserDNNvpu Converting and running neural networks for Myriad-X VPU
+/*! \page UserDNNvpu 转换并运行 Myriad-X VPU 的神经网络
 
-\jvpro supports the [Intel Movidius
-Myriad-X](https://www.intel.com/content/www/us/en/products/details/processors/movidius-vpu/movidius-myriad-x.html)
-Vector Processing Unit (VPU) as an optional add-on neural accelerator.
+\jvpro 支持 [Intel Movidius Myriad-X](https://www.intel.com/content/www/us/en/products/details/processors/movidius-vpu/movidius-myriad-x.html) 矢量处理单元 (VPU) 作为可选的附加神经加速器。
 
-\note \jvpro only. This accelerator is not supported on \jva33.
+\note 仅限 \jvpro。\jva33 不支持此加速器。
 
-Supported neural network frameworks
-===================================
+支持的神经网络框架====================================
 
 - Caffe
 - TensorFlow
 - ONNX
-- pyTorch (via export to ONNX)
+- pyTorch（通过导出到 ONNX）
 - MXNet
 - PaddlePaddle
 - Kaldi
 
-The VPU can run models with float16 (16-bit floating point) weights. It does not support standatd 32-bit float weights
-and hence conversion or compression is necessary.
+VPU 可以运行具有 float16（16 位浮点）权重的模型。它不支持标准 32 位浮点权重，因此需要进行转换或压缩。
 
-For execution on VPU, your model will be converted on a Linux desktop to a proprietary blob format that can then be
-transferred to JeVois-Pro microSD for execution.
+为了在 VPU 上执行，您的模型将在 Linux 桌面上转换为专有 blob 格式，然后可以将其传输到 JeVois-Pro microSD 进行执行。
 
-On JeVois-Pro, we run VPU models through OpenVino installed as a backend to OpenCV. Thus, the basic mechanism to load
-and run inference on a VPU model is OpenCV, like for models that run on CPU.
+在 JeVois-Pro 上，我们通过作为 OpenCV 后端安装的 OpenVino 运行 VPU 模型。因此，加载和在 VPU 模型上运行推理的基本机制是 OpenCV，就像在 CPU 上运行的模型一样。
 
-An emulation mode is available, using the JeVois-Pro CPU to run models optimized for VPU, through the [ARM Compute
-Library](https://github.com/ARM-software/ComputeLibrary) and the [OpenVino ARM CPU
-plugin](https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md).  It is much
-slower, though. When a VPU is not connected to JeVois-Pro, all VPU networks are still available as **VPUX** to
-signal emulated mode. To the end user, this is completely transparent (no need to modify any settings).
+可以使用仿真模式，通过 [ARM 计算库](https://github.com/ARM-software/ComputeLibrary) 和 [OpenVino ARM CPU 插件](https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md)，使用 JeVois-Pro CPU 运行针对 VPU 优化的模型。不过，速度要慢得多。当 VPU 未连接到 JeVois-Pro 时，所有 VPU 网络仍可用作 **VPUX** 来发出仿真模式信号。对于最终用户来说，这是完全透明的（无需修改任何设置）。
 
-Procedure
-=========
+程序 =========
 
-- Read and understand the JeVois docs about \ref UserDNNoverview
+- 阅读并理解有关 \ref UserDNNoverview 的 JeVois 文档
 
-- Make sure you understand the quantization concepts in \ref UserDNNconv
+- 确保你理解 \ref UserDNNconv 中的量化概念
 
-- Check out the [official OpenVino docs](https://docs.openvino.ai/latest/index.html). In particular, we will use the
-  [Model Optimizer](https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) to
-  convert custom models to VPU.
+- 查看 [官方 OpenVino 文档](https://docs.openvino.ai/latest/index.html)。具体来说，我们将使用 [模型优化器](https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html) 将自定义模型转换为 VPU。
 
-- The OpenVino docs are excellent and provide many [conversion
-  tutorials](https://docs.openvino.ai/latest/openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html)
+- OpenVino 文档非常出色，提供了很多 [转换教程](https://docs.openvino.ai/latest/openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html)
 
-- The [Open Model Zoo](https://docs.openvino.ai/latest/model_zoo.html) provides many models that can be downloaded and
-  converted to VPU (or are already converted).
+- [Open Model Zoo](https://docs.openvino.ai/latest/model_zoo.html) 提供了许多可下载并转换为 VPU（或已转换）的模型。
 
-- The VPU only supports a specific set of layer types. If you try to convert a network that contains unsupported layers,
-  the conversion may sometimes seem to succeed but your converted network may fail to run. Check [supported
-  plugins](https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_VPU.html) and
-  [opset9](https://github.com/openvinotoolkit/openvino/blob/master/docs/ops/opset9.md) for some information.
+- VPU 仅支持一组特定的层类型。如果您尝试转换包含不受支持的层的网络，转换有时似乎成功，但转换后的网络可能无法运行。请查看 [支持的插件](https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_VPU.html) 和 [opset9](https://github.com/openvinotoolkit/openvino/blob/master/docs/ops/opset9.md) 了解相关信息。
 
-- You need to download and install the OpenVino SDK to convert/compress your model on a desktop computer running
-  Linux Ubuntu 20.04.
+- 您需要下载并安装 OpenVino SDK 才能在运行 Linux Ubuntu 20.04 的台式计算机上转换/压缩您的模型。
 
-- Everything you need for runtime inference (OpenVino runtime libraries, OpenCV bindings, OpenVino ARM CPU plugin) is
-  pre-installed on your JeVois microSD.
+- 运行时推理所需的一切（OpenVino 运行时库、OpenCV 绑定、OpenVino ARM CPU 插件）都已预先安装在您的 JeVois microSD 上。
 
-- Obtain a model: train your own, or download a pretrained model.
+- 获得模型：训练您自己的模型，或下载预先训练的模型。
 
-- Obtain some parameters about the model (e.g., pre-processing mean, stdev, scale, expected input image size, RGB or
-  BGR, packed (NWHC) or planar (NCHW) pixels, etc).
+- 获取有关模型的一些参数（例如，预处理平均值、标准差、比例、预期输入图像大小、RGB 或 BGR、打包（NWHC）或平面（NCHW）像素等）。
 
-- Copy model to JeVois microSD card under JEVOIS[PRO]:/share/dnn/custom/
+- 将模型复制到 JEVOIS[PRO]:/share/dnn/custom/ 下的 JeVois microSD 卡
 
-- Create a JeVois model zoo entry for your model, where you specify the model parameters and the location where you
-  copied your model files. Typically this is a YAML file under JEVOIS[PRO]:/share/dnn/custom/
+- 为您的模型创建一个 JeVois 模型动物园条目，在其中指定模型参数和复制模型文件的位置。通常，这是 JEVOIS[PRO]:/share/dnn/custom/ 下的 YAML 文件
 
-- Launch the JeVois \jvmod{DNN} module. It will scan the custom directory for any valid YAML file, and make your model
-  available as one available value for the \p pipe parameter of the DNN module's Pipeline component. Select that pipe to
-  run your model.
+- 启动 JeVois \jvmod{DNN} 模块。它将扫描自定义目录以查找任何有效的 YAML 文件，并使您的模型作为 DNN 模块的 Pipeline 组件的 \p 管道参数的一个可用值。选择该管道以运行您的模型。
 
-Setting up the OpenVino SDK
-===========================
+设置 OpenVino SDK =============================
 
-\note Everything below is to be run on a fast x86_64 desktop computer running Ubuntu 20.04 Linux, not on your JeVois-Pro
-camera. At the end, we will copy the converted model to microSD and then run inference on JeVois-Pro with that model.
+\note 以下所有内容均应在运行 Ubuntu 20.04 Linux 的快速 x86_64 台式计算机上运行，​​而不是在您的 JeVois-Pro 相机上运行。最后，我们将转换后的模型复制到 microSD，然后使用该模型在 JeVois-Pro 上运行推理。
 
-We follow the [official OpenVino installation
-instructions](https://docs.openvino.ai/latest/openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools)
-to install the OpenVino SDK on an Ubuntu 20.04 desktop:
+我们按照[官方 OpenVino 安装说明](https://docs.openvino.ai/latest/openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools)在 Ubuntu 20.04 桌面上安装 OpenVino SDK：
 
-- Create a python virtual env and get the OpenVino Development Tools:
+- 创建一个 python 虚拟环境并获取 OpenVino 开发工具：
 
-\code{.py}
-python3 -m venv openvino_env
-source openvino_env/bin/activate
-python -m pip install --upgrade pip
-pip install openvino-dev[tensorflow2,onnx,caffe,kaldi,mxnet,pytorch] # ok to delete those that you do not need
-mo -h # verify the install
-\endcode
+\code{.py} python3 -m venv openvino_env source openvino_env/bin/activate python -m pip install --upgrade pip pip install openvino-dev[tensorflow2,onnx,caffe,kaldi,mxnet,pytorch] # 删除不需要的 mo -h # 验证安装 \endcode
 
-Example: Object detection with YOLOv5s
-======================================
+示例：使用 YOLOv5s 进行对象检测 ========================================
 
-1. Get the model
-----------------
+1. 获取模型 ----------------
 
-- Go to https://github.com/ultralytics/yolov5
+- 前往 https://github.com/ultralytics/yolov5
 
-- Let's download YOLOv5s which runs on 640x640 inputs. Either click on the latest Release and then on \b yolov5s.pt in
-  the list of assets at the bottom, or run this:
+- 让我们下载在 640x640 输入上运行的 YOLOv5s。单击最新版本，然后单击底部资产列表中的 \b yolov5s.pt，或者运行以下命令：
 
-\code{.py}
-wget https://github.com/ultralytics/yolov5/releases/download/v6.2/yolov5s.pt
-\endcode
+\code{.py} wget https://github.com/ultralytics/yolov5/releases/download/v6.2/yolov5s.pt \endcode
 
-- You will get **yolov5s.pt**, which is in pyTorch format.
+- 你将获得 pyTorch 格式的 **yolov5s.pt**。
 
-- Unlike with the NPU or TPU, we do not need a sample dataset for the VPU, since we are just truncating 32-bit float to
-  16-bit float, which does not require detailed knowledge of the range of values that every layer will encounter ar
-  runtime.
+- 与 NPU 或 TPU 不同，我们不需要 VPU 的样本数据集，因为我们只是将 32 位浮点数截断为 16 位浮点数，这不需要详细了解每一层在运行时会遇到的值范围。
 
-2. Since our model is pyTorch, convert it to ONNX first
--------------------------------------------------------
+2.由于我们的模型是pyTorch，所以先将其转换为ONNX -------------------------------------------------------
 
-- The [OpenVino docs for pyTorch
-  conversion](https://docs.openvino.ai/latest/openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_PyTorch.html)
-  call for first exporting the pyTorch model to ONNX, then run the OpenVino Model Optimizer on that.
+- [OpenVino 的 pyTorch 转换文档](https://docs.openvino.ai/latest/openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_PyTorch.html) 要求首先将 pyTorch 模型导出到 ONNX，然后在其上运行 OpenVino 模型优化器。
 
-- Like many recent networks, the yolov5 repo provides an export.py script to export the model to ONNX and other formats.
+- 与许多最近的网络一样，yolov5 repo 提供了一个 export.py 脚本来将模型导出为 ONNX 和其他格式。
 
-- We thus proceed as follows (also see https://github.com/violet17/yolov5_demo):
+- 因此，我们按如下方式进行（另请参阅https://github.com/violet17/yolov5_demo）：
 
-  \code{.py}
-git clone https://github.com/ultralytics/yolov5.git
-cd yolov5
-pip install -r requirements.txt
-python3 export.py --weights ../yolov5s.pt --include onnx --simplify --img 640 --batch 1
-# test the converted model:
-python detect.py --weights ../yolov5s.onnx 
-# check results in runs/detect/exp/
-cd ..
-  \endcode
+\code{.py} git clone https://github.com/ultralytics/yolov5.git cd yolov5 pip install -r requirements.txt python3 export.py --weights ../yolov5s.pt --include onnx --simplify --img 640 --batch 1
+# 测试转换后的模型：python detect.py --weights ../yolov5s.onnx 
+# 检查 runs/detect/exp/ 中的结果 cd .. \endcode
 
-- We now have **yolov5s.onnx**
+- 我们现在有 **yolov5s.onnx**
 
-3. Run the OpenVino model optimizer
------------------------------------
+3. 运行OpenVino模型优化器 -----------------------------------
 
-By default, the network outputs a single output tensor that concatenates the 3 YOLO scales, while most YOLO
-post-processors expect 3 separate outputs. So let's load our **yolov5s.onnx** into https://netron.app to find the 3 last
-Conv layers before final reshaping and concatenation. We find Conv_198 which outputs 1x255x80x80, Conv_232 which outputs
-1x255x40x40, and Conv_266 which outputs 1x255x20x20. So we will use these outputs, which the JeVois PostProcessorDetect
-can handle.
+默认情况下，网络输出单个输出张量，该张量连接 3 个 YOLO 尺度，而大多数 YOLO 后处理器需要 3 个单独的输出。因此，让我们将 **yolov5s.onnx** 加载到 https://netron.app 中，以在最终重塑和连接之前找到最后 3 个 Conv 层。我们发现 Conv_198 输出 1x255x80x80，Conv_232 输出 1x255x40x40，Conv_266 输出 1x255x20x20。因此，我们将使用这些输出，JeVois PostProcessorDetect 可以处理这些输出。
 
-Click on the image below to enlarge. If you click on each of the blue Conv layers in Netron, you will see their names.
+点击下图放大。如果你点击 Netron 中的每个蓝色 Conv 层，你会看到它们的名称。
 
 \jvimg{yolov5s-last-conv.png, 25%}
 
-Also have a look at https://github.com/violet17/yolov5_demo who did something similar.
+另外还可以看看 https://github.com/violet17/yolov5_demo，他做了类似的事情。
 
-We convert the model to float16 (FP16) for operation on Myriad-X VPU:
+我们将模型转换为 float16 (FP16)，以便在 Myriad-X VPU 上运行：
 
-\code{.py}
-mo --input_model yolov5s.onnx -s 255 --data_type FP16 --output Conv_198,Conv_232,Conv_266
-\endcode
+\code{.py} mo --input_model yolov5s.onnx -s 255 --data_type FP16 --output Conv_198,Conv_232,Conv_266 \endcode
 
-Parameter **-s 255** will divide input pixels by 255 on device, so we can directly feed unscaled input pixels to the
-network. See `mo --help` for more options.
+参数 **-s 255** 将在设备上将输入像素除以 255，因此我们可以直接将未缩放的输入像素输入到网络。更多选项请参阅“mo --help”。
 
-We obtain **yolov5s.bin** and **yolov5s.xml** which we can run on JeVois-Pro.
+我们获得了**yolov5s.bin**和**yolov5s.xml**，可以在JeVois-Pro上运行。
 
-4. Create YAML zoo file
------------------------
+4. 创建YAML zoo文件 -----------------------
 
-- We start with a similar entry from zoo file vpu.yaml already in the JeVois microSD (and available in the Config
-  tab of the GUI).
+- 我们从 JeVois microSD 中已有的 zoo 文件 vpu.yaml 中的类似条目开始（并且可以在 GUI 的 Config 选项卡中使用）。
 
-- For YOLO post-processing, we need definitions of anchors (prototypical box shapes that will be used to predict object
-  boxes). We just get those from https://github.com/ultralytics/yolov5/blob/master/models/yolov5s.yaml, towards top:
-  \code{.py}
-anchors:
-  - [10,13, 16,30, 33,23]  # P3/8
-  - [30,61, 62,45, 59,119]  # P4/16
-  - [116,90, 156,198, 373,326]  # P5/32
-  \endcode
-  In the YAML file below, we will separate the 3 sets of anchors for the 3 YOLO scales by semicolons.
+- 对于 YOLO 后处理，我们需要定义锚点（用于预测对象框的原型框形状）。我们从 https://github.com/ultralytics/yolov5/blob/master/models/yolov5s.yaml 获取这些，位于顶部：\code{.py} 锚点：
+- [10,13, 16,30, 33,23] # P3/8
+- [30,61, 62,45, 59,119] # P4/16
+- [116,90, 156,198, 373,326] # P5/32 \endcode 在下面的 YAML 文件中，我们将用分号分隔 3 个 YOLO 尺度的 3 组锚点。
 
-- Because YOLOv5 uses the "new style" of YOLO coordinates, we need to disable Post-Processor sigmoid and set
-  Post-Processor scalexy to 2.0. You would usually want that for YOLOv5/v7. Conversely, set sigmoid to true and scalexy
-  to 0.0 (defaults) to use old-style box coordinates for YOLOv2/v3/v4. You can look at the differences in
-  jevois::dnn::PostProcessorDetectYOLO::yolo_one()
+- 由于 YOLOv5 使用“新样式”的 YOLO 坐标，我们需要禁用后处理器 sigmoid 并将后处理器 scalexy 设置为 2.0。对于 YOLOv5/v7，您通常会希望这样做。相反，将 sigmoid 设置为 true 并将 scalexy 设置为 0.0（默认值）以使用 YOLOv2/v3/v4 的旧样式框坐标。您可以在 jevois::dnn::PostProcessorDetectYOLO::yolo_one() 中查看差异
 
-- Here, actually, it looks like these 3 Conv layers we used for our outputs have linear activation in that particular
-  model. So we need to set sigmoid to true as the post-processor will require that for YOLO decoding.
+- 实际上，我们用于输出的这 3 个 Conv 层在该特定模型中似乎具有线性激活。因此我们需要将 sigmoid 设置为 true，因为后处理器将需要它来进行 YOLO 解码。
 
-- We just modify the name and file locations, bring all the global definitions that were in spu.yml into our file (like
-  preproc, nettype, etc which were set globally in spu.yml and hence not repeated for the entry we are copying
-  from), and end up with the following **yolov5s.yml**:
- 
-\code{.py}
-%YAML 1.0
----
+- 我们只需修改名称和文件位置，将 spu.yml 中的所有全局定义放入我们的文件中（例如 preproc、nettype 等，它们在 spu.yml 中全局设置，因此不会在我们要复制的条目中重复），最后得到以下 **yolov5s.yml**：\code{.py} %YAML 1.0 ---
 
-yolov5s:
-  preproc: Blob
-  nettype: OpenCV
-  backend: InferenceEngine
-  target: Myriad
-  model: "dnn/custom/yolov5s.bin"
-  config: "dnn/custom/yolov5s.xml"
-  intensors: "NCHW:8U:1x3x640x640"
-  postproc: Detect
-  detecttype: RAWYOLO
-  anchors: "10,13, 16,30, 33,23;   30,61, 62,45, 59,119;   116,90, 156,198, 373,326"
-  classes: "npu/detection/coco-labels.txt"
-  sigmoid: true
-  scalexy: 2.0
-\endcode
+yolov5s： preproc：Blob 网络类型：OpenCV 后端：InferenceEngine 目标：Myriad 模型：“dnn/custom/yolov5s.bin” 配置：“dnn/custom/yolov5s.xml” 强度：“NCHW：8U：1x3x640x640” postproc：检测 检测类型：RAWYOLO 锚点：“10,13、16,30、33,23；30,61、62,45、59,119；116,90、156,198、373,326” 类：“npu/detection/coco-labels.txt” sigmoid：true scalexy：2.0 \endcode
 
-\note Here by just specifying **intensors: "NCHW:8U:1x3x640x640"** with no quantization details at the end of the spec,
-we instruct the JeVois pre-processor to just feed the raw input pixels with no value scaling (i.e., mean=[0 0 0],
-scale=1, stdev=[1 1 1]) and hence we skip specifying mean scale, and stdev altogether.
+\note 在这里，只需在规范末尾指定 **intensors: "NCHW:8U:1x3x640x640"** 而没有量化细节，我们指示 JeVois 预处理器仅提供原始输入像素，而不进行值缩放（即，平均值 = [0 0 0]，比例 = 1，标准差 = [1 1 1]），因此我们完全跳过指定平均比例和标准差。
 
-- We copy yolov5s.yml, yolo5s.xml, yolov5s.bin to /jevoispro/share/dnn/custom/ on JeVois-Pro and let's try it!
+- 我们将 yolov5s.yml、yolo5s.xml、yolov5s.bin 复制到 JeVois-Pro 上的 /jevoispro/share/dnn/custom/ 然后尝试一下！
 
-5. Test the model and adjust any parameters
--------------------------------------------
+5. 测试模型并调整任何参数 -------------------------------------------
 
-- Select the \jvmod{DNN} machine vision module
+- 选择 \jvmod{DNN} 机器视觉模块
 
-- Set the \p pipe parameter to **VPU:Detect:yolov5s**
+- 将 \p 管道参数设置为 **VPU:Detect:yolov5s**
 
 \jvimg{vpu-yolov5s.png, 70%}
 
-It works! This network is a bit big for the Myriad-X, running at only 1.9 FPS. A tiny version of the model, or using
-smaller input size, will get you higher frames/second.
+成功了！这个网络对于 Myriad-X 来说有点大，运行速度仅为 1.9 FPS。使用模型的微型版本或使用较小的输入尺寸将获得更高的帧/秒。
 
-Tips
-====
+提示 ====
 
-- Also see \ref UserDNNtips
+- 另请参阅 \ref UserDNNtips
 
 */
 

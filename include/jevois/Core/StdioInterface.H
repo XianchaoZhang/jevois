@@ -24,10 +24,9 @@
 
 namespace jevois
 {
-  //! String-based user interface, simple terminal input/output to use on host
-  /*! When compiling JeVois code on the host, the hardware serial port and serial-over-usb ports will not be
-      available. Instead of these two, the Engine will use a single StdioInterface which reads/writes strings from
-      standard input/output of the terminal in which jevois-daemon was started. \ingroup core */
+  //! 基于字符串的用户界面，在主机上使用的简单终端输入/输出 
+  /*! 在主机上编译 JeVois 代码时，硬件串行端口和 USB 串行端口将不可用。引擎将使用单个 StdioInterface 来代替这两个端口，该 
+      StdioInterface 从启动 jevois-daemon 的终端的标准输入/输出读取/写入字符串。 \ingroup core */
   class StdioInterface : public UserInterface
   {
     public:
@@ -37,14 +36,14 @@ namespace jevois
       //! Destructor
       virtual ~StdioInterface();
       
-      //! Read some bytes if available, and return true and a string when one is complete
+      //! 如果可用，则读取一些字节，并在完成时返回 true 和一个字符串
       bool readSome(std::string & str) override;
       
-      //! Write a string, using the line termination convention of serial::linestyle
-      /*! No line terminator should be included in the string, writeString() will add one. */
+      //! 使用 serial::linestyle 的行终止约定写入字符串 
+      /*! 字符串中不应包含行终止符，writeString() 将添加一个。 */
       void writeString(std::string const & str) override;
 
-      //! Return our port type, here always Stdio
+      //! 返回我们的端口类型，这里总是 Stdio 
       UserInterface::Type type() const override;
 
     private:

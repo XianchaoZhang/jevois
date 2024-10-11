@@ -42,7 +42,7 @@ void jevois::dnn::PostProcessorSegment::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::PostProcessorSegment::postInit()
 {
-  // Colormap from pascal VOC segmentation benchmark: 
+  // 来自 pascal VOC 分割基准的 Colormap
   for (size_t i = 0; i < 256; ++i)
   {
     uint32_t & c = itsColor[i]; c = 0;
@@ -71,12 +71,11 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
     // ----------------------------------------------------------------------------------------------------
   case jevois::dnn::postprocessor::SegType::ClassesHWC:
   {
-    // tensor should be 4D 1xHxWxC, where C is the number of classes. We pick the class index with max value and
-    // apply the colormap to it:
+    // 张量应为 4D 1xHxWxC，其中 C 是类数。我们选择具有最大值的类索引并将颜色图应用于它：
     if (rs.dims() != 4 || rs[0] != 1) LTHROW("Need 1xHxWxC for C classes");
     int const numclass = rs[3]; int const siz = rs[1] * rs[2] * numclass;
     
-    // Apply colormap, converting from RGB to RGBA:
+    // 应用 colormap，从 RGB 转换为 RGBA：
     itsOverlay = cv::Mat(rs[1], rs[2], CV_8UC4);
     uint32_t * im = reinterpret_cast<uint32_t *>(itsOverlay.data);
     
@@ -89,7 +88,7 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
         if (v > maxval) { maxval = v; maxc = c; }
       }
       
-      // Use full transparent for class bgclass or if out of bounds, otherwise colormap:
+      // 对类 bgclass 使用完全透明或如果超出范围，否则使用颜色图：
       if (maxc < 0 || maxc > 255 || maxc == bgclass) *im++ = 0; else *im++ = itsColor[maxc] | alph;
     }
   }
@@ -98,8 +97,7 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
   // ----------------------------------------------------------------------------------------------------
   case jevois::dnn::postprocessor::SegType::ClassesCHW:
   {
-    // tensor should be 4D 1xCxHxW, where C is the number of classes. We pick the class index with max value and
-    // apply the colormap to it:
+    // 张量应为 4D 1xCxHxW，其中 C 是类别数。我们选择具有最大值的类索引并将颜色图应用于它：
     if (rs.dims() != 4 || rs[0] != 1) LTHROW("Need 1xCxHxW for C classes");
     int const numclass = rs[1]; int const hw = rs[2] * rs[3];
     
@@ -116,7 +114,7 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
         if (v > maxval) { maxval = v; maxc = c; }
       }
       
-      // Use full transparent for class bgclass or if out of bounds, otherwise colormap:
+      // 对类 bgclass 使用完全透明或如果超出范围，否则使用 colormap:
       if (maxc < 0 || maxc > 255 || maxc == bgclass) *im++ = 0; else *im++ = itsColor[maxc] | alph;
     }
   }
@@ -125,7 +123,7 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
   // ----------------------------------------------------------------------------------------------------
   case jevois::dnn::postprocessor::SegType::ArgMax:
   {
-    // tensor should be 2D HxW, 3D 1xHxW, or 4D 1xHxWx1 and contain class ID in each pixel:
+    // 张量应为 2D HxW、3D 1xHxW 或 4D 1xHxWx1，并且每个像素包含类 ID：
     if (rs.dims() != 2 && (rs.dims() != 3 || rs[0] != 1) && (rs.dims() != 4 || rs[0] != 1 || rs[3] != 1))
       LTHROW("Need shape HxW, 1xHxW, or 1xHxWx1 with class ID in each pixel");
     int const siz = rs[1] * rs[2];
@@ -136,7 +134,7 @@ void jevois::dnn::PostProcessorSegment::process(cv::Mat const & results)
     
     for (int i = 0; i < siz; ++i)
     {
-      // Use full transparent for class bgclass or if out of bounds, otherwise colormap:
+      // 对类 bgclass 使用完全透明，或者如果超出范围，否则使用 colormap:
       int32_t const id = *r++;
       if (id < 0 || id > 255 || id == bgclass) *im++ = 0; else *im++ = itsColor[id] | alph;
     }
@@ -152,7 +150,7 @@ void jevois::dnn::PostProcessorSegment::process(std::vector<cv::Mat> const & out
   {
     if (outs.size() != 1) LTHROW("Need exactly one output blob");
 
-    // Patch up the colormap if background class ID is 0:
+    // 如果背景类 ID 为 0，则修补 colormap
     if (bgid::get() != 0) itsColor[0] = 0xff0000; else itsColor[0] = 0;
     
     // Post-process:
@@ -168,7 +166,7 @@ void jevois::dnn::PostProcessorSegment::process(std::vector<cv::Mat> const & out
     default: LTHROW("Unsupported data type in tensor " << jevois::dnn::shapestr(results));
     }
   }
-  // Abort here if the received outputs were malformed:
+  // 如果收到的输出格式错误，则在此中止：
   catch (std::exception const & e)
   {
     std::string err = "Selected segtype is " + segtype::strget() + " and network produced:\n\n";
@@ -178,7 +176,7 @@ void jevois::dnn::PostProcessorSegment::process(std::vector<cv::Mat> const & out
     LFATAL(err);
   }
 
-  // Compute overlay corner coords within the input image, for use in report():
+  // 计算输入图像内的叠加角坐标，用于 report()：
   preproc->getUnscaledCropRect(0, itsTLx, itsTLy, itsBRx, itsBRy);
 }
 
@@ -186,23 +184,23 @@ void jevois::dnn::PostProcessorSegment::process(std::vector<cv::Mat> const & out
 void jevois::dnn::PostProcessorSegment::report(jevois::StdModule * mod, jevois::RawImage * outimg,
                                                jevois::OptGUIhelper * helper, bool /*overlay*/, bool /*idle*/)
 {
-  // Remember our helper, will be used in destructor to free overlay OpenGL texture:
+  // 记住我们的帮助器，将在析构函数中用于释放覆盖 OpenGL 纹理：
   itsHelper = helper;
 
-  // Outputs may not be ready yet:
+  // 输出可能尚未准备好：
   if (itsOverlay.empty()) return;
   
-  // If desired, draw boxes in output image:
+  // 如果需要，在输出图像中绘制框：
   if (outimg)
   {
     // todo: blend into YUYV
   }
 
 #ifdef JEVOIS_PRO
-  // Draw the image on top of our input image, as a semi-transparent overlay. OpenGL will do scaling and blending:
+  // 将图像绘制在输入图像的顶部，作为半透明覆盖层。OpenGL 将进行缩放和混合：
   if (helper)
   {
-    // Convert box coords from input image to display:
+    // 将框坐标从输入图像转换为显示：
     ImVec2 tl = helper->i2d(itsTLx, itsTLy), br = helper->i2d(itsBRx, itsBRy);
     int dtlx = tl.x, dtly = tl.y;
     unsigned short dw = br.x - tl.x, dh = br.y - tl.y;

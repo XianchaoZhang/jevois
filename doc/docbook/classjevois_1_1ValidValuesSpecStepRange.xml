@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ValidValuesSpecStepRange">
+<title>jevois::ValidValuesSpecStepRange&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ValidValuesSpec.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::ValidValuesSpecStepRange&lt; T &gt;</title></simplesect>
+
+
+<para>基于 <link linkend="_classjevois_1_1StepRange">StepRange</link> 的有效值规范，包含边界 </para>
+<para>
+Definition at line 136 of file ValidValuesSpec.H.</para>
+Inheritance diagram for jevois::ValidValuesSpecStepRange&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecStepRange__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ValidValuesSpecStepRange&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecStepRange__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ValidValuesSpecStepRange_1a3ba16dcfbce1ea4b33a99888a28fbbd6">ValidValuesSpecStepRange</link> ()=delete</para>
+
+<para>没有默认构造函数，总是需要提供一个范围 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ValidValuesSpecStepRange_1ad8040bf55a68f5475029201a664cc289">ValidValuesSpecStepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;valid_range)</para>
+
+<para>从有效值的 <link linkend="_classjevois_1_1StepRange">StepRange</link> 构造（约定：边界包含在内） </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ValidValuesSpecStepRange_1a1ec8e4cfac1ead1b499cd4f1a8ce70a2">~ValidValuesSpecStepRange</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecStepRange_1a55dad4d0f53eb5cfc9e41e5ebf79715f">checkValueValidity</link> (T const &amp;val) const</para>
+
+<para>检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecStepRange_1a8ea21d22b160b7855e3b87cb1f318234">str</link> () const</para>
+
+<para>转换为可读字符串：StepRange:[MIN-STEP-MAX] 其中 MIN、STEP 和 MAX 由实际值替换。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; <link linkend="_classjevois_1_1ValidValuesSpecStepRange_1ad0772a35caf23bd9deabde58decc454a">itsValidStepRange</link></para>
+
+<para>我们的有效值步长范围 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1a3ba16dcfbce1ea4b33a99888a28fbbd6"/>    <section>
+    <title>ValidValuesSpecStepRange()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>ValidValuesSpecStepRange</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>ValidValuesSpecStepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1ValidValuesSpecStepRange">ValidValuesSpecStepRange</link> ( )<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>没有默认构造函数，总是需要提供一个范围 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1ad8040bf55a68f5475029201a664cc289"/>    <section>
+    <title>ValidValuesSpecStepRange()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>ValidValuesSpecStepRange</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>ValidValuesSpecStepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1ValidValuesSpecStepRange">ValidValuesSpecStepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; valid_range)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>从有效值的 <link linkend="_classjevois_1_1StepRange">StepRange</link> 构造（约定：边界包含在内） </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1a1ec8e4cfac1ead1b499cd4f1a8ce70a2"/>    <section>
+    <title>~ValidValuesSpecStepRange()</title>
+<indexterm><primary>~ValidValuesSpecStepRange</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>~ValidValuesSpecStepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual <link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::~<link linkend="_classjevois_1_1ValidValuesSpecStepRange">ValidValuesSpecStepRange</link> ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1a55dad4d0f53eb5cfc9e41e5ebf79715f"/>    <section>
+    <title>checkValueValidity()</title>
+<indexterm><primary>checkValueValidity</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>checkValueValidity</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::checkValueValidity (T const &amp; val) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac1198c7ddd9c246cc9f6e68b0c20b4f9">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1a8ea21d22b160b7855e3b87cb1f318234"/>    <section>
+    <title>str()</title>
+<indexterm><primary>str</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>str</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::str ( ) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>转换为可读字符串：StepRange:[MIN-STEP-MAX] 其中 MIN、STEP 和 MAX 由实际值替换。 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac354706e1ae5638204584d660b0b6f47">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecStepRange_1ad0772a35caf23bd9deabde58decc454a"/>    <section>
+    <title>itsValidStepRange</title>
+<indexterm><primary>itsValidStepRange</primary><secondary>jevois::ValidValuesSpecStepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecStepRange&lt; T &gt;</primary><secondary>itsValidStepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt;T&gt; <link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange</link>&lt; T &gt;::itsValidStepRange<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们的有效值步长范围 </para>
+</para>
+<para>
+Definition at line 155 of file ValidValuesSpec.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_ValidValuesSpec_8H">ValidValuesSpec.H</link></section>
+</section>

@@ -1,33 +1,31 @@
-/*! \page Fanless JeVois-A33 fanless operation
+/*! \page Fanless JeVois-A33 无风扇操作
 
-In some situations, the fan that cools \jva33 is just too loud or consumes too much power. It is possible for JeVois to
-work without it. Here we show you how to convert your JeVois camera to using a heatsink instead of the fan.
+在某些情况下，冷却 \jva33 的风扇声音太大或耗电量太大。JeVois 可以在没有风扇的情况下工作。这里我们向您展示如何将您的 JeVois 相机转换为使用散热器而不是风扇。
 
-During development of JeVois, we had initially planned on passive cooling with a heatsink. However, the required
-heatsink was so large and was getting so hot that we finally opted for a fan.
+在开发 JeVois 的过程中，我们最初计划使用散热器进行被动冷却。但是，所需的散热器太大，而且温度太高，所以我们最终选择了风扇。
 
-Requirements
-============
+要求 
+=============
 
-You will need:
+你会需要：
 
-- a working JeVois camera
-- a large flat screwdriver
-- wire cutters or scissors
-- super glue
-- a heatsink, here we used 30x30x20mm, with spike-style fins as those tend to be more efficient
-- heatsink (thermally conductive) glue, we got ours on ebay or aliexpress
-- alcohol pads
-- a vise with soft jaws (e.g., rubber)
+- 一台能用的 JeVois 相机
+- 一把大号平头螺丝刀
+- 钢丝钳或剪刀
+- 强力胶
+- 散热器，这里我们使用 30x30x20mm，带尖刺式散热片，因为这种散热片效率更高
+- 散热器（导热）胶，我们在 ebay 或 aliexpress 上买的
+- 酒精垫
+- 带软钳口的虎钳（例如橡胶）
 
-\warning The heatsink will get very hot, too hot for confortable touching. It can go up to 80C (175F).
+\warning 散热器会变得非常热，热到让人无法舒适地触摸。温度最高可达 80C (175F)。
 
-Converting to fanless
-=====================
+转换为无风扇 
+=======================
 
-- This modification of course voids your warranty. Proceed at your own risk.
+- 此修改当然会使您的保修失效。继续操作时风险自负。
 
-- Open the case using the large flat screwdriver
+- 使用大号平头螺丝刀打开外壳
 
 \jvimg{fanless1.jpg, 25%}
 
@@ -35,88 +33,64 @@ Converting to fanless
 
 \jvimg{fanless2.jpg, 25%}
 
-- Cut the fan wires. Make sure they do not get shorted!
+- 剪断风扇电线。确保它们不会短路！
 
 \jvimg{fanless3.jpg, 25%}
 
 
-- You may want to glue the camera sensor to the case bottom using some super glue. Just beware that the invisible fumes
-  from super glue will permanently damage your lens. So make sure that the lens is covered before applying glue to the
-  case. In the picture below, you would slightly lift the sensor out of the case, put a very small amount of super-glue
-  on the case in the housing of the sensor, and put the sensor back.
+- 您可能需要使用强力胶将相机传感器粘在外壳底部。但请注意，强力胶产生的无形烟雾会永久损坏您的镜头。因此，在将胶水涂到外壳上之前，请确保镜头已盖好。在下图中，您需要将传感器从外壳中轻轻抬起，在传感器外壳上的外壳上涂上少量强力胶，然后将传感器放回原位。
 
 \jvimg{fanless4.jpg, 25%}
 
 
-- Examine the soldering job all around the CPU. None of the solder joints should extend higher than the CPU. Othwerwise,
-  the heatsink could create short circuits. You may have to cover some of the solder joints with tape if you are afraid
-  that they will come in contact with the heatsink.
+- 检查 CPU 周围的焊接工作。焊点不应高于 CPU。否则，散热器可能会造成短路。如果您担心焊点会与散热器接触，您可能需要用胶带覆盖一些焊点。
 
 \jvimg{fanless5.jpg, 25%}
 
-- Now get ready to glue the heatsink. First clean both the heatsink and the CPU and RAM chips with an alcohol swab and
-  allow the alcohol to fully dry out. The CPU has a marking of \a A33 on it, and the RAM chip has \a Samsung.
+- 现在准备粘合散热器。首先用酒精棉签清洁散热器、CPU 和 RAM 芯片，让酒精完全干燥。CPU 上有 \a A33 标记，RAM 芯片上有 \a Sa​​msung 标记。
 
 \jvimg{fanless6.jpg, 25%}
 
-- Next, apply a small amount of heatsink glue to the CPU and to the RAM chip. Note that the RAM chip is a bit thinner
-  than the CPU so the contact with the heatsink will not be great, but that is ok as the RAM does not get very hot
-  anyway.
+- 接下来，在 CPU 和 RAM 芯片上涂抹少量散热胶。请注意，RAM 芯片比 CPU 薄一点，因此与散热片的接触不会很好，但这没关系，因为 RAM 无论如何都不会变得很热。
 
 \jvimg{fanless7.jpg, 25%}
 
-- Press the heatsink onto the CPU and clamp in a vise, not too tight so that you will not break the circuit board. Allow
-  to dry for several hours (overnight is recommended).
+- 将散热器压在 CPU 上并用虎钳夹紧，不要太紧以免损坏电路板。让其干燥几个小时（建议干燥一整夜）。
 
 \jvimg{fanless8.jpg, 25%}
 
-- Ready to go, it does not look too good but let's see if it will work.
+- 准备出发，看上去不太好，但让我们看看它是否可行。
 
 \jvimg{fanless9.jpg, 25%}
 
-- Success, in a 20C office, we get about 63C CPU temperature after 30 minutes of running \jvmod{TensorFlowEasy}, which
-  uses about 375% of the CPU (400% would mean loading all 4 CPU cores to the max).
+- 成功，在 20C 的办公室中，运行 \jvmod{TensorFlowEasy} 30 分钟后，CPU 温度约为 63C，这使用了大约 375% 的 CPU（400% 意味着将所有 4 个 CPU 核心都加载到最大）。
 
 \jvimg{fanlessa.png, 40%}
 
-That camera eventually went up to 66C after two hours.
+两小时后，相机温度最终升至 66C。
 
-If CPU temperature goes over 75C, the CPU frequency will automatically reduce from 1.34GHz to 1.2GHz.
+如果 CPU 温度超过 75C，CPU 频率将自动从 1.34GHz 降低至 1.2GHz。
 
-You can also reduce the max CPU clock using parameter \p cpumax of JeVois. In the Console of JeVois inventor, type
-`help` and look for parameter \p cpumax which will show you a number of possible frequencies in MHz. You can then pick
-one of those and set it. For example,
+您还可以使用 JeVois 的参数 \p cpumax 降低最大 CPU 时钟。在 JeVois Inventor 的控制台中，输入 `help` 并查找参数 \p cpumax ，它将向您显示以 MHz 为单位的可能频率数。然后您可以选择其中一个并进行设置。例如，
 
 \verbatim
 setpar cpumax 1008
 \endverbatim
 
-TensorFlow predict time went up from 25ms/inference to 33ms/inference, but CPU temperature dropped from 66C to 42C on
-our test camera.
+TensorFlow 预测时间从 25ms/推理增加到 33ms/推理，但在我们的测试相机上，CPU 温度从 66C 下降到 42C。
 
-You can also add this command to your camera's \b initscript.cfg file to run it each time JeVois starts.
+您还可以将此命令添加到相机的 \b initscript.cfg 文件中，以便在每次 JeVois 启动时运行它。
 
-\note Using our \jvmod{BurnTest} module which we use to test the cameras at the factory, we eventually reached 75C, at
-which point the CPU frequency automatically dropped to 1.2GHz. Temperature then oscillated between 72C and 75C while CPU
-frequency oscillated between 1.2GHz and 1.34GHz. \jvmod{BurnTest} is not enabled by default because it is a terminal
-module (you need to reboot JeVois to kill it). If you look for BurnTest in \b videomappings.cfg, you will find a
-commented-out entry. Remove the comment character and restart JeVois to enable it. As noted, once you launch BurnTest,
-you will need to reboot JeVois to get out of it. While the system remained stable (no crash), we suspect that running
-for extended time periods near 75C will significantly shorten the lifespan of the CPU chip. This is also one of the
-reasons why we eventually decided to use a fan for mass production.
+\note 使用我们在工厂测试摄像机时使用的 \jvmod{BurnTest} 模块，我们最终达到了 75C，此时 CPU 频率自动降至 1.2GHz。然后温度在 72C 和 75C 之间波动，而 CPU 频率在 1.2GHz 和 1.34GHz 之间波动。\jvmod{BurnTest} 默认未启用，因为它是一个终端模块（您需要重新启动 JeVois 才能将其关闭）。如果您在 \b videomappings.cfg 中查找 BurnTest，您将找到一个注释掉的条目。删除注释字符并重新启动 JeVois 以启用它。如上所述，一旦启动 BurnTest，您将需要重新启动 JeVois 才能退出它。虽然系统保持稳定（没有崩溃），但我们怀疑在 75C 附近长时间运行会显著缩短 CPU 芯片的使用寿命。这也是我们最终决定在批量生产中使用风扇的原因之一。
 
-Conclusion
-==========
+结论 
+===========
 
-It looks ugly and is bulky and hot to the touch, but a fanless conversion is possible.
+它看上去很丑，体积很大，摸起来很烫，但可以进行无风扇改造。
 
 \jvimg{fanlessb.jpg, 25%}
 
-You may be able to use a smaller heatsink if you are ok with running at a lower frequency. See
-http://jevois.org/start/software.html and look for "fanless case" to download STL files of a case that can accommodate a
-heatsink with 30x20mm footprint. You can then 3D print that case. In our early tests with 30x20x6mm heatsinks, JeVois
-would almost immediately overheat under load. But if you can find high-efficiency and taller 30x20mm heatsinks and can
-work with lower CPU frequency, this could be an option. This would have to be tested, though.
+如果您不介意以较低的频率运行，则可以使用较小的散热器。请参阅 http://jevois.org/start/software.html 并查找 "fanless case" 以下载可容纳 30x20mm 散热器的机箱的 STL 文件。然后您可以 3D 打印该机箱。在我们早期对 30x20x6mm 散热器的测试中，JeVois 在负载下几乎会立即过热。但是，如果您能找到高效且更高的 30x20mm 散热器并且可以在较低的 CPU 频率下工作，这可能是一个选择。不过，这必须经过测试。
 
 */
 

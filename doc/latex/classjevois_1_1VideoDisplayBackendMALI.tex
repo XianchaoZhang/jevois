@@ -1,0 +1,151 @@
+\hypertarget{classjevois_1_1VideoDisplayBackendMALI}{}\doxysubsection{jevois\+::Video\+Display\+Backend\+M\+A\+LI Class Reference}
+\label{classjevois_1_1VideoDisplayBackendMALI}\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Video\+Display\+Backend\+M\+A\+L\+I.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Backend for Video\+Display on Je\+Vois-\/\+Pro host using M\+A\+LI. 
+
+This class provides an interface used by \mbox{\hyperlink{classjevois_1_1VideoDisplayGL}{Video\+Display\+GL}} using Mali framebuffer + Open\+G\+L-\/\+ES 3.\+2 (to be used on Je\+Vois-\/\+Pro platform). 
+
+Definition at line 29 of file Video\+Display\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Inheritance diagram for jevois\+::Video\+Display\+Backend\+M\+A\+LI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classjevois_1_1VideoDisplayBackendMALI__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Video\+Display\+Backend\+M\+A\+LI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classjevois_1_1VideoDisplayBackendMALI__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_a7375e69ab1b609116106e6cb3bcfd724}{Video\+Display\+Backend\+M\+A\+LI}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_a557dcd01887818df0d8cd8db17bb950c}{$\sim$\+Video\+Display\+Backend\+M\+A\+LI}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance, free resources. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool fullscreen=false) override
+\begin{DoxyCompactList}\small\item\em Initialize the underlying engine that will process events, create windows, etc. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_ac40174958faa9a66874d10b4a5082906}{poll\+Events}} (bool \&shouldclose) override
+\begin{DoxyCompactList}\small\item\em Poll events such as mouse movements, buttons, keyboard, joystick, and pass to Video\+Display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+fbdev\+\_\+window \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_acbcc9c4c88afa5a40058328e2be4720f}{its\+Window}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayBackendMALI_a7375e69ab1b609116106e6cb3bcfd724}\label{classjevois_1_1VideoDisplayBackendMALI_a7375e69ab1b609116106e6cb3bcfd724}} 
+\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}!VideoDisplayBackendMALI@{VideoDisplayBackendMALI}}
+\index{VideoDisplayBackendMALI@{VideoDisplayBackendMALI}!jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+\doxyparagraph{\texorpdfstring{VideoDisplayBackendMALI()}{VideoDisplayBackendMALI()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::\+Video\+Display\+Backend\+M\+A\+LI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 23 of file Video\+Display\+Backend\+M\+A\+L\+I.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayBackendMALI_a557dcd01887818df0d8cd8db17bb950c}\label{classjevois_1_1VideoDisplayBackendMALI_a557dcd01887818df0d8cd8db17bb950c}} 
+\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}!````~VideoDisplayBackendMALI@{$\sim$VideoDisplayBackendMALI}}
+\index{````~VideoDisplayBackendMALI@{$\sim$VideoDisplayBackendMALI}!jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoDisplayBackendMALI()}{~VideoDisplayBackendMALI()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::$\sim$\+Video\+Display\+Backend\+M\+A\+LI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for safe inheritance, free resources. 
+
+
+
+Definition at line 28 of file Video\+Display\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}\label{classjevois_1_1VideoDisplayBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}} 
+\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}!init@{init}}
+\index{init@{init}!jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+\doxyparagraph{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::init (\begin{DoxyParamCaption}\item[{unsigned short}]{w,  }\item[{unsigned short}]{h,  }\item[{bool}]{fullscreen = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initialize the underlying engine that will process events, create windows, etc. 
+
+The init starts with the given initial framebuffer size. Note that on M\+A\+LI, size and fullscreen parameters are ignored and we always run full-\/screen at the native resolution of the framebuffer. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoDisplayBackend_ab7db3f98de08fb763935b179c0031eea}{jevois\+::\+Video\+Display\+Backend}}.
+
+
+
+Definition at line 35 of file Video\+Display\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References h, jevois\+::\+Video\+Display\+Backend\+::init(), and L\+I\+N\+FO.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init().
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayBackendMALI_ac40174958faa9a66874d10b4a5082906}\label{classjevois_1_1VideoDisplayBackendMALI_ac40174958faa9a66874d10b4a5082906}} 
+\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}!pollEvents@{pollEvents}}
+\index{pollEvents@{pollEvents}!jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+\doxyparagraph{\texorpdfstring{pollEvents()}{pollEvents()}}
+{\footnotesize\ttfamily bool jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::poll\+Events (\begin{DoxyParamCaption}\item[{bool \&}]{shouldclose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Poll events such as mouse movements, buttons, keyboard, joystick, and pass to Video\+Display. 
+
+Returns true if some events were received, which can be used to turn on mouse pointer and G\+UI. On M\+A\+LI, there is no support for events at this level, and hence no support for a test to close. 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoDisplayBackend_aabf45e81d105cc9bf79a701e458858a1}{jevois\+::\+Video\+Display\+Backend}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a7a5c04eb60cd37869d5074d421ff33fe}{jevois\+::\+Im\+Gui\+Backend\+M\+A\+LI}}.
+
+
+
+Definition at line 46 of file Video\+Display\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayBackendMALI_acbcc9c4c88afa5a40058328e2be4720f}\label{classjevois_1_1VideoDisplayBackendMALI_acbcc9c4c88afa5a40058328e2be4720f}} 
+\index{jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}!itsWindow@{itsWindow}}
+\index{itsWindow@{itsWindow}!jevois::VideoDisplayBackendMALI@{jevois::VideoDisplayBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsWindow}{itsWindow}}
+{\footnotesize\ttfamily fbdev\+\_\+window jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::its\+Window\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 50 of file Video\+Display\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{VideoDisplayBackendMALI_8H}{Video\+Display\+Backend\+M\+A\+L\+I.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{VideoDisplayBackendMALI_8C}{Video\+Display\+Backend\+M\+A\+L\+I.\+C}}\end{DoxyCompactItemize}

@@ -30,23 +30,22 @@ jevois::OutputFrame::OutputFrame(std::shared_ptr<jevois::VideoOutput> const & ga
 // ####################################################################################################
 jevois::OutputFrame::~OutputFrame()
 {
-  // If itsGadget is invalidated, we have been moved to another object, so do not do anything here:
+  // 如果 itsGadget 无效，我们已经被移到另一个对象，所以这里不要做任何事情：
   if (itsGadget.get() == nullptr) return;
 
   // If we did not get(), just end now:
   if (itsDidGet == false) return;
   
-  // If Engine gave us a non-zero image pointer for exceptions, and we did get(), pass down the buffer we did get, so
-  // that Engine can write exception text into it, unless it is too late (exception occurred after send()) or too early
-  // (before get()), in which case Engine will get its own buffer:
+  // 如果引擎为异常提供了一个非零图像指针，并且我们确实 get()，则将我们确实获得的缓冲区向下传递，因此引擎可以将异常文本写入其中，
+  // 除非为时已晚（异常发生在 send() 之后）或太早 //（在 get() 之前），在这种情况下引擎将获得自己的缓冲区：
   if (itsImagePtrForException)
   {
     if (itsDidSend == false) { *itsImagePtrForException = itsImage; }
-    // Engine will be responsible for the final send()
+    // 引擎将负责最后的 send()
   }
   else
   {
-    // If we did get() but not send(), send now (the image will likely contain garbage):
+    // 如果我们确实 get() 但没有 send()，则立即发送（图像可能包含垃圾）：
     if (itsDidSend == false) try { itsGadget->send(itsImage); } catch (...) { }
   }
 }

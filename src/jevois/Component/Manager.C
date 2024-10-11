@@ -58,14 +58,13 @@ void jevois::Manager::preInit()
 // BEGIN_JEVOIS_CODE_SNIPPET manager4.C
 void jevois::Manager::postInit()
 {
-  // If --help was given on command-line, print help message and exit:
+  // 如果在命令行上给出了 --help，则打印帮助消息并退出：
   if (help::get()) { printHelpMessage(); LINFO("JeVois: exit after help message"); exit(0); }
   
-  // The --help parameter is only useful for parsing of command-line arguments. After that is done, we here hide it as
-  // we will instead provide a 'help' command in the JeVois console:
+  // --help 参数仅用于解析命令行参数。完成后，我们在此将其隐藏为我们将在 JeVois 控制台中提供一个 'help' 命令：
   help::freeze(true);
   
-  // Do not confuse users with a non-working tracelevel parameter if tracing has not been compiled in:
+  // 如果尚未编译跟踪，请不要使用不起作用的 tracelevel 参数让用户感到困惑：
 #if !defined(JEVOIS_TRACE_ENABLE) || !defined(JEVOIS_LDEBUG_ENABLE)
   tracelevel::freeze(true);
 #endif
@@ -86,33 +85,31 @@ void jevois::Manager::constructHelpMessage(std::ostream & out) const
                                         std::vector<std::pair<std::string, // component name
                                                               std::string  // current param value
                                                               > > > > helplist;
-  // First our own options, excluding our subs:
+  // 首先是我们自己的选项，不包括我们的子选项：
   this->populateHelpMessage("", helplist, false);
 
-  // Then all our components/modules, we call them directly instead of just recursing down from us so that the manager
-  // name is omitted from all descriptors:
+  // 然后我们直接调用所有组件/模块，而不是从我们这里向下递归，以便从所有描述符中省略管理器名称：
   {
     boost::shared_lock<boost::shared_mutex> lck(itsSubMtx);
     for (std::shared_ptr<jevois::Component> c : itsSubComponents) c->populateHelpMessage("", helplist);
   }
 
-  // Helplist should never be empty since the Manager has options, but in any case...
+  // 由于管理器有选项，所以帮助列表永远不应该为空，但无论如何...
   if (helplist.empty()) { out << "NO PARAMETERS."; return; }
 
   out << "PARAMETERS:" << std::endl << std::endl;
 
   for (auto & c : helplist)
   {
-    // Print out the category name and description
+    // 打印出类别名称和描述
     out << c.first << std::endl;
 
-    // Print out the parameter details
+    // 打印出参数详细信息
     for (auto const & n : c.second)
     {
       out << n.first << std::endl;
 
-      // Print out the name of each component that exports this parameter definition, but strip the manager's name for
-      // brevity, unless that's the only thing in the descriptor:
+      // 打印出导出此参数定义的每个组件的名称，但为了简洁起见，删除管理器的名称，除非这是描述符中唯一的东西：
       out << "       Exported By: ";
       for (auto const & cp : n.second)   // pair: <component, value>
       {
@@ -132,33 +129,32 @@ void jevois::Manager::constructHelpMessage(std::ostream & out) const
 // ######################################################################
 std::vector<std::string> const jevois::Manager::parseCommandLine(std::vector<std::string> const & commandLineArgs)
 {
-  // Start by pushing the program name into remaining args
+  // 首先将程序名称推入剩余参数
   std::vector<std::string> remainingArgs;
   remainingArgs.push_back(commandLineArgs[0]);
 
-  // process all the -- args, push other things into remaining args:
+  // 处理所有 -- args, 将其他内容推入剩余 args:
   std::vector<std::string>::const_iterator argIt;
   for (argIt = commandLineArgs.begin() + 1; argIt != commandLineArgs.end(); ++argIt)
   {
-    // All arguments should start with "--", store as remaining arg anything that does not:
+    // 所有参数都应以 "--" 开头，将不以 "--" 开头的任何内容存储为剩余参数
     if (argIt->length() < 2 || (*argIt)[0] != '-' || (*argIt)[1] != '-') { remainingArgs.push_back(*argIt); continue; }
 
-    // If the argument is just a lone "--", then we are done with command line parsing:
+    // 如果参数只是一个 "--"，那么我们就完成了命令行解析：
     if (*argIt == "--") break;
 
-    // Split the string by "=" to separate the parameter name from the value
+    // 用 "=" 分割字符串，将参数名称与值分开
     size_t const equalsPos = argIt->find_first_of('=');
     if (equalsPos < 3) LFATAL("Cannot parse command-line argument with no name [" << *argIt << ']');
 
     std::string const parameterName  = argIt->substr(2, equalsPos - 2);
     std::string const parameterValue = (equalsPos == std::string::npos) ? "true" : argIt->substr(equalsPos + 1);
 
-    // Set the parameter recursively, will throw if not found, and here we allow multiple matches and set all matching
-    // parameters to the given value:
+    // 递归设置参数，如果未找到则会抛出，这里我们允许多个匹配并将所有匹配的参数设置为给定值：
     setParamString(parameterName, parameterValue);
   }
 
-  // Add anything after a lone -- to the remaining args:
+  // 在单独的 -- 之后添加任何内容到剩余的参数中：
   while (argIt != commandLineArgs.end()) { remainingArgs.push_back(*argIt); ++argIt; }
 
   return remainingArgs;
@@ -171,7 +167,7 @@ std::vector<std::string> const & jevois::Manager::remainingArgs() const
 // ######################################################################
 void jevois::Manager::removeComponent(std::string const & instance, bool warnIfNotFound)
 {
-  // Keep this code in sync with Componnet::removeSubComponent
+  // 使此代码与 Componnet::removeSubComponent 保持同步
 
   boost::upgrade_lock<boost::shared_mutex> uplck(itsSubMtx);
 

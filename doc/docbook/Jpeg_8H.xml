@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Jpeg_8H">
+<title>include/jevois/Image/Jpeg.H File Reference</title>
+<indexterm><primary>include/jevois/Image/Jpeg.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Types/Singleton.H&gt;
+#include &lt;jevois/Image/RawImage.H&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+</programlisting>Include dependency graph for Jpeg.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Jpeg_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Jpeg_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1JpegCompressor">jevois::JpegCompressor</link></para>
+
+<para>turbojpeg 压缩器的简单单例包装器 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__jpeg_1gaf446f726ba6d8e2d87aa87e5cd041518">jevois::convertYUYVtoYUV422</link> (unsigned char const *src, int width, int height, unsigned char *dst)</para>
+
+<para>辅助从打包的 YUYV 转换为平面 YUV422 </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gac8019b137a50caf3afe8f93b8041d815">jevois::compressBGRtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga055d9848dc85723e4429ac6b4f98812e">jevois::compressBGRtoJpeg</link> (cv::Mat const &amp;src, RawImage &amp;dst, int quality=75)</para>
+
+<para>将 BGR cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gaf968b68fd408477de51a6fcf41be48d9">jevois::compressRGBtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga8a53f108718df36751b7b2b4fd16fbce">jevois::compressRGBtoJpeg</link> (cv::Mat const &amp;src, RawImage &amp;dst, int quality=75)</para>
+
+<para>将 RGB cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gad721785df8a36bbc0081acf691b84cfc">jevois::compressRGBAtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gadd51281893168dd79429e9777eabe0e0">jevois::compressRGBAtoJpeg</link> (cv::Mat const &amp;src, RawImage &amp;dst, int quality=75)</para>
+
+<para>将 RGBA cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gab4e9f0c744d97117a37eae05da2c2a6d">jevois::compressGRAYtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gab4829fbfa937795d50f95b3d60596a31">jevois::compressGRAYtoJpeg</link> (cv::Mat const &amp;src, RawImage &amp;dst, int quality=75)</para>
+
+<para>将 Gray cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

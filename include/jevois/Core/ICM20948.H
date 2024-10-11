@@ -142,58 +142,50 @@ namespace jevois
                                            500, { 250, 500, 1000, 2000 }, ParamCateg);
   }
   
-  //! TDK InvenSense ICM-20948 9DOF IMU high-level driver
-  /*! This driver communicates with a kernel-side driver that is integrated with the camera sensor driver on some
-      optional JeVois sensors only. Currently, on JeVois-A33, only the OnSemi (Aptina) AR0135 global shutter optional
-      camera sensor is equipped with an IMU. On JeVois-Pro, all camera sensors are equipped with an IMU.
-
-      The specifications of this chip are quite impressive:
-      - 3-axis 16-bit accelerometer with full-range sensitivity selectable to +/-2g, +/-4g, +/-8g, and +/-16g.
-      - Accelerometer data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit gyroscope with full-range sensitivity selectable to +/-250dps (degrees/s), +/-500dps,
-        +/-1000dps, and +/-2000dps.
-      - Gyroscope data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit magnetometer (compass) with wide range of +/-4900uT (micro Tesla).
-      - Magnetometer data rates 10 Hz, 20 Hz, 50 Hz, or 100 Hz.
-      - 16-bit temperature sensor with readout rate of up to 8 kHz.
-      - RAW data mode (get current sensor values at any time), buffered (FIFO) data mode (sensor values accumulate into
-        a FIFO at a fixed rate), and digital motion processing mode (DMP; raw data is processed on-chip).
-      - On-chip digital motion processor (DMP) can compute, inside the IMU chip itself:
-        + quaternion 6 (uses accel + gyro),
-        + quaternion 9 (uses accel + gyro + compass),
-        + geomag quaternion (uses accel + compass),
-        + flip/pickup detection,
-        + step detection and counting,
-        + basic activity recognition: drive, walk, run, bike, tilt, still.
-
-      With quaternions computed on-chip, with an algorithm that gets sensor data at a highly accurate, fixed rate, and
-      applies various calibrations, drift corrections, and compensations on the fly, one gets highly accurate real-time
-      estimate of the sensor's pose in the 3D world and of how it is moving.
-
-      Note that on JeVois-A33 communication with the IMU is over a 400kHz I2C bus, which may limit data readout rate
-      depending on which data is requested from the IMU. On JeVois-Pro, communication is over SPI at 7MHz.
-
-      This IMU has 3 basic modes of operation (parameter mode, which can only be set in params.cfg):
-
-      - RAW: One can access the latest raw sensor data at any time using the getRaw() or get() functions. This is the
-        simplest mode of operation. One disadvantage is that if you are not calling get() at a perfectly regular
-        interval, there will be some time jitter in your readouts. The IMU does not provide any time stamps for its
-        data.
-
-      - FIFO: In this mode, data from the sensor is piled up into a 1 kbyte FIFO buffer at a precise, constant rate
-        (when all three of accelerometer, gyroscope, and magnetometer are on, the gyro rate determines the FIFO
-        buffering rate). Main advantage is that you can then read out the data without having to worry about calling
-        getRaw() or get() at a highly precise interval. But you need to be careful that the FIFO can fill up and
-        overflow very quickly when using high sensor data rates.
-
-      - DMP: In this mode, data is captured from the sensor at an accurate, fixed rate, and is fed to the on-chip
-        digital motion processor (DMP). The DMP then computes quaternions, activity recognition, etc and pushes data
-        packets into the FIFO as results from these algorithms become available.
-
-      CAUTION: This class has state and is not re-entrant. Namely, we store the current register bank of the IMU chip in
-      a class member variable. This could get out of sync if several member functions of this class are called
-      concurrently. Because we assume this will not be the case in normal operation, we do not protect chip access with
-      a mutex. Users should use an external mutex to protect this class if used in a multithreaded manner.
+  //! TDK InvenSense ICM-20948 9DOF IMU 高级驱动程序 
+  /*! 此驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 JeVois 传感器上的摄像头传感器驱动程序集成。目前，在 
+      JeVois-A33 上，只有 OnSemi (Aptina) AR0135 全局快门可选摄像头传感器配备了 IMU。在 JeVois-Pro 上，所有摄像头传感器
+	  都配备了 IMU。
+	  
+	  该芯片的规格相当令人印象深刻：
+	  - 3 轴 16 位加速度计，全范围灵敏度可选为 +/-2g、+/-4g、+/-8g 和 +/-16g。
+	  - 加速度计数据速率从 4 Hz 到 1125 Hz。
+	  - 3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-250dps（度/秒）、+/-500dps、+/-1000dps 和 +/-2000dps。
+	  - 陀螺仪数据速率从 4 Hz 到 1125 Hz。
+	  - 3 轴 16 位磁力计（指南针），范围宽达 +/-4900uT（微特斯拉）。
+	  - 磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。
+	  - 16 位温度传感器，读出速率高达 8 kHz。
+	  - RAW 数据模式（随时获取当前传感器值）、缓冲 (FIFO) 数据模式（传感器值以固定速率累积到 FIFO 中）和数字运动处理模式
+	     (DMP；原始数据在芯片上处理)。
+	  - 片上数字运动处理器 (DMP) 可以在 IMU 芯片内部计算：
+	    + 四元数 6（使用加速度计 + 陀螺仪），
+		+ 四元数 9（使用加速度计 + 陀螺仪 + 指南针），
+		+ geomag 四元数（使用加速度计 + 指南针），
+		+ 翻转/拾取检测，
+		+ 步数检测和计数，
+		+ 基本活动识别：驾驶、步行、跑步、骑自行车、倾斜、静止。
+	  
+	  通过片上计算的四元数，采用以高精度、固定速率获取传感器数据的算法，并动态应用各种校准、漂移校正和补偿，可以对传感器
+	  在 3D 世界中的姿态及其运动方式进行高精度实时估计。
+	  
+	  请注意，在 JeVois-A33 上，与 IMU 的通信是通过 400kHz I2C 总线进行的，这可能会限制数据读取速率，具体取决于从 IMU 请
+	  求的数据。在 JeVois-Pro 上，通信是通过 7MHz 的 SPI 进行的。
+	  
+	  该 IMU 有 3 种基本工作模式（参数模式，只能在 params.cfg 中设置）：
+	  
+	  - RAW：可以使用 getRaw() 或 get() 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以
+	    完全规则的间隔调用 get()，则读数中会出现一些时间抖动。IMU 不为其数据提供任何时间戳。
+	  
+	  - FIFO：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte FIFO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启
+	    时，陀螺仪速率决定 FIFO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 getRaw() 或 get()。但您
+		需要注意，当使用高传感器数据速率时，FIFO 可能会很快填满并溢出。
+	  
+	  - DMP：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (DMP)。然后，DMP 计算四元数、活动
+	    识别等，并在这些算法的结果可用时将数据包推送到 FIFO。
+	  
+	  注意：此类具有状态且不可重入。也就是说，我们将 IMU 芯片的当前寄存器组存储在类成员变量中。如果同时调用此类的多个成员
+	  函数，则可能会不同步。由于我们假设在正常操作中不会出现这种情况，因此我们不使用互斥锁来保护芯片访问。如果以多线程方式
+	  使用，用户应使用外部互斥锁来保护此类。
 
       \ingroup imu */
   class ICM20948 : public Component,
@@ -201,49 +193,47 @@ namespace jevois
                                     imu::tbw, imu::arange, imu::grange, imu::pktdbg>
   {
     public:
-      //! Constructor, low-level communication driver is null
+      //! 构造函数，低级通信驱动程序为空
       ICM20948(std::string const & instance);
 
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚析构函数
       virtual ~ICM20948();
 
-      //! Returns true if this camera indeed has a working ICM20948
+      //! 如果此相机确实具有可正常工作的 ICM20948 则返回 true；
       bool ready();
 
-      //! Returns the amount of new data that had not previously been obtained
-      /*! In RAW mode, this is either 0 or 1. In FIFO or DMP mode, returns length in bytes of new data in the FIFO. */
+      //! 返回以前未获得的新数据量
+	  /*！在 RAW 模式下，该值为 0 或 1。在 FIFO 或 DMP 模式下，返回 FIFO 中新数据的长度（以字节为单位）。 */
       int dataReady();
       
-      //! Get one round of raw data
-      /*! In RAW or DMP mode, this is the latest available, and blocking has no effect as some latest data always is
-          available immediately. In FIFO mode, this is the oldest data in the FIFO, and we may block if the FIFO is
-          currently empty. */
+      //! 获取一轮原始数据
+	  /*！在 RAW 或 DMP 模式下，这是最新的可用数据，并且阻塞不起作用，因为某些最新数据始终可立即使用。在 FIFO 模式下，
+	      这是 FIFO 中最旧的数据，如果 FIFO 当前为空，我们可能会阻止。 */
       IMUrawData getRaw(bool blocking = true);
       
-      //! Get one round of scaled raw data
-      /*! In RAW or DMP mode, this is the latest available, and blocking has no effect as some latest data always is
-          available immediately. In FIFO mode, this is the oldest data in the FIFO, and we may block if the FIFO is
-          currently empty. */
+      //! 获取一轮缩放的原始数据
+	  /*！在 RAW 或 DMP 模式下，这是最新的可用数据，并且阻塞不起作用，因为某些最新数据始终可立即使用。在 FIFO 模式下，
+	      这是 FIFO 中最旧的数据，如果 FIFO 当前为空，我们可能会阻止。 */
       IMUdata get(bool blocking = true);
 
-      //! Get one packet of DMP data
-      /*! Will throw if mode is not set to DMP. If blocking is true, will block until one new data packet is
-          available from the IMU; otherwise, may return DMPdata with contents set to zero. */
+      //! 获取一包 DMP 数据 
+	  /*! 如果模式未设置为 DMP，则会抛出。如果阻止为真，则会阻止，直到 IMU 提供一个新数据包；否则，可能会返回内容设置
+	      为零的 DMPdata。 */
       DMPdata getDMP(bool blocking = true);
       
     protected:
-      //! Connect to and initialize the IMU chip
+      //! 连接并初始化 IMU 芯片
       void preInit() override;
 
-      //! Configure RAW vs DMP mode:
+      //! 配置 RAW 与 DMP 模式：
       void postInit() override;
 
-      //! Unfreeze any previously frozen parameters
+      //! 解冻任何先前冻结的参数
       void preUninit() override;
      
-      void reset(); //!< Reset the IMU chip - not recommended in normal operation
-      void sleep(bool enable); //!< Turn on/off sleep mode
-      void cycle(bool enable); //!< Turn on/off cycle mode vs continuous for accel, gyro and compass
+      void reset(); //!< 重置 IMU 芯片 - 正常操作时不推荐使用
+      void sleep(bool enable); //!< 打开/关闭睡眠模式
+      void cycle(bool enable); //!< 打开/关闭加速度计、陀螺仪和指南针的循环模式与连续模式
       uint32_t devid(); //!< Read device ID
 
     private:
@@ -265,9 +255,9 @@ namespace jevois
       void computeFIFOpktSize(float ar, float gr, int mm);
       size_t getDMPsome(bool blocking, size_t desired);
       
-      unsigned short itsFIFOpktSiz = 0; // Cached size of a FIFO-mode packet
+      unsigned short itsFIFOpktSiz = 0; // FIFO 模式数据包的缓存大小
 
       unsigned char itsDMPpacket[1024]; // fixme max packet size...
-      int itsDMPsz = 0; // size of DMP data received so far
+      int itsDMPsz = 0; // 迄今为止接收的 DMP 数据的大小
   };
 }

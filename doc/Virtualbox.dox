@@ -1,90 +1,64 @@
-/*! \page Virtualbox Using Virtualbox to setup jevois-sdk in a virtual machine
+/*! \page Virtualbox 使用 Virtualbox 在虚拟机中设置 jevois-sdk
 
-It is highly recommended that you use a virtual machine software to create a fresh installation of Ubuntu into which you
-will install the JeVois development environment. This way, you will not encounter problems with differemt versions of
-packages required by JeVois and by possibly other applications you run on your desktop and laptop.
+强烈建议您使用虚拟机软件来全新安装 Ubuntu，并将 JeVois 开发环境安装到其中。这样，您就不会遇到 JeVois 所需的软件包版本不同以及您在台式机和笔记本电脑上运行的其他应用程序所需的软件包版本不同导致的问题。
 
-Here are summary instructions on how to do this with the free Virtualbox software:
+以下是使用免费 Virtualbox 软件执行此操作的简要说明：
 
-- Download and install Virtualbox from https://www.virtualbox.org/wiki/Downloads (get the version for your current
-  computer, which is called the \a host computer, e.g., if using a Mac, get the version for OS X host).
+- 从 https://www.virtualbox.org/wiki/Downloads 下载并安装 Virtualbox（获取适合您当前计算机的版本，称为 \a host computer，例如，如果使用 Mac，请获取适用于 OS X 主机的版本）。
 
-- Download and install the corresponding VirtualBox Oracle VM VirtualBox Extension Pack, making sure that the version of
-  the extension pack matches exactly the version of Virtualbox you installed.
+- 下载并安装相应的 VirtualBox Oracle VM VirtualBox 扩展包，确保扩展包的版本与您安装的 Virtualbox 版本完全匹配。
 
-- \a IMPORTANT: you must restart your computer for the installation to work properly later on. Especially for Mac users,
-  it is unusual to have to reboot your mac, but you need to do it here otherwise video capture will likely not work
-  later on.
+- \a IMPORTANT：您必须重启计算机，安装才能在稍后正常运行。特别是对于 Mac 用户来说，重启 Mac 的情况并不常见，但您需要在此处重启，否则视频捕获稍后可能无法正常工作。
 
-- Create a new virtual machine: select Linux 64-bit OS, allocate as much RAM and CPU as is reasonable (usually, move the
-  sliders to the point where they become red), and create a new virtual hard drive, using the VDI method and selecting
-  at least 50GB size.
+- 创建一个新的虚拟机：选择 Linux 64 位操作系统，分配尽可能多的 RAM 和 CPU（通常将滑块移动到变为红色的位置），然后创建一个新的虚拟硬盘，使用 VDI 方法并选择至少 50GB 大小。
 
-  \image html vbox1.png "Above: creating a new virtual machine"
+\image html vbox1.png “上图：创建一个新的虚拟机”
 
-  \image html vbox2.png "Above: setting memory size"
+\image html vbox2.png “上面：设置内存大小”
 
-  \image html vbox3.png "Above: Creating a virtual hard disk"
+\image html vbox3.png “上图：创建虚拟硬盘”
 
-  \image html vbox4.png "Above: Selecting VDI hard disk type"
+\image html vbox4.png “上图：选择 VDI 硬盘类型”
 
-  \image html vbox5.png "Above: We recommend setting VDI size to at least 50GB for JeVois-A33 and 150GB for JeVois-Pro"
- 
+\image html vbox5.png “以上：我们建议将 JeVois-A33 的 VDI 大小设置为至少 50GB，将 JeVois-Pro 的 VDI 大小设置为至少 150GB”
 
-- Get Ubuntu 20.04 Desttop amd64 iso file from https://www.ubuntu.com/download/desktop
+- 从 https://www.ubuntu.com/download/desktop 获取 Ubuntu 20.04 Desttop amd64 iso 文件
 
-- Start your virtual machine. Because it has no operating system yet, you will be asked to provide an iso file, select
-  the Ubuntu iso you just downloaded.
+- 启动虚拟机。由于虚拟机尚未安装操作系统，因此系统会要求您提供 iso 文件，请选择刚刚下载的 Ubuntu iso。
 
-- Install Ubuntu. Make sure you allocate the whole virtual disk to a single root partition (this is the default when
-  asked how to format the disk), so that there is plenty of room in the root partition.
+- 安装 Ubuntu。确保将整个虚拟磁盘分配给单个根分区（当询问如何格式化磁盘时，这是默认设置），以便根分区中有足够的空间。
 
-- After Ubuntu is installed, you can start it, open a terminal, and proceed with the installation of the JeVois SDK as
-  detailed in \ref ProgrammerSource and in [the programmer setup
-  tutorial](http://jevois.org/tutorials/ProgrammerSetup.html).
+- 安装 Ubuntu 后，您可以启动它，打开终端，然后按照 \ref ProgrammerSource 和 [程序员安装教程](http://jevois.org/tutorials/ProgrammerSetup.html) 中的详细说明安装 JeVois SDK。
 
-- To be able to grab video, go to the settings of your virtual machine (yellow cog-wheel in the main panel of
-  Virtualbox) and make sure that you enable USB 2.0 or USB 3.0 under Ports, USB. Then plug-in a USB camera, and add a
-  device filter for it (click the icon with the + sign on top of a USB connector). We recommend that you then restart
-  your virtual machine and your host.
+- 为了能够抓取视频，请转到虚拟机的设置（Virtualbox 主面板中的黄色齿轮），并确保在“端口”、“USB”下启用 USB 2.0 或 USB 3.0。然后插入 USB 摄像头，并为其添加设备过滤器（单击 USB 连接器顶部带有 + 号的图标）。我们建议您重新启动虚拟机和主机。
 
-  \image html vbox6.png "Above: adding a USB filter"
+\image html vbox6.png “上图：添加 USB 过滤器”
 
-  \image html vbox7.png "Above: you can also enable a connected USB camera using the little USB connector icon at the bottom of your virtualbox screen."
+\image html vbox7.png “以上：您还可以使用虚拟盒屏幕底部的小型 USB 连接器图标启用连接的 USB 摄像头。”
 
-- Back to the virtual machine, install `guvcview` by typing:
-  \verbatim
-  sudo apt install guvcview
-  \endverbatim
-  and you should be able to grab video from your USB camera.
+- 返回虚拟机，通过输入：\verbatim sudo apt install guvcview \endverbatim 安装“guvcview”，您应该能够从 USB 摄像头中获取视频。
 
-  \image html vbox8.png "Above: guvcview working inside virtualbox"
+\image html vbox8.png “上图：guvcview 在 vi​​rtualbox 中工作”
 
-Headless VirtualBox
+无头 VirtualBox 
 -------------------
 
-When using a Linux host, it is often more convenient to just run the
-JeVois SDK virtual machine in a terminal, without the whole graphical
-interface. This allows you to simply copy/paste commands from another
-terminal to the one that runs your virtual machine. You cannot run
-jevois-inventor in that headless machine, so this is more for C++
-development and compilation.
+使用 Linux 主机时，在终端中运行 JeVois SDK 虚拟机通常更方便，而无需整个图形界面。这样您就可以简单地将命令从另一个终端复制/粘贴到运行虚拟机的终端。您无法在那台无头机器上运行 jevois-inventor，因此这更适合 C++ 开发和编译。
 
-To enable headless mode, you need to enable an SSH port forwarding rule on your virtual machine, as follows:
+要启用无头模式，您需要在虚拟机上启用 SSH 端口转发规则，如下所示：
 
-- in a terminal on your host machine, create a key with empty password, if you do not already have one:
+- 在主机上的终端中，如果您还没有密钥，请创建一个带有空密码的密钥：
   \verbatim
   ssh-keygen -t rsa
-  \endverbatim
-  When prompted for a passphrase, just press ENTER.
+  \endverbatim 
+  当提示输入密码时，只需按 ENTER 键。
 
-- on the virtual machine, install openssh-server:
+- 在虚拟机上，安装 openssh-server：
   \verbatim
   sudo apt install openssh-server
   \endverbatim
 
-- in VirtualBox, select \a Settings for your virtual machine, then \a Network, click on \a Advanced, and then <em>Port
-  Forwarding</em>. Click on the little icon with a green plus sign to add a rule, as follows:
+- 在 VirtualBox 中，选择虚拟机的 \a Settings，然后选择 \a Network，点击 \a Advanced，然后点击 <em>Port Forwarding</em>。点击带有绿色加号的小图标添加规则，如下所示：
   + name: ssh
   + protocol: TCP
   + Host IP: leave blank
@@ -92,32 +66,23 @@ To enable headless mode, you need to enable an SSH port forwarding rule on your 
   + Guest IP: leave blank
   + Guest port: 22
 
-  And click Ok. This will forward connections made to your host
-  machine on port 3000 to the virtual machine port 22 (ssh).
 
-- Copy your key from the host to the virtual machine:
+  然后单击确定。这会将与主机端口 3000 建立的连接转发到虚拟机端口 22（ssh）。
+
+- 将密钥从主机复制到虚拟机：
   \verbatim
   ssh-copy-id -p 3000 jevois@localhost
-  \endverbatim
-  When asked, type password \a jevois
-  
-- You can now shutdown your virtual machine and close VirtualBox.
+  \endverbatim 
+  当系统询问时，输入密码 \a jevois 
 
-- To start the virtual machine headless and log into it:
-  \verbatim
-  VBoxManage startvm UbuSdk2004 --type headless
-  sleep 20
-  ssh -p 3000 jevois@localhost
-  \endverbatim
+- 您现在可以关闭虚拟机并关闭 VirtualBox。
 
-  Replace \a UbuSdk2004 above by the name you have chosen when
-  creating your virtual machine (this is the name that appears on the
-  sidebar with the list of machines in the VirtualBox graphical
-  interface).
+- 要以无头方式启动虚拟机并登录：\verbatim VBoxManage startvm UbuSdk2004 --type headless sleep 20 ssh -p 3000 jevois@localhost \endverbatim
 
-  All done, you should now be logged into your virtual
-  machine. Remember to shut it down with `sudo shutdown -h now` when
-  finished.
+将上面的 \a UbuSdk2004 替换为您在创建虚拟机时选择的名称（这是在 VirtualBox 图形界面中机器列表侧栏上显示的名称）。
+
+一切完成，您现在应该登录到虚拟机了。完成后记得使用“sudo shutdown -h now”关闭它。
 
 
 */
+

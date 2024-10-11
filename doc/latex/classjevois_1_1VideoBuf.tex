@@ -1,0 +1,174 @@
+\hypertarget{classjevois_1_1VideoBuf}{}\doxysubsection{jevois\+::Video\+Buf Class Reference}
+\label{classjevois_1_1VideoBuf}\index{jevois::VideoBuf@{jevois::VideoBuf}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Buf.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+V4\+L2 视频缓冲区，保存在 shared\+\_\+ptr 中 
+
+在构造时从给定的文件描述符请求 M\+M\+AP 的内存区域，并在析构时取消映射。\+Video\+Buf 用于通过 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 将 M\+M\+AP 的视频缓冲 区从 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 驱动程序传递到应用程序代码。实际的内存分配由内核驱动程序执行。因此，\+Video\+Buf 像素数组不能从 一个内存位置移动到另一个内存位置。 
+
+Definition at line 28 of file Video\+Buf.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoBuf_a76713e36bfec1face9268c09dbe9d599}{Video\+Buf}} (int const fd, size\+\_\+t const \mbox{\hyperlink{classjevois_1_1VideoBuf_a9c614f71b82aa50c3ff49095fb1d2379}{length}}, unsigned int offset, int const dmafd)
+\begin{DoxyCompactList}\small\item\em 构造和分配 M\+M\+AP 的内存 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1VideoBuf_a69aec2582dcd9ed5a4eb39435acdece9}{$\sim$\+Video\+Buf}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数取消内存映射 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuf_a9cae44ccadd21f1da597270b6dc8a7f4}{sync}} ()
+\begin{DoxyCompactList}\small\item\em 同步数据 \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{classjevois_1_1VideoBuf_a9d1a60731d392b46c80d5a2202353d24}{data}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向缓​​冲区数据的指针 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1VideoBuf_a9c614f71b82aa50c3ff49095fb1d2379}{length}} () const
+\begin{DoxyCompactList}\small\item\em 获取分配的内存长度 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuf_a914a906ef44faef51aefd857044b919b}{set\+Bytes\+Used}} (size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em 设置使用的字节数，例如，对于应用程序代码压缩到缓冲区的 M\+J\+P\+EG 图像 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1VideoBuf_a4460b9f320b27d8e38bf1eb6c39d6a10}{bytes\+Used}} () const
+\begin{DoxyCompactList}\small\item\em 获取已使用的字节数，仅对\+M\+J\+P\+E\+G图像有效 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1VideoBuf_abf52de4a4291fc574dafa5f15b1d3b60}{dma\+Fd}} () const
+\begin{DoxyCompactList}\small\item\em 获取与此缓冲区关联的 dma\+\_\+buf fd，该 fd 在构造时给出 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a76713e36bfec1face9268c09dbe9d599}\label{classjevois_1_1VideoBuf_a76713e36bfec1face9268c09dbe9d599}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!VideoBuf@{VideoBuf}}
+\index{VideoBuf@{VideoBuf}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{VideoBuf()}{VideoBuf()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Buf\+::\+Video\+Buf (\begin{DoxyParamCaption}\item[{int const}]{fd,  }\item[{size\+\_\+t const}]{length,  }\item[{unsigned int}]{offset,  }\item[{int const}]{dmafd }\end{DoxyParamCaption})}
+
+
+
+构造和分配 M\+M\+AP 的内存 
+
+主要用于调试目的（支持 Video\+Display），如果 fd 为 -\/1，则我们执行常规内存分配而不是 mmap。 
+
+Definition at line 27 of file Video\+Buf.\+C.
+
+
+
+References length(), and P\+L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a69aec2582dcd9ed5a4eb39435acdece9}\label{classjevois_1_1VideoBuf_a69aec2582dcd9ed5a4eb39435acdece9}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!````~VideoBuf@{$\sim$VideoBuf}}
+\index{````~VideoBuf@{$\sim$VideoBuf}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoBuf()}{~VideoBuf()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Buf\+::$\sim$\+Video\+Buf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数取消内存映射 
+
+
+
+Definition at line 49 of file Video\+Buf.\+C.
+
+
+
+References P\+L\+E\+R\+R\+OR.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a4460b9f320b27d8e38bf1eb6c39d6a10}\label{classjevois_1_1VideoBuf_a4460b9f320b27d8e38bf1eb6c39d6a10}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!bytesUsed@{bytesUsed}}
+\index{bytesUsed@{bytesUsed}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{bytesUsed()}{bytesUsed()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Video\+Buf\+::bytes\+Used (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取已使用的字节数，仅对\+M\+J\+P\+E\+G图像有效 
+
+
+
+Definition at line 123 of file Video\+Buf.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a9d1a60731d392b46c80d5a2202353d24}\label{classjevois_1_1VideoBuf_a9d1a60731d392b46c80d5a2202353d24}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!data@{data}}
+\index{data@{data}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily void $\ast$ jevois\+::\+Video\+Buf\+::data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取指向缓​​冲区数据的指针 
+
+
+
+Definition at line 105 of file Video\+Buf.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_abf52de4a4291fc574dafa5f15b1d3b60}\label{classjevois_1_1VideoBuf_abf52de4a4291fc574dafa5f15b1d3b60}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!dmaFd@{dmaFd}}
+\index{dmaFd@{dmaFd}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{dmaFd()}{dmaFd()}}
+{\footnotesize\ttfamily int jevois\+::\+Video\+Buf\+::dma\+Fd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取与此缓冲区关联的 dma\+\_\+buf fd，该 fd 在构造时给出 
+
+
+
+Definition at line 129 of file Video\+Buf.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a9c614f71b82aa50c3ff49095fb1d2379}\label{classjevois_1_1VideoBuf_a9c614f71b82aa50c3ff49095fb1d2379}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!length@{length}}
+\index{length@{length}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Video\+Buf\+::length (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取分配的内存长度 
+
+
+
+Definition at line 111 of file Video\+Buf.\+C.
+
+
+
+Referenced by Video\+Buf().
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a914a906ef44faef51aefd857044b919b}\label{classjevois_1_1VideoBuf_a914a906ef44faef51aefd857044b919b}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!setBytesUsed@{setBytesUsed}}
+\index{setBytesUsed@{setBytesUsed}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{setBytesUsed()}{setBytesUsed()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buf\+::set\+Bytes\+Used (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+设置使用的字节数，例如，对于应用程序代码压缩到缓冲区的 M\+J\+P\+EG 图像 
+
+
+
+Definition at line 117 of file Video\+Buf.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuf_a9cae44ccadd21f1da597270b6dc8a7f4}\label{classjevois_1_1VideoBuf_a9cae44ccadd21f1da597270b6dc8a7f4}} 
+\index{jevois::VideoBuf@{jevois::VideoBuf}!sync@{sync}}
+\index{sync@{sync}!jevois::VideoBuf@{jevois::VideoBuf}}
+\doxyparagraph{\texorpdfstring{sync()}{sync()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buf\+::sync (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+同步数据 
+
+这在某些情况下可能很有用，可以避免支持 D\+MA 的驱动程序和 C\+PU 之间的缓存一致性问题。 
+
+Definition at line 85 of file Video\+Buf.\+C.
+
+
+
+References clearcache(), and L\+E\+R\+R\+OR.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoBuf_8H}{Video\+Buf.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoBuf_8C}{Video\+Buf.\+C}}\end{DoxyCompactItemize}

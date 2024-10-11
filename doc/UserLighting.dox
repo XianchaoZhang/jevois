@@ -1,165 +1,102 @@
-/*! \page UserLighting Optimizing performance under different lighting conditions
+/*! \page UserLighting 优化不同光照条件下的性能
 
-The sensor in the JeVois smart camera is quite capable, though some adjustments are sometimes necessary to operate well
-in low light conditions.
+JeVois 智能相机中的传感器功能非常强大，但有时需要进行一些调整才能在低光照条件下正常运行。
 
-These tips are mostly for \jva33, as \jvpro features a high-end Starvis back-illuminated (i.e., extra sensitive) sensor
-that performs very well in low light. Nevertheless, \jvpro users may still be interested in some of the tips below.
+这些技巧主要针对 \jva33，因为 \jvpro 配备了高端 Starvis 背光（即超灵敏）传感器，在低光条件下表现非常出色。不过，\jvpro 用户可能仍对以下一些技巧感兴趣。
 
-The brightness of the captured video depends on (at least):
+所捕获视频的亮度取决于（至少）：
 
-- the exposure time. Longer exposure will collect more photons and yield brighter video. The exposure time is capped by
-  the framerate, that is, faster frame rates limit the maximum possible exposure time because the frame needs to be sent
-  out for processing.
+- 曝光时间。曝光时间越长，收集的光子越多，视频就越亮。曝光时间受帧速率限制，也就是说，更快的帧速率会限制最大可能的曝光时间，因为需要将帧发送出去进行处理。
 
-- the sensor gain, which is the amplification applied to the raw signals from the photoreceptors. Higher gain yields
-  brighter but also noisier images.
+- 传感器增益，即对来自感光器的原始信号进行放大。增益越高，图像越亮，但噪声也越大。
 
-- the gamma curve, which is a correction curve applied in post-processing to adjust pixel values, possibly making them
-  brighter or darker. In addition to a gamma curve, the JeVois image sensor also has a programmable color matrix, which
-  specifies how pixel values should be converted from the raw pixel array (BAYER format; see \ref PixelFormats) to a
-  given sensor image format (e.g., YUYV). By putting higher values in that color matrix, one can achieve overall higher
-  brightness of the images.
+- 伽马曲线，这是在后期处理中应用的校正曲线，用于调整像素值，可能使它们更亮或更暗。除了伽马曲线之外，JeVois 图像传感器还具有可编程颜色矩阵，它指定如何将像素值从原始像素阵列（BAYER 格式；参见 \ref PixelFormats）转换为给定的传感器图像格式（例如 YUYV）。通过在该颜色矩阵中输入更高的值，可以实现图像的整体更高亮度。
 
-Default settings
-----------------
+默认设置  -  -  -  -  -  -  -  - 
 
-By default, JeVois attempts to maintain the frame rate specified in a given video mapping. The rationale for this is
-that some downstream computer connected to JeVois may require the specified framerate for smooth real-time
-operation. With some of the machine vision modules bundled with JeVois, the framerate is high, for example 60 frames/s
-or even 120 frames/s for \jvmod{DemoEyeTracker}.
+默认情况下，JeVois 会尝试保持给定视频映射中指定的帧速率。这样做的原因是，连接到 JeVois 的某些下游计算机可能需要指定的帧速率才能实现流畅的实时操作。对于与 JeVois 捆绑在一起的一些机器视觉模块，帧速率很高，例如 \jvmod{DemoEyeTracker} 的帧速率为 60 帧/秒甚至 120 帧/秒。
 
-At higher frame rates, there is very little time available for exposure.
+在较高的帧速率下，可用于曝光的时间非常短。
 
-Operating in low light
-----------------------
+在弱光下操作 ----------------------
 
-Let us compare JeVois-A33 with a professional video camera (Sony FDR-AX1, about 100 times the price of JeVois-A33), and
-with an inexpensive USB camera (a small bullet camera).
+让我们将 JeVois-A33 与专业摄像机（索尼 FDR-AX1，价格约为 JeVois-A33 的 100 倍）以及廉价的 USB 摄像机（小型子弹头摄像机）进行比较。
 
-\image html lowlight-bullet-30fps.jpg An expensive Sony camera, JeVois camera (circled in red), and inexpensive bullet USB camera (circled in blue), all looking at the same scene, with office lights turned on. All cameras perform well in these conditions.
+\image html lowlight-bullet-30fps.jpg 一台昂贵的索尼相机、一台 JeVois 相机（红色圆圈）和一台廉价的子弹 USB 相机（蓝色圆圈），都观察同一个场景，办公室灯亮着。所有相机在这些条件下都表现良好。
 
-When lighting is low (here, we turned off the light on an evening close to sunset, but not yet past sunset), the image
-captured by all cameras darkens, as seen below. Here, we can see that the bullet camera adapts by dropping framerate to
-4 frames/s to allow for more exposure time (the bullet camera's picture is shown on the computer screen, and guvcview
-used to display the frames from it reports 4.12 frames/s).
+当光线较暗时（此处，我们在日落前但日落后不久关掉了灯），所有摄像头拍摄的图像都会变暗，如下所示。此处，我们可以看到子弹头摄像头通过将帧速率降低到 4 帧/秒来适应，以便获得更多曝光时间（子弹头摄像头的图片显示在计算机屏幕上，用于显示帧的 guvcview 报告 4.12 帧/秒）。
 
-\image html lowlight-bullet-4fps.jpg Darker images are captured in low light conditions, and one strategy to counter that is to increase exposure time by lowering frame rate, as done here by the inexpensive USB bullet camera, which drops frame rate to 4 frames/s.
+\image html lowlight-bullet-4fps.jpg 在弱光条件下拍摄的图像较暗，应对该问题的一种方法是通过降低帧速率来增加曝光时间，就像这里使用廉价的 USB 子弹摄像机所做的那样，它将帧速率降低到 4 帧/秒。
 
-The expensive Sony camera was here set to capture at a fixed 60 fps, and we can see on the little LCD screen of that
-camera that, despite its much higher cost, that camera too has difficulty producing a bright picture in low light and
-under high frame rate.
+昂贵的索尼相机在这里被设置为以固定的 60 fps 进行拍摄，我们可以在该相机的小型 LCD 屏幕上看到，尽管成本高得多，但该相机在低光和高帧率下也难以产生明亮的图像。
 
-Let us have a closer look at the JeVois camera. With low light, and when using high frame rate, the video can get very,
-very dark, as shown below.
+让我们仔细看看 JeVois 相机。在低光照条件下，使用高帧率时，视频会变得非常非常暗，如下所示。
 
-\image html lowlight-auto-60fps.jpg The JeVois camera operating in low light at a fixed 60 frames/s. Clearly there is not enough light to get a decent image at this high frame rate.
+\image html lowlight-auto-60fps.jpg JeVois 相机在低光照条件下以固定的 60 帧/秒运行。显然，在如此高的帧速率下，光线不足以获得像样的图像。
 
-JeVois provides several ways to handle this:
+JeVois 提供了几种方法来解决这个问题：
 
-Brightness control
-------------------
+亮度控制  -  -  -  -  -  -  -  -  - 
 
-As a first thing to try, JeVois provides standard USB camera controls for brightness, contrast, etc. Those affect the
-color matrix. You may want to try to play with these controls first in your video capture software, and see whether you
-can achieve a good enough picture quality under your lighting conditions.
+首先要尝试的是，JeVois 提供了用于亮度、对比度等的标准 USB 摄像头控件。这些控件会影响颜色矩阵。您可能希望先在视频捕获软件中尝试使用这些控件，看看在您的照明条件下是否可以获得足够好的图像质量。
 
-Allowing for automatic lower frame rates
-----------------------------------------
+允许自动降低帧速率 ----------------------------------------
 
-\note The tips below are for the default \jva33 sensor (Omnivision ov9653). Some controls may not be available on other
-sensors (e.g., Aptina AR0135 global shutter; please refer to 'help' to list available controls).
+\note 以下提示适用于默认 \jva33 传感器（Omnivision ov9653）。某些控件可能不适用于其他传感器（例如，Aptina AR0135 全局快门；请参阅“帮助”以列出可用的控件）。
 
-If brightness control is not sufficient, one strategy is to allow for frame rate to decrease when JeVois is used in low
-light, to allow for longer exposure time. This can be achieved using the \p presetwb camera parameter available in the
-JeVois command-line interface (see \ref UserCli). Unfortunately, such controls do not seem to exist in the USB Video
-Class specification, and hence we cannot expose them to the host computer so that they would show up as available
-controls in the video capture software. Thus, you have to modify these controls using the JeVois command-line
-interface. Let us switch to night mode (called \b shade in the Video4Linux2 specifications):
+如果亮度控制不够，一种策略是允许在低光下使用 JeVois 时降低帧速率，以延长曝光时间。这可以使用 JeVois 命令行界面中提供的 \p presetwb 相机参数来实现（参见 \ref UserCli）。不幸的是，USB 视频类规范中似乎不存在此类控件，因此我们无法将它们公开给主机，以便它们在视频捕获软件中显示为可用控件。因此，您必须使用 JeVois 命令行界面修改这些控件。让我们切换到夜间模式（在 Video4Linux2 规范中称为 \b shade）：
 
 `setcam presetwb 9`
 
-(available values, as reported by \c help, are: 0:manual 1:auto 2:incandescent 3:fluorescent 4:fluorescent_h 5:horizon
-6:daylight 7:flash 8:cloudy 9:shade).
+（\c help 报告的可用值为：0:manual 1:auto 2:incandescent 3:fluorescent 4:fluorescent_h 5:horizo​​n 6:daylight 7:flash 8:cloudy 9:shade）。
 
-\image html lowlight-auto-shade.jpg Same lighting conditions as above, but \b shade camera preset turned on in JeVois. The image is now much brighter as frame rate has been automatically reduced by the camera sensor to 7.5 frames/s to allow for sufficient exposure under these low light conditions.
+\image html lowlight-auto-shade.jpg 与上文相同的光照条件，但 \b 遮光相机预设在 JeVois 中打开。图像现在更亮了，因为相机传感器已自动将帧速率降低至 7.5 帧/秒，以便在这些低光照条件下获得足够的曝光。
 
-Feel free to try out the other presets. Preset 9 is the one that allows for the most drastic automatic reduction in
-frame rate, up to 8x reduction. Some of the other presets allow for only smaller reductions, or for no automatic frame
-rate adjustment in low light.
+请随意尝试其他预设。预设 9 允许最大程度地自动降低帧速率，最多可降低 8 倍。其他一些预设仅允许较小程度的降低，或者在低光条件下不自动调整帧速率。
 
-\note There is hysteresis when modifying camera presets, i.e., switching from preset 1 to 9 and then back to 1 will
-leave the camera in a different state than it originally was. Just power JeVois off and back on to get back to the
-original state.
+\note 修改摄像机预设时存在滞后现象，即从预设 1 切换到 9 然后再切换回 1 会使摄像机处于与原始状态不同的状态。只需关闭 JeVois 电源然后再打开即可恢复到原始状态。
 
 
-Using lower fixed frame rates
------------------------------
+使用较低的固定帧速率 -----------------------------
 
-In the demos bundled with JeVois, we have often used 60 frames/s to show how fast JeVois can process video on the fly.
+在与 JeVois 捆绑的演示中，我们经常使用 60 帧/秒来展示 JeVois 动态处理视频的速度。
 
-However, if you do not need, for example, to detect colorful objects with the ObjectTracker module at 60 frames/s, and
-your application will work well with 15 frames/s, then just edit the corresponding video mapping and reduce both the USB
-output frame rate and the camera frame rate in your \b videomappings.cfg file (see \ref VideoMapping).
+但是，如果您不需要以 60 帧/秒的速度使用 ObjectTracker 模块检测彩色物体，并且您的应用程序以 15 帧/秒的速度运行就足够了，那么只需编辑相应的视频映射并降低 \b videomappings.cfg 文件中的 USB 输出帧速率和摄像头帧速率（参见 \ref VideoMapping）。
 
-When JeVois starts, it will by default use automatic exposure and gain control, and the lower frame rate will allow a
-much wider range of automatic exposure and gain adjustments, which in turn will allow JeVois to operate better in low
-light.
+JeVois 启动时，默认使用自动曝光和增益控制，较低的帧速率将允许更大范围的自动曝光和增益调整，从而使 JeVois 在低光照条件下更好地运行。
 
-Manual exposure and gain
-------------------------
+手动曝光和增益 ------------------------
 
-Another option is to turn to manual controls. Two controls are of interest here:
+另一个选择是转向手动控制。这里有两个控制措施值得关注：
 
-- exposure: for how long the photo-sensors will collect light. This is capped by frame rate (i.e., cannot expose for
-  longer than the frame period). The longer the exposure, the brighter the video will be, but it will also become more
-  susceptible to motion blur.
+- 曝光：光传感器收集光线的时间。曝光时间受帧速率限制（即曝光时间不能超过帧周期）。曝光时间越长，视频就越亮，但也更容易出现运动模糊。
 
-- gain: for how strongly the analog signal received from the photo-sensors should be amplified before they are
-  digitized. Higher gain will brighten the video but will also tend to amplify noise.
+- 增益：表示从光传感器接收到的模拟信号在数字化之前应被放大到何种程度。较高的增益会使视频更亮，但也会放大噪音。
 
-First set the <b>Exposure, Auto</b> control in your video viewer to <b>Manual Mode</b>, and then start setting the
-<b>Exposure (absolute)</b> and <b>Gain</b> controls. Note that, although the exposure control has a scale from 0 to
-1000, only a fraction of that scale may be usable depending on framerate (that is, exposure cannot be increased to a
-longer time than the frame period. If one attempts to set an exposure time longer than the frame period, exposure will
-automatically be capped at slightly below the frame period).
+首先将视频查看器中的<b>曝光、自动</b>控件设置为<b>手动模式</b>，然后开始设置<b>曝光（绝对）</b>和<b>增益</b>控件。请注意，尽管曝光控制的范围从 0 到 1000，但根据帧速率，只有该范围的一小部分可用（即，曝光时间不能增加到比帧周期更长的时间。如果尝试将曝光时间设置为比帧周期更长，曝光将自动限制在略低于帧周期的水平）。
 
-Generally speaking, a compromise should be found between gain and exposure values. If motion blur is not a problem, then
-highest possible exposure and lowest possible gain will yield less noisy and grainy images.
+一般来说，应该在增益和曝光值之间找到一个折衷点。如果运动模糊不是问题，那么尽可能高的曝光和尽可能低的增益将产生较少噪声和颗粒感的图像。
 
-\note Because auto-gain is not defined as a camera control in the USB Video Class specification, in JeVois we have
-coupled the auto-exposure and auto-gain settings: When you select manual exposure, it also selects manual gain, and when
-you select auto exposure, it also selects auto gain.
+\note 由于自动增益在 USB 视频类规范中未定义为相机控制，因此在 JeVois 中我们将自动曝光和自动增益设置结合在一起：当您选择手动曝光时，它也会选择手动增益，当您选择自动曝光时，它也会选择自动增益。
 
-\image html lowlight-manexp.jpg Example of using manual exposure and gain to obtain a brighter image in low light. Note how here we manage to sustain a fixed 30 frames/s as used by default for the DemoArUco machine vision module.
+\image html lowlight-manexp.jpg 使用手动曝光和增益在低光照条件下获得更亮图像的示例。请注意，我们在这里如何设法维持 DemoArUco 机器视觉模块默认使用的固定 30 帧/秒。
 
-With higher gain, the image will look grainier and, if frame rate must be kept high, will not be pleasant to look
-at.
+增益越高，图像看起来就越粗糙，如果必须保持较高的帧速率，则看起来就越不美观。
 
-But this may not necessarily be a problem for the machine vision algorithms.
+但这对于机器视觉算法来说不一定是个问题。
 
-For example, in the image above, we have turned up the gain very high to be able to still operate at 30 frames/s in very
-dark conditions. Significant pixel noise is apparent in the video captured by JeVois. But ... the \jvmod{DemoArUco}
-algorithm running inside JeVois does not seem to be affected and is running just fine, readily detecting and decoding
-the two ArUco markers present in the scene!
+例如，在上图中，我们将增益调得非常高，以便在非常暗的条件下仍能以 30 帧/秒的速度运行。JeVois 捕获的视频中明显存在明显的像素噪声。但是……JeVois 内部运行的 \jvmod{DemoArUco} 算法似乎没有受到影响，并且运行良好，可以轻松检测和解码场景中存在的两个 ArUco 标记！
 
-Here is an even more extreme example, in almost compete darkness and cranking up the exposure and the gain to the
-max. The image quality is horrible (see the very high pixel noise on the black areas of the markers). But ArUco markers
-are getting detected just fine...
+这是一个更极端的例子，在几乎完全黑暗的环境下，将曝光和增益调到最大。图像质量很糟糕（参见标记黑色区域上的非常高的像素噪声）。但 ArUco 标记检测得很好……
 
-\image html lowlight-night.jpg 
+\图片 html 低光之夜.jpg
 
 
-Further exploration
--------------------
+进一步探索 -------------------
 
-JeVois allows you to poke at the camera sensor registers through the \c setcamreg and \c getcamreg commands (parameter
-\c camreg must first be turned to true, as an extra protection against accidental use of these commands). Just beware
-that changing any register that has to do with pixel clock and details of the image format, polarity of pulses, etc is
-likely to just crash the sensor and you will have to power JeVois off to recover.
+JeVois 允许您通过 \c setcamreg 和 \c getcamreg 命令来访问相机传感器寄存器（必须先将参数 \c camreg 设置为 true，作为防止意外使用这些命令的额外保护）。请注意，更改与像素时钟和图像格式细节、脉冲极性等有关的任何寄存器都可能导致传感器崩溃，您必须关闭 JeVois 才能恢复。
 
-You may want to explore loading different gamma curves, different color matrices, etc into the sensor and see whether
-you can achieve better low-light performance.
+您可能想要探索将不同的伽马曲线、不同的颜色矩阵等加载到传感器中，看看是否可以获得更好的低光性能。
 
 */
 

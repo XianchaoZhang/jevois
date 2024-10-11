@@ -36,7 +36,7 @@ jevois::dnn::NetworkHailo::NetworkHailo(std::string const & instance) :
     jevois::dnn::Network(instance)
 {
 
-  /* Skip this test for now... The overlay need to be tuned up to actually bind to the hailo chip.
+  /* 暂时跳过此测试...覆盖需要进行调整才能实际绑定到 hailo 芯片。
 
 #ifdef JEVOIS_PLATFORM
   try { (void)jevois::getFileString("/proc/device-tree/reserved-memory/linux,hailo_cma/name"); }
@@ -63,7 +63,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkHailo::outputShapes()
 // ####################################################################################################
 jevois::dnn::NetworkHailo::~NetworkHailo()
 {
-  // If we are loading the network via load() running in a thread, wait until that is done before we destroy
+  // 如果我们通过线程中运行的 load() 加载网络，则请等到该操作完成后再销毁
   // (base class jevois::dnn::Network handles this):
   waitBeforeDestroy();
 }
@@ -82,14 +82,14 @@ void jevois::dnn::NetworkHailo::load()
   // We can only load once...
   if (itsDevice) LFATAL("Network already loaded... restart the module to load a new one.");
 
-  // Create a device and load the HEF network file:
+  // 创建设备并加载 HEF 网络文件：
   auto dev = hailort::Device::create_pcie();
   if (!dev) LFATAL("Failed to create PCIe device:" << dev.status());
   itsDevice = dev.release();
   
   /*
-  // FIXME: looks like there may be a memory leak in the Hailo PCIe driver. It may not always deallocate all DMA
-  // coherent memory. Try a reset each time we load a new network:
+  // FIXME: 看起来 Hailo PCIe 驱动程序中可能存在内存泄漏。它可能不会始终释放所有 DMA 一致内存。每次加载
+  // 新网络时尝试重置：
   itsDevice->reset(HAILO_RESET_DEVICE_MODE_FORCED_SOFT);
   itsDevice.reset();
   std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -98,13 +98,13 @@ void jevois::dnn::NetworkHailo::load()
   (void)jevois::system("/usr/sbin/modprobe hailo_pci");
   std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
-  // After reset we need a new Device object:
+  // 重置后，我们需要一个新的设备对象：
   auto dev2 = hailort::Device::create_pcie();
   if (!dev2) LFATAL("Failed to create PCIe device:" << dev2.status());
   itsDevice = dev2.release();
   */
   
-  // Load the network from HEF:
+  // 从 HEF 加载网络：
   std::string const m = jevois::absolutePath(dataroot::get(), model::get());
   LINFO("Loading HEF file " << m << " ...");
   auto hef = hailort::Hef::create(m);
@@ -122,7 +122,7 @@ void jevois::dnn::NetworkHailo::load()
   if (network_groups->empty()) LFATAL("HEF file " << m << " does not contain any network groups");
   itsNetGroup = std::move(network_groups->at(0)); // use the first network group
 
-  // Configure the input and output virtual streams:
+  // 配置输入和输出虚拟流：
   constexpr bool QUANTIZED = true;
   constexpr hailo_format_type_t FORMAT_TYPE = HAILO_FORMAT_TYPE_AUTO;
 
@@ -137,7 +137,7 @@ void jevois::dnn::NetworkHailo::load()
   HAILO_CHECK(activated_network_group, "Failed activating network group");
   itsActiveNetGroup = activated_network_group.release();
 
-  // Get the input and output attributes, allocate some cv::Mat for the outputs:
+  // 获取输入和输出属性，为输出分配一些 cv::Mat：
   for (auto const & vs : itsInStreams)
   {
     itsInAttrs.emplace_back(jevois::dnn::tensorattr(vs.get_info()));
@@ -154,7 +154,7 @@ void jevois::dnn::NetworkHailo::load()
     itsOutMats.emplace_back(cv::Mat(jevois::dnn::attrdims(attr), CV_32F));
   }
 
-  // Turbo parameter may have been changed before or while we loaded, so set it here:
+  // Turbo 参数可能在加载之前或加载时发生更改，因此请在此处设置：
   itsDevice->set_throttling_state(! turbo::get());
 }
 
@@ -178,7 +178,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkHailo::doprocess(std::vector<cv::Mat> c
         " but want: " + jevois::dnn::shapestr(itsInAttrs[i]) + "\n";
   if (err.empty() == false) LFATAL(err);
 
-  // Launch the output reader threads (device->host) first:
+  // 首先启动输出读取器线程（设备->主机）：
   std::vector<std::future<std::string>> fvec(itsInStreams.size() + itsOutStreams.size());
   bool const dq = dequant::get();
 
@@ -205,7 +205,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkHailo::doprocess(std::vector<cv::Mat> c
       
     }, i, dq);
 
-  // Launch the input writing (host->device) threads:
+  // 启动输入写入（主机->设备）线程：
   for (size_t b = 0; b < blobs.size(); ++b)
     fvec[b] = jevois::async([this, &blobs](size_t b) -> std::string 
     {
@@ -230,7 +230,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkHailo::doprocess(std::vector<cv::Mat> c
     devstr = jevois::sformat("- Hailo8: %.1fW, %.0fC%s", pwr, temp.ts0_temperature, throttle ? "" : " (turbo)");
   }
 
-  // Join all threads (may throw a single combined exception):
+  // 连接所有线程（可能引发单个组合异常）：
   std::vector<std::string> retvec = jevois::joinall(fvec);
   info.insert(info.end(), std::make_move_iterator(retvec.begin()), std::make_move_iterator(retvec.end()));
   info.emplace_back(devstr);

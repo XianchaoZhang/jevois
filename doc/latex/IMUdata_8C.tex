@@ -1,0 +1,283 @@
+\hypertarget{IMUdata_8C}{}\doxysubsection{src/jevois/\+Core/\+I\+M\+Udata.C File Reference}
+\label{IMUdata_8C}\index{src/jevois/Core/IMUdata.C@{src/jevois/Core/IMUdata.C}}
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Udata.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+C\+M20948\+\_\+regs.\+H$>$}\newline
+Include dependency graph for I\+M\+Udata.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{IMUdata_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a575e311fcf976145ab9024c26b9f96eb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_acbc9cd9f9aba03b1c7a2c4826f5b2240}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a4c9a7ded4e66110fab6e4edec4eeaaae}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_abcdc69f41b18f77ba106d7f90b015938}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a0ccb05363dd433151af629acab18b944}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+L\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~8
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a8a71bec0b30763047345f85575f68745}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~12
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_ade83d3844321d10a0c22aa1cf28f4591}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~14
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a9c3765a728e448c0b8f2caf8f82702a1}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a9509ab61983144c6f89868036997f985}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~14
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a7496335eb99774ed660f7ad4c32c19e5}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_ad7613f4844268200ac9537faaff1beac}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a233f9ac8911e13f28ea1c4e1dfbf4a6a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+B\+R\+\_\+\+D\+A\+T\+A\+\_\+\+SZ}}~12
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a5352033a1dabdb3ccf330afe01ce21d0}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+M\+P\+\_\+\+SZ}}~4
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_acba498bb77d7303fea95214cae46ddab}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+O\+O\+T\+E\+R\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a379e5bc8831bb2d0ca6f978286e19ff3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a607b87c52443c7b0458c368b4458feb7}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a1209fdfe3d17cd76ed914369228e33cc}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a85ad1db7a0a8a830cc2521f8134d7078}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a74ed1d7a34c70c8c9641c1ca5ac7500d}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+N\+C\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a845c2fe12b575b987bf5ef697e94270c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+SZ}}~2
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a5fc85bb063dd867b12fffe7246a39f97}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+O\+G\+\_\+\+SZ}}~6
+\item 
+\#define \mbox{\hyperlink{IMUdata_8C_a4664a13287b5be00f62bfb25be4df4cb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+\_\+\+G\+Y\+R\+O\+\_\+\+SZ}}~2
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{IMUdata_8C_a607b87c52443c7b0458c368b4458feb7}\label{IMUdata_8C_a607b87c52443c7b0458c368b4458feb7}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ@{JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ}}
+\index{JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ@{JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ}{JEVOIS\_DMP\_ACCEL\_ACCURACY\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ~2}
+
+
+
+Definition at line 41 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_acbc9cd9f9aba03b1c7a2c4826f5b2240}\label{IMUdata_8C_acbc9cd9f9aba03b1c7a2c4826f5b2240}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_ACCEL\_DATA\_SZ@{JEVOIS\_DMP\_ACCEL\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_ACCEL\_DATA\_SZ@{JEVOIS\_DMP\_ACCEL\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ACCEL\_DATA\_SZ}{JEVOIS\_DMP\_ACCEL\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 25 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a5fc85bb063dd867b12fffe7246a39f97}\label{IMUdata_8C_a5fc85bb063dd867b12fffe7246a39f97}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_ACT\_RECOG\_SZ@{JEVOIS\_DMP\_ACT\_RECOG\_SZ}}
+\index{JEVOIS\_DMP\_ACT\_RECOG\_SZ@{JEVOIS\_DMP\_ACT\_RECOG\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ACT\_RECOG\_SZ}{JEVOIS\_DMP\_ACT\_RECOG\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+O\+G\+\_\+\+SZ~6}
+
+
+
+Definition at line 46 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a0ccb05363dd433151af629acab18b944}\label{IMUdata_8C_a0ccb05363dd433151af629acab18b944}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_ALS\_DATA\_SZ@{JEVOIS\_DMP\_ALS\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_ALS\_DATA\_SZ@{JEVOIS\_DMP\_ALS\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ALS\_DATA\_SZ}{JEVOIS\_DMP\_ALS\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+L\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~8}
+
+
+
+Definition at line 28 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a85ad1db7a0a8a830cc2521f8134d7078}\label{IMUdata_8C_a85ad1db7a0a8a830cc2521f8134d7078}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ@{JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ}}
+\index{JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ@{JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ}{JEVOIS\_DMP\_CPASS\_ACCURACY\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ~2}
+
+
+
+Definition at line 43 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a233f9ac8911e13f28ea1c4e1dfbf4a6a}\label{IMUdata_8C_a233f9ac8911e13f28ea1c4e1dfbf4a6a}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ@{JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ@{JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ}{JEVOIS\_DMP\_CPASS\_CALIBR\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+B\+R\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~12}
+
+
+
+Definition at line 35 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_abcdc69f41b18f77ba106d7f90b015938}\label{IMUdata_8C_abcdc69f41b18f77ba106d7f90b015938}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_CPASS\_DATA\_SZ@{JEVOIS\_DMP\_CPASS\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_CPASS\_DATA\_SZ@{JEVOIS\_DMP\_CPASS\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_CPASS\_DATA\_SZ}{JEVOIS\_DMP\_CPASS\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 27 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a845c2fe12b575b987bf5ef697e94270c}\label{IMUdata_8C_a845c2fe12b575b987bf5ef697e94270c}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_FLIP\_PICKUP\_SZ@{JEVOIS\_DMP\_FLIP\_PICKUP\_SZ}}
+\index{JEVOIS\_DMP\_FLIP\_PICKUP\_SZ@{JEVOIS\_DMP\_FLIP\_PICKUP\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_FLIP\_PICKUP\_SZ}{JEVOIS\_DMP\_FLIP\_PICKUP\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+SZ~2}
+
+
+
+Definition at line 45 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_acba498bb77d7303fea95214cae46ddab}\label{IMUdata_8C_acba498bb77d7303fea95214cae46ddab}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_FOOTER\_SZ@{JEVOIS\_DMP\_FOOTER\_SZ}}
+\index{JEVOIS\_DMP\_FOOTER\_SZ@{JEVOIS\_DMP\_FOOTER\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_FOOTER\_SZ}{JEVOIS\_DMP\_FOOTER\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+O\+O\+T\+E\+R\+\_\+\+SZ~2}
+
+
+
+Definition at line 37 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a74ed1d7a34c70c8c9641c1ca5ac7500d}\label{IMUdata_8C_a74ed1d7a34c70c8c9641c1ca5ac7500d}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_FSYNC\_SZ@{JEVOIS\_DMP\_FSYNC\_SZ}}
+\index{JEVOIS\_DMP\_FSYNC\_SZ@{JEVOIS\_DMP\_FSYNC\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_FSYNC\_SZ}{JEVOIS\_DMP\_FSYNC\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+N\+C\+\_\+\+SZ~2}
+
+
+
+Definition at line 44 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a9509ab61983144c6f89868036997f985}\label{IMUdata_8C_a9509ab61983144c6f89868036997f985}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_GEOMAG\_DATA\_SZ@{JEVOIS\_DMP\_GEOMAG\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_GEOMAG\_DATA\_SZ@{JEVOIS\_DMP\_GEOMAG\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GEOMAG\_DATA\_SZ}{JEVOIS\_DMP\_GEOMAG\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~14}
+
+
+
+Definition at line 32 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a1209fdfe3d17cd76ed914369228e33cc}\label{IMUdata_8C_a1209fdfe3d17cd76ed914369228e33cc}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ@{JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ}}
+\index{JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ@{JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ}{JEVOIS\_DMP\_GYRO\_ACCURACY\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ~2}
+
+
+
+Definition at line 42 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_ad7613f4844268200ac9537faaff1beac}\label{IMUdata_8C_ad7613f4844268200ac9537faaff1beac}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ@{JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ@{JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ}{JEVOIS\_DMP\_GYRO\_BIAS\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 34 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a4c9a7ded4e66110fab6e4edec4eeaaae}\label{IMUdata_8C_a4c9a7ded4e66110fab6e4edec4eeaaae}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_GYRO\_DATA\_SZ@{JEVOIS\_DMP\_GYRO\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_GYRO\_DATA\_SZ@{JEVOIS\_DMP\_GYRO\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GYRO\_DATA\_SZ}{JEVOIS\_DMP\_GYRO\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 26 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a379e5bc8831bb2d0ca6f978286e19ff3}\label{IMUdata_8C_a379e5bc8831bb2d0ca6f978286e19ff3}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_HEADER2\_SZ@{JEVOIS\_DMP\_HEADER2\_SZ}}
+\index{JEVOIS\_DMP\_HEADER2\_SZ@{JEVOIS\_DMP\_HEADER2\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_HEADER2\_SZ}{JEVOIS\_DMP\_HEADER2\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2\+\_\+\+SZ~2}
+
+
+
+Definition at line 40 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a575e311fcf976145ab9024c26b9f96eb}\label{IMUdata_8C_a575e311fcf976145ab9024c26b9f96eb}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_HEADER\_SZ@{JEVOIS\_DMP\_HEADER\_SZ}}
+\index{JEVOIS\_DMP\_HEADER\_SZ@{JEVOIS\_DMP\_HEADER\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_HEADER\_SZ}{JEVOIS\_DMP\_HEADER\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+SZ~2}
+
+
+
+Definition at line 24 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a4664a13287b5be00f62bfb25be4df4cb}\label{IMUdata_8C_a4664a13287b5be00f62bfb25be4df4cb}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ@{JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ}}
+\index{JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ@{JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ}{JEVOIS\_DMP\_ODR\_CNT\_GYRO\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+\_\+\+G\+Y\+R\+O\+\_\+\+SZ~2}
+
+
+
+Definition at line 49 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a5352033a1dabdb3ccf330afe01ce21d0}\label{IMUdata_8C_a5352033a1dabdb3ccf330afe01ce21d0}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ@{JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ}}
+\index{JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ@{JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ}{JEVOIS\_DMP\_PED\_STEPDET\_TIMESTAMP\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+M\+P\+\_\+\+SZ~4}
+
+
+
+Definition at line 36 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a9c3765a728e448c0b8f2caf8f82702a1}\label{IMUdata_8C_a9c3765a728e448c0b8f2caf8f82702a1}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_PQUAT6\_DATA\_SZ@{JEVOIS\_DMP\_PQUAT6\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_PQUAT6\_DATA\_SZ@{JEVOIS\_DMP\_PQUAT6\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_PQUAT6\_DATA\_SZ}{JEVOIS\_DMP\_PQUAT6\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 31 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a7496335eb99774ed660f7ad4c32c19e5}\label{IMUdata_8C_a7496335eb99774ed660f7ad4c32c19e5}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_PRESSURE\_DATA\_SZ@{JEVOIS\_DMP\_PRESSURE\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_PRESSURE\_DATA\_SZ@{JEVOIS\_DMP\_PRESSURE\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_PRESSURE\_DATA\_SZ}{JEVOIS\_DMP\_PRESSURE\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~6}
+
+
+
+Definition at line 33 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_a8a71bec0b30763047345f85575f68745}\label{IMUdata_8C_a8a71bec0b30763047345f85575f68745}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_QUAT6\_DATA\_SZ@{JEVOIS\_DMP\_QUAT6\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_QUAT6\_DATA\_SZ@{JEVOIS\_DMP\_QUAT6\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_QUAT6\_DATA\_SZ}{JEVOIS\_DMP\_QUAT6\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~12}
+
+
+
+Definition at line 29 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{IMUdata_8C_ade83d3844321d10a0c22aa1cf28f4591}\label{IMUdata_8C_ade83d3844321d10a0c22aa1cf28f4591}} 
+\index{IMUdata.C@{IMUdata.C}!JEVOIS\_DMP\_QUAT9\_DATA\_SZ@{JEVOIS\_DMP\_QUAT9\_DATA\_SZ}}
+\index{JEVOIS\_DMP\_QUAT9\_DATA\_SZ@{JEVOIS\_DMP\_QUAT9\_DATA\_SZ}!IMUdata.C@{IMUdata.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_QUAT9\_DATA\_SZ}{JEVOIS\_DMP\_QUAT9\_DATA\_SZ}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9\+\_\+\+D\+A\+T\+A\+\_\+\+SZ~14}
+
+
+
+Definition at line 30 of file I\+M\+Udata.\+C.
+

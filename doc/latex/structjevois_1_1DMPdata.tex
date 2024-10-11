@@ -1,0 +1,586 @@
+\hypertarget{structjevois_1_1DMPdata}{}\doxysubsection{jevois\+::D\+M\+Pdata Struct Reference}
+\label{structjevois_1_1DMPdata}\index{jevois::DMPdata@{jevois::DMPdata}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Udata.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+D\+MP 数据（数字运动处理器） 
+
+Definition at line 126 of file I\+M\+Udata.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{structjevois_1_1DMPdata_a6dd82d2a12930c4981030cc9a9ab8d54}{parse\+Packet}} (unsigned char const $\ast$packet, size\+\_\+t siz)
+\begin{DoxyCompactList}\small\item\em 从 D\+MP 收到的数据包中填充我们的字段 \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structjevois_1_1DMPdata_acfadc44ec64381d15e3f942378a58ea8}{fsync\+\_\+us}} () const
+\begin{DoxyCompactList}\small\item\em Delay between F\+S\+Y\+NC and next \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} data, in microseconds. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{structjevois_1_1DMPdata_a99e31d907d4b229537b700de744e9b89}{activity}} ()
+\begin{DoxyCompactList}\small\item\em 将当前正在进行的活动解码为字符串 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{structjevois_1_1DMPdata_a3cb317ef4a42a565a39de1cdc8ecc2be}{activity2}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{structjevois_1_1DMPdata_af67ba4abaee3c213164cb018f753ff80}{fix2float}} (long val)
+\begin{DoxyCompactList}\small\item\em 将长定点值转换为浮点数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_a600722a0e04a908f2919e787af349789}{header1}}
+\begin{DoxyCompactList}\small\item\em Header 1 字段指示哪些数据有效 \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_aa68f2a8beb23c118a9537f9b5baa6397}{header2}}
+\begin{DoxyCompactList}\small\item\em Header 2 字段指示哪些数据有效 \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a4d57effa002121ec809d7ee4d9291d0f}{accel}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Raw accelerometer data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+EL in header1) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a32d9d6923c33a6342af72258c42634ec}{gyro}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Raw gyro data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO in header1) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a894d6e522d6bc597c71573f11e510fff}{cpass}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Raw compass data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+SS in header1) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_afae75111a229a37eba3e6c2ce643d65c}{gbias}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Raw gyro bias data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO in header1) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_acdf6645d7a9fa65b54bb46ec2ced77bf}{quat6}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Quaternion6 data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6 in header1) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_ab88c494dacffb765f288d0624588199f}{quat9}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Quaternion9 data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9 in header1) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_a1f736ff9f1a3bdddd0b51d6e1f133b93}{quat9acc}}
+\begin{DoxyCompactList}\small\item\em Quaternion9 accuracy (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9 in header1) \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{structjevois_1_1DMPdata_ab0f538035051e1b813379639ffba547c}{stepts}}
+\begin{DoxyCompactList}\small\item\em Step detection timestamp (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET) \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_a0d6c5c5c289272fb2f8bff3f51bebb46}{steps}}
+\begin{DoxyCompactList}\small\item\em Number of steps (0..7) detected this cycle (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_ae8a8f172f817d58435aa5697570d37b7}{geomag}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Geomag data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG in header1) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_ab9fc79ba561437af6999fb59685f70c7}{geomagacc}}
+\begin{DoxyCompactList}\small\item\em Geomag accuracy (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG in header1) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a36ed15cac015cc9f4122ce8251dadb70}{gyrobias}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Gyro bias/calibration data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR in header1) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_a2e09f79b6091ad5d1065187fa249af0d}{cpasscal}} \mbox{[}3\mbox{]}
+\begin{DoxyCompactList}\small\item\em Compass calibration data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR in header1) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a6b3b487d93196f40e7bf4ac4d382c64d}{accelacc}}
+\begin{DoxyCompactList}\small\item\em Accelerometer accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a0c12403b46cde7848d5a3571b4ba2c92}{gyroacc}}
+\begin{DoxyCompactList}\small\item\em Gyro accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_a024b9472fad90dfa498f666d30b9dcb4}{cpassacc}}
+\begin{DoxyCompactList}\small\item\em Compass accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_a4c3ec8aa1e1a59d61ae342a703706c87}{fsync}}
+\begin{DoxyCompactList}\small\item\em Delay between F\+S\+Y\+NC received from camera and first subsequent \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} data generated. \end{DoxyCompactList}\item 
+short \mbox{\hyperlink{structjevois_1_1DMPdata_addfab3954bcbeb080df93db7f8fafcb3}{pickup}}
+\begin{DoxyCompactList}\small\item\em Flip/pickup detection (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+UP in header2) \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_a0bf90590a8cee0084337235cc2bea3b1}{bacstate}}
+\begin{DoxyCompactList}\small\item\em Activity recognition state (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG in header2) \end{DoxyCompactList}\item 
+long \mbox{\hyperlink{structjevois_1_1DMPdata_af26d54ea4368df406ea21d46e6d6835b}{bacts}}
+\begin{DoxyCompactList}\small\item\em Activity recognition timestamp (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG in header2) \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{structjevois_1_1DMPdata_ae394d4345a7951623b09f7279908cfd1}{odrcnt}}
+\begin{DoxyCompactList}\small\item\em 输出数据速率计数器（总是在这里但不清楚它是什么） \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a99e31d907d4b229537b700de744e9b89}\label{structjevois_1_1DMPdata_a99e31d907d4b229537b700de744e9b89}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!activity@{activity}}
+\index{activity@{activity}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{activity()}{activity()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ jevois\+::\+D\+M\+Pdata\+::activity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+将当前正在进行的活动解码为字符串 
+
+要求在 header2 中设置 J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG 并使用正确的数据速率。此函数返回包含开始或停止作为前缀的字符串， 然后是每个活动。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 
+
+Definition at line 233 of file I\+M\+Udata.\+C.
+
+
+
+References D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+KE, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+VE, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+UN, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+LL, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+LT, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+LK, and jevois\+::sformat().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a3cb317ef4a42a565a39de1cdc8ecc2be}\label{structjevois_1_1DMPdata_a3cb317ef4a42a565a39de1cdc8ecc2be}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!activity2@{activity2}}
+\index{activity2@{activity2}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{activity2()}{activity2()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ jevois\+::\+D\+M\+Pdata\+::activity2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+要求在 header2 中设置 J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG 并使用正确的数据速率。此函数返回包含每个正在进行的事件的名称的字 符串。警告，它有状态，因此您应该在开始使用它后仅调用此函数进行任何与活动相关的解析，并且您应该在每次从 D\+MP 读取时调用它。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 
+
+Definition at line 259 of file I\+M\+Udata.\+C.
+
+
+
+References D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+B\+I\+KE, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+D\+R\+I\+VE, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+R\+UN, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+S\+T\+I\+LL, D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+T\+I\+LT, and D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+A\+LK.
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_af67ba4abaee3c213164cb018f753ff80}\label{structjevois_1_1DMPdata_af67ba4abaee3c213164cb018f753ff80}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!fix2float@{fix2float}}
+\index{fix2float@{fix2float}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{fix2float()}{fix2float()}}
+{\footnotesize\ttfamily float jevois\+::\+D\+M\+Pdata\+::fix2float (\begin{DoxyParamCaption}\item[{long}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+将长定点值转换为浮点数 
+
+
+
+Definition at line 283 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_acfadc44ec64381d15e3f942378a58ea8}\label{structjevois_1_1DMPdata_acfadc44ec64381d15e3f942378a58ea8}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!fsync\_us@{fsync\_us}}
+\index{fsync\_us@{fsync\_us}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{fsync\_us()}{fsync\_us()}}
+{\footnotesize\ttfamily float jevois\+::\+D\+M\+Pdata\+::fsync\+\_\+us (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Delay between F\+S\+Y\+NC and next \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} data, in microseconds. 
+
+
+
+Definition at line 227 of file I\+M\+Udata.\+C.
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a6dd82d2a12930c4981030cc9a9ab8d54}\label{structjevois_1_1DMPdata_a6dd82d2a12930c4981030cc9a9ab8d54}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!parsePacket@{parsePacket}}
+\index{parsePacket@{parsePacket}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{parsePacket()}{parsePacket()}}
+{\footnotesize\ttfamily void jevois\+::\+D\+M\+Pdata\+::parse\+Packet (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{packet,  }\item[{size\+\_\+t}]{siz }\end{DoxyParamCaption})}
+
+
+
+从 D\+MP 收到的数据包中填充我们的字段 
+
+
+
+Definition at line 84 of file I\+M\+Udata.\+C.
+
+
+
+References accel, accelacc, bacstate, bacts, cpass, cpassacc, cpasscal, fsync, gbias, geomag, geomagacc, gyro, gyroacc, gyrobias, header1, header2, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+EL, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+O\+G\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+LS, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+L\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+SS, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+B\+R\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+UP, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+O\+O\+T\+E\+R\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+NC, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+N\+C\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+M\+P\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+I\+ND, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+RE, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, L\+E\+R\+R\+OR, odrcnt, pickup, quat6, quat9, quat9acc, steps, and stepts.
+
+
+
+Referenced by jevois\+::\+I\+C\+M20948\+::get\+D\+M\+P().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a4d57effa002121ec809d7ee4d9291d0f}\label{structjevois_1_1DMPdata_a4d57effa002121ec809d7ee4d9291d0f}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!accel@{accel}}
+\index{accel@{accel}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{accel}{accel}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::accel\mbox{[}3\mbox{]}}
+
+
+
+Raw accelerometer data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+EL in header1) 
+
+
+
+Definition at line 134 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a6b3b487d93196f40e7bf4ac4d382c64d}\label{structjevois_1_1DMPdata_a6b3b487d93196f40e7bf4ac4d382c64d}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!accelacc@{accelacc}}
+\index{accelacc@{accelacc}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{accelacc}{accelacc}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::accelacc}
+
+
+
+Accelerometer accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) 
+
+
+
+Definition at line 152 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a0bf90590a8cee0084337235cc2bea3b1}\label{structjevois_1_1DMPdata_a0bf90590a8cee0084337235cc2bea3b1}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!bacstate@{bacstate}}
+\index{bacstate@{bacstate}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{bacstate}{bacstate}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::bacstate}
+
+
+
+Activity recognition state (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG in header2) 
+
+
+
+Definition at line 161 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_af26d54ea4368df406ea21d46e6d6835b}\label{structjevois_1_1DMPdata_af26d54ea4368df406ea21d46e6d6835b}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!bacts@{bacts}}
+\index{bacts@{bacts}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{bacts}{bacts}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::bacts}
+
+
+
+Activity recognition timestamp (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG in header2) 
+
+
+
+Definition at line 162 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a894d6e522d6bc597c71573f11e510fff}\label{structjevois_1_1DMPdata_a894d6e522d6bc597c71573f11e510fff}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!cpass@{cpass}}
+\index{cpass@{cpass}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{cpass}{cpass}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::cpass\mbox{[}3\mbox{]}}
+
+
+
+Raw compass data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+SS in header1) 
+
+
+
+Definition at line 136 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a024b9472fad90dfa498f666d30b9dcb4}\label{structjevois_1_1DMPdata_a024b9472fad90dfa498f666d30b9dcb4}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!cpassacc@{cpassacc}}
+\index{cpassacc@{cpassacc}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{cpassacc}{cpassacc}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::cpassacc}
+
+
+
+Compass accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) 
+
+
+
+Definition at line 154 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a2e09f79b6091ad5d1065187fa249af0d}\label{structjevois_1_1DMPdata_a2e09f79b6091ad5d1065187fa249af0d}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!cpasscal@{cpasscal}}
+\index{cpasscal@{cpasscal}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{cpasscal}{cpasscal}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::cpasscal\mbox{[}3\mbox{]}}
+
+
+
+Compass calibration data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR in header1) 
+
+
+
+Definition at line 150 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a4c3ec8aa1e1a59d61ae342a703706c87}\label{structjevois_1_1DMPdata_a4c3ec8aa1e1a59d61ae342a703706c87}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!fsync@{fsync}}
+\index{fsync@{fsync}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{fsync}{fsync}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::fsync}
+
+
+
+Delay between F\+S\+Y\+NC received from camera and first subsequent \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} data generated. 
+
+
+
+Definition at line 156 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_afae75111a229a37eba3e6c2ce643d65c}\label{structjevois_1_1DMPdata_afae75111a229a37eba3e6c2ce643d65c}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!gbias@{gbias}}
+\index{gbias@{gbias}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{gbias}{gbias}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::gbias\mbox{[}3\mbox{]}}
+
+
+
+Raw gyro bias data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO in header1) 
+
+
+
+Definition at line 137 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_ae8a8f172f817d58435aa5697570d37b7}\label{structjevois_1_1DMPdata_ae8a8f172f817d58435aa5697570d37b7}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!geomag@{geomag}}
+\index{geomag@{geomag}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{geomag}{geomag}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::geomag\mbox{[}3\mbox{]}}
+
+
+
+Geomag data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG in header1) 
+
+
+
+Definition at line 146 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_ab9fc79ba561437af6999fb59685f70c7}\label{structjevois_1_1DMPdata_ab9fc79ba561437af6999fb59685f70c7}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!geomagacc@{geomagacc}}
+\index{geomagacc@{geomagacc}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{geomagacc}{geomagacc}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::geomagacc}
+
+
+
+Geomag accuracy (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG in header1) 
+
+
+
+Definition at line 147 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a32d9d6923c33a6342af72258c42634ec}\label{structjevois_1_1DMPdata_a32d9d6923c33a6342af72258c42634ec}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!gyro@{gyro}}
+\index{gyro@{gyro}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{gyro}{gyro}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::gyro\mbox{[}3\mbox{]}}
+
+
+
+Raw gyro data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO in header1) 
+
+
+
+Definition at line 135 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a0c12403b46cde7848d5a3571b4ba2c92}\label{structjevois_1_1DMPdata_a0c12403b46cde7848d5a3571b4ba2c92}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!gyroacc@{gyroacc}}
+\index{gyroacc@{gyroacc}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{gyroacc}{gyroacc}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::gyroacc}
+
+
+
+Gyro accuracy data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY in header2) 
+
+
+
+Definition at line 153 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a36ed15cac015cc9f4122ce8251dadb70}\label{structjevois_1_1DMPdata_a36ed15cac015cc9f4122ce8251dadb70}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!gyrobias@{gyrobias}}
+\index{gyrobias@{gyrobias}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{gyrobias}{gyrobias}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::gyrobias\mbox{[}3\mbox{]}}
+
+
+
+Gyro bias/calibration data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR in header1) 
+
+
+
+Definition at line 149 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a600722a0e04a908f2919e787af349789}\label{structjevois_1_1DMPdata_a600722a0e04a908f2919e787af349789}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!header1@{header1}}
+\index{header1@{header1}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{header1}{header1}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::header1}
+
+
+
+Header 1 字段指示哪些数据有效 
+
+
+
+Definition at line 131 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_aa68f2a8beb23c118a9537f9b5baa6397}\label{structjevois_1_1DMPdata_aa68f2a8beb23c118a9537f9b5baa6397}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!header2@{header2}}
+\index{header2@{header2}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{header2}{header2}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::header2}
+
+
+
+Header 2 字段指示哪些数据有效 
+
+
+
+Definition at line 132 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_ae394d4345a7951623b09f7279908cfd1}\label{structjevois_1_1DMPdata_ae394d4345a7951623b09f7279908cfd1}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!odrcnt@{odrcnt}}
+\index{odrcnt@{odrcnt}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{odrcnt}{odrcnt}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::odrcnt}
+
+
+
+输出数据速率计数器（总是在这里但不清楚它是什么） 
+
+将活动的开始/停止解码为字符串 
+
+Definition at line 164 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_addfab3954bcbeb080df93db7f8fafcb3}\label{structjevois_1_1DMPdata_addfab3954bcbeb080df93db7f8fafcb3}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!pickup@{pickup}}
+\index{pickup@{pickup}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{pickup}{pickup}}
+{\footnotesize\ttfamily short jevois\+::\+D\+M\+Pdata\+::pickup}
+
+
+
+Flip/pickup detection (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+UP in header2) 
+
+
+
+Definition at line 159 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_acdf6645d7a9fa65b54bb46ec2ced77bf}\label{structjevois_1_1DMPdata_acdf6645d7a9fa65b54bb46ec2ced77bf}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!quat6@{quat6}}
+\index{quat6@{quat6}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{quat6}{quat6}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::quat6\mbox{[}3\mbox{]}}
+
+
+
+Quaternion6 data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6 in header1) 
+
+
+
+Definition at line 139 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_ab88c494dacffb765f288d0624588199f}\label{structjevois_1_1DMPdata_ab88c494dacffb765f288d0624588199f}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!quat9@{quat9}}
+\index{quat9@{quat9}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{quat9}{quat9}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::quat9\mbox{[}3\mbox{]}}
+
+
+
+Quaternion9 data (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9 in header1) 
+
+
+
+Definition at line 140 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a1f736ff9f1a3bdddd0b51d6e1f133b93}\label{structjevois_1_1DMPdata_a1f736ff9f1a3bdddd0b51d6e1f133b93}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!quat9acc@{quat9acc}}
+\index{quat9acc@{quat9acc}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{quat9acc}{quat9acc}}
+{\footnotesize\ttfamily long jevois\+::\+D\+M\+Pdata\+::quat9acc}
+
+
+
+Quaternion9 accuracy (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9 in header1) 
+
+
+
+Definition at line 141 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_a0d6c5c5c289272fb2f8bff3f51bebb46}\label{structjevois_1_1DMPdata_a0d6c5c5c289272fb2f8bff3f51bebb46}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!steps@{steps}}
+\index{steps@{steps}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{steps}{steps}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+D\+M\+Pdata\+::steps}
+
+
+
+Number of steps (0..7) detected this cycle (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET) 
+
+
+
+Definition at line 144 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+\mbox{\Hypertarget{structjevois_1_1DMPdata_ab0f538035051e1b813379639ffba547c}\label{structjevois_1_1DMPdata_ab0f538035051e1b813379639ffba547c}} 
+\index{jevois::DMPdata@{jevois::DMPdata}!stepts@{stepts}}
+\index{stepts@{stepts}!jevois::DMPdata@{jevois::DMPdata}}
+\doxyparagraph{\texorpdfstring{stepts}{stepts}}
+{\footnotesize\ttfamily unsigned long jevois\+::\+D\+M\+Pdata\+::stepts}
+
+
+
+Step detection timestamp (when J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET) 
+
+
+
+Definition at line 143 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by parse\+Packet().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{IMUdata_8H}{I\+M\+Udata.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{IMUdata_8C}{I\+M\+Udata.\+C}}\end{DoxyCompactItemize}

@@ -47,16 +47,15 @@
 
 // ####################################################################################################
 
-// Simple class to hold a list of <name, value> pairs for our parameters, with updating the value of existing parameer
-// names if they are set several times (e.g., first set as a global, then set again for a particular network). Note that
-// here we do not check the validity of the parameters. This is delegated to Pipeline::setZooParam():
+// 简单类，用于保存参数的 <name, value> 对列表，如果现有参数名称被设置多次（例如，首先设置为全局，然后为特定网络再次设置），则更新
+// 其值。请注意，这里我们不检查参数的有效性。这委托给 Pipeline::setZooParam()：
 namespace
 {
   class ParHelper
   {
     public:
       // ----------------------------------------------------------------------------------------------------
-      // Set a param from an entry in our yaml file
+      // 从我们的 yaml 文件中的条目设置参数
       void set(cv::FileNode const & item, std::string const & zf, cv::FileNode const & node)
       {
         std::string k = item.name();
@@ -73,13 +72,13 @@ namespace
             LFATAL("Invalid zoo parameter " << k << " type " << item.type() << " in " << zf << " node " << node.name());
         }
 
-        // Update value if param already exists, or add new key,value pair:
+        // 如果 param 已经存在，则更新值，否则添加新的键值对：
         for (auto & p : params) if (p.first == k) { p.second = v; return; }
         params.emplace_back(std::make_pair(k, v));
       }
 
       // ----------------------------------------------------------------------------------------------------
-      // Get a value for entry subname under item if found, otherwise try our table of globals, otherwise empty
+      // 如果找到，则获取 item 下条目 subname 的值，否则尝试我们的全局表，否则为空
       std::string pget(cv::FileNode & item, std::string const & subname)
       {
         std::string const v = (std::string)item[subname];
@@ -89,14 +88,14 @@ namespace
       }
 
       // ----------------------------------------------------------------------------------------------------
-      // Un-set a previously set global
+      // 取消设置先前设置的全局
       void unset(std::string const & name)
       {
         for (auto itr = params.begin(); itr != params.end(); ++itr)
           if (itr->first == name) { params.erase(itr); return; }
       }
       
-      // Ordering matters, so use a vector instead of map or unordered_map
+      // 顺序很重要，所以使用向量而不是 map 或 unordered_map
       std::vector<std::pair<std::string /* name */, std::string /* value */>> params;
   };
 }
@@ -113,9 +112,9 @@ jevois::dnn::Pipeline::Pipeline(std::string const & instance) :
   itsAccelerators["ORT"] = 1;    // ONNX runtime always available
   itsAccelerators["Python"] = 1; // Python always available
 #ifdef JEVOIS_PLATFORM_PRO
-  itsAccelerators["VPUX"] = 1;   // VPU emulation on CPU always available through OpenVino
+  itsAccelerators["VPUX"] = 1;   // 通过 OpenVino 始终可在 CPU 上进行 VPU 仿真
 #endif
-  itsAccelerators["NPUX"] = 1;   // NPU over Tim-VX always available since compiled into OpenCV
+  itsAccelerators["NPUX"] = 1;   // 自编译到 OpenCV 以来，Tim-VX 上的 NPU 始终可用
     
   LINFO("Detected " <<
         itsAccelerators["NPU"] << " JeVois-Pro NPUs, " <<
@@ -139,28 +138,28 @@ void jevois::dnn::Pipeline::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::Pipeline::postInit()
 {
-  // Freeze all params that users should not modify at runtime:
+  // 冻结所有用户在运行时不应修改的参数：
   freeze(true);
 }
 
 // ####################################################################################################
 void jevois::dnn::Pipeline::preUninit()
 {
-  // If we have a network running async, make sure we wait here until it is done:
+  // 如果我们有一个异步运行的网络，请确保我们在这里等待它直到完成：
   asyncNetWait();
 }
 
 // ####################################################################################################
 jevois::dnn::Pipeline::~Pipeline()
 {
-  // Make sure network is not running as we die:
+  // 确保我们死机时网络没有运行：
   asyncNetWait();
 }
 
 // ####################################################################################################
 void jevois::dnn::Pipeline::asyncNetWait()
 {
-  // If we were currently doing async processing, wait until network is done:
+  // 如果我们当前正在进行异步处理，请等待网络完成：
   if (itsNetFut.valid())
     while (true)
     {
@@ -176,17 +175,16 @@ void jevois::dnn::Pipeline::asyncNetWait()
 // ####################################################################################################
 void jevois::dnn::Pipeline::onParamChange(pipeline::filter const &, jevois::dnn::pipeline::Filter const & val)
 {
-  // Reload the zoo file so that the filter can be applied to create the parameter def of pipe, but first we need this
-  // parameter to indeed be updated. So here we just set a flag and the update will occur in process(), after we run the
-  // current model one last time:
+  // 重新加载 zoo 文件，以便可以应用过滤器来创建 pipe 的参数 def，但首先我们需要确实更新这个参数。所以这里我们只需设置一个标志，更
+  // 新将在 process() 中发生，在我们最后一次运行当前模型之后：
   if (val != filter::get()) itsZooChanged = true;
 }
 
 // ####################################################################################################
 void jevois::dnn::Pipeline::onParamChange(pipeline::zooroot const &, std::string const & val)
 {
-  // Reload the zoo file, but first we need this parameter to indeed be updated. So here we just set a flag and the
-  // update will occur in process(), after we run the current model one last time:
+  // 重新加载 zoo 文件，但首先我们需要更新此参数。因此，我们只需在这里设置一个标志，更新将在 process() 中发生，在我们最后一次运行
+  // 当前模型之后：
   if (val.empty() == false && val != zooroot::get()) itsZooChanged = true;
 }
 
@@ -208,27 +206,27 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::benchmark const &, bool cons
 // ####################################################################################################
 void jevois::dnn::Pipeline::onParamChange(pipeline::zoo const &, std::string const & val)
 {
-  // Just nuke everything:
+  // 只需删除所有内容：
   itsPreProcessor.reset();
   itsNetwork.reset();
   itsPostProcessor.reset();
-  // Will get instantiated again when pipe param is set.
+  // 当设置管道参数时将再次实例化。
 
   // Load zoo file:
   std::vector<std::string> pipes;
   scanZoo(jevois::absolutePath(zooroot::get(), val), filter::strget(), pipes, "");
   LINFO("Found a total of " << pipes.size() << " valid pipelines.");
 
-  // Update the parameter def of pipe:
+  // 更新管道的参数定义：
   jevois::ParameterDef<std::string> newdef("pipe", "Pipeline to use, determined by entries in the zoo file and "
                                            "by the current filter",
                                            pipes[0], pipes, jevois::dnn::pipeline::ParamCateg);
   pipe::changeParameterDef(newdef);
 
-  // Just changing the def does not change the param value, so change it now:
+  // 仅仅改变 def 不会改变 param 值，所以现在改变它：
   pipe::set(pipes[0]);
 
-  // Mark the zoo as not changed anymore, unless we are just starting the module and need to load a first net:
+  // 将动物园标记为不再改变，除非我们刚刚启动模块并需要加载第一个网络：
   itsZooChanged = false;
 }
 
@@ -243,7 +241,7 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
   auto itr = itsAccelerators.find("VPU");
   if (itr != itsAccelerators.end() && itr->second > 0) has_vpu = true;
   
-  // Scan the zoo file to update the parameter def of the pipe parameter:
+  // 扫描 zoo 文件，更新 pipe 参数的参数 def：
   cv::FileStorage fs(zoofile, cv::FileStorage::READ);
   if (fs.isOpened() == false) LFATAL("Could not open zoo file " << zoofile);
   cv::FileNode fn = fs.root();
@@ -253,12 +251,12 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
   {
     cv::FileNode item = *fit;
 
-    // Process include: directives recursively:
+    // 递归处理 include: 指令：
     if (item.name() == "include")
     {
       scanZoo(jevois::absolutePath(zooroot::get(), (std::string)item), filt, pipes, indent + "  ");
     }
-    // Process includedir: directives (only one level of directory is scanned):
+    // 处理 includedir: 指令（仅扫描一级目录）：
     else if (item.name() == "includedir")
     {
       std::filesystem::path const dir = jevois::absolutePath(zooroot::get(), (std::string)item);
@@ -270,7 +268,7 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
           if (ext == ".yml" || ext == ".yaml") scanZoo(path, filt, pipes, indent + "  ");
         }
     }
-    // Unset a previously set global?
+    // 取消设置先前设置的全局变量？
     else if (item.name() == "unset")
     {
       ph.unset((std::string)item);
@@ -285,11 +283,11 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
     {
       ++ntot;
       
-      // As a prefix, we use OpenCV for OpenCV models on CPU/OpenCL backends, and VPU for InferenceEngine backend with
-      // Myriad target, VPUX for InferenceEngine/CPU (arm-compute OpenVino plugin, only works on platform), and NPUX for
-      // TimVX/NPU (NPU using TimVX OpenCV extension, uses NPU on platform or emulator on host):
+      // 作为前缀，我们在 CPU/OpenCL 后端使用 OpenCV 模型的 OpenCV，使用 VPU 作为带有 Myriad 目标的 InferenceEngine 后
+	  // 端，使用 VPUX 作为 InferenceEngine/CPU（arm-compute OpenVino 插件，仅适用于平台），使用 NPUX 作为 TimVX/NPU
+	  // （NPU 使用 TimVX OpenCV 扩展，在平台上使用 NPU 或在主机上使用模拟器）：
 
-      // Set then get nettype to account for globals:
+      // 设置然后获取 nettype 来考虑全局变量：
       std::string typ = ph.pget(item, "nettype");
       
       if (typ == "OpenCV")
@@ -301,11 +299,11 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
         {
           if (target == "Myriad")
           {
-            if (has_vpu) typ = "VPU"; // run VPU models on VPU if MyriadX accelerator is present
+            if (has_vpu) typ = "VPU"; // 如果存在 MyriadX 加速器，则在 VPU 上运行 VPU 模型
 #ifdef JEVOIS_PLATFORM_PRO
-            else typ = "VPUX"; // emulate VPU models on CPU through ARM-Compute if MyriadX accelerator not present
+            else typ = "VPUX"; // 如果不存在 MyriadX 加速器，则通过 ARM-Compute 在 CPU 上模拟 VPU 模型
 #else
-            else continue; // VPU emulation does not work on host...
+            else continue; // 如果我们没有加速器，则不要考虑模型：
 #endif
           }
           else if (target == "CPU") typ = "VPUX";
@@ -313,12 +311,12 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
         else if (backend == "TimVX" && target == "NPU") typ = "NPUX";
       }
       
-      // Do not consider a model if we do not have the accelerator for it:
+      //  VPU 模拟在主机上不起作用...
       bool has_accel = false;
       itr = itsAccelerators.find(typ);
       if (itr != itsAccelerators.end() && itr->second > 0) has_accel = true;
       
-      // Add this pipe if it matches our filter and we have the accelerator for it:
+      // 如果它与我们的过滤器匹配并且我们有它的加速器，则添加此管道：
       if ((filt == "All" || typ == filt) && has_accel)
       {
         std::string const postproc = ph.pget(item, "postproc");
@@ -335,7 +333,7 @@ void jevois::dnn::Pipeline::scanZoo(std::filesystem::path const & zoofile, std::
 void jevois::dnn::Pipeline::onParamChange(pipeline::pipe const &, std::string const & val)
 {
 #ifdef JEVOIS_PRO
-  // Reset the data peekin on each pipe change:
+  // 每次管道变化时重置数据窥视：
   itsShowDataPeek = false;
   itsDataPeekOutIdx = 0;
   itsDataPeekFreeze = false;
@@ -346,10 +344,10 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::pipe const &, std::string co
   itsPipeThrew = false;
   freeze(false);
 
-  // Clear any errors related to previous pipeline:
+  // 清除与前一个管道相关的任何错误：
   engine()->clearErrors();
   
-  // Find the desired pipeline, and set it up:
+  // 找到所需的管道并进行设置：
   std::string const z = jevois::absolutePath(zooroot::get(), zoo::get());
   std::vector<std::string> tok = jevois::split(val, ":");
   if (selectPipe(z, tok) == false)
@@ -361,19 +359,19 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::pipe const &, std::string co
 // ####################################################################################################
 bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<std::string> const & tok)
 {
-  // We might have frozen processing to Sync if we ran a NetworkPython previously, so unfreeze here:
+  // 如果我们之前运行了 NetworkPython，我们可能已经将处理冻结到 Sync，因此请在此处解冻：
   processing::freeze(false);
   processing::set(jevois::dnn::pipeline::Processing::Async);
 
-  // Check if we have a VPU, to use VPU vs VPUX:
+  // 检查我们是否有 VPU，以使用 VPU 与 VPUX：
   bool has_vpu = false;
   auto itr = itsAccelerators.find("VPU");
   if (itr != itsAccelerators.end() && itr->second > 0) has_vpu = true;
   bool vpu_emu = false;
 
-  // Clear any old stats:
+  // 清除所有旧统计数据：
   itsPreStats.clear(); itsNetStats.clear(); itsPstStats.clear();
-  itsStatsWarmup = true; // warmup before computing new stats
+  itsStatsWarmup = true; // 在计算新统计数据之前进行预热
   
   // Open the zoo file:
   cv::FileStorage fs(zoofile, cv::FileStorage::READ);
@@ -387,13 +385,13 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
   {
     cv::FileNode item = *fit;
     
-    // Process include: directives recursively, end the recursion if we found our pipe in there:
+    // 递归处理 include：指令，如果我们在其中找到管道，则结束递归：
     if (item.name() == "include")
     {
       if (selectPipe(jevois::absolutePath(zooroot::get(), (std::string)item), tok)) return true;
     }
 
-    // Process includedir: directives (only one level of directory is scanned), end recursion if we found our pipe:
+    // 处理 includedir: 指令（仅扫描一级目录），如果找到管道，则结束递归：
     else if (item.name() == "includedir")
     {
       std::filesystem::path const dir = jevois::absolutePath(zooroot::get(), (std::string)item);
@@ -406,7 +404,7 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
         }
     }
     
-    // Unset a previously set global?
+    // 取消设置先前设置的全局变量？
     else if (item.name() == "unset")
     {
       ph.unset((std::string)item);
@@ -416,14 +414,14 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
     {
       ph.set(item, zoofile, node);
     }
-    // This is an entry for a pipeline with a bunch of params under it:
+    // 这是带有一堆参数的管道条目：
     else
     {
       if (item.name() != tok.back()) continue;
       if (tok.size() == 1) { node = item; break; }
       if (tok.size() != 3) LFATAL("Malformed pipeline name: " << jevois::join(tok, ":"));
       
-      // Skip if postproc is no match:
+      // 如果 postproc 不匹配，则跳过：
       std::string postproc = ph.pget(item, "postproc");
       if (postproc != tok[1] && postproc::strget() != tok[1]) continue;
       
@@ -457,20 +455,20 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
     }
   }
   
-  // If the spec was not a match with any entries in the file, return false:
+  // 如果规范与文件中的任何条目都不匹配，则返回 false：
   if (node.empty()) return false;
       
-  // Found the pipe. First nuke our current pre/net/post:
+  // 找到管道。首先删除我们当前的 pre/net/post：
   asyncNetWait();
   itsPreProcessor.reset(); removeSubComponent("preproc", false);
   itsNetwork.reset(); removeSubComponent("network", false);
   itsPostProcessor.reset(); removeSubComponent("postproc", false);
 
-  // Then set all the global parameters of the current file:
+  // 然后设置当前文件的所有全局参数：
   //for (auto const & pp : ph.params)
   //  setZooParam(pp.first, pp.second, zoofile, fs.root());
   
-  // Then iterate over all pipeline params and set them: first update our table, then set params from the whole table:
+  // 然后遍历所有管道参数并设置它们：首先更新我们的表，然后从整个表中设置参数：
   for (cv::FileNodeIterator fit = node.begin(); fit != node.end(); ++fit)
     ph.set(*fit, zoofile, node);
 
@@ -480,8 +478,8 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
     else setZooParam(pp.first, pp.second, zoofile, node);
   }
 
-  // Running a python net async segfaults instantly if we are also concurrently running pre or post processing in
-  // python, as python is not re-entrant... so force sync here:
+  // 如果我们还在 python 中同时运行预处理或后处理，则运行 python net async 会立即发生段错误，因为 python 
+  // 不是可重入的……所以在这里强制同步：
   if (dynamic_cast<jevois::dnn::NetworkPython *>(itsNetwork.get()) &&
       (dynamic_cast<jevois::dnn::PreProcessorPython *>(itsPreProcessor.get()) ||
        dynamic_cast<jevois::dnn::PostProcessorPython *>(itsPostProcessor.get())))
@@ -502,8 +500,8 @@ bool jevois::dnn::Pipeline::selectPipe(std::string const & zoofile, std::vector<
 void jevois::dnn::Pipeline::setZooParam(std::string const & k, std::string const & v,
                                         std::string const & zf, cv::FileNode const & node)
 {
-  // The zoo file may contain extra params, like download URL, etc. To ignore those while still catching invalid
-  // values on our parameters, we first check whether the parameter exists, and, if so, try to set it:
+  // zoo 文件可能包含额外的参数，如下载 URL 等。为了忽略这些参数同时仍然捕获参数上的无效值，我们首先检查参数是否
+  // 存在，如果存在，则尝试设置它：
   bool hasparam = false;
   try { getParamStringUnique(k); hasparam = true; } catch (...) { }
   
@@ -544,7 +542,7 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::preproc const &, pipeline::P
 // ####################################################################################################
 void jevois::dnn::Pipeline::onParamChange(pipeline::nettype const &, pipeline::NetType const & val)
 {
-  asyncNetWait(); // If currently processing async net, wait until done
+  asyncNetWait(); // 如果当前正在处理异步网络，则等待直至完成
 
   itsNetwork.reset(); removeSubComponent("network", false);
   
@@ -585,9 +583,8 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::nettype const &, pipeline::N
   if (itsNetwork) LINFO("Instantiated network of type " << itsNetwork->className());
   else LINFO("No network");
 
-  // We already display a "loading..." message while the network is loading, but some OpenCV networks take a long time
-  // to process their first frame after they are loaded (e.g., YuNet initializes all the anchors on first frame). So
-  // here we set some placeholder text that will appear after the network is loaded and is processing the first frame:
+  // 我们已经在网络加载时显示了 "loading..." 消息，但有些 OpenCV 网络在加载后需要很长时间来处理它们的第一帧（例如，
+  // YuNet 在第一帧上初始化所有锚点）。所以我们在这里设置了一些占位符文本，这些文本将在网络加载并处理第一帧后出现
   itsInputAttrs.clear();
   itsNetInfo.clear();
   itsNetInfo.emplace_back("* Input Tensors");
@@ -604,7 +601,7 @@ void jevois::dnn::Pipeline::onParamChange(pipeline::nettype const &, pipeline::N
 // ####################################################################################################
 void jevois::dnn::Pipeline::onParamChange(pipeline::postproc const &, pipeline::PostProc const & val)
 {
-  asyncNetWait(); // If currently processing async net, wait until done
+  asyncNetWait(); // 如果当前正在处理异步网络，则等待直至完成
 
   itsPostProcessor.reset(); removeSubComponent("postproc", false);
 
@@ -659,22 +656,21 @@ bool jevois::dnn::Pipeline::checkAsyncNetComplete()
 void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdModule * mod, jevois::RawImage * outimg,
                                     jevois::OptGUIhelper * helper, bool idle)
 {
-  // Reload the zoo file if filter has changed:
+  // 如果过滤器已更改，则重新加载 zoo 文件：
   if (itsZooChanged) zoo::set(zoo::get());
 
-  // If the pipeline is throwing exception at any stage, do not do anything here, itsPipeThrew is cleared when selecting
-  // a new pipe:
+  // 如果管道在任何阶段抛出异常，请不要在此处执行任何操作，选择新管道时将清除 itsPipeThrew：
   if (itsPipeThrew) return;
   
   bool const ovl = overlay::get();
-  itsOutImgY = 5; // y text position when using outimg text drawings
-  bool refresh_data_peek = false; // Will be true after each post-processing is actually run
+  itsOutImgY = 5; // 使用 outimg 文本绘图时的 y 文本位置
+  bool refresh_data_peek = false; // 每次实际运行后处理后将为真
   
 #ifdef JEVOIS_PRO
-  // Open an info window if using GUI and not idle:
+  // 如果使用 GUI 且不空闲，则打开信息窗口：
   if (helper && idle == false)
   {
-    // Set window size applied only on first use ever, otherwise from imgui.ini:
+    // 设置仅在第一次使用时应用的窗口大小，否则来自 imgui.ini：
     ImGui::SetNextWindowPos(ImVec2(24, 159), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(464, 877), ImGuiCond_FirstUseEver);
     
@@ -685,7 +681,7 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
   (void)helper; // avoid compiler warning
 #endif
 
-  // If we want an overlay, show network name on first line:
+  // 如果我们想要覆盖，请在第一行显示网络名称：
   if (ovl)
   {
     if (outimg)
@@ -700,8 +696,8 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
 #endif
   }
   
-  // If network is not ready, inform user. Be careful that ready() may throw, eg, if bad network name was given and
-  // network could not be loaded:
+  // 如果网络尚未准备好，请通知用户。请注意 ready() 可能会抛出异常，例如，如果给出了错误的网络名称并且 
+  // 网络无法加载：
   try
   {
     if (ready() == false)
@@ -727,13 +723,13 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
     }
     else
     {
-      // Network is ready, run processing, either single-thread (Sync) or threaded (Async):
+      // 网络已准备就绪，运行处理，单线程（同步）或线程（异步）：
       switch (processing::get())
       {
         // --------------------------------------------------------------------------------
       case jevois::dnn::pipeline::Processing::Sync:
       {
-        asyncNetWait(); // If currently processing async net, wait until done
+        asyncNetWait(); // 如果当前正在处理异步网络，则等到完成
         
         // Pre-process:
         itsTpre.start();
@@ -763,23 +759,22 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
       // --------------------------------------------------------------------------------
       case jevois::dnn::pipeline::Processing::Async:
       {
-        // We are going to run pre-processing and post-processing synchronously, and network in a thread. One small
-        // complication is that we are going to run post-processing on every frame so that the drawings do not
-        // flicker. We will keep post-processing the same results until new results replace them.
-        
-        // Are we running the network, and is it done? If so, get the outputs:
+        // 我们将同步运行预处理和后处理，并在一个线程中运行网络。一个小的复杂之处在于我们将在每一帧上运行后处理，以便绘图
+        // 不会​闪烁。我们将继续对相同的结果进行后处理，直到新的结果取代它们。
+
+        // 我们正在运行网络吗？它完成了吗？如果是，请获取输出：
         bool needpost = checkAsyncNetComplete();
         
-        // If we are not running a network, start it:
+        // 如果我们没有运行网络，请启动它：
         if (itsNetFut.valid() == false)
         {
-          // Pre-process in the current thread:
+          // 在当前线程中预处理：
           itsTpre.start();
           if (itsInputAttrs.empty()) itsInputAttrs = itsNetwork->inputShapes();
           itsBlobs = itsPreProcessor->process(inimg, itsInputAttrs);
           itsProcTimes[0] = itsTpre.stop(&itsProcSecs[0]);
           
-          // Network forward pass in a thread:
+          // 线程中的网络正向传递：
           itsNetFut =
             jevois::async([this]()
                           {
@@ -787,8 +782,8 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
                             std::vector<cv::Mat> outs = itsNetwork->process(itsBlobs, itsAsyncNetInfo);
                             itsAsyncNetworkTime = itsTnet.stop(&itsAsyncNetworkSecs);
                             
-                            // OpenCV DNN seems to be re-using and overwriting the same output matrices,
-                            // so we need to make a deep copy of the outputs if the network type is OpenCV:
+                            // OpenCV DNN 似乎正在重复使用和覆盖相同的输出矩阵，因此如果网络类型是 OpenCV，我们需
+                            // 要对输出进行深度复制：
                             if (dynamic_cast<jevois::dnn::NetworkOpenCV *>(itsNetwork.get()) == nullptr)
                               return outs;
                             
@@ -798,13 +793,13 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
                           });
         }
         
-        // Report pre-processing results on every frame:
+        // 报告每一帧的预处理结果：
         itsPreProcessor->sendreport(mod, outimg, helper, ovl, idle);
         
-        // Show network info on every frame:
+        // 显示每一帧的网络信息：
         showInfo(itsNetInfo, mod, outimg, helper, ovl, idle);
         
-        // Run post-processing if needed:
+        // 如果需要，运行后期处理：
         if (needpost && itsOuts.empty() == false)
         {
           itsTpost.start();
@@ -813,17 +808,17 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
           refresh_data_peek = true;
         }
         
-        // Report/draw post-processing results on every frame:
+        // 报告/绘制每一帧的后处理结果：
         itsPostProcessor->report(mod, outimg, helper, ovl, idle);
       }
       break;
       }
       
-      // Update our rolling average of total processing time:
+      // 更新总处理时间的滚动平均值：
       itsSecsSum += itsProcSecs[0] + itsProcSecs[1] + itsProcSecs[2];
       if (++itsSecsSumNum == 20) { itsSecsAvg = itsSecsSum / itsSecsSumNum; itsSecsSum = 0.0; itsSecsSumNum = 0; }
       
-      // If computing benchmarking stats, update them now:
+      // 如果计算基准统计数据，请立即更新它们：
       if (statsfile::get().empty() == false && itsOuts.empty() == false)
       {
         static std::vector<std::string> pipelines;
@@ -834,11 +829,11 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
         {
           if (pipelines.empty())
           {
-            // User just turned on benchmark mode. List all pipes and start iterating over them:
-            // Valid values string format is List:[A|B|C] where A, B, C are replaced by the actual elements.
+            // 用户刚刚开启基准测试模式。列出所有管道并开始对它们进行迭代：有效值字符串格式为 List:[A|B|C]，其中 A、B、C 由实际
+            // 元素替换。
             std::string pipes = pipe::def().validValuesString();
             size_t const idx = pipes.find('[');
-            pipes = pipes.substr(idx + 1, pipes.length() - idx - 2); // risky code but we control the string's contents
+            pipes = pipes.substr(idx + 1, pipes.length() - idx - 2); // 有风险的代码，但我们控制字符串的内容
             pipelines = jevois::split(pipes, "\\|");
             benchpipe = 0;
             statswritten = false;
@@ -853,7 +848,7 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
           }
           else
           {
-            // Switch to the next pipeline after enough stats have been written:
+            // 写入足够的统计数据后切换到下一个管道：
             if (statswritten)
             {
               ++benchpipe;
@@ -882,7 +877,7 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
         itsNetStats.push_back(itsProcSecs[1]);
         itsPstStats.push_back(itsProcSecs[2]);
         
-        // Discard data for a few warmup frames after we start a new net:
+        // 启动新网络后，丢弃几个预热帧的数据：
         if (itsStatsWarmup && itsPreStats.size() == 200)
         { itsStatsWarmup = false; itsPreStats.clear(); itsNetStats.clear(); itsPstStats.clear(); }
         
@@ -984,7 +979,7 @@ void jevois::dnn::Pipeline::process(jevois::RawImage const & inimg, jevois::StdM
   (void)refresh_data_peek; // prevent compiler warning
 #endif
 
-  // Report processing times to outimg if present:
+  // 如果存在，则向 outimg 报告处理时间：
   if (outimg && ovl)
   {
     for (std::string const & s : itsProcTimes)
@@ -1006,16 +1001,16 @@ void jevois::dnn::Pipeline::showInfo(std::vector<std::string> const & info, jevo
 
   for (std::string const & s : info)
   {
-    // On JeVois Pro, display info in the GUI:
+    // 在 JeVois Pro 上，在 GUI 中显示信息：
 #ifdef JEVOIS_PRO
     if (helper && idle == false)
     {
-      // Create collapsible header and get its collapsed status:
+      // 创建可折叠标题并获取其折叠状态：
       if (jevois::stringStartsWith(s, "* "))
         show = ImGui::CollapsingHeader(s.c_str() + 2, ImGuiTreeNodeFlags_DefaultOpen);
       else if (show)
       {
-        // If header not collapsed, show data:
+        // 如果标题未折叠，则显示数据：
         if (jevois::stringStartsWith(s, "- ")) ImGui::BulletText("%s", s.c_str() + 2);
         else ImGui::TextUnformatted(s.c_str());
       }
@@ -1036,10 +1031,10 @@ void jevois::dnn::Pipeline::showInfo(std::vector<std::string> const & info, jevo
 // ####################################################################################################
 void jevois::dnn::Pipeline::showDataPeekWindow(jevois::GUIhelper * helper, bool refresh)
 {
-  // Do not show anything if user closed the window:
+  // 如果用户关闭窗口，则不显示任何内容：
   if (itsShowDataPeek == false) return;
 
-  // Set window size applied only on first use ever, otherwise from imgui.ini:
+  // 设置仅在第一次使用时应用的窗口大小，否则来自 imgui.ini：
   ImGui::SetNextWindowPos(ImVec2(100, 50), ImGuiCond_FirstUseEver);
   ImGui::SetNextWindowSize(ImVec2(900, 600), ImGuiCond_FirstUseEver);
 
@@ -1049,7 +1044,7 @@ void jevois::dnn::Pipeline::showDataPeekWindow(jevois::GUIhelper * helper, bool 
   // Open the window:
   ImGui::Begin("DNN Output Peek", &itsShowDataPeek, ImGuiWindowFlags_HorizontalScrollbar);
 
-  // Draw a combo to select which output:
+  // 绘制一个组合来选择哪个输出：
   std::vector<std::string> outspecs;
   for (size_t i = 0; cv::Mat const & out : itsOuts)
     outspecs.emplace_back("Out " + std::to_string(i++) + ": " + jevois::dnn::shapestr(out));
@@ -1064,7 +1059,7 @@ void jevois::dnn::Pipeline::showDataPeekWindow(jevois::GUIhelper * helper, bool 
     ImGui::TextUnformatted(itsDataPeekStr.c_str());
   else
   {
-    // OpenCV Mat::operator<< cannot handle >2D, try to collapse any dimensions with size 1:
+    // OpenCV Mat::operator<< 无法处理 >2D，尝试折叠任何大小为 1 的维度：
     cv::Mat const & out = itsOuts[itsDataPeekOutIdx];
     std::vector<int> newsz;
     cv::MatSize const & ms = out.size; int const nd = ms.dims();

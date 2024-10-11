@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Util_2Utils_8H">
+<title>include/jevois/Util/Utils.H File Reference</title>
+<indexterm><primary>include/jevois/Util/Utils.H</primary></indexterm>
+<programlisting>#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;type_traits&gt;
+#include &lt;sstream&gt;
+#include &lt;filesystem&gt;
+#include &lt;jevois/Util/details/UtilsImpl.H&gt;
+</programlisting>Include dependency graph for Utils.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Util_2Utils_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Util_2Utils_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Util_2Utils_8H_1af485992cff00d3b6d935d3d5de3ba0e6">ISP_V4L2_PIX_FMT_META</link>   v4l2_fourcc( &apos;M&apos;, &apos;E&apos;, &apos;T&apos;, &apos;A&apos; )</para>
+
+<para>Metadata V4L2 format used by Amlogic A311D camera ISP. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Util_2Utils_8H_1a4df97417f73b7fe0448944a5f5d86df7">JEVOISPRO_FMT_GUI</link>   v4l2_fourcc( &apos;<link linkend="_GUIhelper_8C_1a518af4e11e6c072ade65a5e299f09bc9">J</link>&apos;, &apos;<link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link>&apos;, &apos;U&apos;, &apos;I&apos; )</para>
+
+<para>JeVois-Pro 相机输入帧的零拷贝显示（用作 VideoMapping 中的输出模式） </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__utils_1gaf8eeacf544c62a2dad5399589ef4533e">XIOCTL</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__utils_1ga30dfc52798d0b53ad1736a622759b9ff">XIOCTL_QUIET</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__utils_1ga03db0ad166b1e653bae8910cb3d76795">XIOCTL_QUIET_ONCE</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_group__utils_1gac76ed513027efe252fe64756fae6d0b6">jevois::fccstr</link> (unsigned int fcc)</para>
+
+<para>将 V4L2 four-cc 代码（V4L2_PIX_FMT_...）转换为 4 字符字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga5cf98a150bb5637de6bbbbb1607ef669">jevois::cvtypestr</link> (unsigned int cvtype)</para>
+
+<para>将 cv::Mat::type() 代码转换为字符串（例如 CV_8UC1、CV_32SC3 等） </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga1ce31b21602cde5b241a59b4312ee6d5">jevois::cvBytesPerPix</link> (unsigned int cvtype)</para>
+
+<para>返回给定 OpenCV 像素类型每像素的字节数 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga34f3127327f6113672a16d3a041552df">jevois::strfcc</link> (std::string const &amp;str)</para>
+
+<para>将 JeVois 视频格式字符串转换为 V4L2 four-cc 代码 (V4L2_PIX_FMT_...) </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga4f32c685308caf5e428e27b8ccaee14b">jevois::v4l2BytesPerPix</link> (unsigned int fcc)</para>
+
+<para>返回给定 V4L2_PIX_FMT_ 每像素的字节数... </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gafa5c6faaeefd12994a07c09ed748176c">jevois::v4l2ImageSize</link> (unsigned int fcc, unsigned int width, unsigned int height)</para>
+
+<para>返回给定 V4L2_PIX_FMT_... 的图像大小（以字节为单位）, width, height </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gae3448a5e4bbd80efd03d6417974834d0">jevois::blackColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的黑色的值 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga7bf3f71d614429a46eda4d9c133e2866">jevois::whiteColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的白色的值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gad1e7ee20cd2509969dcd07acfb188f2b">jevois::applyLetterBox</link> (unsigned int &amp;imw, unsigned int &amp;imh, unsigned int const winw, unsigned int const winh, bool noalias)</para>
+
+<para>应用 letterbox 调整大小以使图像适合窗口 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_group__utils_1gac91eaef1908f07d3ecd6112eb12ef571">jevois::split</link> (std::string const &amp;input, std::string const &amp;regex=&quot;\\s+&quot;)</para>
+
+<para>使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga31195f1860c3aff445df8be6e602fecd">jevois::join</link> (std::vector&lt; std::string &gt; const &amp;strings, std::string const &amp;delimiter)</para>
+
+<para>将 tokens 向量连接成字符串 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__utils_1gac058832c57b8033f8a90e05c8ecee103">jevois::stringStartsWith</link> (std::string const &amp;str, std::string const &amp;prefix)</para>
+
+<para>如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa5a52cf5cff1d44b33db20364c07801a">jevois::replaceWhitespace</link> (std::string const &amp;str, char rep=&apos;_&apos;)</para>
+
+<para>用下划线（默认）或其他字符替换字符串中的空格字符 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga283968df765ce49751142cd55e0364d7">jevois::strip</link> (std::string const &amp;str)</para>
+
+<para>从字符串末尾去除空格（包括 CR、LF、tabs 等） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga4b0d94273d4e910b353a0ff999c23b7c">jevois::extractString</link> (std::string const &amp;str, std::string const &amp;startsep, std::string const &amp;endsep)</para>
+
+<para>提取两个分隔符之间的字符串部分 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1ga34ee23a47b698e960a477d9d4e2d435d">jevois::replaceStringFirst</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将 &apos;from&apos; 的第一个实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1gab6a5b228ce68e5634e2bb2c778b0bc34">jevois::replaceStringAll</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gafd49e84b9b5e4d95b1d4da28bdbbdb94">jevois::replaceAll</link> (std::string const &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga534153c7b53c07a0db4bbdcbb81b566f">jevois::tolower</link> (std::string const &amp;str)</para>
+
+<para>Convert string to lowercase. </para>
+</listitem>
+            <listitem><para>std::filesystem::path <link linkend="_group__utils_1gabd49e55c0ae1f31a3f30d73284469eac">jevois::absolutePath</link> (std::filesystem::path const &amp;root, std::filesystem::path const &amp;path)</para>
+
+<para>根据两个路径计算绝对路径 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link> (char const *fmt,...) __attribute__((format(__printf__</para>
+
+<para>使用 printf 样式参数创建字符串 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string T <link linkend="_group__utils_1ga7eb44bbb053c52395d5704aa15265632">jevois::from_string</link> (std::string const &amp;str)</para>
+
+<para>从字符串转换为类型 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__utils_1gae142fbf87f70b758581c1845c2fa58e7">jevois::to_string</link> (T const &amp;val)</para>
+
+<para>从字符串转换为类型，适用于整数类型的版本 </para>
+</listitem>
+            <listitem><para>template&lt;typename dest_type , typename source_type &gt; </para><para>dest_type <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert</link> (source_type source)</para>
+
+<para>Clamped numerical conversion. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga3c42b68a3562220199677eed7cdceb51">jevois::flushcache</link> ()</para>
+
+<para>刷新缓存，有时在 turbo 模式下运行相机时可能会有用 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee">jevois::system</link> (std::string const &amp;cmd, bool errtoo=true)</para>
+
+<para>执行命令并将 stdout 输出抓取到字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga54a11682b4afc2645f69f4f0770ea1bb">jevois::secs2str</link> (double secs)</para>
+
+<para>报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga961f407b12b1d4a32577facc3d1f6ad9">jevois::secs2str</link> (std::vector&lt; double &gt; secs)</para>
+
+<para>报告以秒为单位给出的 avg+/-std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gaa9401ec9d35d0669e256673c8cdeb4f4">jevois::secs2str</link> (std::ostringstream &amp;ss, double secs)</para>
+
+<para>报告以秒为单位的持续时间（ns、us、ms 或 s） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga3d57bcea9c02b2c2b91e064d58b4b005">jevois::num2str</link> (double n)</para>
+
+<para>报告一个具有可变乘数（K、M、G、T、P、E、Z、Y）的数字，精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga074c42c36f209780e0420ca3b6e3bfc6">jevois::num2str</link> (std::ostringstream &amp;ss, double n)</para>
+
+<para>报告具有可变乘数 (K、M、G、T、P、E、Z、Y) 的数字 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga55e88d558a6aeff700099fa3180fc025">jevois::getFileString</link> (char const *fname, int skip=0)</para>
+
+<para>从文件中读取一行并将其作为字符串返回 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Util_2Utils_8H_1af485992cff00d3b6d935d3d5de3ba0e6"/>    <section>
+    <title>ISP_V4L2_PIX_FMT_META</title>
+<indexterm><primary>ISP_V4L2_PIX_FMT_META</primary><secondary>Utils.H</secondary></indexterm>
+<indexterm><primary>Utils.H</primary><secondary>ISP_V4L2_PIX_FMT_META</secondary></indexterm>
+<para><computeroutput>#define ISP_V4L2_PIX_FMT_META   v4l2_fourcc( &apos;M&apos;, &apos;E&apos;, &apos;T&apos;, &apos;A&apos; )</computeroutput></para><para>
+
+<para>Metadata V4L2 format used by Amlogic A311D camera ISP. </para>
+</para>
+<para>
+Definition at line 27 of file Utils.H.</para>
+    </section><anchor xml:id="_Util_2Utils_8H_1a4df97417f73b7fe0448944a5f5d86df7"/>    <section>
+    <title>JEVOISPRO_FMT_GUI</title>
+<indexterm><primary>JEVOISPRO_FMT_GUI</primary><secondary>Utils.H</secondary></indexterm>
+<indexterm><primary>Utils.H</primary><secondary>JEVOISPRO_FMT_GUI</secondary></indexterm>
+<para><computeroutput>#define JEVOISPRO_FMT_GUI   v4l2_fourcc( &apos;<link linkend="_GUIhelper_8C_1a518af4e11e6c072ade65a5e299f09bc9">J</link>&apos;, &apos;<link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link>&apos;, &apos;U&apos;, &apos;I&apos; )</computeroutput></para><para>
+
+<para>JeVois-Pro 相机输入帧的零拷贝显示（用作 VideoMapping 中的输出模式） </para>
+</para>
+
+<para>请注意，底层模式是 MALI OpenGL 使用的 RGBA 
+<literallayout>&#160;&#xa;</literallayout>
+ </para>
+<para>
+Definition at line 31 of file Utils.H.</para>
+</section>
+</section>
+</section>

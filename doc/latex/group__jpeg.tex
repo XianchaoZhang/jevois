@@ -1,0 +1,217 @@
+\hypertarget{group__jpeg}{}\doxysubsection{Jpeg 相关的类和函数}
+\label{group__jpeg}\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+
+
+\doxysubsubsection{ }
+Jpeg 类和函数，主要用于支持从相机捕获的原始未压缩图像通过 U\+SB 发送 M\+J\+P\+EG 视频输出。 
+
+Collaboration diagram for Jpeg 相关的类和函数\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__jpeg}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1JpegCompressor}{jevois\+::\+Jpeg\+Compressor}}
+\begin{DoxyCompactList}\small\item\em turbojpeg 压缩器的简单单例包装器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__jpeg_gaf446f726ba6d8e2d87aa87e5cd041518}{jevois\+::convert\+Y\+U\+Y\+Vto\+Y\+U\+V422}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst)
+\begin{DoxyCompactList}\small\item\em 辅助从打包的 Y\+U\+YV 转换为平面 Y\+U\+V422 \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gac8019b137a50caf3afe8f93b8041d815}{jevois\+::compress\+B\+G\+Rto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga055d9848dc85723e4429ac6b4f98812e}{jevois\+::compress\+B\+G\+Rto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gaf968b68fd408477de51a6fcf41be48d9}{jevois\+::compress\+R\+G\+Bto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga8a53f108718df36751b7b2b4fd16fbce}{jevois\+::compress\+R\+G\+Bto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gad721785df8a36bbc0081acf691b84cfc}{jevois\+::compress\+R\+G\+B\+Ato\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gadd51281893168dd79429e9777eabe0e0}{jevois\+::compress\+R\+G\+B\+Ato\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gab4e9f0c744d97117a37eae05da2c2a6d}{jevois\+::compress\+G\+R\+A\+Yto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gab4829fbfa937795d50f95b3d60596a31}{jevois\+::compress\+G\+R\+A\+Yto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 Gray cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__jpeg_ga055d9848dc85723e4429ac6b4f98812e}\label{group__jpeg_ga055d9848dc85723e4429ac6b4f98812e}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressBGRtoJpeg@{compressBGRtoJpeg}}
+\index{compressBGRtoJpeg@{compressBGRtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressBGRtoJpeg()}{compressBGRtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::compress\+B\+G\+Rto\+Jpeg (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将 B\+GR cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 
+
+dst \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 应该有一个分配的缓冲区，通常用于从 U\+VC gadget 获取的 Raw\+Image。 
+
+Definition at line 108 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::compress\+B\+G\+Rto\+Jpeg(), and jevois\+::\+Raw\+Image\+::pixelsw().
+
+\mbox{\Hypertarget{group__jpeg_gac8019b137a50caf3afe8f93b8041d815}\label{group__jpeg_gac8019b137a50caf3afe8f93b8041d815}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressBGRtoJpeg@{compressBGRtoJpeg}}
+\index{compressBGRtoJpeg@{compressBGRtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressBGRtoJpeg()}{compressBGRtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long jevois\+::compress\+B\+G\+Rto\+Jpeg (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{src,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{unsigned char $\ast$}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将原始像素缓冲区压缩为 jpeg 
+
+
+
+Definition at line 52 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Jpeg\+Compressor\+::compressor(), and jevois\+::\+Singleton$<$ Jpeg\+Compressor $>$\+::instance().
+
+
+
+Referenced by jevois\+::compress\+B\+G\+Rto\+Jpeg(), and jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image().
+
+\mbox{\Hypertarget{group__jpeg_gab4829fbfa937795d50f95b3d60596a31}\label{group__jpeg_gab4829fbfa937795d50f95b3d60596a31}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressGRAYtoJpeg@{compressGRAYtoJpeg}}
+\index{compressGRAYtoJpeg@{compressGRAYtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressGRAYtoJpeg()}{compressGRAYtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::compress\+G\+R\+A\+Yto\+Jpeg (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将 Gray cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 
+
+
+
+Definition at line 126 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), and jevois\+::\+Raw\+Image\+::pixelsw().
+
+\mbox{\Hypertarget{group__jpeg_gab4e9f0c744d97117a37eae05da2c2a6d}\label{group__jpeg_gab4e9f0c744d97117a37eae05da2c2a6d}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressGRAYtoJpeg@{compressGRAYtoJpeg}}
+\index{compressGRAYtoJpeg@{compressGRAYtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressGRAYtoJpeg()}{compressGRAYtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long jevois\+::compress\+G\+R\+A\+Yto\+Jpeg (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{src,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{unsigned char $\ast$}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将原始像素缓冲区压缩为 jpeg 
+
+
+
+Definition at line 94 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Jpeg\+Compressor\+::compressor(), and jevois\+::\+Singleton$<$ Jpeg\+Compressor $>$\+::instance().
+
+
+
+Referenced by jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), and jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image().
+
+\mbox{\Hypertarget{group__jpeg_gadd51281893168dd79429e9777eabe0e0}\label{group__jpeg_gadd51281893168dd79429e9777eabe0e0}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressRGBAtoJpeg@{compressRGBAtoJpeg}}
+\index{compressRGBAtoJpeg@{compressRGBAtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressRGBAtoJpeg()}{compressRGBAtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::compress\+R\+G\+B\+Ato\+Jpeg (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将 R\+G\+BA cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 
+
+dst \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 应该有一个分配的缓冲区，通常用于从 U\+VC gadget 获取的 Raw\+Image。 
+
+Definition at line 120 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), and jevois\+::\+Raw\+Image\+::pixelsw().
+
+\mbox{\Hypertarget{group__jpeg_gad721785df8a36bbc0081acf691b84cfc}\label{group__jpeg_gad721785df8a36bbc0081acf691b84cfc}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressRGBAtoJpeg@{compressRGBAtoJpeg}}
+\index{compressRGBAtoJpeg@{compressRGBAtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressRGBAtoJpeg()}{compressRGBAtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long jevois\+::compress\+R\+G\+B\+Ato\+Jpeg (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{src,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{unsigned char $\ast$}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将原始像素缓冲区压缩为 jpeg 
+
+返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width $\ast$ height $\ast$ 2 个字节。质量应该介于 1（最差）和 100（最好） 之间。 
+
+Definition at line 80 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Jpeg\+Compressor\+::compressor(), and jevois\+::\+Singleton$<$ Jpeg\+Compressor $>$\+::instance().
+
+
+
+Referenced by jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), and jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image().
+
+\mbox{\Hypertarget{group__jpeg_ga8a53f108718df36751b7b2b4fd16fbce}\label{group__jpeg_ga8a53f108718df36751b7b2b4fd16fbce}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressRGBtoJpeg@{compressRGBtoJpeg}}
+\index{compressRGBtoJpeg@{compressRGBtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressRGBtoJpeg()}{compressRGBtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::compress\+R\+G\+Bto\+Jpeg (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将 R\+GB cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 
+
+dst \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 应该有一个分配的缓冲区，通常用于从 U\+VC gadget 获取的 Raw\+Image。 
+
+Definition at line 114 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::compress\+R\+G\+Bto\+Jpeg(), and jevois\+::\+Raw\+Image\+::pixelsw().
+
+\mbox{\Hypertarget{group__jpeg_gaf968b68fd408477de51a6fcf41be48d9}\label{group__jpeg_gaf968b68fd408477de51a6fcf41be48d9}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!compressRGBtoJpeg@{compressRGBtoJpeg}}
+\index{compressRGBtoJpeg@{compressRGBtoJpeg}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{compressRGBtoJpeg()}{compressRGBtoJpeg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily unsigned long jevois\+::compress\+R\+G\+Bto\+Jpeg (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{src,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{unsigned char $\ast$}]{dst,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption})}
+
+
+
+将原始像素缓冲区压缩为 jpeg 
+
+返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width $\ast$ height $\ast$ 2 个字节。质量应介于 1（最差）和 100（最好） 之间。 
+
+Definition at line 66 of file Jpeg.\+C.
+
+
+
+References jevois\+::\+Jpeg\+Compressor\+::compressor(), and jevois\+::\+Singleton$<$ Jpeg\+Compressor $>$\+::instance().
+
+
+
+Referenced by jevois\+::compress\+R\+G\+Bto\+Jpeg(), and jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image().
+
+\mbox{\Hypertarget{group__jpeg_gaf446f726ba6d8e2d87aa87e5cd041518}\label{group__jpeg_gaf446f726ba6d8e2d87aa87e5cd041518}} 
+\index{Jpeg 相关的类和函数@{Jpeg 相关的类和函数}!convertYUYVtoYUV422@{convertYUYVtoYUV422}}
+\index{convertYUYVtoYUV422@{convertYUYVtoYUV422}!Jpeg 相关的类和函数@{Jpeg 相关的类和函数}}
+\doxyparagraph{\texorpdfstring{convertYUYVtoYUV422()}{convertYUYVtoYUV422()}}
+{\footnotesize\ttfamily void jevois\+::convert\+Y\+U\+Y\+Vto\+Y\+U\+V422 (\begin{DoxyParamCaption}\item[{unsigned char const $\ast$}]{src,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{unsigned char $\ast$}]{dst }\end{DoxyParamCaption})}
+
+
+
+辅助从打包的 Y\+U\+YV 转换为平面 Y\+U\+V422 
+
+
+
+Definition at line 35 of file Jpeg.\+C.
+

@@ -34,7 +34,7 @@
 #define FDLERROR(msg) LERROR('[' << itsDevName << ':' << itsFd << "] " << msg)
 #define FDLFATAL(msg) LFATAL('[' << itsDevName << ':' << itsFd << "] " << msg)
 
-// V4L2_MODE_VIDEO not defined in our kernel? Needed by capturemode of VIDIOC_S_PARM
+// V4L2_MODE_VIDEO 未在我们的内核中定义？VIDIOC_S_PARM 的捕获模式需要它
 #ifndef V4L2_MODE_VIDEO
 #define V4L2_MODE_VIDEO 2
 #endif
@@ -42,7 +42,7 @@
 #ifdef JEVOIS_PLATFORM_A33
 namespace
 {
-  //! Temporary fix for bug in sunxi-vfe kernel camera driver which returns MBUS format instead or V4L2
+  //! 临时修复 sunxi-vfe 内核摄像头驱动程序中的错误，该驱动程序返回 MBUS 格式或 V4L2 
   unsigned int v4l2sunxiFix(unsigned int fcc)
   {
     switch (fcc)
@@ -68,7 +68,7 @@ namespace
   }
 }
 
-// Define a few things which are absent from our A33 platform kernel 3.4:
+// 定义一些在我们的 A33 平台内核 3.4 中缺少的东西：
 #define V4L2_COLORSPACE_DEFAULT v4l2_colorspace(0)
 #endif
 
@@ -83,7 +83,7 @@ jevois::CameraDevice::CameraDevice(std::string const & devname, unsigned int con
   itsFd = open(devname.c_str(), O_RDWR | O_NONBLOCK, 0);
   if (itsFd == -1) LFATAL("Camera device open failed on " << devname);
   
-  // See what kinds of inputs we have and select the first one that is a camera:
+  // 查看我们有哪些类型的输入并选择第一个相机：
   int camidx = -1;
   struct v4l2_input inp = { };
   while (true)
@@ -99,16 +99,16 @@ jevois::CameraDevice::CameraDevice(std::string const & devname, unsigned int con
 
   if (camidx == -1) FDLFATAL("No valid camera input");
 
-  // Select the camera input, this seems to be required by sunxi-VFE on JeVois-A33 for the camera to power on:
+  // 选择摄像头输入，这似乎是 JeVois-A33 上的 sunxi-VFE 要求的，以便摄像头开机：
   XIOCTL(itsFd, VIDIOC_S_INPUT, &camidx);
   
-  // Find out what camera can do:
+  // 找出摄像头能做什么：
   struct v4l2_capability cap = { };
   XIOCTL(itsFd, VIDIOC_QUERYCAP, &cap);
   
   FDLINFO("V4L2 camera " << devname << " card " << cap.card << " bus " << cap.bus_info);
 
-  // Amlogic ISP V4L2 does not report a video capture capability, but it has video capture mplane
+  // Amlogic ISP V4L2 未报告视频捕获 capability，但它具有视频捕获 mplane capability
   if (cap.capabilities & V4L2_CAP_VIDEO_CAPTURE_MPLANE) itsMplane = true;
 
   if ((cap.capabilities & V4L2_CAP_VIDEO_CAPTURE) == 0 && itsMplane == false)
@@ -117,7 +117,7 @@ jevois::CameraDevice::CameraDevice(std::string const & devname, unsigned int con
   if ((cap.capabilities & V4L2_CAP_STREAMING) == 0)
     FDLFATAL(devname << " does not support streaming");
   
-  // List the supported formats and frame sizes, only once:
+  // 列出支持的格式和帧大小，仅列出一次：
   static bool showfmts = true;
   if (dummy == false && showfmts)
   {
@@ -160,7 +160,7 @@ jevois::CameraDevice::CameraDevice(std::string const & devname, unsigned int con
     showfmts = false;
   }
 
-  // Get our run() thread going and wait until it is cranking, it will flip itsRunning to true as it starts:
+  // 启动我们的 run() 线程并等待它启动，它会在启动时将 itsRunning 翻转为 true：
   if (dummy == false)
   {
     itsRunFuture = jevois::async_little(std::bind(&jevois::CameraDevice::run, this));
@@ -173,10 +173,10 @@ jevois::CameraDevice::~CameraDevice()
 {
   JEVOIS_TRACE(1);
 
-  // Turn off streaming if it was on:
+  // 如果流式传输已打开，则关闭它：
   try { streamOff(); } catch (...) { jevois::warnAndIgnoreException(); }
  
-  // Block until the run() thread completes:
+  //  阻塞直到 run() 线程完成：
   itsRunning.store(false);
   JEVOIS_WAIT_GET_FUTURE(itsRunFuture);
 
@@ -208,21 +208,19 @@ void jevois::CameraDevice::run()
   itsRunning.store(true);
   LDEBUG("run() thread ready");
 
-  // NOTE: The flow is a little complex here, the goal is to minimize latency between a frame being captured and us
-  // dequeueing it from the driver and making it available to get(). To achieve low latency, we thus need to be polling
-  // the driver most of the time, and we need to prevent other threads from doing various ioctls while we are polling,
-  // as the SUNXI-VFE driver does not like that. Thus, there is high contention on itsMtx which we lock most of the
-  // time. For this reason we do a bit of sleeping with itsMtx unlocked at places where we know it will not increase our
-  // captured image delivery latency.
+  // 注意：这里的流程有点复杂，目标是最小化捕获帧和将其从驱动程序中出队并使其可用于 get() 之间的延迟。为了实现低延迟，我们需要在大
+  // 多数时间轮询驱动程序，并且我们需要防止其他线程在我们轮询时执行各种 ioctl，因为 SUNXI-VFE 驱动程序不喜欢这样。因此，itsMtx 
+  // 上的争用很严重，我们大多数时间都将其锁定。为此，我们在知道不会增加捕获图像传输延迟的地方对 itsMtx 进行一些休眠，使其保持解锁状
+  // 态。
   std::vector<size_t> doneidx;
   
-  // Wait for events from the kernel driver and process them:
+  // 等待来自内核驱动程序的事件并处理它们：
   while (itsRunning.load())
     try
     {
-      // Requeue any done buffer. To avoid having to use a double lock on itsOutputMtx (for itsDoneIdx) and itsMtx (for
-      // itsBuffers->qbuf()), we just swap itsDoneIdx into a local variable here, and invalidate it, with itsOutputMtx
-      // locked, then we will do the qbuf() later, if needed, while itsMtx is locked:
+      // 重新排队任何完成的缓冲区。为了避免必须在 itsOutputMtx（对于 itsDoneIdx）和 itsMtx（对于 itsBuffers->qbuf()）上使用
+      // 双重锁，我们只需在此处将其 DoneIdx 交换到局部变量中，并使其无效，同时锁定 itsOutputMtx，然后我们将在需要时在 itsMtx 被锁
+      // 定时稍后执行 qbuf()：
       {
         JEVOIS_TIMED_LOCK(itsOutputMtx);
         if (itsDoneIdx.empty() == false) itsDoneIdx.swap(doneidx);
@@ -231,12 +229,11 @@ void jevois::CameraDevice::run()
       std::unique_lock lck(itsMtx, std::chrono::seconds(5));
       if (lck.owns_lock() == false) FDLFATAL("Timeout trying to acquire camera lock");
 
-      // Do the actual qbuf of any done buffer, ignoring any exception:
+      // 执行任何已完成缓冲区的实际 qbuf，忽略任何异常：
       if (itsBuffers) { for (size_t idx : doneidx) try { itsBuffers->qbuf(idx); } catch (...) { } }
       doneidx.clear();
 
-      // SUNXI-VFE does not like to be polled when not streaming; if indeed we are not streaming, unlock and then sleep
-      // a bit to avoid too much contention on itsMtx:
+      // SUNXI-VFE 不喜欢在没有流式传输时被轮询；如果我们确实没有流式传输，则解锁然后休眠一段时间以避免 itsMtx 上出现过多争用：
       if (itsStreaming.load() == false)
       {
         lck.unlock();
@@ -244,8 +241,7 @@ void jevois::CameraDevice::run()
         continue;
       }
       
-      // Check whether user code cannot keep up with the frame rate, and if so requeue all dequeued buffers except maybe
-      // the one currently associated with itsOutputImage:
+      // 检查用户代码是否无法跟上帧速率，如果是，则重新排队所有出队缓冲区，可能除了当前与 itsOutputImage 关联的缓冲区：
       if (itsBuffers && itsBuffers->nqueued() < 2)
       {
         LERROR("Running out of camera buffers - your process() function is too slow - DROPPING FRAMES");
@@ -261,7 +257,7 @@ void jevois::CameraDevice::run()
         itsBuffers->qbufallbutone(keep);
       }
 
-      // Poll the device to wait for any new captured video frame:
+      // 轮询设备以等待任何新捕获的视频帧：
       FD_ZERO(&rfds); FD_ZERO(&efds); FD_SET(itsFd, &rfds); FD_SET(itsFd, &efds);
       tv.tv_sec = 0; tv.tv_usec = 5000;
 
@@ -273,11 +269,11 @@ void jevois::CameraDevice::run()
 
         if (FD_ISSET(itsFd, &rfds))
         {
-          // A new frame has been captured. Dequeue a buffer from the camera driver:
+          // 已捕获新帧。从相机驱动程序中出列缓冲区：
           struct v4l2_buffer buf;
           itsBuffers->dqbuf(buf);
 
-          // Create a RawImage from that buffer:
+          // 从该缓冲区创建一个 RawImage：
           jevois::RawImage img;
           img.width = itsFormat.fmt.pix.width;
           img.height = itsFormat.fmt.pix.height;
@@ -289,30 +285,28 @@ void jevois::CameraDevice::run()
           // Unlock itsMtx:
           lck.unlock();
 
-          // We want to never block waiting for people to consume our grabbed frames here, hence we just overwrite our
-          // output image here, it just always contains the latest grabbed image:
+          // 我们希望永远不要阻止等待人们在这里使用我们抓取的帧，因此我们只需在这里覆盖我们的输出图像，它始终包含最新抓取的图像：
           {
             JEVOIS_TIMED_LOCK(itsOutputMtx);
 
-            // If user never called get()/done() on an image we already have, drop it and requeue the buffer:
+            // 如果用户从未在我们已经拥有的图像上调用 get()/done()，则删除它并重新排队缓冲区：
             if (itsOutputImage.valid()) itsDoneIdx.push_back(itsOutputImage.bufindex);
 
-            // Set our new output image:
+            // 设置我们的新输出图像：
             itsOutputImage = img;
           }
           LDEBUG("Captured image " << img.bufindex << " ready for processing");
 
-          // Let anyone trying to get() our image know it's here:
+          // 让任何尝试 get() 我们图像的人知道它在这里：
           itsOutputCondVar.notify_all();
 
-          // This is also a good time to sleep a bit since it will take a while for the next frame to arrive, this
-          // should allow people who had been trying to get a lock on itsMtx to get it now:
+          // 这也是休息一下的好时机，因为下一帧需要一段时间才能到达，这应该允许那些试图获取 itsMtx 锁的人现在获取它：
           std::this_thread::sleep_for(std::chrono::milliseconds(5));
         }
       }
     } catch (...) { jevois::warnAndIgnoreException(); }
   
-  // Switch out of running state in case we did interrupt the loop here by a break statement:
+  // 如果我们确实通过 break 语句中断循环，则退出运行状态：
   itsRunning.store(false);
 }
 
@@ -329,9 +323,9 @@ void jevois::CameraDevice::streamOn()
   
   if (itsStreaming.load() || itsBuffers) { FDLERROR("Stream is already on -- IGNORED"); return; }
 
-  itsStreaming.store(false); // just in case user forgot to call abortStream()
+  itsStreaming.store(false); // 以防用户忘记调用 abortStream()
 
-  // If number of buffers is zero, adjust it depending on frame size:
+  // 如果缓冲区数量为零，则根据帧大小进行调整：
   unsigned int nbuf = itsNbufs;
   if (nbuf == 0)
   {
@@ -339,18 +333,18 @@ void jevois::CameraDevice::streamOn()
                                                    itsFormat.fmt.pix.height);
 
 #ifdef JEVOIS_PRO
-    // Aim for about 256 mbyte when using small images, and no more than 5 buffers in any case:
+    // 使用小图像时，目标约为 256 mbyte，在任何情况下缓冲区不超过 5 个：
     nbuf = (256U * 1024U * 1024U) / framesize;
 #else
-    // Aim for about 4 mbyte when using small images, and no more than 5 buffers in any case:
+    // 使用小图像时，目标约为 4 mbyte，在任何情况下缓冲区不超过 5 个：
     nbuf = (4U * 1024U * 1024U) / framesize;
 #endif
   }
 
-  // Force number of buffers to a sane value:
+  // 强制将缓冲区数量设置为合理值：
   if (nbuf < 5) nbuf = 5; else if (nbuf > 8) nbuf = 8;
   
-  // Allocate the buffers for our current video format:
+  // 为我们当前的视频格式分配缓冲区：
   v4l2_buf_type btype = itsMplane ? V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE : V4L2_BUF_TYPE_VIDEO_CAPTURE;
   itsBuffers = new jevois::VideoBuffers("camera", itsFd, btype, nbuf);
   FDLINFO(itsBuffers->size() << " buffers of " << itsBuffers->get(0)->length() << " bytes allocated");
@@ -359,7 +353,7 @@ void jevois::CameraDevice::streamOn()
   itsBuffers->qbufall();
   FDLDEBUG("All buffers queued to camera driver");
   
-  // Start streaming at the device level:
+  // 在设备级别开始流式传输：
   XIOCTL(itsFd, VIDIOC_STREAMON, &btype);
   FDLDEBUG("Device stream on");
   
@@ -372,11 +366,10 @@ void jevois::CameraDevice::abortStream()
 {
   JEVOIS_TRACE(2);
 
-  // Set its Streaming to false here while unlocked, which will introduce some sleeping in our run() thread, thereby
-  // helping us acquire our needed double lock:
+  // 在解锁时将其 Streaming 设置为 false，这将在我们的 run() 线程中引入一些睡眠，从而帮助我们获取所需的双重锁：
   itsStreaming.store(false);
 
-  // Unblock any get() that is waiting on itsOutputCondVar, it will then throw now that streaming is off:
+  // 解除对正在等待 itsOutputCondVar 的任何 get() 的阻止，然后它将抛出，因为流式传输已关闭：
   for (int i = 0; i < 20; ++i) itsOutputCondVar.notify_all();
 }
 
@@ -385,16 +378,14 @@ void jevois::CameraDevice::streamOff()
 {
   JEVOIS_TRACE(2);
 
-  // Note: we allow for several streamOff() without complaining, this happens, e.g., when destroying a Camera that is
-  // not currently streaming.
+  // 注意：我们允许多次 streamOff() 而不会发出任何抱怨，这种情况会发生，例如，当销毁当前未流式传输的相机时。
   
   FDLDEBUG("Turning off camera stream");
 
-  // Abort stream in case it was not already done, which will introduce some sleeping in our run() thread, thereby
-  // helping us acquire our needed double lock:
+  // 如果尚未完成，则中止流，这将在我们的 run() 线程中引入一些睡眠，从而帮助我们获取所需的双重锁：
   abortStream();
 
-  // We need a double lock here so that we can both turn off the stream and nuke our output image and done idx:
+  // 我们在这里需要双重锁定，以便我们既可以关闭流，又可以核实我们的输出图像并完成 idx:
   std::unique_lock<std::timed_mutex> lk1(itsMtx, std::defer_lock);
   std::unique_lock<std::timed_mutex> lk2(itsOutputMtx, std::defer_lock);
   LDEBUG("Ready to double-lock...");
@@ -404,8 +395,7 @@ void jevois::CameraDevice::streamOff()
   // Invalidate our output image:
   itsOutputImage.invalidate();
 
-  // User may have called done() but our run() thread has not yet gotten to requeueing this image, if so requeue it here
-  // as it seems to keep the driver happier:
+  // 用户可能已经调用 done()，但是我们的 run() 线程尚未重新排队此图像，如果是这样，请在此处重新排队因为这似乎可以让驱动程序更满意：
   if (itsBuffers)
     for (size_t idx : itsDoneIdx) try { itsBuffers->qbuf(idx); } catch (...) { jevois::warnAndIgnoreException(); }
   itsDoneIdx.clear();
@@ -414,10 +404,10 @@ void jevois::CameraDevice::streamOff()
   int type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
   try { XIOCTL_QUIET(itsFd, VIDIOC_STREAMOFF, &type); } catch (...) { }
 
-  // Nuke all the buffers:
+  // 删除所有缓冲区：
   if (itsBuffers) { delete itsBuffers; itsBuffers = nullptr; }
 
-  // Unblock any get() that is waiting on itsOutputCondVar, it will then throw now that streaming is off:
+  // 解除对正在等待 itsOutputCondVar 的任何 get() 的阻止，然后它将抛出，因为流式传输已关闭：
   lk2.unlock();
   for (int i = 0; i < 20; ++i) itsOutputCondVar.notify_all();
 
@@ -431,7 +421,7 @@ void jevois::CameraDevice::get(jevois::RawImage & img)
 
   if (itsConvertedOutputImage.valid())
   {
-    // We need to convert from Bayer/Mono to YUYV:
+    // 我们需要从 Bayer/Mono 转换为 YUYV：
     std::unique_lock ulck(itsOutputMtx, std::chrono::seconds(5));
     if (ulck.owns_lock() == false) FDLFATAL("Timeout trying to acquire output lock");
     
@@ -484,8 +474,8 @@ void jevois::CameraDevice::done(jevois::RawImage & img)
 
   if (itsStreaming.load() == false) throw std::runtime_error("Camera done() rejected while not streaming");
 
-  // To avoid blocking for a long time here, we do not try to lock itsMtx and to qbuf() the buffer right now, instead we
-  // just make a note that this buffer is available and it will be requeued by our run() thread:
+  // 为了避免在这里长时间阻塞，我们现在不尝试锁定 itsMtx 并 qbuf() 缓冲区，而是只记下这个缓冲区可用，它将被我们的 run() 
+  // 线程重新排队：
   JEVOIS_TIMED_LOCK(itsOutputMtx);
   itsDoneIdx.push_back(img.bufindex);
 
@@ -499,13 +489,12 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
 {
   JEVOIS_TRACE(2);
 
-  // We may be streaming, eg, if we were running a mapping with no USB out and then the user starts a video grabber. So
-  // make sure we stream off first:
+  // 我们可能正在流式传输，例如，如果我们运行没有 USB 输出的映射，然后用户启动视频抓取器。因此确保我们首先流式传输：
   if (itsStreaming.load()) streamOff();
 
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // Assume format not set in case we exit on exception:
+  // 如果我们因异常退出，则假设格式未设置：
   itsFormatOk = false;
 
   // Set desired format:
@@ -551,7 +540,7 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
              jevois::fccstr(itsFormat.fmt.pix.pixelformat));
   }
   
-  // Try to set the format. If it fails, try to see whether we can use BAYER or MONO instead, and we will convert:
+  // 尝试设置格式。如果失败，尝试看看我们是否可以使用 BAYER 或 MONO 来代替，然后我们将进行转换：
   try
   {
     XIOCTL_QUIET(itsFd, VIDIOC_S_FMT, &itsFormat);
@@ -586,10 +575,10 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
     }
   }
   
-  // Get the format back as the driver may have adjusted some sizes, etc:
+  // 恢复格式，因为驱动程序可能已经调整了一些尺寸等：
   XIOCTL(itsFd, VIDIOC_G_FMT, &itsFormat);
   
-  // The sunxi driver on JeVois-A33 returns a different format code, may be the mbus code instead of the v4l2 fcc...
+  // JeVois-A33 上的 sunxi 驱动程序返回了不同的格式代码，可能是 mbus 代码而不是 v4l2 fcc... 
 #ifdef JEVOIS_PLATFORM_A33
   itsFormat.fmt.pix.pixelformat = v4l2sunxiFix(itsFormat.fmt.pix.pixelformat);
 #endif
@@ -597,7 +586,7 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
   FDLINFO("Camera set video format to " << itsFormat.fmt.pix.width << 'x' << itsFormat.fmt.pix.height << ' ' <<
         jevois::fccstr(itsFormat.fmt.pix.pixelformat));
   
-  // Because modules may rely on the exact format that they request, throw if the camera modified it:
+  // 因为模块可能依赖于它们请求的确切格式，如果相机修改了它，则会抛出：
   if (itsMplane)
   {
     if (itsFormat.fmt.pix_mp.width != capw ||
@@ -616,14 +605,13 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
       FDLFATAL("Camera did not accept the requested video format as specified");
   }
   
-  // Reset cropping parameters. NOTE: just open()'ing the device does not reset it, according to the unix toolchain
-  // philosophy. Hence, although here we do not provide support for cropping, we still need to ensure that it is
-  // properly reset. Note that some cameras do not support this so here we swallow that exception:
+  // 重置裁剪参数。注意：根据 unix 工具链理念，仅 open() 设备不会重置它。因此，尽管我们这里不提供裁剪支持，但我们仍需要确保
+  // 它已正确重置。请注意，某些相机不支持此功能，因此我们在此接受该异常：
   if (fps > 0.0F)
     try
     {
       struct v4l2_cropcap cropcap = { };
-      cropcap.type = V4L2_BUF_TYPE_VIDEO_CAPTURE; // Note: kernel docs say do not use the MPLANE type here.
+      cropcap.type = V4L2_BUF_TYPE_VIDEO_CAPTURE; // 注意：内核文档说这里不要使用 MPLANE 类型。
       XIOCTL_QUIET(itsFd, VIDIOC_CROPCAP, &cropcap);
       
       FDLDEBUG("Cropcap bounds " << cropcap.bounds.width << 'x' << cropcap.bounds.height <<
@@ -637,12 +625,12 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
         crop.c = cropcap.defrect;
       else
       {
-        crop.type = V4L2_BUF_TYPE_VIDEO_CAPTURE; // Note: kernel docs say do not use the MPLANE type here.
+        crop.type = V4L2_BUF_TYPE_VIDEO_CAPTURE; // 注意：内核文档说这里不要使用 MPLANE 类型。
         crop.c.top = ((caph - croph) >> 1) & 0xfffc; // force multiple of 4
         crop.c.left = ((capw - cropw) >> 1) & 0xfffc;
         crop.c.width = cropw; crop.c.height = croph;
         
-        // From now on, as far as we are concerned, these are the capture width and height:
+        // 从现在开始，就我们而言，这些是捕获宽度和高度：
         itsFormat.fmt.pix.width = cropw;
         itsFormat.fmt.pix.height = croph;
       }
@@ -654,16 +642,16 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
     }
     catch (...) { FDLERROR("Querying/setting crop rectangle not supported"); }
 
-  // From now on, as far as we are concerned, these are the capture width and height:
+  // 从现在开始，就我们而言，这些是捕获宽度和高度： 
   itsFormat.fmt.pix.width = cropw;
   itsFormat.fmt.pix.height = croph;
   
-  // Allocate a RawImage for conversion from Bayer or Monochrome to YUYV if needed:
+  // 如果需要，分配一个 RawImage 以便从拜耳或单色转换为 YUYV：
   itsConvertedOutputImage.invalidate();
   if (itsMplane == false && fmt == V4L2_PIX_FMT_YUYV &&
       (itsFormat.fmt.pix.pixelformat == V4L2_PIX_FMT_SRGGB8 || itsFormat.fmt.pix.pixelformat == V4L2_PIX_FMT_GREY))
   {
-    // We will grab raw Bayer/Mono and store that into itsOutputImage, finally converting to YUYV in get():
+    // 我们将抓取原始拜耳/单声道并将其存储到 itsOutputImage 中，最后在 get() 中转换为 YUYV：
     itsConvertedOutputImage.width = itsFormat.fmt.pix.width;
     itsConvertedOutputImage.height = itsFormat.fmt.pix.height;
     itsConvertedOutputImage.fmt = V4L2_PIX_FMT_YUYV;
@@ -687,18 +675,18 @@ void jevois::CameraDevice::setFormat(unsigned int const fmt, unsigned int const 
     catch (...) { FDLERROR("Setting frame rate to " << fps << " fps failed -- IGNORED"); }
 #endif
 
-  // Load any low-level camera sensor preset register sequence:
+  // 加载任何低级摄像机传感器预设寄存器序列：
   if (preset != -1)
   {
     FDLINFO("Loading sensor preset " << preset);
 
-    // Bugfix for when loading preset 0: the kernel driver will ignore the request unless we set non-zero preset first:
+    // 加载预设 0 时的错误修复：除非我们先设置非零预设，否则内核驱动程序将忽略请求：
     if (preset == 0) { struct v4l2_control ctrl { 0xf0f003, 1 };  XIOCTL(itsFd, VIDIOC_S_CTRL, &ctrl); }
 
     struct v4l2_control ctrl { 0xf0f003, preset }; // 0xf0f003 = ispsensorpreset
     XIOCTL(itsFd, VIDIOC_S_CTRL, &ctrl);
   }
   
-  // All good, note that we succeeded:
+  // 一切顺利，请注意我们成功了：
   itsFormatOk = true;
 }

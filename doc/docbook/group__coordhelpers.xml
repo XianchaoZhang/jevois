@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__coordhelpers">
+<title>用于将坐标从相机分辨率转换为标准坐标的辅助函数</title>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>JeVois 中的不同机器视觉算法可能以不同的相机分辨率运行，例如 1280x1024、320x240 或 176x144。当在相机帧中检测到某些感兴 趣的物品时，人们通常希望将该物品的坐标发送到串行端口。如果直接发送物品的图像坐标，就会出现问题，即现在接收器（例如 Arduino）需要知道使用了哪种相机图像分辨率，以便能够正确解释这些坐标。例如，如果视觉注意（显著性）算法使用 640x480 相 机输入运行，则相机视野中心的显著物体的坐标为 320,240。但如果将相同的显著性算法配置为处理 320x240 输入视频（以便它可以 以更高的帧速率运行），现在视野中心的物体的坐标为 160,120。如果将控制例如云台的 Arduino 连接到 JeVois，我们需要一种方法 来独立于相机使用的视频分辨率传达世界上目标物体的坐标。 </para>
+
+<para>因此，JeVois 定义了一个标准化的坐标系，如下所示：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>相机视野中心位于 x=0、y=0</para>
+</listitem><listitem>
+<para>相机图像的左边缘始终位于 x=-1000</para>
+</listitem><listitem>
+<para>相机图像的右边缘始终位于 x=1000</para>
+</listitem><listitem>
+<para>相机图像的上边缘通常位于 y=-750</para>
+</listitem><listitem>
+<para>相机图像的下边缘通常位于 y=750</para>
+</listitem></itemizedlist>
+</para>
+
+<para>请注意，这里的 750 值来自相机传感器 4:3 宽高比的假设，实际上是在 JEVOIS_CAMERA_ASPECT 中定义的。所有相机传感器分辨率都 使用 4:3 宽高比，因此 y 值介于 -750 和 750 之间，但 1280x1024 除外，其 y 值介于 -800 和 800 之间。在编写通过串行发送 相机帧中检测到的物体的坐标的机器视觉算法时，请务必先将这些坐标从图像转换为标准化空间。有关如何使用标准化坐标与嵌入式控制 器进行通信以及 3D 坐标的更多信息，请参阅 <link linkend="_UserSerialStyle">标准化串行消息格式</link> </para>
+Collaboration diagram for 用于将坐标从相机分辨率转换为标准坐标的辅助函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__coordhelpers.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__coordhelpers_1ga1d1cce429f3dc409417001eccf6b85b6">JEVOIS_CAMERA_ASPECT</link>   (16.0 / 9.0)</para>
+
+<para>JeVois 相机的纵横比 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb">jevois::coords::imgToStd</link> (float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;camimg, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 将相机坐标就地转换为标准化坐标，以确定图像大小 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga22830c058b06d45804ac9acc9e43d939">jevois::coords::imgToStdX</link> (float &amp;x, unsigned int const width, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga3c03b605134727c861576a87ccd0fcb7">jevois::coords::imgToStdY</link> (float &amp;y, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1gac6b2bbdd9348f3da2e4f9dd304bf3343">jevois::coords::imgToStdSize</link> (float &amp;w, float &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5">jevois::coords::stdToImg</link> (float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;camimg, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__coordhelpers_1gadc6d1e599f2c8e464a69f25b54fd6f45">jevois::coords::stdToImg</link> (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps=0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>)</para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_group__coordhelpers_1ga1d1cce429f3dc409417001eccf6b85b6"/>    <section>
+    <title>JEVOIS_CAMERA_ASPECT</title>
+<indexterm><primary>JEVOIS_CAMERA_ASPECT</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>JEVOIS_CAMERA_ASPECT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CAMERA_ASPECT   (16.0 / 9.0)</computeroutput></para><para>
+
+<para>JeVois 相机的纵横比 </para>
+</para>
+<para>
+Definition at line 57 of file Coordinates.H.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb"/>    <section>
+    <title>imgToStd()</title>
+<indexterm><primary>imgToStd</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>imgToStd</secondary></indexterm>
+<para><computeroutput>void jevois::coords::imgToStd (float &amp; x, float &amp; y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; camimg, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 将相机坐标就地转换为标准化坐标，以确定图像大小 </para>
+</para>
+
+<para>来自相机的 <link linkend="_classjevois_1_1RawImage">RawImage</link> 用于指定相机图像的像素宽度和高度，这是源坐标系。目标坐标系是标准化坐标系，x 在 [-1000 ... 1000] 内，y 在 [-750 ... 750] 内。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 22 of file Coordinates.C.</para>
+<para>
+References jevois::RawImage::height, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::StdModule::sendSerialContour2D(), and jevois::StdModule::sendSerialImg2D().</para>
+    </section><anchor xml:id="_group__coordhelpers_1gac6b2bbdd9348f3da2e4f9dd304bf3343"/>    <section>
+    <title>imgToStdSize()</title>
+<indexterm><primary>imgToStdSize</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>imgToStdSize</secondary></indexterm>
+<para><computeroutput>void jevois::coords::imgToStdSize (float &amp; w, float &amp; h, unsigned int const width, unsigned int const height, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 </para>
+</para>
+
+<para>参数 w 和 h 定义对象的大小（以像素为单位），将转换为标准化单位。宽度和高度用于指定相机图像的像素宽度和高度，这是源坐标 系。目标坐标系是标准化坐标系，x 为 [-1000 ... 1000]，y 为 [-750 ... 750]。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 50 of file Coordinates.C.</para>
+<para>
+References h, and JEVOIS_CAMERA_ASPECT.</para>
+<para>
+Referenced by jevois::StdModule::sendSerialImg1Dx(), jevois::StdModule::sendSerialImg1Dy(), and jevois::StdModule::sendSerialImg2D().</para>
+    </section><anchor xml:id="_group__coordhelpers_1ga22830c058b06d45804ac9acc9e43d939"/>    <section>
+    <title>imgToStdX()</title>
+<indexterm><primary>imgToStdX</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>imgToStdX</secondary></indexterm>
+<para><computeroutput>void jevois::coords::imgToStdX (float &amp; x, unsigned int const width, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 </para>
+</para>
+
+<para>width 用于指定相机图像的像素宽度，这是源坐标系。目标坐标系是标准化坐标系，x 介于 [-1000 ... 1000] 之间。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 36 of file Coordinates.C.</para>
+<para>
+Referenced by jevois::StdModule::sendSerialImg1Dx().</para>
+    </section><anchor xml:id="_group__coordhelpers_1ga3c03b605134727c861576a87ccd0fcb7"/>    <section>
+    <title>imgToStdY()</title>
+<indexterm><primary>imgToStdY</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>imgToStdY</secondary></indexterm>
+<para><computeroutput>void jevois::coords::imgToStdY (float &amp; y, unsigned int const height, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 </para>
+</para>
+
+<para>height 用于指定相机图像的像素高度，这是源坐标系。目标坐标系是标准化坐标系，y 在 [-750 ... 750] 内。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 43 of file Coordinates.C.</para>
+<para>
+References JEVOIS_CAMERA_ASPECT.</para>
+<para>
+Referenced by jevois::StdModule::sendSerialImg1Dy().</para>
+    </section><anchor xml:id="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5"/>    <section>
+    <title>stdToImg()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>stdToImg</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>stdToImg</secondary></indexterm>
+<para><computeroutput>void jevois::coords::stdToImg (float &amp; x, float &amp; y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; camimg, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</para>
+
+<para><link linkend="_classjevois_1_1RawImage">RawImage</link> 通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 位于 [-1000 ... 1000] 内，y 位于 [-750 ... 750] 内。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 60 of file Coordinates.C.</para>
+<para>
+References jevois::RawImage::height, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__coordhelpers_1gadc6d1e599f2c8e464a69f25b54fd6f45"/>    <section>
+    <title>stdToImg()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>stdToImg</primary><secondary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</secondary></indexterm>
+<indexterm><primary>用于将坐标从相机分辨率转换为标准坐标的辅助函数</primary><secondary>stdToImg</secondary></indexterm>
+<para><computeroutput>void jevois::coords::stdToImg (float &amp; x, float &amp; y, unsigned int const width, unsigned int const height, float const eps = <computeroutput>0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>使用 <link linkend="_classjevois_1_1RawImage">RawImage</link> 建立图像大小，将坐标从标准化坐标转换为图像 </para>
+</para>
+
+<para>宽度和高度通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 为 [-1000 ... 1000]，y 为 [-750 ... 750]。</para>
+
+<para>eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 </para>
+<para>
+Definition at line 64 of file Coordinates.C.</para>
+<para>
+References JEVOIS_CAMERA_ASPECT.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,102 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython}\index{jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Y\+O\+LO post-\/processor exposed to python. 
+
+A bit hacky since \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}{Post\+Processor\+Detect\+Y\+O\+LO}} is a \mbox{\hyperlink{classjevois_1_1Component}{Component}} that holds parameters. This class will add a \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}{Post\+Processor\+Detect\+Y\+O\+LO}} subcomponent to the current module, and then will forward yolo post-\/processing requests to it. 
+
+Definition at line 447 of file Python\+Module.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a1686bb5d7d6d8c6123c2d831f8b23cc2}{Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python}} ()
+\begin{DoxyCompactList}\small\item\em Constructor constructs its\+Y\+O\+LO and adds it to current module. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4a96264fa4dbdcef5edf98aa65f12b19}{$\sim$\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python}} ()
+\begin{DoxyCompactList}\small\item\em Destructor removes its\+Y\+O\+LO from current module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_ab6d61568ea55607a69e8a8924b74dd5d}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em Freeze/unfreeze parameters that users should not change while running. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4db83edbf4db9cd2d187212cfc18495b}{yolo}} (boost\+::python\+::list outs, int nclass, float box\+Threshold, float conf\+Threshold, int bw, int bh, int fudge, int maxbox)
+\begin{DoxyCompactList}\small\item\em Generic raw Y\+O\+LO processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a1686bb5d7d6d8c6123c2d831f8b23cc2}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a1686bb5d7d6d8c6123c2d831f8b23cc2}} 
+\index{jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}!PostProcessorDetectYOLOforPython@{PostProcessorDetectYOLOforPython}}
+\index{PostProcessorDetectYOLOforPython@{PostProcessorDetectYOLOforPython}!jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}}
+\doxyparagraph{\texorpdfstring{PostProcessorDetectYOLOforPython()}{PostProcessorDetectYOLOforPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor constructs its\+Y\+O\+LO and adds it to current module. 
+
+
+
+Definition at line 628 of file Python\+Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4a96264fa4dbdcef5edf98aa65f12b19}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4a96264fa4dbdcef5edf98aa65f12b19}} 
+\index{jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}!````~PostProcessorDetectYOLOforPython@{$\sim$PostProcessorDetectYOLOforPython}}
+\index{````~PostProcessorDetectYOLOforPython@{$\sim$PostProcessorDetectYOLOforPython}!jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorDetectYOLOforPython()}{~PostProcessorDetectYOLOforPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python\+::$\sim$\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor removes its\+Y\+O\+LO from current module. 
+
+
+
+Definition at line 643 of file Python\+Module.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_ab6d61568ea55607a69e8a8924b74dd5d}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_ab6d61568ea55607a69e8a8924b74dd5d}} 
+\index{jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+Freeze/unfreeze parameters that users should not change while running. 
+
+
+
+Definition at line 646 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4db83edbf4db9cd2d187212cfc18495b}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_a4db83edbf4db9cd2d187212cfc18495b}} 
+\index{jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}!yolo@{yolo}}
+\index{yolo@{yolo}!jevois::dnn::PostProcessorDetectYOLOforPython@{jevois::dnn::PostProcessorDetectYOLOforPython}}
+\doxyparagraph{\texorpdfstring{yolo()}{yolo()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python\+::yolo (\begin{DoxyParamCaption}\item[{boost\+::python\+::list}]{outs,  }\item[{int}]{nclass,  }\item[{float}]{box\+Threshold,  }\item[{float}]{conf\+Threshold,  }\item[{int}]{bw,  }\item[{int}]{bh,  }\item[{int}]{fudge,  }\item[{int}]{maxbox }\end{DoxyParamCaption})}
+
+
+
+Generic raw Y\+O\+LO processing. 
+
+The returned tuple has 3 elements\+: list of int for class\+Ids, list of float for confidences, and list of 4-\/element tuples of floats for boxes (x, y, w, h). 
+
+Definition at line 650 of file Python\+Module.\+C.
+
+
+
+References jevois\+::python\+::py\+Vec\+To\+List().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonModule_8H}{Python\+Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonModule_8C}{Python\+Module.\+C}}\end{DoxyCompactItemize}

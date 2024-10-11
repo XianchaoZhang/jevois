@@ -31,20 +31,17 @@
 
 namespace jevois
 {
-  //! Video output to local screen
-  /*! This class provides accelerated OpenGL-ES display on JeVois-Pro platform. It only works on JeVois-Pro and creates
-      fatal errors on other host or platform configs. Images are simply displayed on the local screen using
-      OpenGL-ES.
+  //! 视频输出到本地屏幕
+  /*! 此类在 JeVois-Pro 平台上提供加速 OpenGL-ES 显示。它仅适用于 JeVois-Pro，并在其他主机或平台配置上产生致命错误。图
+	  像仅使用 OpenGL-ES 显示在本地屏幕上。
+      
+	  以下是基本操作理论：
 
-      Here is the basic theory of operation:
-
-      - When running on host, we open an X11 window; on platform, we instead use fbdev.
-      - When the first video frame arrives, we then initialize OpenGL and create 2 triangles that will be rendered in
-        the whole window. The reason for this is to avoid threading issues (so OpenGL is initialized in the same thread
-        as rendering calls will be made). We also initialize a texture of the same size as the incoming image. We
-        finally create a surface of same size as the window or fbdev. We then load and compile shaders to render our
-        texture into our surface.
-      - On every frame, we just update the texture's pixel data location in memory and render the scene.
+      - 在主机上运行时，我们打开一个 X11 窗口；在平台上，我们改用 fbdev。
+	  - 当第一个视频帧到达时，我们初始化 OpenGL 并创建将在整个窗口中渲染的 2 个三角形。这样做的原因是为了避免线程问题
+	    （因此 OpenGL 在与渲染调用相同的线程中初始化）。我们还初始化与传入图像大小相同的纹理。我们最终创建与窗口或 
+		fbdev 大小相同的表面。然后我们加载并编译着色器以将纹理渲染到表面中。
+	  - 在每一帧上，我们只需更新纹理在内存中的像素数据位置并渲染场景。
 
       \ingroup core */
   class VideoDisplayGL : public VideoOutput
@@ -53,23 +50,23 @@ namespace jevois
       //! Constructor
       VideoDisplayGL(size_t nbufs = 2);
       
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~VideoDisplayGL();
 
-      //! Set the video format and frame rate, allocate the buffers
+      //! 设置视频格式和帧速率，分配缓冲区
       virtual void setFormat(VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out using send()
+      //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去
       virtual void get(RawImage & img) override;
       
-      //! Send an image out to display
+      //! 发送图像以显示
       virtual void send(RawImage const & img) override;
 
       //! Start streaming
       virtual void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消将来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       virtual void abortStream() override;
       
       //! Stop streaming

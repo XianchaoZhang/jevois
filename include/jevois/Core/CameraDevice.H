@@ -27,19 +27,19 @@
 
 namespace jevois
 {
-  //! Accessory class to hold all the data associated with a V4L2 camera device
-  /*! This class is used internally by jevois::Camera and is of little use to end users. \ingroup core */
+  //! 附件类，用于保存与 V4L2 相机设备相关的所有数据
+  /*! 此类由 jevois::Camera 内部使用，对最终用户用处不大。 \ingroup core */
   class CameraDevice
   {
     public:
-      //! Constructor opens the device, checks its capabilities, starts run thread
-      /*! When dummy is true, we will just dequeue and requeue the buffers with no processing. */
+      //! 构造函数打开设备，检查其功能，启动运行线程
+      /*! 当 dummy 为 true 时，我们将仅出队并重新排队缓冲区而不进行任何处理。 */
       CameraDevice(std::string const & devname, unsigned int const nbufs, bool dummy);
 
-      //! Destructor frees all buffers and closes the device
+      //! 析构函数释放所有缓冲区并关闭设备
       ~CameraDevice();
 
-      //! Get our fd; used by Camera to access controls
+      //! 获取我们的 fd；由 Camera 用来访问 controls
       int getFd() const;
       
       //! Start streaming
@@ -51,21 +51,21 @@ namespace jevois
       //! Stop streaming
       void streamOff();
 
-      //! Get the next captured buffer
+      //! 获取下一个捕获的缓冲区
       void get(RawImage & img);
 
-      //! Indicate that user processing is done with an image previously obtained via get()
+      //! 表示用户已完成先前通过 get() 获取的图像处理
       void done(RawImage & img);
 
-      //! Set the video format and frame rate
+      //! 设置视频格式和帧率
       void setFormat(unsigned int const fmt, unsigned int const capw, unsigned int const caph, float const fps,
                      unsigned int const cropw, unsigned int const croph, int preset = -1);
 
     private:
       std::string const itsDevName; //!< Our device or movie file name
-      unsigned int const itsNbufs;  //!< Our number of buffers
+      unsigned int const itsNbufs;  //!< 我们的缓冲区数量
 
-      int itsFd = -1; // file descriptor we use to grab frames
+      int itsFd = -1; // 我们用来抓取帧的文件描述符
       bool itsMplane = false; // true if device uses multiplane V4L2 API
       VideoBuffers * itsBuffers; // video buffers
       struct v4l2_format itsFormat { }; // capture format

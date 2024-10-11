@@ -1,0 +1,1349 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Engine">
+<title>jevois::Engine Class Reference</title>
+<indexterm><primary>jevois::Engine</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/Engine.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>JeVois processing engine - 从相机传感器获取图像，对其进行处理，并通过 USB 发送结果。 </para>
+
+
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 协调视觉处理软件的执行。它是一个 <link linkend="_classjevois_1_1Manager">Manager</link> ，即它是 <link linkend="_classjevois_1_1Component">Component</link> 对象层次结构的根，它处理对其参数设置及其构造、 init()、 unInit() 和析构的访问。组件层次结构由根部的 <link linkend="_classjevois_1_1Engine">Engine</link> 和用户在运行时选择的 <link linkend="_classjevois_1_1Module">Module</link> 组成，例如，在连接到 JeVois 硬件的主机上 运行的摄像机软件上选择给定的视频格式。然后， <link linkend="_classjevois_1_1Module">Module</link> 可以包含任意复杂的 <link linkend="_classjevois_1_1Component">Component</link> 对象层次结构，其中包含参数设置。Module 派生自 Component，因此也可能有自己的参数设置。</para>
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 包含以下基本元素：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>A <link linkend="_classjevois_1_1VideoInput">VideoInput</link>, 实例化为用于实时视频流的 <link linkend="_classjevois_1_1Camera">Camera</link> 或用于处理预先录制的视频文件或图像序列的 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> （在算法开发期间有用， 用于测试和优化可再现的输入）；</para>
+</listitem><listitem>
+<para>A <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link>, 在 JeVois 硬件平台上运行时实例化为 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 驱动程序，在有图形显示器的计算机上运行时实例化为 VideoDisplay， 或者实例化为 <link linkend="_classjevois_1_1MovieOutput">MovieOutput</link> 将输出视频帧保存到磁盘，或者实例化为 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> （如果）需要对视觉算法进行基准测试，同时 忽略与传输输出帧相关的任何工作。</para>
+</listitem><listitem>
+<para>A <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 根据用户选择在运行时加载所选的视觉处理 Module；</para>
+</listitem><listitem>
+<para>任意数量的 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 对象，实例化为硬件 <link linkend="_classjevois_1_1Serial">Serial</link> 端口（平台硬件上的 4 针 JST 1.0mm 连接器）、USB <link linkend="_classjevois_1_1Serial">Serial</link> 端口（在连接 JeVois 硬件的主机上可见）通过 USB），或 <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link> （直接在终端启动 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 接受命令并在终端打印结果，在通用 计算机而不是平台硬件上运行时特别有用）。当在平台硬件上运行时，通常会创建两个 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 对象（一个硬件 <link linkend="_classjevois_1_1Serial">Serial</link> ，一个通 过 USB <link linkend="_classjevois_1_1Serial">Serial</link> ），而在通用计算机上运行时，通常只创建一个 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> （类型为 <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link> ）在终端启动 jevois-daemon 并且接受命令）；</para>
+</listitem><listitem>
+<para>从 videomappings.cfg 文件导入的 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 定义列表。这些定义指定了使用的 <link linkend="_classjevois_1_1Module">Module</link> 及其相应的 <link linkend="_classjevois_1_1Camera">Camera</link> 设置并使用 USB 输出的 模式，以及未通过 USB 流式视频输出的模式（例如，当将硬件平台连接到 Arduino 时）仅有的）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 的主循环一直运行到用户决定退出为止，基本上会经历以下步骤：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>创建 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 对象，它是下一个可用 <link linkend="_classjevois_1_1Camera">Camera</link> 帧的异常安全包装器。该帧可能尚未捕获。InputFrame 可以被理解为一种机制，用于在 将来当该帧可用时（即相机已捕获）来访问该帧。这与 C++11 的 std::future 框架非常相似。</para>
+</listitem><listitem>
+<para>当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定通过 USB 流式传输视频帧时，还要创建一个 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 对象，该对象是下一个可用 <link linkend="_classjevois_1_1Gadget">Gadget</link> 帧的异常安全包装器。 这也是一种用于访问 USB 驱动程序提供的下一个空白视频缓冲区的机制，在通过 USB 将其发送到主机之前应该填充有趣的像素数据。</para>
+</listitem><listitem>
+<para>调用当前加载的 <link linkend="_classjevois_1_1Module">Module</link> 的 process() 函数，当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定通过 USB 发送某些视频输出时，可以调用 process(InputFrame, OutputFrame) ， 或者当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定没有视频输出时，调用 process(InputFrame)。 <link linkend="_classjevois_1_1Module">Module</link> 的 process() 函数抛出的任何异常都将 被捕获、报告和忽略。 process() 函数通常会通过 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 包装器请求下一个可用的相机图像（此请求可能会阻塞，直到相机 传感器硬件捕获该帧），处理该图像，通过 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包装器请求下一个可用的输出图像（当 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定 USB 视频输出时）， 并将一些结果绘制到该输出图像中，然后将其通过 USB 发送到主机，以供某些网络摄像头程序显示或由运行在该输出图像上的某些自定义 视觉软件进一步处理。此外，当前加载的 <link linkend="_classjevois_1_1Module">Module</link> 可以通过 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 端口发出消息（例如，指示找到目标的位置，以让 Arduino 知道它）。</para>
+</listitem><listitem>
+<para>读取用户通过 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 端口发出的任何新命令并执行适当的命令。</para>
+</listitem><listitem>
+<para>当用户在连接 JeVois 硬件的主机上运行的网络摄像头软件中选择不同的视频模式时，处理用户更改 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 的请求。此类请求 可能会触发当前 <link linkend="_classjevois_1_1Module">Module</link> 的卸载并加载新的 Module，并更改相机像素格式、图像大小等。这些更改保证在 <link linkend="_classjevois_1_1Module">Module</link> 的 process() 函数 未运行时发生，即 <link linkend="_classjevois_1_1Module">Module</link> 程序员不必担心在执行 process() 函数期间图像尺寸或像素格式可能发生的变化。</para>
+</listitem><listitem>
+<para>将通过 USB 或 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 接收到的任何用户请求传递给实际的 <link linkend="_classjevois_1_1Camera">Camera</link> 硬件驱动程序，以调整相机参数（例如，当用户更改网络 摄像头程序中的对比度时，该请求将通过 USB 发送到 Engine，然后 <link linkend="_classjevois_1_1Engine">Engine</link> 将其转发到 <link linkend="_classjevois_1_1Camera">Camera</link> 硬件驱动程序）。 </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line 377 of file Engine.H.</para>
+Inheritance diagram for jevois::Engine:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Engine__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Engine:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Engine__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a14fbeefe304c188cf47af27ffb669383">Engine</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a881e17f4465765453e56e3d269cf214e">Engine</link> (int argc, char const *argv[], std::string const &amp;instance)</para>
+
+<para>Constructor with command-line parsing. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1aac8a333945fae07bf6475f1da84bf638">~Engine</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1ad283adff625848b7ec29968fc7c61d58">reloadVideoMappings</link> ()</para>
+
+<para>从 videomappings.cfg 重新加载视频映射。 </para>
+</listitem>
+            <listitem><para>const <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp; <link linkend="_classjevois_1_1Engine_1a4deaa34441d8554c19a196c997649b0a">findVideoMapping</link> (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const</para>
+
+<para>查找具有给定输出规格的 VideoMapping，如果未找到则抛​​出 </para>
+</listitem>
+            <listitem><para>const <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp; <link linkend="_classjevois_1_1Engine_1aa746811f666a10d5dda827a2a62a9f9e">getCurrentVideoMapping</link> () const</para>
+
+<para>获取当前视频映射 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Engine_1a524bc32f57970770d32eec857afc4d07">numVideoMappings</link> () const</para>
+
+<para>返回视频映射的数量 </para>
+</listitem>
+            <listitem><para>const <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp; <link linkend="_classjevois_1_1Engine_1a0f7d778d163ee0c52d21843e4f69a7c3">getVideoMapping</link> (size_t idx) const</para>
+
+<para>允许访问我们在构建时从文件解析的视频映射 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Engine_1ab359ccc8b2d022f120efcd59e708c373">getVideoMappingIdx</link> (unsigned int iformat, unsigned int iframe, unsigned int interval) const</para>
+
+<para>获取给定 UVC iformat、iframe 和 interval 的视频映射索引 </para>
+</listitem>
+            <listitem><para>const <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp; <link linkend="_classjevois_1_1Engine_1a9914f65be4669baf38bef649a8cad25b">getDefaultVideoMapping</link> () const</para>
+
+<para>Allow access to the default video mapping. </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Engine_1a63834e45f8e3edd0be14aac516daabad">getDefaultVideoMappingIdx</link> () const</para>
+
+<para>Allow access to the default video mapping index. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1af988124a54cfbfbb56a77c43a52eadc6">foreachVideoMapping</link> (std::function&lt; void(<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)&gt; &amp;&amp;func)</para>
+
+<para>在每个视频映射上运行一个函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a09ae0f9771b693693a92207c01218c19">requestSetFormat</link> (int idx)</para>
+
+<para>使用它从 process() 中请求格式更改 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1aa7df0e7a58a02ec29d9a911d3ea03d12">quit</link> ()</para>
+
+<para>Terminate the program. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a140e7a43c307f306c0c7089f5fa1b7ab">reboot</link> ()</para>
+
+<para>请求重启 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a6b15249fc704fa95cc579c12ae012811">setFormat</link> (size_t idx)</para>
+
+<para>当用户选择新的输出视频格式时的回调 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a0cb844ce7bf0b3ae9111b1d0d264bd54">streamOn</link> ()</para>
+
+<para>开始从相机、处理和 USB 流式传输视频 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a7fe0923fef589e45ec1d74c229ad6a5a">streamOff</link> ()</para>
+
+<para>停止从相机、处理和 USB 流式传输视频 </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1Engine_1aaba81580ca2c4361b2c7a83b54e86a59">mainLoop</link> ()</para>
+
+<para>主循环：抓取、处理、通过 USB 发送。应由主应用程序线程调用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a7fbaa165dff9628cffa14d8ae307eb64">sendSerial</link> (std::string const &amp;str, bool islog=false)</para>
+
+<para>向所有串行端口发送一个字符串 </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1Module">Module</link> &gt; <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> () const</para>
+
+<para>获取指向当前模块的指针（可能为空） </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1Camera">Camera</link> &gt; <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link> () const</para>
+
+<para>获取指向我们相机的指针（可能为空，特别是当不使用相机而是使用电影输入时） </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a0cd78565d78403bb348ad09fb7ca3f49">drawCameraGUI</link> ()</para>
+
+<para>将所有相机控件绘制到我们的 GUI 中 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1CameraCalibration">CameraCalibration</link> <link linkend="_classjevois_1_1Engine_1ac5e8a0996af9bf5048e2d9b5e6f9d69f">loadCameraCalibration</link> (std::string const &amp;stem=&quot;calibration&quot;, bool do_throw=false)</para>
+
+<para>为当前正在运行的模块加载 OpenCV 相机矩阵和失真系数的辅助函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a4a45bbb8080c1efba3aef4212e7697da">saveCameraCalibration</link> (<link linkend="_classjevois_1_1CameraCalibration">CameraCalibration</link> const &amp;calib, std::string const &amp;stem=&quot;calibration&quot;)</para>
+
+<para>保存当前正在运行的模块的 OpenCV 相机矩阵和失真系数的辅助函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1ac09b49c72d9fa8b79cee485de91cbc67">registerPythonComponent</link> (<link linkend="_classjevois_1_1Component">Component</link> *comp, void *pyinst)</para>
+
+<para>将组件注册为链接到某些 python 代码，由在 python 中创建的动态参数使用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a74cc0839e6b8add6bbe85eeedee101c0">unRegisterPythonComponent</link> (<link linkend="_classjevois_1_1Component">Component</link> *comp)</para>
+
+<para>取消注册与某些 Python 代码链接的组件，由 Python 中创建的动态参数使用 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Component">Component</link> * <link linkend="_classjevois_1_1Engine_1a01c815c22362c6508c0bc89ded17eb87">getPythonComponent</link> (void *pyinst) const</para>
+
+<para>获取使用给定 python 实例注册的组件 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1afa87ec4e88e9009fe7ef2886931b6cd1">reportError</link> (std::string const &amp;err)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1af8d6c77bf2e1b187673ecff358418264">clearErrors</link> ()</para>
+
+<para>清除 JeVois-Pro GUI 中当前显示的所有错误 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a138505c0a3d95d3ecbd88b07185deb67">nextDemo</link> ()</para>
+
+<para>处于演示模式时，切换到下一个演示 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a62d9b060d26c40e131e595fa65004c9f">abortDemo</link> ()</para>
+
+<para>处于演示模式时，中止演示模式 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a85e6d2c45d49f628f47c74b8c1bd4285">runScriptFromFile</link> (std::string const &amp;filename, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; ser, bool throw_no_file)</para>
+
+<para>从文件运行脚本 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a3e245d10dfd6e0d88cdade6b0527195c">onParamChange</link> (engine::serialdev const &amp;param, std::string const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a7141bcc6d655bc8c75fcd47e1d31129a">onParamChange</link> (engine::usbserialdev const &amp;param, std::string const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1acc8a76230d7ff91d026744b0dd228776">onParamChange</link> (engine::cpumode const &amp;param, engine::CPUmode const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a614985d2cba07942c3a72377dbab8cdd">onParamChange</link> (engine::cpumax const &amp;param, unsigned int const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1aaaf9c5d6921fad67474668ac612ee074">onParamChange</link> (engine::videoerrors const &amp;param, bool const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a74a52ed177033ad9aae2ac6b32b8e1ef">onParamChange</link> (engine::gui const &amp;param, bool const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a1aeebcbbf9406126a6b2d6859fa10061">onParamChange</link> (engine::cpumaxl const &amp;param, unsigned int const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a76a60ae563e667b09fa1af9a43d8ae2b">onParamChange</link> (engine::cpumodel const &amp;param, engine::CPUmode const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a5b65d2eb3778204e46d474832e875861">onParamChange</link> (engine::demomode const &amp;param, float const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1a25d2fd8ab270cbdf4a26cc4bf9d5bac7">preInit</link> () override</para>
+
+<para>Override of <link linkend="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be">Manager::preInit()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Engine_1ad7b8927d246b350cf0be396291f79f3c">postInit</link> () override</para>
+
+<para>Override of <link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">Manager::postInit()</link> </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Engine_1aa88378edfca8eb7d16107f212aa3ca54">parseCommand</link> (std::string const &amp;str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s, std::string const &amp;pfx=&quot;&quot;)</para>
+
+<para>解析通过串行端口接收到的用户命令 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Engine_1a9cf49224e3c9b0b53b446d550d2181fd">itsDefaultMappingIdx</link></para>
+
+<para>Index of default mapping. </para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &gt; <link linkend="_classjevois_1_1Engine_1af2c887a173ea62307c85fe4e606fc1be">itsMappings</link></para>
+
+<para>来自 videomappings.cfg 的所有映射 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> <link linkend="_classjevois_1_1Engine_1afcd8e073c7874fd7fda097d7d3971067">itsCurrentMapping</link></para>
+
+<para>当前映射，如果使用 setmapping2，则可能与 itsMappings 中的任何映射都不匹配 </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoInput">VideoInput</link> &gt; <link linkend="_classjevois_1_1Engine_1ade317fc8331474405a551a44ad8eeb12">itsCamera</link></para>
+
+<para>Our camera. </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1IMU">IMU</link> &gt; <link linkend="_classjevois_1_1Engine_1a5dcab54a33a3501f0ef3ab21db0c0c05">itsIMU</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> &gt; <link linkend="_classjevois_1_1Engine_1ae0918e608af6f639810e33026ae344fb">itsGadget</link></para>
+
+<para>Our <link linkend="_classjevois_1_1IMU">IMU</link>. </para>
+</listitem>
+            <listitem><para>std::unique_ptr&lt; <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> &gt; <link linkend="_classjevois_1_1Engine_1afb9bf8f5074f94a924d32044c8675224">itsLoader</link></para>
+
+<para>Our module loader. </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1Module">Module</link> &gt; <link linkend="_classjevois_1_1Engine_1a2775861063bb4eed282a519d67a2f0ad">itsModule</link></para>
+
+<para>Our current module. </para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1Engine_1a4fa3bc6f8158671527e5aa172b06b999">itsRunning</link></para>
+
+<para>True when we are running. </para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1Engine_1a38278831a46971aecd841cd954a0614c">itsStreaming</link></para>
+
+<para>True when we are streaming video. </para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1Engine_1a1f2d50734e8faaa2d8cc368064878140">itsStopMainLoop</link></para>
+
+<para>Flag used to stop the main loop. </para>
+</listitem>
+            <listitem><para>std::timed_mutex <link linkend="_classjevois_1_1Engine_1aefdb8ae7d6d2c7644bad2a7f42cd0f2d">itsMtx</link></para>
+
+<para>Mutex to protect our internals. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Engine_1a34175bdc63bd923183dabb20f3b17374">frameNum</link> ()</para>
+
+<para>获取当前视频处理帧号 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1ae044303718c53706eed448d57b574fcf">JEVOIS_DECLARE_PARAMETER</link> (cameradev, std::string, &quot;Camera device name (if starting with /dev/v...), or movie &quot; &quot;file name (e.g., movie.mpg) or image sequence (e.g., im%02d.jpg, to read frames &quot; &quot;im00.jpg, im01.jpg, etc).&quot;, JEVOIS_CAMERA_DEFAULT, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1acd1d0521371a59e80c6a3ea0dc167b06">JEVOIS_DECLARE_PARAMETER</link> (camerasens, CameraSensor, &quot;Camera sensor. Users would usually not set this parameter &quot; &quot;manually, it is set through boot-time configuration.&quot;, JEVOIS_CAMERASENS_DEFAULT, CameraSensor_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a056082d644f352bf6088e9cea7783d7a">JEVOIS_DECLARE_PARAMETER</link> (cameralens, CameraLens, &quot;Camera lens. Users should usually not set this parameter &quot; &quot;using the global JeVois params.cfg config file.&quot;, CameraLens::standard, CameraLens_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a8e47f3c52346435f8c5cd65b42340dba">JEVOIS_DECLARE_PARAMETER</link> (cameranbuf, unsigned int, &quot;Number of video input (<link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link>) buffers, or 0 for automatic.&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1aaf04586ff5734953637f805819009fe3">JEVOIS_DECLARE_PARAMETER</link> (gadgetdev, std::string, &quot;Gadget device name. This is used on platform hardware only. &quot; &quot;On host hardware, a display window will be used unless gadgetdev is None (useful &quot; &quot;for benchmarking) or is a file stem for a movie file that does not start with /dev/ &quot; &quot;(and which should contain a printf-style directive for a single int argument, &quot; &quot;the movie number).&quot;, JEVOIS_GADGET_DEFAULT, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1ab3b346f1b9700536a53a231e8ae1c709">JEVOIS_DECLARE_PARAMETER</link> (gadgetnbuf, unsigned int, &quot;Number of video output (USB video) buffers, or 0 for auto&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a67d03e897d919877164a970988be372b">JEVOIS_DECLARE_PARAMETER</link> (videomapping, int, &quot;Index of Video Mapping to use, or -1 to use the default mapping. &quot; &quot;Note that this parameter is only available when parsing command-line arguments. &quot; &quot;At runtime, the setmapping command should be used instead.&quot;, -1, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1ab5c6d63fe4817863fd5dbaedfd5f79d1">JEVOIS_DECLARE_PARAMETER</link> (serialmonitors, bool, &quot;If true, serial port monitors will be enabled &quot; &quot;in the GUI, which can be used to peek at serial communications not &quot; &quot;directed to the console. Can be turned off at start time (e.g., in the &quot; &quot;global JeVois params.cfg) as there is some small CPU cost to it.&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1af7433d5e286087bc827fce698722f607">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (serialdev, std::string, &quot;Hardware (4-pin connector) serial device name, &quot; &quot;or &apos;stdio&apos; to use the console, or empty for no hardware serial port&quot;, JEVOIS_SERIAL_DEFAULT, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a147035aa3972856977943e9a6e653cbe">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (usbserialdev, std::string, &quot;Over-the-USB serial device name, or empty&quot;, JEVOIS_USBSERIAL_DEFAULT, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1ac261845994ca62311ed460817ed636cb">JEVOIS_DECLARE_PARAMETER</link> (camreg, bool, &quot;Enable raw access to <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link> registers through setcamreg and getcamreg&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a42ee006f3a41dbf0d13720b615ea1acb">JEVOIS_DECLARE_PARAMETER</link> (imureg, bool, &quot;Enable raw access to <link linkend="_classjevois_1_1IMU">IMU</link> registers through setimureg and getimureg&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a475a32ed0999c157ce5c1328e7d4776c">JEVOIS_DECLARE_PARAMETER</link> (camturbo, bool, &quot;Enable <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link> turbo mode by relaxing the need for DMA-coherent video &quot; &quot;buffer memory. This can accelerate severalfolds access to the captured image data, but &quot; &quot;it may also yield stripe artifacts with some modules, such as PassThrough. The stripes &quot; &quot;are pieces of incorrect data in the cache. You should experiment with each particular &quot; &quot;module. Turbo mode is not recommended for any production-grade application.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a69011978ae0535e442fb913c0cc69427">JEVOIS_DEFINE_ENUM_CLASS</link> (SerPort,(None)(All)(Hard)(USB))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a67d265efdc6a96e963fd3ef5c95163e4">JEVOIS_DECLARE_PARAMETER</link> (serlog, SerPort, &quot;Show log and debug messages on selected serial port(s)&quot;, SerPort::None, SerPort_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a23cbb6bd0d3d0ff3490db5cacc31582c">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (videoerrors, bool, &quot;Show any machine vision <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> errors (exceptions) &quot; &quot;in the video stream. Only takes effect if streaming video to USB.&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a44e5aba3a35e1da591f08c425ea62a4f">JEVOIS_DECLARE_PARAMETER</link> (serout, SerPort, &quot;Send <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> serial messages to selected serial port(s)&quot;, SerPort::None, SerPort_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a9eeda56315b1a8b2a0ae8f72c9deac95">JEVOIS_DEFINE_ENUM_CLASS</link> (CPUmode,(PowerSave)(Conservative)(OnDemand)(Interactive)(Performance))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1add8a900ec59b723642992e0609268947">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (cpumode, CPUmode, &quot;CPU frequency modulation mode&quot; &quot; for A73 big cores&quot;, CPUmode::Performance, CPUmode_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1ae23f3e3aff4e92cd83d8a98fed6fd4eb">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (cpumodel, CPUmode, &quot;CPU frequency modulation mode for A53 little cores&quot;, CPUmode::Performance, CPUmode_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a95e2b7506013dbb02d94726b94e41d2e">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (cpumax, unsigned int, &quot;CPU maximum frequency in MHz&quot; &quot;. To enable overclock frequencies above 2208 MHz, you need to first edit &quot; &quot;/boot/env.txt and change max_freq_a73, then reboot. Use with caution!&quot;, 2208, { 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208, 2304, 2400 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a6927a5d45cefa82a3a4aec902dec5e7e">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (cpumaxl, unsigned int, &quot;CPU maximum frequency in MHz, for A53 little cores. &quot; &quot;To enable overclock frequencies above 1800 MHz, you need to first edit &quot; &quot;/boot/env.txt and change max_freq_a53, then reboot. Use with caution!&quot;, 1800, { 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a67fb641e544ccddb9d803601997bb1b9">JEVOIS_DECLARE_PARAMETER</link> (multicam, bool, &quot;Allow up to 3 JeVois cameras on one USB bus. Enabling this &quot; &quot;reduces the amount of USB bandwidth used by each JeVois <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link>, from 3kb &quot; &quot;per USB isochronous microframe to 1kb. All 3 JeVois cameras must have this &quot; &quot;option enabled, and the JeVois linux kernel <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> should also have &quot; &quot;been loaded with multicam on.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a20b2d402cddc35a9a186ad83a41c3bff">JEVOIS_DECLARE_PARAMETER</link> (quietcmd, bool, &quot;When true, do not issue a message &apos;OK&apos; after every correct command &quot; &quot;received at the command-line interface. Recommended for advanced users only.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a353a2aeece49bc90c0e714ca8fc9b851">JEVOIS_DECLARE_PARAMETER</link> (python, bool, &quot;When true, enable support for modules written in Python. Otherwise, &quot; &quot;attempting to load a python <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> will throw an exception. Disabling python saves &quot; &quot;a lot of memory and may be useful when using C++ modules that run large deep neural &quot; &quot;networks.&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a716e2a0c595ba0bb3754195573070f5a">JEVOIS_DECLARE_PARAMETER</link> (serlimit, size_t, &quot;Maximum number of serial messages that can be sent by a <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> &quot; &quot;using <link linkend="_classjevois_1_1Engine_1a7fbaa165dff9628cffa14d8ae307eb64">sendSerial</link>(), for each video frame, or 0 for no limit. Any message sent by &quot; &quot;the <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> beyond the first serlimit ones will be dropped. This is useful to avoid &quot; &quot;overloading the serial link, for example in case one is running a ArUco detector and &quot; &quot;a large number of ArUco tags are present in the field of view of JeVois.&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1aff13f0ebdfab11c9e69703d33aeb5d7c">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (gui, bool, &quot;Use a graphical user interface instead of plain display &quot; &quot;when true&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a6180309657ecd1b83f52386f157c59ca">JEVOIS_DECLARE_PARAMETER</link> (conslock, bool, &quot;Lock the console and capture the keyboard and mouse to avoid &quot; &quot;interference, only effective on JeVois-Pro Platform, otherwise ignored. Set conslock &quot; &quot;to false if you are experiencing hard crashes and want to run jevoispro-daemon in gdb.&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a362ca7396b84a4b44678b346b832607b">JEVOIS_DECLARE_PARAMETER</link> (watchdog, double, &quot;Timeout in seconds after which we kill this process if the <link linkend="_jevois-restore-console_8C_1a2b760810e5bb0cfb55f0c7d6d74d4438">main</link> loop &quot; &quot;is stuck somehow, or 0.0 for no watchdog&quot;, 10.0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Engine_1a6edade9cd42e6e2502bd93286cebb0ae">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (demomode, float, &quot;Show a demonstration of some available JeVois-Pro &quot; &quot;machine vision modules, cycling to the next modules after a number &quot; &quot;of seconds specified by this parameter (or 0.0 for no demo mode).&quot;, 0.0F, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Engine_1a14fbeefe304c188cf47af27ffb669383"/>    <section>
+    <title>Engine()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Engine</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>Engine</secondary></indexterm>
+<para><computeroutput>jevois::Engine::Engine (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 221 of file Engine.C.</para>
+<para>
+References jevois::async_little(), and JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a881e17f4465765453e56e3d269cf214e"/>    <section>
+    <title>Engine()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Engine</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>Engine</secondary></indexterm>
+<para><computeroutput>jevois::Engine::Engine (int argc, char const * argv[], std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor with command-line parsing. </para>
+</para>
+<para>
+Definition at line 239 of file Engine.C.</para>
+<para>
+References jevois::async_little(), and JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aac8a333945fae07bf6475f1da84bf638"/>    <section>
+    <title>~Engine()</title>
+<indexterm><primary>~Engine</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>~Engine</secondary></indexterm>
+<para><computeroutput>jevois::Engine::~Engine ( )</computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 826 of file Engine.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, jevois::logSetEngine(), and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Engine_1a62d9b060d26c40e131e595fa65004c9f"/>    <section>
+    <title>abortDemo()</title>
+<indexterm><primary>abortDemo</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>abortDemo</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::abortDemo ( )</computeroutput></para><para>
+
+<para>处于演示模式时，中止演示模式 </para>
+</para>
+<para>
+Definition at line 604 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7"/>    <section>
+    <title>camera()</title>
+<indexterm><primary>camera</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>camera</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt; <link linkend="_classjevois_1_1Camera">jevois::Camera</link> &gt; jevois::Engine::camera ( ) const</computeroutput></para><para>
+
+<para>获取指向我们相机的指针（可能为空，特别是当不使用相机而是使用电影输入时） </para>
+</para>
+<para>
+Definition at line 1455 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1af8d6c77bf2e1b187673ecff358418264"/>    <section>
+    <title>clearErrors()</title>
+<indexterm><primary>clearErrors</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>clearErrors</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::clearErrors ( )</computeroutput></para><para>
+
+<para>清除 JeVois-Pro GUI 中当前显示的所有错误 </para>
+</para>
+
+<para>在 JevoisPro GUI 中，通过 <link linkend="_classjevois_1_1Engine_1afa87ec4e88e9009fe7ef2886931b6cd1">reportError()</link> 报告的错误会保留显示几秒钟，但有时我们希望立即清除它们，例如，在 DNN 管道抛 出后，如果用户选择另一个，我们希望之前的错误立即消失，因为它不再适用。当不使用 JeVois-Pro GUI 时，这没有效果。 </para>
+<para>
+Definition at line 1390 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a0cd78565d78403bb348ad09fb7ca3f49"/>    <section>
+    <title>drawCameraGUI()</title>
+<indexterm><primary>drawCameraGUI</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>drawCameraGUI</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::drawCameraGUI ( )</computeroutput></para><para>
+
+<para>将所有相机控件绘制到我们的 GUI 中 </para>
+</para>
+<para>
+Definition at line 2842 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a4deaa34441d8554c19a196c997649b0a"/>    <section>
+    <title>findVideoMapping()</title>
+<indexterm><primary>findVideoMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>findVideoMapping</secondary></indexterm>
+<para><computeroutput>const <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> &amp; jevois::Engine::findVideoMapping (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const</computeroutput></para><para>
+
+<para>查找具有给定输出规格的 VideoMapping，如果未找到则抛​​出 </para>
+</para>
+<para>
+Definition at line 1575 of file Engine.C.</para>
+<para>
+References jevois::fccstr(), LFATAL, and jevois::VideoMapping::match().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1af988124a54cfbfbb56a77c43a52eadc6"/>    <section>
+    <title>foreachVideoMapping()</title>
+<indexterm><primary>foreachVideoMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>foreachVideoMapping</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::foreachVideoMapping (std::function&lt; void(<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)&gt; &amp;&amp; func)</computeroutput></para><para>
+
+<para>在每个视频映射上运行一个函数 </para>
+</para>
+
+<para>您的函数将被调用的第一个映射是索引为 0 的映射，依此类推，直到索引为 <link linkend="_classjevois_1_1Engine_1a524bc32f57970770d32eec857afc4d07">numVideoMappings()</link>-1。如果您的函数抛出异常，我们会 报告异常然后忽略它，然后我们继续下一个映射。 </para>
+<para>
+Definition at line 1567 of file Engine.C.</para>
+<para>
+References jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aa746811f666a10d5dda827a2a62a9f9e"/>    <section>
+    <title>getCurrentVideoMapping()</title>
+<indexterm><primary>getCurrentVideoMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getCurrentVideoMapping</secondary></indexterm>
+<para><computeroutput>const <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> &amp; jevois::Engine::getCurrentVideoMapping ( ) const</computeroutput></para><para>
+
+<para>获取当前视频映射 </para>
+</para>
+
+<para>请注意，如果当前映射是通过 setmapping2 CLI 命令动态设置的，则当前映射可能没有在从 videomappings.cfg 获取的映射列表中的条目。 </para>
+<para>
+Definition at line 1511 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a9914f65be4669baf38bef649a8cad25b"/>    <section>
+    <title>getDefaultVideoMapping()</title>
+<indexterm><primary>getDefaultVideoMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getDefaultVideoMapping</secondary></indexterm>
+<para><computeroutput>const <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> &amp; jevois::Engine::getDefaultVideoMapping ( ) const</computeroutput></para><para>
+
+<para>Allow access to the default video mapping. </para>
+</para>
+<para>
+Definition at line 1559 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a63834e45f8e3edd0be14aac516daabad"/>    <section>
+    <title>getDefaultVideoMappingIdx()</title>
+<indexterm><primary>getDefaultVideoMappingIdx</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getDefaultVideoMappingIdx</secondary></indexterm>
+<para><computeroutput>size_t jevois::Engine::getDefaultVideoMappingIdx ( ) const</computeroutput></para><para>
+
+<para>Allow access to the default video mapping index. </para>
+</para>
+<para>
+Definition at line 1563 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a01c815c22362c6508c0bc89ded17eb87"/>    <section>
+    <title>getPythonComponent()</title>
+<indexterm><primary>getPythonComponent</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getPythonComponent</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1Component">jevois::Component</link> * jevois::Engine::getPythonComponent (void * pyinst) const</computeroutput></para><para>
+
+<para>获取使用给定 python 实例注册的组件 </para>
+</para>
+<para>
+Definition at line 2998 of file Engine.C.</para>
+<para>
+References LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a0f7d778d163ee0c52d21843e4f69a7c3"/>    <section>
+    <title>getVideoMapping()</title>
+<indexterm><primary>getVideoMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getVideoMapping</secondary></indexterm>
+<para><computeroutput>const <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> &amp; jevois::Engine::getVideoMapping (size_t idx) const</computeroutput></para><para>
+
+<para>允许访问我们在构建时从文件解析的视频映射 </para>
+</para>
+<para>
+Definition at line 1519 of file Engine.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ab359ccc8b2d022f120efcd59e708c373"/>    <section>
+    <title>getVideoMappingIdx()</title>
+<indexterm><primary>getVideoMappingIdx</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>getVideoMappingIdx</secondary></indexterm>
+<para><computeroutput>size_t jevois::Engine::getVideoMappingIdx (unsigned int iformat, unsigned int iframe, unsigned int interval) const</computeroutput></para><para>
+
+<para>获取给定 UVC iformat、iframe 和 interval 的视频映射索引 </para>
+</para>
+<para>
+Definition at line 1528 of file Engine.C.</para>
+<para>
+References LFATAL, jevois::VideoMapping::ofps, jevois::VideoMapping::uvcformat, jevois::VideoMapping::uvcframe, and jevois::VideoMapping::uvcToFps().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ac5e8a0996af9bf5048e2d9b5e6f9d69f"/>    <section>
+    <title>loadCameraCalibration()</title>
+<indexterm><primary>loadCameraCalibration</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>loadCameraCalibration</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1CameraCalibration">jevois::CameraCalibration</link> jevois::Engine::loadCameraCalibration (std::string const &amp; stem = <computeroutput>&quot;calibration&quot;</computeroutput>
+, bool do_throw = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>为当前正在运行的模块加载 OpenCV 相机矩阵和失真系数的辅助函数 </para>
+</para>
+<para>
+Definition at line 1459 of file Engine.C.</para>
+<para>
+References jevois::CameraCalibration::h, h, JEVOIS_SHARE_PATH, jevois::CameraCalibration::lens, LFATAL, LINFO, jevois::CameraCalibration::load(), jevois::CameraCalibration::sensor, jevois::to_string(), and jevois::CameraCalibration::w.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aaba81580ca2c4361b2c7a83b54e86a59"/>    <section>
+    <title>mainLoop()</title>
+<indexterm><primary>mainLoop</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>mainLoop</secondary></indexterm>
+<para><computeroutput>int jevois::Engine::mainLoop ( )</computeroutput></para><para>
+
+<para>主循环：抓取、处理、通过 USB 发送。应由主应用程序线程调用 </para>
+</para>
+<para>
+Definition at line 1087 of file Engine.C.</para>
+<para>
+References jevois::UserInterface::Hard, JEVOIS_TIMED_LOCK, JEVOIS_TRACE, JEVOIS_VERSION_STRING, JEVOISPRO_FMT_GUI, jevois::StdModule::sendSerialMarkStart(), jevois::StdModule::sendSerialMarkStop(), jevois::UserInterface::type(), jevois::warnAndIgnoreException(), and jevois::UserInterface::writeString().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4"/>    <section>
+    <title>module()</title>
+<indexterm><primary>module</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>module</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt; <link linkend="_classjevois_1_1Module">jevois::Module</link> &gt; jevois::Engine::module ( ) const</computeroutput></para><para>
+
+<para>获取指向当前模块的指针（可能为空） </para>
+</para>
+<para>
+Definition at line 1447 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a138505c0a3d95d3ecbd88b07185deb67"/>    <section>
+    <title>nextDemo()</title>
+<indexterm><primary>nextDemo</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>nextDemo</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::nextDemo ( )</computeroutput></para><para>
+
+<para>处于演示模式时，切换到下一个演示 </para>
+</para>
+<para>
+Definition at line 600 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a524bc32f57970770d32eec857afc4d07"/>    <section>
+    <title>numVideoMappings()</title>
+<indexterm><primary>numVideoMappings</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>numVideoMappings</secondary></indexterm>
+<para><computeroutput>size_t jevois::Engine::numVideoMappings ( ) const</computeroutput></para><para>
+
+<para>返回视频映射的数量 </para>
+</para>
+<para>
+Definition at line 1515 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a614985d2cba07942c3a72377dbab8cdd"/>    <section>
+    <title>onParamChange()<computeroutput>[1/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::cpumax const &amp; param, unsigned int const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a1aeebcbbf9406126a6b2d6859fa10061"/>    <section>
+    <title>onParamChange()<computeroutput>[2/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::cpumaxl const &amp; param, unsigned int const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1acc8a76230d7ff91d026744b0dd228776"/>    <section>
+    <title>onParamChange()<computeroutput>[3/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::cpumode const &amp; param, engine::CPUmode const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a76a60ae563e667b09fa1af9a43d8ae2b"/>    <section>
+    <title>onParamChange()<computeroutput>[4/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::cpumodel const &amp; param, engine::CPUmode const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a5b65d2eb3778204e46d474832e875861"/>    <section>
+    <title>onParamChange()<computeroutput>[5/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::demomode const &amp; param, float const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a74a52ed177033ad9aae2ac6b32b8e1ef"/>    <section>
+    <title>onParamChange()<computeroutput>[6/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::gui const &amp; param, bool const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a3e245d10dfd6e0d88cdade6b0527195c"/>    <section>
+    <title>onParamChange()<computeroutput>[7/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::serialdev const &amp; param, std::string const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a7141bcc6d655bc8c75fcd47e1d31129a"/>    <section>
+    <title>onParamChange()<computeroutput>[8/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::usbserialdev const &amp; param, std::string const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aaaf9c5d6921fad67474668ac612ee074"/>    <section>
+    <title>onParamChange()<computeroutput>[9/9]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::onParamChange (engine::videoerrors const &amp; param, bool const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aa88378edfca8eb7d16107f212aa3ca54"/>    <section>
+    <title>parseCommand()</title>
+<indexterm><primary>parseCommand</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>parseCommand</secondary></indexterm>
+<para><computeroutput>bool jevois::Engine::parseCommand (std::string const &amp; str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s, std::string const &amp; pfx = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>解析通过串行端口接收到的用户命令 </para>
+</para>
+
+<para>收到不正确的命令（例如，错误的参数值）时抛出，如果成功则返回 true，如果命令未被识别并且应由 <link linkend="_classjevois_1_1Module">Module</link> 尝试，则返回 false。 pfx 是一个可选前缀，将添加到所有生成的消息或错误中。 </para>
+<para>
+Definition at line 1957 of file Engine.C.</para>
+<para>
+References jevois::Serial::fileGet(), jevois::Serial::filePut(), jevois::getSysInfoCPU(), jevois::getSysInfoMem(), jevois::getSysInfoVersion(), JEVOIS_CUSTOM_DNN_PATH, JEVOIS_CUSTOM_DNN_URL, JEVOIS_USBSD_SYS, JEVOIS_VERSION_STRING, JEVOISPRO_FMT_GUI, LDEBUG, jevois::split(), jevois::system(), jevois::to_string(), and jevois::UserInterface::writeString().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ad7b8927d246b350cf0be396291f79f3c"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Override of <link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">Manager::postInit()</link> </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">jevois::Manager</link>.</para>
+<para>
+Definition at line 641 of file Engine.C.</para>
+<para>
+References jevois::Component::freezeAllParams(), jevois::getFileString(), JEVOIS_ENGINE_INIT_SCRIPT, JEVOIS_TIMED_LOCK, LERROR, LINFO, jevois::logSetEngine(), jevois::Manager::postInit(), jevois::sensorHasIMU(), jevois::python::setEngine(), jevois::stringStartsWith(), and jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a25d2fd8ab270cbdf4a26cc4bf9d5bac7"/>    <section>
+    <title>preInit()</title>
+<indexterm><primary>preInit</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>preInit</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::preInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Override of <link linkend="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be">Manager::preInit()</link> </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be">jevois::Manager</link>.</para>
+<para>
+Definition at line 617 of file Engine.C.</para>
+<para>
+References JEVOIS_CONFIG_PATH, JEVOIS_MODULE_PARAMS_FILENAME, and jevois::Manager::preInit().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aa7df0e7a58a02ec29d9a911d3ea03d12"/>    <section>
+    <title>quit()</title>
+<indexterm><primary>quit</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>quit</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::quit ( )</computeroutput></para><para>
+
+<para>Terminate the program. </para>
+</para>
+<para>
+Definition at line 1855 of file Engine.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a140e7a43c307f306c0c7089f5fa1b7ab"/>    <section>
+    <title>reboot()</title>
+<indexterm><primary>reboot</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>reboot</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::reboot ( )</computeroutput></para><para>
+
+<para>请求重启 </para>
+</para>
+
+<para>在 JeVois-A33 平台上，触发硬重置。在 JeVois-Pro 平台或 JeVois-Host 上，只需终止程序即可。 </para>
+<para>
+Definition at line 1834 of file Engine.C.</para>
+<para>
+References LERROR, and jevois::system().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ac09b49c72d9fa8b79cee485de91cbc67"/>    <section>
+    <title>registerPythonComponent()</title>
+<indexterm><primary>registerPythonComponent</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>registerPythonComponent</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::registerPythonComponent (<link linkend="_classjevois_1_1Component">jevois::Component</link> * comp, void * pyinst)</computeroutput></para><para>
+
+<para>将组件注册为链接到某些 python 代码，由在 python 中创建的动态参数使用 </para>
+</para>
+<para>
+Definition at line 2979 of file Engine.C.</para>
+<para>
+References jevois::Component::instanceName(), LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ad283adff625848b7ec29968fc7c61d58"/>    <section>
+    <title>reloadVideoMappings()</title>
+<indexterm><primary>reloadVideoMappings</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>reloadVideoMappings</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::reloadVideoMappings ( )</computeroutput></para><para>
+
+<para>从 videomappings.cfg 重新加载视频映射。 </para>
+</para>
+
+<para>Mappings 会在启动时自动加载，因此仅当文件发生修改并且需要刷新映射时才应使用此方法。请注意，这不会刷新 USB 输出的可用分辨率， 这需要完全重启才能重新初始化内核 <link linkend="_classjevois_1_1Gadget">Gadget</link> 模块。还要注意可能的状态不一致（例如，如果外部代码持有先前由 <link linkend="_classjevois_1_1Engine_1a4deaa34441d8554c19a196c997649b0a">findVideoMapping()</link> 返回的引用。因此，请谨慎使用。基本上，应该只有 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 使用它。 </para>
+<para>
+Definition at line 628 of file Engine.C.</para>
+<para>
+References LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1afa87ec4e88e9009fe7ef2886931b6cd1"/>    <section>
+    <title>reportError()</title>
+<indexterm><primary>reportError</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>reportError</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::reportError (std::string const &amp; err)</computeroutput></para><para>
+Definition at line 1381 of file Engine.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a09ae0f9771b693693a92207c01218c19"/>    <section>
+    <title>requestSetFormat()</title>
+<indexterm><primary>requestSetFormat</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>requestSetFormat</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::requestSetFormat (int idx)</computeroutput></para><para>
+
+<para>使用它从 process() 中请求格式更改 </para>
+</para>
+<para>
+Definition at line 927 of file Engine.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a85e6d2c45d49f628f47c74b8c1bd4285"/>    <section>
+    <title>runScriptFromFile()</title>
+<indexterm><primary>runScriptFromFile</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>runScriptFromFile</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::runScriptFromFile (std::string const &amp; filename, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; ser, bool throw_no_file)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>从文件运行脚本 </para>
+</para>
+
+<para>文件名应该是绝对的。文件应该包含 <link linkend="_classjevois_1_1Engine">Engine</link> 支持的任何命令，每行一个。文件名应该相对于当前模块的路径。 </para>
+<para>
+Definition at line 2764 of file Engine.C.</para>
+<para>
+References jevois::UserInterface::GUI, jevois::UserInterface::Hard, LFATAL, jevois::strip(), jevois::to_string(), jevois::UserInterface::type(), jevois::UserInterface::USB, jevois::warnAndIgnoreException(), and jevois::UserInterface::writeString().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a4a45bbb8080c1efba3aef4212e7697da"/>    <section>
+    <title>saveCameraCalibration()</title>
+<indexterm><primary>saveCameraCalibration</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>saveCameraCalibration</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::saveCameraCalibration (<link linkend="_classjevois_1_1CameraCalibration">jevois::CameraCalibration</link> const &amp; calib, std::string const &amp; stem = <computeroutput>&quot;calibration&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>保存当前正在运行的模块的 OpenCV 相机矩阵和失真系数的辅助函数 </para>
+</para>
+
+<para>注意：为了线程安全，应锁定引擎；在 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">Module::process()</link> 内部调用它是安全的。 </para>
+<para>
+Definition at line 1497 of file Engine.C.</para>
+<para>
+References jevois::CameraCalibration::h, JEVOIS_SHARE_PATH, jevois::CameraCalibration::lens, LINFO, jevois::CameraCalibration::save(), jevois::CameraCalibration::sensor, jevois::to_string(), and jevois::CameraCalibration::w.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a7fbaa165dff9628cffa14d8ae307eb64"/>    <section>
+    <title>sendSerial()</title>
+<indexterm><primary>sendSerial</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>sendSerial</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::sendSerial (std::string const &amp; str, bool islog = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>向所有串行端口发送一个字符串 </para>
+</para>
+
+<para><note><title>Note</title>
+
+<para>当 islog 为真时，这被认为是一条日志消息，它将被发送到参数 serlog 指定的端口。否则，该消息将被发送到参数 serout 指 定的端口。请注意，每个视频帧可以发送的消息数量可能受参数 <computeroutput>serlimit</computeroutput> 的限制；对于给定的视频帧，最多只能发送 <computeroutput>serlimit</computeroutput> 条消息。这对于避免串行链路过载很有用，例如在运行 ArUco 检测器并且 JeVois 的视野中存在大量 ArUco 标签的情况下。 </para>
+</note>
+</para>
+<para>
+Definition at line 1336 of file Engine.C.</para>
+<para>
+References jevois::UserInterface::GUI, jevois::UserInterface::Hard, jevois::UserInterface::type(), jevois::UserInterface::USB, jevois::warnAndIgnoreException(), and jevois::UserInterface::writeString().</para>
+<para>
+Referenced by jevois::Module::sendSerial().</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a6b15249fc704fa95cc579c12ae012811"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::setFormat (size_t idx)</computeroutput></para><para>
+
+<para>当用户选择新的输出视频格式时的回调 </para>
+</para>
+
+<para>在这里，我们停止流式传输，删除任何当前处理模块，设置相机格式，设置小工具输出格式，加载新的处理模块，然后再次开始流式传 输。通常使用 <link linkend="_classjevois_1_1Engine_1a4deaa34441d8554c19a196c997649b0a">findVideoMapping()</link> 从通过 USB 链接接收的输出规范中获取给定的 VideoMapping。 </para>
+<para>
+Definition at line 934 of file Engine.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a7fe0923fef589e45ec1d74c229ad6a5a"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::streamOff ( )</computeroutput></para><para>
+
+<para>停止从相机、处理和 USB 流式传输视频 </para>
+</para>
+<para>
+Definition at line 906 of file Engine.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, and LDEBUG.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a0cb844ce7bf0b3ae9111b1d0d264bd54"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::streamOn ( )</computeroutput></para><para>
+
+<para>开始从相机、处理和 USB 流式传输视频 </para>
+</para>
+<para>
+Definition at line 895 of file Engine.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, and JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a74cc0839e6b8add6bbe85eeedee101c0"/>    <section>
+    <title>unRegisterPythonComponent()</title>
+<indexterm><primary>unRegisterPythonComponent</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>unRegisterPythonComponent</secondary></indexterm>
+<para><computeroutput>void jevois::Engine::unRegisterPythonComponent (<link linkend="_classjevois_1_1Component">Component</link> * comp)</computeroutput></para><para>
+
+<para>取消注册与某些 Python 代码链接的组件，由 Python 中创建的动态参数使用 </para>
+</para>
+
+<para>请谨慎使用，以保证线程安全和对象生命周期，因为我们在这里只使用原始指针 </para>
+<para>
+Definition at line 2989 of file Engine.C.</para>
+<para>
+References jevois::Component::instanceName(), and LDEBUG.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Engine_1a34175bdc63bd923183dabb20f3b17374"/>    <section>
+    <title>frameNum()</title>
+<indexterm><primary>frameNum</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>frameNum</secondary></indexterm>
+<para><computeroutput>size_t frameNum ( )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>获取当前视频处理帧号 </para>
+</para>
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 维护一个主帧计数器，该计数器在每次调用模块的 process() 时都会递增，无论调用是否成功。当模块尚未加载（例如加载失 败）时，计数器不会递增。每次加载新模块时，计数器都会重置为零。</para>
+
+<para>这是作为一项自由函数实现的，以便任何人都可以访问它：</para>
+
+<para><literallayout><computeroutput>size_t&#32;current_frame_number&#32;=&#32;jevois::frameNum();
+</computeroutput></literallayout></para>
+
+<para>它是线程安全的。程序员注意：实现在 <link linkend="_Engine_8C">Engine.C</link> 中，因为 <link linkend="_classjevois_1_1Engine">Engine</link> 是管理计数器的那个。它在这里声明，以便用户不必包含 Engine.H </para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ae044303718c53706eed448d57b574fcf"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (cameradev , std::string , &quot;Camera device name  if starting with /dev/v..., or movie &quot; &quot;file name(e.g., movie.mpg) or image sequence(e.g., im%02d.jpg, to read frames &quot; &quot;im00.jpg, im01.jpg, etc).&quot; , <link linkend="_Engine_8H_1a2946b1e1627169e3e971ea8187f766f8">JEVOIS_CAMERA_DEFAULT</link> , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a056082d644f352bf6088e9cea7783d7a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (cameralens , CameraLens , &quot;Camera lens. Users should usually not set this parameter &quot; &quot;using the global JeVois params.cfg config file.&quot; , CameraLens::standard , CameraLens_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a8e47f3c52346435f8c5cd65b42340dba"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (cameranbuf , unsigned int , &quot;Number of video input (<link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link>) buffers, or 0 for automatic.&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1acd1d0521371a59e80c6a3ea0dc167b06"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (camerasens , CameraSensor , &quot;Camera sensor. Users would usually not set this parameter &quot; &quot; manually, it is set through boot-time configuration.&quot; , <link linkend="_Engine_8H_1a2408641d6661198d265548aea4c76765">JEVOIS_CAMERASENS_DEFAULT</link> , CameraSensor_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ac261845994ca62311ed460817ed636cb"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (camreg , bool , &quot;Enable raw access to <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link> registers through setcamreg and getcamreg&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a475a32ed0999c157ce5c1328e7d4776c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[6/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (camturbo , bool , &quot;Enable <link linkend="_classjevois_1_1Engine_1ad9282f927dc77a2cf501007e0d0547c7">camera</link> turbo mode by relaxing the need for DMA-coherent video &quot; &quot;buffer memory. This can accelerate severalfolds access to the captured image data, but &quot; &quot;it may also yield stripe artifacts with some modules, such as PassThrough. The stripes &quot; &quot;are pieces of incorrect data in the cache. You should experiment with each particular &quot; &quot;module. Turbo mode is not recommended for any production-grade application.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a6180309657ecd1b83f52386f157c59ca"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[7/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (conslock , bool , &quot;Lock the console and capture the keyboard and mouse to avoid &quot; &quot; interference, only effective on JeVois-Pro Platform, otherwise ignored. Set conslock &quot; &quot;to false if you are experiencing hard crashes and want to run jevoispro-daemon in gdb.&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aaf04586ff5734953637f805819009fe3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[8/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (gadgetdev , std::string , &quot;Gadget device name. This is used on platform hardware only. &quot; &quot;On host hardware, a display window will be used unless gadgetdev is None(useful &quot; &quot;for benchmarking) or is a file stem for a movie file that does not start with/dev/&quot; &quot;(and which should contain a printf-style directive for a single int argument, &quot; &quot;the movie number).&quot; , <link linkend="_Engine_8H_1a63fb01c4b3d97d9f02ed5e283a924dd6">JEVOIS_GADGET_DEFAULT</link> , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ab3b346f1b9700536a53a231e8ae1c709"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[9/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (gadgetnbuf , unsigned int , &quot;Number of video output (USB video) buffers, or 0 for auto&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a42ee006f3a41dbf0d13720b615ea1acb"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[10/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (imureg , bool , &quot;Enable raw access to <link linkend="_classjevois_1_1IMU">IMU</link> registers through setimureg and getimureg&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a67fb641e544ccddb9d803601997bb1b9"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[11/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (multicam , bool , &quot;Allow up to 3 JeVois cameras on one USB bus. Enabling this &quot; &quot;reduces the amount of USB bandwidth used by each JeVois camera, from 3kb &quot; &quot;per USB isochronous microframe to 1kb. All 3 JeVois cameras must have this &quot; &quot;option enabled, and the JeVois linux kernel <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> should also have &quot; &quot;been loaded with multicam on.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a353a2aeece49bc90c0e714ca8fc9b851"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[12/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (python , bool , &quot;When true, enable support for modules written in Python. Otherwise, &quot; &quot;attempting to load a python <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> will throw an exception. Disabling python saves &quot; &quot;a lot of memory and may be useful when using C++modules that run large deep neural &quot; &quot;networks.&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a20b2d402cddc35a9a186ad83a41c3bff"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[13/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (quietcmd , bool , &quot;When true, do not issue a message &apos;OK&apos; after every correct command &quot; &quot;received at the command-line interface. Recommended for advanced users only.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ab5c6d63fe4817863fd5dbaedfd5f79d1"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[14/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (serialmonitors , bool , &quot;If true, serial port monitors will be enabled &quot; &quot;in the GUI, which can be used to peek at serial communications not &quot; &quot;directed to the console. Can be turned off at start time(e.g., in the &quot; &quot;global JeVois params.cfg) as there is some small CPU cost to it.&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a716e2a0c595ba0bb3754195573070f5a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[15/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (serlimit , size_t , &quot;Maximum number of serial messages that can be sent by a <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> &quot; &quot;using  sendSerial(), for each video frame, or 0 for no limit. Any message sent by &quot; &quot;the <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> beyond the first serlimit ones will be dropped. This is useful to avoid &quot; &quot;overloading the serial link, for example in case one is running a ArUco detector and &quot; &quot;a large number of ArUco tags are present in the field of view of JeVois.&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a67d265efdc6a96e963fd3ef5c95163e4"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[16/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (serlog , SerPort , &quot;Show log and debug messages on selected serial port(s)&quot; , SerPort::None , SerPort_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a44e5aba3a35e1da591f08c425ea62a4f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[17/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (serout , SerPort , &quot;Send <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> serial messages to selected serial port(s)&quot; , SerPort::None , SerPort_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a67d03e897d919877164a970988be372b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[18/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (videomapping , int , &quot;Index of Video Mapping to use, or -1 to use the default mapping. &quot; &quot;Note that this parameter is only available when parsing command-line arguments. &quot; &quot;At runtime, the setmapping command should be used instead.&quot; , - 1, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a362ca7396b84a4b44678b346b832607b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[19/19]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (watchdog , double , &quot;Timeout in seconds after which we kill this process if the <link linkend="_jevois-restore-console_8C_1a2b760810e5bb0cfb55f0c7d6d74d4438">main</link> loop &quot; &quot;is stuck somehow, or 0.0 for no watchdog&quot; , 10. 0, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a95e2b7506013dbb02d94726b94e41d2e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (cpumax , unsigned int , &quot;CPU maximum frequency in MHz&quot; &quot;. To enable overclock frequencies above 2208 MHz, you need to first edit &quot; &quot;/boot/env.txt and change max_freq_a73, then reboot. Use with caution!&quot; , 2208 , { 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208, 2304, 2400 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a6927a5d45cefa82a3a4aec902dec5e7e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (cpumaxl , unsigned int , &quot;CPU maximum frequency in MHz, for A53 little cores. &quot; &quot;To enable overclock frequencies above 1800 MHz, you need to first edit &quot; &quot;/boot/env.txt and change max_freq_a53, then reboot. Use with caution!&quot; , 1800 , { 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1add8a900ec59b723642992e0609268947"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[3/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (cpumode , CPUmode , &quot;CPU frequency modulation mode&quot; &quot; for A73 big cores&quot; , CPUmode::Performance , CPUmode_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ae23f3e3aff4e92cd83d8a98fed6fd4eb"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[4/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (cpumodel , CPUmode , &quot;CPU frequency modulation mode for A53 little cores&quot; , CPUmode::Performance , CPUmode_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a6edade9cd42e6e2502bd93286cebb0ae"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[5/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (demomode , float , &quot;Show a demonstration of some available JeVois-Pro &quot; &quot;machine vision modules, cycling to the next modules after a number &quot; &quot;of seconds specified by this parameter(or 0.0 for no demo mode).&quot; , 0. 0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aff13f0ebdfab11c9e69703d33aeb5d7c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[6/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (gui , bool , &quot;Use a graphical user interface instead of plain display &quot; &quot;when true&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1af7433d5e286087bc827fce698722f607"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[7/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (serialdev , std::string , &quot;Hardware (4-pin connector) serial device name, &quot; &quot;or &apos;stdio&apos; to use the console, or empty for no hardware serial port&quot; , <link linkend="_Engine_8H_1a68d7a82071d6b6e2005c52f38f9d204c">JEVOIS_SERIAL_DEFAULT</link> , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a147035aa3972856977943e9a6e653cbe"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[8/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (usbserialdev , std::string , &quot;Over-the-USB serial device name, or empty&quot; , <link linkend="_Engine_8H_1a6ae242fd651e29cc5662523966ee7654">JEVOIS_USBSERIAL_DEFAULT</link> , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a23cbb6bd0d3d0ff3490db5cacc31582c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[9/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (videoerrors , bool , &quot;Show any machine vision <link linkend="_classjevois_1_1Engine_1a588038306520a695d620a75f72eaf1e4">module</link> errors (exceptions) &quot; &quot;in the video stream. Only takes effect if streaming video to USB.&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a9eeda56315b1a8b2a0ae8f72c9deac95"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (CPUmode , (PowerSave)(Conservative)(OnDemand)(Interactive)(Performance) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a69011978ae0535e442fb913c0cc69427"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (SerPort , (None)(All)(Hard)(USB) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1Engine_1ade317fc8331474405a551a44ad8eeb12"/>    <section>
+    <title>itsCamera</title>
+<indexterm><primary>itsCamera</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsCamera</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoInput">VideoInput</link>&gt; jevois::Engine::itsCamera<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our camera. </para>
+</para>
+<para>
+Definition at line 560 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1afcd8e073c7874fd7fda097d7d3971067"/>    <section>
+    <title>itsCurrentMapping</title>
+<indexterm><primary>itsCurrentMapping</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsCurrentMapping</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> jevois::Engine::itsCurrentMapping<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>当前映射，如果使用 setmapping2，则可能与 itsMappings 中的任何映射都不匹配 </para>
+</para>
+<para>
+Definition at line 558 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a9cf49224e3c9b0b53b446d550d2181fd"/>    <section>
+    <title>itsDefaultMappingIdx</title>
+<indexterm><primary>itsDefaultMappingIdx</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsDefaultMappingIdx</secondary></indexterm>
+<para><computeroutput>size_t jevois::Engine::itsDefaultMappingIdx<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Index of default mapping. </para>
+</para>
+<para>
+Definition at line 556 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1ae0918e608af6f639810e33026ae344fb"/>    <section>
+    <title>itsGadget</title>
+<indexterm><primary>itsGadget</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsGadget</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoOutput">VideoOutput</link>&gt; jevois::Engine::itsGadget<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our <link linkend="_classjevois_1_1IMU">IMU</link>. </para>
+</para>
+
+<para>Our gadget </para>
+<para>
+Definition at line 562 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a5dcab54a33a3501f0ef3ab21db0c0c05"/>    <section>
+    <title>itsIMU</title>
+<indexterm><primary>itsIMU</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsIMU</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1IMU">IMU</link>&gt; jevois::Engine::itsIMU<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 561 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1afb9bf8f5074f94a924d32044c8675224"/>    <section>
+    <title>itsLoader</title>
+<indexterm><primary>itsLoader</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsLoader</secondary></indexterm>
+<para><computeroutput>std::unique_ptr&lt;<link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link>&gt; jevois::Engine::itsLoader<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our module loader. </para>
+</para>
+<para>
+Definition at line 564 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1af2c887a173ea62307c85fe4e606fc1be"/>    <section>
+    <title>itsMappings</title>
+<indexterm><primary>itsMappings</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsMappings</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link>&gt; jevois::Engine::itsMappings<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>来自 videomappings.cfg 的所有映射 </para>
+</para>
+<para>
+Definition at line 557 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a2775861063bb4eed282a519d67a2f0ad"/>    <section>
+    <title>itsModule</title>
+<indexterm><primary>itsModule</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsModule</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1Module">Module</link>&gt; jevois::Engine::itsModule<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our current module. </para>
+</para>
+<para>
+Definition at line 565 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1aefdb8ae7d6d2c7644bad2a7f42cd0f2d"/>    <section>
+    <title>itsMtx</title>
+<indexterm><primary>itsMtx</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsMtx</secondary></indexterm>
+<para><computeroutput>std::timed_mutex jevois::Engine::itsMtx<computeroutput>[mutable]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Mutex to protect our internals. </para>
+</para>
+<para>
+Definition at line 571 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a4fa3bc6f8158671527e5aa172b06b999"/>    <section>
+    <title>itsRunning</title>
+<indexterm><primary>itsRunning</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsRunning</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::Engine::itsRunning<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>True when we are running. </para>
+</para>
+<para>
+Definition at line 567 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a1f2d50734e8faaa2d8cc368064878140"/>    <section>
+    <title>itsStopMainLoop</title>
+<indexterm><primary>itsStopMainLoop</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsStopMainLoop</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::Engine::itsStopMainLoop<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Flag used to stop the main loop. </para>
+</para>
+<para>
+Definition at line 569 of file Engine.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Engine_1a38278831a46971aecd841cd954a0614c"/>    <section>
+    <title>itsStreaming</title>
+<indexterm><primary>itsStreaming</primary><secondary>jevois::Engine</secondary></indexterm>
+<indexterm><primary>jevois::Engine</primary><secondary>itsStreaming</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::Engine::itsStreaming<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>True when we are streaming video. </para>
+</para>
+<para>
+Definition at line 568 of file Engine.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_Engine_8H">Engine.H</link>include/jevois/Component/<link linkend="_Component_8H">Component.H</link>src/jevois/Core/<link linkend="_Engine_8C">Engine.C</link></section>
+</section>

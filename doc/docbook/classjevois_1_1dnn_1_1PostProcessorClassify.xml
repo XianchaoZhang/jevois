@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify">
+<title>jevois::dnn::PostProcessorClassify Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorClassify.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的后处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道的最后一步。 </para>
+<para>
+Definition at line 29 of file PostProcessorClassify.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorClassify:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorClassify__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorClassify:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorClassify__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a929061523f6ef0899a10c7599f10b6c9">~PostProcessorClassify</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a4ba86dcba285a8d0608953100c9a98ed">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a5b590228d3ed7317b5f0d72b75e49bef">process</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *preproc) override</para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1aeb2e26491fc97ecacdb29df3bc8edb7c">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a5b590228d3ed7317b5f0d72b75e49bef">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a39ab47d8e45ebf1e7731e27f782fdd77">onParamChange</link> (postprocessor::classes const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; int, std::string &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1afd02e1ab5e6db8230ad1522234333e35">itsLabels</link></para>
+
+<para>从对象 ID 映射到类名 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a04bdef96bc40712c4030558981e6ff71">JEVOIS_DECLARE_PARAMETER</link> (classoffset, int, &quot;Offset added to model output when looking up class name. Useful if &quot; &quot;your model uses a background class but your class file does not (use -1), or if your &quot; &quot;model does not use a background class but your class file has one (use 1). If unsure, &quot; &quot;use 0 and check whether reported class names are off.&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a4845e80e5177a8a4ce6817d25c69abee">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (classes, std::string, &quot;Path to text file with names of object classes&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1ac4898c96ba31e29056b3aa467c097952">JEVOIS_DECLARE_PARAMETER</link> (top, unsigned int, &quot;Max number of top-scoring predictions that score above &quot; &quot;threshold to <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1aeb2e26491fc97ecacdb29df3bc8edb7c">report</link>&quot;, 5, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a95f09ad7335b12fb3bac66c2732f4bea">JEVOIS_DECLARE_PARAMETER</link> (cthresh, float, &quot;Classification threshold (in percent confidence) above which &quot; &quot;predictions will be reported&quot;, 20.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 100.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a3f367c39faa8884704bb4232f6c30a31">JEVOIS_DECLARE_PARAMETER</link> (<link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link>, bool, &quot;Apply a <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link> to classification outputs&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a496354eb5c312ac967dd2eea6711b252">JEVOIS_DECLARE_PARAMETER</link> (scorescale, float, &quot;Scaling factors applied to recognition scores. Mainly &quot; &quot;for debugging if your scores seem too high or too low. If too high, usually &quot; &quot;that means that you should turn on parameter <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link> instead.&quot;, 1.0F, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a929061523f6ef0899a10c7599f10b6c9"/>    <section>
+    <title>~PostProcessorClassify()</title>
+<indexterm><primary>~PostProcessorClassify</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>~PostProcessorClassify</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorClassify::~PostProcessorClassify ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 27 of file PostProcessorClassify.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a4ba86dcba285a8d0608953100c9a98ed"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorClassify::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a6e87ca847dc8c16445168b01a2fdedb7">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 31 of file PostProcessorClassify.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a39ab47d8e45ebf1e7731e27f782fdd77"/>    <section>
+    <title>onParamChange()</title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorClassify::onParamChange (postprocessor::classes const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 37 of file PostProcessorClassify.C.</para>
+<para>
+References jevois::Component::descriptor(), and jevois::split().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a5b590228d3ed7317b5f0d72b75e49bef"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorClassify::process (std::vector&lt; cv::Mat &gt; const &amp; outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * preproc)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a26329a32271138357f7906c83e4856b1">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 50 of file PostProcessorClassify.C.</para>
+<para>
+References jevois::dnn::getLabel(), LERROR, LFATAL, o, jevois::dnn::softmax(), and jevois::dnn::topK().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1aeb2e26491fc97ecacdb29df3bc8edb7c"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorClassify::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1a5b590228d3ed7317b5f0d72b75e49bef">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1ac7c507221e2f1c52715b9185beaebc42">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 85 of file PostProcessorClassify.C.</para>
+<para>
+References jevois::GUIhelper::itext(), o, jevois::StdModule::sendSerialObjReco(), jevois::sformat(), jevois::yuyv::White, and jevois::rawimage::writeText().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a04bdef96bc40712c4030558981e6ff71"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (classoffset , int , &quot;Offset added to model output when looking up class name. Useful if &quot; &quot;your model uses a background class but your class file does not  use -1, or if your &quot; &quot;model does not use a background class but your class file has one(use 1). If unsure, &quot; &quot;use 0 and check whether reported class names are off.&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a95f09ad7335b12fb3bac66c2732f4bea"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (cthresh , float , &quot;Classification threshold (in percent confidence) above which &quot; &quot;predictions will be reported&quot; , 20. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 100.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a496354eb5c312ac967dd2eea6711b252"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (scorescale , float , &quot;Scaling factors applied to recognition scores. Mainly &quot; &quot;for debugging if your scores seem too high or too low. If too high, usually &quot; &quot;that means that you should turn on parameter <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link> instead.&quot; , 1. 0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a3f367c39faa8884704bb4232f6c30a31"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (<link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link> , bool , &quot;Apply a <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">softmax</link> to classification outputs&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1ac4898c96ba31e29056b3aa467c097952"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (top , unsigned int , &quot;Max number of top-scoring predictions that score above &quot; &quot;threshold to <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify_1aeb2e26491fc97ecacdb29df3bc8edb7c">report</link>&quot; , 5 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1a4845e80e5177a8a4ce6817d25c69abee"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()</title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (classes , std::string , &quot;Path to text file with names of object classes&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorClassify_1afd02e1ab5e6db8230ad1522234333e35"/>    <section>
+    <title>itsLabels</title>
+<indexterm><primary>itsLabels</primary><secondary>jevois::dnn::PostProcessorClassify</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorClassify</primary><secondary>itsLabels</secondary></indexterm>
+<para><computeroutput>std::map&lt;int, std::string&gt; jevois::dnn::PostProcessorClassify::itsLabels<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>从对象 ID 映射到类名 </para>
+</para>
+<para>
+Definition at line 54 of file PostProcessorClassify.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorClassify_8H">PostProcessorClassify.H</link>include/jevois/DNN/<link linkend="_PostProcessor_8H">PostProcessor.H</link>src/jevois/DNN/<link linkend="_PostProcessorClassify_8C">PostProcessorClassify.C</link></section>
+</section>

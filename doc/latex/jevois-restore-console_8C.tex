@@ -1,0 +1,45 @@
+\hypertarget{jevois-restore-console_8C}{}\doxysubsection{src/\+Apps/jevois-\/restore-\/console.C File Reference}
+\label{jevois-restore-console_8C}\index{src/Apps/jevois-\/restore-\/console.C@{src/Apps/jevois-\/restore-\/console.C}}
+{\ttfamily \#include $<$jevois/\+Util/\+Console.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$linux/input.\+h$>$}\newline
+{\ttfamily \#include $<$linux/kd.\+h$>$}\newline
+{\ttfamily \#include $<$linux/keyboard.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+Include dependency graph for jevois-\/restore-\/console.C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jevois-restore-console_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{jevois-restore-console_8C_a2b760810e5bb0cfb55f0c7d6d74d4438}{main}} (int, char const $\ast$$\ast$)
+\begin{DoxyCompactList}\small\item\em 在 jevoispro-\/daemon 剧烈崩溃后恢复控制台操作 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{jevois-restore-console_8C_a2b760810e5bb0cfb55f0c7d6d74d4438}\label{jevois-restore-console_8C_a2b760810e5bb0cfb55f0c7d6d74d4438}} 
+\index{jevois-\/restore-\/console.C@{jevois-\/restore-\/console.C}!main@{main}}
+\index{main@{main}!jevois-\/restore-\/console.C@{jevois-\/restore-\/console.C}}
+\doxyparagraph{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{char const $\ast$$\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+在 jevoispro-\/daemon 剧烈崩溃后恢复控制台操作 
+
+
+
+Definition at line 32 of file jevois-\/restore-\/console.\+C.
+
+
+
+References jevois\+::get\+Active\+T\+T\+Y(), jevois\+::get\+Console\+Fd(), jevois\+::log\+End(), jevois\+::log\+Level, and jevois\+::un\+Mute\+Keyboard().
+

@@ -33,7 +33,7 @@ jevois::StdioInterface::StdioInterface(std::string const & instance) :
         FD_SET(STDIN_FILENO, &fds);
         int ret = select(STDIN_FILENO+1, &fds, nullptr, nullptr, &tv);
         if (ret == -1) LERROR("Ignoring error on stdin: " << strerror(errno));
-        else if (ret > 0) // some input is available, read an entire line
+        else if (ret > 0) // 有一些输入可用，读取整行
         {
           std::string str; std::getline(std::cin, str);
           std::lock_guard<std::mutex> _(itsMtx);

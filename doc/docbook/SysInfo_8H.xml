@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_SysInfo_8H">
+<title>include/jevois/Debug/SysInfo.H File Reference</title>
+<indexterm><primary>include/jevois/Debug/SysInfo.H</primary></indexterm>
+<programlisting>#include &lt;string&gt;
+</programlisting>Include dependency graph for SysInfo.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="SysInfo_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="SysInfo_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga5cd0b0b867a9f033762819e8af37ca35">jevois::getSysInfoCPU</link> ()</para>
+
+<para>获取 CPU 信息： frequency, thermal, load </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga98e313acb940dfe5cb5168e8b0876ba8">jevois::getSysInfoMem</link> ()</para>
+
+<para>Get memory info. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1gacab36569297392a9a62000609f3d2193">jevois::getSysInfoVersion</link> ()</para>
+
+<para>Get O.S. version info. </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a6ab540ea34f56b48165b563719c5cad5">jevois::getNumInstalledTPUs</link> ()</para>
+
+<para>获取此系统上存在的 Coral TPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a26961977d36a68b1cc6fb0f67298aa12">jevois::getNumInstalledVPUs</link> ()</para>
+
+<para>获取此系统上存在的 Myriad-X VPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a4bc07166fd9b5ae7a021fcb04a170746">jevois::getNumInstalledNPUs</link> ()</para>
+
+<para>获取此系统上存在的 JeVois-Pro NPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1aae7970fe8c32c8285c24c352ab960163">jevois::getNumInstalledSPUs</link> ()</para>
+
+<para>获取此系统上存在的 Hailo8 SPU 数量 </para>
+</listitem>
+            <listitem><para>int <link linkend="_namespacejevois_1a3c137ebcbbdda157639ae3e711568db2">jevois::getFanSpeed</link> ()</para>
+
+<para>获取风扇速度百分比，仅在 JeVois-Pro 平台上有意义，其他所有平台均返回 0 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

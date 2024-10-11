@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_jevois-add-videomapping_8C">
+<title>src/Apps/jevois-add-videomapping.C File Reference</title>
+<indexterm><primary>src/Apps/jevois-add-videomapping.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Core/VideoMapping.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+</programlisting>Include dependency graph for jevois-add-videomapping.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="jevois-add-videomapping_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_jevois-add-videomapping_8C_1abf9e6b7e6f15df4b525a2e7705ba3089">main</link> (int argc, char const *argv[])</para>
+
+<para>向 videomappings.cfg 添加新的映射并跳过重复项 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_jevois-add-videomapping_8C_1abf9e6b7e6f15df4b525a2e7705ba3089"/>    <section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>jevois-add-videomapping.C</secondary></indexterm>
+<indexterm><primary>jevois-add-videomapping.C</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char const * argv[])</computeroutput></para><para>
+
+<para>向 videomappings.cfg 添加新的映射并跳过重复项 </para>
+</para>
+<para>
+Definition at line 28 of file jevois-add-videomapping.C.</para>
+<para>
+References jevois::VideoMapping::hasSameSpecsAs(), JEVOIS_ENGINE_CONFIG_FILE, LFATAL, LINFO, jevois::logEnd(), jevois::logLevel, jevois::VideoMapping::modulename, jevois::VideoMapping::str(), jevois::VideoMapping::vendor, jevois::videoMappingsFromStream(), and jevois::VideoMapping::wdr.</para>
+</section>
+</section>
+</section>

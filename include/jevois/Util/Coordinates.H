@@ -19,49 +19,39 @@
 
 #include <jevois/Image/RawImage.H>
 
-//! Main namespace for all JeVois classes and functions
-/*! See [Topics](http://jevois.org/doc/html/topics.html) for more details. */
+//! 所有 JeVois 类和函数的主命名空间 
+/*! 有关更多详细信息，请参阅 [主题](http://jevois.org/doc/html/topics.html)。 */
 namespace jevois
 {
-  //! Namespace for helper functions to convert coordinates from camera resolution to standardized
-  /*! See \ref coordhelpers for more details. */
+  //! 用于将坐标从相机分辨率转换为标准坐标的辅助函数的命名空间 
+  /*! 有关更多详细信息，请参阅 \ref coordhelpers 。 */
   namespace coords
   {
-    /*! \defgroup coordhelpers Helper functions to convert coordinates from camera resolution to standardized
+    /*! \defgroup coordhelpers 用于将坐标从相机分辨率转换为标准坐标的辅助函数 
+    
+        JeVois 中的不同机器视觉算法可能以不同的相机分辨率运行，例如 1280x1024、320x240 或 176x144。当在相机帧中检测到某些感兴
+        趣的物品时，人们通常希望将该物品的坐标发送到串行端口。如果直接发送物品的图像坐标，就会出现问题，即现在接收器（例如 
+        Arduino）需要知道使用了哪种相机图像分辨率，以便能够正确解释这些坐标。例如，如果视觉注意（显著性）算法使用 640x480 相
+        机输入运行，则相机视野中心的显著物体的坐标为 320,240。但如果将相同的显著性算法配置为处理 320x240 输入视频（以便它可以
+        以更高的帧速率运行），现在视野中心的物体的坐标为 160,120。如果将控制例如云台的 Arduino 连接到 JeVois，我们需要一种方法
+        来独立于相机使用的视频分辨率传达世界上目标物体的坐标。
         
-        Different machine vision algorithms in JeVois may be able to operate with different camera resolutions, such as
-        1280x1024, 320x240, or 176x144. When some item of interest is detected in the camera frame, one may often want
-        to send the coordinates of that thing to the serial port. This poses a problem if one were to directly send the
-        image coordinates of the item out, which is that now the receiver (e.g., an Arduino) needs to know which camera
-        image resolution was used, so that it can properly interpret these coordinates. For example, if the visual
-        attention (saliency) algorithm is running with 640x480 camera input, then a salient object at the center of the
-        camera's field of view would have coordinates 320,240. But if the same saliency algorithm is configured to
-        process 320x240 input video (so that it can run at a higher framerate), now an object at the center of the field
-        of view would have coordinates 160,120. If one connects an Arduino that controls, for example, a pan/tilt head
-        to JeVois, we need a way to communicate coordinates of target objects in the world independently of the video
-        resolution used by the camera.
+        因此，JeVois 定义了一个标准化的坐标系，如下所示：
+
+        - 相机视野中心位于 x=0、y=0
+        - 相机图像的左边缘始终位于 x=-1000
+        - 相机图像的右边缘始终位于 x=1000
+        - 相机图像的上边缘通常位于 y=-750
+        - 相机图像的下边缘通常位于 y=750 
         
-        Thus, JeVois defines a standardized coordinate system, as follows:
-        
-        - center fo the camera's field of view is at x=0, y=0
-        - left edge of the camera image is always at x=-1000
-        - right edge of the camera image is always at x=1000
-        - top edge of the camera image is usually at y=-750
-        - bottom edge of the camera image is usually at y=750
-        
-        Note that the value of 750 here comes from the assumption of a 4:3 aspect ratio for the camera sensor, and is
-        actually defined in JEVOIS_CAMERA_ASPECT. All camera sensor resolutions use 4:3 aspect ratio and hence have y
-        values between -750 and 750, except for 1280x1024, which has y values between -800 and 800.
-        
-        When writing a machine vision algorithm that sends over serial the coordinates of things detected in the camera
-        frames, be sure to first transform those coordinates from image to standardized space.
-        
-        For more on how standardized coordinates are used to communicate with embedded controllers, and for 3D
-        coordinates, see \ref UserSerialStyle
+        请注意，这里的 750 值来自相机传感器 4:3 宽高比的假设，实际上是在 JEVOIS_CAMERA_ASPECT 中定义的。所有相机传感器分辨率都
+        使用 4:3 宽高比，因此 y 值介于 -750 和 750 之间，但 1280x1024 除外，其 y 值介于 -800 和 800 之间。在编写通过串行发送
+        相机帧中检测到的物体的坐标的机器视觉算法时，请务必先将这些坐标从图像转换为标准化空间。有关如何使用标准化坐标与嵌入式控制
+        器进行通信以及 3D 坐标的更多信息，请参阅 \ref UserSerialStyle
 
         \ingroup utils */
 
-    //! Aspect ratio of the JeVois camera
+    //! JeVois 相机的纵横比
     /*! \ingroup coordhelpers */
 #ifdef JEVOIS_PRO
 #define JEVOIS_CAMERA_ASPECT (16.0 / 9.0)
@@ -69,91 +59,71 @@ namespace jevois
 #define JEVOIS_CAMERA_ASPECT (4.0 / 3.0)
 #endif
     
-    //! Transform coordinates in-place from camera to standardized, using a RawImage to establish image size
-    /*! The RawImage from the camera is used to specify pixel width and height of the camera image, and this is the
-        source coordinate system. The destination coordinate system is the standardized one, with x in [-1000 ... 1000]
-        and y in [-750 ... 750].
+    //! 使用 RawImage 将相机坐标就地转换为标准化坐标，以确定图像大小 
+    /*! 来自相机的 RawImage 用于指定相机图像的像素宽度和高度，这是源坐标系。目标坐标系是标准化坐标系，x 在 [-1000 ... 1000] 
+        内，y 在 [-750 ... 750] 内。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void imgToStd(float & x, float & y, RawImage const & camimg, float const eps = 0.1F);
     
-    //! Transform coordinates in-place from camera to standardized, using given image width and height
-    /*! The width and height are used to specify pixel width and height of the camera image, and this is the source
-        coordinate system. The destination coordinate system is the standardized one, with x in [-1000 ... 1000] and y
-        in [-750 ... 750].
+    //! 使用给定的图像宽度和高度从相机现场转换为标准化坐标 
+    /*! width and height 用于指定相机图像的像素宽度和高度，这是源坐标系。目标坐标系是标准化坐标系，x 在 [-1000 ... 1000] 内
+        ，y 在 [-750 ... 750] 内。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
-
-        \ingroup coordhelpers */
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 */
     void imgToStd(float & x, float & y, unsigned int const width, unsigned int const height, float const eps = 0.1F);
 
-    //! Transform X coordinate in-place from camera to standardized, using given image width and height
-    /*! The width is used to specify pixel width of the camera image, and this is the source
-        coordinate system. The destination coordinate system is the standardized one, with x in [-1000 ... 1000].
+    //! 使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 
+    /*! width 用于指定相机图像的像素宽度，这是源坐标系。目标坐标系是标准化坐标系，x 介于 [-1000 ... 1000] 之间。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void imgToStdX(float & x, unsigned int const width, float const eps = 0.1F);
     
-    //! Transform Y coordinate in-place from camera to standardized, using given image width and height
-    /*! The height is used to specify pixel height of the camera image, and this is the source
-        coordinate system. The destination coordinate system is the standardized one, with y in [-750 ... 750].
+    //! 使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 
+    /*! height 用于指定相机图像的像素高度，这是源坐标系。目标坐标系是标准化坐标系，y 在 [-750 ... 750] 内。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void imgToStdY(float & y, unsigned int const height, float const eps = 0.1F);
 
-    //! Transform size in-place from camera to standardized, using given image width and height
-    /*! Arguments w and h define the size of an object in pixels, which will be converted to standardized units. The
-        width and height are used to specify pixel width and height of the camera image, and this is the source
-        coordinate system. The destination coordinate system is the standardized one, with x in [-1000 ... 1000] and y
-        in [-750 ... 750].
+    //! 使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 
+    /*! 参数 w 和 h 定义对象的大小（以像素为单位），将转换为标准化单位。宽度和高度用于指定相机图像的像素宽度和高度，这是源坐标
+        系。目标坐标系是标准化坐标系，x 为 [-1000 ... 1000]，y 为 [-750 ... 750]。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void imgToStdSize(float & w, float & h, unsigned int const width, unsigned int const height,
                       float const eps = 0.1F);
 
-    //! Transform coordinates in-place from standardized to image, using a RawImage to establish image size
-    /*! The RawImage would typically be from the camera is used to specify pixel width and height of the camera image,
-        and this is the destination coordinate system. The source coordinate system is the standardized one, with x in
-        [-1000 ... 1000] and y in [-750 ... 750].
+    //! 使用 RawImage 建立图像大小，将坐标从标准化坐标转换为图像 
+    /*! RawImage 通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 位于 
+        [-1000 ... 1000] 内，y 位于 [-750 ... 750] 内。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void stdToImg(float & x, float & y, RawImage const & camimg, float const eps = 0.1F);
 
-    //! Transform coordinates in-place from standardized to image, using a RawImage to establish image size
-    /*! The width and height would typically be from the camera and are used to specify pixel width and height of the
-        camera image, and this is the destination coordinate system. The source coordinate system is the standardized
-        one, with x in [-1000 ... 1000] and y in [-750 ... 750].
+    //! 使用 RawImage 建立图像大小，将坐标从标准化坐标转换为图像 
+    /*! 宽度和高度通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 为 
+        [-1000 ... 1000]，y 为 [-750 ... 750]。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void stdToImg(float & x, float & y, unsigned int const width, unsigned int const height, float const eps = 0.1F);
 
-    //! Transform size in-place from standardized to image, using a RawImage to establish image size
-    /*! Arguments w and h define the size of an object in standardized units, which will be converted to pixels. The
-        width and height would typically be from the camera and are used to specify pixel width and height of the
-        camera image, and this is the destination coordinate system. The source coordinate system is the standardized
-        one, with x in [-1000 ... 1000] and y in [-750 ... 750].
+    //! 使用 RawImage 建立图像大小，将尺寸从标准化转换为图像 
+    /*！参数 w 和 h 以标准化单位定义对象的大小，将转换为像素。宽度和高度通常来自相机，用于指定相机图像的像素宽度和高度，这是目标
+        坐标系。源坐标系是标准化的，x 在 [-1000 ... 1000] 中，y 在 [-750 ... 750] 中。
 
-        eps is used for rounding of returned coordinates, which is convenient to avoid sending very long floating point
-        values over serial port.
+        eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。
 
         \ingroup coordhelpers */
     void stdToImgSize(float & x, float & y, unsigned int const width, unsigned int const height,

@@ -1,0 +1,137 @@
+\hypertarget{classjevois_1_1GPUtextureDmaBuf}{}\doxysubsection{jevois\+::G\+P\+Utexture\+Dma\+Buf Class Reference}
+\label{classjevois_1_1GPUtextureDmaBuf}\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Utexture\+Dma\+Buf.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple class to hold an Open\+GL texture with in-\/\+G\+PU pixel format conversion and D\+M\+A\+B\+UF acceleration. 
+
+Open\+GL textures are used to transfer image data from C\+PU to G\+PU and then allow the G\+PU to perform some processing on the data. Processing is typically done by using \char`\"{}shader\char`\"{} G\+PU programs that transform the texture\textquotesingle{}s pixel data and render it, in some user-\/programmable way. 
+
+Definition at line 30 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_ab36d06687e877312e24c1fefcd37d842}{G\+P\+Utexture\+Dma\+Buf}} (E\+G\+L\+Display display, G\+Lsizei width, G\+Lsizei height, unsigned int fmt, int dmafd)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_ace1ead4f80cea14161e498b221916039}{$\sim$\+G\+P\+Utexture\+Dma\+Buf}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, frees the texture in Open\+GL. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const G\+Lsizei \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_a1a7cb84a8b40e91dab15449ce5d2c9d5}{Width}}
+\item 
+const G\+Lsizei \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_a6a8ae79f7c9b13dca370ba06e31fd57c}{Height}}
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_a8509c0d4f1dff4e72227f8917789a97a}{Id}}
+\item 
+E\+G\+L\+Image\+K\+HR \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_ab66de225fc5f5b0a78f57a9b76cedea9}{Image}} = nullptr
+\item 
+E\+G\+L\+Display \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf_a9494ca3e16bc86e0a76bd7bcd8e46366}{Display}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_ab36d06687e877312e24c1fefcd37d842}\label{classjevois_1_1GPUtextureDmaBuf_ab36d06687e877312e24c1fefcd37d842}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!GPUtextureDmaBuf@{GPUtextureDmaBuf}}
+\index{GPUtextureDmaBuf@{GPUtextureDmaBuf}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{GPUtextureDmaBuf()}{GPUtextureDmaBuf()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+G\+P\+Utexture\+Dma\+Buf (\begin{DoxyParamCaption}\item[{E\+G\+L\+Display}]{display,  }\item[{G\+Lsizei}]{width,  }\item[{G\+Lsizei}]{height,  }\item[{unsigned int}]{fmt,  }\item[{int}]{dmafd }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+format should be as in gl\+Tex\+Image2\+D(), typically only G\+L\+\_\+\+R\+G\+BA or G\+L\+\_\+\+L\+U\+M\+I\+N\+A\+N\+CE are supported on embedded hardware platforms. 
+
+Definition at line 27 of file G\+P\+Utexture\+Dma\+Buf.\+C.
+
+
+
+References jevois\+::fccstr(), G\+L\+\_\+\+C\+H\+E\+CK, Id, Image, L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and jevois\+::v4l2\+Bytes\+Per\+Pix().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_ace1ead4f80cea14161e498b221916039}\label{classjevois_1_1GPUtextureDmaBuf_ace1ead4f80cea14161e498b221916039}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!````~GPUtextureDmaBuf@{$\sim$GPUtextureDmaBuf}}
+\index{````~GPUtextureDmaBuf@{$\sim$GPUtextureDmaBuf}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{$\sim$GPUtextureDmaBuf()}{~GPUtextureDmaBuf()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::$\sim$\+G\+P\+Utexture\+Dma\+Buf (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, frees the texture in Open\+GL. 
+
+
+
+Definition at line 90 of file G\+P\+Utexture\+Dma\+Buf.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_a9494ca3e16bc86e0a76bd7bcd8e46366}\label{classjevois_1_1GPUtextureDmaBuf_a9494ca3e16bc86e0a76bd7bcd8e46366}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!Display@{Display}}
+\index{Display@{Display}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{Display}{Display}}
+{\footnotesize\ttfamily E\+G\+L\+Display jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+Display}
+
+
+
+Definition at line 45 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_a6a8ae79f7c9b13dca370ba06e31fd57c}\label{classjevois_1_1GPUtextureDmaBuf_a6a8ae79f7c9b13dca370ba06e31fd57c}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!Height@{Height}}
+\index{Height@{Height}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{Height}{Height}}
+{\footnotesize\ttfamily const G\+Lsizei jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+Height}
+
+
+
+Definition at line 42 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_a8509c0d4f1dff4e72227f8917789a97a}\label{classjevois_1_1GPUtextureDmaBuf_a8509c0d4f1dff4e72227f8917789a97a}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!Id@{Id}}
+\index{Id@{Id}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+Id}
+
+
+
+Definition at line 43 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+
+
+Referenced by G\+P\+Utexture\+Dma\+Buf().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_ab66de225fc5f5b0a78f57a9b76cedea9}\label{classjevois_1_1GPUtextureDmaBuf_ab66de225fc5f5b0a78f57a9b76cedea9}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!Image@{Image}}
+\index{Image@{Image}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{Image}{Image}}
+{\footnotesize\ttfamily E\+G\+L\+Image\+K\+HR jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+Image = nullptr}
+
+
+
+Definition at line 44 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+
+
+Referenced by G\+P\+Utexture\+Dma\+Buf().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtextureDmaBuf_a1a7cb84a8b40e91dab15449ce5d2c9d5}\label{classjevois_1_1GPUtextureDmaBuf_a1a7cb84a8b40e91dab15449ce5d2c9d5}} 
+\index{jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}!Width@{Width}}
+\index{Width@{Width}!jevois::GPUtextureDmaBuf@{jevois::GPUtextureDmaBuf}}
+\doxyparagraph{\texorpdfstring{Width}{Width}}
+{\footnotesize\ttfamily const G\+Lsizei jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+Width}
+
+
+
+Definition at line 41 of file G\+P\+Utexture\+Dma\+Buf.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUtextureDmaBuf_8H}{G\+P\+Utexture\+Dma\+Buf.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUtextureDmaBuf_8C}{G\+P\+Utexture\+Dma\+Buf.\+C}}\end{DoxyCompactItemize}

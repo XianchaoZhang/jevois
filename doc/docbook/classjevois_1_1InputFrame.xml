@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1InputFrame">
+<title>jevois::InputFrame Class Reference</title>
+<indexterm><primary>jevois::InputFrame</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/InputFrame.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>原始相机输入帧周围的异常安全包装器 </para>
+
+
+
+<para>此包装器的操作与标准 C++11 中的 std:future 非常相似。用户可以通过调用 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 获取相机捕获的下一张图像，如果捕获尚 未完成，则可能会阻塞，如果捕获由于某种原因（例如，相机未流式传输）失败，则可能会抛出异常。图像大小和像素类型由当 前 VideoMapping、相机部分定义。此外，还提供了一个 <link linkend="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf">done()</link> 函数，用户可以在完成通过 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 获取的图像中的像素数据后 立即使用该函数，以允许相机驱动程序再次设置底层内存缓冲区以进行捕获。如果在 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 被销毁时尚未调用 <link linkend="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf">done()</link>， 则如果已调用 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link>，它将被自动调用。在某些情况下，尽早手动调用 <link linkend="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf">done()</link> 可能会提高帧速率，而不是让 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 析构 函数执行此操作。</para>
+
+<para><link linkend="_classjevois_1_1InputFrame">InputFrame</link> 实现对输入视频帧的零拷贝、零等待访问，即：</para>
+
+<para><orderedlist>
+<listitem>
+<para>您通过 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 获取的图像的像素数据直接是内存映射的像素缓冲区，JeVois 芯片上的硅硬件通过直接内存访问 (DMA) 使用 该缓冲区将像素数据从相机芯片传输到处理器内存；</para>
+</listitem><listitem>
+<para>一旦相机硬件捕获图像，get() 就会解除阻塞并返回该图像（而不是以固定的、有规律的间隔来获取图像）。相机有多个图 像缓冲区，允许捕获一个图像缓冲区，同时将另一个图像缓冲区通过 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 交由处理。这些缓冲区会被回收，即一旦调用 <link linkend="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf">done()</link>，底层缓冲区就会被发送回相机硬件以供将来捕获。 </para>
+</listitem></orderedlist>
+</para>
+<para>
+Definition at line 47 of file InputFrame.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1InputFrame_1a57784cd2a33a7c4bb2d5a50208d9e6a3">InputFrame</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;other)=default</para>
+
+<para>移动构造函数 </para>
+</listitem>
+            <listitem><para>! 获取下一个捕获的相机图像 const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFrame_1a2780cf34e153fe097f05236ef2ef83d7">get</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1InputFrame_1a91ebeb9140343678453243266bb49f60">hasScaledImage</link> () const</para>
+
+<para>检查是否有 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2</link> (bool casync=false) const</para>
+
+<para>获取下一个捕获的相机图像，ISP 缩放的第二帧 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFrame_1a2f11f8de64b500796859d60883042772">getp</link> (bool casync=false) const</para>
+
+<para>获取下一个要处理的捕获的相机图像 </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1InputFrame_1a44adf47efbd340129f7be91ff2488ed0">getDmaFd</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>来自传感器的原始帧，2 由 ISP 缩放。此函数用于访问 ISP 缩放的帧。如果不是 JeVois Pro 平台或摄像头流类型不是 jevois::StreamType::RawAndScaled，则抛出。此文件描述符可用于在支持 DMA BUF 的接口之间共享像素缓冲区。JeVois 核 心使用它来创建从摄像头传感器到 JeVois Pro 上的硬件加速 OpenGL 显示器的零拷贝管道。如果不支持 DMA BUF（在主机上 和 JeVois A33 平台上），则返回 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get</link> () ，则会调用它，它会阻塞直到下一个摄像头帧可用。可以多次 调用 <link linkend="_classjevois_1_1InputFrame_1a44adf47efbd340129f7be91ff2488ed0">getDmaFd</link>() ，但总是返回相同的 fd（参见 <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2</link>() ）。 */int getDmaFd2(bool casync</para>
+
+<para>获取 ISP 缩放的第二个摄像头帧的 DMA-BUF 文件描述符 /*! 仅在 JeVois-Pro 平台上，摄像头 ISP 可以输出 2 个帧：1) </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf">done</link> () const</para>
+
+<para>指示用户处理已完成，先前已通过 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 获取的图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1InputFrame_1a4498e91a765d1c91ea773abf9790c12b">done2</link> () const</para>
+
+<para>表示用户处理已完成，并且已通过 <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2()</link> 先前获取了 ISP 缩放图像 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1a3992f62f2e0ff2ca215474477a45bb3a">getCvGRAY</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1a2e01794525428eb8108894b4dc31c57e">getCvBGR</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1ae1b6ab64561d2c2c4597ff85c1627ea7">getCvRGB</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1aaec9b290f11a60ff1c671566890220e2">getCvRGBA</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1a2c67e473f80f62315ce232f037b61050">getCvGRAYp</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1acf95555e377922115986909d7cdfac67">getCvBGRp</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1aafe09570214c449a8f0236bf946d6f36">getCvRGBp</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFrame_1ab4163ed4e006846752ccd59fefd335d8">getCvRGBAp</link> (bool casync=false) const</para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1InputFrame_1a5f07560a44b90bcd7b9ca098e30c8306">~InputFrame</link> ()</para>
+
+<para>析构函数，根据需要将缓冲区返回给驱动程序 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFrame_1a3e1914489e4bed4f9f23cdeab34a43dc">Engine</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFrame_1a57784cd2a33a7c4bb2d5a50208d9e6a3"/>    <section>
+    <title>InputFrame()</title>
+<indexterm><primary>InputFrame</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>InputFrame</secondary></indexterm>
+<para><computeroutput>jevois::InputFrame::InputFrame (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>移动构造函数 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a5f07560a44b90bcd7b9ca098e30c8306"/>    <section>
+    <title>~InputFrame()</title>
+<indexterm><primary>~InputFrame</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>~InputFrame</secondary></indexterm>
+<para><computeroutput>jevois::InputFrame::~InputFrame ( )</computeroutput></para><para>
+
+<para>析构函数，根据需要将缓冲区返回给驱动程序 </para>
+</para>
+<para>
+Definition at line 31 of file InputFrame.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFrame_1a3ad6ba7b0e66fefb8e43944ca4e90bcf"/>    <section>
+    <title>done()</title>
+<indexterm><primary>done</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>done</secondary></indexterm>
+<para><computeroutput>void jevois::InputFrame::done ( ) const</computeroutput></para><para>
+
+<para>指示用户处理已完成，先前已通过 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 获取的图像 </para>
+</para>
+
+<para>处理完 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据后，应尽快在 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 之后调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获 。 </para>
+<para>
+Definition at line 102 of file InputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a4498e91a765d1c91ea773abf9790c12b"/>    <section>
+    <title>done2()</title>
+<indexterm><primary>done2</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>done2</secondary></indexterm>
+<para><computeroutput>void jevois::InputFrame::done2 ( ) const</computeroutput></para><para>
+
+<para>表示用户处理已完成，并且已通过 <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2()</link> 先前获取了 ISP 缩放图像 </para>
+</para>
+
+<para>处理完 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据后，应在 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 之后尽快调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获 。 </para>
+<para>
+Definition at line 109 of file InputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c"/>    <section>
+    <title>get()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>get</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>来自传感器的原始帧，2 由 ISP 缩放。此函数用于访问 ISP 缩放的帧。如果不是 JeVois Pro 平台或摄像头流类型不是 jevois::StreamType::RawAndScaled，则抛出。此文件描述符可用于在支持 DMA BUF 的接口之间共享像素缓冲区。JeVois 核 心使用它来创建从摄像头传感器到 JeVois Pro 上的硬件加速 OpenGL 显示器的零拷贝管道。如果不支持 DMA BUF（在主机上 和 JeVois A33 平台上），则返回 jevois::InputFrame::get ( )</computeroutput></para><para>
+
+<para>获取 ISP 缩放的第二个摄像头帧的 DMA-BUF 文件描述符 /*! 仅在 JeVois-Pro 平台上，摄像头 ISP 可以输出 2 个帧：1) </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a2780cf34e153fe097f05236ef2ef83d7"/>    <section>
+    <title>get()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>get</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFrame::get (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para>
+<para>如果相机未流式传输或阻塞直到图像可用（已捕获），则抛出。 可以多次调用 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link>，但始终会返回相同的图像。 要从相 机获取连续的帧，必须由 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 向您提供连续的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 包装器。 </para>
+<para>
+Definition at line 50 of file InputFrame.C.</para>
+<para>
+Referenced by jevois::GUIhelper::drawInputFrame(), jevois::GUIhelper::iinfo(), and jevois::GPUimage::set().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d"/>    <section>
+    <title>get2()</title>
+<indexterm><primary>get2</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>get2</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFrame::get2 (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+
+<para>获取下一个捕获的相机图像，ISP 缩放的第二帧 </para>
+</para>
+
+<para>仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此函数用于访问 ISP 缩放 的帧。如果不是 JeVois-Pro 平台或相机流类型不是 jevois::StreamType::RawAndScaled，则抛出。如果相机没有流式传输 或阻塞直到图像可用（已捕获），则抛出。可以多次调用 <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2()</link>，但始终会返回相同的图像。要从相机获取连续的帧， JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 必须向您提供连续的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 包装器。 </para>
+<para>
+Definition at line 67 of file InputFrame.C.</para>
+<para>
+References jevois::RawImage::buf.</para>
+<para>
+Referenced by jevois::GUIhelper::drawInputFrame(), jevois::GUIhelper::drawInputFrame2(), jevois::GUIhelper::iinfo(), and jevois::GPUimage::set2().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a2e01794525428eb8108894b4dc31c57e"/>    <section>
+    <title>getCvBGR()</title>
+<indexterm><primary>getCvBGR</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvBGR</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvBGR (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 125 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvBGR().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1acf95555e377922115986909d7cdfac67"/>    <section>
+    <title>getCvBGRp()</title>
+<indexterm><primary>getCvBGRp</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvBGRp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvBGRp (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 161 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvBGR().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a3992f62f2e0ff2ca215474477a45bb3a"/>    <section>
+    <title>getCvGRAY()</title>
+<indexterm><primary>getCvGRAY</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvGRAY</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvGRAY (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 116 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvGray().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a2c67e473f80f62315ce232f037b61050"/>    <section>
+    <title>getCvGRAYp()</title>
+<indexterm><primary>getCvGRAYp</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvGRAYp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvGRAYp (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 152 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvGray().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1ae1b6ab64561d2c2c4597ff85c1627ea7"/>    <section>
+    <title>getCvRGB()</title>
+<indexterm><primary>getCvRGB</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvRGB</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvRGB (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 134 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvRGB().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1aaec9b290f11a60ff1c671566890220e2"/>    <section>
+    <title>getCvRGBA()</title>
+<indexterm><primary>getCvRGBA</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvRGBA</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvRGBA (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 143 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvRGBA().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1ab4163ed4e006846752ccd59fefd335d8"/>    <section>
+    <title>getCvRGBAp()</title>
+<indexterm><primary>getCvRGBAp</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvRGBAp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvRGBAp (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 179 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvRGBA().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1aafe09570214c449a8f0236bf946d6f36"/>    <section>
+    <title>getCvRGBp()</title>
+<indexterm><primary>getCvRGBp</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getCvRGBp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFrame::getCvRGBp (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 170 of file InputFrame.C.</para>
+<para>
+References jevois::rawimage::convertToCvRGB().</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a44adf47efbd340129f7be91ff2488ed0"/>    <section>
+    <title>getDmaFd()</title>
+<indexterm><primary>getDmaFd</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getDmaFd</secondary></indexterm>
+<para><computeroutput>int jevois::InputFrame::getDmaFd (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+Definition at line 86 of file InputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a2f11f8de64b500796859d60883042772"/>    <section>
+    <title>getp()</title>
+<indexterm><primary>getp</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>getp</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFrame::getp (bool casync = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+
+<para>获取下一个要处理的捕获的相机图像 </para>
+</para>
+
+<para>如果 <link linkend="_classjevois_1_1InputFrame_1a91ebeb9140343678453243266bb49f60">hasScaledImage()</link> 为 false，则与 <link linkend="_classjevois_1_1InputFrame_1a2f074467becbef9303a8531199ecc60c">get()</link> 相同，如果 <link linkend="_classjevois_1_1InputFrame_1a91ebeb9140343678453243266bb49f60">hasScaledImage()</link> 为 true，则与 <link linkend="_classjevois_1_1InputFrame_1a64699f9698a605ce41d539d0ffedd56d">get2()</link> 相同。 </para>
+<para>
+Definition at line 79 of file InputFrame.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFrame_1a91ebeb9140343678453243266bb49f60"/>    <section>
+    <title>hasScaledImage()</title>
+<indexterm><primary>hasScaledImage</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>hasScaledImage</secondary></indexterm>
+<para><computeroutput>bool jevois::InputFrame::hasScaledImage ( ) const</computeroutput></para><para>
+
+<para>检查是否有 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 </para>
+</para>
+
+<para>除非我们在 JeVois-Pro 平台上并且相机格式修饰符 jevois::CropType::CropScale 当前正在使用中，否则返回 false。 </para>
+<para>
+Definition at line 61 of file InputFrame.C.</para>
+<para>
+Referenced by jevois::GUIhelper::drawInputFrame(), and jevois::GUIhelper::iinfo().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFrame_1a3e1914489e4bed4f9f23cdeab34a43dc"/>    <section>
+    <title>Engine</title>
+<indexterm><primary>Engine</primary><secondary>jevois::InputFrame</secondary></indexterm>
+<indexterm><primary>jevois::InputFrame</primary><secondary>Engine</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Engine">Engine</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 162 of file InputFrame.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_InputFrame_8H">InputFrame.H</link>src/jevois/Core/<link linkend="_InputFrame_8C">InputFrame.C</link></section>
+</section>

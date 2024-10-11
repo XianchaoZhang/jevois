@@ -23,22 +23,20 @@
 
 namespace jevois
 {
-  /*! \defgroup jpeg Jpeg-related classes and functions
-    
-      Jpeg classes and functions, mainly used to support sending MJPEG video output over USB from raw uncompressed
-      images captured by a camera.
+  /*! \defgroup jpeg Jpeg 相关的类和函数 
+  
+      Jpeg 类和函数，主要用于支持从相机捕获的原始未压缩图像通过 USB 发送 MJPEG 视频输出。
 
       \ingroup image */
   
   /*! @{ */ // **********************************************************************
 
-  //! Helper to convert from packed YUYV to planar YUV422
-  /*! Memory must have been allocated by caller. */
+  //! 辅助从打包的 YUYV 转换为平面 YUV422 
+  /*！调用者必须分配内存。 */
   void convertYUYVtoYUV422(unsigned char const * src, int width, int height, unsigned char * dst);
 
-  //! Simple singleton wrapper over a turbojpeg compressor
-  /*! Most users should not need to use this class, compressBRGtoJpeg() uses it internally to avoid re-creating the
-      turbojpeg compressor object on each video frame. */
+  //! turbojpeg 压缩器的简单单例包装器 
+  /*! 大多数用户不需要使用此类，compressBRGtoJpeg() 在内部使用它来避免在每个视频帧上重新创建 turbojpeg 压缩器对象。 */
   class JpegCompressor : public Singleton<JpegCompressor>
   {
     public:
@@ -55,47 +53,43 @@ namespace jevois
       void * itsCompressor;
   };
   
-  //! Compress raw pixel buffer to jpeg
-  /*! The compressed size is returned. The dst buffer should have been allocated by caller, with size at least width *
-      height * 2 bytes. quality should be between 1 (worst) and 100 (best). */
+  //! 将原始像素缓冲区压缩为 jpeg 
+  /*！返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 字节。质量应该介于 1（最差）和 100（最好）
+      之间。 */
   unsigned long compressBGRtoJpeg(unsigned char const * src, int width, int height, unsigned char * dst,
                                   int quality = 75);
 
-  //! Compress a BGR cv::Mat into an output JPEG jevois::RawImage
-  /*! The dst RawImage should have an allocated buffer, typically this is intended for use with a RawImage that was
-      obtained from the UVC gadget. */
+  //! 将 BGR cv::Mat 压缩为输出 JPEG jevois::RawImage 
+  /*! dst RawImage 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 */
   void compressBGRtoJpeg(cv::Mat const & src, RawImage & dst, int quality = 75);
 
-  //! Compress raw pixel buffer to jpeg
-  /*! The compressed size is returned. The dst buffer should have been allocated by caller, with size at least width *
-      height * 2 bytes. quality should be between 1 (worst) and 100 (best). */
+  //! 将原始像素缓冲区压缩为 jpeg 
+  /*! 返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 个字节。质量应介于 1（最差）和 100（最好）
+      之间。 */
   unsigned long compressRGBtoJpeg(unsigned char const * src, int width, int height, unsigned char * dst,
                                   int quality = 75);
 
-  //! Compress a RGB cv::Mat into an output JPEG jevois::RawImage
-  /*! The dst RawImage should have an allocated buffer, typically this is intended for use with a RawImage that was
-      obtained from the UVC gadget. */
+  //! 将 RGB cv::Mat 压缩为输出 JPEG jevois::RawImage 
+  /*! dst RawImage 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 */
   void compressRGBtoJpeg(cv::Mat const & src, RawImage & dst, int quality = 75);
 
-  //! Compress raw pixel buffer to jpeg
-  /*! The compressed size is returned. The dst buffer should have been allocated by caller, with size at least width *
-      height * 2 bytes. quality should be between 1 (worst) and 100 (best). */
+  //! 将原始像素缓冲区压缩为 jpeg 
+  /*! 返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 个字节。质量应该介于 1（最差）和 100（最好）
+      之间。 */
   unsigned long compressRGBAtoJpeg(unsigned char const * src, int width, int height, unsigned char * dst,
                                    int quality = 75);
 
-  //! Compress an RGBA cv::Mat into an output JPEG jevois::RawImage
-  /*! The dst RawImage should have an allocated buffer, typically this is intended for use with a RawImage that was
-      obtained from the UVC gadget. */
+  //! 将 RGBA cv::Mat 压缩为输出 JPEG jevois::RawImage 
+  /*! dst RawImage 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 */
   void compressRGBAtoJpeg(cv::Mat const & src, RawImage & dst, int quality = 75);
 
-  //! Compress raw pixel buffer to jpeg
-  /*! The compressed size is returned. The dst buffer should have been allocated by caller, with size at least width *
-      height * 2 bytes. quality should be between 1 (worst) and 100 (best). */
+  //! 将原始像素缓冲区压缩为 jpeg
+  /*！返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 个字节。质量应介于 1（最差）和 100（最好）
+      之间。 */
   unsigned long compressGRAYtoJpeg(unsigned char const * src, int width, int height, unsigned char * dst,
                                    int quality = 75);
-  //! Compress a Gray cv::Mat into an output JPEG jevois::RawImage
-  /*! The dst RawImage should have an allocated buffer, typically this is intended for use with a RawImage that was
-      obtained from the UVC gadget. */
+  //! 将 Gray cv::Mat 压缩为输出 JPEG jevois::RawImage
+  /*！dst RawImage 应该有一个分配的缓冲区，通常这用于从 UVC gadget 获得的 RawImage。 */
   void compressGRAYtoJpeg(cv::Mat const & src, RawImage & dst, int quality = 75);
 
   /*! @} */ // **********************************************************************

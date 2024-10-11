@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_PreProcessorBlob_8C">
+<title>src/jevois/DNN/PreProcessorBlob.C File Reference</title>
+<indexterm><primary>src/jevois/DNN/PreProcessorBlob.C</primary></indexterm>
+<programlisting>#include &lt;jevois/DNN/PreProcessorBlob.H&gt;
+#include &lt;jevois/DNN/Utils.H&gt;
+#include &lt;jevois/Image/RawImageOps.H&gt;
+#include &lt;opencv2/dnn.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+</programlisting>Include dependency graph for PreProcessorBlob.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="PreProcessorBlob_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_PreProcessorBlob_8C_1a12089f8a7982ff5353209a026af669e5">DETAILS</link>(fmt, ...)   do { if (detail) itsInfo.emplace_back(prefix + <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link>(fmt, ## __VA_ARGS__)); } while(0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PreProcessorBlob_8C_1a85c80be74c227c6dded1e4117b8a8668">DETAILS2</link>(fmt, ...)   do { itsInfo.emplace_back(prefix + <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link>(fmt, ## __VA_ARGS__)); } while(0)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_PreProcessorBlob_8C_1a12089f8a7982ff5353209a026af669e5"/>    <section>
+    <title>DETAILS</title>
+<indexterm><primary>DETAILS</primary><secondary>PreProcessorBlob.C</secondary></indexterm>
+<indexterm><primary>PreProcessorBlob.C</primary><secondary>DETAILS</secondary></indexterm>
+<para><computeroutput>#define DETAILS( fmt,  ...)   do { if (detail) itsInfo.emplace_back(prefix + <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link>(fmt, ## __VA_ARGS__)); } while(0)</computeroutput></para><para>
+Definition at line 25 of file PreProcessorBlob.C.</para>
+    </section><anchor xml:id="_PreProcessorBlob_8C_1a85c80be74c227c6dded1e4117b8a8668"/>    <section>
+    <title>DETAILS2</title>
+<indexterm><primary>DETAILS2</primary><secondary>PreProcessorBlob.C</secondary></indexterm>
+<indexterm><primary>PreProcessorBlob.C</primary><secondary>DETAILS2</secondary></indexterm>
+<para><computeroutput>#define DETAILS2( fmt,  ...)   do { itsInfo.emplace_back(prefix + <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link>(fmt, ## __VA_ARGS__)); } while(0)</computeroutput></para><para>
+Definition at line 28 of file PreProcessorBlob.C.</para>
+</section>
+</section>
+</section>

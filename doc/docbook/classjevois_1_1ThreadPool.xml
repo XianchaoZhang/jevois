@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ThreadPool">
+<title>jevois::ThreadPool Class Reference</title>
+<indexterm><primary>jevois::ThreadPool</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Util/ThreadPool.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>具有 CPU 亲和力的线程池 </para>
+
+
+
+<para>具有额外设置的线程池，用于强制传递的任务在某些特定核心上运行。JeVois-Pro 平台使用它来强制机器视觉任务在大核心（ARM A73） 上运行，而非关键任务在较慢的小核心（ARM A53）上运行。 </para>
+<para>
+Definition at line 45 of file ThreadPool.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ThreadPool_1ac6ead839cec408586fb6d01a1b359321">ThreadPool</link> (unsigned int threads=std::thread::hardware_concurrency(), bool little=false)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ThreadPool_1ab78df7189f846f8607859cde466f6c64">~ThreadPool</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>template&lt;typename Func , typename... Args, std::enable_if_t&lt; std::is_invocable_v&lt; Func &amp;&amp;, Args &amp;&amp;... &gt;, bool &gt;  = true&gt; </para><para>auto <link linkend="_classjevois_1_1ThreadPool_1a80dff6d3486d80b69b64fd85b6932ccf">execute</link> (Func &amp;&amp;func, Args &amp;&amp;... args) -&gt; std::future&lt; decltype(func(args...))&gt;</para>
+
+<para>Execute a function and get a future. </para>
+</listitem>
+            <listitem><para>auto <link linkend="_classjevois_1_1ThreadPool_1a6bc1c53a482bfc0e9056f47e78abc7e7">getPoolSize</link> () -&gt; size_t</para>
+
+<para>Get the pool size. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ThreadPool_1ac6ead839cec408586fb6d01a1b359321"/>    <section>
+    <title>ThreadPool()</title>
+<indexterm><primary>ThreadPool</primary><secondary>jevois::ThreadPool</secondary></indexterm>
+<indexterm><primary>jevois::ThreadPool</primary><secondary>ThreadPool</secondary></indexterm>
+<para><computeroutput>jevois::ThreadPool::ThreadPool (unsigned int threads = <computeroutput>std::thread::hardware_concurrency()</computeroutput>
+, bool little = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 31 of file ThreadPool.C.</para>
+<para>
+References execute(), LERROR, and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1ThreadPool_1ab78df7189f846f8607859cde466f6c64"/>    <section>
+    <title>~ThreadPool()</title>
+<indexterm><primary>~ThreadPool</primary><secondary>jevois::ThreadPool</secondary></indexterm>
+<indexterm><primary>jevois::ThreadPool</primary><secondary>~ThreadPool</secondary></indexterm>
+<para><computeroutput>jevois::ThreadPool::~ThreadPool ( )</computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 104 of file ThreadPool.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ThreadPool_1a80dff6d3486d80b69b64fd85b6932ccf"/>    <section>
+    <title>execute()</title>
+<indexterm><primary>execute</primary><secondary>jevois::ThreadPool</secondary></indexterm>
+<indexterm><primary>jevois::ThreadPool</primary><secondary>execute</secondary></indexterm>
+<computeroutput>template&lt;typename Func , typename... Args, std::enable_if_t&lt; std::is_invocable_v&lt; Func &amp;&amp;, Args &amp;&amp;... &gt;, bool &gt;  = true&gt; </computeroutput><para><computeroutput>auto jevois::ThreadPool::execute (Func &amp;&amp; func, Args &amp;&amp;... args) -&gt;  std::future&lt; decltype(func(args...))&gt;</computeroutput></para><para>
+
+<para>Execute a function and get a future. </para>
+</para>
+<para>
+Referenced by ThreadPool().</para>
+    </section><anchor xml:id="_classjevois_1_1ThreadPool_1a6bc1c53a482bfc0e9056f47e78abc7e7"/>    <section>
+    <title>getPoolSize()</title>
+<indexterm><primary>getPoolSize</primary><secondary>jevois::ThreadPool</secondary></indexterm>
+<indexterm><primary>jevois::ThreadPool</primary><secondary>getPoolSize</secondary></indexterm>
+<para><computeroutput>auto jevois::ThreadPool::getPoolSize ( ) -&gt; size_t</computeroutput></para><para>
+
+<para>Get the pool size. </para>
+</para>
+<para>
+Definition at line 116 of file ThreadPool.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Util/<link linkend="_ThreadPool_8H">ThreadPool.H</link>src/jevois/Util/<link linkend="_ThreadPool_8C">ThreadPool.C</link></section>
+</section>

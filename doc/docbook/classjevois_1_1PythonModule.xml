@@ -1,0 +1,213 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1PythonModule">
+<title>jevois::PythonModule Class Reference</title>
+<indexterm><primary>jevois::PythonModule</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>包装器模块允许用户开发用 Python 编写的新模块 </para>
+
+
+
+<para>此包装器模块在每一帧上调用用 Python 编写的处理函数。请注意，在定义 python 类后，sendSerial() 是如何动态添加的，作为该 类的新成员函数。 </para>
+<para>
+Definition at line 357 of file PythonModule.H.</para>
+Inheritance diagram for jevois::PythonModule:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1PythonModule__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::PythonModule:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1PythonModule__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1PythonModule_1a6ef62489ffe8c7279575dfef930cf437">PythonModule</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)</para>
+
+<para>构造函数需要 Python 源代码文件的完整路径 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonModule_1ac1d5345e0543d5b5646ba08ee799f274">preInit</link> () override</para>
+
+<para>加载 python 代码并可选择调用 init() python 模块函数（如果已实现） </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1PythonModule_1acb3a6115027ee02ef605aa8762ade2ed">~PythonModule</link> ()</para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1PythonModule_1a58900c6b311c9a740d969125839ab474">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe, <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp;outframe) override</para>
+
+<para>Processing function, version that receives a frame from camera and sends a frame out over USB. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1PythonModule_1a611eeb138989c87e696128ff54efd154">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe) override</para>
+
+<para>Processing function, version that receives a frame from camera and does not use USB. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1PythonModule_1aa15495d16fa453eeff122334e8bd6be5">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe, <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &amp;helper)</para>
+
+<para>Processing function, version that receives a frame from camera, no USB, but GUI output on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1PythonModule_1ac13d3c929ebab9aea708576cdb50c420">parseSerial</link> (std::string const &amp;str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s) override</para>
+
+<para>Receive a string from a serial port which contains a user command. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1PythonModule_1aaee2b1ee201fdeebe73a2287c35ea83f">supportedCommands</link> (std::ostream &amp;os) override</para>
+
+<para>Human-readable description of this <link linkend="_classjevois_1_1Module">Module</link>&apos;s supported custom commands. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonModule_1abbda1a108de1cb63223b1fa7e9fd76df">postUninit</link> () override</para>
+
+<para>Optionally call uninit() python module function, if implemented. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonModule_1a6ef62489ffe8c7279575dfef930cf437"/>    <section>
+    <title>PythonModule()</title>
+<indexterm><primary>PythonModule</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>PythonModule</secondary></indexterm>
+<para><computeroutput>jevois::PythonModule::PythonModule (<link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> const &amp; m)</computeroutput></para><para>
+
+<para>构造函数需要 Python 源代码文件的完整路径 </para>
+</para>
+
+<para>请注意，与 C++ 模块相反，构造不会抛出。这样，模块始终有效且已初始化，并且其模块路径可以由 <link linkend="_classjevois_1_1Engine">Engine</link> 设置，这对于允许从 JeVois Inventor 保存源代码是必要的。相反，任何构造错误都存储在这个类内部，并且在访问 <link linkend="_classjevois_1_1PythonModule_1a58900c6b311c9a740d969125839ab474">process()</link>、parfseSerial() 等 时会重新抛出。 </para>
+<para>
+Definition at line 504 of file PythonModule.C.</para>
+<para>
+References jevois::VideoMapping::ispython, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1acb3a6115027ee02ef605aa8762ade2ed"/>    <section>
+    <title>~PythonModule()</title>
+<indexterm><primary>~PythonModule</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>~PythonModule</secondary></indexterm>
+<para><computeroutput>jevois::PythonModule::~PythonModule ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</para>
+<para>
+Definition at line 528 of file PythonModule.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonModule_1ac13d3c929ebab9aea708576cdb50c420"/>    <section>
+    <title>parseSerial()</title>
+<indexterm><primary>parseSerial</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>parseSerial</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::parseSerial (std::string const &amp; str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Receive a string from a serial port which contains a user command. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Module_1a4fa64441f85b9a23f17d972b1d9b2c51">jevois::Module</link>.</para>
+<para>
+Definition at line 559 of file PythonModule.C.</para>
+<para>
+References jevois::python::hasattr(), jevois::Module::parseSerial(), jevois::PythonWrapper::pyinst(), and jevois::UserInterface::writeString().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1abbda1a108de1cb63223b1fa7e9fd76df"/>    <section>
+    <title>postUninit()</title>
+<indexterm><primary>postUninit</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>postUninit</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::postUninit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Optionally call uninit() python module function, if implemented. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f">jevois::Component</link>.</para>
+<para>
+Definition at line 521 of file PythonModule.C.</para>
+<para>
+References jevois::python::hasattr(), and jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1ac1d5345e0543d5b5646ba08ee799f274"/>    <section>
+    <title>preInit()</title>
+<indexterm><primary>preInit</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>preInit</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::preInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>加载 python 代码并可选择调用 init() python 模块函数（如果已实现） </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">jevois::Component</link>.</para>
+<para>
+Definition at line 511 of file PythonModule.C.</para>
+<para>
+References jevois::python::hasattr(), jevois::PythonWrapper::pyinst(), and jevois::PythonWrapper::pythonload().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1a611eeb138989c87e696128ff54efd154"/>    <section>
+    <title>process()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Processing function, version that receives a frame from camera and does not use USB. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Module_1a81c140e6db5945679845aa9108b8ecd4">jevois::Module</link>.</para>
+<para>
+Definition at line 540 of file PythonModule.C.</para>
+<para>
+References jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1aa15495d16fa453eeff122334e8bd6be5"/>    <section>
+    <title>process()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe, <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &amp; helper)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Processing function, version that receives a frame from camera, no USB, but GUI output on JeVois-Pro. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Module_1a9f9619482c39de5a86b99600b4cf9020">jevois::Module</link>.</para>
+<para>
+Definition at line 549 of file PythonModule.C.</para>
+<para>
+References jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1a58900c6b311c9a740d969125839ab474"/>    <section>
+    <title>process()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe, <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp; outframe)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Processing function, version that receives a frame from camera and sends a frame out over USB. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">jevois::Module</link>.</para>
+<para>
+Definition at line 532 of file PythonModule.C.</para>
+<para>
+References jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonModule_1aaee2b1ee201fdeebe73a2287c35ea83f"/>    <section>
+    <title>supportedCommands()</title>
+<indexterm><primary>supportedCommands</primary><secondary>jevois::PythonModule</secondary></indexterm>
+<indexterm><primary>jevois::PythonModule</primary><secondary>supportedCommands</secondary></indexterm>
+<para><computeroutput>void jevois::PythonModule::supportedCommands (std::ostream &amp; os)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Human-readable description of this <link linkend="_classjevois_1_1Module">Module</link>&apos;s supported custom commands. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Module_1a2734260ac62a4b5b6d5806c30631562d">jevois::Module</link>.</para>
+<para>
+Definition at line 571 of file PythonModule.C.</para>
+<para>
+References jevois::python::hasattr(), jevois::PythonWrapper::pyinst(), and jevois::Module::supportedCommands().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

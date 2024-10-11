@@ -1,0 +1,393 @@
+\hypertarget{classjevois_1_1MovieOutput}{}\doxysubsection{jevois\+::Movie\+Output Class Reference}
+\label{classjevois_1_1MovieOutput}\index{jevois::MovieOutput@{jevois::MovieOutput}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Movie\+Output.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+使用 Open\+CV 视频编码将视频输出到电影文件 
+
+此视频输出模式将输出帧保存到文件（或一系列文件）。在开发新算法以离线检查生成的输出的正确性或保存模块的某些文档/ 演示电影时，它很有用。 
+
+Definition at line 32 of file Movie\+Output.\+H.
+
+
+
+Inheritance diagram for jevois\+::Movie\+Output\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classjevois_1_1MovieOutput__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Movie\+Output\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1MovieOutput__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1MovieOutput_a01cd97237133eb8f98201f6020562076}{Movie\+Output}} (std\+::string const \&fn)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1MovieOutput_a0c8e34c50faa34e3ea3f991b28d5596a}{$\sim$\+Movie\+Output}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieOutput_a8613022e6abc3897663b010f564b6e25}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧率 \end{DoxyCompactList}\item 
+即，所有缓冲区都已排队等待发送但尚未发送。应用程序代码必须为每个 \mbox{\hyperlink{classjevois_1_1MovieOutput_abe2589047ca93b97c7fc5d05b36a9acf}{get}} () 平衡一个 \mbox{\hyperlink{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}{send}}() 。 $\ast$/virtual void get(\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img) override
+\begin{DoxyCompactList}\small\item\em 发送图像 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieOutput_acd08cef18b6ee9ab13ea9b616322a296}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieOutput_af1f5a85a4c8f318165b210000b7a9541}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}{run}} ()
+\begin{DoxyCompactList}\small\item\em 使用线程对帧进行编码和保存 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1MovieOutput_ab2b9f363d4df1ce122ae47b3559041df}{its\+Buffer}}
+\begin{DoxyCompactList}\small\item\em 我们的单个视频缓冲区 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \mbox{\hyperlink{classjevois_1_1MovieOutput_a8444a374c262f01aada7f43e4d46eda8}{its\+Mapping}}
+\begin{DoxyCompactList}\small\item\em 我们当前的视频映射，我们将输入调整为映射的摄像头大小 \end{DoxyCompactList}\item 
+std\+::future$<$ void $>$ \mbox{\hyperlink{classjevois_1_1MovieOutput_aeaeb5898bebf6ae28f3fbc786be44076}{its\+Run\+Fut}}
+\begin{DoxyCompactList}\small\item\em Future for our \mbox{\hyperlink{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}{run()}} thread. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ cv\+::\+Mat, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{jevois\+::\+Blocking\+Behavior\+::\+Block}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{jevois\+::\+Blocking\+Behavior\+::\+Block}} $>$ \mbox{\hyperlink{classjevois_1_1MovieOutput_a8d10ecc9f288dc6dd20c467180f5db76}{its\+Buf}}
+\begin{DoxyCompactList}\small\item\em 要编码并写入文件的帧缓冲区 \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1MovieOutput_a7a4faca797199c65a155f7dea17b2926}{its\+Saving}}
+\begin{DoxyCompactList}\small\item\em 当我们保存到文件时为 True \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1MovieOutput_a5ac7ca08f0bd83ac40f43ec5964e49b1}{its\+File\+Num}}
+\begin{DoxyCompactList}\small\item\em 文件编号，在每次 \mbox{\hyperlink{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}{stream\+Off()}} 时递增，以避免覆盖以前的文件 \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1MovieOutput_a8441e3b4e94728ee518ba8f2bb33bebd}{its\+Running}}
+\begin{DoxyCompactList}\small\item\em 当我们的 \mbox{\hyperlink{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}{run()}} 线程应继续运行时为 True \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1MovieOutput_a944af89fc7e1fa87eb5425c796709998}{its\+Filename}}
+\begin{DoxyCompactList}\small\item\em 将视频保存到的当前文件名 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1MovieOutput_a625090100654077c44148362f30c7257}{its\+Filebase}}
+\begin{DoxyCompactList}\small\item\em Current file base to save video to. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a01cd97237133eb8f98201f6020562076}\label{classjevois_1_1MovieOutput_a01cd97237133eb8f98201f6020562076}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!MovieOutput@{MovieOutput}}
+\index{MovieOutput@{MovieOutput}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{MovieOutput()}{MovieOutput()}}
+{\footnotesize\ttfamily jevois\+::\+Movie\+Output\+::\+Movie\+Output (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fn }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 32 of file Movie\+Output.\+C.
+
+
+
+References jevois\+::async(), its\+Run\+Fut, and run().
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a0c8e34c50faa34e3ea3f991b28d5596a}\label{classjevois_1_1MovieOutput_a0c8e34c50faa34e3ea3f991b28d5596a}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!````~MovieOutput@{$\sim$MovieOutput}}
+\index{````~MovieOutput@{$\sim$MovieOutput}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{$\sim$MovieOutput()}{~MovieOutput()}}
+{\footnotesize\ttfamily jevois\+::\+Movie\+Output\+::$\sim$\+Movie\+Output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 39 of file Movie\+Output.\+C.
+
+
+
+References L\+E\+R\+R\+OR, L\+I\+N\+FO, jevois\+::system(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_af1f5a85a4c8f318165b210000b7a9541}\label{classjevois_1_1MovieOutput_af1f5a85a4c8f318165b210000b7a9541}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Abort streaming. 
+
+这只会取消将来的 \mbox{\hyperlink{classjevois_1_1MovieOutput_abe2589047ca93b97c7fc5d05b36a9acf}{get()}} 和 \mbox{\hyperlink{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}{send()}} 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}{stream\+Off()}} 来关闭流式传输。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 102 of file Movie\+Output.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_abe2589047ca93b97c7fc5d05b36a9acf}\label{classjevois_1_1MovieOutput_abe2589047ca93b97c7fc5d05b36a9acf}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!get@{get}}
+\index{get@{get}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) \&\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Definition at line 63 of file Movie\+Output.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}\label{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!run@{run}}
+\index{run@{run}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+使用线程对帧进行编码和保存 
+
+
+
+Definition at line 127 of file Movie\+Output.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by Movie\+Output().
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}\label{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!send@{send}}
+\index{send@{send}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+发送图像 
+
+如果格式不正确，则可能抛出 std\+::overflow\+\_\+error，如果我们尚未使用前一个图像。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 81 of file Movie\+Output.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), L\+E\+R\+R\+OR, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a8613022e6abc3897663b010f564b6e25}\label{classjevois_1_1MovieOutput_a8613022e6abc3897663b010f564b6e25}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧率 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 56 of file Movie\+Output.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}\label{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 108 of file Movie\+Output.\+C.
+
+
+
+References L\+E\+R\+R\+OR, L\+I\+N\+FO, and jevois\+::system().
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_acd08cef18b6ee9ab13ea9b616322a296}\label{classjevois_1_1MovieOutput_acd08cef18b6ee9ab13ea9b616322a296}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Output\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 96 of file Movie\+Output.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a8d10ecc9f288dc6dd20c467180f5db76}\label{classjevois_1_1MovieOutput_a8d10ecc9f288dc6dd20c467180f5db76}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsBuf@{itsBuf}}
+\index{itsBuf@{itsBuf}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsBuf}{itsBuf}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$cv\+::\+Mat, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{jevois\+::\+Blocking\+Behavior\+::\+Block}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{jevois\+::\+Blocking\+Behavior\+::\+Block}}$>$ jevois\+::\+Movie\+Output\+::its\+Buf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+要编码并写入文件的帧缓冲区 
+
+
+
+Definition at line 69 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_ab2b9f363d4df1ce122ae47b3559041df}\label{classjevois_1_1MovieOutput_ab2b9f363d4df1ce122ae47b3559041df}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsBuffer@{itsBuffer}}
+\index{itsBuffer@{itsBuffer}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsBuffer}{itsBuffer}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ jevois\+::\+Movie\+Output\+::its\+Buffer\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们的单个视频缓冲区 
+
+
+
+Definition at line 63 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a625090100654077c44148362f30c7257}\label{classjevois_1_1MovieOutput_a625090100654077c44148362f30c7257}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsFilebase@{itsFilebase}}
+\index{itsFilebase@{itsFilebase}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsFilebase}{itsFilebase}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Movie\+Output\+::its\+Filebase\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Current file base to save video to. 
+
+
+
+Definition at line 74 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a944af89fc7e1fa87eb5425c796709998}\label{classjevois_1_1MovieOutput_a944af89fc7e1fa87eb5425c796709998}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsFilename@{itsFilename}}
+\index{itsFilename@{itsFilename}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsFilename}{itsFilename}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Movie\+Output\+::its\+Filename\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+将视频保存到的当前文件名 
+
+
+
+Definition at line 73 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a5ac7ca08f0bd83ac40f43ec5964e49b1}\label{classjevois_1_1MovieOutput_a5ac7ca08f0bd83ac40f43ec5964e49b1}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsFileNum@{itsFileNum}}
+\index{itsFileNum@{itsFileNum}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsFileNum}{itsFileNum}}
+{\footnotesize\ttfamily int jevois\+::\+Movie\+Output\+::its\+File\+Num\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+文件编号，在每次 \mbox{\hyperlink{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}{stream\+Off()}} 时递增，以避免覆盖以前的文件 
+
+
+
+Definition at line 71 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a8444a374c262f01aada7f43e4d46eda8}\label{classjevois_1_1MovieOutput_a8444a374c262f01aada7f43e4d46eda8}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsMapping@{itsMapping}}
+\index{itsMapping@{itsMapping}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsMapping}{itsMapping}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} jevois\+::\+Movie\+Output\+::its\+Mapping\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们当前的视频映射，我们将输入调整为映射的摄像头大小 
+
+
+
+Definition at line 64 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_aeaeb5898bebf6ae28f3fbc786be44076}\label{classjevois_1_1MovieOutput_aeaeb5898bebf6ae28f3fbc786be44076}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsRunFut@{itsRunFut}}
+\index{itsRunFut@{itsRunFut}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsRunFut}{itsRunFut}}
+{\footnotesize\ttfamily std\+::future$<$void$>$ jevois\+::\+Movie\+Output\+::its\+Run\+Fut\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Future for our \mbox{\hyperlink{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}{run()}} thread. 
+
+
+
+Definition at line 67 of file Movie\+Output.\+H.
+
+
+
+Referenced by Movie\+Output().
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a8441e3b4e94728ee518ba8f2bb33bebd}\label{classjevois_1_1MovieOutput_a8441e3b4e94728ee518ba8f2bb33bebd}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsRunning@{itsRunning}}
+\index{itsRunning@{itsRunning}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsRunning}{itsRunning}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Movie\+Output\+::its\+Running\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+当我们的 \mbox{\hyperlink{classjevois_1_1MovieOutput_a1b2c4d537acd9148563f096d2671b577}{run()}} 线程应继续运行时为 True 
+
+
+
+Definition at line 72 of file Movie\+Output.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieOutput_a7a4faca797199c65a155f7dea17b2926}\label{classjevois_1_1MovieOutput_a7a4faca797199c65a155f7dea17b2926}} 
+\index{jevois::MovieOutput@{jevois::MovieOutput}!itsSaving@{itsSaving}}
+\index{itsSaving@{itsSaving}!jevois::MovieOutput@{jevois::MovieOutput}}
+\doxyparagraph{\texorpdfstring{itsSaving}{itsSaving}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Movie\+Output\+::its\+Saving\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+当我们保存到文件时为 True 
+
+
+
+Definition at line 70 of file Movie\+Output.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{MovieOutput_8H}{Movie\+Output.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{MovieOutput_8C}{Movie\+Output.\+C}}\end{DoxyCompactItemize}

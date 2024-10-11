@@ -1,0 +1,37 @@
+\hypertarget{VideoMapping_8H}{}\doxysubsection{include/jevois/\+Core/\+Video\+Mapping.H File Reference}
+\label{VideoMapping_8H}\index{include/jevois/Core/VideoMapping.H@{include/jevois/Core/VideoMapping.H}}
+{\ttfamily \#include $<$jevois/\+Core/\+Camera\+Sensor.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Enum.\+H$>$}\newline
+{\ttfamily \#include $<$iosfwd$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$linux/videodev2.\+h$>$}\newline
+Include dependency graph for Video\+Mapping.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{VideoMapping_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{VideoMapping_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}}
+\begin{DoxyCompactList}\small\item\em 用于保存处理 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的视频映射定义的简单结构 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ Video\+Mapping $>$ \mbox{\hyperlink{namespacejevois_a828fc05eea12bd9d7071a1bc561e1835}{jevois\+::video\+Mappings\+From\+Stream}} (Camera\+Sensor s, std\+::istream \&is, size\+\_\+t \&defidx, bool checkso, bool hasgui)
+\begin{DoxyCompactList}\small\item\em 解析配置文件中的所有映射，并指出哪一个是默认的 \end{DoxyCompactList}\end{DoxyCompactItemize}

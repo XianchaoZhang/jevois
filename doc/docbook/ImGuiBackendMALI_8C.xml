@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ImGuiBackendMALI_8C">
+<title>src/jevois/GPU/ImGuiBackendMALI.C File Reference</title>
+<indexterm><primary>src/jevois/GPU/ImGuiBackendMALI.C</primary></indexterm>
+<programlisting>#include &lt;jevois/GPU/ImGuiBackendMALI.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/GPU/OpenGL.H&gt;
+#include &lt;jevois/Util/Console.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;imgui_impl_opengl3.h&gt;
+#include &lt;imgui.h&gt;
+#include &lt;linux/input.h&gt;
+#include &lt;linux/kd.h&gt;
+#include &lt;linux/keyboard.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;cctype&gt;
+#include &lt;wchar.h&gt;
+#include &lt;wctype.h&gt;
+</programlisting>Include dependency graph for ImGuiBackendMALI.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ImGuiBackendMALI_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ImGuiBackendMALI_8C_1ade3be93da0509d2a86b7ed5c4d68829a">EV_MAKE</link>   1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ImGuiBackendMALI_8C_1a7842d43bd2e2d34749aae84887bd5e2e">EV_BREAK</link>   0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ImGuiBackendMALI_8C_1aab9107b6770f76546435deef4d70880c">EV_REPEAT</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ImGuiBackendMALI_8C_1a22dd9d967cbe39a94c26153f1e96ec1e">NELEMS</link>(x)   (sizeof(x) / sizeof((x)[0]))</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ImGuiBackendMALI_8C_1a7842d43bd2e2d34749aae84887bd5e2e"/>    <section>
+    <title>EV_BREAK</title>
+<indexterm><primary>EV_BREAK</primary><secondary>ImGuiBackendMALI.C</secondary></indexterm>
+<indexterm><primary>ImGuiBackendMALI.C</primary><secondary>EV_BREAK</secondary></indexterm>
+<para><computeroutput>#define EV_BREAK   0</computeroutput></para><para>
+Definition at line 42 of file ImGuiBackendMALI.C.</para>
+    </section><anchor xml:id="_ImGuiBackendMALI_8C_1ade3be93da0509d2a86b7ed5c4d68829a"/>    <section>
+    <title>EV_MAKE</title>
+<indexterm><primary>EV_MAKE</primary><secondary>ImGuiBackendMALI.C</secondary></indexterm>
+<indexterm><primary>ImGuiBackendMALI.C</primary><secondary>EV_MAKE</secondary></indexterm>
+<para><computeroutput>#define EV_MAKE   1</computeroutput></para><para>
+Definition at line 41 of file ImGuiBackendMALI.C.</para>
+    </section><anchor xml:id="_ImGuiBackendMALI_8C_1aab9107b6770f76546435deef4d70880c"/>    <section>
+    <title>EV_REPEAT</title>
+<indexterm><primary>EV_REPEAT</primary><secondary>ImGuiBackendMALI.C</secondary></indexterm>
+<indexterm><primary>ImGuiBackendMALI.C</primary><secondary>EV_REPEAT</secondary></indexterm>
+<para><computeroutput>#define EV_REPEAT   2</computeroutput></para><para>
+Definition at line 43 of file ImGuiBackendMALI.C.</para>
+    </section><anchor xml:id="_ImGuiBackendMALI_8C_1a22dd9d967cbe39a94c26153f1e96ec1e"/>    <section>
+    <title>NELEMS</title>
+<indexterm><primary>NELEMS</primary><secondary>ImGuiBackendMALI.C</secondary></indexterm>
+<indexterm><primary>ImGuiBackendMALI.C</primary><secondary>NELEMS</secondary></indexterm>
+<para><computeroutput>#define NELEMS( x)   (sizeof(x) / sizeof((x)[0]))</computeroutput></para><para>
+Definition at line 45 of file ImGuiBackendMALI.C.</para>
+</section>
+</section>
+</section>

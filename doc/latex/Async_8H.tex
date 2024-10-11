@@ -1,0 +1,35 @@
+\hypertarget{Async_8H}{}\doxysubsection{include/jevois/\+Util/\+Async.H File Reference}
+\label{Async_8H}\index{include/jevois/Util/Async.H@{include/jevois/Util/Async.H}}
+{\ttfamily \#include $<$future$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/details/\+Async\+Impl.\+H$>$}\newline
+Include dependency graph for Async.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{Async_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Async_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Function , class... Args$>$ }\\std\+::future$<$ std\+::invoke\+\_\+result\+\_\+t$<$ std\+::decay\+\_\+t$<$ Function $>$, std\+::decay\+\_\+t$<$ Args $>$... $>$ $>$ \mbox{\hyperlink{namespacejevois_a5c82f5b2b9dd4a98d343f9e54eea0fff}{jevois\+::async}} (Function \&\&f, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 使用线程池异步执行 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function , class... Args$>$ }\\std\+::future$<$ std\+::invoke\+\_\+result\+\_\+t$<$ std\+::decay\+\_\+t$<$ Function $>$, std\+::decay\+\_\+t$<$ Args $>$... $>$ $>$ \mbox{\hyperlink{namespacejevois_a5dbfbd62f0701adcef770280e0bc31f6}{jevois\+::async\+\_\+little}} (Function \&\&f, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 使用线程池异步执行 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{group__utils_ga7649d6ce325acac1606bceec036f171b}{jevois\+::joinall}} (std\+::vector$<$ std\+::future$<$ T $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga019e31f64c16f1b7a51bd2676acddfb9}{jevois\+::joinall}} (std\+::vector$<$ std\+::future$<$ void $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\end{DoxyCompactItemize}

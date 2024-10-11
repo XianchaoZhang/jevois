@@ -19,7 +19,7 @@
 
 namespace jevois
 {
-  //! A trivial struct to store object recognition results
+  //! 一个用于存储对象识别结果的简单结构
   struct ObjReco
   {
       float score = 0.0F;

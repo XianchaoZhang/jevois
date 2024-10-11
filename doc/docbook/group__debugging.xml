@@ -1,0 +1,484 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__debugging">
+<title>调试辅助类、函数和宏</title>
+<indexterm><primary>调试辅助类、函数和宏</primary></indexterm>
+<section>
+<title> </title>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Log">jevois::Log&lt; Level &gt;</link></para>
+
+<para>Logger 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1timed__lock__guard">jevois::timed_lock_guard</link></para>
+
+<para>在 std::timed_mutex 上获取锁对象，或在等待 1 秒后 LFATAL </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Profiler">jevois::Profiler</link></para>
+
+<para>简单的 profiler 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Timer">jevois::Timer</link></para>
+
+<para>简单计时器类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1TimerOne">jevois::TimerOne</link></para>
+
+<para>简单的一次性计时器类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Watchdog">jevois::Watchdog</link></para>
+
+<para>简单的看门狗类 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG</link>(msg)</para>
+
+<para>方便用户打印出控制台或系统日志消息的宏，DEBUG 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gad545842aa2c640a2cbbd12bd249f1c66">PLDEBUG</link>(msg)</para>
+
+<para>与 LDEBUG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gadf127ca2262cc160830da49c37d04e85">LINFO</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏，INFO 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gaea08c108b85ea1f927c0066dc146dafe">PLINFO</link>(msg)</para>
+
+<para>与 LINFO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏， ERROR level </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga423f8c25512020248b543a103130cabf">PLERROR</link>(msg)</para>
+
+<para>与 LERROR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(msg)</para>
+
+<para>Convenience macro for users to print out console or syslog messages, FATAL level. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga905cdef856c6a279bdc4a5f037a25c52">PLFATAL</link>(msg)</para>
+
+<para>方便用户打印控制台或系统日志消息的宏，FATAL 级别 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga16c96efb84f03f7ded9bfdd977405596">JEVOIS_ASSERT</link>(cond)</para>
+
+<para>测试某事是否为真，如果不是，则发出 LFATAL </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga9061a9b1a920652dd863efb219c0d9d4">JEVOIS_TRACE</link>(level)</para>
+
+<para>Trace object. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__debugging_1ga36695a40a90d579eef600d90c82484f5">JEVOIS_TIMED_LOCK</link>(mtx)</para>
+
+<para>辅助宏用于创建 timed_lock_guard 对象 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__debugging_1gac5f7014e430b19db36d4284254f886ef">jevois::warnAndRethrowException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并重新抛出它 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga7460b83ad6c4523ba897c81362742027">jevois::warnAndIgnoreException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并忽略它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1gac577d140e95998b907a3d8ee82d8f9c5">jevois::warnAndRethrowParamCallbackException</link> (std::string const &amp;descriptor, std::string const &amp;strval)</para>
+
+<para>参数回调异常的便捷函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1ga41793c253cf663f59b715c0bd2dcc2ad">jevois::logSetEngine</link> (<link linkend="_classjevois_1_1Engine">Engine</link> *e)</para>
+
+<para>设置引擎，以便所有日志消息都转发到其串行端口 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1gaede3301d7e76cf562b3c9326b7b3d686">jevois::getPythonExceptionString</link> (boost::python::error_already_set &amp;)</para>
+
+<para>Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga5cd0b0b867a9f033762819e8af37ca35">jevois::getSysInfoCPU</link> ()</para>
+
+<para>获取 CPU 信息： frequency, thermal, load </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga98e313acb940dfe5cb5168e8b0876ba8">jevois::getSysInfoMem</link> ()</para>
+
+<para>Get memory info. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1gacab36569297392a9a62000609f3d2193">jevois::getSysInfoVersion</link> ()</para>
+
+<para>Get O.S. version info. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link> = LOG_INFO</para>
+
+<para>当前日志级别 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__debugging_1ga293cae43e521f4f49ae381d1c931c7b2">jevois::traceLevel</link> = 0</para>
+
+<para>当前跟踪级别 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_group__debugging_1ga16c96efb84f03f7ded9bfdd977405596"/>    <section>
+    <title>JEVOIS_ASSERT</title>
+<indexterm><primary>JEVOIS_ASSERT</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>JEVOIS_ASSERT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_ASSERT( cond)</computeroutput></para><para>
+
+<para>测试某事是否为真，如果不是，则发出 LFATAL </para>
+</para>
+<para>
+Definition at line 241 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga36695a40a90d579eef600d90c82484f5"/>    <section>
+    <title>JEVOIS_TIMED_LOCK</title>
+<indexterm><primary>JEVOIS_TIMED_LOCK</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>JEVOIS_TIMED_LOCK</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_TIMED_LOCK( mtx)</computeroutput></para><para>
+
+<para>辅助宏用于创建 timed_lock_guard 对象 </para>
+</para>
+
+<para>在 std::timed_mutex mtx 上创建一个 timed_lock_guard，如果在超时之前无法锁定 mtx，则会抛出该异常。该保护程序将在销毁 时解锁互斥锁。 </para>
+<para>
+Definition at line 310 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga9061a9b1a920652dd863efb219c0d9d4"/>    <section>
+    <title>JEVOIS_TRACE</title>
+<indexterm><primary>JEVOIS_TRACE</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>JEVOIS_TRACE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_TRACE( level)</computeroutput></para><para>
+
+<para>Trace object. </para>
+</para>
+
+<para>像使用 std::lock_guard 一样使用它。在构造时发出一条 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG()</link> 消息，在销毁时发出一条消息。通常，您会在每个要跟踪的 函数中调用 JEVOIS_TRACE 作为第一个命令。 </para>
+<para>
+Definition at line 279 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6"/>    <section>
+    <title>LDEBUG</title>
+<indexterm><primary>LDEBUG</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>LDEBUG</secondary></indexterm>
+<para><computeroutput>#define LDEBUG( msg)</computeroutput></para><para>
+
+<para>方便用户打印出控制台或系统日志消息的宏，DEBUG 级别 </para>
+</para>
+
+<para>此宏旨在与面向流的语法一起使用，用于作为参数传递给宏的所有内容。该语法一开始有点奇怪，但您很快就会习惯它。这允许在 日志中打印出任何定义了运算符 &lt;&lt; 的数据类型（与 printf 样式的语法相反）。例如：</para>
+
+<para><literallayout><computeroutput>int&#32;x&#32;=&#32;3;&#32;std::string&#32;str&#32;=&#32;&quot;hello&quot;;&#32;jevois::StepRange&lt;int&gt;&#32;rng(0,&#32;5,&#32;100);
+LDEBUG(&quot;x=&quot;&#32;&lt;&lt;&#32;x&#32;&lt;&lt;&#32;&quot;&#32;and&#32;str=&quot;&#32;&lt;&lt;&#32;str&#32;&lt;&lt;&#32;&quot;&#32;and&#32;rng=&quot;&#32;&lt;&lt;&#32;rng);
+</computeroutput></literallayout></para>
+
+<para><note><title>Note</title>
+
+<para>这是发出消息的首选方式。不要使用 printf，不要使用 cout&lt;&lt;&quot;blah&quot; 等。</para>
+</note>
+<warning><title>Warning</title>
+
+<para><link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG()</link>、LINFO() 和 <link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR()</link> 中不允许使用换行符（&apos;
+<literallayout>&#160;&#xa;</literallayout>
+&apos; 和类似符号），因为这些可能会通过串行端口发送到 Arduino 等简单处理器，只需一个前缀（“DBG”、“INF”、“ERR”）后跟消息，即可轻松解析。如果您发送多行消息，JeVois-Inventor 可能无法运行。异常错误消息以及 <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL()</link> 和 <link linkend="_Log_8H_1a8e3f8ce22d435337fb988c530e098b25">LTHROW()</link> 中允许使用换行符，并且多行将作为几条连续消息发送。</para>
+</warning>
+根据设计，如果当前日志级别低于（高于）调试级别，则不会评估您的日志消息。这意味着您不必担心浪费 CPU 计算不会输出的消息； 例如：</para>
+
+<para><literallayout><computeroutput>LINFO(&quot;CPU-intensive&#32;function&#32;says:&#32;&quot;&#32;&lt;&lt;&#32;cpu_intensive_function());
+</computeroutput></literallayout></para>
+
+<para>如果当前日志级别为 LOG_ERR，则不会运行 CPU 密集型函数（它仍将运行一个 &quot;if&quot; 语句来检查当前日志级别）。这也意味着您永远 不应假设您的日志消息将被评估。例如： <literallayout><computeroutput>@code
+</computeroutput></literallayout> int x = 42; LDEBUG(&quot;x = &quot; &lt;&lt; (x++) ); // x 现在可能是 43 或 42，具体取决于当前日志级别... </para>
+
+<para><note><title>Note</title>
+
+<para>因为 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG()</link> 可用于调试许多快速循环，包括通过使用 <link linkend="_group__debugging_1ga9061a9b1a920652dd863efb219c0d9d4">JEVOIS_TRACE(level)</link>，所以只有在构建期间定义了 JEVOIS_LDEBUG_ENABLE 时才会编译它（通常，这是作为传递给 cmake 的选项完成的），否则它将被注释掉，这样就不会浪费 CPU。 </para>
+</note>
+</para>
+<para>
+Definition at line 158 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc"/>    <section>
+    <title>LERROR</title>
+<indexterm><primary>LERROR</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>LERROR</secondary></indexterm>
+<para><computeroutput>#define LERROR( msg)</computeroutput></para><para>
+
+<para>方便用户打印控制台或系统日志消息的宏， ERROR level </para>
+</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> </para>
+<para>
+Definition at line 196 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d"/>    <section>
+    <title>LFATAL</title>
+<indexterm><primary>LFATAL</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>LFATAL</secondary></indexterm>
+<para><computeroutput>#define LFATAL( msg)</computeroutput></para><para>
+
+<para>Convenience macro for users to print out console or syslog messages, FATAL level. </para>
+</para>
+
+<para>方便用户抛出 std::runtime_error 的便利宏，具有方便的消息格式</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> <note><title>Note</title>
+
+<para>After printing the message, this also throws std::runtime_error</para>
+</note>
+使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> 相同。此函数不会向用户提供的错误消息添加任何内容。因此，这主要用于捕获异常并通 过 <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL()</link> 发出合并错误消息的情况（可能添加更多上下文详细信息）。 <note><title>Note</title>
+
+<para>这会抛出 std::runtime_error </para>
+</note>
+</para>
+    </section><anchor xml:id="_group__debugging_1gadf127ca2262cc160830da49c37d04e85"/>    <section>
+    <title>LINFO</title>
+<indexterm><primary>LINFO</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>LINFO</secondary></indexterm>
+<para><computeroutput>#define LINFO( msg)</computeroutput></para><para>
+
+<para>方便用户打印控制台或系统日志消息的宏，INFO 级别 </para>
+</para>
+
+<para>Usage syntax is the same as for <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> </para>
+<para>
+Definition at line 179 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1gad545842aa2c640a2cbbd12bd249f1c66"/>    <section>
+    <title>PLDEBUG</title>
+<indexterm><primary>PLDEBUG</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>PLDEBUG</secondary></indexterm>
+<para><computeroutput>#define PLDEBUG( msg)</computeroutput></para><para>
+
+<para>与 LDEBUG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> 相同 </para>
+<para>
+Definition at line 166 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga423f8c25512020248b543a103130cabf"/>    <section>
+    <title>PLERROR</title>
+<indexterm><primary>PLERROR</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>PLERROR</secondary></indexterm>
+<para><computeroutput>#define PLERROR( msg)</computeroutput></para><para>
+
+<para>与 LERROR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> </para>
+<para>
+Definition at line 204 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1ga905cdef856c6a279bdc4a5f037a25c52"/>    <section>
+    <title>PLFATAL</title>
+<indexterm><primary>PLFATAL</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>PLFATAL</secondary></indexterm>
+<para><computeroutput>#define PLFATAL( msg)</computeroutput></para><para>
+
+<para>方便用户打印控制台或系统日志消息的宏，FATAL 级别 </para>
+</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> <note><title>Note</title>
+
+<para>打印消息后，这也会引发 std::runtime_error </para>
+</note>
+</para>
+<para>
+Definition at line 224 of file Log.H.</para>
+    </section><anchor xml:id="_group__debugging_1gaea08c108b85ea1f927c0066dc146dafe"/>    <section>
+    <title>PLINFO</title>
+<indexterm><primary>PLINFO</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>PLINFO</secondary></indexterm>
+<para><computeroutput>#define PLINFO( msg)</computeroutput></para><para>
+
+<para>与 LINFO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 </para>
+</para>
+
+<para>使用语法与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link> </para>
+<para>
+Definition at line 187 of file Log.H.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__debugging_1gaede3301d7e76cf562b3c9326b7b3d686"/>    <section>
+    <title>getPythonExceptionString()</title>
+<indexterm><primary>getPythonExceptionString</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>getPythonExceptionString</secondary></indexterm>
+<para><computeroutput>std::string jevois::getPythonExceptionString (boost::python::error_already_set &amp; )</computeroutput></para><para>
+
+<para>Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. </para>
+</para>
+
+<para>This code inspired from: <link xlink:href="https://github.com/abingham/boost_python_exception/tree/master/src/boost_python_exception/auto_translation">https://github.com/abingham/boost_python_exception/tree/master/src/boost_python_exception/auto_translation</link></para>
+
+<para>您通常会在 catch(boost::python::error_already_set &amp; e) { ... } 块内部使用它。 </para>
+<para>
+Definition at line 154 of file PythonException.C.</para>
+<para>
+Referenced by jevois::PythonWrapper::pythonload(), jevois::GUIhelper::reportAndIgnoreException(), jevois::warnAndIgnoreException(), jevois::warnAndRethrowException(), and jevois::warnAndRethrowParamCallbackException().</para>
+    </section><anchor xml:id="_group__debugging_1ga5cd0b0b867a9f033762819e8af37ca35"/>    <section>
+    <title>getSysInfoCPU()</title>
+<indexterm><primary>getSysInfoCPU</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>getSysInfoCPU</secondary></indexterm>
+<para><computeroutput>std::string jevois::getSysInfoCPU ( )</computeroutput></para><para>
+
+<para>获取 CPU 信息： frequency, thermal, load </para>
+</para>
+<para>
+Definition at line 24 of file SysInfo.C.</para>
+<para>
+References jevois::getFileString(), and jevois::to_string().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::Engine::parseCommand().</para>
+    </section><anchor xml:id="_group__debugging_1ga98e313acb940dfe5cb5168e8b0876ba8"/>    <section>
+    <title>getSysInfoMem()</title>
+<indexterm><primary>getSysInfoMem</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>getSysInfoMem</secondary></indexterm>
+<para><computeroutput>std::string jevois::getSysInfoMem ( )</computeroutput></para><para>
+
+<para>Get memory info. </para>
+</para>
+<para>
+Definition at line 66 of file SysInfo.C.</para>
+<para>
+References jevois::getFileString().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::Engine::parseCommand().</para>
+    </section><anchor xml:id="_group__debugging_1gacab36569297392a9a62000609f3d2193"/>    <section>
+    <title>getSysInfoVersion()</title>
+<indexterm><primary>getSysInfoVersion</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>getSysInfoVersion</secondary></indexterm>
+<para><computeroutput>std::string jevois::getSysInfoVersion ( )</computeroutput></para><para>
+
+<para>Get O.S. version info. </para>
+</para>
+<para>
+Definition at line 74 of file SysInfo.C.</para>
+<para>
+References jevois::getFileString().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::Engine::parseCommand().</para>
+    </section><anchor xml:id="_group__debugging_1ga41793c253cf663f59b715c0bd2dcc2ad"/>    <section>
+    <title>logSetEngine()</title>
+<indexterm><primary>logSetEngine</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>logSetEngine</secondary></indexterm>
+<para><computeroutput>void jevois::logSetEngine (<link linkend="_classjevois_1_1Engine">Engine</link> * e)</computeroutput></para><para>
+
+<para>设置引擎，以便所有日志消息都转发到其串行端口 </para>
+</para>
+
+<para>此功能不适用于一般用途，当用户设置其某个参数以启用将日志消息转发到串行端口时，引擎会在内部使用它。 </para>
+<para>
+Definition at line 143 of file Log.C.</para>
+<para>
+Referenced by jevois::logEnd(), jevois::Engine::postInit(), and jevois::Engine::~Engine().</para>
+    </section><anchor xml:id="_group__debugging_1ga7460b83ad6c4523ba897c81362742027"/>    <section>
+    <title>warnAndIgnoreException()</title>
+<indexterm><primary>warnAndIgnoreException</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>warnAndIgnoreException</secondary></indexterm>
+<para><computeroutput>std::string jevois::warnAndIgnoreException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并忽略它 </para>
+</para>
+
+<para>用户代码可以按如下方式使用此函数，记录一些引发的异常的踪迹，然后吞掉（忽略）该异常。请谨慎使用，吞掉异常通常会破 坏使用异常的整个逻辑。示例用法：</para>
+
+<para><literallayout><computeroutput>try&#32;{&#32;do_something_risky_and_we_dont_care_if_it_fails();&#32;}&#32;catch&#32;(...)&#32;{&#32;jevois::warnAndIgnoreException();&#32;}
+</computeroutput></literallayout></para>
+
+<para>请注意，如果有人想以其他方式报告它（例如，在 GUI 中或使用 <link linkend="_namespacejevois_1a702884502b6ac843dada7c3f24e6e1fb">drawErrorImage()</link> 的视频帧中），则记录到控制台的消息也会 作为字符串返回。 </para>
+<para>
+Definition at line 235 of file Log.C.</para>
+<para>
+References jevois::getPythonExceptionString(), LERROR, and jevois::split().</para>
+<para>
+Referenced by jevois::Camera::abortStream(), jevois::GUIhelper::compileCommand(), jevois::Engine::foreachVideoMapping(), jevois::GUIhelper::headlessDisplay(), jevois::ImGuiBackendMALI::init(), jevois::GPUshader::load(), jevois::Engine::mainLoop(), jevois::Engine::postInit(), jevois::dnn::Pipeline::process(), jevois::Engine::runScriptFromFile(), jevois::Engine::sendSerial(), jevois::CameraDevice::streamOff(), jevois::Camera::streamOff(), jevois::Camera::streamOn(), jevois::Camera::~Camera(), jevois::CameraDevice::~CameraDevice(), jevois::Engine::~Engine(), jevois::Gadget::~Gadget(), jevois::ImGuiBackendMALI::~ImGuiBackendMALI(), and jevois::MovieOutput::~MovieOutput().</para>
+    </section><anchor xml:id="_group__debugging_1gac5f7014e430b19db36d4284254f886ef"/>    <section>
+    <title>warnAndRethrowException()</title>
+<indexterm><primary>warnAndRethrowException</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>warnAndRethrowException</secondary></indexterm>
+<para><computeroutput>void jevois::warnAndRethrowException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并重新抛出它 </para>
+</para>
+
+<para>不会吞下异常的用户代码可以按如下方式使用此函数来记录一些被抛出的异常的踪迹：</para>
+
+<para><literallayout><computeroutput>try&#32;{&#32;do_something_risky();&#32;}&#32;catch&#32;(...)&#32;{&#32;jevois::warnAndRethrowException();&#32;}
+</computeroutput></literallayout></para>
+
+<para><note><title>Note</title>
+
+<para>此函数抛出异常！因此，显然只有在 catch 块内使用它才有意义。 </para>
+</note>
+</para>
+<para>
+Definition at line 202 of file Log.C.</para>
+<para>
+References jevois::getPythonExceptionString(), LERROR, and jevois::split().</para>
+<para>
+Referenced by jevois::dnn::NetworkNPU::doprocess(), and jevois::dnn::Network::ready().</para>
+    </section><anchor xml:id="_group__debugging_1gac577d140e95998b907a3d8ee82d8f9c5"/>    <section>
+    <title>warnAndRethrowParamCallbackException()</title>
+<indexterm><primary>warnAndRethrowParamCallbackException</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>warnAndRethrowParamCallbackException</secondary></indexterm>
+<para><computeroutput>void jevois::warnAndRethrowParamCallbackException (std::string const &amp; descriptor, std::string const &amp; strval)</computeroutput></para><para>
+
+<para>参数回调异常的便捷函数 </para>
+</para>
+
+<para>由 Parameter 内部使用，可能对其他人没那么有用，包含在 jevois 命名空间中，以避免必须将 boost::python 拉入 Parameter，这会将其拉入几乎所有内容并大大增加编译时间。 <note><title>Note</title>
+
+<para>此函数抛出！因此显然只有在 catch 块内使用它才有意义。 </para>
+</note>
+</para>
+<para>
+Definition at line 273 of file Log.C.</para>
+<para>
+References jevois::getPythonExceptionString(), and LERROR.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b"/>    <section>
+    <title>logLevel</title>
+<indexterm><primary>logLevel</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>logLevel</secondary></indexterm>
+<para><computeroutput>int jevois::logLevel = LOG_INFO</computeroutput></para><para>
+
+<para>当前日志级别 </para>
+</para>
+
+<para>通过改变此全局变量的值来设置日志级别。默认值为 LOG_INFO。</para>
+
+<para>可能的日志值在 sys/syslog.h 中定义，这里我们只处理以下不同数量的消息：LOG_CRIT、LOG_ERR、LOG_INFO、LOG_DEBUG。 </para>
+<para>
+Definition at line 29 of file Log.C.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_group__debugging_1ga293cae43e521f4f49ae381d1c931c7b2"/>    <section>
+    <title>traceLevel</title>
+<indexterm><primary>traceLevel</primary><secondary>调试辅助类、函数和宏</secondary></indexterm>
+<indexterm><primary>调试辅助类、函数和宏</primary><secondary>traceLevel</secondary></indexterm>
+<para><computeroutput>int jevois::traceLevel = 0</computeroutput></para><para>
+
+<para>当前跟踪级别 </para>
+</para>
+
+<para>级别越高，跟踪越详细。请注意，只有当 JEVOIS_TRACE_ENABLE 被指定为编译选项，并且跟踪消息在 LDEBUG 日志级别发出时， 这才会有效，因此在编译时还必须指定 JEVOIS_LDEBUG_ENABLE。 </para>
+<para>
+Definition at line 30 of file Log.C.</para>
+</section>
+</section>
+</section>

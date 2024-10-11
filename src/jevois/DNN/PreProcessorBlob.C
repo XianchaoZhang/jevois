@@ -68,7 +68,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
              "; did you swap NHWC vs NCHW in your intensors specification?");
 
     // --------------------------------------------------------------------------------
-    // Compute crop rectangle:
+    // 计算裁剪矩形：
     if (letterbox::get())
     {
       jevois::applyLetterBox(bw, bh, img.cols, img.rows, false);
@@ -97,7 +97,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
     }
     
     // --------------------------------------------------------------------------------
-    // Crop and resize to desired network input dims:
+    // 裁剪并调整大小以适应所需的网络输入 dims:
     cv::InterpolationFlags interpflags;
     switch (interp::get())
     {
@@ -112,8 +112,8 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
     DETAILS("Resize to %dx%d%s", blob.cols, blob.rows, letterbox::get() ? "" : " (stretch)");
     
     // --------------------------------------------------------------------------------
-    // Swap red/blue byte order if we have color and will not do planar; would be better below except that cvtColor
-    // always outputs 8U pixels so we have to do this here before possible conversion to 8S or others:
+    // 如果我们有颜色并且不会做平面，则交换红/蓝字节顺序；下面会更好，除了 cvtColor 总是输出 8U 像素，
+	// 所以我们必须在这里执行此操作，然后才能转换为 8S 或其他：
     bool swapped = false;
     if (swaprb && attr.dtype.fmt == VSI_NN_DIM_FMT_NHWC)
     {
@@ -126,11 +126,11 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
       DETAILS("Swap Red <-> Blue");
     }
 
-    // If we need to swap but will do it later, swap mean and std red/blue now:
+    // 如果我们需要交换但稍后再进行，则现在交换平均值和标准红/蓝：
     if (swaprb && swapped == false) { std::swap(m[0], m[2]); std::swap(sd[0], sd[2]); }
 
     // --------------------------------------------------------------------------------
-    // Convert and quantize if needed: First try some fast paths:
+    // 如果需要，转换并量化：首先尝试一些快速路径：
     unsigned int const tt = jevois::dnn::vsi2cv(attr.dtype.vx_type);
     unsigned int const bt = blob.depth();
     bool const uniformsd = (sd[0] == sd[1] && sd[1] == sd[2]);
@@ -150,7 +150,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
       if (bt == CV_8U && tt == CV_8S)
       {
         // --------------------
-        // Convert from 8U to 8S with DFP quantization:
+        // 使用 DFP 量化从 8U 转换为 8S：
         cv::Mat newblob(bsiz, CV_MAKETYPE(tt, blob.channels()));
  
         uint8_t const * bdata = (uint8_t const *)blob.data;
@@ -173,7 +173,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
       else if (bt == CV_8U && tt == CV_16S)
       {
         // --------------------
-        // Convert from 8U to 16S with DFP quantization:
+        // 使用 DFP 量化从 8U 转换为 16S：
         int const fl = attr.dtype.fl;
         uint8_t const * bdata = (uint8_t const *)blob.data;
         uint32_t const sz = blob.total() * blob.channels();
@@ -209,7 +209,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
         }
         notdone = false;
       }
-      // We only handle DFP: 8U->8S and 8U->16S with unit stdev here, more general code below for other cases.
+      // 我们在这里仅处理带有单位 stdev 的 DFP：8U->8S 和 8U->16S，下面针对其他情况提供更通用的代码。
     }
     
     if (notdone && uniformsd && uniformmean)
@@ -256,7 +256,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
 
     if (notdone)
     {
-      // This is the slowest path... you should add optimizations above for some specific cases:
+      // 这是最慢的路径……您应该针对某些特定情况添加上述优化：
       blob.convertTo(blob, CV_32F);
       DETAILS("Convert to 32F");
 
@@ -297,8 +297,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
     }
 
     // --------------------------------------------------------------------------------
-    // Ok, blob has desired width, height, and type, but is still packed RGB. Now deal with making a 4D shape, and R/G
-    // swapping if we have channels:
+    // 好的，blob 具有所需的宽度、高度和类型，但仍然是 RGB 封装的。现在处理制作 4D 形状，并且如果我们有通道，则进行 R/G 交换：
     int const nch = blob.channels();
     switch (nch)
     {
@@ -308,7 +307,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
     case 3:
     case 4:
     {
-      // If fmt type is auto (e.g., ONNX runtime), guess it as NCHW or NHWC based on dims:
+      // 如果 fmt 类型为自动（例如，ONNX 运行时），则根据 dims 猜测它是 NCHW 或 NHWC：
       vsi_nn_dim_fmt_e fmt = attr.dtype.fmt;
       if (fmt == VSI_NN_DIM_FMT_AUTO)
       {
@@ -320,11 +319,11 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
       {
       case VSI_NN_DIM_FMT_NCHW:
       {
-        // Convert from packed to planar:
+        // 从 packed 转换为 planar：
         int dims[] = { 1, nch, blob.rows, blob.cols };
         cv::Mat newblob(4, dims, tt);
 
-        // Create some pointers in newblob for each channel:
+        // 为每个通道在 newblob 中创建一些指针：
         cv::Mat nbc[nch];
         for (int i = 0; i < nch; ++i) nbc[i] = cv::Mat(blob.rows, blob.cols, tt, newblob.ptr(0, i));
         if (swaprb)
@@ -344,7 +343,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
 
       case VSI_NN_DIM_FMT_NHWC:
       {
-        // red/blue byte swap was handled above... Just convert to a 4D blob:
+        // 红色/蓝色字节交换已在上面处理...只需转换为 4D blob：
         blob = blob.reshape(1, { 1, bsiz.height, bsiz.width, 3 });
       }
       break;
@@ -366,10 +365,9 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorBlob::process(cv::Mat const & img,
 
 
     // --------------------------------------------------------------------------------
-    // NOTE: in principle, our code here is ready to generate several blobs.
-    // However, in practice all nets tested so far expect just one input, since they are machine vision models, except
-    // for URetinex-Net, which expects an image and a single float. Thus, here, we only generate the first blob
-    // (when numin param is at its default value of 1, otherwise up to numin blobs).
+    // 注意：原则上，此处的代码已准备好生成多个 blob。但是，实际上，到目前为止测试的所有网络都只需要一个输入，因为它们
+	// 是机器视觉模型，除了 URetinex-Net，它需要一个图像和一个浮点数。因此，在这里，我们只生成第一个 blob （当 numin 
+	// param 为其默认值 1 时，否则最多为 numin 个 blob）。
     if (bnum >= numin::get()) break;
   }
   return blobs;

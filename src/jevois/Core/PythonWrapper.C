@@ -37,14 +37,14 @@ void jevois::PythonWrapper::pythonload(std::string const & path)
   
   itsConstructionError.clear();
   
-  // Do not throw during construction, instead report construction errors later.
+  // 构造期间不要抛出，而是稍后报告构造错误。
   try
   {
     // Get the python interpreter going:
     itsMainModule = boost::python::import("__main__");
     itsMainNamespace = itsMainModule.attr("__dict__");
     
-    // Import the module. Note that we import the whole directory:
+    // 导入模块。请注意，我们导入了整个目录： 
     size_t last_slash = path.rfind('/');
     std::string const pydir = path.substr(0, last_slash);
     std::string const pyclass = path.substr(last_slash + 1, path.length() - last_slash - 4); // strip trailing .py
@@ -60,10 +60,10 @@ void jevois::PythonWrapper::pythonload(std::string const & path)
 
     boost::python::exec(execstr.c_str(), itsMainNamespace, itsMainNamespace);
     
-    // Create an instance of the python class defined in the file:
+    // 创建文件中定义的 python 类的实例：
     itsInstance = boost::python::eval((pyclass + "." + pyclass + "()").c_str(), itsMainNamespace, itsMainNamespace);
 
-    // If we are sibling of Component, register our instance with Engine, used by dynamic parameters created in python:
+    // 如果我们是 Component 的兄弟，则使用 E​​ngine 注册我们的实例，由在 python 中创建的动态参数使用：
     jevois::Component * comp = dynamic_cast<jevois::Component *>(this);
     if (comp) comp->engine()->registerPythonComponent(comp, itsInstance.ptr()->ob_type);
   }
@@ -105,7 +105,7 @@ jevois::PythonWrapper::~PythonWrapper()
 {
   std::lock_guard<std::mutex> _(itsMtx);
 
-  // If we are sibling of a Component, unregister our instance with Engine:
+  // 如果我们是组件的兄弟，则使用引擎取消注册我们的实例：
   if (itsInstance.is_none() == false)
   {
     jevois::Component * comp = dynamic_cast<jevois::Component *>(this);

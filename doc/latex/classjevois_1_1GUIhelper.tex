@@ -1,0 +1,2036 @@
+\hypertarget{classjevois_1_1GUIhelper}{}\doxysubsection{jevois\+::G\+U\+Ihelper Class Reference}
+\label{classjevois_1_1GUIhelper}\index{jevois::GUIhelper@{jevois::GUIhelper}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ihelper.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Helper class to assist modules in creating graphical and G\+UI elements. 
+
+This class only works on Je\+Vois-\/\+Pro. 
+
+Definition at line 129 of file G\+U\+Ihelper.\+H.
+
+
+
+Inheritance diagram for jevois\+::G\+U\+Ihelper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1GUIhelper__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::G\+U\+Ihelper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1GUIhelper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjevois_1_1GUIhelper_1_1ErrorData}{Error\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_ae6cc75834fffd5770e781cb293eac35a}{G\+U\+Ihelper}} (std\+::string const \&instance, bool conslock=false)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1GUIhelper_a49a2d5011402c214900130880c38d112}{$\sim$\+G\+U\+Ihelper}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame}} (unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}})
+\begin{DoxyCompactList}\small\item\em Start a new rendering frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a9ae2499fccb03d29f46ba38be1b9a9cd}{idle}} () const
+\begin{DoxyCompactList}\small\item\em Check for idle in case \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}} was called elsewhere. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a5f722e2382bd77233fc25b4f26c682db}{frame\+Started}} () const
+\begin{DoxyCompactList}\small\item\em Helper to indicate that \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}} was called, and thus \mbox{\hyperlink{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}{end\+Frame()}} should be called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img, int \&x, int \&y, unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw a \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a458520fd42c6dcc1f9ff0e1b190c04ff}{draw\+Image}} (char const $\ast$name, cv\+::\+Mat const \&img, bool rgb, int \&x, int \&y, unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw an Open\+CV image, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} const \&frame, int \&x, int \&y, unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool casync=false)
+\begin{DoxyCompactList}\small\item\em Draw the input video frame from the camera using zero-\/copy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a60be540ca92cb56bcdd5f788d708b208}{draw\+Input\+Frame2}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} const \&frame, int \&x, int \&y, unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool casync=false)
+\begin{DoxyCompactList}\small\item\em Draw the second (scaled) input video frame from the camera using zero-\/copy. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_af5ecf87b9f9622e61561da0a5e1a4891}{i2d}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a28627de127c08380c451b42bf8393fe2}{i2ds}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a404c3f9738e399dae41bc3a344af0efe}{i2ds}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a9da38e1cfcc419f2b495d990a23ff81d}{draw\+Line}} (float x1, float y1, float x2, float y2, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255))
+\begin{DoxyCompactList}\small\item\em Draw line over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a5bbeebcca24b35f664129ca3eb0b64f4}{draw\+Rect}} (float x1, float y1, float x2, float y2, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw rectangular box over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ac9e13d0ed1de8d45e3cd8093044fda39}{draw\+Poly}} (std\+::vector$<$ cv\+::\+Point $>$ const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a8077c25f21faccbbd22a25c64e553c0f}{draw\+Poly}} (std\+::vector$<$ cv\+::\+Point2f $>$ const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a7116feea7c9ee3ac3a6642a4a423ba9a}{draw\+Poly}} (cv\+::\+Mat const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a031ae5b8e5fe4040764cbd0cf0d1155d}{draw\+Circle}} (float x, float y, float r, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw circle over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a2be09b291ea743b4998af64fcf6cd79f}{draw\+Text}} (float x, float y, char const $\ast$txt, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255))
+\begin{DoxyCompactList}\small\item\em Draw text over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a5223cd41a5a912756f57408f0c82c5cd}{draw\+Text}} (float x, float y, std\+::string const \&txt, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255))
+\begin{DoxyCompactList}\small\item\em Draw text over an image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a1b4f96316e741cd202adef08b77a9c3a}{iline}} (int line=-\/1, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_aa7cfc58cc38d29e2d143b7ec3644e18e}{itext}} (char const $\ast$txt, Im\+U32 const \&col=I\+M\+\_\+\+C\+O\+L32\+\_\+\+B\+L\+A\+C\+K\+\_\+\+T\+R\+A\+NS, int line=-\/1)
+\begin{DoxyCompactList}\small\item\em Draw some overlay text on top of an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a28640fee386035f430ce617a03c68c6d}{itext}} (std\+::string const \&txt, Im\+U32 const \&col=I\+M\+\_\+\+C\+O\+L32\+\_\+\+B\+L\+A\+C\+K\+\_\+\+T\+R\+A\+NS, int line=-\/1)
+\begin{DoxyCompactList}\small\item\em Draw some overlay text on top of an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a6fdcfed83643d274768d5675f389a863}{iinfo}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&inframe, std\+::string const \&fpscpu, unsigned short winw=0, unsigned short winh=0)
+\begin{DoxyCompactList}\small\item\em Display processing and video info at bottom of screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a6c22f4d68231c60106afaaa381f4759c}{release\+Image}} (char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Release an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ab0f9caccb8af5a60dfb5d4707ab8c8ef}{release\+Image2}} (char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Release an image, second video stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}{end\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Finish current frame and render it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a14e2fa1ffb7442940828d1bfeee7d6ff}{resetstate}} (bool modulechanged=true)
+\begin{DoxyCompactList}\small\item\em Reset to default state, typically called on \mbox{\hyperlink{classjevois_1_1Module}{Module}} or video format change. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a7d3891ff73bc0624b34a8ebdc6ca9090}{report\+Error}} (std\+::string const \&err)
+\begin{DoxyCompactList}\small\item\em Report an error in an overlay window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a1e702a6d3bac26c77e29ce8c02bf2707}{report\+And\+Ignore\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Report current exception in a modal dialog, then ignore it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a8803956ef75d11c59576da09673e63ac}{report\+And\+Rethrow\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Report current exception in a modal dialog, then re-\/throw it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a687ee97232b87606cab86b8564bbed5c}{clear\+Errors}} ()
+\begin{DoxyCompactList}\small\item\em Clear all errors currently displayed in the Je\+Vois-\/\+Pro G\+UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a734afb6c5da1691848ed08b7ae382bf9}{help\+Marker}} (char const $\ast$msg, char const $\ast$msg2=nullptr, char const $\ast$msg3=nullptr)
+\begin{DoxyCompactList}\small\item\em Display a (?) label and show tooltip when it is hovered. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_aefb4c91dc93c800dd30273c5b4829ce5}{toggle\+Button}} (char const $\ast$name, bool $\ast$val)
+\begin{DoxyCompactList}\small\item\em Helper to draw a toggle button. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1GUIhelper_ac6538d23c3041223d430baf0cfc40b19}{modal}} (std\+::string const \&title, char const $\ast$text, int $\ast$default\+\_\+val=nullptr, char const $\ast$b1txt=\char`\"{}Ok\char`\"{}, char const $\ast$b2txt=\char`\"{}Cancel\char`\"{})
+\begin{DoxyCompactList}\small\item\em Helper to draw a modal with 2 choices. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a146f970f5a8fbde06b2214f413770dfe}{combo}} (std\+::string const \&name, std\+::vector$<$ std\+::string $>$ const \&items, int \&selected\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Helper to draw a combobox from a vector of strings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a83935ec7a6221b2c9401a812f70efce8}{headless\+Display}} ()
+\begin{DoxyCompactList}\small\item\em Show a message that we are running headless. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_afe463d138ed7a8ca248f6fcaf45709ca}{serlog\+Enabled}} () const
+\begin{DoxyCompactList}\small\item\em Tell whether user enabled serlog messages to G\+UI console. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a10f9f27571b8e266f59d3c259bd81bb2}{serout\+Enabled}} () const
+\begin{DoxyCompactList}\small\item\em Tell whether user enabled serout messages to G\+UI console. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_aee381445b4043ba33d414c9abb566046}{d2i}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a873b8f3be61cce52aa2a68de750f3ef1}{d2i}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a9c4a258452a66671c430066f50cfdc6f}{d2is}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelper_a6757cf5c49817f3289e0969da9e541ea}{d2is}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a5fdb8ecec8ca13927fa1efc9ff89efe6}{start\+Compilation}} ()
+\begin{DoxyCompactList}\small\item\em Compile a newly created module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a761a362c8094f562636d8860ee5e7bf7}{highlight\+Text}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em Like Im\+Gui\+::\+Textunformatted but in a highlight color (typically, red) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a74ad503e0d3fd0000c8d00cc820bb820}{demo\+Banner}} (std\+::string const \&title=\char`\"{}\char`\"{}, std\+::string const \&msg=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Display some text in a big banner, used by demo mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{classjevois_1_1GUIhelper_a5c058d6b1e48c4e61a8c665659ff8677}{pixel\+\_\+perfect\+\_\+z}} = 0.\+0F
+\begin{DoxyCompactList}\small\item\em Z distance from camera to image plane to achieve pixel-\/perfect rendering. \end{DoxyCompactList}\item 
+glm\+::mat4 \mbox{\hyperlink{classjevois_1_1GUIhelper_a02efd286259d430012d42daa6571a0a4}{proj}}
+\begin{DoxyCompactList}\small\item\em Our projection matrix. \end{DoxyCompactList}\item 
+glm\+::mat4 \mbox{\hyperlink{classjevois_1_1GUIhelper_a71c06d165e7eb5167cb585418798aa07}{view}}
+\begin{DoxyCompactList}\small\item\em Our view matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}{Compilation\+State}} \{ \newline
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ab7b89fd31a95e8a9d0764c3151ed6c11}{Idle}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aced47fb796868c95e620489b128c90d0}{Start}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a5ab40616777af96cc1e8a0e42ec21326}{Cmake}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ac77f2655641f258ce7acd7364e6a116f}{Make}}, 
+\newline
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aca22b63a6564a4dbb04a5c7560d42ce3}{Install}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ad4fe7f5979c2a91374fc9a46bd5bfbd9}{C\+Pack}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a614f505d8fb8695cb2d8ba7c201eeba8}{Success}}, 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a2a8831288056e9935a14d867ba911b2e}{Error}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ace355e4d6a0badfdc8be2c7a6c921855}{draw\+Poly\+Internal}} (Im\+Vec2 const $\ast$pts, size\+\_\+t npts, Im\+U32 col, bool filled)
+\item 
+Im\+U32 \mbox{\hyperlink{classjevois_1_1GUIhelper_abdfd01a28cdc536948502d4ddd7f8391}{apply\+Fill\+Alpha}} (Im\+U32 col) const
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_afdef4b16d59ec3b12e9f69d971ae1ef5}{draw\+Je\+Vois\+G\+UI}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_aa97aaf68c6cff9ee371fbce5d8696d33}{draw\+Info}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ae1e1893737507e26794b232e93945c49}{draw\+Parameters}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a79ca8d2fcf084dd7197c4b1de7b4dd05}{draw\+Console}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a105033c6e34881e1e4efec8f070e13b3}{draw\+Cam\+Ctrls}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a4a556f092792145786f6bdb2690c1e4f}{draw\+Tweaks}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ac95682ecf0c35233df7c44f46bfe4e95}{draw\+System}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a65f71185fe0c2fc8c908670160c7c4f1}{draw\+Menu\+Bar}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a8e65eb0c9afc3e589e5427eb532b6369}{draw\+Module\+Select}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a58274fb23d1a514a755ef9b2d625a9c1}{draw\+Error\+Popup}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a6750475ba40fa0784d530e35b0291cc6}{draw\+New\+Module\+Form}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ab54e4a57eaefbee594b2be58ef3c50f8}{compile\+Module}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a6a6d75f55fa3518ca37e756e403afe14}{new\+Mod\+Entry}} (char const $\ast$wname, std\+::string \&str, char const $\ast$desc, char const $\ast$hint, char const $\ast$hlp)
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_acf79dece1197c898825f5753b816e10f}{setparstr}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a160d084b123b5abb6388905498349d74}{descriptor}}, std\+::string const \&val)
+\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classjevois_1_1GUIhelper_a01e1168a4cdf67d5dcca86860056f4a3}{setparval}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a160d084b123b5abb6388905498349d74}{descriptor}}, T const \&val)
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a5db396b381f5d981f164a377c0e268d5}{on\+Param\+Change}} (gui\+::scale const \&param, float const \&newval) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_aca9cb306829da995d0021a77079ca5a8}{on\+Param\+Change}} (gui\+::rounding const \&param, int const \&newval) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a0637c38af3459702ad9241441f597ad3}{on\+Param\+Change}} (gui\+::style const \&param, gui\+::\+Gui\+Style const \&newval) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_a48a9987b67ed011feac2c29533e197e6}{on\+Param\+Change}} (gui\+::twirl const \&param, float const \&newval) override
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_ade830d05035437dd04bc5aba6483f945}{compile\+Command}} (std\+::string const \&cmd, std\+::string \&msg)
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelper_ae448f6f9ad79fd1ffbe15c3982ce4a81}{run\+New\+Module}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}} $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_ae99e433c45e733f75e8746cf642d8595}{its\+Images}}
+\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}} $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a09c0afe6667a15deb5fe854b6c8a834d}{its\+Images2}}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}} $\ast$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a2731215077fd852337ff1482af279fd7}{its\+Last\+Drawn\+Image}} = nullptr
+\item 
+int \mbox{\hyperlink{classjevois_1_1GUIhelper_a8f6fe2002f3635a872a677f3ab44c638}{its\+Last\+Drawn\+Text\+Line}} = -\/1
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a1d9fcedc8888b608f5601239dc6d3ada}{its\+Using\+Scaled\+Image}} = false
+\item 
+float \mbox{\hyperlink{classjevois_1_1GUIhelper_aeea81945ef46517a3ea8ce8b7cc5504a}{its\+Scaled\+Image\+FacX}} = 1.\+0F
+\item 
+float \mbox{\hyperlink{classjevois_1_1GUIhelper_ab9afa7b184aa0f7d8ab478cf4177fc4e}{its\+Scaled\+Image\+FacY}} = 1.\+0F
+\item 
+std\+::chrono\+::time\+\_\+point$<$ std\+::chrono\+::steady\+\_\+clock $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_ac18a4b63aca8172dade9e623c3232a71}{its\+Last\+Event\+Time}}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_aeb60252372fede27d9db7fe9e0846e04}{its\+Idle}} = true
+\begin{DoxyCompactList}\small\item\em Idle state, updated by \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}}, used by \mbox{\hyperlink{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}{end\+Frame()}} to decide whether to draw G\+UI. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a2156a698e3d6ae27f904f8d38423690b}{its\+Idle\+Blocked}} = false
+\begin{DoxyCompactList}\small\item\em While creating/compiling new modules, prevent idle. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a84bd1cce9ca0814a9f66272fabf05b45}{its\+End\+Frame\+Called}} = true
+\item 
+std\+::mutex \mbox{\hyperlink{classjevois_1_1GUIhelper_a4485aa552c6fd57272515515964d2627}{its\+Error\+Mtx}}
+\item 
+std\+::list$<$ \mbox{\hyperlink{structjevois_1_1GUIhelper_1_1ErrorData}{Error\+Data}} $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a0749de9b605113aa24c92f7f6398fc78}{its\+Errors}}
+\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a48e356fef1b18d7f6a730fb167a17ace}{its\+Open\+Modals}}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_aaa61c34880287198df1ebcc699345dc8}{its\+Cons\+Lock}}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI}{Im\+Gui\+Backend\+M\+A\+LI}} \mbox{\hyperlink{classjevois_1_1GUIhelper_addab621fc1b37165138ce302c7e0f3b2}{its\+Backend}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_ad22c937cee5893aca65e8e821ae107f8}{its\+Window\+Title}}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiImage}{Im\+Gui\+Image}} \mbox{\hyperlink{classjevois_1_1GUIhelper_a9d0a7ee05b963c891418a895bd3d8a34}{its\+Icon}}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiImage}{Im\+Gui\+Image}} \mbox{\hyperlink{classjevois_1_1GUIhelper_a60a80a7f26a07c0afba060a5f338f7d3}{its\+Headless}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_a4d0525b156ad3c4fdf6523c653889bdb}{its\+Mod\+Name}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_ad400a5ef1213620bd879784e586d3208}{its\+Mod\+Desc}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_a694a1895dc8ffb885357542338664297}{its\+Mod\+Auth}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_af0549e577c8eb505a58a50c743c5bc5c}{its\+Mod\+Lang}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_ae02e4a2c7133692a14d1b81b2258aced}{its\+Mod\+Doc}}
+\item 
+gui\+::\+Gui\+Style \mbox{\hyperlink{classjevois_1_1GUIhelper_ad01b295ed4c139c9b0831e739c5e56d8}{its\+Current\+Style}} = gui\+::\+Gui\+Style\+::\+Dark
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_adbc97729e068f87607c2910358d37ce6}{its\+Show\+Style\+Editor}} = false
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a1c15575f27d2e92067dc3d370814f1e7}{its\+Show\+App\+Metrics}} = false
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_ac74ae7ac2701da1f556042505e097524}{its\+Show\+Im\+Gui\+Demo}} = false
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a72c124d0e9cfdb86f7159d8f42b2d2d0}{its\+Ser\+Log\+Enabled}} = true
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a6135eb46d08b40917526154e428b55b1}{its\+Ser\+Out\+Enabled}} = false
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a28d193f37e420440e3b5e476e6bd1a2a}{its\+Show\+Hard\+Serial\+Win}} = false
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_ad549f8bc8b32cc66262c82d99236333a}{its\+Show\+Usb\+Serial\+Win}} = false
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}} $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a198d66bd59d5076a9c3c9de1074c8fe8}{its\+Cfg\+Editor}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}} $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_a63acaded32df5d9e2f704c4e2ee3507f}{its\+Code\+Editor}}
+\item 
+std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_accab7627abdde78781b82fa1db671c21}{its\+Dnn\+Get\+Fut}}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_acacd5af912e67fe8427d89361fc80f35}{its\+Refresh\+Video\+Mappings}} = false
+\item 
+int \mbox{\hyperlink{classjevois_1_1GUIhelper_ad5244574b47ec429144004e7e01ed8f4}{its\+Video\+Mapping\+List\+Type}} = 0
+\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelper_a1db65c34f22a2a7acb4e019a7bd5988c}{its\+U\+S\+Bserial}} = false
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}{Compilation\+State}} \mbox{\hyperlink{classjevois_1_1GUIhelper_a9193adce0fa323793b5b89a03b2a677c}{its\+Compile\+State}} = Compilation\+State\+::\+Idle
+\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \mbox{\hyperlink{classjevois_1_1GUIhelper_a17da31d02293a20dcd4e9d89caeceaa7}{its\+New\+Mapping}}
+\item 
+std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_adcaf875504e7a5ad7ba62e2d7cfe1b88}{its\+Compile\+Fut}}
+\item 
+std\+::array$<$ std\+::string, 4 $>$ \mbox{\hyperlink{classjevois_1_1GUIhelper_ac692a07090cbfe03ab3a010f77992ee1}{its\+Compile\+Messages}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_a0fdcf134be9b51964dbb4e4c96ade625}{its\+Banner\+Title}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1GUIhelper_a0f3bef97e98cd464ad129400c43daca8}{its\+Banner\+Msg}}
+\item 
+float \mbox{\hyperlink{classjevois_1_1GUIhelper_a64b4304588615685f1dd6e4b57c19c74}{its\+Global\+Alpha}} = 1.\+0F
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_aa1adc902e3625f1447181607f19d778f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (fullscreen, bool, \char`\"{}Use a fullscreen display when true, only has effect on host. \char`\"{} \char`\"{}Platform always is fullscreen as the M\+A\+LI Open\+GL driver do not support windowing.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_afe474f931505b732e33eed1e4046054a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (winsize, cv\+::\+Size, \char`\"{}Initial window size to use on host. On platform, size is determined \char`\"{} \char`\"{}by hardware and the value of this parameter will be overwritten on init. The \char`\"{} \char`\"{}parameter can still be used to query display size.\char`\"{}, cv\+::\+Size(0, 0), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_af3350dd0f345512e302f91e3c2f49a62}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (hidesecs, float, \char`\"{}Number of seconds of inactivity from keyboard/mouse/joystick/etc after \char`\"{} \char`\"{}which we hide the G\+UI, or 0.\+0 to never hide it. Note\+: The G\+UI starts hidden until the \char`\"{} \char`\"{}first input event from a keyboard, mouse, etc.\char`\"{}, 30.\+0F, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a1e2372f51ec3495afd190f2fe0d69ce3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (scale, float, \char`\"{}Scale factor applied to the G\+UI\char`\"{}, 2.\+0f, \{ 1.\+0f, 1.\+1f, 1.\+2f, 1.\+3f, 1.\+4f, 1.\+5f, 1.\+6f, 1.\+7f, 1.\+8f, 1.\+9f, 2.\+0f, 2.\+1f, 2.\+2f, 2.\+3f, 2.\+4f, 2.\+5f, 2.\+6f, 2.\+7f, 2.\+8f, 2.\+9f, 3.\+0f \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_aecbd6c5069a91c23a155ecd6741a654a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Gui\+Style,(Light)(Dark)(Classic))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_adb8d5ece752a1aa4b5017df47a07061c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (style, Gui\+Style, \char`\"{}Color style for the Je\+Vois G\+UI\char`\"{}, Gui\+Style\+::\+Light, Gui\+Style\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a2b5c9cc80c4f0127f72ff889fba0ba64}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (rounding, int, \char`\"{}Window and widget corner rounding for the Je\+Vois G\+U\+I. \char`\"{} \char`\"{}Note than changing G\+UI scale will update this parameter as well.\char`\"{}, 4, jevois\+::\+Range$<$ int $>$(0, 24), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_afe8df453ba962a11536d403ac421161c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (overlaycolor, Im\+Color, \char`\"{}Default color to use for overlay text\char`\"{}, Im\+Color(255, 255, 255, 255), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_ac63922e4131a5721c22ad2b9664da3a2}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (linethick, float, \char`\"{}Line thickness for overlay drawings\char`\"{}, 5.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, 20.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a28313781a0e81cb42e275e393e05b7a7}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (fillalpha, float, \char`\"{}Alpha multiplier for overlay fills\char`\"{}, 0.\+25F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+0F, 1.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_add0727e144c4096a3f3cc4a261a125b3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (allowquit, bool, \char`\"{}Quit application on E\+SC key (platform) or window close (host)\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelper_a5741a72cab4867fc00d89577335b273a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (twirl, float, \char`\"{}Apply twirl effect to displayed video and images, useful \char`\"{} \char`\"{}mainly for demo mode\char`\"{}, 0.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(-\/15.\+0F, 15.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!CompilationState@{CompilationState}}
+\index{CompilationState@{CompilationState}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{CompilationState}{CompilationState}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}{jevois\+::\+G\+U\+Ihelper\+::\+Compilation\+State}}\hspace{0.3cm}{\ttfamily [protected]}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Idle@{Idle}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Idle@{Idle}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ab7b89fd31a95e8a9d0764c3151ed6c11}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ab7b89fd31a95e8a9d0764c3151ed6c11}} 
+Idle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Start@{Start}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Start@{Start}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aced47fb796868c95e620489b128c90d0}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aced47fb796868c95e620489b128c90d0}} 
+Start&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Cmake@{Cmake}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Cmake@{Cmake}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a5ab40616777af96cc1e8a0e42ec21326}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a5ab40616777af96cc1e8a0e42ec21326}} 
+Cmake&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Make@{Make}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Make@{Make}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ac77f2655641f258ce7acd7364e6a116f}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ac77f2655641f258ce7acd7364e6a116f}} 
+Make&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Install@{Install}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Install@{Install}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aca22b63a6564a4dbb04a5c7560d42ce3}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8aca22b63a6564a4dbb04a5c7560d42ce3}} 
+Install&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CPack@{CPack}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!CPack@{CPack}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ad4fe7f5979c2a91374fc9a46bd5bfbd9}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8ad4fe7f5979c2a91374fc9a46bd5bfbd9}} 
+C\+Pack&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Success@{Success}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Success@{Success}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a614f505d8fb8695cb2d8ba7c201eeba8}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a614f505d8fb8695cb2d8ba7c201eeba8}} 
+Success&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Error@{Error}!jevois::GUIhelper@{jevois::GUIhelper}}\index{jevois::GUIhelper@{jevois::GUIhelper}!Error@{Error}}}\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a2a8831288056e9935a14d867ba911b2e}\label{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8a2a8831288056e9935a14d867ba911b2e}} 
+Error&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 496 of file G\+U\+Ihelper.\+H.
+
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ae6cc75834fffd5770e781cb293eac35a}\label{classjevois_1_1GUIhelper_ae6cc75834fffd5770e781cb293eac35a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!GUIhelper@{GUIhelper}}
+\index{GUIhelper@{GUIhelper}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{GUIhelper()}{GUIhelper()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Ihelper\+::\+G\+U\+Ihelper (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance,  }\item[{bool}]{conslock = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 45 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::get\+File\+String(), h, its\+Cfg\+Editor, its\+Code\+Editor, its\+Window\+Title, J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+D\+N\+N\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG, L\+I\+N\+FO, and jevois\+::split().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a49a2d5011402c214900130880c38d112}\label{classjevois_1_1GUIhelper_a49a2d5011402c214900130880c38d112}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!````~GUIhelper@{$\sim$GUIhelper}}
+\index{````~GUIhelper@{$\sim$GUIhelper}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{$\sim$GUIhelper()}{~GUIhelper()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Ihelper\+::$\sim$\+G\+U\+Ihelper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 109 of file G\+U\+Ihelper.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+G\+E\+T\+\_\+\+F\+U\+T\+U\+RE.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_abdfd01a28cdc536948502d4ddd7f8391}\label{classjevois_1_1GUIhelper_abdfd01a28cdc536948502d4ddd7f8391}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!applyFillAlpha@{applyFillAlpha}}
+\index{applyFillAlpha@{applyFillAlpha}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{applyFillAlpha()}{applyFillAlpha()}}
+{\footnotesize\ttfamily Im\+U32 jevois\+::\+G\+U\+Ihelper\+::apply\+Fill\+Alpha (\begin{DoxyParamCaption}\item[{Im\+U32}]{col }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 623 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a687ee97232b87606cab86b8564bbed5c}\label{classjevois_1_1GUIhelper_a687ee97232b87606cab86b8564bbed5c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!clearErrors@{clearErrors}}
+\index{clearErrors@{clearErrors}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{clearErrors()}{clearErrors()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::clear\+Errors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all errors currently displayed in the Je\+Vois-\/\+Pro G\+UI. 
+
+In the Jevois\+Pro G\+UI, errors reported via \mbox{\hyperlink{classjevois_1_1GUIhelper_a7d3891ff73bc0624b34a8ebdc6ca9090}{report\+Error()}} remain displayed for a few seconds, but sometimes we want to clear them right away, e.\+g., after D\+NN pipeline threw, if the user selects another one, we want the previous error to disappear immediately since it is not applicable anymore. 
+
+Definition at line 2602 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a146f970f5a8fbde06b2214f413770dfe}\label{classjevois_1_1GUIhelper_a146f970f5a8fbde06b2214f413770dfe}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!combo@{combo}}
+\index{combo@{combo}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{combo()}{combo()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::combo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::vector$<$ std\+::string $>$ const \&}]{items,  }\item[{int \&}]{selected\+\_\+index }\end{DoxyParamCaption})}
+
+
+
+Helper to draw a combobox from a vector of strings. 
+
+Note that selected\+\_\+index is read-\/write\+: the passed value is used to display the current item in the combobox, and, when a new item is selected, its index is returned in selected\+\_\+index and true is returned. 
+
+Definition at line 1681 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ade830d05035437dd04bc5aba6483f945}\label{classjevois_1_1GUIhelper_ade830d05035437dd04bc5aba6483f945}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!compileCommand@{compileCommand}}
+\index{compileCommand@{compileCommand}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{compileCommand()}{compileCommand()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::compile\+Command (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{cmd,  }\item[{std\+::string \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2973 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::async(), L\+E\+R\+R\+OR, L\+I\+N\+FO, jevois\+::system(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ab54e4a57eaefbee594b2be58ef3c50f8}\label{classjevois_1_1GUIhelper_ab54e4a57eaefbee594b2be58ef3c50f8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!compileModule@{compileModule}}
+\index{compileModule@{compileModule}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{compileModule()}{compileModule()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::compile\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2787 of file G\+U\+Ihelper.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a873b8f3be61cce52aa2a68de750f3ef1}\label{classjevois_1_1GUIhelper_a873b8f3be61cce52aa2a68de750f3ef1}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!d2i@{d2i}}
+\index{d2i@{d2i}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{d2i()}{d2i()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::d2i (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from on-\/screen to within a rendered image. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 722 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aee381445b4043ba33d414c9abb566046}\label{classjevois_1_1GUIhelper_aee381445b4043ba33d414c9abb566046}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!d2i@{d2i}}
+\index{d2i@{d2i}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{d2i()}{d2i()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::d2i (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from on-\/screen to within a rendered image. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 689 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+G\+P\+Uimage\+::d2i().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6757cf5c49817f3289e0969da9e541ea}\label{classjevois_1_1GUIhelper_a6757cf5c49817f3289e0969da9e541ea}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!d2is@{d2is}}
+\index{d2is@{d2is}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{d2is()}{d2is()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::d2is (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from on-\/screen to within a rendered image. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 759 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a9c4a258452a66671c430066f50cfdc6f}\label{classjevois_1_1GUIhelper_a9c4a258452a66671c430066f50cfdc6f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!d2is@{d2is}}
+\index{d2is@{d2is}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{d2is()}{d2is()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::d2is (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from on-\/screen to within a rendered image. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 726 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+G\+P\+Uimage\+::d2is().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a74ad503e0d3fd0000c8d00cc820bb820}\label{classjevois_1_1GUIhelper_a74ad503e0d3fd0000c8d00cc820bb820}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!demoBanner@{demoBanner}}
+\index{demoBanner@{demoBanner}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{demoBanner()}{demoBanner()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::demo\+Banner (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{title = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{msg = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Display some text in a big banner, used by demo mode. 
+
+Any non-\/empty banner remains on screen until \mbox{\hyperlink{classjevois_1_1GUIhelper_a74ad503e0d3fd0000c8d00cc820bb820}{demo\+Banner()}} called again with empty title (default args). 
+
+Definition at line 2747 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a105033c6e34881e1e4efec8f070e13b3}\label{classjevois_1_1GUIhelper_a105033c6e34881e1e4efec8f070e13b3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawCamCtrls@{drawCamCtrls}}
+\index{drawCamCtrls@{drawCamCtrls}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawCamCtrls()}{drawCamCtrls()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Cam\+Ctrls (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1622 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a031ae5b8e5fe4040764cbd0cf0d1155d}\label{classjevois_1_1GUIhelper_a031ae5b8e5fe4040764cbd0cf0d1155d}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawCircle@{drawCircle}}
+\index{drawCircle@{drawCircle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawCircle()}{drawCircle()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Circle (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{r,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw circle over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 598 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a79ca8d2fcf084dd7197c4b1de7b4dd05}\label{classjevois_1_1GUIhelper_a79ca8d2fcf084dd7197c4b1de7b4dd05}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawConsole@{drawConsole}}
+\index{drawConsole@{drawConsole}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawConsole()}{drawConsole()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Console (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1503 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a58274fb23d1a514a755ef9b2d625a9c1}\label{classjevois_1_1GUIhelper_a58274fb23d1a514a755ef9b2d625a9c1}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawErrorPopup@{drawErrorPopup}}
+\index{drawErrorPopup@{drawErrorPopup}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawErrorPopup()}{drawErrorPopup()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Error\+Popup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2641 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a458520fd42c6dcc1f9ff0e1b190c04ff}\label{classjevois_1_1GUIhelper_a458520fd42c6dcc1f9ff0e1b190c04ff}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawImage@{drawImage}}
+\index{drawImage@{drawImage}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawImage()}{drawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Image (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{rgb,  }\item[{int \&}]{x,  }\item[{int \&}]{y,  }\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw an Open\+CV image, copying pixel data to an Open\+GL texture. 
+
+Name should be a unique name, and should typically remain constant across successive video frames. This name is used as an index to Open\+GL textures, shaders, and programs created to render the images. Note that Open\+GL will slow down and eventually run out of resources if you create too many textures, thus \mbox{\hyperlink{classjevois_1_1Module}{Module}} writers should try to minimize the number of different names that are used. If image has three or four 8-\/bit channels, interpret as R\+GB\mbox{[}A\mbox{]} if rgb is true, otherwise B\+GR\mbox{[}A\mbox{]}. If two 8-\/bit channels, interpret as Y\+U\+YV. If one, interpret as G\+R\+AY. If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. If isoverlay is true, then the image is assumed to be a semi-\/transparent overlay to be drawn on top of a previously drawn image, and we preserve the drawing parameters of that previous image. 
+
+Definition at line 314 of file G\+U\+Ihelper.\+C.
+
+
+
+References h.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}\label{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawImage@{drawImage}}
+\index{drawImage@{drawImage}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawImage()}{drawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Image (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img,  }\item[{int \&}]{x,  }\item[{int \&}]{y,  }\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw a \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, copying pixel data to an Open\+GL texture. 
+
+Name should be a unique name, and should typically remain constant across successive video frames. This name is used as an index to Open\+GL textures, shaders, and programs created to render the images. Note that Open\+GL will slow down and eventually run out of resources if you create too many textures, thus \mbox{\hyperlink{classjevois_1_1Module}{Module}} writers should try to minimize the number of different names that are used. Note that we will add a suffix to the name, corresponding to the bufindex of the \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}. If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Otherwise, x,y,w,h are not modified. If noalias is specified, the scaling factor will be rounded down to the nearest integer to prevent aliasing in the display. This may reduce the displayed image size. For example, with a 1920x1080 window, a 640x480 image would be letterboxed to 1440x1080 when noalias is false. But that is a scaling factor of 2.\+25 which may create rendering aliasing. When noalias is true, the letterboxed image size will be 1280x960 (scale factor of 2.\+0). If isoverlay is true, then the image is assumed to be a semi-\/transparent overlay to be drawn on top of a previously drawn image, and we preserve the drawing parameters of that previous image. 
+
+Definition at line 289 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, h, and jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Segment\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aa97aaf68c6cff9ee371fbce5d8696d33}\label{classjevois_1_1GUIhelper_aa97aaf68c6cff9ee371fbce5d8696d33}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawInfo@{drawInfo}}
+\index{drawInfo@{drawInfo}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawInfo()}{drawInfo()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1087 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}\label{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawInputFrame@{drawInputFrame}}
+\index{drawInputFrame@{drawInputFrame}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawInputFrame()}{drawInputFrame()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&}]{frame,  }\item[{int \&}]{x,  }\item[{int \&}]{y,  }\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw the input video frame from the camera using zero-\/copy. 
+
+If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. 
+
+Definition at line 336 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Input\+Frame\+::get(), jevois\+::\+Input\+Frame\+::get2(), h, jevois\+::\+Input\+Frame\+::has\+Scaled\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::to\+\_\+string(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a60be540ca92cb56bcdd5f788d708b208}\label{classjevois_1_1GUIhelper_a60be540ca92cb56bcdd5f788d708b208}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawInputFrame2@{drawInputFrame2}}
+\index{drawInputFrame2@{drawInputFrame2}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawInputFrame2()}{drawInputFrame2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&}]{frame,  }\item[{int \&}]{x,  }\item[{int \&}]{y,  }\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw the second (scaled) input video frame from the camera using zero-\/copy. 
+
+If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. Throws unless we are Je\+Vois-\/\+Pro Platform and the camera is set to Crop\+Scale mode. 
+
+Definition at line 366 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Input\+Frame\+::get2(), h, and jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_afdef4b16d59ec3b12e9f69d971ae1ef5}\label{classjevois_1_1GUIhelper_afdef4b16d59ec3b12e9f69d971ae1ef5}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawJeVoisGUI@{drawJeVoisGUI}}
+\index{drawJeVoisGUI@{drawJeVoisGUI}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawJeVoisGUI()}{drawJeVoisGUI()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Je\+Vois\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 828 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a9da38e1cfcc419f2b495d990a23ff81d}\label{classjevois_1_1GUIhelper_a9da38e1cfcc419f2b495d990a23ff81d}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Line (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)} }\end{DoxyParamCaption})}
+
+
+
+Draw line over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 474 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a65f71185fe0c2fc8c908670160c7c4f1}\label{classjevois_1_1GUIhelper_a65f71185fe0c2fc8c908670160c7c4f1}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawMenuBar@{drawMenuBar}}
+\index{drawMenuBar@{drawMenuBar}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawMenuBar()}{drawMenuBar()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Menu\+Bar (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 951 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a8e65eb0c9afc3e589e5427eb532b6369}\label{classjevois_1_1GUIhelper_a8e65eb0c9afc3e589e5427eb532b6369}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawModuleSelect@{drawModuleSelect}}
+\index{drawModuleSelect@{drawModuleSelect}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawModuleSelect()}{drawModuleSelect()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Module\+Select (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1007 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6750475ba40fa0784d530e35b0291cc6}\label{classjevois_1_1GUIhelper_a6750475ba40fa0784d530e35b0291cc6}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawNewModuleForm@{drawNewModuleForm}}
+\index{drawNewModuleForm@{drawNewModuleForm}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawNewModuleForm()}{drawNewModuleForm()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+New\+Module\+Form (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2031 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ae1e1893737507e26794b232e93945c49}\label{classjevois_1_1GUIhelper_ae1e1893737507e26794b232e93945c49}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawParameters@{drawParameters}}
+\index{drawParameters@{drawParameters}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawParameters()}{drawParameters()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1269 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a7116feea7c9ee3ac3a6642a4a423ba9a}\label{classjevois_1_1GUIhelper_a7116feea7c9ee3ac3a6642a4a423ba9a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawPoly@{drawPoly}}
+\index{drawPoly@{drawPoly}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawPoly()}{drawPoly()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Poly (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+For N vertices, pts should be either C\+V\+\_\+32F and 2xN or Nx2 for x,x,x,x,... y,y,y,y,..., or 1x2N or 2Nx1 for x,y,x,y,x,y...; or C\+V\+\_\+32\+F\+C2 and 1xN or Nx1. If N $<$ 2, nothing is drawn. Other shapes are illegal. 
+
+Definition at line 538 of file G\+U\+Ihelper.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and jevois\+::dnn\+::shapestr().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac9e13d0ed1de8d45e3cd8093044fda39}\label{classjevois_1_1GUIhelper_ac9e13d0ed1de8d45e3cd8093044fda39}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawPoly@{drawPoly}}
+\index{drawPoly@{drawPoly}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawPoly()}{drawPoly()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Poly (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point $>$ const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 514 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a8077c25f21faccbbd22a25c64e553c0f}\label{classjevois_1_1GUIhelper_a8077c25f21faccbbd22a25c64e553c0f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawPoly@{drawPoly}}
+\index{drawPoly@{drawPoly}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawPoly()}{drawPoly()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Poly (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point2f $>$ const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 526 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ace355e4d6a0badfdc8be2c7a6c921855}\label{classjevois_1_1GUIhelper_ace355e4d6a0badfdc8be2c7a6c921855}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawPolyInternal@{drawPolyInternal}}
+\index{drawPolyInternal@{drawPolyInternal}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawPolyInternal()}{drawPolyInternal()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Poly\+Internal (\begin{DoxyParamCaption}\item[{Im\+Vec2 const $\ast$}]{pts,  }\item[{size\+\_\+t}]{npts,  }\item[{Im\+U32}]{col,  }\item[{bool}]{filled }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 492 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5bbeebcca24b35f664129ca3eb0b64f4}\label{classjevois_1_1GUIhelper_a5bbeebcca24b35f664129ca3eb0b64f4}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawRect()}{drawRect()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Rect (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw rectangular box over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 480 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac95682ecf0c35233df7c44f46bfe4e95}\label{classjevois_1_1GUIhelper_ac95682ecf0c35233df7c44f46bfe4e95}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawSystem@{drawSystem}}
+\index{drawSystem@{drawSystem}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawSystem()}{drawSystem()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1710 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::async\+\_\+little(), jevois\+::get\+Fan\+Speed(), jevois\+::get\+File\+String(), jevois\+::get\+Num\+Installed\+N\+P\+Us(), jevois\+::get\+Num\+Installed\+S\+P\+Us(), jevois\+::get\+Num\+Installed\+T\+P\+Us(), jevois\+::get\+Num\+Installed\+V\+P\+Us(), jevois\+::get\+Sys\+Info\+C\+P\+U(), jevois\+::get\+Sys\+Info\+Mem(), jevois\+::get\+Sys\+Info\+Version(), J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+U\+RL, J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG, J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+G\+S\+E\+R\+I\+A\+L\+\_\+\+F\+I\+LE, jevois\+::split(), jevois\+::string\+Starts\+With(), and jevois\+::system().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a2be09b291ea743b4998af64fcf6cd79f}\label{classjevois_1_1GUIhelper_a2be09b291ea743b4998af64fcf6cd79f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawText@{drawText}}
+\index{drawText@{drawText}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawText()}{drawText()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{txt,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)} }\end{DoxyParamCaption})}
+
+
+
+Draw text over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 611 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5223cd41a5a912756f57408f0c82c5cd}\label{classjevois_1_1GUIhelper_a5223cd41a5a912756f57408f0c82c5cd}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawText@{drawText}}
+\index{drawText@{drawText}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawText()}{drawText()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{std\+::string const \&}]{txt,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)} }\end{DoxyParamCaption})}
+
+
+
+Draw text over an image. 
+
+Coordinates used should be image coordinates, as this function internally calls \mbox{\hyperlink{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}{i2d()}}. 
+
+Definition at line 617 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4a556f092792145786f6bdb2690c1e4f}\label{classjevois_1_1GUIhelper_a4a556f092792145786f6bdb2690c1e4f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!drawTweaks@{drawTweaks}}
+\index{drawTweaks@{drawTweaks}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{drawTweaks()}{drawTweaks()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::draw\+Tweaks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2503 of file G\+U\+Ihelper.\+C.
+
+
+
+References draw\+Tiny\+Im\+G\+U\+Idemo().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}\label{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!endFrame@{endFrame}}
+\index{endFrame@{endFrame}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{endFrame()}{endFrame()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::end\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finish current frame and render it. 
+
+This should be called once for every call to \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}}. 
+
+Definition at line 763 of file G\+U\+Ihelper.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5f722e2382bd77233fc25b4f26c682db}\label{classjevois_1_1GUIhelper_a5f722e2382bd77233fc25b4f26c682db}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!frameStarted@{frameStarted}}
+\index{frameStarted@{frameStarted}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{frameStarted()}{frameStarted()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::frame\+Started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Helper to indicate that \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}} was called, and thus \mbox{\hyperlink{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}{end\+Frame()}} should be called. 
+
+Mostly useful during exception handling inside \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}. 
+
+Definition at line 285 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a83935ec7a6221b2c9401a812f70efce8}\label{classjevois_1_1GUIhelper_a83935ec7a6221b2c9401a812f70efce8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!headlessDisplay@{headlessDisplay}}
+\index{headlessDisplay@{headlessDisplay}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{headlessDisplay()}{headlessDisplay()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::headless\+Display (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Show a message that we are running headless. 
+
+
+
+Definition at line 2719 of file G\+U\+Ihelper.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, and jevois\+::warn\+And\+Ignore\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a734afb6c5da1691848ed08b7ae382bf9}\label{classjevois_1_1GUIhelper_a734afb6c5da1691848ed08b7ae382bf9}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!helpMarker@{helpMarker}}
+\index{helpMarker@{helpMarker}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{helpMarker()}{helpMarker()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::help\+Marker (\begin{DoxyParamCaption}\item[{char const $\ast$}]{msg,  }\item[{char const $\ast$}]{msg2 = {\ttfamily nullptr},  }\item[{char const $\ast$}]{msg3 = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Display a (?) label and show tooltip when it is hovered. 
+
+If 2 or more messages are provided, they will be separated by a separator. 
+
+Definition at line 2683 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a761a362c8094f562636d8860ee5e7bf7}\label{classjevois_1_1GUIhelper_a761a362c8094f562636d8860ee5e7bf7}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!highlightText@{highlightText}}
+\index{highlightText@{highlightText}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{highlightText()}{highlightText()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::highlight\+Text (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+Like Im\+Gui\+::\+Textunformatted but in a highlight color (typically, red) 
+
+
+
+Definition at line 2739 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_af5ecf87b9f9622e61561da0a5e1a4891}\label{classjevois_1_1GUIhelper_af5ecf87b9f9622e61561da0a5e1a4891}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!i2d@{i2d}}
+\index{i2d@{i2d}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{i2d()}{i2d()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::i2d (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from within a rendered image to on-\/screen. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 434 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}\label{classjevois_1_1GUIhelper_a861122ce420cf463d8e7164e8dba0aa9}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!i2d@{i2d}}
+\index{i2d@{i2d}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{i2d()}{i2d()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::i2d (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from within a rendered image to on-\/screen. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 402 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+G\+P\+Uimage\+::i2d().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Segment\+::report(), and jevois\+::dnn\+::\+Pre\+Processor\+::sendreport().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a404c3f9738e399dae41bc3a344af0efe}\label{classjevois_1_1GUIhelper_a404c3f9738e399dae41bc3a344af0efe}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!i2ds@{i2ds}}
+\index{i2ds@{i2ds}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{i2ds()}{i2ds()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::i2ds (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from within a rendered image to on-\/screen. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 470 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a28627de127c08380c451b42bf8393fe2}\label{classjevois_1_1GUIhelper_a28627de127c08380c451b42bf8393fe2}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!i2ds@{i2ds}}
+\index{i2ds@{i2ds}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{i2ds()}{i2ds()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::i2ds (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from within a rendered image to on-\/screen. 
+
+If name is nullptr, the last image used by \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} is used. In such case, if \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}} was called on a frame that also had a second, scaled image, assume that we have displayed the full-\/resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. 
+
+Definition at line 438 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::\+G\+P\+Uimage\+::i2ds().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a9ae2499fccb03d29f46ba38be1b9a9cd}\label{classjevois_1_1GUIhelper_a9ae2499fccb03d29f46ba38be1b9a9cd}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!idle@{idle}}
+\index{idle@{idle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{idle()}{idle()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::idle (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Check for idle in case \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}} was called elsewhere. 
+
+
+
+Definition at line 229 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6fdcfed83643d274768d5675f389a863}\label{classjevois_1_1GUIhelper_a6fdcfed83643d274768d5675f389a863}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!iinfo@{iinfo}}
+\index{iinfo@{iinfo}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{iinfo()}{iinfo()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::iinfo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&}]{inframe,  }\item[{std\+::string const \&}]{fpscpu,  }\item[{unsigned short}]{winw = {\ttfamily 0},  }\item[{unsigned short}]{winh = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Display processing and video info at bottom of screen. 
+
+This helper is to be used by modules to provide a consistent info display at the bottom of the screen. fpscpu should be the string returned by \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{Timer\+::stop()}}. If winw and winh are not given, will query from display backend, which will cost a few C\+PU cycles; so pass it on if you already have it, e.\+g, from running \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}} previously. 
+
+Definition at line 654 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Input\+Frame\+::get(), jevois\+::\+Input\+Frame\+::get2(), jevois\+::\+Input\+Frame\+::has\+Scaled\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::sformat(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1b4f96316e741cd202adef08b77a9c3a}\label{classjevois_1_1GUIhelper_a1b4f96316e741cd202adef08b77a9c3a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!iline@{iline}}
+\index{iline@{iline}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{iline()}{iline()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+::iline (\begin{DoxyParamCaption}\item[{int}]{line = {\ttfamily -\/1},  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. 
+
+Use this to draw overlay text on top of a previously drawn image, it will scale by font size for you. If line is -\/1, we will increment over the last time this function was called (use with caution). Line number is reset to 0 when \mbox{\hyperlink{classjevois_1_1GUIhelper_af22c75a3177cb40616b5af89ad90733e}{draw\+Image()}} or \mbox{\hyperlink{classjevois_1_1GUIhelper_a22b55a0ca5d62a9d09eb1a3b356c35c2}{draw\+Input\+Frame()}}, etc are called. 
+
+Definition at line 631 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aa7cfc58cc38d29e2d143b7ec3644e18e}\label{classjevois_1_1GUIhelper_aa7cfc58cc38d29e2d143b7ec3644e18e}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itext@{itext}}
+\index{itext@{itext}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itext()}{itext()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::itext (\begin{DoxyParamCaption}\item[{char const $\ast$}]{txt,  }\item[{Im\+U32 const \&}]{col = {\ttfamily IM\+\_\+COL32\+\_\+BLACK\+\_\+TRANS},  }\item[{int}]{line = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Draw some overlay text on top of an image. 
+
+
+
+Definition at line 641 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Classify\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a28640fee386035f430ce617a03c68c6d}\label{classjevois_1_1GUIhelper_a28640fee386035f430ce617a03c68c6d}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itext@{itext}}
+\index{itext@{itext}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itext()}{itext()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::itext (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{txt,  }\item[{Im\+U32 const \&}]{col = {\ttfamily IM\+\_\+COL32\+\_\+BLACK\+\_\+TRANS},  }\item[{int}]{line = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Draw some overlay text on top of an image. 
+
+
+
+Definition at line 648 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::rawimage\+::itext().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac6538d23c3041223d430baf0cfc40b19}\label{classjevois_1_1GUIhelper_ac6538d23c3041223d430baf0cfc40b19}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!modal@{modal}}
+\index{modal@{modal}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{modal()}{modal()}}
+{\footnotesize\ttfamily int jevois\+::\+G\+U\+Ihelper\+::modal (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{title,  }\item[{char const $\ast$}]{text,  }\item[{int $\ast$}]{default\+\_\+val = {\ttfamily nullptr},  }\item[{char const $\ast$}]{b1txt = {\ttfamily \char`\"{}Ok\char`\"{}},  }\item[{char const $\ast$}]{b2txt = {\ttfamily \char`\"{}Cancel\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Helper to draw a modal with 2 choices. 
+
+Returns 1 if the first button was clicked, 2 if the second was, or some other value if no button was clicked (caller should just wait and try again at the next frame if not 1 or 2, passing again that returned value). By default, the first button is in focus. If default\+\_\+val is not nullptr, add a \char`\"{}don\textquotesingle{}t ask again\char`\"{} checkbox. If default\+\_\+val is 1 or 2, just return that without even showing the modal. 
+
+Definition at line 1628 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6a6d75f55fa3518ca37e756e403afe14}\label{classjevois_1_1GUIhelper_a6a6d75f55fa3518ca37e756e403afe14}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!newModEntry@{newModEntry}}
+\index{newModEntry@{newModEntry}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{newModEntry()}{newModEntry()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::new\+Mod\+Entry (\begin{DoxyParamCaption}\item[{char const $\ast$}]{wname,  }\item[{std\+::string \&}]{str,  }\item[{char const $\ast$}]{desc,  }\item[{char const $\ast$}]{hint,  }\item[{char const $\ast$}]{hlp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1695 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aca9cb306829da995d0021a77079ca5a8}\label{classjevois_1_1GUIhelper_aca9cb306829da995d0021a77079ca5a8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{gui\+::rounding const \&}]{param,  }\item[{int const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5db396b381f5d981f164a377c0e268d5}\label{classjevois_1_1GUIhelper_a5db396b381f5d981f164a377c0e268d5}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{gui\+::scale const \&}]{param,  }\item[{float const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a0637c38af3459702ad9241441f597ad3}\label{classjevois_1_1GUIhelper_a0637c38af3459702ad9241441f597ad3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{gui\+::style const \&}]{param,  }\item[{gui\+::\+Gui\+Style const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a48a9987b67ed011feac2c29533e197e6}\label{classjevois_1_1GUIhelper_a48a9987b67ed011feac2c29533e197e6}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{gui\+::twirl const \&}]{param,  }\item[{float const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 390 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6c22f4d68231c60106afaaa381f4759c}\label{classjevois_1_1GUIhelper_a6c22f4d68231c60106afaaa381f4759c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!releaseImage@{releaseImage}}
+\index{releaseImage@{releaseImage}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{releaseImage()}{releaseImage()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::release\+Image (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Release an image. 
+
+Call this if you plan on re-\/using the same image name later for an image of different size or format. Otherwise, once an image has been used once, its Open\+GL texture (including its dims) will remain the same and only the pixel values will be updated when the image is drawn again. Silently ignores if the image is not found, i.\+e., has not been drawn before. 
+
+Definition at line 675 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Segment\+::$\sim$\+Post\+Processor\+Segment().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ab0f9caccb8af5a60dfb5d4707ab8c8ef}\label{classjevois_1_1GUIhelper_ab0f9caccb8af5a60dfb5d4707ab8c8ef}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!releaseImage2@{releaseImage2}}
+\index{releaseImage2@{releaseImage2}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{releaseImage2()}{releaseImage2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::release\+Image2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Release an image, second video stream. 
+
+Call this if you plan on re-\/using the same image name later for an image of different size or format. Otherwise, once an image has been used once, its Open\+GL texture (including its dims) will remain the same and only the pixel values will be updated when the image is drawn again. Silently ignores if the image is not found, i.\+e., has not been drawn before. 
+
+Definition at line 682 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1e702a6d3bac26c77e29ce8c02bf2707}\label{classjevois_1_1GUIhelper_a1e702a6d3bac26c77e29ce8c02bf2707}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!reportAndIgnoreException@{reportAndIgnoreException}}
+\index{reportAndIgnoreException@{reportAndIgnoreException}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{reportAndIgnoreException()}{reportAndIgnoreException()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::report\+And\+Ignore\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Report current exception in a modal dialog, then ignore it. 
+
+
+
+Definition at line 2609 of file G\+U\+Ihelper.\+C.
+
+
+
+References jevois\+::get\+Python\+Exception\+String().
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a8803956ef75d11c59576da09673e63ac}\label{classjevois_1_1GUIhelper_a8803956ef75d11c59576da09673e63ac}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!reportAndRethrowException@{reportAndRethrowException}}
+\index{reportAndRethrowException@{reportAndRethrowException}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{reportAndRethrowException()}{reportAndRethrowException()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::report\+And\+Rethrow\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Report current exception in a modal dialog, then re-\/throw it. 
+
+
+
+Definition at line 2634 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a7d3891ff73bc0624b34a8ebdc6ca9090}\label{classjevois_1_1GUIhelper_a7d3891ff73bc0624b34a8ebdc6ca9090}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!reportError@{reportError}}
+\index{reportError@{reportError}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{reportError()}{reportError()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::report\+Error (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{err }\end{DoxyParamCaption})}
+
+
+
+Report an error in an overlay window. 
+
+
+
+Definition at line 2576 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process(), and jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a14e2fa1ffb7442940828d1bfeee7d6ff}\label{classjevois_1_1GUIhelper_a14e2fa1ffb7442940828d1bfeee7d6ff}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!resetstate@{resetstate}}
+\index{resetstate@{resetstate}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{resetstate()}{resetstate()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::resetstate (\begin{DoxyParamCaption}\item[{bool}]{modulechanged = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Reset to default state, typically called on \mbox{\hyperlink{classjevois_1_1Module}{Module}} or video format change. 
+
+Free images, reset matrices, etc. 
+
+Definition at line 116 of file G\+U\+Ihelper.\+C.
+
+
+
+References h, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ae448f6f9ad79fd1ffbe15c3982ce4a81}\label{classjevois_1_1GUIhelper_ae448f6f9ad79fd1ffbe15c3982ce4a81}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!runNewModule@{runNewModule}}
+\index{runNewModule@{runNewModule}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{runNewModule()}{runNewModule()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::run\+New\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 2469 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_afe463d138ed7a8ca248f6fcaf45709ca}\label{classjevois_1_1GUIhelper_afe463d138ed7a8ca248f6fcaf45709ca}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!serlogEnabled@{serlogEnabled}}
+\index{serlogEnabled@{serlogEnabled}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{serlogEnabled()}{serlogEnabled()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::serlog\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tell whether user enabled serlog messages to G\+UI console. 
+
+
+
+Definition at line 1614 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a10f9f27571b8e266f59d3c259bd81bb2}\label{classjevois_1_1GUIhelper_a10f9f27571b8e266f59d3c259bd81bb2}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!seroutEnabled@{seroutEnabled}}
+\index{seroutEnabled@{seroutEnabled}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{seroutEnabled()}{seroutEnabled()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::serout\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tell whether user enabled serout messages to G\+UI console. 
+
+
+
+Definition at line 1618 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_acf79dece1197c898825f5753b816e10f}\label{classjevois_1_1GUIhelper_acf79dece1197c898825f5753b816e10f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!setparstr@{setparstr}}
+\index{setparstr@{setparstr}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{setparstr()}{setparstr()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::setparstr (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{descriptor,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1261 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a01e1168a4cdf67d5dcca86860056f4a3}\label{classjevois_1_1GUIhelper_a01e1168a4cdf67d5dcca86860056f4a3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!setparval@{setparval}}
+\index{setparval@{setparval}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{setparval()}{setparval()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void jevois\+::\+G\+U\+Ihelper\+::setparval (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{descriptor,  }\item[{T const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5fdb8ecec8ca13927fa1efc9ff89efe6}\label{classjevois_1_1GUIhelper_a5fdb8ecec8ca13927fa1efc9ff89efe6}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!startCompilation@{startCompilation}}
+\index{startCompilation@{startCompilation}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{startCompilation()}{startCompilation()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+::start\+Compilation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Compile a newly created module. 
+
+This is mainly for internal use. Called by the code editor when saving C++ code to let us know to start the compilation process again. its\+New\+Mapping should contain the new module\textquotesingle{}s data. 
+
+Definition at line 2755 of file G\+U\+Ihelper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}\label{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!startFrame@{startFrame}}
+\index{startFrame@{startFrame}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{startFrame()}{startFrame()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::start\+Frame (\begin{DoxyParamCaption}\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h }\end{DoxyParamCaption})}
+
+
+
+Start a new rendering frame. 
+
+This should be called on every new video frame to be rendered. Will initialize Open\+GL and open the window or screen if needed. Sets the current window size into w and h, returns true if idle (no keyboard/mouse/etc events received in more than hidesecs seconds). 
+
+Definition at line 171 of file G\+U\+Ihelper.\+C.
+
+
+
+References h, L\+F\+A\+T\+AL, and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aefb4c91dc93c800dd30273c5b4829ce5}\label{classjevois_1_1GUIhelper_aefb4c91dc93c800dd30273c5b4829ce5}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!toggleButton@{toggleButton}}
+\index{toggleButton@{toggleButton}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{toggleButton()}{toggleButton()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::toggle\+Button (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{bool $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+Helper to draw a toggle button. 
+
+
+
+Definition at line 2700 of file G\+U\+Ihelper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_add0727e144c4096a3f3cc4a261a125b3}\label{classjevois_1_1GUIhelper_add0727e144c4096a3f3cc4a261a125b3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{allowquit}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Quit application on E\+SC key (platform) or window close (host)\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a28313781a0e81cb42e275e393e05b7a7}\label{classjevois_1_1GUIhelper_a28313781a0e81cb42e275e393e05b7a7}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{fillalpha}]{,  }\item[{float}]{,  }\item[{\char`\"{}Alpha multiplier for overlay fills\char`\"{}}]{,  }\item[{0.}]{25F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+0\+F, 1.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aa1adc902e3625f1447181607f19d778f}\label{classjevois_1_1GUIhelper_aa1adc902e3625f1447181607f19d778f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{fullscreen}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Use a fullscreen display when}]{true,  }\item[{only has effect on host. \char`\"{} \char`\"{}Platform always is fullscreen as the M\+A\+LI Open\+GL driver do not support windowing.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_af3350dd0f345512e302f91e3c2f49a62}\label{classjevois_1_1GUIhelper_af3350dd0f345512e302f91e3c2f49a62}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{hidesecs}]{,  }\item[{float}]{,  }\item[{\char`\"{}Number of seconds of inactivity from keyboard/mouse/joystick/etc after \char`\"{} \char`\"{}which we hide the}]{G\+UI,  }\item[{or 0.\+0 to never hide it. Note\+:\+The G\+UI starts hidden until the \char`\"{} \char`\"{}first input event from a}]{keyboard,  }\item[{mouse}]{,  }\item[{etc.\char`\"{}}]{,  }\item[{30.}]{0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac63922e4131a5721c22ad2b9664da3a2}\label{classjevois_1_1GUIhelper_ac63922e4131a5721c22ad2b9664da3a2}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{linethick}]{,  }\item[{float}]{,  }\item[{\char`\"{}Line thickness for overlay drawings\char`\"{}}]{,  }\item[{5.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+1\+F, 20.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_afe8df453ba962a11536d403ac421161c}\label{classjevois_1_1GUIhelper_afe8df453ba962a11536d403ac421161c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{overlaycolor}]{,  }\item[{Im\+Color}]{,  }\item[{\char`\"{}Default color to use for overlay text\char`\"{}}]{,  }\item[{Im\+Color(255, 255, 255, 255)}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_afe474f931505b732e33eed1e4046054a}\label{classjevois_1_1GUIhelper_afe474f931505b732e33eed1e4046054a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{winsize}]{,  }\item[{cv\+::\+Size}]{,  }\item[{\char`\"{}Initial window size to use on host. On}]{platform,  }\item[{size is determined \char`\"{} \char`\"{}by hardware and the value of this parameter will be overwritten on init. The \char`\"{} \char`\"{}parameter can still be used to query display size.\char`\"{}}]{,  }\item[{cv\+::\+Size(0, 0)}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a2b5c9cc80c4f0127f72ff889fba0ba64}\label{classjevois_1_1GUIhelper_a2b5c9cc80c4f0127f72ff889fba0ba64}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{rounding}]{,  }\item[{int}]{,  }\item[{\char`\"{}Window and widget corner rounding for the Je\+Vois G\+U\+I. \char`\"{} \char`\"{}Note than changing G\+UI scale will update this parameter as well.\char`\"{}}]{,  }\item[{4}]{,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ int $>$}]{0, 24,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1e2372f51ec3495afd190f2fe0d69ce3}\label{classjevois_1_1GUIhelper_a1e2372f51ec3495afd190f2fe0d69ce3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{scale}]{,  }\item[{float}]{,  }\item[{\char`\"{}Scale factor applied to the G\+UI\char`\"{}}]{,  }\item[{2.}]{0f,  }\item[{\{ 1.\+0f, 1.\+1f, 1.\+2f, 1.\+3f, 1.\+4f, 1.\+5f, 1.\+6f, 1.\+7f, 1.\+8f, 1.\+9f, 2.\+0f, 2.\+1f, 2.\+2f, 2.\+3f, 2.\+4f, 2.\+5f, 2.\+6f, 2.\+7f, 2.\+8f, 2.\+9f, 3.\+0f \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_adb8d5ece752a1aa4b5017df47a07061c}\label{classjevois_1_1GUIhelper_adb8d5ece752a1aa4b5017df47a07061c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{style}]{,  }\item[{Gui\+Style}]{,  }\item[{\char`\"{}Color style for the Je\+Vois G\+UI\char`\"{}}]{,  }\item[{Gui\+Style\+::\+Light}]{,  }\item[{Gui\+Style\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5741a72cab4867fc00d89577335b273a}\label{classjevois_1_1GUIhelper_a5741a72cab4867fc00d89577335b273a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{twirl}]{,  }\item[{float}]{,  }\item[{\char`\"{}Apply twirl effect to displayed video and}]{images,  }\item[{useful \char`\"{} \char`\"{}mainly for demo mode\char`\"{}}]{,  }\item[{0.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{-\/15.\+0\+F, 15.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aecbd6c5069a91c23a155ecd6741a654a}\label{classjevois_1_1GUIhelper_aecbd6c5069a91c23a155ecd6741a654a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Gui\+Style}]{,  }\item[{(Light)(Dark)(Classic)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_addab621fc1b37165138ce302c7e0f3b2}\label{classjevois_1_1GUIhelper_addab621fc1b37165138ce302c7e0f3b2}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsBackend@{itsBackend}}
+\index{itsBackend@{itsBackend}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsBackend}{itsBackend}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI}{Im\+Gui\+Backend\+M\+A\+LI}} jevois\+::\+G\+U\+Ihelper\+::its\+Backend\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 431 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a0f3bef97e98cd464ad129400c43daca8}\label{classjevois_1_1GUIhelper_a0f3bef97e98cd464ad129400c43daca8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsBannerMsg@{itsBannerMsg}}
+\index{itsBannerMsg@{itsBannerMsg}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsBannerMsg}{itsBannerMsg}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Banner\+Msg\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 505 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a0fdcf134be9b51964dbb4e4c96ade625}\label{classjevois_1_1GUIhelper_a0fdcf134be9b51964dbb4e4c96ade625}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsBannerTitle@{itsBannerTitle}}
+\index{itsBannerTitle@{itsBannerTitle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsBannerTitle}{itsBannerTitle}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Banner\+Title\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 505 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a198d66bd59d5076a9c3c9de1074c8fe8}\label{classjevois_1_1GUIhelper_a198d66bd59d5076a9c3c9de1074c8fe8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCfgEditor@{itsCfgEditor}}
+\index{itsCfgEditor@{itsCfgEditor}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCfgEditor}{itsCfgEditor}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}}$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Cfg\+Editor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 480 of file G\+U\+Ihelper.\+H.
+
+
+
+Referenced by G\+U\+Ihelper().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a63acaded32df5d9e2f704c4e2ee3507f}\label{classjevois_1_1GUIhelper_a63acaded32df5d9e2f704c4e2ee3507f}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCodeEditor@{itsCodeEditor}}
+\index{itsCodeEditor@{itsCodeEditor}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCodeEditor}{itsCodeEditor}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}}$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Code\+Editor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 483 of file G\+U\+Ihelper.\+H.
+
+
+
+Referenced by G\+U\+Ihelper().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_adcaf875504e7a5ad7ba62e2d7cfe1b88}\label{classjevois_1_1GUIhelper_adcaf875504e7a5ad7ba62e2d7cfe1b88}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCompileFut@{itsCompileFut}}
+\index{itsCompileFut@{itsCompileFut}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCompileFut}{itsCompileFut}}
+{\footnotesize\ttfamily std\+::future$<$std\+::string$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Compile\+Fut\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 499 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac692a07090cbfe03ab3a010f77992ee1}\label{classjevois_1_1GUIhelper_ac692a07090cbfe03ab3a010f77992ee1}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCompileMessages@{itsCompileMessages}}
+\index{itsCompileMessages@{itsCompileMessages}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCompileMessages}{itsCompileMessages}}
+{\footnotesize\ttfamily std\+::array$<$std\+::string, 4$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Compile\+Messages\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 501 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a9193adce0fa323793b5b89a03b2a677c}\label{classjevois_1_1GUIhelper_a9193adce0fa323793b5b89a03b2a677c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCompileState@{itsCompileState}}
+\index{itsCompileState@{itsCompileState}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCompileState}{itsCompileState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1GUIhelper_a4bc256979069fe78e0de8743fa1726c8}{Compilation\+State}} jevois\+::\+G\+U\+Ihelper\+::its\+Compile\+State = Compilation\+State\+::\+Idle\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 497 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aaa61c34880287198df1ebcc699345dc8}\label{classjevois_1_1GUIhelper_aaa61c34880287198df1ebcc699345dc8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsConsLock@{itsConsLock}}
+\index{itsConsLock@{itsConsLock}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsConsLock}{itsConsLock}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Cons\+Lock\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 429 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ad01b295ed4c139c9b0831e739c5e56d8}\label{classjevois_1_1GUIhelper_ad01b295ed4c139c9b0831e739c5e56d8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsCurrentStyle@{itsCurrentStyle}}
+\index{itsCurrentStyle@{itsCurrentStyle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsCurrentStyle}{itsCurrentStyle}}
+{\footnotesize\ttfamily gui\+::\+Gui\+Style jevois\+::\+G\+U\+Ihelper\+::its\+Current\+Style = gui\+::\+Gui\+Style\+::\+Dark\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 443 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_accab7627abdde78781b82fa1db671c21}\label{classjevois_1_1GUIhelper_accab7627abdde78781b82fa1db671c21}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsDnnGetFut@{itsDnnGetFut}}
+\index{itsDnnGetFut@{itsDnnGetFut}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsDnnGetFut}{itsDnnGetFut}}
+{\footnotesize\ttfamily std\+::future$<$std\+::string$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Dnn\+Get\+Fut\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 486 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a84bd1cce9ca0814a9f66272fabf05b45}\label{classjevois_1_1GUIhelper_a84bd1cce9ca0814a9f66272fabf05b45}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsEndFrameCalled@{itsEndFrameCalled}}
+\index{itsEndFrameCalled@{itsEndFrameCalled}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsEndFrameCalled}{itsEndFrameCalled}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+End\+Frame\+Called = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 413 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4485aa552c6fd57272515515964d2627}\label{classjevois_1_1GUIhelper_a4485aa552c6fd57272515515964d2627}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsErrorMtx@{itsErrorMtx}}
+\index{itsErrorMtx@{itsErrorMtx}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsErrorMtx}{itsErrorMtx}}
+{\footnotesize\ttfamily std\+::mutex jevois\+::\+G\+U\+Ihelper\+::its\+Error\+Mtx\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 415 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a0749de9b605113aa24c92f7f6398fc78}\label{classjevois_1_1GUIhelper_a0749de9b605113aa24c92f7f6398fc78}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsErrors@{itsErrors}}
+\index{itsErrors@{itsErrors}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsErrors}{itsErrors}}
+{\footnotesize\ttfamily std\+::list$<$\mbox{\hyperlink{structjevois_1_1GUIhelper_1_1ErrorData}{Error\+Data}}$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Errors\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 422 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a64b4304588615685f1dd6e4b57c19c74}\label{classjevois_1_1GUIhelper_a64b4304588615685f1dd6e4b57c19c74}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsGlobalAlpha@{itsGlobalAlpha}}
+\index{itsGlobalAlpha@{itsGlobalAlpha}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsGlobalAlpha}{itsGlobalAlpha}}
+{\footnotesize\ttfamily float jevois\+::\+G\+U\+Ihelper\+::its\+Global\+Alpha = 1.\+0F\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 506 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a60a80a7f26a07c0afba060a5f338f7d3}\label{classjevois_1_1GUIhelper_a60a80a7f26a07c0afba060a5f338f7d3}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsHeadless@{itsHeadless}}
+\index{itsHeadless@{itsHeadless}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsHeadless}{itsHeadless}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1ImGuiImage}{Im\+Gui\+Image}} jevois\+::\+G\+U\+Ihelper\+::its\+Headless\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 437 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a9d0a7ee05b963c891418a895bd3d8a34}\label{classjevois_1_1GUIhelper_a9d0a7ee05b963c891418a895bd3d8a34}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsIcon@{itsIcon}}
+\index{itsIcon@{itsIcon}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsIcon}{itsIcon}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1ImGuiImage}{Im\+Gui\+Image}} jevois\+::\+G\+U\+Ihelper\+::its\+Icon\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 436 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aeb60252372fede27d9db7fe9e0846e04}\label{classjevois_1_1GUIhelper_aeb60252372fede27d9db7fe9e0846e04}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsIdle@{itsIdle}}
+\index{itsIdle@{itsIdle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsIdle}{itsIdle}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Idle = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Idle state, updated by \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}}, used by \mbox{\hyperlink{classjevois_1_1GUIhelper_a109563555b4ae6a784aa94220224c55a}{end\+Frame()}} to decide whether to draw G\+UI. 
+
+
+
+Definition at line 411 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a2156a698e3d6ae27f904f8d38423690b}\label{classjevois_1_1GUIhelper_a2156a698e3d6ae27f904f8d38423690b}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsIdleBlocked@{itsIdleBlocked}}
+\index{itsIdleBlocked@{itsIdleBlocked}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsIdleBlocked}{itsIdleBlocked}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Idle\+Blocked = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+While creating/compiling new modules, prevent idle. 
+
+
+
+Definition at line 412 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ae99e433c45e733f75e8746cf642d8595}\label{classjevois_1_1GUIhelper_ae99e433c45e733f75e8746cf642d8595}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsImages@{itsImages}}
+\index{itsImages@{itsImages}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsImages}{itsImages}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string , \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}}$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Images\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 404 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a09c0afe6667a15deb5fe854b6c8a834d}\label{classjevois_1_1GUIhelper_a09c0afe6667a15deb5fe854b6c8a834d}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsImages2@{itsImages2}}
+\index{itsImages2@{itsImages2}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsImages2}{itsImages2}}
+{\footnotesize\ttfamily std\+::map$<$std\+::string , \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}}$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Images2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 404 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a2731215077fd852337ff1482af279fd7}\label{classjevois_1_1GUIhelper_a2731215077fd852337ff1482af279fd7}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsLastDrawnImage@{itsLastDrawnImage}}
+\index{itsLastDrawnImage@{itsLastDrawnImage}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsLastDrawnImage}{itsLastDrawnImage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}}$\ast$ jevois\+::\+G\+U\+Ihelper\+::its\+Last\+Drawn\+Image = nullptr\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 405 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a8f6fe2002f3635a872a677f3ab44c638}\label{classjevois_1_1GUIhelper_a8f6fe2002f3635a872a677f3ab44c638}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsLastDrawnTextLine@{itsLastDrawnTextLine}}
+\index{itsLastDrawnTextLine@{itsLastDrawnTextLine}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsLastDrawnTextLine}{itsLastDrawnTextLine}}
+{\footnotesize\ttfamily int jevois\+::\+G\+U\+Ihelper\+::its\+Last\+Drawn\+Text\+Line = -\/1\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 406 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac18a4b63aca8172dade9e623c3232a71}\label{classjevois_1_1GUIhelper_ac18a4b63aca8172dade9e623c3232a71}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsLastEventTime@{itsLastEventTime}}
+\index{itsLastEventTime@{itsLastEventTime}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsLastEventTime}{itsLastEventTime}}
+{\footnotesize\ttfamily std\+::chrono\+::time\+\_\+point$<$std\+::chrono\+::steady\+\_\+clock$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Last\+Event\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 410 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a694a1895dc8ffb885357542338664297}\label{classjevois_1_1GUIhelper_a694a1895dc8ffb885357542338664297}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsModAuth@{itsModAuth}}
+\index{itsModAuth@{itsModAuth}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsModAuth}{itsModAuth}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Mod\+Auth\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 440 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ad400a5ef1213620bd879784e586d3208}\label{classjevois_1_1GUIhelper_ad400a5ef1213620bd879784e586d3208}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsModDesc@{itsModDesc}}
+\index{itsModDesc@{itsModDesc}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsModDesc}{itsModDesc}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Mod\+Desc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 439 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ae02e4a2c7133692a14d1b81b2258aced}\label{classjevois_1_1GUIhelper_ae02e4a2c7133692a14d1b81b2258aced}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsModDoc@{itsModDoc}}
+\index{itsModDoc@{itsModDoc}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsModDoc}{itsModDoc}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Mod\+Doc\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 442 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_af0549e577c8eb505a58a50c743c5bc5c}\label{classjevois_1_1GUIhelper_af0549e577c8eb505a58a50c743c5bc5c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsModLang@{itsModLang}}
+\index{itsModLang@{itsModLang}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsModLang}{itsModLang}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Mod\+Lang\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 441 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a4d0525b156ad3c4fdf6523c653889bdb}\label{classjevois_1_1GUIhelper_a4d0525b156ad3c4fdf6523c653889bdb}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsModName@{itsModName}}
+\index{itsModName@{itsModName}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsModName}{itsModName}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Mod\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 438 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a17da31d02293a20dcd4e9d89caeceaa7}\label{classjevois_1_1GUIhelper_a17da31d02293a20dcd4e9d89caeceaa7}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsNewMapping@{itsNewMapping}}
+\index{itsNewMapping@{itsNewMapping}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsNewMapping}{itsNewMapping}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} jevois\+::\+G\+U\+Ihelper\+::its\+New\+Mapping\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 498 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a48e356fef1b18d7f6a730fb167a17ace}\label{classjevois_1_1GUIhelper_a48e356fef1b18d7f6a730fb167a17ace}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsOpenModals@{itsOpenModals}}
+\index{itsOpenModals@{itsOpenModals}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsOpenModals}{itsOpenModals}}
+{\footnotesize\ttfamily std\+::set$<$std\+::string$>$ jevois\+::\+G\+U\+Ihelper\+::its\+Open\+Modals\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 424 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_acacd5af912e67fe8427d89361fc80f35}\label{classjevois_1_1GUIhelper_acacd5af912e67fe8427d89361fc80f35}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsRefreshVideoMappings@{itsRefreshVideoMappings}}
+\index{itsRefreshVideoMappings@{itsRefreshVideoMappings}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsRefreshVideoMappings}{itsRefreshVideoMappings}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Refresh\+Video\+Mappings = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 489 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_aeea81945ef46517a3ea8ce8b7cc5504a}\label{classjevois_1_1GUIhelper_aeea81945ef46517a3ea8ce8b7cc5504a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsScaledImageFacX@{itsScaledImageFacX}}
+\index{itsScaledImageFacX@{itsScaledImageFacX}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsScaledImageFacX}{itsScaledImageFacX}}
+{\footnotesize\ttfamily float jevois\+::\+G\+U\+Ihelper\+::its\+Scaled\+Image\+FacX = 1.\+0F\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 408 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ab9afa7b184aa0f7d8ab478cf4177fc4e}\label{classjevois_1_1GUIhelper_ab9afa7b184aa0f7d8ab478cf4177fc4e}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsScaledImageFacY@{itsScaledImageFacY}}
+\index{itsScaledImageFacY@{itsScaledImageFacY}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsScaledImageFacY}{itsScaledImageFacY}}
+{\footnotesize\ttfamily float jevois\+::\+G\+U\+Ihelper\+::its\+Scaled\+Image\+FacY = 1.\+0F\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 408 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a72c124d0e9cfdb86f7159d8f42b2d2d0}\label{classjevois_1_1GUIhelper_a72c124d0e9cfdb86f7159d8f42b2d2d0}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsSerLogEnabled@{itsSerLogEnabled}}
+\index{itsSerLogEnabled@{itsSerLogEnabled}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsSerLogEnabled}{itsSerLogEnabled}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Ser\+Log\+Enabled = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 447 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a6135eb46d08b40917526154e428b55b1}\label{classjevois_1_1GUIhelper_a6135eb46d08b40917526154e428b55b1}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsSerOutEnabled@{itsSerOutEnabled}}
+\index{itsSerOutEnabled@{itsSerOutEnabled}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsSerOutEnabled}{itsSerOutEnabled}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Ser\+Out\+Enabled = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 448 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1c15575f27d2e92067dc3d370814f1e7}\label{classjevois_1_1GUIhelper_a1c15575f27d2e92067dc3d370814f1e7}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsShowAppMetrics@{itsShowAppMetrics}}
+\index{itsShowAppMetrics@{itsShowAppMetrics}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsShowAppMetrics}{itsShowAppMetrics}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Show\+App\+Metrics = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 445 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a28d193f37e420440e3b5e476e6bd1a2a}\label{classjevois_1_1GUIhelper_a28d193f37e420440e3b5e476e6bd1a2a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsShowHardSerialWin@{itsShowHardSerialWin}}
+\index{itsShowHardSerialWin@{itsShowHardSerialWin}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsShowHardSerialWin}{itsShowHardSerialWin}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Show\+Hard\+Serial\+Win = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 449 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ac74ae7ac2701da1f556042505e097524}\label{classjevois_1_1GUIhelper_ac74ae7ac2701da1f556042505e097524}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsShowImGuiDemo@{itsShowImGuiDemo}}
+\index{itsShowImGuiDemo@{itsShowImGuiDemo}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsShowImGuiDemo}{itsShowImGuiDemo}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Show\+Im\+Gui\+Demo = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 446 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_adbc97729e068f87607c2910358d37ce6}\label{classjevois_1_1GUIhelper_adbc97729e068f87607c2910358d37ce6}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsShowStyleEditor@{itsShowStyleEditor}}
+\index{itsShowStyleEditor@{itsShowStyleEditor}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsShowStyleEditor}{itsShowStyleEditor}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Show\+Style\+Editor = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 444 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ad549f8bc8b32cc66262c82d99236333a}\label{classjevois_1_1GUIhelper_ad549f8bc8b32cc66262c82d99236333a}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsShowUsbSerialWin@{itsShowUsbSerialWin}}
+\index{itsShowUsbSerialWin@{itsShowUsbSerialWin}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsShowUsbSerialWin}{itsShowUsbSerialWin}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Show\+Usb\+Serial\+Win = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 450 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1db65c34f22a2a7acb4e019a7bd5988c}\label{classjevois_1_1GUIhelper_a1db65c34f22a2a7acb4e019a7bd5988c}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsUSBserial@{itsUSBserial}}
+\index{itsUSBserial@{itsUSBserial}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsUSBserial}{itsUSBserial}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+U\+S\+Bserial = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 493 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a1d9fcedc8888b608f5601239dc6d3ada}\label{classjevois_1_1GUIhelper_a1d9fcedc8888b608f5601239dc6d3ada}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsUsingScaledImage@{itsUsingScaledImage}}
+\index{itsUsingScaledImage@{itsUsingScaledImage}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsUsingScaledImage}{itsUsingScaledImage}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+::its\+Using\+Scaled\+Image = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 407 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ad5244574b47ec429144004e7e01ed8f4}\label{classjevois_1_1GUIhelper_ad5244574b47ec429144004e7e01ed8f4}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsVideoMappingListType@{itsVideoMappingListType}}
+\index{itsVideoMappingListType@{itsVideoMappingListType}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsVideoMappingListType}{itsVideoMappingListType}}
+{\footnotesize\ttfamily int jevois\+::\+G\+U\+Ihelper\+::its\+Video\+Mapping\+List\+Type = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 490 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_ad22c937cee5893aca65e8e821ae107f8}\label{classjevois_1_1GUIhelper_ad22c937cee5893aca65e8e821ae107f8}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!itsWindowTitle@{itsWindowTitle}}
+\index{itsWindowTitle@{itsWindowTitle}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{itsWindowTitle}{itsWindowTitle}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+G\+U\+Ihelper\+::its\+Window\+Title\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 435 of file G\+U\+Ihelper.\+H.
+
+
+
+Referenced by G\+U\+Ihelper().
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a5c058d6b1e48c4e61a8c665659ff8677}\label{classjevois_1_1GUIhelper_a5c058d6b1e48c4e61a8c665659ff8677}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!pixel\_perfect\_z@{pixel\_perfect\_z}}
+\index{pixel\_perfect\_z@{pixel\_perfect\_z}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{pixel\_perfect\_z}{pixel\_perfect\_z}}
+{\footnotesize\ttfamily const float jevois\+::\+G\+U\+Ihelper\+::pixel\+\_\+perfect\+\_\+z = 0.\+0F}
+
+
+
+Z distance from camera to image plane to achieve pixel-\/perfect rendering. 
+
+
+
+Definition at line 323 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a02efd286259d430012d42daa6571a0a4}\label{classjevois_1_1GUIhelper_a02efd286259d430012d42daa6571a0a4}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!proj@{proj}}
+\index{proj@{proj}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{proj}{proj}}
+{\footnotesize\ttfamily glm\+::mat4 jevois\+::\+G\+U\+Ihelper\+::proj}
+
+
+
+Our projection matrix. 
+
+
+
+Definition at line 326 of file G\+U\+Ihelper.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelper_a71c06d165e7eb5167cb585418798aa07}\label{classjevois_1_1GUIhelper_a71c06d165e7eb5167cb585418798aa07}} 
+\index{jevois::GUIhelper@{jevois::GUIhelper}!view@{view}}
+\index{view@{view}!jevois::GUIhelper@{jevois::GUIhelper}}
+\doxyparagraph{\texorpdfstring{view}{view}}
+{\footnotesize\ttfamily glm\+::mat4 jevois\+::\+G\+U\+Ihelper\+::view}
+
+
+
+Our view matrix. 
+
+On the first call to \mbox{\hyperlink{classjevois_1_1GUIhelper_a255ddb960a7619f8e96484d03d797520}{start\+Frame()}}, the whole Open\+GL engine is initialized and the view matrix is set so that the pixel perfect image plane is vertical and centered on the origin, while the camera is translated in negative Z to achieve pixel perfect rendering. 
+
+Definition at line 332 of file G\+U\+Ihelper.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIhelper_8H}{G\+U\+Ihelper.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIhelper_8C}{G\+U\+Ihelper.\+C}}\end{DoxyCompactItemize}

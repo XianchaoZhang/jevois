@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_RawImage_8H">
+<title>include/jevois/Image/RawImage.H File Reference</title>
+<indexterm><primary>include/jevois/Image/RawImage.H</primary></indexterm>
+<programlisting>#include &lt;memory&gt;
+#include &lt;linux/videodev2.h&gt;
+#include &lt;jevois/Image/details/RawImageImpl.H&gt;
+</programlisting>Include dependency graph for RawImage.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="RawImage_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="RawImage_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link></para>
+
+<para>来自 V4L2 <link linkend="_classjevois_1_1Camera">Camera</link> 和/或发送到 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 的原始图像 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1yuyv">jevois::yuyv</link></para>
+
+<para>辅助 YUYV 颜色 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1rgb565">jevois::rgb565</link></para>
+
+<para>辅助 RGB565 颜色 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1aad6cf7ac43e2ad7e8ef6918470f40a83">jevois::yuyv::Black</link> = 0x8000</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a4f155791d15554e071aef3dfb37beb95">jevois::yuyv::DarkGrey</link> = 0x8050</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1aa3b6295010136553868f606e6a993b49">jevois::yuyv::MedGrey</link> = 0x8080</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a5f206e015ca7e099028a1a3cae787e6a">jevois::yuyv::LightGrey</link> = 0x80a0</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a76df58773f59d7f784b5fb1804f15387">jevois::yuyv::White</link> = 0x80ff</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a91969a50979e79d4974c8f459f99bdce">jevois::yuyv::DarkGreen</link> = 0x0000</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1ab086c9ac9e1997469b664642f59f8145">jevois::yuyv::MedGreen</link> = 0x0040</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a66fc676e658366005821f3331101beb8">jevois::yuyv::LightGreen</link> = 0x00ff</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a303ff8a5d1a4ec77e2570b87637a4bec">jevois::yuyv::DarkTeal</link> = 0x7070</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a461de62e75a0cfc31802e36b6f310e1b">jevois::yuyv::MedTeal</link> = 0x7090</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1ade13f94333592e4ec10742bb07e0160d">jevois::yuyv::LightTeal</link> = 0x70b0</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1acc314d90a43dbd39d4f479ed9749ba80">jevois::yuyv::DarkPurple</link> = 0xa030</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a04820055cb96407ed6444e8532d0a63e">jevois::yuyv::MedPurple</link> = 0xa050</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a78b7c2b2cefbba2a67f749af7a736a03">jevois::yuyv::LightPurple</link> = 0xa080</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a5ad84b6d7bcef10df48d4c3d2fb85a48">jevois::yuyv::DarkPink</link> = 0xff00</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a8c48179cf75fc20abacb02f29f5f1e33">jevois::yuyv::MedPink</link> = 0xff80</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1yuyv_1a327a3ef5e6651921d87c3d3c23b933d9">jevois::yuyv::LightPink</link> = 0xffff</para>
+
+<para>YUYV color value. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a32dec84c4d207a525c81ed0f0a84dd06">jevois::rgb565::Black</link> = 0x0000</para>
+
+<para>RGB565 value for: 0, 0, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a0f9fbdb23cbf551036a1fbc449a4b465">jevois::rgb565::Navy</link> = 0x000F</para>
+
+<para>RGB565 value for: 0, 0, 128. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1aac739f94be03329393d1d3ce41807e9d">jevois::rgb565::DarkGreen</link> = 0x03E0</para>
+
+<para>RGB565 value for: 0, 128, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a3ff3ae96ecf98a43cb0535fdabb6bf86">jevois::rgb565::DarkCyan</link> = 0x03EF</para>
+
+<para>RGB565 value for: 0, 128, 128. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a742aae7ffc1aec2efbdbccf9ac904376">jevois::rgb565::Maroon</link> = 0x7800</para>
+
+<para>RGB565 value for: 128, 0, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a4bbb8a5bf0fbbe4e25279a3d6ea714a0">jevois::rgb565::Purple</link> = 0x780F</para>
+
+<para>RGB565 value for: 128, 0, 128. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a5a5821324ec3ba7022611cfeaf01ba9b">jevois::rgb565::Olive</link> = 0x7BE0</para>
+
+<para>RGB565 value for: 128, 128, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a533042ff36fc263f8462e2cec9943247">jevois::rgb565::LightGrey</link> = 0xC618</para>
+
+<para>RGB565 value for: 192, 192, 192. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a8c067d0f3ff38964d39c1e952d6bb34b">jevois::rgb565::DarkGrey</link> = 0x7BEF</para>
+
+<para>RGB565 value for: 128, 128, 128. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1ac19360e9b5fc49b14411496065c86e27">jevois::rgb565::Blue</link> = 0x001F</para>
+
+<para>RGB565 value for: 0, 0, 255. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1acee23946f5913d7a62d94aa6fbd7f396">jevois::rgb565::Green</link> = 0x07E0</para>
+
+<para>RGB565 value for: 0, 255, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a16eb2dcf1f0f242ee58d946e0307d2d1">jevois::rgb565::Cyan</link> = 0x07FF</para>
+
+<para>RGB565 value for: 0, 255, 255. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a100db7e327ca883384142613343318e2">jevois::rgb565::Red</link> = 0xF800</para>
+
+<para>RGB565 value for: 255, 0, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a4724d8fd5c05556d3850c365610c30e9">jevois::rgb565::Magenta</link> = 0xF81F</para>
+
+<para>RGB565 value for: 255, 0, 255. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1af5283a1164a9b6073611cba424920bf4">jevois::rgb565::Yellow</link> = 0xFFE0</para>
+
+<para>RGB565 value for: 255, 255, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1a1f5d465ee3d1071e39d9f09293167580">jevois::rgb565::White</link> = 0xFFFF</para>
+
+<para>RGB565 value for: 255, 255, 255. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1ac9b991a2a73098987da7a670091fb590">jevois::rgb565::Orange</link> = 0xFD20</para>
+
+<para>RGB565 value for: 255, 165, 0. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1ad66a4aacfdefc7f6c851c7b92d5cd2c3">jevois::rgb565::GreenYellow</link> = 0xAFE5</para>
+
+<para>RGB565 value for: 173, 255, 47. </para>
+</listitem>
+            <listitem><para>unsigned constexpr short <link linkend="_namespacejevois_1_1rgb565_1abe57292d3c48b2de289af50ee42a281a">jevois::rgb565::Pink</link> = 0xF618</para>
+
+<para>RGB565 value for: F4 C2 C2. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

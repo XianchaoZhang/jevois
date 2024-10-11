@@ -1,76 +1,71 @@
-/*! \page ProHardware Overview of the JeVois-Pro hardware platform
+/*! \page ProHardware JeVois-Pro 硬件平台概述 
 \tableofcontents
 
 \jvimg{JeVois-Pro.png, 60%}
 
-Features at a glance:
+功能一览：
 
-- CPU: Amlogic A311D with 4x A73 @ 2.2 GHz + 2x A53 @ 1.8 GHz.
+- CPU：Amlogic A311D，配备 4x A73 @ 2.2 GHz + 2x A53 @ 1.8 GHz。
 
-- GPU: Quad-core MALI G52 MP4 @ 800 MHz.
+- GPU：四核 MALI G52 MP4 @ 800 MHz。
 
-- NPU: 5-TOPS integrated Neural Processing Unit.
+- NPU：5-TOPS 集成神经处理单元。
 
-- RAM: 4 GB LPDDR4-3200.
+内存：4 GB LPDDR4-3200。
 
-- Camera: 2MP Sony IMX290 back-illuminated Starvis sensor, 1/2.8”, 12mm lens, 1920x1080 at up to 120fps, rolling
-   shutter, wide dynamic range support.
+- 摄像头：2MP Sony IMX290 背照式 Starvis 传感器，1/2.8 英寸，12mm 镜头，1920x1080，最高 120fps，滚动快门，支持宽动态范围。
 
-- IMU: TDK InvenSense ICM-20948 with 3-axis accelerometer, 3-axis gyro, 3-axis compass, SPI bus @ 7 MHz, can be
-  synchronized with camera sensor.
+- IMU：TDK InvenSense ICM-20948 带有 3 轴加速度计、3 轴陀螺仪、3 轴罗盘、7 MHz SPI 总线，可与摄像头传感器同步。
 
-- HDMI 2.1 video + sound output, up to 4k @ 60 Hz.
+- HDMI 2.1 视频 + 声音输出，最高可达 4k @ 60 Hz。
 
-- MicroSD card slot, up to 104 MByte/s, for operating system, software and data.
+- MicroSD 卡插槽，最高 104 MByte/s，用于操作系统、软件和数据。
 
-- 2x USB 2.0 Type A ports (for keyboard, mouse, wifi, ethernet, etc).
+- 2 个 USB 2.0 A 型端口（用于键盘、鼠标、wifi、以太网等）。
 
-- 1x mini-USB OTG port.
+- 1 个 mini-USB OTG 端口。
 
-- 4-Pin UART (serial) port.
+- 4 针 UART（串行）端口。
 
-- 6-pin auxiliary power out for 5V, 3.3V, and 1.8V peripherals.
+- 6 针辅助电源输出，适用于 5V、3.3V 和 1.8V 外围设备。
 
-- 8-pin GPIO port (I2C + SPI, or 6x GPIO + GND + I/O voltage select).
+- 8 针 GPIO 端口（I2C + SPI，或 6x GPIO + GND + I/O 电压选择）。
 
-- Custom camera sensor connector, supports 1 or 2 sensors, 4x MIPI-CSI + IMU.
+- 定制相机传感器连接器，支持 1 或 2 个传感器、4x MIPI-CSI + IMU。
 
-- M.2 E-Key slot for 2230 PCIe x1/USB/SDIO/PCM/UART add-on cards (Coral TPU, WiFi, etc), supports custom JeVois
-  extension for eMMC flash. (Note: PCIe x2 not supported).
+- 用于 2230 PCIe x1/USB/SDIO/PCM/UART 附加卡（Coral TPU、WiFi 等）的 M.2 E-Key 插槽，支持用于 eMMC 闪存的自定义 JeVois 扩展。（注意：不支持 PCIe x2）。
 
-- Single 6-24 VDC input, 30 Watts max (including up to 15 Watts to power USB peripherals). Idle: 3 Watts. Running YOLOv2
-  on NPU: 5.3 Watts. Running CPU+NPU+TPU+VPU quad YOLO/SSD deep networks: 12 Watts.
+- 单个 6-24 VDC 输入，最大 30 瓦（包括为 USB 外围设备供电的高达 15 瓦）。空闲：3 瓦。在 NPU 上运行 YOLOv2：5.3 瓦。运行 CPU+NPU+TPU+VPU 四重 YOLO/SSD 深度网络：12 瓦。
 
-- Ubuntu 20.04 LTS (long-term support) aarch64 full.
+- Ubuntu 20.04 LTS（长期支持）aarch64 完整版。
 
-- OpenCV (latest) + OpenVino + all contribs and Python bindings preinstalled.
+- OpenCV（最新）+ OpenVino + 所有贡献和 Python 绑定均已预装。
 
-- JeVois Core library with 30+ included machine vision modules preinstalled.
+- JeVois Core 库预装了 30 多个机器视觉模块。
 
-- OpenGL ES 3.2, Vulkan 1.0, OpenCL 2.0, Coral Edge-TPU libraries.
+- OpenGL ES 3.2、Vulkan 1.0、OpenCL 2.0、Coral Edge-TPU 库。
 
-- Python 3.8 + numpy + scipy pre-installed.
+- 已预先安装 Python 3.8 + numpy + scipy。
 
-- Boost, Eigen, ImGui, glm, and many other C++ libraries pre-installed.
+- 预装 Boost、Eigen、ImGui、glm 和许多其他 C++ 库。
 
-- Install any extra aarch64 Ubuntu or Python packages using apt-get and pip3.
+- 使用 apt-get 和 pip3 安装任何额外的 aarch64 Ubuntu 或 Python 包。
 
-- TensorFlow-Lite 2.5, Caffe, ONNX, MxNet, and Darknet deep learning support.
+- TensorFlow-Lite 2.5、Caffe、ONNX、MxNet 和 Darknet 深度学习支持。
 
-- Import your own custom deep learning models to run inside JeVois-Pro.
+- 导入您自己的自定义深度学习模型在 JeVois-Pro 内部运行。
 
-- Program your own machine vision pipelines in C++ or Python.
+- 使用 C++ 或 Python 编写您自己的机器视觉管道。
 
-- Full cross-compilation environment allows you to first develop and test your code on a standard Ubuntu Linux PC host
-  computer, then cross-compile the same code for execution on the JeVois-Pro camera.
+- 完整的交叉编译环境允许您首先在标准 Ubuntu Linux PC 主机上开发和测试代码，然后交叉编译相同的代码以在 JeVois-Pro 相机上执行。
 
-- Weight: 80 grams (2.8 oz) with case, fan, heatsinks. Electronics only: 40 grams (1.4 oz).
+- 重量：80 克（2.8 盎司），含外壳、风扇、散热器。仅电子设备：40 克（1.4 盎司）。
 
 
 \jvimg{overview-out.png, 100%}
 
 
-Regulatory information
+监管信息 
 ----------------------
 
 - HS Tariff code: 8525804000
@@ -79,4 +74,6 @@ Regulatory information
 - Certifications: FCC, CE, RoHS, Australia C-Tick, Canada ICES-3(B)/NMB-3(B)
 
 
+
 */
+

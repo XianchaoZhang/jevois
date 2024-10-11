@@ -1,36 +1,30 @@
-/*! \page ArduinoTutorial Tutorial on how to write Arduino code that interacts with JeVois
+/*! \page ArduinoTutorial 教程：如何编写与 JeVois 交互的 Arduino 代码
 
-<h1>Controlling servos using JeVois and Arduino</h1>
+<h1>使用 JeVois 和 Arduino 控制伺服器</h1>
 
-<h2>Serial strings output by JeVois modules</h2>
+<h2>JeVois 模块输出的串行字符串</h2>
 
-In this simple example, we create an Arduino program that will listen for messages from \jvmod{DemoSaliency},
-\jvmod{RoadNavigation}, \jvmod{ObjectTracker}, \jvmod{DemoArUco}, or other modules that output messages over serial port
-that contain information about the location of a target. These modules output strings of the form:
+在这个简单的示例中，我们创建一个 Arduino 程序，它将监听来自 \jvmod{DemoSaliency}、\jvmod{RoadNavigation}、\jvmod{ObjectTracker}、\jvmod{DemoArUco} 或其他模块的消息，这些模块通过串行端口输出包含目标位置信息的消息。这些模块输出以下形式的字符串：
 
 \verbatim
 T1 <target_x>
 \endverbatim
 
-for one-dimentional guidance (e.g., direction of the vanishing point in \jvmod{RoadNavigation}), or
+用于一维导航（例如 \jvmod{RoadNavigation} 中消失点的方向），或
 
 \verbatim
 T2 <target_x> <target_y>
 \endverbatim
 
-for two-dimensional coordinates. See \ref UserSerialStyle for information about customizing thee serial messages.
+用于二维坐标。有关自定义串行消息的信息，请参阅 \ref UserSerialStyle。
 
-To make the outputs independent of video image resolution, coordinates are always normalized by all modules ot a range
-of -1000 (full left or full up) to 1000 (full right or full down).
+为了使输出独立于视频图像分辨率，所有模块始终将坐标标准化为 -1000（全左或全上）到 1000（全右或全下）的范围。
 
-One string is typically output on every video frame, that is, these strings are coming out of the JeVois camera at rates
-of 30 per second, 60 per second, or more.
+每个视频帧通常输出一个字符串，也就是说，这些字符串以每秒 30 个、每秒 60 个或更高的速率从 JeVois 相机输出。
 
-<h2>Arduino servo control</h2>
+<h2>Arduino 伺服控制</h2>
 
-Here is a simple piece of Arduino code that can parse the strings sent by JeVois and convert them into pulses that will
-control the angle of servo-motors. This code can be used to control the steering of a radio-controlled car, or to
-control the pan and tilt angles of a servo-based electric pan/titl head onto which the JeVois camera is mounted.
+这是一段简单的 Arduino 代码，可以解析 JeVois 发送的字符串并将其转换为控制伺服电机角度的脉冲。此代码可用于控制无线电遥控汽车的转向，或控制安装 JeVois 相机的伺服电动云台的 pan 和 titl 角度。
 
 \code
 // JeVois control steering or a pan/tilt head from the output of JeVois modules
@@ -153,16 +147,14 @@ void loop()
 
 \endcode
 
-<h2>Using a script.cfg file on the JeVois platform</h2>
 
-Sometimes, it is useful to set some parameters or execute some commands when a module is loaded.
+<h2>在 JeVois 平台上使用 script.cfg 文件</h2>
 
-JeVois allows you to store parameter settings and commands in a file named \c script.cfg stored in the directory of a
-module. The file \c script.cfg may contain any sequence of commands as you would type them interactively in the JeVois
-command-line interface.
+有时，在加载模块时设置一些参数或执行一些命令很有用。
 
-Here is an example for the ObjectTracker module. As you can see below, the commands here will not only set parameters on
-JeVois, but will also set the pan and tilt gains of the Arduino-controlled pan/tilt head:
+JeVois 允许您将参数设置和命令存储在模块目录中名为 \c script.cfg 的文件中。文件 \c script.cfg 可能包含任何命令序列，就像您在 JeVois 命令行界面中以交互方式输入它们一样。
+
+以下是 ObjectTracker 模块的一个示例。如下所示，此处的命令不仅会设置 JeVois 上的参数，还会设置 Arduino 控制的云台的平移和倾斜增益：
 
 \code{.py}
 # Demo configuration script for ObjectTracker module.
@@ -197,3 +189,4 @@ serout TILTGAIN 300
 
 
 */
+

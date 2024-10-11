@@ -1,15 +1,15 @@
-/*! \page ProStatus JeVois-Pro Development Status
+/*! \page ProStatus JeVois-Pro 开发状态
 
-Updated: Setp 9, 2021
+更新时间：2021 年 9 月 9 日
 
 Legend
 ------
 
-- Implemented, tested and working: \image{inline} html checkmark.png
-- Not yet implemented, or not working: \image{inline} html crossmark.png
+- 已实现、测试并运行：\image{inline} html checkmark.png
+- 尚未实现或无法运行：\image{inline} html crossmark.png
 
 
-Current development status
+目前发展状况 
 --------------------------
 
 Feature                                                                               | Status | Notes
@@ -106,55 +106,30 @@ Support for Coral M.2 board with 2xTPU chips using 2xPCIe lanes, made by Google 
 Support for custom JeVois 2xTPU board with 1 TPU on PCIe and the other on USB         | \jvok  | -
 Support for custom JeVois 2xTPU + eMMC board with PCIe hub + 2 TPUs on PCIe           | \jvok  | -
 
-Notes:
+注意：
 ------
 
-1. ARM ISP hardware reports frame collision when using IMX-290 datasheet's 720p settings. May be hardware
-incompatibility between ISP and sensor running at 720p, or bug in ARM's ISP kernel driver. Can still capture at 1080p
-and use hardware-accelerated rescaling to 720p.
+1. 使用 IMX-290 数据表的 720p 设置时，ARM ISP 硬件报告帧冲突。可能是 ISP 与以 720p 运行的传感器之间的硬件不兼容，或 ARM 的 ISP 内核驱动程序存在错误。仍然可以以 1080p 捕获并使用硬件加速重新缩放到 720p。
 
-2. Need to add support for VIDIOC_S_PARM and VIDIOC_G_PARM in the ARM ISP kernel driver for V4L2. Currently frame rate
-is determined by the chosen IMX290 operation mode and sensor settings (default 1080p @ 30fps).
+2. 需要在 V4L2 的 ARM ISP 内核驱动程序中添加对 VIDIOC_S_PARM 和 VIDIOC_G_PARM 的支持。当前帧速率由所选的 IMX290 操作模式和传感器设置决定（默认 1080p @ 30fps）。
 
-3. May be a voltage translation issue on our prototype boards, or may be a software issue. A311D chip may be too weak to
-drive resistor-based voltage divider at 7MHz SPI speed. Hardware revision of our sensor board in progress using active
-voltage translator chip. For early prototypes, assume that DMP is not operational.
+3. 可能是我们的原型板上存在电压转换问题，也可能是软件问题。A311D 芯片可能太弱，无法以 7MHz SPI 速度驱动基于电阻的分压器。我们正在使用有源电压转换器芯片对传感器板进行硬件修订。对于早期原型，假设 DMP 无法运行。
 
-4. These features have been shown to work on other development boards using the A311D chip, so they should work,
-possibly after instaling necessary drivers and other software.
+4. 这些功能已被证明可以在使用 A311D 芯片的其他开发板上工作，因此它们应该可以工作，可能在安装了必要的驱动程序和其他软件之后。
 
-5. A331D only has 1x PCIe lane. Beware that you will only be able to access one TPU on JeVois if you use the Coral
-dual-TPU board developed and sold by the Coral team. We designed a dual-TPU board that connects both TPUs to the 1x PCIe
-bus of the A311D using a PCIe switch. The board works great.
+5. A331D 仅有 1x PCIe 通道。请注意，如果您使用 Coral 团队开发和销售的 Coral 双 TPU 板，您将只能访问 JeVois 上的一个 TPU。我们设计了一个双 TPU 板，使用 PCIe 交换机将两个 TPU 连接到 A311D 的 1x PCIe 总线。该板工作得很好。
 
-7. Some aliasing issues in the shaders, which seem to only exist on the A311D and not on our desktop GPUs, require that
-processed images be displayed with an integer scaling factor, likely due to lower precision of the A311D OpenGL-ES
-processor compared to desktop full OpenGL. For example, a 640x480 YUYV processing output will show aliasing artifacts if
-scaled to fit full screen height (from 640x480 to 1440x1080 pixels, scaling factor 2.25), but displays ok if scaled by a
-factor 2 (1280x960). This only affects "old-style" JeVois machine vision modules that created a new output image with
-the processing results drawn using pixel-based drawing functions into a copy of an input image. The preferred new style
-of processing on JeVois-Pro is to simply display the 1080p raw image captured from the camera using zero-copy DMABUF,
-then have machine vision modules draw ImGui/OpenGL overlays on top of it, letting OpenGL render the image plus overlays
-(with possible alpha blending). In such scenario, no aliasing issues exist.
+7. 着色器中的一些混叠问题似乎只存在于 A311D 上，而不存在于我们的桌面 GPU 上，这要求处理后的图像以整数缩放因子显示，这可能是由于 A311D OpenGL-ES 处理器的精度低于桌面完整 OpenGL。例如，如果将 640x480 YUYV 处理输出缩放以适应全屏高度（从 640x480 到 1440x1080 像素，缩放因子 2.25），则将显示混叠伪影，但如果按因子 2（1280x960）缩放，则显示正常。这只会影响“旧式”JeVois 机器视觉模块，这些模块使用基于像素的绘图函数将处理结果绘制到输入图像的副本中，从而创建新的输出图像。 JeVois-Pro 上首选的新处理方式是使用零拷贝 DMABUF 简单地显示从相机捕获的 1080p 原始图像，然后让机器视觉模块在其上绘制 ImGui/OpenGL 覆盖层，让 OpenGL 渲染图像和覆盖层（可能带有 alpha 混合）。在这种情况下，不存在混叠问题。
 
-10. Required signals for dual camera sensors have been routed but not yet tested as we do not yet have a dual-sensor
-prototype board. Dual camera sensor boards can use 2 separate MIPI-CSI clocks, and up to 2 MIPI lanes for each
-sensor. Single camera sensor boards (e.g., default Sony IMX290 board) use one MIPI-CSI clock and up to 4 MIPI lanes.
+10. 双摄像头传感器所需的信号已布线但尚未测试，因为我们还没有双传感器原型板。双摄像头传感器板可以使用 2 个独立的 MIPI-CSI 时钟，每个传感器最多可以使用 2 个 MIPI 通道。单摄像头传感器板（例如默认的 Sony IMX290 板）使用一个 MIPI-CSI 时钟和最多 4 个 MIPI 通道。
 
-11. Supports cropping or scaling of camera frames to any size, but OpenGL, OpenCV, and others often require image width
-and height to be multiples of 32.
+11. 支持将摄像机画面裁剪或缩放到任意大小，但OpenGL、OpenCV 等通常要求图像宽度和高度为 32 的倍数。
 
-12. See \ref ProConnectors
+12. 参见 \ref ProConnectors
 
-13. Since JeVois-Pro has an HDMI output, emulating a USB webcam like we did on JeVois-A33 is of lesser interest. During
-development of algorithms, you can just connect JeVois-Pro directly to display, keyboard, and mouse, and JeVois-Pro has
-a full graphical user interface that allows you to tweak parameters, run various machine vision modules, edit Python
-code, etc. For headless operation once an algorithm is finalized, use the 4-pin micro-serial port to output machine
-vision results as text strings (e.g., "face detected at X,Y", or "QRcode decoded value is Z", etc).
+13. 由于 JeVois-Pro 具有 HDMI 输出，因此像我们在 JeVois-A33 上所做的那样模拟 USB 网络摄像头就没那么有趣了。在算法开发过程中，您只需将 JeVois-Pro 直接连接到显示器、键盘和鼠标，JeVois-Pro 具有完整的图形用户界面，可让您调整参数、运行各种机器视觉模块、编辑 Python 代码等。对于算法完成后的无头操作，请使用 4 针微型串行端口将机器视觉结果输出为文本字符串（例如，“在 X、Y 处检测到面部”，或“QRcode 解码值为 Z”，等等）。
 
-14. JeVois-Inventor is a desktop app that allows one to control a JeVois-A33 smart camera, which has no display or
-keyboard/mouse. Since JeVois-Pro has display and keyboard/mouse, the functionality of JeVois-Inventor has been converted
-into a full graphical user interface that runs directly in JeVois-Pro, thereby eliminating the need for a host
-computer entirely.
+14. JeVois-Inventor 是一款桌面应用程序，可用于控制没有显示器或键盘/鼠标的 JeVois-A33 智能相机。由于 JeVois-Pro 有显示器和键盘/鼠标，因此 JeVois-Inventor 的功能已转换为可直接在 JeVois-Pro 中运行的完整图形用户界面，从而完全不再需要主机。
 
 */
+

@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_DNN_2Utils_8H">
+<title>include/jevois/DNN/Utils.H File Reference</title>
+<indexterm><primary>include/jevois/DNN/Utils.H</primary></indexterm>
+<programlisting>#include &lt;map&gt;
+#include &lt;string&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;tensorflow/lite/c/common.h&gt;
+#include &lt;ovxlib/vsi_nn_pub.h&gt;
+#include &lt;hailo/hailort.h&gt;
+#include &lt;onnxruntime_cxx_api.h&gt;
+</programlisting>Include dependency graph for Utils.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="DNN_2Utils_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="DNN_2Utils_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1dnn">jevois::dnn</link></para>
+
+<para>深度神经网络 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; int, std::string &gt; <link linkend="_group__dnn_1ga56f17dd747d44f13a9e1f7085a3d9469">jevois::dnn::readLabelsFile</link> (std::string const &amp;fname)</para>
+
+<para>读取标签文件 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gab9823d8696c5547a1ae5e6a12262098a">jevois::dnn::getLabel</link> (std::map&lt; int, std::string &gt; const &amp;labels, int id)</para>
+
+<para>从 id 获取标签 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1gaa4745ed932b27371704c95921b170e8a">jevois::dnn::stringToRGBA</link> (std::string const &amp;label, unsigned char alpha=128)</para>
+
+<para>根据标签名称计算颜色 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1gad145daee8d4e5bb273e9088056d19405">jevois::dnn::topK</link> (float const *pfProb, float *pfMaxProb, uint32_t *pMaxClass, uint32_t outputCount, uint32_t topNum)</para>
+
+<para>获取前 k 个条目及其索引 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gad9c3f395bec79145589fd39488f884ec">jevois::dnn::shapestr</link> (cv::Mat const &amp;m)</para>
+
+<para>从数据类型为 TYPE 的 n 维 cv::Mat 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gaac2cb8a2fe11b45299e8c4c6eea9b865">jevois::dnn::shapestr</link> (TfLiteTensor const *t)</para>
+
+<para>从数据类型为 TYPE 的 n 维 TfLiteTensor 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc">jevois::dnn::shapestr</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>从数据类型为 TYPE 的 n 维 NPU 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::vector&lt; size_t &gt; <link linkend="_group__dnn_1gae60b5b58375993db5c9e51f46b6bf428">jevois::dnn::strshape</link> (std::string const &amp;str)</para>
+
+<para>从包含 AxBxC... 的字符串中获取 size_t 的向量 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1ga124e654d215055679eb24323ebaee202">jevois::dnn::tf2cv</link> (TfLiteType t)</para>
+
+<para>从 TensorFlow 数据类型转换为 OpenCV </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1gacff04669a655ea47c1eac3eeaa9a8ab4">jevois::dnn::tf2vsi</link> (TfLiteType t)</para>
+
+<para>从 TensorFlow 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1ga2fbb284d549bdd6e69c18436a294f38c">jevois::dnn::vsi2cv</link> (vsi_nn_type_e t)</para>
+
+<para>从NPU数据类型转换为 OpenCV </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1ga82f43e88e1e64aa6a97b0bdc85747afb">jevois::dnn::clamp</link> (cv::Rect &amp;r, int width, int height)</para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1ga44ad3cd1fee2ce347dc215585cd8e20b">jevois::dnn::clamp</link> (cv::Rect2f &amp;r, float width, float height)</para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</listitem>
+            <listitem><para>std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_group__dnn_1ga7fa178a1b984edc8cd9b5f761d691d5f">jevois::dnn::parseTensorSpecs</link> (std::string const &amp;specs)</para>
+
+<para>解析张量规范 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga8a6f29ea2202a325d0c99111488d7b67">jevois::dnn::attrmat</link> (vsi_nn_tensor_attr_t const &amp;attr, void *dataptr=nullptr)</para>
+
+<para>从 attr 和可能的数据指针构造一个 cv::Mat。 </para>
+</listitem>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_group__dnn_1gae40b6505b2d82fa2a580e787f0503308">jevois::dnn::attrdims</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>获取一个张量 dims 作为 int 向量，用于构造匹配的 cv::Mat </para>
+</listitem>
+            <listitem><para>cv::Size <link linkend="_group__dnn_1gab724bef5b8efd2446a0600cf269bcbe3">jevois::dnn::attrsize</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>以 cv::Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga831921dbaf6ac75427bc68156ebb0bc8">jevois::dnn::attrstr</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__dnn_1gaf83f2f4f42ec0efefa6f3dda166660b4">jevois::dnn::attrmatch</link> (vsi_nn_tensor_attr_t const &amp;attr, cv::Mat const &amp;blob)</para>
+
+<para>检查 cv::Mat blob 是否与 attr 的规范完全匹配 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1ga51841d296531fc366c5091863a9141fe">jevois::dnn::tensorattr</link> (TfLiteTensor const *t)</para>
+
+<para>获取 TensorFlow Lite 张量的张量形状和类型属性 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">jevois::dnn::softmax</link> (float const *input, size_t const n, size_t const stride, float const fac, float *output, bool maxonly)</para>
+
+<para>将 softmax 应用于浮点向量。 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga55a15be28c64149fdb2762b71fb344a0">jevois::dnn::quantize</link> (cv::Mat const &amp;m, vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>根据 attr 中的量化规范从 float32 量化为定点 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1gac5c65bee7351c37b9500cad0292f8cc9">jevois::dnn::dequantize</link> (cv::Mat const &amp;m, vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>根据 attr 中的量化规范将输出反量化为 float32 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__dnn_1ga8da769aea616ace74e265fbc06770439">jevois::dnn::effectiveDims</link> (cv::Mat const &amp;m)</para>
+
+<para>返回 cv::Mat 中非单位暗淡的数量 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga97ca13925a9abe3bc80251a61cf18960">jevois::dnn::concatenate</link> (std::vector&lt; cv::Mat &gt; const &amp;tensors, int axis)</para>
+
+<para>将多个张量连接成一个。 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga705e4633e47b4b39f01a710baf5acc29">jevois::dnn::shapestr</link> (hailo_vstream_info_t const &amp;vi)</para>
+
+<para>从数据类型为 TYPE 的 n 维 Hailo 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1ga69f343327103557c67e6559e72a5fe09">jevois::dnn::tensorattr</link> (hailo_vstream_info_t const &amp;vi)</para>
+
+<para>获取 Hailo 张量的张量形状和类型属性 </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1ga8f572d133c52e5eb2fe81d8bf72ebefe">jevois::dnn::hailo2vsi</link> (hailo_format_type_t t)</para>
+
+<para>从 Hailo 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1ga5f1e444edfb3bffbf851b41ae3112b23">jevois::dnn::onnx2vsi</link> (ONNXTensorElementDataType t)</para>
+
+<para>从 ONNX-Runtime 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga39970f486d748880bb2286dafd38d341">jevois::dnn::shapestr</link> (Ort::ConstTensorTypeAndShapeInfo const &amp;ti)</para>
+
+<para>从数据类型为 TYPE 的 n 维 ONNX 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1gaf77c85c3d7329994fdf6ab1caffef5f0">jevois::dnn::tensorattr</link> (Ort::ConstTensorTypeAndShapeInfo const &amp;ti)</para>
+
+<para>获取 ONNX 运行时张量的张量形状和类型属性 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

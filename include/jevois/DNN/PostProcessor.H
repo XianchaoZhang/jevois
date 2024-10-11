@@ -33,8 +33,7 @@ namespace jevois
     
     namespace postprocessor
     {
-      // We define all parameters for all derived classes here to avoid duplicate definitions. Different derived classes
-      // will use different subsets of all available parameters:
+      // 我们在此处定义所有派生类的所有参数，以避免重复定义。不同的派生类将使用所有可用参数的不同子集： 
       static jevois::ParameterCategory const ParamCateg("DNN Post-Processing Options");
       
       //! Parameter \relates jevois::dnn::PostProcessorClassify
@@ -141,8 +140,8 @@ namespace jevois
                                true, ParamCateg);
     }
 
-    //! Post-Processor for neural network pipeline
-    /*! This is the last step in a deep neural network processing Pipeline. \ingroup dnn */
+    //! 神经网络管道的后处理器 
+	/*! 这是深度神经网络处理管道的最后一步。 \ingroup dnn */
     class PostProcessor : public jevois::Component
     {
       public:
@@ -153,13 +152,13 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessor();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻运行时用户不应更改的参数
         virtual void freeze(bool doit) = 0;
 
         //! Process outputs
         virtual void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) = 0;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         virtual void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                             jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) = 0;
    };

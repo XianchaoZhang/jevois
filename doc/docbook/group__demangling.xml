@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__demangling">
+<title>Name demangling 函数</title>
+<indexterm><primary>Name demangling 函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>Name demangling 函数返回源代码中所写的类型的原始名称，而不是编译器内部使用的名称，该名称被解析以避免跨不同命名空 间、重载等的名称冲突和混淆。 </para>
+
+<para>有关更多信息，请参阅 <link xlink:href="http://en.wikipedia.org/wiki/Name_mangling">http://en.wikipedia.org/wiki/Name_mangling</link>。 </para>
+Collaboration diagram for Name demangling 函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__demangling.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_group__demangling_1gaed135e078da2b90d91350d676e7413fc">jevois::demangle</link> (std::string const &amp;mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__demangling_1ga717b7381dadbb9c05f2dc6fda5344b05">jevois::demangle</link> (char const *mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__demangling_1ga31535139a092fa0cd6aa7ab7e0339cfd">jevois::demangledName</link> ()</para>
+
+<para>Get the demangled type name of type T. </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>std::string <link linkend="_group__demangling_1gad0fbf71c27d34d4bb1074750bb0d94ca">jevois::demangledName&lt; std::string &gt;</link> ()</para>
+
+<para>对 std::string 进行特例化以避免得到丑陋的名称 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__demangling_1ga717b7381dadbb9c05f2dc6fda5344b05"/>    <section>
+    <title>demangle()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>demangle</primary><secondary>Name demangling 函数</secondary></indexterm>
+<indexterm><primary>Name demangling 函数</primary><secondary>demangle</secondary></indexterm>
+<para><computeroutput>std::string jevois::demangle (char const * mangledName)</computeroutput></para><para>
+
+<para>Demangle a mangled name. </para>
+</para>
+    </section><anchor xml:id="_group__demangling_1gaed135e078da2b90d91350d676e7413fc"/>    <section>
+    <title>demangle()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>demangle</primary><secondary>Name demangling 函数</secondary></indexterm>
+<indexterm><primary>Name demangling 函数</primary><secondary>demangle</secondary></indexterm>
+<para><computeroutput>std::string jevois::demangle (std::string const &amp; mangledName)</computeroutput></para><para>
+
+<para>Demangle a mangled name. </para>
+</para>
+<para>
+Referenced by jevois::Component::className().</para>
+    </section><anchor xml:id="_group__demangling_1ga31535139a092fa0cd6aa7ab7e0339cfd"/>    <section>
+    <title>demangledName()</title>
+<indexterm><primary>demangledName</primary><secondary>Name demangling 函数</secondary></indexterm>
+<indexterm><primary>Name demangling 函数</primary><secondary>demangledName</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::string jevois::demangledName ( )</computeroutput></para><para>
+
+<para>Get the demangled type name of type T. </para>
+</para>
+    </section><anchor xml:id="_group__demangling_1gad0fbf71c27d34d4bb1074750bb0d94ca"/>    <section>
+    <title>demangledName&lt; std::string &gt;()</title>
+<indexterm><primary>demangledName&lt; std::string &gt;</primary><secondary>Name demangling 函数</secondary></indexterm>
+<indexterm><primary>Name demangling 函数</primary><secondary>demangledName&lt; std::string &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>std::string <link linkend="_group__demangling_1ga31535139a092fa0cd6aa7ab7e0339cfd">jevois::demangledName</link>&lt; std::string &gt; ( )</computeroutput></para><para>
+
+<para>对 std::string 进行特例化以避免得到丑陋的名称 </para>
+</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespacejevois_1_1python">
+<title>jevois::python Namespace Reference</title>
+<indexterm><primary>jevois::python</primary></indexterm>
+<section>
+<title> </title>
+
+<para>Python 相关的帮助程序和函数 </para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1python_1_1PyParHelper">PyParHelper</link></para>
+
+<para>类型化类，允许在 Python 中创建参数 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1python_1_1PyParHelperBase">PyParHelperBase</link></para>
+
+<para>允许在 python 中创建参数的基本帮助类 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adc">YUYV</link> { 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935">Black</link> = 0x8000, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa">DarkGrey</link> = 0x8050, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a">MedGrey</link> = 0x8080, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707">LightGrey</link> = 0x80a0, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d">White</link> = 0x80ff, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08">DarkGreen</link> = 0x0000, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451">MedGreen</link> = 0x0040, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327">LightGreen</link> = 0x00ff, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e">DarkTeal</link> = 0x7070, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44">MedTeal</link> = 0x7090, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad">LightTeal</link> = 0x70b0, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1">DarkPurple</link> = 0xa030, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0">MedPurple</link> = 0xa050, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df">LightPurple</link> = 0xa080, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531">DarkPink</link> = 0xff00, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675">MedPink</link> = 0xff80, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a">LightPink</link> = 0xffff
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__pysupport_1ga89fd3c8c027de53532b0ab63ba9bd84b">setEngine</link> (<link linkend="_classjevois_1_1Engine">jevois::Engine</link> *e)</para>
+
+<para>初始化 Python、numpy，并允许 python 模块通过 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 发送串行输出 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__pysupport_1gada9a987413579e077d37b2a1392fa328">hasattr</link> (boost::python::object &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>, char const *name)</para>
+
+<para>检查 boost::python::object 是否具有属性 </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>boost::python::list <link linkend="_group__pysupport_1ga851e553d8bb3ad854f6a72f2d21cacc6">pyVecToList</link> (std::vector&lt; T &gt; const &amp;v)</para>
+
+<para>将 std::vector&lt;T&gt; 转换为 python 列表的辅助程序 </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::vector&lt; T &gt; <link linkend="_group__pysupport_1gae59dd866134c4b7c754dab76465ca81b">pyListToVec</link> (boost::python::object const &amp;lst)</para>
+
+<para>将 python 列表（或任何可迭代对象）转换为 std::vector&lt;T&gt; 的辅助程序 </para>
+</listitem>
+            <listitem><para>template&lt;typename T , size_t N&gt; </para><para>std::array&lt; T, N &gt; <link linkend="_group__pysupport_1gaa0b5c0e59acd608244ab06a80f2d73cd">tupleToArray</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</listitem>
+            <listitem><para>template&lt;typename T , size_t N&gt; </para><para>void <link linkend="_group__pysupport_1gae325e307bbc6b533c57dd06f018b0e9e">tupleToArray</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>, std::array&lt; T, N &gt; &amp;arr, size_t minN=N)</para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">pyextract</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>通用值提取，对于 python 知道如何提取的类型，传递给 boost::python::extract() </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Scalar_&lt; float &gt; <link linkend="_group__pysupport_1ga98cb1cfcea2fe6e33491692486c3cfef">pyextract&lt; cv::Scalar_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Scalar_&lt;float&gt; 的特化，从 1..4 个浮点值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Scalar_&lt; int &gt; <link linkend="_group__pysupport_1ga3339d8c469b02495305d50de4cc8de38">pyextract&lt; cv::Scalar_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Scalar_&lt;int&gt; 的特化，从 1..4 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Point_&lt; float &gt; <link linkend="_group__pysupport_1gaa2a4e4d9e6c4a9056cf609ee0d561dad">pyextract&lt; cv::Point_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Point_&lt;float&gt; 的特化，从 2 个浮点值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Point_&lt; int &gt; <link linkend="_group__pysupport_1ga395f9f89edce74dad823ce34b591bcd5">pyextract&lt; cv::Point_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Point_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Size_&lt; float &gt; <link linkend="_group__pysupport_1gaf092f9f8b5dc66da71794f4713126346">pyextract&lt; cv::Size_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Size_&lt;float&gt; 的特化，从 2 个 float 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Size_&lt; int &gt; <link linkend="_group__pysupport_1ga8b2cc1d6859055c9912c7bf34169e2b3">pyextract&lt; cv::Size_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Size_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>ImColor <link linkend="_group__pysupport_1ga417d94bbf152c547c3d67155f79e15fa">pyextract&lt; ImColor &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>ImColor 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga4f18ce4c0271e61810cb876a267e7e7e">topyobj</link> (T const &amp;val)</para>
+
+<para>将值转换为 python，传递到 python::object(val) </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gad7841f6fbaa2d636b7189c549e211ac3">topyobj</link> (cv::Scalar_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Scalar&lt;float&gt; 的特化，返回一个有 4 个浮点元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga76307bdb32c40ee62a394276641f4eb0">topyobj</link> (cv::Scalar_&lt; int &gt; const &amp;val)</para>
+
+<para>cv::Scalar&lt;int&gt; 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gaf422b158b87551344a609cf00d565419">topyobj</link> (cv::Point_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Point&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga93c8f7221a6bffe3fc183963e81e700b">topyobj</link> (cv::Point_&lt; int &gt; const &amp;val)</para>
+
+<para>cv::Point&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga0bdf6f519c8a68fb811ae707c3dd43dd">topyobj</link> (cv::Size_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Size&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gacf2bb5c5469a2c97b0f0341cd8a71495">topyobj</link> (cv::Size_&lt; int &gt; const &amp;val)</para>
+
+<para>对 cv::Size&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga75c60823494fe158f5663a0e2a090832">topyobj</link> (ImColor const &amp;val)</para>
+
+<para>对 ImColor 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Engine">Engine</link> * <link linkend="_namespacejevois_1_1python_1a3a8c677a1515acb56189a5d2bf9ac787">engineForPythonModule</link> = nullptr</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adc"/>    <section>
+    <title>YUYV</title>
+<indexterm><primary>YUYV</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>YUYV</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adc">jevois::python::YUYV</link></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Black</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>Black</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935"/>Black</entry><entry></entry></row><row><entry><indexterm><primary>DarkGrey</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>DarkGrey</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa"/>DarkGrey</entry><entry></entry></row><row><entry><indexterm><primary>MedGrey</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>MedGrey</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a"/>MedGrey</entry><entry></entry></row><row><entry><indexterm><primary>LightGrey</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>LightGrey</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707"/>LightGrey</entry><entry></entry></row><row><entry><indexterm><primary>White</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>White</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d"/>White</entry><entry></entry></row><row><entry><indexterm><primary>DarkGreen</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>DarkGreen</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08"/>DarkGreen</entry><entry></entry></row><row><entry><indexterm><primary>MedGreen</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>MedGreen</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451"/>MedGreen</entry><entry></entry></row><row><entry><indexterm><primary>LightGreen</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>LightGreen</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327"/>LightGreen</entry><entry></entry></row><row><entry><indexterm><primary>DarkTeal</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>DarkTeal</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e"/>DarkTeal</entry><entry></entry></row><row><entry><indexterm><primary>MedTeal</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>MedTeal</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44"/>MedTeal</entry><entry></entry></row><row><entry><indexterm><primary>LightTeal</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>LightTeal</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad"/>LightTeal</entry><entry></entry></row><row><entry><indexterm><primary>DarkPurple</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>DarkPurple</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1"/>DarkPurple</entry><entry></entry></row><row><entry><indexterm><primary>MedPurple</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>MedPurple</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0"/>MedPurple</entry><entry></entry></row><row><entry><indexterm><primary>LightPurple</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>LightPurple</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df"/>LightPurple</entry><entry></entry></row><row><entry><indexterm><primary>DarkPink</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>DarkPink</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531"/>DarkPink</entry><entry></entry></row><row><entry><indexterm><primary>MedPink</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>MedPink</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675"/>MedPink</entry><entry></entry></row><row><entry><indexterm><primary>LightPink</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>LightPink</secondary></indexterm>
+<anchor xml:id="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a"/>LightPink</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 213 of file PythonSupport.C.</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_namespacejevois_1_1python_1a3a8c677a1515acb56189a5d2bf9ac787"/>    <section>
+    <title>engineForPythonModule</title>
+<indexterm><primary>engineForPythonModule</primary><secondary>jevois::python</secondary></indexterm>
+<indexterm><primary>jevois::python</primary><secondary>engineForPythonModule</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1Engine">Engine</link>* jevois::python::engineForPythonModule = nullptr</computeroutput></para><para>
+Definition at line 70 of file PythonSupport.C.</para>
+<para>
+Referenced by setEngine().</para>
+</section>
+</section>
+</section>

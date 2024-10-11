@@ -1,37 +1,34 @@
-/*! \page ProgrammerSource JeVois Ubuntu packages and source code repositories
+/*! \page ProgrammerSource JeVois Ubuntu 软件包和源代码存储库 
 \tableofcontents
 
-All JeVois software is open-source.
+所有 JeVois 软件都是开源的。
 
-It is licensed under the GNU General Public License. Please be aware of the viral nature of this license, namely, if you
-integrate any of the JeVois source code into your own project, then you must release the derived source code as well.
+它是根据 GNU 通用公共许可证授权的。请注意此许可证的病毒性质，即，如果您将任何 JeVois 源代码集成到您自己的项目中，那么您也必须发布派生的源代码。
 
-Please see the [GNU GPL page](https://www.gnu.org/licenses/gpl-3.0.en.html) for more information.
+请参阅 [GNU GPL 页面](https://www.gnu.org/licenses/gpl-3.0.en.html) 了解更多信息。
 
-All JeVois source code is hosted on Github, at https://github.com/jevois
+所有 JeVois 源代码均托管在 Github 上，网址为 https://github.com/jevois
 
-The following repositories are provided:
+提供了以下存储库：
 
-- \b jevois: The core C++17 JeVois software.
-- \b jevoisbase: The base collection of 25+ machine vision modules for JeVois.
-- \b samplemodule: A sample standalone module for JeVois, use as a template for new modules.
-- \b samplepythonmodule: A sample Python standalone module for JeVois, use as a template for new modules.
-- \b jevois-sdk: The framework that provides a Linux kernel and operating system for a \jva33 camera, to be flashed
-  to a microSD card.
-- \b jevoispro-sdk: The framework that provides a Linux kernel and operating system for a \jvpro camera, to be flashed
-  to a microSD card.
+- \b jevois：核心 C++17 JeVois 软件。
+- \b jevoisbase：JeVois 的超过 25 个机器视觉模块的基本集合。
+- \b samplemodule：JeVois 的示例独立模块，用作新模块的模板。
+- \b samplepythonmodule：JeVois 的示例 Python 独立模块，用作新模块的模板。
+- \b jevois-sdk：为 \jva33 相机提供 Linux 内核和操作系统的框架，可刷入 microSD 卡。
+- \b jevoispro-sdk：为 \jvpro 相机提供 Linux 内核和操作系统的框架，可刷入 microSD 卡。
 
-Installing pre-compiled code from jevois.usc.edu
-================================================
+从 jevois.usc.edu 安装预编译代码 
+====================================================
 
-See https://jevois.usc.edu for the latest instructions.
+请参阅 https://jevois.usc.edu 了解最新说明。
 
-We provide pre-compiled Ubuntu deb packages for the GitHub repositories listed above.
+我们为上面列出的 GitHub 存储库提供预编译的 Ubuntu deb 包。
 
-Setting up the jevois.usc.edu apt source
+设置 jevois.usc.edu apt 源 
 ----------------------------------------
 
-As of this writing, and for a desktop running Ubuntu 20.04 amd64:
+截至撰写本文时，对于运行 Ubuntu 20.04 amd64 的桌面：
 
 \verbatim
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DD24C027
@@ -44,210 +41,167 @@ sudo usermod -aG dialout $USER # need to reboot to take effect
 sudo usermod -aG video $USER # need to reboot to take effect
 \endverbatim
 
-\note Starting with \jvversion{1.19.0}, jevois.usc.edu now also hosts mirror copies of the Google Coral EdgeTPU and
-Hailo deb packages, so you do not need to pull those from their respective vendors.
+\note 从 \jvversion{1.19.0} 开始，jevois.usc.edu 现在还托管 Google Coral EdgeTPU 和 Hailo deb 包的镜像副本，因此您不需要从各自的供应商处获取这些包。
 
-Installing Ubuntu packages for JeVois-A33 development
-=====================================================
+为 JeVois-A33 开发安装 Ubuntu 软件包 
+=========================================================
 
-Because the operating system that runs on \jva33 is as small as possible and does not have a package management system,
-compilers, etc the overall strategy for \jva33 is that we cross-compile all code on a desktop computer and place the
-compiled results into a staging area that will later be flashed to microSD.
+因为在 \jva33 上运行的操作系统尽可能小，并且没有包管理系统、编译器等，所以 \jva33 的总体策略是我们在桌面计算机上交叉编译所有代码，并将编译结果放入暂存区，然后将其刷入 microSD。
 
-Thus, all packages for \jva33 are for Intel amd64 architecture and are to be installed on desktop, though some packages
-do contain cross-compiled code for the ARM processor of JeVois-A33. This cross-compiled code will be copied from staging
-to microSD.
+因此，\jva33 的所有软件包均适用于 Intel amd64 架构，并将安装在桌面上，但有些软件包确实包含 JeVois-A33 的 ARM 处理器的交叉编译代码。此交叉编译代码将从暂存复制到 microSD。
 
-The following packages are available at https://jevois.usc.edu for \jva33:
+\jva33 的以下软件包可在 https://jevois.usc.edu 上获取：
 
-- \b jevois-opencv: OpenCV 4.x compiled for host computer with settings that match those used by the JeVois platform
-  hardware. We install this package into /usr/share/jevois-opencv-4.x so that it will not interfere with any other
-  OpenCV install you might have on your host system and that might be required by some other software.
+- \b jevois-opencv：OpenCV 4.x 为主机编译，其设置与 JeVois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-opencv-4.x，这样它就不会干扰您主机系统上可能安装的任何其他 OpenCV，而这些 OpenCV 可能是其他软件所需要的。
 
-- \b jevois-host: JeVois core software compiled for execution on a host computer
+- \b jevois-host：为在主机上执行而编译的 JeVois 核心软件
 
-- \b jevois-platform: JeVois core software cross-compiled for execution on the JeVois platform hardware
+- \b jevois-platform：JeVois 核心软件交叉编译，用于在 JeVois 平台硬件上执行
 
-- \b jevoisbase-host: JeVois base modules compiled for execution on a host computer
+- \b jevoisbase-host：为在主机上执行而编译的 JeVois 基础模块
 
-- \b jevoisbase-platform: JeVois base modules cross-compiled for execution on the JeVois platform hardware
+- \b jevoisbase-platform：JeVois 基础模块交叉编译，用于在 JeVois 平台硬件上执行
 
-- \b jevois-sdk: Compiled bootloaders, root filesystem, and other config files.
+- \b jevois-sdk：编译的引导加载程序、根文件系统和其他配置文件。
 
-- \b jevois-sdk-dev: Compiled cross-compilers and cross-compiled libraries for the JeVois platform architecture.
+- \b jevois-sdk-dev：为 JeVois 平台架构编译的交叉编译器和交叉编译库。
 
-As jevois-sdk-dev brings all the others as dependencies, getting up and running with JeVois development now just means
-one apt-get install command.
+由于 jevois-sdk-dev 将所有其他依赖项都带入，因此启动和运行 JeVois 开发现在只需一个 apt-get install 命令。
 
-For more details about file organization across these different packages, see \ref ProgrammerOrganization
+有关这些不同软件包中文件组织的详细信息，请参阅 \ref ProgrammerOrganization
 
-Which packages to install for JeVois-A33?
------------------------------------------
- 
-- If you just want to install and run \ref JeVoisInventor on your desktop:
+为 JeVois-A33 安装哪些软件包？ 
+----------------------------------------- 
+- 如果您只想在桌面上安装并运行 \ref JeVoisInventor
   \verbatim
   sudo apt install jevois-inventor
   \endverbatim
-  
-- If you just want to run JeVois software (jevois-daemon) on your host computer with a standard webcam:
+
+- 如果您只想在带有标准网络摄像头的主机上运行 JeVois 软件 (jevois-daemon)：
   \verbatim
   sudo apt install jevois-host jevoisbase-host
   \endverbatim
 
-- If you want jevois and jevoisbase cross-compiled for the platform hardware:
+- 如果您希望 jevois 和 jevoisbase 针对平台硬件进行交叉编译：
   \verbatim
   sudo apt install jevois-platform jevoisbase-platform
   \endverbatim
 
-- If you want to be able to flash a microSD card using jevois-flash-card:
+- 如果您希望能够使用 jevois-flash-card 刷新 microSD 卡：\verbatim sudo apt install jevois-sdk \endverbatim 
+- 如果您希望能够为 JeVois 平台硬件交叉编译新模块：
   \verbatim
   sudo apt install jevois-sdk
   \endverbatim
-    	
-- If you want to be able to cross-compile new modules for JeVois platform hardware:
-  \verbatim
-  sudo apt install jevois-sdk-dev
-  \endverbatim
-    	
-- If you want to be able to recompile the platform Linux kernel or change the platform O.S. or add new buildroot
-  packages to the platform:
 
-  You need to rebuild jevois-sdk from source. Follow the instructions in the INSTALL file of the jevois repository at
-  https://github.com/jevois.
-    	
+- 如果您希望能够重新编译平台 Linux 内核或更改平台操作系统或向平台添加新的 buildroot 包：
 
-Installing Ubuntu packages for JeVois-Pro development
-=====================================================
+  您需要从源代码重建 jevois-sdk。按照 https://github.com/jevois 上的 jevois 存储库的 INSTALL 文件中的说明进行操作。
 
-Because \jvpro runs a full Ubuntu operating system, installing packages on the camera is done as you would do for a
-normal computer.
+为 JeVois-Pro 开发安装 Ubuntu 软件包 
+=========================================================
 
-The following packages are available at https://jevois.usc.edu for \a amd64 (to be installed on a desktop):
+因为 \jvpro 运行完整的 Ubuntu 操作系统，所以在相机上安装软件包就像在普通计算机上安装一样。
 
-- \b jevoispro-opencv: OpenCV 4.x compiled for host computer with settings that match those used by the JeVois-Pro
-  platform hardware. We install this package into /usr/share/jevois-opencv-4.x so that it will not interfere with any
-  other OpenCV install you might have on your host system and that might be required by some other software.
+以下软件包可在 https://jevois.usc.edu 上获取，适用于 \a amd64（安装在桌面上）：
 
-- \b jevoispro-openvino: Intel neural network framework OpenVino compiled for host computer with settings that match
-  those used by the JeVois platform hardware. We install this package into /usr/share/jevoispro-openvino-x so that it
-  will not interfere with any other OpenVino install you might have on your host system and that might be required by
-  some other software.
+- \b jevoispro-opencv：为主机编译的 OpenCV 4.x，其设置与 JeVois-Pro 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-opencv-4.x，这样它就不会干扰您主机系统上可能安装的任何其他 OpenCV，而这些 OpenCV 可能是其他软件所需要的。
 
-- \b jevoispro-host: JeVois core software compiled for execution on a host computer.
+- \b jevoispro-openvino：英特尔神经网络框架 OpenVino 为主机编译，其设置与 JeVois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevoispro-openvino-x 中，这样它就不会干扰您主机系统上可能安装的任何其他 OpenVino，而其他软件可能需要这些安装。
 
-- \b jevoisprobase-host: JeVois base modules compiled for execution on a host computer.
+- \b jevoispro-host：编译用于主机执行的 JeVois 核心软件。
 
-- \b jevoispro-platform: JeVois core software cross-compiled for arm64 processor as a \a support package that will
-  provide the necessary ARM libraries to allow you to later cross-compile your own machine vision modules.
+- \b jevoisprobase-host：编译用于主机上执行的 JeVois 基础模块。
 
-- \b jevoisprobase-platform: JeVois base modules cross-compiled for arm64 processor as a \a support package that will
-  provide the necessary ARM libraries to allow you to later cross-compile your own machine vision modules.
+- \b jevoispro-platform：JeVois 核心软件为 arm64 处理器交叉编译为 \a 支持包，它将提供必要的 ARM 库，以便您以后交叉编译自己的机器视觉模块。
 
-- \b jevoispro-sdk-dev: Cross-compiled operating system and libraries to be installed on host to support
-  cross-compilation of JeVois software for the platform. That is, installing jevoispro-sdk-dev on your desktop will
-  allow you to cross-compile jevois and jevoisbase for platform, finding the necessary cross-compiled libraries that may
-  be needed.
+- \b jevoisprobase-platform：JeVois 基础模块为 arm64 处理器交叉编译为 \a 支持包，它将提供必要的 ARM 库，以便您以后交叉编译自己的机器视觉模块。
 
-The following packages are available at https://jevois.usc.edu for \a arm64 (to be installed on JeVois-Pro):
+- \b jevoispro-sdk-dev：交叉编译的操作系统和库，安装在主机上以支持 JeVois 软件在该平台的交叉编译。也就是说，在桌面上安装 jevoispro-sdk-dev 将允许您为平台交叉编译 jevois 和 jevoisbase，找到可能需要的必要交叉编译库。
 
-- \b jevoispro-opencv: OpenCV 4.x compiled for JeVois-Pro. We install this package into /usr/share/jevois-opencv-4.x on
-  the camera.
+以下软件包可在 https://jevois.usc.edu 上获取，适用于 \a arm64（安装在 JeVois-Pro 上）：
 
-- \b jevoispro-openvino: Intel neural network framework OpenVino compiled for JeVois-Pro. We install this package into
-  /usr/share/jevoispro-openvino-x on the camera.
+- \b jevoispro-opencv：为 JeVois-Pro 编译的 OpenCV 4.x。我们将此包安装到相机上的 /usr/share/jevois-opencv-4.x 中。
 
-- \b jevoispro-platform: JeVois core software cross-compiled for execution on the JeVois-Pro platform hardware, as a \a
-  native package for arm64.
+- \b jevoispro-openvino：为 JeVois-Pro 编译的英特尔神经网络框架 OpenVino。我们将此包安装到相机上的 /usr/share/jevoispro-openvino-x 中。
 
-- \b jevoisprobase-platform: JeVois base modules compiled for execution on the JeVois-Pro platform hardware, as a \a
-  native package for arm64.
+- \b jevoispro-platform：JeVois 核心软件交叉编译，用于在 JeVois-Pro 平台硬件上执行，作为 arm64 的本机包。
+
+- \b jevoisprobase-platform：JeVois 基础模块已编译，可在 JeVois-Pro 平台硬件上执行，作为 arm64 的 \a 本机包。
 
 
-\note Installing jevoispro-sdk-dev will pull all the other packages automatically as dependencies.
+\note 安装 jevoispro-sdk-dev 将自动将所有其他包作为依赖项拉取。
 
-Here is a walkthrough of what you should see:
+以下是您将看到的内容的演练：
 
 \youtube{rQ-_GUz1NAc}
 
-Which packages to install on a desktop host for JeVois-Pro?
------------------------------------------------------------
- 
-- If you just want to run JeVois software (jevois-daemon) on your host computer with a standard webcam:
+在桌面主机上为 JeVois-Pro 安装哪些软件包？ 
+-------------------------------------------------------------------------- 
+- 如果您只想在带有标准网络摄像头的主机上运行 JeVois 软件 (jevois-daemon)：
   \verbatim
   sudo apt install jevoispro-host jevoisprobase-host
   \endverbatim
 
-  \note Yes, this will pull over 500 dependent packages, this is normal, just say Yes to install them all. They include
-  many libraries used by JeVois, the Coral libraries, Boost, OpenCV and OpenVino, etc.
+\note 是的，这将拉取超过 500 个依赖包，这是正常的，只需选择 Yes 即可全部安装。它们包括 JeVois 使用的许多库、Coral 库、Boost、OpenCV 和 OpenVino 等。
 
-- If you want jevois and jevoisbase cross-compiled for the platform hardware as \a support packages to be installed on
-  your host (needed to later cross-compile your own modules from source):
+- 如果您希望将 jevois 和 jevoisbase 交叉编译为平台硬件，作为 \a support 包安装在您的主机上（稍后需要从源代码交叉编译您自己的模块）：
   \verbatim
   sudo apt install jevoispro-platform jevoisprobase-platform
   \endverbatim
 
-- If you want to be able to cross-compile jevois, jevoisbase, or new modules for JeVois platform hardware:
+- 如果您希望能够交叉编译 jevois、jevoisbase 或 JeVois 平台硬件的新模块：
   \verbatim
   sudo apt install jevoispro-sdk-dev
   \endverbatim
 
-- If you want to be able to recompile the platform Linux kernel or change the platform operating system:
+- 如果您希望能够重新编译平台 Linux 内核或者更改平台操作系统：
 
-  You need to rebuild jevoispro-sdk from source using `rebuild-os.sh` as described below.
-    	
-Which packages to install on the JeVois-Pro smart camera?
+  您需要使用 `rebuild-os.sh` 从源代码重建 jevoispro-sdk，如下所述。
+
+在 JeVois-Pro 智能相机上安装哪些软件包？
 ---------------------------------------------------------
 
-\note The apt source jevois.usc.edu and those for Google Coral are already configured on the microSD, so you do not need
-to add them to your camera using the `add-apt-repository` commands detailed above.
+\note apt 源 jevois.usc.edu 和 Google Coral 的源已经在 microSD 上配置，因此您不需要使用上面详述的 `add-apt-repository` 命令将它们添加到您的相机。
 
-Before you can run the commands below, you need to connect your camera to a network as described in \ref ProNetwork
+在运行以下命令之前，你需要将相机连接到网络，如 \ref ProNetwork 中所述
 
-\note jevoispro-opencv, jevoispro-openvino, jevoispro-platform, and jevoisprobase-platform are already pre-installed on
-the microSD.
+\note jevoispro-opencv、jevoispro-openvino、jevoispro-platform 和 jevoisprobase-platform 已预装在 microSD 上。
 
-The easiest to run the commands below is to switch JeVois-Pro to Console boot as explained in \ref ProUserQuick and to
-login as user \a root with password \a jevois
+运行以下命令最简单的方法是将 JeVois-Pro 切换到控制台启动，如 \ref ProUserQuick 中所述，然后以用户 \a root 身份使用密码 \a jevois 登录
 
-- If you want to update jevoispro-platform and jevoisprobase-platform to the latest official version
-  published at jevois.usc.edu:
+- 如果您想将 jevoispro-platform 和 jevoisprobase-platform 更新到 jevois.usc.edu 发布的最新官方版本：
   \verbatim
   sudo apt update
   sudo apt upgrade
   \endverbatim
 
-- If you accidentally messed-up your jevois or jevoisbase on microSD (e.g., deleted some critical files) and want
-  to re-install the latest official version published at jevois.usc.edu:
+- 如果您不小心弄乱了 microSD 上的 jevois 或 jevoisbase（例如，删除了一些关键文件）并想要重新安装在 jevois.usc.edu 上发布的最新官方版本：
   \verbatim
   sudo apt purge jevoispro-platform jevoisprobase-platform
   sudo apt update
   sudo apt install jevoispro-platform jevoisprobase-platform
   \endverbatim
-  And if that does not fix your problem, you may need to re-flash your microSD.
+  如果这不能解决您的问题，您可能需要重新刷新您的 microSD。
 
-- If you modified and then cross-compiled jevois and jevoisbase from source (see \ref CompilingJeVois and \ref
-  CompilingJeVoisBase) and you want to install those packages on your camera:
+- 如果您修改了 jevois 和 jevoisbase，然后从源代码对其进行了交叉编译（请参阅 \ref CompilingJeVois 和 \ref CompilingJeVoisBase ），并且想要在相机上安装这些软件包：
   \verbatim
   sudo apt purge jevoispro-platform jevoisprobase-platform
-  # get the debs you created onto your microSD
+  # 将您创建的 debs 放到 microSD 上
   dpkg -i jevoispro-platform-XXX_arm64.deb
   dpkg -i jevoisprobase-platform-XXX_arm64.deb
   \endverbatim
 
-JeVois-A33 operating system source download and build from scratch
-==================================================================
+JeVois-A33 操作系统源代码下载并从头开始构建
+=====================================================================
 
-This only recommended for advanced programmers who want to modify the Linux kernel or operating system of JeVois.
+这仅推荐给想要修改 Linux 内核或 JeVois 操作系统的高级程序员。
 
-Download and installation instructions are in the [INSTALL file of the jevois
-repository](https://github.com/jevois/jevois/blob/master/INSTALL).
+下载和安装说明位于 [jevois 存储库的 INSTALL 文件](https://github.com/jevois/jevois/blob/master/INSTALL)。
 
-JeVois-Pro operating system source download and build from scratch
-==================================================================
+JeVois-Pro 操作系统源代码下载并从头开始构建
+=====================================================================
 
-This only recommended for advanced programmers who want to modify the Linux kernel or operating system of JeVois-Pro. If
-you just need the cross-compiled operating system so that you can compile and link custom code, install the
-\b jevoispro-sdk-dev deb package instead.
+这仅推荐给想要修改 JeVois-Pro 的 Linux 内核或操作系统的高级程序员。如果您只需要交叉编译的操作系统以便编译和链接自定义代码，请安装 \b jevoispro-sdk-dev deb 包。
 
 \verbatim
 git clone https://github.com/jevois/jevoispro-sdk.git
@@ -255,12 +209,11 @@ cd jevoispro-sdk
 ./rebuild-os.sh
 \endverbatim
 
-It will take a very long time, possibly over 12 hours depending on your computer and network speeds.
+这将需要很长时间，可能超过 12 小时，具体取决于您的计算机和网络速度。
 
-\note If you want to also re-create the \b jevoispro-sdk-dev deb package so that you can later install it on another
-desktop computer, use `./rebuild-os -deb`
+\note 如果您还想重新创建 \b jevoispro-sdk-dev deb 包，以便以后可以将其安装在另一台台式计算机上，请使用 `./rebuild-os -deb`
 
-Here is a walkthrough of what you should see when running `rebuild-os.sh`:
+以下是运行“rebuild-os.sh”时应该看到的内容的演练：
 
 \youtube{w8AeW91ZOww}
 

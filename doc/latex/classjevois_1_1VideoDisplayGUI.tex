@@ -1,0 +1,216 @@
+\hypertarget{classjevois_1_1VideoDisplayGUI}{}\doxysubsection{jevois\+::Video\+Display\+G\+UI Class Reference}
+\label{classjevois_1_1VideoDisplayGUI}\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Display\+G\+U\+I.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+使用基本 G\+UI 将视频输出到本地屏幕 
+
+此类在 Je\+Vois-\/\+Pro 上提供加速 Open\+G\+L-\/\+ES 显示，使用 Dear-\/\+Im\+Gui 提供简单的图形界面。 
+
+Definition at line 35 of file Video\+Display\+G\+U\+I.\+H.
+
+
+
+Inheritance diagram for jevois\+::Video\+Display\+G\+UI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classjevois_1_1VideoDisplayGUI__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Video\+Display\+G\+UI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{classjevois_1_1VideoDisplayGUI__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a6b30c989e456e26fadbd93d0bcacc2c2}{Video\+Display\+G\+UI}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $>$ helper, size\+\_\+t nbufs=2)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_aebaff29c81bc846c6249176deacee543}{$\sim$\+Video\+Display\+G\+UI}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a4249f773bd26d4c9a20b39c37fc6f6bc}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率，分配缓冲区 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_abaae4f38841162e9deed1f24a5e5d16d}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}{send()}} 发送出去 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img) override
+\begin{DoxyCompactList}\small\item\em Send an image out to display. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a14a53e643e5b908132940eacc7f602c2}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_af7a06701b89c4d6a8c7fe13b07b8c3fc}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a11349b56b1c284ab8d30861fbb3c9816}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_a6b30c989e456e26fadbd93d0bcacc2c2}\label{classjevois_1_1VideoDisplayGUI_a6b30c989e456e26fadbd93d0bcacc2c2}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!VideoDisplayGUI@{VideoDisplayGUI}}
+\index{VideoDisplayGUI@{VideoDisplayGUI}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{VideoDisplayGUI()}{VideoDisplayGUI()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+G\+U\+I\+::\+Video\+Display\+G\+UI (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $>$}]{helper,  }\item[{size\+\_\+t}]{nbufs = {\ttfamily 2} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 27 of file Video\+Display\+G\+U\+I.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_aebaff29c81bc846c6249176deacee543}\label{classjevois_1_1VideoDisplayGUI_aebaff29c81bc846c6249176deacee543}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!````~VideoDisplayGUI@{$\sim$VideoDisplayGUI}}
+\index{````~VideoDisplayGUI@{$\sim$VideoDisplayGUI}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoDisplayGUI()}{~VideoDisplayGUI()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+G\+U\+I\+::$\sim$\+Video\+Display\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for safe inheritance. 
+
+
+
+Definition at line 65 of file Video\+Display\+G\+U\+I.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_af7a06701b89c4d6a8c7fe13b07b8c3fc}\label{classjevois_1_1VideoDisplayGUI_af7a06701b89c4d6a8c7fe13b07b8c3fc}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Abort streaming. 
+
+这只会取消将来的 \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_abaae4f38841162e9deed1f24a5e5d16d}{get()}} 和 done() 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a11349b56b1c284ab8d30861fbb3c9816}{stream\+Off()}} 来关闭流式传输。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 116 of file Video\+Display\+G\+U\+I.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_abaae4f38841162e9deed1f24a5e5d16d}\label{classjevois_1_1VideoDisplayGUI_abaae4f38841162e9deed1f24a5e5d16d}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!get@{get}}
+\index{get@{get}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}{send()}} 发送出去 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 78 of file Video\+Display\+G\+U\+I.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}\label{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!send@{send}}
+\index{send@{send}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Send an image out to display. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 88 of file Video\+Display\+G\+U\+I.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, h, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_a4249f773bd26d4c9a20b39c37fc6f6bc}\label{classjevois_1_1VideoDisplayGUI_a4249f773bd26d4c9a20b39c37fc6f6bc}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧速率，分配缓冲区 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 34 of file Video\+Display\+G\+U\+I.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, L\+D\+E\+B\+UG, jevois\+::\+Video\+Mapping\+::ofmt, jevois\+::\+Video\+Mapping\+::ofps, jevois\+::\+Video\+Mapping\+::oh, jevois\+::\+Video\+Mapping\+::osize(), jevois\+::\+Video\+Mapping\+::ow, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_a11349b56b1c284ab8d30861fbb3c9816}\label{classjevois_1_1VideoDisplayGUI_a11349b56b1c284ab8d30861fbb3c9816}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 120 of file Video\+Display\+G\+U\+I.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGUI_a14a53e643e5b908132940eacc7f602c2}\label{classjevois_1_1VideoDisplayGUI_a14a53e643e5b908132940eacc7f602c2}} 
+\index{jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::VideoDisplayGUI@{jevois::VideoDisplayGUI}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+U\+I\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 112 of file Video\+Display\+G\+U\+I.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoDisplayGUI_8H}{Video\+Display\+G\+U\+I.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoDisplayGUI_8C}{Video\+Display\+G\+U\+I.\+C}}\end{DoxyCompactItemize}

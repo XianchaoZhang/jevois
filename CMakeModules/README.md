@@ -1,41 +1,33 @@
-Variables used in the JeVois CMake files
-========================================
+JeVois CMake 文件中使用的变量
+=============================
 
-The description below will help you understand our CMake code. Most users can just ignore this.
+以下描述将帮助您理解我们的 CMake 代码。大多数用户可以忽略这一点。
 
-Basic variables
----------------
+基本变量
+--------
 
-- JEVOIS_HARDWARE [A33|PRO] - defined by cmake caller to determine whether to build for JeVois-A33 or JeVois-Pro
+- JEVOIS_HARDWARE [A33|PRO] - 由 cmake 调用者定义，用于确定是否为 JeVois-A33 或 JeVois-Pro 构建
 
-- JEVOIS_VENDOR [string] - name (starting with uppercase letter) of a vendor, used to group machine vision modules into
-  different sources (each vendor translates to a directory under /jevois/modules/)
+- JEVOIS_VENDOR [string] - 供应商名称（以大写字母开头），用于将机器视觉模块分组到不同的源（每个供应商转换为 /jevois/modules/ 下的目录）
 
-- JEVOIS_PLATFORM [ON|OFF] - whether to compile natively for host, or cross-compile for platform hardware
+- JEVOIS_PLATFORM [ON|OFF] - 是否为主机本地编译，或为平台硬件交叉编译
 
-- JEVOIS_A33 [ON|OFF] - convenience shortcut for JEVOIS_HARDWARE==A33
+- JEVOIS_A33 [ON|OFF] - JEVOIS_HARDWARE==A33 的便捷快捷方式
 
-- JEVOIS_PRO [ON|OFF] - convenience shortcut for JEVOIS_HARDWARE==PRO
+- JEVOIS_PRO [ON|OFF] - JEVOIS_HARDWARE==PRO 的便捷快捷方式
 
-- JEVOIS [string] - evaluates to "jevois" or "jevoispro" depending on JEVOIS_HARDWARE
+- JEVOIS [string] - 根据以下条件评估为 "jevois" or "jevoispro" JEVOIS_HARDWARE
 
-- JEVOIS_NATIVE [ON|OFF] - set by cmake caller when compiling a module on a running JeVois-Pro camera. This will trigger
-  using aarch64 compilation flags, yet using the native compiler (not cross-compiler), and will set various library
-  paths and others for native compilation on JeVois-Pro
+- JEVOIS_NATIVE [ON|OFF] - 在正在运行的 JeVois-Pro 相机上编译模块时由 cmake 调用者设置。这将触发使用 aarch64 编译标志，但使用本机编译器（而不是交叉编译器），并将设置各种库路径和其他用于 JeVois-Pro 上的本机编译
 
+变量的变体取决于编译目标
+------------------------
 
-Variables with variants depending on compilation target
--------------------------------------------------------
+一些变量有 HOST、PLATFORM 和可能的 PLATFORM_NATIVE 变体。变体在初始设置期间定义。然后，根据 JEVOIS_HARDWARE 的值，将没有任何变体的最终变量设置为 HOST、PLATFORM 或 PLATFORM_NATIVE 变体。
 
-Some variables have HOST, PLATFORM, and possibly PLATFORM_NATIVE variants. The variants are defined during initial
-setup. Then a final variable without any variant is set to either the HOST, PLATFORM, or PLATFORM_NATIVE variant
-depending on the value of JEVOIS_HARDWARE.
+例如：编译器标志因编译目标而异：
+- JEVOIS_HOST_CFLAGS - 运行 rebuild-host.sh 时针对 x86_64 编译优化的标志
+- JEVOIS_PLATFORM_CFLAGS - 运行 rebuild-platform.sh 时针对 arm/aarch64 交叉编译优化的标志
+- JEVOIS_PLATFORM_NATIVE_CFLAGS - 在运行 JeVois-Pro 时针对 aarch64 编译优化的标志
 
-For example: compiler flags vary depending on the compilation target:
-- JEVOIS_HOST_CFLAGS - flags optimized for x86_64 compilation when running rebuild-host.sh
-- JEVOIS_PLATFORM_CFLAGS - flags optimized for cross-compilation to arm/aarch64 when running rebuild-platform.sh
-- JEVOIS_PLATFORM_NATIVE_CFLAGS - flags optimized for aarch64 compilation when compiling on a running JeVois-Pro
-
-One of these variants will end up in JEVOIS_CFLAGS depending on JEVOIS_HARDWARE and JEVOIS_NATIVE values. Downstream
-CMake rules would typically only use JEVOIS_CFLAGS.
-
+其中一个变体将根据 JEVOIS_HARDWARE 和 JEVOIS_NATIVE 值最终出现在 JEVOIS_CFLAGS 中。下游 CMake 规则通常只使用 JEVOIS_CFLAGS。

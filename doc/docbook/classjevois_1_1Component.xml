@@ -1,0 +1,1005 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Component">
+<title>jevois::Component Class Reference</title>
+<indexterm><primary>jevois::Component</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Component.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>模型层次结构的组成部分。 </para>
+
+
+
+<para>模型 Components 构成了每个 JeVois 应用程序的核心，因为它们的主要目的是 1) 从共享的、可重用的处理元素构建复杂的视觉处理管道； 2) 这些处理元件可能有可调参数的统一接口。事实上，每个需要向用户公开参数的类都应该直接或间接继承自 <link linkend="_classjevois_1_1Component">Component</link> 。参数是任何有效 C++ 类型的简单包装，以及一些描述、默认值、可能的有效值规范等。参数用于通过更改参数值来调整处理元素的行为（例如，某些图像处理 算法中的阈值）。</para>
+
+<para>Components 通常形成一个组件层次结构，其中 <link linkend="_classjevois_1_1Manager">Manager</link> （包括 <link linkend="_classjevois_1_1Engine">Engine</link> ）位于根，下面是子组件树。要形成这棵树，只需使用 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">Manager::addComponent()</link> 和 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">Component::addSubComponent()</link> 方法添加一些子项，然后向这些子项添加一些子项，等等...</para>
+
+<para><link linkend="_classjevois_1_1Component">Component</link> 背后的目的之一是在实现复杂的视觉处理框架时实现大量代码重用，并减轻在调用处理元素时将许多参数传递给函数调用的负担。这 与 OpenCV 等许多其他框架有很大的不同，后者基本上依赖于有许多参数的函数（尽管后来的版本也使用了类）。例如，在 OpenCV 中调用 Canny 边缘检测器的方法是调用以下函数：</para>
+
+<para><literallayout><computeroutput>void&#32;Canny(InputArray&#32;image,&#32;OutputArray&#32;edges,&#32;double&#32;threshold1,&#32;double&#32;threshold2,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;int&#32;apertureSize&#32;=&#32;3,&#32;bool&#32;L2gradient&#32;=&#32;false)
+</computeroutput></literallayout></para>
+
+<para>除了可能会混淆哪个值属于长列表中的哪个参数（Python 等语言通过允许按名称访问参数来解决）之外，这种方法的一个主要问题是每个使用 Canny 的函数都必须为用户提供一种机制设置参数（threshold1, threshold2 等），或者在大多数情况下，这些参数最终会被硬连线，限制最终应 用程序对不同图像尺寸、环境类型等的适用性。</para>
+
+<para>相比之下，在 JeVois 框架中，我们将创建一个 Canny <link linkend="_classjevois_1_1Component">Component</link> ，其中包含阈值等参数设置以及一个成员函数</para>
+
+<para><literallayout><computeroutput>OutputArray&#32;process(InputArray&#32;in)
+</computeroutput></literallayout></para>
+
+<para>通常首先设置参数值，然后调用该函数。设置参数可以通过使用该函数的代码来完成，但更常见的是由用户完成。在特定的视觉管道中，可以在开始 时为参数提供合理的默认值，然后让那些可能想要修改它们的最终用户可以访问这些参数。JeVois 中参数的修改可以在应用程序启动时通过解析命 令行参数、实例化新的处理 <link linkend="_classjevois_1_1Module">Module</link> 时进行处理，也可以在其运行时通过 <link linkend="_classjevois_1_1Serial">Serial</link> 端口与管理系统的 <link linkend="_classjevois_1_1Engine">Engine</link> 交互来处理。</para>
+
+<para>任何在其层次结构中包含 Canny 组件的复杂视觉处理管道都会公开其参数，以便可以由用户（通过命令行参数、通过串行端口发出的命令等）或层次结构 中的其他组件来设置它们。如果层次结构中存在 <link linkend="_classjevois_1_1Component">Component</link> 的多个实例，则它们的参数可以一次全部设置为单个（共享）值，也可以单独访问它们并将其 设置为不同的值（每个 <link linkend="_classjevois_1_1Component">Component</link> 都有唯一的实例名称，并且所谓的描述符是通过连接组件的实例名称和特定 <link linkend="_classjevois_1_1Component">Component</link> 实例的所有父参数来创建的； 可以通过将该实例的描述符添加到参数名称来访问。参数提供了用于设置/获取参数值的统一接口，因此程序员不必在每个组件中为每个参数编写访问器函数 （例如，添加 threshold1 Parameter&lt;int&gt;，会自动将 set()、get() 等函数添加到你的组件中）。</para>
+
+<para>此外，Component 还提供某种程度的内省（introspection）或反射（reflection）：可以访问组件实例名称、类名称、描述符（包括层次结构中所有父 组件的名称），并迭代其参数、子组件等。</para>
+
+<para><link linkend="_classjevois_1_1Component">Component</link> 本质上是线程安全的，组件接口的编写是为了鼓励线程安全的使用；例如，没有提供返回组件父组件的函数，因为另一个线程可能会在返回 父组件的时间和使用它的时间之间更改该组件。相反，提供的函数可以以线程安全的方式向上或向下遍历层次结构，并对遍历期间遇到的组件执行某些 操作。</para>
+
+<para>组件分几个阶段使用：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>Construction: 在构造函数中，参数值尚未设置，因此依赖于它们的任何内容都不应初始化。通常，构造函数应该只初始化独立于参数值的固定组件 资源，或者它们也可以设置参数的默认值，这些默认值稍后可能会被命令行参数覆盖。在许多情况下，构造函数不会执行任何操作，并且大部分初始化 将延迟到组件的 init() 阶段设置参数值。</para>
+</listitem><listitem>
+<para>Initialization: 当在管理器（包括 <link linkend="_classjevois_1_1Engine">Engine</link> ）上调用 init() 时，它会向下传播整个 <link linkend="_classjevois_1_1Component">Component</link> 层次结构，如下所示：<itemizedlist>
+<listitem>
+<para>在所有子组件上递归调用 <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">preInit()</link>。</para>
+</listitem><listitem>
+<para>在当前组件上运行 <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">preInit()</link>，preInit()函数可以由派生类重写以实现一些自定义初始化；请注意，参数值此时尚未最终确定，不应使用）。</para>
+</listitem><listitem>
+<para>然后，Manager 解析命令行并可能设置参数。从此时起，认为参数可以使用。</para>
+</listitem><listitem>
+<para>对于有回调但命令行中没有显式设置的参数，请使用默认参数值第一次调用回调。这样，创建资源的回调（例如，设备的设备名称参数的回调， 在调用时打开设备）在 init() 完成之前至少调用一次。</para>
+</listitem><listitem>
+<para>递归地将所有子组件的状态翻转为已初始化，然后将组件状态翻转为已初始化。</para>
+</listitem><listitem>
+<para>在所有子组件上递归运行 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit()</link> （派生类可能会重写 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit()</link> ，并且通常会根据重写 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit()</link> 中的参数值来分配资源）， 然后在当前组件上运行。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>初始化流程是固定的。从 <link linkend="_classjevois_1_1Component">Component</link> 派生的类可以重写 <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">preInit()</link> 来实现不依赖于参数值的初始化，并重写 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit()</link> 来实现依赖于 参数值的初始化。一旦 <link linkend="_classjevois_1_1Manager">Manager</link> 上的 init() 完成，层次结构中的所有组件都被视为准备好运行。</para>
+
+<para>如果将组件添加到已初始化的层次结构中，则在添加时它将进入与其父组件相同的初始化状态。当从已经运行并流式传输视频的 JeVois 系统 上的 USB 主机选择新的视频格式时，通常会出现这种情况。处理旧格式的 <link linkend="_classjevois_1_1Module">Module</link> 首先由 <link linkend="_classjevois_1_1Engine">Engine</link> 去初始化，然后将其销毁，为新格式实例化 新模块，并在视频帧流定向到它之前对其进行初始化。</para>
+</listitem><listitem>
+<para>uninit: 这是 init() 的对偶， <link linkend="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c">preUninit()</link> 和 <link linkend="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f">postUninit()</link> 遵循与 <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">preInit()</link> 和 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit()</link> 相同的逻辑。具体顺序是：<itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c">preUninit()</link> 在所有子组件上递归调用，然后在组件上调用（请注意，此时 <link linkend="_classjevois_1_1Component_1a465314997843a6364a18abce2d307be9">initialized()</link> 仍然为 true）；</para>
+</listitem><listitem>
+<para>组件翻转为未初始化，然后递归其所有子组件</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f">postUninit()</link> 在组件上调用，然后在其所有子组件上递归调用。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>请注意 init() 和 uninit() 在 <link linkend="_classjevois_1_1Component">Component</link> 中都是私有的，因此不能直接调用。Manager（以及从 <link linkend="_classjevois_1_1Manager">Manager</link> 派生的 <link linkend="_classjevois_1_1Engine">Engine</link> ）将它们公开， 以便您可以在管理器上调用它们。也就是说，您的整个层次结构要么已初始化，要么未初始化。</para>
+
+<para>由于 JeVois 硬件平台上电时会自动构建并初始化默认处理管道，并且当用户更改视频格式时 <link linkend="_classjevois_1_1Engine">Engine</link> 会实例化并初始化处理模块，因此大多数 组件只是假设在组件未初始化时它们的视觉处理函数永远不会被调用。因此完全跳过对 <link linkend="_classjevois_1_1Component_1a465314997843a6364a18abce2d307be9">initialized()</link> 的测试（以节省 CPU 周期）。 </para>
+<para>
+Definition at line 139 of file Component.H.</para>
+Inheritance diagram for jevois::Component:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Component__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Component:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Component__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Component_1a70906f6c599ad75ab6ed79dff19f68d2">Component</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1Component_1ab6ece3033df061a3dbbc5c7b3da3283c">~Component</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>Component hierarchies</title>
+        <itemizedlist>
+            <listitem><para>template&lt;class Comp , typename... Args&gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">addSubComponent</link> (std::string const &amp;instance, Args &amp;&amp;...args)</para>
+
+<para>Pseudo-constructor: 构造并添加另一个组件作为该组件的子组件。 </para>
+</listitem>
+            <listitem><para>template&lt;class Comp &gt; </para><para>void <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">removeSubComponent</link> (std::shared_ptr&lt; Comp &gt; &amp;component)</para>
+
+<para>通过 shared_ptr 从 <link linkend="_classjevois_1_1Component">Component</link> 中删除子组件。 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1a58233c8e715da1975f5dd20445c32cc4">removeSubComponent</link> (std::string const &amp;instance, bool warnIfNotFound=true)</para>
+
+<para>按实例名称从 <link linkend="_classjevois_1_1Component">Component</link> 中删除子组件。 </para>
+</listitem>
+            <listitem><para>template&lt;class Comp  = jevois::Component&gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Component_1a6fa8c112c371226dc469be3c66aa9f76">getSubComponent</link> (std::string const &amp;instance) const</para>
+
+<para>通过实例名称获取子组件。 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Component_1a7e5a8b8e26f37c82a7c67a3b2d9c488b">isTopLevel</link> () const</para>
+
+<para>Returns true if this component is top-level, i.e., its parent is <link linkend="_classjevois_1_1Manager">jevois::Manager</link>. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>Component runtime</title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_classjevois_1_1Component_1a465314997843a6364a18abce2d307be9">initialized</link> () const</para>
+
+<para>Has this component been initialized yet? </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>Component metainfo-related functions</title>
+        <itemizedlist>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1Component_1a94393bebf75e11ddb4287b2f23489dc8">className</link> () const</para>
+
+<para>The class name of this component. </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link> () const</para>
+
+<para>The instance name of this component. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>Component Parameter-related functions</title>
+
+<para>每个 <link linkend="_classjevois_1_1Component">Component</link> 都可以保存 Parameter 对象（通过继承），这些对象可以通过修改 <link linkend="_classjevois_1_1Component">Component</link> 由用户在外部设置，并且可以由 <link linkend="_classjevois_1_1Component">Component</link> 本身访问或设置。</para>
+
+<para>请注意 JeVois 框架如何对参数使用继承，而不是使它们成为所属 <link linkend="_classjevois_1_1Component">Component</link> 的类数据成员。详细说明请参见 <link linkend="_group__parameter">Parameter-related classes and functions</link> for detailed explanations. </para>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; std::string &gt; <link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal</link> (std::string const &amp;paramdescriptor, T const &amp;val)</para>
+
+<para>Set a parameter value. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_classjevois_1_1Component_1a1a88e8efd0957c4d2211269ecbb5618b">setParamValUnique</link> (std::string const &amp;paramdescriptor, T const &amp;val)</para>
+
+<para>设置一个参数值，简单版本假设只有一个参数匹配。 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; std::pair&lt; std::string, T &gt; &gt; <link linkend="_classjevois_1_1Component_1af7841287aa195aa67a6c2b5acf4d5d5b">getParamVal</link> (std::string const &amp;paramdescriptor) const</para>
+
+<para>通过描述符获取参数值 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_classjevois_1_1Component_1afbf453dae93298b1dbd186cdbfde848a">getParamValUnique</link> (std::string const &amp;paramdescriptor) const</para>
+
+<para>获取参数值，简单版本假设只有一个参数匹配 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_classjevois_1_1Component_1a0e51e39f529f8eb2b6fd5068407a5a9f">setParamString</link> (std::string const &amp;paramdescriptor, std::string const &amp;val)</para>
+
+<para>通过字符串设置参数值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1af733b4d22345a6f56bc7b0e6e7be4ddc">setParamStringUnique</link> (std::string const &amp;paramdescriptor, std::string const &amp;val)</para>
+
+<para>通过字符串设置参数值，简单版本假设只有一个参数匹配 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; <link linkend="_classjevois_1_1Component_1a1ea17fa2f1960d4476a01e6f2c5c02d5">getParamString</link> (std::string const &amp;paramdescriptor) const</para>
+
+<para>通过字符串获取参数值 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1Component_1ae1ba3752e44d529cf41c8b5f38457945">getParamStringUnique</link> (std::string const &amp;paramdescriptor) const</para>
+
+<para>通过字符串获取参数值，简单版本假设只有一个参数匹配 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1a406a6bdc2a6b94308ee6f630aa0cb09c">freezeParam</link> (std::string const &amp;paramdescriptor, bool doit)</para>
+
+<para>按名称冻结/解冻参数，参见 <link linkend="_classjevois_1_1ParameterBase_1aeb82f8d408f72e7490f5a25cf41e48c5">ParameterBase::freeze()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1a5d2e9887f9e8f485676178c82555048c">freezeAllParams</link> (bool doit)</para>
+
+<para>Freeze all parameters. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1Component_1a160d084b123b5abb6388905498349d74">descriptor</link> () const</para>
+
+<para>获取我们的完整描述符（包括所有父级）作为 [Instancename]:[...]:[...] </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1ae586131c86793919a1208faa10d1f40f">setParamsFromFile</link> (std::string const &amp;filename)</para>
+
+<para>从文件设置一些参数 </para>
+</listitem>
+            <listitem><para>std::istream &amp; <link linkend="_classjevois_1_1Component_1a598608043902a81fff7be9a4dfdef383">setParamsFromStream</link> (std::istream &amp;is, std::string const &amp;absfile)</para>
+
+<para>从打开的流中设置一些参数 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Component_1ad4a8b3ab4c1e17a8353478c9edb7102f">paramInfo</link> (std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s, std::map&lt; std::string, std::string &gt; &amp;categs, bool skipFrozen, std::string const &amp;cname=&quot;&quot;, std::string const &amp;pfx=&quot;&quot;)</para>
+
+<para>获取所有参数的面向机器的描述 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1a53f1a96de78606da022ab1e9fddcd130">foreachParam</link> (std::function&lt; void(std::string const &amp;compname, <link linkend="_classjevois_1_1ParameterBase">ParameterBase</link> *p)&gt; func, std::string const &amp;cname=&quot;&quot;)</para>
+
+<para>对我们持有的每个参数运行一个函数 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt; T &gt; &gt; <link linkend="_classjevois_1_1Component_1ad9929e687e28e6aeeffa9df69bc39e53">addDynamicParameter</link> (std::string const &amp;name, std::string const &amp;description, T const &amp;defaultValue, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;category)</para>
+
+<para>在组件已经构造后添加新参数 </para>
+</listitem>
+            <listitem><para>template&lt;typename T , template&lt; typename &gt; class ValidValuesSpec&gt; </para><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt; T &gt; &gt; <link linkend="_classjevois_1_1Component_1a80ad7290096e62ac3ad8d1c7432d97d3">addDynamicParameter</link> (std::string const &amp;name, std::string const &amp;description, T const &amp;defaultValue, ValidValuesSpec&lt; T &gt; const &amp;validValuesSpec, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;category)</para>
+
+<para>在组件构造完成后添加新参数 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_classjevois_1_1Component_1ab8e576ff72ca69e7e8bf293e5529aec4">setDynamicParameterCallback</link> (std::string const &amp;name, std::function&lt; void(T const &amp;)&gt; cb, bool callnow=true)</para>
+
+<para>使用先前创建的动态参数注册回调 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1af56af29b92df74f8aca6fbfabb147d92">removeDynamicParameter</link> (std::string const &amp;name, bool throw_if_not_found=true)</para>
+
+<para>删除先前添加的动态参数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>组件路径相关函数</title>
+
+<para>每个组件都可以跟踪首选文件系统路径。通常，用户不应篡改此路径，但动态加载的模块对象（从组件派生）会将该路径设 置为找到模块共享对象文件 (.so) 的路径。这允许这些模块访问其部分本地配置数据，例如，这些数据可能存储在模块路 径下的 <computeroutput>etc/</computeroutput> 目录中。 </para>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1Component_1ab19561ca99b94e58b37875ceb5e7f566">setPath</link> (std::string const &amp;path)</para>
+
+<para>为该组件分配一个文件系统路径 </para>
+</listitem>
+            <listitem><para>std::filesystem::path <link linkend="_classjevois_1_1Component_1a107130a245353bd22fc65a248a8b9baa">absolutePath</link> (std::filesystem::path const &amp;path=&quot;&quot;)</para>
+
+<para>如果给定路径是相对的（不以 / 开头），则将组件路径添加到它前面 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+<simplesect><title>组件设置函数可由派生类重载</title>
+        <itemizedlist>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">preInit</link> ()</para>
+
+<para>Called before all sub-Components are init()ed. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">postInit</link> ()</para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c">preUninit</link> ()</para>
+
+<para>Called before all sub-Components are uninit()ed. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f">postUninit</link> ()</para>
+
+<para>Called after all sub-Components are uninit()ed. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>class <link linkend="_classjevois_1_1Component_1a4fc95c9b928bda9fd1891c63a6895ec7">ParameterCore</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Component_1adddd5c43ff870a047aa66db4edf82a7e">Manager</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Component_1a3e1914489e4bed4f9f23cdeab34a43dc">Engine</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Component_1a21f639900c480510650969df9c74d17d">Module</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Component_1a70906f6c599ad75ab6ed79dff19f68d2"/>    <section>
+    <title>Component()</title>
+<indexterm><primary>Component</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>Component</secondary></indexterm>
+<para><computeroutput>jevois::Component::Component (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>创建组件的标准方法是通过 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">Component::addSubComponent()</link> 或 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">Manager::addComponent()</link>，而不是手动构建。通过构造函数构造的组件 （例如，调用 new 操作符）将不会附加到 <link linkend="_classjevois_1_1Component">Component</link> 层次结构。建议派生组件也有一个实例构造函数参数并将其传递给 base <link linkend="_classjevois_1_1Component">Component</link> 类， 以允许复杂系统包含同一 <link linkend="_classjevois_1_1Component">Component</link> 的多个实例。事实上，对于大多数组件来说，继承的构造函数是合适的：</para>
+
+<para><literallayout><computeroutput>class&#32;MyComp&#32;:&#32;public&#32;jevois::Component
+{
+public:
+&#32;&#32;//&#32;继承的构造函数
+&#32;&#32;using&#32;jevois::Component::Component;
+
+&#32;&#32;//&#32;用于安全继承的虚拟析构函数
+&#32;&#32;virtual&#32;~MyComp();
+};
+</computeroutput></literallayout> </para>
+<para>
+Definition at line 32 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ab6ece3033df061a3dbbc5c7b3da3283c"/>    <section>
+    <title>~Component()</title>
+<indexterm><primary>~Component</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>~Component</secondary></indexterm>
+<para><computeroutput>jevois::Component::~Component ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数。 </para>
+</para>
+
+<para>如果组件已初始化，则调用 uninit()。 </para>
+<para>
+Definition at line 54 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE, and LDEBUG.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Component_1a107130a245353bd22fc65a248a8b9baa"/>    <section>
+    <title>absolutePath()</title>
+<indexterm><primary>absolutePath</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>absolutePath</secondary></indexterm>
+<para><computeroutput>std::filesystem::path jevois::Component::absolutePath (std::filesystem::path const &amp; path = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>如果给定路径是相对的（不以 / 开头），则将组件路径添加到它前面 </para>
+</para>
+
+<para>如果路径是绝对的，则无操作。如果路径为空，则返回使用 <link linkend="_classjevois_1_1Component_1ab19561ca99b94e58b37875ceb5e7f566">setPath()</link> 设置的组件路径。 </para>
+<para>
+Definition at line 510 of file Component.C.</para>
+<para>
+References jevois::absolutePath(), and JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ad9929e687e28e6aeeffa9df69bc39e53"/>    <section>
+    <title>addDynamicParameter()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>addDynamicParameter</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>addDynamicParameter</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt;T&gt; &gt; jevois::Component::addDynamicParameter (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>在组件已经构造后添加新参数 </para>
+</para>
+
+<para>动态参数只能通过描述符使用 <link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">Component::setParamVal()</link>、Component::getParamVal() 等进行访问，因为拥有的组件不会 像标准参数那样从它们继承。创建后可以使用 <link linkend="_classjevois_1_1Component_1ab8e576ff72ca69e7e8bf293e5529aec4">Component::setDynamicParameterCallback()</link> 手动添加回调。此版本创建一 个没有给定有效值的参数，有效值是 T 可以采用的任何值。 </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a80ad7290096e62ac3ad8d1c7432d97d3"/>    <section>
+    <title>addDynamicParameter()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>addDynamicParameter</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>addDynamicParameter</secondary></indexterm>
+<computeroutput>template&lt;typename T , template&lt; typename &gt; class ValidValuesSpec&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt;T&gt; &gt; jevois::Component::addDynamicParameter (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, ValidValuesSpec&lt; T &gt; const &amp; validValuesSpec, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>在组件构造完成后添加新参数 </para>
+</para>
+
+<para>动态参数只能通过描述符访问，因为拥有该参数的组件不会像标准参数那样从它们继承。创建后可以使用 <link linkend="_classjevois_1_1Component_1ab8e576ff72ca69e7e8bf293e5529aec4">Component::setDynamicParameterCallback()</link> 手动添加回调。此版本从 ValidValueSpec 创建具有指定有效值的参数 </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc"/>    <section>
+    <title>addSubComponent()</title>
+<indexterm><primary>addSubComponent</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>addSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp , typename... Args&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Component::addSubComponent (std::string const &amp; instance, Args &amp;&amp;... args)</computeroutput></para><para>
+
+<para>Pseudo-constructor: 构造并添加另一个组件作为该组件的子组件。 </para>
+</para>
+
+<para>将创建 Comp 类型的子组件（必须从 <link linkend="_classjevois_1_1Component">jevois::Component</link> 派生）并将其添加为该组件的子组件。子组件在逻辑上 &quot;属于&quot; 该组件，并且 会随着父组件自动初始化、去初始化和删除。除了构造之外，添加子组件还将使其达到与所有者组件相同的 init() 状态。</para>
+
+<para>设置参数时，可以将子组件作为该组件的 child 来引用。例如，如果我们有一个 ComponentParent，其中 ComponentChild 作为子组件， 并且 ComponentChild 有名为 CoolChildParam 的参数，则可以通过以下方式在命令行上指定该参数</para>
+
+<para><literallayout><computeroutput>--ComponentParentInstanceName:ComponentChildInstanceName:coolChildParamName=&quot;whatever&quot;
+</computeroutput></literallayout></para>
+
+<para>通过 <link linkend="_classjevois_1_1Serial">Serial</link> 端口</para>
+
+<para><literallayout><computeroutput>setpar&#32;ComponentParentInstanceName:ComponentChildInstanceName:coolChildParamName&#32;whatever
+</computeroutput></literallayout></para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>instance</entry>
+                                <entry>
+<para>标识 <link linkend="_classjevois_1_1Component">Component</link> 的特定实例的字符串，两个子组件不能有相同的实例名称。实例名称应通过派生的 <link linkend="_classjevois_1_1Component">Component</link> 的构造函数传入，从而允许用户消除 <link linkend="_classjevois_1_1Component">Component</link> 的多个实例之间的歧义。如果实例名称为空，则实际实例将被命名为 ComponentClassname::， 并将 # 替换为唯一编号（如有必要）。如果实例名称不为空但包含 #，则仅将 # 替换为数字（如有必要），以使实例名称唯一。组件构建完成 后，可以通过 <link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName()</link> 访问最终名称。基类中的实例没有默认值来捕获忘记将其传递给基类的派生类，但在派生类中为实例设置一个 空字符串默认值可能是一个好主意。</para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>args</entry>
+                                <entry>
+<para>用于实例化子组件的构造函数参数</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <note><title>Note</title>
+
+<para>子组件始终继承其顶级父组件的路径（顶级组件是通过 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">Manager::addComponent()</link> 直接添加到 <link linkend="_classjevois_1_1Manager">Manager</link> 的组件）。请参见 <link linkend="_classjevois_1_1Component_1a107130a245353bd22fc65a248a8b9baa">absolutePath()</link> 。 这样不同的模块可以为其组件提供不同的数据；例如，FaceDetector 组件可能需要一些人脸模板数据文件才能运行；如果使用相对路径名加载这些文件， 则使用 FaceDetector 的不同模块可能会使用不同的人脸模板数据文件。 </para>
+</note>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a94393bebf75e11ddb4287b2f23489dc8"/>    <section>
+    <title>className()</title>
+<indexterm><primary>className</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>className</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::Component::className ( ) const</computeroutput></para><para>
+
+<para>The class name of this component. </para>
+</para>
+<para>
+Definition at line 39 of file Component.C.</para>
+<para>
+References jevois::demangle().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a160d084b123b5abb6388905498349d74"/>    <section>
+    <title>descriptor()</title>
+<indexterm><primary>descriptor</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>descriptor</secondary></indexterm>
+<para><computeroutput>std::string jevois::Component::descriptor ( ) const</computeroutput></para><para>
+
+<para>获取我们的完整描述符（包括所有父级）作为 [Instancename]:[...]:[...] </para>
+</para>
+<para>
+Definition at line 274 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorClassify::onParamChange(), and jevois::dnn::PostProcessorDetect::onParamChange().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a53f1a96de78606da022ab1e9fddcd130"/>    <section>
+    <title>foreachParam()</title>
+<indexterm><primary>foreachParam</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>foreachParam</secondary></indexterm>
+<para><computeroutput>void jevois::Component::foreachParam (std::function&lt; void(std::string const &amp;compname, <link linkend="_classjevois_1_1ParameterBase">ParameterBase</link> *p)&gt; func, std::string const &amp; cname = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>对我们持有的每个参数运行一个函数 </para>
+</para>
+<para>
+Definition at line 564 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a5d2e9887f9e8f485676178c82555048c"/>    <section>
+    <title>freezeAllParams()</title>
+<indexterm><primary>freezeAllParams</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>freezeAllParams</secondary></indexterm>
+<para><computeroutput>void jevois::Component::freezeAllParams (bool doit)</computeroutput></para><para>
+
+<para>Freeze all parameters. </para>
+</para>
+<para>
+Definition at line 425 of file Component.C.</para>
+<para>
+Referenced by jevois::Engine::postInit().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a406a6bdc2a6b94308ee6f630aa0cb09c"/>    <section>
+    <title>freezeParam()</title>
+<indexterm><primary>freezeParam</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>freezeParam</secondary></indexterm>
+<para><computeroutput>void jevois::Component::freezeParam (std::string const &amp; paramdescriptor, bool doit)</computeroutput></para><para>
+
+<para>按名称冻结/解冻参数，参见 <link linkend="_classjevois_1_1ParameterBase_1aeb82f8d408f72e7490f5a25cf41e48c5">ParameterBase::freeze()</link> </para>
+</para>
+<para>
+Definition at line 413 of file Component.C.</para>
+<para>
+References jevois::ParameterBase::freeze().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a1ea17fa2f1960d4476a01e6f2c5c02d5"/>    <section>
+    <title>getParamString()</title>
+<indexterm><primary>getParamString</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>getParamString</secondary></indexterm>
+<para><computeroutput>std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; jevois::Component::getParamString (std::string const &amp; paramdescriptor) const</computeroutput></para><para>
+
+<para>通过字符串获取参数值 </para>
+</para>
+
+<para>有关 paramdescriptor 的详细说明，<formalpara><title>See also</title>
+
+<para><link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal</link> 使用此方法从字符串描述符中获取组件参数的当前值。将返回与描述 符匹配的所有参数的值（以字符串形式）。 </para>
+</formalpara>
+
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>jevois::exception::ParameterException（如果没有参数与给定的描述符匹配）。</entry>
+                                <entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>所有与给定描述符匹配的参数的 &lt;paramdescriptor, valuestring&gt; 列表。列表保证至少有一个元素，因为如果没有 找到匹配的参数，我们会抛出异常。 </para>
+</formalpara>
+</para>
+<para>
+Definition at line 385 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE, and jevois::ParameterBase::strget().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ae1ba3752e44d529cf41c8b5f38457945"/>    <section>
+    <title>getParamStringUnique()</title>
+<indexterm><primary>getParamStringUnique</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>getParamStringUnique</secondary></indexterm>
+<para><computeroutput>std::string jevois::Component::getParamStringUnique (std::string const &amp; paramdescriptor) const</computeroutput></para><para>
+
+<para>通过字符串获取参数值，简单版本假设只有一个参数匹配 </para>
+</para>
+
+<para>这会调用 <link linkend="_classjevois_1_1Component_1af7841287aa195aa67a6c2b5acf4d5d5b">getParamVal()</link>，检查是否找到一个匹配项，并将其值作为字符串返回。 
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>jevois::exception::ParameterException</entry>
+                                <entry>
+<para>如果没有一个参数与给定的描述符完全匹配。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line 401 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1af7841287aa195aa67a6c2b5acf4d5d5b"/>    <section>
+    <title>getParamVal()</title>
+<indexterm><primary>getParamVal</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>getParamVal</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;std::pair&lt;std::string, T&gt; &gt; jevois::Component::getParamVal (std::string const &amp; paramdescriptor) const</computeroutput></para><para>
+
+<para>通过描述符获取参数值 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1afbf453dae93298b1dbd186cdbfde848a"/>    <section>
+    <title>getParamValUnique()</title>
+<indexterm><primary>getParamValUnique</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>getParamValUnique</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T jevois::Component::getParamValUnique (std::string const &amp; paramdescriptor) const</computeroutput></para><para>
+
+<para>获取参数值，简单版本假设只有一个参数匹配 </para>
+</para>
+
+<para>这会调用 <link linkend="_classjevois_1_1Component_1af7841287aa195aa67a6c2b5acf4d5d5b">getParamVal()</link>，检查是否找到一个匹配项，并返回其值。例如，如果 MyComponent 类有一个名为“myparam”的整 数参数，您可以像这样获取该值：</para>
+
+<para><literallayout><computeroutput>std::shared_ptr&lt;MyComponent&gt;&#32;comp(new&#32;MyComponent);
+int&#32;paramValue&#32;=&#32;comp-&gt;getParamValUnique&lt;int&gt;(&quot;myparam&quot;);
+</computeroutput></literallayout></para>
+
+<para>
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::range_error</entry>
+                                <entry>
+<para>如果没有一个参数与给定的描述符匹配。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a6fa8c112c371226dc469be3c66aa9f76"/>    <section>
+    <title>getSubComponent()</title>
+<indexterm><primary>getSubComponent</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>getSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp  = jevois::Component&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Component::getSubComponent (std::string const &amp; instance) const</computeroutput></para><para>
+
+<para>通过实例名称获取子组件。 </para>
+</para>
+
+<para>如果它不是默认值 ( <link linkend="_classjevois_1_1Component">jevois::Component</link> )，则此方法会对 Comp 进行动态指针转换。如果未通过实例名称找到组件，或者找到组件但 不是 Comp 类型（如果指定了 Comp），则抛出该错误。请注意，一旦您将 shared_ptr 保存到某个 Component，就可以保证该组件不会 被销毁，直到该 shared_ptr 被释放。如果 JeVois 系统尝试销毁该组件（例如，调用 <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">removeSubComponent()</link> ），该组件将被去初始化， 并且其父组件将被取消设置，因此它不会完全可操作，当最后一个指向它的 shared_ptr 超出范围时将删除它。 </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a465314997843a6364a18abce2d307be9"/>    <section>
+    <title>initialized()</title>
+<indexterm><primary>initialized</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>initialized</secondary></indexterm>
+<para><computeroutput>bool jevois::Component::initialized ( ) const</computeroutput></para><para>
+
+<para>Has this component been initialized yet? </para>
+</para>
+<para>
+Definition at line 204 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843"/>    <section>
+    <title>instanceName()</title>
+<indexterm><primary>instanceName</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>instanceName</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::Component::instanceName ( ) const</computeroutput></para><para>
+
+<para>The instance name of this component. </para>
+</para>
+<para>
+Definition at line 50 of file Component.C.</para>
+<para>
+Referenced by jevois::Engine::registerPythonComponent(), and jevois::Engine::unRegisterPythonComponent().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a7e5a8b8e26f37c82a7c67a3b2d9c488b"/>    <section>
+    <title>isTopLevel()</title>
+<indexterm><primary>isTopLevel</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>isTopLevel</secondary></indexterm>
+<para><computeroutput>bool jevois::Component::isTopLevel ( ) const</computeroutput></para><para>
+
+<para>Returns true if this component is top-level, i.e., its parent is <link linkend="_classjevois_1_1Manager">jevois::Manager</link>. </para>
+</para>
+
+<para>The <link linkend="_classjevois_1_1Module">Module</link> of <link linkend="_classjevois_1_1Engine">Engine</link> is top-level. </para>
+<para>
+Definition at line 118 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ad4a8b3ab4c1e17a8353478c9edb7102f"/>    <section>
+    <title>paramInfo()</title>
+<indexterm><primary>paramInfo</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>paramInfo</secondary></indexterm>
+<para><computeroutput>void jevois::Component::paramInfo (std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s, std::map&lt; std::string, std::string &gt; &amp; categs, bool skipFrozen, std::string const &amp; cname = <computeroutput>&quot;&quot;</computeroutput>
+, std::string const &amp; pfx = <computeroutput>&quot;&quot;</computeroutput>
+)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取所有参数的面向机器的描述 </para>
+</para>
+<para>
+Definition at line 517 of file Component.C.</para>
+<para>
+References jevois::ParameterSummary::category, jevois::ParameterSummary::categorydescription, jevois::ParameterSummary::defaultvalue, jevois::ParameterSummary::description, jevois::ParameterSummary::frozen, JEVOIS_TRACE, jevois::ParameterSummary::name, jevois::ParameterSummary::validvalues, jevois::ParameterSummary::value, jevois::ParameterSummary::valuetype, and jevois::UserInterface::writeString().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>virtual void jevois::Component::postInit ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1Engine_1ad7b8927d246b350cf0be396291f79f3c">jevois::Engine</link>, <link linkend="_classjevois_1_1ICM20948_1a8a5ffa0fa699059985794186876f75b6">jevois::ICM20948</link>, <link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">jevois::Manager</link>, <link linkend="_classjevois_1_1dnn_1_1Pipeline_1ae13fed0f9c31f30edcf07e9a5abeed81">jevois::dnn::Pipeline</link>, <link linkend="_classjevois_1_1Serial_1a159fa2d1b226adc859e874aa771820c8">jevois::Serial</link>, and <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1af1ad908e21e661c8b454e46720b38e2e">jevois::dnn::PostProcessorSegment</link>.</para>
+<para>
+Definition at line 428 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f"/>    <section>
+    <title>postUninit()</title>
+<indexterm><primary>postUninit</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>postUninit</secondary></indexterm>
+<para><computeroutput>virtual void jevois::Component::postUninit ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called after all sub-Components are uninit()ed. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1abbda1a108de1cb63223b1fa7e9fd76df">jevois::PythonModule</link>, and <link linkend="_classjevois_1_1Serial_1afe39197a374d85599ac823e60e3d263a">jevois::Serial</link>.</para>
+<para>
+Definition at line 434 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6"/>    <section>
+    <title>preInit()</title>
+<indexterm><primary>preInit</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>preInit</secondary></indexterm>
+<para><computeroutput>virtual void jevois::Component::preInit ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called before all sub-Components are init()ed. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1Engine_1a25d2fd8ab270cbdf4a26cc4bf9d5bac7">jevois::Engine</link>, <link linkend="_classjevois_1_1PythonModule_1ac1d5345e0543d5b5646ba08ee799f274">jevois::PythonModule</link>, <link linkend="_classjevois_1_1ICM20948_1a8202f4edbc99ef5a71dc3465b9d0c2e7">jevois::ICM20948</link>, and <link linkend="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be">jevois::Manager</link>.</para>
+<para>
+Definition at line 425 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c"/>    <section>
+    <title>preUninit()</title>
+<indexterm><primary>preUninit</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>preUninit</secondary></indexterm>
+<para><computeroutput>virtual void jevois::Component::preUninit ( )<computeroutput>[inline]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called before all sub-Components are uninit()ed. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1ICM20948_1ac0c87dce4c1cad9591e6ab4c87e04da2">jevois::ICM20948</link>, and <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a2afcca8091eba25f532cdaac0916c55e">jevois::dnn::Pipeline</link>.</para>
+<para>
+Definition at line 431 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1af56af29b92df74f8aca6fbfabb147d92"/>    <section>
+    <title>removeDynamicParameter()</title>
+<indexterm><primary>removeDynamicParameter</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>removeDynamicParameter</secondary></indexterm>
+<para><computeroutput>void jevois::Component::removeDynamicParameter (std::string const &amp; name, bool throw_if_not_found = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>删除先前添加的动态参数 </para>
+</para>
+<para>
+Definition at line 494 of file Component.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362"/>    <section>
+    <title>removeSubComponent()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>removeSubComponent</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>removeSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp &gt; </computeroutput><para><computeroutput>void jevois::Component::removeSubComponent (std::shared_ptr&lt; Comp &gt; &amp; component)</computeroutput></para><para>
+
+<para>通过 shared_ptr 从 <link linkend="_classjevois_1_1Component">Component</link> 中删除子组件。 </para>
+</para>
+
+<para><note><title>Note</title>
+
+<para>注意传递的 shared_ptr 在此过程中会失效。如果此后 use_count 未降至零（即，存在指向该组件的附加共享指针，这会阻止其实际被删除）， 则会发出警告。 </para>
+</note>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a58233c8e715da1975f5dd20445c32cc4"/>    <section>
+    <title>removeSubComponent()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>removeSubComponent</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>removeSubComponent</secondary></indexterm>
+<para><computeroutput>void jevois::Component::removeSubComponent (std::string const &amp; instance, bool warnIfNotFound = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>按实例名称从 <link linkend="_classjevois_1_1Component">Component</link> 中删除子组件。 </para>
+</para>
+<para>
+Definition at line 74 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE, and LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ab8e576ff72ca69e7e8bf293e5529aec4"/>    <section>
+    <title>setDynamicParameterCallback()</title>
+<indexterm><primary>setDynamicParameterCallback</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setDynamicParameterCallback</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void jevois::Component::setDynamicParameterCallback (std::string const &amp; name, std::function&lt; void(T const &amp;)&gt; cb, bool callnow = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>使用先前创建的动态参数注册回调 </para>
+</para>
+
+<para>如果 callnow 为 true，则回调将在注册后立即使用参数的当前值调用。这是为了模仿标准参数，其中回调在初始化期间 至少被调用一次。 </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ae586131c86793919a1208faa10d1f40f"/>    <section>
+    <title>setParamsFromFile()</title>
+<indexterm><primary>setParamsFromFile</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamsFromFile</secondary></indexterm>
+<para><computeroutput>void jevois::Component::setParamsFromFile (std::string const &amp; filename)</computeroutput></para><para>
+
+<para>从文件设置一些参数 </para>
+</para>
+
+<para>该文件应包含 &quot;descriptor=value&quot; 条目，每行一个，其中参数描述符应相对于此组件。如果文件名是相对的，则我们 的组件路径将使用 <link linkend="_classjevois_1_1Component_1a107130a245353bd22fc65a248a8b9baa">absolutePath()</link> 作为前缀。 </para>
+<para>
+Definition at line 433 of file Component.C.</para>
+<para>
+References jevois::absolutePath(), and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a598608043902a81fff7be9a4dfdef383"/>    <section>
+    <title>setParamsFromStream()</title>
+<indexterm><primary>setParamsFromStream</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamsFromStream</secondary></indexterm>
+<para><computeroutput>std::istream &amp; jevois::Component::setParamsFromStream (std::istream &amp; is, std::string const &amp; absfile)</computeroutput></para><para>
+
+<para>从打开的流中设置一些参数 </para>
+</para>
+<para>
+Definition at line 442 of file Component.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a0e51e39f529f8eb2b6fd5068407a5a9f"/>    <section>
+    <title>setParamString()</title>
+<indexterm><primary>setParamString</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamString</secondary></indexterm>
+<para><computeroutput>std::vector&lt; std::string &gt; jevois::Component::setParamString (std::string const &amp; paramdescriptor, std::string const &amp; val)</computeroutput></para><para>
+
+<para>通过字符串设置参数值 </para>
+</para>
+
+<para>有关 paramdescriptor 的详细说明，<formalpara><title>See also</title>
+
+<para><link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal</link> </para>
+</formalpara>
+
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>jevois::exception::ParameterException，如果没有参数与给定的描述符匹配，或者给定的字符串无法转换为参数</entry>
+                                <entry>
+<para>的本机类型。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>匹配和设置的参数的完全展开（无 &apos;*&apos;）描述符列表。该列表保证至少有一个元素，因为如果没有找到匹配的参数， 我们会抛出异常。 </para>
+</formalpara>
+</para>
+<para>
+Definition at line 354 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE, and jevois::ParameterBase::strset().</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1af733b4d22345a6f56bc7b0e6e7be4ddc"/>    <section>
+    <title>setParamStringUnique()</title>
+<indexterm><primary>setParamStringUnique</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamStringUnique</secondary></indexterm>
+<para><computeroutput>void jevois::Component::setParamStringUnique (std::string const &amp; paramdescriptor, std::string const &amp; val)</computeroutput></para><para>
+
+<para>通过字符串设置参数值，简单版本假设只有一个参数匹配 </para>
+</para>
+
+<para>这会调用 <link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal()</link>，并检查是否找到一个匹配项。 
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::range_error。如果没有一个参数与给定的描述符完全匹配</entry>
+                                <entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line 370 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640"/>    <section>
+    <title>setParamVal()</title>
+<indexterm><primary>setParamVal</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamVal</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;std::string&gt; jevois::Component::setParamVal (std::string const &amp; paramdescriptor, T const &amp; val)</computeroutput></para><para>
+
+<para>Set a parameter value. </para>
+</para>
+
+<para>如果我们没有该名称的参数或者该值不起作用，则会抛出异常。以下是描述符的工作原理：</para>
+
+<para>基本格式是</para>
+
+<para><literallayout><computeroutput>[ComponentInstanceName]:[...]:[paramname]
+</computeroutput></literallayout></para>
+
+<para>请注意，<computeroutput>[ComponentInstanceName]</computeroutput> 标记也可以替换为 *，这相当于任意数量的任何 ComponentInstanceName 规范。 因此，当您不知道参数有多深时，请使用 * 来获取参数。如果 * 和最终参数名称之间存在其他 ComponentInstanceName，则递归将关闭， 并且 * 和参数名称之间的任何内容都必须与介入的组件/实例相匹配。</para>
+
+<para>For example,</para>
+
+<para><literallayout><computeroutput>MyInst:*:CoolComp:MyParam
+</computeroutput></literallayout></para>
+
+<para>将匹配 MyInst 与顶级组件（您调用 <link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal()</link> 的组件）匹配的参数，然后将递归遍历任意数量的子组件，直到其中一个与 CoolComp 匹配，然后我们将在该子组件中查找 MyParam 参数，我们不会再深入查找。</para>
+
+<para>最后请注意，有一个隐式的第一个 *: 会自动添加到您的描述中，因此，如果您只指定一个参数名称，而在它之前没有其他内容，我们将在 所有子组件中按该名称设置所有参数，无论它们有多深（比如您指定了 *:paramname)。</para>
+
+<para>
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::exception</entry>
+                                <entry>
+<para>如果没有参数与给定的描述符匹配。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>匹配和设置的参数（no &apos;*&apos;）描述符列表。该列表保证至少有一个元素，因为如果没有找到匹配的参数，我们就会抛出异常。 </para>
+</formalpara>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a1a88e8efd0957c4d2211269ecbb5618b"/>    <section>
+    <title>setParamValUnique()</title>
+<indexterm><primary>setParamValUnique</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setParamValUnique</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void jevois::Component::setParamValUnique (std::string const &amp; paramdescriptor, T const &amp; val)</computeroutput></para><para>
+
+<para>设置一个参数值，简单版本假设只有一个参数匹配。 </para>
+</para>
+
+<para>这会调用 <link linkend="_classjevois_1_1Component_1a158c6073e8417061e2797b49899f1640">setParamVal()</link> ，并检查是否找到了恰好一个匹配项。 
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::exception</entry>
+                                <entry>
+<para>如果没有一个参数完全匹配给定的描述符。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+    </section><anchor xml:id="_classjevois_1_1Component_1ab19561ca99b94e58b37875ceb5e7f566"/>    <section>
+    <title>setPath()</title>
+<indexterm><primary>setPath</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>setPath</secondary></indexterm>
+<para><computeroutput>void jevois::Component::setPath (std::string const &amp; path)</computeroutput></para><para>
+
+<para>为该组件分配一个文件系统路径 </para>
+</para>
+<para>
+Definition at line 480 of file Component.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Component_1a3e1914489e4bed4f9f23cdeab34a43dc"/>    <section>
+    <title>Engine</title>
+<indexterm><primary>Engine</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>Engine</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Engine">Engine</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 441 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1adddd5c43ff870a047aa66db4edf82a7e"/>    <section>
+    <title>Manager</title>
+<indexterm><primary>Manager</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>Manager</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Manager">Manager</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 440 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a21f639900c480510650969df9c74d17d"/>    <section>
+    <title>Module</title>
+<indexterm><primary>Module</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>Module</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Module">Module</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 442 of file Component.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Component_1a4fc95c9b928bda9fd1891c63a6895ec7"/>    <section>
+    <title>ParameterCore</title>
+<indexterm><primary>ParameterCore</primary><secondary>jevois::Component</secondary></indexterm>
+<indexterm><primary>jevois::Component</primary><secondary>ParameterCore</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>friend class <link linkend="_classjevois_1_1ParameterCore">ParameterCore</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 439 of file Component.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Component/<link linkend="_Component_8H">Component.H</link>src/jevois/Component/<link linkend="_Component_8C">Component.C</link></section>
+</section>

@@ -21,7 +21,7 @@
 
 #include <linux/videodev2.h>
 
-// Do not compile any highgui-dependent code on the JeVois-A33 platform, since it does not have a display.
+// 不要在 JeVois-A33 平台上编译任何依赖 highgui 的代码，因为它没有显示器。
 #ifndef JEVOIS_PLATFORM_A33
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -39,12 +39,12 @@ jevois::VideoDisplay::VideoDisplay(char const * displayname, size_t nbufs) :
 // ##############################################################################################################
 void jevois::VideoDisplay::setFormat(jevois::VideoMapping const & m)
 {
-  // Nuke any old buffers:
+  // 清除所有旧缓冲区：
   itsBuffers.clear();
   itsImageQueue.clear();
   size_t const nbufs = itsImageQueue.size();
   
-  // Allocate the buffers and make them all immediately available as RawImage:
+  // 分配缓冲区并使它们全部立即可用作 RawImage：
   unsigned int imsize = m.osize();
 
   for (size_t i = 0; i < nbufs; ++i)
@@ -77,12 +77,12 @@ jevois::VideoDisplay::~VideoDisplay()
   {
     if (b.use_count() > 1) LERROR("Ref count non zero when attempting to free VideoBuf");
 
-    b.reset(); // VideoBuf destructor will do the memory freeing
+    b.reset(); // VideoBuf 析构函数将释放内存
   }
 
   itsBuffers.clear();
 
-  // Close opencv window, we need a waitKey() for it to actually close:
+  // 关闭 opencv 窗口，我们需要一个 waitKey() 来真正关闭它：
   cv::waitKey(1);
   cv::destroyWindow(itsName);
   cv::waitKey(20);
@@ -91,7 +91,7 @@ jevois::VideoDisplay::~VideoDisplay()
 // ##############################################################################################################
 void jevois::VideoDisplay::get(jevois::RawImage & img)
 {
-  // Take this buffer out of our queue and hand it over:
+  // 将此缓冲区从我们的队列中取出并移交：
   img = itsImageQueue.pop();
   LDEBUG("Empty image " << img.bufindex << " handed over to application code for filling");
 }
@@ -99,10 +99,10 @@ void jevois::VideoDisplay::get(jevois::RawImage & img)
 // ##############################################################################################################
 void jevois::VideoDisplay::send(jevois::RawImage const & img)
 {
-  // OpenCV uses BGR color for display:
+  // OpenCV 使用 BGR 颜色进行显示：
   cv::Mat imgbgr;
 
-  // Convert the image to openCV and to BGR:
+  // 将图像转换为 openCV 和 BGR：
   switch (img.fmt)
   {
   case V4L2_PIX_FMT_YUYV:
@@ -139,11 +139,10 @@ void jevois::VideoDisplay::send(jevois::RawImage const & img)
   // Display image:
   cv::imshow(itsName, imgbgr);
 
-  // OpenCV needs this to actually update the display. Delay is in millisec:
+  // OpenCV 需要这个来实际更新显示。延迟以毫秒为单位：
   cv::waitKey(1);
 
-  // Just push the buffer back into our queue. Note: we do not bother clearing the data or checking that the image is
-  // legit, i.e., matches one that was obtained via get():
+  // 只需将缓冲区推回到我们的队列中。注意：我们不必清除数据或检查图像是否合法，即是否与通过 get() 获取的图像匹配：
   itsImageQueue.push(img);
   LDEBUG("Empty image " << img.bufindex << " ready for filling in by application code");
 }
@@ -162,8 +161,8 @@ void jevois::VideoDisplay::streamOff()
 
 #else //  JEVOIS_PLATFORM_A33
 
-// OpenCV is not compiled with HighGui support by buildroot by default, and anyway we can't use it on the platform since
-// it has no display, so let's not waste resources linking to it:
+// OpenCV 默认未在 buildroot 中编译 HighGui 支持，而且我们无法在该平台上使用它，因为它没有显示器，所以我们不要浪费资源链
+// 接到它：
 jevois::VideoDisplay::VideoDisplay(char const * displayname, size_t nbufs) :
   itsImageQueue(nbufs), itsName(displayname)
 { LFATAL("VideoDisplay is not supported on JeVois hardware platform"); }

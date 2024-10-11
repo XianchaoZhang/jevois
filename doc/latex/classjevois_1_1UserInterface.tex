@@ -1,0 +1,201 @@
+\hypertarget{classjevois_1_1UserInterface}{}\doxysubsection{jevois\+::User\+Interface Class Reference}
+\label{classjevois_1_1UserInterface}\index{jevois::UserInterface@{jevois::UserInterface}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+User\+Interface.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+基于字符串的用户界面的抽象基类 
+
+用户通过发出文本命令和接收文本答案与 Je\+Vois 硬件交互。\+User\+Interface 是此类通信的抽象基类，其派生类为 Serial（在平台硬件上， 使用硬件串行和 U\+SB 串行）或 Stdio\+Interface（在主机上，使用终端中的用户输入和输出）。
+
+请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} 了解命令行界面的用户文档。 
+
+Definition at line 31 of file User\+Interface.\+H.
+
+
+
+Inheritance diagram for jevois\+::User\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1UserInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::User\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classjevois_1_1UserInterface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{Type}} \{ \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a3656183169810334a96b91129dc9d881}{Type\+::\+Hard}}, 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a7aca5ec618f7317328dcd7014cf9bdcf}{Type\+::\+U\+SB}}, 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88af9f805b30fdb6c23233caaae223ccfaa}{Type\+::\+Stdio}}, 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a1e3042b2e2a5550b412b37edd1c36b34}{Type\+::\+G\+UI}}
+ \}
+\begin{DoxyCompactList}\small\item\em 接口类型的枚举 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a9c8cba99a6be0c317e231dcb0b2519eb}{User\+Interface}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1UserInterface_a55d4a1a02d729f405e2997099b0662d9}{$\sim$\+User\+Interface}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1UserInterface_aa0122126d1da68237d66a33e02e3fa02}{read\+Some}} (std\+::string \&str)=0
+\begin{DoxyCompactList}\small\item\em 读取一些字节（如果可用），并在完成时（按下 R\+E\+T\+U\+RN 键）返回 true 和一个字符串 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1UserInterface_a1ea78da97f6d939d4aca0c1ec577992a}{write\+String}} (std\+::string const \&str)=0
+\begin{DoxyCompactList}\small\item\em 写入字符串 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1UserInterface_a89da1172f885dca912feb6935a4ab102}{write\+String}} (std\+::string const \&prefix, std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 写入一个字符串，并在前面添加前缀 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{Type}} \mbox{\hyperlink{classjevois_1_1UserInterface_ac4e4337ea4e993ed8e3230389a062224}{type}} () const =0
+\begin{DoxyCompactList}\small\item\em 派生类必须实现此并返回其接口类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}\label{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!Type@{Type}}
+\index{Type@{Type}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{jevois\+::\+User\+Interface\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+接口类型的枚举 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hard@{Hard}!jevois::UserInterface@{jevois::UserInterface}}\index{jevois::UserInterface@{jevois::UserInterface}!Hard@{Hard}}}\mbox{\Hypertarget{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a3656183169810334a96b91129dc9d881}\label{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a3656183169810334a96b91129dc9d881}} 
+Hard&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{USB@{USB}!jevois::UserInterface@{jevois::UserInterface}}\index{jevois::UserInterface@{jevois::UserInterface}!USB@{USB}}}\mbox{\Hypertarget{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a7aca5ec618f7317328dcd7014cf9bdcf}\label{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a7aca5ec618f7317328dcd7014cf9bdcf}} 
+U\+SB&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Stdio@{Stdio}!jevois::UserInterface@{jevois::UserInterface}}\index{jevois::UserInterface@{jevois::UserInterface}!Stdio@{Stdio}}}\mbox{\Hypertarget{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88af9f805b30fdb6c23233caaae223ccfaa}\label{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88af9f805b30fdb6c23233caaae223ccfaa}} 
+Stdio&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GUI@{GUI}!jevois::UserInterface@{jevois::UserInterface}}\index{jevois::UserInterface@{jevois::UserInterface}!GUI@{GUI}}}\mbox{\Hypertarget{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a1e3042b2e2a5550b412b37edd1c36b34}\label{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88a1e3042b2e2a5550b412b37edd1c36b34}} 
+G\+UI&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 56 of file User\+Interface.\+H.
+
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1UserInterface_a9c8cba99a6be0c317e231dcb0b2519eb}\label{classjevois_1_1UserInterface_a9c8cba99a6be0c317e231dcb0b2519eb}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!UserInterface@{UserInterface}}
+\index{UserInterface@{UserInterface}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{UserInterface()}{UserInterface()}}
+{\footnotesize\ttfamily jevois\+::\+User\+Interface\+::\+User\+Interface (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 21 of file User\+Interface.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1UserInterface_a55d4a1a02d729f405e2997099b0662d9}\label{classjevois_1_1UserInterface_a55d4a1a02d729f405e2997099b0662d9}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!````~UserInterface@{$\sim$UserInterface}}
+\index{````~UserInterface@{$\sim$UserInterface}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{$\sim$UserInterface()}{~UserInterface()}}
+{\footnotesize\ttfamily jevois\+::\+User\+Interface\+::$\sim$\+User\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 26 of file User\+Interface.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1UserInterface_aa0122126d1da68237d66a33e02e3fa02}\label{classjevois_1_1UserInterface_aa0122126d1da68237d66a33e02e3fa02}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!readSome@{readSome}}
+\index{readSome@{readSome}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{readSome()}{readSome()}}
+{\footnotesize\ttfamily virtual bool jevois\+::\+User\+Interface\+::read\+Some (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+读取一些字节（如果可用），并在完成时（按下 R\+E\+T\+U\+RN 键）返回 true 和一个字符串 
+
+如果用户输入尚未完成（尚未按下 R\+E\+T\+U\+RN 键），则 str 保持不变。\+R\+E\+T\+U\+R\+N（行尾）标记不会复制到 str 中，只会复制直到行尾标 记为止接收到的字符。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Serial_a50f7553bdbf0fdfe4e5d2d06689317df}{jevois\+::\+Serial}}, \mbox{\hyperlink{classjevois_1_1GUIserial_a743adac54253b9e078bee56b9b6697f1}{jevois\+::\+G\+U\+Iserial}}, \mbox{\hyperlink{classjevois_1_1GUIconsole_a3966366168ae49c34e9654cc557a68c3}{jevois\+::\+G\+U\+Iconsole}}, and \mbox{\hyperlink{classjevois_1_1StdioInterface_aa3d240bb679fbec1cea83dad4aa48771}{jevois\+::\+Stdio\+Interface}}.
+
+\mbox{\Hypertarget{classjevois_1_1UserInterface_ac4e4337ea4e993ed8e3230389a062224}\label{classjevois_1_1UserInterface_ac4e4337ea4e993ed8e3230389a062224}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!type@{type}}
+\index{type@{type}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{Type}} jevois\+::\+User\+Interface\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+派生类必须实现此并返回其接口类型 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}{jevois\+::\+Serial}}, \mbox{\hyperlink{classjevois_1_1GUIconsole_ab7f910f792c292503357d7ff3812b432}{jevois\+::\+G\+U\+Iconsole}}, and \mbox{\hyperlink{classjevois_1_1StdioInterface_aecb67e78c6057df89f9b15149ef1ba1f}{jevois\+::\+Stdio\+Interface}}.
+
+
+
+Referenced by jevois\+::\+Engine\+::main\+Loop(), jevois\+::\+Engine\+::run\+Script\+From\+File(), and jevois\+::\+Engine\+::send\+Serial().
+
+\mbox{\Hypertarget{classjevois_1_1UserInterface_a89da1172f885dca912feb6935a4ab102}\label{classjevois_1_1UserInterface_a89da1172f885dca912feb6935a4ab102}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+User\+Interface\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix,  }\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+写入一个字符串，并在前面添加前缀 
+
+字符串中不应包含行终止符，write\+String() 将添加一个。在 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 派生类中，这将使用 serial\+::linestyle 的行终止约定来支 持不同的样式（\+C\+R、\+C\+R\+L\+F、\+LF 等）。 
+
+Definition at line 30 of file User\+Interface.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1UserInterface_a1ea78da97f6d939d4aca0c1ec577992a}\label{classjevois_1_1UserInterface_a1ea78da97f6d939d4aca0c1ec577992a}} 
+\index{jevois::UserInterface@{jevois::UserInterface}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::UserInterface@{jevois::UserInterface}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void jevois\+::\+User\+Interface\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+写入字符串 
+
+字符串中不应包含行终止符，write\+String() 将添加一个。在 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 派生类中，这将使用 serial\+::linestyle 的行终止约定来支 持不同的样式（\+C\+R、\+C\+R\+L\+F、\+LF 等）。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Serial_a06bd87b9e59a6aad3c8c184b2406edb5}{jevois\+::\+Serial}}, \mbox{\hyperlink{classjevois_1_1GUIconsole_a1c1c01b706e10e6ce35b74ba7e063c4b}{jevois\+::\+G\+U\+Iconsole}}, \mbox{\hyperlink{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}{jevois\+::\+G\+U\+Iserial}}, and \mbox{\hyperlink{classjevois_1_1StdioInterface_af945794e67aafdb291f60b4782e8c3f8}{jevois\+::\+Stdio\+Interface}}.
+
+
+
+Referenced by jevois\+::\+Engine\+::main\+Loop(), jevois\+::\+Component\+::param\+Info(), jevois\+::\+Engine\+::parse\+Command(), jevois\+::\+Python\+Module\+::parse\+Serial(), jevois\+::\+Engine\+::run\+Script\+From\+File(), and jevois\+::\+Engine\+::send\+Serial().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{UserInterface_8H}{User\+Interface.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{UserInterface_8C}{User\+Interface.\+C}}\end{DoxyCompactItemize}

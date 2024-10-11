@@ -21,39 +21,37 @@
 
 namespace jevois
 {
-  //! A V4L2 video buffer, to be held in a shared_ptr
-  /*! Requests an MMAP'ed memory area from the given file descriptor at construction, and unmaps it at
-      destruction. VideoBuf is used to pass MMAP'ed video buffers from Camera and Gadget drivers to application code,
-      via RawImage. The actual memory allocation is performed by the kernel driver. Hence, VideoBuf pixel arrays cannot
-      be moved from one memory location to another. \ingroup core */
+  //! V4L2 视频缓冲区，保存在 shared_ptr 中
+  /*! 在构造时从给定的文件描述符请求 MMAP 的内存区域，并在析构时取消映射。VideoBuf 用于通过 RawImage 将 MMAP 的视频缓冲
+      区从 Camera 和 Gadget 驱动程序传递到应用程序代码。实际的内存分配由内核驱动程序执行。因此，VideoBuf 像素数组不能从
+	  一个内存位置移动到另一个内存位置。 \ingroup core */
   class VideoBuf
   {
     public:
-      //! Construct and allocate MMAP'd memory
-      /*! Mostly for debugging purposes (supporting VideoDisplay), if fd is -1 then we perform a regular memory
-          allocation instead of mmap. */
+      //! 构造和分配 MMAP 的内存
+      /*! 主要用于调试目的（支持 VideoDisplay），如果 fd 为 -1，则我们执行常规内存分配而不是 mmap。 */
       VideoBuf(int const fd, size_t const length, unsigned int offset, int const dmafd);
 
-      //! Destructor unmaps the memory
+      //! 析构函数取消内存映射
       ~VideoBuf();
 
-      //! Sync the data
-      /*! This may be useful in some cases to avoid cache coherency issues between DMA-capable driver and CPU. */
+      //! 同步数据
+      /*! 这在某些情况下可能很有用，可以避免支持 DMA 的驱动程序和 CPU 之间的缓存一致性问题。 */
       void sync();
       
-      //! Get a pointer to the buffer data
+      //! 获取指向缓​​冲区数据的指针
       void * data() const;
 
-      //! Get the allocated memory length
+      //! 获取分配的内存长度
       size_t length() const;
 
-      //! Set the number of bytes used, eg, for MJPEG images that application code compressed into the buffer
+      //! 设置使用的字节数，例如，对于应用程序代码压缩到缓冲区的 MJPEG 图像
       void setBytesUsed(size_t n);
 
-      //! Get the number of bytes used, valid only for MJPEG images
+      //! 获取已使用的字节数，仅对MJPEG图像有效
       size_t bytesUsed() const;
 
-      //! Get the dma_buf fd associated with this buffer, which was given at construction
+      //! 获取与此缓冲区关联的 dma_buf fd，该 fd 在构造时给出
       int dmaFd() const;
       
 

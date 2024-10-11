@@ -22,9 +22,9 @@
 #include <iostream>
 #include <memory>
 
-//! Parse videomappings.cfg and output a string to be passed to the jevois kernel module
-/*! This little app was created so that we ensure perfect consistency between the kernel driver and the user code by
-    using exactly the same config file parsing and sorting code (in VideoMapping). */
+//! 解析 videomappings.cfg 并输出要传递给 jevois 内核模块的字符串 
+/*! 创建这个小应用程序是为了通过使用完全相同的配置文件解析和排序代码（在 VideoMapping 中）来确保内核驱动程序和用户代码之间的
+    完美一致性。 */
 int main(int argc, char const * argv[])
 {
   jevois::logLevel = LOG_CRIT;
@@ -34,7 +34,7 @@ int main(int argc, char const * argv[])
   std::unique_ptr<std::istream> iss(new std::istringstream(std::string(argv[1])));
   jevois::CameraSensor sens; (*iss) >> sens;
   
-  // Parse the videomappings.cfg file and create the mappings:
+  // 解析 videomappings.cfg 文件并创建映射：
   size_t defidx;
   std::ifstream ifs(JEVOIS_ENGINE_CONFIG_FILE);
   if (ifs.is_open() == false) LFATAL("Could not open [" << JEVOIS_ENGINE_CONFIG_FILE << ']');
@@ -46,13 +46,13 @@ int main(int argc, char const * argv[])
 #endif
                                                                                );
 
-  // First, the default index (0-based), but we need to skip over the no-usb mappings:
+  // 首先，默认索引（0-based），但我们需要跳过 no-usb 映射：
   size_t uvcdefidx = 0;
   for (size_t i = 0; i <= defidx; ++i) if (mappings[i].ofmt != 0) ++uvcdefidx;
   if (uvcdefidx == 0) LFATAL("No mappings with UVC output?");
-  std::cout << (uvcdefidx - 1); // FIXME: the kernel is actually not using the default index
+  std::cout << (uvcdefidx - 1); // FIXME: 内核实际上没有使用默认索引
 
-  // Then each format, grouping by video fcc and framerates:
+  // 然后每种格式按视频 fcc 和帧速率分组：
   unsigned int ofmt = ~0U, ow = ~0U, oh = ~0u;
   for (jevois::VideoMapping const & m : mappings)
   {

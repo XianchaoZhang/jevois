@@ -1,0 +1,646 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__dnn">
+<title>张量/神经处理网络</title>
+<indexterm><primary>张量/神经处理网络</primary></indexterm>
+<section>
+<title> </title>
+
+<para>深度神经网络提供抽象的 Classes and utilities。提供与 OpenCV 后端（CPU、OpenCL）、张量处理单元（TPU）（例如 Coral Edge TPU）和神经处理单元（NPU）（例如 Amlogic A311D NPU）的接口。 </para>
+Collaboration diagram for 张量/神经处理网络:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__dnn.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1Network">jevois::dnn::Network</link></para>
+
+<para>表示神经网络的抽象类。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkHailo">jevois::dnn::NetworkHailo</link></para>
+
+<para>在 Hailo8 神经加速器上运行的 DNN 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkNPU">jevois::dnn::NetworkNPU</link></para>
+
+<para>在 Amlogic A311D NPU 加速器 (Verisilicon) 上运行的 DNN 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkONNX">jevois::dnn::NetworkONNX</link></para>
+
+<para>围绕 ONNX-Runtime 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV">jevois::dnn::NetworkOpenCV</link></para>
+
+<para>围绕 OpenCV DNN 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkPython">jevois::dnn::NetworkPython</link></para>
+
+<para>通过 python 调用的 DNN 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1NetworkTPU">jevois::dnn::NetworkTPU</link></para>
+
+<para>围绕 Coral TPU 神经网络的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1Pipeline">jevois::dnn::Pipeline</link></para>
+
+<para>神经处理管道 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessor">jevois::dnn::PostProcessor</link></para>
+
+<para>神经网络管道的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessorClassify">jevois::dnn::PostProcessorClassify</link></para>
+
+<para>神经网络管道的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessorPython">jevois::dnn::PostProcessorPython</link></para>
+
+<para>神经网络管道的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment">jevois::dnn::PostProcessorSegment</link></para>
+
+<para>神经网络管道的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub">jevois::dnn::PostProcessorStub</link></para>
+
+<para>神经网络管道的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet">jevois::dnn::PostProcessorYuNet</link></para>
+
+<para>YuNet 人脸特征点检测器的后处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PreProcessor">jevois::dnn::PreProcessor</link></para>
+
+<para>神经网络管道的预处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob">jevois::dnn::PreProcessorBlob</link></para>
+
+<para>神经网络管道的预处理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1dnn_1_1PreProcessorPython">jevois::dnn::PreProcessorPython</link></para>
+
+<para>用 python 编写的神经网络管道预处理器 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__pydnn">用 python 编写的 DNN 相关处理器</link></para>
+
+<para>除了用 C++ 编写 pre/net/post processors 之外，JeVois 还支持用 Python 编写。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; int, std::string &gt; <link linkend="_group__dnn_1ga56f17dd747d44f13a9e1f7085a3d9469">jevois::dnn::readLabelsFile</link> (std::string const &amp;fname)</para>
+
+<para>读取标签文件 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gab9823d8696c5547a1ae5e6a12262098a">jevois::dnn::getLabel</link> (std::map&lt; int, std::string &gt; const &amp;labels, int id)</para>
+
+<para>从 id 获取标签 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1gaa4745ed932b27371704c95921b170e8a">jevois::dnn::stringToRGBA</link> (std::string const &amp;label, unsigned char alpha=128)</para>
+
+<para>根据标签名称计算颜色 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1gad145daee8d4e5bb273e9088056d19405">jevois::dnn::topK</link> (float const *pfProb, float *pfMaxProb, uint32_t *pMaxClass, uint32_t outputCount, uint32_t topNum)</para>
+
+<para>获取前 k 个条目及其索引 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gad9c3f395bec79145589fd39488f884ec">jevois::dnn::shapestr</link> (cv::Mat const &amp;m)</para>
+
+<para>从数据类型为 TYPE 的 n 维 cv::Mat 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1gaac2cb8a2fe11b45299e8c4c6eea9b865">jevois::dnn::shapestr</link> (TfLiteTensor const *t)</para>
+
+<para>从数据类型为 TYPE 的 n 维 TfLiteTensor 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc">jevois::dnn::shapestr</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>从数据类型为 TYPE 的 n 维 NPU 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>std::vector&lt; size_t &gt; <link linkend="_group__dnn_1gae60b5b58375993db5c9e51f46b6bf428">jevois::dnn::strshape</link> (std::string const &amp;str)</para>
+
+<para>从包含 AxBxC... 的字符串中获取 size_t 的向量 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1ga124e654d215055679eb24323ebaee202">jevois::dnn::tf2cv</link> (TfLiteType t)</para>
+
+<para>从 TensorFlow 数据类型转换为 OpenCV </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1gacff04669a655ea47c1eac3eeaa9a8ab4">jevois::dnn::tf2vsi</link> (TfLiteType t)</para>
+
+<para>从 TensorFlow 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__dnn_1ga2fbb284d549bdd6e69c18436a294f38c">jevois::dnn::vsi2cv</link> (vsi_nn_type_e t)</para>
+
+<para>从NPU数据类型转换为 OpenCV </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1ga82f43e88e1e64aa6a97b0bdc85747afb">jevois::dnn::clamp</link> (cv::Rect &amp;r, int width, int height)</para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__dnn_1ga44ad3cd1fee2ce347dc215585cd8e20b">jevois::dnn::clamp</link> (cv::Rect2f &amp;r, float width, float height)</para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</listitem>
+            <listitem><para>std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_group__dnn_1ga7fa178a1b984edc8cd9b5f761d691d5f">jevois::dnn::parseTensorSpecs</link> (std::string const &amp;specs)</para>
+
+<para>解析张量规范 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga8a6f29ea2202a325d0c99111488d7b67">jevois::dnn::attrmat</link> (vsi_nn_tensor_attr_t const &amp;attr, void *dataptr=nullptr)</para>
+
+<para>从 attr 和可能的数据指针构造一个 cv::Mat。 </para>
+</listitem>
+            <listitem><para>std::vector&lt; int &gt; <link linkend="_group__dnn_1gae40b6505b2d82fa2a580e787f0503308">jevois::dnn::attrdims</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>获取一个张量 dims 作为 int 向量，用于构造匹配的 cv::Mat </para>
+</listitem>
+            <listitem><para>cv::Size <link linkend="_group__dnn_1gab724bef5b8efd2446a0600cf269bcbe3">jevois::dnn::attrsize</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>以 cv::Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga831921dbaf6ac75427bc68156ebb0bc8">jevois::dnn::attrstr</link> (vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__dnn_1gaf83f2f4f42ec0efefa6f3dda166660b4">jevois::dnn::attrmatch</link> (vsi_nn_tensor_attr_t const &amp;attr, cv::Mat const &amp;blob)</para>
+
+<para>检查 cv::Mat blob 是否与 attr 的规范完全匹配 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1ga51841d296531fc366c5091863a9141fe">jevois::dnn::tensorattr</link> (TfLiteTensor const *t)</para>
+
+<para>获取 TensorFlow Lite 张量的张量形状和类型属性 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__dnn_1ga452497353f71ffe559e02da85c78896b">jevois::dnn::softmax</link> (float const *input, size_t const n, size_t const stride, float const fac, float *output, bool maxonly)</para>
+
+<para>将 softmax 应用于浮点向量。 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga55a15be28c64149fdb2762b71fb344a0">jevois::dnn::quantize</link> (cv::Mat const &amp;m, vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>根据 attr 中的量化规范从 float32 量化为定点 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1gac5c65bee7351c37b9500cad0292f8cc9">jevois::dnn::dequantize</link> (cv::Mat const &amp;m, vsi_nn_tensor_attr_t const &amp;attr)</para>
+
+<para>根据 attr 中的量化规范将输出反量化为 float32 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__dnn_1ga8da769aea616ace74e265fbc06770439">jevois::dnn::effectiveDims</link> (cv::Mat const &amp;m)</para>
+
+<para>返回 cv::Mat 中非单位暗淡的数量 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__dnn_1ga97ca13925a9abe3bc80251a61cf18960">jevois::dnn::concatenate</link> (std::vector&lt; cv::Mat &gt; const &amp;tensors, int axis)</para>
+
+<para>将多个张量连接成一个。 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga705e4633e47b4b39f01a710baf5acc29">jevois::dnn::shapestr</link> (hailo_vstream_info_t const &amp;vi)</para>
+
+<para>从数据类型为 TYPE 的 n 维 Hailo 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1ga69f343327103557c67e6559e72a5fe09">jevois::dnn::tensorattr</link> (hailo_vstream_info_t const &amp;vi)</para>
+
+<para>获取 Hailo 张量的张量形状和类型属性 </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1ga8f572d133c52e5eb2fe81d8bf72ebefe">jevois::dnn::hailo2vsi</link> (hailo_format_type_t t)</para>
+
+<para>从 Hailo 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>vsi_nn_type_e <link linkend="_group__dnn_1ga5f1e444edfb3bffbf851b41ae3112b23">jevois::dnn::onnx2vsi</link> (ONNXTensorElementDataType t)</para>
+
+<para>从 ONNX-Runtime 数据类型转换为 vsi_nn </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__dnn_1ga39970f486d748880bb2286dafd38d341">jevois::dnn::shapestr</link> (Ort::ConstTensorTypeAndShapeInfo const &amp;ti)</para>
+
+<para>从数据类型为 TYPE 的 n 维 ONNX 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</listitem>
+            <listitem><para>vsi_nn_tensor_attr_t <link linkend="_group__dnn_1gaf77c85c3d7329994fdf6ab1caffef5f0">jevois::dnn::tensorattr</link> (Ort::ConstTensorTypeAndShapeInfo const &amp;ti)</para>
+
+<para>获取 ONNX 运行时张量的张量形状和类型属性 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__dnn_1gae40b6505b2d82fa2a580e787f0503308"/>    <section>
+    <title>attrdims()</title>
+<indexterm><primary>attrdims</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>attrdims</secondary></indexterm>
+<para><computeroutput>std::vector&lt; int &gt; jevois::dnn::attrdims (vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>获取一个张量 dims 作为 int 向量，用于构造匹配的 cv::Mat </para>
+</para>
+<para>
+Definition at line 478 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::attrmat(), jevois::dnn::NetworkHailo::load(), jevois::dnn::Network::process(), and jevois::dnn::quantize().</para>
+    </section><anchor xml:id="_group__dnn_1ga8a6f29ea2202a325d0c99111488d7b67"/>    <section>
+    <title>attrmat()</title>
+<indexterm><primary>attrmat</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>attrmat</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::dnn::attrmat (vsi_nn_tensor_attr_t const &amp; attr, void * dataptr = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>从 attr 和可能的数据指针构造一个 cv::Mat。 </para>
+</para>
+
+<para>如果 dataptr 为 nullptr，将为 cv::Mat 分配新内存。调用者必须确保数据比 cv::Mat 更长寿，并负责最终释放数据。通 常，对于非空 dataptr，这仅用作临时 re-casting，例如，在 dequantizing 之前将接收到的张量 recast 为 Mat，然后忘 记该 Mat。 </para>
+<para>
+Definition at line 471 of file Utils.C.</para>
+<para>
+References jevois::dnn::attrdims(), and jevois::dnn::vsi2cv().</para>
+<para>
+Referenced by jevois::dnn::NetworkONNX::doprocess(), jevois::dnn::NetworkNPU::doprocess(), jevois::dnn::NetworkHailo::load(), and jevois::dnn::Network::process().</para>
+    </section><anchor xml:id="_group__dnn_1gaf83f2f4f42ec0efefa6f3dda166660b4"/>    <section>
+    <title>attrmatch()</title>
+<indexterm><primary>attrmatch</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>attrmatch</secondary></indexterm>
+<para><computeroutput>bool jevois::dnn::attrmatch (vsi_nn_tensor_attr_t const &amp; attr, cv::Mat const &amp; blob)</computeroutput></para><para>
+
+<para>检查 cv::Mat blob 是否与 attr 的规范完全匹配 </para>
+</para>
+<para>
+Definition at line 704 of file Utils.C.</para>
+<para>
+References jevois::dnn::vsi2cv().</para>
+<para>
+Referenced by jevois::dnn::dequantize(), jevois::dnn::NetworkHailo::doprocess(), and jevois::dnn::NetworkNPU::doprocess().</para>
+    </section><anchor xml:id="_group__dnn_1gab724bef5b8efd2446a0600cf269bcbe3"/>    <section>
+    <title>attrsize()</title>
+<indexterm><primary>attrsize</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>attrsize</secondary></indexterm>
+<para><computeroutput>cv::Size jevois::dnn::attrsize (vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>以 cv::Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 </para>
+</para>
+<para>
+Definition at line 487 of file Utils.C.</para>
+<para>
+References jevois::dnn::attrstr().</para>
+<para>
+Referenced by jevois::dnn::PreProcessor::blobsize(), and jevois::dnn::PreProcessorBlob::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga831921dbaf6ac75427bc68156ebb0bc8"/>    <section>
+    <title>attrstr()</title>
+<indexterm><primary>attrstr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>attrstr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::attrstr (vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） </para>
+</para>
+<para>
+Definition at line 512 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::attrsize(), jevois::dnn::NetworkHailo::doprocess(), jevois::dnn::NetworkONNX::doprocess(), jevois::dnn::NetworkNPU::doprocess(), jevois::dnn::NetworkTPU::inputShapes(), jevois::dnn::NetworkHailo::load(), jevois::dnn::NetworkTPU::outputShapes(), jevois::dnn::PreProcessorPythonImpl::process(), and jevois::dnn::PreProcessorBlob::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga82f43e88e1e64aa6a97b0bdc85747afb"/>    <section>
+    <title>clamp()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>clamp</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>clamp</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::clamp (cv::Rect &amp; r, int width, int height)</computeroutput></para><para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</para>
+<para>
+Definition at line 367 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::process(), and jevois::dnn::PostProcessorYuNet::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga44ad3cd1fee2ce347dc215585cd8e20b"/>    <section>
+    <title>clamp()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>clamp</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>clamp</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::clamp (cv::Rect2f &amp; r, float width, float height)</computeroutput></para><para>
+
+<para>将矩形限制在给定的图像宽度和高度内 </para>
+</para>
+<para>
+Definition at line 377 of file Utils.C.</para>
+    </section><anchor xml:id="_group__dnn_1ga97ca13925a9abe3bc80251a61cf18960"/>    <section>
+    <title>concatenate()</title>
+<indexterm><primary>concatenate</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>concatenate</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::dnn::concatenate (std::vector&lt; cv::Mat &gt; const &amp; tensors, int axis)</computeroutput></para><para>
+
+<para>将多个张量连接成一个。 </para>
+</para>
+
+<para>对于第一个维度，Axis 可能从 0 开始为正（当从左到右读取 dims 时），对于最后一个维度，Axis 可能从 -1 开始为负。例 如，对于 10x20x30 张量，Axis 0 的大小为 10，也是 Axis -3，Axis 1 的大小为 20，也是 Axis -2，Axis 2 的大小为 30， 也是 Axis -1。输入张量必须都有相同的维度数、相同的像素类型，并且除要连接的维度之外的所有维度的大小必须匹配。 </para>
+<para>
+Definition at line 842 of file Utils.C.</para>
+<para>
+References jevois::cvBytesPerPix(), jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_group__dnn_1gac5c65bee7351c37b9500cad0292f8cc9"/>    <section>
+    <title>dequantize()</title>
+<indexterm><primary>dequantize</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>dequantize</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::dnn::dequantize (cv::Mat const &amp; m, vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>根据 attr 中的量化规范将输出反量化为 float32 </para>
+</para>
+
+<para>attr 应具有 m 的类型和量化细节，返回的张量为 float32 </para>
+<para>
+Definition at line 793 of file Utils.C.</para>
+<para>
+References jevois::dnn::attrmatch(), LFATAL, and jevois::dnn::shapestr().</para>
+<para>
+Referenced by jevois::dnn::NetworkHailo::doprocess(), and jevois::dnn::NetworkNPU::doprocess().</para>
+    </section><anchor xml:id="_group__dnn_1ga8da769aea616ace74e265fbc06770439"/>    <section>
+    <title>effectiveDims()</title>
+<indexterm><primary>effectiveDims</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>effectiveDims</secondary></indexterm>
+<para><computeroutput>size_t jevois::dnn::effectiveDims (cv::Mat const &amp; m)</computeroutput></para><para>
+
+<para>返回 cv::Mat 中非单位暗淡的数量 </para>
+</para>
+
+<para>例如，对于大小为 1x1x224x224 的 4D Mat，返回 2，因为它实际上是一个 224x224 的 2D 数组 </para>
+<para>
+Definition at line 832 of file Utils.C.</para>
+    </section><anchor xml:id="_group__dnn_1gab9823d8696c5547a1ae5e6a12262098a"/>    <section>
+    <title>getLabel()</title>
+<indexterm><primary>getLabel</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>getLabel</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::getLabel (std::map&lt; int, std::string &gt; const &amp; labels, int id)</computeroutput></para><para>
+
+<para>从 id 获取标签 </para>
+</para>
+<para>
+Definition at line 68 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::PostProcessorClassify::process(), and jevois::dnn::PostProcessorDetect::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga8f572d133c52e5eb2fe81d8bf72ebefe"/>    <section>
+    <title>hailo2vsi()</title>
+<indexterm><primary>hailo2vsi</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>hailo2vsi</secondary></indexterm>
+<para><computeroutput>vsi_nn_type_e jevois::dnn::hailo2vsi (hailo_format_type_t t)</computeroutput></para><para>
+
+<para>从 Hailo 数据类型转换为 vsi_nn </para>
+</para>
+<para>
+Definition at line 353 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_group__dnn_1ga5f1e444edfb3bffbf851b41ae3112b23"/>    <section>
+    <title>onnx2vsi()</title>
+<indexterm><primary>onnx2vsi</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>onnx2vsi</secondary></indexterm>
+<para><computeroutput>vsi_nn_type_e jevois::dnn::onnx2vsi (ONNXTensorElementDataType t)</computeroutput></para><para>
+
+<para>从 ONNX-Runtime 数据类型转换为 vsi_nn </para>
+</para>
+<para>
+Definition at line 208 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_group__dnn_1ga7fa178a1b984edc8cd9b5f761d691d5f"/>    <section>
+    <title>parseTensorSpecs()</title>
+<indexterm><primary>parseTensorSpecs</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>parseTensorSpecs</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::parseTensorSpecs (std::string const &amp; specs)</computeroutput></para><para>
+
+<para>解析张量规范 </para>
+</para>
+<para>
+Definition at line 387 of file Utils.C.</para>
+<para>
+References jevois::split(), and jevois::dnn::strshape().</para>
+<para>
+Referenced by jevois::dnn::NetworkPython::inputShapes(), jevois::dnn::NetworkTPU::inputShapes(), jevois::dnn::NetworkOpenCV::inputShapes(), jevois::dnn::NetworkNPU::inputShapes(), jevois::dnn::NetworkNPU::load(), jevois::dnn::Network::onParamChange(), jevois::dnn::NetworkPython::outputShapes(), jevois::dnn::NetworkOpenCV::outputShapes(), jevois::dnn::NetworkTPU::outputShapes(), and jevois::dnn::NetworkNPU::outputShapes().</para>
+    </section><anchor xml:id="_group__dnn_1ga55a15be28c64149fdb2762b71fb344a0"/>    <section>
+    <title>quantize()</title>
+<indexterm><primary>quantize</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>quantize</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::dnn::quantize (cv::Mat const &amp; m, vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>根据 attr 中的量化规范从 float32 量化为定点 </para>
+</para>
+<para>
+Definition at line 718 of file Utils.C.</para>
+<para>
+References jevois::dnn::attrdims(), LFATAL, jevois::dnn::shapestr(), and jevois::dnn::vsi2cv().</para>
+<para>
+Referenced by jevois::dnn::PreProcessorBlob::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga56f17dd747d44f13a9e1f7085a3d9469"/>    <section>
+    <title>readLabelsFile()</title>
+<indexterm><primary>readLabelsFile</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>readLabelsFile</secondary></indexterm>
+<para><computeroutput>std::map&lt; int, std::string &gt; jevois::dnn::readLabelsFile (std::string const &amp; fname)</computeroutput></para><para>
+
+<para>读取标签文件 </para>
+</para>
+
+<para>允许两种格式：每行一个类名，或每个文件一个类号后跟一个类名。 </para>
+<para>
+Definition at line 25 of file Utils.C.</para>
+<para>
+References LERROR, LFATAL, LINFO, and jevois::replaceStringAll().</para>
+    </section><anchor xml:id="_group__dnn_1gad9c3f395bec79145589fd39488f884ec"/>    <section>
+    <title>shapestr()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>shapestr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>shapestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::shapestr (cv::Mat const &amp; m)</computeroutput></para><para>
+
+<para>从数据类型为 TYPE 的 n 维 cv::Mat 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</para>
+<para>
+Definition at line 105 of file Utils.C.</para>
+<para>
+References jevois::cvtypestr(), and jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::dequantize(), jevois::dnn::NetworkTPU::doprocess(), jevois::dnn::NetworkONNX::doprocess(), jevois::dnn::NetworkHailo::doprocess(), jevois::dnn::NetworkNPU::doprocess(), jevois::GUIhelper::drawPoly(), jevois::dnn::NetworkTPU::load(), jevois::dnn::NetworkONNX::load(), jevois::dnn::PostProcessorSegment::process(), jevois::dnn::PostProcessorDetect::process(), jevois::dnn::PreProcessorBlob::process(), jevois::dnn::Pipeline::process(), jevois::dnn::Network::process(), jevois::dnn::quantize(), jevois::dnn::PreProcessor::sendreport(), jevois::dnn::shapestr(), jevois::dnn::Pipeline::showDataPeekWindow(), and jevois::dnn::PostProcessorDetectYOLO::yolo().</para>
+    </section><anchor xml:id="_group__dnn_1ga705e4633e47b4b39f01a710baf5acc29"/>    <section>
+    <title>shapestr()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>shapestr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>shapestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::shapestr (hailo_vstream_info_t const &amp; vi)</computeroutput></para><para>
+
+<para>从数据类型为 TYPE 的 n 维 Hailo 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</para>
+<para>
+Definition at line 252 of file Utils.C.</para>
+<para>
+References jevois::dnn::shapestr(), and jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_group__dnn_1ga39970f486d748880bb2286dafd38d341"/>    <section>
+    <title>shapestr()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>shapestr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>shapestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::shapestr (Ort::ConstTensorTypeAndShapeInfo const &amp; ti)</computeroutput></para><para>
+
+<para>从数据类型为 TYPE 的 n 维 ONNX 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</para>
+<para>
+Definition at line 174 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+    </section><anchor xml:id="_group__dnn_1gaac2cb8a2fe11b45299e8c4c6eea9b865"/>    <section>
+    <title>shapestr()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>shapestr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>shapestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::shapestr (TfLiteTensor const * t)</computeroutput></para><para>
+
+<para>从数据类型为 TYPE 的 n 维 TfLiteTensor 获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</para>
+<para>
+Definition at line 115 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+    </section><anchor xml:id="_group__dnn_1ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc"/>    <section>
+    <title>shapestr()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>shapestr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>shapestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::dnn::shapestr (vsi_nn_tensor_attr_t const &amp; attr)</computeroutput></para><para>
+
+<para>从数据类型为 TYPE 的 n 维 NPU 张量中获取形式为 &quot;nD AxBxC... TYPE&quot; 的字符串 </para>
+</para>
+<para>
+Definition at line 144 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+    </section><anchor xml:id="_group__dnn_1ga452497353f71ffe559e02da85c78896b"/>    <section>
+    <title>softmax()</title>
+<indexterm><primary>softmax</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>softmax</secondary></indexterm>
+<para><computeroutput>size_t jevois::dnn::softmax (float const * input, size_t const n, size_t const stride, float const fac, float * output, bool maxonly)</computeroutput></para><para>
+
+<para>将 softmax 应用于浮点向量。 </para>
+</para>
+
+<para>n 是要处理的元素数量，stride 是数组中从一个元素到下一个元素的增量。因此数组的大小应为 n * stride。返回得分最高 的元素在 [0..n*stride] 中的索引。如果 maxonly 为 true，则仅输出 [returned index] 有效。 </para>
+<para>
+Definition at line 668 of file Utils.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorClassify::process().</para>
+    </section><anchor xml:id="_group__dnn_1gaa4745ed932b27371704c95921b170e8a"/>    <section>
+    <title>stringToRGBA()</title>
+<indexterm><primary>stringToRGBA</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>stringToRGBA</secondary></indexterm>
+<para><computeroutput>int jevois::dnn::stringToRGBA (std::string const &amp; label, unsigned char alpha = <computeroutput>128</computeroutput>
+)</computeroutput></para><para>
+
+<para>根据标签名称计算颜色 </para>
+</para>
+<para>
+Definition at line 76 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::report().</para>
+    </section><anchor xml:id="_group__dnn_1gae60b5b58375993db5c9e51f46b6bf428"/>    <section>
+    <title>strshape()</title>
+<indexterm><primary>strshape</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>strshape</secondary></indexterm>
+<para><computeroutput>std::vector&lt; size_t &gt; jevois::dnn::strshape (std::string const &amp; str)</computeroutput></para><para>
+
+<para>从包含 AxBxC... 的字符串中获取 size_t 的向量 </para>
+</para>
+<para>
+Definition at line 277 of file Utils.C.</para>
+<para>
+References jevois::split().</para>
+<para>
+Referenced by jevois::dnn::parseTensorSpecs(), and jevois::dnn::Network::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga69f343327103557c67e6559e72a5fe09"/>    <section>
+    <title>tensorattr()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>tensorattr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>tensorattr</secondary></indexterm>
+<para><computeroutput>vsi_nn_tensor_attr_t jevois::dnn::tensorattr (hailo_vstream_info_t const &amp; vi)</computeroutput></para><para>
+
+<para>获取 Hailo 张量的张量形状和类型属性 </para>
+</para>
+<para>
+Definition at line 602 of file Utils.C.</para>
+<para>
+References jevois::dnn::hailo2vsi(), and jevois::to_string().</para>
+    </section><anchor xml:id="_group__dnn_1gaf77c85c3d7329994fdf6ab1caffef5f0"/>    <section>
+    <title>tensorattr()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>tensorattr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>tensorattr</secondary></indexterm>
+<para><computeroutput>vsi_nn_tensor_attr_t jevois::dnn::tensorattr (Ort::ConstTensorTypeAndShapeInfo const &amp; ti)</computeroutput></para><para>
+
+<para>获取 ONNX 运行时张量的张量形状和类型属性 </para>
+</para>
+<para>
+Definition at line 234 of file Utils.C.</para>
+<para>
+References jevois::dnn::onnx2vsi().</para>
+    </section><anchor xml:id="_group__dnn_1ga51841d296531fc366c5091863a9141fe"/>    <section>
+    <title>tensorattr()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>tensorattr</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>tensorattr</secondary></indexterm>
+<para><computeroutput>vsi_nn_tensor_attr_t jevois::dnn::tensorattr (TfLiteTensor const * t)</computeroutput></para><para>
+
+<para>获取 TensorFlow Lite 张量的张量形状和类型属性 </para>
+</para>
+<para>
+Definition at line 563 of file Utils.C.</para>
+<para>
+References LFATAL, and jevois::dnn::tf2vsi().</para>
+<para>
+Referenced by jevois::dnn::NetworkTPU::inputShapes(), jevois::dnn::NetworkONNX::load(), jevois::dnn::NetworkHailo::load(), jevois::dnn::NetworkTPU::outputShapes(), and jevois::dnn::shapestr().</para>
+    </section><anchor xml:id="_group__dnn_1ga124e654d215055679eb24323ebaee202"/>    <section>
+    <title>tf2cv()</title>
+<indexterm><primary>tf2cv</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>tf2cv</secondary></indexterm>
+<para><computeroutput>int jevois::dnn::tf2cv (TfLiteType t)</computeroutput></para><para>
+
+<para>从 TensorFlow 数据类型转换为 OpenCV </para>
+</para>
+<para>
+Definition at line 286 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::NetworkTPU::doprocess().</para>
+    </section><anchor xml:id="_group__dnn_1gacff04669a655ea47c1eac3eeaa9a8ab4"/>    <section>
+    <title>tf2vsi()</title>
+<indexterm><primary>tf2vsi</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>tf2vsi</secondary></indexterm>
+<para><computeroutput>vsi_nn_type_e jevois::dnn::tf2vsi (TfLiteType t)</computeroutput></para><para>
+
+<para>从 TensorFlow 数据类型转换为 vsi_nn </para>
+</para>
+<para>
+Definition at line 330 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_group__dnn_1gad145daee8d4e5bb273e9088056d19405"/>    <section>
+    <title>topK()</title>
+<indexterm><primary>topK</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>topK</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::topK (float const * pfProb, float * pfMaxProb, uint32_t * pMaxClass, uint32_t outputCount, uint32_t topNum)</computeroutput></para><para>
+
+<para>获取前 k 个条目及其索引 </para>
+</para>
+<para>
+Definition at line 85 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorClassify::process().</para>
+    </section><anchor xml:id="_group__dnn_1ga2fbb284d549bdd6e69c18436a294f38c"/>    <section>
+    <title>vsi2cv()</title>
+<indexterm><primary>vsi2cv</primary><secondary>张量/神经处理网络</secondary></indexterm>
+<indexterm><primary>张量/神经处理网络</primary><secondary>vsi2cv</secondary></indexterm>
+<para><computeroutput>int jevois::dnn::vsi2cv (vsi_nn_type_e t)</computeroutput></para><para>
+
+<para>从NPU数据类型转换为 OpenCV </para>
+</para>
+<para>
+Definition at line 308 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::attrmat(), jevois::dnn::attrmatch(), jevois::dnn::NetworkONNX::doprocess(), jevois::dnn::PreProcessorBlob::process(), and jevois::dnn::quantize().</para>
+</section>
+</section>
+</section>

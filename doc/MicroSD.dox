@@ -1,98 +1,79 @@
-/*! \page MicroSD MicroSD card organization and files
+/*! \page MicroSD MicroSD 卡组织和文件
 
 
-How the MicroSD card is organized
-=================================
+MicroSD 卡的组织方式 
+===================================
 
-The MicroSD card in your JeVois smart camera contains all the software that runs on the smart camera's processor. This
-includes:
+JeVois 智能相机中的 MicroSD 卡包含智能相机处理器上运行的所有软件。其中包括：
 
-- Files necessary to boot (start up) and configure low-level hardware elements, such as the DDR3 memory and microSD card
-  drivers, and a Linux kernel.
+- 启动和配置低级硬件元素所需的文件，例如 DDR3 内存和 microSD 卡驱动程序以及 Linux 内核。
 
-- Linux operating system, including standard Linux command-line utilities, and many libraries such as OpenCV, boost,
-  Eigen3, etc.
+- Linux 操作系统，包括标准 Linux 命令行实用程序，以及许多库，如 OpenCV、boost、Eigen3 等。
 
-- JeVois machine vision modules and data.
+- JeVois 机器视觉模块和数据。
 
-Using your MicroSD card with a desktop or laptop computer
-=========================================================
+在桌面或笔记本电脑上使用 MicroSD 卡 
+================================================================
 
-Modifying the contents of your MicroSD card, for example to add new machine vision modules or to get video files that
-were recorded by JeVois, is achieved by taking the MicroSD card out of your JeVois smart camera and connecting it to a
-desktop or laptop computer.
+修改 MicroSD 卡的内容（例如添加新的机器视觉模块或获取 JeVois 录制的视频文件）可以通过将 MicroSD 卡从 JeVois 智能相机中取出并将其连接到台式机或笔记本电脑来实现。
 
-\warning Your JeVois smart camera features a \b push-push MicroSD card slot. You push the card in until it clicks to
-load it, and you push it in again until it clicks and then ejects to unload it. Do you try to pull the MicroSD card out
-or you might damage the MicroSD card slot of your JeVois smart camera.
+\warning 您的 JeVois 智能相机具有 \b push-push MicroSD 卡槽。将卡推入直至卡入卡槽发出咔嗒声以装入卡槽，然后再次推入直至卡入卡槽并弹出以卸载卡槽。您是否尝试将 MicroSD 卡拉出，否则可能会损坏 JeVois 智能相机的 MicroSD 卡槽。
 
 
-JeVois-A33 MicroSD
+JeVois-A33 MicroSD 
 ------------------
 
 \jvimg{microsd-insert.png, 50%}
 
-JeVois-Pro MicroSD
+JeVois-Pro MicroSD 
 ------------------
 
 \jvimg{jvp-sd.png, 30%}
 
-Using the MicroSD card with a computer
+在计算机上使用 MicroSD 卡 
 --------------------------------------
 
-There are two basic ways of accessing the MicroSD card on a desktop or laptop:
+在台式机或笔记本电脑上访问 MicroSD 卡有两种基本方法：
 
-- Use a USB Card Reader, sold in most computer stores, and connect it to a USB port of your desktop or laptop
+- 使用大多数计算机商店出售的 USB 读卡器，并将其连接到台式机或笔记本电脑的 USB 端口
 
 \image html microsd-usb.jpg
 
-- Use a Micro-SD to SD card adapter, and insert the SD card into your computer if it has a slot for it (e.g., Mac
-  laptop):
+- 使用 Micro-SD 至 SD 卡适配器，并将 SD 卡插入计算机（如果计算机有插槽）（例如 Mac 笔记本电脑）：
 
 \image html microsd-sd.jpg
 
 \image html microsd-sdmac.jpg
 
-MicroSD partitions and partition types
-======================================
 
-The card is organized into three partitions (logical volumes):
+MicroSD 分区和分区类型 
+=========================================
 
-- \b BOOT (DOS/Windows FAT32 format): contains files needed for startup, including Linux kernel
+该卡分为三个分区（逻辑卷）：
 
-- \b LINUX (Linux ext4 format, may not show up when reading MicroSD card on Windows and Mac computers): Contains Linux
-  operating system and programs
+- \b BOOT（DOS/Windows FAT32 格式）：包含启动所需的文件，包括 Linux 内核
 
-- \b JEVOIS (DOS/Windows FAT32 format): Contains all JeVois machine vision modules and data files, including possibly
-  files created by the smart camera (e.g., when saving video to microSD).
+- \b LINUX（Linux ext4 格式，在 Windows 和 Mac 电脑上读取 MicroSD 卡时可能不会显示）：包含 Linux 操作系统和程序
+
+- \b JEVOIS（DOS/Windows FAT32 格式）：包含所有 JeVois 机器视觉模块和数据文件，包括智能相机可能创建的文件（例如，将视频保存到 microSD 时）。
 
 
-Because the LINUX partition is of type ext4, which is the native file system for Linux, but is not recognized by default
-on Windows and Mac, when you read your MicroSD card on a Windows or Mac computer, you may not be able to see it or to
-access it. That is usually not a problem as only advanced hackers (who will be programming on Linux computers) would
-ever need to modify the contents of the LINUX partition.
+由于 LINUX 分区的类型为 ext4，这是 Linux 的原生文件系统，但在 Windows 和 Mac 上默认无法识别，因此当您在 Windows 或 Mac 计算机上读取 MicroSD 卡时，您可能无法看到或访问它。这通常不是问题，因为只有高级黑客（将在 Linux 计算机上编程）才需要修改 LINUX 分区的内容。
 
-For regular users, all you need is in the JEVOIS partition, as further detailed below.
+对于普通用户，您需要的只是 JEVOIS 分区，如下所述。
 
-Here is an example of what happens on a Mac laptop when you insert the MicroSD card: Two volumes appear, BOOT and
-JEVOIS, and one can browse the files in both of them. The LINUX volume does not appear on this Mac (but note that third
-party apps are available to allow Macs to read ext4 partitions as well).
+以下是插入 MicroSD 卡后 Mac 笔记本电脑上发生的情况的示例：出现两个卷，BOOT 和 JEVOIS，可以浏览这两个卷中的文件。LINUX 卷未出现在这台 Mac 上（但请注意，第三方应用程序也可用于允许 Mac 读取 ext4 分区）。
 
-\warning The MicroSD card also has additional and essential "files" that are stored directly onto specific sectors
-(physical flash disk locations) on the card. These are bootloader (system startup) files which are the first files
-loaded when the JeVois embedded processor starts. Because the processor does not yet know about partitions, file
-systems, etc at that early startup stage, all it knows how to do is to read raw sectors from the SD card. You usually do
-not need to modify these special files. But beware that if you want to copy the contents of one JeVois MicroSD card to a
-new card, you need to do a full physical sector-by-sector copy. Instructions for how to do this are provided in \ref
-NewMicroSD.
+\warning MicroSD 卡还具有额外的和必要的 "files" ，这些文件直接存储在卡上的特定扇区（物理闪存盘位置）上。这些是引导加载程序（系统启动）文件，是 JeVois 嵌入式处理器启动时加载的第一个文件。由于处理器在早期启动阶段还不知道分区、文件系统等，因此它所知道的全部操作就是从 SD 卡读取原始扇区。您通常不需要修改这些特殊文件。但请注意，如果您想将一张 JeVois MicroSD 卡的内容复制到新卡，则需要进行完整的物理逐扇区复制。有关如何执行此操作的说明，请参阅 \ref NewMicroSD。
 
 \image html microsd-mac.png
 
-MicroSD card contents
-=====================
+MicroSD 卡内容 
+=======================
 
-Here is an abbreviated tree of the files present on a typical \jva33 microSD card (\jvpro is similar but not
-identical):
+以下是典型的 \jva33 microSD 卡上的文件简图树（\jvpro 类似但不完全相同）：
+
+
 
 \verbatim
 ├── BOOT  ########## (16 MB FAT32 partition)
@@ -264,7 +245,7 @@ identical):
 │   │       │   ├── modinfo.yaml
 │   │       │   ├── movie.avi
 │   │       │   ├── screenshot1.png
-│   │       │   └── tiny-dnn     # This module uses auxiliary files for neural network data
+│   │       │   └── tiny-dnn     # 该模块使用神经网络数据的辅助文件 
 │   │       │       ├── CIFAR10
 │   │       │       │   ├── batches.meta.txt
 │   │       │       │   ├── data_batch_1.bin
@@ -316,73 +297,59 @@ identical):
 
 \endverbatim
 
-MicroSD partition resizing
-==========================
+MicroSD 分区大小调整 
+============================
 
-If you have a card larger than the image sizes we provide, you may want to resize the JEVOIS or JEVOISPRO partition to
-use all available free space on your card.
+如果您的卡大于我们提供的图像尺寸，您可能需要调整 JEVOIS 或 JEVOISPRO 分区的大小以使用卡上所有可用的空间。
 
-The JEVOIS or JEVOISPRO partition is using a VFAT/FAT32 filesystem for greatest compatibility with a variety of
-hosts. To resize it under Linux, use `gparted` (you may have to first install it with `sudo apt install gparted`).
+JEVOIS 或 JEVOISPRO 分区使用 VFAT/FAT32 文件系统，以实现与各种主机的最大兼容性。要在 Linux 下调整其大小，请使用 `gparted` （您可能必须先使用 `sudo apt install gparted` 安装它）。
 
 
-JeVois-A33: Accessing and modifying the MicroSD while JeVois is running
-=======================================================================
+JeVois-A33：在 JeVois 运行时访问和修改 MicroSD 
+==============================================================================
 
 \jva33 \jvversion{1.1}
 
-You can access the contents of the \b JEVOIS partition on the microSD while the card is inside your JeVois smart
-camera. JeVois can (on demand) make the \b JEVOIS partition visible to a connected host computer over USB, as a virtual
-USB flash drive.
+当卡位于 JeVois 智能相机内时，您可以访问 microSD 上 \b JEVOIS 分区的内容。JeVois 可以（根据需要）使 \b JEVOIS 分区作为虚拟 USB 闪存驱动器通过 USB 向连接的主机计算机显示。
 
-To enable this feature, connect to the JeVois command-line interface (see \ref UserCli) and issue the command:
+要启用此功能，请连接到 JeVois 命令行界面（参见 \ref UserCli）并发出命令：
 
 \verbatim
 usbsd
 \endverbatim
 
-You will notice that a new USB flash drive is detected by your host computer.
+您会注意到主机检测到了一个新的 USB 闪存驱动器。
 
 \image html usbsd.png
 
-\note Since being able to switch through various vision modules while changing the contents of the microSD poses some
-potential data consistency issues, for now, we have restricted file access over USB to only work while not streaming
-video. Likewise, a reboot of the JeVois camera is necessary to allow it to use any new or modified files from th ehost
-computer.
+\note 由于能够在更改 microSD 内容的同时切换各种视觉模块会带来一些潜在的数据一致性问题，因此目前，我们已限制通过 USB 的文件访问，仅在不流式传输视频时才有效。同样，需要重新启动 JeVois 相机才能允许它使用主机上的任何新文件或修改过的文件。
 
-On Linux and with \jvversion{1.2} and later, you can use host command `jevois-usbsd start` to instruct a connected
-JeVois camera to start exporting its microSD, without having to open a serial terminal application and to connect to
-JeVois. Likewise, you can issue `jevois-usbsd stop` to release the card and restart JeVois.
+在 Linux 上，使用 \jvversion{1.2} 及更高版本，您可以使用主机命令 `jevois-usbsd start` 指示连接的 JeVois 相机开始导出其 microSD，而无需打开串行终端应用程序并连接到 JeVois。同样，您可以发出 `jevois-usbsd stop` 来释放卡并重新启动 JeVois。
 
-Typical workflow is as follows:
+典型的工作流程如下：
 
-- Connect JeVois to a host computer and let it start up.
+- 将 JeVois 连接到主机并让其启动。
 
-- Make sure that you are not capturing video from JeVois.
+- 确保您没有从 JeVois 捕获视频。
 
-- Connect to the JeVois command line interface (either using the hardware serial port, or serial over USB; see \ref
-  UserCli).
+- 连接到 JeVois 命令行界面（使用硬件串行端口或 USB 串行；参见 \ref UserCli）。
 
-- When you want to modify the contents of the microSD inside JeVois, issue the \c usbsd command. The virtual USB flash
-  drive will appear on your host computer.
+- 当你想修改 JeVois 内部 microSD 的内容时，请发出 \c usbsd 命令。虚拟 USB 闪存驱动器将出现在主机上。
 
-- With \jvversion{1.3} and later, you do not need to open a serial terminal and type into it, you can instead use new
-  host command `jevois-usbsd start` directly from any Linux shell.
+- 使用 \jvversion{1.3} 及更高版本，您不需要打开串行终端并在其中输入，而是可以直接从任何 Linux shell 使用新的主机命令 `jevois-usbsd start` 。
 
-- Add/modify/remove files. This includes:
-  + modify configuration or parameter files in \b JEVOIS:/config
-  + edit a module written in Python, under \b JEVOIS:/modules
-  + add any data, e.g., training images for the ObjectDetect module
-  + retrieve any data, e.g., video files recorded by JeVois
-  + copy a new C++ module's .jvpkg package compiled with `./rebuild-platform.sh` to JEVOIS:/packages/
+- 添加/修改/删除文件。这包括：
+  + 修改 \b JEVOIS:/config 中的配置或参数文件
+  + 编辑 \b JEVOIS:/modules 下用 Python 编写的模块
+  + 添加任何数据，例如 ObjectDetect 模块的训练图像
+  + 检索任何数据，例如 JeVois 录制的视频文件
+  + 将使用 `./rebuild-platform.sh` 编译的新 C++ 模块的 .jvpkg 包复制到 JEVOIS:/packages/
 
-- When you are done, properly eject the virtual USB drive (drag to trash, click eject button, etc). JeVois will detect
-  this and will automatically restart and then be able to use the new or modified files. You should see the following on
-  the JeVois LED:
-  + Blinks off - shutdown complete
-  + Solid green - restarting
-  + Orange blink - camera sensor detected
-  + Solid orange: ready for action
+- 完成后，正确弹出虚拟 USB 驱动器（拖到垃圾箱、单击弹出按钮等）。JeVois 将检测到此情况并自动重新启动，然后可以使用新文件或修改后的文件。您应该在 JeVois LED 上看到以下内容：
+  + 闪烁 - 关机完成
+  + 常亮绿色 - 重新启动
+  + 橙色闪烁 - 检测到摄像头传感器
+  + 常亮橙色：准备就绪
 
 */
 

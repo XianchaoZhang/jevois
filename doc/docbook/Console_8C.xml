@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Console_8C">
+<title>src/jevois/Util/Console.C File Reference</title>
+<indexterm><primary>src/jevois/Util/Console.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Util/Console.H&gt;
+#include &lt;stdexcept&gt;
+#include &lt;string&gt;
+#include &lt;linux/input.h&gt;
+#include &lt;linux/kd.h&gt;
+#include &lt;linux/keyboard.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;cctype&gt;
+</programlisting>Include dependency graph for Console.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Console_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Console_8C_1a22dd9d967cbe39a94c26153f1e96ec1e">NELEMS</link>(x)   (sizeof(x) / sizeof((x)[0]))</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>   (sizeof(unsigned long) * 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a1f296f3f5ec473b603ee32e2f7577fcb">NBITS</link>(x)   ((((x)-1)/<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)+1)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a4521467edec9387fad3ae8761f0f4b1d">OFF</link>(x)   ((x)%<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1af647a68a4985fd16c40d533b0ab21bac">LONG</link>(x)   ((x)/<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a9bfbfcfdf94e66aad3e5113c5acf4072">test_bit</link>(bit,  array)   ((array[<link linkend="_Console_8C_1af647a68a4985fd16c40d533b0ab21bac">LONG</link>(bit)] &gt;&gt; <link linkend="_Console_8C_1a4521467edec9387fad3ae8761f0f4b1d">OFF</link>(bit)) &amp; 1)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1af2fc38646a7edd6cb16e696e984cdda8">KDSKBMUTE</link>   0x4B51</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a05edebcc5a34e87e3ee374a93996fed9">KDSKBMODE</link>   0x4B45</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a381947de92299381e59a3186786527e1">K_OFF</link>   0x04</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Console_8C_1a468a80bf7d05ad64839d72049c41760f">IS_CONSOLE</link>(fd)   isatty(fd) &amp;&amp; ioctl(fd, KDGKBTYPE, &amp;arg) == 0 &amp;&amp; ((arg == KB_101) || (arg == KB_84))</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3"/>    <section>
+    <title>BITS_PER_LONG</title>
+<indexterm><primary>BITS_PER_LONG</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>BITS_PER_LONG</secondary></indexterm>
+<para><computeroutput>#define BITS_PER_LONG   (sizeof(unsigned long) * 8)</computeroutput></para>    </section><anchor xml:id="_Console_8C_1a468a80bf7d05ad64839d72049c41760f"/>    <section>
+    <title>IS_CONSOLE</title>
+<indexterm><primary>IS_CONSOLE</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>IS_CONSOLE</secondary></indexterm>
+<para><computeroutput>#define IS_CONSOLE( fd)   isatty(fd) &amp;&amp; ioctl(fd, KDGKBTYPE, &amp;arg) == 0 &amp;&amp; ((arg == KB_101) || (arg == KB_84))</computeroutput></para><para>
+Definition at line 83 of file Console.C.</para>
+    </section><anchor xml:id="_Console_8C_1a381947de92299381e59a3186786527e1"/>    <section>
+    <title>K_OFF</title>
+<indexterm><primary>K_OFF</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>K_OFF</secondary></indexterm>
+<para><computeroutput>#define K_OFF   0x04</computeroutput></para><para>
+Definition at line 76 of file Console.C.</para>
+    </section><anchor xml:id="_Console_8C_1a05edebcc5a34e87e3ee374a93996fed9"/>    <section>
+    <title>KDSKBMODE</title>
+<indexterm><primary>KDSKBMODE</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>KDSKBMODE</secondary></indexterm>
+<para><computeroutput>#define KDSKBMODE   0x4B45</computeroutput></para><para>
+Definition at line 73 of file Console.C.</para>
+    </section><anchor xml:id="_Console_8C_1af2fc38646a7edd6cb16e696e984cdda8"/>    <section>
+    <title>KDSKBMUTE</title>
+<indexterm><primary>KDSKBMUTE</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>KDSKBMUTE</secondary></indexterm>
+<para><computeroutput>#define KDSKBMUTE   0x4B51</computeroutput></para><para>
+Definition at line 70 of file Console.C.</para>
+    </section><anchor xml:id="_Console_8C_1af647a68a4985fd16c40d533b0ab21bac"/>    <section>
+    <title>LONG</title>
+<indexterm><primary>LONG</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>LONG</secondary></indexterm>
+<para><computeroutput>#define LONG( x)   ((x)/<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)</computeroutput></para>    </section><anchor xml:id="_Console_8C_1a1f296f3f5ec473b603ee32e2f7577fcb"/>    <section>
+    <title>NBITS</title>
+<indexterm><primary>NBITS</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>NBITS</secondary></indexterm>
+<para><computeroutput>#define NBITS( x)   ((((x)-1)/<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)+1)</computeroutput></para>    </section><anchor xml:id="_Console_8C_1a22dd9d967cbe39a94c26153f1e96ec1e"/>    <section>
+    <title>NELEMS</title>
+<indexterm><primary>NELEMS</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>NELEMS</secondary></indexterm>
+<para><computeroutput>#define NELEMS( x)   (sizeof(x) / sizeof((x)[0]))</computeroutput></para><para>
+Definition at line 33 of file Console.C.</para>
+    </section><anchor xml:id="_Console_8C_1a4521467edec9387fad3ae8761f0f4b1d"/>    <section>
+    <title>OFF</title>
+<indexterm><primary>OFF</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>OFF</secondary></indexterm>
+<para><computeroutput>#define OFF( x)   ((x)%<link linkend="_Console_8C_1a2f660aa23a5dbc0f4b8df48b4302b8c3">BITS_PER_LONG</link>)</computeroutput></para>    </section><anchor xml:id="_Console_8C_1a9bfbfcfdf94e66aad3e5113c5acf4072"/>    <section>
+    <title>test_bit</title>
+<indexterm><primary>test_bit</primary><secondary>Console.C</secondary></indexterm>
+<indexterm><primary>Console.C</primary><secondary>test_bit</secondary></indexterm>
+<para><computeroutput>#define test_bit( bit,  array)   ((array[<link linkend="_Console_8C_1af647a68a4985fd16c40d533b0ab21bac">LONG</link>(bit)] &gt;&gt; <link linkend="_Console_8C_1a4521467edec9387fad3ae8761f0f4b1d">OFF</link>(bit)) &amp; 1)</computeroutput></para></section>
+</section>
+</section>

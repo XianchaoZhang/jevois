@@ -1,0 +1,40 @@
+\hypertarget{PixelFormats_autotoc_md77}{}\doxysubsection{Je\+Vois-\/\+A33 和 Je\+Vois-\/\+Pro 支持的像素格式}\label{PixelFormats_autotoc_md77}
+有关各种 Je\+Vois 相机传感器支持的分辨率和像素格式的完整和最新列表，请参阅 \mbox{[}Camera\+Sensors.\+C\mbox{]}\{\href{http://jevois.org/doc/html/CameraSensor_8C_source.html}{\texttt{ http\+://jevois.\+org/doc/html/\+Camera\+Sensor\+\_\+8\+C\+\_\+source.\+html}}\} 源代码文件。
+
+
+\begin{DoxyItemize}
+\item {\bfseries{B\+A\+Y\+ER}} {\bfseries{R\+G\+GB\+:}} Je\+Vois 相机中的传感器提供颜色输出，但并非每个像素都有 3 个独立的红色、绿色和蓝色感光元件。事实上，由于人眼感知颜色的视力低于感知形状（基于亮度），因此许多相机传感器制造商提供高分辨率亮度信息，但提供较低分辨率的颜色信息。在所谓的拜耳 R\+G\+GB 传感器类型（用于 Je\+Vois 传感器）中，相机传感器每个像素有一个感光元件，交替的彩色滤光片放置在交替的像素前面。
+
+有关更多信息，请参阅这个优秀的维基百科条目：https\+://en.wikipedia.\+org/wiki/\+Bayer\+\_\+filter
+
+
+\item {\bfseries{Y\+U\+YV\+:}} 这也是一种流行的格式，其中亮度信息以全分辨率提供，而颜色信息仅以较低的分辨率提供，通过让两个相邻像素共享相同的颜色信息。这种模式在 Je\+Vois 中特别有趣，因为相机传感器芯片可以本地输出它（即，传感器芯片包含动态从 R\+G\+GB 转换为 Y\+U\+YV 的硬件），并且它非常易于使用（每个像素只有 2 个字节，一个用于亮度，一个用于颜色信息）。在 Je\+Vois 中，我们编写了简单的函数，允许将文本、线条、圆圈等直接绘制到 Y\+U\+YV 图像中，以便许多演示视觉模块显示的演示显示直接以 Y\+U\+YV 格式创建，从而无需转换为更标准的 R\+GB 图像表示（这需要大量的 C\+PU 时间）。\+Y\+U\+YV 有时也称为 Y\+U\+V422 交错。
+
+
+\item {\bfseries{G\+R\+EY\+:}} 这是一种灰度格式，没有颜色信息，每个像素使用一个字节。
+
+
+\item {\bfseries{R\+G\+B565}} / {\bfseries{R\+G\+BP\+:}} 这是一种将每个像素的三个 R、G 和 B 值打包成仅 2 个字节的格式，每个值使用较少的位数（红色 5 位、绿色 6 位、蓝色 5 位，总共 16 位）。\+Je\+Vois 硬件传感器也可以原生地以 R\+G\+BP 格式捕获，并且 Je\+Vois G\+PU 可以将其处理的结果输出（渲染）为 R\+G\+BP 格式，因此 R\+G\+BP 也是一种有趣的格式。
+
+不幸的是，{\ttfamily guvcview} 似乎无法在 R\+G\+BP 模式下正常工作。它无法分配图像缓冲区并崩溃。这可能是因为 Je\+Vois 是第一款真正能够输出 R\+G\+BP 的 U\+SB 摄像头，并且该代码尚未在 guvcview 中经过彻底测试。我们将与 guvcview 团队合作解决这个问题。与此同时，{\ttfamily ffplay} 或 {\ttfamily ffmpeg} 是可以很好地与 R\+G\+BP 配合使用的替代视频捕获软件，尽管它们没有提供像 {\ttfamily guvcview} 那样漂亮和完整的图形界面。
+
+
+\item {\bfseries{B\+G\+R24\+:}} 这是一种使用 3 个字节对每个像素进行编码的模式，用于对红色、绿色和蓝色进行编码。这是通过从原生 R\+G\+G\+B、\+R\+G\+BP 或 Y\+U\+YV 进行插值在 Je\+Vois C\+PU 上计算得出的。因此，它并不常用，因为它需要大量的 C\+PU 时间来创建。请注意，\+Je\+Vois 使用 B\+G\+R24（而不是 R\+G\+B24），主要是因为 B\+G\+R24 是 Open\+CV 使用的原生颜色格式。
+
+
+\item {\bfseries{M\+J\+PG\+:}} 这是许多 U\+SB 摄像头上流行的压缩模式。每个视频帧基本上都被压缩为 J\+P\+EG 图像。压缩也是由 Je\+Vois C\+PU 完成的，因此会占用一些计算资源。因此，它在捆绑演示中也没有得到广泛使用。
+
+
+\end{DoxyItemize}
+
+请注意，guvcview 显示了一些额外的像素格式，而 Je\+Vois 相机实际上并未声明 Je\+Vois 硬件支持这些格式。guvcview 似乎通过从上面列出的本机支持的格式进行转换来提供这些格式。具体情况因主机、guvcview 版本等而异。在我们的主机上，我们在 guvcview 的“相机输出”下看到了 R\+G\+B3、\+Y\+U12、\+Y\+V12 的其他像素格式。当我们尝试选择它们时，guvcview 有时会崩溃。不要使用它们，坚持使用 G\+R\+E\+Y、\+R\+G\+G\+B、\+M\+J\+P\+G、\+R\+G\+BP 和 Y\+U\+YV 的本机模式。\hypertarget{PixelFormats_autotoc_md78}{}\doxysubsection{Je\+Vois-\/\+Pro 支持的其他格式}\label{PixelFormats_autotoc_md78}
+
+\begin{DoxyItemize}
+\item {\bfseries{R\+G\+B24\+:}} 此模式原生可用，对于需要此像素格式的深度神经网络很有用。
+
+
+\item {\bfseries{J\+V\+UI\+:}} 这种特殊的输出格式指定 Je\+Vois-\/\+Pro 的图形用户界面将用于直接在实时摄像机视图上绘制覆盖图。
+
+
+\end{DoxyItemize}\hypertarget{PixelFormats_autotoc_md79}{}\doxysubsection{视频映射概念}\label{PixelFormats_autotoc_md79}
+Je\+Vois 中的视觉处理模式由像素格式、图像分辨率和帧速率的组合决定。您可以在相机软件中使用所有这些参数来触发不同的模式。例如，在默认的 Je\+Vois 磁盘映像中，\+M\+J\+P\+EG 格式的 320x240@60fps 使用 Pass\+Through 视觉模块（无需处理，只需将原始捕获的图像压缩为 M\+J\+P\+EG 后输出），而 Y\+U\+YV 格式的 320x240@60fps 使用 Save\+Video 模块（可以捕获视频并将其保存到 micro\+SD 卡）。 

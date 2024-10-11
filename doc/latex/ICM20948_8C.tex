@@ -1,0 +1,162 @@
+\hypertarget{ICM20948_8C}{}\doxysubsection{src/jevois/\+Core/\+I\+C\+M20948.C File Reference}
+\label{ICM20948_8C}\index{src/jevois/Core/ICM20948.C@{src/jevois/Core/ICM20948.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+C\+M20948.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+C\+M20948\+\_\+regs.\+H$>$}\newline
+Include dependency graph for I\+C\+M20948.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ICM20948_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_accfc057055882bc5af49122d405e6ae7}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+E\+A\+R\+A\+B\+L\+E\+\_\+\+EN}}~0x8000
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a08b69f99774561e72ac718ab564761ad}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+O\+M\+E\+T\+E\+R\+\_\+\+EN}}~0x4000
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_adae03553c24c2479f238e7feadee23ff}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+O\+M\+E\+T\+E\+R\+\_\+\+I\+N\+T\+\_\+\+EN}}~0x2000
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_acd3237eeddf0e9f59e947899702af7ec}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+EN}}~0x0800
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_aa552c2d0191c1ff4c956ef90ea7cce56}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+T\+S\+\_\+\+EN}}~0x0020
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a3e26911172141af04b4c71e270042351}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+EN}}~0x0010
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a6fbc4ecce3734862dc48ae970dc1dc6c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+EN}}~0x0008
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a4a832953ac560eaf5a8bf58cc5a22a20}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+EN}}~0x0200
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_ac9e00f530a1f87429cca967b60cc0fff}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+\_\+\+EN}}~0x0100
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_afea7f274ffd27bb38dbbc325a6d47447}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+O\+M\+P\+A\+S\+S\+\_\+\+C\+A\+L\+\_\+\+EN}}~0x0080
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a29567699471e746c6398d7c30605480f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+N\+I\+N\+E\+\_\+\+A\+X\+I\+S\+\_\+\+EN}}~0x0040
+\item 
+\#define \mbox{\hyperlink{ICM20948_8C_a195ab9c505b30fab8c5f275f0991fa62}{J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+R\+I\+N\+G\+\_\+\+A\+N\+D\+\_\+\+L\+O\+O\+K\+\_\+\+T0\+\_\+\+S\+E\+E\+\_\+\+EN}}~0x0004
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ICM20948_8C_a4a832953ac560eaf5a8bf58cc5a22a20}\label{ICM20948_8C_a4a832953ac560eaf5a8bf58cc5a22a20}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_ACCEL\_CAL\_EN@{JEVOIS\_DMP\_ACCEL\_CAL\_EN}}
+\index{JEVOIS\_DMP\_ACCEL\_CAL\_EN@{JEVOIS\_DMP\_ACCEL\_CAL\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_ACCEL\_CAL\_EN}{JEVOIS\_DMP\_ACCEL\_CAL\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+C\+A\+L\+\_\+\+EN~0x0200}
+
+
+
+Definition at line 55 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_accfc057055882bc5af49122d405e6ae7}\label{ICM20948_8C_accfc057055882bc5af49122d405e6ae7}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_BAC\_WEARABLE\_EN@{JEVOIS\_DMP\_BAC\_WEARABLE\_EN}}
+\index{JEVOIS\_DMP\_BAC\_WEARABLE\_EN@{JEVOIS\_DMP\_BAC\_WEARABLE\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_BAC\_WEARABLE\_EN}{JEVOIS\_DMP\_BAC\_WEARABLE\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+A\+C\+\_\+\+W\+E\+A\+R\+A\+B\+L\+E\+\_\+\+EN~0x8000}
+
+
+
+Definition at line 48 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_a195ab9c505b30fab8c5f275f0991fa62}\label{ICM20948_8C_a195ab9c505b30fab8c5f275f0991fa62}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN@{JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN}}
+\index{JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN@{JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN}{JEVOIS\_DMP\_BRING\_AND\_LOOK\_T0\_SEE\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+R\+I\+N\+G\+\_\+\+A\+N\+D\+\_\+\+L\+O\+O\+K\+\_\+\+T0\+\_\+\+S\+E\+E\+\_\+\+EN~0x0004}
+
+
+
+Definition at line 59 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_aa552c2d0191c1ff4c956ef90ea7cce56}\label{ICM20948_8C_aa552c2d0191c1ff4c956ef90ea7cce56}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_BTS\_EN@{JEVOIS\_DMP\_BTS\_EN}}
+\index{JEVOIS\_DMP\_BTS\_EN@{JEVOIS\_DMP\_BTS\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_BTS\_EN}{JEVOIS\_DMP\_BTS\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+T\+S\+\_\+\+EN~0x0020}
+
+
+
+Definition at line 52 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_afea7f274ffd27bb38dbbc325a6d47447}\label{ICM20948_8C_afea7f274ffd27bb38dbbc325a6d47447}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_COMPASS\_CAL\_EN@{JEVOIS\_DMP\_COMPASS\_CAL\_EN}}
+\index{JEVOIS\_DMP\_COMPASS\_CAL\_EN@{JEVOIS\_DMP\_COMPASS\_CAL\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_COMPASS\_CAL\_EN}{JEVOIS\_DMP\_COMPASS\_CAL\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+O\+M\+P\+A\+S\+S\+\_\+\+C\+A\+L\+\_\+\+EN~0x0080}
+
+
+
+Definition at line 57 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_a3e26911172141af04b4c71e270042351}\label{ICM20948_8C_a3e26911172141af04b4c71e270042351}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_FLIP\_PICKUP\_EN@{JEVOIS\_DMP\_FLIP\_PICKUP\_EN}}
+\index{JEVOIS\_DMP\_FLIP\_PICKUP\_EN@{JEVOIS\_DMP\_FLIP\_PICKUP\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_FLIP\_PICKUP\_EN}{JEVOIS\_DMP\_FLIP\_PICKUP\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+EN~0x0010}
+
+
+
+Definition at line 53 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_a6fbc4ecce3734862dc48ae970dc1dc6c}\label{ICM20948_8C_a6fbc4ecce3734862dc48ae970dc1dc6c}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_GEOMAG\_EN@{JEVOIS\_DMP\_GEOMAG\_EN}}
+\index{JEVOIS\_DMP\_GEOMAG\_EN@{JEVOIS\_DMP\_GEOMAG\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GEOMAG\_EN}{JEVOIS\_DMP\_GEOMAG\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+EN~0x0008}
+
+
+
+Definition at line 54 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_ac9e00f530a1f87429cca967b60cc0fff}\label{ICM20948_8C_ac9e00f530a1f87429cca967b60cc0fff}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_GYRO\_CAL\_EN@{JEVOIS\_DMP\_GYRO\_CAL\_EN}}
+\index{JEVOIS\_DMP\_GYRO\_CAL\_EN@{JEVOIS\_DMP\_GYRO\_CAL\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_GYRO\_CAL\_EN}{JEVOIS\_DMP\_GYRO\_CAL\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+\_\+\+EN~0x0100}
+
+
+
+Definition at line 56 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_a29567699471e746c6398d7c30605480f}\label{ICM20948_8C_a29567699471e746c6398d7c30605480f}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_NINE\_AXIS\_EN@{JEVOIS\_DMP\_NINE\_AXIS\_EN}}
+\index{JEVOIS\_DMP\_NINE\_AXIS\_EN@{JEVOIS\_DMP\_NINE\_AXIS\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_NINE\_AXIS\_EN}{JEVOIS\_DMP\_NINE\_AXIS\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+N\+I\+N\+E\+\_\+\+A\+X\+I\+S\+\_\+\+EN~0x0040}
+
+
+
+Definition at line 58 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_a08b69f99774561e72ac718ab564761ad}\label{ICM20948_8C_a08b69f99774561e72ac718ab564761ad}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_PEDOMETER\_EN@{JEVOIS\_DMP\_PEDOMETER\_EN}}
+\index{JEVOIS\_DMP\_PEDOMETER\_EN@{JEVOIS\_DMP\_PEDOMETER\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_PEDOMETER\_EN}{JEVOIS\_DMP\_PEDOMETER\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+O\+M\+E\+T\+E\+R\+\_\+\+EN~0x4000}
+
+
+
+Definition at line 49 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_adae03553c24c2479f238e7feadee23ff}\label{ICM20948_8C_adae03553c24c2479f238e7feadee23ff}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_PEDOMETER\_INT\_EN@{JEVOIS\_DMP\_PEDOMETER\_INT\_EN}}
+\index{JEVOIS\_DMP\_PEDOMETER\_INT\_EN@{JEVOIS\_DMP\_PEDOMETER\_INT\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_PEDOMETER\_INT\_EN}{JEVOIS\_DMP\_PEDOMETER\_INT\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+O\+M\+E\+T\+E\+R\+\_\+\+I\+N\+T\+\_\+\+EN~0x2000}
+
+
+
+Definition at line 50 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{ICM20948_8C_acd3237eeddf0e9f59e947899702af7ec}\label{ICM20948_8C_acd3237eeddf0e9f59e947899702af7ec}} 
+\index{ICM20948.C@{ICM20948.C}!JEVOIS\_DMP\_SMD\_EN@{JEVOIS\_DMP\_SMD\_EN}}
+\index{JEVOIS\_DMP\_SMD\_EN@{JEVOIS\_DMP\_SMD\_EN}!ICM20948.C@{ICM20948.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DMP\_SMD\_EN}{JEVOIS\_DMP\_SMD\_EN}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+S\+M\+D\+\_\+\+EN~0x0800}
+
+
+
+Definition at line 51 of file I\+C\+M20948.\+C.
+

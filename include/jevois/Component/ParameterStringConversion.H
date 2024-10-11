@@ -15,7 +15,7 @@
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*! \file */
 
-// This code is inspired by the Neuromorphic Robotics Toolkit (http://nrtkit.org)
+// 该代码受到神经形态机器人工具包 (http://nrtkit.org) 的启发
 
 #pragma once
 
@@ -31,102 +31,99 @@
 
 namespace jevois
 {
-  /*! \defgroup parameterstrconv String conversions for Parameter
+  /*! \defgroup parameterstrconv 参数的字符串转换
       \ingroup parameter */
 
   /*! @{ */ // **********************************************************************
 
-  //! Machine-readable conversion of T to a string, for use in jevois::Parameter
-  /*! A default implementation is provided which internally just uses jevois::to_string(). When implementing new types
-      that can be used as parameters, users should supply the appropriate template specialization for this
-      function. This function is used internally by Parameter to get a Parameter value as a string. */
+  //! 将 T 转换为字符串，供 jevois::Parameter 使用 
+  /*! 提供了一个默认实现，其内部仅使用 jevois::to_string()。在实现可用作参数的新类型时，用户应为此函数提供适当的模板特化。此函
+      数由 Parameter 在内部使用，以字符串形式获取 Parameter 值。 */
   template <typename T>
   void paramValToString(T const & val, std::string & result);
 
-  //! Machine-readable conversion of T to a string, specialization to convert unsigned char to number, not character
+  //! 将 T 转换为机器可读的字符串，专门将无符号字符转换为数字，而不是字符
   template <>
   void paramValToString<unsigned char>(unsigned char const & val, std::string & result);
 
-  //! Machine-readable conversion from string to T, for use in jevois::Parameter
-  /*! @throws Implementation-dependent exception encountered during conversion
+  //! 从字符串到 T 的机器可读转换，用于 jevois::Parameter 
+  /*! @throws 转换期间遇到与实现相关的异常
 
-      A default implementation is provided which internally just uses jevois::from_string(). When implementing new types
-      that can be used as parameters, users should supply the appropriate template specialization for this
-      function. This function is used internally by Parameter to set a Parameter value from string. */
+      提供了一个默认实现，其内部仅使用 jevois::from_string()。在实现可用作参数的新类型时，用户应为此函数提供适当的模板特
+	  化。此函数由 Parameter 在内部使用，以从字符串设置 Parameter 值。 */
   template <typename T>
   void paramStringToVal(std::string const & valstring, T & result);
 
-   //! Machine-readable output to a string, for use in jevois::Parameter: outputs [\c Element1, \c Element2, ...]
-   /*! Overload for std::vector<T> which supports nesting of other vectors and vectors of other types  */
+   //! 机器可读的字符串输出，用于 ​​jevois::Parameter：输出 [\c Element1, \c Element2, ...] 
+   /*! std::vector<T> 的重载，支持嵌套其他向量和其他类型的向量  */
   template <typename Q>
   void paramValToString(std::vector<Q> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads [\c Element1, \c Element2, ...]
-  /*! Overload for std::vector<T> which supports nesting of other vectors and vectors of other types */
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 [\c Element1, \c Element2, ...] 
+  /*! std::vector<T> 的重载，支持嵌套其他向量和其他类型的向量 */
   template <typename Q>
   void paramStringToVal(std::string const & valstring, std::vector<Q> & result);
 
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c first \c second
+  //! 机器可读的输出为字符串，用于 jevois::Parameter: 输出 \c first \c second 
   template <typename F, typename S>
   void paramValToString(std::pair<F, S> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c first \c second
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 \c first \c second 
   template <typename F, typename S>
   void paramStringToVal(std::string const & valstring, std::pair<F, S> & result);
 
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c x \c y
+  //! 机器可读的输出为字符串，用于 jevois::Parameter: 输出 \c x \c y 
   template <typename T>
   void paramValToString(cv::Point_<T> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c x \c y
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 \c x \c y 
   template <typename T>
   void paramStringToVal(std::string const & valstring, cv::Point_<T> & result);
 
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c width \c height
+  //! 机器可读的输出为字符串，用于 jevois::Parameter: 输出 \c width \c height 
   template <typename T>
   void paramValToString(cv::Size_<T> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c width \c height
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 \c width \c height 
   template <typename T>
   void paramStringToVal(std::string const & valstring, cv::Size_<T> & result);
 
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c r \c g \c b \c a
+  //! 机器可读的输出为字符串，用于 jevois::Parameter: 输出 \c r \c g \c b \c a 
   template <typename T>
   void paramValToString(cv::Scalar_<T> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c r \c g \c b \c a or subsets
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 \c r \c g \c b \c a 或子集模板 
   template <typename T>
   void paramStringToVal(std::string const & valstring, cv::Scalar_<T> & result);
 
 #ifdef JEVOIS_PRO  
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c R \c G \c B \c A, each 0..255
+  //! 机器可读输出为字符串，用于 jevois::Parameter: 输出 \c R \c G \c B \c A，每个 0..255
   template <>
   void paramValToString<ImColor>(ImColor const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c R \c G \c B \c A, each 0..255
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 \c R \c G \c B \c A，每个 0..255
   template <>
   void paramStringToVal<ImColor>(std::string const & valstring, ImColor & result);
 #endif
   
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs [\c Key1:Value1, \c Key2:Value2, ...]
-   /*! Overload for std::map which supports nesting of other maps/vectors */
+  //! 机器可读输出到字符串，用于 jevois::Parameter：输出 [\c Key1:Value1, \c Key2:Value2, ...] 
+  /*! 支持嵌套其他映射/向量的 std::map 重载 */
   template <typename K, typename V>
   void paramValToString(std::map<K,V> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads [\c Key1:Value1, \c Key2:Value2, ...]
-  /*! Overload for std::map which supports nesting of other maps/vectors */
+  //! 来自字符串的机器可读输入，用于 jevois::Parameter：读取 [\c Key1:Value1, \c Key2:Value2, ...] 
+  /*! 支持嵌套其他映射/向量的 std::map 重载 */
   template <typename K, typename V>
   void paramStringToVal(std::string const & valstring, std::map<K,V> & result);
 
-  //! Machine-readable conversion of bool to a string, for use in jevois::Parameter
+  //! 将 bool 转换为机器可读的字符串，以便在 jevois::Parameter 中使用；
   template <>
   void paramValToString<bool>(bool const & val, std::string & result);
 
-  //! Machine-readable conversion from string to bool, for use in jevois::Parameter
-  /*! @throws jevois::exception::Exception if input string is malformed.
+  //! 从字符串到布尔值的机器可读转换，用于 jevois::Parameter 
+  /*! @throws jevois::exception::Exception, 如果输入字符串格式不正确。
 
-      Specialization for bool so that we can accept nice verbose terms rather than just 0 and 1.  Acceptable ways to set
-      a bool Parameter are:
+      对 bool 进行专业化，以便我们可以接受详细的术语，而不仅仅是 0 和 1。设置 bool 参数的可接受方法是：
 
       - "true" or "false"
       - "True" or "False"
@@ -134,18 +131,18 @@ namespace jevois
       - "yes" or "no"
       - "y" or "n"
       - 1 or 0
-      - An empty string will set the Parameter to true, so you may use boolean parameters as switches, e.g.,
-        <code>"--myFlag"</code> is equivalent to <code>"--myFlag=true"</code> */
+	  - 空字符串将设置参数为 true，因此您可以使用布尔参数作为开关，例如，
+	  <code>"--myFlag"</code> is equivalent to <code>"--myFlag=true"</code> */
   template <>
   void paramStringToVal<bool>(std::string const & valstring, bool & result);
 
-  //! Machine-readable conversion of string to a string, for use in jevois::Parameter
-  /*! This implementation just returns the original string. */
+  //! 机器可读的字符串到字符串的转换，用于 jevois::Parameter 
+  /*! 此实现仅返回原始字符串。 */
   template <>
   void paramValToString<std::string>(std::string const & val, std::string & result);
 
-  //! Machine-readable conversion from string to string, for use in jevois::Parameter
-  /*! This implementation just returns the original string. */
+  //! 机器可读的字符串到字符串的转换，用于 jevois::Parameter 
+  /*! 此实现仅返回原始字符串。 */
   template <>
   void paramStringToVal<std::string>(std::string const & valstring, std::string & result);
 

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1BoundedBuffer">
+<title>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt; Class Template Reference</title>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Types/BoundedBuffer.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T, BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt;
+class jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</title></simplesect>
+
+
+<para>线程安全同步生产者/消费者队列 </para>
+
+
+
+<para><link linkend="_classjevois_1_1BoundedBuffer">BoundedBuffer</link> 专为生产者/消费者场景而设计，其中多个线程希望异步将数据推送到缓冲区或从缓冲区弹出数据。当缓冲区为空时尝 试弹出数据的线程将处于休眠状态，直到数据实际可用或出现异常（取决于模板参数），而当缓冲区已满时尝试推送数据的线程将处于 阻塞状态，直到缓冲区中有可用空间或出现异常（取决于模板参数）。</para>
+
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>WhenFull</entry>
+                                <entry>
+<para>尝试推送到满缓冲区时的阻塞行为（如 jevois::BlockingBehavior） </para>
+</entry>
+                            </row>
+                            <row>
+                                <entry>WhenEmpty</entry>
+                                <entry>
+<para>尝试从空缓冲区弹出时的阻塞行为（如 jevois::BlockingBehavior） </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line 35 of file BoundedBuffer.H.</para>
+Inheritance diagram for jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1BoundedBuffer__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1BoundedBuffer_1a5a0881eb22f369cfc0a558aad390e4f0">BoundedBuffer</link> (size_t const siz)</para>
+
+<para>创建一个没有数据且具有给定大小的新 <link linkend="_classjevois_1_1BoundedBuffer">BoundedBuffer</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1BoundedBuffer_1aef4ced134c653b4e1fd312cfb437ceb7">push</link> (T const &amp;val)</para>
+
+<para>将新数据元素推送到缓冲区，如果缓冲区已满，则可能会休眠或抛出，copy version </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1BoundedBuffer_1a27b3d15c075516d120935643ed8c7977">push</link> (T &amp;&amp;val)</para>
+
+<para>将新数据元素推送到缓冲区，如果缓冲区已满，可能会休眠或抛出， move version </para>
+</listitem>
+            <listitem><para>T <link linkend="_classjevois_1_1BoundedBuffer_1a5287279b4bcb2f9811135ef7deb264d0">pop</link> ()</para>
+
+<para>从缓冲区弹出最旧的数据元素，可能会处于休眠状态直到有一个数据可用，或者如果为空则抛出 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1BoundedBuffer_1ab0c72f335f2309be485fd4d3b7baffe9">filled_size</link> () const</para>
+
+<para>缓冲区中实际的当前项目数 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1BoundedBuffer_1ac58548e3bb1b6a468ae885ebdaee72c0">size</link> () const</para>
+
+<para>缓冲区的最大大小（构造时分配） </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1BoundedBuffer_1a811c394f7a95e26b390367b042ad455e">clear</link> ()</para>
+
+<para>清除所有内容，将 <link linkend="_classjevois_1_1BoundedBuffer_1ab0c72f335f2309be485fd4d3b7baffe9">filled_size()</link> 重置为零（size() 保持在最大可能大小不变） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1BoundedBuffer_1a5a0881eb22f369cfc0a558aad390e4f0"/>    <section>
+    <title>BoundedBuffer()</title>
+<indexterm><primary>BoundedBuffer</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>BoundedBuffer</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::<link linkend="_classjevois_1_1BoundedBuffer">BoundedBuffer</link> (size_t const siz)</computeroutput></para><para>
+
+<para>创建一个没有数据且具有给定大小的新 <link linkend="_classjevois_1_1BoundedBuffer">BoundedBuffer</link> </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1BoundedBuffer_1a811c394f7a95e26b390367b042ad455e"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>clear</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::clear ( )</computeroutput></para><para>
+
+<para>清除所有内容，将 <link linkend="_classjevois_1_1BoundedBuffer_1ab0c72f335f2309be485fd4d3b7baffe9">filled_size()</link> 重置为零（size() 保持在最大可能大小不变） </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1BoundedBuffer_1ab0c72f335f2309be485fd4d3b7baffe9"/>    <section>
+    <title>filled_size()</title>
+<indexterm><primary>filled_size</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>filled_size</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>size_t <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::filled_size ( ) const</computeroutput></para><para>
+
+<para>缓冲区中实际的当前项目数 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1BoundedBuffer_1a5287279b4bcb2f9811135ef7deb264d0"/>    <section>
+    <title>pop()</title>
+<indexterm><primary>pop</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>pop</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>T <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::pop ( )</computeroutput></para><para>
+
+<para>从缓冲区弹出最旧的数据元素，可能会处于休眠状态直到有一个数据可用，或者如果为空则抛出 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1BoundedBuffer_1a27b3d15c075516d120935643ed8c7977"/>    <section>
+    <title>push()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>push</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>push</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::push (T &amp;&amp; val)</computeroutput></para><para>
+
+<para>将新数据元素推送到缓冲区，如果缓冲区已满，可能会休眠或抛出， move version </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1BoundedBuffer_1aef4ced134c653b4e1fd312cfb437ceb7"/>    <section>
+    <title>push()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>push</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>push</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::push (T const &amp; val)</computeroutput></para><para>
+
+<para>将新数据元素推送到缓冲区，如果缓冲区已满，则可能会休眠或抛出，copy version </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1BoundedBuffer_1ac58548e3bb1b6a468ae885ebdaee72c0"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</secondary></indexterm>
+<indexterm><primary>jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</primary><secondary>size</secondary></indexterm>
+<computeroutput>template&lt;typename T , BlockingBehavior WhenFull, BlockingBehavior WhenEmpty&gt; </computeroutput><para><computeroutput>size_t <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; T, WhenFull, WhenEmpty &gt;::size ( ) const</computeroutput></para><para>
+
+<para>缓冲区的最大大小（构造时分配） </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Types/<link linkend="_BoundedBuffer_8H">BoundedBuffer.H</link></section>
+</section>

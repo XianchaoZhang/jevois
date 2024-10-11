@@ -1,96 +1,74 @@
-/*! \page Change11log Changes and new features in JeVois 1.1
+/*! \page Change11log JeVois 1.1 中的变化和新功能
 
-JeVois 1.1 brings two main new features:
+JeVois 1.1 带来了两个主要的新功能：
 
-Added support to export the microSD card inside JeVois as a virtual USB flash drive
------------------------------------------------------------------------------------
+增加了将 JeVois 内部的 microSD 卡导出为虚拟 USB 闪存驱动器的支持
+------------------------------------------------------------------
+这很困难，需要对 Linux 内核进行大量的 hacking，并使用我们值得信赖的 LeCroy USB 数据包嗅探器来找出错误，但现在它似乎可以完美地与 Windows、Mac 和 Linux 主机配合使用。这意味着您现在可以直接编辑配置文件、安装新的机器视觉模块、复制模块的训练数据等到 JeVois，而无需弹出 microSD 卡，并且 JeVois 正在运行。即使您将大文件复制到 microSD，视频速度也不会变慢，因为视频流在 USB 总线上分配了保留带宽（同步）。
 
-It was tough and has required quite a bit of Linux kernel hacking and fooling around with our trusty LeCroy USB packet
-sniffer to get the bugs out, but it seems to be working flawlessly with Windows, Mac, and Linux hosts now. This means
-that you can now directly edit config files, install new machine vision modules, copy training data for your modules,
-etc to JeVois without ejecting the microSD card and while JeVois is running. There is no slowing down of the video even
-when you copy large files to microSD because the video stream is allocated a reserved bandwidth on the USB bus
-(isochronous).
-
-Here is an example where we browse the JeVois modules on the microSD inside JeVois, accessing it over the USB link,
-while streaming video at the same time:
+下面是一个示例，我们浏览 JeVois 内部 microSD 上的 JeVois 模块，通过 USB 链接访问它，同时流式传输视频：
 
 \image html usbsd.png
 
-However, being able to switch through various vision modules while changing the contents of the microSD poses some
-potential data consistency issues, hence, for now, we have restricted this to only allowing file access while not
-streaming video.
+但是，能够在更改 microSD 内容的同时切换各种视觉模块会带来一些潜在的数据一致性问题，因此，目前，我们将其限制为仅允许文件访问而不允许流式传输视频。
 
-Python 3.5 + Python OpenCV 3.2.0 support on host and platform
+主机和平台上支持 Python 3.5 + Python OpenCV 3.2.0 
 -------------------------------------------------------------
 
-Great news for all Python enthusiasts: JeVois now supports full python 3.5 including the python bindings to opencv
-3.2.0. This means that you can now write machine vision modules for JeVois in Python, using both the API exported by
-JeVois for handling of camera and USB video frames, and the OpenCV python API. Check out this [demo edge detection
-module](https://github.com/jevois/jevoisbase/blob/master/src/Modules/PythonOpenCV/PythonOpenCV.py) written in Python and
-using the Python OpenCV Canny edge detection function, here working inside the JeVois camera:
+对于所有 Python 爱好者来说，这是一个好消息：JeVois 现在支持完整的 Python 3.5，包括与 opencv 3.2.0 的 Python 绑定。这意味着您现在可以用 Python 为 JeVois 编写机器视觉模块，既可以使用 JeVois 导出的用于处理相机和 USB 视频帧的 API，也可以使用 OpenCV Python API。查看这个用 Python 编写并使用 Python OpenCV Canny 边缘检测函数的 [演示边缘检测模块](https://github.com/jevois/jevoisbase/blob/master/src/Modules/PythonOpenCV/PythonOpenCV.py)，它在 JeVois 相机内部工作：
 
 \image html python-canny.png
 
-86.5fps at 640x480 on the JeVois camera and written in Python? Yes indeed!
+在 JeVois 相机上以 640x480 分辨率实现 86.5fps，并且用 Python 编写？确实如此！
 
-Taken together both of these improvements should facilitate rapid development and prototyping on JeVois: Edit a python
-module directly on the JeVois microSD exported to your host computer as a virtual flash drive, then just select the
-corresponding video resolution in your video grabbing software to see the results.
+总的来说，这两项改进应该有助于在 JeVois 上进行快速开发和原型设计：直接在导出到主机作为虚拟闪存驱动器的 JeVois microSD 上编辑 python 模块，然后只需在视频抓取软件中选择相应的视频分辨率即可查看结果。
 
-We expect this will allow many users to learn OpenCV with Python directly on JeVois.
+我们希望这将允许许多用户直接在 JeVois 上使用 Python 学习 OpenCV。
 
-Install JeVois development kit on Ubuntu using a simple apt-get command
+使用简单的 apt-get 命令在 Ubuntu 上安装 JeVois 开发套件 
 -----------------------------------------------------------------------
 
-We created Ubuntu packages for the following:
+我们为以下内容创建了 Ubuntu 软件包：
 
-- jevois-opencv: OpenCV 3.2.0 compiled for host computer with settings that match those used by the JeVois platform
-  hardware. We install this package into /usr/share/jevois-opencv-3.2.0 so that it will not interfere with any other
-  OpenCV install you might have on your host system and that might be required by some other software.
+- jevois-opencv：为主机编译的 OpenCV 3.2.0，其设置与 JeVois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-opencv-3.2.0 中，这样它就不会干扰您主机系统上可能安装的任何其他 OpenCV，而这些 OpenCV 可能是其他软件所需要的。
 
-- jevois-host: JeVois core software compiled for execution on a host computer
+- jevois-host：为在主机上执行而编译的 JeVois 核心软件
 
-- jevois-platform: JeVois core software cross-compiled for execution on the JeVois platform hardware
+- jevois-platform：交叉编译的 JeVois 核心软件，用于在 JeVois 平台硬件上执行
 
-- jevoisbase-host: JeVois base modules compiled for execution on a host computer
+- jevoisbase-host：为在主机上执行而编译的 JeVois 基础模块
 
-- jevoisbase-platform: JeVois base modules cross-compiled for execution on the JeVois platform hardware
+- jevoisbase-platform：交叉编译的 JeVois 基础模块，用于在 JeVois 平台硬件上执行
 
-- jevois-sdk: Compiled bootloaders, root filesystem, and other config files.
+- jevois-sdk：编译的引导加载程序、根文件系统和其他配置文件。
 
-- jevois-sdk-dev: Compiled cross-compilers and cross-compiled libraries for the JeVois platform architecture.
+- jevois-sdk-dev：为 JeVois 平台架构编译的交叉编译器和交叉编译库。
 
-As jevois-sdk-dev brings all the others as dependencies, getting up and running with JeVois development now just means
-one apt-get install command.
+由于 jevois-sdk-dev 将所有其他依赖项都带入，因此启动和运行 JeVois 开发现在只需一个 apt-get install 命令。
 
-Miscellaneous improvements
+其他改进 
 --------------------------
 
-- A few new commands were added to the JeVois command-line interface: `sync`, `date`, `restart`, `usbsd`
+- JeVois 命令行界面添加了一些新命令：`sync`, `date`, `restart`, `usbsd`
 
-- jevois::RawImage now contains an extra \b fps field that can be used by modules to know the frame rate expectation
+- jevois::RawImage 现在包含一个额外的 \b fps 字段，模块可以使用它来了解帧速率预期
 
-- `info` in the command-line interface now reports the current video mapping
+- 命令行界面中的 `info` 现在报告当前视频映射
 
-- Enabled slowing down of framerate to allow increased exposure time when running in low light. Activate it by selecting
-  the \b shade white balance preset in the JeVois command-line interface: `setcam presetwb 9`
+- 启用降低帧速率以允许在低光下运行时增加曝光时间。通过在 JeVois 命令行界面中选择 \b shade 白平衡预设来激活它：`setcam presetwb 9`
 
-- Relocated many JeVois-related files (except boot and core) to the JEVOIS partition so they can be modified live by
-  exporting the microSD over USB.
+- 将许多与 JeVois 相关的文件（启动和核心除外）重新定位到 JEVOIS 分区，以便可以通过 USB 导出 microSD 来实时修改它们。
 
-- `rebuild-platform.sh` now supports 3 install targets:
-  + with no extra argument - install to jvpkg/ directory in the module's source, as before
-  + with `--staging` - install to microSD staging area, for later flashing to microSD
-  + with `--microsd` - install to /media/username/JEVOIS/ which could either be a mounted JeVois microSD,
-    or a live JeVois camera exporting its microSD over USB.
+- `rebuild-platform.sh` 现在支持 3 个安装目标：
+  + 无需额外参数 - 安装到模块源中的 jvpkg/ 目录，与以前一样
+  + 使用 `--staging` - 安装到 microSD 暂存区，以便稍后刷入 microSD
+  + 使用 `--microsd` - 安装到 /media/username/JEVOIS/，可以是已安装的 JeVois microSD，也可以是实时 JeVois 摄像头，通过 USB 导出其 microSD。
   
-  This should significantly facilitate the development cycle: no need to install/eject the microSD card anymore, just
-  compile and install directly to it while it is in JeVois.
+  这将大大简化开发周期：无需再安装/弹出 microSD 卡，只需在 JeVois 中直接编译并安装即可。
 
-- New boot options \b BOOT:serialtty and \b BOOT:usbserialtty to give a Linux login prompt on the hardware serial or
-  serial-over-USB ports instead of the JeVois console.
+- 新的启动选项 \b BOOT:serialtty 和 \b BOOT:usbserialtty 在硬件串行或 USB 串行端口而不是 JeVois 控制台上提供 Linux 登录提示。
 
-- Reorganized jevoisbase with a separate include directory to facilitate creation of debian packages.
+- 重新组织 jevoisbase 并添加单独的包含目录，以方便创建 debian 软件包。
 
 */
+

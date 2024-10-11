@@ -33,8 +33,7 @@ namespace jevois
     
     namespace preprocessor
     {
-      // We define all parameters for all derived classes here to avoid duplicate definitions. Different derived classes
-      // will use different subsets of all available parameters:
+      // 我们在这里定义所有派生类的所有参数以避免重复定义。不同的派生类将使用所有可用参数的不同子集：
       static jevois::ParameterCategory const ParamCateg("DNN Pre-Processing Options");
 
       //! Parameter \relates jevois::dnn::PreProcessor
@@ -93,16 +92,16 @@ namespace jevois
                                1, ParamCateg);
     }
 
-    //! Pre-Processor for neural network pipeline
-    /*! This is the first step in a deep neural network processing Pipeline.
+    //! 神经网络管道的预处理器
+	/*! 这是深度神经网络处理管道的第一步。
 
-        Derived classes must implement the pure virtual methods:
-        - process(): process an input image and generate some tensors (blobs)
-        - report(): describe what process() did to humans
-        - freeze(): freeze/unfreeze parameters that users should not change at runtime
+        派生类必须实现纯虚拟方法：
+        - process()：处理输入图像并生成一些张量 (blob)
+        - report()：描述 process() 对人类做了什么
+        - freeze()：冻结/解冻用户在运行时不应更改的参数
 
-        They should keep some internal state about what to report, since report() is always called on
-        every frame, but process() may be called less often if the network is slow.
+        它们应该保留一些关于要报告的内容的内部状态，因为 report() 总是在每一帧上被调用，但是如果网络速度较慢，则 
+		process() 的调用频率可能会较低。
         
         \ingroup dnn */
     class PreProcessor : public jevois::Component,
@@ -116,79 +115,77 @@ namespace jevois
         //! Destructor
         virtual ~PreProcessor();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻运行时用户不应更改的参数
         virtual void freeze(bool doit) = 0;
 
-        //! Extract blobs from input image
+        //! 从输入图像中提取 blob
         std::vector<cv::Mat> process(jevois::RawImage const & img, std::vector<vsi_nn_tensor_attr_t> const & attrs);
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         virtual void sendreport(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                                 jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false);
 
-        //! Access the last processed image size
+        //! 访问最后处理的图像大小
         cv::Size const & imagesize() const;
         
-        //! Access the last computed blobs (or empty if process() has not yet been called)
+        //! 访问最后计算的 blob（如果尚未调用 process()，则为空）
         std::vector<cv::Mat> const & blobs() const;
 
-        //! Access the width and height of a given blob, accounting for NCHW or NHWC
+        //! 访问给定 blob 的宽度和高度，考虑 NCHW 或 NHWC
         cv::Size blobsize(size_t num) const;
         
-        //! Convert coordinates from blob back to original image
-        /*! Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the blob's width and height. This is useful to
-            convert detected boxes back into original input coordinates. */
+        //! 将 blob 中的坐标转换回原始图像
+		/*！给定坐标 x、y 应在 [0..w-1]x[0..h-1] 中，其中 w、h 是 blob 的宽度和高度。这对于将检测到的框转换回原始输入坐
+		    标很有用。 */
         void b2i(float & x, float & y, size_t blobnum = 0);
 
-        //! Convert coordinates from blob back to original image, given a known blob size
-        /*! Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the blob's width and height. This is useful to
-            convert detected boxes back into original input coordinates. */
+        //! 将 blob 的坐标转换回原始图像，给定一个已知的 blob 大小 
+		/*! 给定的坐标 x,y 应该在 [0..w-1]x[0..h-1] 中，其中 w,h 是 blob 的宽度和高度。这对于将检测到的框转换回原始输入坐
+		    标很有用。 */
         void b2i(float & x, float & y, cv::Size const & bsiz, bool letterboxed);
 
-        //! Get unscaled crop rectangle in image coordinates
-        /*! This is useful to display an image overlay on top of the input image. */
+        //! 在图像坐标中获取未缩放的裁剪矩形
+		/*！这对于在输入图像顶部显示图像 overlay 很有用。 */
+
         cv::Rect getUnscaledCropRect(size_t blobnum = 0);
         
-        //! Get unscaled crop rectangle in image coordinates
-        /*! This is useful to display an image overlay on top of the input image. */
+        //! 在图像坐标中获取未缩放的裁剪矩形
+		/*！这对于在输入图像顶部显示图像 overlay 很有用。 */
         void getUnscaledCropRect(size_t blobnum, int & tlx, int & tly, int & brx, int & bry);
 
-        //! Convert coordinates from image to blob
-        /*! Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the image's width and height. This is useful
-            to convert mouse coordinates (after they have been converted from screen to image coords) to locations
-            within an input blob. */
+        //! 将坐标从图像转换为 blob 
+		/*! 给定坐标 x、y 应位于 [0..w-1]x[0..h-1] 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转
+		    换为图像坐标之后）转换为输入 blob 内的位置很有用。 */
         void i2b(float & x, float & y, size_t blobnum = 0);
 
-        //! Convert coordinates from image to blob
-        /*! Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the image's width and height. This is useful
-            to convert mouse coordinates (after they have been converted from screen to image coords) to locations
-            within an input blob. */
+        //! 将坐标从图像转换为 blob 
+		/*! 给定坐标 x、y 应位于 [0..w-1]x[0..h-1] 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转
+		    换为图像坐标之后）转换为输入 blob 内的位置很有用。 */
         void i2b(float & x, float & y, cv::Size const & bsiz, bool letterboxed);
 
-        //! Get a pointer to our python-friendly interface
+        //! 获取指向我们的 python 友好接口的指针
         std::shared_ptr<PreProcessorForPython> getPreProcForPy() const;
         
       protected:
-        //! Extract blobs from input image
-        /*! isrgb should be true if the given img has RGB color order, or false for BGR. Only 3-channel byte images are
-            supported as input. */
+        //! 从输入图像中提取 blob 
+		/*！如果给定的 img 具有 RGB 颜色顺序，则 isrgb 应该为 true，如果是 BGR，则为 false。仅支持 3 通道字节图像作为输入。 */
         virtual std::vector<cv::Mat> process(cv::Mat const & img, bool isrgb,
                                              std::vector<vsi_nn_tensor_attr_t> const & attrs,
                                              std::vector<cv::Rect> & crops) = 0;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         virtual void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                             jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) = 0;
 
       private:
         std::vector<vsi_nn_tensor_attr_t> itsAttrs;
         std::vector<cv::Mat> itsBlobs;
-        std::vector<cv::Rect> itsCrops; // Unscaled crops, one per blob, used for rescaling from blob to image
+        std::vector<cv::Rect> itsCrops; // 未缩放的裁剪，每个 blob 一个，用于从 blob 重新缩放到图像
         
         cv::Size itsImageSize;
         unsigned int itsImageFmt;
 
-        // Helper class exposed to python
+        // 向 python 公开的辅助类
         std::shared_ptr<PreProcessorForPython> itsPP;
     };
     

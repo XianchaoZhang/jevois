@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ParameterStringConversion_8H">
+<title>include/jevois/Component/ParameterStringConversion.H File Reference</title>
+<indexterm><primary>include/jevois/Component/ParameterStringConversion.H</primary></indexterm>
+<programlisting>#include &lt;string&gt;
+#include &lt;iostream&gt;
+#include &lt;sstream&gt;
+#include &lt;vector&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;imgui.h&gt;
+#include &lt;jevois/Component/details/ParameterStringConversionImpl.H&gt;
+</programlisting>Include dependency graph for ParameterStringConversion.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ParameterStringConversion_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ParameterStringConversion_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8775d20a2bef3f1548e85360e9608656">jevois::paramValToString</link> (T const &amp;val, std::string &amp;result)</para>
+
+<para>将 T 转换为字符串，供 jevois::Parameter 使用 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga828ed097b767a329b9ef81b25671af91">jevois::paramValToString&lt; unsigned char &gt;</link> (unsigned char const &amp;val, std::string &amp;result)</para>
+
+<para>将 T 转换为机器可读的字符串，专门将无符号字符转换为数字，而不是字符 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga9181607df247a37a9f6f3048fc5274f9">jevois::paramStringToVal</link> (std::string const &amp;valstring, T &amp;result)</para>
+
+<para>从字符串到 T 的机器可读转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;typename Q &gt; </para><para>void <link linkend="_group__parameterstrconv_1gab2ed13d224cb5afce6b018c5750bd376">jevois::paramValToString</link> (std::vector&lt; <link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link> &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的字符串输出，用于 ​​jevois::Parameter：输出 [<computeroutput>Element1</computeroutput>, <computeroutput>Element2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename Q &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga231b033ee2dd96aea6c349a50d81f28b">jevois::paramStringToVal</link> (std::string const &amp;valstring, std::vector&lt; <link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link> &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 [<computeroutput>Element1</computeroutput>, <computeroutput>Element2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename F , typename S &gt; </para><para>void <link linkend="_group__parameterstrconv_1gaf8c330b3092d43e1b51a4726c2c37490">jevois::paramValToString</link> (std::pair&lt; <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, S &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>first</computeroutput> <computeroutput>second</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename F , typename S &gt; </para><para>void <link linkend="_group__parameterstrconv_1gaa4d379683d33f681a73fd3dd7326cb24">jevois::paramStringToVal</link> (std::string const &amp;valstring, std::pair&lt; <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, S &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>first</computeroutput> <computeroutput>second</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1gad80d460be599086f5446ca420ec8c7e2">jevois::paramValToString</link> (cv::Point_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>x</computeroutput> <computeroutput>y</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga0401340fc2f5faba4060a8919e9f90b1">jevois::paramStringToVal</link> (std::string const &amp;valstring, cv::Point_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>x</computeroutput> <computeroutput>y</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1gae1463dc259923946a4b432c86cc36ffc">jevois::paramValToString</link> (cv::Size_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>width</computeroutput> <computeroutput>height</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga6e9f701bba18de827137f2569b6136bd">jevois::paramStringToVal</link> (std::string const &amp;valstring, cv::Size_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>width</computeroutput> <computeroutput>height</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga050076c5ac771a52a203c08b0fe21963">jevois::paramValToString</link> (cv::Scalar_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>r</computeroutput> <computeroutput>g</computeroutput> <computeroutput>b</computeroutput> <computeroutput>a</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga645ebe139c475a906c9d0ba3a3a2700e">jevois::paramStringToVal</link> (std::string const &amp;valstring, cv::Scalar_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>r</computeroutput> <computeroutput>g</computeroutput> <computeroutput>b</computeroutput> <computeroutput>a</computeroutput> 或子集模板 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8677d178b2ca79ef97fb448064cab026">jevois::paramValToString&lt; ImColor &gt;</link> (ImColor const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>R</computeroutput> <computeroutput>G</computeroutput> <computeroutput>B</computeroutput> <computeroutput>A，每个</computeroutput> 0..255 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga3b97261e1b34103c923492b251b16ade">jevois::paramStringToVal&lt; ImColor &gt;</link> (std::string const &amp;valstring, ImColor &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>R</computeroutput> <computeroutput>G</computeroutput> <computeroutput>B</computeroutput> <computeroutput>A，每个</computeroutput> 0..255 </para>
+</listitem>
+            <listitem><para>template&lt;typename K , typename V &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga4f532edee49623462389446878802425">jevois::paramValToString</link> (std::map&lt; K, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读输出到字符串，用于 jevois::Parameter：输出 [<computeroutput>Key1:Value1</computeroutput>, <computeroutput>Key2:Value2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename K , typename V &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga0589bb4a03f4ab3644ca150930a98e20">jevois::paramStringToVal</link> (std::string const &amp;valstring, std::map&lt; K, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 [<computeroutput>Key1:Value1</computeroutput>, <computeroutput>Key2:Value2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8434bf9159dcbaab41546816f39d3816">jevois::paramValToString&lt; bool &gt;</link> (bool const &amp;val, std::string &amp;result)</para>
+
+<para>将 bool 转换为机器可读的字符串，以便在 jevois::Parameter 中使用； </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8500220c721730cb23bd49ba8f9b1a91">jevois::paramStringToVal&lt; bool &gt;</link> (std::string const &amp;valstring, bool &amp;result)</para>
+
+<para>从字符串到布尔值的机器可读转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga391a3919aabdde5c2f6c0a2ff92c201f">jevois::paramValToString&lt; std::string &gt;</link> (std::string const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的字符串到字符串的转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga98169733c0aaff712d9484cd1f20a3e8">jevois::paramStringToVal&lt; std::string &gt;</link> (std::string const &amp;valstring, std::string &amp;result)</para>
+
+<para>机器可读的字符串到字符串的转换，用于 jevois::Parameter </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

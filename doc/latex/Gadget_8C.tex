@@ -1,0 +1,88 @@
+\hypertarget{Gadget_8C}{}\doxysubsection{src/jevois/\+Core/\+Gadget.C File Reference}
+\label{Gadget_8C}\index{src/jevois/Core/Gadget.C@{src/jevois/Core/Gadget.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Gadget.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Input.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Async.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Buffers.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/time.\+h$>$}\newline
+Include dependency graph for Gadget.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Gadget_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_a9753903bd1cb938590e92b49bc01b7d3}{success}}()~\{ its\+Error\+Code = 0; \}
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_af8fc0ffe3970b3983d0a8f488e17d70a}{failure}}(code)~\{ resp.\+length = -\/E\+L2\+H\+LT; its\+Error\+Code = code; \}
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_af5e05ce14050af2739f6921bd843afb9}{byteresponse}}(val)~\{ resp.\+data\mbox{[}0\mbox{]} = val; resp.\+length = 1; its\+Error\+Code = 0; \}
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_afc6fa9f99776203e6ca76b580d7afea6}{wordresponse}}(val)
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_a9fbaf3e83e6c2969c78e8f974a635de7}{intresponse}}(val)
+\item 
+\#define \mbox{\hyperlink{Gadget_8C_a3d1928473e526ba745bfac10f711119b}{arrayblankresponse}}(len)~\{ memset(resp.\+data, 0, len); resp.\+length = len; its\+Error\+Code = 0; \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Gadget_8C_a3d1928473e526ba745bfac10f711119b}\label{Gadget_8C_a3d1928473e526ba745bfac10f711119b}} 
+\index{Gadget.C@{Gadget.C}!arrayblankresponse@{arrayblankresponse}}
+\index{arrayblankresponse@{arrayblankresponse}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{arrayblankresponse}{arrayblankresponse}}
+{\footnotesize\ttfamily \#define arrayblankresponse(\begin{DoxyParamCaption}\item[{}]{len }\end{DoxyParamCaption})~\{ memset(resp.\+data, 0, len); resp.\+length = len; its\+Error\+Code = 0; \}}
+
+\mbox{\Hypertarget{Gadget_8C_af5e05ce14050af2739f6921bd843afb9}\label{Gadget_8C_af5e05ce14050af2739f6921bd843afb9}} 
+\index{Gadget.C@{Gadget.C}!byteresponse@{byteresponse}}
+\index{byteresponse@{byteresponse}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{byteresponse}{byteresponse}}
+{\footnotesize\ttfamily \#define byteresponse(\begin{DoxyParamCaption}\item[{}]{val }\end{DoxyParamCaption})~\{ resp.\+data\mbox{[}0\mbox{]} = val; resp.\+length = 1; its\+Error\+Code = 0; \}}
+
+\mbox{\Hypertarget{Gadget_8C_af8fc0ffe3970b3983d0a8f488e17d70a}\label{Gadget_8C_af8fc0ffe3970b3983d0a8f488e17d70a}} 
+\index{Gadget.C@{Gadget.C}!failure@{failure}}
+\index{failure@{failure}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{failure}{failure}}
+{\footnotesize\ttfamily \#define failure(\begin{DoxyParamCaption}\item[{}]{code }\end{DoxyParamCaption})~\{ resp.\+length = -\/E\+L2\+H\+LT; its\+Error\+Code = code; \}}
+
+\mbox{\Hypertarget{Gadget_8C_a9fbaf3e83e6c2969c78e8f974a635de7}\label{Gadget_8C_a9fbaf3e83e6c2969c78e8f974a635de7}} 
+\index{Gadget.C@{Gadget.C}!intresponse@{intresponse}}
+\index{intresponse@{intresponse}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{intresponse}{intresponse}}
+{\footnotesize\ttfamily \#define intresponse(\begin{DoxyParamCaption}\item[{}]{val }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ resp.data[0] = val \& 0xff; resp.data[1] = (val >> 8) \& 0xff; \(\backslash\)}
+\DoxyCodeLine{    resp.data[2] = (val >> 16) \& 0xff; resp.data[3] = (val >> 24) \& 0xff; \(\backslash\)}
+\DoxyCodeLine{    resp.length = 4; itsErrorCode = 0; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{Gadget_8C_a9753903bd1cb938590e92b49bc01b7d3}\label{Gadget_8C_a9753903bd1cb938590e92b49bc01b7d3}} 
+\index{Gadget.C@{Gadget.C}!success@{success}}
+\index{success@{success}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{success}{success}}
+{\footnotesize\ttfamily \#define success(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~\{ its\+Error\+Code = 0; \}}
+
+\mbox{\Hypertarget{Gadget_8C_afc6fa9f99776203e6ca76b580d7afea6}\label{Gadget_8C_afc6fa9f99776203e6ca76b580d7afea6}} 
+\index{Gadget.C@{Gadget.C}!wordresponse@{wordresponse}}
+\index{wordresponse@{wordresponse}!Gadget.C@{Gadget.C}}
+\doxyparagraph{\texorpdfstring{wordresponse}{wordresponse}}
+{\footnotesize\ttfamily \#define wordresponse(\begin{DoxyParamCaption}\item[{}]{val }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \{ resp.data[0] = val \& 0xff; resp.data[1] = (val >> 8) \& 0xff; \(\backslash\)}
+\DoxyCodeLine{    resp.length = 2; itsErrorCode = 0; \}}
+
+\end{DoxyCode}

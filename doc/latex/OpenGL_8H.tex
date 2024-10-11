@@ -1,0 +1,112 @@
+\hypertarget{OpenGL_8H}{}\doxysubsection{include/jevois/\+G\+P\+U/\+Open\+GL.H File Reference}
+\label{OpenGL_8H}\index{include/jevois/GPU/OpenGL.H@{include/jevois/GPU/OpenGL.H}}
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$E\+G\+L/eglplatform.\+h$>$}\newline
+{\ttfamily \#include $<$E\+G\+L/egl.\+h$>$}\newline
+{\ttfamily \#include $<$E\+G\+L/eglext.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S2/gl2.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S2/gl2ext.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S3/gl3.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S3/gl3ext.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S3/gl31.\+h$>$}\newline
+{\ttfamily \#include $<$G\+L\+E\+S3/gl32.\+h$>$}\newline
+Include dependency graph for Open\+G\+L.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{OpenGL_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{OpenGL_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{OpenGL_8H_a640197e1e2c236d40c9b4b86332e1f18}{E\+G\+L\+\_\+\+E\+G\+L\+E\+X\+T\+\_\+\+P\+R\+O\+T\+O\+T\+Y\+P\+ES}}
+\item 
+\#define \mbox{\hyperlink{OpenGL_8H_a120fb070bddb21f0bd899f50252c4cb5}{G\+L\+\_\+\+G\+L\+E\+X\+T\+\_\+\+P\+R\+O\+T\+O\+T\+Y\+P\+ES}}
+\item 
+\#define \mbox{\hyperlink{OpenGL_8H_a684c0dc6c3c9c9550c3a18fa13c8749b}{G\+L\+\_\+\+C\+H\+E\+CK}}(stmt)
+\begin{DoxyCompactList}\small\item\em Simple macro to check for Open\+GL errors. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{OpenGL_8H_a811759c9d907dcd1568836bdd31a082f}{G\+L\+\_\+\+C\+H\+E\+C\+K\+\_\+\+B\+O\+OL}}(stmt)
+\begin{DoxyCompactList}\small\item\em Simple macro to check for Open\+GL errors when a boolean result is expected. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}{jevois\+::opengl\+\_\+error}} (int err)
+\begin{DoxyCompactList}\small\item\em Function to write Open\+GL errors in clear witout requiring G\+L\+UT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{OpenGL_8H_a640197e1e2c236d40c9b4b86332e1f18}\label{OpenGL_8H_a640197e1e2c236d40c9b4b86332e1f18}} 
+\index{OpenGL.H@{OpenGL.H}!EGL\_EGLEXT\_PROTOTYPES@{EGL\_EGLEXT\_PROTOTYPES}}
+\index{EGL\_EGLEXT\_PROTOTYPES@{EGL\_EGLEXT\_PROTOTYPES}!OpenGL.H@{OpenGL.H}}
+\doxyparagraph{\texorpdfstring{EGL\_EGLEXT\_PROTOTYPES}{EGL\_EGLEXT\_PROTOTYPES}}
+{\footnotesize\ttfamily \#define E\+G\+L\+\_\+\+E\+G\+L\+E\+X\+T\+\_\+\+P\+R\+O\+T\+O\+T\+Y\+P\+ES}
+
+
+
+Definition at line 24 of file Open\+G\+L.\+H.
+
+\mbox{\Hypertarget{OpenGL_8H_a684c0dc6c3c9c9550c3a18fa13c8749b}\label{OpenGL_8H_a684c0dc6c3c9c9550c3a18fa13c8749b}} 
+\index{OpenGL.H@{OpenGL.H}!GL\_CHECK@{GL\_CHECK}}
+\index{GL\_CHECK@{GL\_CHECK}!OpenGL.H@{OpenGL.H}}
+\doxyparagraph{\texorpdfstring{GL\_CHECK}{GL\_CHECK}}
+{\footnotesize\ttfamily \#define G\+L\+\_\+\+C\+H\+E\+CK(\begin{DoxyParamCaption}\item[{}]{stmt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{ stmt; GLenum \_err = glGetError(); \(\backslash\)}
+\DoxyCodeLine{    if (\_err != GL\_NO\_ERROR) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"Error "} << \mbox{\hyperlink{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}{jevois::opengl\_error}}(\_err) <<\textcolor{stringliteral}{" in: "} << \#stmt); \} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+Simple macro to check for Open\+GL errors. 
+
+Inspired from here\+: \href{http://stackoverflow.com/questions/11256470/define-a-macro-to-facilitate-opengl-command-debugging}{\texttt{ http\+://stackoverflow.\+com/questions/11256470/define-\/a-\/macro-\/to-\/facilitate-\/opengl-\/command-\/debugging}} 
+
+Definition at line 77 of file Open\+G\+L.\+H.
+
+\mbox{\Hypertarget{OpenGL_8H_a811759c9d907dcd1568836bdd31a082f}\label{OpenGL_8H_a811759c9d907dcd1568836bdd31a082f}} 
+\index{OpenGL.H@{OpenGL.H}!GL\_CHECK\_BOOL@{GL\_CHECK\_BOOL}}
+\index{GL\_CHECK\_BOOL@{GL\_CHECK\_BOOL}!OpenGL.H@{OpenGL.H}}
+\doxyparagraph{\texorpdfstring{GL\_CHECK\_BOOL}{GL\_CHECK\_BOOL}}
+{\footnotesize\ttfamily \#define G\+L\+\_\+\+C\+H\+E\+C\+K\+\_\+\+B\+O\+OL(\begin{DoxyParamCaption}\item[{}]{stmt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{ \textcolor{keywordtype}{int} \_result = stmt; \textcolor{keywordflow}{if} (\_result == 0) \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{LERROR}}(\textcolor{stringliteral}{"Failed: "} \#stmt); \(\backslash\)}
+\DoxyCodeLine{    GLenum \_err = glGetError();                                         \(\backslash\)}
+\DoxyCodeLine{    if (\_err != GL\_NO\_ERROR) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"Error "} << \mbox{\hyperlink{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}{jevois::opengl\_error}}(\_err) <<\textcolor{stringliteral}{" in: "} << \#stmt); \} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+Simple macro to check for Open\+GL errors when a boolean result is expected. 
+
+
+
+Definition at line 81 of file Open\+G\+L.\+H.
+
+\mbox{\Hypertarget{OpenGL_8H_a120fb070bddb21f0bd899f50252c4cb5}\label{OpenGL_8H_a120fb070bddb21f0bd899f50252c4cb5}} 
+\index{OpenGL.H@{OpenGL.H}!GL\_GLEXT\_PROTOTYPES@{GL\_GLEXT\_PROTOTYPES}}
+\index{GL\_GLEXT\_PROTOTYPES@{GL\_GLEXT\_PROTOTYPES}!OpenGL.H@{OpenGL.H}}
+\doxyparagraph{\texorpdfstring{GL\_GLEXT\_PROTOTYPES}{GL\_GLEXT\_PROTOTYPES}}
+{\footnotesize\ttfamily \#define G\+L\+\_\+\+G\+L\+E\+X\+T\+\_\+\+P\+R\+O\+T\+O\+T\+Y\+P\+ES}
+
+
+
+Definition at line 25 of file Open\+G\+L.\+H.
+

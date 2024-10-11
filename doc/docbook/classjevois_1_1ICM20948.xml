@@ -1,0 +1,506 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ICM20948">
+<title>jevois::ICM20948 Class Reference</title>
+<indexterm><primary>jevois::ICM20948</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/ICM20948.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>TDK InvenSense ICM-20948 9DOF <link linkend="_classjevois_1_1IMU">IMU</link> 高级驱动程序 </para>
+
+
+
+<para>此驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 JeVois 传感器上的摄像头传感器驱动程序集成。目前，在 JeVois-A33 上，只有 OnSemi (Aptina) AR0135 全局快门可选摄像头传感器配备了 IMU。在 JeVois-Pro 上，所有摄像头传感器 都配备了 IMU。</para>
+
+<para>该芯片的规格相当令人印象深刻：<itemizedlist>
+<listitem>
+<para>3 轴 16 位加速度计，全范围灵敏度可选为 +/-2g、+/-4g、+/-8g 和 +/-16g。</para>
+</listitem><listitem>
+<para>加速度计数据速率从 4 Hz 到 1125 Hz。</para>
+</listitem><listitem>
+<para>3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-250dps（度/秒）、+/-500dps、+/-1000dps 和 +/-2000dps。</para>
+</listitem><listitem>
+<para>陀螺仪数据速率从 4 Hz 到 1125 Hz。</para>
+</listitem><listitem>
+<para>3 轴 16 位磁力计（指南针），范围宽达 +/-4900uT（微特斯拉）。</para>
+</listitem><listitem>
+<para>磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。</para>
+</listitem><listitem>
+<para>16 位温度传感器，读出速率高达 8 kHz。</para>
+</listitem><listitem>
+<para>RAW 数据模式（随时获取当前传感器值）、缓冲 (FIFO) 数据模式（传感器值以固定速率累积到 FIFO 中）和数字运动处理模式 (DMP；原始数据在芯片上处理)。</para>
+</listitem><listitem>
+<para>片上数字运动处理器 (DMP) 可以在 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片内部计算：<itemizedlist>
+<listitem>
+<para>四元数 6（使用加速度计 + 陀螺仪），</para>
+</listitem><listitem>
+<para>四元数 9（使用加速度计 + 陀螺仪 + 指南针），</para>
+</listitem><listitem>
+<para>geomag 四元数（使用加速度计 + 指南针），</para>
+</listitem><listitem>
+<para>翻转/拾取检测，</para>
+</listitem><listitem>
+<para>步数检测和计数，</para>
+</listitem><listitem>
+<para>基本活动识别：驾驶、步行、跑步、骑自行车、倾斜、静止。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>通过片上计算的四元数，采用以高精度、固定速率获取传感器数据的算法，并动态应用各种校准、漂移校正和补偿，可以对传感器 在 3D 世界中的姿态及其运动方式进行高精度实时估计。</para>
+
+<para>请注意，在 JeVois-A33 上，与 <link linkend="_classjevois_1_1IMU">IMU</link> 的通信是通过 400kHz I2C 总线进行的，这可能会限制数据读取速率，具体取决于从 <link linkend="_classjevois_1_1IMU">IMU</link> 请 求的数据。在 JeVois-Pro 上，通信是通过 7MHz 的 SPI 进行的。</para>
+
+<para>该 <link linkend="_classjevois_1_1IMU">IMU</link> 有 3 种基本工作模式（参数模式，只能在 params.cfg 中设置）：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>RAW：可以使用 <link linkend="_classjevois_1_1ICM20948_1abeceec15f2311d734a7f922355bdbc94">getRaw()</link> 或 <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get()</link> 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以 完全规则的间隔调用 <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get()</link>，则读数中会出现一些时间抖动。IMU 不为其数据提供任何时间戳。</para>
+</listitem><listitem>
+<para>FIFO：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte FIFO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启 时，陀螺仪速率决定 FIFO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 <link linkend="_classjevois_1_1ICM20948_1abeceec15f2311d734a7f922355bdbc94">getRaw()</link> 或 <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get()</link>。但您 需要注意，当使用高传感器数据速率时，FIFO 可能会很快填满并溢出。</para>
+</listitem><listitem>
+<para>DMP：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (DMP)。然后，DMP 计算四元数、活动 识别等，并在这些算法的结果可用时将数据包推送到 FIFO。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>注意：此类具有状态且不可重入。也就是说，我们将 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片的当前寄存器组存储在类成员变量中。如果同时调用此类的多个成员 函数，则可能会不同步。由于我们假设在正常操作中不会出现这种情况，因此我们不使用互斥锁来保护芯片访问。如果以多线程方式 使用，用户应使用外部互斥锁来保护此类。 </para>
+<para>
+Definition at line 191 of file ICM20948.H.</para>
+Inheritance diagram for jevois::ICM20948:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ICM20948__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ICM20948:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ICM20948__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1ad3d8bad8bdf0689509e48211f79729e0">ICM20948</link> (std::string const &amp;instance)</para>
+
+<para>构造函数，低级通信驱动程序为空 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ICM20948_1a497afd41a86414f6197fdb824316960d">~ICM20948</link> ()</para>
+
+<para>用于安全继承的虚析构函数 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ICM20948_1a5dbe44a38b3c88a2c37a8293eb6ec8ff">ready</link> ()</para>
+
+<para>如果此相机确实具有可正常工作的 <link linkend="_classjevois_1_1ICM20948">ICM20948</link> 则返回 true； </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ICM20948_1af49cc2c1cff425cf2065e3d9307ca689">dataReady</link> ()</para>
+
+<para>返回以前未获得的新数据量 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1IMUrawData">IMUrawData</link> <link linkend="_classjevois_1_1ICM20948_1abeceec15f2311d734a7f922355bdbc94">getRaw</link> (bool blocking=true)</para>
+
+<para>获取一轮原始数据 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1IMUdata">IMUdata</link> <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link> (bool blocking=true)</para>
+
+<para>获取一轮缩放的原始数据 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1DMPdata">DMPdata</link> <link linkend="_classjevois_1_1ICM20948_1a09d20dc8ed590bffd4de96d2c23b2d9a">getDMP</link> (bool blocking=true)</para>
+
+<para>获取一包 DMP 数据 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1a8202f4edbc99ef5a71dc3465b9d0c2e7">preInit</link> () override</para>
+
+<para>连接并初始化 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1a8a5ffa0fa699059985794186876f75b6">postInit</link> () override</para>
+
+<para>配置 RAW 与 DMP 模式： </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1ac0c87dce4c1cad9591e6ab4c87e04da2">preUninit</link> () override</para>
+
+<para>解冻任何先前冻结的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1a3dfe91b8cc41317af9e0a1da12478bb2">reset</link> ()</para>
+
+<para>重置 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片 - 正常操作时不推荐使用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1a086a18d296e388aaea3765122f1a32b5">sleep</link> (bool enable)</para>
+
+<para>打开/关闭睡眠模式 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ICM20948_1a167779c6866f29dc6c430073a8beb990">cycle</link> (bool enable)</para>
+
+<para>打开/关闭加速度计、陀螺仪和指南针的循环模式与连续模式 </para>
+</listitem>
+            <listitem><para>uint32_t <link linkend="_classjevois_1_1ICM20948_1ab47f6569ca17eb2f912f2b630a4a31bb">devid</link> ()</para>
+
+<para>Read device ID. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a7ab7e5bfac503a5aab82344fae70f3ee">JEVOIS_DEFINE_ENUM_CLASS</link> (Mode,(RAW)(FIFO)(DMP))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1aad9e6ed2ab353af824aa71a205f99f2b">JEVOIS_DECLARE_PARAMETER</link> (mode, Mode, &quot;Data collection mode. RAW means that the latest available raw &quot; &quot;data is returned each time <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() is called, hence timing may not be very &quot; &quot;accurate depending on how regularly <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() is called. FIFO collects accel and gyro data &quot; &quot;at the exact rates specified by parameters arate, grate into a 1kb FIFO queue, and &quot; &quot;<link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() takes that data back from the FIFO. DMP runs the embedded &quot; &quot;digital motion processor on raw data, and accumulates resulting output &quot; &quot;data into the <link linkend="_classjevois_1_1IMU">IMU</link>&apos;s internal FIFO buffer at a precise, fixed rate. This &quot; &quot;parameter can only be set in a module&apos;s params.cfg file.&quot;, Mode::RAW, Mode_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a7e012c0766c2fe3851c14fb81a332a2e">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (dmp, std::string, &quot;Requested DMP data. Only valid when mode is DMP. &quot; &quot;Use any string of letters including:&quot; &quot;A=acceleration, &quot; &quot;<link linkend="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991">G</link>=gyro, &quot; &quot;M=magnetometer (compass), &quot; &quot;R=quaternion 6 (uses accel + gyro), &quot; &quot;<link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link>=quaternion 9 (uses accel + gyro + compass), &quot; &quot;E=geomag (uses accel + compass), &quot; &quot;P=flip/pickup detection, &quot; &quot;S=step detection, &quot; &quot;T=activity recognition, &quot; &quot;<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>=frame sync from video sensor, &quot; &quot;w=configure activity recognition for wearable, &quot; &quot;g=gyro calibration (always on when gyro used), &quot; &quot;m=compass calibration (always on when compass used), &quot; &quot;b=accel accuracy (always on when accel used), &quot; &quot;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>=gyro accuracy (always on when gyro used), &quot; &quot;n=compass accuracy (always on when compass used).&quot;, &quot;QSPT&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1ad023ad9842888231ac301c14cf77e070">JEVOIS_DECLARE_PARAMETER</link> (pktdbg, bool, &quot;Send raw FIFO or DMP packets to console for debug/hacking purposes.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1af7976be313ba0e23e689d86a1afc4ada">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (arate, float, &quot;Accelerometer sampling rate (Hz), or 0.0 to disable &quot; &quot;accelerometer. Actual sample rate may differ because of finite and &quot; &quot;discrete divider settings. In FIFO mode, grate controls the data rate.&quot;, 30.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 1125.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a33040a19b436b769e338c31bfe342945">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (grate, float, &quot;Gyroscope sampling rate (Hz), or 0.0 to disable &quot; &quot;gyroscope. Actual sample rate may differ because of finite and &quot; &quot;discrete divider settings. In FIFO mode, grate controls the data rate.&quot;, 30.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 1125.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a5363ef59970987a9812b8b9418d34e2c">JEVOIS_DEFINE_ENUM_CLASS</link> (MagRate,(Off)(Once)(M10Hz)(M20Hz)(M50Hz)(M100Hz))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1afe653a9be656631c2dca01e0f783110b">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (mrate, MagRate, &quot;Magnetometer sampling rate (Hz), or Off to disable &quot; &quot;magnetometer, or Once to only <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link> one measurement. You can repeatedly &quot; &quot;set this parameter to Once to obtain repeated measurements &quot; &quot;at your own pace. In JeVois Inventor, you need to alternate between &quot; &quot;Off and Once. In FIFO mode, grate controls the data rate.&quot;, MagRate::M50Hz, MagRate_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1adf08da6549cdd435b6fd80245a4f0fe3">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (abw, unsigned int, &quot;Accelerometer bandwidth rate (Hz), or 0 for no &quot; &quot;low-pass filter on accelerometer data.&quot;, 50, { 0, 6, 12, 24, 50, 111, 246, 470, 1210 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a07fb273398ab6a7cbf4a20c406b43c8a">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (gbw, unsigned int, &quot;Gyroscope bandwidth rate (Hz), or 0 for no low-pass &quot; &quot;filter on gyroscope data.&quot;, 51, { 0, 6, 12, 24, 51, 120, 150, 200, 360, 12100 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a0ec7414c81841c8e864dbe22e4f66035">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (tbw, unsigned int, &quot;Temperature bandwidth rate (Hz), or 0 to turn off &quot; &quot;temperature sensor. Temperature sampling rate is always 1125Hz unless &quot; &quot;tbw is 7932, in which case sampling is at 9kHz.&quot;, 34, { 0, 9, 17, 34, 66, 123, 218, 7932 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a5be3e6b6c4d1a99b75cd0a8cbe7a98f1">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (arange, unsigned int, &quot;Accelerometer full-scale range (+/-g for example, &quot; &quot;2 means +/-2g)).&quot;, 4, { 2, 4, 8, 16 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ICM20948_1a1b019969c5b16f0e65a7a071ba904c82">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (grange, unsigned int, &quot;Gyroscope full-scale range (+/-dps for example, &quot; &quot;500 means +/-500 degrees per second)).&quot;, 500, { 250, 500, 1000, 2000 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ICM20948_1ad3d8bad8bdf0689509e48211f79729e0"/>    <section>
+    <title>ICM20948()</title>
+<indexterm><primary>ICM20948</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>ICM20948</secondary></indexterm>
+<para><computeroutput>jevois::ICM20948::ICM20948 (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>构造函数，低级通信驱动程序为空 </para>
+</para>
+<para>
+Definition at line 62 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a497afd41a86414f6197fdb824316960d"/>    <section>
+    <title>~ICM20948()</title>
+<indexterm><primary>~ICM20948</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>~ICM20948</secondary></indexterm>
+<para><computeroutput>jevois::ICM20948::~ICM20948 ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚析构函数 </para>
+</para>
+<para>
+Definition at line 67 of file ICM20948.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ICM20948_1a167779c6866f29dc6c430073a8beb990"/>    <section>
+    <title>cycle()</title>
+<indexterm><primary>cycle</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>cycle</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::cycle (bool enable)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>打开/关闭加速度计、陀螺仪和指南针的循环模式与连续模式 </para>
+</para>
+<para>
+Definition at line 683 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1af49cc2c1cff425cf2065e3d9307ca689"/>    <section>
+    <title>dataReady()</title>
+<indexterm><primary>dataReady</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>dataReady</secondary></indexterm>
+<para><computeroutput>int jevois::ICM20948::dataReady ( )</computeroutput></para><para>
+
+<para>返回以前未获得的新数据量 </para>
+</para>
+<para>
+Definition at line 257 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1ab47f6569ca17eb2f912f2b630a4a31bb"/>    <section>
+    <title>devid()</title>
+<indexterm><primary>devid</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>devid</secondary></indexterm>
+<para><computeroutput>uint32_t jevois::ICM20948::devid ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Read device ID. </para>
+</para>
+<para>
+Definition at line 694 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>get</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1IMUdata">jevois::IMUdata</link> jevois::ICM20948::get (bool blocking = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>获取一轮缩放的原始数据 </para>
+</para>
+<para>
+Definition at line 374 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a09d20dc8ed590bffd4de96d2c23b2d9a"/>    <section>
+    <title>getDMP()</title>
+<indexterm><primary>getDMP</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>getDMP</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1DMPdata">jevois::DMPdata</link> jevois::ICM20948::getDMP (bool blocking = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>获取一包 DMP 数据 </para>
+</para>
+
+<para>如果模式未设置为 DMP，则会抛出。如果阻止为真，则会阻止，直到 <link linkend="_classjevois_1_1IMU">IMU</link> 提供一个新数据包；否则，可能会返回内容设置 为零的 DMPdata。 </para>
+<para>
+Definition at line 380 of file ICM20948.C.</para>
+<para>
+References jevois::DMPpacketSize(), JEVOIS_DMP_HEADER2, LFATAL, LINFO, and jevois::DMPdata::parsePacket().</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1abeceec15f2311d734a7f922355bdbc94"/>    <section>
+    <title>getRaw()</title>
+<indexterm><primary>getRaw</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>getRaw</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1IMUrawData">jevois::IMUrawData</link> jevois::ICM20948::getRaw (bool blocking = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>获取一轮原始数据 </para>
+</para>
+<para>
+Definition at line 279 of file ICM20948.C.</para>
+<para>
+References jevois::IMUrawData::ax(), jevois::IMUrawData::ay(), jevois::IMUrawData::az(), jevois::IMUrawData::gx(), jevois::IMUrawData::gy(), jevois::IMUrawData::gz(), LERROR, LINFO, jevois::IMUrawData::mst2(), jevois::IMUrawData::mx(), jevois::IMUrawData::my(), jevois::IMUrawData::mz(), jevois::IMUrawData::temp(), and jevois::IMUrawData::v.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a8a5ffa0fa699059985794186876f75b6"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>配置 RAW 与 DMP 模式： </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">jevois::Component</link>.</para>
+<para>
+Definition at line 164 of file ICM20948.C.</para>
+<para>
+References LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a8202f4edbc99ef5a71dc3465b9d0c2e7"/>    <section>
+    <title>preInit()</title>
+<indexterm><primary>preInit</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>preInit</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::preInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>连接并初始化 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片 </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">jevois::Component</link>.</para>
+<para>
+Definition at line 114 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1ac0c87dce4c1cad9591e6ab4c87e04da2"/>    <section>
+    <title>preUninit()</title>
+<indexterm><primary>preUninit</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>preUninit</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::preUninit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>解冻任何先前冻结的参数 </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c">jevois::Component</link>.</para>
+<para>
+Definition at line 245 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a5dbe44a38b3c88a2c37a8293eb6ec8ff"/>    <section>
+    <title>ready()</title>
+<indexterm><primary>ready</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>ready</secondary></indexterm>
+<para><computeroutput>bool jevois::ICM20948::ready ( )</computeroutput></para><para>
+
+<para>如果此相机确实具有可正常工作的 <link linkend="_classjevois_1_1ICM20948">ICM20948</link> 则返回 true； </para>
+</para>
+<para>
+Definition at line 251 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a3dfe91b8cc41317af9e0a1da12478bb2"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::reset ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>重置 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片 - 正常操作时不推荐使用 </para>
+</para>
+<para>
+Definition at line 461 of file ICM20948.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a086a18d296e388aaea3765122f1a32b5"/>    <section>
+    <title>sleep()</title>
+<indexterm><primary>sleep</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>sleep</secondary></indexterm>
+<para><computeroutput>void jevois::ICM20948::sleep (bool enable)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>打开/关闭睡眠模式 </para>
+</para>
+<para>
+Definition at line 668 of file ICM20948.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ICM20948_1aad9e6ed2ab353af824aa71a205f99f2b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (mode , Mode , &quot;Data collection mode. RAW means that the latest available raw &quot; &quot;data is returned each time <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() is called, hence timing may not be very &quot; &quot;accurate depending on how regularly <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() is called. FIFO collects accel and gyro data &quot; &quot;at the exact rates specified by parameters arate, grate into a 1kb FIFO queue, and &quot; &quot;<link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link>() takes that data back from the FIFO. DMP runs the embedded &quot; &quot;digital motion processor on raw data, and accumulates resulting output &quot; &quot;data into the <link linkend="_classjevois_1_1IMU">IMU</link> &apos;s internal FIFO buffer at a precise, fixed rate. This &quot; &quot;parameter can only be set in a module &apos;s params.cfg file.&quot; , Mode::RAW , Mode_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1ad023ad9842888231ac301c14cf77e070"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (pktdbg , bool , &quot;Send raw FIFO or DMP packets to console for debug/hacking purposes.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1adf08da6549cdd435b6fd80245a4f0fe3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (abw , unsigned int , &quot;Accelerometer bandwidth rate  Hz, or 0 for no &quot; &quot;low-pass filter on accelerometer data.&quot; , 50 , { 0, 6, 12, 24, 50, 111, 246, 470, 1210 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a5be3e6b6c4d1a99b75cd0a8cbe7a98f1"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (arange , unsigned int , &quot;Accelerometer full-scale range  +/-g for example, &quot; &quot;2 means +/-2g)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1af7976be313ba0e23e689d86a1afc4ada"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[3/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (arate , float , &quot;Accelerometer sampling rate  Hz, or 0.0 to disable &quot; &quot;accelerometer. Actual sample rate may differ because of finite and &quot; &quot;discrete divider settings. In FIFO mode, grate controls the data rate.&quot; , 30. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 1125.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a7e012c0766c2fe3851c14fb81a332a2e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[4/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (dmp , std::string , &quot;Requested DMP data. Only valid when mode is DMP. &quot; &quot;Use any string of letters including:&quot; &quot; A = <computeroutput>acceleration</computeroutput>
+, &quot; &quot; G = <computeroutput>gyro</computeroutput>
+, &quot; &quot; M = <computeroutput>magnetometer (compass)</computeroutput>
+, &quot; &quot; R = <computeroutput>quaternion 6 (uses accel + gyro)</computeroutput>
+, &quot; &quot; Q = <computeroutput>quaternion 9 (uses accel + gyro + compass)</computeroutput>
+, &quot; &quot; E = <computeroutput>geomag (uses accel + compass)</computeroutput>
+, &quot; &quot; P = <computeroutput>flip/pickup detection</computeroutput>
+, &quot; &quot; S = <computeroutput>step detection</computeroutput>
+, &quot; &quot; T = <computeroutput>activity recognition</computeroutput>
+, &quot; &quot; F = <computeroutput>frame sync from video sensor</computeroutput>
+, &quot; &quot; w = <computeroutput>configure activity recognition for wearable</computeroutput>
+, &quot; &quot; g = <computeroutput>gyro calibration (always on when gyro used)</computeroutput>
+, &quot; &quot; m = <computeroutput>compass calibration (always on when compass used)</computeroutput>
+, &quot; &quot; b = <computeroutput>accel accuracy (always on when accel used)</computeroutput>
+, &quot; &quot; h = <computeroutput>gyro accuracy (always on when gyro used)</computeroutput>
+)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a07fb273398ab6a7cbf4a20c406b43c8a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[5/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (gbw , unsigned int , &quot;Gyroscope bandwidth rate  Hz, or 0 for no low-pass &quot; &quot;filter on gyroscope data.&quot; , 51 , { 0, 6, 12, 24, 51, 120, 150, 200, 360, 12100 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a1b019969c5b16f0e65a7a071ba904c82"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[6/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (grange , unsigned int , &quot;Gyroscope full-scale range  +/-dps for example, &quot; &quot;500 means +/-500 degrees per second)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a33040a19b436b769e338c31bfe342945"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[7/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (grate , float , &quot;Gyroscope sampling rate  Hz, or 0.0 to disable &quot; &quot;gyroscope. Actual sample rate may differ because of finite and &quot; &quot;discrete divider settings. In FIFO mode, grate controls the data rate.&quot; , 30. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 1125.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1afe653a9be656631c2dca01e0f783110b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[8/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (mrate , MagRate , &quot;Magnetometer sampling rate  Hz, or Off to disable &quot; &quot; magnetometer, or Once to only <link linkend="_classjevois_1_1ICM20948_1ab0818b82b4b68bbb84493cc27d56f793">get</link> one measurement. You can repeatedly &quot; &quot;set this parameter to Once to obtain repeated measurements &quot; &quot;at your own pace. In JeVois Inventor, you need to alternate between &quot; &quot;Off and Once. In FIFO mode, grate controls the data rate.&quot; , MagRate::M50Hz , MagRate_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a0ec7414c81841c8e864dbe22e4f66035"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[9/9]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (tbw , unsigned int , &quot;Temperature bandwidth rate  Hz, or 0 to turn off &quot; &quot;temperature sensor. Temperature sampling rate is always 1125Hz unless &quot; &quot;tbw is 7932, in which case sampling is at 9kHz.&quot; , 34 , { 0, 9, 17, 34, 66, 123, 218, 7932 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a5363ef59970987a9812b8b9418d34e2c"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (MagRate , (Off)(Once)(M10Hz)(M20Hz)(M50Hz)(M100Hz) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ICM20948_1a7ab7e5bfac503a5aab82344fae70f3ee"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::ICM20948</secondary></indexterm>
+<indexterm><primary>jevois::ICM20948</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (Mode , (RAW)(FIFO)(DMP) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_ICM20948_8H">ICM20948.H</link>src/jevois/Core/<link linkend="_ICM20948_8C">ICM20948.C</link></section>
+</section>

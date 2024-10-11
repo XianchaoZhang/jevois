@@ -1,0 +1,297 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ParameterCore">
+<title>jevois::ParameterCore&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Parameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::ParameterCore&lt; T &gt;</title></simplesect>
+
+
+<para><link linkend="_classjevois_1_1Component">Component</link> 的可变参数，核心类 </para>
+
+
+
+<para>用于公开 <link linkend="_classjevois_1_1Component">Component</link> 的用户可配置设置的 Parameter。它们可以从命令行指定，并在拥有 Parameter 的 <link linkend="_classjevois_1_1Component">Component</link> 上调用 <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">Component::postInit()</link> 时设置。Parameter 可能有一个回调函数，每次尝试更改参数值时都会调用该函数。 </para>
+<para>
+Definition at line 181 of file Parameter.H.</para>
+Inheritance diagram for jevois::ParameterCore&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterCore__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ParameterCore&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterCore__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ParameterCore_1a52c0cff720a747ecfdd008f4f7f3d672">ParameterCore</link> (<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp;<link linkend="_classjevois_1_1ParameterCore_1a53c50e9682bb07bd56e82fe61c64fdf0">def</link>)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ParameterCore_1aa81e72fb97e1a3eb7d267344b9a6b15b">~ParameterCore</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual const std::string &amp; <link linkend="_classjevois_1_1ParameterCore_1a2f72b49144d03843dad2e84b0eade908">name</link> () const override</para>
+
+<para>Get the parameter name. </para>
+</listitem>
+            <listitem><para>virtual std::string <link linkend="_classjevois_1_1ParameterCore_1ace71e5059c62014c4e4498c4515360c4">descriptor</link> () const override</para>
+
+<para>Get the parameter fully-qualified name, aka descriptor. </para>
+</listitem>
+            <listitem><para>T <link linkend="_classjevois_1_1ParameterCore_1ae1ed414cc3b8000f965502aca49c6d04">get</link> () const</para>
+
+<para>Get the value of this Parameter. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterCore_1a95e33594381861776518d868268cbb1c">set</link> (T const &amp;newVal)</para>
+
+<para>设置此参数的值 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ParameterCore_1a1121687474dc9e676217545de1ac3040">strset</link> (std::string const &amp;valstring) override</para>
+
+<para>Set the value from a string representation of it. </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterCore_1a127d83697e47a6ec36fee2dee9bb77dc">strget</link> () const override</para>
+
+<para>Get the value as a string representation of it. </para>
+</listitem>
+            <listitem><para>virtual const <link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> <link linkend="_classjevois_1_1ParameterCore_1a14f89b6c9cec27634da16afa912289c4">summary</link> () const override</para>
+
+<para>Get summary info about this parameter. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ParameterCore_1ad4816cae3f11bb5acb7a154a8de6385f">reset</link> () override</para>
+
+<para>Reset this parameter to its default value. </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1ParameterCore_1a53c50e9682bb07bd56e82fe61c64fdf0">def</link> () const</para>
+
+<para>Access to our parameter def. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterCore_1aab7d6676f5f0027c93fd0c33e12fe76c">changeParameterDef</link> (<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp;<link linkend="_classjevois_1_1ParameterCore_1a53c50e9682bb07bd56e82fe61c64fdf0">def</link>)</para>
+
+<para>更改此参数的 <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterCore_1af763094cebad1c842566a628f71837b6">setCallback</link> (std::function&lt; void(T const &amp;)&gt; cb)</para>
+
+<para>Set the parameter&apos;s callback. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual const <link linkend="_classjevois_1_1Component">Component</link> * <link linkend="_classjevois_1_1ParameterCore_1a5d03b30408f72e7bfd272c6ddffe98c8">owner</link> () const =0</para>
+
+<para>获取此参数所附加到的组件，或者 nullptr（单个参数必须覆盖） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterCore_1a52c0cff720a747ecfdd008f4f7f3d672"/>    <section>
+    <title>ParameterCore()</title>
+<indexterm><primary>ParameterCore</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>ParameterCore</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterCore">ParameterCore</link> (<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp; def)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>def</entry>
+                                <entry>
+<para>指向此参数定义的指针（由 <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> 提供）。 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1aa81e72fb97e1a3eb7d267344b9a6b15b"/>    <section>
+    <title>~ParameterCore()</title>
+<indexterm><primary>~ParameterCore</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>~ParameterCore</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::~<link linkend="_classjevois_1_1ParameterCore">ParameterCore</link> ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterCore_1aab7d6676f5f0027c93fd0c33e12fe76c"/>    <section>
+    <title>changeParameterDef()</title>
+<indexterm><primary>changeParameterDef</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>changeParameterDef</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::changeParameterDef (<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp; def)</computeroutput></para><para>
+
+<para>更改此参数的 <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> </para>
+</para>
+
+<para>请谨慎使用，只有知道自己在做什么的人才能使用此函数。它的线程安全性和可能的​​副作用值得怀疑。 </para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a53c50e9682bb07bd56e82fe61c64fdf0"/>    <section>
+    <title>def()</title>
+<indexterm><primary>def</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>def</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt;T&gt;&amp; <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::def ( ) const</computeroutput></para><para>
+
+<para>Access to our parameter def. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1ace71e5059c62014c4e4498c4515360c4"/>    <section>
+    <title>descriptor()</title>
+<indexterm><primary>descriptor</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>descriptor</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual std::string <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::descriptor ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get the parameter fully-qualified name, aka descriptor. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1a6cee45eb55e639246f471ccac72e95ea">jevois::ParameterBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1ae1ed414cc3b8000f965502aca49c6d04"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>get</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::get ( ) const</computeroutput></para><para>
+
+<para>Get the value of this Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a2f72b49144d03843dad2e84b0eade908"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>name</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const std::string&amp; <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::name ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get the parameter name. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1a8117ea414837acfaa3c194406ab3b6dd">jevois::ParameterBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a5d03b30408f72e7bfd272c6ddffe98c8"/>    <section>
+    <title>owner()</title>
+<indexterm><primary>owner</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>owner</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const <link linkend="_classjevois_1_1Component">Component</link>* <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::owner ( ) const<computeroutput>[protected]</computeroutput>, <computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取此参数所附加到的组件，或者 nullptr（单个参数必须覆盖） </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1DynamicParameter_1abb08737ebce48cc962e100318e8f7086">jevois::DynamicParameter&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1ad4816cae3f11bb5acb7a154a8de6385f"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>reset</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual void <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::reset ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Reset this parameter to its default value. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1a6460f1a7cecaa8e651f8d77c4721358d">jevois::ParameterBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a95e33594381861776518d868268cbb1c"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>set</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::set (T const &amp; newVal)</computeroutput></para><para>
+
+<para>设置此参数的值 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1af763094cebad1c842566a628f71837b6"/>    <section>
+    <title>setCallback()</title>
+<indexterm><primary>setCallback</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>setCallback</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::setCallback (std::function&lt; void(T const &amp;)&gt; cb)</computeroutput></para><para>
+
+<para>Set the parameter&apos;s callback. </para>
+</para>
+
+<para>每次尝试更改参数值时都会调用回调函数。尽量避免使用 <link linkend="_classjevois_1_1ParameterCore_1af763094cebad1c842566a628f71837b6">setCallback()</link>，以免让类的用户感到困惑。在大多数情况下， 只需使用便捷的 <link linkend="_classjevois_1_1Manager_1ac2decd6e1f0a9a1366b783e59b440d7f">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()</link> 宏即可。</para>
+
+<para>回调应该检查候选值 newval，并且 (1) 如果不喜欢，则抛出一个 std::range_error，并附上拒绝该值的原因描述性消息，(2) 否则，假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（参数对象的实际修改在上游处理，回调无需担心：如果 它返回而没有抛出，则提议的值将成为参数的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免破坏参数和/或多 个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调用 <link linkend="_classjevois_1_1ParameterCore_1a95e33594381861776518d868268cbb1c">set()</link> 等，因为这将始终导致死锁（如果您 的回调需要知道参数的当前值，则允许使用 <link linkend="_classjevois_1_1ParameterCore_1ae1ed414cc3b8000f965502aca49c6d04">get()</link>）。 </para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a127d83697e47a6ec36fee2dee9bb77dc"/>    <section>
+    <title>strget()</title>
+<indexterm><primary>strget</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>strget</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::strget ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get the value as a string representation of it. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1a3ae3dc26472435191e90b9f4db1951aa">jevois::ParameterBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a1121687474dc9e676217545de1ac3040"/>    <section>
+    <title>strset()</title>
+<indexterm><primary>strset</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>strset</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual void <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::strset (std::string const &amp; valstring)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Set the value from a string representation of it. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::range_error</entry>
+                                <entry>
+<para>if the given string cannot be converted to a valid Parameter value. </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1a73b52118989ca2cae2632f5c710035f4">jevois::ParameterBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterCore_1a14f89b6c9cec27634da16afa912289c4"/>    <section>
+    <title>summary()</title>
+<indexterm><primary>summary</primary><secondary>jevois::ParameterCore&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterCore&lt; T &gt;</primary><secondary>summary</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const <link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore</link>&lt; T &gt;::summary ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get summary info about this parameter. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterBase_1ac3654762a1c846ada35e56bf2fdafe64">jevois::ParameterBase</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_Parameter_8H">Parameter.H</link></section>
+</section>

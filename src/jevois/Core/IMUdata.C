@@ -234,10 +234,10 @@ std::vector<std::string> jevois::DMPdata::activity()
 {
   std::vector<std::string> ret;
 
-  // The activity classifier reports start/stop of activities:
-  // bacstate is a set of 2 bytes:
-  // - high byte indicates activity start
-  // - low byte indicates activity end
+  // 活动分类器报告活动的开始/停止：
+  // bacstate 是一组 2 个字节：
+  // - 高字节表示活动开始
+  // - 低字节表示活动结束
   unsigned char bs[2]; bs[0] = bacstate >> 8; bs[1] = bacstate & 0xff;
   unsigned short const mask = DMP_BAC_DRIVE | DMP_BAC_WALK | DMP_BAC_RUN | DMP_BAC_BIKE | DMP_BAC_TILT | DMP_BAC_STILL;
   for (int i = 0; i < 2; ++i)
@@ -259,11 +259,11 @@ std::vector<std::string> jevois::DMPdata::activity()
 std::vector<std::string> jevois::DMPdata::activity2()
 {
   std::vector<std::string> ret;
-  static unsigned char act = 0; // Activities that currently are ongoing
+  static unsigned char act = 0; // 当前正在进行的活动
 
-  // The activity classifier reports start/stop of activities:
-  // - high byte indicates activity start
-  // - low byte indicates activity end
+  // 活动分类器报告活动的开始/停止：
+  // - 高字节表示活动开始
+  // - 低字节表示活动结束
   unsigned char bs[2]; bs[0] = bacstate >> 8; bs[1] = bacstate & 0xff;
 
   act |= bs[0]; // Activities that started are turned on

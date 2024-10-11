@@ -1,0 +1,275 @@
+\hypertarget{classjevois_1_1ParameterBase}{}\doxysubsection{jevois\+::Parameter\+Base Class Reference}
+\label{classjevois_1_1ParameterBase}\index{jevois::ParameterBase@{jevois::ParameterBase}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Base class for Parameter. 
+
+将字符串接口公开给 Parameter，而派生模板类将公开 value-\/based 接口。 
+
+Definition at line 113 of file Parameter.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter\+Base\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classjevois_1_1ParameterBase__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ParameterBase_afb8e2a6c43ef97c7625c2d1a064cde4c}{Parameter\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ParameterBase_abc9a5ddc1a05f3ee91a17b0dd03174ed}{$\sim$\+Parameter\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, 将从其所有者组件中删除参数 \end{DoxyCompactList}\item 
+virtual const std\+::string \& \mbox{\hyperlink{classjevois_1_1ParameterBase_a8117ea414837acfaa3c194406ab3b6dd}{name}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the parameter name. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classjevois_1_1ParameterBase_a6cee45eb55e639246f471ccac72e95ea}{descriptor}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取参数完全限定名称，也称为描述符，包括拥有 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 和所有父组件的名称 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterBase_a73b52118989ca2cae2632f5c710035f4}{strset}} (std\+::string const \&valstring)=0
+\begin{DoxyCompactList}\small\item\em 从其字符串表示形式设置值 \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterBase_a3ae3dc26472435191e90b9f4db1951aa}{strget}} () const =0
+\begin{DoxyCompactList}\small\item\em Get the value as a string. \end{DoxyCompactList}\item 
+virtual const \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} \mbox{\hyperlink{classjevois_1_1ParameterBase_ac3654762a1c846ada35e56bf2fdafe64}{summary}} () const =0
+\begin{DoxyCompactList}\small\item\em Get summary info about this parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterBase_aeb82f8d408f72e7490f5a25cf41e48c5}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em 冻结或取消冻结一个参数；冻结的参数不能被 set()，但是仍然允许 get() \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1ParameterBase_add20d4eb71c8f56abf970cdf2e171ade}{frozen}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether parameter is frozen. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterBase_a6460f1a7cecaa8e651f8d77c4721358d}{reset}} ()=0
+\begin{DoxyCompactList}\small\item\em Reset this parameter to its default value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::shared\+\_\+mutex \mbox{\hyperlink{classjevois_1_1ParameterBase_aaf5684bf44c88b81560f482181af04d3}{its\+Mutex}}
+\begin{DoxyCompactList}\small\item\em 用于保护参数值的互斥锁 \end{DoxyCompactList}\item 
+volatile bool \mbox{\hyperlink{classjevois_1_1ParameterBase_a42a8faeaa6a3c56aa415d9793299ee8a}{its\+Frozen}}
+\begin{DoxyCompactList}\small\item\em 为 true 时，参数被冻结（只读，不会显示在帮助消息中） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1ParameterBase_a9fcd18166d07b16f30274eb6237fda8b}{its\+Virgin}}
+\begin{DoxyCompactList}\small\item\em 参数尚未明确设置，需要在初始化时调用回调（如果有） \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterBase_a1b0e830b1463dc40f819202e817bb307}{Parameter\+Registry}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_afb8e2a6c43ef97c7625c2d1a064cde4c}\label{classjevois_1_1ParameterBase_afb8e2a6c43ef97c7625c2d1a064cde4c}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!ParameterBase@{ParameterBase}}
+\index{ParameterBase@{ParameterBase}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{ParameterBase()}{ParameterBase()}}
+{\footnotesize\ttfamily jevois\+::\+Parameter\+Base\+::\+Parameter\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_abc9a5ddc1a05f3ee91a17b0dd03174ed}\label{classjevois_1_1ParameterBase_abc9a5ddc1a05f3ee91a17b0dd03174ed}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!````~ParameterBase@{$\sim$ParameterBase}}
+\index{````~ParameterBase@{$\sim$ParameterBase}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{$\sim$ParameterBase()}{~ParameterBase()}}
+{\footnotesize\ttfamily virtual jevois\+::\+Parameter\+Base\+::$\sim$\+Parameter\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor, 将从其所有者组件中删除参数 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a6cee45eb55e639246f471ccac72e95ea}\label{classjevois_1_1ParameterBase_a6cee45eb55e639246f471ccac72e95ea}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily virtual std\+::string jevois\+::\+Parameter\+Base\+::descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取参数完全限定名称，也称为描述符，包括拥有 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 和所有父组件的名称 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_ace71e5059c62014c4e4498c4515360c4}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_aeb82f8d408f72e7490f5a25cf41e48c5}\label{classjevois_1_1ParameterBase_aeb82f8d408f72e7490f5a25cf41e48c5}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::\+Parameter\+Base\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+冻结或取消冻结一个参数；冻结的参数不能被 set()，但是仍然允许 get() 
+
+
+
+Referenced by jevois\+::\+Component\+::freeze\+Param().
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_add20d4eb71c8f56abf970cdf2e171ade}\label{classjevois_1_1ParameterBase_add20d4eb71c8f56abf970cdf2e171ade}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!frozen@{frozen}}
+\index{frozen@{frozen}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{frozen()}{frozen()}}
+{\footnotesize\ttfamily bool jevois\+::\+Parameter\+Base\+::frozen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns whether parameter is frozen. 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a8117ea414837acfaa3c194406ab3b6dd}\label{classjevois_1_1ParameterBase_a8117ea414837acfaa3c194406ab3b6dd}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!name@{name}}
+\index{name@{name}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily virtual const std\+::string\& jevois\+::\+Parameter\+Base\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the parameter name. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_a2f72b49144d03843dad2e84b0eade908}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+
+
+Referenced by jevois\+::\+Parameter\+Registry\+::add\+Parameter(), and jevois\+::\+Parameter\+Registry\+::remove\+Parameter().
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a6460f1a7cecaa8e651f8d77c4721358d}\label{classjevois_1_1ParameterBase_a6460f1a7cecaa8e651f8d77c4721358d}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!reset@{reset}}
+\index{reset@{reset}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Parameter\+Base\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Reset this parameter to its default value. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_ad4816cae3f11bb5acb7a154a8de6385f}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a3ae3dc26472435191e90b9f4db1951aa}\label{classjevois_1_1ParameterBase_a3ae3dc26472435191e90b9f4db1951aa}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!strget@{strget}}
+\index{strget@{strget}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{strget()}{strget()}}
+{\footnotesize\ttfamily virtual const std\+::string jevois\+::\+Parameter\+Base\+::strget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get the value as a string. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_a127d83697e47a6ec36fee2dee9bb77dc}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+
+
+Referenced by jevois\+::\+Component\+::get\+Param\+String().
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a73b52118989ca2cae2632f5c710035f4}\label{classjevois_1_1ParameterBase_a73b52118989ca2cae2632f5c710035f4}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!strset@{strset}}
+\index{strset@{strset}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{strset()}{strset()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Parameter\+Base\+::strset (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{valstring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+从其字符串表示形式设置值 
+
+如果给定的字符串不能转换为 Parameter 值，或者该值根据我们的有效值规范无效或被 Parameter 的回调拒绝（如果有）， 则 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error。} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_a1121687474dc9e676217545de1ac3040}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+
+
+Referenced by jevois\+::\+Component\+::set\+Param\+String().
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_ac3654762a1c846ada35e56bf2fdafe64}\label{classjevois_1_1ParameterBase_ac3654762a1c846ada35e56bf2fdafe64}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!summary@{summary}}
+\index{summary@{summary}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{summary()}{summary()}}
+{\footnotesize\ttfamily virtual const \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} jevois\+::\+Parameter\+Base\+::summary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get summary info about this parameter. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterCore_a14f89b6c9cec27634da16afa912289c4}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a1b0e830b1463dc40f819202e817bb307}\label{classjevois_1_1ParameterBase_a1b0e830b1463dc40f819202e817bb307}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!ParameterRegistry@{ParameterRegistry}}
+\index{ParameterRegistry@{ParameterRegistry}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{ParameterRegistry}{ParameterRegistry}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1ParameterRegistry}{Parameter\+Registry}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 154 of file Parameter.\+H.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a42a8faeaa6a3c56aa415d9793299ee8a}\label{classjevois_1_1ParameterBase_a42a8faeaa6a3c56aa415d9793299ee8a}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!itsFrozen@{itsFrozen}}
+\index{itsFrozen@{itsFrozen}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{itsFrozen}{itsFrozen}}
+{\footnotesize\ttfamily volatile bool jevois\+::\+Parameter\+Base\+::its\+Frozen\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+为 true 时，参数被冻结（只读，不会显示在帮助消息中） 
+
+
+
+Definition at line 150 of file Parameter.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_aaf5684bf44c88b81560f482181af04d3}\label{classjevois_1_1ParameterBase_aaf5684bf44c88b81560f482181af04d3}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!itsMutex@{itsMutex}}
+\index{itsMutex@{itsMutex}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{itsMutex}{itsMutex}}
+{\footnotesize\ttfamily boost\+::shared\+\_\+mutex jevois\+::\+Parameter\+Base\+::its\+Mutex\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
+
+
+
+用于保护参数值的互斥锁 
+
+
+
+Definition at line 149 of file Parameter.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterBase_a9fcd18166d07b16f30274eb6237fda8b}\label{classjevois_1_1ParameterBase_a9fcd18166d07b16f30274eb6237fda8b}} 
+\index{jevois::ParameterBase@{jevois::ParameterBase}!itsVirgin@{itsVirgin}}
+\index{itsVirgin@{itsVirgin}!jevois::ParameterBase@{jevois::ParameterBase}}
+\doxyparagraph{\texorpdfstring{itsVirgin}{itsVirgin}}
+{\footnotesize\ttfamily bool jevois\+::\+Parameter\+Base\+::its\+Virgin\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+参数尚未明确设置，需要在初始化时调用回调（如果有） 
+
+
+
+Definition at line 151 of file Parameter.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Parameter_8H}{Parameter.\+H}}\end{DoxyCompactItemize}

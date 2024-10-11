@@ -1,0 +1,117 @@
+\hypertarget{classjevois_1_1DynamicParameter}{}\doxysubsection{jevois\+::Dynamic\+Parameter$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1DynamicParameter}\index{jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Dynamic\+Parameter$<$ T $>$}
+
+运行时添加到组件的动态参数 
+
+动态参数只能通过 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 级别的描述符访问（使用 get\+Param\+Val()、set\+Param\+Val() 等），因为它们没有唯一的类类型，并且拥有它们 的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 不会从它们继承。通常通过 \mbox{\hyperlink{classjevois_1_1Component_ad9929e687e28e6aeeffa9df69bc39e53}{Component\+::add\+Dynamic\+Parameter()}} 使用。请谨慎使用。主要是为了能够为 Python 模块赋予 Je\+Vois 参数而开发的。 
+
+Definition at line 374 of file Parameter.\+H.
+
+
+
+Inheritance diagram for jevois\+::Dynamic\+Parameter$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classjevois_1_1DynamicParameter__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Dynamic\+Parameter$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classjevois_1_1DynamicParameter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+typedef \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1DynamicParameter_a2bb039882107fea7311c61816127c717}{type}}
+\begin{DoxyCompactList}\small\item\em Our type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1DynamicParameter_a166ba4215fe1d050ccefd4060f95d91c}{Dynamic\+Parameter}} (\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$comp, \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&pdef)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1DynamicParameter_ae5256c05515dece8f9ed7d5f79f6d7e3}{$\sim$\+Dynamic\+Parameter}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual const \mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$ \mbox{\hyperlink{classjevois_1_1DynamicParameter_abb08737ebce48cc962e100318e8f7086}{owner}} () const override
+\begin{DoxyCompactList}\small\item\em Handle to owning component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{classjevois_1_1DynamicParameter_a2bb039882107fea7311c61816127c717}\label{classjevois_1_1DynamicParameter_a2bb039882107fea7311c61816127c717}} 
+\index{jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}!type@{type}}
+\index{type@{type}!jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+typedef \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$T$>$ \mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1DynamicParameter_a2bb039882107fea7311c61816127c717}{type}}}
+
+
+
+Our type. 
+
+
+
+Definition at line 379 of file Parameter.\+H.
+
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1DynamicParameter_a166ba4215fe1d050ccefd4060f95d91c}\label{classjevois_1_1DynamicParameter_a166ba4215fe1d050ccefd4060f95d91c}} 
+\index{jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}!DynamicParameter@{DynamicParameter}}
+\index{DynamicParameter@{DynamicParameter}!jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{DynamicParameter()}{DynamicParameter()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$}]{comp,  }\item[{\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&}]{pdef }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1DynamicParameter_ae5256c05515dece8f9ed7d5f79f6d7e3}\label{classjevois_1_1DynamicParameter_ae5256c05515dece8f9ed7d5f79f6d7e3}} 
+\index{jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}!````~DynamicParameter@{$\sim$DynamicParameter}}
+\index{````~DynamicParameter@{$\sim$DynamicParameter}!jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$DynamicParameter()}{~DynamicParameter()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1DynamicParameter_abb08737ebce48cc962e100318e8f7086}\label{classjevois_1_1DynamicParameter_abb08737ebce48cc962e100318e8f7086}} 
+\index{jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}!owner@{owner}}
+\index{owner@{owner}!jevois::DynamicParameter$<$ T $>$@{jevois::DynamicParameter$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{owner()}{owner()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const \mbox{\hyperlink{classjevois_1_1Component}{Component}}$\ast$ \mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$ T $>$\+::owner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handle to owning component. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterCore_a5d03b30408f72e7bfd272c6ddffe98c8}{jevois\+::\+Parameter\+Core$<$ T $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Parameter_8H}{Parameter.\+H}}\end{DoxyCompactItemize}

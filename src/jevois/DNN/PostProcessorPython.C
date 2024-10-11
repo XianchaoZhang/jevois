@@ -53,11 +53,11 @@ void jevois::dnn::PostProcessorPythonImpl::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::PostProcessorPythonImpl::loadpy(std::string const & pypath)
 {
-  // Load the code and instantiate the python object:
+  // 加载代码并实例化 python 对象：
   PythonWrapper::pythonload(JEVOIS_SHARE_PATH "/" + pypath);
   LINFO("Loaded " << pypath);
 
-  // Now that we are fully up and ready, call python module's init() function if implemented:
+  // 现在我们已经完全准备好了，如果实现了，则调用 python 模块的 init() 函数：
   if (jevois::python::hasattr(PythonWrapper::pyinst(), "init")) PythonWrapper::pyinst().attr("init")();
 }
 
@@ -73,7 +73,7 @@ void jevois::dnn::PostProcessorPythonImpl::process(std::vector<cv::Mat> const & 
 void jevois::dnn::PostProcessorPythonImpl::report(jevois::StdModule *, jevois::RawImage * outimg,
                                                   jevois::OptGUIhelper * helper, bool overlay, bool idle)
 {
-  // default constructed boost::python::object is None on the python side
+  // 默认构造的 boost::python::object 在 python 端为 None
   if (outimg)
   {
 #ifdef JEVOIS_PRO

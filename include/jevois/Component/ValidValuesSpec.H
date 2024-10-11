@@ -27,80 +27,78 @@
 
 namespace jevois
 {
-  /*! \defgroup validvalues Specification of sets of valid values, e.g., that some Parameter may take
+  /*! \defgroup validvalues 有效值集的规范，例如，某些参数可能采用
 
-      This is used by ParameterDef to specify valid values that a Parameter may take as unrestricted, from a given list,
-      in a range, matching a regex, etc
+      ParameterDef 使用它来指定参数可以采用的有效值，这些值不受限制，来自给定列表、范围、匹配正则表达式等
 
       \ingroup parameter */
 
   /*! @{ */ // **********************************************************************
 
-  //! Base class for specifying a set of valid values for a type
-  /*! Note when defining new derived valid values specs: make sure you define operator<<() and also that the copy
-      constructor works as intended (which means that you may have to define it explicitly if your data members are
-      complicated). */
+  //! 用于为类型指定一组有效值的基类 
+  /*! 定义新的派生有效值规范时请注意：确保定义 operator<<() 并且复制构造函数按预期工作（这意味着如果数据成员很复杂，
+      则可能必须明确定义它）。 */
   template <typename T>
   class ValidValuesSpecBase
   {
     public:
-      //! Construct, for the base class this is a no-op
-      /*! Note that we make the constructor explicit otherwise we get false hits against strings and what not in our
-          operator<< defined on various ValidValueSpec derivatives. */
+      //! 构造，对于基类，这是一个 no-op
+	  /*! 请注意，我们要明确构造函数，否则我们会对字符串和在各种 ValidValueSpec 派生函数上定义的 operator<< 中不存在
+	      的内容产生错误命中。 */
       explicit ValidValuesSpecBase();
 
       //! Destructor
       virtual ~ValidValuesSpecBase();
 
-      //! Check whether a proposed value is valid, return true if it is
+      //! 检查提议的值是否有效，如果是虚拟的，则返回 true
       virtual bool checkValueValidity(T const & val) const = 0;
 
-      //! Convert the specification of valid values to a readable string
-      /*! Caution, a GUI may wish to parse this string so keep the format tight. Typically,
-          type:[valuesdescription], e.g., see derived classes for None:[], List:[A|B|C], etc. */
+      //! 将有效值的规范转换为可读字符串 
+	  /*! 注意，GUI 可能希望解析此字符串，因此请保持格式紧凑。通常，类型：[valuesdescription]，
+	      例如，请参阅 None:[]、List:[A|B|C] 等的派生类。 */
       virtual std::string const str() const = 0;
   };
 
   // ######################################################################
-  //! Open/None valid values spec, anything that T can take is valid
+  //! Open/None 有效值规范，T 可以采用的任何值都有效
   template <typename T>
   class ValidValuesSpecNone : public ValidValuesSpecBase<T>
   {
     public:
-      //! Construct with no specification, any value that T can take goes
+      //! 构造时没有规范，T 可以采用的任何值
       explicit ValidValuesSpecNone();
 
       //! Destructor
       virtual ~ValidValuesSpecNone();
 
-      //! Check whether a proposed value is valid, here always returns true
+      //! 检查提议的值是否有效，这里总是返回 true
       virtual bool checkValueValidity(T const & val) const;
 
-      //! Convert to a readable string
-      /*! Returns None:[] */
+      //! 转换为可读字符串
+	  /*!返回 None:[] */
       virtual std::string const str() const;
   };
 
   // ######################################################################
-  //! Finite list valid values spec, everything listed at construction is valid, anything else is not
+  //! 有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效
   template <typename T>
   class ValidValuesSpecList : public ValidValuesSpecBase<T>
   {
     public:
-      //! No default constructor, always need to provide a list
+      //! 没有默认构造函数，始终需要提供一个列表
       ValidValuesSpecList() = delete;
 
-      //! Construct from a given list of valid values in a vector
+      //! 从向量中给定的有效值列表构造
       explicit ValidValuesSpecList(std::vector<T> const & valid_list);
 
       //! Destructor
       virtual ~ValidValuesSpecList();
 
-      //! Check whether a proposed value is valid, returns true iff value is in our list
+      //! 检查提议的值是否有效，当且仅当值在我们的列表中时返回 true
       virtual bool checkValueValidity(T const & val) const;
 
-      //! Convert to a readable string
-      /*! Returns List:[A|B|C] where A, B, C are replaced by the actual elements. */
+      //! 转换为可读字符串
+	  /*！返回列表：[A|B|C]，其中 A、B、C 被实际元素替换。 */
       virtual std::string const str() const;
 
     protected:
@@ -108,91 +106,89 @@ namespace jevois
   };
 
   // ######################################################################
-  //! Range-based valid values spec, bounds are included
+  //! 基于范围的有效值规范，包含边界
   template <typename T>
   class ValidValuesSpecRange : public ValidValuesSpecBase<T>
   {
     public:
-      //! No default constructor, always need to provide a range
+      //! 没有默认构造函数，始终需要提供一个范围
       ValidValuesSpecRange() = delete;
 
-      //! Construct from a Range of valid values (convention: bounds are inclusive)
+      //! 从有效值范围构造（约定：边界包含在内）
       explicit ValidValuesSpecRange(Range<T> const & valid_range);
 
       //! Destructor
       virtual ~ValidValuesSpecRange();
 
-      //! Check whether a proposed value is valid, returns true iff value is in our range (bounds included)
+      //! 检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true
       virtual bool checkValueValidity(T const & val) const;
 
-      //! Convert to a readable string: Range:[MIN-MAX] where MIN and MAX are replaced by the actual range bounds.
+      //! 转换为可读字符串：Range:[MIN-MAX]，其中 MIN 和 MAX 由实际范围边界替换。
       virtual std::string const str() const;
 
     protected:
-      Range<T> const itsValidRange; //!< Our range of valid values
+      Range<T> const itsValidRange; //!< 我们的有效值范围
   };
 
   // ######################################################################
-  //! StepRange-based valid values spec, bounds are included
+  //! 基于 StepRange 的有效值规范，包含边界
   template <typename T>
   class ValidValuesSpecStepRange : public ValidValuesSpecBase<T>
   {
     public:
-      //! No default constructor, always need to provide a range
+      //! 没有默认构造函数，总是需要提供一个范围
       ValidValuesSpecStepRange() = delete;
 
-      //! Construct from a StepRange of valid values (convention: bounds are inclusive)
+      //! 从有效值的 StepRange 构造（约定：边界包含在内）
       explicit ValidValuesSpecStepRange(StepRange<T> const & valid_range);
 
       //! Destructor
       virtual ~ValidValuesSpecStepRange();
 
-      //! Check whether a proposed value is valid, returns true iff value is in our range (bounds included)
+      //! 检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true
       virtual bool checkValueValidity(T const & val) const;
 
-      //! Convert to a readable string: StepRange:[MIN-STEP-MAX] where MIN, STEP and MAX are replaced by actual values.
+      //! 转换为可读字符串：StepRange:[MIN-STEP-MAX] 其中 MIN、STEP 和 MAX 由实际值替换。
       virtual std::string const str() const;
 
     protected:
-      StepRange<T> const itsValidStepRange; //!< Our step-range of valid values
+      StepRange<T> const itsValidStepRange; //!< 我们的有效值步长范围
   };
   
   // ######################################################################
-  //! Regex-based valid values spec, everything that is a match to the regex is considered valid
-  /*! Uses boost::regex internally (because std::regex does not alow one to get the original string specification back
-      from the regex, but we need that to display help messages). This allows for highly flexible valid values
-      definitions. For example, say you want an int parameter to be in range [0..59] but it could also have value 72,
-      your regex would be:
+  //! 基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 
+  /*! 在内部使用 boost::regex（因为 std::regex 不允许从正则表达式中获取原始字符串规范，但我们需要它来显示帮助消息）。
+      这允许高度灵活的有效值定义。例如，假设您希望 int 参数在范围 [0..59] 内，但它也可以具有值 72，则您的正则表达式
+	  将是：
 
       \verbatim
       ^(([0-5]?[0-9])|72)$
       \endverbatim
 
-      You can find on the web regex examples to match things like a valid filename, a valid URL, a valid credit card
-      number, etc. Just make sure your regex is in the syntax expected by boost::regex since several syntaxes are
-      floating around for regular expressions. */
+      您可以在网络上找到正则表达式示例来匹配有效文件名、有效 URL、有效信用卡号等。只需确保您的正则表达式符合 
+	  boost::regex 所期望的语法，因为正则表达式有几种语法。 */
   template <typename T>
   class ValidValuesSpecRegex : public ValidValuesSpecBase<T>
   {
     public:
-      //! No default constructor, always need to provide a regex
+      //! 没有默认构造函数，始终需要提供正则表达式
       ValidValuesSpecRegex() = delete;
 
-      //! Construct from a given regex that specifies valid values
+      //! 从指定有效值的给定正则表达式构造
       explicit ValidValuesSpecRegex(boost::regex const & valid_regex);
 
       //! Destructor
       virtual ~ValidValuesSpecRegex();
 
-      //! Check whether a proposed value is valid, returns true iff value is a match against our regex
+      //! 检查提议的值是否有效，当且仅当值与我们的正则表达式匹配时返回 true
       virtual bool checkValueValidity(T const & val) const;
 
-      //! Convert to a readable string
-      /*! Returns Regex:[expression] where expression is replaced by the actual regex. */
+      //! 转换为可读字符串
+	  /*！返回 Regex：[表达式]，其中表达式由实际的正则表达式替换。 */
       virtual std::string const str() const;
 
     protected:
-      boost::regex const itsValidRegex; //!< The regex that defines our valid values
+      boost::regex const itsValidRegex; //!< 定义有效值的正则表达式
   };
 
   /*! @} */ // **********************************************************************

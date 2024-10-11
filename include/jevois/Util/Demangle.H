@@ -24,13 +24,12 @@
 
 namespace jevois
 {
-  /*! \defgroup demangling Name demangling functions
+  /*! \defgroup demangling Name demangling 函数
 
-      Name demangling functions return the original name of a type as written in the source code, as opposed to the name
-      used internally by the compiler, which is mangled to avoid name conflicts and confusions across different
-      namespaces, overloads, and such.
+      Name demangling 函数返回源代码中所写的类型的原始名称，而不是编译器内部使用的名称，该名称被解析以避免跨不同命名空
+      间、重载等的名称冲突和混淆。
 
-      See http://en.wikipedia.org/wiki/Name_mangling for more information.
+      有关更多信息，请参阅 http://en.wikipedia.org/wiki/Name_mangling。
 
       \ingroup utils */
 
@@ -46,7 +45,7 @@ namespace jevois
   template <typename T>
   std::string demangledName();
 
-  //! Specialization for std::string to avoid getting an ugly name
+  //! 对 std::string 进行特例化以避免得到丑陋的名称
   template <>
   std::string demangledName<std::string>();
 
@@ -54,5 +53,5 @@ namespace jevois
 
 } // namespace jevois
 
-// Include implementation details of no interest to end users
+// 包括最终用户不感兴趣的实现细节
 #include <jevois/Util/details/DemangleImpl.H>

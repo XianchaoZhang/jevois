@@ -1,0 +1,997 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Versions">
+
+<para><itemizedlist>
+<listitem>
+<para><link linkend="_Change11log">JeVois 1.1 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change12log">JeVois 1.2 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change13log">JeVois 1.3 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change14log">JeVois 1.4 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change15log">JeVois 1.5 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change16log">JeVois 1.6 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change17log">JeVois 1.7 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change18log">JeVois 1.8 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change19log">JeVois 1.9 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change110log">JeVois 1.10 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change111log">JeVois 1.11 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change112log">JeVois 1.12 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change113log">JeVois 1.13 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change114log">JeVois 1.14 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change115log">JeVois 1.15 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change117log">JeVois 1.17 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change118log">JeVois 1.18 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change119log">JeVois 1.19 中的变化和新功能</link></para>
+</listitem><listitem>
+<para><link linkend="_Change120log">JeVois 1.20 中的变化和新功能</link></para>
+</listitem><listitem>
+<para>Change121log </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change11log"><title>JeVois 1.1 中的变化和新功能</title>    </section>
+<para>JeVois 1.1 带来了两个主要的新功能：</para>
+<section xml:id="_Change11log_1autotoc_md0">
+<title>增加了将 JeVois 内部的 microSD 卡导出为虚拟 USB 闪存驱动器的支持</title>
+
+<para>这很困难，需要对 Linux 内核进行大量的 hacking，并使用我们值得信赖的 LeCroy USB 数据包嗅探器来找出错误，但现在它似乎可以完美地与 Windows、Mac 和 Linux 主机配合使用。这意味着您现在可以直接编辑配置文件、安装新的机器视觉模块、复制模块的训练数据等到 JeVois，而无需弹出 microSD 卡，并且 JeVois 正在运行。即使您将大文件复制到 microSD，视频速度也不会变慢，因为视频流在 USB 总线上分配了保留带宽（同步）。</para>
+
+<para>下面是一个示例，我们浏览 JeVois 内部 microSD 上的 JeVois 模块，通过 USB 链接访问它，同时流式传输视频：</para>
+
+<para></para>
+
+<para>但是，能够在更改 microSD 内容的同时切换各种视觉模块会带来一些潜在的数据一致性问题，因此，目前，我们将其限制为仅允许文件访问而不允许流式传输视频。</para>
+</section>
+<section xml:id="_Change11log_1autotoc_md1">
+<title>主机和平台上支持 Python 3.5 + Python OpenCV 3.2.0</title>
+
+<para>对于所有 Python 爱好者来说，这是一个好消息：JeVois 现在支持完整的 Python 3.5，包括与 opencv 3.2.0 的 Python 绑定。这意味着您现在可以用 Python 为 JeVois 编写机器视觉模块，既可以使用 JeVois 导出的用于处理相机和 USB 视频帧的 API，也可以使用 OpenCV Python API。查看这个用 Python 编写并使用 Python OpenCV Canny 边缘检测函数的 <link xlink:href="https://github.com/jevois/jevoisbase/blob/master/src/Modules/PythonOpenCV/PythonOpenCV.py">演示边缘检测模块</link>，它在 JeVois 相机内部工作：</para>
+
+<para></para>
+
+<para>在 JeVois 相机上以 640x480 分辨率实现 86.5fps，并且用 Python 编写？确实如此！</para>
+
+<para>总的来说，这两项改进应该有助于在 JeVois 上进行快速开发和原型设计：直接在导出到主机作为虚拟闪存驱动器的 JeVois microSD 上编辑 python 模块，然后只需在视频抓取软件中选择相应的视频分辨率即可查看结果。</para>
+
+<para>我们希望这将允许许多用户直接在 JeVois 上使用 Python 学习 OpenCV。</para>
+</section>
+<section xml:id="_Change11log_1autotoc_md2">
+<title>使用简单的 apt-get 命令在 Ubuntu 上安装 JeVois 开发套件</title>
+
+<para>我们为以下内容创建了 Ubuntu 软件包：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>jevois-opencv：为主机编译的 OpenCV 3.2.0，其设置与 JeVois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-opencv-3.2.0 中，这样它就不会干扰您主机系统上可能安装的任何其他 OpenCV，而这些 OpenCV 可能是其他软件所需要的。</para>
+</listitem><listitem>
+<para>jevois-host：为在主机上执行而编译的 JeVois 核心软件</para>
+</listitem><listitem>
+<para>jevois-platform：交叉编译的 JeVois 核心软件，用于在 JeVois 平台硬件上执行</para>
+</listitem><listitem>
+<para>jevoisbase-host：为在主机上执行而编译的 JeVois 基础模块</para>
+</listitem><listitem>
+<para>jevoisbase-platform：交叉编译的 JeVois 基础模块，用于在 JeVois 平台硬件上执行</para>
+</listitem><listitem>
+<para>jevois-sdk：编译的引导加载程序、根文件系统和其他配置文件。</para>
+</listitem><listitem>
+<para>jevois-sdk-dev：为 JeVois 平台架构编译的交叉编译器和交叉编译库。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>由于 jevois-sdk-dev 将所有其他依赖项都带入，因此启动和运行 JeVois 开发现在只需一个 apt-get install 命令。</para>
+</section>
+<section xml:id="_Change11log_1autotoc_md3">
+<title>其他改进</title>
+
+<para><itemizedlist>
+<listitem>
+<para>JeVois 命令行界面添加了一些新命令：<computeroutput>sync</computeroutput>, <computeroutput>date</computeroutput>, <computeroutput>restart</computeroutput>, <computeroutput>usbsd</computeroutput></para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> 现在包含一个额外的 <emphasis role="bold">fps</emphasis> 字段，模块可以使用它来了解帧速率预期</para>
+</listitem><listitem>
+<para>命令行界面中的 <computeroutput>info</computeroutput> 现在报告当前视频映射</para>
+</listitem><listitem>
+<para>启用降低帧速率以允许在低光下运行时增加曝光时间。通过在 JeVois 命令行界面中选择 <emphasis role="bold">shade</emphasis> 白平衡预设来激活它：<computeroutput>setcam presetwb 9</computeroutput></para>
+</listitem><listitem>
+<para>将许多与 JeVois 相关的文件（启动和核心除外）重新定位到 JEVOIS 分区，以便可以通过 USB 导出 microSD 来实时修改它们。</para>
+</listitem><listitem>
+<para><computeroutput>rebuild-platform.sh</computeroutput> 现在支持 3 个安装目标：<itemizedlist>
+<listitem>
+<para>无需额外参数 - 安装到模块源中的 jvpkg/ 目录，与以前一样</para>
+</listitem><listitem>
+<para>使用 <computeroutput>--staging</computeroutput> - 安装到 microSD 暂存区，以便稍后刷入 microSD</para>
+</listitem><listitem>
+<para>使用 <computeroutput>--microsd</computeroutput> - 安装到 /media/username/JEVOIS/，可以是已安装的 JeVois microSD，也可以是实时 JeVois 摄像头，通过 USB 导出其 microSD。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>这将大大简化开发周期：无需再安装/弹出 microSD 卡，只需在 JeVois 中直接编译并安装即可。</para>
+</listitem><listitem>
+<para>新的启动选项 <emphasis role="bold">BOOT:serialtty</emphasis> 和 <emphasis role="bold">BOOT:usbserialtty</emphasis> 在硬件串行或 USB 串行端口而不是 JeVois 控制台上提供 Linux 登录提示。</para>
+</listitem><listitem>
+<para>重新组织 jevoisbase 并添加单独的包含目录，以方便创建 debian 软件包。 </para>
+</listitem></itemizedlist>
+</para>
+</section>
+    <section xml:id="_Change12log"><title>JeVois 1.2 中的变化和新功能</title>    </section>
+<para>JeVois 1.2 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>增加了直接编译和安装新模块到 microSD 的支持：<computeroutput>./rebuild-platform.sh --live</computeroutput> 将交叉编译模块，指示连接的 JeVois 相机将其 microSD 导出为虚拟闪存驱动器，将交叉编译的模块安装到 microSD，弹出虚拟闪存驱动器，然后重新启动 JeVois。新模块已准备好立即使用。</para>
+</listitem><listitem>
+<para>更多文档和教程</para>
+</listitem><listitem>
+<para>现在报告 Python 错误的完整堆栈跟踪</para>
+</listitem><listitem>
+<para>新的视频错误报告，显示视频流中的异常消息，以简化平台硬件上模块的调试：</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>增加了对 std::pair、cv::Size 和 cv::Point 类型的 JeVois 参数的支持 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change13log"><title>JeVois 1.3 中的变化和新功能</title>    </section>
+<para>JeVois 1.3 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>新的标准化串行消息允许各种 JeVois 机器视觉模块和 Arduino 代码之间实现更高的互操作性。请参阅 <link linkend="_UserSerialStyle">标准化串行消息格式</link></para>
+</listitem><listitem>
+<para>新的主机命令 <computeroutput>jevois-add-videomapping</computeroutput> 用于将新的视频映射添加到 <emphasis role="bold">videomappings.cfg，检查是否有重复。现在，它用于新模块的</emphasis> <computeroutput>postinstall</computeroutput> 脚本中。</para>
+</listitem><listitem>
+<para>新的主机命令“jevois-cmd”向 JeVois 发送简单命令并获取结果，而无需打开串行终端并将其连接到 JeVois。</para>
+</listitem><listitem>
+<para>新的主机命令 <computeroutput>jevois-cmd</computeroutput> 指示连接的 JeVois 相机开始/停止将其 microSD 导出为虚拟闪存驱动器。</para>
+</listitem><listitem>
+<para>新文档，包括 <link linkend="_UserLighting">优化不同光照条件下的性能</link></para>
+</listitem><listitem>
+<para>C++ 和 Python 的新教程 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change14log"><title>JeVois 1.4 中的变化和新功能</title>    </section>
+<para>JeVois 1.4 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>新的 <emphasis role="bold">/jevois/share/</emphasis> 目录用于存储可在多个机器视觉模块之间共享的数据，例如神经网络配置文件和权重、预训练分类器等</para>
+</listitem><listitem>
+<para>使用 Darknet 和 Darknet YOLO 在 ImageNet（1000 个目标类别）和 Pascal VOC 上进行目标识别。尚未完全优化速度，但看起来已经非常有前途。  查看 jevoisbase 中的两个新模块：<itemizedlist>
+<listitem>
+<para> 将中央 224x224 裁剪图传递到 Darknet 神经网络。神经网络预测前 N 个目标类别候选（在 imagenet 中可能的 1000 个候选中），并且显示那些高于最低置信度阈值的目标并发送到串行。</para>
+</listitem><listitem>
+<para> 将整个 640x480 帧传递到 Darknet YOLO（you only look once）网络，该网络结合了对场景中所有目标的检测（查找目标可能在哪里）和识别（目标是什么），只需一次传递即可。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>RawImageOps.H 中增加了一些图像转换函数</para>
+</listitem><listitem>
+<para>ARtoolkit（增强现实标记的超快速检测）、Darknet、Darknet YOLO 的新机器视觉模块。</para>
+</listitem><listitem>
+<para>更新 模块以输出正确的 VP 信息。</para>
+</listitem><listitem>
+<para>关于如何构建简单的视觉引导移动机器人的新教程 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change15log"><title>JeVois 1.5 中的变化和新功能</title>    </section>
+<para>JeVois 1.5 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>已更新至 OpenCV 3.3.0，包括 OpenCV-Contrib 包和 python 3.6 支持</para>
+</listitem><listitem>
+<para>与 buildroot 2017.08 合并，将 JeVois 操作系统更新为：<itemizedlist>
+<listitem>
+<para>gcc/g++-7.2.0</para>
+</listitem><listitem>
+<para>boost-1.64.0</para>
+</listitem><listitem>
+<para>python-3.6.1</para>
+</listitem><listitem>
+<para>python-numpy-1.8.0</para>
+</listitem><listitem>
+<para>eigen-3.3.3</para>
+</listitem><listitem>
+<para>tbb-4.4</para>
+</listitem><listitem>
+<para>attr-2.4.47</para>
+</listitem><listitem>
+<para>binutils-2.29</para>
+</listitem><listitem>
+<para>busybox-1.27.1</para>
+</listitem><listitem>
+<para>bzip2-1.0.6</para>
+</listitem><listitem>
+<para>clapack-3.2.1</para>
+</listitem><listitem>
+<para>dhrystone-2</para>
+</listitem><listitem>
+<para>diffutils-3.6</para>
+</listitem><listitem>
+<para>dos2unix-7.3.4</para>
+</listitem><listitem>
+<para>expat-2.2.2</para>
+</listitem><listitem>
+<para>ffmpeg-3.3.3</para>
+</listitem><listitem>
+<para>fftw-3.3.6-pl2</para>
+</listitem><listitem>
+<para>findutils-4.6.0</para>
+</listitem><listitem>
+<para>flann-1.9.1</para>
+</listitem><listitem>
+<para>gawk-4.1.4</para>
+</listitem><listitem>
+<para>gdb-7.11.1</para>
+</listitem><listitem>
+<para>glibc-2.25</para>
+</listitem><listitem>
+<para>gmp-6.1.2</para>
+</listitem><listitem>
+<para>grep-3.1</para>
+</listitem><listitem>
+<para>gsl-2.3</para>
+</listitem><listitem>
+<para>gst1-plugins-base-1.12.2</para>
+</listitem><listitem>
+<para>gstreamer1-1.12.2</para>
+</listitem><listitem>
+<para>jasper-version-2.0.13</para>
+</listitem><listitem>
+<para>jpeg-turbo-1.5.2</para>
+</listitem><listitem>
+<para>keyutils-1.5.10</para>
+</listitem><listitem>
+<para>lapack-3.7.1</para>
+</listitem><listitem>
+<para>leptonica-1.74.4</para>
+</listitem><listitem>
+<para>libcurl-7.55.0</para>
+</listitem><listitem>
+<para>libffi-3.2.1</para>
+</listitem><listitem>
+<para>libglib2-2.52.2</para>
+</listitem><listitem>
+<para>liblinear-2.1</para>
+</listitem><listitem>
+<para>libpng-1.6.31</para>
+</listitem><listitem>
+<para>libpthread-stubs-0.4</para>
+</listitem><listitem>
+<para>libump-ec0680628744f30b8fac35e41a7bd8e23e59c39f</para>
+</listitem><listitem>
+<para>libv4l-1.12.5</para>
+</listitem><listitem>
+<para>libyaml-0.1.6</para>
+</listitem><listitem>
+<para>libyuv-1ebf86795cb213a37f06eb1ef3713cff080568ea</para>
+</listitem><listitem>
+<para>linux-headers-3.4.113</para>
+</listitem><listitem>
+<para>memstat-1.0</para>
+</listitem><listitem>
+<para>memtester-4.3.0</para>
+</listitem><listitem>
+<para>mpdecimal-2.4.1</para>
+</listitem><listitem>
+<para>ncurses-6.0</para>
+</listitem><listitem>
+<para>openblas-f04af36ad0e85b64f12a7c38095383192cc52345</para>
+</listitem><listitem>
+<para>oprofile-1.1.0</para>
+</listitem><listitem>
+<para>pcre-8.41</para>
+</listitem><listitem>
+<para>popt-1.16</para>
+</listitem><listitem>
+<para>protobuf-3.3.0</para>
+</listitem><listitem>
+<para>ramsmp-3.5.0</para>
+</listitem><listitem>
+<para>ramspeed-2.6.0</para>
+</listitem><listitem>
+<para>readline-7.0</para>
+</listitem><listitem>
+<para>sed-4.4</para>
+</listitem><listitem>
+<para>sqlite-3190300</para>
+</listitem><listitem>
+<para>strace-4.18</para>
+</listitem><listitem>
+<para>stress-1.0.4</para>
+</listitem><listitem>
+<para>stress-ng-0.06.15</para>
+</listitem><listitem>
+<para>sunxi-cedarx-b8f52d913f73720e50d8f1b2f8610467b575dc45</para>
+</listitem><listitem>
+<para>sunxi-mali-d343311efc8db166d8371b28494f0f27b6a5872</para>
+</listitem><listitem>
+<para>tesseract-ocr-3.05.00</para>
+</listitem><listitem>
+<para>tiff-4.0.8</para>
+</listitem><listitem>
+<para>util-linux-2.30.1</para>
+</listitem><listitem>
+<para>valgrind-3.12.0</para>
+</listitem><listitem>
+<para>whetstone-1.2</para>
+</listitem><listitem>
+<para>xutil_util-macros-1.19.1</para>
+</listitem><listitem>
+<para>xz-5.2.3</para>
+</listitem><listitem>
+<para>zbar-854a5d97059e395807091ac4d80c53f7968abb8f</para>
+</listitem><listitem>
+<para>zlib-1.2.11</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>NOTE：平台（基于 buildroot）现在比主机（假设为 Ubuntu 17.04）略有领先。随着 Ubuntu 未来的发布，部分差异可能会消失，但与此同时请注意：</para>
+</listitem></itemizedlist>
+</para>
+
+<para><informaltable frame="all">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+<thead>
+      <row >
+<entry>
+<para>Software </para>
+</entry><entry>
+<para>Platform </para>
+</entry><entry>
+<para>Ubuntu 17.04  </para>
+</entry></row>
+</thead><tbody>
+      <row >
+<entry>
+<para>gcc / g++ </para>
+</entry><entry>
+<para>7.2 </para>
+</entry><entry>
+<para>6.3  </para>
+</entry></row>
+      <row >
+<entry>
+<para>python </para>
+</entry><entry>
+<para>3.6 </para>
+</entry><entry>
+<para>3.5  </para>
+</entry></row>
+      <row >
+<entry>
+<para>boost </para>
+</entry><entry>
+<para>1.64 </para>
+</entry><entry>
+<para>1.62  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+
+<para>对于大多数人来说，这应该没有什么区别。因为 g++ 7.2 比 6.3 更严格，所以在为平台编译代码时，与主机相比，您可能会收到一些额外的警告。无论如何，您都应该修复它们，因为主机设置将很快转移到 g++7。<itemizedlist>
+<listitem>
+<para>将 tiny-dnn 更新为 GitHub 的最新版本（最近没有任何版本）。这会稍微改变 API，请参阅 jevoisbase 中更新的 ObjectRecognition 组件。</para>
+</listitem><listitem>
+<para>对 jevois-flash-card 进行小改进，以避免错误地擦除大硬盘。</para>
+</listitem><listitem>
+<para>此版本更改了平台操作系统 (buildroot)。您需要从 <link xlink:href="https://jevois.usc.edu">https://jevois.usc.edu</link> 获取新的 JeVois Debian 软件包</para>
+</listitem><listitem>
+<para>推荐的升级工作流程：请参阅 <link xlink:href="http://jevois.org/tutorials/ProgrammerSetup.html">http://jevois.org/tutorials/ProgrammerSetup.html</link> 下的升级部分。</para>
+</listitem><listitem>
+<para>添加了新的 <computeroutput>help2</computeroutput> 命令行界面命令，仅显示有关当前视觉模块的更紧凑的帮助信息。</para>
+</listitem><listitem>
+<para>增加了对 darknet 的分析，这将使人们能够轻松找出哪些深度神经网络层需要花费大量时间进行计算。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change16log"><title>JeVois 1.6 中的变化和新功能</title>    </section>
+<para>JeVois 1.6 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>修复了 Ubuntu 16.04 上 Debian 软件包依赖项的错误。</para>
+</listitem><listitem>
+<para>支持 Ubuntu 16.04、17.04 和（新）17.10（仅限所有 amd64）的 JeVois Debian 软件包。</para>
+</listitem><listitem>
+<para>改进的文档脚本。</para>
+</listitem><listitem>
+<para>已更新至最新的 darknet-nnpack。新的神经网络即将推出！</para>
+</listitem><listitem>
+<para>在 USB 协议中启用了一种变通方法，使 JeVois 对某些 Windows 10 计算机发出的虚假请求更加可靠。希望这能帮助一些遇到 Windows 10 问题的人。</para>
+</listitem><listitem>
+<para>将 UVC 控制单元的名称更改为 &quot;JeVois-A33 Video Camera&quot;，以便伪造 Windows 版本的用户知道这是他们的 JeVois 摄像机（Mac 和 Linux 已经正确使用制造商和产品字符串，因此对它们来说没有变化）。</para>
+</listitem><listitem>
+<para>修复了 YOLO 启动时的小错误，在深度网络加载时显示更好的消息。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change17log"><title>JeVois 1.7 中的变化和新功能</title>    </section>
+<para>JeVois 1.7 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>已更新至最新 OpenCV 版本 3.4.0</para>
+</listitem><listitem>
+<para>新的样本目标检测（sample object detection）和姿势估计模块，以启发 FIRST 机器人学生（及其他人）：（C++ 版）和 和（Python 版）。</para>
+</listitem><listitem>
+<para>当不使用 USB 输出时，Python 错误报告的小错误得到修复。</para>
+</listitem><listitem>
+<para>修复 Python 模块中 process() 无效重载（overloads）的错误。现在使用两个入口点，当视频映射具有 USB 输出时使用 process()，而当视频映射没有 USB 输出时使用 processNoUSB()。</para>
+</listitem><listitem>
+<para>添加了线条剪辑（line clipping）功能，以避免在进行近乎单一的 3D 投影时浪费时间绘制可能非常长的线条（尽管大部分在视口之外）。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change18log"><title>JeVois 1.8 中的变化和新功能</title>    </section>
+<para>JeVois 1.8 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>支持针对移动设备优化的 TensorFlow Lite，允许在 JeVois 上运行 TensorFlow 深度神经网络。请参阅、 和，了解使用 mobilenet 和压缩 mobilenet 预训练网络的示例模块，这些网络可以识别 1000 种不同的目标类别。这些网络可以在 JeVois 内部的小型处理器上以高达 83 次推理/秒 (mobilenet_v1_0.25_128_quant) 的速度运行。</para>
+</listitem><listitem>
+<para>Bugfix：现在可以从传感器（使用 <computeroutput>getcam absexp</computeroutput>）正确读回绝对曝光设置（使用 <computeroutput>setcam autoexp 1</computeroutput> and then <computeroutput>setcam absexp 123</computeroutput>）。请注意，根据帧速率，读回的值可能会被截断，这可能会限制曝光时间。</para>
+</listitem><listitem>
+<para>添加了启动选项（默认情况下禁用），用于连接连接到单个 USB 总线的 3 个 JeVois 摄像机的流视频。有关详细信息，请参阅 <link linkend="_Multicam">JeVois-A33 通过连接到一个 USB 总线的多个 JeVois 摄像机流式传输视频</link> 。</para>
+</listitem><listitem>
+<para>添加了选项（默认启用），当串行缓冲区已满时，静默丢弃串行消息。这避免了 JeVois 在尝试通过 USB 连接发送串行消息但主机上无人监听时出现挂起的问题。</para>
+</listitem><listitem>
+<para>更改了 <computeroutput>jevois-cmd</computeroutput> 主机脚本以使用 python 串行端口处理而不是简单的 shell 命令。应该可以提高某些较新主机 Linux 版本的可靠性。</para>
+</listitem><listitem>
+<para>在 中添加了对无 USB 视频流操作的支持。</para>
+</listitem><listitem>
+<para>新的启动选项：创建一个空文件 <emphasis role="bold">BOOT:quietcmd，以禁止在命令行上收到每个成功命令后向用户发送</emphasis> &apos;OK&apos;。仅推荐高级用户使用。</para>
+</listitem><listitem>
+<para>新的启动选项：创建一个空文件 <emphasis role="bold">BOOT:nopython，以禁用对用</emphasis> python 编写的模块的支持。激活后，尝试加载 python 模块将引发异常。禁用 python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change19log"><title>JeVois 1.9 中的变化和新功能</title>    </section>
+<para>JeVois 1.9 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>引入了新的 <link linkend="_JeVoisInventor">JeVois-A33：JeVois Inventor 图形用户界面</link> ，它使使用完整的 OpenCV 和完整的 Python 3.6 编程 JeVois 比以往更加容易。</para>
+</listitem><listitem>
+<para>升级至 OpenCV 3.4.2，所有贡献模块包括深度神经网络 (DNN)</para>
+</listitem><listitem>
+<para> 现在支持 YOLO v3，速度更快、更准确、占用内存更少，并有 80 个目标类别。</para>
+</listitem><listitem>
+<para>新模块 和 展示了如何使用 OpenCV DNN 框架（C++ 和 Python）使用目标检测 + 识别深度神经网络。支持的网络格式为 Caffe、TensorFlow、Darknet 和 Torch。提供的示例包括：<itemizedlist>
+<listitem>
+<para>OpenCV 人脸检测器，Caffe 模型</para>
+</listitem><listitem>
+<para>MobileNet + 在 Pascal VOC 上训练的 SSD（20 个目标类），Caffe 模型</para>
+</listitem><listitem>
+<para>MobileNet + 在 Coco 上训练的 SSD（80 个目标类），TensorFlow 模型</para>
+</listitem><listitem>
+<para>MobileNet v2 + 在 Coco 上训练的 SSD（80 个目标类），TensorFlow 模型</para>
+</listitem><listitem>
+<para>Darknet Tiny YOLO v3 在 Coco 上训练的 Darknet Tiny YOLO v3（80 个目标类），Darknet 模型</para>
+</listitem><listitem>
+<para>Darknet Tiny YOLO v2 在 Pascal VOC 上训练的 Darknet Tiny YOLO v2（20 个目标类），Darknet 模型</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>将预先训练的 MobileNet v2 网络添加到</para>
+</listitem><listitem>
+<para>用于目标识别结果以及目标框检测 + 识别的新标准化消息，该消息在 <link linkend="_UserSerialStyle">标准化串行消息格式</link> 中定义并用于所有深度网络模块。</para>
+</listitem><listitem>
+<para>两个新教程解释了如何在 Arduino 上解码这些消息，并附有示例 Arduino 代码：UserArduinoBlink 和 UserArduinoYOLO</para>
+</listitem><listitem>
+<para>增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 仍在开发中。下一版本中将提供更多信息。</para>
+</listitem><listitem>
+<para>在主循环中添加了一个帧计数器，并使用 jevois::Module::frameNum() 访问它。需要跟踪帧号的模块不再需要实现自己的计数器，可以使用这个计数器。</para>
+</listitem><listitem>
+<para>向 <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> 添加了参数 <computeroutput>serstamp，可选择在所有标准化串行消息前面添加帧号、时间、帧+时间等</computeroutput> </para>
+</listitem><listitem>
+<para>向 <link linkend="_classjevois_1_1Engine">jevois::Engine</link> 添加了参数 <computeroutput>serlimit，以限制每个视频帧发送的串行消息数量，避免串行链路过载。</computeroutput> </para>
+</listitem><listitem>
+<para>添加了参数 <computeroutput>sermark，可选择标记每帧的开始和结束。如果需要知道何时处理了一帧但未找到结果，因此未发送其他串行消息，则很有用。</computeroutput> </para>
+</listitem><listitem>
+<para>添加了用于目标识别的标准化消息并将其用于神经网络模块（TensorFlow，Darknet）</para>
+</listitem><listitem>
+<para>新的命令行界面命令：shell（允许在 JeVois 上运行 Unix 命令）</para>
+</listitem><listitem>
+<para>新的命令行界面命令用于获取有关相机的机器信息：cmdinfo、caminfo、modcmdinfo、paraminfo</para>
+</listitem><listitem>
+<para>修复了 中的错误，该错误在无 USB 输出的情况下操作时会发送不正确的数据。</para>
+</listitem><listitem>
+<para>在 JeVois 内核中启用了 swap 支持。默认情况下不启用，以免减慢启动时间，但如果需要，可以轻松创建 swap 文件并使用 JeVois 命令行界面的 <computeroutput>shell</computeroutput> 命令激活它。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change110log"><title>JeVois 1.10 中的变化和新功能</title>    </section>
+<para>JeVois 1.10 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>改进的 JeVois Inventor 允许测试 JeVois 的无头（无 USB 视频输出）操作</para>
+</listitem><listitem>
+<para>升级到 OpenCV 4.0.0-beta，所有贡献模块包括深度神经网络 (DNN) 和非免费</para>
+</listitem><listitem>
+<para> 现在支持 YOLO v3，速度更快、更准确、占用内存更少，并有 80 个对象类别。</para>
+</listitem><listitem>
+<para>新模块 展示了如何使用 OpenCV DNN 框架（Python 版）使用对象识别深度神经网络。支持的网络格式包括 Caffe、TensorFlow、Darknet、Torch 和 ONNX。提供的示例包括：</para>
+</listitem><listitem>
+<para>在 ImageNet 上训练的 SqueezeNet v1.1（1000 个对象类别），Caffe 模型</para>
+</listitem><listitem>
+<para>即将推出更多内容！请贡献力量！</para>
+</listitem><listitem>
+<para>关于用 Python 实现光流、无头操作等的几个新教程。</para>
+</listitem><listitem>
+<para>增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 和 AR0135（全局快门，M12 镜头支架）的开发仍在进行中，ICM-20948 9-DOF IMU 位于图像传感器的正后方。下一版本将提供更多信息。</para>
+</listitem><listitem>
+<para>增加了从原始 BAYER 相机帧到 YUYV 的即时转换支持。对于只能输出 BAYER 的传感器（如 AR0135 全局快门传感器）非常有用。</para>
+</listitem><listitem>
+<para>修复了‘jevois-usbsd’对某些用户无法正常工作的问题。</para>
+</listitem><listitem>
+<para>更好地处理模块启动错误、配置文件错误等，这样即使 viion 模块完全加载失败或某些配置文件是伪造的，Inventor 也不会卡住。</para>
+</listitem><listitem>
+<para>附加支持从 C++ 和 Python 访问原始相机传感器寄存器和原始 IMU 寄存器。</para>
+</listitem><listitem>
+<para>有关可选镜头、可选传感器等的更多文档。</para>
+</listitem><listitem>
+<para>修补某些机器上缺少的 CPU_SETSIZE 定义（需要在 jevoisbase 中编译 TensorFlow）。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change111log"><title>JeVois 1.11 中的变化和新功能</title>    </section>
+<para>JeVois 1.11 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>升级到 OpenCV 4.0.0，包含所有贡献模块，包括深度神经网络 (DNN) 和非免费</para>
+</listitem><listitem>
+<para>在 jevois-inventor 中添加对 MacOS Mojave 的支持</para>
+</listitem><listitem>
+<para>修复主机 jevois-daemon 中的一个错误</para>
+</listitem><listitem>
+<para>增加了对灰度传感器的支持（例如 AR0135 单色）</para>
+</listitem><listitem>
+<para>支持 ICM-20948 惯性传感器中的完整 9-DOF 访问（仅随可选的 AR0135 全局快门相机传感器升级而提供）</para>
+</listitem><listitem>
+<para>增加了从原始 BAYER 和原始 GREY 相机帧到 YUYV 的即时转换支持。对于只能输出 BAYER 或 GREY 的传感器（如 AR0135 全局快门传感器）非常有用。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change112log"><title>JeVois 1.12 中的变化和新功能</title>    </section>
+<para>JeVois 1.12 带来以下新功能：</para>
+
+<para></para>
+
+<para><itemizedlist>
+<listitem>
+<para>升级到 OpenCV 4.0.1，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。</para>
+</listitem><listitem>
+<para> 中提供了新的 mobilenet_v2_1.0_224_quant，这是一种具有高精度的量化 MobileNet V2。</para>
+</listitem><listitem>
+<para>jevois-inventor 为 MacOS Mojave 提供更多支持</para>
+</listitem><listitem>
+<para>增加了对 ov2640 1600x1200 传感器的支持：此传感器支持：YUYV、BAYER、RGB565 和<itemizedlist>
+<listitem>
+<para>UXGA (1600 x 1200): up to 15 fps</para>
+</listitem><listitem>
+<para>SXGA (1280 x 1024): up to 15 fps</para>
+</listitem><listitem>
+<para>720p (1280 x 720): up to 15 fps</para>
+</listitem><listitem>
+<para>XGA (1024 x 768): up to 15 fps</para>
+</listitem><listitem>
+<para>SVGA ( 800 x 600): up to 40 fps</para>
+</listitem><listitem>
+<para>VGA ( 640 x 480): up to 40 fps</para>
+</listitem><listitem>
+<para>CIF ( 352 x 288): up to 60 fps</para>
+</listitem><listitem>
+<para>QVGA ( 320 x 240): up to 60 fps</para>
+</listitem><listitem>
+<para>QCIF ( 176 x 144): up to 60 fps</para>
+</listitem><listitem>
+<para>QQVGA ( 160 x 120): up to 60 fps</para>
+</listitem><listitem>
+<para>QQCIF ( 88 x 72): up to 60 fps</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>但请注意，USB 2.0 带宽限制（最高 24 Mbyte/s 的视频数据）可能会限制通过 USB 传输视频时的帧速率。</para>
+
+<para><itemizedlist>
+<listitem>
+<para>新模块 使用 OpenCV 中的 FER+ ONNX 深度神经网络识别 Python 中的面部情绪。</para>
+</listitem><listitem>
+<para>新增对 ICM-20948 惯性测量单元芯片的增强支持。JeVois ICM20948 驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 JeVois 传感器上的摄像头传感器驱动程序集成。目前，只有 OnSemi (Aptina) AR0135 全局快门可选摄像头传感器配备了 IMU。</para>
+
+<para>请参阅新模块 和，并参阅 <link linkend="_Sensors">JeVois-A33 相机传感器选项</link> 。</para>
+
+<para>该芯片的规格相当令人印象深刻：<itemizedlist>
+<listitem>
+<para>3 轴 16 位加速度计，全范围灵敏度可选为 +/-2g、+/-4g、+/-8g 和 +/-16g。</para>
+</listitem><listitem>
+<para>加速度计数据速率从 4 Hz 到 1125 Hz。</para>
+</listitem><listitem>
+<para>3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-250dps（度/秒）、+/-500dps、+/-1000dps 和 +/-2000dps。</para>
+</listitem><listitem>
+<para>陀螺仪数据速率从 4 Hz 到 1125 Hz。</para>
+</listitem><listitem>
+<para>3 轴 16 位磁力计（指南针），范围宽达 +/-4900uT（微特斯拉）。</para>
+</listitem><listitem>
+<para>磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。</para>
+</listitem><listitem>
+<para>16 位温度传感器，读出速率高达 8 kHz。</para>
+</listitem><listitem>
+<para>RAW 数据模式（随时获取当前传感器值）、缓冲 (FIFO) 数据模式（传感器值以固定速率累积到 FIFO 中）和数字运动处理模式 (DMP；原始数据在芯片上处理)。</para>
+</listitem><listitem>
+<para>片上数字运动处理器 (DMP) 可以在 IMU 芯片内部计算：<itemizedlist>
+<listitem>
+<para>四元数 6（使用加速度计 + 陀螺仪），</para>
+</listitem><listitem>
+<para>四元数 9（使用加速度计 + 陀螺仪 + 指南针），</para>
+</listitem><listitem>
+<para>geomag 四元数（使用加速度计 + 指南针），</para>
+</listitem><listitem>
+<para>翻转/拾取检测，</para>
+</listitem><listitem>
+<para>步数检测和计数，</para>
+</listitem><listitem>
+<para>基本活动识别：驾驶、行走、跑步、骑自行车、倾斜、静止。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>使用片上计算的四元数，使用以高精度、固定速率获取传感器数据并动态应用各种校准、漂移校正和补偿的算法，可以高度准确地实时估计传感器在 3D 世界中的姿势及其移动方式。请注意，与 IMU 的通信是通过 400kHz I2C 总线进行的，这可能会限制数据读出率，具体取决于从 IMU 请求的数据。此 IMU 有 3 种基本操作模式（参数 <computeroutput>mode</computeroutput> 只能在 params.cfg 中设置）：</para>
+</listitem><listitem>
+<para>RAW：可以使用 getRaw() 或 get() 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以完全规则的间隔调用 get()，则读数中会出现一些时间抖动。IMU 不为其数据提供任何时间戳。</para>
+</listitem><listitem>
+<para>FIFO：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte FIFO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启时，陀螺仪速率决定 FIFO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 getRaw() 或 get()。但您需要注意，当使用高传感器数据速率时，FIFO 可能会很快填满并溢出。</para>
+</listitem><listitem>
+<para>DMP：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (DMP)。然后，DMP 计算四元数、活动识别等，并在这些算法的结果可用时将数据包推送到 FIFO。</para>
+</listitem><listitem>
+<para>新的 jevoisextra 模块 YOLO Light 运行 AlexeyAB 的 yolo2_light，支持 INT8 和 XNOR 推理。但是，到目前为止，我们只有 INT8 模型，它们的运行速度比 YOLO 的 darknet-nnpack 实现或 OpenCV 实现慢大约两倍。因此，尚不清楚 XNOR 推理是否真的会大幅提高速度。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change113log"><title>JeVois 1.13 中的变化和新功能</title>    </section>
+<para>JeVois 1.13 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>升级到 OpenCV 4.1.0，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。</para>
+</listitem><listitem>
+<para>升级到 buildroot 2019.05-rc2，其中包含</para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> gcc/g++/gfortran 8.3</para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> <emphasis role="bold">boost-1.70.0</emphasis> </para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> binutils-2.32</para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> <emphasis role="bold">eigen-3.3.7</emphasis> </para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> <emphasis role="bold">python-3.7.3</emphasis> </para>
+</listitem><listitem>
+<para><emphasis>升级的</emphasis> <emphasis role="bold">python-numpy-1.16.3</emphasis> </para>
+</listitem><listitem>
+<para><emphasis>新的</emphasis> <emphasis role="bold">python-scipy-1.3.0</emphasis> </para>
+</listitem><listitem>
+<para><emphasis>新的</emphasis> <emphasis role="bold">python-pip-19.1，可以调用它安装新的</emphasis> python 包（目前，只有没有编译依赖项的纯 python 包才可以轻松安装。我们正在开发 piwheels 的变体，以允许安装任何可用的 python 包，即将推出！）</para>
+</listitem><listitem>
+<para>对于不耐烦的人，这里有一个 <emphasis>pip</emphasis> 的迷你教程：</para>
+</listitem><listitem>
+<para>将没有任何编译的 C++ 代码的轮子复制到 microSD 卡的某个位置（例如，在 <emphasis role="bold">JEVOIS:/packages/</emphasis> 中）。例如，<computeroutput>jsondiff-1.1.2-py3-none-any.whl</computeroutput> 来自 <link xlink:href="http://piwheels.org">http://piwheels.org</link>（请参阅 JeVois 用户教程，了解如何将文件复制到 microSD）。名称中没有 <emphasis role="bold">none-any</emphasis> 的轮子可能无法工作。</para>
+</listitem><listitem>
+<para>在 JeVois Inventor 的控制台中，输入：<literallayout><computeroutput>shell pip install /jevois/packages/jsondiff-1.1.2-py3-none-any.whl </computeroutput></literallayout> 您应该会看到类似以下内容：<literallayout><computeroutput>shell pip install /jevois/packages/jsondiff-1.1.2-py3-none-any.whl
+
+正在处理 ./packages/jsondiff-1.1.2-py3-none-any.whl 正在安装收集的包：jsondiff 已成功安装 jsondiff-1.1.2 OK </computeroutput></literallayout></para>
+</listitem><listitem>
+<para>就是这样！现在您可以在 Python 模块中“导入 jsondiff”。同样，如果您的 wheel 有依赖项，尤其是编译的依赖项，此操作将失败。我们正在努力解决此问题。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change114log"><title>JeVois 1.14 中的变化和新功能</title>    </section>
+<para>JeVois 1.14 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>升级到 OpenCV 4.1.1，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。</para>
+</listitem><listitem>
+<para>新的自动相机传感器检测。现在可以选择将文件 <emphasis role="bold">BOOT:sensor</emphasis> 写入安装在 JeVois 智能相机中的传感器名称（ov9650、ov7725、ov2640、ar0135 等）。如果 <emphasis role="bold">BOOT:sensor</emphasis> 中有正确的传感器，您仍将加快 JeVois 的启动时间，但 JeVois 现在将依次尝试所有支持的传感器，直到找到一个可用的传感器。Allwinner 内核视频捕获驱动程序已修改为允许正确卸载和重新加载（卸载用于挂起和崩溃制造商的代码），并在加载时同步检测传感器（而不是将检测委托给内核线程）。</para>
+</listitem><listitem>
+<para>目前，检测顺序为：<emphasis role="bold">BOOT:sensor</emphasis> 中指定的传感器或 ov9650（如果没有 <emphasis role="bold">BOOT:sensor</emphasis> 文件）、ov7725、ov2640、ar0135、ov9650。您将看到 JeVois 智能相机在启动时尝试检测的每个传感器都有一个橙色 LED 闪烁。一旦找到正确的传感器，LED 将在几秒钟后变为常亮橙色。</para>
+</listitem><listitem>
+<para>全局 JeVois 参数 <computeroutput>camerasens</computeroutput> 允许人们知道安装了哪个传感器。只需在 JeVois Inventor 控制台中输入：<literallayout><computeroutput>getpar camerasens </computeroutput></literallayout> 即可获取值。</para>
+</listitem><listitem>
+<para>新的深度网络：</para>
+</listitem><listitem>
+<para> 中支持 MnasNet 优化的 autoML 网络</para>
+</listitem><listitem>
+<para> 中支持 inception_v1_224_quant_20181026 高精度（但速度较慢）网络</para>
+</listitem><listitem>
+<para> 中的新参数 <computeroutput>model</computeroutput> 允许用户在运行时轻松选择网络，而无需编辑模块的 <emphasis role="bold">params.cfg</emphasis> 文件。</para>
+</listitem><listitem>
+<para>改进了 ov2640 低分辨率（CIF 及更低分辨率）图像捕获。以前，低分辨率下捕获的图像与高分辨率下的图像相比非常暗且放大。现在已修复此问题。这是真正的硬件 CIF（加上基于 DSP 的缩小功能，可实现更低的分辨率），因此它支持硬件宣传的最大帧速率 60fps（与网络上其他驱动程序中使用的方法相反，这些驱动程序以最大 30fps 的 VGA 捕获，然后使用板载 DSP 缩小）。</para>
+</listitem><listitem>
+<para>使用 AR0135 传感器对色彩平衡进行轻微改进。</para>
+</listitem><listitem>
+<para>对于 C++ 程序员：new Parameter&lt;T&gt;::reset() 将参数重置为其默认值。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change115log"><title>JeVois 1.15 中的变化和新功能</title>    </section>
+<para>JeVois 1.15 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>已更新至 OpenCV 4.4.0</para>
+</listitem><listitem>
+<para>从 github 更新 Darknet 和 NNPACK 至最新版本。</para>
+</listitem><listitem>
+<para>更新至 TensorFlow 1.15.3，在 mobilenet 上的运行速度提高了约 25。</para>
+</listitem><listitem>
+<para>更新了有关如何训练自定义 TensorFlow 模型的教程，网址为 <link xlink:href="http://jevois.org/tutorials/UserTensorFlowTraining.html">http://jevois.org/tutorials/UserTensorFlowTraining.html</link></para>
+</listitem><listitem>
+<para>jevoisextra 中更新至 Dlib 19.20。</para>
+</listitem><listitem>
+<para>修复了早期版本中已禁用的 GPU 驱动程序。</para>
+</listitem><listitem>
+<para>在 DemoGPU 中添加对 YUYV 输出的支持，以便可以在 JeVois Inventor 中使用。请注意，从原生 RGB565 到 YUYV 的转换是在 JeVois CPU 上完成的，因此会使用一些周期。</para>
+</listitem><listitem>
+<para>更新了 ArUco 模块以使用现在支持的新字典：ATAG_16h5、ATAG_25h9、ATAG_36h10 和 ATAG_36h11。解析可选参数配置文件时，现在还支持 AprilTag 配置参数。</para>
+</listitem><listitem>
+<para>在无头 ARtoolkit 中添加了对除 YUYV 之外的模式的支持。这对于使用来自相机传感器的原始 BAYER 图像格式支持 1280x1024 的 15fps 操作非常有用。</para>
+</listitem><listitem>
+<para>改进了 ICM-20948 IMU（惯性测量单元）和 DMP（数字运动处理器）支持：</para>
+</listitem><listitem>
+<para>新增对 FSYNC 输入的支持，其中 IMU 和 DMP 可以在从摄像头传感器接收到帧同步脉冲时发出信号（摄像头传感器在每个新帧开始之前发出一个脉冲）。除了获取脉冲之外，我们还获取了最后一次 IMU 测量和 FSYNC 脉冲之间的微秒延迟。这对于需要 IMU 和视频传感器之间紧密耦合的应用非常有用，例如视觉惯性里程计。</para>
+</listitem><listitem>
+<para>命令行界面上的新功能允许用户修改低级 IMU 和 DMP 寄存器：</para>
+</listitem><listitem>
+<para>setimureg <computeroutput>reg</computeroutput> <computeroutput>val</computeroutput> - 将原始 IMU 寄存器 <computeroutput>reg</computeroutput> 设置为值 <computeroutput>val</computeroutput> </para>
+</listitem><listitem>
+<para>getimureg <computeroutput>reg</computeroutput> - 获取原始 IMU 寄存器的值 <computeroutput>reg</computeroutput> </para>
+</listitem><listitem>
+<para>setimuregs <computeroutput>reg</computeroutput> <computeroutput>num</computeroutput> <computeroutput>val1</computeroutput> ... <computeroutput>valn</computeroutput> - 设置原始 IMU 寄存器值数组</para>
+</listitem><listitem>
+<para>getimuregs <computeroutput>reg</computeroutput> <computeroutput>num</computeroutput> - 获取原始 IMU 寄存器值数组</para>
+</listitem><listitem>
+<para>setdmpreg <computeroutput>reg</computeroutput> <computeroutput>val</computeroutput> - 将原始 DMP 寄存器 <computeroutput>reg</computeroutput> 设置为值 <computeroutput>val</computeroutput> </para>
+</listitem><listitem>
+<para>getdmpreg <computeroutput>reg</computeroutput> - 获取原始 DMP 寄存器的值 <computeroutput>reg</computeroutput> </para>
+</listitem><listitem>
+<para>setdmpregs <computeroutput>reg</computeroutput> <computeroutput>num</computeroutput> <computeroutput>val1</computeroutput> ... <computeroutput>valn</computeroutput> - 设置原始 DMP 数组寄存器值</para>
+</listitem><listitem>
+<para>getdmpregs <computeroutput>reg</computeroutput> <computeroutput>num</computeroutput> - 获取原始 DMP 寄存器值数组</para>
+</listitem></itemizedlist>
+</para>
+
+<para>寄存器和值可以以十进制、十六进制（前缀为 0x）或八进制（前缀为 0 - 注意这一点并小心 - 如果您写入 010，它将是八进制 10）指定。返回的值始终为十六进制（无前缀）。请注意，上述功能默认不激活，以防止新手用户犯错。要激活它们，请在 JeVois 控制台上发出“setpar camreg 1”。</para>
+
+<para><itemizedlist>
+<listitem>
+<para>为我们的 C++ 内部函数添加了更多 python 绑定。</para>
+</listitem><listitem>
+<para>使用 AR0135 传感器对色彩平衡进行轻微改进。</para>
+</listitem><listitem>
+<para>如果温度系统文件格式不正确，则使用新的异常处理来避免主机版 jevois-daemon 上出现模糊的 stoi() 异常。谢谢 Marc！ </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change117log"><title>JeVois 1.17 中的变化和新功能</title>    </section>
+<para>JeVois 1.17 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>已更新至 OpenCV 4.5.4、OpenVino 2021.4 LTS</para>
+</listitem><listitem>
+<para>已更新至 TensorFlow 2.5.0</para>
+</listitem><listitem>
+<para>线程池改进，在 JeVois-Pro 上具有更好的大/小亲和力处理。</para>
+</listitem><listitem>
+<para>JeVois-A33：新的 JeVois DNN 框架，使用 OpenCV 运行各种深度学习模型，进行分类、检测和语义分割（支持 Caffe、ONNX、TensorFlow 等）。将您自己的模型添加到 JEVOIS:/share/dnn/models.yml（并将相应的模型和权重文件复制到 microSD）以直接运行它们。</para>
+</listitem><listitem>
+<para>DNN：当预期的网络输入/输出与收到的输入/输出不同时，会出现更友好的错误消息。</para>
+</listitem><listitem>
+<para>JeVois-Pro：对 Linux 内核进行了小幅增强，更新了 NPU 内核模块。</para>
+</listitem><listitem>
+<para>升级到最新的 numpy，现在默认安装在平台上，并具有相应的 API 更改。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更好的构建和包装系统。</para>
+</listitem><listitem>
+<para>JeVois-Pro：models.yml 模型库中有更多深度学习模型。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更好的风扇控制。</para>
+</listitem><listitem>
+<para>添加了更多文档。</para>
+</listitem><listitem>
+<para>修复了各种错误并改进了性能。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change118log"><title>JeVois 1.18 中的变化和新功能</title>    </section>
+<para>JeVois 1.18 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>新增对 Hailo-8 神经加速器的支持，在可装入 JeVois-Pro 的小型 M.2 A+E 2230 板上最高可达 26-TOPS！这是迄今为止最快的神经加速器，它可以运行更大的模型，如 YOLOv5m 或 YOLOv7，帧速率非常不错。请参阅 <link linkend="_JeVoisProBenchmarks">JeVois-Pro 深度神经网络基准</link> 中的 SPU 条目</para>
+</listitem><listitem>
+<para>已更新至 OpenCV 4.6.0、OpenVino 2022.1</para>
+</listitem><listitem>
+<para>支持 TIM-VX 库直接通过 OpenCV 在 JeVois-Pro 集成 NPU 上执行模型（无需转换为 NPU blob 格式，直接从 ONNX 加载模型等；模型仍应量化为 int8）。请参阅 <link xlink:href="https://github.com/VeriSilicon/TIM-VX">TIM-VX</link> 和 <link xlink:href="https://github.com/opencv/opencv/wiki/TIM-VX-Backend-For-Running-OpenCV-On-NPU">OpenCV+TIM-VX</link>。</para>
+</listitem><listitem>
+<para>通过 ARM Compute Backend 到 OpenCV 支持 ARM CPU 上的 Intel Myriad-X 仿真。请参阅 <link xlink:href="https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_ARM_CPU.html">ARM CPU 插件</link> 和 <link xlink:href="https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md">github repo</link>。即使您没有 VPU 硬件加密狗，也可以为 VPU 加载任何 OpenVino 模型并使用基于 CPU 的仿真进行尝试。不过，与实际的 VPU 芯片相比，仿真速度相当慢。请参阅 <link linkend="_JeVoisProBenchmarks">JeVois-Pro 深度神经网络基准</link> 中的 VPU 与 VPUX</para>
+</listitem><listitem>
+<para>核心 JeVois：新增对动态 JeVois 参数的支持。这些是强类型参数，可通过命令行、控制台或 GUI 访问。</para>
+</listitem><listitem>
+<para>Python：允许在 Python 模块中创建和访问 JeVois 参数。请查看 作为示例。Python 模块现在可以具有可调参数，用户可以在 GUI 中调整这些参数，就像 C++ 模块一样。</para>
+</listitem><listitem>
+<para>Python：添加了对 Python 组件的支持。这些是 JeVois 组件对象，可以像 C++ 组件一样组装成组件层次结构，但它们是用 Python 编写的。Python 组件可以保存从 Python 创建的 JeVois 参数。</para>
+</listitem><listitem>
+<para>Core JeVois：转向使用 std::filesystem 进行文件和路径操作</para>
+</listitem><listitem>
+<para>DNN：支持用 Python 编写的预处理器、网络和后处理器。这将使添加新网络类型变得更加容易，因为网络设计者通常会提供 Python 中的预处理和后处理代码。现在可以轻松将这些代码移植到 JeVois。请查看：</para>
+</listitem><listitem>
+<para>PyPreBlob.py - Python 中的示例预处理器</para>
+</listitem><listitem>
+<para>PyNetOpenCV.py - 使用 OpenCV API 加载网络并运行推理</para>
+</listitem><listitem>
+<para>PyPostClassify.py - 报告得分最高的类别</para>
+</listitem><listitem>
+<para>DNN：当预期的网络输入/输出与收到的输入/输出不同时，会出现更好的错误消息。</para>
+</listitem><listitem>
+<para>DNN：更好、更通用的预处理。在 GUI 中检查 PreProcessor::details 时能够显示大量详细信息。</para>
+</listitem><listitem>
+<para>DNN：RAW YOLO 预处理得到极大改进，速度提高了约 4 倍，支持各种 yolo 形状以及新旧坐标样式。更好地处理 YOLO 锚点。</para>
+</listitem><listitem>
+<para>JeVois-Pro GUI：改进的文本编辑器，新的 <link linkend="_classjevois_1_1GUIeditor">jevois::GUIeditor</link> 类。添加了文件浏览器和键盘快捷键支持。现在可以编辑磁盘上的任何文件，并在需要时创建新文件。</para>
+</listitem><listitem>
+<para>OpenGL GUI：添加了 d2i() 以将屏幕坐标转换为显示的图像。请参阅 新 GUI 版本中的使用示例</para>
+</listitem><listitem>
+<para>JeVois-Pro：支持 4K 显示器。可以通过编辑 /boot/env.txt 启用，默认情况下不启用，因为它会稍微减慢整体操作速度，可能是因为内存总线上的流量较高。</para>
+</listitem><listitem>
+<para>JeVois-Pro：models.yml model zoo 中提供了更多深度学习模型。将 model.yml 拆分为 npu、tpu、vpu 等单独的子文件。添加了对可以设置和取消设置的全局参数的支持。现在，新的 zoo 文件更易于阅读和编辑。可以通过 JeVois-Pro GUI 的 Config 选项卡直接访问 zoo 文件。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更好的风扇控制。注意：由于 /sys/ 中当前没有可用的 Hailo 温度，如果 JeVois-Pro 中安装了 Hailo-8 加速器，我们始终将风扇速度调至 100。</para>
+</listitem><listitem>
+<para>关于如何将深度网络转换为 JeVois-Pro 上各种加速器的新文档和教程：<itemizedlist>
+<listitem>
+<para><link linkend="_UserDNNoverview">在 JeVois-A33 和 JeVois-Pro 上运行神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNconv">为 JeVois-Pro 转换和量化深度神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNopencv">使用 OpenCV 在 JeVois-A33 或 JeVois-Pro 上运行神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNnpu">为 JeVois-Pro NPU 转换并运行神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNspu">为 Hailo-8 SPU 转换并运行神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNtpu">为 Coral TPU 转换并运行神经网络</link></para>
+</listitem><listitem>
+<para><link linkend="_UserDNNvpu">转换并运行 Myriad-X VPU 的神经网络</link></para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>用更广泛使用的 jevois::frameNum() 自由函数替换 JeVois 模块中的 <link linkend="_classjevois_1_1Engine_1a34175bdc63bd923183dabb20f3b17374">frameNum()</link>。报告当前视频帧数。加载新的机器视觉模块时重置为 0。</para>
+</listitem><listitem>
+<para>添加了新的用途，例如 <link linkend="_group__utils_1ga7649d6ce325acac1606bceec036f171b">jevois::joinall()</link><link linkend="_group__utils_1ga3d57bcea9c02b2c2b91e064d58b4b005">、jevois::num2str()</link><link linkend="_group__utils_1ga54a11682b4afc2645f69f4f0770ea1bb">、jevois::secs2str()</link>、Hailo 相关助手、量化相关等</para>
+</listitem><listitem>
+<para>新的 <link linkend="_Log_8H_1a8e3f8ce22d435337fb988c530e098b25">LTHROW()</link> 宏类似于 <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL()</link>，但不会在控制台中显示错误，而只是将其抛出。在子例程中很有用，调用者将捕获任何异常并可能重新格式化它以提供统一的错误消息。就像普通的抛出一样，除了可以使用与 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG()</link>、LINFO() 等相同的 JeVois 流语法。</para>
+</listitem><listitem>
+<para>修复了各种错误并改进了性能。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change119log"><title>JeVois 1.19 中的变化和新功能</title>    </section>
+<para>JeVois 1.19 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>新增对 CPU 上 ONNX Runtime 框架的支持，包括 C++ 和 Python。这允许您在 CPU 上运行 ONNX 网络，其兼容性比 OpenCV 框架提供的更高。请参阅 DNN 模块中的新 ORT 管道类型。添加了几个示例网络。</para>
+</listitem><listitem>
+<para>提高了用 Python 为 DNN 模块编写预处理器、网络和后处理器的能力。在 jevoisbase 中提供了几个新示例：<itemizedlist>
+<listitem>
+<para>share-jevoispro/pydnn/net/PyNetOpenCV.py - 使用 OpenCV 加载网络并运行推理</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/net/PyNetORT.py - 使用 ONNX Runtime 加载网络并运行推理</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/net/PyNetURetinex.py - PyNetORT.py 的变体，带有针对此网络的额外固定输入</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostClassify.py - Python 中的简单目标分类后处理器</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostDAMOyolo.py - DAMO-YOLO 网络的目标检测后处理器</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostDepth.py - 将深度图显示为半透明覆盖（emi-transparent overlay）</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostStub.py - 不执行任何操作，可作为新网络类型的起点</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostURetinex.py - 显示部分覆盖（overlay），并带有用户鼠标交互示例</para>
+</listitem><listitem>
+<para>share-jevoispro/pydnn/post/PyPostYolo.py - 我们非常快速的 C++ YOLO 后处理器的包装器</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>请记住，由于 python 非重入或非并行，如果预处理、网络推理或后处理中的多个程序都在 python 中，则将强制同步 DNN 处理，这可能会降低慢速网络上 GUI 的帧速率。</para>
+
+<para><itemizedlist>
+<listitem>
+<para>已更新至 OpenCV 4.7.0、OpenVino 2022.3、EdgeTPU 1.16、PyCoral 2.0.0、HailoRT 4.13.0</para>
+</listitem><listitem>
+<para>Core JeVois：修复了从文件中选择默认视频映射的问题，更新了贡献以包含 onnxruntime，清理了 CMakeLists.txt 中的一些包含和依赖路径。</para>
+</listitem><listitem>
+<para>Core JeVois：为 <link linkend="_namespacejevois_1a6ab540ea34f56b48165b563719c5cad5">getNumInstalledTPUs()</link>、getFanSpeed() 等添加了更多 Python 绑定</para>
+</listitem><listitem>
+<para>Movie input：增加了对 JeVois-Pro 中双流的支持（其中一种分辨率的输入被发送到显示器，而另一种分辨率的同一图像被发送到处理）。要使用预先录制的电影输入而不是实时视频，请使用 <computeroutput>jevoispro.sh --cameradev=/path/to/movie.mp4</computeroutput>。还修复了电影倒带和循环播放问题。</para>
+</listitem><listitem>
+<para>Programmers：创建了新的 github repo <emphasis>mydnn</emphasis> 作为 JeVois DNN 模块的示例独立克隆。您可以修改它、交叉编译它并将其安装在您的相机上。</para>
+</listitem><listitem>
+<para>DNN：PreProcessorBlob 现在默认仅返回 1 个 blob，可以通过参数 <computeroutput>numin（发送到网络的输入数量）进行更改。然后，可以使用新的网络参数</computeroutput> <computeroutput>extraintensors</computeroutput> 来指定额外的固定输入。这在 URetinexNet 示例中使用，因为该网络既需要图像输入，也需要设置曝光参数的单个浮点输入。</para>
+</listitem><listitem>
+<para>DNN：在 PreProcessor 中添加了 i2b()，允许将坐标从输入图像转换为 blob，这在将鼠标坐标首先从显示转换为图像（使用 GuiHelper::d2i()），然后从图像转换为 blob（使用新的 PreProcessor::i2b()）时非常有用。d2i() 和 i2b() 都可以正确处理信箱（letterboxing）、缩放（scaling）、拉伸（streching）等。请参阅 PyPostURetinex.py 中的使用示例</para>
+</listitem><listitem>
+<para>DNN：改进的语义分割后处理器以允许阈值（只有高于阈值的值才会显示为半透明的 OpenGL overlay）。</para>
+</listitem><listitem>
+<para>JeVois-Pro：改进了 ImGui 渲染的清晰度，现在即使在 GUI 比例 1 下看起来也非常漂亮（在 GUI 的 &quot;Parameters&quot; 选项卡下，启用 &quot;Show Systems Parameters&quot;，然后在图形用户界面部分中，使用 gui 比例参数）。</para>
+</listitem><listitem>
+<para>JeVois-Pro：为 ImGUI 添加了更多 Python 包装器，以允许用户在 Python 中检查鼠标坐标、按钮点击等。PyPostURetinex.py 中的使用示例</para>
+</listitem><listitem>
+<para>JeVois-Pro：支持使用 gadget 串行将串行输出发送到 USB。可以在 JeVois-Pro GUI 的系统选项卡下启用 gadget，之后可以将模块输出和/或日志发送到以设备模式运行的 mini-USB 端口。然后，您可以使用常规 USB-A 转 mini-USB 电缆将 JeVois-Pro 连接到主机，并且 JeVois-Pro 串行控制台将可通过 /dev/ttyACM0 在主机上访问。</para>
+</listitem><listitem>
+<para>Serial-over-USB：现在可以处理 USB 电缆断开/重新连接，方法是在连接丢失后尝试重新打开设备。还可以更好地处理电缆断开时 USB 发送缓冲区溢出。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更多深度学习模型，包括几个新的 ONNX-Runtime 模型。为 model zoo 条目添加了注释和 URL 字段。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更好的风扇控制，包括对 Hailo-8 加速器板的温度监控。</para>
+</listitem><listitem>
+<para>JeVois-Pro：更好地显示模块信息，并带有项目符号文本的换行。</para>
+</listitem><listitem>
+<para>JeVois-Pro：管道中的新 <computeroutput>benchmark</computeroutput> 参数可运行自动基准测试，该基准测试根据当前管道滤波器循环遍历所有可用网络。基准测试统计数据以 HTML 表格格式保存到 /jevoispro/share/benchmarks.html</para>
+</listitem><listitem>
+<para>JeVois-Pro：我们有 8MP/4K OS08a10 传感器板和 2.3MP 全局快门 AR0234CS 的工作原型。AR0234 上的颜色校准效果不佳，需要调整内核中的 ISP 校准。如果您对这些传感器感兴趣，请告诉我们。添加了基于哪个内核 overlay 处于活动状态的相机传感器自动检测。</para>
+</listitem><listitem>
+<para>修复了各种错误并改进了性能。 </para>
+</listitem></itemizedlist>
+</para>
+    <section xml:id="_Change120log"><title>JeVois 1.20 中的变化和新功能</title>    </section>
+<para>JeVois 1.20 带来以下新功能：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>JeVois-Pro：新功能可直接在正在运行的 JeVois-Pro 相机上克隆和编译 C++ 模块。速度有点慢，但运行良好！修改和重新编译我们捆绑的 C++ 模块之一的步骤是：1) 使用单击 GUI 系统选项卡中的 &quot;Create new machine vision module...&quot; 时弹出的弹出窗口中的克隆选项克隆模块。这会将模块克隆到其自己的单独目录中，然后对其进行编译和运行。2) 然后您可以编辑其源代码，当您保存更改时，模块将重新编译并运行。</para>
+</listitem><listitem>
+<para>JeVois-Pro：新的演示模式，循环遍历各种模块（在 /jevoispro/config/demodata.yml 中定义）。要启用，请在 Engine 的参数 &quot;demomode&quot; 中设置一个非零时间（以秒为单位）（在 GUI 中，启用 &quot;Show systems parameters&quot; 以查看 Engine 的参数）。</para>
+</listitem><listitem>
+<para>改进了对 CPU 上 ONNX 运行时框架的支持，包括 C++ 和 Python。</para>
+</listitem><listitem>
+<para>修复了一些 jevoisbase 模块中的一系列我们没有看到的警告，因为它们触发了各种第三方库，所以某些警告被关闭了。</para>
+</listitem><listitem>
+<para>更新至 OpenCV 4.8.0。</para>
+</listitem><listitem>
+<para>JeVois-Pro：在系统选项卡中添加了一个按钮，以便轻松编辑风扇配置，这可以让您找到调整风扇全速的阈值。现在检测 Hailo 芯片的存在并从中获取温度（如果存在）。</para>
+</listitem><listitem>
+<para>JeVois-Pro：对 CMake 流程和贡献进行了重大重组，它们现在安装到 /jevoispro 以允许在设备上进行编译。</para>
+</listitem><listitem>
+<para>修复了各种错误并改进了性能。 </para>
+</listitem></itemizedlist>
+</para>
+</section>

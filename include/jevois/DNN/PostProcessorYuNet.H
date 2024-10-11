@@ -50,9 +50,8 @@ namespace jevois
       class PriorBox;
     } // namespace yunet
     
-    //! Post-Processor for YuNet face landmarks detector
-    /*! This is the last step in a deep neural network processing Pipeline. Code derived from 
-        https://github.com/khadas/OpenCV_NPU_Demo.git
+    //! YuNet 人脸特征点检测器的后处理器
+    /*! 这是深度神经网络处理管道中的最后一步。代码源自 https://github.com/khadas/OpenCV_NPU_Demo.git
         \ingroup dnn */
     class PostProcessorYuNet : public PostProcessor,
                                public Parameter<postprocessor::nms, postprocessor::top, postprocessor::cthresh,
@@ -66,13 +65,13 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorYuNet();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         virtual void freeze(bool doit) override;
 
-        //! Process outputs and draw/send some results
+        //! 处理输出并绘制/发送一些结果
         void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 

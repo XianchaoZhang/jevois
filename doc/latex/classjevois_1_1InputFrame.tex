@@ -1,0 +1,344 @@
+\hypertarget{classjevois_1_1InputFrame}{}\doxysubsection{jevois\+::Input\+Frame Class Reference}
+\label{classjevois_1_1InputFrame}\index{jevois::InputFrame@{jevois::InputFrame}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Input\+Frame.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+原始相机输入帧周围的异常安全包装器 
+
+此包装器的操作与标准 C++11 中的 std\+:future 非常相似。用户可以通过调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 获取相机捕获的下一张图像，如果捕获尚 未完成，则可能会阻塞，如果捕获由于某种原因（例如，相机未流式传输）失败，则可能会抛出异常。图像大小和像素类型由当 前 Video\+Mapping、相机部分定义。此外，还提供了一个 \mbox{\hyperlink{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}{done()}} 函数，用户可以在完成通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 获取的图像中的像素数据后 立即使用该函数，以允许相机驱动程序再次设置底层内存缓冲区以进行捕获。如果在 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 被销毁时尚未调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}{done()}}， 则如果已调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}}，它将被自动调用。在某些情况下，尽早手动调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}{done()}} 可能会提高帧速率，而不是让 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 析构 函数执行此操作。
+
+\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 实现对输入视频帧的零拷贝、零等待访问，即：
+
+
+\begin{DoxyEnumerate}
+\item 您通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 获取的图像的像素数据直接是内存映射的像素缓冲区，\+Je\+Vois 芯片上的硅硬件通过直接内存访问 (D\+MA) 使用 该缓冲区将像素数据从相机芯片传输到处理器内存；
+\item 一旦相机硬件捕获图像，get() 就会解除阻塞并返回该图像（而不是以固定的、有规律的间隔来获取图像）。相机有多个图 像缓冲区，允许捕获一个图像缓冲区，同时将另一个图像缓冲区通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 交由处理。这些缓冲区会被回收，即一旦调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}{done()}}，底层缓冲区就会被发送回相机硬件以供将来捕获。 
+\end{DoxyEnumerate}
+
+Definition at line 47 of file Input\+Frame.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1InputFrame_a57784cd2a33a7c4bb2d5a50208d9e6a3}{Input\+Frame}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&other)=default
+\begin{DoxyCompactList}\small\item\em 移动构造函数 \end{DoxyCompactList}\item 
+! 获取下一个捕获的相机图像 const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFrame_a2780cf34e153fe097f05236ef2ef83d7}{get}} (bool casync=false) const
+\item 
+bool \mbox{\hyperlink{classjevois_1_1InputFrame_a91ebeb9140343678453243266bb49f60}{has\+Scaled\+Image}} () const
+\begin{DoxyCompactList}\small\item\em 检查是否有 Je\+Vois\+Pro 平台 I\+SP 缩放的第二个输入图像可用 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2}} (bool casync=false) const
+\begin{DoxyCompactList}\small\item\em 获取下一个捕获的相机图像，\+I\+SP 缩放的第二帧 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFrame_a2f11f8de64b500796859d60883042772}{getp}} (bool casync=false) const
+\begin{DoxyCompactList}\small\item\em 获取下一个要处理的捕获的相机图像 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1InputFrame_a44adf47efbd340129f7be91ff2488ed0}{get\+Dma\+Fd}} (bool casync=false) const
+\item 
+来自传感器的原始帧，2 由 I\+SP 缩放。此函数用于访问 I\+SP 缩放的帧。如果不是 Je\+Vois Pro 平台或摄像头流类型不是 jevois\+::\+Stream\+Type\+::\+Raw\+And\+Scaled，则抛出。此文件描述符可用于在支持 D\+MA B\+UF 的接口之间共享像素缓冲区。\+Je\+Vois 核 心使用它来创建从摄像头传感器到 Je\+Vois Pro 上的硬件加速 Open\+GL 显示器的零拷贝管道。如果不支持 D\+MA B\+U\+F（在主机上 和 Je\+Vois A33 平台上），则返回 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get}} () ，则会调用它，它会阻塞直到下一个摄像头帧可用。可以多次 调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a44adf47efbd340129f7be91ff2488ed0}{get\+Dma\+Fd}}() ，但总是返回相同的 fd（参见 \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2}}() ）。 $\ast$/int get\+Dma\+Fd2(bool casync
+\begin{DoxyCompactList}\small\item\em 获取 I\+SP 缩放的第二个摄像头帧的 D\+M\+A-\/\+B\+UF 文件描述符 /$\ast$! 仅在 Je\+Vois-\/\+Pro 平台上，摄像头 I\+SP 可以输出 2 个帧：1) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}{done}} () const
+\begin{DoxyCompactList}\small\item\em 指示用户处理已完成，先前已通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 获取的图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1InputFrame_a4498e91a765d1c91ea773abf9790c12b}{done2}} () const
+\begin{DoxyCompactList}\small\item\em 表示用户处理已完成，并且已通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2()}} 先前获取了 I\+SP 缩放图像 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_a3992f62f2e0ff2ca215474477a45bb3a}{get\+Cv\+G\+R\+AY}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_a2e01794525428eb8108894b4dc31c57e}{get\+Cv\+B\+GR}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_ae1b6ab64561d2c2c4597ff85c1627ea7}{get\+Cv\+R\+GB}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_aaec9b290f11a60ff1c671566890220e2}{get\+Cv\+R\+G\+BA}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_a2c67e473f80f62315ce232f037b61050}{get\+Cv\+G\+R\+A\+Yp}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_acf95555e377922115986909d7cdfac67}{get\+Cv\+B\+G\+Rp}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_aafe09570214c449a8f0236bf946d6f36}{get\+Cv\+R\+G\+Bp}} (bool casync=false) const
+\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFrame_ab4163ed4e006846752ccd59fefd335d8}{get\+Cv\+R\+G\+B\+Ap}} (bool casync=false) const
+\item 
+\mbox{\hyperlink{classjevois_1_1InputFrame_a5f07560a44b90bcd7b9ca098e30c8306}{$\sim$\+Input\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数，根据需要将缓冲区返回给驱动程序 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1InputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}{Engine}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a57784cd2a33a7c4bb2d5a50208d9e6a3}\label{classjevois_1_1InputFrame_a57784cd2a33a7c4bb2d5a50208d9e6a3}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!InputFrame@{InputFrame}}
+\index{InputFrame@{InputFrame}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{InputFrame()}{InputFrame()}}
+{\footnotesize\ttfamily jevois\+::\+Input\+Frame\+::\+Input\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+移动构造函数 
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a5f07560a44b90bcd7b9ca098e30c8306}\label{classjevois_1_1InputFrame_a5f07560a44b90bcd7b9ca098e30c8306}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!````~InputFrame@{$\sim$InputFrame}}
+\index{````~InputFrame@{$\sim$InputFrame}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{$\sim$InputFrame()}{~InputFrame()}}
+{\footnotesize\ttfamily jevois\+::\+Input\+Frame\+::$\sim$\+Input\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数，根据需要将缓冲区返回给驱动程序 
+
+
+
+Definition at line 31 of file Input\+Frame.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}\label{classjevois_1_1InputFrame_a3ad6ba7b0e66fefb8e43944ca4e90bcf}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!done@{done}}
+\index{done@{done}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{done()}{done()}}
+{\footnotesize\ttfamily void jevois\+::\+Input\+Frame\+::done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+指示用户处理已完成，先前已通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 获取的图像 
+
+处理完 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据后，应尽快在 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 之后调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获 。 
+
+Definition at line 102 of file Input\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a4498e91a765d1c91ea773abf9790c12b}\label{classjevois_1_1InputFrame_a4498e91a765d1c91ea773abf9790c12b}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!done2@{done2}}
+\index{done2@{done2}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{done2()}{done2()}}
+{\footnotesize\ttfamily void jevois\+::\+Input\+Frame\+::done2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+表示用户处理已完成，并且已通过 \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2()}} 先前获取了 I\+SP 缩放图像 
+
+处理完 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据后，应在 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 之后尽快调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获 。 
+
+Definition at line 109 of file Input\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}\label{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!get@{get}}
+\index{get@{get}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily 来自传感器的原始帧，2 由 I\+SP 缩放。此函数用于访问 I\+SP 缩放的帧。如果不是 Je\+Vois Pro 平台或摄像头流类型不是 jevois\+::\+Stream\+Type\+::\+Raw\+And\+Scaled，则抛出。此文件描述符可用于在支持 D\+MA B\+UF 的接口之间共享像素缓冲区。\+Je\+Vois 核 心使用它来创建从摄像头传感器到 Je\+Vois Pro 上的硬件加速 Open\+GL 显示器的零拷贝管道。如果不支持 D\+MA B\+U\+F（在主机上 和 Je\+Vois A33 平台上），则返回 jevois\+::\+Input\+Frame\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取 I\+SP 缩放的第二个摄像头帧的 D\+M\+A-\/\+B\+UF 文件描述符 /$\ast$! 仅在 Je\+Vois-\/\+Pro 平台上，摄像头 I\+SP 可以输出 2 个帧：1) 
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a2780cf34e153fe097f05236ef2ef83d7}\label{classjevois_1_1InputFrame_a2780cf34e153fe097f05236ef2ef83d7}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!get@{get}}
+\index{get@{get}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+::get (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+如果相机未流式传输或阻塞直到图像可用（已捕获），则抛出。 可以多次调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}}，但始终会返回相同的图像。 要从相 机获取连续的帧，必须由 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 向您提供连续的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 包装器。 
+
+Definition at line 50 of file Input\+Frame.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), and jevois\+::\+G\+P\+Uimage\+::set().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}\label{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!get2@{get2}}
+\index{get2@{get2}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{get2()}{get2()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+::get2 (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个捕获的相机图像，\+I\+SP 缩放的第二帧 
+
+仅在 Je\+Vois-\/\+Pro 平台上，相机 I\+SP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 I\+SP 缩放。此函数用于访问 I\+SP 缩放 的帧。如果不是 Je\+Vois-\/\+Pro 平台或相机流类型不是 jevois\+::\+Stream\+Type\+::\+Raw\+And\+Scaled，则抛出。如果相机没有流式传输 或阻塞直到图像可用（已捕获），则抛出。可以多次调用 \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2()}}，但始终会返回相同的图像。要从相机获取连续的帧， Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 必须向您提供连续的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 包装器。 
+
+Definition at line 67 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame2(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), and jevois\+::\+G\+P\+Uimage\+::set2().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a2e01794525428eb8108894b4dc31c57e}\label{classjevois_1_1InputFrame_a2e01794525428eb8108894b4dc31c57e}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvBGR@{getCvBGR}}
+\index{getCvBGR@{getCvBGR}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvBGR()}{getCvBGR()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 125 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_acf95555e377922115986909d7cdfac67}\label{classjevois_1_1InputFrame_acf95555e377922115986909d7cdfac67}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvBGRp@{getCvBGRp}}
+\index{getCvBGRp@{getCvBGRp}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvBGRp()}{getCvBGRp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+B\+G\+Rp (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 161 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a3992f62f2e0ff2ca215474477a45bb3a}\label{classjevois_1_1InputFrame_a3992f62f2e0ff2ca215474477a45bb3a}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvGRAY@{getCvGRAY}}
+\index{getCvGRAY@{getCvGRAY}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvGRAY()}{getCvGRAY()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 116 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+Gray().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a2c67e473f80f62315ce232f037b61050}\label{classjevois_1_1InputFrame_a2c67e473f80f62315ce232f037b61050}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvGRAYp@{getCvGRAYp}}
+\index{getCvGRAYp@{getCvGRAYp}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvGRAYp()}{getCvGRAYp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+G\+R\+A\+Yp (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 152 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+Gray().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_ae1b6ab64561d2c2c4597ff85c1627ea7}\label{classjevois_1_1InputFrame_ae1b6ab64561d2c2c4597ff85c1627ea7}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvRGB@{getCvRGB}}
+\index{getCvRGB@{getCvRGB}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvRGB()}{getCvRGB()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 134 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_aaec9b290f11a60ff1c671566890220e2}\label{classjevois_1_1InputFrame_aaec9b290f11a60ff1c671566890220e2}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvRGBA@{getCvRGBA}}
+\index{getCvRGBA@{getCvRGBA}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvRGBA()}{getCvRGBA()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 143 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_ab4163ed4e006846752ccd59fefd335d8}\label{classjevois_1_1InputFrame_ab4163ed4e006846752ccd59fefd335d8}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvRGBAp@{getCvRGBAp}}
+\index{getCvRGBAp@{getCvRGBAp}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvRGBAp()}{getCvRGBAp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+B\+Ap (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 179 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_aafe09570214c449a8f0236bf946d6f36}\label{classjevois_1_1InputFrame_aafe09570214c449a8f0236bf946d6f36}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getCvRGBp@{getCvRGBp}}
+\index{getCvRGBp@{getCvRGBp}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getCvRGBp()}{getCvRGBp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+Bp (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 170 of file Input\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B().
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a44adf47efbd340129f7be91ff2488ed0}\label{classjevois_1_1InputFrame_a44adf47efbd340129f7be91ff2488ed0}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getDmaFd@{getDmaFd}}
+\index{getDmaFd@{getDmaFd}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getDmaFd()}{getDmaFd()}}
+{\footnotesize\ttfamily int jevois\+::\+Input\+Frame\+::get\+Dma\+Fd (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 86 of file Input\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a2f11f8de64b500796859d60883042772}\label{classjevois_1_1InputFrame_a2f11f8de64b500796859d60883042772}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!getp@{getp}}
+\index{getp@{getp}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{getp()}{getp()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+::getp (\begin{DoxyParamCaption}\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个要处理的捕获的相机图像 
+
+如果 \mbox{\hyperlink{classjevois_1_1InputFrame_a91ebeb9140343678453243266bb49f60}{has\+Scaled\+Image()}} 为 false，则与 \mbox{\hyperlink{classjevois_1_1InputFrame_a2f074467becbef9303a8531199ecc60c}{get()}} 相同，如果 \mbox{\hyperlink{classjevois_1_1InputFrame_a91ebeb9140343678453243266bb49f60}{has\+Scaled\+Image()}} 为 true，则与 \mbox{\hyperlink{classjevois_1_1InputFrame_a64699f9698a605ce41d539d0ffedd56d}{get2()}} 相同。 
+
+Definition at line 79 of file Input\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a91ebeb9140343678453243266bb49f60}\label{classjevois_1_1InputFrame_a91ebeb9140343678453243266bb49f60}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!hasScaledImage@{hasScaledImage}}
+\index{hasScaledImage@{hasScaledImage}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{hasScaledImage()}{hasScaledImage()}}
+{\footnotesize\ttfamily bool jevois\+::\+Input\+Frame\+::has\+Scaled\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+检查是否有 Je\+Vois\+Pro 平台 I\+SP 缩放的第二个输入图像可用 
+
+除非我们在 Je\+Vois-\/\+Pro 平台上并且相机格式修饰符 jevois\+::\+Crop\+Type\+::\+Crop\+Scale 当前正在使用中，否则返回 false。 
+
+Definition at line 61 of file Input\+Frame.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), and jevois\+::\+G\+U\+Ihelper\+::iinfo().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}\label{classjevois_1_1InputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}} 
+\index{jevois::InputFrame@{jevois::InputFrame}!Engine@{Engine}}
+\index{Engine@{Engine}!jevois::InputFrame@{jevois::InputFrame}}
+\doxyparagraph{\texorpdfstring{Engine}{Engine}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 162 of file Input\+Frame.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{InputFrame_8H}{Input\+Frame.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{InputFrame_8C}{Input\+Frame.\+C}}\end{DoxyCompactItemize}

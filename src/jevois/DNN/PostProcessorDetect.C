@@ -44,7 +44,7 @@ void jevois::dnn::PostProcessorDetect::onParamChange(postprocessor::classes cons
 {
   if (val.empty()) { itsLabels.clear(); return; }
 
-  // Get the dataroot of our network. We assume that there is a sub-component named "network" that is a sibling of us:
+  // 获取我们网络的数据根。我们假设有一个名为 "network" 的子组件是我们的兄弟：
   std::vector<std::string> dd = jevois::split(Component::descriptor(), ":");
   dd.back() = "network"; dd.emplace_back("dataroot");
   std::string const dataroot = engine()->getParamStringUnique(jevois::join(dd, ":"));
@@ -76,21 +76,20 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
   int const fudge = classoffset::get();
   itsImageSize = preproc->imagesize();
   
-  // To draw boxes, we will need to:
-  // - scale from [0..1]x[0..1] to blobw x blobh
-  // - scale and center from blobw x blobh to input image w x h, provided by PreProcessor::b2i()
-  // - when using the GUI, we further scale and translate to OpenGL display coordinates using GUIhelper::i2d()
-  // Here we assume that the first blob sets the input size.
+  // 要绘制框，我们需要： 
+  // - 从 [0..1]x[0..1] 缩放到 blobw x blobh 
+  // - 从 blobw x blobh 缩放并居中到输入图像 w x h，由 PreProcessor::b2i() 提供 
+  // - 当使用 GUI 时，我们使用 GUIhelper::i2d() 进一步缩放和平移到 OpenGL 显示坐标 
+  // 在这里我们假设第一个 blob 设置输入大小。
   cv::Size const bsiz = preproc->blobsize(0);
   
-  // We keep 3 vectors here instead of creating a class to hold all of the data because OpenCV will need that for
-  // non-maximum suppression:
+  // 我们在这里保留 3 个向量，而不是创建一个类来保存所有数据，因为 OpenCV 需要它来进行非最大抑制：
   std::vector<int> classIds;
   std::vector<float> confidences;
   std::vector<cv::Rect> boxes;
   size_t const maxbox = maxnbox::get();
 
-  // Here we just scale the coords from [0..1]x[0..1] to blobw x blobh:
+  // 在这里我们只需将坐标从 [0..1]x[0..1] 缩放到 blobw x blobh：
   try
   {
     switch(detecttype::get())
@@ -98,8 +97,8 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
       // ----------------------------------------------------------------------------------------------------
     case jevois::dnn::postprocessor::DetectType::FasterRCNN:
     {
-      // Network produces output blob with a shape 1x1xNx7 where N is a number of detections and an every detection is
-      // a vector of values [batchId, classId, confidence, left, top, right, bottom]
+      // 网络产生形状为 1x1xNx7 的输出 blob，其中 N 是检测次数，每个检测都是值的向量 
+	  // [batchId、classId、confidence、left、top、right、bottom]
       if (outs.size() != 1 || msiz.dims() != 4 || msiz[0] != 1 || msiz[1] != 1 || msiz[3] != 7)
         LTHROW("Expected 1 output blob with shape 1x1xNx7 for N detections with values "
                "[batchId, classId, confidence, left, top, right, bottom]");
@@ -116,7 +115,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
           int bottom = (int)data[i + 6];
           int width = right - left + 1;
           int height = bottom - top + 1;
-          classIds.push_back((int)(data[i + 1]) + fudge);  // Skip 0th background class id.
+          classIds.push_back((int)(data[i + 1]) + fudge);  // 跳过第 0 个背景类 id。 
           boxes.push_back(cv::Rect(left, top, width, height));
           confidences.push_back(confidence);
           if (classIds.size() > maxbox) break; // Stop if too many boxes
@@ -128,8 +127,8 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     // ----------------------------------------------------------------------------------------------------
     case jevois::dnn::postprocessor::DetectType::SSD:
     {
-      // Network produces output blob with a shape 1x1xNx7 where N is a number of detections and an every detection is
-      // a vector of values [batchId, classId, confidence, left, top, right, bottom]
+      // 网络产生形状为 1x1xNx7 的输出 blob，其中 N 是检测次数，每个检测都是一个值向量
+      //  [batchId, classId, confidence, left, top, right, bottom]
       if (outs.size() != 1 || msiz.dims() != 4 || msiz[0] != 1 || msiz[1] != 1 || msiz[3] != 7)
         LTHROW("Expected 1 output blob with shape 1x1xNx7 for N detections with values "
                "[batchId, classId, confidence, left, top, right, bottom]");
@@ -158,8 +157,8 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     // ----------------------------------------------------------------------------------------------------
     case jevois::dnn::postprocessor::DetectType::TPUSSD:
     {
-      // Network produces 4 output blobs with shapes 4xN for boxes, N for IDs, N for scores, and 1x1 for count
-      // (see GetDetectionResults in detection/adapter.cc of libcoral):
+      // 网络产生 4 个输出 blob，其中盒子形状为 4xN，ID 为 N，分数为 N，计数为 1x1 
+	  //（请参阅 libcoral 的 detection/adapter.cc 中的 GetDetectionResults）：
       if (outs.size() != 4)
         LTHROW("Expected 4 output blobs with shapes 4xN for boxes, N for IDs, N for scores, and 1x1 for count");
       cv::Mat const & bboxes = outs[0];
@@ -196,8 +195,8 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     {
       for (size_t i = 0; i < outs.size(); ++i)
       {
-        // Network produces output blob(s) with shape Nx(5+C) where N is a number of detected objects and C is a number
-        // of classes + 5 where the first 5 numbers are [center_x, center_y, width, height, box score].
+        // 网络产生形状为 Nx(5+C) 的输出 blob，其中 N 是检测到的对象的数量，C 是类的数量 + 5，其中前 5 个数字是
+		//  [center_x, center_y, width, height, box score].
         cv::Mat const & out = outs[i];
         cv::MatSize const & ms = out.size; int const nd = ms.dims();
         int nbox = -1, ndata = -1;
@@ -206,7 +205,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
         {
           nbox = ms[nd-2];
           ndata = ms[nd-1];
-          for (int i = 0; i < nd-2; ++i) if (ms[i] != 1) nbox = -1; // reject if more than 2 effective dims
+          for (int i = 0; i < nd-2; ++i) if (ms[i] != 1) nbox = -1; // 如果有效 dims 超过 2 个则拒绝
         }
 
         if (nbox < 0 || ndata < 5)
@@ -216,7 +215,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
                  "Incorrect size " << jevois::dnn::shapestr(out) << " for output " << i <<
                  ": need Nx(5+C) or 1xNx(5+C)");
 
-        // Some networks, like YOLOv5 or YOLOv7, output 3D 1xNx(5+C), so here we slice off the last 2 dims:
+        // 某些网络，例如 YOLOv5 或 YOLOv7，输出 3D 1xNx(5+C)，因此这里我们切掉最后 2 个维度：
         int sz2[] = { nbox, ndata };
         cv::Mat const out2(2, sz2, out.type(), out.data);
         
@@ -229,9 +228,9 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
           cv::Point classIdPoint; double confidence;
           cv::minMaxLoc(scores, 0, &confidence, 0, &classIdPoint);
 
-          if (confidence < confThreshold) continue; // skip if class score too low
+          if (confidence < confThreshold) continue; // 如果类别分数太低则跳过
 
-          // YOLO<5 produces boxes in [0..1[x[0..1[ and 2D output blob:
+          // YOLO<5 在 [0..1[x[0..1[ 中生成框和 2D 输出 blob：
           int centerX, centerY, width, height;
           if (nd == 2)
           {
@@ -242,7 +241,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
           }
           else
           {
-            // YOLOv5, YOLOv7 produce boxes already scaled by input blob size, and 3D output blob:
+            // YOLOv5、YOLOv7 生成已经按输入 blob 大小缩放的框和 3D 输出 blob：
             centerX = (int)(data[0]);
             centerY = (int)(data[1]);
             width = (int)(data[2]);
@@ -265,9 +264,8 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     {
       for (size_t i = 0; i < outs.size(); ++i)
       {
-        // Network produces output blob(s) with shape Nx(4+C) where N is a number of detected objects and C is a number
-        // of classes + 4 where the first 4 numbers are [center_x, center_y, width, height]. There is no box score, just
-        // scores for individual classes for each detection.
+        // 网络产生形状为 Nx(4+C) 的输出 blob，其中 N 是检测到的对象的数量，C 是类别的数量 + 4，其中前 4 个数字为 
+		// [center_x, center_y, width, height]。没有框分数，只有每个检测的各个类的分数。
         cv::Mat const & out = outs[i];
         cv::MatSize const & ms = out.size; int const nd = ms.dims();
         int nbox = -1, ndata = -1;
@@ -286,7 +284,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
                  "Incorrect size " << jevois::dnn::shapestr(out) << " for output " << i <<
                  ": need Nx(4+C) or 1xNx(4+C)");
 
-        // Some networks may output 3D 1xNx(4+C), so here we slice off the last 2 dims:
+        // 某些网络可能输出 3D 1xNx(4+C)，因此这里我们切掉最后 2 个维度：
         int sz2[] = { nbox, ndata };
         cv::Mat const out2(2, sz2, out.type(), out.data);
         
@@ -299,7 +297,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
 
           if (confidence < confThreshold) continue; // skip if class score too low
 
-          // Boxes are already scaled by input blob size, and are x1, y1, x2, y2:
+          // 框已根据输入 blob 大小缩放，并且为 x1、y1、x2、y2：
           boxes.push_back(cv::Rect(data[0], data[1], data[2]-data[0]+1, data[3]-data[1]+1));
           classIds.push_back(classIdPoint.x);
           confidences.push_back((float)confidence);
@@ -312,8 +310,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     // ----------------------------------------------------------------------------------------------------
     case jevois::dnn::postprocessor::DetectType::YOLOv10pp:
     {
-      // Network produces output blob with a shape 1xNx6 where N is a number of detections and an every detection is
-      // a vector of values [left, top, right, bottom, confidence, classId]
+      // 网络产生形状为 1xNx6 的输出 blob，其中 N 是检测次数，每个检测都是一个值向量 [left, top, right, bottom, confidence, classId]
       if (outs.size() != 1 || msiz.dims() != 3 || msiz[0] != 1 || msiz[2] != 6)
         LTHROW("Expected 1 output blob with shape 1xNx6 for N detections with values "
                "[left, top, right, bottom, confidence, classId]");
@@ -324,7 +321,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
         float confidence = data[i + 4];
         if (confidence > confThreshold)
         {
-          // Boxes are already scaled by input blob size, and are x1, y1, x2, y2:
+          // 框已根据输入 blob 大小缩放，并且为 x1、y1、x2、y2： 
           int left = (int)data[i + 0];
           int top = (int)data[i + 1];
           int right = (int)data[i + 2];
@@ -350,11 +347,11 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
     break;
     
     default:
-      // Do not use strget() here as it will throw!
+      // 不要在这里使用 strget()，因为它会抛出！
       LTHROW("Unsupported Post-processor detecttype " << int(detecttype::get()));
     }
   }
-  // Abort here if the received outputs were malformed:
+  // 如果收到的输出格式错误，则在此处中止：
   catch (std::exception const & e)
   {
     std::string err = "Selected detecttype is " + detecttype::strget() + " and network produced:\n\n";
@@ -368,7 +365,7 @@ void jevois::dnn::PostProcessorDetect::process(std::vector<cv::Mat> const & outs
   std::vector<int> indices;
   cv::dnn::NMSBoxes(boxes, confidences, confThreshold, nmsThreshold, indices);
 
-  // Now clamp boxes to be within blob, and adjust the boxes from blob size to input image size:
+  // 现在将盒子限制在 blob 内，并将盒子从 blob 大小调整为输入图像大小：
   for (cv::Rect & b : boxes)
   {
     jevois::dnn::clamp(b, bsiz.width, bsiz.height);
@@ -412,7 +409,7 @@ void jevois::dnn::PostProcessorDetect::report(jevois::StdModule * mod, jevois::R
       label = jevois::sformat("%s: %.2f", categ.c_str(), o.reco[0].score);
     }
 
-    // If desired, draw boxes in output image:
+    // 如果需要，在输出图像中绘制框：
     if (outimg && overlay)
     {
       jevois::rawimage::drawRect(*outimg, o.tlx, o.tly, o.brx - o.tlx, o.bry - o.tly, 2, jevois::yuyv::LightGreen);
@@ -432,7 +429,7 @@ void jevois::dnn::PostProcessorDetect::report(jevois::StdModule * mod, jevois::R
       (void)helper; // keep compiler happy  
 #endif   
 
-    // If desired, send results to serial port:
+    // 如果需要，将结果发送到串行端口：
     if (mod) mod->sendSerialObjDetImg2D(itsImageSize.width, itsImageSize.height, o);
   }
 }

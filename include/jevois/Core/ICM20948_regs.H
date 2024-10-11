@@ -15,7 +15,7 @@
 // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*! \file */
 
-// Direction bit to be or'd with register address when using SPI:
+// 使用 SPI 时要与寄存器地址进行或运算的方向位：
 #define ICM20948_SPI_READ  0x80
 #define ICM20948_SPI_WRITE 0x00
 

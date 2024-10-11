@@ -1,0 +1,460 @@
+\hypertarget{classjevois_1_1Serial}{}\doxysubsection{jevois\+::Serial Class Reference}
+\label{classjevois_1_1Serial}\index{jevois::Serial@{jevois::Serial}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Serial.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+串行端口接口 
+
+此类是线程安全的。并发读取和写入（似乎不受操作系统或硬件支持）通过在 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 类中使用互斥锁进行序列化。 
+
+Definition at line 85 of file Serial.\+H.
+
+
+
+Inheritance diagram for jevois\+::Serial\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Serial__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Serial\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Serial__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Serial_aa3264cd7d39230ec9a1800baccef7bc1}{Serial}} (std\+::string const \&instance, \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{User\+Interface\+::\+Type}} \mbox{\hyperlink{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}{type}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1Serial_a900273caa5b0b40c4a0e039399dfb64d}{$\sim$\+Serial}} ()
+\begin{DoxyCompactList}\small\item\em destructor \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a17962e924e8caeeeee75bacbbe0964bb}{set\+Blocking}} (bool blocking, std\+::chrono\+::milliseconds const \&timeout)
+\begin{DoxyCompactList}\small\item\em 设置是否阻塞访问 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a542b90af764230a4a50c1b71a818f632}{toggle\+D\+TR}} (std\+::chrono\+::milliseconds const \&dur)
+\begin{DoxyCompactList}\small\item\em 暂时关闭 D\+TR 模式。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a310cb18132f446c9d6852cfd4654f00a}{send\+Break}} (void)
+\begin{DoxyCompactList}\small\item\em 在特定持续时间内传输连续的零值位流。 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1Serial_a50f7553bdbf0fdfe4e5d2d06689317df}{read\+Some}} (std\+::string \&str) override
+\begin{DoxyCompactList}\small\item\em 如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a06bd87b9e59a6aad3c8c184b2406edb5}{write\+String}} (std\+::string const \&str) override
+\begin{DoxyCompactList}\small\item\em 使用 serial\+::linestyle 的行终止约定写入字符串 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a75519929a28fc26d785a84f64c0f352e}{file\+Get}} (std\+::string const \&abspath)
+\begin{DoxyCompactList}\small\item\em 将文件从本地 micro\+SD 发送到主机 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a66ac0d80417158476aee615c05aa3640}{file\+Put}} (std\+::string const \&abspath)
+\begin{DoxyCompactList}\small\item\em 从主机接收文件并将其写入本地 micro\+SD \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a1a86de2b818bec6f38083a8e782e5736}{flush}} (void)
+\begin{DoxyCompactList}\small\item\em Flush all inputs. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{User\+Interface\+::\+Type}} \mbox{\hyperlink{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}{type}} () const override
+\begin{DoxyCompactList}\small\item\em 返回我们的端口类型，这里是 Hard 或 U\+SB \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_a159fa2d1b226adc859e874aa771820c8}{post\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Called after all sub-\/\+Components are init()ed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Serial_afe39197a374d85599ac823e60e3d263a}{post\+Uninit}} () override
+\begin{DoxyCompactList}\small\item\em Called after all sub-\/\+Components are uninit()ed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a95dd3765242d009b312ef07866108941}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (devname, std\+::string, \char`\"{}Device file name\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a8ce7e8ae9d7f8397a69040baa8ae670f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (baudrate, unsigned int, \char`\"{}Baudrate\char`\"{}, 115200, \{ 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 230400, 460800, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a09702a0052bc7bc562ea20b653d9fe1f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (format, std\+::string, \char`\"{}Data format\char`\"{}, \char`\"{}8N1\char`\"{}, boost\+::regex(\char`\"{}$^\wedge$\mbox{[}5-\/8\mbox{]}\mbox{[}N\+EO\mbox{]}\mbox{[}12\mbox{]}\$\char`\"{}), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a2d5c84667f99bbc694486fda3c618d89}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (flowsoft, bool, \char`\"{}Use soft (X\+ON/X\+O\+FF) flow control\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_abc14de108a2111e2e924546ed3484a1b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (flowhard, bool, \char`\"{}Use hard (R\+TS/C\+TS) flow control\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a9fea7c2236091db5c238766627928a6c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (drop, bool, \char`\"{}Silently drop write data when write buffer is full. Useful to \char`\"{} \char`\"{}avoid blocking when writing messages to serial-\/over-\/U\+SB port and the host is \char`\"{} \char`\"{}not listening to it. Note that even when drop is false, we will still drop \char`\"{} \char`\"{}data after repeated attempts to send it, and will report an error (as opposed to \char`\"{} \char`\"{}silently dropping when drop is true).\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_ab3736991e5ffb59fbf71d8361f06d519}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Line\+Style,(LF)(CR)(C\+R\+LF)(Zero)(Sloppy))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a25e06d5b82facb12841347c4a4948649}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (linestyle, Line\+Style, \char`\"{}End of line style\+: LF is for 0x0a \mbox{[}\textbackslash{}\textbackslash{}n\mbox{]} CR is for 0x0d \mbox{[}\textbackslash{}\textbackslash{}r\mbox{]} \char`\"{} \char`\"{}C\+R\+LF is for 0x0d 0x0a \mbox{[}\textbackslash{}\textbackslash{}r\textbackslash{}\textbackslash{}n\mbox{]} Zero is for 0x00 \mbox{[}\textbackslash{}\textbackslash{}0\mbox{]} Sloppy accepts any of \char`\"{} \char`\"{}CR, LF, C\+R\+LF, 0xd0 (issued by some keyboards instead of Return), and Zero as input \char`\"{} \char`\"{}and issues C\+R\+LF in outputs.\char`\"{}, Line\+Style\+::\+Sloppy, Line\+Style\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a6e022a62da7730755d3973ec5b7c6100}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Terminal\+Mode,(Plain)(V\+T100))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Serial_a196723d35fccaf8b116e1583c6ef7d74}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (mode, Terminal\+Mode, \char`\"{}Terminal emulation mode for input\char`\"{}, Terminal\+Mode\+::\+Plain, Terminal\+Mode\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Serial_aa3264cd7d39230ec9a1800baccef7bc1}\label{classjevois_1_1Serial_aa3264cd7d39230ec9a1800baccef7bc1}} 
+\index{jevois::Serial@{jevois::Serial}!Serial@{Serial}}
+\index{Serial@{Serial}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{Serial()}{Serial()}}
+{\footnotesize\ttfamily jevois\+::\+Serial\+::\+Serial (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance,  }\item[{\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{User\+Interface\+::\+Type}}}]{type }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 61 of file Serial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a900273caa5b0b40c4a0e039399dfb64d}\label{classjevois_1_1Serial_a900273caa5b0b40c4a0e039399dfb64d}} 
+\index{jevois::Serial@{jevois::Serial}!````~Serial@{$\sim$Serial}}
+\index{````~Serial@{$\sim$Serial}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{$\sim$Serial()}{~Serial()}}
+{\footnotesize\ttfamily jevois\+::\+Serial\+::$\sim$\+Serial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+destructor 
+
+
+
+Definition at line 410 of file Serial.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Serial_a75519929a28fc26d785a84f64c0f352e}\label{classjevois_1_1Serial_a75519929a28fc26d785a84f64c0f352e}} 
+\index{jevois::Serial@{jevois::Serial}!fileGet@{fileGet}}
+\index{fileGet@{fileGet}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{fileGet()}{fileGet()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::file\+Get (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{abspath }\end{DoxyParamCaption})}
+
+
+
+将文件从本地 micro\+SD 发送到主机 
+
+abspath 应为文件的完整绝对路径。 在整个交易期间，端口将被锁定。 
+
+Definition at line 418 of file Serial.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::\+Engine\+::parse\+Command().
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a66ac0d80417158476aee615c05aa3640}\label{classjevois_1_1Serial_a66ac0d80417158476aee615c05aa3640}} 
+\index{jevois::Serial@{jevois::Serial}!filePut@{filePut}}
+\index{filePut@{filePut}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{filePut()}{filePut()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::file\+Put (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{abspath }\end{DoxyParamCaption})}
+
+
+
+从主机接收文件并将其写入本地 micro\+SD 
+
+abspath 应为文件的完整绝对路径。整个交易期间端口将被锁定。 
+
+Definition at line 442 of file Serial.\+C.
+
+
+
+References jevois\+::split(), and jevois\+::string\+Starts\+With().
+
+
+
+Referenced by jevois\+::\+Engine\+::parse\+Command().
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a1a86de2b818bec6f38083a8e782e5736}\label{classjevois_1_1Serial_a1a86de2b818bec6f38083a8e782e5736}} 
+\index{jevois::Serial@{jevois::Serial}!flush@{flush}}
+\index{flush@{flush}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::flush (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Flush all inputs. 
+
+
+
+Definition at line 400 of file Serial.\+C.
+
+
+
+References L\+D\+E\+B\+UG.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a159fa2d1b226adc859e874aa771820c8}\label{classjevois_1_1Serial_a159fa2d1b226adc859e874aa771820c8}} 
+\index{jevois::Serial@{jevois::Serial}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after all sub-\/\+Components are init()ed. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{jevois\+::\+Component}}.
+
+
+
+Definition at line 66 of file Serial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_afe39197a374d85599ac823e60e3d263a}\label{classjevois_1_1Serial_afe39197a374d85599ac823e60e3d263a}} 
+\index{jevois::Serial@{jevois::Serial}!postUninit@{postUninit}}
+\index{postUninit@{postUninit}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{postUninit()}{postUninit()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::post\+Uninit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after all sub-\/\+Components are uninit()ed. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}{jevois\+::\+Component}}.
+
+
+
+Definition at line 200 of file Serial.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a50f7553bdbf0fdfe4e5d2d06689317df}\label{classjevois_1_1Serial_a50f7553bdbf0fdfe4e5d2d06689317df}} 
+\index{jevois::Serial@{jevois::Serial}!readSome@{readSome}}
+\index{readSome@{readSome}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{readSome()}{readSome()}}
+{\footnotesize\ttfamily bool jevois\+::\+Serial\+::read\+Some (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_aa0122126d1da68237d66a33e02e3fa02}{jevois\+::\+User\+Interface}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1GUIserial_a743adac54253b9e078bee56b9b6697f1}{jevois\+::\+G\+U\+Iserial}}.
+
+
+
+Definition at line 262 of file Serial.\+C.
+
+
+
+References S\+E\+R\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::\+G\+U\+Iserial\+::read\+Some().
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a310cb18132f446c9d6852cfd4654f00a}\label{classjevois_1_1Serial_a310cb18132f446c9d6852cfd4654f00a}} 
+\index{jevois::Serial@{jevois::Serial}!sendBreak@{sendBreak}}
+\index{sendBreak@{sendBreak}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{sendBreak()}{sendBreak()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::send\+Break (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+在特定持续时间内传输连续的零值位流。 
+
+
+
+Definition at line 253 of file Serial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a17962e924e8caeeeee75bacbbe0964bb}\label{classjevois_1_1Serial_a17962e924e8caeeeee75bacbbe0964bb}} 
+\index{jevois::Serial@{jevois::Serial}!setBlocking@{setBlocking}}
+\index{setBlocking@{setBlocking}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{setBlocking()}{setBlocking()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::set\+Blocking (\begin{DoxyParamCaption}\item[{bool}]{blocking,  }\item[{std\+::chrono\+::milliseconds const \&}]{timeout }\end{DoxyParamCaption})}
+
+
+
+设置是否阻塞访问 
+
+默认为非阻塞。如果阻塞，也可以指定超时（四舍五入到十分之一秒） 
+
+Definition at line 213 of file Serial.\+C.
+
+
+
+References S\+E\+R\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a542b90af764230a4a50c1b71a818f632}\label{classjevois_1_1Serial_a542b90af764230a4a50c1b71a818f632}} 
+\index{jevois::Serial@{jevois::Serial}!toggleDTR@{toggleDTR}}
+\index{toggleDTR@{toggleDTR}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{toggleDTR()}{toggleDTR()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::toggle\+D\+TR (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds const \&}]{dur }\end{DoxyParamCaption})}
+
+
+
+暂时关闭 D\+TR 模式。 
+
+
+
+Definition at line 234 of file Serial.\+C.
+
+
+
+References S\+E\+R\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}\label{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}} 
+\index{jevois::Serial@{jevois::Serial}!type@{type}}
+\index{type@{type}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{jevois\+::\+User\+Interface\+::\+Type}} jevois\+::\+Serial\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+返回我们的端口类型，这里是 Hard 或 U\+SB 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_ac4e4337ea4e993ed8e3230389a062224}{jevois\+::\+User\+Interface}}.
+
+
+
+Definition at line 414 of file Serial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a06bd87b9e59a6aad3c8c184b2406edb5}\label{classjevois_1_1Serial_a06bd87b9e59a6aad3c8c184b2406edb5}} 
+\index{jevois::Serial@{jevois::Serial}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}}
+{\footnotesize\ttfamily void jevois\+::\+Serial\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+使用 serial\+::linestyle 的行终止约定写入字符串 
+
+字符串中不应包含行终止符，write\+String() 将添加一个。 
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_a1ea78da97f6d939d4aca0c1ec577992a}{jevois\+::\+User\+Interface}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}{jevois\+::\+G\+U\+Iserial}}.
+
+
+
+Definition at line 316 of file Serial.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Iserial\+::write\+String().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Serial_a8ce7e8ae9d7f8397a69040baa8ae670f}\label{classjevois_1_1Serial_a8ce7e8ae9d7f8397a69040baa8ae670f}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{baudrate}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Baudrate\char`\"{}}]{,  }\item[{115200}]{,  }\item[{\{ 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 230400, 460800, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a95dd3765242d009b312ef07866108941}\label{classjevois_1_1Serial_a95dd3765242d009b312ef07866108941}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{devname}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Device file name\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a9fea7c2236091db5c238766627928a6c}\label{classjevois_1_1Serial_a9fea7c2236091db5c238766627928a6c}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{drop}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Silently drop write data when write buffer is full. Useful to \char`\"{} \char`\"{}avoid blocking when writing messages to serial-\/over-\/U\+SB port and the host is \char`\"{} \char`\"{}not listening to it. Note that even when drop is}]{false,  }\item[{we will still drop \char`\"{} \char`\"{}data after repeated attempts to send}]{it,  }\item[{and will report an error(as opposed to \char`\"{} \char`\"{}silently dropping when drop is true).\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_abc14de108a2111e2e924546ed3484a1b}\label{classjevois_1_1Serial_abc14de108a2111e2e924546ed3484a1b}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{flowhard}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Use hard (R\+TS/C\+TS) flow control\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a2d5c84667f99bbc694486fda3c618d89}\label{classjevois_1_1Serial_a2d5c84667f99bbc694486fda3c618d89}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{flowsoft}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Use soft (X\+ON/X\+O\+FF) flow control\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a09702a0052bc7bc562ea20b653d9fe1f}\label{classjevois_1_1Serial_a09702a0052bc7bc562ea20b653d9fe1f}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{format}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Data format\char`\"{}}]{,  }\item[{\char`\"{}8N1\char`\"{}}]{,  }\item[{boost\+::regex(\char`\"{}$^\wedge$\mbox{[}5-\/8\mbox{]}\mbox{[}N\+EO\mbox{]}\mbox{[}12\mbox{]}\$\char`\"{})}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a25e06d5b82facb12841347c4a4948649}\label{classjevois_1_1Serial_a25e06d5b82facb12841347c4a4948649}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{linestyle}]{,  }\item[{Line\+Style}]{,  }\item[{\char`\"{}End of line style\+: LF is for 0x0a  CR is for 0x0d  \char`\"{} \char`\"{}C\+R\+LF is for 0x0d 0x0a  Zero is for 0x00  Sloppy accepts any of \char`\"{} \char`\"{}}]{CR\mbox{[}\textbackslash{}\textbackslash{}n\mbox{]}\mbox{[}\textbackslash{}\textbackslash{}r\mbox{]}\mbox{[}\textbackslash{}\textbackslash{}r\textbackslash{}\textbackslash{}n\mbox{]}\mbox{[}\textbackslash{}\textbackslash{}0\mbox{]},  }\item[{LF}]{,  }\item[{C\+R\+LF}]{,  }\item[{0xd0(issued by some keyboards instead of Return)}]{,  }\item[{and Zero as input \char`\"{} \char`\"{}and issues C\+R\+LF in outputs.\char`\"{}}]{,  }\item[{Line\+Style\+::\+Sloppy}]{,  }\item[{Line\+Style\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a196723d35fccaf8b116e1583c6ef7d74}\label{classjevois_1_1Serial_a196723d35fccaf8b116e1583c6ef7d74}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{mode}]{,  }\item[{Terminal\+Mode}]{,  }\item[{\char`\"{}Terminal emulation mode for input\char`\"{}}]{,  }\item[{Terminal\+Mode\+::\+Plain}]{,  }\item[{Terminal\+Mode\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_ab3736991e5ffb59fbf71d8361f06d519}\label{classjevois_1_1Serial_ab3736991e5ffb59fbf71d8361f06d519}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Line\+Style}]{,  }\item[{(LF)(CR)(C\+R\+LF)(Zero)(Sloppy)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Serial_a6e022a62da7730755d3973ec5b7c6100}\label{classjevois_1_1Serial_a6e022a62da7730755d3973ec5b7c6100}} 
+\index{jevois::Serial@{jevois::Serial}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::Serial@{jevois::Serial}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Terminal\+Mode}]{,  }\item[{(Plain)(V\+T100)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{Serial_8H}{Serial.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{Serial_8C}{Serial.\+C}}\end{DoxyCompactItemize}

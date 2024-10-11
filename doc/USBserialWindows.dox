@@ -1,55 +1,38 @@
-/*! \page USBserialWindows Connecting to JeVois using serial-over-USB: Windows host
+/*! \page USBserialWindows 使用 USB 串行连接到 JeVois：Windows 主机
 
-This feature is not yet available on \jvpro but will soon be...
+该功能目前在 \jvpro 上还不可用，但很快就会可用……
 
-\section serusbwingen Finding the serial-over-USB device on Windows host
+\section serusbwingen 在 Windows 主机上查找串行 USB 设备
 
-<b>This should only affect some Windows 7 and Windows 8 users. If you do not see the failed CDC Serial device shown
-below, then you do not need to do anything.</b>
+<b>这应该只会影响部分 Windows 7 和 Windows 8 用户。如果您没有看到下面显示的故障 CDC 串行设备，则无需执行任何操作。</b>
 
-On some versions of Windows, the serial-over-USB port of JeVois will be detected and configured automatically. On other
-versions, however, it may be necessary to install an `inf` file.
+在某些版本的 Windows 上，JeVois 的串行 USB 端口将被自动检测和配置。但是，在其他版本上，可能需要安装“inf”文件。
 
-- First, have a look in your <b>Device Manager</b> and check whether you have an errored <b>CDC Serial</b> device under
-  <b>Other devices</b>. If not, the JeVois serial-over-USB may have been already detected and configured and you are
-  ready to proceed to the next section.
-  \image html windows-cdc-error.png
+- 首先，查看您的<b>设备管理器</b>，检查<b>其他设备</b>下是否有错误的<b>CDC 串行</b>设备。如果没有，JeVois 串行-over-USB 可能已被检测和配置，您可以继续下一部分。 \image html windows-cdc-error.png
 
-- If you see the error device, download this file using right-click and <b>Save Target as ...</b> on this link:
-  http://jevois.org/data/jevois-serial.inf
-  \note Make sure the file is indeed saved with file extension \b .inf, otherwise Windows will not detect it in the next
-  step. In some versions of Windows, the file ends up being saved as \b jevois-serial.inf.txt and you should then rename
-  it as \b jevois-serial.inf
+- 如果您看到错误设备，请通过右键单击下载此文件，然后通过以下链接<b>将目标另存为...</b>：http://jevois.org/data/jevois-serial.inf \note 确保文件确实以文件扩展名 \b .inf 保存，否则 Windows 将无法在下一步中检测到它。在某些版本的 Windows 中，文件最终被保存为 \b jevois-serial.inf.txt，然后您应该将其重命名为 \b jevois-serial.inf
 
-- In the device manager, right click on the CDC serial which has the error, and select \b Properties.
+- 在设备管理器中，右键单击有错误的 CDC 序列，并选择 \b 属性。
 
-- Click <b>Update driver</b> then <b>Browse my computer for driver software</b>.
+- 单击<b>更新驱动程序</b>，然后单击<b>浏览我的计算机以查找驱动程序软件</b>。
 
-- Select the folder where you saved the <b>jevois-serial.inf</b> file (likely, your \b Downloads folder, make sure you
-  do not have any other \b .inf files in there). When Windows complains about this driver not being trusted, select to
-  install anyway.
+- 选择您保存 <b>jevois-serial.inf</b> 文件的文件夹（可能是您的 \b 下载文件夹，请确保其中没有任何其他 \b .inf 文件）。当 Windows 抱怨此驱动程序不受信任时，选择仍然安装。
 
-- Your device manager should update from showing a <b>CDC serial</b> device to <b>JeVois-A33 Serial-over-USB</b> or
-  <b>Gadget Serial</b>, and Windows should tell you that the driver was installed successfully. In the example below,
-  the JeVois serial-over-USB port is configured as \b COM6 - this is the port you should use with a serial terminal
-  program.
+- 您的设备管理器应从显示 <b>CDC 串行</b> 设备更新为 <b>JeVois-A33 Serial-over-USB</b> 或 <b>Gadget Serial</b>，并且 Windows 应告诉您驱动程序已成功安装。在下面的示例中，JeVois serial-over-USB 端口配置为 \b COM6 - 这是您应该与串行终端程序一起使用的端口。
 
-\image html windows-cdc-installed.png
+\图像 html windows-cdc-安装.png
 
 
-\section serusbwinusing Connecting to JeVois
+\section serusbwinusing 连接到 JeVois
 
 
-We have had good success connecting using [Tera Term](https://ttssh2.osdn.jp/index.html.en) and
-[Termite](https://www.compuphase.com/software_termite.htm). Open the COM port that was created using 115200 8N1.
+我们已经成功使用 [Tera Term](https://ttssh2.osdn.jp/index.html.en) 和 [Termite](https://www.compuphase.com/software_termite.htm) 进行连接。打开使用 115200 8N1 创建的 COM 端口。
 
-Termite is quite nice for use with JeVois as it allows you to type and edit a single command line (at the bottom of the
-screen), and it will send the final edited line to JeVois when you press return. Hence it is more typo-friendly than
-some other serial terminal programs.
+Termite 与 JeVois 配合使用效果非常好，因为它允许您键入和编辑单个命令行（在屏幕底部），当您按回车键时，它会将最后编辑的行发送给 JeVois。因此，它比其他一些串行终端程序更易于输入错误。
 
-\image html windows-cdc-teraterm.png Tera Term on Windows 7 connected to JeVois
+\image html windows-cdc-teraterm.png Windows 7 上的 Tera Term 连接到 JeVois
 
-\image html windows-cdc-termite.png Termite on Windows 7 connected to JeVois
+\image html windows-cdc-termite.png Windows 7 上的 Termite 连接到 JeVois
 
 
 */

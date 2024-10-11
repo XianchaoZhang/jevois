@@ -58,11 +58,10 @@ void jevois::MovieInput::get(RawImage & img)
 {
   static size_t frameidx = 0; // only used for conversion info messages
 
-  // Users may call get() several times on a given frame. The switch to the next frame is when done() is called, which
-  // invalidates itsBuf:
+  // 用户可能会在给定帧上多次调用 get()。切换到下一帧是在调用 done() 时，这会使 itsBuf 无效：
   if (itsBuf)
   {
-    // Just pass the buffer to the rawimage:
+    // 只需将缓冲区传递给原始图像：
     img.width = itsMapping.cw;
     img.height = itsMapping.ch;
     img.fmt = itsMapping.cfmt;
@@ -117,8 +116,7 @@ void jevois::MovieInput::get2(RawImage & img)
 {
   static size_t frameidx2 = 0; // only used for conversion info messages
 
-  // Users may call get2() several times on a given frame. The switch to the next frame is when done2() is called, which
-  // invalidates itsBuf2:
+  // 用户可能会在给定帧上多次调用 get2()。切换到下一帧是在调用 done2() 时，这会使 itsBuf2 无效：
   if (itsBuf2)
   {
     // Just pass the buffer to the rawimage:
@@ -132,14 +130,14 @@ void jevois::MovieInput::get2(RawImage & img)
     return;
   }
 
-  // If get2() is called before get() let's call get() now:
+  // 如果在 get() 之前调用 get2()，那么我们现在调用 get()：
   if (! itsBuf)
   {
     jevois::RawImage tmp;
     get(tmp);
   }
 
-  // Now both itsBuf and itsRawFrame are valid, let's just convert/resize itsRawFrame into our second frame format:
+  // 现在 itsBuf 和 itsRawFrame 都有效，让我们将其转换/调整为第二种帧格式：
   cv::Mat frame;
   if (itsRawFrame.cols != int(itsMapping.c2w) || itsRawFrame.rows != int(itsMapping.c2h))
   {
@@ -199,6 +197,6 @@ void jevois::MovieInput::setControl(struct v4l2_control const &)
 // ##############################################################################################################
 void jevois::MovieInput::setFormat(VideoMapping const & m)
 {
-  // Store the mapping so we can check frame size and format when grabbing:
+  // 存储映射，以便我们在抓取时检查帧大小和格式：
   itsMapping = m;
 }

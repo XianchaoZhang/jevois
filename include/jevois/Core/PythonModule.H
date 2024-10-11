@@ -26,93 +26,90 @@ namespace jevois
 {
   class Engine;
   
-  /*! \defgroup python Support for JeVois modules written in Python
+  /*! \defgroup python 支持用 Python 编写的 JeVois 模块
   
-      In addition to writing modules in C++, JeVois supports writing modules in Python. JeVois provides two-way
-      mappings:
+      除了用 C++ 编写模块外，JeVois 还支持用 Python 编写模块。JeVois 提供双向映射：
 
-      - C++ functions and classes of JeVois become accessible in Python by importing Python package \p libjevois
-      - The JeVois engine can directly invoke class member functions of a Python class implementing a machine vision
-        processing module
+      - 通过导入 Python 包 \p libjevois ，可以在 Python 中访问 JeVois 的 C++ 函数和类
+      - JeVois 引擎可以直接调用实现机器视觉处理模块的 Python 类的类成员函数
 
       \ingroup core */
 
-  //! Wrapper around InputFrame to be used by Python
-  /*! This wrapper is to work around the lack of move semantics in our Python support. This class is not intended for
-      general use, but only for use by PythonModule. Users of this class must ensure that the original InputFrame will
-      outlive any and all InputFramePython instances, since InputFramePython just references to the source InputFrame by
-      unprotected raw pointer. Although the C++ object is called InputFramePython, we will expose it to python under
-      the name InputFrame (see PythonSupport.C). \ingroup python */
+  //! 包装 Python 使用的 InputFrame 
+  /*! 此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，仅供 PythonModule 使用。此类的用户必须确保原
+      始 InputFrame 将比任何和所有 InputFramePython 实例都存活得更久，因为 InputFramePython 只是通过不受保护的原始指针引用源 
+      InputFrame。虽然 C++ 对象称为 InputFramePython，但我们将以 InputFrame 的名称将其公开给 python（请参阅 PythonSupport.C）。
+       \ingroup python */
   class InputFramePython
   {
     public:
-      //! Default constructor to keep boost::python happy, object is not operational
+      //! 默认构造函数使 boost::python 正常运行，对象不可操作
       InputFramePython() = default;
       
-      //! Construct from a regular (move-only) InputFrame that should be be coming from Engine
+      //! 从来自引擎的常规（仅移动）InputFrame 构造
       InputFramePython(InputFrame * src);
       
-      //! Get the next captured camera image, thin wrapper for default arg value
+      //! 获取下一个捕获的相机图像，默认参数值的薄包装器
       RawImage const & get1(bool casync) const;
 
-      //! Get the next captured camera image, thin wrapper for default arg value
+      //! 获取下一个捕获的相机图像，默认参数值的薄包装器
       RawImage const & get() const;
 
-      //! Check whether a second input image scaled by the JeVoisPro Platform ISP is available
+      //! 检查 JeVoisPro 平台 ISP 缩放的第二个输入图像是否可用
       bool hasScaledImage() const;
 
-      //! Indicate that user processing is done with the image previously obtained via get()
+      //! 表明用户处理已完成，且已通过 get() 获得先前的图像;
       void done() const;
 
-      //! Indicate that user processing is done with the ISP-scaled image previously obtained via get2()
+      //! 表明用户处理已完成，且已通过 get2() 获得 ISP 缩放图像;
       void done2() const;
 
-      //! Get the next captured camera image, ISP-scaled second frame
+      //! 获取接下来捕获的摄像头图像，ISP 缩放的第二帧
       RawImage const & get21(bool casync) const;
 
-      //! Get the next captured camera image, ISP-scaled second frame
+      //! 获取接下来捕获的摄像头图像，ISP 缩放的第二帧
       RawImage const & get2() const;
 
-      //! Get the next captured camera image that is intended for processing
+      //! 获取下一个用于处理 RawImage 的捕获相机图像
       RawImage const & getp1(bool casync) const;
 
-      //! Get the next captured camera image that is intended for processing
+      //! 获取下一个用于处理 RawImage 的捕获相机图像
       RawImage const & getp() const;
 
-      //! Shorthand to get the input image as a GRAY cv::Mat and release the raw buffer
+      //! 简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区
       cv::Mat getCvGRAY1(bool casync) const;
 
-      //! Shorthand to get the input image as a GRAY cv::Mat and release the raw buffer
+      //! 简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区
       cv::Mat getCvGRAY() const;
 
-      //! Shorthand to get the input image as a BGR cv::Mat and release the raw buffer
+      //! 简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区
       cv::Mat getCvBGR1(bool casync) const;
 
-      //! Shorthand to get the input image as a BGR cv::Mat and release the raw buffer
+      //! 简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区
       cv::Mat getCvBGR() const;
 
-      //! Shorthand to get the input image as a RGB cv::Mat and release the raw buffer
+      //! 简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区
       cv::Mat getCvRGB1(bool casync) const;
 
-      //! Shorthand to get the input image as a RGB cv::Mat and release the raw buffer
+      //! 简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区
       cv::Mat getCvRGB() const;
 
-      //! Shorthand to get the input image as a RGBA cv::Mat and release the raw buffer
+      //! 简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区
       cv::Mat getCvRGBA1(bool casync) const;
 
-      //! Shorthand to get the input image as a RGBA cv::Mat and release the raw buffer
+      //! 简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区
       cv::Mat getCvRGBA() const;
 
-      //! Shorthand to get the input image for processing as a GRAY cv::Mat and release the raw buffer
+      //! 简写为 GRAY cv::Mat 获取输入图像进行处理并释放原始缓冲区
       cv::Mat getCvGRAYp() const;
 
-      //! Shorthand to get the input image for processing as a BGR cv::Mat and release the raw buffer
+      //! 简写为获取输入图像以作为 BGR cv::Mat 进行处理并释放原始缓冲区
       cv::Mat getCvBGRp() const;
 
-      //! Shorthand to get the input image for processing as a RGB cv::Mat and release the raw buffer
+      //! 简写为 RGB cv::Mat 获取输入图像进行处理并释放原始缓冲区
       cv::Mat getCvRGBp() const;
 
-      //! Shorthand to get the input image for processing as a RGBA cv::Mat and release the raw buffer
+      //! 简写以获取输入图像以将其作为 RGBA cv::Mat 进行处理并释放原始缓冲区
       cv::Mat getCvRGBAp() const;
       
     private:
@@ -120,22 +117,21 @@ namespace jevois
       InputFrame * itsInputFrame;
   };
   
-  //! Wrapper around OutputFrame to be used by Python
-  /*! This wrapper is to work around the lack of move semantics in our Python support. This class is not intended for
-      general use, but only for use by PythonModule. Users of this class must ensure that the original OutputFrame will
-      outlive any and all OutputFramePython instances, since OutputFramePython just references to the source OutputFrame
-      by unprotected raw pointer. Although the C++ object is called OutputFramePython, we will expose it to python
-      under the name OutputFrame (see PythonSupport.C). \ingroup python */
+  //! Python 使用的 OutputFrame 包装器 
+  /*! 此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，而仅供 PythonModule 使用。此类的用户必须确保
+      原始 OutputFrame 将比任何和所有 OutputFramePython 实例都存活得更久，因为 OutputFramePython 只是通过不受保护的原始指针引用
+      源 OutputFrame。虽然 C++ 对象称为 OutputFramePython，但我们将以名称 OutputFrame 将其公开给 python（参见 PythonSupport.C）。
+       \ingroup python */
   class OutputFramePython
   {
     public:
-      //! Default constructor to keep boost::python happy, object is not operational
+      //! 默认构造函数使 boost::python 正常运行，对象不可操作
       OutputFramePython() = default;
       
-      //! Construct from a regular (move-only) OutputFrame that should be be coming from Engine
+      //! 从应该来自引擎的常规（仅移动）OutputFrame 构造
       OutputFramePython(OutputFrame * src);
       
-      //! Get the next captured camera image
+      //! 获取下一个捕获的相机图像
       RawImage const & get() const;
 
       //! Indicate that user processing is done with the image previously obtained via get()
@@ -216,11 +212,10 @@ namespace jevois
   };
 
 #ifdef JEVOIS_PRO
-  //! Wrapper around GUIhelper to be used by Python
-  /*! This class is not intended for general use, but only for use by PythonModule. Users of this class must ensure that
-      the original GUIhelper will outlive any and all GUIhelperPython instances, since GUIhelperPython just references
-      to the source GUIhelper by unprotected raw pointer. Although the C++ object is called GUIhelperPython, we will
-      expose it to python under the name GUIhelper (see PythonSupport.C). \ingroup python */
+  //! 包装 GUIhelper 以供 Python 使用 
+  /*! 此类不适用于一般用途，仅供 PythonModule 使用。此类的用户必须确保原始 GUIhelper 将比任何和所有 GUIhelperPython 实例存活的
+      时间更长，因为 GUIhelperPython 只是通过不受保护的原始指针引用源 GUIhelper。虽然 C++ 对象称为 GUIhelperPython，但我们将以
+       GUIhelper 的名称将其公开给 python（参见 PythonSupport.C）。 \ingroup python */
   class GUIhelperPython
   {
     public:
@@ -356,20 +351,19 @@ namespace jevois
   };
 #endif
   
-  //! Wrapper module to allow users to develop new modules written in Python
-  /*! This wrapper module calls a process function written in Python on every frame. Note how sendSerial() is added
-      dynamically after the python class is defined, as a new member function of the class. \ingroup python */
+  //! 包装器模块允许用户开发用 Python 编写的新模块
+  /*! 此包装器模块在每一帧上调用用 Python 编写的处理函数。请注意，在定义 python 类后，sendSerial() 是如何动态添加的，作为该
+      类的新成员函数。 \ingroup python */
   class PythonModule : public Module, public PythonWrapper
   {
     public:
-      //! Constructor needs the full path to a Python source code file
-      /*! Note that, contrary to C++ modules, construction will not throw. This is so that the module is always valid
-	  and initialized, and its module path can be set by Engine, which is necessary to allow saving the source code
-	  from JeVois Inventor. Instead, any construction error is stored internally in this class and will be re-thrown
-	  at any access to process(), parfseSerial(), etc. */
+      //! 构造函数需要 Python 源代码文件的完整路径
+      /*! 请注意，与 C++ 模块相反，构造不会抛出。这样，模块始终有效且已初始化，并且其模块路径可以由 Engine 设置，这对于允许从 
+          JeVois Inventor 保存源代码是必要的。相反，任何构造错误都存储在这个类内部，并且在访问 process()、parfseSerial() 等
+          时会重新抛出。 */
       PythonModule(VideoMapping const & m);
 
-      //! Load python code and optionally call init() python module function, if implemented
+      //! 加载 python 代码并可选择调用 init() python 模块函数（如果已实现）
       void preInit() override;
  
       //! Virtual destructor for safe inheritance

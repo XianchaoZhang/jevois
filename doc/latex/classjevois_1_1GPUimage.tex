@@ -1,0 +1,524 @@
+\hypertarget{classjevois_1_1GPUimage}{}\doxysubsection{jevois\+::G\+P\+Uimage Class Reference}
+\label{classjevois_1_1GPUimage}\index{jevois::GPUimage@{jevois::GPUimage}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Uimage.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Class to hold a \mbox{\hyperlink{classjevois_1_1GPUtexture}{G\+P\+Utexture}}, \mbox{\hyperlink{classjevois_1_1GPUprogram}{G\+P\+Uprogram}}, and other data associated with rendering an image in Open\+GL. 
+
+Open\+GL should have been properly setup before this class is used. 
+
+Definition at line 38 of file G\+P\+Uimage.\+H.
+
+
+
+Collaboration diagram for jevois\+::G\+P\+Uimage\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1GPUimage__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUimage_a2102fa86beca2c170b1212053c329ceb}{G\+P\+Uimage}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GPUimage_a647d37928e862fa184c885ccc6fcbba6}{$\sim$\+G\+P\+Uimage}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_a621cb94a4dec484e84710ae2c82d0215}{set}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img)
+\begin{DoxyCompactList}\small\item\em Set pixel data from a vanilla \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, pixel data will be copied to texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_a6c2fc63472548c58c2b637fdf6fa5445}{set}} (cv\+::\+Mat const \&img, bool rgb)
+\begin{DoxyCompactList}\small\item\em Set pixel data from a vanilla Open\+CV Mat, pixel data will be copied to texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_a16607c4aa51636c4d8d7609c22bc18f2}{set}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} const \&frame, E\+G\+L\+Display display)
+\begin{DoxyCompactList}\small\item\em Set pixel data from camera input frame, sharing data with camera kernel driver using zero-\/copy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_aa94afeb7f3fe3268588f1aae96307876}{set2}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} const \&frame, E\+G\+L\+Display display)
+\begin{DoxyCompactList}\small\item\em Set pixel data from camera input second (scaled) frame, sharing data with camera kernel driver using zero-\/copy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw}} (int \&x, int \&y, unsigned short \&w, unsigned short \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias, glm\+::mat4 const \&pvm)
+\begin{DoxyCompactList}\small\item\em Draw to Open\+GL. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GPUimage_a52d8b84a7b85442b17448022ce116559}{i2d}} (Im\+Vec2 const \&p)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GPUimage_a30ec1434deda0fd6a78bdb0419114bed}{i2ds}} (Im\+Vec2 const \&p)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GPUimage_a9e893862f56fc8e9d8228ba06fbc6b0d}{d2i}} (Im\+Vec2 const \&p)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GPUimage_ae1de47987ab623cc85bbc2e95f708096}{d2is}} (Im\+Vec2 const \&p)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_a64a9f6deafb9a00562dda09b83e6c433}{twirl}} (float t, float alpha=1.\+0F)
+\begin{DoxyCompactList}\small\item\em Optional twirl and alpha fading effect to the image, useful mostly for demos/transitions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_acecc5df142373733b1ff89e8aaf41c04}{set\+Internal}} (unsigned int width, unsigned int height, unsigned int fmt, unsigned char const $\ast$data)
+\item 
+void \mbox{\hyperlink{classjevois_1_1GPUimage_a4479aad42978c70f1ab3f95c2d4a5ed7}{set\+With\+Dma\+Buf}} (\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&img, int dmafd, E\+G\+L\+Display display)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+E\+G\+L\+Display \mbox{\hyperlink{classjevois_1_1GPUimage_a2d9580d4e99494928ed80416d260a0a4}{its\+Display}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GPUtexture}{G\+P\+Utexture}} $>$ \mbox{\hyperlink{classjevois_1_1GPUimage_acea58e770a2f94f454b77cb7d458ec73}{its\+Texture}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GPUprogram}{G\+P\+Uprogram}} $>$ \mbox{\hyperlink{classjevois_1_1GPUimage_a3d0b15a0e29dd76afeba9022b80e2dfa}{its\+Program}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf}{G\+P\+Utexture\+Dma\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1GPUimage_a754a602a3ec47535b9a0c1f52cc37c84}{its\+Texture\+Dma\+Buf}}
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUimage_a99ca07de9ae1008d9d3b2e777389d893}{its\+Location}} = 0
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUimage_a43aef5488a5b44f85e503baadc2bab41}{its\+Vertex\+Array}} = 0
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUimage_a04f14f563647d47aa6d9b7b8e317ca83}{its\+Vertex\+Buffers}} \mbox{[}2\mbox{]} = \{ \}
+\item 
+int \mbox{\hyperlink{classjevois_1_1GPUimage_a96a074e4c0bcb68aea0bc4661899e15a}{its\+DrawX}} = -\/1234567
+\item 
+int \mbox{\hyperlink{classjevois_1_1GPUimage_ad952cc3f7f8ceb6a0dcb38de4ef86ade}{its\+DrawY}} = -\/6712345
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1GPUimage_af4a5ced3e93c69749b1374329005c93c}{its\+Draw\+Width}} = 0
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1GPUimage_a33390f866aafc8c3afcc88bf296c6323}{its\+Draw\+Height}} = 0
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1GPUimage_a34d505b280042b5f315d45782df2890a}{its\+Texture\+Width}} = 0
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1GPUimage_a95166b26042ab0333d40495e1f4c1956}{its\+Texture\+Height}} = 0
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1GPUimage_a15079b33dc67fc0ffa9bf8f396c068d5}{its\+Format}} = 0
+\item 
+int \mbox{\hyperlink{classjevois_1_1GPUimage_a9d2addfe32b6ae8cb0f913248deed38a}{its\+G\+Ltexture\+Width}} = 0
+\item 
+G\+Lenum \mbox{\hyperlink{classjevois_1_1GPUimage_a78d90434af688fdeea8fbdda5f5e7312}{its\+G\+Ltexture\+Fmt}} = 0
+\item 
+G\+Lfloat \mbox{\hyperlink{classjevois_1_1GPUimage_acbd04ebcce5745cd9fda965978372417}{its\+Twirl}} = 0
+\item 
+G\+Lfloat \mbox{\hyperlink{classjevois_1_1GPUimage_af157e6261eb019bc3cc87e37871fd9f6}{its\+Alpha}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a2102fa86beca2c170b1212053c329ceb}\label{classjevois_1_1GPUimage_a2102fa86beca2c170b1212053c329ceb}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!GPUimage@{GPUimage}}
+\index{GPUimage@{GPUimage}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{GPUimage()}{GPUimage()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Uimage\+::\+G\+P\+Uimage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 51 of file G\+P\+Uimage.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a647d37928e862fa184c885ccc6fcbba6}\label{classjevois_1_1GPUimage_a647d37928e862fa184c885ccc6fcbba6}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!````~GPUimage@{$\sim$GPUimage}}
+\index{````~GPUimage@{$\sim$GPUimage}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{$\sim$GPUimage()}{~GPUimage()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Uimage\+::$\sim$\+G\+P\+Uimage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 55 of file G\+P\+Uimage.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a9e893862f56fc8e9d8228ba06fbc6b0d}\label{classjevois_1_1GPUimage_a9e893862f56fc8e9d8228ba06fbc6b0d}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!d2i@{d2i}}
+\index{d2i@{d2i}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{d2i()}{d2i()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+P\+Uimage\+::d2i (\begin{DoxyParamCaption}\item[{Im\+Vec2 const \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from on-\/screen to within a rendered image. 
+
+Throws if \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} has not been previously called. 
+
+Definition at line 420 of file G\+P\+Uimage.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::d2i().
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_ae1de47987ab623cc85bbc2e95f708096}\label{classjevois_1_1GPUimage_ae1de47987ab623cc85bbc2e95f708096}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!d2is@{d2is}}
+\index{d2is@{d2is}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{d2is()}{d2is()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+P\+Uimage\+::d2is (\begin{DoxyParamCaption}\item[{Im\+Vec2 const \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from on-\/screen to within a rendered image. 
+
+Throws if \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} has not been previously called. 
+
+Definition at line 427 of file G\+P\+Uimage.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::d2is().
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}\label{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!draw@{draw}}
+\index{draw@{draw}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::draw (\begin{DoxyParamCaption}\item[{int \&}]{x,  }\item[{int \&}]{y,  }\item[{unsigned short \&}]{w,  }\item[{unsigned short \&}]{h,  }\item[{bool}]{noalias,  }\item[{glm\+::mat4 const \&}]{pvm }\end{DoxyParamCaption})}
+
+
+
+Draw to Open\+GL. 
+
+If w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Otherwise, x,y,w,h are not modified. Throws if \mbox{\hyperlink{classjevois_1_1GPUimage_a621cb94a4dec484e84710ae2c82d0215}{set()}} has not been previously called. If noalias is specified, the scaling factor will be rounded down to the nearest integer to prevent aliasing in the display. This may reduce the displayed image size. For example, with a 1920x1080 window, a 640x480 image would be letterboxed to 1440x1080 when noalias is false. But that is a scaling factor of 2.\+25 which may create rendering aliasing. When noalias is true, the letterboxed image size will be 1280x960 (scale factor of 2.\+0). The matrix pvm is the projection-\/view-\/model matrix to use for rendering. 
+
+Definition at line 282 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::apply\+Letter\+Box(), G\+L\+\_\+\+C\+H\+E\+CK, and h.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a52d8b84a7b85442b17448022ce116559}\label{classjevois_1_1GPUimage_a52d8b84a7b85442b17448022ce116559}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!i2d@{i2d}}
+\index{i2d@{i2d}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{i2d()}{i2d()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+P\+Uimage\+::i2d (\begin{DoxyParamCaption}\item[{Im\+Vec2 const \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from within a rendered image to on-\/screen. 
+
+Throws if \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} has not been previously called. 
+
+Definition at line 406 of file G\+P\+Uimage.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::i2d().
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a30ec1434deda0fd6a78bdb0419114bed}\label{classjevois_1_1GPUimage_a30ec1434deda0fd6a78bdb0419114bed}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!i2ds@{i2ds}}
+\index{i2ds@{i2ds}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{i2ds()}{i2ds()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+P\+Uimage\+::i2ds (\begin{DoxyParamCaption}\item[{Im\+Vec2 const \&}]{p }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from within a rendered image to on-\/screen. 
+
+Throws if \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} has not been previously called. 
+
+Definition at line 413 of file G\+P\+Uimage.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::i2ds().
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a6c2fc63472548c58c2b637fdf6fa5445}\label{classjevois_1_1GPUimage_a6c2fc63472548c58c2b637fdf6fa5445}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!set@{set}}
+\index{set@{set}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{rgb }\end{DoxyParamCaption})}
+
+
+
+Set pixel data from a vanilla Open\+CV Mat, pixel data will be copied to texture. 
+
+If image had three or four 8-\/bit channels, interpret as R\+GB\mbox{[}A\mbox{]} if rgb is true, otherwise B\+GR\mbox{[}A\mbox{]}. If two 8-\/bit channels, interpret at Y\+U\+YV. If one, interpret at G\+R\+AY. The caller must guarantee that the pixel data will not be de-\/allocated until after \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} is called. 
+
+Definition at line 162 of file G\+P\+Uimage.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a16607c4aa51636c4d8d7609c22bc18f2}\label{classjevois_1_1GPUimage_a16607c4aa51636c4d8d7609c22bc18f2}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!set@{set}}
+\index{set@{set}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&}]{frame,  }\item[{E\+G\+L\+Display}]{display }\end{DoxyParamCaption})}
+
+
+
+Set pixel data from camera input frame, sharing data with camera kernel driver using zero-\/copy. 
+
+The caller must guarantee that the pixel data will not be de-\/allocated (e.\+g., by calling done() on the \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}) until after \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} is called. Zero-\/copy requires D\+M\+A\+B\+UF sharing between V4\+L2 and Open\+G\+L-\/\+ES and is only available on Je\+Vois-\/\+Pro platform. On other hardware configs, this falls back to set(\+Raw\+Image) using the \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} from the \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}. 
+
+Definition at line 180 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Input\+Frame\+::get(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a621cb94a4dec484e84710ae2c82d0215}\label{classjevois_1_1GPUimage_a621cb94a4dec484e84710ae2c82d0215}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!set@{set}}
+\index{set@{set}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{set()}{set()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})}
+
+
+
+Set pixel data from a vanilla \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, pixel data will be copied to texture. 
+
+The caller must guarantee that the pixel data will not be de-\/allocated until after \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} is called. 
+
+Definition at line 156 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_aa94afeb7f3fe3268588f1aae96307876}\label{classjevois_1_1GPUimage_aa94afeb7f3fe3268588f1aae96307876}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!set2@{set2}}
+\index{set2@{set2}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{set2()}{set2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} const \&}]{frame,  }\item[{E\+G\+L\+Display}]{display }\end{DoxyParamCaption})}
+
+
+
+Set pixel data from camera input second (scaled) frame, sharing data with camera kernel driver using zero-\/copy. 
+
+The caller must guarantee that the pixel data will not be de-\/allocated (e.\+g., by calling done() on the \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}) until after \mbox{\hyperlink{classjevois_1_1GPUimage_aeb94b2ad8524f0ae4bb293377466fb29}{draw()}} is called. Zero-\/copy requires D\+M\+A\+B\+UF sharing between V4\+L2 and Open\+G\+L-\/\+ES and is only available on Je\+Vois-\/\+Pro platform. On other hardware configs, this falls back to set(\+Raw\+Image) using the \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} from the \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}. Throws unless we are Je\+Vois-\/\+Pro Platform and the camera is set to Crop\+Scale mode. 
+
+Definition at line 206 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Input\+Frame\+::get2(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_acecc5df142373733b1ff89e8aaf41c04}\label{classjevois_1_1GPUimage_acecc5df142373733b1ff89e8aaf41c04}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!setInternal@{setInternal}}
+\index{setInternal@{setInternal}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{setInternal()}{setInternal()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set\+Internal (\begin{DoxyParamCaption}\item[{unsigned int}]{width,  }\item[{unsigned int}]{height,  }\item[{unsigned int}]{fmt,  }\item[{unsigned char const $\ast$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 62 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::fccstr(), jevois\+::shader\+::frag\+\_\+grey, jevois\+::shader\+::frag\+\_\+grey\+\_\+twirl, jevois\+::shader\+::frag\+\_\+rgb, jevois\+::shader\+::frag\+\_\+rgb\+\_\+twirl, jevois\+::shader\+::frag\+\_\+rgba, jevois\+::shader\+::frag\+\_\+rgba\+\_\+twirl, jevois\+::shader\+::frag\+\_\+yuyv, jevois\+::shader\+::frag\+\_\+yuyv\+\_\+twirl, L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and jevois\+::shader\+::vert.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a4479aad42978c70f1ab3f95c2d4a5ed7}\label{classjevois_1_1GPUimage_a4479aad42978c70f1ab3f95c2d4a5ed7}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!setWithDmaBuf@{setWithDmaBuf}}
+\index{setWithDmaBuf@{setWithDmaBuf}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{setWithDmaBuf()}{setWithDmaBuf()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::set\+With\+Dma\+Buf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img,  }\item[{int}]{dmafd,  }\item[{E\+G\+L\+Display}]{display }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 232 of file G\+P\+Uimage.\+C.
+
+
+
+References jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::shader\+::frag\+\_\+oes, jevois\+::shader\+::frag\+\_\+oes\+\_\+twirl, jevois\+::\+Raw\+Image\+::height, L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, jevois\+::shader\+::vert, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a64a9f6deafb9a00562dda09b83e6c433}\label{classjevois_1_1GPUimage_a64a9f6deafb9a00562dda09b83e6c433}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!twirl@{twirl}}
+\index{twirl@{twirl}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{twirl()}{twirl()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Uimage\+::twirl (\begin{DoxyParamCaption}\item[{float}]{t,  }\item[{float}]{alpha = {\ttfamily 1.0F} }\end{DoxyParamCaption})}
+
+
+
+Optional twirl and alpha fading effect to the image, useful mostly for demos/transitions. 
+
+
+
+Definition at line 434 of file G\+P\+Uimage.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUimage_af157e6261eb019bc3cc87e37871fd9f6}\label{classjevois_1_1GPUimage_af157e6261eb019bc3cc87e37871fd9f6}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsAlpha@{itsAlpha}}
+\index{itsAlpha@{itsAlpha}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsAlpha}{itsAlpha}}
+{\footnotesize\ttfamily G\+Lfloat jevois\+::\+G\+P\+Uimage\+::its\+Alpha = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 123 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a2d9580d4e99494928ed80416d260a0a4}\label{classjevois_1_1GPUimage_a2d9580d4e99494928ed80416d260a0a4}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsDisplay@{itsDisplay}}
+\index{itsDisplay@{itsDisplay}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsDisplay}{itsDisplay}}
+{\footnotesize\ttfamily E\+G\+L\+Display jevois\+::\+G\+P\+Uimage\+::its\+Display\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 105 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a33390f866aafc8c3afcc88bf296c6323}\label{classjevois_1_1GPUimage_a33390f866aafc8c3afcc88bf296c6323}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsDrawHeight@{itsDrawHeight}}
+\index{itsDrawHeight@{itsDrawHeight}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsDrawHeight}{itsDrawHeight}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+G\+P\+Uimage\+::its\+Draw\+Height = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 117 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_af4a5ced3e93c69749b1374329005c93c}\label{classjevois_1_1GPUimage_af4a5ced3e93c69749b1374329005c93c}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsDrawWidth@{itsDrawWidth}}
+\index{itsDrawWidth@{itsDrawWidth}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsDrawWidth}{itsDrawWidth}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+G\+P\+Uimage\+::its\+Draw\+Width = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 117 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a96a074e4c0bcb68aea0bc4661899e15a}\label{classjevois_1_1GPUimage_a96a074e4c0bcb68aea0bc4661899e15a}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsDrawX@{itsDrawX}}
+\index{itsDrawX@{itsDrawX}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsDrawX}{itsDrawX}}
+{\footnotesize\ttfamily int jevois\+::\+G\+P\+Uimage\+::its\+DrawX = -\/1234567\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 116 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_ad952cc3f7f8ceb6a0dcb38de4ef86ade}\label{classjevois_1_1GPUimage_ad952cc3f7f8ceb6a0dcb38de4ef86ade}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsDrawY@{itsDrawY}}
+\index{itsDrawY@{itsDrawY}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsDrawY}{itsDrawY}}
+{\footnotesize\ttfamily int jevois\+::\+G\+P\+Uimage\+::its\+DrawY = -\/6712345\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 116 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a15079b33dc67fc0ffa9bf8f396c068d5}\label{classjevois_1_1GPUimage_a15079b33dc67fc0ffa9bf8f396c068d5}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsFormat@{itsFormat}}
+\index{itsFormat@{itsFormat}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsFormat}{itsFormat}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+G\+P\+Uimage\+::its\+Format = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 119 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a78d90434af688fdeea8fbdda5f5e7312}\label{classjevois_1_1GPUimage_a78d90434af688fdeea8fbdda5f5e7312}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsGLtextureFmt@{itsGLtextureFmt}}
+\index{itsGLtextureFmt@{itsGLtextureFmt}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsGLtextureFmt}{itsGLtextureFmt}}
+{\footnotesize\ttfamily G\+Lenum jevois\+::\+G\+P\+Uimage\+::its\+G\+Ltexture\+Fmt = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 121 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a9d2addfe32b6ae8cb0f913248deed38a}\label{classjevois_1_1GPUimage_a9d2addfe32b6ae8cb0f913248deed38a}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsGLtextureWidth@{itsGLtextureWidth}}
+\index{itsGLtextureWidth@{itsGLtextureWidth}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsGLtextureWidth}{itsGLtextureWidth}}
+{\footnotesize\ttfamily int jevois\+::\+G\+P\+Uimage\+::its\+G\+Ltexture\+Width = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 120 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a99ca07de9ae1008d9d3b2e777389d893}\label{classjevois_1_1GPUimage_a99ca07de9ae1008d9d3b2e777389d893}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsLocation@{itsLocation}}
+\index{itsLocation@{itsLocation}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsLocation}{itsLocation}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Uimage\+::its\+Location = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 112 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a3d0b15a0e29dd76afeba9022b80e2dfa}\label{classjevois_1_1GPUimage_a3d0b15a0e29dd76afeba9022b80e2dfa}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsProgram@{itsProgram}}
+\index{itsProgram@{itsProgram}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsProgram}{itsProgram}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1GPUprogram}{G\+P\+Uprogram}}$>$ jevois\+::\+G\+P\+Uimage\+::its\+Program\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 107 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_acea58e770a2f94f454b77cb7d458ec73}\label{classjevois_1_1GPUimage_acea58e770a2f94f454b77cb7d458ec73}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsTexture@{itsTexture}}
+\index{itsTexture@{itsTexture}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsTexture}{itsTexture}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1GPUtexture}{G\+P\+Utexture}}$>$ jevois\+::\+G\+P\+Uimage\+::its\+Texture\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 106 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a754a602a3ec47535b9a0c1f52cc37c84}\label{classjevois_1_1GPUimage_a754a602a3ec47535b9a0c1f52cc37c84}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsTextureDmaBuf@{itsTextureDmaBuf}}
+\index{itsTextureDmaBuf@{itsTextureDmaBuf}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsTextureDmaBuf}{itsTextureDmaBuf}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf}{G\+P\+Utexture\+Dma\+Buf}}$>$ jevois\+::\+G\+P\+Uimage\+::its\+Texture\+Dma\+Buf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 110 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a95166b26042ab0333d40495e1f4c1956}\label{classjevois_1_1GPUimage_a95166b26042ab0333d40495e1f4c1956}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsTextureHeight@{itsTextureHeight}}
+\index{itsTextureHeight@{itsTextureHeight}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsTextureHeight}{itsTextureHeight}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+G\+P\+Uimage\+::its\+Texture\+Height = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 118 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a34d505b280042b5f315d45782df2890a}\label{classjevois_1_1GPUimage_a34d505b280042b5f315d45782df2890a}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsTextureWidth@{itsTextureWidth}}
+\index{itsTextureWidth@{itsTextureWidth}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsTextureWidth}{itsTextureWidth}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+G\+P\+Uimage\+::its\+Texture\+Width = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 118 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_acbd04ebcce5745cd9fda965978372417}\label{classjevois_1_1GPUimage_acbd04ebcce5745cd9fda965978372417}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsTwirl@{itsTwirl}}
+\index{itsTwirl@{itsTwirl}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsTwirl}{itsTwirl}}
+{\footnotesize\ttfamily G\+Lfloat jevois\+::\+G\+P\+Uimage\+::its\+Twirl = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 122 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a43aef5488a5b44f85e503baadc2bab41}\label{classjevois_1_1GPUimage_a43aef5488a5b44f85e503baadc2bab41}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsVertexArray@{itsVertexArray}}
+\index{itsVertexArray@{itsVertexArray}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsVertexArray}{itsVertexArray}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Uimage\+::its\+Vertex\+Array = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 113 of file G\+P\+Uimage.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1GPUimage_a04f14f563647d47aa6d9b7b8e317ca83}\label{classjevois_1_1GPUimage_a04f14f563647d47aa6d9b7b8e317ca83}} 
+\index{jevois::GPUimage@{jevois::GPUimage}!itsVertexBuffers@{itsVertexBuffers}}
+\index{itsVertexBuffers@{itsVertexBuffers}!jevois::GPUimage@{jevois::GPUimage}}
+\doxyparagraph{\texorpdfstring{itsVertexBuffers}{itsVertexBuffers}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Uimage\+::its\+Vertex\+Buffers\mbox{[}2\mbox{]} = \{ \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 114 of file G\+P\+Uimage.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUimage_8H}{G\+P\+Uimage.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUimage_8C}{G\+P\+Uimage.\+C}}\end{DoxyCompactItemize}

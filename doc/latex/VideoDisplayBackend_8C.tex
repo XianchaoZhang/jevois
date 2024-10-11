@@ -1,0 +1,30 @@
+\hypertarget{VideoDisplayBackend_8C}{}\doxysubsection{src/jevois/\+G\+P\+U/\+Video\+Display\+Backend.C File Reference}
+\label{VideoDisplayBackend_8C}\index{src/jevois/GPU/VideoDisplayBackend.C@{src/jevois/GPU/VideoDisplayBackend.C}}
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Video\+Display\+Backend.\+H$>$}\newline
+Include dependency graph for Video\+Display\+Backend.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{VideoDisplayBackend_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{VideoDisplayBackend_8C_a25c14b5f4bad1336b4f6ef90c7dba370}{J\+E\+V\+O\+I\+S\+\_\+\+E\+G\+L\+\_\+\+I\+N\+FO}}(x)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{VideoDisplayBackend_8C_a25c14b5f4bad1336b4f6ef90c7dba370}\label{VideoDisplayBackend_8C_a25c14b5f4bad1336b4f6ef90c7dba370}} 
+\index{VideoDisplayBackend.C@{VideoDisplayBackend.C}!JEVOIS\_EGL\_INFO@{JEVOIS\_EGL\_INFO}}
+\index{JEVOIS\_EGL\_INFO@{JEVOIS\_EGL\_INFO}!VideoDisplayBackend.C@{VideoDisplayBackend.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_EGL\_INFO}{JEVOIS\_EGL\_INFO}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+E\+G\+L\+\_\+\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \mbox{\hyperlink{OpenGL_8H_a684c0dc6c3c9c9550c3a18fa13c8749b}{GL\_CHECK}}(eglGetConfigAttrib(itsDisplay, configs[i], x, \&val)); \(\backslash\)}
+\DoxyCodeLine{    info += std::string(\#x) + \textcolor{charliteral}{'='} + \mbox{\hyperlink{group__utils_gae142fbf87f70b758581c1845c2fa58e7}{std::to\_string}}(val) + \textcolor{stringliteral}{", "};}
+
+\end{DoxyCode}

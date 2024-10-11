@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_VideoDisplayBackend_8C">
+<title>src/jevois/GPU/VideoDisplayBackend.C File Reference</title>
+<indexterm><primary>src/jevois/GPU/VideoDisplayBackend.C</primary></indexterm>
+<programlisting>#include &lt;jevois/GPU/VideoDisplayBackend.H&gt;
+</programlisting>Include dependency graph for VideoDisplayBackend.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="VideoDisplayBackend_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_VideoDisplayBackend_8C_1a25c14b5f4bad1336b4f6ef90c7dba370">JEVOIS_EGL_INFO</link>(x)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_VideoDisplayBackend_8C_1a25c14b5f4bad1336b4f6ef90c7dba370"/>    <section>
+    <title>JEVOIS_EGL_INFO</title>
+<indexterm><primary>JEVOIS_EGL_INFO</primary><secondary>VideoDisplayBackend.C</secondary></indexterm>
+<indexterm><primary>VideoDisplayBackend.C</primary><secondary>JEVOIS_EGL_INFO</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_EGL_INFO( x)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<link linkend="_OpenGL_8H_1a684c0dc6c3c9c9550c3a18fa13c8749b">GL_CHECK</link>(eglGetConfigAttrib(itsDisplay,&#32;configs[i],&#32;x,&#32;&amp;val));&#32;\
+&#32;&#32;&#32;&#32;info&#32;+=&#32;std::string(#x)&#32;+&#32;<emphasis role="charliteral">&apos;=&apos;</emphasis>&#32;+&#32;<link linkend="_group__utils_1gae142fbf87f70b758581c1845c2fa58e7">std::to_string</link>(val)&#32;+&#32;<emphasis role="stringliteral">&quot;,&#32;&quot;</emphasis>;
+</programlisting></section>
+</section>
+</section>

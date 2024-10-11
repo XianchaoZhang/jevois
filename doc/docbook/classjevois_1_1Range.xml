@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Range">
+<title>jevois::Range&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Types/Range.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::Range&lt; T &gt;</title></simplesect>
+
+
+<para>通用 <link linkend="_classjevois_1_1Range">Range</link> 类 </para>
+
+
+
+<para><link linkend="_classjevois_1_1Range">Range</link> 类用于表示从 [min .. max] 的范围</para>
+
+<para>请注意，Range 的运算符不使用类型提升。这是为了最大限度地减少模板负担，也是为了减少程序员的困惑。例如，虽然原则上可以定义 Range&lt;int&gt; + float 并返回 Range&lt;float&gt;，但这里我们没有定义这样的运算符。通过首先转换范围然后添加常量可以实现相同的结 果：</para>
+
+<para><literallayout><computeroutput>jevois::Range&lt;int&gt;&#32;r1(0,&#32;100);
+//&#32;NOT&#32;ALLOWED:&#32;jevois::Range&lt;float&gt;&#32;r2&#32;=&#32;r1&#32;+&#32;1.23F;
+jevois::Range&lt;float&gt;&#32;r2&#32;=&#32;jevois::Range&lt;float&gt;(r1)&#32;+&#32;1.23F;&#32;//&#32;OK,&#32;没有隐藏转换，易于阅读，明确
+</computeroutput></literallayout></para>
+
+<para><link linkend="_classjevois_1_1Range">Range</link> 上的运算符在内部使用范围检查和限制。因此，使用 Range&lt;byte&gt; 时要小心。例如： <literallayout><computeroutput>jevois::Range&lt;jevois::byte&gt;&#32;r(jevois::byte(0),&#32;jevois::byte(250));
+r&#32;+=&#32;jevois::byte(100);&#32;//&#32;new&#32;range&#32;is&#32;100-255
+</computeroutput></literallayout> </para>
+<para>
+Definition at line 78 of file Range.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Range_1a2e4ec9033f659f54d6a39f31198ad4be">Range</link> ()</para>
+
+<para>Default constructor, range is [0 .. 0]. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Range_1add3b8affc73769fe5dba0de6d9095858">Range</link> (T const mini, T const maxi)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Range_1a34867aa2cd7fdd4c3e9cba1d7834bee6">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;other)=default</para>
+
+<para>Copy constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Range_1a3710d9d2e56086ffb9dd4b4400ae30a9">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;&amp;other)=default</para>
+
+<para>Move constructor. </para>
+</listitem>
+            <listitem><para>template&lt;typename U &gt; </para><para><link linkend="_classjevois_1_1Range_1a8b9a5f2b87ded2b216e968d3e2a09852">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; U &gt; const &amp;other)</para>
+
+<para>复制转换构造函数，内部使用 <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert&lt;T,U&gt;</link> </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1a73726994e4d23f6b9b3e141264f69310">operator=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;other)=default</para>
+
+<para>Assignment. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1aabca48f2414d21724afe3139f1a51072">operator=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;&amp;other)=default</para>
+
+<para>Move assignment. </para>
+</listitem>
+            <listitem><para>const T &amp; <link linkend="_classjevois_1_1Range_1a6b13d7f40e04d40f7e3a046581eb54a6">min</link> () const</para>
+
+<para>Return the minimum value. </para>
+</listitem>
+            <listitem><para>const T &amp; <link linkend="_classjevois_1_1Range_1a4a549ba093c640c573a0053458e38176">max</link> () const</para>
+
+<para>Return the maximum value. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Range_1a58b5b7edc3efc6040fe4aaedd9522a8f">empty</link> () const</para>
+
+<para>Return whether <link linkend="_classjevois_1_1Range_1a6b13d7f40e04d40f7e3a046581eb54a6">min()</link> == <link linkend="_classjevois_1_1Range_1a4a549ba093c640c573a0053458e38176">max()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Range_1a635e2a93a55a2bd2a8b5220decd4930f">extend</link> (T const val)</para>
+
+<para>Extend the range, if needed, so that it includes val. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Range_1ae8e0b115e011c415b303d067624d8c68">contains</link> (T const &amp;val) const</para>
+
+<para>Return true if val is within [min ... max]. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1a87ca731ef4a775a97877d8f4cf4e0d5f">merge</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;r1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;r2)</para>
+
+<para>Merge two ranges. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::ostream &amp; <link linkend="_classjevois_1_1Range_1ad1edbe7f3a6e61e3dfc264bbd1f3c55a">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;r)</para>
+
+<para>Stream out as &quot;[min ... max]&quot;. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::istream &amp; <link linkend="_classjevois_1_1Range_1af91d990582481eab9a2cc3bea435163c">operator&gt;&gt;</link> (std::istream &amp;in, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;r)</para>
+
+<para>Stream in as &quot;[min ... max]&quot;. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_classjevois_1_1Range_1a12eaf41523c56fb9077b8e925e694ef7">paramValToString</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter：outputs <computeroutput>min</computeroutput>...max (e.g., 0...100) </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_classjevois_1_1Range_1a2f1086da6d93a653fcf5108c7b8e7130">paramStringToVal</link> (std::string const &amp;valstring, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入， 用于 jevois::Parameter: reads <computeroutput>min</computeroutput>...max (e.g., 0...100) </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_classjevois_1_1Range_1aca58491e6bc6518b779d44f564329a0c">operator==</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range2)</para>
+
+<para>相等性测试： Range&lt;T&gt; == Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_classjevois_1_1Range_1a88ee26977ee29b8f752791039f76ff78">operator!=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range2)</para>
+
+<para>不等式测试： Range&lt;T&gt; != Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1abb29c7835c518c5d7ab531669a3bdbcf">operator+</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range, T const &amp;scalar)</para>
+
+<para>在范围的两端添加常数： Range&lt;T&gt; + T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1a300623c28968367cfec22be853f2077b">operator+</link> (T const &amp;scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range)</para>
+
+<para>在范围的两端添加常数： T + Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1a0f97c64b23314fea674e8afc2006270a">operator-</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range, T const &amp;scalar)</para>
+
+<para>从范围的两端减去常数：Range&lt;T&gt; - T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1abba5270c728ba66bd9f8b143c04e2e65">operator-</link> (T const &amp;scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range)</para>
+
+<para>从范围的两端减去常数：T - Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1afb316085a3c0683e533e81ab8703c193">operator/</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range, T const &amp;scalar)</para>
+
+<para>Divide both ends of a range by a factor: Range&lt;T&gt; / T. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1ac0bca80e0650381a7a5003a885e3a7d0">operator/</link> (T const &amp;scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range)</para>
+
+<para>将范围的两端除以一个因子： T / Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1a8df1ba5f21d170ce2f51686b7ae356c8">operator*</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range, T const &amp;scalar)</para>
+
+<para>将范围的两端乘以一个因子： Range&lt;T&gt; * T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; <link linkend="_classjevois_1_1Range_1a23c52a20b93fc01a0e803016b2d8186f">operator*</link> (T const &amp;scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp;range)</para>
+
+<para>将一个因子乘以范围的两端： T * Range&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1ae8c53045167c09b4ebbcfcf3f486b660">operator+=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;range, T const &amp;scalar)</para>
+
+<para>在范围的两端添加常数：Range&lt;T&gt; += T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1af18a38563e9096105df7b04f2393f9e0">operator-=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;range, T const &amp;scalar)</para>
+
+<para>从范围的两端减去常数：Range&lt;T&gt; -= T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1a9ecf4f3f28bbc3fb360e449d5f1d9fe0">operator*=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;range, T const &amp;scalar)</para>
+
+<para>将范围的两端乘以一个因子： Range&lt;T&gt; *= T </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1Range_1a60d90127864115c4ef72b402c096a082">operator/=</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;range, T const &amp;scalar)</para>
+
+<para>将范围的两端除以一个因子：Range&lt;T&gt; /= T </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Range_1a2e4ec9033f659f54d6a39f31198ad4be"/>    <section>
+    <title>Range()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>Range</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>Range</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::<link linkend="_classjevois_1_1Range">Range</link> ( )<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>Default constructor, range is [0 .. 0]. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1add3b8affc73769fe5dba0de6d9095858"/>    <section>
+    <title>Range()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>Range</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>Range</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::<link linkend="_classjevois_1_1Range">Range</link> (T const mini, T const maxi)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a34867aa2cd7fdd4c3e9cba1d7834bee6"/>    <section>
+    <title>Range()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>Range</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>Range</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::<link linkend="_classjevois_1_1Range">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Copy constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a3710d9d2e56086ffb9dd4b4400ae30a9"/>    <section>
+    <title>Range()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>Range</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>Range</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::<link linkend="_classjevois_1_1Range">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Move constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a8b9a5f2b87ded2b216e968d3e2a09852"/>    <section>
+    <title>Range()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>Range</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>Range</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><computeroutput>template&lt;typename U &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::<link linkend="_classjevois_1_1Range">Range</link> (<link linkend="_classjevois_1_1Range">Range</link>&lt; U &gt; const &amp; other)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>复制转换构造函数，内部使用 <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert&lt;T,U&gt;</link> </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Range_1ae8e0b115e011c415b303d067624d8c68"/>    <section>
+    <title>contains()</title>
+<indexterm><primary>contains</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>contains</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::contains (T const &amp; val) const</computeroutput></para><para>
+
+<para>Return true if val is within [min ... max]. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a58b5b7edc3efc6040fe4aaedd9522a8f"/>    <section>
+    <title>empty()</title>
+<indexterm><primary>empty</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>empty</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::empty ( ) const</computeroutput></para><para>
+
+<para>Return whether <link linkend="_classjevois_1_1Range_1a6b13d7f40e04d40f7e3a046581eb54a6">min()</link> == <link linkend="_classjevois_1_1Range_1a4a549ba093c640c573a0053458e38176">max()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a635e2a93a55a2bd2a8b5220decd4930f"/>    <section>
+    <title>extend()</title>
+<indexterm><primary>extend</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>extend</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::extend (T const val)</computeroutput></para><para>
+
+<para>Extend the range, if needed, so that it includes val. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a4a549ba093c640c573a0053458e38176"/>    <section>
+    <title>max()</title>
+<indexterm><primary>max</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>max</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T&amp; <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::max ( ) const</computeroutput></para><para>
+
+<para>Return the maximum value. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a6b13d7f40e04d40f7e3a046581eb54a6"/>    <section>
+    <title>min()</title>
+<indexterm><primary>min</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>min</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T&amp; <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::min ( ) const</computeroutput></para><para>
+
+<para>Return the minimum value. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1aabca48f2414d21724afe3139f1a51072"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt;T&gt;&amp; <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::operator= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Move assignment. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a73726994e4d23f6b9b3e141264f69310"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt;T&gt;&amp; <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt;::operator= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Assignment. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Range_1a87ca731ef4a775a97877d8f4cf4e0d5f"/>    <section>
+    <title>merge()</title>
+<indexterm><primary>merge</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>merge</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; merge (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; r1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; r2)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Merge two ranges. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a88ee26977ee29b8f752791039f76ff78"/>    <section>
+    <title>operator!=()</title>
+<indexterm><primary>operator!=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator!=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool operator!= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range2)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>不等式测试： Range&lt;T&gt; != Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a8df1ba5f21d170ce2f51686b7ae356c8"/>    <section>
+    <title>operator*()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator*</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator*</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator* (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将范围的两端乘以一个因子： Range&lt;T&gt; * T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a23c52a20b93fc01a0e803016b2d8186f"/>    <section>
+    <title>operator*()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator*</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator*</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator* (T const &amp; scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将一个因子乘以范围的两端： T * Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a9ecf4f3f28bbc3fb360e449d5f1d9fe0"/>    <section>
+    <title>operator*=()</title>
+<indexterm><primary>operator*=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator*=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; operator*= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将范围的两端乘以一个因子： Range&lt;T&gt; *= T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1abb29c7835c518c5d7ab531669a3bdbcf"/>    <section>
+    <title>operator+()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator+</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator+</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator+ (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>在范围的两端添加常数： Range&lt;T&gt; + T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a300623c28968367cfec22be853f2077b"/>    <section>
+    <title>operator+()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator+</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator+</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator+ (T const &amp; scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>在范围的两端添加常数： T + Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1ae8c53045167c09b4ebbcfcf3f486b660"/>    <section>
+    <title>operator+=()</title>
+<indexterm><primary>operator+=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator+=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; operator+= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>在范围的两端添加常数：Range&lt;T&gt; += T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a0f97c64b23314fea674e8afc2006270a"/>    <section>
+    <title>operator-()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator-</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator-</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator- (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>从范围的两端减去常数：Range&lt;T&gt; - T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1abba5270c728ba66bd9f8b143c04e2e65"/>    <section>
+    <title>operator-()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator-</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator-</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator- (T const &amp; scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>从范围的两端减去常数：T - Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1af18a38563e9096105df7b04f2393f9e0"/>    <section>
+    <title>operator-=()</title>
+<indexterm><primary>operator-=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator-=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; operator-= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>从范围的两端减去常数：Range&lt;T&gt; -= T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1afb316085a3c0683e533e81ab8703c193"/>    <section>
+    <title>operator/()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator/</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator/</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator/ (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Divide both ends of a range by a factor: Range&lt;T&gt; / T. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1ac0bca80e0650381a7a5003a885e3a7d0"/>    <section>
+    <title>operator/()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator/</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator/</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; operator/ (T const &amp; scalar, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将范围的两端除以一个因子： T / Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a60d90127864115c4ef72b402c096a082"/>    <section>
+    <title>operator/=()</title>
+<indexterm><primary>operator/=</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator/=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; operator/= (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; range, T const &amp; scalar)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将范围的两端除以一个因子：Range&lt;T&gt; /= T </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1ad1edbe7f3a6e61e3dfc264bbd1f3c55a"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::ostream &amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; r)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Stream out as &quot;[min ... max]&quot;. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1aca58491e6bc6518b779d44f564329a0c"/>    <section>
+    <title>operator==()</title>
+<indexterm><primary>operator==</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator==</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool operator== (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range1, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; range2)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>相等性测试： Range&lt;T&gt; == Range&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1af91d990582481eab9a2cc3bea435163c"/>    <section>
+    <title>operator&gt;&gt;()</title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::istream &amp; operator&gt;&gt; (std::istream &amp; in, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; r)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Stream in as &quot;[min ... max]&quot;. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a2f1086da6d93a653fcf5108c7b8e7130"/>    <section>
+    <title>paramStringToVal()</title>
+<indexterm><primary>paramStringToVal</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>paramStringToVal</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void paramStringToVal (std::string const &amp; valstring, <link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; &amp; result)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>来自字符串的机器可读输入， 用于 jevois::Parameter: reads <computeroutput>min</computeroutput>...max (e.g., 0...100) </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Range_1a12eaf41523c56fb9077b8e925e694ef7"/>    <section>
+    <title>paramValToString()</title>
+<indexterm><primary>paramValToString</primary><secondary>jevois::Range&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Range&lt; T &gt;</primary><secondary>paramValToString</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void paramValToString (<link linkend="_classjevois_1_1Range">Range</link>&lt; T &gt; const &amp; val, std::string &amp; result)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter：outputs <computeroutput>min</computeroutput>...max (e.g., 0...100) </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Types/<link linkend="_Range_8H">Range.H</link></section>
+</section>

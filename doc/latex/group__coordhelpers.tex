@@ -1,0 +1,197 @@
+\hypertarget{group__coordhelpers}{}\doxysubsection{用于将坐标从相机分辨率转换为标准坐标的辅助函数}
+\label{group__coordhelpers}\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+
+
+\doxysubsubsection{ }
+Je\+Vois 中的不同机器视觉算法可能以不同的相机分辨率运行，例如 1280x1024、320x240 或 176x144。当在相机帧中检测到某些感兴 趣的物品时，人们通常希望将该物品的坐标发送到串行端口。如果直接发送物品的图像坐标，就会出现问题，即现在接收器（例如 Arduino）需要知道使用了哪种相机图像分辨率，以便能够正确解释这些坐标。例如，如果视觉注意（显著性）算法使用 640x480 相 机输入运行，则相机视野中心的显著物体的坐标为 320,240。但如果将相同的显著性算法配置为处理 320x240 输入视频（以便它可以 以更高的帧速率运行），现在视野中心的物体的坐标为 160,120。如果将控制例如云台的 Arduino 连接到 Je\+Vois，我们需要一种方法 来独立于相机使用的视频分辨率传达世界上目标物体的坐标。 
+
+因此，\+Je\+Vois 定义了一个标准化的坐标系，如下所示：
+
+
+\begin{DoxyItemize}
+\item 相机视野中心位于 x=0、y=0
+\item 相机图像的左边缘始终位于 x=-\/1000
+\item 相机图像的右边缘始终位于 x=1000
+\item 相机图像的上边缘通常位于 y=-\/750
+\item 相机图像的下边缘通常位于 y=750
+\end{DoxyItemize}
+
+请注意，这里的 750 值来自相机传感器 4\+:3 宽高比的假设，实际上是在 J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT 中定义的。所有相机传感器分辨率都 使用 4\+:3 宽高比，因此 y 值介于 -\/750 和 750 之间，但 1280x1024 除外，其 y 值介于 -\/800 和 800 之间。在编写通过串行发送 相机帧中检测到的物体的坐标的机器视觉算法时，请务必先将这些坐标从图像转换为标准化空间。有关如何使用标准化坐标与嵌入式控制 器进行通信以及 3D 坐标的更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} Collaboration diagram for 用于将坐标从相机分辨率转换为标准坐标的辅助函数\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__coordhelpers}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__coordhelpers_ga1d1cce429f3dc409417001eccf6b85b6}{J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT}}~(16.\+0 / 9.\+0)
+\begin{DoxyCompactList}\small\item\em Je\+Vois 相机的纵横比 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{jevois\+::coords\+::img\+To\+Std}} (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&camimg, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 将相机坐标就地转换为标准化坐标，以确定图像大小 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga22830c058b06d45804ac9acc9e43d939}{jevois\+::coords\+::img\+To\+StdX}} (float \&x, unsigned int const width, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga3c03b605134727c861576a87ccd0fcb7}{jevois\+::coords\+::img\+To\+StdY}} (float \&y, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_gac6b2bbdd9348f3da2e4f9dd304bf3343}{jevois\+::coords\+::img\+To\+Std\+Size}} (float \&w, float \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{jevois\+::coords\+::std\+To\+Img}} (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&camimg, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_gadc6d1e599f2c8e464a69f25b54fd6f45}{jevois\+::coords\+::std\+To\+Img}} (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__coordhelpers_ga1d1cce429f3dc409417001eccf6b85b6}\label{group__coordhelpers_ga1d1cce429f3dc409417001eccf6b85b6}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!JEVOIS\_CAMERA\_ASPECT@{JEVOIS\_CAMERA\_ASPECT}}
+\index{JEVOIS\_CAMERA\_ASPECT@{JEVOIS\_CAMERA\_ASPECT}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CAMERA\_ASPECT}{JEVOIS\_CAMERA\_ASPECT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT~(16.\+0 / 9.\+0)}
+
+
+
+Je\+Vois 相机的纵横比 
+
+
+
+Definition at line 57 of file Coordinates.\+H.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}\label{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!imgToStd@{imgToStd}}
+\index{imgToStd@{imgToStd}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{imgToStd()}{imgToStd()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::img\+To\+Std (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{camimg,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 将相机坐标就地转换为标准化坐标，以确定图像大小 
+
+来自相机的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 用于指定相机图像的像素宽度和高度，这是源坐标系。目标坐标系是标准化坐标系，x 在 \mbox{[}-\/1000 ... 1000\mbox{]} 内，y 在 \mbox{[}-\/750 ... 750\mbox{]} 内。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 22 of file Coordinates.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::height, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Std\+Module\+::send\+Serial\+Contour2\+D(), and jevois\+::\+Std\+Module\+::send\+Serial\+Img2\+D().
+
+\mbox{\Hypertarget{group__coordhelpers_gac6b2bbdd9348f3da2e4f9dd304bf3343}\label{group__coordhelpers_gac6b2bbdd9348f3da2e4f9dd304bf3343}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!imgToStdSize@{imgToStdSize}}
+\index{imgToStdSize@{imgToStdSize}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{imgToStdSize()}{imgToStdSize()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::img\+To\+Std\+Size (\begin{DoxyParamCaption}\item[{float \&}]{w,  }\item[{float \&}]{h,  }\item[{unsigned int const}]{width,  }\item[{unsigned int const}]{height,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 
+
+参数 w 和 h 定义对象的大小（以像素为单位），将转换为标准化单位。宽度和高度用于指定相机图像的像素宽度和高度，这是源坐标 系。目标坐标系是标准化坐标系，x 为 \mbox{[}-\/1000 ... 1000\mbox{]}，y 为 \mbox{[}-\/750 ... 750\mbox{]}。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 50 of file Coordinates.\+C.
+
+
+
+References h, and J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT.
+
+
+
+Referenced by jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dx(), jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dy(), and jevois\+::\+Std\+Module\+::send\+Serial\+Img2\+D().
+
+\mbox{\Hypertarget{group__coordhelpers_ga22830c058b06d45804ac9acc9e43d939}\label{group__coordhelpers_ga22830c058b06d45804ac9acc9e43d939}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!imgToStdX@{imgToStdX}}
+\index{imgToStdX@{imgToStdX}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{imgToStdX()}{imgToStdX()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::img\+To\+StdX (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{unsigned int const}]{width,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 
+
+width 用于指定相机图像的像素宽度，这是源坐标系。目标坐标系是标准化坐标系，x 介于 \mbox{[}-\/1000 ... 1000\mbox{]} 之间。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 36 of file Coordinates.\+C.
+
+
+
+Referenced by jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dx().
+
+\mbox{\Hypertarget{group__coordhelpers_ga3c03b605134727c861576a87ccd0fcb7}\label{group__coordhelpers_ga3c03b605134727c861576a87ccd0fcb7}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!imgToStdY@{imgToStdY}}
+\index{imgToStdY@{imgToStdY}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{imgToStdY()}{imgToStdY()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::img\+To\+StdY (\begin{DoxyParamCaption}\item[{float \&}]{y,  }\item[{unsigned int const}]{height,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 
+
+height 用于指定相机图像的像素高度，这是源坐标系。目标坐标系是标准化坐标系，y 在 \mbox{[}-\/750 ... 750\mbox{]} 内。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 43 of file Coordinates.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT.
+
+
+
+Referenced by jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dy().
+
+\mbox{\Hypertarget{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}\label{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!stdToImg@{stdToImg}}
+\index{stdToImg@{stdToImg}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{stdToImg()}{stdToImg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::coords\+::std\+To\+Img (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{camimg,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 
+
+\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 位于 \mbox{[}-\/1000 ... 1000\mbox{]} 内，y 位于 \mbox{[}-\/750 ... 750\mbox{]} 内。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 60 of file Coordinates.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::height, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__coordhelpers_gadc6d1e599f2c8e464a69f25b54fd6f45}\label{group__coordhelpers_gadc6d1e599f2c8e464a69f25b54fd6f45}} 
+\index{用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}!stdToImg@{stdToImg}}
+\index{stdToImg@{stdToImg}!用于将坐标从相机分辨率转换为标准坐标的辅助函数@{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\doxyparagraph{\texorpdfstring{stdToImg()}{stdToImg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::coords\+::std\+To\+Img (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{unsigned int const}]{width,  }\item[{unsigned int const}]{height,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 
+
+宽度和高度通常来自相机，用于指定相机图像的像素宽度和高度，这是目标坐标系。源坐标系是标准化坐标系，x 为 \mbox{[}-\/1000 ... 1000\mbox{]}，y 为 \mbox{[}-\/750 ... 750\mbox{]}。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 64 of file Coordinates.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT.
+

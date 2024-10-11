@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment">
+<title>jevois::dnn::PostProcessorSegment Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorSegment.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的后处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道的最后一步。 </para>
+<para>
+Definition at line 28 of file PostProcessorSegment.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorSegment:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorSegment__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorSegment:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorSegment__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a015893fa0322d9bd8c9e48c855e3e41e">~PostProcessorSegment</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1ac026160a5dd6e559254117e598682869">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a059864afb35985779f815f1a8cc3ec33">process</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *preproc) override</para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a3826e0638b79af325f264a886247c7e3">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a059864afb35985779f815f1a8cc3ec33">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1af1ad908e21e661c8b454e46720b38e2e">postInit</link> () override</para>
+
+<para>在 <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1af1ad908e21e661c8b454e46720b38e2e">postInit()</link> 中创建 colormap </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::array&lt; uint32_t, 256 &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1ac9cb369daf4b9fea96564b6b81bc5e8e">itsColor</link></para>
+
+<para>Colors for our drawings, as RGBA with zero alpha value. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a32d84d966958c529e237c20e7eceeb4d">JEVOIS_DECLARE_PARAMETER</link> (bgid, unsigned char, &quot;Class ID for the background, will show as fully transparent in &quot; &quot;semantic segmentation overlays&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1aa17100390f282970215ac0cef213c14e">JEVOIS_DEFINE_ENUM_CLASS</link> (SegType,(ClassesHWC)(ClassesCHW)(ArgMax))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a95d99e96875b6d0db944c5e197799972">JEVOIS_DECLARE_PARAMETER</link> (segtype, SegType, &quot;Type of segmentation network output. ClassesHWC: output is 1xHxWxC &quot; &quot;for C classes and we get one score per class we will show &quot; &quot;the top scoring class for each pixel (e.g., UNet-MobileNet on TPU). ClassesCHW: &quot; &quot;output is 1xCxHxW and the rest is as for ClassesHWC (e.g., DeepLabV3 OpenCV). ArgMax: &quot; &quot;output is HxW, 1xHxW, or 1xHxWx1 and contains the class ID for each pixel &quot; &quot;(e.g., DeepLabV3 on TPU).&quot;, SegType::ClassesHWC, SegType_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1a015893fa0322d9bd8c9e48c855e3e41e"/>    <section>
+    <title>~PostProcessorSegment()</title>
+<indexterm><primary>~PostProcessorSegment</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>~PostProcessorSegment</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorSegment::~PostProcessorSegment ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 29 of file PostProcessorSegment.C.</para>
+<para>
+References jevois::GUIhelper::releaseImage().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1ac026160a5dd6e559254117e598682869"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorSegment::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a6e87ca847dc8c16445168b01a2fdedb7">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 37 of file PostProcessorSegment.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1af1ad908e21e661c8b454e46720b38e2e"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorSegment::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>在 <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1af1ad908e21e661c8b454e46720b38e2e">postInit()</link> 中创建 colormap </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">jevois::Component</link>.</para>
+<para>
+Definition at line 43 of file PostProcessorSegment.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1a059864afb35985779f815f1a8cc3ec33"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorSegment::process (std::vector&lt; cv::Mat &gt; const &amp; outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * preproc)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a26329a32271138357f7906c83e4856b1">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 147 of file PostProcessorSegment.C.</para>
+<para>
+References jevois::dnn::PreProcessor::getUnscaledCropRect(), LFATAL, LTHROW, and jevois::dnn::shapestr().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1a3826e0638b79af325f264a886247c7e3"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorSegment::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorSegment_1a059864afb35985779f815f1a8cc3ec33">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1ac7c507221e2f1c52715b9185beaebc42">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 184 of file PostProcessorSegment.C.</para>
+<para>
+References jevois::GUIhelper::drawImage(), and jevois::GUIhelper::i2d().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1a32d84d966958c529e237c20e7eceeb4d"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (bgid , unsigned char , &quot;Class ID for the background, will show as fully transparent in &quot; &quot;semantic segmentation overlays&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1a95d99e96875b6d0db944c5e197799972"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (segtype , SegType , &quot;Type of segmentation network output. ClassesHWC: output is 1xHxWxC &quot; &quot;for C classes and we get one score per class we will show &quot; &quot;the top scoring class for each pixel (e.g., UNet-MobileNet on TPU). ClassesCHW: &quot; &quot;output is 1xCxHxW and the rest is as for ClassesHWC (e.g., DeepLabV3 OpenCV). ArgMax: &quot; &quot;output is HxW, 1xHxW , or 1xHxWx1 and contains the class ID for each pixel &quot; &quot;(e.g., DeepLabV3 on TPU).&quot; , SegType::ClassesHWC , SegType_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1aa17100390f282970215ac0cef213c14e"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()</title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (SegType , (ClassesHWC)(ClassesCHW)(ArgMax) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorSegment_1ac9cb369daf4b9fea96564b6b81bc5e8e"/>    <section>
+    <title>itsColor</title>
+<indexterm><primary>itsColor</primary><secondary>jevois::dnn::PostProcessorSegment</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorSegment</primary><secondary>itsColor</secondary></indexterm>
+<para><computeroutput>std::array&lt;uint32_t, 256&gt; jevois::dnn::PostProcessorSegment::itsColor<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Colors for our drawings, as RGBA with zero alpha value. </para>
+</para>
+<para>
+Definition at line 52 of file PostProcessorSegment.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorSegment_8H">PostProcessorSegment.H</link>include/jevois/DNN/<link linkend="_PostProcessor_8H">PostProcessor.H</link>src/jevois/DNN/<link linkend="_PostProcessorSegment_8C">PostProcessorSegment.C</link></section>
+</section>

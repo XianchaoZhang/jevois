@@ -1,74 +1,44 @@
-/*! \mainpage JeVois Smart Embedded Machine Vision Toolkit
+/*! \mainpage JeVois 智能嵌入式机器视觉工具包
 
-\section welcome Welcome to the documentation of the JeVois Smart Embedded Machine Vision Toolkit.
+\section welcome 欢迎阅读 JeVois 智能嵌入式机器视觉工具包文档。
 
-New users, be sure to check out [JeVois Start](/start/start.html).
+新用户请务必查看 [JeVois Start](/start/start.html)。
 
 \jvimg{jevois-philosophy.png, 60%}
 
-Unlike a traditional camera that relies on a human viewer to interpret the contents of what it sees, JeVois runs
-powerful machine vision and deep learning algorithms right inside the camera. This allows you to directly connect
-JeVois-Pro to a custom robot, home automation system, drone, surveillance system, etc. You let JeVois-Pro handle the
-machine vision while you focus on developing the high-level functionality of your system.
+与依赖人类观察者来解释所见内容的传统相机不同，JeVois 在相机内部运行强大的机器视觉和深度学习算法。这样您就可以直接将 JeVois-Pro 连接到定制机器人、家庭自动化系统、无人机、监控系统等。您可以让 JeVois-Pro 处理机器视觉，而您则专注于开发系统的高级功能。
 
-JeVois is mainly a development and education tool: it provides a Linux-based programming environment (C++ or Python)
-that facilitates writing your own machine vision pipelines for real-time operation on the processor inside the camera.
+JeVois 主要是一个开发和教育工具：它提供了一个基于 Linux 的编程环境（C++ 或 Python），方便您编写自己的机器视觉管道，以便在相机内部的处理器上实时操作。
 
-The JeVois toolkit is primarily designed to run on embedded smart camera hardware, although it can also run on recent
-Linux-based computers, including Raspberry Pi. The toolkit facilitates image capture from a camera sensor, processing of
-the captured images through some machine vision algorithm, and sending the processed results to a host computer over a
-USB link (JeVois-A33) or displaying results using OpenGL (JeVois-Pro).
+JeVois 工具包主要设计用于在嵌入式智能相机硬件上运行，但它也可以在最近的基于 Linux 的计算机（包括 Raspberry Pi）上运行。该工具包有助于从相机传感器捕获图像，通过某种机器视觉算法处理捕获的图像，并通过 USB 链路（JeVois-A33）将处理后的结果发送到主机或使用 OpenGL（JeVois-Pro）显示结果。
 
-Two hardware models are available:
+有两种硬件型号可供选择：
 
-\section hardjevoisa33 JeVois-A33 USB-powered smart webcam
+\section hardjevoisa33 JeVois-A33 USB 供电智能网络摄像头
 
-\image html hardware-proto.jpg "Early JeVois platform prototype with quad-core ARM processor inside. Back view shows Mini-USB port, serial port, Micro-SD slot, and status LED." width=\textwidth
+\image html hardware-proto.jpg "早期的 JeVois 平台原型，内置四核 ARM 处理器。背面显示 Mini-USB 端口、串行端口、Micro-SD 插槽和状态 LED。" width=\textwidth
 
-JeVois-A33 is a small USB-powered smart webcam. To the host computer, a JeVois-A33 smart camera appears like a regular
-USB webcam, and is fully plug-and-play with no driver installation needed on reasonably recent versions of Windows,
-MacOS, and Linux: A JeVois smart camera is compliant with the USB Video Class (UVC) revision 1.1. Like with regular USB
-webcams, users can select image resolution, framerate, and adjust camera settings such as brightness, exposure, color
-balance, etc. But a JeVois smart camera outputs images that are the results of processing camera frames through some
-vision algorithm, as opposed to simply outputing the raw camera frames like a regular USB webcam.
+JeVois-A33 是一款小型 USB 供电智能网络摄像头。对于主机来说，JeVois-A33 智能摄像头看起来就像普通的 USB 网络摄像头，并且完全即插即用，在较新版本的 Windows、MacOS 和 Linux 上无需安装驱动程序：JeVois 智能摄像头符合 USB 视频类 (UVC) 修订版 1.1。与普通 USB 网络摄像头一样，用户可以选择图像分辨率、帧速率并调整摄像头设置，如亮度、曝光、色彩平衡等。但 JeVois 智能摄像头输出的图像是通过某种视觉算法处理摄像头帧的结果，而不是像普通 USB 网络摄像头那样简单地输出原始摄像头帧。
 
-The JeVois smart camera is a compact (39mm x 32mm x 19mm, or 1.5" x 1.25" x 0.75"), USB-powered, self-contained and
-powerful quad-core ARM computer running the Linux operating system.
+JeVois 智能相机是一款紧凑型（39mm x 32mm x 19mm, or 1.5" x 1.25" x 0.75"）、USB 供电、独立且功能强大的四核 ARM 计算机，运行 Linux 操作系统。
 
-\section hardjevoispro JeVois-Pro standalone deep learning camera
+\section hardjevoispro JeVois-Pro 独立深度学习相机
 
 \jvimg{jevois-pro-cards.JPG, 30%}
 
-JeVois-Pro is a full Linux-based computer in a small form factor. In addition to a 6-core CPU, it integrates a variety
-of hardware accelerators for deep neural networks. Because it is a full computer, the primary output for JeVois-Pro is
-an HDMI display. There is no need for a host computer, as one can directly connect keyboard, mouse, and display to
-JeVois-Pro.
+JeVois-Pro 是一款小型的全 Linux 计算机。除了 6 核 CPU 外，它还集成了用于深度神经网络的各种硬件加速器。由于它是一台全功能计算机，因此 JeVois-Pro 的主要输出是 HDMI 显示器。无需主机，因为可以直接将键盘、鼠标和显示器连接到 JeVois-Pro。
 
-\section features Common features
+\section 特点 常见特点
 
-For ease of programming and configuration, all of the operating system, core JeVois software, and any necessary data
-files are stored on a single high-speed Micro-SD card that can easily be removed and plugged into a desktop or laptop
-computer. This also makes the platform "unbrickable" and very hacking-friendly.
+为了便于编程和配置，所有操作系统、核心 JeVois 软件以及任何必要的数据文件都存储在一张高速 Micro-SD 卡上，可以轻松取出并插入台式机或笔记本电脑。这也使得该平台“牢不可破”且非常容易被黑客入侵。
 
-In addition to video outputs, a JeVois smart camera includes one hardware serial port and one serial-over-USB port
-(JeVois-Pro also includes additional hardware ports). Simple text strings can be sent by the smart camera over these
-ports, for example to indicate the coordinates at which an object of interest was found in the camera video
-stream. These are intended for use by embedded controllers, including Arduino or any other that supports serial
-communications (UART with TTL levels at 3.3V or 5V). Users or micro-controllers can also send simple text commands to
-the smart camera over the serial ports.
+除了视频输出外，JeVois 智能相机还包括一个硬件串行端口和一个串行 USB 端口（JeVois-Pro 还包括其他硬件端口）。智能相机可以通过这些端口发送简单的文本字符串，例如，指示在相机视频流中发现感兴趣对象的坐标。这些旨在供嵌入式控制器使用，包括 Arduino 或任何其他支持串行通信（TTL 电平为 3.3V 或 5V 的 UART）的控制器。用户或微控制器还可以通过串行端口向智能相机发送简单的文本命令。
 
-The JeVois software framework combines custom Linux kernel drivers for camera sensor and for USB output, written in C,
-and a custom high-level vision processing framework, written in C++-17. This framework is designed for easy integration
-with other open-source libraries, including tiny-dnn, OpenCV, boost, zBar, Eigen, turbojpeg, etc. The JeVois operating
-system infrastructure is built using the buildroot framework, for which hundreds of libraries and modules are already
-available, and adding new libraries or modules is relatively easy. The core JeVois software is managed by cmake, which
-makes it easy to create new vision processing modules, and which allows simultaneous compilation of the same source code
-for a host computer (e.g., Intel-based Linux desktop used for development, debugging and testing) and for the platform
-hardware (ARM processor).
+JeVois 软件框架结合了用 C 编写的用于相机传感器和 USB 输出的定制 Linux 内核驱动程序，以及用 C++-17 编写的定制高级视觉处理框架。该框架旨在轻松与其他开源库集成，包括 tiny-dnn、OpenCV、boost、zBar、Eigen、turbojpeg 等。JeVois 操作系统基础设施是使用 buildroot 框架构建的，该框架已有数百个库和模块可用，添加新库或模块相对容易。核心 JeVois 软件由 cmake 管理，这使得创建新的视觉处理模块变得容易，并且允许同时为主机（例如，用于开发、调试和测试的基于 Intel 的 Linux 桌面）和平台硬件（ARM 处理器）编译相同的源代码。
 
-\image html frameworks.png "Hardware and software JeVois frameworks. Note that JeVois-Pro now also supports video display outputs and requires no host computer." width=\textwidth
+\image html frameworks.png "硬件和软件 JeVois 框架。请注意，JeVois-Pro 现在还支持视频显示输出，不需要主机。" width=\textwidth
 
-\section contents Table of contents
+\section contents 目录
 
 - \subpage Handling
 - \subpage Hardware
@@ -88,11 +58,11 @@ hardware (ARM processor).
 - \ref JeVoisBaseDocs
 - \subpage History
 
-For tutorials on how to use and program JeVois, see the <a href="/tutorials">JeVois Tutorials</a>.
+有关如何使用和编程 JeVois 的教程，请参阅 <a href="/tutorials">JeVois 教程</a>。
 
 */
 
-/*! \defgroup core Core classes and definitions
+/*! \defgroup core 核心类和定义
 
-    Core types, components, hardware drivers, debugging tools, etc */
+核心类型、组件、硬件驱动程序、调试工具等 */
 

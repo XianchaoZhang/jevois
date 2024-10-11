@@ -1,17 +1,17 @@
-/*! \page Change112log Changes and new features in JeVois 1.12
+/*! \page Change112log JeVois 1.12 中的变化和新功能
 
 
-JeVois 1.12 brings the following new features:
+JeVois 1.12 带来以下新功能：
 
 \youtube{MFGpN_Vp7mg}
 
-- Bumped to OpenCV 4.0.1, with all contrib modules including deep neural networks (DNN) and non-free.
+- 升级到 OpenCV 4.0.1，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。
 
-- New mobilenet_v2_1.0_224_quant available in \jvmod{TensorFlowEasy}, a quantized MobileNet V2 with high accuracy.
+- \jvmod{TensorFlowEasy} 中提供了新的 mobilenet_v2_1.0_224_quant，这是一种具有高精度的量化 MobileNet V2。
 
-- More support for MacOS Mojave in jevois-inventor
+- jevois-inventor 为 MacOS Mojave 提供更多支持
 
-- Added support for ov2640 1600x1200 sensor: This sensor supports: YUYV, BAYER, RGB565 and
+- 增加了对 ov2640 1600x1200 传感器的支持：此传感器支持：YUYV、BAYER、RGB565 和
     +  UXGA (1600 x 1200): up to 15 fps
     +  SXGA (1280 x 1024): up to 15 fps
     +  720p (1280 x  720): up to 15 fps
@@ -24,61 +24,41 @@ JeVois 1.12 brings the following new features:
     + QQVGA ( 160 x  120): up to 60 fps
     + QQCIF (  88 x   72): up to 60 fps
 
-  But note that USB 2.0 bandwidth limitations (up to 24 Mbyte/s of video data) may limit framerates when streaming video
-  over USB.
 
-- New module \jvmod{PyEmotion} recognizes facial emotions in Python using FER+ ONNX deep neural net in OpenCV.
+但请注意，USB 2.0 带宽限制（最高 24 Mbyte/s 的视频数据）可能会限制通过 USB 传输视频时的帧速率。
 
-- New enhanced support for ICM-20948 inertial measurement unit chip. The JeVois ICM20948 driver communicates with a
-  kernel-side driver that is integrated with the camera sensor driver on some optional JeVois sensors only. Currently,
-  only the OnSemi (Aptina) AR0135 global shutter optional camera sensor is equipped with an IMU.
+- 新模块 \jvmod{PyEmotion} 使用 OpenCV 中的 FER+ ONNX 深度神经网络识别 Python 中的面部情绪。
+
+- 新增对 ICM-20948 惯性测量单元芯片的增强支持。JeVois ICM20948 驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 JeVois 传感器上的摄像头传感器驱动程序集成。目前，只有 OnSemi (Aptina) AR0135 全局快门可选摄像头传感器配备了 IMU。
+
+  请参阅新模块 \jvmod{DemoIMU} 和 \jvmod{DemoDMP}，并参阅 \ref Sensors 。
+
+  该芯片的规格相当令人印象深刻：
+      - 3 轴 16 位加速度计，全范围灵敏度可选为 +/-2g、+/-4g、+/-8g 和 +/-16g。
+      - 加速度计数据速率从 4 Hz 到 1125 Hz。
+      - 3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-250dps（度/秒）、+/-500dps、+/-1000dps 和 +/-2000dps。
+      - 陀螺仪数据速率从 4 Hz 到 1125 Hz。
+      - 3 轴 16 位磁力计（指南针），范围宽达 +/-4900uT（微特斯拉）。
+      - 磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。
+      - 16 位温度传感器，读出速率高达 8 kHz。
+      - RAW 数据模式（随时获取当前传感器值）、缓冲 (FIFO) 数据模式（传感器值以固定速率累积到 FIFO 中）和数字运动处理模式 (DMP；原始数据在芯片上处理)。
+      - 片上数字运动处理器 (DMP) 可以在 IMU 芯片内部计算：
+        + 四元数 6（使用加速度计 + 陀螺仪），
+        + 四元数 9（使用加速度计 + 陀螺仪 + 指南针），
+        + geomag 四元数（使用加速度计 + 指南针），
+        + 翻转/拾取检测，
+        + 步数检测和计数，
+        + 基本活动识别：驾驶、行走、跑步、骑自行车、倾斜、静止。
   
-  See new modules \jvmod{DemoIMU} and \jvmod{DemoDMP}, and see \ref Sensors.
+  使用片上计算的四元数，使用以高精度、固定速率获取传感器数据并动态应用各种校准、漂移校正和补偿的算法，可以高度准确地实时估计传感器在 3D 世界中的姿势及其移动方式。请注意，与 IMU 的通信是通过 400kHz I2C 总线进行的，这可能会限制数据读出率，具体取决于从 IMU 请求的数据。此 IMU 有 3 种基本操作模式（参数 \p mode 只能在 params.cfg 中设置）：
 
-  The specifications of this chip are quite impressive:
-      - 3-axis 16-bit accelerometer with full-range sensitivity selectable to +/-2g, +/-4g, +/-8g, and +/-16g.
-      - Accelerometer data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit gyroscope with full-range sensitivity selectable to +/-250dps (degrees/s), +/-500dps,
-        +/-1000dps, and +/-2000dps.
-      - Gyroscope data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit magnetometer (compass) with wide range of +/-4900uT (micro Tesla).
-      - Magnetometer data rates 10 Hz, 20 Hz, 50 Hz, or 100 Hz.
-      - 16-bit temperature sensor with readout rate of up to 8 kHz.
-      - RAW data mode (get current sensor values at any time), buffered (FIFO) data mode (sensor values accumulate into
-        a FIFO at a fixed rate), and digital motion processing mode (DMP; raw data is processed on-chip).
-      - On-chip digital motion processor (DMP) can compute, inside the IMU chip itself:
-        + quaternion 6 (uses accel + gyro),
-        + quaternion 9 (uses accel + gyro + compass),
-        + geomag quaternion (uses accel + compass),
-        + flip/pickup detection,
-        + step detection and counting,
-        + basic activity recognition: drive, walk, run, bike, tilt, still.
-  
-  With quaternions computed on-chip, with an algorithm that gets sensor data at a highly accurate, fixed rate, and
-  applies various calibrations, drift corrections, and compensations on the fly, one gets highly accurate real-time
-  estimate of the sensor's pose in the 3D world and of how it is moving.
-  
-  Note that communication with the IMU is over a 400kHz I2C bus, which may limit data readout rate depending on which
-  data is requested from the IMU.
-  
-  This IMU has 3 basic modes of operation (parameter \p mode which can only be set in params.cfg):
+- RAW：可以使用 getRaw() 或 get() 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以完全规则的间隔调用 get()，则读数中会出现一些时间抖动。IMU 不为其数据提供任何时间戳。
 
-  - RAW: One can access the latest raw sensor data at any time using the getRaw() or get() functions. This is the
-    simplest mode of operation. One disadvantage is that if you are not calling get() at a perfectly regular interval,
-    there will be some time jitter in your readouts. The IMU does not provide any time stamps for its data.
+- FIFO：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte FIFO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启时，陀螺仪速率决定 FIFO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 getRaw() 或 get()。但您需要注意，当使用高传感器数据速率时，FIFO 可能会很快填满并溢出。
 
-  - FIFO: In this mode, data from the sensor is piled up into a 1 kbyte FIFO buffer at a precise, constant rate (when
-    all three of accelerometer, gyroscope, and magnetometer are on, the gyro rate determines the FIFO buffering
-    rate). Main advantage is that you can then read out the data without having to worry about calling getRaw() or get()
-    at a highly precise interval. But you need to be careful that the FIFO can fill up and overflow very quickly when
-    using high sensor data rates.
+- DMP：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (DMP)。然后，DMP 计算四元数、活动识别等，并在这些算法的结果可用时将数据包推送到 FIFO。
 
-  - DMP: In this mode, data is captured from the sensor at an accurate, fixed rate, and is fed to the on-chip digital
-    motion processor (DMP). The DMP then computes quaternions, activity recognition, etc and pushes data packets into
-    the FIFO as results from these algorithms become available.
-
-- New jevoisextra module YOLO Light runs AlexeyAB's yolo2_light with support for INT8 and XNOR inference. However, we
-  only have INT8 models so far, and they run about twice slower than with the darknet-nnpack implementation of YOLO, or
-  the OpenCV implementation. It is hence unclear whether the XNOR inference will really provide a big speed boost.
+- 新的 jevoisextra 模块 YOLO Light 运行 AlexeyAB 的 yolo2_light，支持 INT8 和 XNOR 推理。但是，到目前为止，我们只有 INT8 模型，它们的运行速度比 YOLO 的 darknet-nnpack 实现或 OpenCV 实现慢大约两倍。因此，尚不清楚 XNOR 推理是否真的会大幅提高速度。
 
 */
+

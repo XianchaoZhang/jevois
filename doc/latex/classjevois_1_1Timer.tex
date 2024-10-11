@@ -1,0 +1,102 @@
+\hypertarget{classjevois_1_1Timer}{}\doxysubsection{jevois\+::Timer Class Reference}
+\label{classjevois_1_1Timer}\index{jevois::Timer@{jevois::Timer}}
+
+
+{\ttfamily \#include $<$jevois/\+Debug/\+Timer.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+简单计时器类 
+
+此类以指定的间隔报告 \mbox{\hyperlink{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}{start()}} 和 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 之间所花费的时间。由于 Je\+Vois 模块通常以视频速率工作，因此此类仅报告通过 \mbox{\hyperlink{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}{start()}} 和 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 进行一定次数迭代后的平均时间。因此，即使 \mbox{\hyperlink{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}{start()}} 和 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 之间的操作时间只有几微秒，通过每 100 帧仅报告一次，也不会使整体帧速率降低太多。请参阅 \mbox{\hyperlink{classjevois_1_1Profiler}{Profiler}} 以了解在 \mbox{\hyperlink{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}{start()}} 和 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 之间提供额外检查点的类。 
+
+Definition at line 33 of file Timer.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Timer_a4582d851b7c8aa47094c2db044add747}{Timer}} (char const $\ast$prefix, size\+\_\+t interval=100, int loglevel=L\+O\+G\+\_\+\+I\+N\+FO)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}{start}} ()
+\begin{DoxyCompactList}\small\item\em Start a time measurement period. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1Timer_a541947e3469954b7d72f8bd9c6219df0}{stop}} (double $\ast$seconds)
+\begin{DoxyCompactList}\small\item\em 结束时间测量期，如果达到报告间隔，则报告所花费的时间 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop}} ()
+\begin{DoxyCompactList}\small\item\em 与 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 的其他签名相同，但不提供秒数，用于 python 绑定 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Timer_a4582d851b7c8aa47094c2db044add747}\label{classjevois_1_1Timer_a4582d851b7c8aa47094c2db044add747}} 
+\index{jevois::Timer@{jevois::Timer}!Timer@{Timer}}
+\index{Timer@{Timer}!jevois::Timer@{jevois::Timer}}
+\doxyparagraph{\texorpdfstring{Timer()}{Timer()}}
+{\footnotesize\ttfamily jevois\+::\+Timer\+::\+Timer (\begin{DoxyParamCaption}\item[{char const $\ast$}]{prefix,  }\item[{size\+\_\+t}]{interval = {\ttfamily 100},  }\item[{int}]{loglevel = {\ttfamily LOG\+\_\+INFO} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 29 of file Timer.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}\label{classjevois_1_1Timer_aec4def2ab2f31c18f4935ebb61285852}} 
+\index{jevois::Timer@{jevois::Timer}!start@{start}}
+\index{start@{start}!jevois::Timer@{jevois::Timer}}
+\doxyparagraph{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void jevois\+::\+Timer\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start a time measurement period. 
+
+
+
+Definition at line 40 of file Timer.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}\label{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}} 
+\index{jevois::Timer@{jevois::Timer}!stop@{stop}}
+\index{stop@{stop}!jevois::Timer@{jevois::Timer}}
+\doxyparagraph{\texorpdfstring{stop()}{stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Timer\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+与 \mbox{\hyperlink{classjevois_1_1Timer_a521cd5a99ec0ddb20b597d685601c7bc}{stop()}} 的其他签名相同，但不提供秒数，用于 python 绑定 
+
+
+
+Definition at line 139 of file Timer.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Timer_a541947e3469954b7d72f8bd9c6219df0}\label{classjevois_1_1Timer_a541947e3469954b7d72f8bd9c6219df0}} 
+\index{jevois::Timer@{jevois::Timer}!stop@{stop}}
+\index{stop@{stop}!jevois::Timer@{jevois::Timer}}
+\doxyparagraph{\texorpdfstring{stop()}{stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Timer\+::stop (\begin{DoxyParamCaption}\item[{double $\ast$}]{seconds }\end{DoxyParamCaption})}
+
+
+
+结束时间测量期，如果达到报告间隔，则报告所花费的时间 
+
+
+
+Definition at line 47 of file Timer.\+C.
+
+
+
+References L\+D\+E\+B\+UG, L\+E\+R\+R\+OR, L\+F\+A\+T\+AL, L\+I\+N\+FO, and jevois\+::secs2str().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Debug/\mbox{\hyperlink{Timer_8H}{Timer.\+H}}\item 
+src/jevois/\+Debug/\mbox{\hyperlink{Timer_8C}{Timer.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,228 @@
+\hypertarget{classjevois_1_1PythonParameter}{}\doxysubsection{jevois\+::Python\+Parameter Class Reference}
+\label{classjevois_1_1PythonParameter}\index{jevois::PythonParameter@{jevois::PythonParameter}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+python 中 jevois 参数的包装器 
+
+此包装器允许 python 模块创建 Je\+Vois 参数对象，从而允许用户通过控制台、\+Je\+Vois-\/\+Inventor 或 Je\+Vois-\/\+Pro G\+UI 与参数进 行交互。此类实际上并不包含参数，它只是一个接口。参数通过 \mbox{\hyperlink{classjevois_1_1PythonWrapper}{Python\+Wrapper}} 属于与 python 代码关联的组件。 
+
+Definition at line 96 of file Python\+Parameter.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1PythonParameter_a82cc85a1a26ca18da5e1c5f61779e39b}{Python\+Parameter}} (boost\+::python\+::object \&pyinst, std\+::string const \&\mbox{\hyperlink{classjevois_1_1PythonParameter_a394b319e6170be2b1a1fbb8e45a7e3cd}{name}}, std\+::string const \&typ, std\+::string const \&description, boost\+::python\+::object const \&default\+Value, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&category)
+\begin{DoxyCompactList}\small\item\em 构造函数。向与 pyinst 关联的组件添加动态参数 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1PythonParameter_ae72c34896e743f22826b606bf69a17ed}{$\sim$\+Python\+Parameter}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数。从关联组件中移除动态参数 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1PythonParameter_a394b319e6170be2b1a1fbb8e45a7e3cd}{name}} () const
+\begin{DoxyCompactList}\small\item\em Get the parameter name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1PythonParameter_af499e643c4d52b6f661774b1c72545a2}{descriptor}} () const
+\begin{DoxyCompactList}\small\item\em 获取参数的完全限定名称，又名描述符，包括拥有组件和所有父组件的名称 \end{DoxyCompactList}\item 
+boost\+::python\+::object \mbox{\hyperlink{classjevois_1_1PythonParameter_a8d835a6a494016c0e425db94678a5321}{get}} () const
+\begin{DoxyCompactList}\small\item\em Get the value of this Parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonParameter_a15ce916d224e17ee1450068a8439ac35}{set}} (boost\+::python\+::object const \&new\+Val)
+\begin{DoxyCompactList}\small\item\em 设置此参数的值 \end{DoxyCompactList}\item 
+const std\+::string \mbox{\hyperlink{classjevois_1_1PythonParameter_aa29a16abba15d27891186109f7be199a}{strget}} () const
+\begin{DoxyCompactList}\small\item\em Get the value as a string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonParameter_a4804be1f5600ce0d793c5f4626667b36}{strset}} (std\+::string const \&valstring)
+\begin{DoxyCompactList}\small\item\em 从它的字符串表示形式设置值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonParameter_aa97065b2c1262d5b963c3c9ab7e2d484}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em 冻结/解冻此参数，它将变为只读并且不会显示在帮助消息中 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1PythonParameter_a74e9f525fb59de184012481df7abedc0}{frozen}} () const
+\begin{DoxyCompactList}\small\item\em Returns whether parameter is frozen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonParameter_a6454d8fde8d238477ce3b2101ca1e6c3}{reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset this parameter to its default value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonParameter_ab0e8e81614ec8781ff801b95fe18c9fe}{set\+Callback}} (boost\+::python\+::object const \&cb)
+\begin{DoxyCompactList}\small\item\em 设置参数的回调 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a82cc85a1a26ca18da5e1c5f61779e39b}\label{classjevois_1_1PythonParameter_a82cc85a1a26ca18da5e1c5f61779e39b}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!PythonParameter@{PythonParameter}}
+\index{PythonParameter@{PythonParameter}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{PythonParameter()}{PythonParameter()}}
+{\footnotesize\ttfamily jevois\+::\+Python\+Parameter\+::\+Python\+Parameter (\begin{DoxyParamCaption}\item[{boost\+::python\+::object \&}]{pyinst,  }\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{typ,  }\item[{std\+::string const \&}]{description,  }\item[{boost\+::python\+::object const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+构造函数。向与 pyinst 关联的组件添加动态参数 
+
+
+
+Definition at line 100 of file Python\+Parameter.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_ae72c34896e743f22826b606bf69a17ed}\label{classjevois_1_1PythonParameter_ae72c34896e743f22826b606bf69a17ed}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!````~PythonParameter@{$\sim$PythonParameter}}
+\index{````~PythonParameter@{$\sim$PythonParameter}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{$\sim$PythonParameter()}{~PythonParameter()}}
+{\footnotesize\ttfamily jevois\+::\+Python\+Parameter\+::$\sim$\+Python\+Parameter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数。从关联组件中移除动态参数 
+
+
+
+Definition at line 122 of file Python\+Parameter.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_af499e643c4d52b6f661774b1c72545a2}\label{classjevois_1_1PythonParameter_af499e643c4d52b6f661774b1c72545a2}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Python\+Parameter\+::descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取参数的完全限定名称，又名描述符，包括拥有组件和所有父组件的名称 
+
+
+
+Definition at line 130 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_aa97065b2c1262d5b963c3c9ab7e2d484}\label{classjevois_1_1PythonParameter_aa97065b2c1262d5b963c3c9ab7e2d484}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Parameter\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+冻结/解冻此参数，它将变为只读并且不会显示在帮助消息中 
+
+
+
+Definition at line 150 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a74e9f525fb59de184012481df7abedc0}\label{classjevois_1_1PythonParameter_a74e9f525fb59de184012481df7abedc0}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!frozen@{frozen}}
+\index{frozen@{frozen}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{frozen()}{frozen()}}
+{\footnotesize\ttfamily bool jevois\+::\+Python\+Parameter\+::frozen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns whether parameter is frozen. 
+
+
+
+Definition at line 154 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a8d835a6a494016c0e425db94678a5321}\label{classjevois_1_1PythonParameter_a8d835a6a494016c0e425db94678a5321}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!get@{get}}
+\index{get@{get}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily boost\+::python\+::object jevois\+::\+Python\+Parameter\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the value of this Parameter. 
+
+
+
+Definition at line 134 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a394b319e6170be2b1a1fbb8e45a7e3cd}\label{classjevois_1_1PythonParameter_a394b319e6170be2b1a1fbb8e45a7e3cd}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!name@{name}}
+\index{name@{name}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Python\+Parameter\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the parameter name. 
+
+
+
+Definition at line 126 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a6454d8fde8d238477ce3b2101ca1e6c3}\label{classjevois_1_1PythonParameter_a6454d8fde8d238477ce3b2101ca1e6c3}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!reset@{reset}}
+\index{reset@{reset}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Parameter\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Reset this parameter to its default value. 
+
+
+
+Definition at line 158 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a15ce916d224e17ee1450068a8439ac35}\label{classjevois_1_1PythonParameter_a15ce916d224e17ee1450068a8439ac35}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!set@{set}}
+\index{set@{set}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Parameter\+::set (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+设置此参数的值 
+
+
+
+Definition at line 138 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_ab0e8e81614ec8781ff801b95fe18c9fe}\label{classjevois_1_1PythonParameter_ab0e8e81614ec8781ff801b95fe18c9fe}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!setCallback@{setCallback}}
+\index{setCallback@{setCallback}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{setCallback()}{setCallback()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Parameter\+::set\+Callback (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{cb }\end{DoxyParamCaption})}
+
+
+
+设置参数的回调 
+
+每次尝试更改参数值时都会调用回调函数。设置回调后，还会使用当前参数值第一次调用该函数。
+
+回调应该检查候选值 newval 并且 (1) 如果不喜欢它，则抛出异常并附带一条描述性消息说明拒绝该值的原因，(2) 否则， 假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（\+Parameter 对象的实际修改在上游处理，回调不需要 担心它：如果它返回而没有抛出异常，则建议的值将成为 Parameter 的新值）。只要回调正在运行，\+Parameter 就会被锁 定以进行写入，以避免破坏参数和/或多个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调 用 \mbox{\hyperlink{classjevois_1_1PythonParameter_a15ce916d224e17ee1450068a8439ac35}{set()}} 等，因为这始终会导致死锁（如果回调需要知道参数的当前值，则允许使用 \mbox{\hyperlink{classjevois_1_1PythonParameter_a8d835a6a494016c0e425db94678a5321}{get()}}）。 
+
+Definition at line 162 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_aa29a16abba15d27891186109f7be199a}\label{classjevois_1_1PythonParameter_aa29a16abba15d27891186109f7be199a}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!strget@{strget}}
+\index{strget@{strget}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{strget()}{strget()}}
+{\footnotesize\ttfamily const std\+::string jevois\+::\+Python\+Parameter\+::strget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the value as a string. 
+
+
+
+Definition at line 142 of file Python\+Parameter.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonParameter_a4804be1f5600ce0d793c5f4626667b36}\label{classjevois_1_1PythonParameter_a4804be1f5600ce0d793c5f4626667b36}} 
+\index{jevois::PythonParameter@{jevois::PythonParameter}!strset@{strset}}
+\index{strset@{strset}!jevois::PythonParameter@{jevois::PythonParameter}}
+\doxyparagraph{\texorpdfstring{strset()}{strset()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Parameter\+::strset (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{valstring }\end{DoxyParamCaption})}
+
+
+
+从它的字符串表示形式设置值 
+
+
+
+Definition at line 146 of file Python\+Parameter.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonParameter_8H}{Python\+Parameter.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonParameter_8C}{Python\+Parameter.\+C}}\end{DoxyCompactItemize}

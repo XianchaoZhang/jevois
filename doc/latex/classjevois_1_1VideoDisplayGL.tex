@@ -1,0 +1,291 @@
+\hypertarget{classjevois_1_1VideoDisplayGL}{}\doxysubsection{jevois\+::Video\+Display\+GL Class Reference}
+\label{classjevois_1_1VideoDisplayGL}\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Display\+G\+L.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+视频输出到本地屏幕 
+
+此类在 Je\+Vois-\/\+Pro 平台上提供加速 Open\+G\+L-\/\+ES 显示。它仅适用于 Je\+Vois-\/\+Pro，并在其他主机或平台配置上产生致命错误。图 像仅使用 Open\+G\+L-\/\+ES 显示在本地屏幕上。
+
+以下是基本操作理论：
+
+
+\begin{DoxyItemize}
+\item 在主机上运行时，我们打开一个 X11 窗口；在平台上，我们改用 fbdev。
+\item 当第一个视频帧到达时，我们初始化 Open\+GL 并创建将在整个窗口中渲染的 2 个三角形。这样做的原因是为了避免线程问题 （因此 Open\+GL 在与渲染调用相同的线程中初始化）。我们还初始化与传入图像大小相同的纹理。我们最终创建与窗口或 fbdev 大小相同的表面。然后我们加载并编译着色器以将纹理渲染到表面中。
+\item 在每一帧上，我们只需更新纹理在内存中的像素数据位置并渲染场景。 
+\end{DoxyItemize}
+
+Definition at line 47 of file Video\+Display\+G\+L.\+H.
+
+
+
+Inheritance diagram for jevois\+::Video\+Display\+GL\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{classjevois_1_1VideoDisplayGL__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Video\+Display\+GL\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1VideoDisplayGL__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a8769f07b9c87b9e96d2e12d7baa7adb3}{Video\+Display\+GL}} (size\+\_\+t nbufs=2)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a323557901256eeec8324c6635fff55ea}{$\sim$\+Video\+Display\+GL}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a1acda833d425751fcf879e6f8bdc42dc}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率，分配缓冲区 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a39307dc451da6bbefbfafcfd1bd538df}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}{send()}} 发送出去 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img) override
+\begin{DoxyCompactList}\small\item\em 发送图像以显示 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a724f39d6a2261d8e91d757f4b0e2574a}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_ab38f4ed907c70e1cbf0e9d3a788aa5c2}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a8183c77d23ce5bd26222513e1536c413}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ $>$ \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_aa8e049077943397a5d8bb974c4c57136}{its\+Buffers}}
+\item 
+\mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}}$<$ \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Blocking\+Behavior\+::\+Block}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Blocking\+Behavior\+::\+Block}} $>$ \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a379e693c92d1d29034a3dc4a950836e9}{its\+Image\+Queue}}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}} \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_ad6cd373bcfa34c9844c490a9856f1595}{its\+Image}}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI}{Video\+Display\+Backend\+M\+A\+LI}} \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a659bb2865b2a4847c0218c34703150d2}{its\+Backend}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_ab8b61b2032f36caa655318b280ad9f1a}{its\+Streaming}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a8769f07b9c87b9e96d2e12d7baa7adb3}\label{classjevois_1_1VideoDisplayGL_a8769f07b9c87b9e96d2e12d7baa7adb3}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!VideoDisplayGL@{VideoDisplayGL}}
+\index{VideoDisplayGL@{VideoDisplayGL}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{VideoDisplayGL()}{VideoDisplayGL()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+G\+L\+::\+Video\+Display\+GL (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nbufs = {\ttfamily 2} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 27 of file Video\+Display\+G\+L.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a323557901256eeec8324c6635fff55ea}\label{classjevois_1_1VideoDisplayGL_a323557901256eeec8324c6635fff55ea}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!````~VideoDisplayGL@{$\sim$VideoDisplayGL}}
+\index{````~VideoDisplayGL@{$\sim$VideoDisplayGL}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoDisplayGL()}{~VideoDisplayGL()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Display\+G\+L\+::$\sim$\+Video\+Display\+GL (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 63 of file Video\+Display\+G\+L.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_ab38f4ed907c70e1cbf0e9d3a788aa5c2}\label{classjevois_1_1VideoDisplayGL_ab38f4ed907c70e1cbf0e9d3a788aa5c2}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Abort streaming. 
+
+这只会取消将来的 \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a39307dc451da6bbefbfafcfd1bd538df}{get()}} 和 done() 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a8183c77d23ce5bd26222513e1536c413}{stream\+Off()}} 来关闭流式传输。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 136 of file Video\+Display\+G\+L.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a39307dc451da6bbefbfafcfd1bd538df}\label{classjevois_1_1VideoDisplayGL_a39307dc451da6bbefbfafcfd1bd538df}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!get@{get}}
+\index{get@{get}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}{send()}} 发送出去 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 76 of file Video\+Display\+G\+L.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}\label{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!send@{send}}
+\index{send@{send}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+发送图像以显示 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 86 of file Video\+Display\+G\+L.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, h, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a1acda833d425751fcf879e6f8bdc42dc}\label{classjevois_1_1VideoDisplayGL_a1acda833d425751fcf879e6f8bdc42dc}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧速率，分配缓冲区 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 32 of file Video\+Display\+G\+L.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, L\+D\+E\+B\+UG, jevois\+::\+Video\+Mapping\+::ofmt, jevois\+::\+Video\+Mapping\+::ofps, jevois\+::\+Video\+Mapping\+::oh, jevois\+::\+Video\+Mapping\+::osize(), jevois\+::\+Video\+Mapping\+::ow, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a8183c77d23ce5bd26222513e1536c413}\label{classjevois_1_1VideoDisplayGL_a8183c77d23ce5bd26222513e1536c413}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 140 of file Video\+Display\+G\+L.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a724f39d6a2261d8e91d757f4b0e2574a}\label{classjevois_1_1VideoDisplayGL_a724f39d6a2261d8e91d757f4b0e2574a}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+G\+L\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 132 of file Video\+Display\+G\+L.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a659bb2865b2a4847c0218c34703150d2}\label{classjevois_1_1VideoDisplayGL_a659bb2865b2a4847c0218c34703150d2}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!itsBackend@{itsBackend}}
+\index{itsBackend@{itsBackend}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{itsBackend}{itsBackend}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI}{Video\+Display\+Backend\+M\+A\+LI}} jevois\+::\+Video\+Display\+G\+L\+::its\+Backend\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 81 of file Video\+Display\+G\+L.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_aa8e049077943397a5d8bb974c4c57136}\label{classjevois_1_1VideoDisplayGL_aa8e049077943397a5d8bb974c4c57136}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!itsBuffers@{itsBuffers}}
+\index{itsBuffers@{itsBuffers}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{itsBuffers}{itsBuffers}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ $>$ jevois\+::\+Video\+Display\+G\+L\+::its\+Buffers\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 76 of file Video\+Display\+G\+L.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_ad6cd373bcfa34c9844c490a9856f1595}\label{classjevois_1_1VideoDisplayGL_ad6cd373bcfa34c9844c490a9856f1595}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!itsImage@{itsImage}}
+\index{itsImage@{itsImage}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{itsImage}{itsImage}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}} jevois\+::\+Video\+Display\+G\+L\+::its\+Image\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 78 of file Video\+Display\+G\+L.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_a379e693c92d1d29034a3dc4a950836e9}\label{classjevois_1_1VideoDisplayGL_a379e693c92d1d29034a3dc4a950836e9}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!itsImageQueue@{itsImageQueue}}
+\index{itsImageQueue@{itsImageQueue}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{itsImageQueue}{itsImageQueue}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}}$<$\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Blocking\+Behavior\+::\+Block}}, \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Blocking\+Behavior\+::\+Block}}$>$ jevois\+::\+Video\+Display\+G\+L\+::its\+Image\+Queue\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 77 of file Video\+Display\+G\+L.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1VideoDisplayGL_ab8b61b2032f36caa655318b280ad9f1a}\label{classjevois_1_1VideoDisplayGL_ab8b61b2032f36caa655318b280ad9f1a}} 
+\index{jevois::VideoDisplayGL@{jevois::VideoDisplayGL}!itsStreaming@{itsStreaming}}
+\index{itsStreaming@{itsStreaming}!jevois::VideoDisplayGL@{jevois::VideoDisplayGL}}
+\doxyparagraph{\texorpdfstring{itsStreaming}{itsStreaming}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Video\+Display\+G\+L\+::its\+Streaming\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 85 of file Video\+Display\+G\+L.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoDisplayGL_8H}{Video\+Display\+G\+L.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoDisplayGL_8C}{Video\+Display\+G\+L.\+C}}\end{DoxyCompactItemize}

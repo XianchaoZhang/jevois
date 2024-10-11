@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_jevois-module-param_8C">
+<title>src/Apps/jevois-module-param.C File Reference</title>
+<indexterm><primary>src/Apps/jevois-module-param.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Core/VideoMapping.H&gt;
+#include &lt;fstream&gt;
+#include &lt;sstream&gt;
+#include &lt;iostream&gt;
+#include &lt;memory&gt;
+</programlisting>Include dependency graph for jevois-module-param.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="jevois-module-param_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_jevois-module-param_8C_1abf9e6b7e6f15df4b525a2e7705ba3089">main</link> (int argc, char const *argv[])</para>
+
+<para>解析 videomappings.cfg 并输出要传递给 jevois 内核模块的字符串 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_jevois-module-param_8C_1abf9e6b7e6f15df4b525a2e7705ba3089"/>    <section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>jevois-module-param.C</secondary></indexterm>
+<indexterm><primary>jevois-module-param.C</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char const * argv[])</computeroutput></para><para>
+
+<para>解析 videomappings.cfg 并输出要传递给 jevois 内核模块的字符串 </para>
+</para>
+
+<para>创建这个小应用程序是为了通过使用完全相同的配置文件解析和排序代码（在 VideoMapping 中）来确保内核驱动程序和用户代码之间的 完美一致性。 </para>
+<para>
+Definition at line 28 of file jevois-module-param.C.</para>
+<para>
+References jevois::VideoMapping::fpsToUvc(), JEVOIS_ENGINE_CONFIG_FILE, LFATAL, jevois::logEnd(), jevois::logLevel, and jevois::videoMappingsFromStream().</para>
+</section>
+</section>
+</section>

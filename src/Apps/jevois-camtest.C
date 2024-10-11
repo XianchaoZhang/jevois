@@ -29,7 +29,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #endif
 
-// Comment this out to use the jevois::Camera driver instead of low-level V4L2 code:
+// 注释掉此代码以使用 jevois::Camera 驱动程序而不是低级 V4L2 代码：
 #define USE_RAW_CAMERA
 
 #ifdef USE_RAW_CAMERA
@@ -41,7 +41,7 @@
 #include <fcntl.h>
 #endif
 
-//! Grabs video frames from the camera, and write them to disk as PNG files
+//! 从相机抓取视频帧，并将它们作为 PNG 文件写入磁盘
 int main(int argc, char const* argv[])
 {
   jevois::logLevel = LOG_DEBUG;
@@ -59,10 +59,10 @@ int main(int argc, char const* argv[])
   m.cfps = std::atof(argv[4]);
 
 #ifdef USE_RAW_CAMERA
-  // Simplest V4L2 capture code, taken from http://staticwave.ca/source/uvccapture/
+  // 最简单的 V4L2 捕获代码，取自 http://staticwave.ca/source/uvccapture/
   int fd; if ((fd = open ("/dev/video0", O_RDWR)) == -1) LFATAL("ERROR opening V4L interface");
 
-  // See what kinds of inputs we have and select the first one that is a camera:
+  // 查看我们有哪些类型的输入并选择第一个相机输入：
   int camidx = -1; struct v4l2_input inp = { };
   while (true)
   {
@@ -76,7 +76,7 @@ int main(int argc, char const* argv[])
   }
   if (camidx == -1) LFATAL("No valid camera input found");
   
-  // Select the camera input, this seems to be required by VFE for the camera to power on:
+  // 选择摄像头输入，这似乎是 VFE 要求摄像头开机所需的：
   XIOCTL(fd, VIDIOC_S_INPUT, &camidx);
 
   // Check capabilities:
@@ -138,7 +138,7 @@ int main(int argc, char const* argv[])
 
     if (i >= 30)
     {
-      // FIXME we only support YUYV here for now
+      // FIXME 我们目前仅支持 YUYV
       cv::Mat imgbgr;
       cv::Mat imgcv(m.ch, m.cw, CV_8UC2, mem[buf.index]);
       cv::cvtColor(imgcv, imgbgr, cv::COLOR_YUV2BGR_YUYV);
@@ -157,12 +157,12 @@ int main(int argc, char const* argv[])
   LINFO("Stream On");
   cam->streamOn();
 
-  // First grab a few trash frames to let the auto exposure, gain, white balance, etc stabilize:
+  // 首先抓取一些垃圾帧以使自动曝光、增益、白平衡等稳定下来：
   LINFO("Trashing a few frames...");
   jevois::RawImage img;
   for (int i = 0; i < 30; ++i) { cam->get(img); cam->done(img); }
 
-  // Now grab a few that we convert and save to disk:
+  // 现在抓取一些我们转换并保存到磁盘的图像：
   LINFO("Grab start...");
   for (int i = 0; i < 10; ++i)
   {

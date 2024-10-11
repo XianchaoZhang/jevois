@@ -1,0 +1,186 @@
+\hypertarget{classjevois_1_1PythonWrapper}{}\doxysubsection{jevois\+::Python\+Wrapper Class Reference}
+\label{classjevois_1_1PythonWrapper}\index{jevois::PythonWrapper@{jevois::PythonWrapper}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Wrapper.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+辅助类，用于从 C++ 运行 Python 代码 
+
+此类加载 Python 代码并使其可通过 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}{pyinst()}} 访问。它旨在与其他类组合，这些类实际上将通过 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}{pyinst()}} 执行一些 Python 代码。
+
+这里的主要约定是，python 代码将定义一个与 python 文件名完全相同的类（不带尾随的 .py 扩展名）。该类随后可通过 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}{pyinst()}} 访问。
+
+请注意，构造函数和 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}{pythonload()}} 不会抛出错误，但如果在构造过程中发生错误，pyinst() 将会抛出错误
+
+通常，此类由从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 继承的类继承，以创建可以运行 Python 代码的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 派生类。在这种情况下， \mbox{\hyperlink{classjevois_1_1PythonWrapper}{Python\+Wrapper}} 将在加载 Python 代码时将该同级关联注册到 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 。在从 \mbox{\hyperlink{classjevois_1_1PythonWrapper}{Python\+Wrapper}} 继承之前从 Component（或派 生类）继承至关重要，这样当调用 \mbox{\hyperlink{classjevois_1_1PythonWrapper}{Python\+Wrapper}} 析构函数时，\+Component 基类应该尚未被销毁，并且它将从 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 中取 消注册。 
+
+Definition at line 40 of file Python\+Wrapper.\+H.
+
+
+
+Inheritance diagram for jevois\+::Python\+Wrapper\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1PythonWrapper__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1PythonWrapper_a142a3816b26b41316de69be2e9681598}{Python\+Wrapper}} ()
+\begin{DoxyCompactList}\small\item\em 默认构造函数。稍后需要调用 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}{pythonload()}} \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1PythonWrapper_ad8e670317eea8d0c3541001790fdb0a6}{$\sim$\+Python\+Wrapper}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1PythonWrapper_a7a7d077ef41b01ff8774b763ae6d6881}{Python\+Wrapper}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em Construct from path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}{pythonload}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em 如果使用了默认构造函数，则从 path 初始化 \end{DoxyCompactList}\item 
+boost\+::python\+::object \& \mbox{\hyperlink{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}{pyinst}} ()
+\begin{DoxyCompactList}\small\item\em 获取 python 类 pyinst，或者如果发生构造错误（例如，找不到文件）则抛出 \end{DoxyCompactList}\item 
+boost\+::python\+::object \& \mbox{\hyperlink{classjevois_1_1PythonWrapper_a0516656c04c1be5b0cf1c5d6344cf707}{main\+Module}} ()
+\begin{DoxyCompactList}\small\item\em Get the main module. \end{DoxyCompactList}\item 
+boost\+::python\+::object \& \mbox{\hyperlink{classjevois_1_1PythonWrapper_af6ab1edbb6dafc1c44f0ffcbf3b7102d}{main\+Namespace}} ()
+\begin{DoxyCompactList}\small\item\em Get the main namespace. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1PythonWrapper_ad6d679e3bcb9ec17c0c4802f80c81c85}{construction\+Error}} () const
+\begin{DoxyCompactList}\small\item\em 获取构造错误（如果有）或空字符串 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_a142a3816b26b41316de69be2e9681598}\label{classjevois_1_1PythonWrapper_a142a3816b26b41316de69be2e9681598}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!PythonWrapper@{PythonWrapper}}
+\index{PythonWrapper@{PythonWrapper}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{PythonWrapper()}{PythonWrapper()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+Python\+Wrapper\+::\+Python\+Wrapper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+默认构造函数。稍后需要调用 \mbox{\hyperlink{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}{pythonload()}} 
+
+
+
+Definition at line 23 of file Python\+Wrapper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_ad8e670317eea8d0c3541001790fdb0a6}\label{classjevois_1_1PythonWrapper_ad8e670317eea8d0c3541001790fdb0a6}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!````~PythonWrapper@{$\sim$PythonWrapper}}
+\index{````~PythonWrapper@{$\sim$PythonWrapper}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{$\sim$PythonWrapper()}{~PythonWrapper()}}
+{\footnotesize\ttfamily jevois\+::\+Python\+Wrapper\+::$\sim$\+Python\+Wrapper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 104 of file Python\+Wrapper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_a7a7d077ef41b01ff8774b763ae6d6881}\label{classjevois_1_1PythonWrapper_a7a7d077ef41b01ff8774b763ae6d6881}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!PythonWrapper@{PythonWrapper}}
+\index{PythonWrapper@{PythonWrapper}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{PythonWrapper()}{PythonWrapper()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+Python\+Wrapper\+::\+Python\+Wrapper (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Construct from path. 
+
+
+
+Definition at line 28 of file Python\+Wrapper.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_ad6d679e3bcb9ec17c0c4802f80c81c85}\label{classjevois_1_1PythonWrapper_ad6d679e3bcb9ec17c0c4802f80c81c85}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!constructionError@{constructionError}}
+\index{constructionError@{constructionError}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{constructionError()}{constructionError()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Python\+Wrapper\+::construction\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取构造错误（如果有）或空字符串 
+
+
+
+Definition at line 100 of file Python\+Wrapper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_a0516656c04c1be5b0cf1c5d6344cf707}\label{classjevois_1_1PythonWrapper_a0516656c04c1be5b0cf1c5d6344cf707}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!mainModule@{mainModule}}
+\index{mainModule@{mainModule}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{mainModule()}{mainModule()}}
+{\footnotesize\ttfamily boost\+::python\+::object \& jevois\+::\+Python\+Wrapper\+::main\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the main module. 
+
+
+
+Definition at line 92 of file Python\+Wrapper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_af6ab1edbb6dafc1c44f0ffcbf3b7102d}\label{classjevois_1_1PythonWrapper_af6ab1edbb6dafc1c44f0ffcbf3b7102d}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!mainNamespace@{mainNamespace}}
+\index{mainNamespace@{mainNamespace}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{mainNamespace()}{mainNamespace()}}
+{\footnotesize\ttfamily boost\+::python\+::object \& jevois\+::\+Python\+Wrapper\+::main\+Namespace (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the main namespace. 
+
+
+
+Definition at line 96 of file Python\+Wrapper.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}\label{classjevois_1_1PythonWrapper_a8a10f3634fb5a645d134783363a67e67}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!pyinst@{pyinst}}
+\index{pyinst@{pyinst}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{pyinst()}{pyinst()}}
+{\footnotesize\ttfamily boost\+::python\+::object \& jevois\+::\+Python\+Wrapper\+::pyinst (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取 python 类 pyinst，或者如果发生构造错误（例如，找不到文件）则抛出 
+
+
+
+Definition at line 85 of file Python\+Wrapper.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Python\+Impl\+::doprocess(), jevois\+::dnn\+::\+Network\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Network\+Python\+Impl\+::load(), jevois\+::dnn\+::\+Network\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::loadpy(), jevois\+::\+Python\+Module\+::parse\+Serial(), jevois\+::\+Python\+Module\+::post\+Uninit(), jevois\+::\+Python\+Module\+::pre\+Init(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::process(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::process(), jevois\+::\+Python\+Module\+::process(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::report(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::report(), and jevois\+::\+Python\+Module\+::supported\+Commands().
+
+\mbox{\Hypertarget{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}\label{classjevois_1_1PythonWrapper_a5ddf8ccc64d17a72d6eaedc450baa14b}} 
+\index{jevois::PythonWrapper@{jevois::PythonWrapper}!pythonload@{pythonload}}
+\index{pythonload@{pythonload}!jevois::PythonWrapper@{jevois::PythonWrapper}}
+\doxyparagraph{\texorpdfstring{pythonload()}{pythonload()}}
+{\footnotesize\ttfamily void jevois\+::\+Python\+Wrapper\+::pythonload (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+如果使用了默认构造函数，则从 path 初始化 
+
+
+
+Definition at line 34 of file Python\+Wrapper.\+C.
+
+
+
+References jevois\+::get\+Python\+Exception\+String(), J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+O\+P\+E\+N\+C\+V\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+P\+A\+TH, and J\+E\+V\+O\+I\+S\+\_\+\+R\+O\+O\+T\+\_\+\+P\+A\+TH.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::loadpy(), and jevois\+::\+Python\+Module\+::pre\+Init().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonWrapper_8H}{Python\+Wrapper.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonWrapper_8C}{Python\+Wrapper.\+C}}\end{DoxyCompactItemize}

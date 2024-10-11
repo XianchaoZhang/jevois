@@ -138,7 +138,7 @@ namespace
     std::string const module_name = boost::python::extract<std::string>(error.attr("filename"));
     std::string const code = boost::python::extract<std::string>(error.attr("text"));
     
-    // for some reason, extract<long> does not work while a python error is set, so do it with CPython
+    // 由于某种原因，在设置了 python 错误时，extract<long> 不起作用，因此使用 CPython 执行
     long const line_number = python_integral_as_long(boost::python::object(error.attr("lineno")).ptr());
     long const pos_in_line = python_integral_as_long(boost::python::object(error.attr("offset")).ptr());
     
@@ -153,7 +153,7 @@ namespace
 
 std::string jevois::getPythonExceptionString(boost::python::error_already_set &)
 {
-  // Get some info from the python exception:
+  // 从 python 异常中获取一些信息：
   PyObject *t, *v, *tb;
 
   try

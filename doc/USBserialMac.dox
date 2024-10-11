@@ -1,47 +1,35 @@
-/*! \page USBserialMac Connecting to JeVois using serial-over-USB: Mac host
+/*! \page USBserialMac 使用 USB 串行连接到 JeVois：Mac 主机
 
-This feature is not yet available on \jvpro but will soon be...
+该功能目前在 \jvpro 上还不可用，但很快就会可用……
 
-\section serusbmacgen Finding the serial-over-USB device on Mac host
+\section serusbmacgen 在 Mac 主机上查找串行 USB 设备
 
 
-When the JeVois smart camera is connected to a Mac OSX host, a new serial-over-USB is automatically detected. Its name
-is of the form:
+当 JeVois 智能相机连接到 Mac OSX 主机时，会自动检测到新的串行 USB。其名称的形式为：
 
-\verbatim
-/dev/tty.usbmodemXXXX
-\endverbatim
-where the `XXXX` characters shown above are replaced by a 4-digit number that depends on yoru exact Mac computer.
+\verbatim /dev/tty.usbmodemXXXX \endverbatim 其中上面显示的“XXXX”字符将替换为取决于您的 Mac 电脑的 4 位数字。
 
-To find out the exact name on your machine, open a \b Terminal window (in \b Applications and then \b Utilities), and
-type:
+要找出您机器上的确切名称，请打开 \b 终端窗口（在 \b 应用程序中，然后是 \b 实用程序中），然后输入：
 
-\verbatim
-ls /dev/tty.usbmodem*
-\endverbatim
+\verbatim ls /dev/tty.usbmodem* \endverbatim
 
-which should return the device name.
+它应该返回设备名称。
 
-\section serusbmacscreen Using the screen command
+\section serusbmacscreen 使用 screen 命令
 
-You can use the built-in `screen` program to connect to your JeVois camera:
+您可以使用内置的“屏幕”程序连接到您的 JeVois 相机：
 
-\verbatim
-screen /dev/tty.usbmodemXXXX 115200
-\endverbatim
-where you replace `XXXX` by the number that was returned by the `ls` command above.
+\verbatim screen /dev/tty.usbmodemXXXX 115200 \endverbatim 其中将“XXXX”替换为上面“ls”命令返回的数字。
 
-Once you are connected, you can issue commands such as `help`, `info`, etc
+一旦连接，您就可以发出“help”，“info”等命令
 
-\note The `screen` program does not (as far as we know) provide an option for command echo (to see what you are
-typing). Hence, as you type, you will not see what you type. This is normal.
+\note 据我们所知，“screen”程序不提供命令回显选项（查看您正在输入的内容）。因此，当您输入时，您将看不到您输入的内容。这是正常的。
 
-\note To scroll up while using `screen`, type `CTRL-A` `ESC` and you can then use the arrow keys or mouse wheel to
-scroll up. Type \c RETURN twice when you are ready to go back to interactive mode.
+\note 要在使用“屏幕”时向上滚动，请键入“CTRL-A”“ESC”，然后可以使用箭头键或鼠标滚轮向上滚动。当您准备返回交互模式时，请键入 \c RETURN 两次。
 
-\section serusbmacother Using other serial terminal programs
+\section serusbmacother 使用其他串行终端程序
 
-Other programs are available for Mac which are more user-friendly than `screen`. For example, we have had good success
-with [ZOC 7](https://www.emtec.com/zoc/).
+还有其他适用于 Mac 的程序比“screen”更易于使用。例如，我们在使用 [ZOC 7](https://www.emtec.com/zoc/) 时取得了良好的效果。
 
 */
+

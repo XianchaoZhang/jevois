@@ -1,53 +1,51 @@
-/*! \page DocumentationRules Documentation rules and guidelines
+/*! \page DocumentationRules 文档规则和指南 
   \tableofcontents
 
-\warning This page contains a lot of broken stuff, it needs major fixing
+\warning 此页面包含大量损坏内容，需要进行重大修复
 
 
-\section tags Tagging your code
+\section tags 标记你的代码
 
-Use the following instead of plain strings in your comments:
+在您的评论中使用以下内容代替纯字符串：
 
-- \\todo will add an item to the todo list
-- \\test will add an item to the test list
-- \\bug will add an item to the bug list
-- \\deprecated will add an item to the deprecated list
+- \\todo 将在待办事项列表中添加一项
+- \\test 将在测试列表中添加一项
+- \\bug 将在错误列表中添加一项
+- \\deprecated 将在弃用列表中添加一项
 
-For example:
+例如：
 
 \code
 //! Cool class
-/*! Class that does something cool.
+/*! 做一些很酷的事情的类。
     \todo Make it hot too */
 class CoolClass { ... };
 \endcode
 
-\section grel Modules, groups of related functions
+\section grel Modules，相关函数组
 
-Generally speaking, our goal is that users should be able to access information:
+一般来说，我们的目标是用户应该能够访问信息：
 
-- by browsing over the Modules section of the doc
-- by search for a name, or browsing the various class lists, file lists, etc
-- through linking between related doc pages
+- 通过浏览文档的 Modules 部分
+- 通过搜索名称，或浏览各种类列表、文件列表等
+- 通过相关文档页面之间的链接
 
-See how it's done for GenericImage.
+看看 GenericImage 是如何实现的。
 
-- First, in GenericImage.H we start with a top-level group, which will appear nicely under the \c Modules section of
-  the documentation:
-\code
-  /*! \defgroup genericimage GenericImage class and concepts
+- 首先，在 GenericImage.H 中，我们从一个顶级组开始，它将很好地显示在文档的 \c Modules 部分下：
+  \code
+  /*! \defgroup genericimage GenericImage 类和概念
 
-      GenericImage is a thin wrapper for an Image of any pixel type. Writing general algorithms that work with
-      GenericImage allows them to apply to any image type. */
+      GenericImage 是任何像素类型图像的薄包装器。编写适用于 GenericImage 的通用算法可将其应用于任何图像类型。 */
   \endcode
-- Then, we document GenericImage itself, make it belong to the genericimage group:
-\code
-/*! GenericImage class
-    ...
-    \ingroup genericimage */
-class GenericImage { ... };
-\endcode
-- Finally, if you want to cross-link to other groups, use the \\see command; for example:
+- 然后，我们记录 GenericImage 本身，使其属于 genericimage 组：
+  \code
+  /*! GenericImage class
+      ...
+      \ingroup genericimage */
+  class GenericImage { ... };
+  \endcode
+- 最后，如果您想交叉链接到其他组，请使用 \\see 命令；例如：
 \code
   /*! \defgroup genericimageoperators GenericImage Operators
       ...
@@ -59,66 +57,54 @@ class GenericImage { ... };
   /*! @} */ // **********************************************************************
 \endcode
 
-And note how we use the arrobas curly braces to here include into our group all the operators that will be defined.
+请注意我们如何使用 arrobas 花括号将所有将要定义的运算符包含到我们的组中。
 
-\note Why use this rather than a bunch of \\relates directives in each of the operators? This would make each operator
-appear in the doc page of the GenericImage class, which is great except that it masks teh general comment block we have
-about how all GenericImage operators work, promote pixels, etc.
+\note 为什么要使用这个而不是每个操作符中的一堆 \\relates 指令？这将使每个操作符出现在 GenericImage 类的文档页面中，这很好，只是它掩盖了我们关于所有 GenericImage 操作符如何工作、提升像素等的一般注释块。
 
-\section enumhelp Helper enums or other helpers
+\section enumhelp 辅助枚举或其他辅助程序
 
-For classes that have helpers, for example, some enums that define parameters of functions associated with the
-class: Just define your group to only include the class; then indicate for each helper that it relates to the
-class. This will list the helpers in the doc page of the class, as opposed to cluttering the page of your group. See for
-example how it's done in Image.H where:
-- we define a group called 'image'
-- in the doc of Image we mention that it is in the group image
-- but in the doc of ImageInitPolicy and ImageFlags we simply mark those as related to the Image class as opposed to
-  being in the group. Thus they will appear in the doc of the image class but not in the page describing the group. This
-  is the desired behavior as in the group's page we want a clear and uncluttered high-level view, while in the class
-  documentation we need to know the details.
+对于具有帮助程序的类，例如，一些枚举定义了与类相关的函数的参数：只需将您的组定义为仅包含类；然后为每个帮助程序指明它与类相关。这将在类的文档页面中列出帮助程序，而不是使组的页面杂乱无章。例如，请参阅 Image.H 中如何完成：
+- 我们定义一个名为 'image' 的组
+- 在图像的文档中，我们提到它在 image 组中
+- 但在 ImageInitPolicy 和 ImageFlags 的文档中，我们只是将它们标记为与图像类相关，而不是在组中。因此，它们将出现在图像类的文档中，但不会出现在描述组的页面中。这是所需的行为，因为在组的页面中，我们希望有一个清晰、整洁的高级视图，而在类文档中，我们需要了解详细信息。
 
-However, for enums that are only used in functions and cannot be related to a class, we mush add those to the group
-where the function belongs. Have a look at Text.H for an example: TextAnchor is documented and added to textdrawing
-group, like the drawText() function is.
+但是，对于仅在函数中使用且不能与类关联的枚举，我们必须将它们添加到函数所属的组中。请查看 Text.H 中的示例：TextAnchor 已记录并添加到 textdrawing 组中，就像 drawText() 函数一样。
 
 
-\section macro Documenting macros
+\section macro 记录宏
 
-- All internal JeVois macros (not to be used directly by users) should have a name that starts with \c JEVOIS_MACRO_
+- 所有内部 JeVois 宏（不能由用户直接使用）的名称都应以 \c JEVOIS_MACRO_ 开头
 
-- All JeVois macros that users may use should have a name that starts with \c JEVOIS_
+- 用户可能使用的所有 JeVois 宏的名称都应以 \c JEVOIS_ 开头
 
-- Simple macros that just define a value can be documented like classes, variables, etc
+- 仅定义值的简单宏可以像类、变量等一样记录下来
 
-- macros that declare a complex function whose internal guts are of no interest to end users should be documented as
-  follows. First, in a .H file, only write a documentation block attached to nothing and that includes a \\def for the
-  macro name:
+- 声明复杂函数的宏（其内部内容对最终用户毫无意义）应按如下方式记录。首先，在 .H 文件中，只编写一个不附加任何内容的文档块，其中包含宏名称的 \\def：
   \code
-  //! Optional brief description of the macro
+  //! 宏的可选简要说明
   /*! \def JEVOIS_MY_MACRO(x, y)
       \hideinitializer
 
-      Convenience macro to achieve blah. */
+      实现 blah 的便利宏。 */
   \endcode
-  Then, in an Impl.H file hidden in the details/ subdirectory, define your macro but do not document the macro
-  definition itself. Finally, to create a link to your macro definition from within some other documentation, use
+  然后，在隐藏在 details/ 子目录中的 Impl.H 文件中定义您的宏，但不要记录宏定义本身。最后，要从其他文档中创建指向您的宏定义的链接，请使用 
   \code
   /*! blah blah. See for example #JEVOIS_MY_MACRO(x, y) */
   \endcode
-  See for example \#JEVOIS_DEFINE_ENUM_CLASS(name, SEQ) in Types/Enum.H and Types/details/EnumImpl.H
 
-\section enums JeVois Enums
+  例如，请参阅 Types/Enum.H 和 Types/details/EnumImpl.H 中的 \#JEVOIS_DEFINE_ENUM_CLASS(name, SEQ)
 
-  For enums defined using JeVois_DEFINE_ENUM_CLASS, we basically manually instruct doxygen that we are creating a new
-  class. Adapt the following to your own enums:
+\section enums JeVois 枚举
+
+  对于使用 JeVois_DEFINE_ENUM_CLASS 定义的枚举，我们基本上手动指示 doxygen 我们正在创建一个新类。将以下内容调整为您自己的枚举：
+
 @code
-  //! Hypothetical BoundedSet insert policy
+  //! 假设的 BoundedSet 插入策略
   /*! \class BoundedSetInsertPolicy
-      When trying to push a new element into the set, if it matches one already in the set:
+      尝试将新元素推送到集合中时，如果它与集合中已有的元素匹配：
 
-      - if \c jevois::BoundedSetInsertPolicy::Preserve, keep the old one and discard the new incoming one, or,
-      - if \c jevois::BoundedSetInsertPolicy::Replace, replace the old one with the new one.
+      - if \c jevois::BoundedSetInsertPolicy::Preserve, 则保留旧策略并丢弃新传入的策略，或者，
+      - if \c jevois::BoundedSetInsertPolicy::Replace, 则用新策略替换旧策略。
 
       \relates BoundedSet */
   JEVOIS_DEFINE_ENUM_CLASS(BoundedSetInsertPolicy, (Preserve) (Replace) );
@@ -126,3 +112,4 @@ group, like the drawText() function is.
 
 
 */
+

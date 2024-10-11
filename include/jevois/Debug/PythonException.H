@@ -23,11 +23,11 @@
 
 namespace jevois
 {
-  //! Python exception translation to string so we can print the traceback to our serlog stream
+  //!  Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream
   /*! This code inspired from:
       https://github.com/abingham/boost_python_exception/tree/master/src/boost_python_exception/auto_translation
 
-      You would usually use this from inside a catch(boost::python::error_already_set & e) { ... } block.
+      您通常会在 catch(boost::python::error_already_set & e) { ... } 块内部使用它。
 
       \ingroup debugging */
   std::string getPythonExceptionString(boost::python::error_already_set &);

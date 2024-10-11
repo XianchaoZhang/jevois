@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl">
+<title>jevois::dnn::NetworkPythonImpl Class Reference</title>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary></indexterm>
+<section>
+<title> </title>
+<para>
+Definition at line 27 of file NetworkPython.C.</para>
+Inheritance diagram for jevois::dnn::NetworkPythonImpl:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkPythonImpl__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::NetworkPythonImpl:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkPythonImpl__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1ab1c57a67bf7eb38add5d699fbd90833b">loadpy</link> (std::string const &amp;pypath)</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a0bb54a91a7a1e6ebc508764643f4c4a3">~NetworkPythonImpl</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a53c08709820e02c00647e647d5a60af0">freeze</link> (bool doit)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1ad3c233acf9fc6bc1a46f74e2cb3530c2">load</link> ()</para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a9519323739b032d8b6d66bb04d375e8a">doprocess</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, std::vector&lt; std::string &gt; &amp;info)</para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a70906f6c599ad75ab6ed79dff19f68d2">Component</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a0bb54a91a7a1e6ebc508764643f4c4a3"/>    <section>
+    <title>~NetworkPythonImpl()</title>
+<indexterm><primary>~NetworkPythonImpl</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>~NetworkPythonImpl</secondary></indexterm>
+<para><computeroutput>jevois::dnn::NetworkPythonImpl::~NetworkPythonImpl ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Definition at line 42 of file NetworkPython.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a70906f6c599ad75ab6ed79dff19f68d2"/>    <section>
+    <title>Component()</title>
+<indexterm><primary>Component</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>Component</secondary></indexterm>
+<para><computeroutput>jevois::Component::Component</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>创建组件的标准方法是通过 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">Component::addSubComponent()</link> 或 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">Manager::addComponent()</link>，而不是手动构建。通过构造函数构造的组件 （例如，调用 new 操作符）将不会附加到 <link linkend="_classjevois_1_1Component">Component</link> 层次结构。建议派生组件也有一个实例构造函数参数并将其传递给 base <link linkend="_classjevois_1_1Component">Component</link> 类， 以允许复杂系统包含同一 <link linkend="_classjevois_1_1Component">Component</link> 的多个实例。事实上，对于大多数组件来说，继承的构造函数是合适的：</para>
+
+<para><literallayout><computeroutput>class&#32;MyComp&#32;:&#32;public&#32;jevois::Component
+{
+public:
+&#32;&#32;//&#32;继承的构造函数
+&#32;&#32;using&#32;jevois::Component::Component;
+
+&#32;&#32;//&#32;用于安全继承的虚拟析构函数
+&#32;&#32;virtual&#32;~MyComp();
+};
+</computeroutput></literallayout> </para>
+<para>
+Definition at line 32 of file Component.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a9519323739b032d8b6d66bb04d375e8a"/>    <section>
+    <title>doprocess()</title>
+<indexterm><primary>doprocess</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>doprocess</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::NetworkPythonImpl::doprocess (std::vector&lt; cv::Mat &gt; const &amp; outs, std::vector&lt; std::string &gt; &amp; info)</computeroutput></para><para>
+Definition at line 69 of file NetworkPython.C.</para>
+<para>
+References LFATAL, jevois::PythonWrapper::pyinst(), and jevois::python::pyVecToList().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1a53c08709820e02c00647e647d5a60af0"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkPythonImpl::freeze (bool doit)</computeroutput></para><para>
+Definition at line 46 of file NetworkPython.C.</para>
+<para>
+References jevois::python::hasattr(), and jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1ad3c233acf9fc6bc1a46f74e2cb3530c2"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkPythonImpl::load ( )</computeroutput></para><para>
+Definition at line 63 of file NetworkPython.C.</para>
+<para>
+References jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkPythonImpl_1ab1c57a67bf7eb38add5d699fbd90833b"/>    <section>
+    <title>loadpy()</title>
+<indexterm><primary>loadpy</primary><secondary>jevois::dnn::NetworkPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkPythonImpl</primary><secondary>loadpy</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkPythonImpl::loadpy (std::string const &amp; pypath)</computeroutput></para><para>
+Definition at line 52 of file NetworkPython.C.</para>
+<para>
+References jevois::python::hasattr(), JEVOIS_SHARE_PATH, LINFO, jevois::PythonWrapper::pyinst(), and jevois::PythonWrapper::pythonload().</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+src/jevois/DNN/<link linkend="_NetworkPython_8C">NetworkPython.C</link></section>
+</section>

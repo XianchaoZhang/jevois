@@ -37,7 +37,7 @@ void jevois::VideoDisplayGL::setFormat(jevois::VideoMapping const & m)
   itsImageQueue.clear();
   size_t const nbufs = itsImageQueue.size();
   
-  // Allocate the buffers and make them all immediately available as RawImage:
+  // 分配缓冲区并使它们全部立即可用作 RawImage：
   unsigned int imsize = m.osize();
 
   for (size_t i = 0; i < nbufs; ++i)
@@ -66,7 +66,7 @@ jevois::VideoDisplayGL::~VideoDisplayGL()
   for (auto & b : itsBuffers)
   {
     if (b.use_count() > 1) LERROR("Ref count non zero when attempting to free VideoBuf");
-    b.reset(); // VideoBuf destructor will do the memory freeing
+    b.reset(); // VideoBuf 析构函数将执行内存释放
   }
 
   itsBuffers.clear();
@@ -77,7 +77,7 @@ void jevois::VideoDisplayGL::get(jevois::RawImage & img)
 {
   if (itsStreaming.load() == false) LFATAL("Not streaming");
 
-  // Take this buffer out of our queue and hand it over:
+  // 从我们的队列中取出这个缓冲区并将其移交：
   img = itsImageQueue.pop();
   LDEBUG("Empty image " << img.bufindex << " handed over to application code for filling");
 }
@@ -87,7 +87,7 @@ void jevois::VideoDisplayGL::send(jevois::RawImage const & img)
 {
   if (itsStreaming.load() == false) LFATAL("Not streaming");
 
-  // Get current window size, will be 0x0 if not initialized yet:
+  // 获取当前窗口大小，如果尚未初始化则为 0x0：
   unsigned short winw, winh;
   itsBackend.getWindowSize(winw, winh);
 
@@ -98,16 +98,15 @@ void jevois::VideoDisplayGL::send(jevois::RawImage const & img)
     itsBackend.getWindowSize(winw, winh); // Get the actual window size
   }
 
-  // Start a new frame and get its size. Will init the display if needed:
+  // 开始一个新框架并获取其大小。如果需要，将初始化显示：
   itsBackend.newFrame();
 
-  // Poll any events. FIXME: for now just ignore requests to close:
+  // 轮询任何事件。修复：现在只需忽略关闭请求：
   bool shouldclose = false; itsBackend.pollEvents(shouldclose);
 
-  // In this viewer, we do not use perspective. So just rescale our drawing from pixel coordinates to normalized device
-  // coordinates using a scaling matrix:
+  // 在此查看器中，我们不使用透视。因此，只需使用缩放矩阵将我们的绘图从像素坐标重新缩放为标准化设备坐标：
 #ifdef JEVOIS_PLATFORM
-  // On platform, we need to translate a bit to avoid aliasing issues, which are problematic with our YUYV shader:
+  // 在平台上，我们需要稍微平移一下以避免混叠问题，这对我们的 YUYV 着色器来说是个问题：
   static glm::mat4 pvm = glm::translate(glm::scale(glm::mat4(1.0f), glm::vec3(2.0f / winw, 2.0f / winh, 1.0f)),
                                         glm::vec3(0.375f, 0.375f, 0.0f));
                                     
@@ -115,16 +114,16 @@ void jevois::VideoDisplayGL::send(jevois::RawImage const & img)
   static glm::mat4 pvm = glm::scale(glm::mat4(1.0f), glm::vec3(2.0f / winw, 2.0f / winh, 1.0f));
 #endif
 
-  // Draw the image, as big as possible on the screen:
+  // 绘制图像，在屏幕上尽可能大：
   itsImage.set(img);
   int x = 0, y = 0; unsigned short w = 0, h = 0;
   itsImage.draw(x, y, w, h, true, pvm); // true for no aliasing
 
-  // Done, ask backend to swap buffers:
+  // 完成，请求后端交换缓冲区：
   itsBackend.render();
   
-  // Just push the buffer back into our queue. Note: we do not bother clearing the data or checking that the image is
-  // legit, i.e., matches one that was obtained via get():
+  // 只需将缓冲区推回到我们的队列中。注意：我们不必清除数据或检查图像是否合法，即是否与通过 get() 
+  // 获取的图像匹配：
   itsImageQueue.push(img);
   LDEBUG("Empty image " << img.bufindex << " ready for filling in by application code");
 }

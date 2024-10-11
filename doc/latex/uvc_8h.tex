@@ -1,0 +1,176 @@
+\hypertarget{uvc_8h}{}\doxysubsection{include/jevois/\+Core/uvc.h File Reference}
+\label{uvc_8h}\index{include/jevois/Core/uvc.h@{include/jevois/Core/uvc.h}}
+{\ttfamily \#include $<$linux/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$linux/types.\+h$>$}\newline
+{\ttfamily \#include $<$linux/usb/ch9.\+h$>$}\newline
+Include dependency graph for uvc.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uvc_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{uvc_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structuvc__request__data}{uvc\+\_\+request\+\_\+data}}
+\item 
+struct \mbox{\hyperlink{structuvc__event}{uvc\+\_\+event}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a3c16f953fb7f4cc725bf726651023088}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+F\+I\+R\+ST}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 0)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_ab0557e6df0e911d59ebd0f7688b8820a}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+C\+O\+N\+N\+E\+CT}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 0)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_ad84d2f96c5e0290de561383f4bd1093b}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 1)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_acf6e1588f9b5b6eeebbe87fb77e5c3ce}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+M\+ON}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 2)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a64a4b35d900337f919c32c326bce3d57}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+M\+O\+FF}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 3)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a596f595dbfa71e831d03ad5a186ed9e2}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+E\+T\+UP}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 4)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a9b7b240fe94edd37c69a9fd1c1e53f71}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+D\+A\+TA}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 5)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a658ce4431858adddb2f27fe798ca6a99}{U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+L\+A\+ST}}~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 5)
+\item 
+\#define \mbox{\hyperlink{uvc_8h_aedfed13442b0a7a01a9dca7021fe6df7}{U\+V\+C\+\_\+\+M\+A\+X\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+S\+I\+ZE}}~512
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a3c62a0df70b32ec09822b611dc190486}{U\+V\+C\+I\+O\+C\+\_\+\+S\+E\+N\+D\+\_\+\+R\+E\+S\+P\+O\+N\+SE}}~\+\_\+\+I\+OW(\textquotesingle{}U\textquotesingle{}, 1, struct \mbox{\hyperlink{structuvc__request__data}{uvc\+\_\+request\+\_\+data}})
+\item 
+\#define \mbox{\hyperlink{uvc_8h_a0403a39374e3fa566870c7c11990953e}{U\+V\+C\+\_\+\+I\+N\+T\+F\+\_\+\+C\+O\+N\+T\+R\+OL}}~0
+\item 
+\#define \mbox{\hyperlink{uvc_8h_ad07dd8caef41aa370cf9ebfed6af8775}{U\+V\+C\+\_\+\+I\+N\+T\+F\+\_\+\+S\+T\+R\+E\+A\+M\+I\+NG}}~1
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{uvc_8h_ab0557e6df0e911d59ebd0f7688b8820a}\label{uvc_8h_ab0557e6df0e911d59ebd0f7688b8820a}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_CONNECT@{UVC\_EVENT\_CONNECT}}
+\index{UVC\_EVENT\_CONNECT@{UVC\_EVENT\_CONNECT}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_CONNECT}{UVC\_EVENT\_CONNECT}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+C\+O\+N\+N\+E\+CT~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 0)}
+
+
+
+Definition at line 24 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a9b7b240fe94edd37c69a9fd1c1e53f71}\label{uvc_8h_a9b7b240fe94edd37c69a9fd1c1e53f71}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_DATA@{UVC\_EVENT\_DATA}}
+\index{UVC\_EVENT\_DATA@{UVC\_EVENT\_DATA}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_DATA}{UVC\_EVENT\_DATA}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+D\+A\+TA~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 5)}
+
+
+
+Definition at line 29 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_ad84d2f96c5e0290de561383f4bd1093b}\label{uvc_8h_ad84d2f96c5e0290de561383f4bd1093b}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_DISCONNECT@{UVC\_EVENT\_DISCONNECT}}
+\index{UVC\_EVENT\_DISCONNECT@{UVC\_EVENT\_DISCONNECT}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_DISCONNECT}{UVC\_EVENT\_DISCONNECT}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+D\+I\+S\+C\+O\+N\+N\+E\+CT~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 1)}
+
+
+
+Definition at line 25 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a3c16f953fb7f4cc725bf726651023088}\label{uvc_8h_a3c16f953fb7f4cc725bf726651023088}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_FIRST@{UVC\_EVENT\_FIRST}}
+\index{UVC\_EVENT\_FIRST@{UVC\_EVENT\_FIRST}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_FIRST}{UVC\_EVENT\_FIRST}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+F\+I\+R\+ST~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 0)}
+
+
+
+Definition at line 23 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a658ce4431858adddb2f27fe798ca6a99}\label{uvc_8h_a658ce4431858adddb2f27fe798ca6a99}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_LAST@{UVC\_EVENT\_LAST}}
+\index{UVC\_EVENT\_LAST@{UVC\_EVENT\_LAST}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_LAST}{UVC\_EVENT\_LAST}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+L\+A\+ST~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 5)}
+
+
+
+Definition at line 30 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a596f595dbfa71e831d03ad5a186ed9e2}\label{uvc_8h_a596f595dbfa71e831d03ad5a186ed9e2}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_SETUP@{UVC\_EVENT\_SETUP}}
+\index{UVC\_EVENT\_SETUP@{UVC\_EVENT\_SETUP}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_SETUP}{UVC\_EVENT\_SETUP}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+E\+T\+UP~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 4)}
+
+
+
+Definition at line 28 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a64a4b35d900337f919c32c326bce3d57}\label{uvc_8h_a64a4b35d900337f919c32c326bce3d57}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_STREAMOFF@{UVC\_EVENT\_STREAMOFF}}
+\index{UVC\_EVENT\_STREAMOFF@{UVC\_EVENT\_STREAMOFF}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_STREAMOFF}{UVC\_EVENT\_STREAMOFF}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+M\+O\+FF~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 3)}
+
+
+
+Definition at line 27 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_acf6e1588f9b5b6eeebbe87fb77e5c3ce}\label{uvc_8h_acf6e1588f9b5b6eeebbe87fb77e5c3ce}} 
+\index{uvc.h@{uvc.h}!UVC\_EVENT\_STREAMON@{UVC\_EVENT\_STREAMON}}
+\index{UVC\_EVENT\_STREAMON@{UVC\_EVENT\_STREAMON}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_EVENT\_STREAMON}{UVC\_EVENT\_STREAMON}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+E\+V\+E\+N\+T\+\_\+\+S\+T\+R\+E\+A\+M\+ON~(V4\+L2\+\_\+\+E\+V\+E\+N\+T\+\_\+\+P\+R\+I\+V\+A\+T\+E\+\_\+\+S\+T\+A\+RT + 2)}
+
+
+
+Definition at line 26 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a0403a39374e3fa566870c7c11990953e}\label{uvc_8h_a0403a39374e3fa566870c7c11990953e}} 
+\index{uvc.h@{uvc.h}!UVC\_INTF\_CONTROL@{UVC\_INTF\_CONTROL}}
+\index{UVC\_INTF\_CONTROL@{UVC\_INTF\_CONTROL}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_INTF\_CONTROL}{UVC\_INTF\_CONTROL}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+I\+N\+T\+F\+\_\+\+C\+O\+N\+T\+R\+OL~0}
+
+
+
+Definition at line 51 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_ad07dd8caef41aa370cf9ebfed6af8775}\label{uvc_8h_ad07dd8caef41aa370cf9ebfed6af8775}} 
+\index{uvc.h@{uvc.h}!UVC\_INTF\_STREAMING@{UVC\_INTF\_STREAMING}}
+\index{UVC\_INTF\_STREAMING@{UVC\_INTF\_STREAMING}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_INTF\_STREAMING}{UVC\_INTF\_STREAMING}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+I\+N\+T\+F\+\_\+\+S\+T\+R\+E\+A\+M\+I\+NG~1}
+
+
+
+Definition at line 52 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_aedfed13442b0a7a01a9dca7021fe6df7}\label{uvc_8h_aedfed13442b0a7a01a9dca7021fe6df7}} 
+\index{uvc.h@{uvc.h}!UVC\_MAX\_REQUEST\_SIZE@{UVC\_MAX\_REQUEST\_SIZE}}
+\index{UVC\_MAX\_REQUEST\_SIZE@{UVC\_MAX\_REQUEST\_SIZE}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVC\_MAX\_REQUEST\_SIZE}{UVC\_MAX\_REQUEST\_SIZE}}
+{\footnotesize\ttfamily \#define U\+V\+C\+\_\+\+M\+A\+X\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+S\+I\+ZE~512}
+
+
+
+Definition at line 33 of file uvc.\+h.
+
+\mbox{\Hypertarget{uvc_8h_a3c62a0df70b32ec09822b611dc190486}\label{uvc_8h_a3c62a0df70b32ec09822b611dc190486}} 
+\index{uvc.h@{uvc.h}!UVCIOC\_SEND\_RESPONSE@{UVCIOC\_SEND\_RESPONSE}}
+\index{UVCIOC\_SEND\_RESPONSE@{UVCIOC\_SEND\_RESPONSE}!uvc.h@{uvc.h}}
+\doxyparagraph{\texorpdfstring{UVCIOC\_SEND\_RESPONSE}{UVCIOC\_SEND\_RESPONSE}}
+{\footnotesize\ttfamily \#define U\+V\+C\+I\+O\+C\+\_\+\+S\+E\+N\+D\+\_\+\+R\+E\+S\+P\+O\+N\+SE~\+\_\+\+I\+OW(\textquotesingle{}U\textquotesingle{}, 1, struct \mbox{\hyperlink{structuvc__request__data}{uvc\+\_\+request\+\_\+data}})}
+
+
+
+Definition at line 49 of file uvc.\+h.
+

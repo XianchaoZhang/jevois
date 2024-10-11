@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1DynamicParameter">
+<title>jevois::DynamicParameter&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::DynamicParameter&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Parameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::DynamicParameter&lt; T &gt;</title></simplesect>
+
+
+<para>运行时添加到组件的动态参数 </para>
+
+
+
+<para>动态参数只能通过 <link linkend="_classjevois_1_1Component">Component</link> 级别的描述符访问（使用 getParamVal()、setParamVal() 等），因为它们没有唯一的类类型，并且拥有它们 的 <link linkend="_classjevois_1_1Component">Component</link> 不会从它们继承。通常通过 <link linkend="_classjevois_1_1Component_1ad9929e687e28e6aeeffa9df69bc39e53">Component::addDynamicParameter()</link> 使用。请谨慎使用。主要是为了能够为 Python 模块赋予 JeVois 参数而开发的。 </para>
+<para>
+Definition at line 374 of file Parameter.H.</para>
+Inheritance diagram for jevois::DynamicParameter&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1DynamicParameter__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::DynamicParameter&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1DynamicParameter__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Types    </title>
+        <itemizedlist>
+            <listitem><para>typedef <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt; T &gt; <link linkend="_classjevois_1_1DynamicParameter_1a2bb039882107fea7311c61816127c717">type</link></para>
+
+<para>Our type. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1DynamicParameter_1a166ba4215fe1d050ccefd4060f95d91c">DynamicParameter</link> (<link linkend="_classjevois_1_1Component">Component</link> *comp, <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp;pdef)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1DynamicParameter_1ae5256c05515dece8f9ed7d5f79f6d7e3">~DynamicParameter</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual const <link linkend="_classjevois_1_1Component">Component</link> * <link linkend="_classjevois_1_1DynamicParameter_1abb08737ebce48cc962e100318e8f7086">owner</link> () const override</para>
+
+<para>Handle to owning component. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Member Typedef Documentation</title>
+<anchor xml:id="_classjevois_1_1DynamicParameter_1a2bb039882107fea7311c61816127c717"/>    <section>
+    <title>type</title>
+<indexterm><primary>type</primary><secondary>jevois::DynamicParameter&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::DynamicParameter&lt; T &gt;</primary><secondary>type</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>typedef <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link>&lt;T&gt; <link linkend="_classjevois_1_1DynamicParameter">jevois::DynamicParameter</link>&lt; T &gt;::<link linkend="_classjevois_1_1DynamicParameter_1a2bb039882107fea7311c61816127c717">type</link></computeroutput></para><para>
+
+<para>Our type. </para>
+</para>
+<para>
+Definition at line 379 of file Parameter.H.</para>
+</section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1DynamicParameter_1a166ba4215fe1d050ccefd4060f95d91c"/>    <section>
+    <title>DynamicParameter()</title>
+<indexterm><primary>DynamicParameter</primary><secondary>jevois::DynamicParameter&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::DynamicParameter&lt; T &gt;</primary><secondary>DynamicParameter</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1DynamicParameter">jevois::DynamicParameter</link>&lt; T &gt;::<link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link> (<link linkend="_classjevois_1_1Component">Component</link> * comp, <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link>&lt; T &gt; const &amp; pdef)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1DynamicParameter_1ae5256c05515dece8f9ed7d5f79f6d7e3"/>    <section>
+    <title>~DynamicParameter()</title>
+<indexterm><primary>~DynamicParameter</primary><secondary>jevois::DynamicParameter&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::DynamicParameter&lt; T &gt;</primary><secondary>~DynamicParameter</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual <link linkend="_classjevois_1_1DynamicParameter">jevois::DynamicParameter</link>&lt; T &gt;::~<link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link> ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1DynamicParameter_1abb08737ebce48cc962e100318e8f7086"/>    <section>
+    <title>owner()</title>
+<indexterm><primary>owner</primary><secondary>jevois::DynamicParameter&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::DynamicParameter&lt; T &gt;</primary><secondary>owner</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const <link linkend="_classjevois_1_1Component">Component</link>* <link linkend="_classjevois_1_1DynamicParameter">jevois::DynamicParameter</link>&lt; T &gt;::owner ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Handle to owning component. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterCore_1a5d03b30408f72e7bfd272c6ddffe98c8">jevois::ParameterCore&lt; T &gt;</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_Parameter_8H">Parameter.H</link></section>
+</section>

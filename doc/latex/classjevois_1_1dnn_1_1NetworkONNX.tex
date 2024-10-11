@@ -1,0 +1,204 @@
+\hypertarget{classjevois_1_1dnn_1_1NetworkONNX}{}\doxysubsection{jevois\+::dnn\+::Network\+O\+N\+NX Class Reference}
+\label{classjevois_1_1dnn_1_1NetworkONNX}\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+O\+N\+N\+X.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+围绕 O\+N\+N\+X-\/\+Runtime 神经网络的包装器 
+
+Definition at line 33 of file Network\+O\+N\+N\+X.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+O\+N\+NX\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkONNX__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+O\+N\+NX\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkONNX__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a698e291e9bf8256f5878fafd49fd5df8}{Network\+O\+N\+NX}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Inherited constructor ok. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a397486547ecb596c2b4ca677f89b57ae}{$\sim$\+Network\+O\+N\+NX}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a25d2005cbbdc106b91005e56de6f09ed}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻参数，用户在运行时不应更改 \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a7833c8a7a47da08081db9d8fa46219a8}{input\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all input tensors. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a992be87c56f00419fb9ee96d90daf964}{output\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all output tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a427de85b73859743dd471bce63bb17e5}{load}} () override
+\begin{DoxyCompactList}\small\item\em Load from disk. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a21f98be54505be1a17303ecbfba147b1}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info) override
+\begin{DoxyCompactList}\small\item\em Process input blobs and obtain output blobs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a698e291e9bf8256f5878fafd49fd5df8}\label{classjevois_1_1dnn_1_1NetworkONNX_a698e291e9bf8256f5878fafd49fd5df8}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!NetworkONNX@{NetworkONNX}}
+\index{NetworkONNX@{NetworkONNX}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{NetworkONNX()}{NetworkONNX()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::\+Network\+O\+N\+NX (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Inherited constructor ok. 
+
+
+
+Definition at line 25 of file Network\+O\+N\+N\+X.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a397486547ecb596c2b4ca677f89b57ae}\label{classjevois_1_1dnn_1_1NetworkONNX_a397486547ecb596c2b4ca677f89b57ae}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!````~NetworkONNX@{$\sim$NetworkONNX}}
+\index{````~NetworkONNX@{$\sim$NetworkONNX}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{$\sim$NetworkONNX()}{~NetworkONNX()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::$\sim$\+Network\+O\+N\+NX (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 34 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a21f98be54505be1a17303ecbfba147b1}\label{classjevois_1_1dnn_1_1NetworkONNX_a21f98be54505be1a17303ecbfba147b1}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Process input blobs and obtain output blobs. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 109 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+References jevois\+::dnn\+::attrmat(), jevois\+::dnn\+::attrstr(), jevois\+::cv\+Bytes\+Per\+Pix(), jevois\+::cvtypestr(), L\+F\+A\+T\+AL, jevois\+::dnn\+::shapestr(), and jevois\+::dnn\+::vsi2cv().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a25d2005cbbdc106b91005e56de6f09ed}\label{classjevois_1_1dnn_1_1NetworkONNX_a25d2005cbbdc106b91005e56de6f09ed}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻参数，用户在运行时不应更改 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 38 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+References jevois\+::dnn\+::\+Network\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a7833c8a7a47da08081db9d8fa46219a8}\label{classjevois_1_1dnn_1_1NetworkONNX_a7833c8a7a47da08081db9d8fa46219a8}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!inputShapes@{inputShapes}}
+\index{inputShapes@{inputShapes}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{inputShapes()}{inputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::input\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all input tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 46 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a427de85b73859743dd471bce63bb17e5}\label{classjevois_1_1dnn_1_1NetworkONNX_a427de85b73859743dd471bce63bb17e5}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!load@{load}}
+\index{load@{load}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Load from disk. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 60 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+References jevois\+::absolute\+Path(), L\+I\+N\+FO, jevois\+::dnn\+::shapestr(), and jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkONNX_a992be87c56f00419fb9ee96d90daf964}\label{classjevois_1_1dnn_1_1NetworkONNX_a992be87c56f00419fb9ee96d90daf964}} 
+\index{jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}!outputShapes@{outputShapes}}
+\index{outputShapes@{outputShapes}!jevois::dnn::NetworkONNX@{jevois::dnn::NetworkONNX}}
+\doxyparagraph{\texorpdfstring{outputShapes()}{outputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::output\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all output tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 53 of file Network\+O\+N\+N\+X.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkONNX_8H}{Network\+O\+N\+N\+X.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkONNX_8C}{Network\+O\+N\+N\+X.\+C}}\end{DoxyCompactItemize}

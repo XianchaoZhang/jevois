@@ -1,0 +1,807 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structjevois_1_1VideoMapping">
+<title>jevois::VideoMapping Struct Reference</title>
+<indexterm><primary>jevois::VideoMapping</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoMapping.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>用于保存处理 <link linkend="_classjevois_1_1Engine">Engine</link> 的视频映射定义的简单结构 </para>
+
+
+
+<para>此结构指定输出视频格式、分辨率和帧速率（通过 USB 发送给最终用户）、相应的摄像头捕获视频格式、分辨率和帧速率，以及 用于处理摄像头帧并生成相应输出帧的模块。此类还为使用不同单位的 USB 和 V4L2 提供帧速率和帧间隔周期之间的转换函数。</para>
+
+<para>JeVois 的操作基于可用的 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 定义列表，该列表在 microSD 卡上名为 JEVOIS:config/videomappings.cfg 的文件中 配置。视频映射指示哪些输出格式暴露给通过 USB 连接的主机，以及当主机上运行的视频捕获软件选择给定的输出格式时应使用 哪种相应的相机格式和视觉处理模块。</para>
+
+<para>有关如何组织 videomappings.cfg 的说明，请参阅 <link linkend="_UserModes">视频模式和映射用户指南</link> </para>
+<para>
+Definition at line 56 of file VideoMapping.H.</para>
+Collaboration diagram for jevois::VideoMapping:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="structjevois_1_1VideoMapping__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a908efc3860db645b046cb8586d3202e6">path</link> () const</para>
+
+<para>返回模块目录的完整绝对路径 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1ad718fd523b68983d3bacc0ddbb23aef2">sopath</link> (bool delete_old_versions=false) const</para>
+
+<para>返回模块的 .so 或 .py 文件的完整绝对路径和文件名 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1ac1f6b173c8a0ccb774f75bea8efa6aa1">srcpath</link> () const</para>
+
+<para>返回模块的.C 或 .py 文件的完整绝对路径和文件名 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1aefb831c126e44cfddb70820f0d4d4c10">cmakepath</link> () const</para>
+
+<para>返回模块的 CMakeLists.txt 文件的完整绝对路径和文件名 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a28b954d94a5c417fedbc7c6dac3aee33">modinfopath</link> () const</para>
+
+<para>返回模块的 modinfo.html 文件的完整绝对路径和文件名 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a4270a8dfb97b1e2fcc2bee3290bacc13">osize</link> () const</para>
+
+<para>返回输出图像的字节大小 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a17b4d229e5c428fedddbc53807c568d4">csize</link> () const</para>
+
+<para>返回相机图像的大小（以字节为单位） </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a85b64f256a5d09764d8c6abce4186c11">c2size</link> () const</para>
+
+<para>如果 stream==RawAndScaled，则返回缩放后的相机图像的大小（以字节为单位），否则为 0 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_structjevois_1_1VideoMapping_1ae278ab957d7e20d9f11957679ad864bd">match</link> (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const</para>
+
+<para>如果此 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 的输出格式与给定的输出参数匹配，则返回 true </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a5b310d04c9e1d0e888a30d4368fb8d30">ostr</link> () const</para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps，用于输出（UVC）格式 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a60ae12947ce5be35eccdf01b6c17a8dc">cstr</link> () const</para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps，用于输入（相机）格式 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a70f367472187f447aefaef2208211529">c2str</link> () const</para>
+
+<para>便捷函数用于打印出 FCC WxH @ fps，用于缩放的相机输入格式，如果 stream==RawAndScaled </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a71a8cb7295f299d854a4835be85231f4">cstrall</link> () const</para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps 加上可能的第二个流，用于输入（相机）格式 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a6235e59852f9de0b6db18ce63310aa60">str</link> () const</para>
+
+<para>便捷函数，以人性化的方式打印出整个映射 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1ac224356c0e96b8b15fcffeddabd02804">menustr</link> () const</para>
+
+<para>便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a8447a52470db158094e532d0d2b0aefa">menustr2</link> () const</para>
+
+<para>便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_structjevois_1_1VideoMapping_1a296f93a1fd519d00c823d3d42fc652a7">hasSameSpecsAs</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;other) const</para>
+
+<para>specs 的相等运算符，但不适用于供应商或模块名称 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_structjevois_1_1VideoMapping_1aaa6499fea1f0e2ee25da53a843a63d6d">isSameAs</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;other) const</para>
+
+<para>specs 以及供应商或模块名称的相等运算符 </para>
+</listitem>
+            <listitem><para>void <link linkend="_structjevois_1_1VideoMapping_1a85566f3da0879bd218249856c525bdb5">setModuleType</link> ()</para>
+
+<para>确定模块是 C++ 还是 Python，并相应地设置 ispython 标志 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static float <link linkend="_structjevois_1_1VideoMapping_1abb1b5894c48d9da66fd1d48ac7d58c61">uvcToFps</link> (unsigned int interval)</para>
+
+<para>从 fps 转换为 USB/UVC 间隔 </para>
+</listitem>
+            <listitem><para>static unsigned int <link linkend="_structjevois_1_1VideoMapping_1a25dba8b9f99e1503de0c20cae80fcb7d">fpsToUvc</link> (float fps)</para>
+
+<para>从 fps 转换为 V4L2 间隔 </para>
+</listitem>
+            <listitem><para>static float <link linkend="_structjevois_1_1VideoMapping_1a223f22f4ca1eddecacce70cf3b0dbb54">v4l2ToFps</link> (struct v4l2_fract const &amp;interval)</para>
+
+<para>Convert from V4L2 interval to fps. </para>
+</listitem>
+            <listitem><para>static struct v4l2_fract <link linkend="_structjevois_1_1VideoMapping_1a0a67d8c4f844fe9c6bc9aee126a04019">fpsToV4l2</link> (float fps)</para>
+
+<para>Convert from fps to V4L2 interval. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1af0154aa75398ca999e7274c5a57296ad">ofmt</link> = 0</para>
+
+<para>输出像素格式，或 0 表示无 USB 输出 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a16298d1f23ee37977ad08ec5134b7b1b">ow</link> = 0</para>
+
+<para>output width </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1ab1c49a151217816e76a05dfcf2ed08a9">oh</link> = 0</para>
+
+<para>output height </para>
+</listitem>
+            <listitem><para>float <link linkend="_structjevois_1_1VideoMapping_1a9d03bc7d08fcdc0e1bf09addb1a0ef23">ofps</link> = 0.0F</para>
+
+<para>output frame rate in frames/sec </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a0ae55dbcb03c271fb9d13accdea6e281">cfmt</link> = 0</para>
+
+<para>camera pixel format </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a9b436a8c8479b72efe84f4e8ba905e5c">cw</link> = 0</para>
+
+<para>camera width </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1aa4995f11fe9c1228acefe23f314ca685">ch</link> = 0</para>
+
+<para>camera height </para>
+</listitem>
+            <listitem><para>float <link linkend="_structjevois_1_1VideoMapping_1a766cb362f792027ffdd7efe8e7c22847">cfps</link> = 0.0F</para>
+
+<para>camera frame rate in frames/sec </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1ab5c3410219861efeef71a33d54c756cb">uvcformat</link></para>
+
+<para>USB-UVC format number (1-based) </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1abdb7c6f7fd08bd492c99bc2462046fb0">uvcframe</link></para>
+
+<para>USB UVC frame number (1-based) </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1ad2652b83576d4c1b2d6d615676cdf8ea">vendor</link></para>
+
+<para>模块创建者名称，用作组织模块的目录 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_structjevois_1_1VideoMapping_1a406531699df3e2ac1e877559c7bce434">modulename</link></para>
+
+<para>将处理此映射的模块的名称 </para>
+</listitem>
+            <listitem><para>WDRtype <link linkend="_structjevois_1_1VideoMapping_1a03f39812b94792bb55fb9ace65d7adbc">wdr</link> = WDRtype::Linear</para>
+
+<para>如果传感器支持，则使用的宽动态范围 (WDR) 类型 </para>
+</listitem>
+            <listitem><para>CropType <link linkend="_structjevois_1_1VideoMapping_1a2ef142ee167d1db180a9544018c7b808">crop</link> = CropType::Scale</para>
+
+<para>如果相机尺寸与传感器原生尺寸不匹配，则应用的裁剪/缩放类型 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_structjevois_1_1VideoMapping_1a843db42b982f0f1ad0083bb65589dfde">ispython</link> = false</para>
+
+<para>如果模块是用 Python 编写的，则为 True；仅影响 <link linkend="_structjevois_1_1VideoMapping_1ad718fd523b68983d3bacc0ddbb23aef2">sopath()</link> 的行为 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a1b17b8798450643adfe3848c4088e1d1">c2fmt</link> = 0</para>
+
+<para>当 crop 为 CropScale 时，缩放图像的像素格式，否则为 0 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1a2a1041bab8d100063f5840cde813c2b3">c2w</link> = 0</para>
+
+<para>当 crop 为 CropScale 时，缩放图像的宽度，否则为 0 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_structjevois_1_1VideoMapping_1aa38e9a4498b6ac0d0e73c4530f672848">c2h</link> = 0</para>
+
+<para>当 crop 为 CropScale 时，缩放图像的高度，否则为 0 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping_1a7d4dc5ac10bc27de5dbe77a59bb5c64b">JEVOIS_DEFINE_ENUM_CLASS</link> (WDRtype,(Linear)(DOL))</para>
+
+<para>Enum for <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> wide-dynamic-range (WDR) type. </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping_1a29e52121d516cfb4c555e7854f3c7601">JEVOIS_DEFINE_ENUM_CLASS</link> (CropType,(Scale)(Crop)(CropScale))</para>
+
+<para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> crop or rescale 的枚举 </para>
+</listitem>
+            <listitem><para>std::ostream &amp; <link linkend="_structjevois_1_1VideoMapping_1ad08d440b2fdbff06067ec4f2bfff3a79">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)</para>
+
+<para>将 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 流输出，用于机器 </para>
+</listitem>
+            <listitem><para>std::istream &amp; <link linkend="_structjevois_1_1VideoMapping_1afcc7e011125b8f51dd19affc928b6535">operator&gt;&gt;</link> (std::istream &amp;in, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp;m)</para>
+
+<para>流式传输 VideoMapping，用于机器 </para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &gt; <link linkend="_structjevois_1_1VideoMapping_1a886596287ddfbcb161503dd1285d2ea0">loadVideoMappings</link> (CameraSensor s, size_t &amp;defidx, bool checkso=true, bool hasgui=false)</para>
+
+<para>从默认配置文件中加载所有视频映射 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_structjevois_1_1VideoMapping_1a85b64f256a5d09764d8c6abce4186c11"/>    <section>
+    <title>c2size()</title>
+<indexterm><primary>c2size</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>c2size</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::c2size ( ) const</computeroutput></para><para>
+
+<para>如果 stream==RawAndScaled，则返回缩放后的相机图像的大小（以字节为单位），否则为 0 </para>
+</para>
+<para>
+Definition at line 93 of file VideoMapping.C.</para>
+<para>
+References jevois::v4l2ImageSize().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a70f367472187f447aefaef2208211529"/>    <section>
+    <title>c2str()</title>
+<indexterm><primary>c2str</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>c2str</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::c2str ( ) const</computeroutput></para><para>
+
+<para>便捷函数用于打印出 FCC WxH @ fps，用于缩放的相机输入格式，如果 stream==RawAndScaled </para>
+</para>
+<para>
+Definition at line 139 of file VideoMapping.C.</para>
+<para>
+References jevois::fccstr().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1aefb831c126e44cfddb70820f0d4d4c10"/>    <section>
+    <title>cmakepath()</title>
+<indexterm><primary>cmakepath</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cmakepath</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::cmakepath ( ) const</computeroutput></para><para>
+
+<para>返回模块的 CMakeLists.txt 文件的完整绝对路径和文件名 </para>
+</para>
+<para>
+Definition at line 73 of file VideoMapping.C.</para>
+<para>
+References JEVOIS_MODULE_PATH.</para>
+<para>
+Referenced by jevois::GUIeditor::refresh().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a17b4d229e5c428fedddbc53807c568d4"/>    <section>
+    <title>csize()</title>
+<indexterm><primary>csize</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>csize</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::csize ( ) const</computeroutput></para><para>
+
+<para>返回相机图像的大小（以字节为单位） </para>
+</para>
+<para>
+Definition at line 89 of file VideoMapping.C.</para>
+<para>
+References jevois::v4l2ImageSize().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a60ae12947ce5be35eccdf01b6c17a8dc"/>    <section>
+    <title>cstr()</title>
+<indexterm><primary>cstr</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cstr</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::cstr ( ) const</computeroutput></para><para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps，用于输入（相机）格式 </para>
+</para>
+<para>
+Definition at line 131 of file VideoMapping.C.</para>
+<para>
+References jevois::fccstr().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a71a8cb7295f299d854a4835be85231f4"/>    <section>
+    <title>cstrall()</title>
+<indexterm><primary>cstrall</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cstrall</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::cstrall ( ) const</computeroutput></para><para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps 加上可能的第二个流，用于输入（相机）格式 </para>
+</para>
+<para>
+Definition at line 147 of file VideoMapping.C.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a25dba8b9f99e1503de0c20cae80fcb7d"/>    <section>
+    <title>fpsToUvc()</title>
+<indexterm><primary>fpsToUvc</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>fpsToUvc</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::fpsToUvc (float fps)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>从 fps 转换为 V4L2 间隔 </para>
+</para>
+<para>
+Definition at line 104 of file VideoMapping.C.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a0a67d8c4f844fe9c6bc9aee126a04019"/>    <section>
+    <title>fpsToV4l2()</title>
+<indexterm><primary>fpsToV4l2</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>fpsToV4l2</secondary></indexterm>
+<para><computeroutput>struct v4l2_fract jevois::VideoMapping::fpsToV4l2 (float fps)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Convert from fps to V4L2 interval. </para>
+</para>
+<para>
+Definition at line 117 of file VideoMapping.C.</para>
+<para>
+Referenced by jevois::CameraDevice::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a296f93a1fd519d00c823d3d42fc652a7"/>    <section>
+    <title>hasSameSpecsAs()</title>
+<indexterm><primary>hasSameSpecsAs</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>hasSameSpecsAs</secondary></indexterm>
+<para><computeroutput>bool jevois::VideoMapping::hasSameSpecsAs (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; other) const</computeroutput></para><para>
+
+<para>specs 的相等运算符，但不适用于供应商或模块名称 </para>
+</para>
+
+<para>请注意，如果两个映射的 fps 值在 0.01fps 以内，则将声明它们匹配，以避免由于浮点表示和舍入而导致不匹配。 </para>
+<para>
+Definition at line 199 of file VideoMapping.C.</para>
+<para>
+References c2fmt, c2h, c2w, cfmt, cfps, ch, crop, cw, ofmt, ofps, oh, and ow.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1aaa6499fea1f0e2ee25da53a843a63d6d"/>    <section>
+    <title>isSameAs()</title>
+<indexterm><primary>isSameAs</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>isSameAs</secondary></indexterm>
+<para><computeroutput>bool jevois::VideoMapping::isSameAs (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; other) const</computeroutput></para><para>
+
+<para>specs 以及供应商或模块名称的相等运算符 </para>
+</para>
+
+<para>请注意，如果两个映射的 fps 值在 0.01fps 以内，则将声明它们匹配，以避免由于浮点表示和舍入而导致不匹配。 </para>
+<para>
+Definition at line 209 of file VideoMapping.C.</para>
+<para>
+References ispython, modulename, vendor, and wdr.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ae278ab957d7e20d9f11957679ad864bd"/>    <section>
+    <title>match()</title>
+<indexterm><primary>match</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>match</secondary></indexterm>
+<para><computeroutput>bool jevois::VideoMapping::match (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const</computeroutput></para><para>
+
+<para>如果此 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 的输出格式与给定的输出参数匹配，则返回 true </para>
+</para>
+<para>
+Definition at line 504 of file VideoMapping.C.</para>
+<para>
+Referenced by jevois::Engine::findVideoMapping().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ac224356c0e96b8b15fcffeddabd02804"/>    <section>
+    <title>menustr()</title>
+<indexterm><primary>menustr</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>menustr</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::menustr ( ) const</computeroutput></para><para>
+
+<para>便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 </para>
+</para>
+<para>
+Definition at line 168 of file VideoMapping.C.</para>
+<para>
+References JEVOISPRO_FMT_GUI.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a8447a52470db158094e532d0d2b0aefa"/>    <section>
+    <title>menustr2()</title>
+<indexterm><primary>menustr2</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>menustr2</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::menustr2 ( ) const</computeroutput></para><para>
+
+<para>便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 </para>
+</para>
+<para>
+Definition at line 180 of file VideoMapping.C.</para>
+<para>
+References JEVOISPRO_FMT_GUI.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a28b954d94a5c417fedbc7c6dac3aee33"/>    <section>
+    <title>modinfopath()</title>
+<indexterm><primary>modinfopath</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>modinfopath</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::modinfopath ( ) const</computeroutput></para><para>
+
+<para>返回模块的 modinfo.html 文件的完整绝对路径和文件名 </para>
+</para>
+<para>
+Definition at line 79 of file VideoMapping.C.</para>
+<para>
+References JEVOIS_MODULE_PATH.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a4270a8dfb97b1e2fcc2bee3290bacc13"/>    <section>
+    <title>osize()</title>
+<indexterm><primary>osize</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>osize</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::osize ( ) const</computeroutput></para><para>
+
+<para>返回输出图像的字节大小 </para>
+</para>
+<para>
+Definition at line 85 of file VideoMapping.C.</para>
+<para>
+References jevois::v4l2ImageSize().</para>
+<para>
+Referenced by jevois::VideoOutputNone::setFormat(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a5b310d04c9e1d0e888a30d4368fb8d30"/>    <section>
+    <title>ostr()</title>
+<indexterm><primary>ostr</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ostr</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::ostr ( ) const</computeroutput></para><para>
+
+<para>便捷函数，用于打印出 FCC WxH @ fps，用于输出（UVC）格式 </para>
+</para>
+<para>
+Definition at line 123 of file VideoMapping.C.</para>
+<para>
+References jevois::fccstr().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a908efc3860db645b046cb8586d3202e6"/>    <section>
+    <title>path()</title>
+<indexterm><primary>path</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>path</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::path ( ) const</computeroutput></para><para>
+
+<para>返回模块目录的完整绝对路径 </para>
+</para>
+<para>
+Definition at line 30 of file VideoMapping.C.</para>
+<para>
+References JEVOIS_MODULE_PATH, modulename, and vendor.</para>
+<para>
+Referenced by jevois::GUIeditor::refresh().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a85566f3da0879bd218249856c525bdb5"/>    <section>
+    <title>setModuleType()</title>
+<indexterm><primary>setModuleType</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>setModuleType</secondary></indexterm>
+<para><computeroutput>void jevois::VideoMapping::setModuleType ( )</computeroutput></para><para>
+
+<para>确定模块是 C++ 还是 Python，并相应地设置 ispython 标志 </para>
+</para>
+
+<para>其他字段应该已经初始化。operator&gt;&gt; 和 loadVideoMappings 在内部使用此函数，因此从 sream 创建 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 后 无需调用它。如果在给定模块供应商和名称的适当位置未找到 .so 或 .py 文件，则此函数将抛出 </para>
+<para>
+Definition at line 512 of file VideoMapping.C.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ad718fd523b68983d3bacc0ddbb23aef2"/>    <section>
+    <title>sopath()</title>
+<indexterm><primary>sopath</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>sopath</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::sopath (bool delete_old_versions = <computeroutput>false</computeroutput>
+) const</computeroutput></para><para>
+
+<para>返回模块的 .so 或 .py 文件的完整绝对路径和文件名 </para>
+</para>
+<para>
+Definition at line 36 of file VideoMapping.C.</para>
+<para>
+References JEVOIS_MODULE_PATH, and jevois::to_string().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ac1f6b173c8a0ccb774f75bea8efa6aa1"/>    <section>
+    <title>srcpath()</title>
+<indexterm><primary>srcpath</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>srcpath</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::srcpath ( ) const</computeroutput></para><para>
+
+<para>返回模块的.C 或 .py 文件的完整绝对路径和文件名 </para>
+</para>
+<para>
+Definition at line 66 of file VideoMapping.C.</para>
+<para>
+References JEVOIS_MODULE_PATH.</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a6235e59852f9de0b6db18ce63310aa60"/>    <section>
+    <title>str()</title>
+<indexterm><primary>str</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>str</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::str ( ) const</computeroutput></para><para>
+
+<para>便捷函数，以人性化的方式打印出整个映射 </para>
+</para>
+<para>
+Definition at line 155 of file VideoMapping.C.</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1abb1b5894c48d9da66fd1d48ac7d58c61"/>    <section>
+    <title>uvcToFps()</title>
+<indexterm><primary>uvcToFps</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>uvcToFps</secondary></indexterm>
+<para><computeroutput>float jevois::VideoMapping::uvcToFps (unsigned int interval)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>从 fps 转换为 USB/UVC 间隔 </para>
+</para>
+
+<para>此函数四舍五入到最接近的 1/100 fps。 </para>
+<para>
+Definition at line 97 of file VideoMapping.C.</para>
+<para>
+Referenced by jevois::Engine::getVideoMappingIdx().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a223f22f4ca1eddecacce70cf3b0dbb54"/>    <section>
+    <title>v4l2ToFps()</title>
+<indexterm><primary>v4l2ToFps</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>v4l2ToFps</secondary></indexterm>
+<para><computeroutput>float jevois::VideoMapping::v4l2ToFps (struct v4l2_fract const &amp; interval)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>Convert from V4L2 interval to fps. </para>
+</para>
+
+<para>This function rounds to the nearest 1/100 fps. </para>
+<para>
+Definition at line 110 of file VideoMapping.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_structjevois_1_1VideoMapping_1a29e52121d516cfb4c555e7854f3c7601"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (CropType , (Scale)(Crop)(CropScale) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> crop or rescale 的枚举 </para>
+</para>
+
+<para>在 JeVois-Pro 平台（仅限）上，相机 ISP 最多可以传输两幅图像：1) 来自传感器的原始帧（可能已裁剪），2) 由 ISP 生成的 缩放帧（缩放始终应用于原始传感器分辨率，与裁剪设置无关），或两者兼而有之。图像可以具有不同的像素类型但相同的帧/秒。 获取裁剪和缩放的图像对于使用全帧原始 YUYV 捕获进行 GUI 显示以及缩小的 RGB24 捕获作为神经网络的输入非常有用。当指定 的相机帧大小与传感器的大小不匹配时，请进行居中裁剪或统一重新缩放。请注意，重新缩放会影响图像纵横比，因此建议使用与 原始传感器大小相同的纵横比的相机帧大小。如果 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 中未指定任何内容，则默认使用 Scale。 </para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a7d4dc5ac10bc27de5dbe77a59bb5c64b"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (WDRtype , (Linear)(DOL) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> wide-dynamic-range (WDR) type. </para>
+</para>
+
+<para>If nothing is specified in a <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link>, use Linear by default. </para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a886596287ddfbcb161503dd1285d2ea0"/>    <section>
+    <title>loadVideoMappings()</title>
+<indexterm><primary>loadVideoMappings</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>loadVideoMappings</secondary></indexterm>
+<para><computeroutput>std::vector&lt; <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &gt; loadVideoMappings (CameraSensor s, size_t &amp; defidx, bool checkso = <computeroutput>true</computeroutput>
+, bool hasgui = <computeroutput>false</computeroutput>
+)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>从默认配置文件中加载所有视频映射 </para>
+</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ad08d440b2fdbff06067ec4f2bfff3a79"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<para><computeroutput>std::ostream &amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; m)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>将 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 流输出，用于机器 </para>
+</para>
+
+<para>请注意，最后不会发出 std::endl。 </para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1afcc7e011125b8f51dd19affc928b6535"/>    <section>
+    <title>operator&gt;&gt;()</title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<para><computeroutput>std::istream &amp; operator&gt;&gt; (std::istream &amp; in, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &amp; m)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>流式传输 VideoMapping，用于机器 </para>
+</para>
+
+<para>请注意，假设映射是干净的（没有多余的垃圾）。 </para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structjevois_1_1VideoMapping_1a1b17b8798450643adfe3848c4088e1d1"/>    <section>
+    <title>c2fmt</title>
+<indexterm><primary>c2fmt</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>c2fmt</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::c2fmt = 0</computeroutput></para><para>
+
+<para>当 crop 为 CropScale 时，缩放图像的像素格式，否则为 0 </para>
+</para>
+<para>
+Definition at line 79 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1aa38e9a4498b6ac0d0e73c4530f672848"/>    <section>
+    <title>c2h</title>
+<indexterm><primary>c2h</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>c2h</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::c2h = 0</computeroutput></para><para>
+
+<para>当 crop 为 CropScale 时，缩放图像的高度，否则为 0 </para>
+</para>
+<para>
+Definition at line 81 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a2a1041bab8d100063f5840cde813c2b3"/>    <section>
+    <title>c2w</title>
+<indexterm><primary>c2w</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>c2w</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::c2w = 0</computeroutput></para><para>
+
+<para>当 crop 为 CropScale 时，缩放图像的宽度，否则为 0 </para>
+</para>
+<para>
+Definition at line 80 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a0ae55dbcb03c271fb9d13accdea6e281"/>    <section>
+    <title>cfmt</title>
+<indexterm><primary>cfmt</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cfmt</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::cfmt = 0</computeroutput></para><para>
+
+<para>camera pixel format </para>
+</para>
+<para>
+Definition at line 63 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), main(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a766cb362f792027ffdd7efe8e7c22847"/>    <section>
+    <title>cfps</title>
+<indexterm><primary>cfps</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cfps</secondary></indexterm>
+<para><computeroutput>float jevois::VideoMapping::cfps = 0.0F</computeroutput></para><para>
+
+<para>camera frame rate in frames/sec </para>
+</para>
+<para>
+Definition at line 66 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), main(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1aa4995f11fe9c1228acefe23f314ca685"/>    <section>
+    <title>ch</title>
+<indexterm><primary>ch</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ch</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::ch = 0</computeroutput></para><para>
+
+<para>camera height </para>
+</para>
+<para>
+Definition at line 65 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), main(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a2ef142ee167d1db180a9544018c7b808"/>    <section>
+    <title>crop</title>
+<indexterm><primary>crop</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>crop</secondary></indexterm>
+<para><computeroutput>CropType jevois::VideoMapping::crop = CropType::Scale</computeroutput></para><para>
+
+<para>如果相机尺寸与传感器原生尺寸不匹配，则应用的裁剪/缩放类型 </para>
+</para>
+<para>
+Definition at line 76 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a9b436a8c8479b72efe84f4e8ba905e5c"/>    <section>
+    <title>cw</title>
+<indexterm><primary>cw</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>cw</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::cw = 0</computeroutput></para><para>
+
+<para>camera width </para>
+</para>
+<para>
+Definition at line 64 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), main(), and jevois::Camera::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a843db42b982f0f1ad0083bb65589dfde"/>    <section>
+    <title>ispython</title>
+<indexterm><primary>ispython</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ispython</secondary></indexterm>
+<para><computeroutput>bool jevois::VideoMapping::ispython = false</computeroutput></para><para>
+
+<para>如果模块是用 Python 编写的，则为 True；仅影响 <link linkend="_structjevois_1_1VideoMapping_1ad718fd523b68983d3bacc0ddbb23aef2">sopath()</link> 的行为 </para>
+</para>
+<para>
+Definition at line 77 of file VideoMapping.H.</para>
+<para>
+Referenced by isSameAs(), and jevois::PythonModule::PythonModule().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a406531699df3e2ac1e877559c7bce434"/>    <section>
+    <title>modulename</title>
+<indexterm><primary>modulename</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>modulename</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::modulename</computeroutput></para><para>
+
+<para>将处理此映射的模块的名称 </para>
+</para>
+<para>
+Definition at line 73 of file VideoMapping.H.</para>
+<para>
+Referenced by isSameAs(), main(), and path().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1af0154aa75398ca999e7274c5a57296ad"/>    <section>
+    <title>ofmt</title>
+<indexterm><primary>ofmt</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ofmt</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::ofmt = 0</computeroutput></para><para>
+
+<para>输出像素格式，或 0 表示无 USB 输出 </para>
+</para>
+<para>
+Definition at line 58 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), jevois::VideoOutputNone::setFormat(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a9d03bc7d08fcdc0e1bf09addb1a0ef23"/>    <section>
+    <title>ofps</title>
+<indexterm><primary>ofps</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ofps</secondary></indexterm>
+<para><computeroutput>float jevois::VideoMapping::ofps = 0.0F</computeroutput></para><para>
+
+<para>output frame rate in frames/sec </para>
+</para>
+<para>
+Definition at line 61 of file VideoMapping.H.</para>
+<para>
+Referenced by jevois::Engine::getVideoMappingIdx(), hasSameSpecsAs(), jevois::VideoOutputNone::setFormat(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ab1c49a151217816e76a05dfcf2ed08a9"/>    <section>
+    <title>oh</title>
+<indexterm><primary>oh</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>oh</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::oh = 0</computeroutput></para><para>
+
+<para>output height </para>
+</para>
+<para>
+Definition at line 60 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), jevois::VideoOutputNone::setFormat(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a16298d1f23ee37977ad08ec5134b7b1b"/>    <section>
+    <title>ow</title>
+<indexterm><primary>ow</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>ow</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::ow = 0</computeroutput></para><para>
+
+<para>output width </para>
+</para>
+<para>
+Definition at line 59 of file VideoMapping.H.</para>
+<para>
+Referenced by hasSameSpecsAs(), jevois::VideoOutputNone::setFormat(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::setFormat().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ab5c3410219861efeef71a33d54c756cb"/>    <section>
+    <title>uvcformat</title>
+<indexterm><primary>uvcformat</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>uvcformat</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::uvcformat</computeroutput></para><para>
+
+<para>USB-UVC format number (1-based) </para>
+</para>
+<para>
+Definition at line 68 of file VideoMapping.H.</para>
+<para>
+Referenced by jevois::Engine::getVideoMappingIdx().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1abdb7c6f7fd08bd492c99bc2462046fb0"/>    <section>
+    <title>uvcframe</title>
+<indexterm><primary>uvcframe</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>uvcframe</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::VideoMapping::uvcframe</computeroutput></para><para>
+
+<para>USB UVC frame number (1-based) </para>
+</para>
+<para>
+Definition at line 69 of file VideoMapping.H.</para>
+<para>
+Referenced by jevois::Engine::getVideoMappingIdx().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1ad2652b83576d4c1b2d6d615676cdf8ea"/>    <section>
+    <title>vendor</title>
+<indexterm><primary>vendor</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>vendor</secondary></indexterm>
+<para><computeroutput>std::string jevois::VideoMapping::vendor</computeroutput></para><para>
+
+<para>模块创建者名称，用作组织模块的目录 </para>
+</para>
+<para>
+Definition at line 71 of file VideoMapping.H.</para>
+<para>
+Referenced by isSameAs(), main(), and path().</para>
+    </section><anchor xml:id="_structjevois_1_1VideoMapping_1a03f39812b94792bb55fb9ace65d7adbc"/>    <section>
+    <title>wdr</title>
+<indexterm><primary>wdr</primary><secondary>jevois::VideoMapping</secondary></indexterm>
+<indexterm><primary>jevois::VideoMapping</primary><secondary>wdr</secondary></indexterm>
+<para><computeroutput>WDRtype jevois::VideoMapping::wdr = WDRtype::Linear</computeroutput></para><para>
+
+<para>如果传感器支持，则使用的宽动态范围 (WDR) 类型 </para>
+</para>
+<para>
+Definition at line 75 of file VideoMapping.H.</para>
+<para>
+Referenced by isSameAs(), and main().</para>
+</section>
+<para>
+The documentation for this struct was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoMapping_8H">VideoMapping.H</link>src/jevois/Core/<link linkend="_VideoMapping_8C">VideoMapping.C</link></section>
+</section>

@@ -1,0 +1,851 @@
+\hypertarget{group__image}{}\doxysubsection{Raw 零拷贝/内存映射视频图像和支持函数}
+\label{group__image}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+
+
+\doxysubsubsection{ }
+支持图像的类和函数的主要目的是允许处理内存映射到硬件（相机或 U\+SB 驱动程序）的图像缓冲区，而无需复制数据。还有许多其他库和框 架可用，它们定义了更完整的图像类和相关的图像处理和机器视觉功能。这里提供的函数允许您将原始图像缓冲区重新解释为 Open\+CV cv\+::\+Mat 图像等，而无需复制图像像素数据。为了创建演示显示，还提供了将图像复制、粘贴、绘制、文本等简单复制到原始 Y\+U\+YV 图像缓 冲区（通常从 U\+SB 驱动程序获得，需要填充一些像素数据才能通过 U\+SB 链路发送）的功能。 
+
+表示具有像素缓冲区的图像的类称为 Raw\+Image，相机或 U\+SB 硬件可直接访问该缓冲区（参见 Video\+Buf）。为了避免再次定义像素类型（ 大多数与图像相关的库已经这样做了），我们在 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中只使用 Video4\+Linux2 提供的定义。
+
+因此，对 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 进行操作的函数主要有两个目的：1) 从 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中获取像素数据并将其转换为另一种格式（如 Open\+C\+V），或从其 他格式转换为 Raw\+Image；2) 允许简单绘制线条、圆形、矩形等，以便直接在 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 缓冲区中进行简单的演示显示，并通过 U\+SB 链 接发送。 Collaboration diagram for Raw 零拷贝/内存映射视频图像和支持函数\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__image}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}}
+\begin{DoxyCompactList}\small\item\em 来自 V4\+L2 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和/或发送到 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 的原始图像 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois_1_1yuyv}{jevois\+::yuyv}}
+\begin{DoxyCompactList}\small\item\em 辅助 Y\+U\+YV 颜色 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1rgb565}{jevois\+::rgb565}}
+\begin{DoxyCompactList}\small\item\em 辅助 R\+G\+B565 颜色 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__jpeg}{Jpeg 相关的类和函数}}
+\begin{DoxyCompactList}\small\item\em Jpeg 类和函数，主要用于支持从相机捕获的原始未压缩图像通过 U\+SB 发送 M\+J\+P\+EG 视频输出。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{jevois\+::rawimage\+::\+Font}} \{ \newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e}{jevois\+::rawimage\+::\+Font5x7}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{jevois\+::rawimage\+::\+Font6x10}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388}{jevois\+::rawimage\+::\+Font7x13}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b}{jevois\+::rawimage\+::\+Font8x13bold}}, 
+\newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8}{jevois\+::rawimage\+::\+Font9x15bold}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4}{jevois\+::rawimage\+::\+Font10x20}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69}{jevois\+::rawimage\+::\+Font11x22}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340}{jevois\+::rawimage\+::\+Font12x22}}, 
+\newline
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494}{jevois\+::rawimage\+::\+Font14x26}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0}{jevois\+::rawimage\+::\+Font15x28}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b}{jevois\+::rawimage\+::\+Font16x29}}, 
+\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c}{jevois\+::rawimage\+::\+Font20x38}}
+ \}
+\begin{DoxyCompactList}\small\item\em 可用于 \mbox{\hyperlink{group__image_ga893e982b449643c8853afe424fb72c09}{write\+Text()}} 的字体 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__image_gabc1de0ec8bdb25ffacf5b0d25dc11469}{convert\+Y\+U\+Y\+Vto\+R\+G\+B\+YL}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned char const $\ast$src, int $\ast$dstrg, int $\ast$dstby, int $\ast$dstlum, int thresh, int inputbits)
+\begin{DoxyCompactList}\small\item\em 将 Y\+U\+YV 转换为 R\+G、\+BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga20c3651602d9b2d003988b9bcd674f03}{jevois\+::rawimage\+::cv\+Image}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src)
+\begin{DoxyCompactList}\small\item\em 从现有 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据创建 Open\+CV 图像，共享像素内存而不是复制它 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga6f005034f93fc03530498eae898f9b22}{jevois\+::rawimage\+::convert\+To\+Cv\+B\+GR}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素执行颜色转换为 Open\+CV B\+GR 字节 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga41c623fdf6e26eca8908b1129b56312f}{jevois\+::rawimage\+::convert\+To\+Cv\+R\+GB}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+GB 字节进行颜色转换 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga028f56e85446eef9d27bd51c71867dd2}{jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+BA}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+G\+B-\/A 字节进行颜色转换 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gac56b219fa6df460b3a9beaf7712d5c77}{jevois\+::rawimage\+::byte\+Swap}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img)
+\begin{DoxyCompactList}\small\item\em 交换 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中的字节对 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga05c4650464e447a89a2a2c60d1956748}{jevois\+::rawimage\+::paste}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将一张图像粘贴到另一张相同像素类型的图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae83668f61639d6a6f4de5e11d02ca015}{jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+YV}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将灰度字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae9f19d7535b689d5c0b4bb31133463da}{jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+YV}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR 字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga3ff72f69a31242d3d77ac1c61e82c4d6}{jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+YV}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB 字节图像粘贴到 Y\+U\+YV 图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa8a5444f39661f76fb160f1f6eead381}{jevois\+::rawimage\+::roipaste}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&src, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dest, int dx, int dy)
+\begin{DoxyCompactList}\small\item\em 将图像中的 R\+OI 粘贴到相同像素类型的另一个图像中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga529a42aed4e4681e38910e8793e6064c}{jevois\+::rawimage\+::draw\+Disk}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x, int y, unsigned int rad, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一个圆盘 disk \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gae7d102e1c456f87337d66a9a2fc11a58}{jevois\+::rawimage\+::draw\+Circle}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在\+Y\+U\+Y\+V图像中绘制一个圆圈 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__image_ga0d1d1903484f89b7a8db5485fe1784a7}{jevois\+::rawimage\+::clip\+Line}} (int wxmin, int wymin, int wxmax, int wymax, int \&x1, int \&y1, int \&x2, int \&y2)
+\begin{DoxyCompactList}\small\item\em 剪裁一条线以适合 viewport \mbox{[}wxmin...wxmax\mbox{[} x \mbox{[}wymin...wymax\mbox{]} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga7cf2b2c4e6460835fbc671367a60feb9}{jevois\+::rawimage\+::draw\+Line}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一条线 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa32b3e227c9904699d616e2a32c9506d}{jevois\+::rawimage\+::draw\+Rect}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int thick, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制一个矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa023840c2ca7c4997b4b456927131cdf}{jevois\+::rawimage\+::draw\+Rect}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga458eebde298cccaa70c778878223c17b}{jevois\+::rawimage\+::draw\+Filled\+Rect}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, int x, int y, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int col)
+\begin{DoxyCompactList}\small\item\em 在 Y\+U\+YV 图像中绘制填充矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga2696d3febc217f295d5532c26255c26b}{jevois\+::rawimage\+::write\+Text}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, std\+::string const \&txt, int x, int y, unsigned int col, \mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{Font}} font=\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{Font6x10}})
+\begin{DoxyCompactList}\small\item\em 在图像中写一些文字 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga893e982b449643c8853afe424fb72c09}{jevois\+::rawimage\+::write\+Text}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img, char const $\ast$txt, int x, int y, unsigned int col, \mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{Font}} font=\mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{Font6x10}})
+\begin{DoxyCompactList}\small\item\em 在图像中写一些文字 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga748b79664f7d9c00f2706e726276a09f}{jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga8d0578936bcb62de35eec980b933de52}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga5c34b763c90ed987d80a1dc58e75524c}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 使用已分配的像素和像素类型将 R\+G\+BA cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gad05785dce156be8a1e4d473ea07e3f67}{jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality)
+\begin{DoxyCompactList}\small\item\em 使用已分配的像素和像素类型将灰色 cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gaa830449161c068b13cd986844a2c428e}{jevois\+::rawimage\+::h\+Flip\+Y\+U\+YV}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img)
+\begin{DoxyCompactList}\small\item\em 水平翻转 Y\+U\+YV \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 同时保留颜色信息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga887e3d1b0329cc864014c04a90689f59}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga2865d43005acc85a1f49b868eedc76cc}{jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_ga13704ff98cb3e041adea2154fd42499c}{jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gad00957ca65ed08071e6b05d6cfe19fc3}{jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Cv\+Y\+U\+YV}} (cv\+::\+Mat const \&src, cv\+::\+Mat \&dst)
+\begin{DoxyCompactList}\small\item\em Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga6607626cad0258d69b6ead8d1ced4f52}{jevois\+::rescale\+Cv}} (cv\+::\+Mat const \&img, cv\+::\+Size const \&newdims)
+\begin{DoxyCompactList}\small\item\em 重新缩放 Open\+CV 图像，选择正确的插值类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}\label{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font@{Font}}
+\index{Font@{Font}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{Font}{Font}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{jevois\+::rawimage\+::\+Font}}}
+
+
+
+可用于 \mbox{\hyperlink{group__image_ga2696d3febc217f295d5532c26255c26b}{write\+Text()}} 的字体 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font5x7@{Font5x7}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font5x7@{Font5x7}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e}} 
+Font5x7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font6x10@{Font6x10}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font6x10@{Font6x10}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}} 
+Font6x10&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font7x13@{Font7x13}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font7x13@{Font7x13}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388}} 
+Font7x13&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font8x13bold@{Font8x13bold}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font8x13bold@{Font8x13bold}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b}} 
+Font8x13bold&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font9x15bold@{Font9x15bold}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font9x15bold@{Font9x15bold}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8}} 
+Font9x15bold&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font10x20@{Font10x20}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font10x20@{Font10x20}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4}} 
+Font10x20&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font11x22@{Font11x22}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font11x22@{Font11x22}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69}} 
+Font11x22&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font12x22@{Font12x22}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font12x22@{Font12x22}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340}} 
+Font12x22&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font14x26@{Font14x26}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font14x26@{Font14x26}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494}} 
+Font14x26&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font15x28@{Font15x28}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font15x28@{Font15x28}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0}} 
+Font15x28&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font16x29@{Font16x29}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font16x29@{Font16x29}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b}} 
+Font16x29&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Font20x38@{Font20x38}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!Font20x38@{Font20x38}}}\mbox{\Hypertarget{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c}\label{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c}} 
+Font20x38&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 146 of file Raw\+Image\+Ops.\+H.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__image_gac56b219fa6df460b3a9beaf7712d5c77}\label{group__image_gac56b219fa6df460b3a9beaf7712d5c77}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!byteSwap@{byteSwap}}
+\index{byteSwap@{byteSwap}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{byteSwap()}{byteSwap()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::byte\+Swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})}
+
+
+
+交换 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中的字节对 
+
+这永远都不需要，除非是 R\+G\+B565 图像，主要用于内部调试，或者直接将 R\+G\+B565 相机图像（大端字节序）传递到 U\+S\+B（使用 R\+G\+BP U\+VC 格式时假定为小端字节序）。此函数在为平台硬件编译时是 N\+E\+ON 加速的。 
+
+Definition at line 368 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::async(), jevois\+::\+Raw\+Image\+::bytesize(), jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga0d1d1903484f89b7a8db5485fe1784a7}\label{group__image_ga0d1d1903484f89b7a8db5485fe1784a7}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!clipLine@{clipLine}}
+\index{clipLine@{clipLine}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{clipLine()}{clipLine()}}
+{\footnotesize\ttfamily bool jevois\+::rawimage\+::clip\+Line (\begin{DoxyParamCaption}\item[{int}]{wxmin,  }\item[{int}]{wymin,  }\item[{int}]{wxmax,  }\item[{int}]{wymax,  }\item[{int \&}]{x1,  }\item[{int \&}]{y1,  }\item[{int \&}]{x2,  }\item[{int \&}]{y2 }\end{DoxyParamCaption})}
+
+
+
+剪裁一条线以适合 viewport \mbox{[}wxmin...wxmax\mbox{[} x \mbox{[}wymin...wymax\mbox{]} 
+
+这使用 Liang-\/\+Barsky 线剪裁算法。如果线完全在 viewport 之外（没有可绘制的内容），则返回 false。 
+
+Definition at line 533 of file Raw\+Image\+Ops.\+C.
+
+
+
+Referenced by jevois\+::rawimage\+::draw\+Line().
+
+\mbox{\Hypertarget{group__image_ga2865d43005acc85a1f49b868eedc76cc}\label{group__image_ga2865d43005acc85a1f49b868eedc76cc}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvBGRtoCvYUYV@{convertCvBGRtoCvYUYV}}
+\index{convertCvBGRtoCvYUYV@{convertCvBGRtoCvYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvBGRtoCvYUYV()}{convertCvBGRtoCvYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Cv\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{cv\+::\+Mat \&}]{dst }\end{DoxyParamCaption})}
+
+
+
+Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 
+
+
+
+Definition at line 1062 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__image_ga748b79664f7d9c00f2706e726276a09f}\label{group__image_ga748b79664f7d9c00f2706e726276a09f}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvBGRtoRawImage@{convertCvBGRtoRawImage}}
+\index{convertCvBGRtoRawImage@{convertCvBGRtoRawImage}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvBGRtoRawImage()}{convertCvBGRtoRawImage()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality }\end{DoxyParamCaption})}
+
+
+
+将 B\+GR cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 
+
+这用于通过 U\+SB 从内部计算的 opencv B\+GR 格式的结果输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 U\+SB gadget中获取），并且它的大小必须与 src 图像的大小相匹配。
+
+支持的 dst 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+J\+PG
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24
+\end{DoxyItemize}
+
+质量仅在 dst 为 M\+J\+PG 时使用，并且应介于 1 到 100 之间。 
+
+Definition at line 1302 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::compress\+B\+G\+Rto\+Jpeg(), jevois\+::rawimage\+::cv\+Image(), jevois\+::cvtypestr(), jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::\+Output\+Frame\+::send\+Cv\+B\+G\+R(), and jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+B\+G\+R().
+
+\mbox{\Hypertarget{group__image_ga13704ff98cb3e041adea2154fd42499c}\label{group__image_ga13704ff98cb3e041adea2154fd42499c}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvGRAYtoCvYUYV@{convertCvGRAYtoCvYUYV}}
+\index{convertCvGRAYtoCvYUYV@{convertCvGRAYtoCvYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvGRAYtoCvYUYV()}{convertCvGRAYtoCvYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Cv\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{cv\+::\+Mat \&}]{dst }\end{DoxyParamCaption})}
+
+
+
+Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 
+
+
+
+Definition at line 1220 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__image_gad05785dce156be8a1e4d473ea07e3f67}\label{group__image_gad05785dce156be8a1e4d473ea07e3f67}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvGRAYtoRawImage@{convertCvGRAYtoRawImage}}
+\index{convertCvGRAYtoRawImage@{convertCvGRAYtoRawImage}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvGRAYtoRawImage()}{convertCvGRAYtoRawImage()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality }\end{DoxyParamCaption})}
+
+
+
+使用已分配的像素和像素类型将灰色 cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 
+
+这用于通过 U\+SB 输出内部计算结果为 opencv 灰度格式的视频帧。dst 应该已经分配了一个像素缓冲区（通常，它应该从 U\+SB 小工具中获 取），并且其大小必须与 src 图像的大小相匹配。
+
+支持的 dst 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+J\+PG
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24
+\end{DoxyItemize}
+
+质量仅在 dst 为 M\+J\+PG 时使用，并且应介于 1 到 100 之间。 
+
+Definition at line 1395 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), jevois\+::rawimage\+::cv\+Image(), jevois\+::cvtypestr(), jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Output\+Frame\+::send\+Cv\+G\+R\+A\+Y(), and jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+G\+R\+A\+Y().
+
+\mbox{\Hypertarget{group__image_gad00957ca65ed08071e6b05d6cfe19fc3}\label{group__image_gad00957ca65ed08071e6b05d6cfe19fc3}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvRGBAtoCvYUYV@{convertCvRGBAtoCvYUYV}}
+\index{convertCvRGBAtoCvYUYV@{convertCvRGBAtoCvYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvRGBAtoCvYUYV()}{convertCvRGBAtoCvYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Cv\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{cv\+::\+Mat \&}]{dst }\end{DoxyParamCaption})}
+
+
+
+Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 
+
+
+
+Definition at line 1292 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__image_ga5c34b763c90ed987d80a1dc58e75524c}\label{group__image_ga5c34b763c90ed987d80a1dc58e75524c}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvRGBAtoRawImage@{convertCvRGBAtoRawImage}}
+\index{convertCvRGBAtoRawImage@{convertCvRGBAtoRawImage}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvRGBAtoRawImage()}{convertCvRGBAtoRawImage()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality }\end{DoxyParamCaption})}
+
+
+
+使用已分配的像素和像素类型将 R\+G\+BA cv\+::\+Mat 转换为 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 
+
+这用于通过 U\+SB 从内部计算的结果以 opencv R\+G\+B-\/A 格式（通常是 N\+E\+ON 或 Open\+GL 处理的首选格式）输出视频帧。 dst 应该已经 有一个分配的像素缓冲区（通常，它应该从 U\+SB 小工具中获取），并且其大小必须与 src 图像的大小相匹配。
+
+支持的 dst 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+J\+PG
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24
+\end{DoxyItemize}
+
+质量仅在 dst 为 M\+J\+PG 时使用，并且应介于 1 到 100 之间。 
+
+Definition at line 1373 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), jevois\+::rawimage\+::cv\+Image(), jevois\+::cvtypestr(), jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Output\+Frame\+::send\+Cv\+R\+G\+B\+A(), and jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B\+A().
+
+\mbox{\Hypertarget{group__image_ga887e3d1b0329cc864014c04a90689f59}\label{group__image_ga887e3d1b0329cc864014c04a90689f59}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvRGBtoCvYUYV@{convertCvRGBtoCvYUYV}}
+\index{convertCvRGBtoCvYUYV@{convertCvRGBtoCvYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvRGBtoCvYUYV()}{convertCvRGBtoCvYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Cv\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{cv\+::\+Mat \&}]{dst }\end{DoxyParamCaption})}
+
+
+
+Open\+CV 没有在 cvt\+Color() 中提供从 R\+GB 到 Y\+U\+YV 的转换，因此此函数提供它 
+
+
+
+Definition at line 1148 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__image_ga8d0578936bcb62de35eec980b933de52}\label{group__image_ga8d0578936bcb62de35eec980b933de52}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertCvRGBtoRawImage@{convertCvRGBtoRawImage}}
+\index{convertCvRGBtoRawImage@{convertCvRGBtoRawImage}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertCvRGBtoRawImage()}{convertCvRGBtoRawImage()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{dst,  }\item[{int}]{quality }\end{DoxyParamCaption})}
+
+
+
+将 R\+GB cv\+::\+Mat 转换为具有已分配像素和像素类型的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 
+
+这用于通过 U\+SB 从内部计算的结果以 opencv B\+GR 格式输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 U\+SB gadget中获取），并且它的大小必须与 src 图像的大小相匹配。
+
+支持的 dst 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+J\+PG
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24
+\end{DoxyItemize}
+
+质量仅在 dst 为 M\+J\+PG 时使用，并且应介于 1 到 100 之间。 
+
+Definition at line 1325 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::compress\+R\+G\+Bto\+Jpeg(), jevois\+::rawimage\+::cv\+Image(), jevois\+::cvtypestr(), jevois\+::fccstr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Output\+Frame\+::send\+Cv\+R\+G\+B(), and jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B().
+
+\mbox{\Hypertarget{group__image_ga6f005034f93fc03530498eae898f9b22}\label{group__image_ga6f005034f93fc03530498eae898f9b22}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertToCvBGR@{convertToCvBGR}}
+\index{convertToCvBGR@{convertToCvBGR}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertToCvBGR()}{convertToCvBGR()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::rawimage\+::convert\+To\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素执行颜色转换为 Open\+CV B\+GR 字节 
+
+由于历史原因，\+B\+GR 是 Open\+CV 的 \char`\"{}native\char`\"{} 颜色格式，请检查您的算法是否需要 R\+GB 或 B\+G\+R，并使用适当的转换。
+
+支持的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式：
+
+
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24 
+\end{DoxyItemize}
+
+Definition at line 282 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::cv\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Input\+Frame\+::get\+Cv\+B\+G\+R(), jevois\+::\+Input\+Frame\+::get\+Cv\+B\+G\+Rp(), jevois\+::dnn\+::\+Pre\+Processor\+::process(), and jevois\+::\+Movie\+Output\+::send().
+
+\mbox{\Hypertarget{group__image_ga41c623fdf6e26eca8908b1129b56312f}\label{group__image_ga41c623fdf6e26eca8908b1129b56312f}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertToCvRGB@{convertToCvRGB}}
+\index{convertToCvRGB@{convertToCvRGB}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertToCvRGB()}{convertToCvRGB()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::rawimage\+::convert\+To\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+GB 字节进行颜色转换 
+
+由于历史原因，\+B\+GR 是 Open\+CV 的 \char`\"{}native\char`\"{} 颜色格式，而不是此处创建的 R\+G\+B，请检查您的算法是否需要 R\+GB 或 B\+G\+R，并使用适当 的转换。
+
+支持的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24 
+\end{DoxyItemize}
+
+Definition at line 307 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::cv\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+B(), jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+Bp(), and jevois\+::dnn\+::\+Pre\+Processor\+::process().
+
+\mbox{\Hypertarget{group__image_ga028f56e85446eef9d27bd51c71867dd2}\label{group__image_ga028f56e85446eef9d27bd51c71867dd2}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertToCvRGBA@{convertToCvRGBA}}
+\index{convertToCvRGBA@{convertToCvRGBA}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertToCvRGBA()}{convertToCvRGBA()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+将 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换为 Open\+C\+V，从任何 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 源像素到 Open\+CV R\+G\+B-\/A 字节进行颜色转换 
+
+Open\+CV 本身很少使用 R\+G\+B\+A，但对许多 N\+E\+ON 和 Open\+GL (G\+PU) 算法很有用。对于这些算法，我们在这里仅使用 cv\+::\+Mat 作 为原始像素数据的便捷容器。
+
+支持的 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式：
+\begin{DoxyItemize}
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+YV
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8 (Bayer)
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565
+\item V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24 
+\end{DoxyItemize}
+
+Definition at line 332 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::cv\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+B\+A(), and jevois\+::\+Input\+Frame\+::get\+Cv\+R\+G\+B\+Ap().
+
+\mbox{\Hypertarget{group__image_gabc1de0ec8bdb25ffacf5b0d25dc11469}\label{group__image_gabc1de0ec8bdb25ffacf5b0d25dc11469}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!convertYUYVtoRGBYL@{convertYUYVtoRGBYL}}
+\index{convertYUYVtoRGBYL@{convertYUYVtoRGBYL}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{convertYUYVtoRGBYL()}{convertYUYVtoRGBYL()}}
+{\footnotesize\ttfamily void convert\+Y\+U\+Y\+Vto\+R\+G\+B\+YL (\begin{DoxyParamCaption}\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned char const $\ast$}]{src,  }\item[{int $\ast$}]{dstrg,  }\item[{int $\ast$}]{dstby,  }\item[{int $\ast$}]{dstlum,  }\item[{int}]{thresh,  }\item[{int}]{inputbits }\end{DoxyParamCaption})}
+
+
+
+将 Y\+U\+YV 转换为 R\+G、\+BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 
+
+
+
+Definition at line 89 of file Color\+Conversion.\+c.
+
+
+
+References convert\+Y\+U\+Y\+Vto\+R\+G\+B\+Y\+Linternal(), G, and h.
+
+\mbox{\Hypertarget{group__image_ga20c3651602d9b2d003988b9bcd674f03}\label{group__image_ga20c3651602d9b2d003988b9bcd674f03}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!cvImage@{cvImage}}
+\index{cvImage@{cvImage}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{cvImage()}{cvImage()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::rawimage\+::cv\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src }\end{DoxyParamCaption})}
+
+
+
+从现有 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据创建 Open\+CV 图像，共享像素内存而不是复制它 
+
+像素数据不会被复制，只是指向，并且不会进行像素格式转换。您应该在 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 之前销毁 cv\+::\+Mat，以避免您的 cv\+::\+Mat 最终导 致像素内存被释放。 
+
+Definition at line 31 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::v4l2\+Bytes\+Per\+Pix(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), jevois\+::rawimage\+::convert\+To\+Cv\+Gray(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A(), and jevois\+::dnn\+::\+Pre\+Processor\+::process().
+
+\mbox{\Hypertarget{group__image_gae7d102e1c456f87337d66a9a2fc11a58}\label{group__image_gae7d102e1c456f87337d66a9a2fc11a58}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawCircle@{drawCircle}}
+\index{drawCircle@{drawCircle}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawCircle()}{drawCircle()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Circle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{rad,  }\item[{unsigned int}]{thick,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在\+Y\+U\+Y\+V图像中绘制一个圆圈 
+
+
+
+Definition at line 483 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::draw\+Disk().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{group__image_ga529a42aed4e4681e38910e8793e6064c}\label{group__image_ga529a42aed4e4681e38910e8793e6064c}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawDisk@{drawDisk}}
+\index{drawDisk@{drawDisk}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawDisk()}{drawDisk()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Disk (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{rad,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在 Y\+U\+YV 图像中绘制一个圆盘 disk 
+
+
+
+Definition at line 465 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::coords\+Ok(), jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::rawimage\+::draw\+Circle(), jevois\+::draw\+Error\+Image(), and jevois\+::rawimage\+::draw\+Line().
+
+\mbox{\Hypertarget{group__image_ga458eebde298cccaa70c778878223c17b}\label{group__image_ga458eebde298cccaa70c778878223c17b}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawFilledRect@{drawFilledRect}}
+\index{drawFilledRect@{drawFilledRect}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawFilledRect()}{drawFilledRect()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Filled\+Rect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在 Y\+U\+YV 图像中绘制填充矩形 
+
+这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 open\+CV 函数。绘制的 像素从 (x,y) 包含到 (x+w-\/1,y+h-\/1) 包含。如果 w 或 h 为 0，则将其替换为 1。 
+
+Definition at line 646 of file Raw\+Image\+Ops.\+C.
+
+
+
+References h, jevois\+::\+Raw\+Image\+::height, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga7cf2b2c4e6460835fbc671367a60feb9}\label{group__image_ga7cf2b2c4e6460835fbc671367a60feb9}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x1,  }\item[{int}]{y1,  }\item[{int}]{x2,  }\item[{int}]{y2,  }\item[{unsigned int}]{thick,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在 Y\+U\+YV 图像中绘制一条线 
+
+
+
+Definition at line 564 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::clip\+Line(), jevois\+::rawimage\+::draw\+Disk(), h, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image(), jevois\+::rawimage\+::draw\+Rect(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report().
+
+\mbox{\Hypertarget{group__image_gaa023840c2ca7c4997b4b456927131cdf}\label{group__image_gaa023840c2ca7c4997b4b456927131cdf}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawRect()}{drawRect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Rect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在 Y\+U\+YV 图像中绘制矩形 
+
+这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 open\+CV 函数。绘制的 像素从 (x,y) 包含到 (x+w-\/1,y+h-\/1) 包含。如果 w 或 h 为 0，则将其替换为 1。 
+
+Definition at line 624 of file Raw\+Image\+Ops.\+C.
+
+
+
+References h, jevois\+::\+Raw\+Image\+::height, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_gaa32b3e227c9904699d616e2a32c9506d}\label{group__image_gaa32b3e227c9904699d616e2a32c9506d}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{drawRect()}{drawRect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::draw\+Rect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned int}]{thick,  }\item[{unsigned int}]{col }\end{DoxyParamCaption})}
+
+
+
+在 Y\+U\+YV 图像中绘制一个矩形 
+
+绘制的像素从 (x,y) 包含到 (x+w-\/1,y+h-\/1) 包含。如果 w 或 h 为 0，则用 1 替换。 
+
+Definition at line 607 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::rawimage\+::draw\+Line(), and h.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report(), jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report(), and jevois\+::dnn\+::\+Pre\+Processor\+::sendreport().
+
+\mbox{\Hypertarget{group__image_gaa830449161c068b13cd986844a2c428e}\label{group__image_gaa830449161c068b13cd986844a2c428e}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!hFlipYUYV@{hFlipYUYV}}
+\index{hFlipYUYV@{hFlipYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{hFlipYUYV()}{hFlipYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::h\+Flip\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})}
+
+
+
+水平翻转 Y\+U\+YV \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 同时保留颜色信息 
+
+此函数允许在 Mac 上使用 Je\+Vois 和 Photo\+Booth 应用程序，水平翻转图像（围绕垂直轴）。仅支持 Y\+U\+YV 像素。您可能能够将 Open\+CV 中的 cv\+::flip() 与其他像素类型一起使用。 
+
+Definition at line 1452 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga05c4650464e447a89a2a2c60d1956748}\label{group__image_ga05c4650464e447a89a2a2c60d1956748}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!paste@{paste}}
+\index{paste@{paste}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{paste()}{paste()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::paste (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{dest,  }\item[{int}]{dx,  }\item[{int}]{dy }\end{DoxyParamCaption})}
+
+
+
+将一张图像粘贴到另一张相同像素类型的图像中 
+
+为保持此功能快速运行，如果源图像不完全适合目标图像，或者两张图像的像素格式不同，则会抛出异常。 
+
+Definition at line 403 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixels(), jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_gae9f19d7535b689d5c0b4bb31133463da}\label{group__image_gae9f19d7535b689d5c0b4bb31133463da}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!pasteBGRtoYUYV@{pasteBGRtoYUYV}}
+\index{pasteBGRtoYUYV@{pasteBGRtoYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{pasteBGRtoYUYV()}{pasteBGRtoYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{dst,  }\item[{int}]{dx,  }\item[{int}]{dy }\end{DoxyParamCaption})}
+
+
+
+将 B\+GR 字节图像粘贴到 Y\+U\+YV 图像中 
+
+
+
+Definition at line 1072 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::cvtypestr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_gae83668f61639d6a6f4de5e11d02ca015}\label{group__image_gae83668f61639d6a6f4de5e11d02ca015}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!pasteGreyToYUYV@{pasteGreyToYUYV}}
+\index{pasteGreyToYUYV@{pasteGreyToYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{pasteGreyToYUYV()}{pasteGreyToYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{dest,  }\item[{int}]{dx,  }\item[{int}]{dy }\end{DoxyParamCaption})}
+
+
+
+将灰度字节图像粘贴到 Y\+U\+YV 图像中 
+
+
+
+Definition at line 448 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga3ff72f69a31242d3d77ac1c61e82c4d6}\label{group__image_ga3ff72f69a31242d3d77ac1c61e82c4d6}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!pasteRGBtoYUYV@{pasteRGBtoYUYV}}
+\index{pasteRGBtoYUYV@{pasteRGBtoYUYV}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{pasteRGBtoYUYV()}{pasteRGBtoYUYV()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+YV (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{src,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{dst,  }\item[{int}]{dx,  }\item[{int}]{dy }\end{DoxyParamCaption})}
+
+
+
+将 R\+GB 字节图像粘贴到 Y\+U\+YV 图像中 
+
+
+
+Definition at line 1158 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::cvtypestr(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga6607626cad0258d69b6ead8d1ced4f52}\label{group__image_ga6607626cad0258d69b6ead8d1ced4f52}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!rescaleCv@{rescaleCv}}
+\index{rescaleCv@{rescaleCv}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{rescaleCv()}{rescaleCv()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::rescale\+Cv (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{cv\+::\+Size const \&}]{newdims }\end{DoxyParamCaption})}
+
+
+
+重新缩放 Open\+CV 图像，选择正确的插值类型 
+
+
+
+Definition at line 1660 of file Raw\+Image\+Ops.\+C.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Image\+::load(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+B\+G\+R(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+G\+R\+A\+Y(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B(), and jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B\+A().
+
+\mbox{\Hypertarget{group__image_gaa8a5444f39661f76fb160f1f6eead381}\label{group__image_gaa8a5444f39661f76fb160f1f6eead381}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!roipaste@{roipaste}}
+\index{roipaste@{roipaste}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{roipaste()}{roipaste()}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::roipaste (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{src,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{dest,  }\item[{int}]{dx,  }\item[{int}]{dy }\end{DoxyParamCaption})}
+
+
+
+将图像中的 R\+OI 粘贴到相同像素类型的另一个图像中 
+
+为了保持此功能的快速运行，如果源图像不完全适合目标图像或像素格式不同，则会抛出。 
+
+Definition at line 425 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::\+Raw\+Image\+::fmt, h, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixels(), jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga893e982b449643c8853afe424fb72c09}\label{group__image_ga893e982b449643c8853afe424fb72c09}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!writeText@{writeText}}
+\index{writeText@{writeText}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{writeText()}{writeText()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::write\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{char const $\ast$}]{txt,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{col,  }\item[{\mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{Font}}}]{font = {\ttfamily \mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{Font6x10}}} }\end{DoxyParamCaption})}
+
+
+
+在图像中写一些文字 
+
+
+
+Definition at line 697 of file Raw\+Image\+Ops.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::font\+::font10x20, jevois\+::rawimage\+::\+Font10x20, jevois\+::font\+::font11x22, jevois\+::rawimage\+::\+Font11x22, jevois\+::font\+::font12x22, jevois\+::rawimage\+::\+Font12x22, jevois\+::font\+::font14x26, jevois\+::rawimage\+::\+Font14x26, jevois\+::font\+::font15x28, jevois\+::rawimage\+::\+Font15x28, jevois\+::font\+::font16x29, jevois\+::rawimage\+::\+Font16x29, jevois\+::font\+::font20x38, jevois\+::rawimage\+::\+Font20x38, jevois\+::font\+::font5x7, jevois\+::rawimage\+::\+Font5x7, jevois\+::font\+::font6x10, jevois\+::rawimage\+::\+Font6x10, jevois\+::font\+::font7x13, jevois\+::rawimage\+::\+Font7x13, jevois\+::font\+::font8x13bold, jevois\+::rawimage\+::\+Font8x13bold, jevois\+::font\+::font9x15bold, jevois\+::rawimage\+::\+Font9x15bold, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::pixelsw(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{group__image_ga2696d3febc217f295d5532c26255c26b}\label{group__image_ga2696d3febc217f295d5532c26255c26b}} 
+\index{Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}!writeText@{writeText}}
+\index{writeText@{writeText}!Raw 零拷贝/内存映射视频图像和支持函数@{Raw 零拷贝/内存映射视频图像和支持函数}}
+\doxyparagraph{\texorpdfstring{writeText()}{writeText()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::rawimage\+::write\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img,  }\item[{std\+::string const \&}]{txt,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{unsigned int}]{col,  }\item[{\mbox{\hyperlink{group__image_ga6c3b4288b23ae5c03a7f625ec0b1409a}{Font}}}]{font = {\ttfamily \mbox{\hyperlink{group__image_gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af}{Font6x10}}} }\end{DoxyParamCaption})}
+
+
+
+在图像中写一些文字 
+
+
+
+Definition at line 690 of file Raw\+Image\+Ops.\+C.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image(), jevois\+::rawimage\+::itext(), jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::dnn\+::\+Post\+Processor\+Classify\+::report(), jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report(), jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report(), and jevois\+::dnn\+::\+Pipeline\+::show\+Info().
+

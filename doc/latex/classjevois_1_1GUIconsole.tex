@@ -1,0 +1,196 @@
+\hypertarget{classjevois_1_1GUIconsole}{}\doxysubsection{jevois\+::G\+U\+Iconsole Class Reference}
+\label{classjevois_1_1GUIconsole}\index{jevois::GUIconsole@{jevois::GUIconsole}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iconsole.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple console with coloring and completion. 
+
+Definition at line 31 of file G\+U\+Iconsole.\+H.
+
+
+
+Inheritance diagram for jevois\+::G\+U\+Iconsole\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classjevois_1_1GUIconsole__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::G\+U\+Iconsole\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classjevois_1_1GUIconsole__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIconsole_a897ae92c01e5bab4dc74782a1d80ceed}{G\+U\+Iconsole}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1GUIconsole_a0cf3093f0ec54fbfe264009f6a73f4e8}{$\sim$\+G\+U\+Iconsole}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIconsole_a3966366168ae49c34e9654cc557a68c3}{read\+Some}} (std\+::string \&str) override
+\begin{DoxyCompactList}\small\item\em Read some bytes if available, and return true and a string when one is complete (R\+E\+T\+U\+RN pressed) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIconsole_a1c1c01b706e10e6ce35b74ba7e063c4b}{write\+String}} (std\+::string const \&str) override
+\begin{DoxyCompactList}\small\item\em Write a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{Type}} \mbox{\hyperlink{classjevois_1_1GUIconsole_ab7f910f792c292503357d7ff3812b432}{type}} () const override
+\begin{DoxyCompactList}\small\item\em Our type is\+: G\+UI. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIconsole_ab4575de90523e90e6f534544da0679e0}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Render into Im\+Gui. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1GUIconsole_ab7710bbcdd9a9904de57f5353a3b6719}{callback}} (Im\+Gui\+Input\+Text\+Callback\+Data $\ast$data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIconsole_a8817b5f6a89563a32600cb68d40c9719}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear the contents of the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_a897ae92c01e5bab4dc74782a1d80ceed}\label{classjevois_1_1GUIconsole_a897ae92c01e5bab4dc74782a1d80ceed}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!GUIconsole@{GUIconsole}}
+\index{GUIconsole@{GUIconsole}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{GUIconsole()}{GUIconsole()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Iconsole\+::\+G\+U\+Iconsole (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 26 of file G\+U\+Iconsole.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_a0cf3093f0ec54fbfe264009f6a73f4e8}\label{classjevois_1_1GUIconsole_a0cf3093f0ec54fbfe264009f6a73f4e8}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!````~GUIconsole@{$\sim$GUIconsole}}
+\index{````~GUIconsole@{$\sim$GUIconsole}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{$\sim$GUIconsole()}{~GUIconsole()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Iconsole\+::$\sim$\+G\+U\+Iconsole (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 40 of file G\+U\+Iconsole.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_ab7710bbcdd9a9904de57f5353a3b6719}\label{classjevois_1_1GUIconsole_ab7710bbcdd9a9904de57f5353a3b6719}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!callback@{callback}}
+\index{callback@{callback}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily int jevois\+::\+G\+U\+Iconsole\+::callback (\begin{DoxyParamCaption}\item[{Im\+Gui\+Input\+Text\+Callback\+Data $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 168 of file G\+U\+Iconsole.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_a8817b5f6a89563a32600cb68d40c9719}\label{classjevois_1_1GUIconsole_a8817b5f6a89563a32600cb68d40c9719}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!clear@{clear}}
+\index{clear@{clear}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iconsole\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Clear the contents of the window. 
+
+
+
+Definition at line 48 of file G\+U\+Iconsole.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_ab4575de90523e90e6f534544da0679e0}\label{classjevois_1_1GUIconsole_ab4575de90523e90e6f534544da0679e0}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!draw@{draw}}
+\index{draw@{draw}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iconsole\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Render into Im\+Gui. 
+
+
+
+Definition at line 84 of file G\+U\+Iconsole.\+C.
+
+
+
+References jevois\+::string\+Starts\+With().
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_a3966366168ae49c34e9654cc557a68c3}\label{classjevois_1_1GUIconsole_a3966366168ae49c34e9654cc557a68c3}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!readSome@{readSome}}
+\index{readSome@{readSome}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{readSome()}{readSome()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Iconsole\+::read\+Some (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Read some bytes if available, and return true and a string when one is complete (R\+E\+T\+U\+RN pressed) 
+
+str is untouched if user input is not yet complete (R\+E\+T\+U\+RN not yet pressed). The R\+E\+T\+U\+RN (end of line) marker is not copied into str, only the characters received up to the end of line marker. 
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_aa0122126d1da68237d66a33e02e3fa02}{jevois\+::\+User\+Interface}}.
+
+
+
+Definition at line 55 of file G\+U\+Iconsole.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_ab7f910f792c292503357d7ff3812b432}\label{classjevois_1_1GUIconsole_ab7f910f792c292503357d7ff3812b432}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!type@{type}}
+\index{type@{type}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{type()}{type()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{jevois\+::\+User\+Interface\+::\+Type}} jevois\+::\+G\+U\+Iconsole\+::type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Our type is\+: G\+UI. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_ac4e4337ea4e993ed8e3230389a062224}{jevois\+::\+User\+Interface}}.
+
+
+
+Definition at line 44 of file G\+U\+Iconsole.\+C.
+
+
+
+References jevois\+::\+User\+Interface\+::\+G\+UI.
+
+\mbox{\Hypertarget{classjevois_1_1GUIconsole_a1c1c01b706e10e6ce35b74ba7e063c4b}\label{classjevois_1_1GUIconsole_a1c1c01b706e10e6ce35b74ba7e063c4b}} 
+\index{jevois::GUIconsole@{jevois::GUIconsole}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::GUIconsole@{jevois::GUIconsole}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iconsole\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Write a string. 
+
+No line terminator should be included in the string, \mbox{\hyperlink{classjevois_1_1GUIconsole_a1c1c01b706e10e6ce35b74ba7e063c4b}{write\+String()}} will add one. In the \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} derived class, this will be using the line termination convention of serial\+::linestyle to support different styles (CR, C\+R\+LF, LF, etc). 
+
+Implements \mbox{\hyperlink{classjevois_1_1UserInterface_a1ea78da97f6d939d4aca0c1ec577992a}{jevois\+::\+User\+Interface}}.
+
+
+
+Definition at line 69 of file G\+U\+Iconsole.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIconsole_8H}{G\+U\+Iconsole.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIconsole_8C}{G\+U\+Iconsole.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,107 @@
+\hypertarget{classjevois_1_1Singleton}{}\doxysubsection{jevois\+::Singleton$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1Singleton}\index{jevois::Singleton$<$ T $>$@{jevois::Singleton$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Types/\+Singleton.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$class T$>$\newline
+class jevois\+::\+Singleton$<$ T $>$}
+
+一个通用的 singleton 类，用于强制一个对象的单个实例 
+
+\mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 类应该被任何需要的类继承：
+\begin{DoxyEnumerate}
+\item 只有一个实例
+\item 可全局访问
+\end{DoxyEnumerate}
+
+请注意，目前无法保证 \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 的析构顺序，因此应注意不要在 \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 的析构函数中引用另一个 Singleton。
+
+这个特定的实现来自：http\+://stackoverflow.com/questions/1008019/c-\/singleton-\/design-\/pattern
+
+以下是 \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 的使用示例：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyClass : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}{Singleton}}<MyClass>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} doIt() \{...\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{  MyClass();}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \mbox{\hyperlink{jevois-add-videomapping_8C_abf9e6b7e6f15df4b525a2e7705ba3089}{main}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  ...}
+\DoxyCodeLine{  MyClass::instance().doIt();}
+\DoxyCodeLine{  ...}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & 被设为单例的类。\\
+\hline
+\end{DoxyTemplParams}
+该类最初由 Rand Voorhies 在 Neuromorphic Robotics Toolkit 中设计。 
+
+Definition at line 89 of file Singleton.\+H.
+
+
+
+Inheritance diagram for jevois\+::Singleton$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classjevois_1_1Singleton__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static T \& \mbox{\hyperlink{classjevois_1_1Singleton_a58760e3f99432b63bef1067bb1fd676d}{instance}} ()
+\begin{DoxyCompactList}\small\item\em 获取类 T 的全局唯一实例 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}{Singleton}} ()
+\begin{DoxyCompactList}\small\item\em 只有从 \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 继承的类才能通过其受保护的默认构造函数 \mbox{\hyperlink{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}{Singleton()}} 来构造它； \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}\label{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}} 
+\index{jevois::Singleton$<$ T $>$@{jevois::Singleton$<$ T $>$}!Singleton@{Singleton}}
+\index{Singleton@{Singleton}!jevois::Singleton$<$ T $>$@{jevois::Singleton$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Singleton()}{Singleton()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Singleton}{jevois\+::\+Singleton}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+只有从 \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}} 继承的类才能通过其受保护的默认构造函数 \mbox{\hyperlink{classjevois_1_1Singleton_aea6e48a85622c9f8286bbe97599a7408}{Singleton()}} 来构造它； 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Singleton_a58760e3f99432b63bef1067bb1fd676d}\label{classjevois_1_1Singleton_a58760e3f99432b63bef1067bb1fd676d}} 
+\index{jevois::Singleton$<$ T $>$@{jevois::Singleton$<$ T $>$}!instance@{instance}}
+\index{instance@{instance}!jevois::Singleton$<$ T $>$@{jevois::Singleton$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+static T\& \mbox{\hyperlink{classjevois_1_1Singleton}{jevois\+::\+Singleton}}$<$ T $>$\+::instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+获取类 T 的全局唯一实例 
+
+如果尚未创建类 T 的全局唯一实例，则此方法将以线程安全的方式创建它。 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Types/\mbox{\hyperlink{Singleton_8H}{Singleton.\+H}}\end{DoxyCompactItemize}

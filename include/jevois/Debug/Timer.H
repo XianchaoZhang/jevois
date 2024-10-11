@@ -25,12 +25,11 @@
 
 namespace jevois
 {
-  //! Simple timer class
-  /*! This class reports the time spent between start() and stop(), at specified intervals.  Because JeVois modules
-      typically work at video rates, this class only reports the average time after some number of iterations through
-      start() and stop(). Thus, even if the time of an operation between start() and stop() is only a few microseconds,
-      by reporting it only every 100 frames one will not slow down the overall framerate too much. See Profiler for a
-      class that provides additional checkpoints between start() and stop(). \ingroup debugging */
+  //! 简单计时器类
+  /*! 此类以指定的间隔报告 start() 和 stop() 之间所花费的时间。由于 JeVois 模块通常以视频速率工作，因此此类仅报告通过 
+      start() 和 stop() 进行一定次数迭代后的平均时间。因此，即使 start() 和 stop() 之间的操作时间只有几微秒，通过每 
+	  100 帧仅报告一次，也不会使整体帧速率降低太多。请参阅 Profiler 以了解在 start() 和 stop() 之间提供额外检查点的类。
+	   \ingroup debugging */
   class Timer
   {
     public:
@@ -40,13 +39,12 @@ namespace jevois
       //! Start a time measurement period
       void start();
 
-      //! End a time measurement period, report time spent if reporting interval is reached
-      /*! The fps and cpu load are returned, in case users want to show this info, eg, in an overlay display. Note that
-          the values are only updated when the reporting interval is reached, and remain the same in between. If seconds
-          is not null, it will be set to the instantaneous number of seconds between start() and stop(). */
+      //! 结束时间测量期，如果达到报告间隔，则报告所花费的时间
+	  /*！返回 fps 和 cpu 负载，以防用户想要显示此信息，例如在覆盖显示中。请注意，只有在达到报告间隔时才会更新值，并且
+	      在两者之间保持不变。如果秒数不为空，它将被设置为 start() 和 stop() 之间的瞬时秒数。 */
       std::string const & stop(double * seconds);
 
-      //! Same as the other signature of stop() except does not provide seconds, for python bindings
+      //! 与 stop() 的其他签名相同，但不提供秒数，用于 python 绑定
       std::string const & stop();
 
     private:
@@ -63,9 +61,9 @@ namespace jevois
       std::chrono::time_point<std::chrono::steady_clock> itsStartTimeForCpu;
   };
   
-  //! Simple one-shot timer class
-  /*! This class reports the time spent between start() and stop(). Typically, this may be useful to report processing
-      time of a neural network, by rendering the string returned by stop() into the video output.  \ingroup debugging */
+  //! 简单的一次性计时器类 
+  /*! 此类报告 start() 和 stop() 之间花费的时间。通常，通过将 stop() 返回的字符串呈现到视频输出中，这可能有助于报告神
+      经网络的处理时间。  \ingroup debugging */
   class TimerOne
   {
     public:
@@ -75,11 +73,11 @@ namespace jevois
       //! Start a time measurement period
       void start();
 
-      //! End a time measurement period, report time spent as: 'prefix: %ms (%fps)' where % is replaced by values
-      /*! If seconds is not null, it will be set to the instantaneous number of seconds between start() and stop(). */
+      //! 结束一个时间测量期，报告花费的时间如下：'prefix: %ms (%fps)'，其中 % 被值替换 
+	  /*! 如果秒数不为空，它将被设置为 start() 和 stop() 之间的瞬时秒数。 */
       std::string stop(double * seconds);
 
-      //! Same as the other signature of stop() except does not provide seconds, for python bindings
+      //! 与 stop() 的其他签名相同，但不提供秒数，用于 python 绑定
       std::string stop();
 
     private:

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Gadget_8C">
+<title>src/jevois/Core/Gadget.C File Reference</title>
+<indexterm><primary>src/jevois/Core/Gadget.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/Gadget.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Core/VideoInput.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/Util/Async.H&gt;
+#include &lt;jevois/Core/VideoBuffers.H&gt;
+#include &lt;jevois/Core/Engine.H&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/time.h&gt;
+</programlisting>Include dependency graph for Gadget.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Gadget_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Gadget_8C_1a9753903bd1cb938590e92b49bc01b7d3">success</link>()   { itsErrorCode = 0; }</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Gadget_8C_1af8fc0ffe3970b3983d0a8f488e17d70a">failure</link>(code)   { resp.length = -EL2HLT; itsErrorCode = code; }</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Gadget_8C_1af5e05ce14050af2739f6921bd843afb9">byteresponse</link>(val)   { resp.data[0] = val; resp.length = 1; itsErrorCode = 0; }</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Gadget_8C_1afc6fa9f99776203e6ca76b580d7afea6">wordresponse</link>(val)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Gadget_8C_1a9fbaf3e83e6c2969c78e8f974a635de7">intresponse</link>(val)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Gadget_8C_1a3d1928473e526ba745bfac10f711119b">arrayblankresponse</link>(len)   { memset(resp.data, 0, len); resp.length = len; itsErrorCode = 0; }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Gadget_8C_1a3d1928473e526ba745bfac10f711119b"/>    <section>
+    <title>arrayblankresponse</title>
+<indexterm><primary>arrayblankresponse</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>arrayblankresponse</secondary></indexterm>
+<para><computeroutput>#define arrayblankresponse( len)   { memset(resp.data, 0, len); resp.length = len; itsErrorCode = 0; }</computeroutput></para>    </section><anchor xml:id="_Gadget_8C_1af5e05ce14050af2739f6921bd843afb9"/>    <section>
+    <title>byteresponse</title>
+<indexterm><primary>byteresponse</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>byteresponse</secondary></indexterm>
+<para><computeroutput>#define byteresponse( val)   { resp.data[0] = val; resp.length = 1; itsErrorCode = 0; }</computeroutput></para>    </section><anchor xml:id="_Gadget_8C_1af8fc0ffe3970b3983d0a8f488e17d70a"/>    <section>
+    <title>failure</title>
+<indexterm><primary>failure</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>failure</secondary></indexterm>
+<para><computeroutput>#define failure( code)   { resp.length = -EL2HLT; itsErrorCode = code; }</computeroutput></para>    </section><anchor xml:id="_Gadget_8C_1a9fbaf3e83e6c2969c78e8f974a635de7"/>    <section>
+    <title>intresponse</title>
+<indexterm><primary>intresponse</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>intresponse</secondary></indexterm>
+<para><computeroutput>#define intresponse( val)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;{&#32;resp.data[0]&#32;=&#32;val&#32;&amp;&#32;0xff;&#32;resp.data[1]&#32;=&#32;(val&#32;&gt;&gt;&#32;8)&#32;&amp;&#32;0xff;&#32;\
+&#32;&#32;&#32;&#32;resp.data[2]&#32;=&#32;(val&#32;&gt;&gt;&#32;16)&#32;&amp;&#32;0xff;&#32;resp.data[3]&#32;=&#32;(val&#32;&gt;&gt;&#32;24)&#32;&amp;&#32;0xff;&#32;\
+&#32;&#32;&#32;&#32;resp.length&#32;=&#32;4;&#32;itsErrorCode&#32;=&#32;0;&#32;}
+</programlisting>    </section><anchor xml:id="_Gadget_8C_1a9753903bd1cb938590e92b49bc01b7d3"/>    <section>
+    <title>success</title>
+<indexterm><primary>success</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>success</secondary></indexterm>
+<para><computeroutput>#define success( )   { itsErrorCode = 0; }</computeroutput></para>    </section><anchor xml:id="_Gadget_8C_1afc6fa9f99776203e6ca76b580d7afea6"/>    <section>
+    <title>wordresponse</title>
+<indexterm><primary>wordresponse</primary><secondary>Gadget.C</secondary></indexterm>
+<indexterm><primary>Gadget.C</primary><secondary>wordresponse</secondary></indexterm>
+<para><computeroutput>#define wordresponse( val)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;{&#32;resp.data[0]&#32;=&#32;val&#32;&amp;&#32;0xff;&#32;resp.data[1]&#32;=&#32;(val&#32;&gt;&gt;&#32;8)&#32;&amp;&#32;0xff;&#32;\
+&#32;&#32;&#32;&#32;resp.length&#32;=&#32;2;&#32;itsErrorCode&#32;=&#32;0;&#32;}
+</programlisting></section>
+</section>
+</section>

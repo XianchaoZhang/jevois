@@ -50,50 +50,47 @@
 
 #pragma once
 
-/*! \defgroup types JeVois-specific types and generic helper classes
+/*! \defgroup types JeVois 特定类型和通用辅助类
 
-    These types and classes support the core JeVois implementation. Pay particular attention to the very useful
-    JEVOIS_DEFINE_ENUM_CLASS(name, SEQ) macro to define new enums that can be used in Parameter to allow menu-style
-    parameters.
+    这些类型和类支持核心 JeVois 实现。请特别注意非常有用的 JEVOIS_DEFINE_ENUM_CLASS(name, SEQ) 宏，它用于定义可在参数中使
+    用的新枚举，以允许菜单样式的参数。
 
-    JEVOIS_DEFINE_ENUM_CLASS(name, SEQ)
-    -----------------------------------
+    JEVOIS_DEFINE_ENUM_CLASS（name，SEQ） 
+    -------------------------------------
 
-    Helper macro to define new enum class types. SEQ should be a BOOST_PP_SEQ (see example syntax below). You will get:
+    用于定义新枚举类类型的辅助宏。SEQ 应为 BOOST_PP_SEQ（请参阅下面的示例语法）。您将获得：
 
-    - an enum class declared and defined with the name and values supplied
-    - a static const std::vector of your enum values, with all the values that the enum can take, in name_Values
-    - a static const std::vector of std::string, with string names of all the values the enum can take, in name_Strings
-    - operator<< and operator>> for your enum.
+    - 使用提供的名称和值声明和定义的枚举类
+    - 枚举值的静态 const std::vector，包含枚举可以采用的所有值，在 name_Values 中
+    - std::string 的静态 const std::vector，包含枚举可以采用的所有值的字符串名称，在 name_Strings 中
+    - 枚举的 operator<< 和 operator>>。
 
-    You can in particular use name_Values when defining a Parameter definition to list all the valid values, and the
-    streaming operators will allow you to set the Parameter value by string, etc.
+    您可以在定义参数定义时使用 name_Values 来列出所有有效值，并且流运算符将允许您通过字符串设置参数值等。
 
-    For example:
+    例如：
 
     @code
     JEVOIS_DEFINE_ENUM_CLASS(myEnum, (One) (Two) (Three));
     @endcode
 
-    expands to:
+    展开为：
 
-    - first, the actual definition of the enum class, with the values you specified in the sequence:
+    - 首先，枚举类的实际定义，其值按顺序指定：
     @code
     enum class myEnum { One, Two, Three };
     @endcode
 
-    - second, a static const vector that contains all the enum values, listed in the order you specified:
+    - 第二，一个静态 const 向量，包含所有枚举值，按您指定的顺序列出：
     @code
     static std::vector<myEnum> const myEnum_Values { myEnum::One, myEnum::Two, myEnum::Three };
     @endcode
 
-    - third, a static const vector of strings that contains all the enum values in string form, listed in the order you
-      specified:
+    - 第三个，一个静态字符串 const 向量，其中包含字符串形式的所有枚举值，按您指定的顺序列出：
     @code
     static std::vector<std::string> const myEnum_Strings { "One", "Two", "Three" };
     @endcode
 
-    - finally, two stream operators that allow you to convert between your enum values and string:
+    - 最后，两个流运算符允许您在枚举值和字符串之间进行转换：
     @code
     inline std::ostream & operator<<(std::ostream & os, myEnum const & v) {
       std::vector<myEnum>::const_iterator vitr = myEnum_Values.begin(), vend = myEnum_Values.end();
@@ -111,8 +108,7 @@
     };
     @endcode
 
-    Note how the \c operator>> will throw if the given string does not match the string representation of one of the
-    enum's values. */
+    请注意，如果给定的字符串与枚举值之一的字符串表示形式不匹配，则 \c operator>> 将如何抛出。 */
 
 //! Include details of no interest to the user
 #include <jevois/Types/details/EnumImpl.H>

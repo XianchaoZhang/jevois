@@ -20,7 +20,7 @@
 #include <jevois/Debug/Log.H>
 #include <thread>
 
-// Icm20948 device requires a DMP image to be loaded on init
+// IIcm20948 设备需要在初始化时加载 DMP image
 static unsigned char const dmp3_image[] = {
 #include "ICM20948_dmp3a.H"
 };
@@ -43,7 +43,7 @@ void jevois::IMU::loadDMPfirmware(bool verify, bool errthrow)
   unsigned short addr = DMP_LOAD_START; size_t chunksiz = DMP_MEM_BANK_SIZE - (addr % DMP_MEM_BANK_SIZE);
   for (size_t i = 0; i < sizeof(dmp3_image); i += chunksiz)
   {
-    // Select DMP memory bank if it changed (banks have DMP_MEM_BANK_SIZE bytes):
+    // 如果 DMP 内存库发生变化，则选择它（内存库有 DMP_MEM_BANK_SIZE 字节）：
     unsigned char const bank = addr / DMP_MEM_BANK_SIZE;
     if (bank != currbank) { writeRegister(ICM20948_REG_MEM_BANK_SEL, bank); currbank = bank; }
 
@@ -70,7 +70,7 @@ void jevois::IMU::loadDMPfirmware(bool verify, bool errthrow)
     chunksiz = DMP_MEM_BANK_SIZE - (addr % DMP_MEM_BANK_SIZE);
     for (size_t i = 0; i < sizeof(dmp3_image); i += chunksiz)
     {
-      // Select DMP memory bank if it changed (banks have DMP_MEM_BANK_SIZE bytes):
+      // 如果 DMP 内存库发生变化，则选择它（内存库有 DMP_MEM_BANK_SIZE 字节）：
       unsigned char const bank = addr / DMP_MEM_BANK_SIZE;
       if (bank != currbank) { writeRegister(ICM20948_REG_MEM_BANK_SEL, bank); currbank = bank; }
 

@@ -1,286 +1,193 @@
-/*! \page UserConnect Connecting JeVois-A33 to Power and Data
+/*! \page UserConnect 将 JeVois-A33 连接到电源和数据
 
 
-Basics
-======
+基础知识 
+============
 
-The JeVois-A33 smart camera only has two connectors:
+JeVois-A33智能相机只有两个连接器：
 
-- One mini-USB 2.0 type B 5-pin connector for power (required) and for transmission of video to a host computer
-  (optional, depends on which machine vision module runs inside JeVois);
+- 一个 mini-USB 2.0 B 型 5 针连接器，用于供电（必需）和将视频传输到主机（可选，取决于 JeVois 内部运行哪个机器视觉模块）；
 
-- One 4-pin JST-SH 1.0mm connector (referred to as <em>micro-serial</em> connector) for optional TTL-level serial (UART)
-  connection to a microcontroller, such as an Arduino.
+- 一个 4 针 JST-SH 1.0 毫米连接器（称为<em>微串行</em>连接器），用于与微控制器（例如 Arduino）进行可选 TTL 级串行 (UART) 连接。
 
-Power through the mini-USB connector is always required for operation. You should aim to provide the following:
+始终需要通过 mini-USB 连接器供电才能运行。您应努力提供以下信息：
 
-- Regulated 5V +/- 10% voltage.
+- 调节5V +/- 10%电压。
 
-- No less than 800mA current (so, a total of 4 Watts of power). Less current is possible if you know that you will only
-  be using some machine vision algorithm that does not fully load the CPU inside JeVois, and which will hence yield a
-  lower power requirement.
+- 电流不低于 800mA（因此，总功率为 4 瓦）。如果您知道您将只使用一些不会完全加载 JeVois 内部 CPU 的机器视觉算法，那么电流可能会更小，因此会产生较低的功率要求。
 
-- No significant current and power flows through the micro-serial port (see \ref UserSerial for additional
-  details). Hence, you cannot power JeVois through the micro-serial port and you always need to power it through the
-  Mini-USB port.
+- 没有显著的电流和功率通过微型串行端口（有关更多详细信息，请参阅 \ref UserSerial）。因此，您无法通过微型串行端口为 JeVois 供电，而始终需要通过 Mini-USB 端口为其供电。
 
 
-Many power and data scenarios are possible. A few examples are given below.
+可能存在多种电源和数据场景。下面给出了几个示例。
 
-Standard connection to a host computer
-======================================
+与主机的标准连接 
+=========================================
 
-In the standard connection, JeVois is connected to one USB 3.0 or two USB 2.0 ports of a host computer. The host
-computer provides power to JeVois through its port(s), and also can communicate with JeVois through these ports (e.g.,
-to stream video from JeVois to the host computer).
+在标准连接中，JeVois 连接到主机的一个 USB 3.0 或两个 USB 2.0 端口。主机通过其端口为 JeVois 供电，也可以通过这些端口与 JeVois 通信（例如，将视频从 JeVois 传输到主机）。
 
-USB 2.0 ports are rated for 500mA maximum current output (at 5V). Note that voltage is allowed to drop below 5V as
-current usage increases. Hence, connecting JeVois to a single USB 2.0 port may not provide enough power to operate
-JeVois under a broad range of machine vision algorithms. A standard trick, which has been used previously to power
-external hard-drives or CD-Roms that also required more than 500mA of current, is to use a so-called <b>Y-type</b>
-cable, which connects to two USB ports, thereby combining power from both ports, and hence providing up to 1A of current
-to the device. Y-type cables look like this:
+USB 2.0 端口的最大额定电流输出为 500mA（5V 时）。请注意，随着电流使用量的增加，电压可以降至 5V 以下。因此，将 JeVois 连接到单个 USB 2.0 端口可能无法提供足够的电力来在各种机器视觉算法下操作 JeVois。以前曾用于为需要超过 500mA 电流的外部硬盘或 CD-Rom 供电的标准技巧是使用所谓的 <b>Y 型</b> 电缆，该电缆连接到两个 USB 端口，从而将两个端口的电源组合起来，从而为设备提供高达 1A 的电流。Y 型电缆如下所示：
 
 \image html UserConnectY.jpg
 
-The wiring is as follows:
+接线如下：
 
-- The USB-A connector (big USB connector) that is connected to two wires (black large connector in the picture above,
-  and P1 in the diagram below) will carry both power and data to JeVois.
+- 连接到两根电线（上图中的黑色大连接器和下图中的 P1）的 USB-A 连接器（大 USB 连接器）将向 JeVois 传输电力和数据。
 
-- The USB-A connector (big USB connector) that is connected to one wire (red large connector in the picture above,
-  and P3 in the diagram below) will carry only power to JeVois.
-  
-- The mini-USB 2.0 5-pin connector (small black above, P2 below) connects to JeVois and provides power and data to it.
+- 连接到一根电线（上图中的红色大连接器和下图中的 P3）的 USB-A 连接器（大 USB 连接器）将仅为 JeVois 传输电源。 
+- 迷你 USB 2.0 5 针连接器（上方的小黑色，下方的 P2）连接到 JeVois 并为其提供电源和数据。
 
 
 \image html UserConnectY2.png
 
-Hence:
+因此：
 
-- When using a Y-type cable with a computer that only supports USB 2.0, the long end of the cable carries power + data
-  and should be connected to your computer (connector P1 in the diagram above), while the short end carries only extra
-  power and can be connected to another USB port on the same computer, to a USB charger, to an externally-powered USB
-  hub, or to a USB battery bank (connector P3 in the diagram above). The mini-USB connector (P2 in the diagram image)
-  always connects to your JeVois smart camera.
+- 当在仅支持 USB 2.0 的计算机上使用 Y 型电缆时，电缆的长端带有电源 + 数据，应连接到计算机（上图中的连接器 P1），而短端仅带有额外的电源，可以连接到同一台计算机上的另一个 USB 端口、USB 充电器、外部供电的 USB 集线器或 USB 电池组（上图中的连接器 P3）。迷你 USB 连接器（图中的 P2）始终连接到您的 JeVois 智能相机。
 
-- With USB 3.0, current output specification has been increased: A single USB 3.0 port is now rated to provide no less
-  than 900mA of current (which, with 5V voltage, means 4.5 Watts of power).  Thus, a host computer with USB 3.0 ports
-  can power JeVois using one USB 3.0 port only. When using only one USB 3.0 port on a computer, you only need to connect
-  the long end of the cable (which carries power + data) to your computer (connector P1 in the diagram above).
+- 使用 USB 3.0，电流输出规格有所提高：单个 USB 3.0 端口现在额定提供不低于 900mA 的电流（在 5V 电压下，意味着 4.5 瓦功率）。因此，具有 USB 3.0 端口的主机仅使用一个 USB 3.0 端口即可为 JeVois 供电。当计算机上仅使用一个 USB 3.0 端口时，您只需将电缆的长端（传输电源 + 数据）连接到计算机（上图中的连接器 P1）。
 
-Here is an example of connecting JeVois to two USB ports of a host computer using a Y-type cable:
+以下是使用 Y 型电缆将 JeVois 连接到主机的两个 USB 端口的示例：
 
 \image html UserConnectHostY.jpg
 
-USB cable types
-===============
+USB 电缆类型 
+================
 
-Many mini-USB 2.0 cable types exist. The cheapest ones usually use the thinnest possible wires which can carry the
-data. These cables may not be appropriate to carry enough power to JeVois, as the very thin wires will not be able to
-carry enough current to JeVois.
+有许多类型的 mini-USB 2.0 电缆。最便宜的电缆通常使用能够传输数据的最细的电线。这些电缆可能不适合为 JeVois 传输足够的电力，因为非常细的电线无法为 JeVois 传输足够的电流。
 
-In the USA, copper wire diameter is measured using the [American Wire
-Gauge](https://en.wikipedia.org/wiki/American_wire_gauge) or AWG for short. Smaller AWG values mean thicker wires that
-can carry more current with less loss.
+在美国，铜线直径使用 [美国线规](https://en.wikipedia.org/wiki/American_wire_gauge) 或简称 AWG 来测量。AWG 值越小，表示电线越粗，可以承载更多电流，损耗越小。
 
-The cheapest USB cables may use 30AWG or 32AWG wire size (extremely thin). While this is appropriate for the data lines,
-it is insufficient to power JeVois.
+最便宜的 USB 电缆可能使用 30AWG 或 32AWG 线径（非常细）。虽然这对于数据线来说很合适，但不足以为 JeVois 供电。
 
-If you purchase mini-USB cables, make sure they feature 24AWG or lower for the two power wires inside the cable (and
-those will usually also feature 28AWG for the two data wires, and hence will be labeled 24/28AWG cables). Sometimes this
-information is written on the cable:
+如果您购买 mini-USB 线缆，请确保线缆内部的两根电源线的线径为 24AWG 或更低（这些线缆的两根数据线的线径通常为 28AWG，因此会标记为 24/28AWG 线缆）。有时线缆上会写有以下信息：
 
-\image html UserConnectAWG.jpg
+\图像 html UserConnectAWG.jpg
 
-The above picture shows a cable that has 1 twisted pair (1P) at 28AWG for data, and 2 conductors (2C) at 24AWG for
-power.
+上图显示的电缆有 1 对 28AWG 的双绞线（1P）用于传输数据，还有 2 对 24AWG 的导线（2C）用于传输电力。
 
-\warning We have been able to fail to properly power JeVois by using cheap USB cables of unknown AWG rating, even at
-lengths of 20cm (8 inches). So just because a cable is short does not mean that it will work.
+\warning 我们使用廉价的未知 AWG 等级的 USB 电缆无法正确为 JeVois 供电，即使长度为 20 厘米（8 英寸）。因此，电缆短并不意味着它可以正常工作。
 
-If in doubt, check out https://jevoisinc.com as all the cables there are custom-manufactured and tested to work with
-JeVois under full load. In fact, we have now moved our manufacturing line to all 22AWG power wires to incur the lowest
-possible loss in the power wires (22AWG is even thicker than 24AWG and hence is better to carry current with low loss;
-but 24AWG remains suitable).
+如果有疑问，请查看 https://jevoisinc.com，因为那里的所有电缆都是定制制造的，并经过测试，可在满负荷下与 JeVois 配合使用。事实上，我们现在已经将生产线转移到所有 22AWG 电源线，以尽可能降低电源线的损耗（22AWG 甚至比 24AWG 更厚，因此更适合低损耗传输电流；但 24AWG 仍然合适）。
 
-Additional connection scenarios
-===============================
+附加连接场景
+================================
 
-Connecting to a host computer with weak USB ports
+连接到具有弱 USB 端口的主机 
 -------------------------------------------------
 
-Although USB 2.0 ports should be able provide 500mA of current according to the USB specifications, sometimes they are
-not. This is often the case in small embedded boards, which themselves are powered from a micro-USB connector, then
-relaying some of that power to their own USB ports.
+虽然 USB 2.0 端口应该能够提供 500mA 电流（根据 USB 规范），但有时却不能。小型嵌入式电路板通常就是这种情况，它们本身由微型 USB 连接器供电，然后将部分电力传输到自己的 USB 端口。
 
-When a host computer's ability to supply power to its USB ports is weak, you can supplement it by using a Y-type cable
-and connecting the short end (power only) to a stable power source. For example:
+当主机为其 USB 端口供电的能力较弱时，您可以使用 Y 型电缆并将短端（仅供电）连接到稳定电源来补充供电。例如：
 
-\image html UserConnectWeakHostCharger.jpg JeVois connected to an embedded board with weak USB ports. We use a USB charger to provide additional power to JeVois
+\image html UserConnectWeakHostCharger.jpg JeVois 连接到带有弱 USB 端口的嵌入式主板。我们使用 USB 充电器为 JeVois 提供额外电源
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-\image html UserConnectWeakHostBatt.jpg  JeVois connected to an embedded board with weak USB ports. We use a USB battery bank to provide additional power to JeVois
+\image html UserConnectWeakHostBatt.jpg JeVois 连接到带有弱 USB 端口的嵌入式主板。我们使用 USB 电池组为 JeVois 提供额外电力
 
 
-Note how in both cases above we have connected the USB-A plug with two wires (connector P1) to the USB port of the
-embedded computer, so that both power and data flow between JeVois and the embedded computer. We have connected the
-USB-A plug with only one wire (which is for power only, connector P3) to the auxiliary power source. Hence:
+请注意，在上述两种情况下，我们都将带有两根电线（连接器 P1）的 USB-A 插头连接到嵌入式计算机的 USB 端口，以便电源和数据在 JeVois 和嵌入式计算机之间流动。我们只用一根电线（仅用于供电，连接器 P3）将 USB-A 插头连接到辅助电源。因此：
 
-- Power will flow from connector P3 via connector P1 to connector P2.
+- 电流将从连接器 P3 经连接器 P1 流向连接器 P2。
 
-- Data (streaming video from JeVois to the embedded computer) will flow between JeVois (connector P2) and the embedded
-  computer (connector P1).
+- 数据（从 JeVois 到嵌入式计算机的流视频）将在 JeVois（连接器 P2）和嵌入式计算机（连接器 P1）之间流动。
 
-The micro-USB cable connected to the embedded computer at the right of the pictures is to power that computer, and it
-should be connected to a USB charger, USB power bank, etc. In such case, you would probably want to use a USB power bank
-that provides several USB outputs, as is usually the case with larger USB power banks; or, similarly, a USB charger with
-several outputs (the small white wall charger shown on this page has 2 ports; many USB charger models are available with
-6 ports or more).
+图片右侧嵌入式计算机连接的微型 USB 电缆用于为该计算机供电，并且应将其连接到 USB 充电器、USB 移动电源等。在这种情况下，您可能需要使用提供多个 USB 输出的 USB 移动电源，大型 USB 移动电源通常都是如此；或者，同样，使用具有多个输出的 USB 充电器（本页显示的小型白色壁式充电器有 2 个端口；许多 USB 充电器型号都有 6 个或更多端口）。
 
-Powering JeVois with no host computer
+无需主机为 JeVois 供电 
 -------------------------------------
 
-JeVois does not always stream video over its USB port. In some scenarios, it can just work as a standalone computer.
+JeVois 并不总是通过 USB 端口传输视频。在某些情况下，它可以作为独立计算机工作。
 
-For example, the [Surprise-based Video Recorder machine vision module](/moddoc/SurpriseRecorder/modinfo.html) uses
-JeVois as a smart surveillance camera, which will just monitor the environment and save a short video clip to its
-microSD card each time something surprising is detected. In such scenario, we only need to provide power to JeVois. This
-can be achieved using a USB charger, a USB battery bank, etc as exemplified below.
+例如，[基于 Surprise 的视频记录器机器视觉模块](/moddoc/SurpriseRecorder/modinfo.html) 使用 JeVois 作为智能监控摄像头，它只会监控环境，并在每次检测到意外情况时将短视频片段保存到其 microSD 卡中。在这种情况下，我们只需为 JeVois 供电。这可以使用 USB 充电器、USB 电池组等来实现，如下所示。
 
 
-\image html UserConnectCharger.jpg JeVois operating in standalone mode from a USB charger
+\image html UserConnectCharger.jpg JeVois 通过 USB 充电器以独立模式运行
 
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
 
-\image html UserConnectUSBbatt.jpg JeVois operating in standalone mode from a USB power bank (battery)
+\image html UserConnectUSBbatt.jpg JeVois 使用 USB 移动电源（电池）以独立模式运行
 
 
-No host computer but a micro-controller
+没有主机，但有微控制器 
 ---------------------------------------
 
-In yet other scenarios, JeVois may not stream video over USB but may issue messages over its micro-Serial port, for
-example to provide information to a micro-controller on an autonomous robot.
+在其他情况下，JeVois 可能不会通过 USB 传输视频，但可能会通过其微型串行端口发出消息，例如向自主机器人上的微控制器提供信息。
 
-\image html UserConnectUSBbattArdu1.jpg JeVois operating in standalone mode from a USB power bank (battery), with micro-serial connection (not yet wired up in the photograph) to an Arduino board that is powered from another source via a micro-USB cable shown at right.
+\image html UserConnectUSBbattArdu1.jpg JeVois 以独立模式运行，通过 USB 移动电源（电池）供电，并通过微型串行连接（照片中尚未连接）连接到 Arduino 开发板，该开发板通过右图所示的微型 USB 电缆从另一个来源供电。
 
-A [splitter mini+micro cable](https://www.jevoisinc.com/collections/accessories/products/mini-usb-micro-usb-splitter-cable-15cm-6-in-long) can come in handy for this kind of scenario:
+对于这种情况，[分离式迷你+微型电缆]（https://www.jevoisinc.com/collections/accessories/products/mini-usb-micro-usb-splitter-cable-15cm-6-in-long）可以派上用场：
 
-\image html UserConnectUSBbattArdu2.jpg JeVois operating in standalone mode from a USB power bank (battery), here using a splitter mini+micro cable to also power an Arduino from the same battery bank.
+\image html UserConnectUSBbattArdu2.jpg JeVois 以独立模式通过 USB 移动电源（电池）运行，这里使用分离器迷你+微型电缆通过同一电池组为 Arduino 供电。
 
-Make sure your USB power bank is rated for at least 1A output current.
+确保您的 USB 移动电源的额定输出电流至少为 1A。
 
 
-Powering from a single raw Lithium cell
+由单个原始锂电池供电 
 ---------------------------------------
 
-You can use a handy [Step-UP DC/DC
-converter](https://www.jevoisinc.com/collections/accessories/products/step-up-dc-dc-boost-converter-3v-to-usb-5v-1a) to
-power JeVois from sources that provide less than 5V (e.g., a single Lithium cell rated 3.7V nominal). In doing so, you
-are essentially building your own USB battery bank (those contain a Lithium battery plus a DC/DC converter inside).
+您可以使用方便的 [升压 DC/DC 转换器](https://www.jevoisinc.com/collections/accessories/products/step-up-dc-dc-boost-converter-3v-to-usb-5v-1a) 从电压低于 5V 的电源（例如，额定电压为 3.7V 的单个锂电池）为 JeVois 供电。这样做，您实际上是在构建自己的 USB 电池组（其中包含锂电池和 DC/DC 转换器）。
 
-\image html UserConnectStepUp.jpg
+\图像 html UserConnectStepUp.jpg
 
-If you want to stream video data to a host computer that is too weak to power JeVois on its own, use a Y-type cable
-instead of the single cable shown above, as we have used in the previous scenarios.
+如果您想将视频数据传输到功率太弱而无法单独为 JeVois 供电的主机，请使用 Y 型电缆，而不是上面显示的单根电缆，就像我们在之前的场景中使用过的那样。
 
-Powering from a power source with voltage greater than 5V
+使用电压大于 5V 的电源供电 
 ---------------------------------------------------------
 
-You can use a [Step-down DC/DC
-converter](https://www.jevoisinc.com/collections/accessories/products/step-down-6-24v-in-to-usb-5v-3a-out-dc-dc-converter)
-to power JeVois from power sources that have voltages greater than 5V, such as a 12V car battery. Here we show such a
-converter connected to a cigarette lighter adapter for a car.
+您可以使用 [降压 DC/DC 转换器](https://www.jevoisinc.com/collections/accessories/products/step-down-6-24v-in-to-usb-5v-3a-out-dc-dc-converter) 从电压大于 5V 的电源（例如 12V 汽车电池）为 JeVois 供电。这里我们展示了连接到汽车点烟器适配器的此类转换器。
 
-\image html UserConnectStepDown.jpg
+\图像 html UserConnectStepDown.jpg
 
-You can also use a standard cigarette-lighter USB charger (which allows people to charge their phones from the cigarette
-lighter port of their car). Make sure it is rated to provide at least 1A of current.
+您还可以使用标准点烟器 USB 充电器（人们可以通过汽车点烟器端口为手机充电）。确保其额定电流至少为 1A。
 
-If you want to stream video data to a host computer that is too weak to power JeVois on its own, use a Y-type cable
-instead of the single cable shown above, as we have used in the previous scenarios.
+如果您想将视频数据传输到功率太弱而无法单独为 JeVois 供电的主机，请使用 Y 型电缆，而不是上面显示的单根电缆，就像我们在之前的场景中使用过的那样。
 
-Using JeVois with an OpenWRT computer to stream video over WIFI
+使用 JeVois 和 OpenWRT 计算机通过 WIFI 传输视频 
 ---------------------------------------------------------------
 
-[OpenWRT](http://openwrt.org) is an open source framework for wired and wireless network routers. OpenWRT has USB camera
-support, and can stream video wirelessly using the <b>mjpg-streamer</b> OpenWRT module, see
-https://wiki.openwrt.org/doc/howto/webcam
+[OpenWRT](http://openwrt.org) 是有线和无线网络路由器的开源框架。OpenWRT 支持 USB 摄像头，可以使用 <b>mjpg-streamer</b> OpenWRT 模块无线传输视频，请参阅 https://wiki.openwrt.org/doc/howto/webcam
 
-You then simply use a Y-type cable to connect JeVois to the USB port of the OpenWRT box and to an additional power
-source (the USB port on the OpenWRT box is unlikely to be able to power JeVois). The OpenWRT box detects JeVois as a
-connected USB camera, and triggers the <b>mjpg-streamer</b> module. There is a bit of messing around with config files
-and options passed down to mjpg-streamer to select the correct resolution and you are good to go. You view the video by
-wirelessly connecting your tablet to the OpenWRT router (which acts as a wifi access point) and then pointing your
-browser to some URL (see the mjpg-streamer doc) where you will see the video from JeVois.
+然后，您只需使用 Y 型电缆将 JeVois 连接到 OpenWRT 盒的 USB 端口和附加电源（OpenWRT 盒上的 USB 端口不太可能为 JeVois 供电）。OpenWRT 盒将 JeVois 检测为连接的 USB 摄像头，并触发 <b>mjpg-streamer</b> 模块。配置文件和选项传递给 mjpg-streamer 以选择正确的分辨率，然后您就可以开始了。您可以通过将平板电脑无线连接到 OpenWRT 路由器（充当 wifi 接入点）来观看视频，然后将浏览器指向某个 URL（请参阅 mjpg-streamer 文档），您将在该 URL 上看到来自 JeVois 的视频。
 
-Try a search for "GL-MT300N" or similar. Although we have not used this exact model, it should work just fine since it
-has OpenWRT and also a USB2.0 port to which you can connect JeVois. Note that the CPU in these OpenWRT boxes is quite
-slow (e.g., 200MHz single core) so the framerate at which you will be able to see the video may be limited. We could do
-15fps at 320x240 MJPG in our tests. Because of the slow OpenWRT CPU, you may be better off doing compression to MJPG on
-JeVois and streaming MJPG video out of JeVois, so that the OpenWRT box will just forward the video frames over wifi
-without the need to compress them on the OpenWRT CPU.
+尝试搜索“GL-MT300N”或类似名称。虽然我们没有使用过这个型号，但它应该可以正常工作，因为它有 OpenWRT 以及一个 USB2.0 端口，您可以将 JeVois 连接到该端口。请注意，这些 OpenWRT 盒子中的 CPU 非常慢（例如，200MHz 单核），因此您能够观看视频的帧速率可能会受到限制。在我们的测试中，我们可以在 320x240 MJPG 上实现 15fps。由于 OpenWRT CPU 速度较慢，您最好在 JeVois 上对 MJPG 进行压缩，然后从 JeVois 流式传输 MJPG 视频，这样 OpenWRT 盒子就会通过 wifi 转发视频帧，而无需在 OpenWRT CPU 上压缩它们。
 
 
-\image html UserConnectOpenWRT.jpg
+\图像 html UserConnectOpenWRT.jpg
 
 
-Measuring power consumption
+测量功耗 
 ---------------------------
 
-You can measure power consumption of JeVois using a [USB power
-tester](https://www.jevoisinc.com/collections/accessories/products/usb-power-meter). Just make sure that use a single
-port to power JeVois (USB 3.0, charger, battery, etc) and not a Y cable, otherwise you may not measure the full power
-that is going into JeVois.
+您可以使用 [USB 电源测试仪](https://www.jevoisinc.com/collections/accessories/products/usb-power-meter) 测量 JeVois 的功耗。只需确保使用单个端口为 JeVois 供电（USB 3.0、充电器、电池等），而不是 Y 型电缆，否则您可能无法测量进入 JeVois 的全部功率。
 
-\image html UserConnectPower.jpg JeVois running the burn test and consuming 3.75 Watts (maximum CPU + GPU load)
+\image html UserConnectPower.jpg JeVois 正在运行烧毁测试，功耗为 3.75 瓦（最大 CPU + GPU 负载）
 
 
-Where to find the correct cables and supplies
+在哪里可以找到正确的电缆和耗材 
 ---------------------------------------------
 
-Cables, battery banks, DC/DC converters, etc that have been certified to work with JeVois are available at
-http://jevoisinc.com
+经认证可与 JeVois 配合使用的电缆、电池组、DC/DC 转换器等可在 http://jevoisinc.com 上找到
 
 
-Troubleshooting
+故障排除
 ---------------
 
-With <em>thin</em> USB cables not rated for charging, sometimes JeVois may appear to correctly startup but is not
-detected by the host computer, or appears to work erratically (video connection drops, etc).
+使用不适合充电的<em>细</em> USB 电缆，有时 JeVois 似乎可以正确启动，但主机无法检测到，或者似乎工作不稳定（视频连接断开等）。
 
-On Linux, try to issue a \c dmesg command in a terminal, and check for the following (exact numbers will change, but you
-want to see a <b>JeVois-A33 Smart Camera</b> detected:
+在 Linux 上，尝试在终端中发出 \c dmesg 命令，并检查以下内容（确切的数字会发生变化，但您希望看到检测到 <b>JeVois-A33 智能相机</b>）：
 
-\verbatim
-[14985.916593] usb 1-1.2: new high-speed USB device number 30 using xhci_hcd
-[14986.021050] usb 1-1.2: New USB device found, idVendor=1d6b, idProduct=0102
-[14986.021053] usb 1-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-[14986.021055] usb 1-1.2: Product: JeVois-A33 Smart Camera
-[14986.021056] usb 1-1.2: Manufacturer: JeVois Inc
-[14986.043758] uvcvideo: Found UVC 1.00 device JeVois-A33 Smart Camera (1d6b:0102)
-[14986.045193] input: JeVois-A33 Smart Camera as /devices/pci0000:00/0000:00:1c.6/0000:09:00.0/usb1/1-1/1-1.2/1-1.2:1.0/input/input48
-[14986.046144] cdc_acm 1-1.2:1.2: ttyACM0: USB ACM device
-[14986.047206] usb-storage 1-1.2:1.4: USB Mass Storage device detected
-[14986.047353] scsi host32: usb-storage 1-1.2:1.4
-[14987.044678] scsi 32:0:0:0: Direct-Access     JeVois   Smart Camera     0333 PQ: 0 ANSI: 2
-[14987.045298] sd 32:0:0:0: Attached scsi generic sg8 type 0
-[14987.046092] sd 32:0:0:0: [sdh] Attached SCSI removable disk
-\endverbatim
+\verbatim [14985.916593] usb 1-1.2：使用 xhci_hcd 的新高速 USB 设备编号 30 [14986.021050] usb 1-1.2：发现新 USB 设备，idVendor=1d6b，idProduct=0102 [14986.021053] usb 1-1.2：新 USB 设备字符串：Mfr=1，Product=2，SerialNumber=0 [14986.021055] usb 1-1.2：产品：JeVois-A33 智能相机 [14986.021056] usb 1-1.2：制造商：JeVois Inc [14986.043758] uvcvideo：发现 UVC 1.00 设备 JeVois-A33 智能相机(1d6b:0102) [14986.045193] 输入：JeVois-A33 智能摄像头为 /devices/pci0000:00/0000:00:1c.6/0000:09:00.0/usb1/1-1/1-1.2/1-1.2:1.0/input/input48 [14986.046144] cdc_acm 1-1.2:1.2：ttyACM0：USB ACM 设备 [14986.047206] usb-storage 1-1.2:1.4：检测到 USB 大容量存储设备 [14986.047353] scsi host32：usb-storage 1-1.2:1.4 [14987.044678] scsi 32:0:0:0: 直接访问 JeVois 智能相机 0333 PQ: 0 ANSI: 2 [14987.045298] sd 32:0:0:0: 连接 scsi 通用 sg8 类型 0 [14987.046092] sd 32:0:0:0: [sdh] 连接 SCSI 可移动磁盘 \endverbatim
 
-if you see errors like this:
+如果你看到这样的错误：
 
-\verbatim
-[14977.226733] uvcvideo: Failed to query (129) UVC probe control : -19 (exp. 26).
-[14977.226736] uvcvideo: Failed to initialize the device (-5).
-\endverbatim
+\verbatim [14977.226733] uvcvideo：无法查询（129）UVC 探测器控制：-19（指数 26）。[14977.226736] uvcvideo：无法初始化设备（-5）。 \endverbatim
 
-then likely your cable is bad (not able to carry enough current), our your USB port is too weak, etc.
+那么很可能是您的电缆有问题（无法承载足够的电流），或者您的 USB 端口太弱等等。
 
 */
 

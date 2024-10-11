@@ -21,30 +21,30 @@
 
 namespace jevois
 {
-  /*! \defgroup console Console access utilities
+  /*! \defgroup console 控制台访问实用程序
       
-      Console-related utility and helper functions. \ingroup utils */
+      控制台相关的实用程序和帮助函数。 \ingroup utils */
   
   /*! @{ */ // **********************************************************************
 
-  //! Indicate whether this fd (which should be from /dev/input/eventX) is keyboard, mouse, etc
-  /*! Inspired from SFML-rpi */
+  //! 指示此 fd（应来自 /dev/input/eventX）是否是键盘、鼠标等 
+  /*! 受 SFML-rpi 启发 */
   bool isInputDevice(int fd);
   
-  //! Get a file descriptor to the console
+  //! 获取控制台的文件描述符
   int getConsoleFd();
 
-  //! Get current active tty
-  /*! Reads /sys/class/tty/tty0/active and open the tty. Caller should close that fd later using close(). */
+  //! 获取当前活动 tty
+  /*！读取 /sys/class/tty/tty0/active 并打开 tty。调用者应稍后使用 close() 关闭该 fd。 */
   int getActiveTTY();
   
-  //! Prevent keystrokes from reaching the tty
-  /*! Useful when doing direct drawing into the linux framebuffer, as in ImGuiBackendMALI. Returned kb_mode is what it
-      was, use it in unMuteKeyboard to restore. */
+  //! 防止 keystrokes 到达 tty
+  /*！在直接绘制到 linux 帧缓冲区时很有用，如在 ImGuiBackendMALI 中一样。返回的 kb_mode 是原来的 kb_mode，
+      在 unMuteKeyboard 中使用它来恢复。 */
   void muteKeyboard(int tty, int & kb_mode);
 
-  //! Restore the keyboard mode for given tty
-  /*! Use kd_mode that was returned by muteKeyboard(). */
+  //! 恢复给定 tty 的键盘模式 
+  /*! 使用 muteKeyboard() 返回的 kd_mode。 */
   void unMuteKeyboard(int tty, int kb_mode);
 
   /*! @} */ // **********************************************************************

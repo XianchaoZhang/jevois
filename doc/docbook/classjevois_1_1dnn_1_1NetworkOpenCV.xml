@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV">
+<title>jevois::dnn::NetworkOpenCV Class Reference</title>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/NetworkOpenCV.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>围绕 OpenCV DNN 神经网络的包装器 </para>
+<para>
+Definition at line 31 of file NetworkOpenCV.H.</para>
+Inheritance diagram for jevois::dnn::NetworkOpenCV:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkOpenCV__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::NetworkOpenCV:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkOpenCV__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1aa968dedcb1f7da19d46b1537cb21b2f6">~NetworkOpenCV</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1abe548296057d9ef38122343505e45f5c">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a61a283e643a8a22e0cf5e743da59d1f4">inputShapes</link> () override</para>
+
+<para>Get shapes of all input tensors. </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a32dd046edba29972d0d8c4b82ea7d02c">outputShapes</link> () override</para>
+
+<para>Get shapes of all output tensors. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a80147b1b468931c226f85c959c522805">load</link> () override</para>
+
+<para>Load from disk. </para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a11dbdabb2b67c48da768be109d65fb1a">doprocess</link> (std::vector&lt; cv::Mat &gt; const &amp;blobs, std::vector&lt; std::string &gt; &amp;info) override</para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1aa968dedcb1f7da19d46b1537cb21b2f6"/>    <section>
+    <title>~NetworkOpenCV()</title>
+<indexterm><primary>~NetworkOpenCV</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>~NetworkOpenCV</secondary></indexterm>
+<para><computeroutput>jevois::dnn::NetworkOpenCV::~NetworkOpenCV ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 22 of file NetworkOpenCV.C.</para>
+<para>
+References jevois::dnn::Network::waitBeforeDestroy().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1a11dbdabb2b67c48da768be109d65fb1a"/>    <section>
+    <title>doprocess()</title>
+<indexterm><primary>doprocess</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>doprocess</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::NetworkOpenCV::doprocess (std::vector&lt; cv::Mat &gt; const &amp; blobs, std::vector&lt; std::string &gt; &amp; info)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a0715f8cd89af48245f39ed1bd00c0849">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 94 of file NetworkOpenCV.C.</para>
+<para>
+References LFATAL, and jevois::num2str().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1abe548296057d9ef38122343505e45f5c"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkOpenCV::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1dnn_1_1Network_1af49aabe3e1317946de848f356970fa8d">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 26 of file NetworkOpenCV.C.</para>
+<para>
+References jevois::dnn::Network::freeze().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1a61a283e643a8a22e0cf5e743da59d1f4"/>    <section>
+    <title>inputShapes()</title>
+<indexterm><primary>inputShapes</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>inputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkOpenCV::inputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all input tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a5c4daabb6b084f87ce330f98159ebaa7">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 39 of file NetworkOpenCV.C.</para>
+<para>
+References jevois::dnn::parseTensorSpecs().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1a80147b1b468931c226f85c959c522805"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkOpenCV::load ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Load from disk. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 51 of file NetworkOpenCV.C.</para>
+<para>
+References jevois::absolutePath(), and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkOpenCV_1a32dd046edba29972d0d8c4b82ea7d02c"/>    <section>
+    <title>outputShapes()</title>
+<indexterm><primary>outputShapes</primary><secondary>jevois::dnn::NetworkOpenCV</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkOpenCV</primary><secondary>outputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkOpenCV::outputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all output tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a98a8d50e49ba4d9f827ff9b5d4c8b68f">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 45 of file NetworkOpenCV.C.</para>
+<para>
+References jevois::dnn::parseTensorSpecs().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_NetworkOpenCV_8H">NetworkOpenCV.H</link>src/jevois/DNN/<link linkend="_NetworkOpenCV_8C">NetworkOpenCV.C</link></section>
+</section>

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython">
+<title>jevois::dnn::PostProcessorDetectYOLOforPython Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLOforPython</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>YOLO post-processor exposed to python. </para>
+
+
+
+<para>A bit hacky since <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO">PostProcessorDetectYOLO</link> is a <link linkend="_classjevois_1_1Component">Component</link> that holds parameters. This class will add a <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO">PostProcessorDetectYOLO</link> subcomponent to the current module, and then will forward yolo post-processing requests to it. </para>
+<para>
+Definition at line 447 of file PythonModule.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a1686bb5d7d6d8c6123c2d831f8b23cc2">PostProcessorDetectYOLOforPython</link> ()</para>
+
+<para>Constructor constructs itsYOLO and adds it to current module. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a4a96264fa4dbdcef5edf98aa65f12b19">~PostProcessorDetectYOLOforPython</link> ()</para>
+
+<para>Destructor removes itsYOLO from current module. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1ab6d61568ea55607a69e8a8924b74dd5d">freeze</link> (bool doit)</para>
+
+<para>Freeze/unfreeze parameters that users should not change while running. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a4db83edbf4db9cd2d187212cfc18495b">yolo</link> (boost::python::list outs, int nclass, float boxThreshold, float confThreshold, int bw, int bh, int fudge, int maxbox)</para>
+
+<para>Generic raw YOLO processing. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a1686bb5d7d6d8c6123c2d831f8b23cc2"/>    <section>
+    <title>PostProcessorDetectYOLOforPython()</title>
+<indexterm><primary>PostProcessorDetectYOLOforPython</primary><secondary>jevois::dnn::PostProcessorDetectYOLOforPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLOforPython</primary><secondary>PostProcessorDetectYOLOforPython</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorDetectYOLOforPython::PostProcessorDetectYOLOforPython ( )</computeroutput></para><para>
+
+<para>Constructor constructs itsYOLO and adds it to current module. </para>
+</para>
+<para>
+Definition at line 628 of file PythonModule.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a4a96264fa4dbdcef5edf98aa65f12b19"/>    <section>
+    <title>~PostProcessorDetectYOLOforPython()</title>
+<indexterm><primary>~PostProcessorDetectYOLOforPython</primary><secondary>jevois::dnn::PostProcessorDetectYOLOforPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLOforPython</primary><secondary>~PostProcessorDetectYOLOforPython</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorDetectYOLOforPython::~PostProcessorDetectYOLOforPython ( )</computeroutput></para><para>
+
+<para>Destructor removes itsYOLO from current module. </para>
+</para>
+<para>
+Definition at line 643 of file PythonModule.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1ab6d61568ea55607a69e8a8924b74dd5d"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorDetectYOLOforPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLOforPython</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetectYOLOforPython::freeze (bool doit)</computeroutput></para><para>
+
+<para>Freeze/unfreeze parameters that users should not change while running. </para>
+</para>
+<para>
+Definition at line 646 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLOforPython_1a4db83edbf4db9cd2d187212cfc18495b"/>    <section>
+    <title>yolo()</title>
+<indexterm><primary>yolo</primary><secondary>jevois::dnn::PostProcessorDetectYOLOforPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLOforPython</primary><secondary>yolo</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PostProcessorDetectYOLOforPython::yolo (boost::python::list outs, int nclass, float boxThreshold, float confThreshold, int bw, int bh, int fudge, int maxbox)</computeroutput></para><para>
+
+<para>Generic raw YOLO processing. </para>
+</para>
+
+<para>The returned tuple has 3 elements: list of int for classIds, list of float for confidences, and list of 4-element tuples of floats for boxes (x, y, w, h). </para>
+<para>
+Definition at line 650 of file PythonModule.C.</para>
+<para>
+References jevois::python::pyVecToList().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

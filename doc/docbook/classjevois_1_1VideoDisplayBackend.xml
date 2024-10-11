@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoDisplayBackend">
+<title>jevois::VideoDisplayBackend Class Reference</title>
+<indexterm><primary>jevois::VideoDisplayBackend</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/VideoDisplayBackend.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Backend for VideoDisplay on JeVois-Pro. </para>
+
+
+
+<para>This abstract base class provides an interface used by <link linkend="_classjevois_1_1VideoDisplayGL">VideoDisplayGL</link>. Derived implementations are available for X11+OpenGL-ES 3.2 (to be used on JeVois-Pro host) and Mali framebuffer + OpenGL-ES 3.2 (to be used on JeVois-Pro platform). </para>
+<para>
+Definition at line 30 of file VideoDisplayBackend.H.</para>
+Inheritance diagram for jevois::VideoDisplayBackend:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayBackend__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::VideoDisplayBackend:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayBackend__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1VideoDisplayBackend_1aaf967e3eb6c0539b08b8300d41f69e36">VideoDisplayBackend</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1VideoDisplayBackend_1a8cc50b4914224bb5588b36c10be977bc">~VideoDisplayBackend</link> ()</para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1ab7db3f98de08fb763935b179c0031eea">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false)=0</para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1VideoDisplayBackend_1aabf45e81d105cc9bf79a701e458858a1">pollEvents</link> (bool &amp;shouldclose)=0</para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to VideoDisplay. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1a3c7c973ef625730022148241cce34e6f">newFrame</link> ()</para>
+
+<para>Start a new frame and clear the window/framebuffer. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1a6164ed80b2f3628f23bd45919750858e">render</link> ()</para>
+
+<para>Render the VideoDisplay graphics. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1af328da028f01a0dff3672f480a6ade58">getWindowSize</link> (unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>) const</para>
+</listitem>
+            <listitem><para>EGLDisplay <link linkend="_classjevois_1_1VideoDisplayBackend_1a61b90866eca9c25d54d48a00f0768290">getDisplay</link> () const</para>
+
+<para>Access our display. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1a181905b959ba0c5d7b9bb5f4f75e54ff">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, EGLNativeWindowType win)</para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackend_1a4a1d6f38b05918eabaa70c7e6aa31e77">uninit</link> ()</para>
+
+<para>Un-initialize the underlying engine, close windows, etc. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const std::string <link linkend="_classjevois_1_1VideoDisplayBackend_1a955a841e029ff28900433e615e6d9dfc">itsName</link></para>
+</listitem>
+            <listitem><para>EGLDisplay <link linkend="_classjevois_1_1VideoDisplayBackend_1a392320ca73fc4117a1d11384997fb8a3">itsDisplay</link> = EGL_NO_DISPLAY</para>
+</listitem>
+            <listitem><para>EGLConfig <link linkend="_classjevois_1_1VideoDisplayBackend_1acd47d1836e2a69a74ef212cd7e30f179">itsConfig</link> = 0</para>
+</listitem>
+            <listitem><para>EGLContext <link linkend="_classjevois_1_1VideoDisplayBackend_1acb7a7013d035e37ee2de6778adcf3888">itsContext</link> = EGL_NO_CONTEXT</para>
+</listitem>
+            <listitem><para>EGLSurface <link linkend="_classjevois_1_1VideoDisplayBackend_1a36be9f558fdd518b36e10f82cf84b834">itsSurface</link> = 0</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackend_1aaf967e3eb6c0539b08b8300d41f69e36"/>    <section>
+    <title>VideoDisplayBackend()</title>
+<indexterm><primary>VideoDisplayBackend</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>VideoDisplayBackend</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayBackend::VideoDisplayBackend ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 46 of file VideoDisplayBackend.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a8cc50b4914224bb5588b36c10be977bc"/>    <section>
+    <title>~VideoDisplayBackend()</title>
+<indexterm><primary>~VideoDisplayBackend</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>~VideoDisplayBackend</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayBackend::~VideoDisplayBackend ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</para>
+<para>
+Definition at line 50 of file VideoDisplayBackend.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a61b90866eca9c25d54d48a00f0768290"/>    <section>
+    <title>getDisplay()</title>
+<indexterm><primary>getDisplay</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>getDisplay</secondary></indexterm>
+<para><computeroutput>EGLDisplay jevois::VideoDisplayBackend::getDisplay ( ) const</computeroutput></para><para>
+
+<para>Access our display. </para>
+</para>
+
+<para>May return nullptr if <link linkend="_classjevois_1_1VideoDisplayBackend_1ab7db3f98de08fb763935b179c0031eea">init()</link> has not yet been called. </para>
+<para>
+Definition at line 259 of file VideoDisplayBackend.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1af328da028f01a0dff3672f480a6ade58"/>    <section>
+    <title>getWindowSize()</title>
+<indexterm><primary>getWindowSize</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>getWindowSize</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::getWindowSize (unsigned short &amp; w, unsigned short &amp; h) const<computeroutput>[virtual]</computeroutput></computeroutput></para>
+<para>Returns 0,0 if display has not been initialized. </para>
+<para>
+Definition at line 243 of file VideoDisplayBackend.C.</para>
+<para>
+References GL_CHECK, and h.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1ab7db3f98de08fb763935b179c0031eea"/>    <section>
+    <title>init()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoDisplayBackend::init (unsigned short w, unsigned short h, bool fullscreen = <computeroutput>false</computeroutput>
+)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</para>
+
+<para>The init starts with the given initial framebuffer size. Note that on MALI, fullscreen parameter is ignored and we always run full-screen. </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1a9c839f0bd1d11929a50ddd5708f91c97">jevois::VideoDisplayBackendMALI</link>.</para>
+<para>
+Referenced by jevois::VideoDisplayBackendMALI::init().</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a181905b959ba0c5d7b9bb5f4f75e54ff"/>    <section>
+    <title>init()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::init (unsigned short w, unsigned short h, EGLNativeWindowType win)<computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</para>
+
+<para>The init starts with the given initial window/framebuffer size. In the base class, we only initialize OpenGL. Derived classes should first create a window or framebuffer as needed. </para>
+<para>
+Definition at line 57 of file VideoDisplayBackend.C.</para>
+<para>
+References GL_CHECK, GL_CHECK_BOOL, JEVOIS_EGL_INFO, LERROR, LFATAL, and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a3c7c973ef625730022148241cce34e6f"/>    <section>
+    <title>newFrame()</title>
+<indexterm><primary>newFrame</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>newFrame</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::newFrame ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start a new frame and clear the window/framebuffer. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1ImGuiBackendMALI_1ae0f79d68f6df7a7b66b16c1e548d133d">jevois::ImGuiBackendMALI</link>.</para>
+<para>
+Definition at line 223 of file VideoDisplayBackend.C.</para>
+<para>
+References h, and LFATAL.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::newFrame().</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1aabf45e81d105cc9bf79a701e458858a1"/>    <section>
+    <title>pollEvents()</title>
+<indexterm><primary>pollEvents</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>pollEvents</secondary></indexterm>
+<para><computeroutput>virtual bool jevois::VideoDisplayBackend::pollEvents (bool &amp; shouldclose)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to VideoDisplay. </para>
+</para>
+
+<para>Returns true if some events were received, which can be used to turn on mouse pointer and GUI. </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ImGuiBackendMALI_1a7a5c04eb60cd37869d5074d421ff33fe">jevois::ImGuiBackendMALI</link>, and <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1ac40174958faa9a66874d10b4a5082906">jevois::VideoDisplayBackendMALI</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a6164ed80b2f3628f23bd45919750858e"/>    <section>
+    <title>render()</title>
+<indexterm><primary>render</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>render</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::render ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Render the VideoDisplay graphics. </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1ImGuiBackendMALI_1ac33528e084ff41de7741179589d580e4">jevois::ImGuiBackendMALI</link>.</para>
+<para>
+Definition at line 236 of file VideoDisplayBackend.C.</para>
+<para>
+References GL_CHECK_BOOL.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::render().</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a4a1d6f38b05918eabaa70c7e6aa31e77"/>    <section>
+    <title>uninit()</title>
+<indexterm><primary>uninit</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>uninit</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::uninit ( )<computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Un-initialize the underlying engine, close windows, etc. </para>
+</para>
+
+<para>In the base class, we only close OpenGL. </para>
+<para>
+Definition at line 208 of file VideoDisplayBackend.C.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackend_1acd47d1836e2a69a74ef212cd7e30f179"/>    <section>
+    <title>itsConfig</title>
+<indexterm><primary>itsConfig</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>itsConfig</secondary></indexterm>
+<para><computeroutput>EGLConfig jevois::VideoDisplayBackend::itsConfig = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 74 of file VideoDisplayBackend.H.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1acb7a7013d035e37ee2de6778adcf3888"/>    <section>
+    <title>itsContext</title>
+<indexterm><primary>itsContext</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>itsContext</secondary></indexterm>
+<para><computeroutput>EGLContext jevois::VideoDisplayBackend::itsContext = EGL_NO_CONTEXT<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 75 of file VideoDisplayBackend.H.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a392320ca73fc4117a1d11384997fb8a3"/>    <section>
+    <title>itsDisplay</title>
+<indexterm><primary>itsDisplay</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>itsDisplay</secondary></indexterm>
+<para><computeroutput>EGLDisplay jevois::VideoDisplayBackend::itsDisplay = EGL_NO_DISPLAY<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 73 of file VideoDisplayBackend.H.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a955a841e029ff28900433e615e6d9dfc"/>    <section>
+    <title>itsName</title>
+<indexterm><primary>itsName</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>itsName</secondary></indexterm>
+<para><computeroutput>const std::string jevois::VideoDisplayBackend::itsName<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 72 of file VideoDisplayBackend.H.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackend_1a36be9f558fdd518b36e10f82cf84b834"/>    <section>
+    <title>itsSurface</title>
+<indexterm><primary>itsSurface</primary><secondary>jevois::VideoDisplayBackend</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackend</primary><secondary>itsSurface</secondary></indexterm>
+<para><computeroutput>EGLSurface jevois::VideoDisplayBackend::itsSurface = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 76 of file VideoDisplayBackend.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_VideoDisplayBackend_8H">VideoDisplayBackend.H</link>src/jevois/GPU/<link linkend="_VideoDisplayBackend_8C">VideoDisplayBackend.C</link></section>
+</section>

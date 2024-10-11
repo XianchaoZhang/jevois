@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ParameterDefBase">
+<title>jevois::ParameterDefBase Class Reference</title>
+<indexterm><primary>jevois::ParameterDefBase</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ParameterDef.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>参数定义的基类 </para>
+
+
+
+<para>这会向定义公开基于字符串的接口，而派生类模板将公开基于值的接口。用户永远不应直接创建 ParameterDefBase，而应创建正 确模板化的 ParameterDef&lt;T&gt;，因为 ParameterDef&lt;T&gt; 派生自 ParameterBase。 </para>
+<para>
+Definition at line 45 of file ParameterDef.H.</para>
+Inheritance diagram for jevois::ParameterDefBase:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterDefBase__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ParameterDefBase:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterDefBase__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDefBase_1acbf7b717f5b3b0e10b5484796261c869">ParameterDefBase</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>=<link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link>())</para>
+
+<para>Construct a <link linkend="_classjevois_1_1ParameterDefBase">ParameterDefBase</link>. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ParameterDefBase_1ad08c350c58a7f34ae25d04c6f05a35cf">~ParameterDefBase</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link> () const</para>
+
+<para>参数名称（不带前导 &quot;--&quot;） </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link> () const</para>
+
+<para>参数作用的描述 </para>
+</listitem>
+            <listitem><para>const <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> &amp; <link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link> () const</para>
+
+<para>The Parameter category. </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterDefBase_1a080b4c9d79c5268b40b9250905e82462">defaultValueString</link> () const =0</para>
+
+<para>字符串表示中的默认值 </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterDefBase_1ab3c0382f0cfd76dd272dbce20e374b50">validValuesString</link> () const =0</para>
+
+<para>字符串表示中的有效值 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_classjevois_1_1ParameterDefBase_1aab0826b473373a6b47d7802b52d7b65e">itsName</link></para>
+
+<para>Our name. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1ParameterDefBase_1a37a6fbb6408122809f94b510bc4e5e93">itsDescription</link></para>
+
+<para>Our description string. </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> <link linkend="_classjevois_1_1ParameterDefBase_1a0cb06235148789a9d4fe3053b74de2f3">itsCategory</link></para>
+
+<para>Our category. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDefBase_1acbf7b717f5b3b0e10b5484796261c869"/>    <section>
+    <title>ParameterDefBase()</title>
+<indexterm><primary>ParameterDefBase</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>ParameterDefBase</secondary></indexterm>
+<para><computeroutput>jevois::ParameterDefBase::ParameterDefBase (std::string const &amp; name, std::string const &amp; description, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category = <computeroutput><link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link>()</computeroutput>
+)</computeroutput></para><para>
+
+<para>Construct a <link linkend="_classjevois_1_1ParameterDefBase">ParameterDefBase</link>. </para>
+</para>
+<para>
+Definition at line 32 of file ParameterDef.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1ad08c350c58a7f34ae25d04c6f05a35cf"/>    <section>
+    <title>~ParameterDefBase()</title>
+<indexterm><primary>~ParameterDefBase</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>~ParameterDefBase</secondary></indexterm>
+<para><computeroutput>jevois::ParameterDefBase::~ParameterDefBase ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 38 of file ParameterDef.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace"/>    <section>
+    <title>category()</title>
+<indexterm><primary>category</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>category</secondary></indexterm>
+<para><computeroutput>const <link linkend="_structjevois_1_1ParameterCategory">jevois::ParameterCategory</link> &amp; jevois::ParameterDefBase::category ( ) const</computeroutput></para><para>
+
+<para>The Parameter category. </para>
+</para>
+<para>
+Definition at line 50 of file ParameterDef.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1a080b4c9d79c5268b40b9250905e82462"/>    <section>
+    <title>defaultValueString()</title>
+<indexterm><primary>defaultValueString</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>defaultValueString</secondary></indexterm>
+<para><computeroutput>virtual const std::string jevois::ParameterDefBase::defaultValueString ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>字符串表示中的默认值 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterDef_1a17f44d3cfc528a4471b8821da9495f7d">jevois::ParameterDef&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364"/>    <section>
+    <title>description()</title>
+<indexterm><primary>description</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>description</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::ParameterDefBase::description ( ) const</computeroutput></para><para>
+
+<para>参数作用的描述 </para>
+</para>
+<para>
+Definition at line 46 of file ParameterDef.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::ParameterDefBase::name ( ) const</computeroutput></para><para>
+
+<para>参数名称（不带前导 &quot;--&quot;） </para>
+</para>
+<para>
+Definition at line 42 of file ParameterDef.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1ab3c0382f0cfd76dd272dbce20e374b50"/>    <section>
+    <title>validValuesString()</title>
+<indexterm><primary>validValuesString</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>validValuesString</secondary></indexterm>
+<para><computeroutput>virtual const std::string jevois::ParameterDefBase::validValuesString ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>字符串表示中的有效值 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterDef_1a89dacefb191d8f1bf4b95c636701325f">jevois::ParameterDef&lt; T &gt;</link>.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDefBase_1a0cb06235148789a9d4fe3053b74de2f3"/>    <section>
+    <title>itsCategory</title>
+<indexterm><primary>itsCategory</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>itsCategory</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> jevois::ParameterDefBase::itsCategory<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our category. </para>
+</para>
+<para>
+Definition at line 73 of file ParameterDef.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1a37a6fbb6408122809f94b510bc4e5e93"/>    <section>
+    <title>itsDescription</title>
+<indexterm><primary>itsDescription</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>itsDescription</secondary></indexterm>
+<para><computeroutput>std::string jevois::ParameterDefBase::itsDescription<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our description string. </para>
+</para>
+<para>
+Definition at line 72 of file ParameterDef.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDefBase_1aab0826b473373a6b47d7802b52d7b65e"/>    <section>
+    <title>itsName</title>
+<indexterm><primary>itsName</primary><secondary>jevois::ParameterDefBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDefBase</primary><secondary>itsName</secondary></indexterm>
+<para><computeroutput>std::string jevois::ParameterDefBase::itsName<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Our name. </para>
+</para>
+<para>
+Definition at line 71 of file ParameterDef.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Component/<link linkend="_ParameterDef_8H">ParameterDef.H</link>src/jevois/Component/<link linkend="_ParameterDef_8C">ParameterDef.C</link></section>
+</section>

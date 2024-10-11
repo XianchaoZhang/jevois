@@ -22,12 +22,11 @@ extern "C"
 {
 #endif
   
-  //! Convert from YUYV to RGB, mostly intended for internal use. Use RawImage functions instead in most cases.
-  /*! This code is modified from here: http://pastebin.com/mDcwqJV3
-      Memory should have been allocated by caller. \ingroup image */
+  //! 从 YUYV 转换为 RGB，主要用于内部使用。大多数情况下，请使用 RawImage 函数。
+  /*！此代码修改自此处：http://pastebin.com/mDcwqJV3 内存应由调用者分配。 \ingroup image */
   void convertYUYVtoRGB24(unsigned int w, unsigned int h, unsigned char const * src, unsigned char * dst);
   
-  //! Convert from YUYV to RG, BY, and luminance for use by Saliency module in jevoisbase. For internal use.
+  //! 将 YUYV 转换为 RG、BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。
   /*! \ingroup image */
   void convertYUYVtoRGBYL(unsigned int w, unsigned int h, unsigned char const * src, int * dstrg,
                           int * dstby, int * dstlum, int thresh, int inputbits);

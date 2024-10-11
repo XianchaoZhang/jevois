@@ -1,0 +1,37 @@
+\hypertarget{ColorConversion_8h}{}\doxysubsection{include/jevois/\+Image/\+Color\+Conversion.h File Reference}
+\label{ColorConversion_8h}\index{include/jevois/Image/ColorConversion.h@{include/jevois/Image/ColorConversion.h}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=268pt]{ColorConversion_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ColorConversion_8h_a471b6d7fb2f378f4177041940bc47840}{convert\+Y\+U\+Y\+Vto\+R\+G\+B24}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned char const $\ast$src, unsigned char $\ast$dst)
+\begin{DoxyCompactList}\small\item\em 从 Y\+U\+YV 转换为 R\+G\+B，主要用于内部使用。大多数情况下，请使用 Raw\+Image 函数。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__image_gabc1de0ec8bdb25ffacf5b0d25dc11469}{convert\+Y\+U\+Y\+Vto\+R\+G\+B\+YL}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned char const $\ast$src, int $\ast$dstrg, int $\ast$dstby, int $\ast$dstlum, int thresh, int inputbits)
+\begin{DoxyCompactList}\small\item\em 将 Y\+U\+YV 转换为 R\+G、\+BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{ColorConversion_8h_a471b6d7fb2f378f4177041940bc47840}\label{ColorConversion_8h_a471b6d7fb2f378f4177041940bc47840}} 
+\index{ColorConversion.h@{ColorConversion.h}!convertYUYVtoRGB24@{convertYUYVtoRGB24}}
+\index{convertYUYVtoRGB24@{convertYUYVtoRGB24}!ColorConversion.h@{ColorConversion.h}}
+\doxyparagraph{\texorpdfstring{convertYUYVtoRGB24()}{convertYUYVtoRGB24()}}
+{\footnotesize\ttfamily void convert\+Y\+U\+Y\+Vto\+R\+G\+B24 (\begin{DoxyParamCaption}\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned char const $\ast$}]{src,  }\item[{unsigned char $\ast$}]{dst }\end{DoxyParamCaption})}
+
+
+
+从 Y\+U\+YV 转换为 R\+G\+B，主要用于内部使用。大多数情况下，请使用 Raw\+Image 函数。 
+
+
+
+Definition at line 23 of file Color\+Conversion.\+c.
+
+
+
+References C\+L\+A\+MP, G, and h.
+

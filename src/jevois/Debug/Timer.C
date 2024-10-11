@@ -50,7 +50,7 @@ std::string const & jevois::Timer::stop(double * seconds)
   double secs = dur.count();
   if (seconds) *seconds = secs;
   
-  // Update average duration computation:
+  // 更新平均持续时间计算：
   itsSecs += secs; ++itsCount;
   
   // Update min and max:
@@ -75,11 +75,10 @@ std::string const & jevois::Timer::stop(double * seconds)
     default: LDEBUG(ss.str());
     }
     
-    // Compute percent CPU used: since often we only run a chunk of code between start() and stop() that we want to
-    // evaluate, we cannot use itsSecs is as a denominator, we need the total elapsed time since the first call to
-    // start() over the current interval, hence our use of itsStartTimeForCpu here. Hence, note that the CPU load
-    // reported is for the whole process that is running, not just for the critical chunk of code that is executed
-    // between start() and stop(). Indeed the goal is to get an idea of the overall machine utilization:
+    // 计算 CPU 使用的百分比：由于我们通常只在 start() 和 stop() 之间运行我们想要评估的一段代码，我们不能使用 
+	// itsSecs 作为分母，我们需要自第一次调用 // start() 在当前间隔内经过的总时间，因此我们在这里使用 
+	// itsStartTimeForCpu。因此，请注意报告的 CPU 负载是针对正在运行的整个进程，而不仅仅是针对在 start() 和 
+	// stop() 之间执行的关键代码块。实际上，目标是了解整体机器利用率：
     rusage stoprusage; getrusage(RUSAGE_SELF, &stoprusage);
 
     double const user_secs = double(stoprusage.ru_utime.tv_sec) - double(itsStartRusage.ru_utime.tv_sec) +
@@ -106,11 +105,11 @@ std::string const & jevois::Timer::stop(double * seconds)
     if (ifs.is_open())
     {
       try { std::string t; std::getline(ifs, t); temp = std::stoi(t); }
-      catch (...) { } // silently ignore any exception and keep default temp if any
+      catch (...) { } // 静默忽略任何异常并保留默认温度（如果有）
       ifs.close();
     }
     
-    // Most hosts report milli-degrees, JeVois-A33 platform reports straight degrees:
+    // 大多数主机报告毫度，JeVois-A33 平台报告直线度：
 #ifndef JEVOIS_PLATFORM_A33
     temp /= 1000;
 #endif
@@ -120,7 +119,7 @@ std::string const & jevois::Timer::stop(double * seconds)
     if (ifs2.is_open())
     {
       try { std::string f; std::getline(ifs2, f); freq = std::stoi(f) / 1000; }
-      catch (...) { }  // silently ignore any exception and keep default freq if any
+      catch (...) { }  // 静默忽略任何异常并保留默认频率（如果有）
       ifs2.close();
     }
     

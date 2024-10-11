@@ -51,11 +51,11 @@ void jevois::dnn::NetworkPythonImpl::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::NetworkPythonImpl::loadpy(std::string const & pypath)
 {
-  // Load the code and instantiate the python object:
+  // 加载代码并实例化 python 对象：
   PythonWrapper::pythonload(JEVOIS_SHARE_PATH "/" + pypath);
   LINFO("Loaded " << pypath);
 
-  // Now that we are fully up and ready, call python module's init() function if implemented:
+  // 现在我们已经完全准备好了，如果实现了，则调用 python 模块的 init() 函数：
   if (jevois::python::hasattr(PythonWrapper::pyinst(), "init")) PythonWrapper::pyinst().attr("init")();
 }
 

@@ -1,0 +1,191 @@
+\hypertarget{namespacejevois_1_1python}{}\doxysubsection{jevois\+::python Namespace Reference}
+\label{namespacejevois_1_1python}\index{jevois::python@{jevois::python}}
+
+
+\doxysubsubsection{ }
+Python 相关的帮助程序和函数 \doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{Py\+Par\+Helper}}
+\begin{DoxyCompactList}\small\item\em 类型化类，允许在 Python 中创建参数 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase}{Py\+Par\+Helper\+Base}}
+\begin{DoxyCompactList}\small\item\em 允许在 python 中创建参数的基本帮助类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adc}{Y\+U\+YV}} \{ \newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935}{Black}} = 0x8000, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa}{Dark\+Grey}} = 0x8050, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a}{Med\+Grey}} = 0x8080, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707}{Light\+Grey}} = 0x80a0, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d}{White}} = 0x80ff, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08}{Dark\+Green}} = 0x0000, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451}{Med\+Green}} = 0x0040, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327}{Light\+Green}} = 0x00ff, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e}{Dark\+Teal}} = 0x7070, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44}{Med\+Teal}} = 0x7090, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad}{Light\+Teal}} = 0x70b0, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1}{Dark\+Purple}} = 0xa030, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0}{Med\+Purple}} = 0xa050, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df}{Light\+Purple}} = 0xa080, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531}{Dark\+Pink}} = 0xff00, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675}{Med\+Pink}} = 0xff80, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a}{Light\+Pink}} = 0xffff
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__pysupport_ga89fd3c8c027de53532b0ab63ba9bd84b}{set\+Engine}} (\mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}} $\ast$e)
+\begin{DoxyCompactList}\small\item\em 初始化 Python、numpy，并允许 python 模块通过 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 发送串行输出 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__pysupport_gada9a987413579e077d37b2a1392fa328}{hasattr}} (boost\+::python\+::object \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em 检查 boost\+::python\+::object 是否具有属性 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\boost\+::python\+::list \mbox{\hyperlink{group__pysupport_ga851e553d8bb3ad854f6a72f2d21cacc6}{py\+Vec\+To\+List}} (std\+::vector$<$ T $>$ const \&v)
+\begin{DoxyCompactList}\small\item\em 将 std\+::vector$<$\+T$>$ 转换为 python 列表的辅助程序 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{group__pysupport_gae59dd866134c4b7c754dab76465ca81b}{py\+List\+To\+Vec}} (boost\+::python\+::object const \&lst)
+\begin{DoxyCompactList}\small\item\em 将 python 列表（或任何可迭代对象）转换为 std\+::vector$<$\+T$>$ 的辅助程序 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , size\+\_\+t N$>$ }\\std\+::array$<$ T, N $>$ \mbox{\hyperlink{group__pysupport_gaa0b5c0e59acd608244ab06a80f2d73cd}{tuple\+To\+Array}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em 辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , size\+\_\+t N$>$ }\\void \mbox{\hyperlink{group__pysupport_gae325e307bbc6b533c57dd06f018b0e9e}{tuple\+To\+Array}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}, std\+::array$<$ T, N $>$ \&arr, size\+\_\+t minN=N)
+\begin{DoxyCompactList}\small\item\em 辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{pyextract}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em 通用值提取，对于 python 知道如何提取的类型，传递给 boost\+::python\+::extract() \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Scalar\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_ga98cb1cfcea2fe6e33491692486c3cfef}{pyextract$<$ cv\+::\+Scalar\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar\+\_\+$<$float$>$ 的特化，从 1..4 个浮点值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Scalar\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga3339d8c469b02495305d50de4cc8de38}{pyextract$<$ cv\+::\+Scalar\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar\+\_\+$<$int$>$ 的特化，从 1..4 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Point\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_gaa2a4e4d9e6c4a9056cf609ee0d561dad}{pyextract$<$ cv\+::\+Point\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point\+\_\+$<$float$>$ 的特化，从 2 个浮点值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Point\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga395f9f89edce74dad823ce34b591bcd5}{pyextract$<$ cv\+::\+Point\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Size\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_gaf092f9f8b5dc66da71794f4713126346}{pyextract$<$ cv\+::\+Size\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size\+\_\+$<$float$>$ 的特化，从 2 个 float 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Size\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga8b2cc1d6859055c9912c7bf34169e2b3}{pyextract$<$ cv\+::\+Size\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ Im\+Color \mbox{\hyperlink{group__pysupport_ga417d94bbf152c547c3d67155f79e15fa}{pyextract$<$ Im\+Color $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em Im\+Color 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga4f18ce4c0271e61810cb876a267e7e7e}{topyobj}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 将值转换为 python，传递到 python\+::object(val) \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gad7841f6fbaa2d636b7189c549e211ac3}{topyobj}} (cv\+::\+Scalar\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar$<$float$>$ 的特化，返回一个有 4 个浮点元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga76307bdb32c40ee62a394276641f4eb0}{topyobj}} (cv\+::\+Scalar\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar$<$int$>$ 的特化，返回一个包含 4 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gaf422b158b87551344a609cf00d565419}{topyobj}} (cv\+::\+Point\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga93c8f7221a6bffe3fc183963e81e700b}{topyobj}} (cv\+::\+Point\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga0bdf6f519c8a68fb811ae707c3dd43dd}{topyobj}} (cv\+::\+Size\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gacf2bb5c5469a2c97b0f0341cd8a71495}{topyobj}} (cv\+::\+Size\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em 对 cv\+::\+Size$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga75c60823494fe158f5663a0e2a090832}{topyobj}} (Im\+Color const \&val)
+\begin{DoxyCompactList}\small\item\em 对 Im\+Color 的特化，返回一个包含 4 个 int 元素的元组 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} $\ast$ \mbox{\hyperlink{namespacejevois_1_1python_a3a8c677a1515acb56189a5d2bf9ac787}{engine\+For\+Python\+Module}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adc}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adc}} 
+\index{jevois::python@{jevois::python}!YUYV@{YUYV}}
+\index{YUYV@{YUYV}!jevois::python@{jevois::python}}
+\doxyparagraph{\texorpdfstring{YUYV}{YUYV}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adc}{jevois\+::python\+::\+Y\+U\+YV}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Black@{Black}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!Black@{Black}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935}} 
+Black&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DarkGrey@{DarkGrey}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!DarkGrey@{DarkGrey}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa}} 
+Dark\+Grey&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MedGrey@{MedGrey}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!MedGrey@{MedGrey}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a}} 
+Med\+Grey&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightGrey@{LightGrey}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!LightGrey@{LightGrey}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707}} 
+Light\+Grey&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{White@{White}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!White@{White}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d}} 
+White&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DarkGreen@{DarkGreen}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!DarkGreen@{DarkGreen}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08}} 
+Dark\+Green&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MedGreen@{MedGreen}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!MedGreen@{MedGreen}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451}} 
+Med\+Green&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightGreen@{LightGreen}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!LightGreen@{LightGreen}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327}} 
+Light\+Green&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DarkTeal@{DarkTeal}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!DarkTeal@{DarkTeal}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e}} 
+Dark\+Teal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MedTeal@{MedTeal}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!MedTeal@{MedTeal}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44}} 
+Med\+Teal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightTeal@{LightTeal}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!LightTeal@{LightTeal}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad}} 
+Light\+Teal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DarkPurple@{DarkPurple}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!DarkPurple@{DarkPurple}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1}} 
+Dark\+Purple&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MedPurple@{MedPurple}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!MedPurple@{MedPurple}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0}} 
+Med\+Purple&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightPurple@{LightPurple}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!LightPurple@{LightPurple}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df}} 
+Light\+Purple&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DarkPink@{DarkPink}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!DarkPink@{DarkPink}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531}} 
+Dark\+Pink&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MedPink@{MedPink}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!MedPink@{MedPink}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675}} 
+Med\+Pink&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LightPink@{LightPink}!jevois::python@{jevois::python}}\index{jevois::python@{jevois::python}!LightPink@{LightPink}}}\mbox{\Hypertarget{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a}\label{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a}} 
+Light\+Pink&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 213 of file Python\+Support.\+C.
+
+
+
+\doxysubsubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacejevois_1_1python_a3a8c677a1515acb56189a5d2bf9ac787}\label{namespacejevois_1_1python_a3a8c677a1515acb56189a5d2bf9ac787}} 
+\index{jevois::python@{jevois::python}!engineForPythonModule@{engineForPythonModule}}
+\index{engineForPythonModule@{engineForPythonModule}!jevois::python@{jevois::python}}
+\doxyparagraph{\texorpdfstring{engineForPythonModule}{engineForPythonModule}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}$\ast$ jevois\+::python\+::engine\+For\+Python\+Module = nullptr}
+
+
+
+Definition at line 70 of file Python\+Support.\+C.
+
+
+
+Referenced by set\+Engine().
+

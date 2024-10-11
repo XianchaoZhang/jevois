@@ -19,37 +19,31 @@
 
 #include <memory>
 
-// Although not strictly required here, we include videodev.h to bring in the V4L2_PIX_FMT_... definitions and make them
-// available to all users of RawImage:
+// 尽管这里没有严格要求，但我们包含了 videodev.h 来引入 V4L2_PIX_FMT_... 定义并使它们 
+// 可供所有 RawImage 用户使用：
 #include <linux/videodev2.h>
 
 namespace jevois
 {
   class Engine;
   class VideoBuf;
-  /*! \defgroup image Raw zero-copy / memory-mapped video images and support functions
+  /*! \defgroup image Raw 零拷贝/内存映射视频图像和支持函数
 
-      The main purpose of the classes and functions that support images is to allow handling of image buffers whose
-      memory is mapped onto hardware (camera or USB drivers) without having to copy the data over. Many other libraries
-      and frameworks are available that define more complete image classes and associated image processing and machine
-      vision functions. Functions are here provided to allow you to reinterpret the raw image buffers as, e.g., OpenCV
-      cv::Mat images without copying the image pixel data. For the purposes of creating demo displays, simple image
-      copy, paste, drawing, text, etc into raw YUYV image buffers (which would typically be obtained from the USB driver
-      and need to be filled with some pixel data to send over the USB link) are also provided.
+      支持图像的类和函数的主要目的是允许处理内存映射到硬件（相机或 USB 驱动程序）的图像缓冲区，而无需复制数据。还有许多其他库和框
+      架可用，它们定义了更完整的图像类和相关的图像处理和机器视觉功能。这里提供的函数允许您将原始图像缓冲区重新解释为 OpenCV 
+      cv::Mat 图像等，而无需复制图像像素数据。为了创建演示显示，还提供了将图像复制、粘贴、绘制、文本等简单复制到原始 YUYV 图像缓
+      冲区（通常从 USB 驱动程序获得，需要填充一些像素数据才能通过 USB 链路发送）的功能。
 
-      The class that represents an image with a pixel buffer that the camera or USB hardware has direct memory access to
-      (see VideoBuf) is called RawImage. To avoid defining pixel types yet again, as most image-related libraries
-      already do, in RawImage we just use the definitions provided by Video4Linux2.
+      表示具有像素缓冲区的图像的类称为 RawImage，相机或 USB 硬件可直接访问该缓冲区（参见 VideoBuf）。为了避免再次定义像素类型（
+      大多数与图像相关的库已经这样做了），我们在 RawImage 中只使用 Video4Linux2 提供的定义。
 
-      The functions that operate on RawImage are thus mostly intented for two purposes: 1) get pixel data out of
-      RawImage and into another format like OpenCV, or from some other format into RawImage; 2) Allow simple drawings of
-      lines, circles, rectangles, etc to make simple demo displays directly in the RawImage buffer that will be sent
-      over the USB link. */
+      因此，对 RawImage 进行操作的函数主要有两个目的：1) 从 RawImage 中获取像素数据并将其转换为另一种格式（如 OpenCV），或从其
+      他格式转换为 RawImage；2) 允许简单绘制线条、圆形、矩形等，以便直接在 RawImage 缓冲区中进行简单的演示显示，并通过 USB 链
+      接发送。*/
 
-  //! Helper YUYV colors
-  /*! Here we assume little endian (so the chroma is the high byte, luminance is low byte) and we assume that we will
-      write the same value to the YU and the YV shorts. This means that all the colors are on the green to magenta
-      (purple) axis, with some limited opportunity for variations using the luminance value. \ingroup image */
+  //! 辅助 YUYV 颜色 
+  /*! 在这里我们假设小端（因此色度是高字节，亮度是低字节），并且我们假设我们将向 YU 和 YV 短路写入相同的值。这意味着所有颜色都
+      在绿色到洋红色（紫色）轴上，使用亮度值有一些有限的变化机会。 \ingroup image */
   namespace yuyv
   {
     unsigned short constexpr Black = 0x8000;     //!< YUYV color value
@@ -75,8 +69,8 @@ namespace jevois
     unsigned short constexpr LightPink = 0xffff; //!< YUYV color value
   } // namespace yuyv
 
-  //! Helper RGB565 colors
-  /*! We assume little endian encoding here. These colors are from
+  //! 辅助 RGB565 颜色 
+  /*! 我们假设此处采用小端编码。这些颜色来自 
       http://stackoverflow.com/questions/13720937/c-defined-16bit-high-color \ingroup image */
   namespace rgb565
   {
@@ -101,12 +95,10 @@ namespace jevois
     unsigned short constexpr Pink        = 0xF618; //!< RGB565 value for: F4 C2 C2
   } // namespace rgb565
   
-  //! A raw image as coming from a V4L2 Camera and/or being sent out to a USB Gadget
-  /*! The pixel data is allocated and memory mapped by the respective camera or gadget drivers. Because the pixel buffer
-      is allocated and managed by the hardware driver, we cannot make deep copies of RawImage, and thus the copy
-      constructor and assignment operators will yield images that share the same pixel data. To copy pixels from one
-      RawImage to another (e.g., from camera image to USB image), see jevois::rawimage::paste() and other RawImage
-      functions. \ingroup image */
+  //! 来自 V4L2 Camera 和/或发送到 USB Gadget 的原始图像 
+  /*! 像素数据由相应的摄像头或小工具驱动程序分配和内存映射。由于像素缓冲区由硬件驱动程序分配和管理，我们无法对 RawImage 进行深度复
+      制，因此复制构造函数和赋值运算符将产生共享相同像素数据的图像。要将像素从一个 RawImage 复制到另一个（例如，从摄像头图像复制到
+       USB 图像），请参阅 jevois::rawimage::paste() 和其他 RawImage 函数。 \ingroup image */
   class RawImage
   {
     public:
@@ -122,51 +114,49 @@ namespace jevois
       //! Default assignment
       RawImage & operator=(RawImage const & other) = default;
         
-      //! Construct from an existing VideoBuf and associated params
+      //! 从现有 VideoBuf 和相关参数构造
       RawImage(unsigned int w, unsigned int h, unsigned int f, float fs, std::shared_ptr<VideoBuf> b, size_t bindex);
 
-      //! Invalidate the image by zero'ing out the pointer to pixel buffer and the dims and format
+      //! 通过将指向像素缓冲区的指针和 dims 和 format 清零来使图像无效
       void invalidate();
 
-      //! Check whether the image has a valid pixel buffer
+      //! 检查图像是否具有有效的像素缓冲区
       bool valid() const;
 
-      //! Clear the pixels to all black
-      /*! Black value depends on format. Does not work with MJPEG. Throws if the raw image is not valid() and silently
-          does nothing if the raw image has MJPEG pixels (since the raw image buffer will be overwritten by the MJPEG
-          compressor anyway). */
+      //! 将像素清除为全黑 
+      /*！黑色值取决于格式。不适用于 MJPEG。如果原始图像无效（），则抛出异常；如果原始图像具有 MJPEG 像素，则不执行任何操作（因
+          为原始图像缓冲区无论如何都会被 MJPEG 压缩器覆盖）。 */
       void clear();
       
-      //! Require a particular image size and format, issue a fatal error message and throw if no match
-      /*! The info string is included in the fatal error message to help identifying which image failed the
-          requirement. Typically, you would pass "input" or "output" as info. */
+      //! 需要特定的图像大小和格式，发出致命错误消息，如果不匹配，则抛出异常 
+      /*！info 字符串包含在致命错误消息中，以帮助识别哪个图像不符合要求。通常，您会传递 "input" or "output" 作为 info。 */
       void require(char const * info, unsigned int w, unsigned int h, unsigned int f) const;
       
       unsigned int width;      //!< Image width in pixels
       unsigned int height;     //!< Image height in pixels
       unsigned int fmt;        //!< Pixel format as a V4L2_PIX_FMT_XXX
       float fps;               //!< Programmed frames/s as given by current video mapping, may not be actual
-      std::shared_ptr<VideoBuf> buf; //!< The pixel data buffer
-      size_t bufindex; //!< The index of the data buffer in the kernel driver
+      std::shared_ptr<VideoBuf> buf; //!< 像素数据缓冲区
+      size_t bufindex; //!< 内核驱动程序中数据缓冲区的索引
 
-      //! Helper function to get the number of bytes/pixel given the RawImage pixel format
+      //! 辅助函数，根据 RawImage 像素格式获取 bytes/pixel
       unsigned int bytesperpix() const;
 
-      //! Helper function to get the total number of bytes in the RawImage, i.e., width * height * bytesperpix()
+      //! 辅助函数用于获取 RawImage 中的总字节数，即 width * height * bytesperpix()
       unsigned int bytesize() const;
       
-      //! Helper function to check that coords are within image bounds
+      //! 辅助函数用于检查坐标是否在图像范围内
       bool coordsOk(int x, int y) const;
 
-      //! Shortcut access to pixels, read-write
+      //! 快捷访问像素，读写
       template <typename T>
       T * pixelsw();
 
-      //! Shortcut access to pixels, read-only
+      //! 快捷访问像素，只读
       template <typename T>
       T const * pixels() const;
   };
 } // namespace jevois
 
-// Include implementation details
+// 包括实现细节
 #include <jevois/Image/details/RawImageImpl.H>

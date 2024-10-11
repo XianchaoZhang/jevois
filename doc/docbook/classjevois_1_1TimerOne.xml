@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1TimerOne">
+<title>jevois::TimerOne Class Reference</title>
+<indexterm><primary>jevois::TimerOne</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Timer.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>简单的一次性计时器类 </para>
+
+
+
+<para>此类报告 <link linkend="_classjevois_1_1TimerOne_1a63fa81f08e16b1e07893abbada2f9bbd">start()</link> 和 <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop()</link> 之间花费的时间。通常，通过将 <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop()</link> 返回的字符串呈现到视频输出中，这可能有助于报告神 经网络的处理时间。 </para>
+<para>
+Definition at line 67 of file Timer.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1TimerOne_1ab095b30fcc7075dc1e04f7160be5ab05">TimerOne</link> (char const *prefix)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1TimerOne_1a63fa81f08e16b1e07893abbada2f9bbd">start</link> ()</para>
+
+<para>Start a time measurement period. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1TimerOne_1a0894274ea3769ec56a3ce6de761d5e24">stop</link> (double *seconds)</para>
+
+<para>结束一个时间测量期，报告花费的时间如下：&apos;prefix: ms (fps)&apos;，其中 % 被值替换 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop</link> ()</para>
+
+<para>与 <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop()</link> 的其他签名相同，但不提供秒数，用于 python 绑定 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1TimerOne_1ab095b30fcc7075dc1e04f7160be5ab05"/>    <section>
+    <title>TimerOne()</title>
+<indexterm><primary>TimerOne</primary><secondary>jevois::TimerOne</secondary></indexterm>
+<indexterm><primary>jevois::TimerOne</primary><secondary>TimerOne</secondary></indexterm>
+<para><computeroutput>jevois::TimerOne::TimerOne (char const * prefix)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 144 of file Timer.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1TimerOne_1a63fa81f08e16b1e07893abbada2f9bbd"/>    <section>
+    <title>start()</title>
+<indexterm><primary>start</primary><secondary>jevois::TimerOne</secondary></indexterm>
+<indexterm><primary>jevois::TimerOne</primary><secondary>start</secondary></indexterm>
+<para><computeroutput>void jevois::TimerOne::start ( )</computeroutput></para><para>
+
+<para>Start a time measurement period. </para>
+</para>
+<para>
+Definition at line 149 of file Timer.C.</para>
+    </section><anchor xml:id="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5"/>    <section>
+    <title>stop()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>stop</primary><secondary>jevois::TimerOne</secondary></indexterm>
+<indexterm><primary>jevois::TimerOne</primary><secondary>stop</secondary></indexterm>
+<para><computeroutput>std::string jevois::TimerOne::stop ( )</computeroutput></para><para>
+
+<para>与 <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop()</link> 的其他签名相同，但不提供秒数，用于 python 绑定 </para>
+</para>
+<para>
+Definition at line 169 of file Timer.C.</para>
+    </section><anchor xml:id="_classjevois_1_1TimerOne_1a0894274ea3769ec56a3ce6de761d5e24"/>    <section>
+    <title>stop()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>stop</primary><secondary>jevois::TimerOne</secondary></indexterm>
+<indexterm><primary>jevois::TimerOne</primary><secondary>stop</secondary></indexterm>
+<para><computeroutput>std::string jevois::TimerOne::stop (double * seconds)</computeroutput></para><para>
+
+<para>结束一个时间测量期，报告花费的时间如下：&apos;prefix: ms (fps)&apos;，其中 % 被值替换 </para>
+</para>
+
+<para>如果秒数不为空，它将被设置为 <link linkend="_classjevois_1_1TimerOne_1a63fa81f08e16b1e07893abbada2f9bbd">start()</link> 和 <link linkend="_classjevois_1_1TimerOne_1ac703b9ae79ac6bfa9f7f2f21c3f0eed5">stop()</link> 之间的瞬时秒数。 </para>
+<para>
+Definition at line 155 of file Timer.C.</para>
+<para>
+References jevois::secs2str().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Timer_8H">Timer.H</link>src/jevois/Debug/<link linkend="_Timer_8C">Timer.C</link></section>
+</section>

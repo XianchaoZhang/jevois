@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1timed__lock__guard">
+<title>jevois::timed_lock_guard Class Reference</title>
+<indexterm><primary>jevois::timed_lock_guard</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Log.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>在 std::timed_mutex 上获取锁对象，或在等待 1 秒后 LFATAL </para>
+
+
+
+<para>像使用 lock_guard 一样使用它（但请确保您的互斥锁是 std::timed_mutex）。 如果发生死锁，它将抛出，这对于调试很有用 。 用户通常会使用 <link linkend="_group__debugging_1ga36695a40a90d579eef600d90c82484f5">JEVOIS_TIMED_LOCK(mtx)</link> 宏而不是直接使用此类。 </para>
+<para>
+Definition at line 290 of file Log.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1timed__lock__guard_1ae23c13cee4eed3896361caa453d99c9b">timed_lock_guard</link> (std::timed_mutex &amp;mtx, char const *file, char const *func)</para>
+
+<para>构造函数，锁定互斥锁或如果在超时之前无法锁定则抛出 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1timed__lock__guard_1a082fcfee1f7a25a70295782e2b3c88d9">~timed_lock_guard</link> ()</para>
+
+<para>Destructor, unlocks the mutex. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1timed__lock__guard_1ae23c13cee4eed3896361caa453d99c9b"/>    <section>
+    <title>timed_lock_guard()</title>
+<indexterm><primary>timed_lock_guard</primary><secondary>jevois::timed_lock_guard</secondary></indexterm>
+<indexterm><primary>jevois::timed_lock_guard</primary><secondary>timed_lock_guard</secondary></indexterm>
+<para><computeroutput>jevois::timed_lock_guard::timed_lock_guard (std::timed_mutex &amp; mtx, char const * file, char const * func)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>构造函数，锁定互斥锁或如果在超时之前无法锁定则抛出 </para>
+</para>
+<para>
+Definition at line 344 of file Log.C.</para>
+    </section><anchor xml:id="_classjevois_1_1timed__lock__guard_1a082fcfee1f7a25a70295782e2b3c88d9"/>    <section>
+    <title>~timed_lock_guard()</title>
+<indexterm><primary>~timed_lock_guard</primary><secondary>jevois::timed_lock_guard</secondary></indexterm>
+<indexterm><primary>jevois::timed_lock_guard</primary><secondary>~timed_lock_guard</secondary></indexterm>
+<para><computeroutput>jevois::timed_lock_guard::~timed_lock_guard ( )</computeroutput></para><para>
+
+<para>Destructor, unlocks the mutex. </para>
+</para>
+<para>
+Definition at line 355 of file Log.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Log_8H">Log.H</link>src/jevois/Debug/<link linkend="_Log_8C">Log.C</link></section>
+</section>

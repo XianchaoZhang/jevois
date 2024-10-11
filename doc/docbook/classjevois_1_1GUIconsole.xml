@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GUIconsole">
+<title>jevois::GUIconsole Class Reference</title>
+<indexterm><primary>jevois::GUIconsole</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GUIconsole.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Simple console with coloring and completion. </para>
+<para>
+Definition at line 31 of file GUIconsole.H.</para>
+Inheritance diagram for jevois::GUIconsole:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIconsole__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::GUIconsole:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIconsole__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GUIconsole_1a897ae92c01e5bab4dc74782a1d80ceed">GUIconsole</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1GUIconsole_1a0cf3093f0ec54fbfe264009f6a73f4e8">~GUIconsole</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIconsole_1a3966366168ae49c34e9654cc557a68c3">readSome</link> (std::string &amp;str) override</para>
+
+<para>Read some bytes if available, and return true and a string when one is complete (RETURN pressed) </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIconsole_1a1c1c01b706e10e6ce35b74ba7e063c4b">writeString</link> (std::string const &amp;str) override</para>
+
+<para>Write a string. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">Type</link> <link linkend="_classjevois_1_1GUIconsole_1ab7f910f792c292503357d7ff3812b432">type</link> () const override</para>
+
+<para>Our type is: GUI. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIconsole_1ab4575de90523e90e6f534544da0679e0">draw</link> ()</para>
+
+<para>Render into ImGui. </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1GUIconsole_1ab7710bbcdd9a9904de57f5353a3b6719">callback</link> (ImGuiInputTextCallbackData *data)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIconsole_1a8817b5f6a89563a32600cb68d40c9719">clear</link> ()</para>
+
+<para>Clear the contents of the window. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIconsole_1a897ae92c01e5bab4dc74782a1d80ceed"/>    <section>
+    <title>GUIconsole()</title>
+<indexterm><primary>GUIconsole</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>GUIconsole</secondary></indexterm>
+<para><computeroutput>jevois::GUIconsole::GUIconsole (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 26 of file GUIconsole.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1a0cf3093f0ec54fbfe264009f6a73f4e8"/>    <section>
+    <title>~GUIconsole()</title>
+<indexterm><primary>~GUIconsole</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>~GUIconsole</secondary></indexterm>
+<para><computeroutput>jevois::GUIconsole::~GUIconsole ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 40 of file GUIconsole.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIconsole_1ab7710bbcdd9a9904de57f5353a3b6719"/>    <section>
+    <title>callback()</title>
+<indexterm><primary>callback</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>callback</secondary></indexterm>
+<para><computeroutput>int jevois::GUIconsole::callback (ImGuiInputTextCallbackData * data)</computeroutput></para><para>
+Definition at line 168 of file GUIconsole.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1a8817b5f6a89563a32600cb68d40c9719"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void jevois::GUIconsole::clear ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Clear the contents of the window. </para>
+</para>
+<para>
+Definition at line 48 of file GUIconsole.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1ab4575de90523e90e6f534544da0679e0"/>    <section>
+    <title>draw()</title>
+<indexterm><primary>draw</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>draw</secondary></indexterm>
+<para><computeroutput>void jevois::GUIconsole::draw ( )</computeroutput></para><para>
+
+<para>Render into ImGui. </para>
+</para>
+<para>
+Definition at line 84 of file GUIconsole.C.</para>
+<para>
+References jevois::stringStartsWith().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1a3966366168ae49c34e9654cc557a68c3"/>    <section>
+    <title>readSome()</title>
+<indexterm><primary>readSome</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>readSome</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIconsole::readSome (std::string &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Read some bytes if available, and return true and a string when one is complete (RETURN pressed) </para>
+</para>
+
+<para>str is untouched if user input is not yet complete (RETURN not yet pressed). The RETURN (end of line) marker is not copied into str, only the characters received up to the end of line marker. </para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1aa0122126d1da68237d66a33e02e3fa02">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 55 of file GUIconsole.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1ab7f910f792c292503357d7ff3812b432"/>    <section>
+    <title>type()</title>
+<indexterm><primary>type</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>type</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">jevois::UserInterface::Type</link> jevois::GUIconsole::type ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Our type is: GUI. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1ac4e4337ea4e993ed8e3230389a062224">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 44 of file GUIconsole.C.</para>
+<para>
+References jevois::UserInterface::GUI.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIconsole_1a1c1c01b706e10e6ce35b74ba7e063c4b"/>    <section>
+    <title>writeString()</title>
+<indexterm><primary>writeString</primary><secondary>jevois::GUIconsole</secondary></indexterm>
+<indexterm><primary>jevois::GUIconsole</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::GUIconsole::writeString (std::string const &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Write a string. </para>
+</para>
+
+<para>No line terminator should be included in the string, <link linkend="_classjevois_1_1GUIconsole_1a1c1c01b706e10e6ce35b74ba7e063c4b">writeString()</link> will add one. In the <link linkend="_classjevois_1_1Serial">Serial</link> derived class, this will be using the line termination convention of serial::linestyle to support different styles (CR, CRLF, LF, etc). </para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1a1ea78da97f6d939d4aca0c1ec577992a">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 69 of file GUIconsole.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GUIconsole_8H">GUIconsole.H</link>src/jevois/GPU/<link linkend="_GUIconsole_8C">GUIconsole.C</link></section>
+</section>

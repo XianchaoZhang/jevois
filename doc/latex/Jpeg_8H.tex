@@ -1,0 +1,50 @@
+\hypertarget{Jpeg_8H}{}\doxysubsection{include/jevois/\+Image/\+Jpeg.H File Reference}
+\label{Jpeg_8H}\index{include/jevois/Image/Jpeg.H@{include/jevois/Image/Jpeg.H}}
+{\ttfamily \#include $<$jevois/\+Types/\+Singleton.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+Include dependency graph for Jpeg.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Jpeg_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Jpeg_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1JpegCompressor}{jevois\+::\+Jpeg\+Compressor}}
+\begin{DoxyCompactList}\small\item\em turbojpeg 压缩器的简单单例包装器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__jpeg_gaf446f726ba6d8e2d87aa87e5cd041518}{jevois\+::convert\+Y\+U\+Y\+Vto\+Y\+U\+V422}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst)
+\begin{DoxyCompactList}\small\item\em 辅助从打包的 Y\+U\+YV 转换为平面 Y\+U\+V422 \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gac8019b137a50caf3afe8f93b8041d815}{jevois\+::compress\+B\+G\+Rto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga055d9848dc85723e4429ac6b4f98812e}{jevois\+::compress\+B\+G\+Rto\+Jpeg}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gaf968b68fd408477de51a6fcf41be48d9}{jevois\+::compress\+R\+G\+Bto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga8a53f108718df36751b7b2b4fd16fbce}{jevois\+::compress\+R\+G\+Bto\+Jpeg}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gad721785df8a36bbc0081acf691b84cfc}{jevois\+::compress\+R\+G\+B\+Ato\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gadd51281893168dd79429e9777eabe0e0}{jevois\+::compress\+R\+G\+B\+Ato\+Jpeg}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gab4e9f0c744d97117a37eae05da2c2a6d}{jevois\+::compress\+G\+R\+A\+Yto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gab4829fbfa937795d50f95b3d60596a31}{jevois\+::compress\+G\+R\+A\+Yto\+Jpeg}} (cv\+::\+Mat const \&src, Raw\+Image \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 Gray cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\end{DoxyCompactItemize}

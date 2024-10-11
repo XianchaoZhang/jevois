@@ -1,0 +1,127 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorStub}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Stub Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorStub}\index{jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor\+Stub.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经网络管道的后处理器 
+
+这是深度神经网络处理管道的最后一步。 除了显示从网络接收的张量的大小之外，此后处理器不执行任何操作。 在导入自定 义网络以检查输出数据格式（如果不确定）时很有用：使用此存根不会导致后处理崩溃并允许检查网络输出形状。 在花时间 为其设计新的后处理器之前，对模型进行基准测试并检查其速度是否可接受也很有用。 
+
+Definition at line 31 of file Post\+Processor\+Stub.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+Stub\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classjevois_1_1dnn_1_1PostProcessorStub__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+Stub\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{classjevois_1_1dnn_1_1PostProcessorStub__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_a56117d5c58a765535ff77838b1fa7747}{$\sim$\+Post\+Processor\+Stub}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_a97f86c434879713d1b581f7f4ab55b2a}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$preproc) override
+\begin{DoxyCompactList}\small\item\em 处理输出并绘制/发送一些结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_ae9eccd4da2bf7cb8613d5dde3165c87e}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false) override
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorStub_a56117d5c58a765535ff77838b1fa7747}\label{classjevois_1_1dnn_1_1PostProcessorStub_a56117d5c58a765535ff77838b1fa7747}} 
+\index{jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}!````~PostProcessorStub@{$\sim$PostProcessorStub}}
+\index{````~PostProcessorStub@{$\sim$PostProcessorStub}!jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorStub()}{~PostProcessorStub()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Stub\+::$\sim$\+Post\+Processor\+Stub (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 27 of file Post\+Processor\+Stub.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorStub_a97f86c434879713d1b581f7f4ab55b2a}\label{classjevois_1_1dnn_1_1PostProcessorStub_a97f86c434879713d1b581f7f4ab55b2a}} 
+\index{jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Stub\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 31 of file Post\+Processor\+Stub.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}\label{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}} 
+\index{jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}!process@{process}}
+\index{process@{process}!jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Stub\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{preproc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+处理输出并绘制/发送一些结果 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 35 of file Post\+Processor\+Stub.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorStub_ae9eccd4da2bf7cb8613d5dde3165c87e}\label{classjevois_1_1dnn_1_1PostProcessorStub_ae9eccd4da2bf7cb8613d5dde3165c87e}} 
+\index{jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}!report@{report}}
+\index{report@{report}!jevois::dnn::PostProcessorStub@{jevois::dnn::PostProcessorStub}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Stub\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 39 of file Post\+Processor\+Stub.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorStub_8H}{Post\+Processor\+Stub.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorStub_8C}{Post\+Processor\+Stub.\+C}}\end{DoxyCompactItemize}

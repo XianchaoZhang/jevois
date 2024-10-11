@@ -63,7 +63,7 @@ void jevois::dnn::PreProcessor::b2i(float & x, float & y, cv::Size const & bsiz,
 
   if (letterboxed)
   {
-    // We did letterbox and crop, so we need to apply scale and offset:
+    // 我们进行了信箱化和裁剪，因此我们需要应用比例和偏移：
     float const fac = std::min(itsImageSize.width / float(bsiz.width), itsImageSize.height / float(bsiz.height));
     float const cropw = fac * bsiz.width + 0.4999F;
     float const croph = fac * bsiz.height + 0.4999F;
@@ -109,7 +109,7 @@ void jevois::dnn::PreProcessor::i2b(float & x, float & y, cv::Size const & bsiz,
 
   if (letterboxed)
   {
-    // We did letterbox and crop, so we need to apply scale and offset:
+    // 我们进行了信箱化和裁剪，因此我们需要应用比例和偏移：
     float const fac = std::min(itsImageSize.width / float(bsiz.width), itsImageSize.height / float(bsiz.height));
     float const cropw = fac * bsiz.width + 0.4999F;
     float const croph = fac * bsiz.height + 0.4999F;
@@ -131,7 +131,7 @@ std::shared_ptr<jevois::dnn::PreProcessorForPython> jevois::dnn::PreProcessor::g
 std::vector<cv::Mat> jevois::dnn::PreProcessor::process(jevois::RawImage const & img,
                                                         std::vector<vsi_nn_tensor_attr_t> const & attrs)
 {
-  // Store input image size and format for future use:
+  // 存储输入图像大小和格式以供将来使用：
   itsImageSize.width = img.width; itsImageSize.height = img.height; itsImageFmt = img.fmt;
   itsCrops.clear(); itsBlobs.clear();
 
@@ -156,7 +156,7 @@ void jevois::dnn::PreProcessor::sendreport(jevois::StdModule * mod, jevois::RawI
                                            jevois::OptGUIhelper * helper, bool overlay, bool idle)
 {
 #ifdef JEVOIS_PRO
-  // First some info about the input:
+  // 首先是一些关于输入的信息：
   if (helper && idle == false && ImGui::CollapsingHeader("Pre-Processing", ImGuiTreeNodeFlags_DefaultOpen))
   {
     ImGui::BulletText("Input image: %dx%d %s", itsImageSize.width, itsImageSize.height,
@@ -168,16 +168,16 @@ void jevois::dnn::PreProcessor::sendreport(jevois::StdModule * mod, jevois::RawI
       else ImGui::BulletText("Convert to BGR");
     }
 
-    // Now a report from the derived class:
+    // 现在来自派生类的报告：
     report(mod, outimg, helper, overlay, idle);
 
-    // If desired, draw a rectangle around the network input:
+    // 如果需要，在网络输入周围绘制一个矩形：
     if (showin::get())
       for (cv::Rect const & r : itsCrops)
         ImGui::GetBackgroundDrawList()->AddRect(helper->i2d(r.x, r.y),
                                                 helper->i2d(r.x + r.width, r.y + r.height), 0x80808080, 0, 0, 5);
 
-    // Finally some info about the blobs, if detailed info was not requested (detailed info provided by derived class):
+    // 最后，如果没有请求详细信息（详细信息由派生类提供），则提供一些有关 blob 的信息：
     if (details::get() == false)
     {
       int idx = 0;
@@ -199,8 +199,7 @@ void jevois::dnn::PreProcessor::sendreport(jevois::StdModule * mod, jevois::RawI
   (void)mod; (void)helper; (void)overlay; (void)idle;
 #endif
 
-  // On JeVois-A33, we do not have much room on screen, so write nothing here, the network will write some info about
-  // input tensors; just draw the crop rectangles:
+  // 在 JeVois-A33 上，屏幕上没有太多空间，所以这里什么都不要写，网络会写一些关于输入张量的信息；只需绘制裁剪矩形：
   if (outimg)
   {
     for (cv::Rect const & r : itsCrops)

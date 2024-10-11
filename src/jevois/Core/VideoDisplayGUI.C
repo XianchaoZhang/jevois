@@ -27,7 +27,7 @@
 jevois::VideoDisplayGUI::VideoDisplayGUI(std::shared_ptr<GUIhelper> helper, size_t nbufs) :
     jevois::VideoOutput(), itsImageQueue(std::max(size_t(2), nbufs)), itsHelper(helper), itsStreaming(false)
 {
-  // We defer OpenGL init to send() so that all OpenGL code is in the same thread.
+  // 我们将 OpenGL 初始化推迟到 send()，以便所有 OpenGL 代码都在同一个线程中。
 }
 
 // ##############################################################################################################
@@ -39,7 +39,7 @@ void jevois::VideoDisplayGUI::setFormat(jevois::VideoMapping const & m)
   itsImageQueue.clear();
   size_t const nbufs = itsImageQueue.size();
   
-  // Allocate the buffers and make them all immediately available as RawImage:
+  // 分配缓冲区并使它们全部立即可用作 RawImage：
   unsigned int imsize = m.osize();
 
   for (size_t i = 0; i < nbufs; ++i)
@@ -68,7 +68,7 @@ jevois::VideoDisplayGUI::~VideoDisplayGUI()
   for (auto & b : itsBuffers)
   {
     if (b.use_count() > 1) LERROR("Ref count non zero when attempting to free VideoBuf");
-    b.reset(); // VideoBuf destructor will do the memory freeing
+    b.reset(); // VideoBuf 析构函数将执行内存释放
   }
   
   itsBuffers.clear();
@@ -79,7 +79,7 @@ void jevois::VideoDisplayGUI::get(jevois::RawImage & img)
 {
   if (itsStreaming.load() == false) LFATAL("Not streaming");
   
-  // Take this buffer out of our queue and hand it over:
+  // 从我们的队列中取出这个缓冲区并将其移交：
   img = itsImageQueue.pop();
   LDEBUG("Empty image " << img.bufindex << " handed over to application code for filling");
 }
@@ -89,9 +89,9 @@ void jevois::VideoDisplayGUI::send(jevois::RawImage const & img)
 {
   if (itsStreaming.load() == false) LFATAL("Not streaming");
 
-  // Start the frame: Internally, this initializes or resizes the display as needed, polls and handles events (inputs,
-  // window resize, etc.), and clears the frame. Variables winw and winh are set by startFrame(0 to the current window
-  // size, and true is returned if no keyboard/mouse action in a while (can be used to hide any GUI elements):
+  // 启动 frame：在内部，这会根据需要初始化或调整显示大小，轮询和处理事件（输入、窗口大小调整等），并清除框架。变量
+  //  winw 和 winh 由 startFrame(0 设置为当前窗口大小，如果一段时间内没有键盘/鼠标操作，则返回 true（可用于隐藏任何
+  //  GUI 元素）：
   unsigned short winw, winh;
   itsHelper->startFrame(winw, winh);
   
@@ -102,8 +102,8 @@ void jevois::VideoDisplayGUI::send(jevois::RawImage const & img)
   // Draw and render the GUI, swap buffers:
   itsHelper->endFrame();
   
-  // Just push the buffer back into our queue. Note: we do not bother clearing the data or checking that the image is
-  // legit, i.e., matches one that was obtained via get():
+  // 只需将缓冲区推回到我们的队列中。注意：我们不必清除数据或检查图像是否合法，即是否与通过 get() 
+  // 获取的图像匹配：
   itsImageQueue.push(img);
   LDEBUG("Empty image " << img.bufindex << " ready for filling in by application code");
 }

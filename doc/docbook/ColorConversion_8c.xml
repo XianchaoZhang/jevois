@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ColorConversion_8c">
+<title>src/jevois/Image/ColorConversion.c File Reference</title>
+<indexterm><primary>src/jevois/Image/ColorConversion.c</primary></indexterm>
+<programlisting>#include &lt;jevois/Image/ColorConversion.h&gt;
+</programlisting>Include dependency graph for ColorConversion.c:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ColorConversion_8c__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ColorConversion_8c_1ac00ae6f2d25810c0b2076e2d23eb1dc4">CLAMP</link>(value)   if (value &lt; 0) value = 0; else if (value &gt; 255) value = 255;</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_ColorConversion_8c_1ae0782c9c018b6ce88a82212033bb0491">convertYUYVtoRGB24</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned char const *srcptr, unsigned char *dstptr)</para>
+
+<para>从 YUYV 转换为 RGB，主要用于内部使用。大多数情况下，请使用 RawImage 函数。 </para>
+</listitem>
+            <listitem><para>void <link linkend="_ColorConversion_8c_1a0a834b95e1a7f003cf287a7fe5bb3195">convertYUYVtoRGBYLinternal</link> (int R, int <link linkend="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991">G</link>, int B, int *dstrg, int *dstby, int *dstlum, int thresh, int lshift, int lumlshift)</para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gabc1de0ec8bdb25ffacf5b0d25dc11469">convertYUYVtoRGBYL</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned char const *srcptr, int *dstrg, int *dstby, int *dstlum, int thresh, int inputbits)</para>
+
+<para>将 YUYV 转换为 RG、BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ColorConversion_8c_1ac00ae6f2d25810c0b2076e2d23eb1dc4"/>    <section>
+    <title>CLAMP</title>
+<indexterm><primary>CLAMP</primary><secondary>ColorConversion.c</secondary></indexterm>
+<indexterm><primary>ColorConversion.c</primary><secondary>CLAMP</secondary></indexterm>
+<para><computeroutput>#define CLAMP( value)   if (value &lt; 0) value = 0; else if (value &gt; 255) value = 255;</computeroutput></para><para>
+Definition at line 20 of file ColorConversion.c.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_ColorConversion_8c_1ae0782c9c018b6ce88a82212033bb0491"/>    <section>
+    <title>convertYUYVtoRGB24()</title>
+<indexterm><primary>convertYUYVtoRGB24</primary><secondary>ColorConversion.c</secondary></indexterm>
+<indexterm><primary>ColorConversion.c</primary><secondary>convertYUYVtoRGB24</secondary></indexterm>
+<para><computeroutput>void convertYUYVtoRGB24 (unsigned int w, unsigned int h, unsigned char const * srcptr, unsigned char * dstptr)</computeroutput></para><para>
+
+<para>从 YUYV 转换为 RGB，主要用于内部使用。大多数情况下，请使用 RawImage 函数。 </para>
+</para>
+<para>
+Definition at line 23 of file ColorConversion.c.</para>
+<para>
+References CLAMP, G, and h.</para>
+    </section><anchor xml:id="_ColorConversion_8c_1a0a834b95e1a7f003cf287a7fe5bb3195"/>    <section>
+    <title>convertYUYVtoRGBYLinternal()</title>
+<indexterm><primary>convertYUYVtoRGBYLinternal</primary><secondary>ColorConversion.c</secondary></indexterm>
+<indexterm><primary>ColorConversion.c</primary><secondary>convertYUYVtoRGBYLinternal</secondary></indexterm>
+<para><computeroutput>void convertYUYVtoRGBYLinternal (int R, int G, int B, int * dstrg, int * dstby, int * dstlum, int thresh, int lshift, int lumlshift)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 57 of file ColorConversion.c.</para>
+<para>
+References CLAMP, G, and L.</para>
+<para>
+Referenced by convertYUYVtoRGBYL().</para>
+</section>
+</section>
+</section>

@@ -1,84 +1,57 @@
-/*! \page Change119log Changes and new features in JeVois 1.19
+/*! \page Change119log JeVois 1.19 中的变化和新功能
 
-JeVois 1.19 brings the following new features:
+JeVois 1.19 带来以下新功能：
 
-- New support for ONNX Runtime framework on CPU, both in C++ and in Python. This allows you to run ONNX networks on CPU,
-  with greater compatibility than the OpenCV framework provides. See new ORT pipeline type in the DNN module. Added
-  several sample networks.
+- 新增对 CPU 上 ONNX Runtime 框架的支持，包括 C++ 和 Python。这允许您在 CPU 上运行 ONNX 网络，其兼容性比 OpenCV 框架提供的更高。请参阅 DNN 模块中的新 ORT 管道类型。添加了几个示例网络。
 
-- Improved ability to write pre-processor, network, and post-processor in Python for the DNN module. Provided several
-  new examples in jevoisbase:
-  + \ref share-jevoispro/pydnn/net/PyNetOpenCV.py - load a network and run inference using OpenCV
-  + \ref share-jevoispro/pydnn/net/PyNetORT.py -  load a network and run inference using ONNX Runtime
-  + \ref share-jevoispro/pydnn/net/PyNetURetinex.py - ariant of PyNetORT.py with extra fixed input for this network
-  + \ref share-jevoispro/pydnn/post/PyPostClassify.py - simple object classification post-processor in Python
-  + \ref share-jevoispro/pydnn/post/PyPostDAMOyolo.py - object detection post-processor for DAMO-YOLO networks
-  + \ref share-jevoispro/pydnn/post/PyPostDepth.py - display depth map as semi-transparent overlay
-  + \ref share-jevoispro/pydnn/post/PyPostStub.py - does nothing, useful as a starting point for new network types
-  + \ref share-jevoispro/pydnn/post/PyPostURetinex.py - display partial overlay with user mouse interaction example
-  + \ref share-jevoispro/pydnn/post/PyPostYolo.py - wrapper around our very fast C++ YOLO post-processor
+- 提高了用 Python 为 DNN 模块编写预处理器、网络和后处理器的能力。在 jevoisbase 中提供了几个新示例：
+  + \ref share-jevoispro/pydnn/net/PyNetOpenCV.py - 使用 OpenCV 加载网络并运行推理
+  + \ref share-jevoispro/pydnn/net/PyNetORT.py - 使用 ONNX Runtime 加载网络并运行推理
+  + \ref share-jevoispro/pydnn/net/PyNetURetinex.py - PyNetORT.py 的变体，带有针对此网络的额外固定输入
+  + \ref share-jevoispro/pydnn/post/PyPostClassify.py - Python 中的简单目标分类后处理器
+  + \ref share-jevoispro/pydnn/post/PyPostDAMOyolo.py - DAMO-YOLO 网络的目标检测后处理器
+  + \ref share-jevoispro/pydnn/post/PyPostDepth.py - 将深度图显示为半透明覆盖（emi-transparent overlay）
+  + \ref share-jevoispro/pydnn/post/PyPostStub.py - 不执行任何操作，可作为新网络类型的起点
+  + \ref share-jevoispro/pydnn/post/PyPostURetinex.py - 显示部分覆盖（overlay），并带有用户鼠标交互示例
+  + \ref share-jevoispro/pydnn/post/PyPostYolo.py - 我们非常快速的 C++ YOLO 后处理器的包装器
 
-  Remember that because python is not re-entrant or parallelizable, if more than one of pre-processing, network
-  inference, or post-processing are in python, that will force synchronous DNN processing, which may lower the framerate
-  of the GUI on slow networks.
+请记住，由于 python 非重入或非并行，如果预处理、网络推理或后处理中的多个程序都在 python 中，则将强制同步 DNN 处理，这可能会降低慢速网络上 GUI 的帧速率。
 
-- Updated to OpenCV 4.7.0, OpenVino 2022.3, EdgeTPU 1.16, PyCoral 2.0.0, HailoRT 4.13.0
+- 已更新至 OpenCV 4.7.0、OpenVino 2022.3、EdgeTPU 1.16、PyCoral 2.0.0、HailoRT 4.13.0
 
-- Core JeVois: Fixed selection of default videomapping from file, updated contribs to include onnxruntime, cleaned up
-  some include and dependency paths in CMakeLists.txt.
+- Core JeVois：修复了从文件中选择默认视频映射的问题，更新了贡献以包含 onnxruntime，清理了 CMakeLists.txt 中的一些包含和依赖路径。
 
-- Core JeVois: Added more Python bindings for getNumInstalledTPUs(), getFanSpeed(), etc
+- Core JeVois：为 getNumInstalledTPUs()、getFanSpeed() 等添加了更多 Python 绑定
 
-- Movie input: added support for dual-stream in JeVois-Pro (where the input at one resolution is sent to display, while
-  the same image at another resolution is sent to processing). To use pre-recorded movie inputs instead of live video,
-  use `jevoispro.sh --cameradev=/path/to/movie.mp4`. Also fixed movie rewinding and looping.
+- Movie input：增加了对 JeVois-Pro 中双流的支持（其中一种分辨率的输入被发送到显示器，而另一种分辨率的同一图像被发送到处理）。要使用预先录制的电影输入而不是实时视频，请使用 `jevoispro.sh --cameradev=/path/to/movie.mp4`。还修复了电影倒带和循环播放问题。
 
-- Programmers: created new github repo \a mydnn as an example standalone clone of the JeVois DNN module. You can modify
-  it, cross-compile it, and install it on your camera.
+- Programmers：创建了新的 github repo \a mydnn 作为 JeVois DNN 模块的示例独立克隆。您可以修改它、交叉编译它并将其安装在您的相机上。
 
-- DNN: PreProcessorBlob is now only returning 1 blob by default, which can be changed by parameter \p numin (number of
-  inputs to send to the network). Then, new Network parameter \p extraintensors can be used to specify extra fixed
-  inputs. This is used in the URetinexNet example, as this network expects both in image input, and a single float
-  input that sets an exposure parameter.
+- DNN：PreProcessorBlob 现在默认仅返回 1 个 blob，可以通过参数 \p numin（发送到网络的输入数量）进行更改。然后，可以使用新的网络参数 \p extraintensors 来指定额外的固定输入。这在 URetinexNet 示例中使用，因为该网络既需要图像输入，也需要设置曝光参数的单个浮点输入。
 
-- DNN: Added i2b() in PreProcessor to allow converting coordinates from input image to blob, which is useful when
-  converting mouse coordinates first from display to image (using GuiHelper::d2i()), and then from image to blob (using
-  new PreProcessor::i2b()). Both d2i() and i2b() correctly handle letterboxing, scaling, streching, etc. See example of
-  use in PyPostURetinex.py
+- DNN：在 PreProcessor 中添加了 i2b()，允许将坐标从输入图像转换为 blob，这在将鼠标坐标首先从显示转换为图像（使用 GuiHelper::d2i()），然后从图像转换为 blob（使用新的 PreProcessor::i2b()）时非常有用。d2i() 和 i2b() 都可以正确处理信箱（letterboxing）、缩放（scaling）、拉伸（streching）等。请参阅 PyPostURetinex.py 中的使用示例
 
-- DNN: Improved semantic segmentation post-processor to allow for a threshold (only values above threshold will be
-  displayed as semi-transparent OpenGL overlay).
+- DNN：改进的语义分割后处理器以允许阈值（只有高于阈值的值才会显示为半透明的 OpenGL overlay）。
 
-- JeVois-Pro: improved crispness of the ImGui rendering, which now looks super nice even at GUI scale 1 (under the
-  Parameters tab of the GUI, enable "Show Systems Parameters", and then in the section on Graphical User Interface, play
-  with the gui scale parameter).
+- JeVois-Pro：改进了 ImGui 渲染的清晰度，现在即使在 GUI 比例 1 下看起来也非常漂亮（在 GUI 的 "Parameters" 选项卡下，启用 "Show Systems Parameters"，然后在图形用户界面部分中，使用 gui 比例参数）。
 
-- JeVois-Pro: Added more python wrappers for ImGUI, to allow users to check for mouse coordinates, button clicked, etc
-  in python. Example of use in PyPostURetinex.py
+- JeVois-Pro：为 ImGUI 添加了更多 Python 包装器，以允许用户在 Python 中检查鼠标坐标、按钮点击等。PyPostURetinex.py 中的使用示例
 
-- JeVois-Pro: support for sending serial outputs to USB using gadget serial. The gadget can be enabled in the JeVois-Pro
-  GUI under the System tab, after which module outputs and/or logs can be sent to the mini-USB port operating in device
-  mode. You can then connect JeVois-Pro to a host computer using a regular USB-A to mini-USB cable, and the JeVois-Pro
-  serial console will be accessible on host via /dev/ttyACM0.
+- JeVois-Pro：支持使用 gadget 串行将串行输出发送到 USB。可以在 JeVois-Pro GUI 的系统选项卡下启用 gadget，之后可以将模块输出和/或日志发送到以设备模式运行的 mini-USB 端口。然后，您可以使用常规 USB-A 转 mini-USB 电缆将 JeVois-Pro 连接到主机，并且 JeVois-Pro 串行控制台将可通过 /dev/ttyACM0 在主机上访问。
 
-- Serial-over-USB: Now can handle USB cable disconnects/reconnects, by trying to re-open the device after the connection
-  was lost. Also better handling of USB send buffer overflows while the cable is disconnected.
+- Serial-over-USB：现在可以处理 USB 电缆断开/重新连接，方法是在连接丢失后尝试重新打开设备。还可以更好地处理电缆断开时 USB 发送缓冲区溢出。
 
-- JeVois-Pro: More deep learning models, including several new ONNX-Runtime models. Added fields for comment and URL to
-  the model zoo entries.
+- JeVois-Pro：更多深度学习模型，包括几个新的 ONNX-Runtime 模型。为 model zoo 条目添加了注释和 URL 字段。
 
-- JeVois-Pro: Better fan control, including temperature monitoring on Hailo-8 accelerator board.
+- JeVois-Pro：更好的风扇控制，包括对 Hailo-8 加速器板的温度监控。
 
-- JeVois-Pro: Better module info display with wrapping of bullet text.
+- JeVois-Pro：更好地显示模块信息，并带有项目符号文本的换行。
 
-- JeVois-Pro: New \p benchmark parameter in Pipeline to run an automated benchmark that cycles through all available
-  networks according to the current pipeline filter. Benchmark stats are saved in HTML table format to
-  /jevoispro/share/benchmarks.html
+- JeVois-Pro：管道中的新 \p benchmark 参数可运行自动基准测试，该基准测试根据当前管道滤波器循环遍历所有可用网络。基准测试统计数据以 HTML 表格格式保存到 /jevoispro/share/benchmarks.html
 
-- JeVois-Pro: We have working prototypes of 8MP/4K OS08a10 sensor boards, and 2.3MP global shutter AR0234CS. The color
-  calibration is not good on the AR0234, will need to tweak the ISP calibrations in the kernel. Please let us know if
-  you are interested in these sensors. Added camera sensor auto-detection based on which kernel overlay is active.
+- JeVois-Pro：我们有 8MP/4K OS08a10 传感器板和 2.3MP 全局快门 AR0234CS 的工作原型。AR0234 上的颜色校准效果不佳，需要调整内核中的 ISP 校准。如果您对这些传感器感兴趣，请告诉我们。添加了基于哪个内核 overlay 处于活动状态的相机传感器自动检测。
 
-- Miscellaneous bug fixes and performance improvements.
+- 修复了各种错误并改进了性能。
 
 */
+

@@ -1,0 +1,202 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorPython}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Python Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorPython}\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor\+Python.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经网络管道的后处理器 
+
+这是深度神经网络处理管道的最后一步。该后处理器调用 python 实现来执行实际的后处理工作。 
+
+Definition at line 31 of file Post\+Processor\+Python.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorPython__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorPython__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_acc256abc8dee54dbe9866fc3b97ba41c}{Post\+Processor\+Python}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a65eed6785ecdd32cde7364d81b70f36a}{$\sim$\+Post\+Processor\+Python}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_aaee72556dbfb87dd31bbcb2fb6cb24d1}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$preproc) override
+\begin{DoxyCompactList}\small\item\em 处理输出并绘制/发送一些结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_aaaedb11fcf6790ab1b6922aa1249022b}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false) override
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_aeac843b9e2514dada20762ba17220575}{on\+Param\+Change}} (postprocessor\+::pypost const \&param, std\+::string const \&newval) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPythonImpl}{Post\+Processor\+Python\+Impl}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a242a619e2457dc1da4b6a8c0aab4ffae}{its\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_acb1ea7beada8362546ee10b2e586ea69}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (pypost, std\+::string, \char`\"{}Path below \char`\"{} J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH \char`\"{}/ of the python \char`\"{} \char`\"{}post-\/processor file. Name of class defined in the file must match \char`\"{} \char`\"{}the file name without the trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_acc256abc8dee54dbe9866fc3b97ba41c}\label{classjevois_1_1dnn_1_1PostProcessorPython_acc256abc8dee54dbe9866fc3b97ba41c}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!PostProcessorPython@{PostProcessorPython}}
+\index{PostProcessorPython@{PostProcessorPython}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{PostProcessorPython()}{PostProcessorPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Python\+::\+Post\+Processor\+Python (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 109 of file Post\+Processor\+Python.\+C.
+
+
+
+References its\+Impl.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_a65eed6785ecdd32cde7364d81b70f36a}\label{classjevois_1_1dnn_1_1PostProcessorPython_a65eed6785ecdd32cde7364d81b70f36a}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!````~PostProcessorPython@{$\sim$PostProcessorPython}}
+\index{````~PostProcessorPython@{$\sim$PostProcessorPython}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorPython()}{~PostProcessorPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Python\+::$\sim$\+Post\+Processor\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 116 of file Post\+Processor\+Python.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_aaee72556dbfb87dd31bbcb2fb6cb24d1}\label{classjevois_1_1dnn_1_1PostProcessorPython_aaee72556dbfb87dd31bbcb2fb6cb24d1}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Python\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 120 of file Post\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_aeac843b9e2514dada20762ba17220575}\label{classjevois_1_1dnn_1_1PostProcessorPython_aeac843b9e2514dada20762ba17220575}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Python\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{postprocessor\+::pypost const \&}]{param,  }\item[{std\+::string const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 130 of file Post\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}\label{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!process@{process}}
+\index{process@{process}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Python\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{preproc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+处理输出并绘制/发送一些结果 
+
+转发到 python 代码，带有简化的签名 
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 137 of file Post\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_aaaedb11fcf6790ab1b6922aa1249022b}\label{classjevois_1_1dnn_1_1PostProcessorPython_aaaedb11fcf6790ab1b6922aa1249022b}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!report@{report}}
+\index{report@{report}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Python\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+转发到 python 代码，带有简化的签名 
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 141 of file Post\+Processor\+Python.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_acb1ea7beada8362546ee10b2e586ea69}\label{classjevois_1_1dnn_1_1PostProcessorPython_acb1ea7beada8362546ee10b2e586ea69}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{pypost}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Path below \char`\"{} J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH \char`\"{}/ of the python \char`\"{} \char`\"{}post-\/processor file. Name of class defined in the file must match \char`\"{} \char`\"{}the file name without the trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorPython_a242a619e2457dc1da4b6a8c0aab4ffae}\label{classjevois_1_1dnn_1_1PostProcessorPython_a242a619e2457dc1da4b6a8c0aab4ffae}} 
+\index{jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}!itsImpl@{itsImpl}}
+\index{itsImpl@{itsImpl}!jevois::dnn::PostProcessorPython@{jevois::dnn::PostProcessorPython}}
+\doxyparagraph{\texorpdfstring{itsImpl}{itsImpl}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPythonImpl}{Post\+Processor\+Python\+Impl}}$>$ jevois\+::dnn\+::\+Post\+Processor\+Python\+::its\+Impl\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 58 of file Post\+Processor\+Python.\+H.
+
+
+
+Referenced by Post\+Processor\+Python().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorPython_8H}{Post\+Processor\+Python.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessor_8H}{Post\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorPython_8C}{Post\+Processor\+Python.\+C}}\end{DoxyCompactItemize}

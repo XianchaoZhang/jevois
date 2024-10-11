@@ -22,9 +22,8 @@
 
 namespace jevois
 {
-  //! Helper class for camera calibration, which allows some modules to compute 3D locations of objects
-  /*! This code heavily derived from calibrate_camera.cpp in the OpenCV source tree. Keep it updated as OpenCV is
-      updated. \ingroup core */
+  //! 用于相机校准的辅助类，允许某些模块计算物体的 3D 位置
+  /*! 此代码大量派生自 OpenCV 源代码树中的 calibrate_camera.cpp。随着 OpenCV 更新而保持更新。 \ingroup core */
   class CameraCalibration
   {
     public:

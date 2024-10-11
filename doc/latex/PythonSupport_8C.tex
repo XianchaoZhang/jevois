@@ -1,0 +1,342 @@
+\hypertarget{PythonSupport_8C}{}\doxysubsection{src/jevois/\+Core/\+Python\+Support.C File Reference}
+\label{PythonSupport_8C}\index{src/jevois/Core/PythonSupport.C@{src/jevois/Core/PythonSupport.C}}
+{\ttfamily \#include $<$boost/python.\+hpp$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Support.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image\+Ops.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Parameter.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+User\+Interface.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Stdio\+Interface.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Serial.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Coordinates.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Timer.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Profiler.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Sys\+Info.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Camera.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+U.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter\+String\+Conversion.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Pre\+Processor\+Python.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Chat\+Box.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Open\+C\+V.\+H$>$}\newline
+Include dependency graph for Python\+Support.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{PythonSupport_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1python}{jevois\+::python}}
+\begin{DoxyCompactList}\small\item\em Python 相关的帮助程序和函数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a7d399fcbebb74300921248d831d6ab6f}{P\+Y\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+U\+N\+I\+Q\+U\+E\+\_\+\+S\+Y\+M\+B\+OL}}~pbcvt\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+A\+PI
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a4503909cc777ed9ee3997b35652da42d}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}}(funcname)~boost\+::python\+::def(\#funcname, jevois\+::funcname)
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a245065578f5150d044f17b0ee282726e}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+R\+A\+W\+I\+M\+A\+G\+E\+\_\+\+F\+U\+NC}}(funcname)~boost\+::python\+::def(\#funcname, jevois\+::rawimage\+::funcname)
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a77d4384bb10b2f4246b0bd1735203c2f}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+R\+A\+W\+I\+M\+A\+G\+E\+\_\+\+E\+N\+U\+M\+\_\+\+V\+AL}}(val)~value(\#val, jevois\+::rawimage\+::val)
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a2d2fc533f7abf51ce76061cc5dfefe7e}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+E\+N\+U\+M\+\_\+\+V\+AL}}(val)~value(\#val, jevois\+::python\+::val)
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_a54e2129317214dd88848ab1b259ec4bd}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT}}(cst)~boost\+::python\+::scope().attr(\#cst) = cst;
+\item 
+\#define \mbox{\hyperlink{PythonSupport_8C_afa6be5ad1250fbb888cc15e26221daac}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+D\+N\+N\+\_\+\+F\+U\+NC}}(funcname)~boost\+::python\+::def(\#funcname, jevois\+::dnn\+::funcname)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adc}{jevois\+::python\+::\+Y\+U\+YV}} \{ \newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935}{jevois\+::python\+::\+Black}} = 0x8000, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa}{jevois\+::python\+::\+Dark\+Grey}} = 0x8050, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a}{jevois\+::python\+::\+Med\+Grey}} = 0x8080, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707}{jevois\+::python\+::\+Light\+Grey}} = 0x80a0, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d}{jevois\+::python\+::\+White}} = 0x80ff, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08}{jevois\+::python\+::\+Dark\+Green}} = 0x0000, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451}{jevois\+::python\+::\+Med\+Green}} = 0x0040, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327}{jevois\+::python\+::\+Light\+Green}} = 0x00ff, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e}{jevois\+::python\+::\+Dark\+Teal}} = 0x7070, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44}{jevois\+::python\+::\+Med\+Teal}} = 0x7090, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad}{jevois\+::python\+::\+Light\+Teal}} = 0x70b0, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1}{jevois\+::python\+::\+Dark\+Purple}} = 0xa030, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0}{jevois\+::python\+::\+Med\+Purple}} = 0xa050, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df}{jevois\+::python\+::\+Light\+Purple}} = 0xa080, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531}{jevois\+::python\+::\+Dark\+Pink}} = 0xff00, 
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675}{jevois\+::python\+::\+Med\+Pink}} = 0xff80, 
+\newline
+\mbox{\hyperlink{namespacejevois_1_1python_ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a}{jevois\+::python\+::\+Light\+Pink}} = 0xffff
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a5800ee17ececc573f221ffeae02a71a1}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT}} (L\+O\+G\+\_\+\+D\+E\+B\+UG)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_aad49f8558742ea939b97f672fe5ad0e6}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT}} (L\+O\+G\+\_\+\+I\+N\+FO)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a1fbe3f917b13c8047ce2d25c2cdb5662}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT}} (L\+O\+G\+\_\+\+E\+RR)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a7e34f46e20e67c5d8b71238a0308cc43}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT}} (L\+O\+G\+\_\+\+C\+R\+IT)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a6bcf862f900ff8ced0cc8c4641f8fa77}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (fccstr)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a2b666fb7bd514e16248454770e05c838}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (cvtypestr)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a9295df5cc326ebed368454e19da1c0c2}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (cv\+Bytes\+Per\+Pix)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a5b45b0fba29fa7c87fa1b72ea565bed0}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (strfcc)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_aa4446d5bde852322a136829526cb25b0}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (v4l2\+Bytes\+Per\+Pix)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a00ffc2ebb99839622df58551f474857d}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (v4l2\+Image\+Size)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_ab4ddfc9fd4001dbe94d2bf106c2390e9}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (black\+Color)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a71c343a855e9d47b5f4545f6de8d105a}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (white\+Color)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_a6e252bd2b1022d4f5b44ffd450d41236}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (flushcache)
+\item 
+\mbox{\hyperlink{PythonSupport_8C_aef6fd133810fc733e2c2b8651b857e1c}{J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC}} (system)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Engine $\ast$ \mbox{\hyperlink{namespacejevois_1_1python_a3a8c677a1515acb56189a5d2bf9ac787}{jevois\+::python\+::engine\+For\+Python\+Module}} = nullptr
+\item 
+void($\ast$ \mbox{\hyperlink{PythonSupport_8C_a21b200b1b3c72e2a13cd48609c3d5d01}{img\+To\+Std1}} )(float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&camimg, float const eps) = \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{jevois\+::coords\+::img\+To\+Std}}
+\item 
+void($\ast$ \mbox{\hyperlink{PythonSupport_8C_afcdb475e10c1774deba82c9226eeaf5b}{img\+To\+Std2}} )(float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps)
+\item 
+void($\ast$ \mbox{\hyperlink{PythonSupport_8C_ab74846d90b86c75a39e4907339b40bdb}{std\+To\+Img1}} )(float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&camimg, float const eps) = \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{jevois\+::coords\+::std\+To\+Img}}
+\item 
+void($\ast$ \mbox{\hyperlink{PythonSupport_8C_a1c9235dcf32568ec130dc02cbd8b476d}{std\+To\+Img2}} )(float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{PythonSupport_8C_a54e2129317214dd88848ab1b259ec4bd}\label{PythonSupport_8C_a54e2129317214dd88848ab1b259ec4bd}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}}
+\index{JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_CONSTANT}{JEVOIS\_PYTHON\_CONSTANT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT(\begin{DoxyParamCaption}\item[{}]{cst }\end{DoxyParamCaption})~boost\+::python\+::scope().attr(\#cst) = cst;}
+
+
+
+Definition at line 59 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_afa6be5ad1250fbb888cc15e26221daac}\label{PythonSupport_8C_afa6be5ad1250fbb888cc15e26221daac}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_DNN\_FUNC@{JEVOIS\_PYTHON\_DNN\_FUNC}}
+\index{JEVOIS\_PYTHON\_DNN\_FUNC@{JEVOIS\_PYTHON\_DNN\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_DNN\_FUNC}{JEVOIS\_PYTHON\_DNN\_FUNC}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+D\+N\+N\+\_\+\+F\+U\+NC(\begin{DoxyParamCaption}\item[{}]{funcname }\end{DoxyParamCaption})~boost\+::python\+::def(\#funcname, jevois\+::dnn\+::funcname)}
+
+
+
+Definition at line 62 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a2d2fc533f7abf51ce76061cc5dfefe7e}\label{PythonSupport_8C_a2d2fc533f7abf51ce76061cc5dfefe7e}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_ENUM\_VAL@{JEVOIS\_PYTHON\_ENUM\_VAL}}
+\index{JEVOIS\_PYTHON\_ENUM\_VAL@{JEVOIS\_PYTHON\_ENUM\_VAL}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_ENUM\_VAL}{JEVOIS\_PYTHON\_ENUM\_VAL}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+E\+N\+U\+M\+\_\+\+V\+AL(\begin{DoxyParamCaption}\item[{}]{val }\end{DoxyParamCaption})~value(\#val, jevois\+::python\+::val)}
+
+
+
+Definition at line 56 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a4503909cc777ed9ee3997b35652da42d}\label{PythonSupport_8C_a4503909cc777ed9ee3997b35652da42d}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC}{JEVOIS\_PYTHON\_FUNC}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC(\begin{DoxyParamCaption}\item[{}]{funcname }\end{DoxyParamCaption})~boost\+::python\+::def(\#funcname, jevois\+::funcname)}
+
+
+
+Definition at line 47 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a77d4384bb10b2f4246b0bd1735203c2f}\label{PythonSupport_8C_a77d4384bb10b2f4246b0bd1735203c2f}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL@{JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL}}
+\index{JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL@{JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL}{JEVOIS\_PYTHON\_RAWIMAGE\_ENUM\_VAL}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+R\+A\+W\+I\+M\+A\+G\+E\+\_\+\+E\+N\+U\+M\+\_\+\+V\+AL(\begin{DoxyParamCaption}\item[{}]{val }\end{DoxyParamCaption})~value(\#val, jevois\+::rawimage\+::val)}
+
+
+
+Definition at line 53 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a245065578f5150d044f17b0ee282726e}\label{PythonSupport_8C_a245065578f5150d044f17b0ee282726e}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_RAWIMAGE\_FUNC@{JEVOIS\_PYTHON\_RAWIMAGE\_FUNC}}
+\index{JEVOIS\_PYTHON\_RAWIMAGE\_FUNC@{JEVOIS\_PYTHON\_RAWIMAGE\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_RAWIMAGE\_FUNC}{JEVOIS\_PYTHON\_RAWIMAGE\_FUNC}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+R\+A\+W\+I\+M\+A\+G\+E\+\_\+\+F\+U\+NC(\begin{DoxyParamCaption}\item[{}]{funcname }\end{DoxyParamCaption})~boost\+::python\+::def(\#funcname, jevois\+::rawimage\+::funcname)}
+
+
+
+Definition at line 50 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a7d399fcbebb74300921248d831d6ab6f}\label{PythonSupport_8C_a7d399fcbebb74300921248d831d6ab6f}} 
+\index{PythonSupport.C@{PythonSupport.C}!PY\_ARRAY\_UNIQUE\_SYMBOL@{PY\_ARRAY\_UNIQUE\_SYMBOL}}
+\index{PY\_ARRAY\_UNIQUE\_SYMBOL@{PY\_ARRAY\_UNIQUE\_SYMBOL}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{PY\_ARRAY\_UNIQUE\_SYMBOL}{PY\_ARRAY\_UNIQUE\_SYMBOL}}
+{\footnotesize\ttfamily \#define P\+Y\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+U\+N\+I\+Q\+U\+E\+\_\+\+S\+Y\+M\+B\+OL~pbcvt\+\_\+\+A\+R\+R\+A\+Y\+\_\+\+A\+PI}
+
+
+
+Definition at line 42 of file Python\+Support.\+C.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{PythonSupport_8C_a7e34f46e20e67c5d8b71238a0308cc43}\label{PythonSupport_8C_a7e34f46e20e67c5d8b71238a0308cc43}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}}
+\index{JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_CONSTANT()}{JEVOIS\_PYTHON\_CONSTANT()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT (\begin{DoxyParamCaption}\item[{L\+O\+G\+\_\+\+C\+R\+IT}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a5800ee17ececc573f221ffeae02a71a1}\label{PythonSupport_8C_a5800ee17ececc573f221ffeae02a71a1}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}}
+\index{JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_CONSTANT()}{JEVOIS\_PYTHON\_CONSTANT()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT (\begin{DoxyParamCaption}\item[{L\+O\+G\+\_\+\+D\+E\+B\+UG}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a1fbe3f917b13c8047ce2d25c2cdb5662}\label{PythonSupport_8C_a1fbe3f917b13c8047ce2d25c2cdb5662}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}}
+\index{JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_CONSTANT()}{JEVOIS\_PYTHON\_CONSTANT()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT (\begin{DoxyParamCaption}\item[{L\+O\+G\+\_\+\+E\+RR}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_aad49f8558742ea939b97f672fe5ad0e6}\label{PythonSupport_8C_aad49f8558742ea939b97f672fe5ad0e6}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}}
+\index{JEVOIS\_PYTHON\_CONSTANT@{JEVOIS\_PYTHON\_CONSTANT}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_CONSTANT()}{JEVOIS\_PYTHON\_CONSTANT()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+C\+O\+N\+S\+T\+A\+NT (\begin{DoxyParamCaption}\item[{L\+O\+G\+\_\+\+I\+N\+FO}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_ab4ddfc9fd4001dbe94d2bf106c2390e9}\label{PythonSupport_8C_ab4ddfc9fd4001dbe94d2bf106c2390e9}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [1/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{black\+Color}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a9295df5cc326ebed368454e19da1c0c2}\label{PythonSupport_8C_a9295df5cc326ebed368454e19da1c0c2}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [2/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{cv\+Bytes\+Per\+Pix}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a2b666fb7bd514e16248454770e05c838}\label{PythonSupport_8C_a2b666fb7bd514e16248454770e05c838}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [3/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{cvtypestr}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a6bcf862f900ff8ced0cc8c4641f8fa77}\label{PythonSupport_8C_a6bcf862f900ff8ced0cc8c4641f8fa77}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [4/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{fccstr}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a6e252bd2b1022d4f5b44ffd450d41236}\label{PythonSupport_8C_a6e252bd2b1022d4f5b44ffd450d41236}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [5/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{flushcache}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a5b45b0fba29fa7c87fa1b72ea565bed0}\label{PythonSupport_8C_a5b45b0fba29fa7c87fa1b72ea565bed0}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [6/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{strfcc}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_aef6fd133810fc733e2c2b8651b857e1c}\label{PythonSupport_8C_aef6fd133810fc733e2c2b8651b857e1c}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [7/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{system}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_aa4446d5bde852322a136829526cb25b0}\label{PythonSupport_8C_aa4446d5bde852322a136829526cb25b0}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [8/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{v4l2\+Bytes\+Per\+Pix}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a00ffc2ebb99839622df58551f474857d}\label{PythonSupport_8C_a00ffc2ebb99839622df58551f474857d}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [9/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{v4l2\+Image\+Size}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{PythonSupport_8C_a71c343a855e9d47b5f4545f6de8d105a}\label{PythonSupport_8C_a71c343a855e9d47b5f4545f6de8d105a}} 
+\index{PythonSupport.C@{PythonSupport.C}!JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}}
+\index{JEVOIS\_PYTHON\_FUNC@{JEVOIS\_PYTHON\_FUNC}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_PYTHON\_FUNC()}{JEVOIS\_PYTHON\_FUNC()}\hspace{0.1cm}{\footnotesize\ttfamily [10/10]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+F\+U\+NC (\begin{DoxyParamCaption}\item[{white\+Color}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsubsection{Variable Documentation}
+\mbox{\Hypertarget{PythonSupport_8C_a21b200b1b3c72e2a13cd48609c3d5d01}\label{PythonSupport_8C_a21b200b1b3c72e2a13cd48609c3d5d01}} 
+\index{PythonSupport.C@{PythonSupport.C}!imgToStd1@{imgToStd1}}
+\index{imgToStd1@{imgToStd1}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{imgToStd1}{imgToStd1}}
+{\footnotesize\ttfamily void($\ast$ img\+To\+Std1) (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&camimg, float const eps) = \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{jevois\+::coords\+::img\+To\+Std}}}
+
+
+
+Definition at line 292 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_afcdb475e10c1774deba82c9226eeaf5b}\label{PythonSupport_8C_afcdb475e10c1774deba82c9226eeaf5b}} 
+\index{PythonSupport.C@{PythonSupport.C}!imgToStd2@{imgToStd2}}
+\index{imgToStd2@{imgToStd2}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{imgToStd2}{imgToStd2}}
+{\footnotesize\ttfamily void($\ast$ img\+To\+Std2) (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps)}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{jevois::coords::imgToStd}}}
+
+\end{DoxyCode}
+
+
+Definition at line 293 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_ab74846d90b86c75a39e4907339b40bdb}\label{PythonSupport_8C_ab74846d90b86c75a39e4907339b40bdb}} 
+\index{PythonSupport.C@{PythonSupport.C}!stdToImg1@{stdToImg1}}
+\index{stdToImg1@{stdToImg1}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{stdToImg1}{stdToImg1}}
+{\footnotesize\ttfamily void($\ast$ std\+To\+Img1) (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&camimg, float const eps) = \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{jevois\+::coords\+::std\+To\+Img}}}
+
+
+
+Definition at line 298 of file Python\+Support.\+C.
+
+\mbox{\Hypertarget{PythonSupport_8C_a1c9235dcf32568ec130dc02cbd8b476d}\label{PythonSupport_8C_a1c9235dcf32568ec130dc02cbd8b476d}} 
+\index{PythonSupport.C@{PythonSupport.C}!stdToImg2@{stdToImg2}}
+\index{stdToImg2@{stdToImg2}!PythonSupport.C@{PythonSupport.C}}
+\doxyparagraph{\texorpdfstring{stdToImg2}{stdToImg2}}
+{\footnotesize\ttfamily void($\ast$ std\+To\+Img2) (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps)}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{jevois::coords::stdToImg}}}
+
+\end{DoxyCode}
+
+
+Definition at line 299 of file Python\+Support.\+C.
+

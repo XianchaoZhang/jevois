@@ -1,11 +1,10 @@
-/*! \page Sensors JeVois-A33 camera sensor options
+/*! \page Sensors JeVois-A33 相机传感器选项
 
-\jva33 smart cameras by default use an Omnivision ov9653 1.3MP camera sensor. This is a very good overall sensor that is
-well matched to the available comptutation power of the processor inside the JeVois unit.
+\jva33 智能相机默认使用 Omnivision ov9653 1.3MP 相机传感器。这是一款非常出色的整体传感器，与 JeVois 单元内处理器的可用计算能力完美匹配。
 
-In some cases, however, one may want to use different optics or sensors.
+然而，在某些情况下，人们可能需要使用不同的光学器件或传感器。
 
-The following options are available as a modification to an existing JeVois smart camera:
+以下选项可作为对现有 JeVois 智能相机的修改：
 
 Sensor                      | Resolution              | Shutter | Pixel size      | Lens type           | JeVois name
 ----------------------------|-------------------------|---------|-----------------|---------------------|------------
@@ -15,113 +14,93 @@ OnSemi AR0135 color         | 1.2MP (1280x960 max)    | Global  | 3.75um x 3.75u
 OnSemi AR0135 monochrome    | 1.2MP (1280x960 max)    | Global  | 3.75um x 3.75um | M12 (12mm, S-mount) | ar0135
 Omnivision ov2640           | 2.0MP (1600x1200 max)   | Rolling | 2.20um x 2.20um | 1/4 inch            | ov2640
 
-\note Sensors with M12 lens mounts require a new plastic case for your JeVois smart camera. They allow for the broadest
-range of possible lenses, from ultra wide angle to telephoto.
+\note 带有 M12 镜头座的传感器需要为您的 JeVois 智能相机配备一个新的塑料外壳。它们支持最广泛的镜头，从超广角到远摄。
 
-\note Global Shutter means that all pixels are sampled at the exact same time, as opposed to rolling shutter, which
-samples pixels one after the other in a raster-scan manner. Global shutter sensors are great for:
-- Drones
-- Fast moving robots
-- Automotive
-- Barcode scanner
-- 3D scanning
-- Positional tracking
-- Iris Scanning
-- Augmented Reality
-- See https://en.wikipedia.org/wiki/Rolling_shutter for more information.
+\note 全局快门意味着所有像素都在同一时间采样，而滚动快门则以光栅扫描方式逐个采样像素。全局快门传感器非常适合：
+- 无人机
+- 快速移动的机器人
+- 汽车
+- 条形码扫描仪
+- 3D 扫描
+- 位置跟踪
+- 虹膜扫描
+- 增强现实
+- 有关更多信息，请参阅 https://en.wikipedia.org/wiki/Rolling_shutter。
 
-\note Typically, sensors with bigger pixels will have better low-light performance. Monochrome sensors also usually have
-better low-light performance. Refer to a given sensor's datasheet for more details.
+\note 通常，像素越大的传感器具有更好的低光性能。单色传感器通常也具有更好的低光性能。有关更多详细信息，请参阅给定传感器的数据表。
 
-Lenses
+镜头 
 ------
 
-For lenses, see \ref Lenses
+对于镜头，请参阅 \ref 镜头
 
-Installation
-------------
+安装
+------
 
-This requires some skills but can be done in less than 5 minutes. See the video below for full details.
+这需要一些技巧，但可以在不到 5 分钟的时间内完成。请观看下面的视频了解详细信息。
 
 \youtube{8rf643fsjSE}
 
-Be careful with the camera connector to not pull too much on the tabs. They should only slide out by about 2mm.
+小心使用相机连接器，不要用力拉扯卡舌。卡舌只能滑出约 2 毫米。
 
 \jvimg{slide-lock-example.jpg, 60%}
 
-JeVois smart camera configuration
+JeVois智能相机配置
 ---------------------------------
 
-\note With JeVois software \jvversion{1.14} and later, this is optional: the sensor type is automatically detected
-at start up. But you may still want to select it as described below, as this will accelerate the JeVois start up time a
-bit, by avoiding that JeVois tries all known sensors one after the other.
+\note 对于 JeVois 软件 \jvversion{1.14} 及更高版本，这是可选的：传感器类型在启动时自动检测。但您可能仍希望按如下所述选择它，因为这将加快 JeVois 的启动时间，避免 JeVois 一个接一个地尝试所有已知传感器。
 
-To let your JeVois smart camera know that you have installed a new sensor, you need to indicate the sensor's name in a
-special configuration file on the microSD of your JeVois unit.
+为了让您的 JeVois 智能相机知道您已经安装了新传感器，您需要在 JeVois 设备的 microSD 上的特殊配置文件中指明传感器的名称。
 
-- Insert microSD into desktop or laptop
-- Browse the BOOT partition
-- Using any editor, create a plain text file in that directory named \a sensor
-- Write a single line of plain ASCII text in that file with the <a>JeVois name</a> listed above.
+- 将 microSD 插入台式机或笔记本电脑
+- 浏览 BOOT 分区
+- 使用任何编辑器，在该目录中创建一个名为 \a sensor 的纯文本文件
+- 在该文件中写入一行纯 ASCII 文本，并使用上面列出的 <a>JeVois 名称</a>。
 
 \jvimg{sensor-edit.png, 30%}
 
-For example (after installing an ov7725 sensor):
+例如（安装 ov7725 传感器后）：
 
-- \b Linux: `echo ov7725 > /media/${USER}/BOOT/sensor`
-- \b Mac: `echo ov7725 > /Volumes/BOOT/sensor`
-- \b Windows: use Notepad to create and save the file. Make sure there is no extension
-(i.e., it is named \a sensor and not <em>sensor.txt</em>).
+- \b Linux：`echo ov7725 > /media/${USER}/BOOT/sensor`
+- \b Mac：`echo ov7725 > /Volumes/BOOT/sensor`
+- \b Windows：使用记事本创建并保存文件。确保没有扩展名（即，它被命名为 \a sensor 而不是 <em>sensor.txt</em>）。
 
-Which sensor does my JeVois camera have?
+我的 JeVois 相机有哪些传感器？ 
 ----------------------------------------
 
-In the Console of JeVois Inventor, type:
+在 JeVois Inventor 的控制台中，输入：
 
-\code{.py}
-getpar camerasens
-\endcode
+\code{.py} 获取相机传感器 \endcode
 
-Sensor specific information
-===========================
+传感器特定信息 
+==============================
 
-Omnivision ov7725
+Omnivision ov7725 
 -----------------
 
-This sensor offers better low-light performance than the default JeVois sensor, thanks to its bigger pixels. On the flip
-side, its resolution is lower. It can also grab at 60fps at 640x480 (original sensor can only do 30fps at that
-resolution), but it is limited to 60fps and cannot grab at 120fps like the original sensor.
+由于像素更大，该传感器比默认的 JeVois 传感器具有更好的低光性能。另一方面，它的分辨率较低。它也可以以 60fps 的速度在 640x480 下抓取（原始传感器在该分辨率下只能达到 30fps），但它被限制在 60fps，无法像原始传感器那样以 120fps 的速度抓取。
 
-Use this sensor if you feel that the original sensor is struggling in low light and you would like to sustain a high
-framerate in low light (otherwise, see \ref UserLighting for tips on how to increase exposure time, when needed, by
-dynamically adjusting framerate on the original ov9653 sensor).
+如果您觉得原始传感器在低光照条件下难以发挥作用，并且您想在低光照条件下维持高帧速率，请使用此传感器（否则，请参阅 \ref UserLighting 以获取有关如何在需要时通过动态调整原始 ov9653 传感器上的帧速率来增加曝光时间的提示）。
 
 \jvimg{jevois-ov7725-comparison.png, 30%}
 
-This sensor supports: YUYV, BAYER, RGB565
+该传感器支持：YUYV、BAYER、RGB565
     +   VGA ( 640 x  480): up to 60 fps
     +   CIF ( 352 x  288): up to 60 fps
     +  QVGA ( 320 x  240): up to 60 fps
     +  QCIF ( 176 x  144): up to 60 fps
     + QQVGA ( 160 x  120): up to 60 fps
     + QQCIF (  88 x   72): up to 60 fps
-    
-OnSemi (Aptina) AR0135
+ 
+
+OnSemi (Aptina) AR0135 
 ----------------------
 
-\note This sensor is primarily intended for industrial machine vision and hence has fewer automatic image enhancements
-than the consumer-grade Omnivision sensors. Only auto-gain and auto-exposure are available, no auto white balance.
+\note 该传感器主要用于工业机器视觉，因此自动图像增强功能比消费级 Omnivision 传感器少。仅提供自动增益和自动曝光，无自动白平衡。
 
-\note This sensor only supports <b>RAW BAYER</b> or <b>GRAY</b> output format (depending on whether you have the color
-or monochrome version). The JeVois core software \jvversion{1.12} and later is able to convert on the fly from BAYER or
-GRAY to YUYV, allowing you to still run the vast majority of JeVois modules, which expect YUYV pixel format. However,
-there is a cost to this (the JeVois processor has to convert from BAYER or GRAY to YUYV). When operating in headless
-mode (no video out to the USB port), you can eliminate that extra cost by using BAYER as the camera pixel format and
-making sure your code can handle that (e.g., no problem if you will just do a `getCvBGR()` or similar on the input
-frame, that function can convert from anything, including BAYER, to BGR).
+\note 此传感器仅支持 <b>RAW BAYER</b> 或 <b>GRAY</b> 输出格式（取决于您使用的是彩色还是单色版本）。JeVois 核心软件 \jvversion{1.12} 及更高版本能够即时从 BAYER 或 GRAY 转换为 YUYV，让您仍能运行绝大多数需要 YUYV 像素格式的 JeVois 模块。但是，这样做是有代价的（JeVois 处理器必须从 BAYER 或 GRAY 转换为 YUYV）。在无头模式下操作时（没有视频输出到 USB 端口），您可以通过使用 BAYER 作为相机像素格式并确保您的代码可以处理它来消除额外的成本（例如，如果您只对输入帧执行 `getCvBGR()` 或类似操作，则没有问题，该函数可以从任何内容（包括 BAYER）转换为 BGR）。
 
-This sensor requires a custom plastic case for your JeVois unit. Instructions are roughly as in the installation video
-above, just be careful to make sure the sensor is pulled towards the front of the case as far as it will go:
+此传感器需要为您的 JeVois 设备配备定制塑料外壳。说明大致与上面的安装视频相同，只需小心确保将传感器拉向外壳前部即可：
 
 \jvimg{ar0135-front.jpg, 25%}
 
@@ -133,8 +112,7 @@ above, just be careful to make sure the sensor is pulled towards the front of th
 
 \jvimg{ar0135-mount.jpg, 25%}
 
-This sensor supports: BAYER or MONO (depending on which model you have), with on-the-fly conversion to YUYV using the
-JeVois CPU
+该传感器支持：BAYER 或 MONO（取决于您拥有的型号），使用 JeVois CPU 即时转换为 YUYV
     +  SXGA (1280 x  960): up to 54 fps
     +  720p (1280 x  720): up to 60 fps
     +   VGA ( 640 x  480): up to 54 fps (binned version of SXGA)
@@ -144,66 +122,46 @@ JeVois CPU
     + QQVGA ( 160 x  120): up to 54 fps (central crop of binned version of SXGA)
     +   90p ( 160 x   90): up to 60 fps
 
-\note As of this writing we are not able to achieve the highest frame rates advertised by the manufacturer in all
-resolutions. Planning on 30fps is a safer bet right now.
 
-We added an awsome IMU (inertial measurement unit) to this sensor, a TDK/InvenSense ICM-20948.
+\note 截至撰写本文时，我们无法在所有分辨率下实现制造商宣传的最高帧速率。目前，计划 30fps 是更安全的选择。
 
-See new modules \jvmod{DemoIMU} and \jvmod{DemoDMP}.
+我们为该传感器添加了一个很棒的 IMU（惯性测量单元），即 TDK/InvenSense ICM-20948。
 
-The specifications of this chip are quite impressive:
-      - 3-axis 16-bit accelerometer with full-range sensitivity selectable to +/-2g, +/-4g, +/-8g, and +/-16g.
-      - Accelerometer data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit gyroscope with full-range sensitivity selectable to +/-250dps (degrees/s), +/-500dps,
-        +/-1000dps, and +/-2000dps.
-      - Gyroscope data rate from 4 Hz to 1125 Hz.
-      - 3-axis 16-bit magnetometer (compass) with wide range of +/-4900uT (micro Tesla).
-      - Magnetometer data rates 10 Hz, 20 Hz, 50 Hz, or 100 Hz.
-      - 16-bit temperature sensor with readout rate of up to 8 kHz.
-      - RAW data mode (get current sensor values at any time), buffered (FIFO) data mode (sensor values accumulate into
-        a FIFO at a fixed rate), and digital motion processing mode (DMP; raw data is processed on-chip).
-      - On-chip digital motion processor (DMP) can compute, inside the IMU chip itself:
-        + quaternion 6 (uses accel + gyro),
-        + quaternion 9 (uses accel + gyro + compass),
-        + geomag quaternion (uses accel + compass),
-        + flip/pickup detection,
-        + step detection and counting,
-        + basic activity recognition: drive, walk, run, bike, tilt, still.
-  
-With quaternions computed on-chip, with an algorithm that gets sensor data at a highly accurate, fixed rate, and applies
-various calibrations, drift corrections, and compensations on the fly, one gets highly accurate real-time estimate of
-the sensor's pose in the 3D world and of how it is moving.
+查看新模块 \jvmod{DemoIMU} 和 \jvmod{DemoDMP}。
+
+该芯片的规格相当令人印象深刻：
+      - 3 轴 16 位加速度计，全范围灵敏度可选为 +/-2g、+/-4g、+/-8g 和 +/-16g。
+      - 加速度计数据速率从 4 Hz 到 1125 Hz。
+      - 3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-250dps（度/秒）、+/-500dps、+/-1000dps 和 +/-2000dps。
+      - 陀螺仪数据速率从 4 Hz 到 1125 Hz。
+      - 3 轴 16 位磁力计（指南针），范围宽达 +/-4900uT（微特斯拉）。
+      - 磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。
+      - 16 位温度传感器，读出速率高达 8 kHz。
+      - RAW 数据模式（随时获取当前传感器值）、缓冲 (FIFO) 数据模式（传感器值以固定速率累积到 FIFO 中）和数字运动处理模式 (DMP；原始数据在芯片上处理)。
+      - 片上数字运动处理器 (DMP) 可以在 IMU 芯片内部计算：
+        + 四元数 6（使用加速度计 + 陀螺仪），
+        + 四元数 9（使用加速度计 + 陀螺仪 + 指南针），
+        + geomag 四元数（使用加速度计 + 指南针），
+        + 翻转/拾取检测，
+        + 步数检测和计数，
+        + 基本活动识别：驾驶、行走、跑步、骑自行车、倾斜、静止。使用片上计算的四元数，使用以高精度、固定速率获取传感器数据并动态应用各种校准、漂移校正和补偿的算法，可以高度准确地实时估计传感器在 3D 世界中的姿势及其移动方式。
 
 \youtube{MFGpN_Vp7mg}
 
-Note that communication with the IMU is over a 400kHz I2C bus, which may limit data readout rate depending on which
-data is requested from the IMU.
-  
-This IMU has 3 basic modes of operation (parameter \p mode which can only be set in params.cfg):
-  - RAW: One can access the latest raw sensor data at any time using the getRaw() or get() functions. This is the
-    simplest mode of operation. One disadvantage is that if you are not calling get() at a perfectly regular interval,
-    there will be some time jitter in your readouts. The IMU does not provide any time stamps for its data.
-  - FIFO: In this mode, data from the sensor is piled up into a 1 kbyte FIFO buffer at a precise, constant rate (when
-    all three of accelerometer, gyroscope, and magnetometer are on, the gyro rate determines the FIFO buffering
-    rate). Main advantage is that you can then read out the data without having to worry about calling getRaw() or get()
-    at a highly precise interval. But you need to be careful that the FIFO can fill up and overflow very quickly when
-    using high sensor data rates.
-  - DMP: In this mode, data is captured from the sensor at an accurate, fixed rate, and is fed to the on-chip digital
-    motion processor (DMP). The DMP then computes quaternions, activity recognition, etc and pushes data packets into
-    the FIFO as results from these algorithms become available.
+请注意，与 IMU 的通信是通过 400kHz I2C 总线进行的，这可能会限制数据读出速率，具体取决于从 IMU 请求的数据。此 IMU 有 3 种基本操作模式（参数 \p mode 只能在 params.cfg 中设置）：
+- RAW：可以使用 getRaw() 或 get() 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以完全规则的间隔调用 get()，则读数中会出现一些时间抖动。IMU 不为其数据提供任何时间戳。
+- FIFO：在此模式下，来自传感器的数据以精确、恒定的速率堆积到 1 kbyte FIFO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启时，陀螺仪速率决定 FIFO 缓冲速率）。主要优点是您可以读出数据，而不必担心以高精度间隔调用 getRaw() 或 get()。但您需要注意，当使用高传感器数据速率时，FIFO 可能会很快填满并溢出。
+- DMP：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (DMP)。然后，DMP 计算四元数、活动识别等，并在这些算法的结果可用时将数据包推送到 FIFO。
 
 
-Omnivision ov2640
+Omnivision ov2640 
 -----------------
 
-The main advantage of this sensor is its higher resolution. However, this comes at a price: light sensitivity is not as
-good, machine vision processing will likely be slow, at high resolutions framerate may be limited by USB 2.0 transfer
-speed (up to 24 MByte/s for video data).
+该传感器的主要优势在于其分辨率较高。然而，这也有其代价：光敏度不够好，机器视觉处理速度可能较慢，高分辨率下帧速率可能受到 USB 2.0 传输速度的限制（视频数据最高为 24 MByte/s）。
 
-Use this sensor if you want to detect small objects far away and you do not need very high frame rate. For example,
-detecting ArUco markers of barcodes works very well with this sensor.
+如果您想要检测远处的小物体并且不需要很高的帧速率，请使用此传感器。例如，使用此传感器可以很好地检测条形码的 ArUco 标记。
 
-This sensor supports: YUYV, BAYER, RGB565
+该传感器支持：YUYV、BAYER、RGB565
     +  UXGA (1600 x 1200): up to 15 fps
     +  SXGA (1280 x 1024): up to 15 fps
     +  720p (1280 x  720): up to 15 fps
@@ -217,37 +175,36 @@ This sensor supports: YUYV, BAYER, RGB565
     + QQCIF (  88 x   72): up to 60 fps
 
 
-\note The housing for this sensor is 1mm larger than for the ov9650 and ov7725. Hence, the case of your JeVois smart
-caera will not fully close in the front after this sensor is installed. This is to be expected, there will be an
-approximately 1mm gap between the top and bottom of the plastic JeVois camera case.
 
-Which one is which?
+\note 此传感器的外壳比 ov9650 和 ov7725 大 1 毫米。因此，安装此传感器后，JeVois 智能相机外壳的前部不会完全关闭。这是可以预料的，塑料 JeVois 相机外壳的顶部和底部之间会有大约 1 毫米的间隙。
+
+哪一个是哪一个？ 
 -------------------
 
-The Omnivision sensor modules look almost identical. Look for markings on the flat flex cable that connect the sensor to
-the JeVois circuit board:
+Omnivision 传感器模块看起来几乎一模一样。查找将传感器连接到 JeVois 电路板的扁平柔性电缆上的标记：
 
-- HDF-25 or HDF-7725: is an ov7725 \jvimg{hdf25-a.jpg, 20%}
+- HDF-25 或 HDF-7725：是 ov7725 \jvimg{hdf25-a.jpg, 20%}
 
-- HDF-53: is an ov9653 \jvimg{hdf53-a.jpg, 20%}
+- HDF-53：是 ov9653 \jvimg{hdf53-a.jpg, 20%}
 
-- HDF3M: is in ov2640 \jvimg{hdf3m.jpg, 20%}
+- HDF3M：位于 ov2640 \jvimg{hdf3m.jpg, 20%}
 
-As far as lenses:
+就镜头而言：
 
-- Standard and NOIR have the smallest lens hole. NOIR has no glue on the lens thread while Standard is glued.
+- Standard 和 NOIR 的镜头孔最小。NOIR 的镜头螺纹上没有胶水，而 Standard 有胶水。
 
-- 90deg has a slightly bigger hole than Standard and NOIR.
+- 90 度的孔比标准和 NOIR 的孔稍大一些。
 
-- 120deg is much bigger and easy to recognize.
+- 120 度更大，更容易识别。
 
 \jvimg{jevois-lenses-small.png, 50%}
 
-- You may have received extra lenses which sometimes are screwed into a square shroud for protection. You should unscrew
-  the shroud before attempting to install the lens onto your JeVois camera. You can discard the shroud:
+- 您可能收到了额外的镜头，这些镜头有时会被拧入方形护罩中以提供保护。在尝试将镜头安装到 JeVois 相机上之前，您应该先拧下护罩。您可以丢弃护罩：
 
 \jvimg{lens-shroud.jpg, 25%}
 
 \jvimg{lens-adjust.png, 40%}
 
+
 */
+

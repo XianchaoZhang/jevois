@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ValidValuesSpec_8H">
+<title>include/jevois/Component/ValidValuesSpec.H File Reference</title>
+<indexterm><primary>include/jevois/Component/ValidValuesSpec.H</primary></indexterm>
+<programlisting>#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;jevois/Types/Range.H&gt;
+#include &lt;jevois/Types/StepRange.H&gt;
+#include &lt;boost/regex.hpp&gt;
+#include &lt;jevois/Component/details/ValidValuesSpecImpl.H&gt;
+</programlisting>Include dependency graph for ValidValuesSpec.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ValidValuesSpec_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ValidValuesSpec_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecBase">jevois::ValidValuesSpecBase&lt; T &gt;</link></para>
+
+<para>用于为类型指定一组有效值的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecNone">jevois::ValidValuesSpecNone&lt; T &gt;</link></para>
+
+<para>Open/None 有效值规范，T 可以采用的任何值都有效 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecList">jevois::ValidValuesSpecList&lt; T &gt;</link></para>
+
+<para>有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecRange">jevois::ValidValuesSpecRange&lt; T &gt;</link></para>
+
+<para>基于范围的有效值规范，包含边界 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecStepRange">jevois::ValidValuesSpecStepRange&lt; T &gt;</link></para>
+
+<para>基于 <link linkend="_classjevois_1_1StepRange">StepRange</link> 的有效值规范，包含边界 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecRegex">jevois::ValidValuesSpecRegex&lt; T &gt;</link></para>
+
+<para>基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

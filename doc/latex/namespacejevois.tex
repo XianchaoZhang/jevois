@@ -1,0 +1,686 @@
+\hypertarget{namespacejevois}{}\doxysubsection{jevois Namespace Reference}
+\label{namespacejevois}\index{jevois@{jevois}}
+
+
+\doxysubsubsection{ }
+所有 Je\+Vois 类和函数的主命名空间 
+
+有关更多详细信息，请参阅 \href{http://jevois.org/doc/html/topics.html}{\texttt{ 主题}}。 \doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois_1_1coords}{coords}}
+\begin{DoxyCompactList}\small\item\em 用于将坐标从相机分辨率转换为标准坐标的辅助函数的命名空间 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1details}{details}}
+\begin{DoxyCompactList}\small\item\em Details that do not affect users of Je\+Vois code. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1dnn}{dnn}}
+\begin{DoxyCompactList}\small\item\em 深度神经网络 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1font}{font}}
+\begin{DoxyCompactList}\small\item\em Fonts available for drawing text strings into \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1python}{python}}
+\begin{DoxyCompactList}\small\item\em Python 相关的帮助程序和函数 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1rawimage}{rawimage}}
+\begin{DoxyCompactList}\small\item\em 用于 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 转换、处理、绘制的函数 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1rgb565}{rgb565}}
+\begin{DoxyCompactList}\small\item\em 辅助 R\+G\+B565 颜色 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1shader}{shader}}
+\begin{DoxyCompactList}\small\item\em Open\+GL shaders for video rendering. \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1yuyv}{yuyv}}
+\begin{DoxyCompactList}\small\item\em 辅助 Y\+U\+YV 颜色 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}}
+\begin{DoxyCompactList}\small\item\em 线程安全同步生产者/消费者队列 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Camera}{Camera}}
+\begin{DoxyCompactList}\small\item\em Je\+Vois camera driver class -\/ 从 Video4\+Linux 相机传感器抓取帧 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1CameraCalibration}{Camera\+Calibration}}
+\begin{DoxyCompactList}\small\item\em 用于相机校准的辅助类，允许某些模块计算物体的 3D 位置 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1CameraDevice}{Camera\+Device}}
+\begin{DoxyCompactList}\small\item\em 附件类，用于保存与 V4\+L2 相机设备相关的所有数据 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ChatBox}{Chat\+Box}}
+\begin{DoxyCompactList}\small\item\em A simple helper class for a chat box rendered in Im\+Gui. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Component}{Component}}
+\begin{DoxyCompactList}\small\item\em 模型层次结构的组成部分。 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1DMPdata}{D\+M\+Pdata}}
+\begin{DoxyCompactList}\small\item\em D\+MP 数据（数字运动处理器） \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}}
+\begin{DoxyCompactList}\small\item\em 用于打开共享对象 (.so) 文件并加载其中包含的函数的类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}
+\begin{DoxyCompactList}\small\item\em 运行时添加到组件的动态参数 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1EditorItem}{Editor\+Item}}
+\begin{DoxyCompactList}\small\item\em Helper class to represent a \mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}} file in a pull-\/down menu. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}
+\begin{DoxyCompactList}\small\item\em Je\+Vois processing engine -\/ 从相机传感器获取图像，对其进行处理，并通过 U\+SB 发送结果。 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}}
+\begin{DoxyCompactList}\small\item\em Je\+Vois 小工具驱动程序 -\/ 向通过 U\+SB 连接的主机计算机公开 uvcvideo 接口 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GPUimage}{G\+P\+Uimage}}
+\begin{DoxyCompactList}\small\item\em Class to hold a \mbox{\hyperlink{classjevois_1_1GPUtexture}{G\+P\+Utexture}}, \mbox{\hyperlink{classjevois_1_1GPUprogram}{G\+P\+Uprogram}}, and other data associated with rendering an image in Open\+GL. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GPUprogram}{G\+P\+Uprogram}}
+\begin{DoxyCompactList}\small\item\em Simple class to load and compile some Open\+G\+L-\/\+ES program. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GPUshader}{G\+P\+Ushader}}
+\begin{DoxyCompactList}\small\item\em Simple class to load and compile some Open\+G\+L-\/\+ES shader code. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GPUtexture}{G\+P\+Utexture}}
+\begin{DoxyCompactList}\small\item\em Simple class to hold an Open\+GL texture. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GPUtextureDmaBuf}{G\+P\+Utexture\+Dma\+Buf}}
+\begin{DoxyCompactList}\small\item\em Simple class to hold an Open\+GL texture with in-\/\+G\+PU pixel format conversion and D\+M\+A\+B\+UF acceleration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIconsole}{G\+U\+Iconsole}}
+\begin{DoxyCompactList}\small\item\em Simple console with coloring and completion. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIeditor}{G\+U\+Ieditor}}
+\begin{DoxyCompactList}\small\item\em Editor panel for Je\+Vois-\/\+Pro G\+UI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}}
+\begin{DoxyCompactList}\small\item\em Helper class to assist modules in creating graphical and G\+UI elements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIhelperPython}{G\+U\+Ihelper\+Python}}
+\begin{DoxyCompactList}\small\item\em 包装 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 以供 Python 使用 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIserial}{G\+U\+Iserial}}
+\begin{DoxyCompactList}\small\item\em Simple class to monitor a serial port in the Je\+Vois-\/\+Pro G\+UI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}}
+\begin{DoxyCompactList}\small\item\em T\+DK Inven\+Sense I\+C\+M-\/20948 9D\+OF \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 高级驱动程序 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ImGuiBackend}{Im\+Gui\+Backend}}
+\begin{DoxyCompactList}\small\item\em Backend for Im\+Gui on Je\+Vois-\/\+Pro. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI}{Im\+Gui\+Backend\+M\+A\+LI}}
+\begin{DoxyCompactList}\small\item\em Backend\+M\+A\+LI for Im\+Gui on Je\+Vois-\/\+Pro. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ImGuiImage}{Im\+Gui\+Image}}
+\begin{DoxyCompactList}\small\item\em Wrapper for an image that can be rendered into Im\+Gui. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 惯性测量单元 (\mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}) 的抽象接口 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1IMUdata}{I\+M\+Udata}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 数据 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1IMUi2c}{I\+M\+Ui2c}}
+\begin{DoxyCompactList}\small\item\em 具有与摄像头传感器共享的 I2C 接口的 I\+M\+U，例如 Je\+Vois-\/\+A33 A\+R0135 摄像头传感器板上的 \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1IMUrawData}{I\+M\+Uraw\+Data}}
+\begin{DoxyCompactList}\small\item\em 原始 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 数据 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1IMUspi}{I\+M\+Uspi}}
+\begin{DoxyCompactList}\small\item\em 具有 S\+PI 接口的 I\+M\+U，例如 Je\+Vois-\/\+Pro I\+M\+X290 摄像头传感器板上的 \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}
+\begin{DoxyCompactList}\small\item\em 原始相机输入帧周围的异常安全包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}}
+\begin{DoxyCompactList}\small\item\em 包装 Python 使用的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1JpegCompressor}{Jpeg\+Compressor}}
+\begin{DoxyCompactList}\small\item\em turbojpeg 压缩器的简单单例包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Log}{Log}}
+\begin{DoxyCompactList}\small\item\em Logger 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Manager}{Manager}}
+\begin{DoxyCompactList}\small\item\em 组件对象层次结构的管理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Module}{Module}}
+\begin{DoxyCompactList}\small\item\em 视觉处理模块的虚基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}}
+\item 
+class \mbox{\hyperlink{classjevois_1_1MovieOutput}{Movie\+Output}}
+\begin{DoxyCompactList}\small\item\em 使用 Open\+CV 视频编码将视频输出到电影文件 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1ObjDetect}{Obj\+Detect}}
+\begin{DoxyCompactList}\small\item\em 一个用于存储对象检测结果的简单结构 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1ObjReco}{Obj\+Reco}}
+\begin{DoxyCompactList}\small\item\em 一个用于存储对象识别结果的简单结构 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}}
+\begin{DoxyCompactList}\small\item\em 围绕要通过 U\+SB 发送的原始图像的异常安全包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1OutputFramePython}{Output\+Frame\+Python}}
+\begin{DoxyCompactList}\small\item\em Python 使用的 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4}{Parameter$<$ Param, Tail ... $>$}}
+\begin{DoxyCompactList}\small\item\em 附加到组件的一组参数。 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for Parameter. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}}
+\begin{DoxyCompactList}\small\item\em 多个 \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 定义可以属于的类别 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的可变参数，核心类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}
+\begin{DoxyCompactList}\small\item\em 参数定义 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterDefBase}{Parameter\+Def\+Base}}
+\begin{DoxyCompactList}\small\item\em 参数定义的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterRegistry}{Parameter\+Registry}}
+\begin{DoxyCompactList}\small\item\em 与组件相关的所有参数的简单注册表 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} 提供有关参数的摘要 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Profiler}{Profiler}}
+\begin{DoxyCompactList}\small\item\em 简单的 profiler 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonModule}{Python\+Module}}
+\begin{DoxyCompactList}\small\item\em 包装器模块允许用户开发用 Python 编写的新模块 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonParameter}{Python\+Parameter}}
+\begin{DoxyCompactList}\small\item\em python 中 jevois 参数的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonWrapper}{Python\+Wrapper}}
+\begin{DoxyCompactList}\small\item\em 辅助类，用于从 C++ 运行 Python 代码 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Range}{Range}}
+\begin{DoxyCompactList}\small\item\em 通用 \mbox{\hyperlink{classjevois_1_1Range}{Range}} 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}
+\begin{DoxyCompactList}\small\item\em 来自 V4\+L2 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和/或发送到 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 的原始图像 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Semaphore}{Semaphore}}
+\begin{DoxyCompactList}\small\item\em 一个简单的信号量 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Serial}{Serial}}
+\begin{DoxyCompactList}\small\item\em 串行端口接口 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Singleton}{Singleton}}
+\begin{DoxyCompactList}\small\item\em 一个通用的 singleton 类，用于强制一个对象的单个实例 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1StdioInterface}{Stdio\+Interface}}
+\begin{DoxyCompactList}\small\item\em 基于字符串的用户界面，在主机上使用的简单终端输入/输出 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1StdModule}{Std\+Module}}
+\begin{DoxyCompactList}\small\item\em 支持标准化串行消息的模块的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}
+\begin{DoxyCompactList}\small\item\em 具有 step 的通用 range 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ThreadPool}{Thread\+Pool}}
+\begin{DoxyCompactList}\small\item\em 具有 C\+PU 亲和力的线程池 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1timed__lock__guard}{timed\+\_\+lock\+\_\+guard}}
+\begin{DoxyCompactList}\small\item\em 在 std\+::timed\+\_\+mutex 上获取锁对象，或在等待 1 秒后 L\+F\+A\+T\+AL \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Timer}{Timer}}
+\begin{DoxyCompactList}\small\item\em 简单计时器类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1TimerOne}{Timer\+One}}
+\begin{DoxyCompactList}\small\item\em 简单的一次性计时器类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}}
+\begin{DoxyCompactList}\small\item\em 基于字符串的用户界面的抽象基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{Valid\+Values\+Spec\+Base}}
+\begin{DoxyCompactList}\small\item\em 用于为类型指定一组有效值的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{Valid\+Values\+Spec\+List}}
+\begin{DoxyCompactList}\small\item\em 有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecNone}{Valid\+Values\+Spec\+None}}
+\begin{DoxyCompactList}\small\item\em Open/\+None 有效值规范，T 可以采用的任何值都有效 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{Valid\+Values\+Spec\+Range}}
+\begin{DoxyCompactList}\small\item\em 基于范围的有效值规范，包含边界 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{Valid\+Values\+Spec\+Regex}}
+\begin{DoxyCompactList}\small\item\em 基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{Valid\+Values\+Spec\+Step\+Range}}
+\begin{DoxyCompactList}\small\item\em 基于 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 的有效值规范，包含边界 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}
+\begin{DoxyCompactList}\small\item\em V4\+L2 视频缓冲区，保存在 shared\+\_\+ptr 中 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoBuffers}{Video\+Buffers}}
+\begin{DoxyCompactList}\small\item\em V4\+L2 视频帧（相机或小工具）的缓冲区集合，带有与 M\+M\+AP 区域挂钩的钩子 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoDisplayBackend}{Video\+Display\+Backend}}
+\begin{DoxyCompactList}\small\item\em Backend for Video\+Display on Je\+Vois-\/\+Pro. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI}{Video\+Display\+Backend\+M\+A\+LI}}
+\begin{DoxyCompactList}\small\item\em Backend for Video\+Display on Je\+Vois-\/\+Pro host using M\+A\+LI. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoDisplayGL}{Video\+Display\+GL}}
+\begin{DoxyCompactList}\small\item\em 视频输出到本地屏幕 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI}{Video\+Display\+G\+UI}}
+\begin{DoxyCompactList}\small\item\em 使用基本 G\+UI 将视频输出到本地屏幕 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}}
+\begin{DoxyCompactList}\small\item\em 视频输入的基类，将派生为 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}}
+\begin{DoxyCompactList}\small\item\em 用于保存处理 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的视频映射定义的简单结构 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}}
+\begin{DoxyCompactList}\small\item\em 视频输出的基类。\+Gadget、\+Movie\+Output、\+Video\+Display 和 \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}} 均从其派生 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Watchdog}{Watchdog}}
+\begin{DoxyCompactList}\small\item\em 简单的看门狗类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{Opt\+G\+U\+Ihelper}} = \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}{Editor\+Save\+Action}} 
+\begin{DoxyCompactList}\small\item\em Helper enum for actions to execute after saving a config file. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{group__types_ga12724887bc7648f2f888edb9c3055e3d}{Blocking\+Behavior}} \{ \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Blocking\+Behavior\+::\+Block}}, 
+\mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f}{Blocking\+Behavior\+::\+Throw}}
+ \}
+\begin{DoxyCompactList}\small\item\em 尝试无法立即完成的操作时的行为 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga8775d20a2bef3f1548e85360e9608656}{param\+Val\+To\+String}} (T const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 T 转换为字符串，供 jevois\+::\+Parameter 使用 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga828ed097b767a329b9ef81b25671af91}{param\+Val\+To\+String$<$ unsigned char $>$}} (unsigned char const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 T 转换为机器可读的字符串，专门将无符号字符转换为数字，而不是字符 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga9181607df247a37a9f6f3048fc5274f9}{param\+String\+To\+Val}} (std\+::string const \&valstring, T \&result)
+\begin{DoxyCompactList}\small\item\em 从字符串到 T 的机器可读转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Q $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gab2ed13d224cb5afce6b018c5750bd376}{param\+Val\+To\+String}} (std\+::vector$<$ \mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}} $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串输出，用于 ​​jevois\+::\+Parameter：输出 \mbox{[}{\ttfamily Element1}, {\ttfamily Element2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Q $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga231b033ee2dd96aea6c349a50d81f28b}{param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::vector$<$ \mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}} $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 \mbox{[}{\ttfamily Element1}, {\ttfamily Element2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F , typename S $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gaf8c330b3092d43e1b51a4726c2c37490}{param\+Val\+To\+String}} (std\+::pair$<$ \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, S $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily first} {\ttfamily second} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F , typename S $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gaa4d379683d33f681a73fd3dd7326cb24}{param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::pair$<$ \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, S $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily first} {\ttfamily second} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gad80d460be599086f5446ca420ec8c7e2}{param\+Val\+To\+String}} (cv\+::\+Point\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily x} {\ttfamily y} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga0401340fc2f5faba4060a8919e9f90b1}{param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Point\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily x} {\ttfamily y} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gae1463dc259923946a4b432c86cc36ffc}{param\+Val\+To\+String}} (cv\+::\+Size\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily width} {\ttfamily height} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga6e9f701bba18de827137f2569b6136bd}{param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Size\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily width} {\ttfamily height} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga050076c5ac771a52a203c08b0fe21963}{param\+Val\+To\+String}} (cv\+::\+Scalar\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily r} {\ttfamily g} {\ttfamily b} {\ttfamily a} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga645ebe139c475a906c9d0ba3a3a2700e}{param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Scalar\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily r} {\ttfamily g} {\ttfamily b} {\ttfamily a} 或子集模板 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8677d178b2ca79ef97fb448064cab026}{param\+Val\+To\+String$<$ Im\+Color $>$}} (Im\+Color const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily R} {\ttfamily G} {\ttfamily B} {\ttfamily A，每个} 0..255 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga3b97261e1b34103c923492b251b16ade}{param\+String\+To\+Val$<$ Im\+Color $>$}} (std\+::string const \&valstring, Im\+Color \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily R} {\ttfamily G} {\ttfamily B} {\ttfamily A，每个} 0..255 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga4f532edee49623462389446878802425}{param\+Val\+To\+String}} (std\+::map$<$ K, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读输出到字符串，用于 jevois\+::\+Parameter：输出 \mbox{[}{\ttfamily Key1\+:Value1}, {\ttfamily Key2\+:Value2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga0589bb4a03f4ab3644ca150930a98e20}{param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::map$<$ K, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 \mbox{[}{\ttfamily Key1\+:Value1}, {\ttfamily Key2\+:Value2}, ...\mbox{]} \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8434bf9159dcbaab41546816f39d3816}{param\+Val\+To\+String$<$ bool $>$}} (bool const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 bool 转换为机器可读的字符串，以便在 jevois\+::\+Parameter 中使用； \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8500220c721730cb23bd49ba8f9b1a91}{param\+String\+To\+Val$<$ bool $>$}} (std\+::string const \&valstring, bool \&result)
+\begin{DoxyCompactList}\small\item\em 从字符串到布尔值的机器可读转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga391a3919aabdde5c2f6c0a2ff92c201f}{param\+Val\+To\+String$<$ std\+::string $>$}} (std\+::string const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串到字符串的转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga98169733c0aaff712d9484cd1f20a3e8}{param\+String\+To\+Val$<$ std\+::string $>$}} (std\+::string const \&valstring, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串到字符串的转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Sensor,(any)(imx290)(os08a10)(ar0234))
+\begin{DoxyCompactList}\small\item\em 不同传感器型号的枚举 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__camerasensor_ga07ea2c95fcfd090f0afa39305ba0720c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Lens,(standard)(custom1)(custom2)(custom3)(custom4)(custom5))
+\item 
+bool \mbox{\hyperlink{group__camerasensor_gaee01f42d6948f5d178890b28663806af}{sensor\+Supports\+Format}} (Camera\+Sensor s, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否支持给定的分辨率和帧速率 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__camerasensor_ga6bc708204f2eb1175885c149ced0b4fd}{sensor\+Has\+I\+MU}} (Camera\+Sensor s)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否有 I\+M\+U（惯性测量单元） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__camerasensor_ga241cf199fdeeac006a137918af9bab0b}{sensor\+Prepare\+Set\+Format}} (Camera\+Sensor s, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m, unsigned int \&capw, unsigned int \&caph, int \&preset)
+\begin{DoxyCompactList}\small\item\em 加载传感器预设（仅限 Je\+Vois-\/\+Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__imu_ga43ee011cc956b9d2d7a5ae46aa268bff}{D\+M\+Ppacket\+Size}} (unsigned short ctl1, unsigned short ctl2)
+\begin{DoxyCompactList}\small\item\em 辅助函数根据选项确定 D\+MP 数据包大小 \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} $>$ \mbox{\hyperlink{namespacejevois_a828fc05eea12bd9d7071a1bc561e1835}{video\+Mappings\+From\+Stream}} (Camera\+Sensor s, std\+::istream \&is, size\+\_\+t \&defidx, bool checkso, bool hasgui)
+\begin{DoxyCompactList}\small\item\em 解析配置文件中的所有映射，并指出哪一个是默认的 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_gac5f7014e430b19db36d4284254f886ef}{warn\+And\+Rethrow\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并重新抛出它 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{warn\+And\+Ignore\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并忽略它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_gac577d140e95998b907a3d8ee82d8f9c5}{warn\+And\+Rethrow\+Param\+Callback\+Exception}} (std\+::string const \&descriptor, std\+::string const \&strval)
+\begin{DoxyCompactList}\small\item\em 参数回调异常的便捷函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_a702884502b6ac843dada7c3f24e6e1fb}{draw\+Error\+Image}} (std\+::string const \&errmsg, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&videoerrimg)
+\begin{DoxyCompactList}\small\item\em 将错误消息显示到 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_ga41793c253cf663f59b715c0bd2dcc2ad}{log\+Set\+Engine}} (\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} $\ast$e)
+\begin{DoxyCompactList}\small\item\em 设置引擎，以便所有日志消息都转发到其串行端口 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_a98e29073164f0fa721c39c968bcafb36}{log\+End}} ()
+\begin{DoxyCompactList}\small\item\em 终止日志服务 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_gaede3301d7e76cf562b3c9326b7b3d686}{get\+Python\+Exception\+String}} (boost\+::python\+::error\+\_\+already\+\_\+set \&)
+\begin{DoxyCompactList}\small\item\em Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga5cd0b0b867a9f033762819e8af37ca35}{get\+Sys\+Info\+C\+PU}} ()
+\begin{DoxyCompactList}\small\item\em 获取 C\+PU 信息： frequency, thermal, load \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga98e313acb940dfe5cb5168e8b0876ba8}{get\+Sys\+Info\+Mem}} ()
+\begin{DoxyCompactList}\small\item\em Get memory info. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_gacab36569297392a9a62000609f3d2193}{get\+Sys\+Info\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Get O.\+S. version info. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacejevois_a6ab540ea34f56b48165b563719c5cad5}{get\+Num\+Installed\+T\+P\+Us}} ()
+\begin{DoxyCompactList}\small\item\em 获取此系统上存在的 Coral T\+PU 数量 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacejevois_a26961977d36a68b1cc6fb0f67298aa12}{get\+Num\+Installed\+V\+P\+Us}} ()
+\begin{DoxyCompactList}\small\item\em 获取此系统上存在的 Myriad-\/X V\+PU 数量 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacejevois_a4bc07166fd9b5ae7a021fcb04a170746}{get\+Num\+Installed\+N\+P\+Us}} ()
+\begin{DoxyCompactList}\small\item\em 获取此系统上存在的 Je\+Vois-\/\+Pro N\+PU 数量 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacejevois_aae7970fe8c32c8285c24c352ab960163}{get\+Num\+Installed\+S\+P\+Us}} ()
+\begin{DoxyCompactList}\small\item\em 获取此系统上存在的 Hailo8 S\+PU 数量 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacejevois_a3c137ebcbbdda157639ae3e711568db2}{get\+Fan\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em 获取风扇速度百分比，仅在 Je\+Vois-\/\+Pro 平台上有意义，其他所有平台均返回 0 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}{opengl\+\_\+error}} (int err)
+\begin{DoxyCompactList}\small\item\em Function to write Open\+GL errors in clear witout requiring G\+L\+UT. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gaf446f726ba6d8e2d87aa87e5cd041518}{convert\+Y\+U\+Y\+Vto\+Y\+U\+V422}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst)
+\begin{DoxyCompactList}\small\item\em 辅助从打包的 Y\+U\+YV 转换为平面 Y\+U\+V422 \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gac8019b137a50caf3afe8f93b8041d815}{compress\+B\+G\+Rto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga055d9848dc85723e4429ac6b4f98812e}{compress\+B\+G\+Rto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gaf968b68fd408477de51a6fcf41be48d9}{compress\+R\+G\+Bto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_ga8a53f108718df36751b7b2b4fd16fbce}{compress\+R\+G\+Bto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gad721785df8a36bbc0081acf691b84cfc}{compress\+R\+G\+B\+Ato\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gadd51281893168dd79429e9777eabe0e0}{compress\+R\+G\+B\+Ato\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+unsigned long \mbox{\hyperlink{group__jpeg_gab4e9f0c744d97117a37eae05da2c2a6d}{compress\+G\+R\+A\+Yto\+Jpeg}} (unsigned char const $\ast$src, int width, int height, unsigned char $\ast$dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将原始像素缓冲区压缩为 jpeg \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__jpeg_gab4829fbfa937795d50f95b3d60596a31}{compress\+G\+R\+A\+Yto\+Jpeg}} (cv\+::\+Mat const \&src, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&dst, int quality=75)
+\begin{DoxyCompactList}\small\item\em 将 Gray cv\+::\+Mat 压缩为输出 J\+P\+EG \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__image_ga6607626cad0258d69b6ead8d1ced4f52}{rescale\+Cv}} (cv\+::\+Mat const \&img, cv\+::\+Size const \&newdims)
+\begin{DoxyCompactList}\small\item\em 重新缩放 Open\+CV 图像，选择正确的插值类型 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function , class... Args$>$ }\\std\+::future$<$ std\+::invoke\+\_\+result\+\_\+t$<$ std\+::decay\+\_\+t$<$ Function $>$, std\+::decay\+\_\+t$<$ Args $>$... $>$ $>$ \mbox{\hyperlink{namespacejevois_a5c82f5b2b9dd4a98d343f9e54eea0fff}{async}} (Function \&\&f, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 使用线程池异步执行 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Function , class... Args$>$ }\\std\+::future$<$ std\+::invoke\+\_\+result\+\_\+t$<$ std\+::decay\+\_\+t$<$ Function $>$, std\+::decay\+\_\+t$<$ Args $>$... $>$ $>$ \mbox{\hyperlink{namespacejevois_a5dbfbd62f0701adcef770280e0bc31f6}{async\+\_\+little}} (Function \&\&f, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 使用线程池异步执行 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{group__utils_ga7649d6ce325acac1606bceec036f171b}{joinall}} (std\+::vector$<$ std\+::future$<$ T $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga019e31f64c16f1b7a51bd2676acddfb9}{joinall}} (std\+::vector$<$ std\+::future$<$ void $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__console_gadb6b6c4de8c91afbd75b26fd21e1267c}{is\+Input\+Device}} (int fd)
+\begin{DoxyCompactList}\small\item\em 指示此 fd（应来自 /dev/input/event\+X）是否是键盘、鼠标等 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gac71712656cfebf518ed5700bf3e9e3ed}{get\+Console\+Fd}} ()
+\begin{DoxyCompactList}\small\item\em 获取控制台的文件描述符 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gab9a802bcfa42386853cc58f86c5d023f}{get\+Active\+T\+TY}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前活动 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga4a8b4e6208cca24fc399107e48eb133c}{mute\+Keyboard}} (int tty, int \&kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 防止 keystrokes 到达 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga5fffa3f01add1a9dab7f031361a01282}{un\+Mute\+Keyboard}} (int tty, int kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 恢复给定 tty 的键盘模式 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__demangling_gaed135e078da2b90d91350d676e7413fc}{demangle}} (std\+::string const \&mangled\+Name)
+\begin{DoxyCompactList}\small\item\em Demangle a mangled name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__demangling_ga717b7381dadbb9c05f2dc6fda5344b05}{demangle}} (char const $\ast$mangled\+Name)
+\begin{DoxyCompactList}\small\item\em Demangle a mangled name. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string \mbox{\hyperlink{group__demangling_ga31535139a092fa0cd6aa7ab7e0339cfd}{demangled\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the demangled type name of type T. \end{DoxyCompactList}\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{group__demangling_gad0fbf71c27d34d4bb1074750bb0d94ca}{demangled\+Name$<$ std\+::string $>$}} ()
+\begin{DoxyCompactList}\small\item\em 对 std\+::string 进行特例化以避免得到丑陋的名称 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{fccstr}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 将 V4\+L2 four-\/cc 代码（\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...）转换为 4 字符字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}{cvtypestr}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 将 cv\+::\+Mat\+::type() 代码转换为字符串（例如 C\+V\+\_\+8\+U\+C1、\+C\+V\+\_\+32\+S\+C3 等） \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga1ce31b21602cde5b241a59b4312ee6d5}{cv\+Bytes\+Per\+Pix}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 返回给定 Open\+CV 像素类型每像素的字节数 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga34f3127327f6113672a16d3a041552df}{strfcc}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 将 Je\+Vois 视频格式字符串转换为 V4\+L2 four-\/cc 代码 (V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...) \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}{v4l2\+Bytes\+Per\+Pix}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+ 每像素的字节数... \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gafa5c6faaeefd12994a07c09ed748176c}{v4l2\+Image\+Size}} (unsigned int fcc, unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+... 的图像大小（以字节为单位）, width, height \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gae3448a5e4bbd80efd03d6417974834d0}{black\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的黑色的值 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}{white\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的白色的值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gad1e7ee20cd2509969dcd07acfb188f2b}{apply\+Letter\+Box}} (unsigned int \&imw, unsigned int \&imh, unsigned int const winw, unsigned int const winh, bool noalias)
+\begin{DoxyCompactList}\small\item\em 应用 letterbox 调整大小以使图像适合窗口 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gac91eaef1908f07d3ecd6112eb12ef571}{split}} (std\+::string const \&input, std\+::string const \&regex=\char`\"{}\textbackslash{}\textbackslash{}s+\char`\"{})
+\begin{DoxyCompactList}\small\item\em 使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga31195f1860c3aff445df8be6e602fecd}{join}} (std\+::vector$<$ std\+::string $>$ const \&strings, std\+::string const \&delimiter)
+\begin{DoxyCompactList}\small\item\em 将 tokens 向量连接成字符串 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__utils_gac058832c57b8033f8a90e05c8ecee103}{string\+Starts\+With}} (std\+::string const \&str, std\+::string const \&prefix)
+\begin{DoxyCompactList}\small\item\em 如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa5a52cf5cff1d44b33db20364c07801a}{replace\+Whitespace}} (std\+::string const \&str, char rep=\textquotesingle{}\+\_\+\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em 用下划线（默认）或其他字符替换字符串中的空格字符 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga283968df765ce49751142cd55e0364d7}{strip}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串末尾去除空格（包括 C\+R、\+L\+F、tabs 等） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga4b0d94273d4e910b353a0ff999c23b7c}{extract\+String}} (std\+::string const \&str, std\+::string const \&startsep, std\+::string const \&endsep)
+\begin{DoxyCompactList}\small\item\em 提取两个分隔符之间的字符串部分 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_ga34ee23a47b698e960a477d9d4e2d435d}{replace\+String\+First}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将 \textquotesingle{}from\textquotesingle{} 的第一个实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_gab6a5b228ce68e5634e2bb2c778b0bc34}{replace\+String\+All}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gafd49e84b9b5e4d95b1d4da28bdbbdb94}{replace\+All}} (std\+::string const \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga534153c7b53c07a0db4bbdcbb81b566f}{tolower}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em Convert string to lowercase. \end{DoxyCompactList}\item 
+std\+::filesystem\+::path \mbox{\hyperlink{group__utils_gabd49e55c0ae1f31a3f30d73284469eac}{absolute\+Path}} (std\+::filesystem\+::path const \&root, std\+::filesystem\+::path const \&path)
+\begin{DoxyCompactList}\small\item\em 根据两个路径计算绝对路径 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa49a5ccff29adea33326680d1e22b456}{sformat}} (char const $\ast$fmt,...) \+\_\+\+\_\+attribute\+\_\+\+\_\+((format(\+\_\+\+\_\+printf\+\_\+\+\_\+
+\begin{DoxyCompactList}\small\item\em 使用 printf 样式参数创建字符串 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string T \mbox{\hyperlink{group__utils_ga7eb44bbb053c52395d5704aa15265632}{from\+\_\+string}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string \mbox{\hyperlink{group__utils_gae142fbf87f70b758581c1845c2fa58e7}{to\+\_\+string}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型，适用于整数类型的版本 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename dest\+\_\+type , typename source\+\_\+type $>$ }\\dest\+\_\+type \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{clamped\+\_\+convert}} (source\+\_\+type source)
+\begin{DoxyCompactList}\small\item\em Clamped numerical conversion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga3c42b68a3562220199677eed7cdceb51}{flushcache}} ()
+\begin{DoxyCompactList}\small\item\em 刷新缓存，有时在 turbo 模式下运行相机时可能会有用 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{system}} (std\+::string const \&cmd, bool errtoo=true)
+\begin{DoxyCompactList}\small\item\em 执行命令并将 stdout 输出抓取到字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}{secs2str}} (double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga961f407b12b1d4a32577facc3d1f6ad9}{secs2str}} (std\+::vector$<$ double $>$ secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位给出的 avg+/-\/std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gaa9401ec9d35d0669e256673c8cdeb4f4}{secs2str}} (std\+::ostringstream \&ss, double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间（ns、us、ms 或 s） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}{num2str}} (double n)
+\begin{DoxyCompactList}\small\item\em 报告一个具有可变乘数（\+K、\+M、\+G、\+T、\+P、\+E、\+Z、\+Y）的数字，精度为小数点后 2 位 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga074c42c36f209780e0420ca3b6e3bfc6}{num2str}} (std\+::ostringstream \&ss, double n)
+\begin{DoxyCompactList}\small\item\em 报告具有可变乘数 (K、\+M、\+G、\+T、\+P、\+E、\+Z、Y) 的数字 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga55e88d558a6aeff700099fa3180fc025}{get\+File\+String}} (char const $\ast$fname, int skip=0)
+\begin{DoxyCompactList}\small\item\em 从文件中读取一行并将其作为字符串返回 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{log\+Level}} = L\+O\+G\+\_\+\+I\+N\+FO
+\begin{DoxyCompactList}\small\item\em 当前日志级别 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}{trace\+Level}} = 0
+\begin{DoxyCompactList}\small\item\em 当前跟踪级别 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}\label{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}} 
+\index{jevois@{jevois}!OptGUIhelper@{OptGUIhelper}}
+\index{OptGUIhelper@{OptGUIhelper}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{OptGUIhelper}{OptGUIhelper}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} = typedef \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}}}
+
+
+
+Definition at line 25 of file G\+U\+Ihelper.\+H.
+
+
+
+\doxysubsubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}\label{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}} 
+\index{jevois@{jevois}!EditorSaveAction@{EditorSaveAction}}
+\index{EditorSaveAction@{EditorSaveAction}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{EditorSaveAction}{EditorSaveAction}}
+{\footnotesize\ttfamily enum Editor\+Save\+Action\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Helper enum for actions to execute after saving a config file. 
+
+
+
+Definition at line 34 of file G\+U\+Ieditor.\+H.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{namespacejevois_a5c82f5b2b9dd4a98d343f9e54eea0fff}\label{namespacejevois_a5c82f5b2b9dd4a98d343f9e54eea0fff}} 
+\index{jevois@{jevois}!async@{async}}
+\index{async@{async}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{async()}{async()}}
+{\footnotesize\ttfamily template$<$class Function , class... Args$>$ \\
+std\+::future$<$std\+::invoke\+\_\+result\+\_\+t$<$std\+::decay\+\_\+t$<$Function$>$, std\+::decay\+\_\+t$<$Args$>$...$>$ $>$ jevois\+::async (\begin{DoxyParamCaption}\item[{Function \&\&}]{f,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+使用线程池异步执行 
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap(), jevois\+::\+G\+U\+Ihelper\+::compile\+Command(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), jevois\+::\+Movie\+Output\+::\+Movie\+Output(), jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::dnn\+::\+Network\+::ready(), jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::yolo().
+
+\mbox{\Hypertarget{namespacejevois_a5dbfbd62f0701adcef770280e0bc31f6}\label{namespacejevois_a5dbfbd62f0701adcef770280e0bc31f6}} 
+\index{jevois@{jevois}!async\_little@{async\_little}}
+\index{async\_little@{async\_little}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{async\_little()}{async\_little()}}
+{\footnotesize\ttfamily template$<$class Function , class... Args$>$ \\
+std\+::future$<$std\+::invoke\+\_\+result\+\_\+t$<$std\+::decay\+\_\+t$<$Function$>$, std\+::decay\+\_\+t$<$Args$>$...$>$ $>$ jevois\+::async\+\_\+little (\begin{DoxyParamCaption}\item[{Function \&\&}]{f,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+使用线程池异步执行 
+
+
+
+Referenced by jevois\+::\+Camera\+Device\+::\+Camera\+Device(), jevois\+::\+G\+U\+Ihelper\+::draw\+System(), jevois\+::\+Engine\+::\+Engine(), and jevois\+::\+Watchdog\+::\+Watchdog().
+
+\mbox{\Hypertarget{namespacejevois_a702884502b6ac843dada7c3f24e6e1fb}\label{namespacejevois_a702884502b6ac843dada7c3f24e6e1fb}} 
+\index{jevois@{jevois}!drawErrorImage@{drawErrorImage}}
+\index{drawErrorImage@{drawErrorImage}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{drawErrorImage()}{drawErrorImage()}}
+{\footnotesize\ttfamily void jevois\+::draw\+Error\+Image (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{errmsg,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{videoerrimg }\end{DoxyParamCaption})}
+
+
+
+将错误消息显示到 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中 
+
+错误消息应由一个字符串组成，其中多行可能由 \textbackslash{}n 字符分隔，例如 \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{warn\+And\+Ignore\+Exception()}} 返回的字符串。该消息将写入 图像中，该图像应该是有效的（）。这对于显示通过 U\+SB 发送的视频流中的模块异常很有用。 
+
+Definition at line 299 of file Log.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::clear(), jevois\+::rawimage\+::draw\+Disk(), jevois\+::rawimage\+::draw\+Line(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::rawimage\+::\+Font10x20, jevois\+::rawimage\+::\+Font14x26, jevois\+::rawimage\+::\+Font6x10, jevois\+::rawimage\+::\+Font7x13, jevois\+::\+Raw\+Image\+::height, L\+E\+R\+R\+OR, split(), jevois\+::\+Raw\+Image\+::valid(), white\+Color(), jevois\+::\+Raw\+Image\+::width, and jevois\+::rawimage\+::write\+Text().
+
+\mbox{\Hypertarget{namespacejevois_a3c137ebcbbdda157639ae3e711568db2}\label{namespacejevois_a3c137ebcbbdda157639ae3e711568db2}} 
+\index{jevois@{jevois}!getFanSpeed@{getFanSpeed}}
+\index{getFanSpeed@{getFanSpeed}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{getFanSpeed()}{getFanSpeed()}}
+{\footnotesize\ttfamily int jevois\+::get\+Fan\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取风扇速度百分比，仅在 Je\+Vois-\/\+Pro 平台上有意义，其他所有平台均返回 0 
+
+
+
+Definition at line 153 of file Sys\+Info.\+C.
+
+
+
+References get\+File\+String().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System().
+
+\mbox{\Hypertarget{namespacejevois_a4bc07166fd9b5ae7a021fcb04a170746}\label{namespacejevois_a4bc07166fd9b5ae7a021fcb04a170746}} 
+\index{jevois@{jevois}!getNumInstalledNPUs@{getNumInstalledNPUs}}
+\index{getNumInstalledNPUs@{getNumInstalledNPUs}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{getNumInstalledNPUs()}{getNumInstalledNPUs()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::get\+Num\+Installed\+N\+P\+Us (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取此系统上存在的 Je\+Vois-\/\+Pro N\+PU 数量 
+
+
+
+Definition at line 127 of file Sys\+Info.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::dnn\+::\+Pipeline\+::\+Pipeline().
+
+\mbox{\Hypertarget{namespacejevois_aae7970fe8c32c8285c24c352ab960163}\label{namespacejevois_aae7970fe8c32c8285c24c352ab960163}} 
+\index{jevois@{jevois}!getNumInstalledSPUs@{getNumInstalledSPUs}}
+\index{getNumInstalledSPUs@{getNumInstalledSPUs}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{getNumInstalledSPUs()}{getNumInstalledSPUs()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::get\+Num\+Installed\+S\+P\+Us (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取此系统上存在的 Hailo8 S\+PU 数量 
+
+
+
+Definition at line 138 of file Sys\+Info.\+C.
+
+
+
+References get\+File\+String(), and to\+\_\+string().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::dnn\+::\+Pipeline\+::\+Pipeline().
+
+\mbox{\Hypertarget{namespacejevois_a6ab540ea34f56b48165b563719c5cad5}\label{namespacejevois_a6ab540ea34f56b48165b563719c5cad5}} 
+\index{jevois@{jevois}!getNumInstalledTPUs@{getNumInstalledTPUs}}
+\index{getNumInstalledTPUs@{getNumInstalledTPUs}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{getNumInstalledTPUs()}{getNumInstalledTPUs()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::get\+Num\+Installed\+T\+P\+Us (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取此系统上存在的 Coral T\+PU 数量 
+
+
+
+Definition at line 87 of file Sys\+Info.\+C.
+
+
+
+References get\+File\+String(), system(), and to\+\_\+string().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::dnn\+::\+Pipeline\+::\+Pipeline().
+
+\mbox{\Hypertarget{namespacejevois_a26961977d36a68b1cc6fb0f67298aa12}\label{namespacejevois_a26961977d36a68b1cc6fb0f67298aa12}} 
+\index{jevois@{jevois}!getNumInstalledVPUs@{getNumInstalledVPUs}}
+\index{getNumInstalledVPUs@{getNumInstalledVPUs}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{getNumInstalledVPUs()}{getNumInstalledVPUs()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::get\+Num\+Installed\+V\+P\+Us (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取此系统上存在的 Myriad-\/X V\+PU 数量 
+
+
+
+Definition at line 112 of file Sys\+Info.\+C.
+
+
+
+References system().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::dnn\+::\+Pipeline\+::\+Pipeline().
+
+\mbox{\Hypertarget{namespacejevois_a98e29073164f0fa721c39c968bcafb36}\label{namespacejevois_a98e29073164f0fa721c39c968bcafb36}} 
+\index{jevois@{jevois}!logEnd@{logEnd}}
+\index{logEnd@{logEnd}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{logEnd()}{logEnd()}}
+{\footnotesize\ttfamily void jevois\+::log\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+终止日志服务 
+
+您必须在准备结束程序时调用此方法，以停止记录器线程。否则，\+Thread\+Pool 将卡在一个正在运行的线程上，并且永远不会退出。 
+
+Definition at line 144 of file Log.\+C.
+
+
+
+References log\+Set\+Engine().
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}\label{namespacejevois_a49a55dd8be92ab5bd902dcd5ca560a66}} 
+\index{jevois@{jevois}!opengl\_error@{opengl\_error}}
+\index{opengl\_error@{opengl\_error}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{opengl\_error()}{opengl\_error()}}
+{\footnotesize\ttfamily std\+::string jevois\+::opengl\+\_\+error (\begin{DoxyParamCaption}\item[{int}]{err }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Function to write Open\+GL errors in clear witout requiring G\+L\+UT. 
+
+
+
+Definition at line 60 of file Open\+G\+L.\+H.
+
+\mbox{\Hypertarget{namespacejevois_a828fc05eea12bd9d7071a1bc561e1835}\label{namespacejevois_a828fc05eea12bd9d7071a1bc561e1835}} 
+\index{jevois@{jevois}!videoMappingsFromStream@{videoMappingsFromStream}}
+\index{videoMappingsFromStream@{videoMappingsFromStream}!jevois@{jevois}}
+\doxyparagraph{\texorpdfstring{videoMappingsFromStream()}{videoMappingsFromStream()}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}}$>$ jevois\+::video\+Mappings\+From\+Stream (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{s,  }\item[{std\+::istream \&}]{is,  }\item[{size\+\_\+t \&}]{defidx,  }\item[{bool}]{checkso,  }\item[{bool}]{hasgui }\end{DoxyParamCaption})}
+
+
+
+解析配置文件中的所有映射，并指出哪一个是默认的 
+
+文件的内容已排序，以便生成的向量按以下顺序排列：1) 格式 fcc，然后是 2) 分辨率（从大到小，先看 x），以及 3) 帧速率 （从高到低）。
+
+相机格式字段可以有冒号分隔的前缀，用于指定 W\+D\+R（宽动态范围）相机捕获模式和/或当相机输入暗淡与传感器原生暗淡不匹配 时的裁剪与重新缩放行为（仅对 Je\+Vois-\/\+Pro 有效）。
+
+输出宽度和高度可以是绝对的，也可以是相对于相机宽度和高度（如果前缀为 + 或 -\/ 符号）。
+
+如果输出格式重复，每增加一个重复，帧速率就会降低 1fps。这是因为我们需要向主机提供不同的视频格式，以便用户可以选择 他们想要的格式。例如： \begin{DoxyVerb}YUYV 320 240 60.0 YUYV 320 240 60.0 JeVois SaveVideo
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorX MyModule
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorY MyModule
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorZ MyModule
+\end{DoxyVerb}
+
+
+将被消除歧义为：
+
+\begin{DoxyVerb}YUYV 320 240 60.0 YUYV 320 240 60.0 JeVois SaveVideo
+YUYV 320 240 59.0 YUYV 320 240 60.0 VendorX MyModule
+YUYV 320 240 58.0 YUYV 320 240 60.0 VendorY MyModule
+YUYV 320 240 57.0 YUYV 320 240 60.0 VendorZ MyModule
+\end{DoxyVerb}
+
+
+并且在 {\bfseries{guvcview}} 或主机上运行的类似程序中，这 4 个映射将可用，因为它们对应 4 个不同的帧速率。建议您在 Je\+Vois 命 令行界面中发出 {\bfseries{listmapping}} 命令以确认在进行任何调整后在运行时使用的最终映射；有关详细信息，请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} 。
+
+defidx 是结果映射向量中默认格式的索引。如果指定了多个默认格式，则以第一个为准。
+
+有关如何组织 {\bfseries{videomappings.\+cfg}} 的说明，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 
+
+Referenced by main().
+

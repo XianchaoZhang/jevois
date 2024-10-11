@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__compilerutil">
+<title>其他与控制编译相关的预处理器实用程序</title>
+<indexterm><primary>其他与控制编译相关的预处理器实用程序</primary></indexterm>
+<section>
+<title> </title>
+Collaboration diagram for 其他与控制编译相关的预处理器实用程序:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__compilerutil.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__compilerutil_1ga63d1052bb64ba1d6d28317fc52c4a8f7">JEVOIS_BEGIN_UNCHECKED_INCLUDES</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__compilerutil_1ga03b352fa0cf830470c4b8fdbf810f81e">JEVOIS_END_UNCHECKED_INCLUDES</link>   <link linkend="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367">JEVOIS_PRAGMA</link>(diagnostic pop)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_group__compilerutil_1ga63d1052bb64ba1d6d28317fc52c4a8f7"/>    <section>
+    <title>JEVOIS_BEGIN_UNCHECKED_INCLUDES</title>
+<indexterm><primary>JEVOIS_BEGIN_UNCHECKED_INCLUDES</primary><secondary>其他与控制编译相关的预处理器实用程序</secondary></indexterm>
+<indexterm><primary>其他与控制编译相关的预处理器实用程序</primary><secondary>JEVOIS_BEGIN_UNCHECKED_INCLUDES</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_BEGIN_UNCHECKED_INCLUDES</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<link linkend="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367">JEVOIS_PRAGMA</link>(diagnostic&#32;push)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wpragmas&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wunknown-pragmas&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wunused-local-typedefs&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wattributes&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wconstant-conversion&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wenum-compare&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wunknown-attributes&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wunused-but-set-variable&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wreorder&quot;</emphasis>)&#32;\
+&#32;&#32;JEVOIS_PRAGMA(diagnostic&#32;ignored&#32;<emphasis role="stringliteral">&quot;-Wall&quot;</emphasis>)
+</programlisting>
+<para>一系列预处理器指令，将特定警告关闭为错误，直到匹配 JEVOIS_END_UNCHECKED_INCLUDES。 这对于使用在 -Wall 下无法编译的代码编写的库很有用。</para>
+
+<para>必须跟随着匹配的 JEVOIS_END_UNCHECKED_INCLUDES </para>
+<para>
+Definition at line 82 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_group__compilerutil_1ga03b352fa0cf830470c4b8fdbf810f81e"/>    <section>
+    <title>JEVOIS_END_UNCHECKED_INCLUDES</title>
+<indexterm><primary>JEVOIS_END_UNCHECKED_INCLUDES</primary><secondary>其他与控制编译相关的预处理器实用程序</secondary></indexterm>
+<indexterm><primary>其他与控制编译相关的预处理器实用程序</primary><secondary>JEVOIS_END_UNCHECKED_INCLUDES</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_END_UNCHECKED_INCLUDES   <link linkend="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367">JEVOIS_PRAGMA</link>(diagnostic pop)</computeroutput></para>
+<para>重新打开 JEVOIS_BEGIN_UNCHECKED_INCLUDES 之前有效的所有警告。 </para>
+<para>
+Definition at line 97 of file CompilerUtil.H.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,95 @@
+\hypertarget{DNN_2Utils_8H}{}\doxysubsection{include/jevois/\+D\+N\+N/\+Utils.H File Reference}
+\label{DNN_2Utils_8H}\index{include/jevois/DNN/Utils.H@{include/jevois/DNN/Utils.H}}
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$tensorflow/lite/c/common.\+h$>$}\newline
+{\ttfamily \#include $<$ovxlib/vsi\+\_\+nn\+\_\+pub.\+h$>$}\newline
+{\ttfamily \#include $<$hailo/hailort.\+h$>$}\newline
+{\ttfamily \#include $<$onnxruntime\+\_\+cxx\+\_\+api.\+h$>$}\newline
+Include dependency graph for Utils.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DNN_2Utils_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{DNN_2Utils_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\item 
+ \mbox{\hyperlink{namespacejevois_1_1dnn}{jevois\+::dnn}}
+\begin{DoxyCompactList}\small\item\em 深度神经网络 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, std\+::string $>$ \mbox{\hyperlink{group__dnn_ga56f17dd747d44f13a9e1f7085a3d9469}{jevois\+::dnn\+::read\+Labels\+File}} (std\+::string const \&fname)
+\begin{DoxyCompactList}\small\item\em 读取标签文件 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gab9823d8696c5547a1ae5e6a12262098a}{jevois\+::dnn\+::get\+Label}} (std\+::map$<$ int, std\+::string $>$ const \&labels, int id)
+\begin{DoxyCompactList}\small\item\em 从 id 获取标签 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_gaa4745ed932b27371704c95921b170e8a}{jevois\+::dnn\+::string\+To\+R\+G\+BA}} (std\+::string const \&label, unsigned char alpha=128)
+\begin{DoxyCompactList}\small\item\em 根据标签名称计算颜色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_gad145daee8d4e5bb273e9088056d19405}{jevois\+::dnn\+::topK}} (float const $\ast$pf\+Prob, float $\ast$pf\+Max\+Prob, uint32\+\_\+t $\ast$p\+Max\+Class, uint32\+\_\+t output\+Count, uint32\+\_\+t top\+Num)
+\begin{DoxyCompactList}\small\item\em 获取前 k 个条目及其索引 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gad9c3f395bec79145589fd39488f884ec}{jevois\+::dnn\+::shapestr}} (cv\+::\+Mat const \&m)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 cv\+::\+Mat 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gaac2cb8a2fe11b45299e8c4c6eea9b865}{jevois\+::dnn\+::shapestr}} (Tf\+Lite\+Tensor const $\ast$t)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 Tf\+Lite\+Tensor 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc}{jevois\+::dnn\+::shapestr}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 N\+PU 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::vector$<$ size\+\_\+t $>$ \mbox{\hyperlink{group__dnn_gae60b5b58375993db5c9e51f46b6bf428}{jevois\+::dnn\+::strshape}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从包含 Ax\+BxC... 的字符串中获取 size\+\_\+t 的向量 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_ga124e654d215055679eb24323ebaee202}{jevois\+::dnn\+::tf2cv}} (Tf\+Lite\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 Tensor\+Flow 数据类型转换为 Open\+CV \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_gacff04669a655ea47c1eac3eeaa9a8ab4}{jevois\+::dnn\+::tf2vsi}} (Tf\+Lite\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 Tensor\+Flow 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_ga2fbb284d549bdd6e69c18436a294f38c}{jevois\+::dnn\+::vsi2cv}} (vsi\+\_\+nn\+\_\+type\+\_\+e t)
+\begin{DoxyCompactList}\small\item\em 从\+N\+P\+U数据类型转换为 Open\+CV \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_ga82f43e88e1e64aa6a97b0bdc85747afb}{jevois\+::dnn\+::clamp}} (cv\+::\+Rect \&r, int width, int height)
+\begin{DoxyCompactList}\small\item\em 将矩形限制在给定的图像宽度和高度内 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_ga44ad3cd1fee2ce347dc215585cd8e20b}{jevois\+::dnn\+::clamp}} (cv\+::\+Rect2f \&r, float width, float height)
+\begin{DoxyCompactList}\small\item\em 将矩形限制在给定的图像宽度和高度内 \end{DoxyCompactList}\item 
+std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{group__dnn_ga7fa178a1b984edc8cd9b5f761d691d5f}{jevois\+::dnn\+::parse\+Tensor\+Specs}} (std\+::string const \&specs)
+\begin{DoxyCompactList}\small\item\em 解析张量规范 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga8a6f29ea2202a325d0c99111488d7b67}{jevois\+::dnn\+::attrmat}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr, void $\ast$dataptr=nullptr)
+\begin{DoxyCompactList}\small\item\em 从 attr 和可能的数据指针构造一个 cv\+::\+Mat。 \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{group__dnn_gae40b6505b2d82fa2a580e787f0503308}{jevois\+::dnn\+::attrdims}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 获取一个张量 dims 作为 int 向量，用于构造匹配的 cv\+::\+Mat \end{DoxyCompactList}\item 
+cv\+::\+Size \mbox{\hyperlink{group__dnn_gab724bef5b8efd2446a0600cf269bcbe3}{jevois\+::dnn\+::attrsize}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 以 cv\+::\+Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga831921dbaf6ac75427bc68156ebb0bc8}{jevois\+::dnn\+::attrstr}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__dnn_gaf83f2f4f42ec0efefa6f3dda166660b4}{jevois\+::dnn\+::attrmatch}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr, cv\+::\+Mat const \&blob)
+\begin{DoxyCompactList}\small\item\em 检查 cv\+::\+Mat blob 是否与 attr 的规范完全匹配 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_ga51841d296531fc366c5091863a9141fe}{jevois\+::dnn\+::tensorattr}} (Tf\+Lite\+Tensor const $\ast$t)
+\begin{DoxyCompactList}\small\item\em 获取 Tensor\+Flow Lite 张量的张量形状和类型属性 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__dnn_ga452497353f71ffe559e02da85c78896b}{jevois\+::dnn\+::softmax}} (float const $\ast$input, size\+\_\+t const n, size\+\_\+t const stride, float const fac, float $\ast$output, bool maxonly)
+\begin{DoxyCompactList}\small\item\em 将 softmax 应用于浮点向量。 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga55a15be28c64149fdb2762b71fb344a0}{jevois\+::dnn\+::quantize}} (cv\+::\+Mat const \&m, vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 根据 attr 中的量化规范从 float32 量化为定点 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_gac5c65bee7351c37b9500cad0292f8cc9}{jevois\+::dnn\+::dequantize}} (cv\+::\+Mat const \&m, vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 根据 attr 中的量化规范将输出反量化为 float32 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__dnn_ga8da769aea616ace74e265fbc06770439}{jevois\+::dnn\+::effective\+Dims}} (cv\+::\+Mat const \&m)
+\begin{DoxyCompactList}\small\item\em 返回 cv\+::\+Mat 中非单位暗淡的数量 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga97ca13925a9abe3bc80251a61cf18960}{jevois\+::dnn\+::concatenate}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&tensors, int axis)
+\begin{DoxyCompactList}\small\item\em 将多个张量连接成一个。 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga705e4633e47b4b39f01a710baf5acc29}{jevois\+::dnn\+::shapestr}} (hailo\+\_\+vstream\+\_\+info\+\_\+t const \&vi)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 Hailo 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_ga69f343327103557c67e6559e72a5fe09}{jevois\+::dnn\+::tensorattr}} (hailo\+\_\+vstream\+\_\+info\+\_\+t const \&vi)
+\begin{DoxyCompactList}\small\item\em 获取 Hailo 张量的张量形状和类型属性 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_ga8f572d133c52e5eb2fe81d8bf72ebefe}{jevois\+::dnn\+::hailo2vsi}} (hailo\+\_\+format\+\_\+type\+\_\+t t)
+\begin{DoxyCompactList}\small\item\em 从 Hailo 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_ga5f1e444edfb3bffbf851b41ae3112b23}{jevois\+::dnn\+::onnx2vsi}} (O\+N\+N\+X\+Tensor\+Element\+Data\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 O\+N\+N\+X-\/\+Runtime 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga39970f486d748880bb2286dafd38d341}{jevois\+::dnn\+::shapestr}} (Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&ti)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 O\+N\+NX 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_gaf77c85c3d7329994fdf6ab1caffef5f0}{jevois\+::dnn\+::tensorattr}} (Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&ti)
+\begin{DoxyCompactList}\small\item\em 获取 O\+N\+NX 运行时张量的张量形状和类型属性 \end{DoxyCompactList}\end{DoxyCompactItemize}

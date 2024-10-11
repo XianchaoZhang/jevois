@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Module_8H">
+<title>include/jevois/Core/Module.H File Reference</title>
+<indexterm><primary>include/jevois/Core/Module.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Image/RawImage.H&gt;
+#include &lt;jevois/Core/InputFrame.H&gt;
+#include &lt;jevois/Core/OutputFrame.H&gt;
+#include &lt;jevois/Core/VideoBuf.H&gt;
+#include &lt;jevois/Core/UserInterface.H&gt;
+#include &lt;jevois/Component/Component.H&gt;
+#include &lt;jevois/Types/ObjReco.H&gt;
+#include &lt;jevois/Types/ObjDetect.H&gt;
+#include &lt;jevois/Types/Enum.H&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;memory&gt;
+#include &lt;ostream&gt;
+#include &lt;jevois/GPU/GUIhelper.H&gt;
+#include &lt;glm/gtc/matrix_transform.hpp&gt;
+</programlisting>Include dependency graph for Module.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Module_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Module_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Module">jevois::Module</link></para>
+
+<para>视觉处理模块的虚基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link></para>
+
+<para>支持标准化串行消息的模块的基类 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Module_8H_1a19a74668397740a2cd4813240e547179">JEVOIS_REGISTER_MODULE</link>(MODULENAME)</para>
+
+<para>注册一个模块，允许它从 .so 文件动态加载 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Module_8H_1a4bd01f80534e626c397ce5bd0e88b7ca">JEVOIS_DISABLED_MODULE</link>(MODULENAME)</para>
+
+<para>创建并注册一个已禁用的模块，允许它从 .so 文件动态加载 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Module_8H_1a4bd01f80534e626c397ce5bd0e88b7ca"/>    <section>
+    <title>JEVOIS_DISABLED_MODULE</title>
+<indexterm><primary>JEVOIS_DISABLED_MODULE</primary><secondary>Module.H</secondary></indexterm>
+<indexterm><primary>Module.H</primary><secondary>JEVOIS_DISABLED_MODULE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DISABLED_MODULE( MODULENAME)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<emphasis role="keyword">class&#32;</emphasis>MODULENAME&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;<link linkend="_classjevois_1_1Module">jevois::Module</link>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;public:&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;MODULENAME(std::string&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;instancename)&#32;:&#32;<link linkend="_namespacejevois">jevois</link>::Module(instancename)&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;{&#32;<emphasis role="keywordflow">throw</emphasis>&#32;std::runtime_error(<emphasis role="stringliteral">&quot;This&#32;module&#32;is&#32;disabled&#32;on&#32;your&#32;hardware&#32;configuration&quot;</emphasis>);&#32;}&#32;\
+&#32;&#32;};&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;extern&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;std::shared_ptr&lt;jevois::Module&gt;&#32;MODULENAME##_create(std::string&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;instanceid)&#32;\
+&#32;&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;std::shared_ptr&lt;jevois::Module&gt;(<emphasis role="keyword">new</emphasis>&#32;MODULENAME(instanceid));&#32;}&#32;\
+&#32;&#32;extern&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;MODULENAME##_version_major()&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>;&#32;}&#32;\
+&#32;&#32;extern&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;MODULENAME##_version_minor()&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>;&#32;}&#32;\
+</programlisting><para>
+
+<para>创建并注册一个已禁用的模块，允许它从 .so 文件动态加载 </para>
+</para>
+<para>
+Definition at line 327 of file Module.H.</para>
+    </section><anchor xml:id="_Module_8H_1a19a74668397740a2cd4813240e547179"/>    <section>
+    <title>JEVOIS_REGISTER_MODULE</title>
+<indexterm><primary>JEVOIS_REGISTER_MODULE</primary><secondary>Module.H</secondary></indexterm>
+<indexterm><primary>Module.H</primary><secondary>JEVOIS_REGISTER_MODULE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_REGISTER_MODULE( MODULENAME)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<emphasis role="keyword">extern</emphasis>&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;std::shared_ptr&lt;jevois::Module&gt;&#32;MODULENAME##_create(std::string&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;instanceid)&#32;\
+&#32;&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;std::shared_ptr&lt;jevois::Module&gt;(<emphasis role="keyword">new</emphasis>&#32;MODULENAME(instanceid));&#32;}&#32;\
+&#32;&#32;extern&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;MODULENAME##_version_major()&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>;&#32;}&#32;\
+&#32;&#32;extern&#32;<emphasis role="stringliteral">&quot;C&quot;</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;MODULENAME##_version_minor()&#32;{&#32;<emphasis role="keywordflow">return</emphasis>&#32;<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>;&#32;}&#32;\
+</programlisting><para>
+
+<para>注册一个模块，允许它从 .so 文件动态加载 </para>
+</para>
+<para>
+Definition at line 304 of file Module.H.</para>
+</section>
+</section>
+</section>

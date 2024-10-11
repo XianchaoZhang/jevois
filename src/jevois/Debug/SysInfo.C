@@ -24,25 +24,25 @@
 std::string jevois::getSysInfoCPU()
 {
 #ifdef JEVOIS_PLATFORM_PRO
-  // One JeVois Pro, use cpu 2 (big core) and thermal zone 1:
+  // 一个 JeVois Pro，使用 cpu 2（大核）和 thermal zone 1:
   int freq = 2208;
   try { freq = std::stoi(jevois::getFileString("/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq")) / 1000; }
-  catch (...) { } // silently ignore any errors
+  catch (...) { } // 静默忽略任何错误
   
   int temp = 30;
   try { temp = std::stoi(jevois::getFileString("/sys/class/thermal/thermal_zone1/temp")); }
-  catch (...) { } // silently ignore any errors
+  catch (...) { } // 静默忽略任何错误
 #else
   int freq = 1344;
   try { freq = std::stoi(jevois::getFileString("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq")) / 1000; }
-  catch (...) { } // silently ignore any errors
+  catch (...) { } // 静默忽略任何错误
   
   int temp = 30;
   try { temp = std::stoi(jevois::getFileString("/sys/class/thermal/thermal_zone0/temp")); }
-  catch (...) { } // silently ignore any errors
+  catch (...) { } // 静默忽略任何错误
 #endif
   
-  // On some hosts, temp is in millidegrees:
+  // 在某些主机上，temp 以毫度为单位：
   if (temp > 200) temp /= 1000;
   
   std::string load = jevois::getFileString("/proc/loadavg");
@@ -75,7 +75,7 @@ std::string jevois::getSysInfoVersion()
 {
   std::string ver = jevois::getFileString("/proc/version");
 
-  // Truncate at "Linux Version XXX":
+  // 截断 at "Linux Version XXX":
   size_t pos = ver.find(' ');
   pos = ver.find(' ', pos + 1);
   pos = ver.find(' ', pos + 1);
@@ -88,7 +88,7 @@ size_t jevois::getNumInstalledTPUs()
 {
   size_t n = 0;
 
-  // First detect any PCIe accelerators:
+  // 首先检测任何 PCIe 加速器：
   while (true)
   {
     try { jevois::getFileString(("/sys/class/apex/apex_" + std::to_string(n) + "/temp").c_str()); }
@@ -96,10 +96,10 @@ size_t jevois::getNumInstalledTPUs()
     ++n;
   }
 
-  // Then detect any USB accelerators:
-  // Note: reported name and USB ID in lsusb changes once we start using the device...
-  // Before running a network: ID 1a6e:089a Global Unichip Corp. 
-  // After running a network: ID 18d1:9302 Google Inc. 
+  // 然后检测任何 USB 加速器： 
+  // 注意：一旦我们开始使用该设备，lsusb 中报告的名称和 USB ID 就会发生变化…… 
+  // 运行网络之前：ID 1a6e：089a Global Unichip Corp. 
+  // 运行网络之后：ID 18d1：9302 Google Inc.
 
   try { n += std::stoi(jevois::system("/usr/bin/lsusb | /usr/bin/grep 1a6e:089a | /usr/bin/wc -l")); } catch (...) { }
 
@@ -111,9 +111,9 @@ size_t jevois::getNumInstalledTPUs()
 // ####################################################################################################
 size_t jevois::getNumInstalledVPUs()
 {
-  // Note: reported name and USB ID in lsusb changes once we start using the device...
-  // Before running a network: ID 03e7:2485 Intel Movidius MyriadX
-  // After running a network: ID 03e7:f63b Myriad VPU [Movidius Neural Compute Stick]
+  // 注意：一旦我们开始使用该设备，lsusb 中报告的名称和 USB ID 就会发生变化…… 
+  // 运行网络之前：ID 03e7:2485 Intel Movidius MyriadX 
+  // 运行网络后：ID 03e7:f63b Myriad VPU [Movidius Neural Compute Stick] 
   size_t n = 0;
 
   try { n += std::stoi(jevois::system("/usr/bin/lsusb | /usr/bin/grep 03e7:2485 | /usr/bin/wc -l")); } catch (...) { }
@@ -126,7 +126,7 @@ size_t jevois::getNumInstalledVPUs()
 // ####################################################################################################
 size_t jevois::getNumInstalledNPUs()
 {
-  // Note: could also check /proc/cpuinfo to get the NPU hardware version
+  // 注意：也可以检查 /proc/cpuinfo 以获取 NPU 硬件版本
 #ifdef JEVOIS_PLATFORM_PRO
   return 1;
 #else

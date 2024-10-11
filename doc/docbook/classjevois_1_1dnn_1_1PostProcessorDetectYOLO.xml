@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO">
+<title>jevois::dnn::PostProcessorDetectYOLO Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorDetectYOLO.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>用于原始 YOLO 解码的后处理器子组件 </para>
+<para>
+Definition at line 27 of file PostProcessorDetectYOLO.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorDetectYOLO:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorDetectYOLO__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorDetectYOLO:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorDetectYOLO__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a20f9d6dd65134226b4f8330a3ef73b34">~PostProcessorDetectYOLO</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1adada304aade362c2828d064d8f723048">freeze</link> (bool doit)</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153">yolo</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, std::vector&lt; int &gt; &amp;classIds, std::vector&lt; float &gt; &amp;confidences, std::vector&lt; cv::Rect &gt; &amp;boxes, size_t nclass, float boxThreshold, float confThreshold, cv::Size const &amp;bsiz, int fudge, size_t const maxbox)</para>
+
+<para>Generic raw YOLO processing. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a0249dbdaee94af6a5db0eaf20ef63672">JEVOIS_DECLARE_PARAMETER</link> (scalexy, float, &quot;If 0, use old-style YOLO boxes (YOLOv2/v3/v4) otherwise, this is &quot; &quot;the scale_xy factor for new-style YOLO coordinates (YOLOv5/v7 value is usually 2.0 &quot; &quot;but check the <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153">yolo</link> layer in the model&apos;s .cfg file)&quot;, 0.0F, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a8d1e03345f35b788e57a1494252d6b98">JEVOIS_DECLARE_PARAMETER</link> (sigmoid, bool, &quot;Apply sigmoid to raw YOLO outputs, use when the last conv layers &quot; &quot;just before <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153">yolo</link>/detection/region layers have linear activation (most &quot; &quot;YOLOv2/v3/v4 models, but not YOLOv5/v7 which have logistic activation on their &quot; &quot;last conv)&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a20f9d6dd65134226b4f8330a3ef73b34"/>    <section>
+    <title>~PostProcessorDetectYOLO()</title>
+<indexterm><primary>~PostProcessorDetectYOLO</primary><secondary>jevois::dnn::PostProcessorDetectYOLO</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary><secondary>~PostProcessorDetectYOLO</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorDetectYOLO::~PostProcessorDetectYOLO ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 50 of file PostProcessorDetectYOLO.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1adada304aade362c2828d064d8f723048"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorDetectYOLO</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetectYOLO::freeze (bool doit)</computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Definition at line 54 of file PostProcessorDetectYOLO.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153"/>    <section>
+    <title>yolo()</title>
+<indexterm><primary>yolo</primary><secondary>jevois::dnn::PostProcessorDetectYOLO</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary><secondary>yolo</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetectYOLO::yolo (std::vector&lt; cv::Mat &gt; const &amp; outs, std::vector&lt; int &gt; &amp; classIds, std::vector&lt; float &gt; &amp; confidences, std::vector&lt; cv::Rect &gt; &amp; boxes, size_t nclass, float boxThreshold, float confThreshold, cv::Size const &amp; bsiz, int fudge, size_t const maxbox)</computeroutput></para><para>
+
+<para>Generic raw YOLO processing. </para>
+</para>
+<para>
+Definition at line 68 of file PostProcessorDetectYOLO.C.</para>
+<para>
+References jevois::async(), jevois::joinall(), LINFO, LTHROW, jevois::sformat(), and jevois::dnn::shapestr().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a0249dbdaee94af6a5db0eaf20ef63672"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetectYOLO</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (scalexy , float , &quot;If 0, use old-style YOLO boxes(YOLOv2/v3/v4) otherwise, this is &quot; &quot;the scale_xy factor for new-style YOLO coordinates(YOLOv5/v7 value is usually 2.0 &quot; &quot;but check the <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153">yolo</link> layer in the model &apos;s .cfg file)&quot; , 0. 0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a8d1e03345f35b788e57a1494252d6b98"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetectYOLO</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetectYOLO</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (sigmoid , bool , &quot;Apply sigmoid to raw YOLO outputs, use when the last conv layers &quot; &quot;just before <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO_1a25d60028a979ad201e3de71908a32153">yolo</link>/detection/region layers have linear activation(most &quot; &quot;YOLOv2/v3/v4 models, but not YOLOv5/v7 which have logistic activation on their &quot; &quot;last conv)&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorDetectYOLO_8H">PostProcessorDetectYOLO.H</link>include/jevois/DNN/<link linkend="_PostProcessor_8H">PostProcessor.H</link>src/jevois/DNN/<link linkend="_PostProcessorDetectYOLO_8C">PostProcessorDetectYOLO.C</link></section>
+</section>

@@ -1,0 +1,939 @@
+\hypertarget{structjevois_1_1VideoMapping}{}\doxysubsection{jevois\+::Video\+Mapping Struct Reference}
+\label{structjevois_1_1VideoMapping}\index{jevois::VideoMapping@{jevois::VideoMapping}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Mapping.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+用于保存处理 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的视频映射定义的简单结构 
+
+此结构指定输出视频格式、分辨率和帧速率（通过 U\+SB 发送给最终用户）、相应的摄像头捕获视频格式、分辨率和帧速率，以及 用于处理摄像头帧并生成相应输出帧的模块。此类还为使用不同单位的 U\+SB 和 V4\+L2 提供帧速率和帧间隔周期之间的转换函数。
+
+Je\+Vois 的操作基于可用的 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 定义列表，该列表在 micro\+SD 卡上名为 J\+E\+V\+O\+IS\+:config/videomappings.\+cfg 的文件中 配置。视频映射指示哪些输出格式暴露给通过 U\+SB 连接的主机，以及当主机上运行的视频捕获软件选择给定的输出格式时应使用 哪种相应的相机格式和视觉处理模块。
+
+有关如何组织 videomappings.\+cfg 的说明，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 
+
+Definition at line 56 of file Video\+Mapping.\+H.
+
+
+
+Collaboration diagram for jevois\+::Video\+Mapping\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=209pt]{structjevois_1_1VideoMapping__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a908efc3860db645b046cb8586d3202e6}{path}} () const
+\begin{DoxyCompactList}\small\item\em 返回模块目录的完整绝对路径 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_ad718fd523b68983d3bacc0ddbb23aef2}{sopath}} (bool delete\+\_\+old\+\_\+versions=false) const
+\begin{DoxyCompactList}\small\item\em 返回模块的 .so 或 .py 文件的完整绝对路径和文件名 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_ac1f6b173c8a0ccb774f75bea8efa6aa1}{srcpath}} () const
+\begin{DoxyCompactList}\small\item\em 返回模块的.\+C 或 .py 文件的完整绝对路径和文件名 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_aefb831c126e44cfddb70820f0d4d4c10}{cmakepath}} () const
+\begin{DoxyCompactList}\small\item\em 返回模块的 C\+Make\+Lists.\+txt 文件的完整绝对路径和文件名 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a28b954d94a5c417fedbc7c6dac3aee33}{modinfopath}} () const
+\begin{DoxyCompactList}\small\item\em 返回模块的 modinfo.\+html 文件的完整绝对路径和文件名 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a4270a8dfb97b1e2fcc2bee3290bacc13}{osize}} () const
+\begin{DoxyCompactList}\small\item\em 返回输出图像的字节大小 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a17b4d229e5c428fedddbc53807c568d4}{csize}} () const
+\begin{DoxyCompactList}\small\item\em 返回相机图像的大小（以字节为单位） \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a85b64f256a5d09764d8c6abce4186c11}{c2size}} () const
+\begin{DoxyCompactList}\small\item\em 如果 stream==Raw\+And\+Scaled，则返回缩放后的相机图像的大小（以字节为单位），否则为 0 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structjevois_1_1VideoMapping_ae278ab957d7e20d9f11957679ad864bd}{match}} (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const
+\begin{DoxyCompactList}\small\item\em 如果此 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 的输出格式与给定的输出参数匹配，则返回 true \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a5b310d04c9e1d0e888a30d4368fb8d30}{ostr}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，用于打印出 F\+CC WxH @ fps，用于输出（\+U\+V\+C）格式 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a60ae12947ce5be35eccdf01b6c17a8dc}{cstr}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，用于打印出 F\+CC WxH @ fps，用于输入（相机）格式 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a70f367472187f447aefaef2208211529}{c2str}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数用于打印出 F\+CC WxH @ fps，用于缩放的相机输入格式，如果 stream==Raw\+And\+Scaled \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a71a8cb7295f299d854a4835be85231f4}{cstrall}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，用于打印出 F\+CC WxH @ fps 加上可能的第二个流，用于输入（相机）格式 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a6235e59852f9de0b6db18ce63310aa60}{str}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，以人性化的方式打印出整个映射 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_ac224356c0e96b8b15fcffeddabd02804}{menustr}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a8447a52470db158094e532d0d2b0aefa}{menustr2}} () const
+\begin{DoxyCompactList}\small\item\em 便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structjevois_1_1VideoMapping_a296f93a1fd519d00c823d3d42fc652a7}{has\+Same\+Specs\+As}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&other) const
+\begin{DoxyCompactList}\small\item\em specs 的相等运算符，但不适用于供应商或模块名称 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structjevois_1_1VideoMapping_aaa6499fea1f0e2ee25da53a843a63d6d}{is\+Same\+As}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&other) const
+\begin{DoxyCompactList}\small\item\em specs 以及供应商或模块名称的相等运算符 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{structjevois_1_1VideoMapping_a85566f3da0879bd218249856c525bdb5}{set\+Module\+Type}} ()
+\begin{DoxyCompactList}\small\item\em 确定模块是 C++ 还是 Python，并相应地设置 ispython 标志 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float \mbox{\hyperlink{structjevois_1_1VideoMapping_abb1b5894c48d9da66fd1d48ac7d58c61}{uvc\+To\+Fps}} (unsigned int interval)
+\begin{DoxyCompactList}\small\item\em 从 fps 转换为 U\+S\+B/\+U\+VC 间隔 \end{DoxyCompactList}\item 
+static unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a25dba8b9f99e1503de0c20cae80fcb7d}{fps\+To\+Uvc}} (float fps)
+\begin{DoxyCompactList}\small\item\em 从 fps 转换为 V4\+L2 间隔 \end{DoxyCompactList}\item 
+static float \mbox{\hyperlink{structjevois_1_1VideoMapping_a223f22f4ca1eddecacce70cf3b0dbb54}{v4l2\+To\+Fps}} (struct v4l2\+\_\+fract const \&interval)
+\begin{DoxyCompactList}\small\item\em Convert from V4\+L2 interval to fps. \end{DoxyCompactList}\item 
+static struct v4l2\+\_\+fract \mbox{\hyperlink{structjevois_1_1VideoMapping_a0a67d8c4f844fe9c6bc9aee126a04019}{fps\+To\+V4l2}} (float fps)
+\begin{DoxyCompactList}\small\item\em Convert from fps to V4\+L2 interval. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_af0154aa75398ca999e7274c5a57296ad}{ofmt}} = 0
+\begin{DoxyCompactList}\small\item\em 输出像素格式，或 0 表示无 U\+SB 输出 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a16298d1f23ee37977ad08ec5134b7b1b}{ow}} = 0
+\begin{DoxyCompactList}\small\item\em output width \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_ab1c49a151217816e76a05dfcf2ed08a9}{oh}} = 0
+\begin{DoxyCompactList}\small\item\em output height \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structjevois_1_1VideoMapping_a9d03bc7d08fcdc0e1bf09addb1a0ef23}{ofps}} = 0.\+0F
+\begin{DoxyCompactList}\small\item\em output frame rate in frames/sec \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a0ae55dbcb03c271fb9d13accdea6e281}{cfmt}} = 0
+\begin{DoxyCompactList}\small\item\em camera pixel format \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a9b436a8c8479b72efe84f4e8ba905e5c}{cw}} = 0
+\begin{DoxyCompactList}\small\item\em camera width \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_aa4995f11fe9c1228acefe23f314ca685}{ch}} = 0
+\begin{DoxyCompactList}\small\item\em camera height \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{structjevois_1_1VideoMapping_a766cb362f792027ffdd7efe8e7c22847}{cfps}} = 0.\+0F
+\begin{DoxyCompactList}\small\item\em camera frame rate in frames/sec \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_ab5c3410219861efeef71a33d54c756cb}{uvcformat}}
+\begin{DoxyCompactList}\small\item\em U\+S\+B-\/\+U\+VC format number (1-\/based) \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_abdb7c6f7fd08bd492c99bc2462046fb0}{uvcframe}}
+\begin{DoxyCompactList}\small\item\em U\+SB U\+VC frame number (1-\/based) \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_ad2652b83576d4c1b2d6d615676cdf8ea}{vendor}}
+\begin{DoxyCompactList}\small\item\em 模块创建者名称，用作组织模块的目录 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structjevois_1_1VideoMapping_a406531699df3e2ac1e877559c7bce434}{modulename}}
+\begin{DoxyCompactList}\small\item\em 将处理此映射的模块的名称 \end{DoxyCompactList}\item 
+W\+D\+Rtype \mbox{\hyperlink{structjevois_1_1VideoMapping_a03f39812b94792bb55fb9ace65d7adbc}{wdr}} = W\+D\+Rtype\+::\+Linear
+\begin{DoxyCompactList}\small\item\em 如果传感器支持，则使用的宽动态范围 (W\+DR) 类型 \end{DoxyCompactList}\item 
+Crop\+Type \mbox{\hyperlink{structjevois_1_1VideoMapping_a2ef142ee167d1db180a9544018c7b808}{crop}} = Crop\+Type\+::\+Scale
+\begin{DoxyCompactList}\small\item\em 如果相机尺寸与传感器原生尺寸不匹配，则应用的裁剪/缩放类型 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structjevois_1_1VideoMapping_a843db42b982f0f1ad0083bb65589dfde}{ispython}} = false
+\begin{DoxyCompactList}\small\item\em 如果模块是用 Python 编写的，则为 True；仅影响 \mbox{\hyperlink{structjevois_1_1VideoMapping_ad718fd523b68983d3bacc0ddbb23aef2}{sopath()}} 的行为 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a1b17b8798450643adfe3848c4088e1d1}{c2fmt}} = 0
+\begin{DoxyCompactList}\small\item\em 当 crop 为 Crop\+Scale 时，缩放图像的像素格式，否则为 0 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_a2a1041bab8d100063f5840cde813c2b3}{c2w}} = 0
+\begin{DoxyCompactList}\small\item\em 当 crop 为 Crop\+Scale 时，缩放图像的宽度，否则为 0 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{structjevois_1_1VideoMapping_aa38e9a4498b6ac0d0e73c4530f672848}{c2h}} = 0
+\begin{DoxyCompactList}\small\item\em 当 crop 为 Crop\+Scale 时，缩放图像的高度，否则为 0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping_a7d4dc5ac10bc27de5dbe77a59bb5c64b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (W\+D\+Rtype,(Linear)(D\+OL))
+\begin{DoxyCompactList}\small\item\em Enum for \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} wide-\/dynamic-\/range (W\+DR) type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping_a29e52121d516cfb4c555e7854f3c7601}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Crop\+Type,(Scale)(Crop)(Crop\+Scale))
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} crop or rescale 的枚举 \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{structjevois_1_1VideoMapping_ad08d440b2fdbff06067ec4f2bfff3a79}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)
+\begin{DoxyCompactList}\small\item\em 将 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 流输出，用于机器 \end{DoxyCompactList}\item 
+std\+::istream \& \mbox{\hyperlink{structjevois_1_1VideoMapping_afcc7e011125b8f51dd19affc928b6535}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \&m)
+\begin{DoxyCompactList}\small\item\em 流式传输 Video\+Mapping，用于机器 \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} $>$ \mbox{\hyperlink{structjevois_1_1VideoMapping_a886596287ddfbcb161503dd1285d2ea0}{load\+Video\+Mappings}} (Camera\+Sensor s, size\+\_\+t \&defidx, bool checkso=true, bool hasgui=false)
+\begin{DoxyCompactList}\small\item\em 从默认配置文件中加载所有视频映射 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a85b64f256a5d09764d8c6abce4186c11}\label{structjevois_1_1VideoMapping_a85b64f256a5d09764d8c6abce4186c11}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!c2size@{c2size}}
+\index{c2size@{c2size}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{c2size()}{c2size()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::c2size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+如果 stream==Raw\+And\+Scaled，则返回缩放后的相机图像的大小（以字节为单位），否则为 0 
+
+
+
+Definition at line 93 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::v4l2\+Image\+Size().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a70f367472187f447aefaef2208211529}\label{structjevois_1_1VideoMapping_a70f367472187f447aefaef2208211529}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!c2str@{c2str}}
+\index{c2str@{c2str}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{c2str()}{c2str()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::c2str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数用于打印出 F\+CC WxH @ fps，用于缩放的相机输入格式，如果 stream==Raw\+And\+Scaled 
+
+
+
+Definition at line 139 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::fccstr().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_aefb831c126e44cfddb70820f0d4d4c10}\label{structjevois_1_1VideoMapping_aefb831c126e44cfddb70820f0d4d4c10}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cmakepath@{cmakepath}}
+\index{cmakepath@{cmakepath}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cmakepath()}{cmakepath()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::cmakepath (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回模块的 C\+Make\+Lists.\+txt 文件的完整绝对路径和文件名 
+
+
+
+Definition at line 73 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ieditor\+::refresh().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a17b4d229e5c428fedddbc53807c568d4}\label{structjevois_1_1VideoMapping_a17b4d229e5c428fedddbc53807c568d4}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!csize@{csize}}
+\index{csize@{csize}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{csize()}{csize()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::csize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回相机图像的大小（以字节为单位） 
+
+
+
+Definition at line 89 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::v4l2\+Image\+Size().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a60ae12947ce5be35eccdf01b6c17a8dc}\label{structjevois_1_1VideoMapping_a60ae12947ce5be35eccdf01b6c17a8dc}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cstr@{cstr}}
+\index{cstr@{cstr}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cstr()}{cstr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::cstr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，用于打印出 F\+CC WxH @ fps，用于输入（相机）格式 
+
+
+
+Definition at line 131 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::fccstr().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a71a8cb7295f299d854a4835be85231f4}\label{structjevois_1_1VideoMapping_a71a8cb7295f299d854a4835be85231f4}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cstrall@{cstrall}}
+\index{cstrall@{cstrall}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cstrall()}{cstrall()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::cstrall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，用于打印出 F\+CC WxH @ fps 加上可能的第二个流，用于输入（相机）格式 
+
+
+
+Definition at line 147 of file Video\+Mapping.\+C.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a25dba8b9f99e1503de0c20cae80fcb7d}\label{structjevois_1_1VideoMapping_a25dba8b9f99e1503de0c20cae80fcb7d}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!fpsToUvc@{fpsToUvc}}
+\index{fpsToUvc@{fpsToUvc}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{fpsToUvc()}{fpsToUvc()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::fps\+To\+Uvc (\begin{DoxyParamCaption}\item[{float}]{fps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+从 fps 转换为 V4\+L2 间隔 
+
+
+
+Definition at line 104 of file Video\+Mapping.\+C.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a0a67d8c4f844fe9c6bc9aee126a04019}\label{structjevois_1_1VideoMapping_a0a67d8c4f844fe9c6bc9aee126a04019}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!fpsToV4l2@{fpsToV4l2}}
+\index{fpsToV4l2@{fpsToV4l2}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{fpsToV4l2()}{fpsToV4l2()}}
+{\footnotesize\ttfamily struct v4l2\+\_\+fract jevois\+::\+Video\+Mapping\+::fps\+To\+V4l2 (\begin{DoxyParamCaption}\item[{float}]{fps }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert from fps to V4\+L2 interval. 
+
+
+
+Definition at line 117 of file Video\+Mapping.\+C.
+
+
+
+Referenced by jevois\+::\+Camera\+Device\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a296f93a1fd519d00c823d3d42fc652a7}\label{structjevois_1_1VideoMapping_a296f93a1fd519d00c823d3d42fc652a7}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!hasSameSpecsAs@{hasSameSpecsAs}}
+\index{hasSameSpecsAs@{hasSameSpecsAs}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{hasSameSpecsAs()}{hasSameSpecsAs()}}
+{\footnotesize\ttfamily bool jevois\+::\+Video\+Mapping\+::has\+Same\+Specs\+As (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+specs 的相等运算符，但不适用于供应商或模块名称 
+
+请注意，如果两个映射的 fps 值在 0.\+01fps 以内，则将声明它们匹配，以避免由于浮点表示和舍入而导致不匹配。 
+
+Definition at line 199 of file Video\+Mapping.\+C.
+
+
+
+References c2fmt, c2h, c2w, cfmt, cfps, ch, crop, cw, ofmt, ofps, oh, and ow.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_aaa6499fea1f0e2ee25da53a843a63d6d}\label{structjevois_1_1VideoMapping_aaa6499fea1f0e2ee25da53a843a63d6d}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!isSameAs@{isSameAs}}
+\index{isSameAs@{isSameAs}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{isSameAs()}{isSameAs()}}
+{\footnotesize\ttfamily bool jevois\+::\+Video\+Mapping\+::is\+Same\+As (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{other }\end{DoxyParamCaption}) const}
+
+
+
+specs 以及供应商或模块名称的相等运算符 
+
+请注意，如果两个映射的 fps 值在 0.\+01fps 以内，则将声明它们匹配，以避免由于浮点表示和舍入而导致不匹配。 
+
+Definition at line 209 of file Video\+Mapping.\+C.
+
+
+
+References ispython, modulename, vendor, and wdr.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ae278ab957d7e20d9f11957679ad864bd}\label{structjevois_1_1VideoMapping_ae278ab957d7e20d9f11957679ad864bd}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!match@{match}}
+\index{match@{match}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{match()}{match()}}
+{\footnotesize\ttfamily bool jevois\+::\+Video\+Mapping\+::match (\begin{DoxyParamCaption}\item[{unsigned int}]{oformat,  }\item[{unsigned int}]{owidth,  }\item[{unsigned int}]{oheight,  }\item[{float}]{oframespersec }\end{DoxyParamCaption}) const}
+
+
+
+如果此 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 的输出格式与给定的输出参数匹配，则返回 true 
+
+
+
+Definition at line 504 of file Video\+Mapping.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::find\+Video\+Mapping().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ac224356c0e96b8b15fcffeddabd02804}\label{structjevois_1_1VideoMapping_ac224356c0e96b8b15fcffeddabd02804}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!menustr@{menustr}}
+\index{menustr@{menustr}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{menustr()}{menustr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::menustr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 
+
+
+
+Definition at line 168 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a8447a52470db158094e532d0d2b0aefa}\label{structjevois_1_1VideoMapping_a8447a52470db158094e532d0d2b0aefa}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!menustr2@{menustr2}}
+\index{menustr2@{menustr2}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{menustr2()}{menustr2()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::menustr2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，以人性化的方式打印出整个映射，以便在菜单中使用 
+
+
+
+Definition at line 180 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a28b954d94a5c417fedbc7c6dac3aee33}\label{structjevois_1_1VideoMapping_a28b954d94a5c417fedbc7c6dac3aee33}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!modinfopath@{modinfopath}}
+\index{modinfopath@{modinfopath}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{modinfopath()}{modinfopath()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::modinfopath (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回模块的 modinfo.\+html 文件的完整绝对路径和文件名 
+
+
+
+Definition at line 79 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a4270a8dfb97b1e2fcc2bee3290bacc13}\label{structjevois_1_1VideoMapping_a4270a8dfb97b1e2fcc2bee3290bacc13}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!osize@{osize}}
+\index{osize@{osize}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{osize()}{osize()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::osize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回输出图像的字节大小 
+
+
+
+Definition at line 85 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::v4l2\+Image\+Size().
+
+
+
+Referenced by jevois\+::\+Video\+Output\+None\+::set\+Format(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a5b310d04c9e1d0e888a30d4368fb8d30}\label{structjevois_1_1VideoMapping_a5b310d04c9e1d0e888a30d4368fb8d30}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ostr@{ostr}}
+\index{ostr@{ostr}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ostr()}{ostr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::ostr (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，用于打印出 F\+CC WxH @ fps，用于输出（\+U\+V\+C）格式 
+
+
+
+Definition at line 123 of file Video\+Mapping.\+C.
+
+
+
+References jevois\+::fccstr().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a908efc3860db645b046cb8586d3202e6}\label{structjevois_1_1VideoMapping_a908efc3860db645b046cb8586d3202e6}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!path@{path}}
+\index{path@{path}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{path()}{path()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回模块目录的完整绝对路径 
+
+
+
+Definition at line 30 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH, modulename, and vendor.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ieditor\+::refresh().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a85566f3da0879bd218249856c525bdb5}\label{structjevois_1_1VideoMapping_a85566f3da0879bd218249856c525bdb5}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!setModuleType@{setModuleType}}
+\index{setModuleType@{setModuleType}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{setModuleType()}{setModuleType()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Mapping\+::set\+Module\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+确定模块是 C++ 还是 Python，并相应地设置 ispython 标志 
+
+其他字段应该已经初始化。operator$>$$>$ 和 load\+Video\+Mappings 在内部使用此函数，因此从 sream 创建 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 后 无需调用它。如果在给定模块供应商和名称的适当位置未找到 .so 或 .py 文件，则此函数将抛出 
+
+Definition at line 512 of file Video\+Mapping.\+C.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ad718fd523b68983d3bacc0ddbb23aef2}\label{structjevois_1_1VideoMapping_ad718fd523b68983d3bacc0ddbb23aef2}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!sopath@{sopath}}
+\index{sopath@{sopath}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{sopath()}{sopath()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::sopath (\begin{DoxyParamCaption}\item[{bool}]{delete\+\_\+old\+\_\+versions = {\ttfamily false} }\end{DoxyParamCaption}) const}
+
+
+
+返回模块的 .so 或 .py 文件的完整绝对路径和文件名 
+
+
+
+Definition at line 36 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH, and jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ac1f6b173c8a0ccb774f75bea8efa6aa1}\label{structjevois_1_1VideoMapping_ac1f6b173c8a0ccb774f75bea8efa6aa1}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!srcpath@{srcpath}}
+\index{srcpath@{srcpath}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{srcpath()}{srcpath()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::srcpath (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回模块的.\+C 或 .py 文件的完整绝对路径和文件名 
+
+
+
+Definition at line 66 of file Video\+Mapping.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+TH.
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a6235e59852f9de0b6db18ce63310aa60}\label{structjevois_1_1VideoMapping_a6235e59852f9de0b6db18ce63310aa60}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!str@{str}}
+\index{str@{str}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+便捷函数，以人性化的方式打印出整个映射 
+
+
+
+Definition at line 155 of file Video\+Mapping.\+C.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_abb1b5894c48d9da66fd1d48ac7d58c61}\label{structjevois_1_1VideoMapping_abb1b5894c48d9da66fd1d48ac7d58c61}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!uvcToFps@{uvcToFps}}
+\index{uvcToFps@{uvcToFps}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{uvcToFps()}{uvcToFps()}}
+{\footnotesize\ttfamily float jevois\+::\+Video\+Mapping\+::uvc\+To\+Fps (\begin{DoxyParamCaption}\item[{unsigned int}]{interval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+从 fps 转换为 U\+S\+B/\+U\+VC 间隔 
+
+此函数四舍五入到最接近的 1/100 fps。 
+
+Definition at line 97 of file Video\+Mapping.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::get\+Video\+Mapping\+Idx().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a223f22f4ca1eddecacce70cf3b0dbb54}\label{structjevois_1_1VideoMapping_a223f22f4ca1eddecacce70cf3b0dbb54}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!v4l2ToFps@{v4l2ToFps}}
+\index{v4l2ToFps@{v4l2ToFps}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{v4l2ToFps()}{v4l2ToFps()}}
+{\footnotesize\ttfamily float jevois\+::\+Video\+Mapping\+::v4l2\+To\+Fps (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+fract const \&}]{interval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert from V4\+L2 interval to fps. 
+
+This function rounds to the nearest 1/100 fps. 
+
+Definition at line 110 of file Video\+Mapping.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a29e52121d516cfb4c555e7854f3c7601}\label{structjevois_1_1VideoMapping_a29e52121d516cfb4c555e7854f3c7601}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Crop\+Type}]{,  }\item[{(Scale)(Crop)(Crop\+Scale)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} crop or rescale 的枚举 
+
+在 Je\+Vois-\/\+Pro 平台（仅限）上，相机 I\+SP 最多可以传输两幅图像：1) 来自传感器的原始帧（可能已裁剪），2) 由 I\+SP 生成的 缩放帧（缩放始终应用于原始传感器分辨率，与裁剪设置无关），或两者兼而有之。图像可以具有不同的像素类型但相同的帧/秒。 获取裁剪和缩放的图像对于使用全帧原始 Y\+U\+YV 捕获进行 G\+UI 显示以及缩小的 R\+G\+B24 捕获作为神经网络的输入非常有用。当指定 的相机帧大小与传感器的大小不匹配时，请进行居中裁剪或统一重新缩放。请注意，重新缩放会影响图像纵横比，因此建议使用与 原始传感器大小相同的纵横比的相机帧大小。如果 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 中未指定任何内容，则默认使用 Scale。 \mbox{\Hypertarget{structjevois_1_1VideoMapping_a7d4dc5ac10bc27de5dbe77a59bb5c64b}\label{structjevois_1_1VideoMapping_a7d4dc5ac10bc27de5dbe77a59bb5c64b}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{W\+D\+Rtype}]{,  }\item[{(Linear)(D\+OL)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} wide-\/dynamic-\/range (W\+DR) type. 
+
+If nothing is specified in a \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}}, use Linear by default. \mbox{\Hypertarget{structjevois_1_1VideoMapping_a886596287ddfbcb161503dd1285d2ea0}\label{structjevois_1_1VideoMapping_a886596287ddfbcb161503dd1285d2ea0}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!loadVideoMappings@{loadVideoMappings}}
+\index{loadVideoMappings@{loadVideoMappings}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{loadVideoMappings()}{loadVideoMappings()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} $>$ load\+Video\+Mappings (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{s,  }\item[{size\+\_\+t \&}]{defidx,  }\item[{bool}]{checkso = {\ttfamily true},  }\item[{bool}]{hasgui = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+从默认配置文件中加载所有视频映射 
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ad08d440b2fdbff06067ec4f2bfff3a79}\label{structjevois_1_1VideoMapping_ad08d440b2fdbff06067ec4f2bfff3a79}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 流输出，用于机器 
+
+请注意，最后不会发出 std\+::endl。 \mbox{\Hypertarget{structjevois_1_1VideoMapping_afcc7e011125b8f51dd19affc928b6535}\label{structjevois_1_1VideoMapping_afcc7e011125b8f51dd19affc928b6535}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily std\+::istream \& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in,  }\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+流式传输 Video\+Mapping，用于机器 
+
+请注意，假设映射是干净的（没有多余的垃圾）。 
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a1b17b8798450643adfe3848c4088e1d1}\label{structjevois_1_1VideoMapping_a1b17b8798450643adfe3848c4088e1d1}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!c2fmt@{c2fmt}}
+\index{c2fmt@{c2fmt}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{c2fmt}{c2fmt}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::c2fmt = 0}
+
+
+
+当 crop 为 Crop\+Scale 时，缩放图像的像素格式，否则为 0 
+
+
+
+Definition at line 79 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_aa38e9a4498b6ac0d0e73c4530f672848}\label{structjevois_1_1VideoMapping_aa38e9a4498b6ac0d0e73c4530f672848}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!c2h@{c2h}}
+\index{c2h@{c2h}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{c2h}{c2h}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::c2h = 0}
+
+
+
+当 crop 为 Crop\+Scale 时，缩放图像的高度，否则为 0 
+
+
+
+Definition at line 81 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a2a1041bab8d100063f5840cde813c2b3}\label{structjevois_1_1VideoMapping_a2a1041bab8d100063f5840cde813c2b3}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!c2w@{c2w}}
+\index{c2w@{c2w}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{c2w}{c2w}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::c2w = 0}
+
+
+
+当 crop 为 Crop\+Scale 时，缩放图像的宽度，否则为 0 
+
+
+
+Definition at line 80 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a0ae55dbcb03c271fb9d13accdea6e281}\label{structjevois_1_1VideoMapping_a0ae55dbcb03c271fb9d13accdea6e281}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cfmt@{cfmt}}
+\index{cfmt@{cfmt}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cfmt}{cfmt}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::cfmt = 0}
+
+
+
+camera pixel format 
+
+
+
+Definition at line 63 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), main(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a766cb362f792027ffdd7efe8e7c22847}\label{structjevois_1_1VideoMapping_a766cb362f792027ffdd7efe8e7c22847}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cfps@{cfps}}
+\index{cfps@{cfps}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cfps}{cfps}}
+{\footnotesize\ttfamily float jevois\+::\+Video\+Mapping\+::cfps = 0.\+0F}
+
+
+
+camera frame rate in frames/sec 
+
+
+
+Definition at line 66 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), main(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_aa4995f11fe9c1228acefe23f314ca685}\label{structjevois_1_1VideoMapping_aa4995f11fe9c1228acefe23f314ca685}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ch@{ch}}
+\index{ch@{ch}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ch}{ch}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::ch = 0}
+
+
+
+camera height 
+
+
+
+Definition at line 65 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), main(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a2ef142ee167d1db180a9544018c7b808}\label{structjevois_1_1VideoMapping_a2ef142ee167d1db180a9544018c7b808}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!crop@{crop}}
+\index{crop@{crop}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{crop}{crop}}
+{\footnotesize\ttfamily Crop\+Type jevois\+::\+Video\+Mapping\+::crop = Crop\+Type\+::\+Scale}
+
+
+
+如果相机尺寸与传感器原生尺寸不匹配，则应用的裁剪/缩放类型 
+
+
+
+Definition at line 76 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a9b436a8c8479b72efe84f4e8ba905e5c}\label{structjevois_1_1VideoMapping_a9b436a8c8479b72efe84f4e8ba905e5c}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!cw@{cw}}
+\index{cw@{cw}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{cw}{cw}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::cw = 0}
+
+
+
+camera width 
+
+
+
+Definition at line 64 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), main(), and jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a843db42b982f0f1ad0083bb65589dfde}\label{structjevois_1_1VideoMapping_a843db42b982f0f1ad0083bb65589dfde}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ispython@{ispython}}
+\index{ispython@{ispython}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ispython}{ispython}}
+{\footnotesize\ttfamily bool jevois\+::\+Video\+Mapping\+::ispython = false}
+
+
+
+如果模块是用 Python 编写的，则为 True；仅影响 \mbox{\hyperlink{structjevois_1_1VideoMapping_ad718fd523b68983d3bacc0ddbb23aef2}{sopath()}} 的行为 
+
+
+
+Definition at line 77 of file Video\+Mapping.\+H.
+
+
+
+Referenced by is\+Same\+As(), and jevois\+::\+Python\+Module\+::\+Python\+Module().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a406531699df3e2ac1e877559c7bce434}\label{structjevois_1_1VideoMapping_a406531699df3e2ac1e877559c7bce434}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!modulename@{modulename}}
+\index{modulename@{modulename}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{modulename}{modulename}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::modulename}
+
+
+
+将处理此映射的模块的名称 
+
+
+
+Definition at line 73 of file Video\+Mapping.\+H.
+
+
+
+Referenced by is\+Same\+As(), main(), and path().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_af0154aa75398ca999e7274c5a57296ad}\label{structjevois_1_1VideoMapping_af0154aa75398ca999e7274c5a57296ad}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ofmt@{ofmt}}
+\index{ofmt@{ofmt}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ofmt}{ofmt}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::ofmt = 0}
+
+
+
+输出像素格式，或 0 表示无 U\+SB 输出 
+
+
+
+Definition at line 58 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), jevois\+::\+Video\+Output\+None\+::set\+Format(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a9d03bc7d08fcdc0e1bf09addb1a0ef23}\label{structjevois_1_1VideoMapping_a9d03bc7d08fcdc0e1bf09addb1a0ef23}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ofps@{ofps}}
+\index{ofps@{ofps}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ofps}{ofps}}
+{\footnotesize\ttfamily float jevois\+::\+Video\+Mapping\+::ofps = 0.\+0F}
+
+
+
+output frame rate in frames/sec 
+
+
+
+Definition at line 61 of file Video\+Mapping.\+H.
+
+
+
+Referenced by jevois\+::\+Engine\+::get\+Video\+Mapping\+Idx(), has\+Same\+Specs\+As(), jevois\+::\+Video\+Output\+None\+::set\+Format(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ab1c49a151217816e76a05dfcf2ed08a9}\label{structjevois_1_1VideoMapping_ab1c49a151217816e76a05dfcf2ed08a9}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!oh@{oh}}
+\index{oh@{oh}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{oh}{oh}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::oh = 0}
+
+
+
+output height 
+
+
+
+Definition at line 60 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), jevois\+::\+Video\+Output\+None\+::set\+Format(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a16298d1f23ee37977ad08ec5134b7b1b}\label{structjevois_1_1VideoMapping_a16298d1f23ee37977ad08ec5134b7b1b}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!ow@{ow}}
+\index{ow@{ow}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{ow}{ow}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::ow = 0}
+
+
+
+output width 
+
+
+
+Definition at line 59 of file Video\+Mapping.\+H.
+
+
+
+Referenced by has\+Same\+Specs\+As(), jevois\+::\+Video\+Output\+None\+::set\+Format(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::set\+Format().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ab5c3410219861efeef71a33d54c756cb}\label{structjevois_1_1VideoMapping_ab5c3410219861efeef71a33d54c756cb}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!uvcformat@{uvcformat}}
+\index{uvcformat@{uvcformat}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{uvcformat}{uvcformat}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::uvcformat}
+
+
+
+U\+S\+B-\/\+U\+VC format number (1-\/based) 
+
+
+
+Definition at line 68 of file Video\+Mapping.\+H.
+
+
+
+Referenced by jevois\+::\+Engine\+::get\+Video\+Mapping\+Idx().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_abdb7c6f7fd08bd492c99bc2462046fb0}\label{structjevois_1_1VideoMapping_abdb7c6f7fd08bd492c99bc2462046fb0}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!uvcframe@{uvcframe}}
+\index{uvcframe@{uvcframe}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{uvcframe}{uvcframe}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Video\+Mapping\+::uvcframe}
+
+
+
+U\+SB U\+VC frame number (1-\/based) 
+
+
+
+Definition at line 69 of file Video\+Mapping.\+H.
+
+
+
+Referenced by jevois\+::\+Engine\+::get\+Video\+Mapping\+Idx().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_ad2652b83576d4c1b2d6d615676cdf8ea}\label{structjevois_1_1VideoMapping_ad2652b83576d4c1b2d6d615676cdf8ea}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!vendor@{vendor}}
+\index{vendor@{vendor}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{vendor}{vendor}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Video\+Mapping\+::vendor}
+
+
+
+模块创建者名称，用作组织模块的目录 
+
+
+
+Definition at line 71 of file Video\+Mapping.\+H.
+
+
+
+Referenced by is\+Same\+As(), main(), and path().
+
+\mbox{\Hypertarget{structjevois_1_1VideoMapping_a03f39812b94792bb55fb9ace65d7adbc}\label{structjevois_1_1VideoMapping_a03f39812b94792bb55fb9ace65d7adbc}} 
+\index{jevois::VideoMapping@{jevois::VideoMapping}!wdr@{wdr}}
+\index{wdr@{wdr}!jevois::VideoMapping@{jevois::VideoMapping}}
+\doxyparagraph{\texorpdfstring{wdr}{wdr}}
+{\footnotesize\ttfamily W\+D\+Rtype jevois\+::\+Video\+Mapping\+::wdr = W\+D\+Rtype\+::\+Linear}
+
+
+
+如果传感器支持，则使用的宽动态范围 (W\+DR) 类型 
+
+
+
+Definition at line 75 of file Video\+Mapping.\+H.
+
+
+
+Referenced by is\+Same\+As(), and main().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoMapping_8H}{Video\+Mapping.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoMapping_8C}{Video\+Mapping.\+C}}\end{DoxyCompactItemize}

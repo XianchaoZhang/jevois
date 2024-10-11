@@ -1,22 +1,19 @@
 #!/bin/bash
-# usage: reinstall.sh [-y]
-# will nuke and re-install all contributed packages
+# 用法：reinstall.sh [-y]
+# 将删除并重新安装所有贡献的软件包
 #
-# Convention for libs and includes:
-# - includes go into include/amd64 (for host), include/armhf (jevois-a33), include/arm64 (jevois-pro),
-#   or include/all (for all). Only add directories to to include/*
-# - libs go into lib/amd64 (for host), lib/armhf (jevois-a33), lib/arm64 (jevois-pro). Only add files and
-#   symlinks to lib/*
+# libs 和 includes 的约定：
+# - includes 放到 include/amd64（host）、include/armhf（jevois-a33）、include/arm64（jevois-pro）或 include/all（用于所有）。仅将目录添加到 include/*
+# - libs 放到 lib/amd64（host）、lib/armhf（jevois-a33）、lib/arm64（jevois-pro）。仅将文件和符号链接添加到 lib/*
 #
-# The JeVois cmake will then install them into the appropriate /jevois[pro]/include and /jevois[pro]/lib
+# JeVois cmake 随后会将它们安装到适当的 /jevois[pro]/include 和 /jevois[pro]/lib
 
-set -e # Exit on any error
+set -e # 出现任何错误时退出
 
-# Go to the Contrib directory (where this script is):
+# 转到 Contrib 目录（此脚本所在的位置）：
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 
-# Bump this release number each time you make significant changes here, this will cause rebuild-host.sh to re-run
-# this reinstall script:
+# 每次在此处进行重大更改时都增加此版本号，这将导致 rebuild-host.sh 重新运行此重新安装脚本：
 release=`cat RELEASE`
 
 ###################################################################################################
@@ -27,6 +24,8 @@ function finish
     exit $rc
 }
 
+# 确保总是执行必要的收尾工作，哪怕是在发生异常的时候。提供 EXIT 的伪信号，然后 trap 它，当脚本退出时，相应
+# 的命令或函数就会执行
 trap finish EXIT
 
 ###################################################################################################
@@ -82,7 +81,7 @@ question "Download pre-compiled binaries for JeVois ${ver} instead of rebuilding
 if [ "X$REPLY" != "Xn" ]; then
     wget http://jevois.org/data/contrib-binary-${ver}.tbz
     tar jxvf contrib-binary-${ver}.tbz
-    /bin/rm -f contrib-binary-${ver}.tbz
+    #/bin/rm -f contrib-binary-${ver}.tbz
     echo "All done."
     exit 0
 fi
@@ -92,20 +91,14 @@ mkdir -p include/amd64 include/armhf include/arm64 include/all
 mkdir -p lib/amd64 lib/armhf lib/arm64
 
 ###################################################################################################
-# Get the packages:
+# 获取软件包：
 
-# Google coral TPU: libedgetpu, libcoral, and pycoral are all in the pycoral repo:
-#get_github google-coral pycoral 08ad3209497518e8a7d5df863ce51d5b47af7d82
-
-# Tensorflow, needed for libtensorflowlite.so and includes, not available as deb package.  Tensorflow version must
-# exactly match that used for libedgetpu, specified as TENSORFLOW_COMMIT in pycoral/WORKSPACE
-#tc=`grep ^TENSORFLOW_COMMIT pycoral/workspace.bzl |awk '{ print \$3 }'`
-#tc="48c3bae94a8b324525b45f157d638dfd4e8c3be1" # version used by frogfish tpu release
+# libtensorflowlite.so 和 includes 需要 Tensorflow，deb 软件包不可用。Tensorflow 版本必须与 libedgetpu 
+# 使用的版本完全匹配，在 pycoral/WORKSPACE 中指定为 TENSORFLOW_COMMIT
 tc="a4dfb8d1a71385bd6d122e4f27f86dcebb96712d" # TF 2.5.0, for use with grouper tpu release
-#tc="5bc9d26649cca274750ad3625bd93422617eed4b" # TF 2.16.1, fo ruse with jevois 1.21.0 and compiled libcoral
 get_github tensorflow tensorflow ${tc//\"/}
 
-# C++20 thread pool (we actually implement our own ThreadPool.H/C but need the dependencies):
+# C++20 线程池（我们实际上实现了自己的 ThreadPool.H/C，但需要依赖项）：
 get_github mzjaworski threadpool f45dab47af20247949ebc43b429c742ef4c1219f
 
 ###################################################################################################
@@ -168,22 +161,11 @@ ${bzl} build --config=elinux_armhf -c opt //tensorflow/lite:libtensorflowlite.so
 sudo mkdir -p /var/lib/jevois-microsd/lib
 sudo cp -v bazel-bin/tensorflow/lite/libtensorflowlite.so ../lib/armhf/
 
-# Build wheel for host: currently disabled as we use the pycoral wheels instead
-## We need docker installed
-#docker --version || ( echo "\n\n\nJEVOIS: Please install docker to compile tensorflow -- ABORT"; exit 1 )
-#cd tensorflow/lite/tools/pip_package/
-#make BASE_IMAGE=ubuntu:24.04 PYTHON=python3 TENSORFLOW_TARGET=k8 docker-build
-#mv out/python3/ubuntu*/tflite_runtime*.whl ../../../../../
-## Build wheel for platform:
-#make BASE_IMAGE=ubuntu:24.04 PYTHON=python3 TENSORFLOW_TARGET=aarch64 docker-build
-#mv out/python3/ubuntu*/tflite_runtime*.whl ../../../../../
-#cd ../../../..
-
 cd ..
 
 ###################################################################################################
-# ONNX Runtime for C++: need to download tarballs from github
-# In our CMakeLists.txt we include the onnxruntime includes and libs into the jevois deb
+# ONNX Runtime for C++：需要从 github 下载 tarball
+# 在我们的 CMakeLists.txt 中，我们将 onnxruntime includes 和 libs 包含在 jevois deb 中
 ORT_VER="1.18.0"
 
 # For host:

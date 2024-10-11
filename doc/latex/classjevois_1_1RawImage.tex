@@ -1,0 +1,419 @@
+\hypertarget{classjevois_1_1RawImage}{}\doxysubsection{jevois\+::Raw\+Image Class Reference}
+\label{classjevois_1_1RawImage}\index{jevois::RawImage@{jevois::RawImage}}
+
+
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+来自 V4\+L2 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和/或发送到 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 的原始图像 
+
+像素数据由相应的摄像头或小工具驱动程序分配和内存映射。由于像素缓冲区由硬件驱动程序分配和管理，我们无法对 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 进行深度复 制，因此复制构造函数和赋值运算符将产生共享相同像素数据的图像。要将像素从一个 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 复制到另一个（例如，从摄像头图像复制到 U\+SB 图像），请参阅 \mbox{\hyperlink{group__image_ga05c4650464e447a89a2a2c60d1956748}{jevois\+::rawimage\+::paste()}} 和其他 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 函数。 
+
+Definition at line 102 of file Raw\+Image.\+H.
+
+
+
+Collaboration diagram for jevois\+::Raw\+Image\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{classjevois_1_1RawImage__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1RawImage_a392684e4a86e2f20533c43faf12f2c37}{Raw\+Image}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, uninitialized. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1RawImage_ab29d9b4d1008c433d3f01132c76bef99}{Raw\+Image}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Default move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1RawImage_ae52974a31aac45dddbd10a63586a3457}{Raw\+Image}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&other)=default
+\begin{DoxyCompactList}\small\item\em Default copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1RawImage_a602e7448d4295044571dd5dbca36855d}{operator=}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&other)=default
+\begin{DoxyCompactList}\small\item\em Default assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1RawImage_abb8fe951e99797ed831c597821b61fc0}{Raw\+Image}} (unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int f, float fs, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ b, size\+\_\+t bindex)
+\begin{DoxyCompactList}\small\item\em 从现有 \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} 和相关参数构造 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1RawImage_a489f656b900de8b0024eea238b7c4c72}{invalidate}} ()
+\begin{DoxyCompactList}\small\item\em 通过将指向像素缓冲区的指针和 dims 和 format 清零来使图像无效 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1RawImage_ad516e725fe8c5fcb8e61d5088c27c2bd}{valid}} () const
+\begin{DoxyCompactList}\small\item\em 检查图像是否具有有效的像素缓冲区 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1RawImage_ad336d8a22afa7bd37bcab69b3b64082a}{clear}} ()
+\begin{DoxyCompactList}\small\item\em 将像素清除为全黑 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}{require}} (char const $\ast$info, unsigned int w, unsigned int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int f) const
+\begin{DoxyCompactList}\small\item\em 需要特定的图像大小和格式，发出致命错误消息，如果不匹配，则抛出异常 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1RawImage_a912b450d9ecc2163b4facbdf5745770d}{bytesperpix}} () const
+\begin{DoxyCompactList}\small\item\em 辅助函数，根据 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式获取 bytes/pixel \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1RawImage_a454ebfb26b63a7601ff66bf0ec96497e}{bytesize}} () const
+\begin{DoxyCompactList}\small\item\em 辅助函数用于获取 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中的总字节数，即 width $\ast$ height $\ast$ \mbox{\hyperlink{classjevois_1_1RawImage_a912b450d9ecc2163b4facbdf5745770d}{bytesperpix()}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1RawImage_a0ce2d4ab4cb9f322433ef1b3c41d131e}{coords\+Ok}} (int x, int y) const
+\begin{DoxyCompactList}\small\item\em 辅助函数用于检查坐标是否在图像范围内 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T $\ast$ \mbox{\hyperlink{classjevois_1_1RawImage_ac2202ecd3324959d17c06a191624d2a6}{pixelsw}} ()
+\begin{DoxyCompactList}\small\item\em 快捷访问像素，读写 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\const T $\ast$ \mbox{\hyperlink{classjevois_1_1RawImage_a0afe5d7d00f4048ecbf6d5c908d98638}{pixels}} () const
+\begin{DoxyCompactList}\small\item\em 快捷访问像素，只读 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}{width}}
+\begin{DoxyCompactList}\small\item\em Image width in pixels. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}{height}}
+\begin{DoxyCompactList}\small\item\em Image height in pixels. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classjevois_1_1RawImage_a0f74c21f145dd4ff5e3140b5632d67a2}{fmt}}
+\begin{DoxyCompactList}\small\item\em Pixel format as a V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+X\+XX. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classjevois_1_1RawImage_a055758eea6dcbe3e527d207f67eefaf1}{fps}}
+\begin{DoxyCompactList}\small\item\em Programmed frames/s as given by current video mapping, may not be actual. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1RawImage_ace0784d1cfcf710761f6e93146683244}{buf}}
+\begin{DoxyCompactList}\small\item\em 像素数据缓冲区 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1RawImage_a14b2841e45ad4269adf0db297ad6af37}{bufindex}}
+\begin{DoxyCompactList}\small\item\em 内核驱动程序中数据缓冲区的索引 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1RawImage_a392684e4a86e2f20533c43faf12f2c37}\label{classjevois_1_1RawImage_a392684e4a86e2f20533c43faf12f2c37}} 
+\index{jevois::RawImage@{jevois::RawImage}!RawImage@{RawImage}}
+\index{RawImage@{RawImage}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{RawImage()}{RawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily jevois\+::\+Raw\+Image\+::\+Raw\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor, uninitialized. 
+
+
+
+Definition at line 24 of file Raw\+Image.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_ab29d9b4d1008c433d3f01132c76bef99}\label{classjevois_1_1RawImage_ab29d9b4d1008c433d3f01132c76bef99}} 
+\index{jevois::RawImage@{jevois::RawImage}!RawImage@{RawImage}}
+\index{RawImage@{RawImage}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{RawImage()}{RawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily jevois\+::\+Raw\+Image\+::\+Raw\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default move constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_ae52974a31aac45dddbd10a63586a3457}\label{classjevois_1_1RawImage_ae52974a31aac45dddbd10a63586a3457}} 
+\index{jevois::RawImage@{jevois::RawImage}!RawImage@{RawImage}}
+\index{RawImage@{RawImage}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{RawImage()}{RawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily jevois\+::\+Raw\+Image\+::\+Raw\+Image (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default copy constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_abb8fe951e99797ed831c597821b61fc0}\label{classjevois_1_1RawImage_abb8fe951e99797ed831c597821b61fc0}} 
+\index{jevois::RawImage@{jevois::RawImage}!RawImage@{RawImage}}
+\index{RawImage@{RawImage}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{RawImage()}{RawImage()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily jevois\+::\+Raw\+Image\+::\+Raw\+Image (\begin{DoxyParamCaption}\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned int}]{f,  }\item[{float}]{fs,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$}]{b,  }\item[{size\+\_\+t}]{bindex }\end{DoxyParamCaption})}
+
+
+
+从现有 \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} 和相关参数构造 
+
+
+
+Definition at line 28 of file Raw\+Image.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1RawImage_a454ebfb26b63a7601ff66bf0ec96497e}\label{classjevois_1_1RawImage_a454ebfb26b63a7601ff66bf0ec96497e}} 
+\index{jevois::RawImage@{jevois::RawImage}!bytesize@{bytesize}}
+\index{bytesize@{bytesize}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{bytesize()}{bytesize()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Raw\+Image\+::bytesize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+辅助函数用于获取 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中的总字节数，即 width $\ast$ height $\ast$ \mbox{\hyperlink{classjevois_1_1RawImage_a912b450d9ecc2163b4facbdf5745770d}{bytesperpix()}} 
+
+
+
+Definition at line 38 of file Raw\+Image.\+C.
+
+
+
+References jevois\+::v4l2\+Bytes\+Per\+Pix().
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a912b450d9ecc2163b4facbdf5745770d}\label{classjevois_1_1RawImage_a912b450d9ecc2163b4facbdf5745770d}} 
+\index{jevois::RawImage@{jevois::RawImage}!bytesperpix@{bytesperpix}}
+\index{bytesperpix@{bytesperpix}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{bytesperpix()}{bytesperpix()}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Raw\+Image\+::bytesperpix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+辅助函数，根据 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式获取 bytes/pixel 
+
+
+
+Definition at line 34 of file Raw\+Image.\+C.
+
+
+
+References jevois\+::v4l2\+Bytes\+Per\+Pix().
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::paste(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::roipaste(), and jevois\+::rawimage\+::write\+Text().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_ad336d8a22afa7bd37bcab69b3b64082a}\label{classjevois_1_1RawImage_ad336d8a22afa7bd37bcab69b3b64082a}} 
+\index{jevois::RawImage@{jevois::RawImage}!clear@{clear}}
+\index{clear@{clear}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void jevois\+::\+Raw\+Image\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+将像素清除为全黑 
+
+
+
+Definition at line 50 of file Raw\+Image.\+C.
+
+
+
+References jevois\+::yuyv\+::\+Black, jevois\+::fccstr(), and L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a0ce2d4ab4cb9f322433ef1b3c41d131e}\label{classjevois_1_1RawImage_a0ce2d4ab4cb9f322433ef1b3c41d131e}} 
+\index{jevois::RawImage@{jevois::RawImage}!coordsOk@{coordsOk}}
+\index{coordsOk@{coordsOk}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{coordsOk()}{coordsOk()}}
+{\footnotesize\ttfamily bool jevois\+::\+Raw\+Image\+::coords\+Ok (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption}) const}
+
+
+
+辅助函数用于检查坐标是否在图像范围内 
+
+
+
+Definition at line 88 of file Raw\+Image.\+C.
+
+
+
+Referenced by jevois\+::rawimage\+::draw\+Disk().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a489f656b900de8b0024eea238b7c4c72}\label{classjevois_1_1RawImage_a489f656b900de8b0024eea238b7c4c72}} 
+\index{jevois::RawImage@{jevois::RawImage}!invalidate@{invalidate}}
+\index{invalidate@{invalidate}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{invalidate()}{invalidate()}}
+{\footnotesize\ttfamily void jevois\+::\+Raw\+Image\+::invalidate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+通过将指向像素缓冲区的指针和 dims 和 format 清零来使图像无效 
+
+
+
+Definition at line 42 of file Raw\+Image.\+C.
+
+
+
+Referenced by jevois\+::\+Camera\+Device\+::get().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a602e7448d4295044571dd5dbca36855d}\label{classjevois_1_1RawImage_a602e7448d4295044571dd5dbca36855d}} 
+\index{jevois::RawImage@{jevois::RawImage}!operator=@{operator=}}
+\index{operator=@{operator=}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}\& jevois\+::\+Raw\+Image\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default assignment. 
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a0afe5d7d00f4048ecbf6d5c908d98638}\label{classjevois_1_1RawImage_a0afe5d7d00f4048ecbf6d5c908d98638}} 
+\index{jevois::RawImage@{jevois::RawImage}!pixels@{pixels}}
+\index{pixels@{pixels}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{pixels()}{pixels()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T$\ast$ jevois\+::\+Raw\+Image\+::pixels (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+快捷访问像素，只读 
+
+
+
+Referenced by jevois\+::rawimage\+::paste(), and jevois\+::rawimage\+::roipaste().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_ac2202ecd3324959d17c06a191624d2a6}\label{classjevois_1_1RawImage_ac2202ecd3324959d17c06a191624d2a6}} 
+\index{jevois::RawImage@{jevois::RawImage}!pixelsw@{pixelsw}}
+\index{pixelsw@{pixelsw}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{pixelsw()}{pixelsw()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T$\ast$ jevois\+::\+Raw\+Image\+::pixelsw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+快捷访问像素，读写 
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap(), jevois\+::compress\+B\+G\+Rto\+Jpeg(), jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), jevois\+::compress\+R\+G\+Bto\+Jpeg(), jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::draw\+Disk(), jevois\+::rawimage\+::draw\+Filled\+Rect(), jevois\+::rawimage\+::draw\+Rect(), jevois\+::rawimage\+::h\+Flip\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::roipaste(), jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image(), and jevois\+::rawimage\+::write\+Text().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}\label{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}} 
+\index{jevois::RawImage@{jevois::RawImage}!require@{require}}
+\index{require@{require}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{require()}{require()}}
+{\footnotesize\ttfamily void jevois\+::\+Raw\+Image\+::require (\begin{DoxyParamCaption}\item[{char const $\ast$}]{info,  }\item[{unsigned int}]{w,  }\item[{unsigned int}]{h,  }\item[{unsigned int}]{f }\end{DoxyParamCaption}) const}
+
+
+
+需要特定的图像大小和格式，发出致命错误消息，如果不匹配，则抛出异常 
+
+
+
+Definition at line 80 of file Raw\+Image.\+C.
+
+
+
+References jevois\+::fccstr(), h, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_ad516e725fe8c5fcb8e61d5088c27c2bd}\label{classjevois_1_1RawImage_ad516e725fe8c5fcb8e61d5088c27c2bd}} 
+\index{jevois::RawImage@{jevois::RawImage}!valid@{valid}}
+\index{valid@{valid}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{valid()}{valid()}}
+{\footnotesize\ttfamily bool jevois\+::\+Raw\+Image\+::valid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+检查图像是否具有有效的像素缓冲区 
+
+
+
+Definition at line 46 of file Raw\+Image.\+C.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1RawImage_ace0784d1cfcf710761f6e93146683244}\label{classjevois_1_1RawImage_ace0784d1cfcf710761f6e93146683244}} 
+\index{jevois::RawImage@{jevois::RawImage}!buf@{buf}}
+\index{buf@{buf}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{buf}{buf}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ jevois\+::\+Raw\+Image\+::buf}
+
+
+
+像素数据缓冲区 
+
+
+
+Definition at line 139 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::compress\+B\+G\+Rto\+Jpeg(), jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), jevois\+::compress\+R\+G\+Bto\+Jpeg(), jevois\+::rawimage\+::cv\+Image(), jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::\+Input\+Frame\+::get2(), main(), jevois\+::\+G\+P\+Uimage\+::set(), jevois\+::\+G\+P\+Uimage\+::set2(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::stream\+On().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a14b2841e45ad4269adf0db297ad6af37}\label{classjevois_1_1RawImage_a14b2841e45ad4269adf0db297ad6af37}} 
+\index{jevois::RawImage@{jevois::RawImage}!bufindex@{bufindex}}
+\index{bufindex@{bufindex}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{bufindex}{bufindex}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Raw\+Image\+::bufindex}
+
+
+
+内核驱动程序中数据缓冲区的索引 
+
+
+
+Definition at line 140 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::\+Camera\+Device\+::done(), jevois\+::\+G\+U\+Ihelper\+::draw\+Image(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame2(), jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Video\+Display\+G\+U\+I\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Camera\+Device\+::get(), jevois\+::\+Video\+Display\+G\+L\+::get(), jevois\+::\+Gadget\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::\+Video\+Display\+G\+U\+I\+::send(), jevois\+::\+Video\+Display\+G\+L\+::send(), jevois\+::\+Gadget\+::send(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::stream\+On().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a0f74c21f145dd4ff5e3140b5632d67a2}\label{classjevois_1_1RawImage_a0f74c21f145dd4ff5e3140b5632d67a2}} 
+\index{jevois::RawImage@{jevois::RawImage}!fmt@{fmt}}
+\index{fmt@{fmt}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{fmt}{fmt}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Raw\+Image\+::fmt}
+
+
+
+Pixel format as a V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+X\+XX. 
+
+
+
+Definition at line 137 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), jevois\+::rawimage\+::convert\+To\+Cv\+Gray(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A(), jevois\+::rawimage\+::cv\+Image(), jevois\+::draw\+Error\+Image(), jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::rawimage\+::h\+Flip\+Y\+U\+Y\+V(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), jevois\+::rawimage\+::paste(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::dnn\+::\+Pre\+Processor\+::process(), jevois\+::rawimage\+::roipaste(), jevois\+::\+Gadget\+::send(), jevois\+::\+G\+P\+Uimage\+::set(), jevois\+::\+G\+P\+Uimage\+::set2(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), jevois\+::\+G\+P\+Uimage\+::set\+With\+Dma\+Buf(), jevois\+::\+Gadget\+::stream\+On(), and jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a055758eea6dcbe3e527d207f67eefaf1}\label{classjevois_1_1RawImage_a055758eea6dcbe3e527d207f67eefaf1}} 
+\index{jevois::RawImage@{jevois::RawImage}!fps@{fps}}
+\index{fps@{fps}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{fps}{fps}}
+{\footnotesize\ttfamily float jevois\+::\+Raw\+Image\+::fps}
+
+
+
+Programmed frames/s as given by current video mapping, may not be actual. 
+
+
+
+Definition at line 138 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), and jevois\+::\+Gadget\+::stream\+On().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}\label{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}} 
+\index{jevois::RawImage@{jevois::RawImage}!height@{height}}
+\index{height@{height}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Raw\+Image\+::height}
+
+
+
+Image height in pixels. 
+
+
+
+Definition at line 136 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap(), jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), jevois\+::rawimage\+::convert\+To\+Cv\+Gray(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A(), jevois\+::rawimage\+::cv\+Image(), jevois\+::draw\+Error\+Image(), jevois\+::rawimage\+::draw\+Filled\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::rawimage\+::draw\+Line(), jevois\+::rawimage\+::draw\+Rect(), jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::rawimage\+::h\+Flip\+Y\+U\+Y\+V(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), jevois\+::coords\+::img\+To\+Std(), main(), jevois\+::rawimage\+::paste(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::dnn\+::\+Pre\+Processor\+::process(), jevois\+::rawimage\+::roipaste(), jevois\+::\+Gadget\+::send(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+B\+G\+R(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+G\+R\+A\+Y(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B\+A(), jevois\+::\+G\+P\+Uimage\+::set(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), jevois\+::\+G\+P\+Uimage\+::set\+With\+Dma\+Buf(), jevois\+::coords\+::std\+To\+Img(), jevois\+::\+Gadget\+::stream\+On(), jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image(), and jevois\+::rawimage\+::write\+Text().
+
+\mbox{\Hypertarget{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}\label{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}} 
+\index{jevois::RawImage@{jevois::RawImage}!width@{width}}
+\index{width@{width}!jevois::RawImage@{jevois::RawImage}}
+\doxyparagraph{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily unsigned int jevois\+::\+Raw\+Image\+::width}
+
+
+
+Image width in pixels. 
+
+
+
+Definition at line 135 of file Raw\+Image.\+H.
+
+
+
+Referenced by jevois\+::rawimage\+::byte\+Swap(), jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), jevois\+::rawimage\+::convert\+To\+Cv\+Gray(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B\+A(), jevois\+::rawimage\+::cv\+Image(), jevois\+::rawimage\+::draw\+Disk(), jevois\+::draw\+Error\+Image(), jevois\+::rawimage\+::draw\+Filled\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::rawimage\+::draw\+Line(), jevois\+::rawimage\+::draw\+Rect(), jevois\+::\+Movie\+Output\+::get(), jevois\+::\+Movie\+Input\+::get(), jevois\+::\+Movie\+Input\+::get2(), jevois\+::rawimage\+::h\+Flip\+Y\+U\+Y\+V(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), jevois\+::coords\+::img\+To\+Std(), main(), jevois\+::rawimage\+::paste(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+Grey\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::dnn\+::\+Pre\+Processor\+::process(), jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report(), jevois\+::rawimage\+::roipaste(), jevois\+::\+Gadget\+::send(), jevois\+::dnn\+::\+Pre\+Processor\+::sendreport(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+B\+G\+R(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+G\+R\+A\+Y(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B(), jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+B\+A(), jevois\+::\+G\+P\+Uimage\+::set(), jevois\+::\+G\+P\+Uimage\+::set2(), jevois\+::\+Video\+Display\+G\+U\+I\+::set\+Format(), jevois\+::\+Video\+Display\+G\+L\+::set\+Format(), jevois\+::\+G\+P\+Uimage\+::set\+With\+Dma\+Buf(), jevois\+::coords\+::std\+To\+Img(), jevois\+::\+Gadget\+::stream\+On(), jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image(), and jevois\+::rawimage\+::write\+Text().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Image/\mbox{\hyperlink{RawImage_8H}{Raw\+Image.\+H}}\item 
+src/jevois/\+Image/\mbox{\hyperlink{RawImage_8C}{Raw\+Image.\+C}}\end{DoxyCompactItemize}

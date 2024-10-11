@@ -1,0 +1,237 @@
+\hypertarget{classjevois_1_1VideoBuffers}{}\doxysubsection{jevois\+::Video\+Buffers Class Reference}
+\label{classjevois_1_1VideoBuffers}\index{jevois::VideoBuffers@{jevois::VideoBuffers}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Buffers.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+V4\+L2 视频帧（相机或小工具）的缓冲区集合，带有与 M\+M\+AP 区域挂钩的钩子 
+
+相机和小工具都使用 \mbox{\hyperlink{classjevois_1_1VideoBuffers}{Video\+Buffers}} 对象来管理其视频缓冲区。\+Video\+Buffer 只是 \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} 对象的向量，具有对缓冲区进行排 队的附加功能（将其发送到内核驱动程序，以便将其与新的相机帧一起归档，或者使其内容通过 U\+SB 链接流出），以及对缓冲 区进行出队（获取下一个抓取的相机帧，或下一个由用户代码填充的空 U\+SB 缓冲区）。
+
+请注意，此类不提供线程安全性，在多线程访问的情况下必须进行外部保护。
+
+\mbox{\hyperlink{classjevois_1_1VideoBuffers}{Video\+Buffers}} 主要供 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 和 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 内部使用。机器视觉程序员应该只使用 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 以及 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 和 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包 装器。 
+
+Definition at line 39 of file Video\+Buffers.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1VideoBuffers_abffa1a97eecc04cbe95b112991828e24}{Video\+Buffers}} (char const $\ast$name, int const fd, v4l2\+\_\+buf\+\_\+type type, size\+\_\+t const num=4)
+\begin{DoxyCompactList}\small\item\em 构造并分配 M\+M\+AP 的视频缓冲区 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1VideoBuffers_ab70c94a41bbd35d989a5c31e01aeef83}{$\sim$\+Video\+Buffers}} ()
+\begin{DoxyCompactList}\small\item\em 释放 M\+M\+AP 的内存区域 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size}} () const
+\begin{DoxyCompactList}\small\item\em 获取分配的缓冲区数量 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1VideoBuffers_a1b03a5d79dabb25eb678b50e0f0bb124}{nqueued}} () const
+\begin{DoxyCompactList}\small\item\em 获取排队的缓冲区数量，始终位于 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{[} size\+\_\+t \mbox{]} \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1VideoBuffers_a06cbda1079fb6967394932d4830edad9}{get}} (size\+\_\+t const index) const
+\begin{DoxyCompactList}\small\item\em 通过索引获取一个缓冲区 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{]} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_a91d88f67f937ddce64b43d6547789811}{qbuf}} (size\+\_\+t const index)
+\begin{DoxyCompactList}\small\item\em 将一个缓冲区排队到 V4\+L2，通过索引 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{]} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_ac2b9869138eea91b446fdedcbffe13fe}{qbuf}} (struct v4l2\+\_\+buffer \&buf)
+\begin{DoxyCompactList}\small\item\em 通过 v4l2\+\_\+buffer 将一个缓冲区排队到 V4\+L2 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_a19fea52fc8e627029354a0142b0e88f0}{qbufall}} ()
+\begin{DoxyCompactList}\small\item\em 对所有缓冲区进行排队，通常在捕获设备上开始流式传输时使用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_a43e93703207df68dc1385e3e0b5ec3b8}{qbufallbutone}} (size\+\_\+t const index)
+\begin{DoxyCompactList}\small\item\em 除了一个指定的缓冲区之外，对尚未排队的所有缓冲区进行排队 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_ad041aac409788b59eacc3596c2a3d035}{dqbuf}} (struct v4l2\+\_\+buffer \&buf)
+\begin{DoxyCompactList}\small\item\em 出队下一个捕获/显示的缓冲区，阻塞直到有一个可用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1VideoBuffers_a0ee60508a074c08b238f7089a568f4cf}{dqbufall}} ()
+\begin{DoxyCompactList}\small\item\em 出队所有缓冲区，通常用于停止流，但这可能需要一些时间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_abffa1a97eecc04cbe95b112991828e24}\label{classjevois_1_1VideoBuffers_abffa1a97eecc04cbe95b112991828e24}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!VideoBuffers@{VideoBuffers}}
+\index{VideoBuffers@{VideoBuffers}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{VideoBuffers()}{VideoBuffers()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Buffers\+::\+Video\+Buffers (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{int const}]{fd,  }\item[{v4l2\+\_\+buf\+\_\+type}]{type,  }\item[{size\+\_\+t const}]{num = {\ttfamily 4} }\end{DoxyParamCaption})}
+
+
+
+构造并分配 M\+M\+AP 的视频缓冲区 
+
+Type 是缓冲区类型，通常为 V4\+L2\+\_\+\+B\+U\+F\+\_\+\+T\+Y\+P\+E\+\_\+\+V\+I\+D\+E\+O\+\_\+\+C\+A\+P\+T\+U\+R\+E、\+V4\+L2\+\_\+\+B\+U\+F\+\_\+\+T\+Y\+P\+E\+\_\+\+V\+I\+D\+E\+O\+\_\+\+C\+A\+P\+T\+U\+R\+E\+\_\+\+M\+P\+L\+A\+NE 或 V4\+L2\+\_\+\+B\+U\+F\+\_\+\+T\+Y\+P\+E\+\_\+\+V\+I\+D\+E\+O\+\_\+\+O\+U\+T\+P\+U\+T。\begin{DoxyNote}{Note}
+name 仅用于调试消息，因此我们可以区分摄像头和 U\+SB 缓冲区。 
+\end{DoxyNote}
+
+
+Definition at line 30 of file Video\+Buffers.\+C.
+
+
+
+References F\+D\+L\+D\+E\+B\+UG, F\+D\+L\+F\+A\+T\+AL, L\+F\+A\+T\+AL, and X\+I\+O\+C\+TL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_ab70c94a41bbd35d989a5c31e01aeef83}\label{classjevois_1_1VideoBuffers_ab70c94a41bbd35d989a5c31e01aeef83}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!````~VideoBuffers@{$\sim$VideoBuffers}}
+\index{````~VideoBuffers@{$\sim$VideoBuffers}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoBuffers()}{~VideoBuffers()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Buffers\+::$\sim$\+Video\+Buffers (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+释放 M\+M\+AP 的内存区域 
+
+
+
+Definition at line 91 of file Video\+Buffers.\+C.
+
+
+
+References F\+D\+L\+D\+E\+B\+UG, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_ad041aac409788b59eacc3596c2a3d035}\label{classjevois_1_1VideoBuffers_ad041aac409788b59eacc3596c2a3d035}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!dqbuf@{dqbuf}}
+\index{dqbuf@{dqbuf}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{dqbuf()}{dqbuf()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::dqbuf (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+buffer \&}]{buf }\end{DoxyParamCaption})}
+
+
+
+出队下一个捕获/显示的缓冲区，阻塞直到有一个可用 
+
+
+
+Definition at line 183 of file Video\+Buffers.\+C.
+
+
+
+References F\+D\+L\+F\+A\+T\+AL, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+E\+T\+\_\+\+O\+N\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a0ee60508a074c08b238f7089a568f4cf}\label{classjevois_1_1VideoBuffers_a0ee60508a074c08b238f7089a568f4cf}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!dqbufall@{dqbufall}}
+\index{dqbufall@{dqbufall}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{dqbufall()}{dqbufall()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::dqbufall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+出队所有缓冲区，通常用于停止流，但这可能需要一些时间 
+
+
+
+Definition at line 208 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a06cbda1079fb6967394932d4830edad9}\label{classjevois_1_1VideoBuffers_a06cbda1079fb6967394932d4830edad9}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!get@{get}}
+\index{get@{get}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{jevois\+::\+Video\+Buf}} $>$ jevois\+::\+Video\+Buffers\+::get (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{index }\end{DoxyParamCaption}) const}
+
+
+
+通过索引获取一个缓冲区 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{]} 
+
+
+
+Definition at line 127 of file Video\+Buffers.\+C.
+
+
+
+References F\+D\+L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a1b03a5d79dabb25eb678b50e0f0bb124}\label{classjevois_1_1VideoBuffers_a1b03a5d79dabb25eb678b50e0f0bb124}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!nqueued@{nqueued}}
+\index{nqueued@{nqueued}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{nqueued()}{nqueued()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Video\+Buffers\+::nqueued (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取排队的缓冲区数量，始终位于 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{[} size\+\_\+t \mbox{]} 
+
+
+
+Definition at line 121 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a91d88f67f937ddce64b43d6547789811}\label{classjevois_1_1VideoBuffers_a91d88f67f937ddce64b43d6547789811}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!qbuf@{qbuf}}
+\index{qbuf@{qbuf}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{qbuf()}{qbuf()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::qbuf (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{index }\end{DoxyParamCaption})}
+
+
+
+将一个缓冲区排队到 V4\+L2，通过索引 \mbox{[}0 .. \mbox{\hyperlink{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}{size()}}\mbox{]} 
+
+请注意，如果在输出设备上使用，则会抛出异常，因为我们不知道 bytesused 应使用什么值（缓冲区中有多少数据；这对于 支持流出 M\+J\+PG 图像是必要的，其使用的字节数是可变的）。 在这些设备上改用 qbuf(v4l2\+\_\+buffer)，通常使用从 \mbox{\hyperlink{classjevois_1_1VideoBuffers_ad041aac409788b59eacc3596c2a3d035}{dqbuf()}} 获得的缓冲区，并且当它包含 M\+J\+PG 图像时，在该缓冲区的 bytesused 字段中设置使用的字节数。 
+
+Definition at line 135 of file Video\+Buffers.\+C.
+
+
+
+References F\+D\+L\+F\+A\+T\+AL, jevois\+::to\+\_\+string(), and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_ac2b9869138eea91b446fdedcbffe13fe}\label{classjevois_1_1VideoBuffers_ac2b9869138eea91b446fdedcbffe13fe}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!qbuf@{qbuf}}
+\index{qbuf@{qbuf}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{qbuf()}{qbuf()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::qbuf (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+buffer \&}]{buf }\end{DoxyParamCaption})}
+
+
+
+通过 v4l2\+\_\+buffer 将一个缓冲区排队到 V4\+L2 
+
+调用者负责设置 v4l2\+\_\+buf 中的所有字段，包括与之前请求的有效且尚未排队的缓冲区相对应的索引。通常，这由输出设备使 用，输出设备首先通过 \mbox{\hyperlink{classjevois_1_1VideoBuffers_ad041aac409788b59eacc3596c2a3d035}{dqbuf()}} 获取缓冲区，然后将像素数据填充到其中，然后将其发送回 \mbox{\hyperlink{classjevois_1_1VideoBuffers_a91d88f67f937ddce64b43d6547789811}{qbuf()}}。 
+
+Definition at line 159 of file Video\+Buffers.\+C.
+
+
+
+References jevois\+::to\+\_\+string(), and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a19fea52fc8e627029354a0142b0e88f0}\label{classjevois_1_1VideoBuffers_a19fea52fc8e627029354a0142b0e88f0}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!qbufall@{qbufall}}
+\index{qbufall@{qbufall}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{qbufall()}{qbufall()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::qbufall (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+对所有缓冲区进行排队，通常在捕获设备上开始流式传输时使用 
+
+
+
+Definition at line 170 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a43e93703207df68dc1385e3e0b5ec3b8}\label{classjevois_1_1VideoBuffers_a43e93703207df68dc1385e3e0b5ec3b8}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!qbufallbutone@{qbufallbutone}}
+\index{qbufallbutone@{qbufallbutone}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{qbufallbutone()}{qbufallbutone()}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Buffers\+::qbufallbutone (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{index }\end{DoxyParamCaption})}
+
+
+
+除了一个指定的缓冲区之外，对尚未排队的所有缓冲区进行排队 
+
+
+
+Definition at line 176 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}\label{classjevois_1_1VideoBuffers_a219dbd9a76e31cfef67c7b55539694b7}} 
+\index{jevois::VideoBuffers@{jevois::VideoBuffers}!size@{size}}
+\index{size@{size}!jevois::VideoBuffers@{jevois::VideoBuffers}}
+\doxyparagraph{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Video\+Buffers\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取分配的缓冲区数量 
+
+
+
+Definition at line 115 of file Video\+Buffers.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoBuffers_8H}{Video\+Buffers.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoBuffers_8C}{Video\+Buffers.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,80 @@
+\hypertarget{ImGuiBackendMALI_8C}{}\doxysubsection{src/jevois/\+G\+P\+U/\+Im\+Gui\+Backend\+M\+A\+LI.C File Reference}
+\label{ImGuiBackendMALI_8C}\index{src/jevois/GPU/ImGuiBackendMALI.C@{src/jevois/GPU/ImGuiBackendMALI.C}}
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Im\+Gui\+Backend\+M\+A\+L\+I.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Open\+G\+L.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Console.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+impl\+\_\+opengl3.\+h$>$}\newline
+{\ttfamily \#include $<$imgui.\+h$>$}\newline
+{\ttfamily \#include $<$linux/input.\+h$>$}\newline
+{\ttfamily \#include $<$linux/kd.\+h$>$}\newline
+{\ttfamily \#include $<$linux/keyboard.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+{\ttfamily \#include $<$wchar.\+h$>$}\newline
+{\ttfamily \#include $<$wctype.\+h$>$}\newline
+Include dependency graph for Im\+Gui\+Backend\+M\+A\+L\+I.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ImGuiBackendMALI_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ImGuiBackendMALI_8C_ade3be93da0509d2a86b7ed5c4d68829a}{E\+V\+\_\+\+M\+A\+KE}}~1
+\item 
+\#define \mbox{\hyperlink{ImGuiBackendMALI_8C_a7842d43bd2e2d34749aae84887bd5e2e}{E\+V\+\_\+\+B\+R\+E\+AK}}~0
+\item 
+\#define \mbox{\hyperlink{ImGuiBackendMALI_8C_aab9107b6770f76546435deef4d70880c}{E\+V\+\_\+\+R\+E\+P\+E\+AT}}~2
+\item 
+\#define \mbox{\hyperlink{ImGuiBackendMALI_8C_a22dd9d967cbe39a94c26153f1e96ec1e}{N\+E\+L\+E\+MS}}(x)~(sizeof(x) / sizeof((x)\mbox{[}0\mbox{]}))
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ImGuiBackendMALI_8C_a7842d43bd2e2d34749aae84887bd5e2e}\label{ImGuiBackendMALI_8C_a7842d43bd2e2d34749aae84887bd5e2e}} 
+\index{ImGuiBackendMALI.C@{ImGuiBackendMALI.C}!EV\_BREAK@{EV\_BREAK}}
+\index{EV\_BREAK@{EV\_BREAK}!ImGuiBackendMALI.C@{ImGuiBackendMALI.C}}
+\doxyparagraph{\texorpdfstring{EV\_BREAK}{EV\_BREAK}}
+{\footnotesize\ttfamily \#define E\+V\+\_\+\+B\+R\+E\+AK~0}
+
+
+
+Definition at line 42 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+\mbox{\Hypertarget{ImGuiBackendMALI_8C_ade3be93da0509d2a86b7ed5c4d68829a}\label{ImGuiBackendMALI_8C_ade3be93da0509d2a86b7ed5c4d68829a}} 
+\index{ImGuiBackendMALI.C@{ImGuiBackendMALI.C}!EV\_MAKE@{EV\_MAKE}}
+\index{EV\_MAKE@{EV\_MAKE}!ImGuiBackendMALI.C@{ImGuiBackendMALI.C}}
+\doxyparagraph{\texorpdfstring{EV\_MAKE}{EV\_MAKE}}
+{\footnotesize\ttfamily \#define E\+V\+\_\+\+M\+A\+KE~1}
+
+
+
+Definition at line 41 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+\mbox{\Hypertarget{ImGuiBackendMALI_8C_aab9107b6770f76546435deef4d70880c}\label{ImGuiBackendMALI_8C_aab9107b6770f76546435deef4d70880c}} 
+\index{ImGuiBackendMALI.C@{ImGuiBackendMALI.C}!EV\_REPEAT@{EV\_REPEAT}}
+\index{EV\_REPEAT@{EV\_REPEAT}!ImGuiBackendMALI.C@{ImGuiBackendMALI.C}}
+\doxyparagraph{\texorpdfstring{EV\_REPEAT}{EV\_REPEAT}}
+{\footnotesize\ttfamily \#define E\+V\+\_\+\+R\+E\+P\+E\+AT~2}
+
+
+
+Definition at line 43 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+\mbox{\Hypertarget{ImGuiBackendMALI_8C_a22dd9d967cbe39a94c26153f1e96ec1e}\label{ImGuiBackendMALI_8C_a22dd9d967cbe39a94c26153f1e96ec1e}} 
+\index{ImGuiBackendMALI.C@{ImGuiBackendMALI.C}!NELEMS@{NELEMS}}
+\index{NELEMS@{NELEMS}!ImGuiBackendMALI.C@{ImGuiBackendMALI.C}}
+\doxyparagraph{\texorpdfstring{NELEMS}{NELEMS}}
+{\footnotesize\ttfamily \#define N\+E\+L\+E\+MS(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(sizeof(x) / sizeof((x)\mbox{[}0\mbox{]}))}
+
+
+
+Definition at line 45 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+

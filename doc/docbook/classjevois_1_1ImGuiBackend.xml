@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ImGuiBackend">
+<title>jevois::ImGuiBackend Class Reference</title>
+<indexterm><primary>jevois::ImGuiBackend</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/ImGuiBackend.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Backend for ImGui on JeVois-Pro. </para>
+
+
+
+<para>This abstract base class provides an interface used by <link linkend="_classjevois_1_1VideoDisplayGUI">VideoDisplayGUI</link>. Derived implementations are available for SDL2 (to be used on JeVois-Pro host) and Mali framebuffer + evdev (to be used on JeVois-Pro platform). </para>
+<para>
+Definition at line 33 of file ImGuiBackend.H.</para>
+Inheritance diagram for jevois::ImGuiBackend:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ImGuiBackend__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ImGuiBackend:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ImGuiBackend__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiBackend_1ae33d7f8ec8066dedbcab612e8afd8bc5">ImGuiBackend</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ImGuiBackend_1ac59b3ad1807875aba0bd2b8a5ef6b069">~ImGuiBackend</link> ()</para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackend_1af0666fcfa9fb5284b74865b3a5e5a72d">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false, float scale=1.0f, bool conslock=false)=0</para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackend_1ab7db3f98de08fb763935b179c0031eea">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false)=0</para>
+
+<para>Avoid warning about overloaded virtual. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ImGuiBackend_1a181905b959ba0c5d7b9bb5f4f75e54ff">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, EGLNativeWindowType win)</para>
+
+<para>Avoid warning about overloaded virtual. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiBackend_1ae33d7f8ec8066dedbcab612e8afd8bc5"/>    <section>
+    <title>ImGuiBackend()</title>
+<indexterm><primary>ImGuiBackend</primary><secondary>jevois::ImGuiBackend</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackend</primary><secondary>ImGuiBackend</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiBackend::ImGuiBackend ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 23 of file ImGuiBackend.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackend_1ac59b3ad1807875aba0bd2b8a5ef6b069"/>    <section>
+    <title>~ImGuiBackend()</title>
+<indexterm><primary>~ImGuiBackend</primary><secondary>jevois::ImGuiBackend</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackend</primary><secondary>~ImGuiBackend</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiBackend::~ImGuiBackend ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</para>
+<para>
+Definition at line 27 of file ImGuiBackend.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiBackend_1ab7db3f98de08fb763935b179c0031eea"/>    <section>
+    <title>init()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::ImGuiBackend</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackend</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoDisplayBackend::init</computeroutput></para><para>
+
+<para>Avoid warning about overloaded virtual. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackend_1af0666fcfa9fb5284b74865b3a5e5a72d"/>    <section>
+    <title>init()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::ImGuiBackend</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackend</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>virtual void jevois::ImGuiBackend::init (unsigned short w, unsigned short h, bool fullscreen = <computeroutput>false</computeroutput>
+, float scale = <computeroutput>1.0f</computeroutput>
+, bool conslock = <computeroutput>false</computeroutput>
+)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</para>
+
+<para>The init starts with the given initial window/framebuffer size. </para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiBackend_1a181905b959ba0c5d7b9bb5f4f75e54ff"/>    <section>
+    <title>init()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>init</primary><secondary>jevois::ImGuiBackend</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiBackend</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackend::init</computeroutput></para><para>
+
+<para>Avoid warning about overloaded virtual. </para>
+</para>
+<para>
+Definition at line 57 of file VideoDisplayBackend.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_ImGuiBackend_8H">ImGuiBackend.H</link>src/jevois/GPU/<link linkend="_ImGuiBackend_8C">ImGuiBackend.C</link></section>
+</section>

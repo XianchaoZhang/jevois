@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoOutput">
+<title>jevois::VideoOutput Class Reference</title>
+<indexterm><primary>jevois::VideoOutput</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoOutput.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>视频输出的基类。Gadget、MovieOutput、VideoDisplay 和 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> 均从其派生 </para>
+
+
+
+<para>此虚拟基类提供 <link linkend="_classjevois_1_1Engine">Engine</link> 所需的视频输出接口。 </para>
+<para>
+Definition at line 27 of file VideoOutput.H.</para>
+Inheritance diagram for jevois::VideoOutput:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoOutput__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1VideoOutput_1af270aa4c4a41f77e50ce7e8f0c7df596">~VideoOutput</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)=0</para>
+
+<para>设置视频格式和帧速率 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">send</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img)=0</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120">streamOn</link> ()=0</para>
+
+<para>开始流式传输 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a">abortStream</link> ()=0</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">streamOff</link> ()=0</para>
+
+<para>Stop streaming. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoOutput_1af270aa4c4a41f77e50ce7e8f0c7df596"/>    <section>
+    <title>~VideoOutput()</title>
+<indexterm><primary>~VideoOutput</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>~VideoOutput</secondary></indexterm>
+<para><computeroutput>jevois::VideoOutput::~VideoOutput ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</para>
+<para>
+Definition at line 21 of file VideoOutput.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::abortStream ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>这只会取消将来的 <link linkend="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9">get()</link> 和 <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">send()</link> 调用，仍应调用 <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Gadget_1a58592471bacdfff49de78fe6d4ef79a1">jevois::Gadget</link>, <link linkend="_classjevois_1_1VideoDisplayGL_1ab38f4ed907c70e1cbf0e9d3a788aa5c2">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1af7a06701b89c4d6a8c7fe13b07b8c3fc">jevois::VideoDisplayGUI</link>, <link linkend="_classjevois_1_1MovieOutput_1af1f5a85a4c8f318165b210000b7a9541">jevois::MovieOutput</link>, and <link linkend="_classjevois_1_1VideoOutputNone_1a43d7042bdaebcf90fa03f6f527c20deb">jevois::VideoOutputNone</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::get (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">jevois::Gadget</link>, <link linkend="_classjevois_1_1VideoDisplayGL_1a39307dc451da6bbefbfafcfd1bd538df">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1abaae4f38841162e9deed1f24a5e5d16d">jevois::VideoDisplayGUI</link>, and <link linkend="_classjevois_1_1VideoOutputNone_1abbcffaff5cc4f8598b699839a4e6bfc8">jevois::VideoOutputNone</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::send (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; img)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+Implemented in <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">jevois::Gadget</link>, <link linkend="_classjevois_1_1VideoDisplayGL_1a2c4acdf51bc75b0f6e2093227db4b141">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1a926621070b48eb62ffd826c2577822f4">jevois::VideoDisplayGUI</link>, <link linkend="_classjevois_1_1MovieOutput_1a5dcac04ce2ca902f50ea0d6547a72705">jevois::MovieOutput</link>, and <link linkend="_classjevois_1_1VideoOutputNone_1a5098384ddb2b6a98be345d60a5929804">jevois::VideoOutputNone</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::setFormat (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; m)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧速率 </para>
+</para>
+
+<para>有时这可以作为无操作来实现。对于 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 类，我们无法决定和设置格式，它是作为接收 USB/UVC 命令的结果设置的，以便 USB 主机准备好接收具有所选格式和帧大小的图像。对于 VideoDisplay 类，这 会分配输出缓冲区，并且必须在流式传输开始之前调用。</para>
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 从其自己的 <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">setFormat()</link> 中调用此方法（以及相机上的 <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">setFormat()</link>），因此通常只需在 <link linkend="_classjevois_1_1Engine">Engine</link> 级别设置格式，而不是直接在 <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> 上设置格式。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1VideoDisplayGL_1a1acda833d425751fcf879e6f8bdc42dc">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1a4249f773bd26d4c9a20b39c37fc6f6bc">jevois::VideoDisplayGUI</link>, <link linkend="_classjevois_1_1MovieOutput_1a8613022e6abc3897663b010f564b6e25">jevois::MovieOutput</link>, <link linkend="_classjevois_1_1VideoOutputNone_1a97a8762ecc4858e32a492e786080939b">jevois::VideoOutputNone</link>, and <link linkend="_classjevois_1_1Gadget_1ab232e3eaee3a793d58271c7a149069a7">jevois::Gadget</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::streamOff ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Gadget_1a2b3e805524d943d4c82a92702ccdeb13">jevois::Gadget</link>, <link linkend="_classjevois_1_1VideoDisplayGL_1a8183c77d23ce5bd26222513e1536c413">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1a11349b56b1c284ab8d30861fbb3c9816">jevois::VideoDisplayGUI</link>, <link linkend="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c">jevois::MovieOutput</link>, and <link linkend="_classjevois_1_1VideoOutputNone_1a0b81122d31d106cda61d3ae1f195012a">jevois::VideoOutputNone</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::VideoOutput</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutput</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>virtual void jevois::VideoOutput::streamOn ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>开始流式传输 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Gadget_1ab59e7323881b74c61c59162091b963bb">jevois::Gadget</link>, <link linkend="_classjevois_1_1VideoDisplayGL_1a724f39d6a2261d8e91d757f4b0e2574a">jevois::VideoDisplayGL</link>, <link linkend="_classjevois_1_1VideoDisplayGUI_1a14a53e643e5b908132940eacc7f602c2">jevois::VideoDisplayGUI</link>, <link linkend="_classjevois_1_1MovieOutput_1acd08cef18b6ee9ab13ea9b616322a296">jevois::MovieOutput</link>, and <link linkend="_classjevois_1_1VideoOutputNone_1ae045404603f6a560085cb4102e1e2bcf">jevois::VideoOutputNone</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoOutput_8H">VideoOutput.H</link>src/jevois/Core/<link linkend="_VideoOutput_8C">VideoOutput.C</link></section>
+</section>

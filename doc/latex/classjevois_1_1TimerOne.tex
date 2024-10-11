@@ -1,0 +1,98 @@
+\hypertarget{classjevois_1_1TimerOne}{}\doxysubsection{jevois\+::Timer\+One Class Reference}
+\label{classjevois_1_1TimerOne}\index{jevois::TimerOne@{jevois::TimerOne}}
+
+
+{\ttfamily \#include $<$jevois/\+Debug/\+Timer.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+简单的一次性计时器类 
+
+此类报告 \mbox{\hyperlink{classjevois_1_1TimerOne_a63fa81f08e16b1e07893abbada2f9bbd}{start()}} 和 \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop()}} 之间花费的时间。通常，通过将 \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop()}} 返回的字符串呈现到视频输出中，这可能有助于报告神 经网络的处理时间。 
+
+Definition at line 67 of file Timer.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1TimerOne_ab095b30fcc7075dc1e04f7160be5ab05}{Timer\+One}} (char const $\ast$prefix)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1TimerOne_a63fa81f08e16b1e07893abbada2f9bbd}{start}} ()
+\begin{DoxyCompactList}\small\item\em Start a time measurement period. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1TimerOne_a0894274ea3769ec56a3ce6de761d5e24}{stop}} (double $\ast$seconds)
+\begin{DoxyCompactList}\small\item\em 结束一个时间测量期，报告花费的时间如下：\textquotesingle{}prefix\+: ms (fps)\textquotesingle{}，其中 \% 被值替换 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop}} ()
+\begin{DoxyCompactList}\small\item\em 与 \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop()}} 的其他签名相同，但不提供秒数，用于 python 绑定 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1TimerOne_ab095b30fcc7075dc1e04f7160be5ab05}\label{classjevois_1_1TimerOne_ab095b30fcc7075dc1e04f7160be5ab05}} 
+\index{jevois::TimerOne@{jevois::TimerOne}!TimerOne@{TimerOne}}
+\index{TimerOne@{TimerOne}!jevois::TimerOne@{jevois::TimerOne}}
+\doxyparagraph{\texorpdfstring{TimerOne()}{TimerOne()}}
+{\footnotesize\ttfamily jevois\+::\+Timer\+One\+::\+Timer\+One (\begin{DoxyParamCaption}\item[{char const $\ast$}]{prefix }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 144 of file Timer.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1TimerOne_a63fa81f08e16b1e07893abbada2f9bbd}\label{classjevois_1_1TimerOne_a63fa81f08e16b1e07893abbada2f9bbd}} 
+\index{jevois::TimerOne@{jevois::TimerOne}!start@{start}}
+\index{start@{start}!jevois::TimerOne@{jevois::TimerOne}}
+\doxyparagraph{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void jevois\+::\+Timer\+One\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start a time measurement period. 
+
+
+
+Definition at line 149 of file Timer.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}\label{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}} 
+\index{jevois::TimerOne@{jevois::TimerOne}!stop@{stop}}
+\index{stop@{stop}!jevois::TimerOne@{jevois::TimerOne}}
+\doxyparagraph{\texorpdfstring{stop()}{stop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Timer\+One\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+与 \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop()}} 的其他签名相同，但不提供秒数，用于 python 绑定 
+
+
+
+Definition at line 169 of file Timer.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1TimerOne_a0894274ea3769ec56a3ce6de761d5e24}\label{classjevois_1_1TimerOne_a0894274ea3769ec56a3ce6de761d5e24}} 
+\index{jevois::TimerOne@{jevois::TimerOne}!stop@{stop}}
+\index{stop@{stop}!jevois::TimerOne@{jevois::TimerOne}}
+\doxyparagraph{\texorpdfstring{stop()}{stop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Timer\+One\+::stop (\begin{DoxyParamCaption}\item[{double $\ast$}]{seconds }\end{DoxyParamCaption})}
+
+
+
+结束一个时间测量期，报告花费的时间如下：\textquotesingle{}prefix\+: ms (fps)\textquotesingle{}，其中 \% 被值替换 
+
+如果秒数不为空，它将被设置为 \mbox{\hyperlink{classjevois_1_1TimerOne_a63fa81f08e16b1e07893abbada2f9bbd}{start()}} 和 \mbox{\hyperlink{classjevois_1_1TimerOne_ac703b9ae79ac6bfa9f7f2f21c3f0eed5}{stop()}} 之间的瞬时秒数。 
+
+Definition at line 155 of file Timer.\+C.
+
+
+
+References jevois\+::secs2str().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Debug/\mbox{\hyperlink{Timer_8H}{Timer.\+H}}\item 
+src/jevois/\+Debug/\mbox{\hyperlink{Timer_8C}{Timer.\+C}}\end{DoxyCompactItemize}

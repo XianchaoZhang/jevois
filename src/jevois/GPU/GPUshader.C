@@ -37,7 +37,7 @@ void jevois::GPUshader::load(char const * filename, GLuint type)
 {
   if (itsId) { glDeleteShader(itsId); itsId = 0; }
 
-  // Read the whole file into memory (much faster than using streambuf):
+  // 将整个文件读入内存（比使用 streambuf 快得多）：
   FILE * f = fopen(filename, "rb"); if (f == nullptr) PLFATAL("Failed to read file " << filename);
   fseek(f, 0, SEEK_END);
   int sz = ftell(f);
@@ -47,7 +47,7 @@ void jevois::GPUshader::load(char const * filename, GLuint type)
   src[sz] = 0; // null terminate it
   fclose(f);
 
-  // Set and compile the shader:
+  // 设置并编译着色器：
   try { this->set(filename, src, type); } catch (...) { jevois::warnAndIgnoreException(); }
 
   delete [] src;
@@ -58,7 +58,7 @@ void jevois::GPUshader::set(char const * name, char const * str, GLuint type)
 {
   if (itsId) { glDeleteShader(itsId); itsId = 0; }
 
-  // Create and compile the shader:
+  // 创建并编译着色器：
   GL_CHECK(itsId = glCreateShader(type));
   GL_CHECK(glShaderSource(itsId, 1, (const GLchar**)&str, 0));
   GL_CHECK(glCompileShader(itsId));

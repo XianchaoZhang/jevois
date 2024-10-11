@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structjevois_1_1DMPdata">
+<title>jevois::DMPdata Struct Reference</title>
+<indexterm><primary>jevois::DMPdata</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/IMUdata.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>DMP 数据（数字运动处理器） </para>
+<para>
+Definition at line 126 of file IMUdata.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_structjevois_1_1DMPdata_1a6dd82d2a12930c4981030cc9a9ab8d54">parsePacket</link> (unsigned char const *packet, size_t siz)</para>
+
+<para>从 DMP 收到的数据包中填充我们的字段 </para>
+</listitem>
+            <listitem><para>float <link linkend="_structjevois_1_1DMPdata_1acfadc44ec64381d15e3f942378a58ea8">fsync_us</link> () const</para>
+
+<para>Delay between FSYNC and next <link linkend="_classjevois_1_1IMU">IMU</link> data, in microseconds. </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_structjevois_1_1DMPdata_1a99e31d907d4b229537b700de744e9b89">activity</link> ()</para>
+
+<para>将当前正在进行的活动解码为字符串 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_structjevois_1_1DMPdata_1a3cb317ef4a42a565a39de1cdc8ecc2be">activity2</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static float <link linkend="_structjevois_1_1DMPdata_1af67ba4abaee3c213164cb018f753ff80">fix2float</link> (long val)</para>
+
+<para>将长定点值转换为浮点数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1a600722a0e04a908f2919e787af349789">header1</link></para>
+
+<para>Header 1 字段指示哪些数据有效 </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1aa68f2a8beb23c118a9537f9b5baa6397">header2</link></para>
+
+<para>Header 2 字段指示哪些数据有效 </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a4d57effa002121ec809d7ee4d9291d0f">accel</link> [3]</para>
+
+<para>Raw accelerometer data (when JEVOIS_DMP_ACCEL in header1) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a32d9d6923c33a6342af72258c42634ec">gyro</link> [3]</para>
+
+<para>Raw gyro data (when JEVOIS_DMP_GYRO in header1) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a894d6e522d6bc597c71573f11e510fff">cpass</link> [3]</para>
+
+<para>Raw compass data (when JEVOIS_DMP_CPASS in header1) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1afae75111a229a37eba3e6c2ce643d65c">gbias</link> [3]</para>
+
+<para>Raw gyro bias data (when JEVOIS_DMP_GYRO in header1) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1acdf6645d7a9fa65b54bb46ec2ced77bf">quat6</link> [3]</para>
+
+<para>Quaternion6 data (when JEVOIS_DMP_QUAT6 in header1) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1ab88c494dacffb765f288d0624588199f">quat9</link> [3]</para>
+
+<para>Quaternion9 data (when JEVOIS_DMP_QUAT9 in header1) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1a1f736ff9f1a3bdddd0b51d6e1f133b93">quat9acc</link></para>
+
+<para>Quaternion9 accuracy (when JEVOIS_DMP_QUAT9 in header1) </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_structjevois_1_1DMPdata_1ab0f538035051e1b813379639ffba547c">stepts</link></para>
+
+<para>Step detection timestamp (when JEVOIS_DMP_PED_STEPDET) </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1a0d6c5c5c289272fb2f8bff3f51bebb46">steps</link></para>
+
+<para>Number of steps (0..7) detected this cycle (when JEVOIS_DMP_PED_STEPDET) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1ae8a8f172f817d58435aa5697570d37b7">geomag</link> [3]</para>
+
+<para>Geomag data (when JEVOIS_DMP_GEOMAG in header1) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1ab9fc79ba561437af6999fb59685f70c7">geomagacc</link></para>
+
+<para>Geomag accuracy (when JEVOIS_DMP_GEOMAG in header1) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a36ed15cac015cc9f4122ce8251dadb70">gyrobias</link> [3]</para>
+
+<para>Gyro bias/calibration data (when JEVOIS_DMP_GYRO_CALIBR in header1) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1a2e09f79b6091ad5d1065187fa249af0d">cpasscal</link> [3]</para>
+
+<para>Compass calibration data (when JEVOIS_DMP_CPASS_CALIBR in header1) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a6b3b487d93196f40e7bf4ac4d382c64d">accelacc</link></para>
+
+<para>Accelerometer accuracy data (when JEVOIS_DMP_ACCEL_ACCURACY in header2) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a0c12403b46cde7848d5a3571b4ba2c92">gyroacc</link></para>
+
+<para>Gyro accuracy data (when JEVOIS_DMP_GYRO_ACCURACY in header2) </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1a024b9472fad90dfa498f666d30b9dcb4">cpassacc</link></para>
+
+<para>Compass accuracy data (when JEVOIS_DMP_CPASS_ACCURACY in header2) </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1a4c3ec8aa1e1a59d61ae342a703706c87">fsync</link></para>
+
+<para>Delay between FSYNC received from camera and first subsequent <link linkend="_classjevois_1_1IMU">IMU</link> data generated. </para>
+</listitem>
+            <listitem><para>short <link linkend="_structjevois_1_1DMPdata_1addfab3954bcbeb080df93db7f8fafcb3">pickup</link></para>
+
+<para>Flip/pickup detection (when JEVOIS_DMP_FLIP_PICKUP in header2) </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1a0bf90590a8cee0084337235cc2bea3b1">bacstate</link></para>
+
+<para>Activity recognition state (when JEVOIS_DMP_ACT_RECOG in header2) </para>
+</listitem>
+            <listitem><para>long <link linkend="_structjevois_1_1DMPdata_1af26d54ea4368df406ea21d46e6d6835b">bacts</link></para>
+
+<para>Activity recognition timestamp (when JEVOIS_DMP_ACT_RECOG in header2) </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_structjevois_1_1DMPdata_1ae394d4345a7951623b09f7279908cfd1">odrcnt</link></para>
+
+<para>输出数据速率计数器（总是在这里但不清楚它是什么） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_structjevois_1_1DMPdata_1a99e31d907d4b229537b700de744e9b89"/>    <section>
+    <title>activity()</title>
+<indexterm><primary>activity</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>activity</secondary></indexterm>
+<para><computeroutput>std::vector&lt; std::string &gt; jevois::DMPdata::activity ( )</computeroutput></para><para>
+
+<para>将当前正在进行的活动解码为字符串 </para>
+</para>
+
+<para>要求在 header2 中设置 JEVOIS_DMP_ACT_RECOG 并使用正确的数据速率。此函数返回包含开始或停止作为前缀的字符串， 然后是每个活动。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 </para>
+<para>
+Definition at line 233 of file IMUdata.C.</para>
+<para>
+References DMP_BAC_BIKE, DMP_BAC_DRIVE, DMP_BAC_RUN, DMP_BAC_STILL, DMP_BAC_TILT, DMP_BAC_WALK, and jevois::sformat().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a3cb317ef4a42a565a39de1cdc8ecc2be"/>    <section>
+    <title>activity2()</title>
+<indexterm><primary>activity2</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>activity2</secondary></indexterm>
+<para><computeroutput>std::vector&lt; std::string &gt; jevois::DMPdata::activity2 ( )</computeroutput></para>
+<para>要求在 header2 中设置 JEVOIS_DMP_ACT_RECOG 并使用正确的数据速率。此函数返回包含每个正在进行的事件的名称的字 符串。警告，它有状态，因此您应该在开始使用它后仅调用此函数进行任何与活动相关的解析，并且您应该在每次从 DMP 读取时调用它。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 </para>
+<para>
+Definition at line 259 of file IMUdata.C.</para>
+<para>
+References DMP_BAC_BIKE, DMP_BAC_DRIVE, DMP_BAC_RUN, DMP_BAC_STILL, DMP_BAC_TILT, and DMP_BAC_WALK.</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1af67ba4abaee3c213164cb018f753ff80"/>    <section>
+    <title>fix2float()</title>
+<indexterm><primary>fix2float</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>fix2float</secondary></indexterm>
+<para><computeroutput>float jevois::DMPdata::fix2float (long val)<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>将长定点值转换为浮点数 </para>
+</para>
+<para>
+Definition at line 283 of file IMUdata.C.</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1acfadc44ec64381d15e3f942378a58ea8"/>    <section>
+    <title>fsync_us()</title>
+<indexterm><primary>fsync_us</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>fsync_us</secondary></indexterm>
+<para><computeroutput>float jevois::DMPdata::fsync_us ( ) const</computeroutput></para><para>
+
+<para>Delay between FSYNC and next <link linkend="_classjevois_1_1IMU">IMU</link> data, in microseconds. </para>
+</para>
+<para>
+Definition at line 227 of file IMUdata.C.</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a6dd82d2a12930c4981030cc9a9ab8d54"/>    <section>
+    <title>parsePacket()</title>
+<indexterm><primary>parsePacket</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>parsePacket</secondary></indexterm>
+<para><computeroutput>void jevois::DMPdata::parsePacket (unsigned char const * packet, size_t siz)</computeroutput></para><para>
+
+<para>从 DMP 收到的数据包中填充我们的字段 </para>
+</para>
+<para>
+Definition at line 84 of file IMUdata.C.</para>
+<para>
+References accel, accelacc, bacstate, bacts, cpass, cpassacc, cpasscal, fsync, gbias, geomag, geomagacc, gyro, gyroacc, gyrobias, header1, header2, JEVOIS_DMP_ACCEL, JEVOIS_DMP_ACCEL_ACCURACY, JEVOIS_DMP_ACCEL_ACCURACY_SZ, JEVOIS_DMP_ACCEL_DATA_SZ, JEVOIS_DMP_ACT_RECOG, JEVOIS_DMP_ACT_RECOG_SZ, JEVOIS_DMP_ALS, JEVOIS_DMP_ALS_DATA_SZ, JEVOIS_DMP_CPASS, JEVOIS_DMP_CPASS_ACCURACY, JEVOIS_DMP_CPASS_ACCURACY_SZ, JEVOIS_DMP_CPASS_CALIBR, JEVOIS_DMP_CPASS_CALIBR_DATA_SZ, JEVOIS_DMP_CPASS_DATA_SZ, JEVOIS_DMP_FLIP_PICKUP, JEVOIS_DMP_FLIP_PICKUP_SZ, JEVOIS_DMP_FOOTER_SZ, JEVOIS_DMP_FSYNC, JEVOIS_DMP_FSYNC_SZ, JEVOIS_DMP_GEOMAG, JEVOIS_DMP_GEOMAG_DATA_SZ, JEVOIS_DMP_GYRO, JEVOIS_DMP_GYRO_ACCURACY, JEVOIS_DMP_GYRO_ACCURACY_SZ, JEVOIS_DMP_GYRO_BIAS_DATA_SZ, JEVOIS_DMP_GYRO_CALIBR, JEVOIS_DMP_GYRO_DATA_SZ, JEVOIS_DMP_HEADER2, JEVOIS_DMP_HEADER2_SZ, JEVOIS_DMP_HEADER_SZ, JEVOIS_DMP_PED_STEPDET, JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ, JEVOIS_DMP_PED_STEPIND, JEVOIS_DMP_PRESSURE, JEVOIS_DMP_PRESSURE_DATA_SZ, JEVOIS_DMP_QUAT6, JEVOIS_DMP_QUAT6_DATA_SZ, JEVOIS_DMP_QUAT9, JEVOIS_DMP_QUAT9_DATA_SZ, LERROR, odrcnt, pickup, quat6, quat9, quat9acc, steps, and stepts.</para>
+<para>
+Referenced by jevois::ICM20948::getDMP().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structjevois_1_1DMPdata_1a4d57effa002121ec809d7ee4d9291d0f"/>    <section>
+    <title>accel</title>
+<indexterm><primary>accel</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>accel</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::accel[3]</computeroutput></para><para>
+
+<para>Raw accelerometer data (when JEVOIS_DMP_ACCEL in header1) </para>
+</para>
+<para>
+Definition at line 134 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a6b3b487d93196f40e7bf4ac4d382c64d"/>    <section>
+    <title>accelacc</title>
+<indexterm><primary>accelacc</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>accelacc</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::accelacc</computeroutput></para><para>
+
+<para>Accelerometer accuracy data (when JEVOIS_DMP_ACCEL_ACCURACY in header2) </para>
+</para>
+<para>
+Definition at line 152 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a0bf90590a8cee0084337235cc2bea3b1"/>    <section>
+    <title>bacstate</title>
+<indexterm><primary>bacstate</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>bacstate</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::bacstate</computeroutput></para><para>
+
+<para>Activity recognition state (when JEVOIS_DMP_ACT_RECOG in header2) </para>
+</para>
+<para>
+Definition at line 161 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1af26d54ea4368df406ea21d46e6d6835b"/>    <section>
+    <title>bacts</title>
+<indexterm><primary>bacts</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>bacts</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::bacts</computeroutput></para><para>
+
+<para>Activity recognition timestamp (when JEVOIS_DMP_ACT_RECOG in header2) </para>
+</para>
+<para>
+Definition at line 162 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a894d6e522d6bc597c71573f11e510fff"/>    <section>
+    <title>cpass</title>
+<indexterm><primary>cpass</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>cpass</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::cpass[3]</computeroutput></para><para>
+
+<para>Raw compass data (when JEVOIS_DMP_CPASS in header1) </para>
+</para>
+<para>
+Definition at line 136 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a024b9472fad90dfa498f666d30b9dcb4"/>    <section>
+    <title>cpassacc</title>
+<indexterm><primary>cpassacc</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>cpassacc</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::cpassacc</computeroutput></para><para>
+
+<para>Compass accuracy data (when JEVOIS_DMP_CPASS_ACCURACY in header2) </para>
+</para>
+<para>
+Definition at line 154 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a2e09f79b6091ad5d1065187fa249af0d"/>    <section>
+    <title>cpasscal</title>
+<indexterm><primary>cpasscal</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>cpasscal</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::cpasscal[3]</computeroutput></para><para>
+
+<para>Compass calibration data (when JEVOIS_DMP_CPASS_CALIBR in header1) </para>
+</para>
+<para>
+Definition at line 150 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a4c3ec8aa1e1a59d61ae342a703706c87"/>    <section>
+    <title>fsync</title>
+<indexterm><primary>fsync</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>fsync</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::fsync</computeroutput></para><para>
+
+<para>Delay between FSYNC received from camera and first subsequent <link linkend="_classjevois_1_1IMU">IMU</link> data generated. </para>
+</para>
+<para>
+Definition at line 156 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1afae75111a229a37eba3e6c2ce643d65c"/>    <section>
+    <title>gbias</title>
+<indexterm><primary>gbias</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>gbias</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::gbias[3]</computeroutput></para><para>
+
+<para>Raw gyro bias data (when JEVOIS_DMP_GYRO in header1) </para>
+</para>
+<para>
+Definition at line 137 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1ae8a8f172f817d58435aa5697570d37b7"/>    <section>
+    <title>geomag</title>
+<indexterm><primary>geomag</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>geomag</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::geomag[3]</computeroutput></para><para>
+
+<para>Geomag data (when JEVOIS_DMP_GEOMAG in header1) </para>
+</para>
+<para>
+Definition at line 146 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1ab9fc79ba561437af6999fb59685f70c7"/>    <section>
+    <title>geomagacc</title>
+<indexterm><primary>geomagacc</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>geomagacc</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::geomagacc</computeroutput></para><para>
+
+<para>Geomag accuracy (when JEVOIS_DMP_GEOMAG in header1) </para>
+</para>
+<para>
+Definition at line 147 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a32d9d6923c33a6342af72258c42634ec"/>    <section>
+    <title>gyro</title>
+<indexterm><primary>gyro</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>gyro</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::gyro[3]</computeroutput></para><para>
+
+<para>Raw gyro data (when JEVOIS_DMP_GYRO in header1) </para>
+</para>
+<para>
+Definition at line 135 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a0c12403b46cde7848d5a3571b4ba2c92"/>    <section>
+    <title>gyroacc</title>
+<indexterm><primary>gyroacc</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>gyroacc</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::gyroacc</computeroutput></para><para>
+
+<para>Gyro accuracy data (when JEVOIS_DMP_GYRO_ACCURACY in header2) </para>
+</para>
+<para>
+Definition at line 153 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a36ed15cac015cc9f4122ce8251dadb70"/>    <section>
+    <title>gyrobias</title>
+<indexterm><primary>gyrobias</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>gyrobias</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::gyrobias[3]</computeroutput></para><para>
+
+<para>Gyro bias/calibration data (when JEVOIS_DMP_GYRO_CALIBR in header1) </para>
+</para>
+<para>
+Definition at line 149 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a600722a0e04a908f2919e787af349789"/>    <section>
+    <title>header1</title>
+<indexterm><primary>header1</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>header1</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::header1</computeroutput></para><para>
+
+<para>Header 1 字段指示哪些数据有效 </para>
+</para>
+<para>
+Definition at line 131 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1aa68f2a8beb23c118a9537f9b5baa6397"/>    <section>
+    <title>header2</title>
+<indexterm><primary>header2</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>header2</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::header2</computeroutput></para><para>
+
+<para>Header 2 字段指示哪些数据有效 </para>
+</para>
+<para>
+Definition at line 132 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1ae394d4345a7951623b09f7279908cfd1"/>    <section>
+    <title>odrcnt</title>
+<indexterm><primary>odrcnt</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>odrcnt</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::odrcnt</computeroutput></para><para>
+
+<para>输出数据速率计数器（总是在这里但不清楚它是什么） </para>
+</para>
+
+<para>将活动的开始/停止解码为字符串 </para>
+<para>
+Definition at line 164 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1addfab3954bcbeb080df93db7f8fafcb3"/>    <section>
+    <title>pickup</title>
+<indexterm><primary>pickup</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>pickup</secondary></indexterm>
+<para><computeroutput>short jevois::DMPdata::pickup</computeroutput></para><para>
+
+<para>Flip/pickup detection (when JEVOIS_DMP_FLIP_PICKUP in header2) </para>
+</para>
+<para>
+Definition at line 159 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1acdf6645d7a9fa65b54bb46ec2ced77bf"/>    <section>
+    <title>quat6</title>
+<indexterm><primary>quat6</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>quat6</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::quat6[3]</computeroutput></para><para>
+
+<para>Quaternion6 data (when JEVOIS_DMP_QUAT6 in header1) </para>
+</para>
+<para>
+Definition at line 139 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1ab88c494dacffb765f288d0624588199f"/>    <section>
+    <title>quat9</title>
+<indexterm><primary>quat9</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>quat9</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::quat9[3]</computeroutput></para><para>
+
+<para>Quaternion9 data (when JEVOIS_DMP_QUAT9 in header1) </para>
+</para>
+<para>
+Definition at line 140 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a1f736ff9f1a3bdddd0b51d6e1f133b93"/>    <section>
+    <title>quat9acc</title>
+<indexterm><primary>quat9acc</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>quat9acc</secondary></indexterm>
+<para><computeroutput>long jevois::DMPdata::quat9acc</computeroutput></para><para>
+
+<para>Quaternion9 accuracy (when JEVOIS_DMP_QUAT9 in header1) </para>
+</para>
+<para>
+Definition at line 141 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1a0d6c5c5c289272fb2f8bff3f51bebb46"/>    <section>
+    <title>steps</title>
+<indexterm><primary>steps</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>steps</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::DMPdata::steps</computeroutput></para><para>
+
+<para>Number of steps (0..7) detected this cycle (when JEVOIS_DMP_PED_STEPDET) </para>
+</para>
+<para>
+Definition at line 144 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+    </section><anchor xml:id="_structjevois_1_1DMPdata_1ab0f538035051e1b813379639ffba547c"/>    <section>
+    <title>stepts</title>
+<indexterm><primary>stepts</primary><secondary>jevois::DMPdata</secondary></indexterm>
+<indexterm><primary>jevois::DMPdata</primary><secondary>stepts</secondary></indexterm>
+<para><computeroutput>unsigned long jevois::DMPdata::stepts</computeroutput></para><para>
+
+<para>Step detection timestamp (when JEVOIS_DMP_PED_STEPDET) </para>
+</para>
+<para>
+Definition at line 143 of file IMUdata.H.</para>
+<para>
+Referenced by parsePacket().</para>
+</section>
+<para>
+The documentation for this struct was generated from the following files:</para>
+include/jevois/Core/<link linkend="_IMUdata_8H">IMUdata.H</link>src/jevois/Core/<link linkend="_IMUdata_8C">IMUdata.C</link></section>
+</section>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_OpenGL_8H">
+<title>include/jevois/GPU/OpenGL.H File Reference</title>
+<indexterm><primary>include/jevois/GPU/OpenGL.H</primary></indexterm>
+<programlisting>#include &lt;sstream&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;EGL/eglplatform.h&gt;
+#include &lt;EGL/egl.h&gt;
+#include &lt;EGL/eglext.h&gt;
+#include &lt;GLES2/gl2.h&gt;
+#include &lt;GLES2/gl2ext.h&gt;
+#include &lt;GLES3/gl3.h&gt;
+#include &lt;GLES3/gl3ext.h&gt;
+#include &lt;GLES3/gl31.h&gt;
+#include &lt;GLES3/gl32.h&gt;
+</programlisting>Include dependency graph for OpenGL.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="OpenGL_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="OpenGL_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_OpenGL_8H_1a640197e1e2c236d40c9b4b86332e1f18">EGL_EGLEXT_PROTOTYPES</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_OpenGL_8H_1a120fb070bddb21f0bd899f50252c4cb5">GL_GLEXT_PROTOTYPES</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_OpenGL_8H_1a684c0dc6c3c9c9550c3a18fa13c8749b">GL_CHECK</link>(stmt)</para>
+
+<para>Simple macro to check for OpenGL errors. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_OpenGL_8H_1a811759c9d907dcd1568836bdd31a082f">GL_CHECK_BOOL</link>(stmt)</para>
+
+<para>Simple macro to check for OpenGL errors when a boolean result is expected. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_namespacejevois_1a49a55dd8be92ab5bd902dcd5ca560a66">jevois::opengl_error</link> (int err)</para>
+
+<para>Function to write OpenGL errors in clear witout requiring GLUT. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_OpenGL_8H_1a640197e1e2c236d40c9b4b86332e1f18"/>    <section>
+    <title>EGL_EGLEXT_PROTOTYPES</title>
+<indexterm><primary>EGL_EGLEXT_PROTOTYPES</primary><secondary>OpenGL.H</secondary></indexterm>
+<indexterm><primary>OpenGL.H</primary><secondary>EGL_EGLEXT_PROTOTYPES</secondary></indexterm>
+<para><computeroutput>#define EGL_EGLEXT_PROTOTYPES</computeroutput></para><para>
+Definition at line 24 of file OpenGL.H.</para>
+    </section><anchor xml:id="_OpenGL_8H_1a684c0dc6c3c9c9550c3a18fa13c8749b"/>    <section>
+    <title>GL_CHECK</title>
+<indexterm><primary>GL_CHECK</primary><secondary>OpenGL.H</secondary></indexterm>
+<indexterm><primary>OpenGL.H</primary><secondary>GL_CHECK</secondary></indexterm>
+<para><computeroutput>#define GL_CHECK( stmt)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;stmt;&#32;GLenum&#32;_err&#32;=&#32;glGetError();&#32;\
+&#32;&#32;&#32;&#32;if&#32;(_err&#32;!=&#32;GL_NO_ERROR)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;Error&#32;&quot;</emphasis>&#32;&lt;&lt;&#32;<link linkend="_namespacejevois_1a49a55dd8be92ab5bd902dcd5ca560a66">jevois::opengl_error</link>(_err)&#32;&lt;&lt;<emphasis role="stringliteral">&quot;&#32;in:&#32;&quot;</emphasis>&#32;&lt;&lt;&#32;#stmt);&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(0)
+</programlisting><para>
+
+<para>Simple macro to check for OpenGL errors. </para>
+</para>
+
+<para>Inspired from here: <link xlink:href="http://stackoverflow.com/questions/11256470/define-a-macro-to-facilitate-opengl-command-debugging">http://stackoverflow.com/questions/11256470/define-a-macro-to-facilitate-opengl-command-debugging</link> </para>
+<para>
+Definition at line 77 of file OpenGL.H.</para>
+    </section><anchor xml:id="_OpenGL_8H_1a811759c9d907dcd1568836bdd31a082f"/>    <section>
+    <title>GL_CHECK_BOOL</title>
+<indexterm><primary>GL_CHECK_BOOL</primary><secondary>OpenGL.H</secondary></indexterm>
+<indexterm><primary>OpenGL.H</primary><secondary>GL_CHECK_BOOL</secondary></indexterm>
+<para><computeroutput>#define GL_CHECK_BOOL( stmt)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;<emphasis role="keywordtype">int</emphasis>&#32;_result&#32;=&#32;stmt;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(_result&#32;==&#32;0)&#32;<link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(<emphasis role="stringliteral">&quot;Failed:&#32;&quot;</emphasis>&#32;#stmt);&#32;\
+&#32;&#32;&#32;&#32;GLenum&#32;_err&#32;=&#32;glGetError();&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;if&#32;(_err&#32;!=&#32;GL_NO_ERROR)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;Error&#32;&quot;</emphasis>&#32;&lt;&lt;&#32;<link linkend="_namespacejevois_1a49a55dd8be92ab5bd902dcd5ca560a66">jevois::opengl_error</link>(_err)&#32;&lt;&lt;<emphasis role="stringliteral">&quot;&#32;in:&#32;&quot;</emphasis>&#32;&lt;&lt;&#32;#stmt);&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(0)
+</programlisting><para>
+
+<para>Simple macro to check for OpenGL errors when a boolean result is expected. </para>
+</para>
+<para>
+Definition at line 81 of file OpenGL.H.</para>
+    </section><anchor xml:id="_OpenGL_8H_1a120fb070bddb21f0bd899f50252c4cb5"/>    <section>
+    <title>GL_GLEXT_PROTOTYPES</title>
+<indexterm><primary>GL_GLEXT_PROTOTYPES</primary><secondary>OpenGL.H</secondary></indexterm>
+<indexterm><primary>OpenGL.H</primary><secondary>GL_GLEXT_PROTOTYPES</secondary></indexterm>
+<para><computeroutput>#define GL_GLEXT_PROTOTYPES</computeroutput></para><para>
+Definition at line 25 of file OpenGL.H.</para>
+</section>
+</section>
+</section>

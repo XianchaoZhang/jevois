@@ -1,0 +1,139 @@
+\hypertarget{Engine_8H}{}\doxysubsection{include/jevois/\+Core/\+Engine.H File Reference}
+\label{Engine_8H}\index{include/jevois/Core/Engine.H@{include/jevois/Core/Engine.H}}
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Mapping.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Component/\+Manager.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Enum.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Camera\+Calibration.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Watchdog.\+H$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+Include dependency graph for Engine.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Engine_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Engine_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}}
+\begin{DoxyCompactList}\small\item\em Je\+Vois processing engine -\/ 从相机传感器获取图像，对其进行处理，并通过 U\+SB 发送结果。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Engine_8H_a2946b1e1627169e3e971ea8187f766f8}{J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+E\+F\+A\+U\+LT}}~\char`\"{}/dev/video0\char`\"{}
+\begin{DoxyCompactList}\small\item\em 在平台硬件上，相机传感器设备 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Engine_8H_a63fb01c4b3d97d9f02ed5e283a924dd6}{J\+E\+V\+O\+I\+S\+\_\+\+G\+A\+D\+G\+E\+T\+\_\+\+D\+E\+F\+A\+U\+LT}}~\char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em 在平台硬件上，\+U\+SB gadget 驱动程序的设备（通过 U\+SB 将视频帧发送到主机） \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Engine_8H_a68d7a82071d6b6e2005c52f38f9d204c}{J\+E\+V\+O\+I\+S\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT}}~\char`\"{}/dev/tty\+S4\char`\"{}
+\begin{DoxyCompactList}\small\item\em 在平台硬件上，4 针硬件串口设备 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Engine_8H_a6ae242fd651e29cc5662523966ee7654}{J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT}}~\char`\"{}\char`\"{}
+\begin{DoxyCompactList}\small\item\em 在平台硬件上，用于串行 U\+SB 端口的设备 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Engine_8H_a2408641d6661198d265548aea4c76765}{J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+S\+E\+N\+S\+\_\+\+D\+E\+F\+A\+U\+LT}}~Camera\+Sensor\+::any
+\begin{DoxyCompactList}\small\item\em 默认相机传感器 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Engine_8H_ab645b4d65509897d82a7703bd270d994}{J\+E\+V\+O\+I\+S\+\_\+\+I\+M\+U\+S\+P\+I\+\_\+\+D\+E\+F\+A\+U\+LT}}~\char`\"{}/dev/spidev32766.\+0\char`\"{}
+\begin{DoxyCompactList}\small\item\em 默认 I\+MU spi 设备 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Engine_8H_a2946b1e1627169e3e971ea8187f766f8}\label{Engine_8H_a2946b1e1627169e3e971ea8187f766f8}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_CAMERA\_DEFAULT@{JEVOIS\_CAMERA\_DEFAULT}}
+\index{JEVOIS\_CAMERA\_DEFAULT@{JEVOIS\_CAMERA\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CAMERA\_DEFAULT}{JEVOIS\_CAMERA\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+E\+F\+A\+U\+LT~\char`\"{}/dev/video0\char`\"{}}
+
+
+
+在平台硬件上，相机传感器设备 
+
+
+
+Definition at line 65 of file Engine.\+H.
+
+\mbox{\Hypertarget{Engine_8H_a2408641d6661198d265548aea4c76765}\label{Engine_8H_a2408641d6661198d265548aea4c76765}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_CAMERASENS\_DEFAULT@{JEVOIS\_CAMERASENS\_DEFAULT}}
+\index{JEVOIS\_CAMERASENS\_DEFAULT@{JEVOIS\_CAMERASENS\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_CAMERASENS\_DEFAULT}{JEVOIS\_CAMERASENS\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+S\+E\+N\+S\+\_\+\+D\+E\+F\+A\+U\+LT~Camera\+Sensor\+::any}
+
+
+
+默认相机传感器 
+
+
+
+Definition at line 78 of file Engine.\+H.
+
+\mbox{\Hypertarget{Engine_8H_a63fb01c4b3d97d9f02ed5e283a924dd6}\label{Engine_8H_a63fb01c4b3d97d9f02ed5e283a924dd6}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_GADGET\_DEFAULT@{JEVOIS\_GADGET\_DEFAULT}}
+\index{JEVOIS\_GADGET\_DEFAULT@{JEVOIS\_GADGET\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_GADGET\_DEFAULT}{JEVOIS\_GADGET\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+G\+A\+D\+G\+E\+T\+\_\+\+D\+E\+F\+A\+U\+LT~\char`\"{}\char`\"{}}
+
+
+
+在平台硬件上，\+U\+SB gadget 驱动程序的设备（通过 U\+SB 将视频帧发送到主机） 
+
+
+
+Definition at line 68 of file Engine.\+H.
+
+\mbox{\Hypertarget{Engine_8H_ab645b4d65509897d82a7703bd270d994}\label{Engine_8H_ab645b4d65509897d82a7703bd270d994}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_IMUSPI\_DEFAULT@{JEVOIS\_IMUSPI\_DEFAULT}}
+\index{JEVOIS\_IMUSPI\_DEFAULT@{JEVOIS\_IMUSPI\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_IMUSPI\_DEFAULT}{JEVOIS\_IMUSPI\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+I\+M\+U\+S\+P\+I\+\_\+\+D\+E\+F\+A\+U\+LT~\char`\"{}/dev/spidev32766.\+0\char`\"{}}
+
+
+
+默认 I\+MU spi 设备 
+
+
+
+Definition at line 81 of file Engine.\+H.
+
+\mbox{\Hypertarget{Engine_8H_a68d7a82071d6b6e2005c52f38f9d204c}\label{Engine_8H_a68d7a82071d6b6e2005c52f38f9d204c}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_SERIAL\_DEFAULT@{JEVOIS\_SERIAL\_DEFAULT}}
+\index{JEVOIS\_SERIAL\_DEFAULT@{JEVOIS\_SERIAL\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_SERIAL\_DEFAULT}{JEVOIS\_SERIAL\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT~\char`\"{}/dev/tty\+S4\char`\"{}}
+
+
+
+在平台硬件上，4 针硬件串口设备 
+
+
+
+Definition at line 71 of file Engine.\+H.
+
+\mbox{\Hypertarget{Engine_8H_a6ae242fd651e29cc5662523966ee7654}\label{Engine_8H_a6ae242fd651e29cc5662523966ee7654}} 
+\index{Engine.H@{Engine.H}!JEVOIS\_USBSERIAL\_DEFAULT@{JEVOIS\_USBSERIAL\_DEFAULT}}
+\index{JEVOIS\_USBSERIAL\_DEFAULT@{JEVOIS\_USBSERIAL\_DEFAULT}!Engine.H@{Engine.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_USBSERIAL\_DEFAULT}{JEVOIS\_USBSERIAL\_DEFAULT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT~\char`\"{}\char`\"{}}
+
+
+
+在平台硬件上，用于串行 U\+SB 端口的设备 
+
+
+
+Definition at line 74 of file Engine.\+H.
+

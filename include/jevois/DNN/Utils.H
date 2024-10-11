@@ -30,138 +30,132 @@
 
 namespace jevois
 {
-  //! Deep neural networks
+  //! 深度神经网络
   namespace dnn
   {
-    /*! \defgroup dnn Tensor/Neural Processing networks
+    /*! \defgroup dnn 张量/神经处理网络
 
-        Classes and utilities to provide abstraction to deep neural networks. Provides interfacing to OpenCV backends
-        (CPU, OpenCL), tensor processing units (TPU) such as Coral Edge TPU and neural processing units (NPU) such as
-        Amlogic A311D NPU. */
+        深度神经网络提供抽象的 Classes and utilities。提供与 OpenCV 后端（CPU、OpenCL）、张量处理单元（TPU）（例如
+		 Coral Edge TPU）和神经处理单元（NPU）（例如 Amlogic A311D NPU）的接口。 */
     
     /*! @{ */ // **********************************************************************
     
-    //! Read a label file
-    /*! Two formats are allowed: one class name per line, or one class number followed by one class name per file.*/
+    //! 读取标签文件
+	/*! 允许两种格式：每行一个类名，或每个文件一个类号后跟一个类名。*/
     std::map<int, std::string> readLabelsFile(std::string const & fname);
 
-    //! Get a label from an id
-    /*! If no entry is found in the map, return the id as a string. */
+    //! 从 id 获取标签
+	/*！如果在映射中未找到任何条目，则返回 id 字符串。 */
     std::string getLabel(std::map<int, std::string> const & labels, int id);
 
-    //! Compute a color from a label name
+    //! 根据标签名称计算颜色
     int stringToRGBA(std::string const & label, unsigned char alpha = 128);
 
-    //! Get top-k entries and their indices
+    //! 获取前 k 个条目及其索引
     void topK(float const * pfProb, float * pfMaxProb, uint32_t * pMaxClass, uint32_t outputCount, uint32_t topNum);
 
-    //! Get a string of the form: "nD AxBxC... TYPE" from an n-dimensional cv::Mat with data type TYPE
+    //! 从数据类型为 TYPE 的 n 维 cv::Mat 获取形式为 "nD AxBxC... TYPE" 的字符串
     std::string shapestr(cv::Mat const & m);
 
-    //! Get a string of the form: "nD AxBxC... TYPE" from an n-dimensional TfLiteTensor with data type TYPE
+    //! 从数据类型为 TYPE 的 n 维 TfLiteTensor 获取形式为 "nD AxBxC... TYPE" 的字符串
     std::string shapestr(TfLiteTensor const * t);
 
-    //! Get a string of the form: "nD AxBxC... TYPE" from an n-dimensional NPU tensor with data type TYPE
+    //! 从数据类型为 TYPE 的 n 维 NPU 张量中获取形式为 "nD AxBxC... TYPE" 的字符串
     std::string shapestr(vsi_nn_tensor_attr_t const & attr);
 
-    //! Get a vector of size_t from a string containing AxBxC...
+    //! 从包含 AxBxC... 的字符串中获取 size_t 的向量
     std::vector<size_t> strshape(std::string const & str);
 
-    //! Convert from TensorFlow data type to OpenCV
+    //! 从 TensorFlow 数据类型转换为 OpenCV
     int tf2cv(TfLiteType t);
 
-    //! Convert from TensorFlow data type to vsi_nn
+    //! 从 TensorFlow 数据类型转换为 vsi_nn
     vsi_nn_type_e tf2vsi(TfLiteType t);
 
-    //! Convert from NPU data type to OpenCV
+    //! 从NPU数据类型转换为 OpenCV
     int vsi2cv(vsi_nn_type_e t);
 
-    //! Clamp a rectangle to within given image width and height
+    //! 将矩形限制在给定的图像宽度和高度内
     void clamp(cv::Rect & r, int width, int height);
 
-    //! Clamp a rectangle to within given image width and height
+    //! 将矩形限制在给定的图像宽度和高度内
     void clamp(cv::Rect2f & r, float width, float height);
 
-    //! Parse tensor specification
-    /*! If the specification is empty, an empty vector is returned. Throws std::range_error on any parsing error. */
+    //! 解析张量规范
+	/*！如果规范为空，则返回一个空向量。任何解析错误都会引发 std::range_error。 */
     std::vector<vsi_nn_tensor_attr_t> parseTensorSpecs(std::string const & specs);
 
-    //! Construct a cv::Mat from attr and possibly data pointer
-    /*! If dataptr is nullptr, new memory will be allocated for the cv::Mat. Caller must ensure data outlives the
-        cv::Mat, and is responsible for eventually de-allocating the data. Usually, with non-null dataptr, this is only
-        to be used as a temporary re-casting, e.g., to recast a received tensor into a Mat before dequantizing it, then
-        forgetting about that Mat. */
+    //! 从 attr 和可能的数据指针构造一个 cv::Mat。
+	/*! 如果 dataptr 为 nullptr，将为 cv::Mat 分配新内存。调用者必须确保数据比 cv::Mat 更长寿，并负责最终释放数据。通
+	    常，对于非空 dataptr，这仅用作临时 re-casting，例如，在 dequantizing 之前将接收到的张量 recast 为 Mat，然后忘
+		记该 Mat。 */
     cv::Mat attrmat(vsi_nn_tensor_attr_t const & attr, void * dataptr = nullptr);
 
-    //! Get a tensor dims as a vector of int, useful to construct a matching cv::Mat
+    //! 获取一个张量 dims 作为 int 向量，用于构造匹配的 cv::Mat
     std::vector<int> attrdims(vsi_nn_tensor_attr_t const & attr);
 
-    //! Get a tensor's (width, height) size in cv::Size format, skipping over other dimensions
+    //! 以 cv::Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度
     cv::Size attrsize(vsi_nn_tensor_attr_t const & attr);
 
-    //! Get a string describing the specs of a tensor, including quantification specs (not provided by shapestr())
+    //! 获取描述张量规格的字符串，包括量化规格（shapestr() 未提供）
     std::string attrstr(vsi_nn_tensor_attr_t const & attr);
 
-    //! Check that a cv::Mat blob matches exactly the spec of an attr
+    //! 检查 cv::Mat blob 是否与 attr 的规范完全匹配
     bool attrmatch(vsi_nn_tensor_attr_t const & attr, cv::Mat const & blob);
     
-    //! Get tensor shape and type attributes for a TensorFlow Lite tensor
+    //! 获取 TensorFlow Lite 张量的张量形状和类型属性
     vsi_nn_tensor_attr_t tensorattr(TfLiteTensor const * t);
 
-    //! Apply softmax to a float vector
-    /*! n is the number of elements to process, stride is the increment in the arrays from one element to the next. So
-        the arrays should have size n * stride. Returns the index in [0..n*stride[ of the highest scoring element. If
-        maxonly is true, only output[returned index] is valid. */
+    //! 将 softmax 应用于浮点向量。
+	/*! n 是要处理的元素数量，stride 是数组中从一个元素到下一个元素的增量。因此数组的大小应为 n * stride。返回得分最高
+	    的元素在 [0..n*stride] 中的索引。如果 maxonly 为 true，则仅输出 [returned index] 有效。 */
     size_t softmax(float const * input, size_t const n, size_t const stride, float const fac, float * output,
                    bool maxonly);
 
-    //! Quantize from float32 to fixed-point according to the quantization spec in attr
-    /*! m should be float32, typically normalized to [0..1[ or [-1..1[ already. attr is the desired quantized type and
-        method (DFP, AA, etc) */
+    //! 根据 attr 中的量化规范从 float32 量化为定点
+	/*！m 应该是 float32，通常已经标准化为 [0..1[ 或 [-1..1[。attr 是所需的量化类型和方法（DFP、AA 等） */
     cv::Mat quantize(cv::Mat const & m, vsi_nn_tensor_attr_t const & attr);
 
-    //! Dequantize an output to float32 according to the quantization spec in attr
-    /*! attr should have the type and quantization details of m, returned tensor is float32 */
+    //! 根据 attr 中的量化规范将输出反量化为 float32 
+	/*!attr 应具有 m 的类型和量化细节，返回的张量为 float32 */
     cv::Mat dequantize(cv::Mat const & m, vsi_nn_tensor_attr_t const & attr);
 
-    //! Returns the number of non-unit dims in a cv::Mat
-    /*! For example, returns 2 for a 4D Mat with size 1x1x224x224, since it effectively is a 224x224 2D array */
+    //! 返回 cv::Mat 中非单位暗淡的数量 
+	/*! 例如，对于大小为 1x1x224x224 的 4D Mat，返回 2，因为它实际上是一个 224x224 的 2D 数组 */
     size_t effectiveDims(cv::Mat const & m);
 
-    //! Concatenate several tensors into one
-    /*! Axis may be positive starting at 0 for the first dimension (when reading dims from left to right), or negative
-        starting at -1 for the last dimension. For example, for a 10x20x30 tensor, axis 0 has size 10 and is also axis
-        -3, axis 1 has size 20 and is also axis -2, and axis 2 has size 30 and is also axis -1. The input tensors must
-        all have the same number of dimensions, same pixel type, and sizes must match for all dimensions except the one
-        that is being concatenated. */
+    //! 将多个张量连接成一个。
+	/*! 对于第一个维度，Axis 可能从 0 开始为正（当从左到右读取 dims 时），对于最后一个维度，Axis 可能从 -1 开始为负。例
+	    如，对于 10x20x30 张量，Axis 0 的大小为 10，也是 Axis -3，Axis 1 的大小为 20，也是 Axis -2，Axis 2 的大小为 30，
+		也是 Axis -1。输入张量必须都有相同的维度数、相同的像素类型，并且除要连接的维度之外的所有维度的大小必须匹配。 */
     cv::Mat concatenate(std::vector<cv::Mat> const & tensors, int axis);
     
 #ifdef JEVOIS_PRO
-    //! Get a string of the form: "nD AxBxC... TYPE" from an n-dimensional Hailo tensor with data type TYPE
+    //! 从数据类型为 TYPE 的 n 维 Hailo 张量中获取形式为 "nD AxBxC... TYPE" 的字符串
     std::string shapestr(hailo_vstream_info_t const & vi);
 
-    //! Get tensor shape and type attributes for a Hailo tensor
+    //! 获取 Hailo 张量的张量形状和类型属性
     vsi_nn_tensor_attr_t tensorattr(hailo_vstream_info_t const & vi);
 
-    //! Convert from Hailo data type to vsi_nn
+    //! 从 Hailo 数据类型转换为 vsi_nn
     vsi_nn_type_e hailo2vsi(hailo_format_type_t t);
 
-    //! Convert from ONNX-Runtime data type to vsi_nn
+    //! 从 ONNX-Runtime 数据类型转换为 vsi_nn
     vsi_nn_type_e onnx2vsi(ONNXTensorElementDataType t);
 
-    //! Get a string of the form: "nD AxBxC... TYPE" from an n-dimensional ONNX tensor with data type TYPE
+    //! 从数据类型为 TYPE 的 n 维 ONNX 张量中获取形式为 "nD AxBxC... TYPE" 的字符串
     std::string shapestr(Ort::ConstTensorTypeAndShapeInfo const & ti);
 
-    //! Get tensor shape and type attributes for an ONNX-runtime tensor
+    //! 获取 ONNX 运行时张量的张量形状和类型属性
     vsi_nn_tensor_attr_t tensorattr(Ort::ConstTensorTypeAndShapeInfo const & ti);
 #endif
     
     /*! @} */ // **********************************************************************
 
 
-    /*! \defgroup pydnn DNN-related processors written in python
-  
-    In addition to writing DNN pre/net/post processors in C++, JeVois supports writing them in Python.
+    /*! \defgroup pydnn 用 python 编写的 DNN 相关处理器
+
+    除了用 C++ 编写 pre/net/post processors 之外，JeVois 还支持用 Python 编写。
 
     \ingroup dnn */
 

@@ -1,0 +1,141 @@
+\hypertarget{classjevois_1_1BoundedBuffer}{}\doxysubsection{jevois\+::Bounded\+Buffer$<$ T, When\+Full, When\+Empty $>$ Class Template Reference}
+\label{classjevois_1_1BoundedBuffer}\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Types/\+Bounded\+Buffer.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T, Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$\newline
+class jevois\+::\+Bounded\+Buffer$<$ T, When\+Full, When\+Empty $>$}
+
+线程安全同步生产者/消费者队列 
+
+\mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}} 专为生产者/消费者场景而设计，其中多个线程希望异步将数据推送到缓冲区或从缓冲区弹出数据。当缓冲区为空时尝 试弹出数据的线程将处于休眠状态，直到数据实际可用或出现异常（取决于模板参数），而当缓冲区已满时尝试推送数据的线程将处于 阻塞状态，直到缓冲区中有可用空间或出现异常（取决于模板参数）。
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em When\+Full} & 尝试推送到满缓冲区时的阻塞行为（如 jevois\+::\+Blocking\+Behavior） \\
+\hline
+{\em When\+Empty} & 尝试从空缓冲区弹出时的阻塞行为（如 jevois\+::\+Blocking\+Behavior） \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 35 of file Bounded\+Buffer.\+H.
+
+
+
+Inheritance diagram for jevois\+::Bounded\+Buffer$<$ T, When\+Full, When\+Empty $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1BoundedBuffer__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1BoundedBuffer_a5a0881eb22f369cfc0a558aad390e4f0}{Bounded\+Buffer}} (size\+\_\+t const siz)
+\begin{DoxyCompactList}\small\item\em 创建一个没有数据且具有给定大小的新 \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer_aef4ced134c653b4e1fd312cfb437ceb7}{push}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 将新数据元素推送到缓冲区，如果缓冲区已满，则可能会休眠或抛出，copy version \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer_a27b3d15c075516d120935643ed8c7977}{push}} (T \&\&val)
+\begin{DoxyCompactList}\small\item\em 将新数据元素推送到缓冲区，如果缓冲区已满，可能会休眠或抛出， move version \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classjevois_1_1BoundedBuffer_a5287279b4bcb2f9811135ef7deb264d0}{pop}} ()
+\begin{DoxyCompactList}\small\item\em 从缓冲区弹出最旧的数据元素，可能会处于休眠状态直到有一个数据可用，或者如果为空则抛出 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1BoundedBuffer_ab0c72f335f2309be485fd4d3b7baffe9}{filled\+\_\+size}} () const
+\begin{DoxyCompactList}\small\item\em 缓冲区中实际的当前项目数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1BoundedBuffer_ac58548e3bb1b6a468ae885ebdaee72c0}{size}} () const
+\begin{DoxyCompactList}\small\item\em 缓冲区的最大大小（构造时分配） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer_a811c394f7a95e26b390367b042ad455e}{clear}} ()
+\begin{DoxyCompactList}\small\item\em 清除所有内容，将 \mbox{\hyperlink{classjevois_1_1BoundedBuffer_ab0c72f335f2309be485fd4d3b7baffe9}{filled\+\_\+size()}} 重置为零（size() 保持在最大可能大小不变） \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_a5a0881eb22f369cfc0a558aad390e4f0}\label{classjevois_1_1BoundedBuffer_a5a0881eb22f369cfc0a558aad390e4f0}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!BoundedBuffer@{BoundedBuffer}}
+\index{BoundedBuffer@{BoundedBuffer}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{BoundedBuffer()}{BoundedBuffer()}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+\mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::\mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}} (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{siz }\end{DoxyParamCaption})}
+
+
+
+创建一个没有数据且具有给定大小的新 \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{Bounded\+Buffer}} 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_a811c394f7a95e26b390367b042ad455e}\label{classjevois_1_1BoundedBuffer_a811c394f7a95e26b390367b042ad455e}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!clear@{clear}}
+\index{clear@{clear}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+清除所有内容，将 \mbox{\hyperlink{classjevois_1_1BoundedBuffer_ab0c72f335f2309be485fd4d3b7baffe9}{filled\+\_\+size()}} 重置为零（size() 保持在最大可能大小不变） 
+
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_ab0c72f335f2309be485fd4d3b7baffe9}\label{classjevois_1_1BoundedBuffer_ab0c72f335f2309be485fd4d3b7baffe9}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!filled\_size@{filled\_size}}
+\index{filled\_size@{filled\_size}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{filled\_size()}{filled\_size()}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::filled\+\_\+size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+缓冲区中实际的当前项目数 
+
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_a5287279b4bcb2f9811135ef7deb264d0}\label{classjevois_1_1BoundedBuffer_a5287279b4bcb2f9811135ef7deb264d0}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!pop@{pop}}
+\index{pop@{pop}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+T \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+从缓冲区弹出最旧的数据元素，可能会处于休眠状态直到有一个数据可用，或者如果为空则抛出 
+
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_a27b3d15c075516d120935643ed8c7977}\label{classjevois_1_1BoundedBuffer_a27b3d15c075516d120935643ed8c7977}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!push@{push}}
+\index{push@{push}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::push (\begin{DoxyParamCaption}\item[{T \&\&}]{val }\end{DoxyParamCaption})}
+
+
+
+将新数据元素推送到缓冲区，如果缓冲区已满，可能会休眠或抛出， move version 
+
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_aef4ced134c653b4e1fd312cfb437ceb7}\label{classjevois_1_1BoundedBuffer_aef4ced134c653b4e1fd312cfb437ceb7}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!push@{push}}
+\index{push@{push}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+void \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::push (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+将新数据元素推送到缓冲区，如果缓冲区已满，则可能会休眠或抛出，copy version 
+
+\mbox{\Hypertarget{classjevois_1_1BoundedBuffer_ac58548e3bb1b6a468ae885ebdaee72c0}\label{classjevois_1_1BoundedBuffer_ac58548e3bb1b6a468ae885ebdaee72c0}} 
+\index{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}!size@{size}}
+\index{size@{size}!jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$@{jevois::BoundedBuffer$<$ T, WhenFull, WhenEmpty $>$}}
+\doxyparagraph{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename T , Blocking\+Behavior When\+Full, Blocking\+Behavior When\+Empty$>$ \\
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer}}$<$ T, When\+Full, When\+Empty $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+缓冲区的最大大小（构造时分配） 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Types/\mbox{\hyperlink{BoundedBuffer_8H}{Bounded\+Buffer.\+H}}\end{DoxyCompactItemize}

@@ -40,14 +40,14 @@ void jevois::Profiler::checkpoint(char const * desc)
 {
   std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
 
-  // See if we already have that desc:
+  // 看看我们是否已经有了那个 desc：
   size_t const sz = itsCheckpointData.size();
   for (size_t i = 0; i < sz; ++i)
   {
     data & cpd = itsCheckpointData[i];
     if (cpd.desc == desc)
     {
-      // Not the first time we have this checkpoint, update the values in cpd:
+      // 这不是我们第一次有这个检查点，更新 cpd 中的值：
       std::chrono::duration<double> dur;
       if (i == 0) dur = now - itsStartTime; else dur = now - itsCheckpointData[i - 1].lasttime;
       double const secs = dur.count();
@@ -62,7 +62,7 @@ void jevois::Profiler::checkpoint(char const * desc)
     }
   }
 
-  // First time this description is encountered, create new entry in itsCheckpointData
+  // 第一次遇到此描述时，在 itsCheckpointData 中创建新条目
   std::chrono::duration<double> dur;
   if (sz == 0) dur = now - itsStartTime; else dur = now - itsCheckpointData[sz - 1].lasttime;
   double secs = dur.count();
@@ -76,7 +76,7 @@ void jevois::Profiler::stop()
   std::chrono::duration<double> const dur = std::chrono::steady_clock::now() - itsStartTime;
   double secs = dur.count();
   
-  // Update average duration computation:
+  // 更新平均持续时间计算：
   itsData.secs += secs; ++itsData.count;
 
   // Update min and max:
@@ -85,7 +85,7 @@ void jevois::Profiler::stop()
 
   if (itsData.count >= itsInterval)
   {
-    // First the overall start-to-stop report, include fps:
+    // 首先是整体的开始到停止报告，包括 fps：
     double const avgsecs = itsData.secs / itsData.count;
     std::ostringstream ss;
     ss << itsPrefix << " overall average (" << itsData.count << ") duration "; jevois::secs2str(ss, avgsecs);
@@ -101,7 +101,7 @@ void jevois::Profiler::stop()
     default: LDEBUG(ss.str());
     }
 
-    // Now same thing but for each checkpoint entry:
+    // 现在对于每个检查点条目都做同样的事情：
     for (data const & cpd : itsCheckpointData)
     {
       double const cpavgsecs = cpd.count ? cpd.secs / cpd.count : 0.0;
@@ -121,7 +121,7 @@ void jevois::Profiler::stop()
       }
     }
     
-    // Get ready for the next cycle:
+    // 为下一个循环做好准备：
     itsData = { "", 0, 0.0, 1.0e30, -1.0e30, itsStartTime };
     itsCheckpointData.clear();
   }

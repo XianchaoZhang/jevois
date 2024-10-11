@@ -30,9 +30,8 @@ namespace jevois
 {
   class GUIhelper;
   
-  //! Video output to local screen with basic GUI
-  /*! This class provides accelerated OpenGL-ES display on JeVois-Pro, using Dear-ImGui for a simple graphical
-      interface. \ingroup core */
+  //! 使用基本 GUI 将视频输出到本地屏幕
+  /*! 此类在 JeVois-Pro 上提供加速 OpenGL-ES 显示，使用 Dear-ImGui 提供简单的图形界面。 \ingroup core */
   class VideoDisplayGUI : public VideoOutput
   {
     public:
@@ -42,10 +41,10 @@ namespace jevois
       //! Virtual destructor for safe inheritance
       virtual ~VideoDisplayGUI();
 
-      //! Set the video format and frame rate, allocate the buffers
+      //! 设置视频格式和帧速率，分配缓冲区
       virtual void setFormat(VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out using send()
+      //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去
       virtual void get(RawImage & img) override;
  
       //! Send an image out to display
@@ -55,7 +54,7 @@ namespace jevois
       virtual void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消将来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       virtual void abortStream() override;
       
       //! Stop streaming

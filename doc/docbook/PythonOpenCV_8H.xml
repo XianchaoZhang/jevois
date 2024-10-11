@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_PythonOpenCV_8H">
+<title>include/jevois/Core/PythonOpenCV.H File Reference</title>
+<indexterm><primary>include/jevois/Core/PythonOpenCV.H</primary></indexterm>
+<programlisting>#include &lt;Python.h&gt;
+#include &lt;numpy/ndarrayobject.h&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;boost/python.hpp&gt;
+#include &lt;cstdio&gt;
+</programlisting>Include dependency graph for PythonOpenCV.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="PythonOpenCV_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="PythonOpenCV_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_PythonOpenCV_8H_1ab6e6ee86736f9ebb56e74ae21bf3ff8a">NPY_NO_DEPRECATED_API</link>   NPY_1_7_API_VERSION</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonOpenCV_8H_1a1dbb0f1a245a4dc0666126cbfec04739">ERRWRAP2</link>(expr)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_PythonOpenCV_8H_1a1dbb0f1a245a4dc0666126cbfec04739"/>    <section>
+    <title>ERRWRAP2</title>
+<indexterm><primary>ERRWRAP2</primary><secondary>PythonOpenCV.H</secondary></indexterm>
+<indexterm><primary>PythonOpenCV.H</primary><secondary>ERRWRAP2</secondary></indexterm>
+<para><computeroutput>#define ERRWRAP2( expr)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<emphasis role="keywordflow">try</emphasis>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;PyAllowThreads&#32;allowThreads;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;expr;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;}&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;catch&#32;(<emphasis role="keyword">const</emphasis>&#32;cv::Exception&#32;&amp;e)&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;PyErr_SetString(opencv_error,&#32;e.what());&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;return&#32;0;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;}
+</programlisting><para>
+Definition at line 64 of file PythonOpenCV.H.</para>
+    </section><anchor xml:id="_PythonOpenCV_8H_1ab6e6ee86736f9ebb56e74ae21bf3ff8a"/>    <section>
+    <title>NPY_NO_DEPRECATED_API</title>
+<indexterm><primary>NPY_NO_DEPRECATED_API</primary><secondary>PythonOpenCV.H</secondary></indexterm>
+<indexterm><primary>PythonOpenCV.H</primary><secondary>NPY_NO_DEPRECATED_API</secondary></indexterm>
+<para><computeroutput>#define NPY_NO_DEPRECATED_API   NPY_1_7_API_VERSION</computeroutput></para><para>
+Definition at line 49 of file PythonOpenCV.H.</para>
+</section>
+</section>
+</section>

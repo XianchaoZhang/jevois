@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoDisplayBackendMALI">
+<title>jevois::VideoDisplayBackendMALI Class Reference</title>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/VideoDisplayBackendMALI.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Backend for VideoDisplay on JeVois-Pro host using MALI. </para>
+
+
+
+<para>This class provides an interface used by <link linkend="_classjevois_1_1VideoDisplayGL">VideoDisplayGL</link> using Mali framebuffer + OpenGL-ES 3.2 (to be used on JeVois-Pro platform). </para>
+<para>
+Definition at line 29 of file VideoDisplayBackendMALI.H.</para>
+Inheritance diagram for jevois::VideoDisplayBackendMALI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayBackendMALI__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::VideoDisplayBackendMALI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayBackendMALI__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1VideoDisplayBackendMALI_1a7375e69ab1b609116106e6cb3bcfd724">VideoDisplayBackendMALI</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1a557dcd01887818df0d8cd8db17bb950c">~VideoDisplayBackendMALI</link> ()</para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1a9c839f0bd1d11929a50ddd5708f91c97">init</link> (unsigned short w, unsigned short <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool fullscreen=false) override</para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1ac40174958faa9a66874d10b4a5082906">pollEvents</link> (bool &amp;shouldclose) override</para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to VideoDisplay. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>fbdev_window <link linkend="_classjevois_1_1VideoDisplayBackendMALI_1acbcc9c4c88afa5a40058328e2be4720f">itsWindow</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackendMALI_1a7375e69ab1b609116106e6cb3bcfd724"/>    <section>
+    <title>VideoDisplayBackendMALI()</title>
+<indexterm><primary>VideoDisplayBackendMALI</primary><secondary>jevois::VideoDisplayBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary><secondary>VideoDisplayBackendMALI</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayBackendMALI::VideoDisplayBackendMALI ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 23 of file VideoDisplayBackendMALI.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackendMALI_1a557dcd01887818df0d8cd8db17bb950c"/>    <section>
+    <title>~VideoDisplayBackendMALI()</title>
+<indexterm><primary>~VideoDisplayBackendMALI</primary><secondary>jevois::VideoDisplayBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary><secondary>~VideoDisplayBackendMALI</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayBackendMALI::~VideoDisplayBackendMALI ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance, free resources. </para>
+</para>
+<para>
+Definition at line 28 of file VideoDisplayBackendMALI.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackendMALI_1a9c839f0bd1d11929a50ddd5708f91c97"/>    <section>
+    <title>init()</title>
+<indexterm><primary>init</primary><secondary>jevois::VideoDisplayBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary><secondary>init</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayBackendMALI::init (unsigned short w, unsigned short h, bool fullscreen = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Initialize the underlying engine that will process events, create windows, etc. </para>
+</para>
+
+<para>The init starts with the given initial framebuffer size. Note that on MALI, size and fullscreen parameters are ignored and we always run full-screen at the native resolution of the framebuffer. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoDisplayBackend_1ab7db3f98de08fb763935b179c0031eea">jevois::VideoDisplayBackend</link>.</para>
+<para>
+Definition at line 35 of file VideoDisplayBackendMALI.C.</para>
+<para>
+References h, jevois::VideoDisplayBackend::init(), and LINFO.</para>
+<para>
+Referenced by jevois::ImGuiBackendMALI::init().</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayBackendMALI_1ac40174958faa9a66874d10b4a5082906"/>    <section>
+    <title>pollEvents()</title>
+<indexterm><primary>pollEvents</primary><secondary>jevois::VideoDisplayBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary><secondary>pollEvents</secondary></indexterm>
+<para><computeroutput>bool jevois::VideoDisplayBackendMALI::pollEvents (bool &amp; shouldclose)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Poll events such as mouse movements, buttons, keyboard, joystick, and pass to VideoDisplay. </para>
+</para>
+
+<para>Returns true if some events were received, which can be used to turn on mouse pointer and GUI. On MALI, there is no support for events at this level, and hence no support for a test to close. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoDisplayBackend_1aabf45e81d105cc9bf79a701e458858a1">jevois::VideoDisplayBackend</link>.</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1ImGuiBackendMALI_1a7a5c04eb60cd37869d5074d421ff33fe">jevois::ImGuiBackendMALI</link>.</para>
+<para>
+Definition at line 46 of file VideoDisplayBackendMALI.C.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayBackendMALI_1acbcc9c4c88afa5a40058328e2be4720f"/>    <section>
+    <title>itsWindow</title>
+<indexterm><primary>itsWindow</primary><secondary>jevois::VideoDisplayBackendMALI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayBackendMALI</primary><secondary>itsWindow</secondary></indexterm>
+<para><computeroutput>fbdev_window jevois::VideoDisplayBackendMALI::itsWindow<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 50 of file VideoDisplayBackendMALI.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_VideoDisplayBackendMALI_8H">VideoDisplayBackendMALI.H</link>src/jevois/GPU/<link linkend="_VideoDisplayBackendMALI_8C">VideoDisplayBackendMALI.C</link></section>
+</section>

@@ -37,7 +37,7 @@ std::string jevois::VideoMapping::sopath(bool delete_old_versions) const
 {
   if (ispython) return JEVOIS_MODULE_PATH "/" + vendor + '/' + modulename + '/' + modulename + ".py";
 
-  // For C++ live installs on the camera, we may have several versions, use the latest:
+  // 对于相机上的 C++ 实时安装，我们可能有多个版本，请使用最新版本：
   std::filesystem::path const dir = JEVOIS_MODULE_PATH "/" + vendor + '/' + modulename;
   std::filesystem::path const stem = modulename + ".so";
   
@@ -237,7 +237,7 @@ std::ostream & jevois::operator<<(std::ostream & out, jevois::VideoMapping const
 
 namespace
 {
-  // Return either the absolute value in str, or c +/- stoi(str)
+  // 返回 str 中的绝对值或 c +/- stoi(str) 
   int parse_relative_dim(std::string const & str, int c)
   {
     if (str.empty()) throw std::range_error("Invalid empty output width");
@@ -249,7 +249,7 @@ namespace
   void parse_cam_format(std::string const & str, unsigned int & fmt, jevois::WDRtype & wdr, jevois::CropType & crop,
                         unsigned int & c2fmt, unsigned int & c2w, unsigned int & c2h)
   {
-    // Set the defaults in case no qualifier is given:
+    // 如果没有给出限定符，则设置默认值：
     wdr = jevois::WDRtype::Linear;
     crop = jevois::CropType::Scale;
     c2fmt = 0;
@@ -260,10 +260,10 @@ namespace
     fmt = jevois::strfcc(tok.back()); tok.pop_back();
     for (std::string & t : tok)
     {
-      // WDR, crop type can be specified in any order. So try to get each and see if we succeed:
+      // WDR，裁剪类型可以按任意顺序指定。因此尝试获取每个并查看是否成功：
       try { wdr = jevois::from_string<jevois::WDRtype>(t); continue; } catch (...) { }
 
-      // If not WDR, then it should be Crop|Scale|CropScale=FCC@WxH
+      // 如果不是 WDR，那么应该是 Crop|Scale|CropScale=FCC@WxH
       auto ttok = jevois::split(t, "[=@x]");
       if (ttok.empty()) throw std::range_error("Invalid empty camera format modifier: " + t);
 
@@ -298,17 +298,16 @@ std::istream & jevois::operator>>(std::istream & in, jevois::VideoMapping & m)
   std::string of, cf, ows, ohs;
   in >> of >> ows >> ohs >> m.ofps >> cf >> m.cw >> m.ch >> m.cfps >> m.vendor >> m.modulename;
 
-  // Output width and height can be either absolute or relative to camera width and height; for relative values, they
-  // must start with either a + or - symbol:
+  // 输出宽度和高度可以是绝对的，也可以是相对于相机宽度和高度的；对于相对值，它们必须以 + 或 - 符号开头：
   m.ow = parse_relative_dim(ows, m.cw);
   m.oh = parse_relative_dim(ohs, m.ch);
   
   m.ofmt = jevois::strfcc(of);
 
-  // Parse any wdr, crop, or stream modulators on camera format, and the format itself:
+  // 解析相机格式上的任何 wdr、crop 或流调制器以及格式本身：
   parse_cam_format(cf, m.cfmt, m.wdr, m.crop, m.c2fmt, m.c2w, m.c2h);
 
-  m.setModuleType(); // set python vs C++, check that file is here, and throw otherwise
+  m.setModuleType(); // 设置 python 与 C++，检查文件是否在这里，否则抛出
   
   return in;
 }
@@ -358,7 +357,7 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
     m.vendor = tok[8];
     m.modulename = tok[9];
 
-    // Determine C++ vs python, silently skip this module if none of those and checkso was given:
+    // 确定 C++ 与 python，如果没有，并且给出了 checkso，则静默跳过此模块：
     try { m.setModuleType(); }
     catch (...)
     {
@@ -366,11 +365,11 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
       { PERROR("No .so|.py found for " << m.vendor << '/' << m.modulename << " -- SKIPPING."); continue; }
     }
 
-    // Skip if the sensor cannot support this mapping:
+    // 如果传感器无法支持此映射，则跳过：
     if (jevois::sensorSupportsFormat(s, m) == false)
     { PERROR("Camera video format [" << m.cstr() << "] not supported by sensor -- SKIPPING."); continue; }
 
-    // Skip gui modes if we do not have a gui:
+    // 如果我们没有 gui，则跳过 gui 模式：
     if (hasgui == false && m.ofmt == JEVOISPRO_FMT_GUI)
     { PERROR("Graphical user interface not available or disabled -- SKIPPING"); continue; }
     
@@ -380,13 +379,13 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
     { PERROR("GUI output only supported on JeVois-Pro -- SKIPPING"); continue; }
 
 #ifndef JEVOIS_PLATFORM
-    // Skip if not jevois-pro platform and trying to do dual-frame hardware scaling through the ISP:
+    // 如果不是 jevois-pro 平台并尝试通过 ISP 进行双帧硬件缩放，则跳过：
     if (m.crop == jevois::CropType::CropScale || m.crop == jevois::CropType::Crop)
     { PERROR("Crop or Crop+Scale camera input only supported on JeVois-Pro platform -- SKIPPING"); continue; }
 #endif // JEVOIS_PLATFORM
 #endif // JEVOIS_PRO
   
-    // Handle optional star for default mapping. We tolerate several and pick the first one:
+    // 处理可选星号以进行默认映射。我们容忍几个并选择第一个：
     if (tok.size() > 10)
     {
       if (tok[10] == "*")
@@ -405,7 +404,7 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
   std::sort(mappings.begin(), mappings.end(),
             [=](jevois::VideoMapping const & a, jevois::VideoMapping const & b)
             {
-              // Return true if a should be ordered before b:
+              // 如果 a 应该排在 b 之前，则返回 true：
               if (a.ofmt < b.ofmt) return true;
               if (a.ofmt == b.ofmt) {
                 if (a.ow > b.ow) return true;
@@ -415,12 +414,11 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
                     if (a.ofps > b.ofps) return true;
                     if (std::abs(a.ofps - b.ofps) < 0.01F) {
 #ifndef JEVOIS_PRO
-                      // JeVois-A33 only: The two output modes are identical. Warn unless the output format is NONE or
-                      // JVUI. We will adjust the framerates later to distinguish the offenders:
+                      // 仅限 JeVois-A33：两种输出模式相同。除非输出格式为 NONE 或 JVUI，否则发出警告。我们稍后会调整帧速率以区分违法者：
                       if (a.ofmt != 0 && a.ofmt != JEVOISPRO_FMT_GUI)
                         PERROR("WARNING: Two modes have identical output format: " << a.ostr());
 #endif
-                      // All right, all USB stuff being equal, just sort according to the camera format:
+                      // 好吧，所有 USB 东西都相同，只需根据相机格式排序：
                       if (a.cfmt < b.cfmt) return true;
                       if (a.cfmt == b.cfmt) {
                         if (a.cw > b.cw) return true;
@@ -428,8 +426,7 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
                           if (a.ch > b.ch) return true;
                           if (a.ch == b.ch) {
                             if (a.cfps > b.cfps) return true;
-                            // it's ok to have duplicates here since either those are NONE USB modes or JVUI that are
-                            // selected manually, or we will adjust below
+                            // 这里有重复是可以的，因为那些要么是 NONE USB 模式，要么是手动选择的 JVUI，或者我们将在下面进行调整 
                           }
                         }
                       }
@@ -440,11 +437,10 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
               return false;
             });
 
-  // If we are not checking for .so, run the shortcut version where we also do not check for no USB mode, duplicates,
-  // default index, etc. This is used, by, e.g., the jevois-add-videomapping program:
+  // 如果我们不检查 .so，则运行快捷方式版本，我们也不会检查无 USB 模式、重复、默认索引等。例如，jevois-add-videomapping 程序会使用它：
   if (checkso == false) { defidx = 0; return mappings; }
   
-  // We need at least one mapping to work, and we need at least one with UVC output too keep hosts happy:
+  // 我们至少需要一个映射才能工作，并且我们至少需要一个具有 UVC 输出的映射才能让主机满意：
   if (mappings.empty() || mappings.back().ofmt == 0 || mappings.back().ofmt == JEVOISPRO_FMT_GUI)
   {
     PERROR("No valid video mapping with UVC output found -- INSERTING A DEFAULT ONE");
@@ -453,19 +449,17 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
     m.cfmt = V4L2_PIX_FMT_YUYV; m.cw = 640; m.ch = 480; m.cfps = 30.0F;
     m.vendor = "JeVois"; m.modulename = "PassThrough"; m.ispython = false;
 
-    // We are guaranteed that this will not create a duplicate output mapping since either mappings was empty or it had
-    // no USB-out modes:
+    // 我们保证这不会创建重复的输出映射，因为映射为空或没有 USB 输出模式：
     mappings.push_back(m);
   }
 
-  // If we had duplicate output formats, discard full exact duplicates (including same module), and otherwise
-  // (JeVois-A33 only) adjust framerates slightly: In the sorting above, we ordered by decreasing ofps (all else being
-  // equal). Here we are going to decrease ofps on the second mapping when we hit a match. We need to beware that this
-  // should propagate down to subsequent matching mappings while preserving the ordering:
+  // 如果我们有重复的输出格式，则丢弃完全重复（包括相同的模块），否则（仅限 JeVois-A33）稍微调整帧速率：在上面的排序中，我们按 
+  // ofps 的递减顺序排列（其他所有条件都相同）。在这里，当我们匹配时，我们将在第二个映射上减少 ofps。我们需要注意，这应该在保留
+  // 顺序的同时传播到后续匹配的映射：
   auto a = mappings.begin(), b = a + 1;
   while (b != mappings.end())
   {
-    // Discard exact duplicates, adjust frame rates for matching specs but different modules:
+    // 丢弃完全重复，调整帧速率以匹配规格但不同的模块：
     if (a->isSameAs(*b)) { b = mappings.erase(b); continue; }
 #ifndef JEVOIS_PRO
     else if (b->ofmt != 0 && b->ofmt != JEVOISPRO_FMT_GUI && a->ofmt == b->ofmt && a->ow == b->ow && a->oh == b->oh)
@@ -477,7 +471,7 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
     a = b; ++b;
   }
   
-  // Find back our default mapping index in the sorted array:
+  // 在排序后的数组中找到我们的默认映射索引：
   if (defmapping.cfmt == 0)
   {
     LERROR("No default video mapping provided, using first one with UVC output");
@@ -485,15 +479,14 @@ std::vector<jevois::VideoMapping> jevois::videoMappingsFromStream(jevois::Camera
   }
   else
   {
-    // Default was set, find its index after sorting:
+    // 已设置默认值，排序后找到其索引：
     defidx = 0;
     for (size_t i = 0; i < mappings.size(); ++i) if (mappings[i].isSameAs(defmapping)) { defidx = i; break; }
   }
   
-  // Now that everything is sorted, compute our UVC format and frame indices, those are 1-based, and frame is reset each
-  // time format changes. Note that all the intervals will be passed as a list to the USB host for a given format and
-  // frame combination, so all the mappings that have identical pixel format and frame size here receive the same
-  // uvcformat and uvcframe numbers. Note that we skip over all the NONE ofmt modes here:
+  // 现在所有内容均已排序，计算我们的 UVC 格式和帧索引，它们以 1 为基础，并且每次格式更改时都会重置帧。请注意，对于给定的格式和
+  // 帧组合，所有间隔都将作为列表传递给 USB 主机，因此此处具有相同像素格式和帧大小的所有映射都会收到相同的 uvcformat 和 
+  // uvcframe 编号。请注意，我们在这里跳过了所有的 NONE ofmt 模式：
   unsigned int ofmt = ~0U, ow = ~0U, oh = ~0U, iformat = 0, iframe = 0;
   for (jevois::VideoMapping & m : mappings)
   {
@@ -518,13 +511,13 @@ bool jevois::VideoMapping::match(unsigned int oformat, unsigned int owidth, unsi
 // ####################################################################################################
 void jevois::VideoMapping::setModuleType()
 {
-  // First assume that it is a C++ compiled module and check for the .so file:
+  // 首先假设它是一个 C++ 编译的模块并检查 .so 文件：
   ispython = false;
   std::string sopa = sopath();
   std::ifstream testifs(sopa);
   if (testifs.is_open() == false)
   {
-    // Could not find the .so, maybe it is a python module:
+    // 找不到 .so，也许它是一个 python 模块：
     ispython = true; sopa = sopath();
     std::ifstream testifs2(sopa);
     if (testifs2.is_open() == false) throw std::runtime_error("Could not open module file " + sopa + "|.so");

@@ -1,0 +1,1454 @@
+\hypertarget{classjevois_1_1Engine}{}\doxysubsection{jevois\+::Engine Class Reference}
+\label{classjevois_1_1Engine}\index{jevois::Engine@{jevois::Engine}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Je\+Vois processing engine -\/ 从相机传感器获取图像，对其进行处理，并通过 U\+SB 发送结果。 
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 协调视觉处理软件的执行。它是一个 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} ，即它是 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 对象层次结构的根，它处理对其参数设置及其构造、 init()、 un\+Init() 和析构的访问。组件层次结构由根部的 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 和用户在运行时选择的 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 组成，例如，在连接到 Je\+Vois 硬件的主机上 运行的摄像机软件上选择给定的视频格式。然后， \mbox{\hyperlink{classjevois_1_1Module}{Module}} 可以包含任意复杂的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 对象层次结构，其中包含参数设置。\+Module 派生自 Component，因此也可能有自己的参数设置。
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 包含以下基本元素：
+
+
+\begin{DoxyItemize}
+\item A \mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}}, 实例化为用于实时视频流的 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 或用于处理预先录制的视频文件或图像序列的 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} （在算法开发期间有用， 用于测试和优化可再现的输入）；
+\item A \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}}, 在 Je\+Vois 硬件平台上运行时实例化为 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 驱动程序，在有图形显示器的计算机上运行时实例化为 Video\+Display， 或者实例化为 \mbox{\hyperlink{classjevois_1_1MovieOutput}{Movie\+Output}} 将输出视频帧保存到磁盘，或者实例化为 \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}} （如果）需要对视觉算法进行基准测试，同时 忽略与传输输出帧相关的任何工作。
+\item A \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 根据用户选择在运行时加载所选的视觉处理 Module；
+\item 任意数量的 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 对象，实例化为硬件 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 端口（平台硬件上的 4 针 J\+ST 1.\+0mm 连接器）、\+U\+SB \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 端口（在连接 Je\+Vois 硬件的主机上可见）通过 U\+S\+B），或 \mbox{\hyperlink{classjevois_1_1StdioInterface}{Stdio\+Interface}} （直接在终端启动 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 接受命令并在终端打印结果，在通用 计算机而不是平台硬件上运行时特别有用）。当在平台硬件上运行时，通常会创建两个 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 对象（一个硬件 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} ，一个通 过 U\+SB \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} ），而在通用计算机上运行时，通常只创建一个 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} （类型为 \mbox{\hyperlink{classjevois_1_1StdioInterface}{Stdio\+Interface}} ）在终端启动 jevois-\/daemon 并且接受命令）；
+\item 从 videomappings.\+cfg 文件导入的 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 定义列表。这些定义指定了使用的 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 及其相应的 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 设置并使用 U\+SB 输出的 模式，以及未通过 U\+SB 流式视频输出的模式（例如，当将硬件平台连接到 Arduino 时）仅有的）。
+\end{DoxyItemize}
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的主循环一直运行到用户决定退出为止，基本上会经历以下步骤：
+
+
+\begin{DoxyItemize}
+\item 创建 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 对象，它是下一个可用 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 帧的异常安全包装器。该帧可能尚未捕获。\+Input\+Frame 可以被理解为一种机制，用于在 将来当该帧可用时（即相机已捕获）来访问该帧。这与 C++11 的 std\+::future 框架非常相似。
+\item 当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定通过 U\+SB 流式传输视频帧时，还要创建一个 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 对象，该对象是下一个可用 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 帧的异常安全包装器。 这也是一种用于访问 U\+SB 驱动程序提供的下一个空白视频缓冲区的机制，在通过 U\+SB 将其发送到主机之前应该填充有趣的像素数据。
+\item 调用当前加载的 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 的 process() 函数，当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定通过 U\+SB 发送某些视频输出时，可以调用 process(\+Input\+Frame, Output\+Frame) ， 或者当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定没有视频输出时，调用 process(\+Input\+Frame)。 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 的 process() 函数抛出的任何异常都将 被捕获、报告和忽略。 process() 函数通常会通过 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 包装器请求下一个可用的相机图像（此请求可能会阻塞，直到相机 传感器硬件捕获该帧），处理该图像，通过 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包装器请求下一个可用的输出图像（当 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定 U\+SB 视频输出时）， 并将一些结果绘制到该输出图像中，然后将其通过 U\+SB 发送到主机，以供某些网络摄像头程序显示或由运行在该输出图像上的某些自定义 视觉软件进一步处理。此外，当前加载的 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 可以通过 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 端口发出消息（例如，指示找到目标的位置，以让 Arduino 知道它）。
+\item 读取用户通过 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 端口发出的任何新命令并执行适当的命令。
+\item 当用户在连接 Je\+Vois 硬件的主机上运行的网络摄像头软件中选择不同的视频模式时，处理用户更改 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 的请求。此类请求 可能会触发当前 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 的卸载并加载新的 Module，并更改相机像素格式、图像大小等。这些更改保证在 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 的 process() 函数 未运行时发生，即 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 程序员不必担心在执行 process() 函数期间图像尺寸或像素格式可能发生的变化。
+\item 将通过 U\+SB 或 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 接收到的任何用户请求传递给实际的 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 硬件驱动程序，以调整相机参数（例如，当用户更改网络 摄像头程序中的对比度时，该请求将通过 U\+SB 发送到 Engine，然后 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 将其转发到 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 硬件驱动程序）。 
+\end{DoxyItemize}
+
+Definition at line 377 of file Engine.\+H.
+
+
+
+Inheritance diagram for jevois\+::Engine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Engine__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Engine\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Engine__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a14fbeefe304c188cf47af27ffb669383}{Engine}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a881e17f4465765453e56e3d269cf214e}{Engine}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]}, std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor with command-\/line parsing. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_aac8a333945fae07bf6475f1da84bf638}{$\sim$\+Engine}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_ad283adff625848b7ec29968fc7c61d58}{reload\+Video\+Mappings}} ()
+\begin{DoxyCompactList}\small\item\em 从 videomappings.\+cfg 重新加载视频映射。 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \& \mbox{\hyperlink{classjevois_1_1Engine_a4deaa34441d8554c19a196c997649b0a}{find\+Video\+Mapping}} (unsigned int oformat, unsigned int owidth, unsigned int oheight, float oframespersec) const
+\begin{DoxyCompactList}\small\item\em 查找具有给定输出规格的 Video\+Mapping，如果未找到则抛​​出 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \& \mbox{\hyperlink{classjevois_1_1Engine_aa746811f666a10d5dda827a2a62a9f9e}{get\+Current\+Video\+Mapping}} () const
+\begin{DoxyCompactList}\small\item\em 获取当前视频映射 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Engine_a524bc32f57970770d32eec857afc4d07}{num\+Video\+Mappings}} () const
+\begin{DoxyCompactList}\small\item\em 返回视频映射的数量 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \& \mbox{\hyperlink{classjevois_1_1Engine_a0f7d778d163ee0c52d21843e4f69a7c3}{get\+Video\+Mapping}} (size\+\_\+t idx) const
+\begin{DoxyCompactList}\small\item\em 允许访问我们在构建时从文件解析的视频映射 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Engine_ab359ccc8b2d022f120efcd59e708c373}{get\+Video\+Mapping\+Idx}} (unsigned int iformat, unsigned int iframe, unsigned int interval) const
+\begin{DoxyCompactList}\small\item\em 获取给定 U\+VC iformat、iframe 和 interval 的视频映射索引 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \& \mbox{\hyperlink{classjevois_1_1Engine_a9914f65be4669baf38bef649a8cad25b}{get\+Default\+Video\+Mapping}} () const
+\begin{DoxyCompactList}\small\item\em Allow access to the default video mapping. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Engine_a63834e45f8e3edd0be14aac516daabad}{get\+Default\+Video\+Mapping\+Idx}} () const
+\begin{DoxyCompactList}\small\item\em Allow access to the default video mapping index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_af988124a54cfbfbb56a77c43a52eadc6}{foreach\+Video\+Mapping}} (std\+::function$<$ void(\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)$>$ \&\&func)
+\begin{DoxyCompactList}\small\item\em 在每个视频映射上运行一个函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a09ae0f9771b693693a92207c01218c19}{request\+Set\+Format}} (int idx)
+\begin{DoxyCompactList}\small\item\em 使用它从 process() 中请求格式更改 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_aa7df0e7a58a02ec29d9a911d3ea03d12}{quit}} ()
+\begin{DoxyCompactList}\small\item\em Terminate the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a140e7a43c307f306c0c7089f5fa1b7ab}{reboot}} ()
+\begin{DoxyCompactList}\small\item\em 请求重启 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a6b15249fc704fa95cc579c12ae012811}{set\+Format}} (size\+\_\+t idx)
+\begin{DoxyCompactList}\small\item\em 当用户选择新的输出视频格式时的回调 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a0cb844ce7bf0b3ae9111b1d0d264bd54}{stream\+On}} ()
+\begin{DoxyCompactList}\small\item\em 开始从相机、处理和 U\+SB 流式传输视频 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a7fe0923fef589e45ec1d74c229ad6a5a}{stream\+Off}} ()
+\begin{DoxyCompactList}\small\item\em 停止从相机、处理和 U\+SB 流式传输视频 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1Engine_aaba81580ca2c4361b2c7a83b54e86a59}{main\+Loop}} ()
+\begin{DoxyCompactList}\small\item\em 主循环：抓取、处理、通过 U\+SB 发送。应由主应用程序线程调用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a7fbaa165dff9628cffa14d8ae307eb64}{send\+Serial}} (std\+::string const \&str, bool islog=false)
+\begin{DoxyCompactList}\small\item\em 向所有串行端口发送一个字符串 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Module}{Module}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向当前模块的指针（可能为空） \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向我们相机的指针（可能为空，特别是当不使用相机而是使用电影输入时） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a0cd78565d78403bb348ad09fb7ca3f49}{draw\+Camera\+G\+UI}} ()
+\begin{DoxyCompactList}\small\item\em 将所有相机控件绘制到我们的 G\+UI 中 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1CameraCalibration}{Camera\+Calibration}} \mbox{\hyperlink{classjevois_1_1Engine_ac5e8a0996af9bf5048e2d9b5e6f9d69f}{load\+Camera\+Calibration}} (std\+::string const \&stem=\char`\"{}calibration\char`\"{}, bool do\+\_\+throw=false)
+\begin{DoxyCompactList}\small\item\em 为当前正在运行的模块加载 Open\+CV 相机矩阵和失真系数的辅助函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a4a45bbb8080c1efba3aef4212e7697da}{save\+Camera\+Calibration}} (\mbox{\hyperlink{classjevois_1_1CameraCalibration}{Camera\+Calibration}} const \&calib, std\+::string const \&stem=\char`\"{}calibration\char`\"{})
+\begin{DoxyCompactList}\small\item\em 保存当前正在运行的模块的 Open\+CV 相机矩阵和失真系数的辅助函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_ac09b49c72d9fa8b79cee485de91cbc67}{register\+Python\+Component}} (\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$comp, void $\ast$pyinst)
+\begin{DoxyCompactList}\small\item\em 将组件注册为链接到某些 python 代码，由在 python 中创建的动态参数使用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a74cc0839e6b8add6bbe85eeedee101c0}{un\+Register\+Python\+Component}} (\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$comp)
+\begin{DoxyCompactList}\small\item\em 取消注册与某些 Python 代码链接的组件，由 Python 中创建的动态参数使用 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$ \mbox{\hyperlink{classjevois_1_1Engine_a01c815c22362c6508c0bc89ded17eb87}{get\+Python\+Component}} (void $\ast$pyinst) const
+\begin{DoxyCompactList}\small\item\em 获取使用给定 python 实例注册的组件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_afa87ec4e88e9009fe7ef2886931b6cd1}{report\+Error}} (std\+::string const \&err)
+\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_af8d6c77bf2e1b187673ecff358418264}{clear\+Errors}} ()
+\begin{DoxyCompactList}\small\item\em 清除 Je\+Vois-\/\+Pro G\+UI 中当前显示的所有错误 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a138505c0a3d95d3ecbd88b07185deb67}{next\+Demo}} ()
+\begin{DoxyCompactList}\small\item\em 处于演示模式时，切换到下一个演示 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a62d9b060d26c40e131e595fa65004c9f}{abort\+Demo}} ()
+\begin{DoxyCompactList}\small\item\em 处于演示模式时，中止演示模式 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a85e6d2c45d49f628f47c74b8c1bd4285}{run\+Script\+From\+File}} (std\+::string const \&filename, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$ ser, bool throw\+\_\+no\+\_\+file)
+\begin{DoxyCompactList}\small\item\em 从文件运行脚本 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a3e245d10dfd6e0d88cdade6b0527195c}{on\+Param\+Change}} (engine\+::serialdev const \&param, std\+::string const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a7141bcc6d655bc8c75fcd47e1d31129a}{on\+Param\+Change}} (engine\+::usbserialdev const \&param, std\+::string const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_acc8a76230d7ff91d026744b0dd228776}{on\+Param\+Change}} (engine\+::cpumode const \&param, engine\+::\+C\+P\+Umode const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a614985d2cba07942c3a72377dbab8cdd}{on\+Param\+Change}} (engine\+::cpumax const \&param, unsigned int const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_aaaf9c5d6921fad67474668ac612ee074}{on\+Param\+Change}} (engine\+::videoerrors const \&param, bool const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a74a52ed177033ad9aae2ac6b32b8e1ef}{on\+Param\+Change}} (engine\+::gui const \&param, bool const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a1aeebcbbf9406126a6b2d6859fa10061}{on\+Param\+Change}} (engine\+::cpumaxl const \&param, unsigned int const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a76a60ae563e667b09fa1af9a43d8ae2b}{on\+Param\+Change}} (engine\+::cpumodel const \&param, engine\+::\+C\+P\+Umode const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a5b65d2eb3778204e46d474832e875861}{on\+Param\+Change}} (engine\+::demomode const \&param, float const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_a25d2fd8ab270cbdf4a26cc4bf9d5bac7}{pre\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Override of \mbox{\hyperlink{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}{Manager\+::pre\+Init()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Engine_ad7b8927d246b350cf0be396291f79f3c}{post\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Override of \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{Manager\+::post\+Init()}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1Engine_aa88378edfca8eb7d16107f212aa3ca54}{parse\+Command}} (std\+::string const \&str, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$ s, std\+::string const \&pfx=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 解析通过串行端口接收到的用户命令 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Engine_a9cf49224e3c9b0b53b446d550d2181fd}{its\+Default\+Mapping\+Idx}}
+\begin{DoxyCompactList}\small\item\em Index of default mapping. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_af2c887a173ea62307c85fe4e606fc1be}{its\+Mappings}}
+\begin{DoxyCompactList}\small\item\em 来自 videomappings.\+cfg 的所有映射 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \mbox{\hyperlink{classjevois_1_1Engine_afcd8e073c7874fd7fda097d7d3971067}{its\+Current\+Mapping}}
+\begin{DoxyCompactList}\small\item\em 当前映射，如果使用 setmapping2，则可能与 its\+Mappings 中的任何映射都不匹配 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_ade317fc8331474405a551a44ad8eeb12}{its\+Camera}}
+\begin{DoxyCompactList}\small\item\em Our camera. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_a5dcab54a33a3501f0ef3ab21db0c0c05}{its\+I\+MU}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_ae0918e608af6f639810e33026ae344fb}{its\+Gadget}}
+\begin{DoxyCompactList}\small\item\em Our \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_afb9bf8f5074f94a924d32044c8675224}{its\+Loader}}
+\begin{DoxyCompactList}\small\item\em Our module loader. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Module}{Module}} $>$ \mbox{\hyperlink{classjevois_1_1Engine_a2775861063bb4eed282a519d67a2f0ad}{its\+Module}}
+\begin{DoxyCompactList}\small\item\em Our current module. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1Engine_a4fa3bc6f8158671527e5aa172b06b999}{its\+Running}}
+\begin{DoxyCompactList}\small\item\em True when we are running. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1Engine_a38278831a46971aecd841cd954a0614c}{its\+Streaming}}
+\begin{DoxyCompactList}\small\item\em True when we are streaming video. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1Engine_a1f2d50734e8faaa2d8cc368064878140}{its\+Stop\+Main\+Loop}}
+\begin{DoxyCompactList}\small\item\em Flag used to stop the main loop. \end{DoxyCompactList}\item 
+std\+::timed\+\_\+mutex \mbox{\hyperlink{classjevois_1_1Engine_aefdb8ae7d6d2c7644bad2a7f42cd0f2d}{its\+Mtx}}
+\begin{DoxyCompactList}\small\item\em Mutex to protect our internals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Engine_a34175bdc63bd923183dabb20f3b17374}{frame\+Num}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前视频处理帧号 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_ae044303718c53706eed448d57b574fcf}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (cameradev, std\+::string, \char`\"{}Camera device name (if starting with /dev/v...), or movie \char`\"{} \char`\"{}file name (e.\+g., movie.\+mpg) or image sequence (e.\+g., im\%02d.\+jpg, to read frames \char`\"{} \char`\"{}im00.\+jpg, im01.\+jpg, etc).\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+E\+F\+A\+U\+LT, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_acd1d0521371a59e80c6a3ea0dc167b06}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (camerasens, Camera\+Sensor, \char`\"{}Camera sensor. Users would usually not set this parameter \char`\"{} \char`\"{}manually, it is set through boot-\/time configuration.\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+S\+E\+N\+S\+\_\+\+D\+E\+F\+A\+U\+LT, Camera\+Sensor\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a056082d644f352bf6088e9cea7783d7a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (cameralens, Camera\+Lens, \char`\"{}Camera lens. Users should usually not set this parameter \char`\"{} \char`\"{}using the global Je\+Vois params.\+cfg config file.\char`\"{}, Camera\+Lens\+::standard, Camera\+Lens\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a8e47f3c52346435f8c5cd65b42340dba}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (cameranbuf, unsigned int, \char`\"{}Number of video input (\mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}}) buffers, or 0 for automatic.\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_aaf04586ff5734953637f805819009fe3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (gadgetdev, std\+::string, \char`\"{}Gadget device name. This is used on platform hardware only. \char`\"{} \char`\"{}On host hardware, a display window will be used unless gadgetdev is None (useful \char`\"{} \char`\"{}for benchmarking) or is a file stem for a movie file that does not start with /dev/ \char`\"{} \char`\"{}(and which should contain a printf-\/style directive for a single int argument, \char`\"{} \char`\"{}the movie number).\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+G\+A\+D\+G\+E\+T\+\_\+\+D\+E\+F\+A\+U\+LT, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_ab3b346f1b9700536a53a231e8ae1c709}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (gadgetnbuf, unsigned int, \char`\"{}Number of video output (U\+SB video) buffers, or 0 for auto\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a67d03e897d919877164a970988be372b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (videomapping, int, \char`\"{}Index of Video Mapping to use, or -\/1 to use the default mapping. \char`\"{} \char`\"{}Note that this parameter is only available when parsing command-\/line arguments. \char`\"{} \char`\"{}At runtime, the setmapping command should be used instead.\char`\"{}, -\/1, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_ab5c6d63fe4817863fd5dbaedfd5f79d1}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serialmonitors, bool, \char`\"{}If true, serial port monitors will be enabled \char`\"{} \char`\"{}in the G\+UI, which can be used to peek at serial communications not \char`\"{} \char`\"{}directed to the console. Can be turned off at start time (e.\+g., in the \char`\"{} \char`\"{}global Je\+Vois params.\+cfg) as there is some small C\+PU cost to it.\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_af7433d5e286087bc827fce698722f607}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (serialdev, std\+::string, \char`\"{}Hardware (4-\/pin connector) serial device name, \char`\"{} \char`\"{}or \textquotesingle{}stdio\textquotesingle{} to use the console, or empty for no hardware serial port\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a147035aa3972856977943e9a6e653cbe}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (usbserialdev, std\+::string, \char`\"{}Over-\/the-\/U\+SB serial device name, or empty\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_ac261845994ca62311ed460817ed636cb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (camreg, bool, \char`\"{}Enable raw access to \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}} registers through setcamreg and getcamreg\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a42ee006f3a41dbf0d13720b615ea1acb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (imureg, bool, \char`\"{}Enable raw access to \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} registers through setimureg and getimureg\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a475a32ed0999c157ce5c1328e7d4776c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (camturbo, bool, \char`\"{}Enable \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}} turbo mode by relaxing the need for D\+MA-\/coherent video \char`\"{} \char`\"{}buffer memory. This can accelerate severalfolds access to the captured image data, but \char`\"{} \char`\"{}it may also yield stripe artifacts with some modules, such as Pass\+Through. The stripes \char`\"{} \char`\"{}are pieces of incorrect data in the cache. You should experiment with each particular \char`\"{} \char`\"{}module. Turbo mode is not recommended for any production-\/grade application.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a69011978ae0535e442fb913c0cc69427}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Ser\+Port,(None)(All)(Hard)(U\+SB))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a67d265efdc6a96e963fd3ef5c95163e4}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serlog, Ser\+Port, \char`\"{}Show log and debug messages on selected serial port(s)\char`\"{}, Ser\+Port\+::\+None, Ser\+Port\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a23cbb6bd0d3d0ff3490db5cacc31582c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (videoerrors, bool, \char`\"{}Show any machine vision \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} errors (exceptions) \char`\"{} \char`\"{}in the video stream. Only takes effect if streaming video to U\+S\+B.\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a44e5aba3a35e1da591f08c425ea62a4f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serout, Ser\+Port, \char`\"{}Send \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} serial messages to selected serial port(s)\char`\"{}, Ser\+Port\+::\+None, Ser\+Port\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a9eeda56315b1a8b2a0ae8f72c9deac95}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (C\+P\+Umode,(Power\+Save)(Conservative)(On\+Demand)(Interactive)(Performance))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_add8a900ec59b723642992e0609268947}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (cpumode, C\+P\+Umode, \char`\"{}C\+PU frequency modulation mode\char`\"{} \char`\"{} for A73 big cores\char`\"{}, C\+P\+Umode\+::\+Performance, C\+P\+Umode\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_ae23f3e3aff4e92cd83d8a98fed6fd4eb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (cpumodel, C\+P\+Umode, \char`\"{}C\+PU frequency modulation mode for A53 little cores\char`\"{}, C\+P\+Umode\+::\+Performance, C\+P\+Umode\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a95e2b7506013dbb02d94726b94e41d2e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (cpumax, unsigned int, \char`\"{}C\+PU maximum frequency in M\+Hz\char`\"{} \char`\"{}. To enable overclock frequencies above 2208 M\+Hz, you need to first edit \char`\"{} \char`\"{}/boot/env.\+txt and change max\+\_\+freq\+\_\+a73, then reboot. Use with caution!\char`\"{}, 2208, \{ 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208, 2304, 2400 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a6927a5d45cefa82a3a4aec902dec5e7e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (cpumaxl, unsigned int, \char`\"{}C\+PU maximum frequency in M\+Hz, for A53 little cores. \char`\"{} \char`\"{}To enable overclock frequencies above 1800 M\+Hz, you need to first edit \char`\"{} \char`\"{}/boot/env.\+txt and change max\+\_\+freq\+\_\+a53, then reboot. Use with caution!\char`\"{}, 1800, \{ 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a67fb641e544ccddb9d803601997bb1b9}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (multicam, bool, \char`\"{}Allow up to 3 Je\+Vois cameras on one U\+SB bus. Enabling this \char`\"{} \char`\"{}reduces the amount of U\+SB bandwidth used by each Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}}, from 3kb \char`\"{} \char`\"{}per U\+SB isochronous microframe to 1kb. All 3 Je\+Vois cameras must have this \char`\"{} \char`\"{}option enabled, and the Je\+Vois linux kernel \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} should also have \char`\"{} \char`\"{}been loaded with multicam on.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a20b2d402cddc35a9a186ad83a41c3bff}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (quietcmd, bool, \char`\"{}When true, do not issue a message \textquotesingle{}OK\textquotesingle{} after every correct command \char`\"{} \char`\"{}received at the command-\/line interface. Recommended for advanced users only.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a353a2aeece49bc90c0e714ca8fc9b851}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (python, bool, \char`\"{}When true, enable support for modules written in Python. Otherwise, \char`\"{} \char`\"{}attempting to load a python \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} will throw an exception. Disabling python saves \char`\"{} \char`\"{}a lot of memory and may be useful when using C++ modules that run large deep neural \char`\"{} \char`\"{}networks.\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a716e2a0c595ba0bb3754195573070f5a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serlimit, size\+\_\+t, \char`\"{}Maximum number of serial messages that can be sent by a \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} \char`\"{} \char`\"{}using \mbox{\hyperlink{classjevois_1_1Engine_a7fbaa165dff9628cffa14d8ae307eb64}{send\+Serial}}(), for each video frame, or 0 for no limit. Any message sent by \char`\"{} \char`\"{}the \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} beyond the first serlimit ones will be dropped. This is useful to avoid \char`\"{} \char`\"{}overloading the serial link, for example in case one is running a Ar\+Uco detector and \char`\"{} \char`\"{}a large number of Ar\+Uco tags are present in the field of view of Je\+Vois.\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_aff13f0ebdfab11c9e69703d33aeb5d7c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (gui, bool, \char`\"{}Use a graphical user interface instead of plain display \char`\"{} \char`\"{}when true\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a6180309657ecd1b83f52386f157c59ca}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (conslock, bool, \char`\"{}Lock the console and capture the keyboard and mouse to avoid \char`\"{} \char`\"{}interference, only effective on Je\+Vois-\/Pro Platform, otherwise ignored. Set conslock \char`\"{} \char`\"{}to false if you are experiencing hard crashes and want to run jevoispro-\/daemon in gdb.\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a362ca7396b84a4b44678b346b832607b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (watchdog, double, \char`\"{}Timeout in seconds after which we kill this process if the \mbox{\hyperlink{jevois-restore-console_8C_a2b760810e5bb0cfb55f0c7d6d74d4438}{main}} loop \char`\"{} \char`\"{}is stuck somehow, or 0.\+0 for no watchdog\char`\"{}, 10.\+0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Engine_a6edade9cd42e6e2502bd93286cebb0ae}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (demomode, float, \char`\"{}Show a demonstration of some available Je\+Vois-\/Pro \char`\"{} \char`\"{}machine vision modules, cycling to the next modules after a number \char`\"{} \char`\"{}of seconds specified by this parameter (or 0.\+0 for no demo mode).\char`\"{}, 0.\+0F, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Engine_a14fbeefe304c188cf47af27ffb669383}\label{classjevois_1_1Engine_a14fbeefe304c188cf47af27ffb669383}} 
+\index{jevois::Engine@{jevois::Engine}!Engine@{Engine}}
+\index{Engine@{Engine}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{Engine()}{Engine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+Engine\+::\+Engine (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 221 of file Engine.\+C.
+
+
+
+References jevois\+::async\+\_\+little(), and J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a881e17f4465765453e56e3d269cf214e}\label{classjevois_1_1Engine_a881e17f4465765453e56e3d269cf214e}} 
+\index{jevois::Engine@{jevois::Engine}!Engine@{Engine}}
+\index{Engine@{Engine}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{Engine()}{Engine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+Engine\+::\+Engine (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor with command-\/line parsing. 
+
+
+
+Definition at line 239 of file Engine.\+C.
+
+
+
+References jevois\+::async\+\_\+little(), and J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aac8a333945fae07bf6475f1da84bf638}\label{classjevois_1_1Engine_aac8a333945fae07bf6475f1da84bf638}} 
+\index{jevois::Engine@{jevois::Engine}!````~Engine@{$\sim$Engine}}
+\index{````~Engine@{$\sim$Engine}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{$\sim$Engine()}{~Engine()}}
+{\footnotesize\ttfamily jevois\+::\+Engine\+::$\sim$\+Engine (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 826 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, jevois\+::log\+Set\+Engine(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Engine_a62d9b060d26c40e131e595fa65004c9f}\label{classjevois_1_1Engine_a62d9b060d26c40e131e595fa65004c9f}} 
+\index{jevois::Engine@{jevois::Engine}!abortDemo@{abortDemo}}
+\index{abortDemo@{abortDemo}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{abortDemo()}{abortDemo()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::abort\+Demo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+处于演示模式时，中止演示模式 
+
+
+
+Definition at line 604 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}\label{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}} 
+\index{jevois::Engine@{jevois::Engine}!camera@{camera}}
+\index{camera@{camera}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{camera()}{camera()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Camera}{jevois\+::\+Camera}} $>$ jevois\+::\+Engine\+::camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取指向我们相机的指针（可能为空，特别是当不使用相机而是使用电影输入时） 
+
+
+
+Definition at line 1455 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_af8d6c77bf2e1b187673ecff358418264}\label{classjevois_1_1Engine_af8d6c77bf2e1b187673ecff358418264}} 
+\index{jevois::Engine@{jevois::Engine}!clearErrors@{clearErrors}}
+\index{clearErrors@{clearErrors}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{clearErrors()}{clearErrors()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::clear\+Errors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+清除 Je\+Vois-\/\+Pro G\+UI 中当前显示的所有错误 
+
+在 Jevois\+Pro G\+UI 中，通过 \mbox{\hyperlink{classjevois_1_1Engine_afa87ec4e88e9009fe7ef2886931b6cd1}{report\+Error()}} 报告的错误会保留显示几秒钟，但有时我们希望立即清除它们，例如，在 D\+NN 管道抛 出后，如果用户选择另一个，我们希望之前的错误立即消失，因为它不再适用。当不使用 Je\+Vois-\/\+Pro G\+UI 时，这没有效果。 
+
+Definition at line 1390 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a0cd78565d78403bb348ad09fb7ca3f49}\label{classjevois_1_1Engine_a0cd78565d78403bb348ad09fb7ca3f49}} 
+\index{jevois::Engine@{jevois::Engine}!drawCameraGUI@{drawCameraGUI}}
+\index{drawCameraGUI@{drawCameraGUI}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{drawCameraGUI()}{drawCameraGUI()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::draw\+Camera\+G\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+将所有相机控件绘制到我们的 G\+UI 中 
+
+
+
+Definition at line 2842 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a4deaa34441d8554c19a196c997649b0a}\label{classjevois_1_1Engine_a4deaa34441d8554c19a196c997649b0a}} 
+\index{jevois::Engine@{jevois::Engine}!findVideoMapping@{findVideoMapping}}
+\index{findVideoMapping@{findVideoMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{findVideoMapping()}{findVideoMapping()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} \& jevois\+::\+Engine\+::find\+Video\+Mapping (\begin{DoxyParamCaption}\item[{unsigned int}]{oformat,  }\item[{unsigned int}]{owidth,  }\item[{unsigned int}]{oheight,  }\item[{float}]{oframespersec }\end{DoxyParamCaption}) const}
+
+
+
+查找具有给定输出规格的 Video\+Mapping，如果未找到则抛​​出 
+
+
+
+Definition at line 1575 of file Engine.\+C.
+
+
+
+References jevois\+::fccstr(), L\+F\+A\+T\+AL, and jevois\+::\+Video\+Mapping\+::match().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_af988124a54cfbfbb56a77c43a52eadc6}\label{classjevois_1_1Engine_af988124a54cfbfbb56a77c43a52eadc6}} 
+\index{jevois::Engine@{jevois::Engine}!foreachVideoMapping@{foreachVideoMapping}}
+\index{foreachVideoMapping@{foreachVideoMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{foreachVideoMapping()}{foreachVideoMapping()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::foreach\+Video\+Mapping (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)$>$ \&\&}]{func }\end{DoxyParamCaption})}
+
+
+
+在每个视频映射上运行一个函数 
+
+您的函数将被调用的第一个映射是索引为 0 的映射，依此类推，直到索引为 \mbox{\hyperlink{classjevois_1_1Engine_a524bc32f57970770d32eec857afc4d07}{num\+Video\+Mappings()}}-\/1。如果您的函数抛出异常，我们会 报告异常然后忽略它，然后我们继续下一个映射。 
+
+Definition at line 1567 of file Engine.\+C.
+
+
+
+References jevois\+::warn\+And\+Ignore\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aa746811f666a10d5dda827a2a62a9f9e}\label{classjevois_1_1Engine_aa746811f666a10d5dda827a2a62a9f9e}} 
+\index{jevois::Engine@{jevois::Engine}!getCurrentVideoMapping@{getCurrentVideoMapping}}
+\index{getCurrentVideoMapping@{getCurrentVideoMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getCurrentVideoMapping()}{getCurrentVideoMapping()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} \& jevois\+::\+Engine\+::get\+Current\+Video\+Mapping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取当前视频映射 
+
+请注意，如果当前映射是通过 setmapping2 C\+LI 命令动态设置的，则当前映射可能没有在从 videomappings.\+cfg 获取的映射列表中的条目。 
+
+Definition at line 1511 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a9914f65be4669baf38bef649a8cad25b}\label{classjevois_1_1Engine_a9914f65be4669baf38bef649a8cad25b}} 
+\index{jevois::Engine@{jevois::Engine}!getDefaultVideoMapping@{getDefaultVideoMapping}}
+\index{getDefaultVideoMapping@{getDefaultVideoMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getDefaultVideoMapping()}{getDefaultVideoMapping()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} \& jevois\+::\+Engine\+::get\+Default\+Video\+Mapping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Allow access to the default video mapping. 
+
+
+
+Definition at line 1559 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a63834e45f8e3edd0be14aac516daabad}\label{classjevois_1_1Engine_a63834e45f8e3edd0be14aac516daabad}} 
+\index{jevois::Engine@{jevois::Engine}!getDefaultVideoMappingIdx@{getDefaultVideoMappingIdx}}
+\index{getDefaultVideoMappingIdx@{getDefaultVideoMappingIdx}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getDefaultVideoMappingIdx()}{getDefaultVideoMappingIdx()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Engine\+::get\+Default\+Video\+Mapping\+Idx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Allow access to the default video mapping index. 
+
+
+
+Definition at line 1563 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a01c815c22362c6508c0bc89ded17eb87}\label{classjevois_1_1Engine_a01c815c22362c6508c0bc89ded17eb87}} 
+\index{jevois::Engine@{jevois::Engine}!getPythonComponent@{getPythonComponent}}
+\index{getPythonComponent@{getPythonComponent}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getPythonComponent()}{getPythonComponent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$ jevois\+::\+Engine\+::get\+Python\+Component (\begin{DoxyParamCaption}\item[{void $\ast$}]{pyinst }\end{DoxyParamCaption}) const}
+
+
+
+获取使用给定 python 实例注册的组件 
+
+
+
+Definition at line 2998 of file Engine.\+C.
+
+
+
+References L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a0f7d778d163ee0c52d21843e4f69a7c3}\label{classjevois_1_1Engine_a0f7d778d163ee0c52d21843e4f69a7c3}} 
+\index{jevois::Engine@{jevois::Engine}!getVideoMapping@{getVideoMapping}}
+\index{getVideoMapping@{getVideoMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getVideoMapping()}{getVideoMapping()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} \& jevois\+::\+Engine\+::get\+Video\+Mapping (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{idx }\end{DoxyParamCaption}) const}
+
+
+
+允许访问我们在构建时从文件解析的视频映射 
+
+
+
+Definition at line 1519 of file Engine.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ab359ccc8b2d022f120efcd59e708c373}\label{classjevois_1_1Engine_ab359ccc8b2d022f120efcd59e708c373}} 
+\index{jevois::Engine@{jevois::Engine}!getVideoMappingIdx@{getVideoMappingIdx}}
+\index{getVideoMappingIdx@{getVideoMappingIdx}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{getVideoMappingIdx()}{getVideoMappingIdx()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Engine\+::get\+Video\+Mapping\+Idx (\begin{DoxyParamCaption}\item[{unsigned int}]{iformat,  }\item[{unsigned int}]{iframe,  }\item[{unsigned int}]{interval }\end{DoxyParamCaption}) const}
+
+
+
+获取给定 U\+VC iformat、iframe 和 interval 的视频映射索引 
+
+
+
+Definition at line 1528 of file Engine.\+C.
+
+
+
+References L\+F\+A\+T\+AL, jevois\+::\+Video\+Mapping\+::ofps, jevois\+::\+Video\+Mapping\+::uvcformat, jevois\+::\+Video\+Mapping\+::uvcframe, and jevois\+::\+Video\+Mapping\+::uvc\+To\+Fps().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ac5e8a0996af9bf5048e2d9b5e6f9d69f}\label{classjevois_1_1Engine_ac5e8a0996af9bf5048e2d9b5e6f9d69f}} 
+\index{jevois::Engine@{jevois::Engine}!loadCameraCalibration@{loadCameraCalibration}}
+\index{loadCameraCalibration@{loadCameraCalibration}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{loadCameraCalibration()}{loadCameraCalibration()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1CameraCalibration}{jevois\+::\+Camera\+Calibration}} jevois\+::\+Engine\+::load\+Camera\+Calibration (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{stem = {\ttfamily \char`\"{}calibration\char`\"{}},  }\item[{bool}]{do\+\_\+throw = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+为当前正在运行的模块加载 Open\+CV 相机矩阵和失真系数的辅助函数 
+
+
+
+Definition at line 1459 of file Engine.\+C.
+
+
+
+References jevois\+::\+Camera\+Calibration\+::h, h, J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, jevois\+::\+Camera\+Calibration\+::lens, L\+F\+A\+T\+AL, L\+I\+N\+FO, jevois\+::\+Camera\+Calibration\+::load(), jevois\+::\+Camera\+Calibration\+::sensor, jevois\+::to\+\_\+string(), and jevois\+::\+Camera\+Calibration\+::w.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aaba81580ca2c4361b2c7a83b54e86a59}\label{classjevois_1_1Engine_aaba81580ca2c4361b2c7a83b54e86a59}} 
+\index{jevois::Engine@{jevois::Engine}!mainLoop@{mainLoop}}
+\index{mainLoop@{mainLoop}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{mainLoop()}{mainLoop()}}
+{\footnotesize\ttfamily int jevois\+::\+Engine\+::main\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+主循环：抓取、处理、通过 U\+SB 发送。应由主应用程序线程调用 
+
+
+
+Definition at line 1087 of file Engine.\+C.
+
+
+
+References jevois\+::\+User\+Interface\+::\+Hard, J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG, J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI, jevois\+::\+Std\+Module\+::send\+Serial\+Mark\+Start(), jevois\+::\+Std\+Module\+::send\+Serial\+Mark\+Stop(), jevois\+::\+User\+Interface\+::type(), jevois\+::warn\+And\+Ignore\+Exception(), and jevois\+::\+User\+Interface\+::write\+String().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}\label{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}} 
+\index{jevois::Engine@{jevois::Engine}!module@{module}}
+\index{module@{module}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{module()}{module()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Module}{jevois\+::\+Module}} $>$ jevois\+::\+Engine\+::module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取指向当前模块的指针（可能为空） 
+
+
+
+Definition at line 1447 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a138505c0a3d95d3ecbd88b07185deb67}\label{classjevois_1_1Engine_a138505c0a3d95d3ecbd88b07185deb67}} 
+\index{jevois::Engine@{jevois::Engine}!nextDemo@{nextDemo}}
+\index{nextDemo@{nextDemo}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{nextDemo()}{nextDemo()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::next\+Demo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+处于演示模式时，切换到下一个演示 
+
+
+
+Definition at line 600 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a524bc32f57970770d32eec857afc4d07}\label{classjevois_1_1Engine_a524bc32f57970770d32eec857afc4d07}} 
+\index{jevois::Engine@{jevois::Engine}!numVideoMappings@{numVideoMappings}}
+\index{numVideoMappings@{numVideoMappings}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{numVideoMappings()}{numVideoMappings()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Engine\+::num\+Video\+Mappings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+返回视频映射的数量 
+
+
+
+Definition at line 1515 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a614985d2cba07942c3a72377dbab8cdd}\label{classjevois_1_1Engine_a614985d2cba07942c3a72377dbab8cdd}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::cpumax const \&}]{param,  }\item[{unsigned int const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a1aeebcbbf9406126a6b2d6859fa10061}\label{classjevois_1_1Engine_a1aeebcbbf9406126a6b2d6859fa10061}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::cpumaxl const \&}]{param,  }\item[{unsigned int const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_acc8a76230d7ff91d026744b0dd228776}\label{classjevois_1_1Engine_acc8a76230d7ff91d026744b0dd228776}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::cpumode const \&}]{param,  }\item[{engine\+::\+C\+P\+Umode const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a76a60ae563e667b09fa1af9a43d8ae2b}\label{classjevois_1_1Engine_a76a60ae563e667b09fa1af9a43d8ae2b}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::cpumodel const \&}]{param,  }\item[{engine\+::\+C\+P\+Umode const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a5b65d2eb3778204e46d474832e875861}\label{classjevois_1_1Engine_a5b65d2eb3778204e46d474832e875861}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::demomode const \&}]{param,  }\item[{float const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a74a52ed177033ad9aae2ac6b32b8e1ef}\label{classjevois_1_1Engine_a74a52ed177033ad9aae2ac6b32b8e1ef}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::gui const \&}]{param,  }\item[{bool const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a3e245d10dfd6e0d88cdade6b0527195c}\label{classjevois_1_1Engine_a3e245d10dfd6e0d88cdade6b0527195c}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::serialdev const \&}]{param,  }\item[{std\+::string const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a7141bcc6d655bc8c75fcd47e1d31129a}\label{classjevois_1_1Engine_a7141bcc6d655bc8c75fcd47e1d31129a}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::usbserialdev const \&}]{param,  }\item[{std\+::string const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aaaf9c5d6921fad67474668ac612ee074}\label{classjevois_1_1Engine_aaaf9c5d6921fad67474668ac612ee074}} 
+\index{jevois::Engine@{jevois::Engine}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{engine\+::videoerrors const \&}]{param,  }\item[{bool const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aa88378edfca8eb7d16107f212aa3ca54}\label{classjevois_1_1Engine_aa88378edfca8eb7d16107f212aa3ca54}} 
+\index{jevois::Engine@{jevois::Engine}!parseCommand@{parseCommand}}
+\index{parseCommand@{parseCommand}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{parseCommand()}{parseCommand()}}
+{\footnotesize\ttfamily bool jevois\+::\+Engine\+::parse\+Command (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$}]{s,  }\item[{std\+::string const \&}]{pfx = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+解析通过串行端口接收到的用户命令 
+
+收到不正确的命令（例如，错误的参数值）时抛出，如果成功则返回 true，如果命令未被识别并且应由 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 尝试，则返回 false。 pfx 是一个可选前缀，将添加到所有生成的消息或错误中。 
+
+Definition at line 1957 of file Engine.\+C.
+
+
+
+References jevois\+::\+Serial\+::file\+Get(), jevois\+::\+Serial\+::file\+Put(), jevois\+::get\+Sys\+Info\+C\+P\+U(), jevois\+::get\+Sys\+Info\+Mem(), jevois\+::get\+Sys\+Info\+Version(), J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+C\+U\+S\+T\+O\+M\+\_\+\+D\+N\+N\+\_\+\+U\+RL, J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+D\+\_\+\+S\+YS, J\+E\+V\+O\+I\+S\+\_\+\+V\+E\+R\+S\+I\+O\+N\+\_\+\+S\+T\+R\+I\+NG, J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI, L\+D\+E\+B\+UG, jevois\+::split(), jevois\+::system(), jevois\+::to\+\_\+string(), and jevois\+::\+User\+Interface\+::write\+String().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ad7b8927d246b350cf0be396291f79f3c}\label{classjevois_1_1Engine_ad7b8927d246b350cf0be396291f79f3c}} 
+\index{jevois::Engine@{jevois::Engine}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Override of \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{Manager\+::post\+Init()}} 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{jevois\+::\+Manager}}.
+
+
+
+Definition at line 641 of file Engine.\+C.
+
+
+
+References jevois\+::\+Component\+::freeze\+All\+Params(), jevois\+::get\+File\+String(), J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+I\+N\+I\+T\+\_\+\+S\+C\+R\+I\+PT, J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, L\+E\+R\+R\+OR, L\+I\+N\+FO, jevois\+::log\+Set\+Engine(), jevois\+::\+Manager\+::post\+Init(), jevois\+::sensor\+Has\+I\+M\+U(), jevois\+::python\+::set\+Engine(), jevois\+::string\+Starts\+With(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a25d2fd8ab270cbdf4a26cc4bf9d5bac7}\label{classjevois_1_1Engine_a25d2fd8ab270cbdf4a26cc4bf9d5bac7}} 
+\index{jevois::Engine@{jevois::Engine}!preInit@{preInit}}
+\index{preInit@{preInit}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{preInit()}{preInit()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::pre\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Override of \mbox{\hyperlink{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}{Manager\+::pre\+Init()}} 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}{jevois\+::\+Manager}}.
+
+
+
+Definition at line 617 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+TH, J\+E\+V\+O\+I\+S\+\_\+\+M\+O\+D\+U\+L\+E\+\_\+\+P\+A\+R\+A\+M\+S\+\_\+\+F\+I\+L\+E\+N\+A\+ME, and jevois\+::\+Manager\+::pre\+Init().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aa7df0e7a58a02ec29d9a911d3ea03d12}\label{classjevois_1_1Engine_aa7df0e7a58a02ec29d9a911d3ea03d12}} 
+\index{jevois::Engine@{jevois::Engine}!quit@{quit}}
+\index{quit@{quit}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{quit()}{quit()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::quit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Terminate the program. 
+
+
+
+Definition at line 1855 of file Engine.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a140e7a43c307f306c0c7089f5fa1b7ab}\label{classjevois_1_1Engine_a140e7a43c307f306c0c7089f5fa1b7ab}} 
+\index{jevois::Engine@{jevois::Engine}!reboot@{reboot}}
+\index{reboot@{reboot}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{reboot()}{reboot()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::reboot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+请求重启 
+
+在 Je\+Vois-\/\+A33 平台上，触发硬重置。在 Je\+Vois-\/\+Pro 平台或 Je\+Vois-\/\+Host 上，只需终止程序即可。 
+
+Definition at line 1834 of file Engine.\+C.
+
+
+
+References L\+E\+R\+R\+OR, and jevois\+::system().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ac09b49c72d9fa8b79cee485de91cbc67}\label{classjevois_1_1Engine_ac09b49c72d9fa8b79cee485de91cbc67}} 
+\index{jevois::Engine@{jevois::Engine}!registerPythonComponent@{registerPythonComponent}}
+\index{registerPythonComponent@{registerPythonComponent}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{registerPythonComponent()}{registerPythonComponent()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::register\+Python\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$}]{comp,  }\item[{void $\ast$}]{pyinst }\end{DoxyParamCaption})}
+
+
+
+将组件注册为链接到某些 python 代码，由在 python 中创建的动态参数使用 
+
+
+
+Definition at line 2979 of file Engine.\+C.
+
+
+
+References jevois\+::\+Component\+::instance\+Name(), L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ad283adff625848b7ec29968fc7c61d58}\label{classjevois_1_1Engine_ad283adff625848b7ec29968fc7c61d58}} 
+\index{jevois::Engine@{jevois::Engine}!reloadVideoMappings@{reloadVideoMappings}}
+\index{reloadVideoMappings@{reloadVideoMappings}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{reloadVideoMappings()}{reloadVideoMappings()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::reload\+Video\+Mappings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+从 videomappings.\+cfg 重新加载视频映射。 
+
+Mappings 会在启动时自动加载，因此仅当文件发生修改并且需要刷新映射时才应使用此方法。请注意，这不会刷新 U\+SB 输出的可用分辨率， 这需要完全重启才能重新初始化内核 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 模块。还要注意可能的状态不一致（例如，如果外部代码持有先前由 \mbox{\hyperlink{classjevois_1_1Engine_a4deaa34441d8554c19a196c997649b0a}{find\+Video\+Mapping()}} 返回的引用。因此，请谨慎使用。基本上，应该只有 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 使用它。 
+
+Definition at line 628 of file Engine.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_afa87ec4e88e9009fe7ef2886931b6cd1}\label{classjevois_1_1Engine_afa87ec4e88e9009fe7ef2886931b6cd1}} 
+\index{jevois::Engine@{jevois::Engine}!reportError@{reportError}}
+\index{reportError@{reportError}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{reportError()}{reportError()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::report\+Error (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{err }\end{DoxyParamCaption})}
+
+
+
+Definition at line 1381 of file Engine.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a09ae0f9771b693693a92207c01218c19}\label{classjevois_1_1Engine_a09ae0f9771b693693a92207c01218c19}} 
+\index{jevois::Engine@{jevois::Engine}!requestSetFormat@{requestSetFormat}}
+\index{requestSetFormat@{requestSetFormat}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{requestSetFormat()}{requestSetFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::request\+Set\+Format (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+
+
+使用它从 process() 中请求格式更改 
+
+
+
+Definition at line 927 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a85e6d2c45d49f628f47c74b8c1bd4285}\label{classjevois_1_1Engine_a85e6d2c45d49f628f47c74b8c1bd4285}} 
+\index{jevois::Engine@{jevois::Engine}!runScriptFromFile@{runScriptFromFile}}
+\index{runScriptFromFile@{runScriptFromFile}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{runScriptFromFile()}{runScriptFromFile()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::run\+Script\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$}]{ser,  }\item[{bool}]{throw\+\_\+no\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+从文件运行脚本 
+
+文件名应该是绝对的。文件应该包含 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 支持的任何命令，每行一个。文件名应该相对于当前模块的路径。 
+
+Definition at line 2764 of file Engine.\+C.
+
+
+
+References jevois\+::\+User\+Interface\+::\+G\+UI, jevois\+::\+User\+Interface\+::\+Hard, L\+F\+A\+T\+AL, jevois\+::strip(), jevois\+::to\+\_\+string(), jevois\+::\+User\+Interface\+::type(), jevois\+::\+User\+Interface\+::\+U\+SB, jevois\+::warn\+And\+Ignore\+Exception(), and jevois\+::\+User\+Interface\+::write\+String().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a4a45bbb8080c1efba3aef4212e7697da}\label{classjevois_1_1Engine_a4a45bbb8080c1efba3aef4212e7697da}} 
+\index{jevois::Engine@{jevois::Engine}!saveCameraCalibration@{saveCameraCalibration}}
+\index{saveCameraCalibration@{saveCameraCalibration}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{saveCameraCalibration()}{saveCameraCalibration()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::save\+Camera\+Calibration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1CameraCalibration}{jevois\+::\+Camera\+Calibration}} const \&}]{calib,  }\item[{std\+::string const \&}]{stem = {\ttfamily \char`\"{}calibration\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+保存当前正在运行的模块的 Open\+CV 相机矩阵和失真系数的辅助函数 
+
+注意：为了线程安全，应锁定引擎；在 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{Module\+::process()}} 内部调用它是安全的。 
+
+Definition at line 1497 of file Engine.\+C.
+
+
+
+References jevois\+::\+Camera\+Calibration\+::h, J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, jevois\+::\+Camera\+Calibration\+::lens, L\+I\+N\+FO, jevois\+::\+Camera\+Calibration\+::save(), jevois\+::\+Camera\+Calibration\+::sensor, jevois\+::to\+\_\+string(), and jevois\+::\+Camera\+Calibration\+::w.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a7fbaa165dff9628cffa14d8ae307eb64}\label{classjevois_1_1Engine_a7fbaa165dff9628cffa14d8ae307eb64}} 
+\index{jevois::Engine@{jevois::Engine}!sendSerial@{sendSerial}}
+\index{sendSerial@{sendSerial}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{sendSerial()}{sendSerial()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::send\+Serial (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{bool}]{islog = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+向所有串行端口发送一个字符串 
+
+\begin{DoxyNote}{Note}
+当 islog 为真时，这被认为是一条日志消息，它将被发送到参数 serlog 指定的端口。否则，该消息将被发送到参数 serout 指 定的端口。请注意，每个视频帧可以发送的消息数量可能受参数 {\ttfamily serlimit} 的限制；对于给定的视频帧，最多只能发送 {\ttfamily serlimit} 条消息。这对于避免串行链路过载很有用，例如在运行 Ar\+Uco 检测器并且 Je\+Vois 的视野中存在大量 Ar\+Uco 标签的情况下。 
+\end{DoxyNote}
+
+
+Definition at line 1336 of file Engine.\+C.
+
+
+
+References jevois\+::\+User\+Interface\+::\+G\+UI, jevois\+::\+User\+Interface\+::\+Hard, jevois\+::\+User\+Interface\+::type(), jevois\+::\+User\+Interface\+::\+U\+SB, jevois\+::warn\+And\+Ignore\+Exception(), and jevois\+::\+User\+Interface\+::write\+String().
+
+
+
+Referenced by jevois\+::\+Module\+::send\+Serial().
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a6b15249fc704fa95cc579c12ae012811}\label{classjevois_1_1Engine_a6b15249fc704fa95cc579c12ae012811}} 
+\index{jevois::Engine@{jevois::Engine}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::set\+Format (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{idx }\end{DoxyParamCaption})}
+
+
+
+当用户选择新的输出视频格式时的回调 
+
+在这里，我们停止流式传输，删除任何当前处理模块，设置相机格式，设置小工具输出格式，加载新的处理模块，然后再次开始流式传 输。通常使用 \mbox{\hyperlink{classjevois_1_1Engine_a4deaa34441d8554c19a196c997649b0a}{find\+Video\+Mapping()}} 从通过 U\+SB 链接接收的输出规范中获取给定的 Video\+Mapping。 
+
+Definition at line 934 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a7fe0923fef589e45ec1d74c229ad6a5a}\label{classjevois_1_1Engine_a7fe0923fef589e45ec1d74c229ad6a5a}} 
+\index{jevois::Engine@{jevois::Engine}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+停止从相机、处理和 U\+SB 流式传输视频 
+
+
+
+Definition at line 906 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and L\+D\+E\+B\+UG.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a0cb844ce7bf0b3ae9111b1d0d264bd54}\label{classjevois_1_1Engine_a0cb844ce7bf0b3ae9111b1d0d264bd54}} 
+\index{jevois::Engine@{jevois::Engine}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+开始从相机、处理和 U\+SB 流式传输视频 
+
+
+
+Definition at line 895 of file Engine.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, and J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a74cc0839e6b8add6bbe85eeedee101c0}\label{classjevois_1_1Engine_a74cc0839e6b8add6bbe85eeedee101c0}} 
+\index{jevois::Engine@{jevois::Engine}!unRegisterPythonComponent@{unRegisterPythonComponent}}
+\index{unRegisterPythonComponent@{unRegisterPythonComponent}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{unRegisterPythonComponent()}{unRegisterPythonComponent()}}
+{\footnotesize\ttfamily void jevois\+::\+Engine\+::un\+Register\+Python\+Component (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$}]{comp }\end{DoxyParamCaption})}
+
+
+
+取消注册与某些 Python 代码链接的组件，由 Python 中创建的动态参数使用 
+
+请谨慎使用，以保证线程安全和对象生命周期，因为我们在这里只使用原始指针 
+
+Definition at line 2989 of file Engine.\+C.
+
+
+
+References jevois\+::\+Component\+::instance\+Name(), and L\+D\+E\+B\+UG.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Engine_a34175bdc63bd923183dabb20f3b17374}\label{classjevois_1_1Engine_a34175bdc63bd923183dabb20f3b17374}} 
+\index{jevois::Engine@{jevois::Engine}!frameNum@{frameNum}}
+\index{frameNum@{frameNum}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{frameNum()}{frameNum()}}
+{\footnotesize\ttfamily size\+\_\+t frame\+Num (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+获取当前视频处理帧号 
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 维护一个主帧计数器，该计数器在每次调用模块的 process() 时都会递增，无论调用是否成功。当模块尚未加载（例如加载失 败）时，计数器不会递增。每次加载新模块时，计数器都会重置为零。
+
+这是作为一项自由函数实现的，以便任何人都可以访问它：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t} current\_frame\_number = jevois::frameNum();}
+\end{DoxyCode}
+
+
+它是线程安全的。程序员注意：实现在 \mbox{\hyperlink{Engine_8C}{Engine.\+C}} 中，因为 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 是管理计数器的那个。它在这里声明，以便用户不必包含 Engine.\+H \mbox{\Hypertarget{classjevois_1_1Engine_ae044303718c53706eed448d57b574fcf}\label{classjevois_1_1Engine_ae044303718c53706eed448d57b574fcf}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{cameradev}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Camera device name }]{if starting with /dev/v...,  }\item[{or movie \char`\"{} \char`\"{}file name(e.\+g., movie.\+mpg) or image sequence(e.\+g., im\%02d.\+jpg, to read frames \char`\"{} \char`\"{}im00.\+jpg, im01.\+jpg, etc).\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Engine_8H_a2946b1e1627169e3e971ea8187f766f8}{J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a056082d644f352bf6088e9cea7783d7a}\label{classjevois_1_1Engine_a056082d644f352bf6088e9cea7783d7a}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{cameralens}]{,  }\item[{Camera\+Lens}]{,  }\item[{\char`\"{}Camera lens. Users should usually not set this parameter \char`\"{} \char`\"{}using the global Je\+Vois params.\+cfg config file.\char`\"{}}]{,  }\item[{Camera\+Lens\+::standard}]{,  }\item[{Camera\+Lens\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a8e47f3c52346435f8c5cd65b42340dba}\label{classjevois_1_1Engine_a8e47f3c52346435f8c5cd65b42340dba}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{cameranbuf}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Number of video input (\mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}})}]{buffers,  }\item[{or 0 for automatic.\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_acd1d0521371a59e80c6a3ea0dc167b06}\label{classjevois_1_1Engine_acd1d0521371a59e80c6a3ea0dc167b06}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{camerasens}]{,  }\item[{Camera\+Sensor}]{,  }\item[{\char`\"{}Camera sensor. Users would usually not set this parameter \char`\"{} \char`\"{}}]{manually,  }\item[{it is set through boot-\/time configuration.\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Engine_8H_a2408641d6661198d265548aea4c76765}{J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+S\+E\+N\+S\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Camera\+Sensor\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ac261845994ca62311ed460817ed636cb}\label{classjevois_1_1Engine_ac261845994ca62311ed460817ed636cb}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [5/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{camreg}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Enable raw access to \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}} registers through setcamreg and getcamreg\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a475a32ed0999c157ce5c1328e7d4776c}\label{classjevois_1_1Engine_a475a32ed0999c157ce5c1328e7d4776c}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [6/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{camturbo}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Enable \mbox{\hyperlink{classjevois_1_1Engine_ad9282f927dc77a2cf501007e0d0547c7}{camera}} turbo mode by relaxing the need for D\+MA-\/coherent video \char`\"{} \char`\"{}buffer memory. This can accelerate severalfolds access to the captured image}]{data,  }\item[{but \char`\"{} \char`\"{}it may also yield stripe artifacts with some}]{modules,  }\item[{such as Pass\+Through. The stripes \char`\"{} \char`\"{}are pieces of incorrect data in the cache. You should experiment with each particular \char`\"{} \char`\"{}module. Turbo mode is not recommended for any production-\/grade application.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a6180309657ecd1b83f52386f157c59ca}\label{classjevois_1_1Engine_a6180309657ecd1b83f52386f157c59ca}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [7/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{conslock}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Lock the console and capture the keyboard and mouse to avoid \char`\"{} \char`\"{}}]{interference,  }\item[{only effective on Je\+Vois-\/Pro}]{Platform,  }\item[{otherwise ignored. Set conslock \char`\"{} \char`\"{}to false if you are experiencing hard crashes and want to run jevoispro-\/daemon in gdb.\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aaf04586ff5734953637f805819009fe3}\label{classjevois_1_1Engine_aaf04586ff5734953637f805819009fe3}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [8/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{gadgetdev}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Gadget device name. This is used on platform hardware only. \char`\"{} \char`\"{}On host}]{hardware,  }\item[{a display window will be used unless gadgetdev is None(useful \char`\"{} \char`\"{}for benchmarking) or is a file stem for a movie file that does not start with/dev/\char`\"{} \char`\"{}(and which should contain a printf-\/style directive for a single int argument, \char`\"{} \char`\"{}the movie number).\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Engine_8H_a63fb01c4b3d97d9f02ed5e283a924dd6}{J\+E\+V\+O\+I\+S\+\_\+\+G\+A\+D\+G\+E\+T\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ab3b346f1b9700536a53a231e8ae1c709}\label{classjevois_1_1Engine_ab3b346f1b9700536a53a231e8ae1c709}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [9/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{gadgetnbuf}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Number of video output (U\+SB video)}]{buffers,  }\item[{or 0 for auto\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a42ee006f3a41dbf0d13720b615ea1acb}\label{classjevois_1_1Engine_a42ee006f3a41dbf0d13720b615ea1acb}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [10/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{imureg}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Enable raw access to \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} registers through setimureg and getimureg\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a67fb641e544ccddb9d803601997bb1b9}\label{classjevois_1_1Engine_a67fb641e544ccddb9d803601997bb1b9}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [11/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{multicam}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Allow up to 3 Je\+Vois cameras on one U\+SB bus. Enabling this \char`\"{} \char`\"{}reduces the amount of U\+SB bandwidth used by each Je\+Vois}]{camera,  }\item[{from 3kb \char`\"{} \char`\"{}per U\+SB isochronous microframe to 1kb. All 3 Je\+Vois cameras must have this \char`\"{} \char`\"{}option}]{enabled,  }\item[{and the Je\+Vois linux kernel \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} should also have \char`\"{} \char`\"{}been loaded with multicam on.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a353a2aeece49bc90c0e714ca8fc9b851}\label{classjevois_1_1Engine_a353a2aeece49bc90c0e714ca8fc9b851}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [12/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{python}]{,  }\item[{bool}]{,  }\item[{\char`\"{}When}]{true,  }\item[{enable support for modules written in Python.}]{Otherwise,  }\item[{\char`\"{} \char`\"{}attempting to load a python \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} will throw an exception. Disabling python saves \char`\"{} \char`\"{}a lot of memory and may be useful when using C++modules that run large deep neural \char`\"{} \char`\"{}networks.\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a20b2d402cddc35a9a186ad83a41c3bff}\label{classjevois_1_1Engine_a20b2d402cddc35a9a186ad83a41c3bff}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [13/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{quietcmd}]{,  }\item[{bool}]{,  }\item[{\char`\"{}When}]{true,  }\item[{do not issue a message \textquotesingle{}OK\textquotesingle{} after every correct command \char`\"{} \char`\"{}received at the command-\/line interface. Recommended for advanced users only.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ab5c6d63fe4817863fd5dbaedfd5f79d1}\label{classjevois_1_1Engine_ab5c6d63fe4817863fd5dbaedfd5f79d1}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [14/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serialmonitors}]{,  }\item[{bool}]{,  }\item[{\char`\"{}If}]{true,  }\item[{serial port monitors will be enabled \char`\"{} \char`\"{}in the}]{G\+UI,  }\item[{which can be used to peek at serial communications not \char`\"{} \char`\"{}directed to the console. Can be turned off at start time(e.\+g., in the \char`\"{} \char`\"{}global Je\+Vois params.\+cfg) as there is some small C\+PU cost to it.\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a716e2a0c595ba0bb3754195573070f5a}\label{classjevois_1_1Engine_a716e2a0c595ba0bb3754195573070f5a}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [15/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serlimit}]{,  }\item[{size\+\_\+t}]{,  }\item[{\char`\"{}Maximum number of serial messages that can be sent by a \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} \char`\"{} \char`\"{}using }]{send\+Serial(),  }\item[{for each video}]{frame,  }\item[{or 0 for no limit. Any message sent by \char`\"{} \char`\"{}the \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} beyond the first serlimit ones will be dropped. This is useful to avoid \char`\"{} \char`\"{}overloading the serial}]{link,  }\item[{for example in case one is running a Ar\+Uco detector and \char`\"{} \char`\"{}a large number of Ar\+Uco tags are present in the field of view of Je\+Vois.\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a67d265efdc6a96e963fd3ef5c95163e4}\label{classjevois_1_1Engine_a67d265efdc6a96e963fd3ef5c95163e4}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [16/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serlog}]{,  }\item[{Ser\+Port}]{,  }\item[{\char`\"{}Show log and debug messages on selected serial port(s)\char`\"{}}]{,  }\item[{Ser\+Port\+::\+None}]{,  }\item[{Ser\+Port\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a44e5aba3a35e1da591f08c425ea62a4f}\label{classjevois_1_1Engine_a44e5aba3a35e1da591f08c425ea62a4f}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [17/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serout}]{,  }\item[{Ser\+Port}]{,  }\item[{\char`\"{}Send \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} serial messages to selected serial port(s)\char`\"{}}]{,  }\item[{Ser\+Port\+::\+None}]{,  }\item[{Ser\+Port\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a67d03e897d919877164a970988be372b}\label{classjevois_1_1Engine_a67d03e897d919877164a970988be372b}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [18/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{videomapping}]{,  }\item[{int}]{,  }\item[{\char`\"{}Index of Video Mapping to}]{use,  }\item[{or -\/1 to use the default mapping. \char`\"{} \char`\"{}Note that this parameter is only available when parsing command-\/line arguments. \char`\"{} \char`\"{}At}]{runtime,  }\item[{the setmapping command should be used instead.\char`\"{}}]{,  }\item[{-\/}]{1,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a362ca7396b84a4b44678b346b832607b}\label{classjevois_1_1Engine_a362ca7396b84a4b44678b346b832607b}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [19/19]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{watchdog}]{,  }\item[{double}]{,  }\item[{\char`\"{}Timeout in seconds after which we kill this process if the \mbox{\hyperlink{jevois-restore-console_8C_a2b760810e5bb0cfb55f0c7d6d74d4438}{main}} loop \char`\"{} \char`\"{}is stuck}]{somehow,  }\item[{or 0.\+0 for no watchdog\char`\"{}}]{,  }\item[{10.}]{0,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a95e2b7506013dbb02d94726b94e41d2e}\label{classjevois_1_1Engine_a95e2b7506013dbb02d94726b94e41d2e}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{cpumax}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}C\+PU maximum frequency in M\+Hz\char`\"{} \char`\"{}. To enable overclock frequencies above 2208}]{M\+Hz,  }\item[{you need to first edit \char`\"{} \char`\"{}/boot/env.\+txt and change}]{max\+\_\+freq\+\_\+a73,  }\item[{then reboot. Use with caution!\char`\"{}}]{,  }\item[{2208}]{,  }\item[{\{ 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208, 2304, 2400 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a6927a5d45cefa82a3a4aec902dec5e7e}\label{classjevois_1_1Engine_a6927a5d45cefa82a3a4aec902dec5e7e}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{cpumaxl}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}C\+PU maximum frequency in}]{M\+Hz,  }\item[{for A53 little cores. \char`\"{} \char`\"{}To enable overclock frequencies above 1800}]{M\+Hz,  }\item[{you need to first edit \char`\"{} \char`\"{}/boot/env.\+txt and change}]{max\+\_\+freq\+\_\+a53,  }\item[{then reboot. Use with caution!\char`\"{}}]{,  }\item[{1800}]{,  }\item[{\{ 500, 667, 1000, 1200, 1398, 1512, 1608, 1704, 1800, 1908, 2016, 2100, 2208 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_add8a900ec59b723642992e0609268947}\label{classjevois_1_1Engine_add8a900ec59b723642992e0609268947}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{cpumode}]{,  }\item[{C\+P\+Umode}]{,  }\item[{\char`\"{}C\+PU frequency modulation mode\char`\"{} \char`\"{} for A73 big cores\char`\"{}}]{,  }\item[{C\+P\+Umode\+::\+Performance}]{,  }\item[{C\+P\+Umode\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ae23f3e3aff4e92cd83d8a98fed6fd4eb}\label{classjevois_1_1Engine_ae23f3e3aff4e92cd83d8a98fed6fd4eb}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{cpumodel}]{,  }\item[{C\+P\+Umode}]{,  }\item[{\char`\"{}C\+PU frequency modulation mode for A53 little cores\char`\"{}}]{,  }\item[{C\+P\+Umode\+::\+Performance}]{,  }\item[{C\+P\+Umode\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a6edade9cd42e6e2502bd93286cebb0ae}\label{classjevois_1_1Engine_a6edade9cd42e6e2502bd93286cebb0ae}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{demomode}]{,  }\item[{float}]{,  }\item[{\char`\"{}Show a demonstration of some available Je\+Vois-\/Pro \char`\"{} \char`\"{}machine vision}]{modules,  }\item[{cycling to the next modules after a number \char`\"{} \char`\"{}of seconds specified by this parameter(or 0.\+0 for no demo mode).\char`\"{}}]{,  }\item[{0.}]{0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aff13f0ebdfab11c9e69703d33aeb5d7c}\label{classjevois_1_1Engine_aff13f0ebdfab11c9e69703d33aeb5d7c}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{gui}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Use a graphical user interface instead of plain display \char`\"{} \char`\"{}when true\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_af7433d5e286087bc827fce698722f607}\label{classjevois_1_1Engine_af7433d5e286087bc827fce698722f607}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{serialdev}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Hardware (4-\/pin connector) serial device}]{name,  }\item[{\char`\"{} \char`\"{}or \textquotesingle{}stdio\textquotesingle{} to use the}]{console,  }\item[{or empty for no hardware serial port\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Engine_8H_a68d7a82071d6b6e2005c52f38f9d204c}{J\+E\+V\+O\+I\+S\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a147035aa3972856977943e9a6e653cbe}\label{classjevois_1_1Engine_a147035aa3972856977943e9a6e653cbe}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{usbserialdev}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Over-\/the-\/U\+SB serial device}]{name,  }\item[{or empty\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Engine_8H_a6ae242fd651e29cc5662523966ee7654}{J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+B\+S\+E\+R\+I\+A\+L\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a23cbb6bd0d3d0ff3490db5cacc31582c}\label{classjevois_1_1Engine_a23cbb6bd0d3d0ff3490db5cacc31582c}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{videoerrors}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Show any machine vision \mbox{\hyperlink{classjevois_1_1Engine_a588038306520a695d620a75f72eaf1e4}{module}} errors (exceptions) \char`\"{} \char`\"{}in the video stream. Only takes effect if streaming video to U\+S\+B.\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a9eeda56315b1a8b2a0ae8f72c9deac95}\label{classjevois_1_1Engine_a9eeda56315b1a8b2a0ae8f72c9deac95}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{C\+P\+Umode}]{,  }\item[{(Power\+Save)(Conservative)(On\+Demand)(Interactive)(Performance)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a69011978ae0535e442fb913c0cc69427}\label{classjevois_1_1Engine_a69011978ae0535e442fb913c0cc69427}} 
+\index{jevois::Engine@{jevois::Engine}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Ser\+Port}]{,  }\item[{(None)(All)(Hard)(U\+SB)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1Engine_ade317fc8331474405a551a44ad8eeb12}\label{classjevois_1_1Engine_ade317fc8331474405a551a44ad8eeb12}} 
+\index{jevois::Engine@{jevois::Engine}!itsCamera@{itsCamera}}
+\index{itsCamera@{itsCamera}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsCamera}{itsCamera}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}}$>$ jevois\+::\+Engine\+::its\+Camera\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our camera. 
+
+
+
+Definition at line 560 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_afcd8e073c7874fd7fda097d7d3971067}\label{classjevois_1_1Engine_afcd8e073c7874fd7fda097d7d3971067}} 
+\index{jevois::Engine@{jevois::Engine}!itsCurrentMapping@{itsCurrentMapping}}
+\index{itsCurrentMapping@{itsCurrentMapping}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsCurrentMapping}{itsCurrentMapping}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} jevois\+::\+Engine\+::its\+Current\+Mapping\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+当前映射，如果使用 setmapping2，则可能与 its\+Mappings 中的任何映射都不匹配 
+
+
+
+Definition at line 558 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a9cf49224e3c9b0b53b446d550d2181fd}\label{classjevois_1_1Engine_a9cf49224e3c9b0b53b446d550d2181fd}} 
+\index{jevois::Engine@{jevois::Engine}!itsDefaultMappingIdx@{itsDefaultMappingIdx}}
+\index{itsDefaultMappingIdx@{itsDefaultMappingIdx}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsDefaultMappingIdx}{itsDefaultMappingIdx}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+Engine\+::its\+Default\+Mapping\+Idx\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Index of default mapping. 
+
+
+
+Definition at line 556 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_ae0918e608af6f639810e33026ae344fb}\label{classjevois_1_1Engine_ae0918e608af6f639810e33026ae344fb}} 
+\index{jevois::Engine@{jevois::Engine}!itsGadget@{itsGadget}}
+\index{itsGadget@{itsGadget}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsGadget}{itsGadget}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}}$>$ jevois\+::\+Engine\+::its\+Gadget\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}. 
+
+Our gadget 
+
+Definition at line 562 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a5dcab54a33a3501f0ef3ab21db0c0c05}\label{classjevois_1_1Engine_a5dcab54a33a3501f0ef3ab21db0c0c05}} 
+\index{jevois::Engine@{jevois::Engine}!itsIMU@{itsIMU}}
+\index{itsIMU@{itsIMU}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsIMU}{itsIMU}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}$>$ jevois\+::\+Engine\+::its\+I\+MU\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 561 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_afb9bf8f5074f94a924d32044c8675224}\label{classjevois_1_1Engine_afb9bf8f5074f94a924d32044c8675224}} 
+\index{jevois::Engine@{jevois::Engine}!itsLoader@{itsLoader}}
+\index{itsLoader@{itsLoader}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsLoader}{itsLoader}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}}$>$ jevois\+::\+Engine\+::its\+Loader\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our module loader. 
+
+
+
+Definition at line 564 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_af2c887a173ea62307c85fe4e606fc1be}\label{classjevois_1_1Engine_af2c887a173ea62307c85fe4e606fc1be}} 
+\index{jevois::Engine@{jevois::Engine}!itsMappings@{itsMappings}}
+\index{itsMappings@{itsMappings}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsMappings}{itsMappings}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}}$>$ jevois\+::\+Engine\+::its\+Mappings\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+来自 videomappings.\+cfg 的所有映射 
+
+
+
+Definition at line 557 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a2775861063bb4eed282a519d67a2f0ad}\label{classjevois_1_1Engine_a2775861063bb4eed282a519d67a2f0ad}} 
+\index{jevois::Engine@{jevois::Engine}!itsModule@{itsModule}}
+\index{itsModule@{itsModule}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsModule}{itsModule}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1Module}{Module}}$>$ jevois\+::\+Engine\+::its\+Module\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our current module. 
+
+
+
+Definition at line 565 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_aefdb8ae7d6d2c7644bad2a7f42cd0f2d}\label{classjevois_1_1Engine_aefdb8ae7d6d2c7644bad2a7f42cd0f2d}} 
+\index{jevois::Engine@{jevois::Engine}!itsMtx@{itsMtx}}
+\index{itsMtx@{itsMtx}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsMtx}{itsMtx}}
+{\footnotesize\ttfamily std\+::timed\+\_\+mutex jevois\+::\+Engine\+::its\+Mtx\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [protected]}}
+
+
+
+Mutex to protect our internals. 
+
+
+
+Definition at line 571 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a4fa3bc6f8158671527e5aa172b06b999}\label{classjevois_1_1Engine_a4fa3bc6f8158671527e5aa172b06b999}} 
+\index{jevois::Engine@{jevois::Engine}!itsRunning@{itsRunning}}
+\index{itsRunning@{itsRunning}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsRunning}{itsRunning}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Engine\+::its\+Running\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+True when we are running. 
+
+
+
+Definition at line 567 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a1f2d50734e8faaa2d8cc368064878140}\label{classjevois_1_1Engine_a1f2d50734e8faaa2d8cc368064878140}} 
+\index{jevois::Engine@{jevois::Engine}!itsStopMainLoop@{itsStopMainLoop}}
+\index{itsStopMainLoop@{itsStopMainLoop}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsStopMainLoop}{itsStopMainLoop}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Engine\+::its\+Stop\+Main\+Loop\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flag used to stop the main loop. 
+
+
+
+Definition at line 569 of file Engine.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Engine_a38278831a46971aecd841cd954a0614c}\label{classjevois_1_1Engine_a38278831a46971aecd841cd954a0614c}} 
+\index{jevois::Engine@{jevois::Engine}!itsStreaming@{itsStreaming}}
+\index{itsStreaming@{itsStreaming}!jevois::Engine@{jevois::Engine}}
+\doxyparagraph{\texorpdfstring{itsStreaming}{itsStreaming}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Engine\+::its\+Streaming\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+True when we are streaming video. 
+
+
+
+Definition at line 568 of file Engine.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{Engine_8H}{Engine.\+H}}\item 
+include/jevois/\+Component/\mbox{\hyperlink{Component_8H}{Component.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{Engine_8C}{Engine.\+C}}\end{DoxyCompactItemize}

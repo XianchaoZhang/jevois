@@ -24,86 +24,82 @@
 
 namespace jevois
 {
-  //! Movie input, can be used as a replacement for Camera to debug algorithms using a fixed video sequence
-  /*! The movie will be looped forever to provide continual input. This is a direct wrapper around the VideoCapture
-      class of OpenCV, and it hence supports many different video file formats, and image sequences when the filename
-      contains a printf-like %d placeholder for a frame number. See OpenCV documentation for VideoCapture for more
-      details.
+  /*! Movie 将永远循环播放以提供持续的输入。这是 OpenCV VideoCapture 类的直接包装器，因此当文件名包含类似 printf 的
+       %d 占位符（表示帧号）时，它支持许多不同的视频文件格式和图像序列。有关更多详细信息，请参阅 VideoCapture 的 
+	   OpenCV 文档。
+	  
+	  请注意，影片帧将调整大小以匹配 setFormat() 指定的尺寸，并将转换为 setFormat() 中指定的像素类型。
+	  \ingroup core */
 
-      Note that the movie frames will be resized to match the dimensions specified by setFormat() and will be converted
-      to the pixel type specified in setFormat().  \ingroup core */
   class MovieInput : public VideoInput
   {
     public:
       //! Constructor, opens the movie file
       MovieInput(std::string const & filename, unsigned int const nbufs = 3);
 
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~MovieInput();
 
       //! Start streaming
       void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       void abortStream() override;
       
       //! Stop streaming
       void streamOff() override;
 
-      //! Get the next frame from the video file, possibly looping back to start if end is reached
+      //! 从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始
       void get(RawImage & img) override;
 
-      //! Check whether a second input image scaled by the JeVoisPro Platform ISP is available
-      /*! Returns false unless we are on JeVois-Pro Platform and the camera format modifier jevois::CropType::CropScale
-          is currently in use. */
+      //！检查是否有由 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 /*！除非我们在 JeVois-Pro 平台上并且相机格式修饰符
+	       jevois::CropType::CropScale 当前正在使用中，否则返回 false。 */ 
       virtual bool hasScaledImage() const override;
 
-      //! Get the next captured ISP-scaled secondary buffer
-      /*! On JeVois-Pro Platform only, the camera ISP can output 2 frames: 1) raw from sensor, 2) scaled by ISP. This
-          function is to access the ISP scaled frame. Throws if not JeVois-Pro Platform or the camera crop type is not
-          jevois::CropType::CropScale. Throws if we are not streaming or blocks until an image is available (has
-          been captured). The image img should have been allocated by the caller and will be filled in by what we
-          receive from the device here. Default implementation throws. */
-      virtual void get2(RawImage & img) override;
+      //！获取下一个捕获的 ISP 缩放辅助缓冲区
+	  /*！仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此功能用于访问 ISP 缩
+	      放的帧。如果不是 JeVois-Pro 平台或相机裁剪类型不是 jevois::CropType::CropScale，则抛出。如果我们没有流式传输
+		  或阻塞直到图像可用（已捕获），则抛出。图像 img 应该由调用者分配，并将由我们从此处的设备收到的内容填充。默认
+		  实现抛出。*/ 
+	  virtual void get2(RawImage & img) override;
 
-      //! Indicate that user processing is done with an image previously obtained via get()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled. This also invalidates the image and in particular its pixel buffer. */
-      void done(RawImage & img) override;
+      //! 表示用户处理已完成，并且之前已通过 get() 获取了图像 
+	  /*! 处理完 RawImage 数据后，应尽快在 get() 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲
+	      区无效。 */ 
+	  void done(RawImage & img) override;
 
-      //! Indicate that user processing is done with an image previously obtained via get()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled. This also invalidates the image and in particular its pixel buffer. */
-      void done2(RawImage & img) override;
+      //! 表示用户处理已完成，并且之前已通过 get() 获取了图像 
+	  /*! 处理完 RawImage 数据后，应尽快在 get() 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲
+	      区无效。 */ 
+	  void done2(RawImage & img) override;
 
-      //! Get information about a control, throw if unsupported by hardware
-      /*! In MovieInput, this just throws an std::runtime_error */
-      void queryControl(struct v4l2_queryctrl & qc) const override;
+      //! 获取有关控件的信息，如果硬件不支持则抛出 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  void queryControl(struct v4l2_queryctrl & qc) const override;
 
-      //! Get the available menu entry names for a menu-type control, throw if unsupported by hardware
-      /*! In MovieInput, this just throws an std::runtime_error */
-      void queryMenu(struct v4l2_querymenu & qm) const override;
-     
-      //! Get a control's current value, throw if unsupported by hardware
-      /*! In MovieInput, this just throws an std::runtime_error */
-      void getControl(struct v4l2_control & ctrl) const override;
-      
-      //! Set a control, throw if the hardware rejects the value
-      /*! In MovieInput, this just throws an std::runtime_error */
-      void setControl(struct v4l2_control const & ctrl) override;
+      //! 获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  void queryMenu(struct v4l2_querymenu & qm) const override; 
+	  
+	  //! 获取控件的当前值，如果硬件不支持则抛出 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  void getControl(struct v4l2_control & ctrl) const override; 
+	  
+	  //! 设置控件，如果硬件拒绝该值则抛出 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  void setControl(struct v4l2_control const & ctrl) override;
 
-      //! Set the video format and frame rate
-      /*! Video frames read from the input movie file will be rescaled (if necessary) to that format's resolution, and
-          will be converted (if necessary) to that format's pixel type. */
-      void setFormat(VideoMapping const & m) override;
+      //! 设置视频格式和帧速率 
+	  /*! 从输入影片文件读取的视频帧将重新缩放（如有必要）为该格式的分辨率，并将转换（如有必要）为该格式的像素类型。 */ 
+	  void setFormat(VideoMapping const & m) override;
 
     protected:
-      cv::VideoCapture itsCap; //!< Our OpenCV video capture, works on movie and image files too
-      cv::Mat itsRawFrame; //!< Raw OpenCV frame last captured, before any resizing or conversion
-      std::shared_ptr<VideoBuf> itsBuf; //!< Our single video buffer for the main frame
-      std::shared_ptr<VideoBuf> itsBuf2; //!< Our single video buffer for the second (processing) frame
-      VideoMapping itsMapping; //!< Our current video mapping, we resize the input to the mapping's camera dims
+      cv::VideoCapture itsCap; //!< 我们的 OpenCV 视频捕获，也适用于电影和图像文件
+      cv::Mat itsRawFrame; //!< 在任何调整大小或转换之前最后捕获的原始 OpenCV 帧
+      std::shared_ptr<VideoBuf> itsBuf; //!< 我们用于主帧的单个视频缓冲区
+      std::shared_ptr<VideoBuf> itsBuf2; //!< 我们用于第二帧（处理帧）的单个视频缓冲区
+      VideoMapping itsMapping; //!< 我们当前的视频映射，我们将输入调整为映射的相机大小
   };
   
 } // namespace jevois

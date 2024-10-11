@@ -29,9 +29,9 @@ jevois::VideoBuf::VideoBuf(int const fd, size_t const length, unsigned int offse
 {
   if (itsFd > 0)
   {
-    // mmap the buffer to any address:
+    // 将缓冲区映射到任意地址：
 #ifdef JEVOIS_PLATFORM_A33
-    // PROT_EXEC needed for clearcache() to work:
+    // PROT_EXEC 需要使 clearcache() 工作：
     itsAddr = mmap(NULL, length, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_SHARED, fd, offset);
 #else
     itsAddr = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, offset);
@@ -60,7 +60,7 @@ jevois::VideoBuf::~VideoBuf()
   if (itsDmaBufFd > 0) close(itsDmaBufFd);
 }
 
-// ARMv7 code that only runs on JeVois-A33 platform
+// 仅在 JeVois-A33 平台上运行的 ARMv7 代码
 void clearcache(char* begin, char *end)
 {
 #ifdef JEVOIS_PLATFORM_A33
@@ -87,15 +87,15 @@ void jevois::VideoBuf::sync()
 #ifdef JEVOIS_PLATFORM_A33
   if (itsFd > 0)
   {
-    // This does nothing useful for us:
+    // 这对我们没有任何用处：
     // msync(itsAddr, itsLength, MS_SYNC | MS_INVALIDATE);
 
-    // This works ok but a bit brutal:
+    // 这个工作正常但是有点残酷：
     std::ofstream ofs("/proc/sys/vm/drop_caches");
     if (ofs.is_open() == false) { LERROR("Cannot flush cache -- IGNORED"); return; }
     ofs << "1" << std::endl;
 
-    // Here is some arm-specific code (only works on JeVois-A33 platform):
+    // 这里是一些特定于 arm 的代码（仅适用于 JeVois-A33 平台）：
     clearcache(reinterpret_cast<char *>(itsAddr), reinterpret_cast<char *>(itsAddr) + itsLength);
   }
 #endif

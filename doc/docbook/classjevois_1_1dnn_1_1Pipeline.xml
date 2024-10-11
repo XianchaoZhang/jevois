@@ -1,0 +1,540 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1Pipeline">
+<title>jevois::dnn::Pipeline Class Reference</title>
+<indexterm><primary>jevois::dnn::Pipeline</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/Pipeline.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经处理管道 </para>
+
+
+
+<para>JeVois 中的神经处理管道包括：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>pre-processing 输入图像以提取一个或多个 blobs，用作深度神经网络的输入 tensors</para>
+</listitem><listitem>
+<para>通过深度网络处理输入 blob 并获得输出 blob</para>
+</listitem><listitem>
+<para>post-processing 输出 blob，显示结果并发送串行消息</para>
+</listitem></itemizedlist>
+</para>
+
+<para>Pipline 通常通过解析 YAML 配置文件（zoo 文件）来配置，该文件确定要使用哪种类型的 pre-processing、network 和 post-processing，并为其设置参数。 </para>
+<para>
+Definition at line 133 of file Pipeline.H.</para>
+Inheritance diagram for jevois::dnn::Pipeline:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1Pipeline__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::Pipeline:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1Pipeline__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a9060d07b8b22587c002870232a0d0bbd">Pipeline</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a7e6cf1725a38e1c6ffbe09d73c464c40">~Pipeline</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a809d7e4b90b9b3e920888aaad7bd1c5d">ready</link> () const</para>
+
+<para>当 preproc、net、postproc 三者都准备就绪时返回 true </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a6aaf351c8508d34b2c6fbf9acf8b927f">process</link> (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;inimg, <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper, bool idle=false)</para>
+
+<para>处理输入图像，将结果发送到 serial/image/gui </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1aaa13a44e7dba5671ed17d6de6e8f3fc0">freeze</link> (bool doit)</para>
+
+<para>冻结/解冻运行时用户不应更改的参数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1ae13fed0f9c31f30edcf07e9a5abeed81">postInit</link> () override</para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a2afcca8091eba25f532cdaac0916c55e">preUninit</link> () override</para>
+
+<para>Called before all sub-Components are uninit()ed. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1aced2d29527e2979b29ac558f6a348727">reloadZoo</link> (std::string const &amp;root, std::string const &amp;filt, std::string const &amp;zoofile)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a7e0181b12741aa704c717a59f7162744">onParamChange</link> (pipeline::zooroot const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a7e84f7a4467a4ceb83e10c1071c343d6">onParamChange</link> (pipeline::zoo const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1aeb4f05c6e0d1fcb0ca7cfd27798aad41">onParamChange</link> (pipeline::filter const &amp;param, pipeline::Filter const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a74ba915e5837127ffe03f81b20fdcf87">onParamChange</link> (pipeline::pipe const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a4f51ed15546cdbe821e11b055b8e22d1">onParamChange</link> (pipeline::nettype const &amp;param, pipeline::NetType const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a98ccc8002d5c409cfd5ca8f54c0bf601">onParamChange</link> (pipeline::preproc const &amp;param, pipeline::PreProc const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a2afd12795bea5d54115c4ba8d85e5339">onParamChange</link> (pipeline::postproc const &amp;param, pipeline::PostProc const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a6e460d02f8cc184fa0a2a2361df64228">onParamChange</link> (pipeline::benchmark const &amp;param, bool const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a0f4103dc49bd7d1ade442066484c7157">showInfo</link> (std::vector&lt; std::string &gt; const &amp;info, <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper, bool ovl, bool idle)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a4545b6c2858eeb6be7236acb8f72b431">asyncNetWait</link> ()</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a0c0b17ccff7dad5f546bb04cdce144a1">checkAsyncNetComplete</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a34d45d6e2b6c48de7672f9594ebf5032">showDataPeekWindow</link> (<link linkend="_classjevois_1_1GUIhelper">jevois::GUIhelper</link> *helper, bool refresh)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> &gt; <link linkend="_classjevois_1_1dnn_1_1Pipeline_1adc7615f7d5a3f8a82ec27c317bc27332">itsPreProcessor</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1Network">Network</link> &gt; <link linkend="_classjevois_1_1dnn_1_1Pipeline_1a181c123110a952cb8454e9d900a14d50">itsNetwork</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1PostProcessor">PostProcessor</link> &gt; <link linkend="_classjevois_1_1dnn_1_1Pipeline_1acd64d915faeeb788d76b567ea8aff902">itsPostProcessor</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1afb712cc154c66256e04c3216209937f7">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (zooroot, std::string, &quot;Path where to find zoo files (.yml). &quot; &quot;If not absolute, it is relative to this module&apos;s path&quot;, JEVOIS_SHARE_PATH &quot;/dnn&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1aae3562edcd5dccb475ed3b40ad93b72d">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (zoo, std::string, &quot;Filename for neural network zoo file (.yml). &quot; &quot;If not absolute, it is relative to zooroot&quot;, &quot;models.yml&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a9dc5d8db42ecd9d38108147dc65b7f56">JEVOIS_DEFINE_ENUM_CLASS</link> (Filter,(All)(OpenCV)(TPU)(NPU)(VPU)(VPUX)(NPUX)(SPU)(ORT))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a2144c097fa7ce9fd89546139a2f5fad3">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (filter, Filter, &quot;Filter to possibly only show as options in &quot; &quot;the &apos;pipe&apos; parameter some class of models from the zoo&quot;, Filter::All, Filter_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a91301848dc19798667ae9fb9bd503900">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (pipe, std::string, &quot;Pipeline to use, which should correspond to a &quot; &quot;top-level entry in the zoo file. <link linkend="_classjevois_1_1dnn_1_1Network">Network</link> execution types are: OpenCV: &quot; &quot;on CPU, NPU: on JeVois NPU accelerator, TPU: on Coral Edge TPU if &quot; &quot;available, VPU: on MyriadX VPU if available, NPUX: on NPU via TimVX &quot; &quot;OpenCV extension, VPUX: on CPU via ARM-Compute OpenVino emulation &quot; &quot;of VPU, and SPU: on Hailo8 SPU if available.&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1ac6950659d78b76b9ad79c5e35194a99c">JEVOIS_DEFINE_ENUM_CLASS</link> (PreProc,(Blob)(Python))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a00d16c0555a750869bfcad0038f136c3">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (preproc, PreProc, &quot;Pre-Processor to use, usually set automatically &quot; &quot;by selecting a pipeline from the zoo file&quot;, PreProc::Blob, PreProc_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1ae7416f7e2da7ccb1b0915887f5b89cb0">JEVOIS_DEFINE_ENUM_CLASS</link> (NetType,(OpenCV)(ORT)(NPU)(TPU)(SPU)(Python))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a03f6a5f40475764e249d8375ca331adc">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (nettype, NetType, &quot;Network runtime framework to use, usually set &quot; &quot;automatically by selecting a pipeline from the zoo file&quot;, NetType::OpenCV, NetType_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1aa81149cffa98351c8e8c06f1a98e204b">JEVOIS_DEFINE_ENUM_CLASS</link> (PostProc,(Classify)(Detect)(Segment)(YuNet)(Python)(Stub))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1ab17337f02c31aad5d1e734ecaf53a960">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (postproc, PostProc, &quot;Post-Processor to use, usually set automatically &quot; &quot;by selecting a pipeline from the zoo file&quot;, PostProc::Classify, PostProc_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a93abdf9c2a71a05e87c3339112e68b97">JEVOIS_DEFINE_ENUM_CLASS</link> (Processing,(Sync)(Async))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a1ed426522cc3c569ca4597b83335578f">JEVOIS_DECLARE_PARAMETER</link> (processing, Processing, &quot;Type of processing: Sync runs pre-processing, &quot; &quot;network, and post-processing sequentially for every frame. Use for fast &quot; &quot;networks only, otherwise it will slow down the GUI... Async runs the network in &quot; &quot;a thread and should be used for networks slower than the camera framerate.&quot;, Processing::Async, Processing_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1af382e701c6073913619f6a41ec5baf5f">JEVOIS_DECLARE_PARAMETER</link> (overlay, bool, &quot;Show some pipeline info as an overlay over output or GUI video&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1ae93d2289ac0ab27cffa5c7a8c6575e6e">JEVOIS_DECLARE_PARAMETER</link> (paramwarn, bool, &quot;Issue warning if parameters are specified in the zoo file for &quot; &quot;a pipeline, but the pipeline&apos;s component is not using them. Warnings appear &quot; &quot;in the console when the pipeline is loaded.&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1a1bb98c6b0d951fac28e487a070eec3f4">JEVOIS_DECLARE_PARAMETER</link> (statsfile, std::string, &quot;Append pre/net/post timing statistics in HTML table format &quot; &quot;to the specified file if not empty. If path is relative, it is to &quot; JEVOIS_SHARE_PATH, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Pipeline_1af95960f9995022a4f6ca9efabf6ea1e9">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (benchmark, bool, &quot;Cycle through all networks specified by filter and, &quot; &quot;for each, run it for a while and append pre/net/post timing statistics &quot; &quot;in HTML table format to &quot; JEVOIS_SHARE_PATH &quot;/benchmark.html&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a9060d07b8b22587c002870232a0d0bbd"/>    <section>
+    <title>Pipeline()</title>
+<indexterm><primary>Pipeline</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>Pipeline</secondary></indexterm>
+<para><computeroutput>jevois::dnn::Pipeline::Pipeline (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 104 of file Pipeline.C.</para>
+<para>
+References jevois::getNumInstalledNPUs(), jevois::getNumInstalledSPUs(), jevois::getNumInstalledTPUs(), jevois::getNumInstalledVPUs(), and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a7e6cf1725a38e1c6ffbe09d73c464c40"/>    <section>
+    <title>~Pipeline()</title>
+<indexterm><primary>~Pipeline</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>~Pipeline</secondary></indexterm>
+<para><computeroutput>jevois::dnn::Pipeline::~Pipeline ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 153 of file Pipeline.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a4545b6c2858eeb6be7236acb8f72b431"/>    <section>
+    <title>asyncNetWait()</title>
+<indexterm><primary>asyncNetWait</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>asyncNetWait</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::asyncNetWait ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 160 of file Pipeline.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a0c0b17ccff7dad5f546bb04cdce144a1"/>    <section>
+    <title>checkAsyncNetComplete()</title>
+<indexterm><primary>checkAsyncNetComplete</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>checkAsyncNetComplete</secondary></indexterm>
+<para><computeroutput>bool jevois::dnn::Pipeline::checkAsyncNetComplete ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 641 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1aaa13a44e7dba5671ed17d6de6e8f3fc0"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::freeze (bool doit)</computeroutput></para><para>
+
+<para>冻结/解冻运行时用户不应更改的参数 </para>
+</para>
+<para>
+Definition at line 127 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a6e460d02f8cc184fa0a2a2361df64228"/>    <section>
+    <title>onParamChange()<computeroutput>[1/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::benchmark const &amp; param, bool const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 192 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1aeb4f05c6e0d1fcb0ca7cfd27798aad41"/>    <section>
+    <title>onParamChange()<computeroutput>[2/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::filter const &amp; param, pipeline::Filter const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a4f51ed15546cdbe821e11b055b8e22d1"/>    <section>
+    <title>onParamChange()<computeroutput>[3/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::nettype const &amp; param, pipeline::NetType const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 543 of file Pipeline.C.</para>
+<para>
+References LFATAL, and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a74ba915e5837127ffe03f81b20fdcf87"/>    <section>
+    <title>onParamChange()<computeroutput>[4/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::pipe const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 333 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a2afd12795bea5d54115c4ba8d85e5339"/>    <section>
+    <title>onParamChange()<computeroutput>[5/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::postproc const &amp; param, pipeline::PostProc const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 602 of file Pipeline.C.</para>
+<para>
+References LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a98ccc8002d5c409cfd5ca8f54c0bf601"/>    <section>
+    <title>onParamChange()<computeroutput>[6/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::preproc const &amp; param, pipeline::PreProc const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 523 of file Pipeline.C.</para>
+<para>
+References LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a7e84f7a4467a4ceb83e10c1071c343d6"/>    <section>
+    <title>onParamChange()<computeroutput>[7/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::zoo const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 207 of file Pipeline.C.</para>
+<para>
+References jevois::absolutePath(), and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a7e0181b12741aa704c717a59f7162744"/>    <section>
+    <title>onParamChange()<computeroutput>[8/8]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::onParamChange (pipeline::zooroot const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 184 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1ae13fed0f9c31f30edcf07e9a5abeed81"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">jevois::Component</link>.</para>
+<para>
+Definition at line 139 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a2afcca8091eba25f532cdaac0916c55e"/>    <section>
+    <title>preUninit()</title>
+<indexterm><primary>preUninit</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>preUninit</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::preUninit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called before all sub-Components are uninit()ed. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1aa2389e9024d8157b3025bced8bb6c95c">jevois::Component</link>.</para>
+<para>
+Definition at line 146 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a6aaf351c8508d34b2c6fbf9acf8b927f"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::process (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; inimg, <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper, bool idle = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>处理输入图像，将结果发送到 serial/image/gui </para>
+</para>
+
+<para>如果网络未 ready，则不会进行任何处理。当 helper 不为null时（即使用 GUI 显示），当 idle 为 true 时隐藏信息 窗口。该函数捕获所有异常并报告它们。 </para>
+<para>
+Definition at line 656 of file Pipeline.C.</para>
+<para>
+References jevois::absolutePath(), jevois::async(), jevois::GUIhelper::itext(), JEVOIS_SHARE_PATH, jevois::join(), LINFO, jevois::replaceAll(), jevois::GUIhelper::reportAndIgnoreException(), jevois::GUIhelper::reportError(), jevois::secs2str(), jevois::dnn::shapestr(), jevois::split(), jevois::warnAndIgnoreException(), jevois::yuyv::White, and jevois::rawimage::writeText().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a809d7e4b90b9b3e920888aaad7bd1c5d"/>    <section>
+    <title>ready()</title>
+<indexterm><primary>ready</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>ready</secondary></indexterm>
+<para><computeroutput>bool jevois::dnn::Pipeline::ready ( ) const</computeroutput></para><para>
+
+<para>当 preproc、net、postproc 三者都准备就绪时返回 true </para>
+</para>
+<para>
+Definition at line 635 of file Pipeline.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1aced2d29527e2979b29ac558f6a348727"/>    <section>
+    <title>reloadZoo()</title>
+<indexterm><primary>reloadZoo</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>reloadZoo</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::reloadZoo (std::string const &amp; root, std::string const &amp; filt, std::string const &amp; zoofile)<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a34d45d6e2b6c48de7672f9594ebf5032"/>    <section>
+    <title>showDataPeekWindow()</title>
+<indexterm><primary>showDataPeekWindow</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>showDataPeekWindow</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::showDataPeekWindow (<link linkend="_classjevois_1_1GUIhelper">jevois::GUIhelper</link> * helper, bool refresh)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1032 of file Pipeline.C.</para>
+<para>
+References jevois::GUIhelper::combo(), jevois::GUIhelper::reportError(), jevois::dnn::shapestr(), jevois::to_string(), and jevois::GUIhelper::toggleButton().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a0f4103dc49bd7d1ade442066484c7157"/>    <section>
+    <title>showInfo()</title>
+<indexterm><primary>showInfo</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>showInfo</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Pipeline::showInfo (std::vector&lt; std::string &gt; const &amp; info, <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper, bool ovl, bool idle)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 997 of file Pipeline.C.</para>
+<para>
+References jevois::stringStartsWith(), jevois::yuyv::White, and jevois::rawimage::writeText().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1af382e701c6073913619f6a41ec5baf5f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (overlay , bool , &quot;Show some pipeline info as an overlay over output or GUI video&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1ae93d2289ac0ab27cffa5c7a8c6575e6e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (paramwarn , bool , &quot;Issue warning if parameters are specified in the zoo file for &quot; &quot;a pipeline, but the pipeline &apos;s component is not using them. Warnings appear &quot; &quot;in the console when the pipeline is loaded.&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a1ed426522cc3c569ca4597b83335578f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (processing , Processing , &quot;Type of processing: Sync runs pre- processing, &quot; &quot; network, and post-processing sequentially for every frame. Use for fast &quot; &quot;networks only, otherwise it will slow down the GUI... Async runs the network in &quot; &quot;a thread and should be used for networks slower than the camera framerate.&quot; , Processing::Async , Processing_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a1bb98c6b0d951fac28e487a070eec3f4"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (statsfile , std::string , &quot;Append pre/net/post timing statistics in HTML table format &quot; &quot;to the specified file if not empty. If path is relative, it is to &quot; JEVOIS_SHARE_PATH, &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1af95960f9995022a4f6ca9efabf6ea1e9"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (benchmark , bool , &quot;Cycle through all networks specified by filter and, &quot; &quot;for each, run it for a while and append pre/net/post timing statistics &quot; &quot;in HTML table format to &quot; JEVOIS_SHARE_PATH &quot;/benchmark.html&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a2144c097fa7ce9fd89546139a2f5fad3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (filter , Filter , &quot;Filter to possibly only show as options in &quot; &quot;the &apos;pipe&apos; parameter some class of models from the zoo&quot; , Filter::All , Filter_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a03f6a5f40475764e249d8375ca331adc"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[3/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (nettype , NetType , &quot;Network runtime framework to use, usually set &quot; &quot;automatically by selecting a pipeline from the zoo file&quot; , NetType::OpenCV , NetType_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a91301848dc19798667ae9fb9bd503900"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[4/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (pipe , std::string , &quot;Pipeline to use, which should correspond to a &quot; &quot;top-level entry in the zoo file. <link linkend="_classjevois_1_1dnn_1_1Network">Network</link> execution types are:OpenCV:&quot; &quot;on CPU, NPU:on JeVois NPU accelerator, TPU:on Coral Edge TPU if &quot; &quot; available, VPU:on MyriadX VPU if available, NPUX:on NPU via TimVX &quot; &quot;OpenCV extension, VPUX:on CPU via ARM-Compute OpenVino emulation &quot; &quot;of VPU, and SPU:on Hailo8 SPU if available.&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1ab17337f02c31aad5d1e734ecaf53a960"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[5/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (postproc , PostProc , &quot;Post-Processor to use, usually set automatically &quot; &quot;by selecting a pipeline from the zoo file&quot; , PostProc::Classify , PostProc_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a00d16c0555a750869bfcad0038f136c3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[6/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (preproc , PreProc , &quot;Pre-Processor to use, usually set automatically &quot; &quot;by selecting a pipeline from the zoo file&quot; , PreProc::Blob , PreProc_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1aae3562edcd5dccb475ed3b40ad93b72d"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[7/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (zoo , std::string , &quot;Filename for neural network zoo file (.yml). &quot; &quot;If not absolute, it is relative to zooroot&quot; , &quot;models.yml&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1afb712cc154c66256e04c3216209937f7"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[8/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (zooroot , std::string , &quot;Path where to find zoo files (.yml). &quot; &quot;If not absolute, it is relative to this module &apos;s path&quot; , <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> &quot;/dnn&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a9dc5d8db42ecd9d38108147dc65b7f56"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (Filter , (All)(OpenCV)(TPU)(NPU)(VPU)(VPUX)(NPUX)(SPU)(ORT) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1ae7416f7e2da7ccb1b0915887f5b89cb0"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (NetType , (OpenCV)(ORT)(NPU)(TPU)(SPU)(Python) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1aa81149cffa98351c8e8c06f1a98e204b"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (PostProc , (Classify)(Detect)(Segment)(YuNet)(Python)(Stub) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1ac6950659d78b76b9ad79c5e35194a99c"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (PreProc , (Blob)(Python) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a93abdf9c2a71a05e87c3339112e68b97"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (Processing , (Sync)(Async) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1a181c123110a952cb8454e9d900a14d50"/>    <section>
+    <title>itsNetwork</title>
+<indexterm><primary>itsNetwork</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>itsNetwork</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1dnn_1_1Network">Network</link>&gt; jevois::dnn::Pipeline::itsNetwork<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 162 of file Pipeline.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1acd64d915faeeb788d76b567ea8aff902"/>    <section>
+    <title>itsPostProcessor</title>
+<indexterm><primary>itsPostProcessor</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>itsPostProcessor</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1dnn_1_1PostProcessor">PostProcessor</link>&gt; jevois::dnn::Pipeline::itsPostProcessor<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 163 of file Pipeline.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Pipeline_1adc7615f7d5a3f8a82ec27c317bc27332"/>    <section>
+    <title>itsPreProcessor</title>
+<indexterm><primary>itsPreProcessor</primary><secondary>jevois::dnn::Pipeline</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Pipeline</primary><secondary>itsPreProcessor</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link>&gt; jevois::dnn::Pipeline::itsPreProcessor<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 161 of file Pipeline.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_Pipeline_8H">Pipeline.H</link>src/jevois/DNN/<link linkend="_Pipeline_8C">Pipeline.C</link></section>
+</section>

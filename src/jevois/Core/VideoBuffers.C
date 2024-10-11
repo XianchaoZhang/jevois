@@ -38,7 +38,7 @@ jevois::VideoBuffers::VideoBuffers(char const * name, int const fd, v4l2_buf_typ
   XIOCTL(fd, VIDIOC_REQBUFS, &req);
   FDLDEBUG("Reqbufs for " << num << " buffers returned " << req.count << " buffers");
   
-  // Allocate VideoBuf and MMAP the buffers:
+  // 分配 VideoBuf 并 MMAP 缓冲区：
   for (unsigned int i = 0; i < req.count; ++i)
   {
     struct v4l2_buffer buf = { };
@@ -46,7 +46,7 @@ jevois::VideoBuffers::VideoBuffers(char const * name, int const fd, v4l2_buf_typ
     buf.type = type;
     buf.memory = V4L2_MEMORY_MMAP;
     buf.index = i;
-    // Note: guvcview adds: buf.flags=V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC
+    // 注意：guvcview 添加： buf.flags=V4L2_BUF_FLAG_TIMESTAMP_MONOTONIC 
     if (type == V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE)
     {
       // In multi-plane mode, allocate a struct for the planes:
@@ -65,7 +65,7 @@ jevois::VideoBuffers::VideoBuffers(char const * name, int const fd, v4l2_buf_typ
     int dmafd = -1;
 
 #ifdef JEVOIS_PRO
-    // Try to get a dma_buf fd, if kernel driver supports it:
+    // 如果内核驱动程序支持，则尝试获取 dma_buf fd：
     struct v4l2_exportbuffer ex_buf = { };
     ex_buf.type = type;
     ex_buf.index = i;
@@ -104,7 +104,7 @@ jevois::VideoBuffers::~VideoBuffers()
   
   // Then free all buffers at the device level:
   struct v4l2_requestbuffers req = { };
-  req.count = 0;  // request 0 buffers to free all the previously requested ones
+  req.count = 0;  // 请求 0 个缓冲区以释放所有先前请求的缓冲区
   req.type = itsType;
   req.memory = V4L2_MEMORY_MMAP;
   try { XIOCTL_QUIET(itsFd, VIDIOC_REQBUFS, &req); }
@@ -210,7 +210,7 @@ void jevois::VideoBuffers::dqbufall()
   struct v4l2_buffer buf;
   int retry = 100;
   
-  // Loop until all are dequeued; we may need to sleep a bit if some buffers are still in use by the hardware:
+  // 循环直到所有缓冲区出队；如果某些缓冲区仍在被硬件使用，我们可能需要稍微休眠一下：
   while (itsNqueued && retry-- >= 0)
   {
     try { dqbuf(buf); } catch (...) { std::this_thread::sleep_for(std::chrono::milliseconds(5)); }

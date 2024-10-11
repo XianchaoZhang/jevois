@@ -1,0 +1,287 @@
+\hypertarget{classjevois_1_1StepRange}{}\doxysubsection{jevois\+::Step\+Range$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1StepRange}\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Types/\+Step\+Range.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Step\+Range$<$ T $>$}
+
+具有 step 的通用 range 类 
+
+\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 类用于表示从 \mbox{[}min .. (step) .. max\mbox{]} 的范围
+
+有效值为 min、min+step、min+2$\ast$step、min+3$\ast$step、...max。请注意，即使 max 不等于某个整数 N 的 min+\+N$\ast$step，它也是有效值。 请注意，T 必须是数字类型（可以转换为双精度）。如果 step 不是正数或零，则抛出异常。
+
+因为 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 通常仅用于有限的特定目的（例如，定义 video4linux 帧抓取器中的控件的参数），所以提供的接口很少（比 \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}} 的接口有限得多）。 
+
+Definition at line 68 of file Step\+Range.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1StepRange_aaf72c1fdf210cac5bd34a2295f1e6c46}{Step\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, range is \mbox{[}0 .. (0) .. 0\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StepRange_a02fa0d9fd399445cbf5616454ba15f3e}{Step\+Range}} (T const mini, T const stepi, T const maxi)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StepRange_a2370823cc7c84165afb49a31bfb21edf}{Step\+Range}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&other)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StepRange_a398a90d5597eba6e5953437fe63f8282}{Step\+Range}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{classjevois_1_1StepRange_aaa7b5a3ed72f4df16ded3be928b5977e}{Step\+Range}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ U $>$ const \&other)
+\begin{DoxyCompactList}\small\item\em 复制转换构造函数，内部使用 \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert$<$\+T,\+U$>$}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1StepRange_aad33ee13355a2369f9534f970b095020}{operator=}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&other)=default
+\begin{DoxyCompactList}\small\item\em Assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1StepRange_a89bd63e3a1f702525b0e30a6bdf0c43a}{operator=}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classjevois_1_1StepRange_aa9ca8925eab812bbbfe4f1d72454bdfc}{min}} () const
+\begin{DoxyCompactList}\small\item\em Return the minimum value. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classjevois_1_1StepRange_a24603a420c864bba6063d65cdd9d8d76}{step}} () const
+\begin{DoxyCompactList}\small\item\em Return the step value. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classjevois_1_1StepRange_ab61fcb26f30742a0af5b1855dd9ff5b4}{max}} () const
+\begin{DoxyCompactList}\small\item\em Return the maximum value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1StepRange_a83587ed8cfd0dd795a3f61f3a4fbd52c}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Return whether \mbox{\hyperlink{classjevois_1_1StepRange_aa9ca8925eab812bbbfe4f1d72454bdfc}{min()}} == \mbox{\hyperlink{classjevois_1_1StepRange_ab61fcb26f30742a0af5b1855dd9ff5b4}{max()}} \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1StepRange_a56b84f46c8f0bf3a8863ef0ddfb4f789}{is\+Value\+Valid}} (T const val) const
+\begin{DoxyCompactList}\small\item\em 如果值有效则返回 true (i.\+e., it is min, min+step, min+step$\ast$2, ... or max) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::ostream \& \mbox{\hyperlink{classjevois_1_1StepRange_a1a0eecc2c5d19573abced21e6c4ede5d}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&r)
+\begin{DoxyCompactList}\small\item\em Stream out as \char`\"{}min...(step)...\+max\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::istream \& \mbox{\hyperlink{classjevois_1_1StepRange_abaad3c4bc2cb1b136f1c0e98c6b48309}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&r)
+\begin{DoxyCompactList}\small\item\em Stream in as \char`\"{}min...(step)...\+max\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classjevois_1_1StepRange_a6c1f30523aae30079083d974e8013600}{param\+Val\+To\+String}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em Machine-\/readable output to a string, for use in jevois\+::\+Parameter\+: outputs {\ttfamily min}...step...max. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classjevois_1_1StepRange_a4ec79d67cb36a2611b5d529b9ea34f5a}{param\+String\+To\+Val}} (std\+::string const \&valstring, \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em Machine-\/readable input from a string, for use in jevois\+::\+Parameter\+: reads {\ttfamily min}...step...max. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classjevois_1_1StepRange_a2ce71b97c1e3e05e86d4beb5df0f0892}{operator==}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&range1, \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&range2)
+\begin{DoxyCompactList}\small\item\em Equality test\+: Step\+Range$<$\+T$>$ == Step\+Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classjevois_1_1StepRange_a36e43c77bb93699fd3393dad4a3cfc17}{operator!=}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&range1, \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&range2)
+\begin{DoxyCompactList}\small\item\em Inequality test\+: Step\+Range$<$\+T$>$ != Step\+Range$<$\+T$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1StepRange_aaf72c1fdf210cac5bd34a2295f1e6c46}\label{classjevois_1_1StepRange_aaf72c1fdf210cac5bd34a2295f1e6c46}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!StepRange@{StepRange}}
+\index{StepRange@{StepRange}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{StepRange()}{StepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Default constructor, range is \mbox{[}0 .. (0) .. 0\mbox{]}. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a02fa0d9fd399445cbf5616454ba15f3e}\label{classjevois_1_1StepRange_a02fa0d9fd399445cbf5616454ba15f3e}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!StepRange@{StepRange}}
+\index{StepRange@{StepRange}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{StepRange()}{StepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} (\begin{DoxyParamCaption}\item[{T const}]{mini,  }\item[{T const}]{stepi,  }\item[{T const}]{maxi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a2370823cc7c84165afb49a31bfb21edf}\label{classjevois_1_1StepRange_a2370823cc7c84165afb49a31bfb21edf}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!StepRange@{StepRange}}
+\index{StepRange@{StepRange}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{StepRange()}{StepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a398a90d5597eba6e5953437fe63f8282}\label{classjevois_1_1StepRange_a398a90d5597eba6e5953437fe63f8282}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!StepRange@{StepRange}}
+\index{StepRange@{StepRange}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{StepRange()}{StepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Move constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_aaa7b5a3ed72f4df16ded3be928b5977e}\label{classjevois_1_1StepRange_aaa7b5a3ed72f4df16ded3be928b5977e}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!StepRange@{StepRange}}
+\index{StepRange@{StepRange}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{StepRange()}{StepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename U $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ U $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+复制转换构造函数，内部使用 \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert$<$\+T,\+U$>$}} 
+
+请注意，此构造函数是 {\itshape explicit} 的，即您需要显式提及它。这是为了避免在程序员不知情的情况下发生转换。例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} myFunc(\mbox{\hyperlink{classjevois_1_1StepRange}{jevois::StepRange<float>}} \textcolor{keyword}{const} \& rng) \{ ... \}}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1StepRange}{jevois::StepRange<int>}} r1(0, 5, 100);}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1StepRange}{jevois::StepRange<float>}} r2(r1); \textcolor{comment}{// ok, explicit constructor call}}
+\DoxyCodeLine{myFunc(r2);  \textcolor{comment}{// ok, no conversion necessary}}
+\DoxyCodeLine{\textcolor{comment}{//myFunc(r1) // NO: 将 StepRange<int> 传递给接受 StepRange<float> 参数的函数编译失败}}
+\DoxyCodeLine{myFunc(\mbox{\hyperlink{classjevois_1_1StepRange}{jevois::StepRange<float>}}(r1)); \textcolor{comment}{// ok, nice and explicit; 并且您可以首先考虑 r1 是否应该是一个 }}
+\DoxyCodeLine{                                \textcolor{comment}{// StepRange<float>，这样您就不会浪费 CPU 进行这种转换（而不是只是没有意识到浪费）}}
+\end{DoxyCode}
+ 
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1StepRange_a83587ed8cfd0dd795a3f61f3a4fbd52c}\label{classjevois_1_1StepRange_a83587ed8cfd0dd795a3f61f3a4fbd52c}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return whether \mbox{\hyperlink{classjevois_1_1StepRange_aa9ca8925eab812bbbfe4f1d72454bdfc}{min()}} == \mbox{\hyperlink{classjevois_1_1StepRange_ab61fcb26f30742a0af5b1855dd9ff5b4}{max()}} 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a56b84f46c8f0bf3a8863ef0ddfb4f789}\label{classjevois_1_1StepRange_a56b84f46c8f0bf3a8863ef0ddfb4f789}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!isValueValid@{isValueValid}}
+\index{isValueValid@{isValueValid}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{isValueValid()}{isValueValid()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::is\+Value\+Valid (\begin{DoxyParamCaption}\item[{T const}]{val }\end{DoxyParamCaption}) const}
+
+
+
+如果值有效则返回 true (i.\+e., it is min, min+step, min+step$\ast$2, ... or max) 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_ab61fcb26f30742a0af5b1855dd9ff5b4}\label{classjevois_1_1StepRange_ab61fcb26f30742a0af5b1855dd9ff5b4}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!max@{max}}
+\index{max@{max}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T\& \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the maximum value. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_aa9ca8925eab812bbbfe4f1d72454bdfc}\label{classjevois_1_1StepRange_aa9ca8925eab812bbbfe4f1d72454bdfc}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!min@{min}}
+\index{min@{min}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T\& \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the minimum value. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a89bd63e3a1f702525b0e30a6bdf0c43a}\label{classjevois_1_1StepRange_a89bd63e3a1f702525b0e30a6bdf0c43a}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$T$>$\& \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Move assignment. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_aad33ee13355a2369f9534f970b095020}\label{classjevois_1_1StepRange_aad33ee13355a2369f9534f970b095020}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$T$>$\& \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Assignment. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a24603a420c864bba6063d65cdd9d8d76}\label{classjevois_1_1StepRange_a24603a420c864bba6063d65cdd9d8d76}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!step@{step}}
+\index{step@{step}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T\& \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$\+::step (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the step value. 
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1StepRange_a36e43c77bb93699fd3393dad4a3cfc17}\label{classjevois_1_1StepRange_a36e43c77bb93699fd3393dad4a3cfc17}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{range1,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{range2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Inequality test\+: Step\+Range$<$\+T$>$ != Step\+Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a1a0eecc2c5d19573abced21e6c4ede5d}\label{classjevois_1_1StepRange_a1a0eecc2c5d19573abced21e6c4ede5d}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Stream out as \char`\"{}min...(step)...\+max\char`\"{}. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a2ce71b97c1e3e05e86d4beb5df0f0892}\label{classjevois_1_1StepRange_a2ce71b97c1e3e05e86d4beb5df0f0892}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{range1,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{range2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Equality test\+: Step\+Range$<$\+T$>$ == Step\+Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_abaad3c4bc2cb1b136f1c0e98c6b48309}\label{classjevois_1_1StepRange_abaad3c4bc2cb1b136f1c0e98c6b48309}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::istream \& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Stream in as \char`\"{}min...(step)...\+max\char`\"{}. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a4ec79d67cb36a2611b5d529b9ea34f5a}\label{classjevois_1_1StepRange_a4ec79d67cb36a2611b5d529b9ea34f5a}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!paramStringToVal@{paramStringToVal}}
+\index{paramStringToVal@{paramStringToVal}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{paramStringToVal()}{paramStringToVal()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void param\+String\+To\+Val (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{valstring,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Machine-\/readable input from a string, for use in jevois\+::\+Parameter\+: reads {\ttfamily min}...step...max. 
+
+\mbox{\Hypertarget{classjevois_1_1StepRange_a6c1f30523aae30079083d974e8013600}\label{classjevois_1_1StepRange_a6c1f30523aae30079083d974e8013600}} 
+\index{jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}!paramValToString@{paramValToString}}
+\index{paramValToString@{paramValToString}!jevois::StepRange$<$ T $>$@{jevois::StepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{paramValToString()}{paramValToString()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void param\+Val\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{val,  }\item[{std\+::string \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Machine-\/readable output to a string, for use in jevois\+::\+Parameter\+: outputs {\ttfamily min}...step...max. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Types/\mbox{\hyperlink{StepRange_8H}{Step\+Range.\+H}}\end{DoxyCompactItemize}

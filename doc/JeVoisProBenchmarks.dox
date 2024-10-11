@@ -1,72 +1,47 @@
-/*! \page JeVoisProBenchmarks JeVois-Pro Deep Neural Network Benchmarks
+/*! \page JeVoisProBenchmarks JeVois-Pro 深度神经网络基准
 
 
-JeVois-Pro neural network backends
-==================================
+JeVois-Pro 神经网络后端 
+====================================
 
-The measurements below were made on a \jvpro smart camera running \jvversion{1.18.0} (September 2022).
+以下测量是在运行 \jvversion{1.18.0}（2022 年 9 月）的 \jvpro 智能相机上进行的。
 
-- **OpenCV:** network loaded by OpenCV DNN framework and running on CPU.
-- **ORT:** network loaded by ONNX Runtime framework and running on CPU.
-- **NPU:** network running native on the JeVois-Pro integrated 5-TOPS NPU (neural processing unit).
-- **TPU:** network running on the optional 4-TOPS Google Coral TPU accelerator (tensor processing unit).
-- **SPU:** network running on the optional 26-TOPS Hailo8 SPU accelerator (stream processing unit).
-- **VPU:** network running on the optional 1-TOPS MyriadX VPU accelerator (vector processing unit).
-- **NPUX:** network loaded by OpenCV and running on NPU via the TIM-VX OpenCV extension. To run efficiently, network
-        should have been quantized to int8, otherwise some slow CPU-based emulation will occur.
-- **VPUX:** network optimized for VPU but running on CPU if VPU is not available. Note that VPUX entries are
-        automatically created by scanning all VPU entries and changing their target from Myriad to CPU, if a VPU
-        accelerator is not detected. If a VPU is detected, then VPU models are listed and VPUX ones are not.
-        VPUX emulation runs on the JeVois-Pro CPU using the Arm Compute Library to provide efficient implementation
-        of various network layers and operations.
+- **OpenCV:** 由 OpenCV DNN 框架加载并在 CPU 上运行的网络。
+- **ORT:** 由 ONNX Runtime 框架加载并在 CPU 上运行的网络。
+- **NPU:** 在 JeVois-Pro 集成的 5-TOPS NPU（神经处理单元）上原生运行的网络。
+- **TPU:** 在可选的 4-TOPS Google Coral TPU 加速器（张量处理单元）上运行的网络。
+- **SPU:** 在可选的 26-TOPS Hailo8 SPU 加速器（流处理单元）上运行的网络。
+- **VPU:** 在可选的 1-TOPS MyriadX VPU 加速器（矢量处理单元）上运行的网络。
+- **NPUX:** 由 OpenCV 加载并通过 TIM-VX OpenCV 扩展在 NPU 上运行的网络。为了高效运行，网络应该量化为 int8，否则会出现一些基于 CPU 的缓慢仿真。
+- **VPUX:** 针对 VPU 优化的网络，但如果 VPU 不可用，则在 CPU 上运行。请注意，如果未检测到 VPU 加速器，则通过扫描所有 VPU 条目并将其目标从 Myriad 更改为 CPU 来自动创建 VPUX 条目。如果检测到 VPU，则列出 VPU 模型，而不列出 VPUX 模型。VPUX 仿真使用 Arm Compute Library 在 JeVois-Pro CPU 上运行，以高效实现各种网络层和操作。
 
-Benchmarking conditions
-=======================
+基准测试条件 
+===========================
 
-- Display was on and 1920x1080/60Hz. Operation is a bit slower if you enable 4K display, likely because of higher
-  contension on the memory bus.
+- 显示器已开启，分辨率为 1920x1080/60Hz。如果启用 4K 显示器，操作会稍微慢一些，可能是因为内存总线的张力较大。
 
-- The \jvmod{DNN} module was used, with 1920x1080 YUYV video capture for display purposes, and 1024x576 RGB24 capture
-  for vision processing.
+- 使用了 \jvmod{DNN} 模块，其中 1920x1080 YUYV 视频捕获用于显示目的，以及 1024x576 RGB24 捕获用于视觉处理。
 
-- Batch size is always 1, i.e., we measure the round-trip time to pre-process, infer, and post-process one frame at a
-  time. Higher performance is usually achieved with larger batch size, but this is not a real-time scenario (would lead
-  to larger delays between when a video frame is captured and when the inference results are available and displayed).
+- 批处理大小始终为 1，即我们每次测量预处理、推断和后处理一帧的往返时间。批处理大小越大，性能通常越高，但这不是实时场景（会导致捕获视频帧和推断结果可用并显示之间的延迟越大）。
 
-- <b>These benchmarks are for JeVois-Pro only and not meant to be representative of a particular accelerator's peak
-  performance.</b> In particular:
-  
-  + The Myriad-X VPU used was a USB dongle connected to JeVois-Pro over a 480 Mbit/s USB 2.0 link. The dongle supports
-    5 GBit/s USB 3.0 but the JeVois-Pro CPU has no available USB 3.0 port.
-    
-  + The NPU is integrated into the Amlogic A311D processor of JeVois-Pro and hence has the highest memory bandwidth
-    (direct memory access to the main RAM of the processor), and highest available memory (up to 4 GBytes of main RAM).
+- <b>这些基准测试仅适用于 JeVois-Pro，并不代表特定加速器的峰值性能。</b> 特别是： 
+  + 使用的 Myriad-X VPU 是一个 USB 加密狗，通过 480 Mbit/s USB 2.0 链路连接到 JeVois-Pro。加密狗支持 5 GBit/s USB 3.0，但 JeVois-Pro CPU 没有可用的 USB 3.0 端口。 
+  + NPU 集成到 JeVois-Pro 的 Amlogic A311D 处理器中，因此具有最高的内存带宽（直接访问处理器主 RAM 的内存）和最高的可用内存（高达 4 GB 的主 RAM）。
 
-  + Coral Edge TPU and Hailo-8 SPU were M.2 2230 A+E cards optionally installed inside JeVois-Pro. Data transfer is
-    over PCIe at 5 GBits/s. Note that Hailo-8 can support up to PCIe x4 but the A311D processor of JeVois-Pro only has
-    one PCIe x1 lane. Note also that Hailo-8 can support larger PCIe transaction packets (up to 4 Kbytes) than the A311D
-    can provide (only up to 256 bytes).
+  + Coral Edge TPU 和 Hailo-8 SPU 是 JeVois-Pro 内可选安装的 M.2 2230 A+E 卡。数据传输通过 PCIe 以 5 GBits/s 的速度进行。请注意，Hailo-8 最多可支持 PCIe x4，但 JeVois-Pro 的 A311D 处理器只有一个 PCIe x1 通道。还请注意，Hailo-8 可以支持比 A311D 所能提供的更大的 PCIe 事务数据包（最多 4 KB）（最多 256 字节）。
 
-  + Coral Edge TPU has only about 6.5 MBytes of usable RAM on chip. Thus, for larger networks, performance is slower as
-    some of the weights may need to constantly be loaded/unloaded over PCIe on every video frame. See, e.g., 45 fps for
-    Inception-V3 on 5-TOPS NPU vs. only 21 fps on 4-TOPS TPU, as model size is about 25 MBytes.
+  + Coral Edge TPU 芯片上只有大约 6.5 MB 的可用 RAM。因此，对于较大的网络，性能会较慢，因为某些权重可能需要在每个视频帧上通过 PCIe 不断加载/卸载。例如，5-TOPS NPU 上的 Inception-V3 为 45 fps，而 4-TOPS TPU 上只有 21 fps，因为模型大小约为 25 MB。
 
-  + You can only install one M.2 2230 A+E card inside JeVois-Pro, so you have to choose between a Hailo-8 card, or a
-    single-TPU card, or a dual-TPU card (only dual-TPU cards made by JeVois will work; the dual-TPU card made by Google
-    requires a PCIe x2 link while JeVois-Pro only has PCIe x1).
+  + 您只能在 JeVois-Pro 内安装一张 M.2 2230 A+E 卡，因此您必须在 Hailo-8 卡、单 TPU 卡或双 TPU 卡之间进行选择（只有 JeVois 制造的双 TPU 卡才有效；谷歌制造的双 TPU 卡需要 PCIe x2 链路，而 JeVois-Pro 只有 PCIe x1）。
 
-  + The \a PreProc time includes resizing the input video (1024x576 RGB24) to the network's input size, and possibly
-    swapping RGB/BGR order, NCHW/NHWC order, mean subtraction, normalization by scale factor and/or stdev, and
-    quantization to the network's desired data type.
+  + \a PreProc 时间包括将输入视频（1024x576 RGB24）调整为网络的输入大小，并可能交换 RGB/BGR 顺序、NCHW/NHWC 顺序、均值减法、按比例因子和/或标准差进行标准化，以及量化为网络所需的数据类型。
 
-  + The \a Network inference time includes data transfer from main memory to device, on-chip inference, data transfer of
-    outputs back to main memory, and possibly dequantization to float32.
+  + \a Network 推理时间包括从主存储器到设备的数据传输、片上推理、将输出的数据传输回主存储器，以及可能的反量化为 float32。
 
-  + The \a PostProc time includes decoding of network outputs (e.g., decoding YOLO boxes from raw YOLO layer outputs),
-    and drawing results using OpenGL.
+  + \a PostProc 时间包括网络输出的解码（例如，从原始 YOLO 层输出解码 YOLO 框），以及使用 OpenGL 绘制结果。
 
-Benchmark results
-=================
+基准测试结果 
+===================
 
 <table>
 <tr><th>Pipeline</th><th>Input</th><th>Output</th><th>PreProc</th><th>Network</th><th>PostProc</th><th>Total</th><th>FPS</th></tr>
@@ -75,14 +50,12 @@ Benchmark results
 
 </table>
 
-Older benchmarks
-================
+旧基准 
+=================
 
-Older benchmarks are provided for comparison as the software evolves over time. Typically, networks running on CPU with
-OpenCV backend should get faster over time as more optimized kernels are added to OpenCV. Networks running on hardware
-accelerators tend to remain the same. Pre and Post processing are under our control and we strive to make those faster
-over time as well, though sometimes adding more features may decrease speed slightly.
+随着软件的不断发展，我们提供了较旧的基准以供比较。通常，随着 OpenCV 中添加了更多优化的内核，在具有 OpenCV 后端的 CPU 上运行的网络应该会随着时间的推移而变得更快。在硬件加速器上运行的网络往往保持不变。预处理和后处理在我们的控制之下，我们努力随着时间的推移使它们变得更快，尽管有时添加更多功能可能会略微降低速度。
 
 - \subpage JeVoisProBenchmarks118
 
 */
+

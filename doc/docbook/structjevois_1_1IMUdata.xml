@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structjevois_1_1IMUdata">
+<title>jevois::IMUdata Struct Reference</title>
+<indexterm><primary>jevois::IMUdata</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/IMUdata.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para><link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+<para>
+Definition at line 65 of file IMUdata.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_structjevois_1_1IMUdata_1a74294074f662b48fad4dcabb23e936ff">IMUdata</link> (<link linkend="_structjevois_1_1IMUrawData">IMUrawData</link> const &amp;rd, double arange, double grange)</para>
+
+<para>从原始数据读数构造 </para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1ad528df6cdd82a2a20b7f3622937eae25">ax</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a0dee2c084a0204e5c7853c086163b5b4">ax</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1aa530f37a26e2cfae1af0288a7922147d">ay</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a368d908a3ef4f6569d619da729263baa">ay</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a1cc5cdbc4030828db880fa8372a3e11f">az</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1ae0d28a12ec8ed70344a0dae4675b0a05">az</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1aaa07ec03de5a907f1f3ef125f3809e89">gx</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1ac7ba19312b27139c1e2462c6c8478067">gx</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1afff29b1087dcfe346b14ca9f5e7d791a">gy</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1ab5933a5db2d5d065d0f060be680846eb">gy</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a5659cd78ce88c9116543938629ff67a3">gz</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a971428fc3cae58abbe64d836e7756d8b">gz</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a310d2ee9ca31e31f7c360c0af8ee9134">temp</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a4176632a42a65953939e02aab7211ae4">temp</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a77709580f05d372c95392cec4268bdba">mx</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a95c428b9065cbb5d1875b8e93c1386ee">mx</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a73dc6b0fcbe305e4e79dd2f48e9c120d">my</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a9bb99863a26331bdc57c74c403b0a010">my</link> () const</para>
+</listitem>
+            <listitem><para>float &amp; <link linkend="_structjevois_1_1IMUdata_1a0d6cc9368e91e66bb3d5afa619706d83">mz</link> ()</para>
+</listitem>
+            <listitem><para>const float &amp; <link linkend="_structjevois_1_1IMUdata_1a5340dbea4ee8157979aa386a4027414a">mz</link> () const</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>float <link linkend="_structjevois_1_1IMUdata_1ac27ca8505885c14542af9e3e8017f4f7">v</link> [10]</para>
+
+<para>The values: ax, ay, az, gy, gy, gz, temp, mx, my, mz. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_structjevois_1_1IMUdata_1af25db42f8ba2d63a7ed855b98480b053">magovf</link></para>
+
+<para>如果磁力计溢出则为 True </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_structjevois_1_1IMUdata_1a74294074f662b48fad4dcabb23e936ff"/>    <section>
+    <title>IMUdata()</title>
+<indexterm><primary>IMUdata</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>IMUdata</secondary></indexterm>
+<para><computeroutput>jevois::IMUdata::IMUdata (<link linkend="_structjevois_1_1IMUrawData">jevois::IMUrawData</link> const &amp; rd, double arange, double grange)</computeroutput></para><para>
+
+<para>从原始数据读数构造 </para>
+</para>
+<para>
+Definition at line 287 of file IMUdata.C.</para>
+<para>
+References jevois::IMUrawData::ax(), jevois::IMUrawData::ay(), jevois::IMUrawData::az(), jevois::IMUrawData::gx(), jevois::IMUrawData::gy(), jevois::IMUrawData::gz(), jevois::IMUrawData::mst2(), jevois::IMUrawData::mx(), jevois::IMUrawData::my(), jevois::IMUrawData::mz(), and jevois::IMUrawData::temp().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_structjevois_1_1IMUdata_1ad528df6cdd82a2a20b7f3622937eae25"/>    <section>
+    <title>ax()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>ax</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>ax</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::ax ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 73 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a0dee2c084a0204e5c7853c086163b5b4"/>    <section>
+    <title>ax()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>ax</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>ax</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::ax ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 74 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1aa530f37a26e2cfae1af0288a7922147d"/>    <section>
+    <title>ay()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>ay</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>ay</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::ay ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 75 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a368d908a3ef4f6569d619da729263baa"/>    <section>
+    <title>ay()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>ay</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>ay</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::ay ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 76 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a1cc5cdbc4030828db880fa8372a3e11f"/>    <section>
+    <title>az()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>az</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>az</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::az ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 77 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1ae0d28a12ec8ed70344a0dae4675b0a05"/>    <section>
+    <title>az()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>az</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>az</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::az ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 78 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1aaa07ec03de5a907f1f3ef125f3809e89"/>    <section>
+    <title>gx()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>gx</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gx</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::gx ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 79 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1ac7ba19312b27139c1e2462c6c8478067"/>    <section>
+    <title>gx()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>gx</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gx</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::gx ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 80 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1afff29b1087dcfe346b14ca9f5e7d791a"/>    <section>
+    <title>gy()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>gy</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gy</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::gy ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 81 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1ab5933a5db2d5d065d0f060be680846eb"/>    <section>
+    <title>gy()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>gy</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gy</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::gy ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 82 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a5659cd78ce88c9116543938629ff67a3"/>    <section>
+    <title>gz()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>gz</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gz</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::gz ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 83 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a971428fc3cae58abbe64d836e7756d8b"/>    <section>
+    <title>gz()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>gz</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>gz</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::gz ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 84 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a77709580f05d372c95392cec4268bdba"/>    <section>
+    <title>mx()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>mx</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>mx</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::mx ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 87 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a95c428b9065cbb5d1875b8e93c1386ee"/>    <section>
+    <title>mx()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>mx</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>mx</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::mx ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 88 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a73dc6b0fcbe305e4e79dd2f48e9c120d"/>    <section>
+    <title>my()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>my</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>my</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::my ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 89 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a9bb99863a26331bdc57c74c403b0a010"/>    <section>
+    <title>my()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>my</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>my</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::my ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 90 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a0d6cc9368e91e66bb3d5afa619706d83"/>    <section>
+    <title>mz()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>mz</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>mz</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::mz ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 91 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a5340dbea4ee8157979aa386a4027414a"/>    <section>
+    <title>mz()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>mz</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>mz</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::mz ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 92 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a310d2ee9ca31e31f7c360c0af8ee9134"/>    <section>
+    <title>temp()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>temp</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>temp</secondary></indexterm>
+<para><computeroutput>float&amp; jevois::IMUdata::temp ( )<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 85 of file IMUdata.H.</para>
+<para>
+References v.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1a4176632a42a65953939e02aab7211ae4"/>    <section>
+    <title>temp()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>temp</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>temp</secondary></indexterm>
+<para><computeroutput>const float&amp; jevois::IMUdata::temp ( ) const<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+Definition at line 86 of file IMUdata.H.</para>
+<para>
+References v.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structjevois_1_1IMUdata_1af25db42f8ba2d63a7ed855b98480b053"/>    <section>
+    <title>magovf</title>
+<indexterm><primary>magovf</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>magovf</secondary></indexterm>
+<para><computeroutput>bool jevois::IMUdata::magovf</computeroutput></para><para>
+
+<para>如果磁力计溢出则为 True </para>
+</para>
+<para>
+Definition at line 71 of file IMUdata.H.</para>
+    </section><anchor xml:id="_structjevois_1_1IMUdata_1ac27ca8505885c14542af9e3e8017f4f7"/>    <section>
+    <title>v</title>
+<indexterm><primary>v</primary><secondary>jevois::IMUdata</secondary></indexterm>
+<indexterm><primary>jevois::IMUdata</primary><secondary>v</secondary></indexterm>
+<para><computeroutput>float jevois::IMUdata::v[10]</computeroutput></para><para>
+
+<para>The values: ax, ay, az, gy, gy, gz, temp, mx, my, mz. </para>
+</para>
+<para>
+Definition at line 70 of file IMUdata.H.</para>
+<para>
+Referenced by ax(), ay(), az(), gx(), gy(), gz(), mx(), my(), mz(), and temp().</para>
+</section>
+<para>
+The documentation for this struct was generated from the following files:</para>
+include/jevois/Core/<link linkend="_IMUdata_8H">IMUdata.H</link>src/jevois/Core/<link linkend="_IMUdata_8C">IMUdata.C</link></section>
+</section>

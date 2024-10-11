@@ -1,0 +1,504 @@
+\hypertarget{classjevois_1_1ImGuiBackendMALI}{}\doxysubsection{jevois\+::Im\+Gui\+Backend\+M\+A\+LI Class Reference}
+\label{classjevois_1_1ImGuiBackendMALI}\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Im\+Gui\+Backend\+M\+A\+L\+I.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Backend\+M\+A\+LI for Im\+Gui on Je\+Vois-\/\+Pro. 
+
+This abstract base class provides an interface used by \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI}{Video\+Display\+G\+UI}}. Derived implementations are available for S\+D\+L2 and Mali framebuffer + evdev.
+
+Je\+Vois Pro hardware reports the following\+:
+
+E\+GL v1.\+4 E\+GL A\+PI is E\+G\+L\+\_\+\+O\+P\+E\+N\+G\+L\+\_\+\+E\+S\+\_\+\+A\+PI Open\+GL ES 3.\+2 git.\+c8adbf9.\+122c9daed32dbba4b3056f41a2f23c58 A\+RM (Mali-\/\+G52) G\+L\+\_\+\+V\+ER=3.\+2
+
+Open\+GL extensions\+: G\+L\+\_\+\+A\+R\+M\+\_\+rgba8 G\+L\+\_\+\+A\+R\+M\+\_\+mali\+\_\+shader\+\_\+binary G\+L\+\_\+\+O\+E\+S\+\_\+depth24 G\+L\+\_\+\+O\+E\+S\+\_\+depth\+\_\+texture G\+L\+\_\+\+O\+E\+S\+\_\+depth\+\_\+texture\+\_\+cube\+\_\+map G\+L\+\_\+\+O\+E\+S\+\_\+packed\+\_\+depth\+\_\+stencil G\+L\+\_\+\+O\+E\+S\+\_\+rgb8\+\_\+rgba8 G\+L\+\_\+\+E\+X\+T\+\_\+read\+\_\+format\+\_\+bgra G\+L\+\_\+\+O\+E\+S\+\_\+compressed\+\_\+paletted\+\_\+texture G\+L\+\_\+\+O\+E\+S\+\_\+compressed\+\_\+\+E\+T\+C1\+\_\+\+R\+G\+B8\+\_\+texture G\+L\+\_\+\+O\+E\+S\+\_\+standard\+\_\+derivatives G\+L\+\_\+\+O\+E\+S\+\_\+\+E\+G\+L\+\_\+image G\+L\+\_\+\+O\+E\+S\+\_\+\+E\+G\+L\+\_\+image\+\_\+external G\+L\+\_\+\+O\+E\+S\+\_\+\+E\+G\+L\+\_\+image\+\_\+external\+\_\+essl3 G\+L\+\_\+\+O\+E\+S\+\_\+\+E\+G\+L\+\_\+sync G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+npot G\+L\+\_\+\+O\+E\+S\+\_\+vertex\+\_\+half\+\_\+float G\+L\+\_\+\+O\+E\+S\+\_\+required\+\_\+internalformat G\+L\+\_\+\+O\+E\+S\+\_\+vertex\+\_\+array\+\_\+object G\+L\+\_\+\+O\+E\+S\+\_\+mapbuffer G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+format\+\_\+\+B\+G\+R\+A8888 G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+rg G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+type\+\_\+2\+\_\+10\+\_\+10\+\_\+10\+\_\+\+R\+EV G\+L\+\_\+\+O\+E\+S\+\_\+fbo\+\_\+render\+\_\+mipmap G\+L\+\_\+\+O\+E\+S\+\_\+element\+\_\+index\+\_\+uint G\+L\+\_\+\+E\+X\+T\+\_\+shadow\+\_\+samplers G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+compression\+\_\+astc G\+L\+\_\+\+K\+H\+R\+\_\+texture\+\_\+compression\+\_\+astc\+\_\+ldr G\+L\+\_\+\+K\+H\+R\+\_\+texture\+\_\+compression\+\_\+astc\+\_\+hdr G\+L\+\_\+\+K\+H\+R\+\_\+texture\+\_\+compression\+\_\+astc\+\_\+sliced\+\_\+3d G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+compression\+\_\+astc\+\_\+decode\+\_\+mode G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+compression\+\_\+astc\+\_\+decode\+\_\+mode\+\_\+rgb9e5 G\+L\+\_\+\+K\+H\+R\+\_\+debug G\+L\+\_\+\+E\+X\+T\+\_\+occlusion\+\_\+query\+\_\+boolean G\+L\+\_\+\+E\+X\+T\+\_\+disjoint\+\_\+timer\+\_\+query G\+L\+\_\+\+E\+X\+T\+\_\+blend\+\_\+minmax G\+L\+\_\+\+E\+X\+T\+\_\+discard\+\_\+framebuffer G\+L\+\_\+\+O\+E\+S\+\_\+get\+\_\+program\+\_\+binary G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+3D G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+storage G\+L\+\_\+\+E\+X\+T\+\_\+multisampled\+\_\+render\+\_\+to\+\_\+texture G\+L\+\_\+\+O\+E\+S\+\_\+surfaceless\+\_\+context G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+stencil8 G\+L\+\_\+\+E\+X\+T\+\_\+shader\+\_\+pixel\+\_\+local\+\_\+storage G\+L\+\_\+\+A\+R\+M\+\_\+shader\+\_\+framebuffer\+\_\+fetch G\+L\+\_\+\+A\+R\+M\+\_\+shader\+\_\+framebuffer\+\_\+fetch\+\_\+depth\+\_\+stencil G\+L\+\_\+\+A\+R\+M\+\_\+mali\+\_\+program\+\_\+binary G\+L\+\_\+\+E\+X\+T\+\_\+s\+R\+GB G\+L\+\_\+\+E\+X\+T\+\_\+s\+R\+G\+B\+\_\+write\+\_\+control G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+s\+R\+G\+B\+\_\+decode G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+s\+R\+G\+B\+\_\+\+R8 G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+s\+R\+G\+B\+\_\+\+R\+G8 G\+L\+\_\+\+K\+H\+R\+\_\+blend\+\_\+equation\+\_\+advanced G\+L\+\_\+\+K\+H\+R\+\_\+blend\+\_\+equation\+\_\+advanced\+\_\+coherent G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+storage\+\_\+multisample\+\_\+2d\+\_\+array G\+L\+\_\+\+O\+E\+S\+\_\+shader\+\_\+image\+\_\+atomic G\+L\+\_\+\+E\+X\+T\+\_\+robustness G\+L\+\_\+\+E\+X\+T\+\_\+draw\+\_\+buffers\+\_\+indexed G\+L\+\_\+\+O\+E\+S\+\_\+draw\+\_\+buffers\+\_\+indexed G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+border\+\_\+clamp G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+border\+\_\+clamp G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+cube\+\_\+map\+\_\+array G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+cube\+\_\+map\+\_\+array G\+L\+\_\+\+O\+E\+S\+\_\+sample\+\_\+variables G\+L\+\_\+\+O\+E\+S\+\_\+sample\+\_\+shading G\+L\+\_\+\+O\+E\+S\+\_\+shader\+\_\+multisample\+\_\+interpolation G\+L\+\_\+\+E\+X\+T\+\_\+shader\+\_\+io\+\_\+blocks G\+L\+\_\+\+O\+E\+S\+\_\+shader\+\_\+io\+\_\+blocks G\+L\+\_\+\+E\+X\+T\+\_\+tessellation\+\_\+shader G\+L\+\_\+\+O\+E\+S\+\_\+tessellation\+\_\+shader G\+L\+\_\+\+E\+X\+T\+\_\+primitive\+\_\+bounding\+\_\+box G\+L\+\_\+\+O\+E\+S\+\_\+primitive\+\_\+bounding\+\_\+box G\+L\+\_\+\+E\+X\+T\+\_\+geometry\+\_\+shader G\+L\+\_\+\+O\+E\+S\+\_\+geometry\+\_\+shader G\+L\+\_\+\+A\+N\+D\+R\+O\+I\+D\+\_\+extension\+\_\+pack\+\_\+es31a G\+L\+\_\+\+E\+X\+T\+\_\+gpu\+\_\+shader5 G\+L\+\_\+\+O\+E\+S\+\_\+gpu\+\_\+shader5 G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+buffer G\+L\+\_\+\+O\+E\+S\+\_\+texture\+\_\+buffer G\+L\+\_\+\+E\+X\+T\+\_\+copy\+\_\+image G\+L\+\_\+\+O\+E\+S\+\_\+copy\+\_\+image G\+L\+\_\+\+E\+X\+T\+\_\+shader\+\_\+non\+\_\+constant\+\_\+global\+\_\+initializers G\+L\+\_\+\+E\+X\+T\+\_\+color\+\_\+buffer\+\_\+half\+\_\+float G\+L\+\_\+\+E\+X\+T\+\_\+color\+\_\+buffer\+\_\+float G\+L\+\_\+\+E\+X\+T\+\_\+\+Y\+U\+V\+\_\+target G\+L\+\_\+\+O\+V\+R\+\_\+multiview G\+L\+\_\+\+O\+V\+R\+\_\+multiview2 G\+L\+\_\+\+O\+V\+R\+\_\+multiview\+\_\+multisampled\+\_\+render\+\_\+to\+\_\+texture G\+L\+\_\+\+K\+H\+R\+\_\+robustness G\+L\+\_\+\+K\+H\+R\+\_\+robust\+\_\+buffer\+\_\+access\+\_\+behavior G\+L\+\_\+\+E\+X\+T\+\_\+draw\+\_\+elements\+\_\+base\+\_\+vertex G\+L\+\_\+\+O\+E\+S\+\_\+draw\+\_\+elements\+\_\+base\+\_\+vertex G\+L\+\_\+\+E\+X\+T\+\_\+buffer\+\_\+storage G\+L\+\_\+\+E\+X\+T\+\_\+texture\+\_\+filter\+\_\+anisotropic
+
+To get correct U\+T\+F-\/8 keyboard translation, you need env var L\+C\+\_\+\+C\+T\+Y\+PE to be set, e.\+g., en\+\_\+\+U\+S.\+U\+TF-\/8 
+
+Definition at line 86 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Inheritance diagram for jevois\+::Im\+Gui\+Backend\+M\+A\+LI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{classjevois_1_1ImGuiBackendMALI__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Im\+Gui\+Backend\+M\+A\+LI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ImGuiBackendMALI__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a68e17c985539d1a91ca298a8b75e1754}{Im\+Gui\+Backend\+M\+A\+LI}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_abcaebf0d0ba5ebeaf3780a0ea37f40f2}{$\sim$\+Im\+Gui\+Backend\+M\+A\+LI}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance, free resources. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_abf33a5d66fe878f4c16918db411d9db1}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool fullscreen=false, float scale=1.\+0f, bool conslock=true)
+\begin{DoxyCompactList}\small\item\em Initialize the underlying engine that will process events, create windows, etc. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a7a5c04eb60cd37869d5074d421ff33fe}{poll\+Events}} (bool \&shouldclose) override
+\begin{DoxyCompactList}\small\item\em Poll events such as mouse movements, buttons, keyboard, joystick, and pass to Im\+Gui. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_ae0f79d68f6df7a7b66b16c1e548d133d}{new\+Frame}} () override
+\begin{DoxyCompactList}\small\item\em Start a new frame and clear the window/framebuffer. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_ac33528e084ff41de7741179589d580e4}{render}} () override
+\begin{DoxyCompactList}\small\item\em Render the Im\+Gui graphics. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool fullscreen=false) override
+\begin{DoxyCompactList}\small\item\em Avoid masking virtual overloads. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a6b8507e7d2eeddb034f0d3ab5105853a}{scan\+Devices}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a1336f72b53a676983587d86fc1475d7e}{add\+Device}} (size\+\_\+t num, int fd)
+\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a24252886e9f84155fb9f28d56197d0aa}{remove\+Device}} (size\+\_\+t num)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::chrono\+::time\+\_\+point$<$ std\+::chrono\+::steady\+\_\+clock $>$ \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_abff620790f05171ab9b335d06e965b71}{its\+Last\+New\+Frame\+Time}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_aaa368bb8f58e7503d4516e3f685a037f}{its\+Fd}} \mbox{[}32\mbox{]}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a1f757ccd12a191c23cafebf0841ca8ff}{its\+MouseX}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a2b9c9e494b92c40e1aa6df5f7652cf4e}{its\+MouseY}}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a6b796b30b429c41b29f7f40f13b82af5}{its\+Mouse\+Button}} \mbox{[}5\mbox{]}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a4987ddef50b51de39186cdc19cfc46cf}{its\+Console\+Fd}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a9b205a6b9a06ddb5c368494a14e90fd6}{its\+T\+TY}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_ab8f0777ba00b8f7c77d2c073b2609833}{its\+K\+Bmode}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a420e629f708f1592b401126d10a23050}{its\+Width}} = 0
+\item 
+int \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_aca5e1bf18fbe2b01811bf4eb1622ef10}{its\+Height}} = 0
+\item 
+std\+::array$<$ wchar\+\_\+t, 49 $>$ \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a50f1aaad74eb9f0b9961ce24118c08d3}{its\+Char\+Keys}} \{ \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\char`\"{}1234567890-\/=qwertyuiop\mbox{[}$\,$\mbox{]}asdfghjkl;\textquotesingle{}\`{}\textbackslash{}\textbackslash{}zxcvbnm,./$<$\char`\"{} \}
+\item 
+std\+::array$<$ wchar\+\_\+t, 49 $>$ \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a0aa749e058ead6e72c0b7cab6cfac9af}{its\+Shift\+Keys}} \{ \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\char`\"{}!@\#\$\%$^\wedge$\&$\ast$()\+\_\++Q\+W\+E\+R\+T\+Y\+U\+I\+OP\{\}A\+S\+D\+F\+G\+H\+J\+K\+L\+:\textbackslash{}\char`\"{}$\sim$$\vert$Z\+X\+C\+V\+B\+NM$<$$>$?$>$\char`\"{} \}
+\item 
+std\+::array$<$ wchar\+\_\+t, 49 $>$ \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_afe5209624a9ac65b3b0eaaafc052f881}{its\+Altgr\+Keys}} = \{ 0 \}
+\item 
+\mbox{\hyperlink{structinput__event__state}{input\+\_\+event\+\_\+state}} \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_aeddf2abc7ccc5f415ac264f5cff9a563}{its\+Input\+State}} = \{ \}
+\item 
+char \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a836ded4f366b8c91e43dc75394d10c46}{its\+Input\+Buffer}} \mbox{[}256\mbox{]} = \{ 0 \}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a49842e3a61c7e847f0eafe662052e883}{its\+Initialized}} = false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr wchar\+\_\+t \mbox{\hyperlink{classjevois_1_1ImGuiBackendMALI_a74c998564aea7e6b523f81fda2892515}{its\+Func\+Keys}} \mbox{[}58\mbox{]}\mbox{[}8\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a68e17c985539d1a91ca298a8b75e1754}\label{classjevois_1_1ImGuiBackendMALI_a68e17c985539d1a91ca298a8b75e1754}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!ImGuiBackendMALI@{ImGuiBackendMALI}}
+\index{ImGuiBackendMALI@{ImGuiBackendMALI}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{ImGuiBackendMALI()}{ImGuiBackendMALI()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::\+Im\+Gui\+Backend\+M\+A\+LI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 368 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References its\+Altgr\+Keys, its\+Char\+Keys, its\+Fd, its\+Mouse\+Button, its\+Shift\+Keys, and N\+E\+L\+E\+MS.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_abcaebf0d0ba5ebeaf3780a0ea37f40f2}\label{classjevois_1_1ImGuiBackendMALI_abcaebf0d0ba5ebeaf3780a0ea37f40f2}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!````~ImGuiBackendMALI@{$\sim$ImGuiBackendMALI}}
+\index{````~ImGuiBackendMALI@{$\sim$ImGuiBackendMALI}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{$\sim$ImGuiBackendMALI()}{~ImGuiBackendMALI()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::$\sim$\+Im\+Gui\+Backend\+M\+A\+LI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for safe inheritance, free resources. 
+
+
+
+Definition at line 379 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References jevois\+::un\+Mute\+Keyboard(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a1336f72b53a676983587d86fc1475d7e}\label{classjevois_1_1ImGuiBackendMALI_a1336f72b53a676983587d86fc1475d7e}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!addDevice@{addDevice}}
+\index{addDevice@{addDevice}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{addDevice()}{addDevice()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::add\+Device (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num,  }\item[{int}]{fd }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 707 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References L\+E\+R\+R\+OR, L\+F\+A\+T\+AL, L\+I\+N\+FO, and N\+E\+L\+E\+MS.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}\label{classjevois_1_1ImGuiBackendMALI_a9c839f0bd1d11929a50ddd5708f91c97}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!init@{init}}
+\index{init@{init}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{init()}{init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::init\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Avoid masking virtual overloads. 
+
+
+
+Definition at line 35 of file Video\+Display\+Backend\+M\+A\+L\+I.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_abf33a5d66fe878f4c16918db411d9db1}\label{classjevois_1_1ImGuiBackendMALI_abf33a5d66fe878f4c16918db411d9db1}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!init@{init}}
+\index{init@{init}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{init()}{init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init (\begin{DoxyParamCaption}\item[{unsigned short}]{w,  }\item[{unsigned short}]{h,  }\item[{bool}]{fullscreen = {\ttfamily false},  }\item[{float}]{scale = {\ttfamily 1.0f},  }\item[{bool}]{conslock = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initialize the underlying engine that will process events, create windows, etc. 
+
+The init starts with the given initial window/framebuffer size. If conslock is true, we lock the console and the framebuffer; set to false when running in gdb for debugging, using gdb --args jevoispro-\/daemon --conslock=false 
+
+Definition at line 399 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References jevois\+::get\+Active\+T\+T\+Y(), jevois\+::get\+Console\+Fd(), h, jevois\+::\+Video\+Display\+Backend\+M\+A\+L\+I\+::init(), jevois\+::mute\+Keyboard(), and jevois\+::warn\+And\+Ignore\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_ae0f79d68f6df7a7b66b16c1e548d133d}\label{classjevois_1_1ImGuiBackendMALI_ae0f79d68f6df7a7b66b16c1e548d133d}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!newFrame@{newFrame}}
+\index{newFrame@{newFrame}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{newFrame()}{newFrame()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::new\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start a new frame and clear the window/framebuffer. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoDisplayBackend_a3c7c973ef625730022148241cce34e6f}{jevois\+::\+Video\+Display\+Backend}}.
+
+
+
+Definition at line 674 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References L\+E\+R\+R\+OR, and jevois\+::\+Video\+Display\+Backend\+::new\+Frame().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a7a5c04eb60cd37869d5074d421ff33fe}\label{classjevois_1_1ImGuiBackendMALI_a7a5c04eb60cd37869d5074d421ff33fe}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!pollEvents@{pollEvents}}
+\index{pollEvents@{pollEvents}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{pollEvents()}{pollEvents()}}
+{\footnotesize\ttfamily bool jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::poll\+Events (\begin{DoxyParamCaption}\item[{bool \&}]{shouldclose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Poll events such as mouse movements, buttons, keyboard, joystick, and pass to Im\+Gui. 
+
+Returns true if some events were received, which can be used to turn on mouse pointer and G\+UI. 
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoDisplayBackendMALI_ac40174958faa9a66874d10b4a5082906}{jevois\+::\+Video\+Display\+Backend\+M\+A\+LI}}.
+
+
+
+Definition at line 509 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References L\+E\+R\+R\+OR, and N\+E\+L\+E\+MS.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a24252886e9f84155fb9f28d56197d0aa}\label{classjevois_1_1ImGuiBackendMALI_a24252886e9f84155fb9f28d56197d0aa}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!removeDevice@{removeDevice}}
+\index{removeDevice@{removeDevice}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{removeDevice()}{removeDevice()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::remove\+Device (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 715 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References L\+E\+R\+R\+OR, L\+F\+A\+T\+AL, L\+I\+N\+FO, and N\+E\+L\+E\+MS.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_ac33528e084ff41de7741179589d580e4}\label{classjevois_1_1ImGuiBackendMALI_ac33528e084ff41de7741179589d580e4}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!render@{render}}
+\index{render@{render}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Render the Im\+Gui graphics. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoDisplayBackend_a6164ed80b2f3628f23bd45919750858e}{jevois\+::\+Video\+Display\+Backend}}.
+
+
+
+Definition at line 699 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References jevois\+::\+Video\+Display\+Backend\+::render().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a6b8507e7d2eeddb034f0d3ab5105853a}\label{classjevois_1_1ImGuiBackendMALI_a6b8507e7d2eeddb034f0d3ab5105853a}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!scanDevices@{scanDevices}}
+\index{scanDevices@{scanDevices}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{scanDevices()}{scanDevices()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::scan\+Devices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 725 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+C.
+
+
+
+References jevois\+::is\+Input\+Device(), N\+E\+L\+E\+MS, and jevois\+::to\+\_\+string().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_afe5209624a9ac65b3b0eaaafc052f881}\label{classjevois_1_1ImGuiBackendMALI_afe5209624a9ac65b3b0eaaafc052f881}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsAltgrKeys@{itsAltgrKeys}}
+\index{itsAltgrKeys@{itsAltgrKeys}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsAltgrKeys}{itsAltgrKeys}}
+{\footnotesize\ttfamily std\+::array$<$wchar\+\_\+t, 49$>$ jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Altgr\+Keys = \{ 0 \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 130 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Referenced by Im\+Gui\+Backend\+M\+A\+L\+I().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a50f1aaad74eb9f0b9961ce24118c08d3}\label{classjevois_1_1ImGuiBackendMALI_a50f1aaad74eb9f0b9961ce24118c08d3}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsCharKeys@{itsCharKeys}}
+\index{itsCharKeys@{itsCharKeys}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsCharKeys}{itsCharKeys}}
+{\footnotesize\ttfamily std\+::array$<$wchar\+\_\+t, 49$>$ jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Char\+Keys \{ \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\char`\"{}1234567890-\/=qwertyuiop\mbox{[}$\,$\mbox{]}asdfghjkl;\textquotesingle{}\`{}\textbackslash{}\textbackslash{}zxcvbnm,./$<$\char`\"{} \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 128 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Referenced by Im\+Gui\+Backend\+M\+A\+L\+I().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a4987ddef50b51de39186cdc19cfc46cf}\label{classjevois_1_1ImGuiBackendMALI_a4987ddef50b51de39186cdc19cfc46cf}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsConsoleFd@{itsConsoleFd}}
+\index{itsConsoleFd@{itsConsoleFd}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsConsoleFd}{itsConsoleFd}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Console\+Fd\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 123 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_aaa368bb8f58e7503d4516e3f685a037f}\label{classjevois_1_1ImGuiBackendMALI_aaa368bb8f58e7503d4516e3f685a037f}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsFd@{itsFd}}
+\index{itsFd@{itsFd}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsFd}{itsFd}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Fd\mbox{[}32\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 117 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Referenced by Im\+Gui\+Backend\+M\+A\+L\+I().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a74c998564aea7e6b523f81fda2892515}\label{classjevois_1_1ImGuiBackendMALI_a74c998564aea7e6b523f81fda2892515}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsFuncKeys@{itsFuncKeys}}
+\index{itsFuncKeys@{itsFuncKeys}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsFuncKeys}{itsFuncKeys}}
+{\footnotesize\ttfamily constexpr wchar\+\_\+t jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Func\+Keys\mbox{[}58\mbox{]}\mbox{[}8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [protected]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Esc>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<BckSp>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Tab>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Enter>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<LCtrl>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<LShft>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<RShft>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP*>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<LAlt>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{" "}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<CpsLk>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F1>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F2>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F3>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F4>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F5>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F6>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F7>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F8>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F9>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F10>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<NumLk>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<ScrLk>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP7>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP8>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP9>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP-\/>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP4>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP5>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP6>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP+>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP1>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP2>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP3>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP0>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP.>"},  \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F11>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<F12>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KPEnt>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<RCtrl>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<KP/>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<PrtSc>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<AltGr>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Break>"} , \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Home>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Up>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<PgUp>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Left>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Right>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<End>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Down>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<PgDn>"},}
+\DoxyCodeLine{       \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Ins>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Del>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Pause>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<LMeta>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<RMeta>"}, \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\textcolor{stringliteral}{"<Menu>"}}
+\DoxyCodeLine{      \}}
+
+\end{DoxyCode}
+
+
+Definition at line 131 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_aca5e1bf18fbe2b01811bf4eb1622ef10}\label{classjevois_1_1ImGuiBackendMALI_aca5e1bf18fbe2b01811bf4eb1622ef10}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsHeight@{itsHeight}}
+\index{itsHeight@{itsHeight}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsHeight}{itsHeight}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Height = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 126 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a49842e3a61c7e847f0eafe662052e883}\label{classjevois_1_1ImGuiBackendMALI_a49842e3a61c7e847f0eafe662052e883}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsInitialized@{itsInitialized}}
+\index{itsInitialized@{itsInitialized}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsInitialized}{itsInitialized}}
+{\footnotesize\ttfamily bool jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Initialized = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 146 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a836ded4f366b8c91e43dc75394d10c46}\label{classjevois_1_1ImGuiBackendMALI_a836ded4f366b8c91e43dc75394d10c46}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsInputBuffer@{itsInputBuffer}}
+\index{itsInputBuffer@{itsInputBuffer}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsInputBuffer}{itsInputBuffer}}
+{\footnotesize\ttfamily char jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Input\+Buffer\mbox{[}256\mbox{]} = \{ 0 \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 145 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_aeddf2abc7ccc5f415ac264f5cff9a563}\label{classjevois_1_1ImGuiBackendMALI_aeddf2abc7ccc5f415ac264f5cff9a563}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsInputState@{itsInputState}}
+\index{itsInputState@{itsInputState}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsInputState}{itsInputState}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structinput__event__state}{input\+\_\+event\+\_\+state}} jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Input\+State = \{ \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 144 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_ab8f0777ba00b8f7c77d2c073b2609833}\label{classjevois_1_1ImGuiBackendMALI_ab8f0777ba00b8f7c77d2c073b2609833}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsKBmode@{itsKBmode}}
+\index{itsKBmode@{itsKBmode}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsKBmode}{itsKBmode}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+K\+Bmode\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 125 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_abff620790f05171ab9b335d06e965b71}\label{classjevois_1_1ImGuiBackendMALI_abff620790f05171ab9b335d06e965b71}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsLastNewFrameTime@{itsLastNewFrameTime}}
+\index{itsLastNewFrameTime@{itsLastNewFrameTime}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsLastNewFrameTime}{itsLastNewFrameTime}}
+{\footnotesize\ttfamily std\+::chrono\+::time\+\_\+point$<$std\+::chrono\+::steady\+\_\+clock$>$ jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Last\+New\+Frame\+Time\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 116 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a6b796b30b429c41b29f7f40f13b82af5}\label{classjevois_1_1ImGuiBackendMALI_a6b796b30b429c41b29f7f40f13b82af5}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsMouseButton@{itsMouseButton}}
+\index{itsMouseButton@{itsMouseButton}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsMouseButton}{itsMouseButton}}
+{\footnotesize\ttfamily bool jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Mouse\+Button\mbox{[}5\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 122 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Referenced by Im\+Gui\+Backend\+M\+A\+L\+I().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a1f757ccd12a191c23cafebf0841ca8ff}\label{classjevois_1_1ImGuiBackendMALI_a1f757ccd12a191c23cafebf0841ca8ff}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsMouseX@{itsMouseX}}
+\index{itsMouseX@{itsMouseX}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsMouseX}{itsMouseX}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+MouseX\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 121 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a2b9c9e494b92c40e1aa6df5f7652cf4e}\label{classjevois_1_1ImGuiBackendMALI_a2b9c9e494b92c40e1aa6df5f7652cf4e}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsMouseY@{itsMouseY}}
+\index{itsMouseY@{itsMouseY}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsMouseY}{itsMouseY}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+MouseY\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 121 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a0aa749e058ead6e72c0b7cab6cfac9af}\label{classjevois_1_1ImGuiBackendMALI_a0aa749e058ead6e72c0b7cab6cfac9af}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsShiftKeys@{itsShiftKeys}}
+\index{itsShiftKeys@{itsShiftKeys}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsShiftKeys}{itsShiftKeys}}
+{\footnotesize\ttfamily std\+::array$<$wchar\+\_\+t, 49$>$ jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Shift\+Keys \{ \mbox{\hyperlink{GUIhelper_8C_a8edd4c14cf4fc3ad2d155ac3d00920cd}{L}}\char`\"{}!@\#\$\%$^\wedge$\&$\ast$()\+\_\++Q\+W\+E\+R\+T\+Y\+U\+I\+OP\{\}A\+S\+D\+F\+G\+H\+J\+K\+L\+:\textbackslash{}\char`\"{}$\sim$$\vert$Z\+X\+C\+V\+B\+NM$<$$>$?$>$\char`\"{} \}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 129 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+Referenced by Im\+Gui\+Backend\+M\+A\+L\+I().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a9b205a6b9a06ddb5c368494a14e90fd6}\label{classjevois_1_1ImGuiBackendMALI_a9b205a6b9a06ddb5c368494a14e90fd6}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsTTY@{itsTTY}}
+\index{itsTTY@{itsTTY}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsTTY}{itsTTY}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+T\+TY\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 124 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackendMALI_a420e629f708f1592b401126d10a23050}\label{classjevois_1_1ImGuiBackendMALI_a420e629f708f1592b401126d10a23050}} 
+\index{jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}!itsWidth@{itsWidth}}
+\index{itsWidth@{itsWidth}!jevois::ImGuiBackendMALI@{jevois::ImGuiBackendMALI}}
+\doxyparagraph{\texorpdfstring{itsWidth}{itsWidth}}
+{\footnotesize\ttfamily int jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::its\+Width = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 126 of file Im\+Gui\+Backend\+M\+A\+L\+I.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiBackendMALI_8H}{Im\+Gui\+Backend\+M\+A\+L\+I.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiBackendMALI_8C}{Im\+Gui\+Backend\+M\+A\+L\+I.\+C}}\end{DoxyCompactItemize}

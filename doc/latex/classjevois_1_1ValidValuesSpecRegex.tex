@@ -1,0 +1,154 @@
+\hypertarget{classjevois_1_1ValidValuesSpecRegex}{}\doxysubsection{jevois\+::Valid\+Values\+Spec\+Regex$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ValidValuesSpecRegex}\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Valid\+Values\+Spec.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Valid\+Values\+Spec\+Regex$<$ T $>$}
+
+基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 
+
+在内部使用 boost\+::regex（因为 std\+::regex 不允许从正则表达式中获取原始字符串规范，但我们需要它来显示帮助消息）。 这允许高度灵活的有效值定义。例如，假设您希望 int 参数在范围 \mbox{[}0..59\mbox{]} 内，但它也可以具有值 72，则您的正则表达式 将是：
+
+\begin{DoxyVerb}^(([0-5]?[0-9])|72)$
+\end{DoxyVerb}
+
+
+您可以在网络上找到正则表达式示例来匹配有效文件名、有效 U\+R\+L、有效信用卡号等。只需确保您的正则表达式符合 boost\+::regex 所期望的语法，因为正则表达式有几种语法。 
+
+Definition at line 171 of file Valid\+Values\+Spec.\+H.
+
+
+
+Inheritance diagram for jevois\+::Valid\+Values\+Spec\+Regex$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classjevois_1_1ValidValuesSpecRegex__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Valid\+Values\+Spec\+Regex$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classjevois_1_1ValidValuesSpecRegex__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_a3aa314788bb15c21f3dd777dd528cd21}{Valid\+Values\+Spec\+Regex}} ()=delete
+\begin{DoxyCompactList}\small\item\em 没有默认构造函数，始终需要提供正则表达式 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_a0f590351e35519a9b67f6e27fb3ab502}{Valid\+Values\+Spec\+Regex}} (boost\+::regex const \&valid\+\_\+regex)
+\begin{DoxyCompactList}\small\item\em 从指定有效值的给定正则表达式构造 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_ac4dbd9b12c1ea20fb562913d6b5e61c0}{$\sim$\+Valid\+Values\+Spec\+Regex}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_a888360c78deb6d25850ff0ad790aee2b}{check\+Value\+Validity}} (T const \&val) const
+\begin{DoxyCompactList}\small\item\em 检查提议的值是否有效，当且仅当值与我们的正则表达式匹配时返回 true \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_adc27085c6f685943d9521714313854a9}{str}} () const
+\begin{DoxyCompactList}\small\item\em 转换为可读字符串 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const boost\+::regex \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_ae616006ac3c632c1dec9b8035a273e52}{its\+Valid\+Regex}}
+\begin{DoxyCompactList}\small\item\em 定义有效值的正则表达式 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_a3aa314788bb15c21f3dd777dd528cd21}\label{classjevois_1_1ValidValuesSpecRegex_a3aa314788bb15c21f3dd777dd528cd21}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!ValidValuesSpecRegex@{ValidValuesSpecRegex}}
+\index{ValidValuesSpecRegex@{ValidValuesSpecRegex}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecRegex()}{ValidValuesSpecRegex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{Valid\+Values\+Spec\+Regex}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+没有默认构造函数，始终需要提供正则表达式 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_a0f590351e35519a9b67f6e27fb3ab502}\label{classjevois_1_1ValidValuesSpecRegex_a0f590351e35519a9b67f6e27fb3ab502}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!ValidValuesSpecRegex@{ValidValuesSpecRegex}}
+\index{ValidValuesSpecRegex@{ValidValuesSpecRegex}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecRegex()}{ValidValuesSpecRegex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{Valid\+Values\+Spec\+Regex}} (\begin{DoxyParamCaption}\item[{boost\+::regex const \&}]{valid\+\_\+regex }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+从指定有效值的给定正则表达式构造 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_ac4dbd9b12c1ea20fb562913d6b5e61c0}\label{classjevois_1_1ValidValuesSpecRegex_ac4dbd9b12c1ea20fb562913d6b5e61c0}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!````~ValidValuesSpecRegex@{$\sim$ValidValuesSpecRegex}}
+\index{````~ValidValuesSpecRegex@{$\sim$ValidValuesSpecRegex}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ValidValuesSpecRegex()}{~ValidValuesSpecRegex()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{Valid\+Values\+Spec\+Regex}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_a888360c78deb6d25850ff0ad790aee2b}\label{classjevois_1_1ValidValuesSpecRegex_a888360c78deb6d25850ff0ad790aee2b}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!checkValueValidity@{checkValueValidity}}
+\index{checkValueValidity@{checkValueValidity}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{checkValueValidity()}{checkValueValidity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::check\+Value\+Validity (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+检查提议的值是否有效，当且仅当值与我们的正则表达式匹配时返回 true 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_adc27085c6f685943d9521714313854a9}\label{classjevois_1_1ValidValuesSpecRegex_adc27085c6f685943d9521714313854a9}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!str@{str}}
+\index{str@{str}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+转换为可读字符串 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRegex_ae616006ac3c632c1dec9b8035a273e52}\label{classjevois_1_1ValidValuesSpecRegex_ae616006ac3c632c1dec9b8035a273e52}} 
+\index{jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}!itsValidRegex@{itsValidRegex}}
+\index{itsValidRegex@{itsValidRegex}!jevois::ValidValuesSpecRegex$<$ T $>$@{jevois::ValidValuesSpecRegex$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsValidRegex}{itsValidRegex}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const boost\+::regex \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex}}$<$ T $>$\+::its\+Valid\+Regex\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+定义有效值的正则表达式 
+
+
+
+Definition at line 191 of file Valid\+Values\+Spec.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ValidValuesSpec_8H}{Valid\+Values\+Spec.\+H}}\end{DoxyCompactItemize}

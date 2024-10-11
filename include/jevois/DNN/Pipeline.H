@@ -121,15 +121,15 @@ namespace jevois
                                              false, ParamCateg);
     }
     
-    //! Neural processing pipeline
-    /*! A neural processing pipeline in JeVois consists of:
+    //! 神经处理管道
+    /*! JeVois 中的神经处理管道包括：
 
-        - pre-processing an input image to extract one or more blobs used as input tensors to a deep neural network
-        - processing the input blobs through a deep network to obtain output blobs
-        - post-processing the output blobs to display results and send serial messages
+        - pre-processing 输入图像以提取一个或多个 blobs，用作深度神经网络的输入 tensors
+        - 通过深度网络处理输入 blob 并获得输出 blob
+        - post-processing 输出 blob，显示结果并发送串行消息
 
-        A pipeline is typically configured by parsing a YAML config file (zoo file) that determines what kind of
-        pre-processing, network, and post-processing to use, and that sets the parameters for those.  \ingroup dnn */
+        Pipline 通常通过解析 YAML 配置文件（zoo 文件）来配置，该文件确定要使用哪种类型的 pre-processing、network 和
+		 post-processing，并为其设置参数。  \ingroup dnn */
     class Pipeline : public jevois::Component,
                      public jevois::Parameter<pipeline::zooroot, pipeline::zoo, pipeline::filter, pipeline::pipe,
                                               pipeline::processing, pipeline::preproc, pipeline::nettype,
@@ -143,16 +143,16 @@ namespace jevois
         //! Destructor
         virtual ~Pipeline();
 
-        //! Returns true when all three of preproc, net, and postproc are ready
+        //! 当 preproc、net、postproc 三者都准备就绪时返回 true
         bool ready() const;
         
-        //! Process an input image, send results to serial/image/gui
-        /*! If the network is not ready, no processing will occur. When helper is not null (i.e., using GUI display),
-            hide the information window when idle is true. This function catches all exceptions and reports them. */
+        //! 处理输入图像，将结果发送到 serial/image/gui
+		/*! 如果网络未 ready，则不会进行任何处理。当 helper 不为null时（即使用 GUI 显示），当 idle 为 true 时隐藏信息
+		    窗口。该函数捕获所有异常并报告它们。 */
         void process(jevois::RawImage const & inimg, jevois::StdModule * mod,
                      jevois::RawImage * outimg, jevois::OptGUIhelper * helper, bool idle = false);
           
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻运行时用户不应更改的参数
         void freeze(bool doit);
 
       protected:
@@ -177,7 +177,7 @@ namespace jevois
         void asyncNetWait();
         bool checkAsyncNetComplete();
 #ifdef JEVOIS_PRO
-        // Allow user to peek into outputs. Caller must make sure helper is valid and idle is false
+        // 允许用户查看输出。调用者必须确保 helper 有效且 idle 为 false
         void showDataPeekWindow(jevois::GUIhelper * helper, bool refresh);
 #endif
         

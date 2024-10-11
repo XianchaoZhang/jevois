@@ -1,0 +1,1663 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ICM20948__regs_8H">
+<title>include/jevois/Core/ICM20948_regs.H File Reference</title>
+<indexterm><primary>include/jevois/Core/ICM20948_regs.H</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ICM20948__regs_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae5f52b3c30696d160dc1c37d5337600d">ICM20948_SPI_READ</link>   0x80</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4d65b7cab4b646809c0704298b9cdf69">ICM20948_SPI_WRITE</link>   0x00</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0bc6135d147ede729350d9f2164f6607">DMP_CFG_FIFO_SIZE</link>   (4222)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a02e5d02d71c980f1c8c4b1508254f259">DMP_DATA_OUT_CTL1</link>   (4 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aba50a06bdafe060a850c566c0ca25f9b">DMP_DATA_OUT_CTL2</link>   (4 * 16 + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a54d0182209cdb7091a951c787bf72db5">DMP_DATA_INTR_CTL</link>   (4 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a8a04860d6ccdd5d7303b2fb2d0bd5487">DMP_FIFO_WATERMARK</link>   (31 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a91a080afc81550d4d9a804f3c6a83182">DMP_MOTION_EVENT_CTL</link>   (4 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1accc2ba51183326b43814d52f5a9b2380">DMP_DATA_RDY_STATUS</link>   (8 * 16 + 10)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0a92d1b09512287a756b28043dcbb8b3">DMP_BM_BATCH_CNTR</link>   (27 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac6a2d1aca9a31340da83305a2a939fb9">DMP_BM_BATCH_THLD</link>   (19 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aba95b3b350650550c8229d57bb5e7931">DMP_BM_BATCH_MASK</link>   (21 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a5c265b85b11dc0da0439fee2c926b087">DMP_ODR_ACCEL</link>   (11 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab6fb6d472c4467a5e41f85f500762290">DMP_ODR_GYRO</link>   (11 * 16 + 10)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad87bd610f57519581746d81df2cacf0a">DMP_ODR_CPASS</link>   (11 * 16 +  6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1afbc5f31380ce00a04f0df67a3b741715">DMP_ODR_ALS</link>   (11 * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9c6902b2505f821b7fa41c309b850850">DMP_ODR_QUAT6</link>   (10 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae895c52fb77cead74d14d007a5f7af0c">DMP_ODR_QUAT9</link>   (10 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae843242671724e60bf489f684a69c5d9">DMP_ODR_PQUAT6</link>   (10 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a358ce0686e6844be4429716602d3aaef">DMP_ODR_GEOMAG</link>   (10 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a602deea1c4f615e19b6bd08a54d31048">DMP_ODR_PRESSURE</link>   (11 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a15c338040c08d6046a81fe38e5409988">DMP_ODR_GYRO_CALIBR</link>   (11 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9d2640f234cf4fd1a32817a423df5268">DMP_ODR_CPASS_CALIBR</link>   (11 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4255a4f2f3aef4a61a22ddcf96a9c197">DMP_ODR_CNTR_ACCEL</link>   (9 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9c7b5934cd80afbea237af1dfef83e81">DMP_ODR_CNTR_GYRO</link>   (9 * 16 + 10)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0c5ecaa1081ab6bb37a328203fc1f229">DMP_ODR_CNTR_CPASS</link>   (9 * 16 +  6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abb113fe8811bb00402400c0dc7181f38">DMP_ODR_CNTR_ALS</link>   (9 * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab860507f6cefae89475da968df47b99b">DMP_ODR_CNTR_QUAT6</link>   (8 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa2628cb13951c057d7f4da3f2439c4b3">DMP_ODR_CNTR_QUAT9</link>   (8 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae27bc54e00172024772e83365844cc53">DMP_ODR_CNTR_PQUAT6</link>   (8 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9806572538ccef0de8c08ed9b7f57b28">DMP_ODR_CNTR_GEOMAG</link>   (8 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a46c6a430d8c129e016845fcfa9368a0a">DMP_ODR_CNTR_PRESSURE</link>   (9 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a768ff08df66a7b8c1d6c39a94343d5b7">DMP_ODR_CNTR_GYRO_CALIBR</link>   (9 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab2fe7aa9534db2b7fb892847b281ebf2">DMP_ODR_CNTR_CPASS_CALIBR</link>   (9 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af3cf7c596eaa9aa4ddbcad213928e7ff">DMP_CPASS_MTX_00</link>   (23 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a5f84509686e5137c528aa2d36d3b8d0c">DMP_CPASS_MTX_01</link>   (23 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae998d16f29f3297001b737924618e5ca">DMP_CPASS_MTX_02</link>   (23 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a8a382abd5cc8395fa813351338c959ad">DMP_CPASS_MTX_10</link>   (23 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a8b6d5992e83e5e2fa3dbb439551da525">DMP_CPASS_MTX_11</link>   (24 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aba3764f2cedf01f2e4df4ba6f2d86a10">DMP_CPASS_MTX_12</link>   (24 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a3b45eaed7593f38186f805010f23a3f4">DMP_CPASS_MTX_20</link>   (24 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac7a7d20472e8f761f2a0fcf9f5783f11">DMP_CPASS_MTX_21</link>   (24 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a14484271fd8f6f4b8d965c1f30f76e2c">DMP_CPASS_MTX_22</link>   (25 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad8bea3d7d1fb22b362afdb3ad6e646cf">DMP_GYRO_SF</link>   (19 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a49765ea4cc8cd20b5c6bb011513e1e5f">DMP_ACCEL_FB_GAIN</link>   (34 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a8f61a2edd34d0c4981d721858e659808">DMP_ACCEL_ONLY_GAIN</link>   (16 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0de6d60b13cc0966e1462385fb3337c5">DMP_GYRO_BIAS_X</link>   (139 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4b48919414a90bd0fdf6eef33b3f576f">DMP_GYRO_BIAS_Y</link>   (139 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1adf8bf18ddbac3d35f469ac2e3d5f7206">DMP_GYRO_BIAS_Z</link>   (139 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9ebf39784760509f273caaadc5dc1e23">DMP_GYRO_ACCURACY</link>   (138 * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a85f0d2fb3df2318c12dc1eae583c6823">DMP_GYRO_BIAS_SET</link>   (138 * 16 +  6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a372b4fd834f9050822dbb439660696a7">DMP_GYRO_LAST_TEMPR</link>   (134 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a07427b121d4e28c6c820974fb3e6635f">DMP_GYRO_SLOPE_X</link>   ( 78 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa32e65235c8fafb46572dd00b3cffacb">DMP_GYRO_SLOPE_Y</link>   ( 78 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa1f8f6f35f179d5ba129b3a0e7807b8d">DMP_GYRO_SLOPE_Z</link>   ( 78 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a923872bb6a5abd109592e0edb3186364">DMP_ACCEL_BIAS_X</link>   (110 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af7907ac5a25e121e6fbd1d00199f8924">DMP_ACCEL_BIAS_Y</link>   (110 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a90c4dfe99d49de18df117a9a92e138d1">DMP_ACCEL_BIAS_Z</link>   (110 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aaacc9b1f58306cf2fdecf8a1ca516428">DMP_ACCEL_ACCURACY</link>   (97 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ada1dddd043f433424a06234ca61ac18a">DMP_ACCEL_CAL_RESET</link>   (77 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab8d3c97b30e0830fa2f86d641d2e6a58">DMP_ACCEL_VARIANCE_THRESH</link>   (93 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab6ec5d9e5f64b5799711237569b32315">DMP_ACCEL_CAL_RATE</link>   (94 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0fdb318eb9502ec7f7a4b168802cc358">DMP_ACCEL_PRE_SENSOR_DATA</link>   (97 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0e89a79bb0e78281e2441566a7e11c1f">DMP_ACCEL_COVARIANCE</link>   (101 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1afabea4b942c5b2370e46b3282ad63b47">DMP_ACCEL_ALPHA_VAR</link>   (91 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af0fa3513e11a22bf0a5191ee4acf54e0">DMP_ACCEL_A_VAR</link>   (92 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6f940cd59b0690a699e385955e9f9ac9">DMP_ACCEL_CAL_INIT</link>   (94 * 16 + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab4626658dc11dfcca7479f695d03f18a">DMP_ACCEL_CAL_SCALE_COVQ_IN_RANGE</link>   (194 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4bc8776ffc26a1a19cf2e91ed3fd1e3d">DMP_ACCEL_CAL_SCALE_COVQ_OUT_RANGE</link>   (195 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aaf8ba2495a00e53d663aecc807d0911c">DMP_ACCEL_CAL_TEMPERATURE_SENSITIVITY</link>   (194 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0bf446c4ca28b815004638e6d8c37a85">DMP_ACCEL_CAL_TEMPERATURE_OFFSET_TRIM</link>   (194 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a810d59d445ddf086ff3724e6c54dadcd">DMP_CPASS_BIAS_X</link>   (126 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1acf56b8bf0226761c92ed608052ac0313">DMP_CPASS_BIAS_Y</link>   (126 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af62e7fdd256a4efef1d614a0e3027441">DMP_CPASS_BIAS_Z</link>   (126 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae121461af3ab846931624de4ec07cb70">DMP_CPASS_ACCURACY</link>   (37 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4eda0d2503a93f974fb30b3971d32e6e">DMP_CPASS_BIAS_SET</link>   (34 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a88d069562de092d7e6ee598d39e74bdf">DMP_MAR_MODE</link>   (37 * 16 + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad2e9711f07de99176236042150d09e2e">DMP_CPASS_COVARIANCE</link>   (115 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1acb7870923d6e00cc41e3cd5f4758633b">DMP_CPASS_COVARIANCE_CUR</link>   (118 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad7f4fec13f1f1d19276ef54ef5afabbd">DMP_CPASS_REF_MAG_3D</link>   (122 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a412d173e1c15bc179f171ebc47c6543c">DMP_CPASS_CAL_INIT</link>   (114 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aab82a386cf3fd0c198301b679c732cbe">DMP_CPASS_EST_FIRST_BIAS</link>   (113 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a24813fc73ee09080402a4f9bd6d6d183">DMP_MAG_DISTURB_STATE</link>   (113 * 16 + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a7e49ff06ab92c6e282e8d58b1d39d790">DMP_CPASS_VAR_COUNT</link>   (112 * 16 + 6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af3e1ceeaf5e498910d8a8eacdafd7a6f">DMP_CPASS_COUNT_7</link>   ( 87 * 16 + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a645f06a0aeb4c13069d1b168670b76ea">DMP_CPASS_MAX_INNO</link>   (124 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a868e30b118d7453c90fdb6d032c83cef">DMP_CPASS_BIAS_OFFSET</link>   (113 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a80e02dbef7ae0dbe863392e50e0c01b5">DMP_CPASS_CUR_BIAS_OFFSET</link>   (114 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abb9c2fcc740228e085e81da055b28031">DMP_CPASS_PRE_SENSOR_DATA</link>   ( 87 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a19afdaaf910bb7ce9ea60f2403d4f336">DMP_CPASS_TIME_BUFFER</link>   (112 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1acc758e35c29cbb56699359f91338bb30">DMP_CPASS_RADIUS_3D_THRESH_ANOMALY</link>   (112 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aab1af1720e7eee916d7e029bc6fba474">DMP_CPASS_STATUS_CHK</link>   (25 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aca6ed9d97f5043745460df47c88ebf2c">DMP_MAGN_THR_9X</link>   (80 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a920e5042fee52515c24c6da37b9fcce8">DMP_MAGN_LPF_THR_9X</link>   (80 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae643e7abcd5c4db8aba3396d866ac3a5">DMP_QFB_THR_9X</link>   (80 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aead48addf5991151d33ee3ac76e0d21e">DMP_DMPRATE_CNTR</link>   (18 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a74f683518309d143cc95a483a521ed17">DMP_PEDSTD_BP_B</link>   (49 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a48b0b638d7b60d6d59e93f510cfa9d7b">DMP_PEDSTD_BP_A4</link>   (52 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4f4a8b8fe4d93817de859d727b0f96f7">DMP_PEDSTD_BP_A3</link>   (52 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1adf339947a0a2215b85954a02d53bab23">DMP_PEDSTD_BP_A2</link>   (52 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a84741b3867263e243d8e3c9b61aeba03">DMP_PEDSTD_BP_A1</link>   (52 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a1512ad6970a25717a7ca99f58a4e1c34">DMP_PEDSTD_SB</link>   (50 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab2de66d53386e6776c0475527cefcb15">DMP_PEDSTD_SB_TIME</link>   (50 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0e119d661d84b37ccc390530e9ffb9b2">DMP_PEDSTD_PEAKTHRSH</link>   (57 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4863f070ea23f5d23627d35b60a51acf">DMP_PEDSTD_TIML</link>   (50 * 16 + 10)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abaccce000c22f2faaf9e3cd20910d4a5">DMP_PEDSTD_TIMH</link>   (50 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a87e8f1008b6dd691724ece07fd654633">DMP_PEDSTD_PEAK</link>   (57 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1adc4b58513ed8beb15c8078b58fe56e4a">DMP_PEDSTD_STEPCTR</link>   (54 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a2dbc9220f6367e598b4b847e05a014b9">DMP_PEDSTD_STEPCTR2</link>   (58 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa2762db3824e007efc1285cd173cd1a3">DMP_PEDSTD_TIMECTR</link>   (60 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aade2fd512d2db8a140412f96f3ad0241">DMP_PEDSTD_DECI</link>   (58 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae84d7bdbec738b395d5094c578d109f0">DMP_PEDSTD_SB2</link>   (60 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac67073e8c4c0bdce795630c6d197fa09">DMP_STPDET_TIMESTAMP</link>   (18 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a30ad972ccd471984d235d5d9a00f840e">DMP_PEDSTEP_IND</link>   (19 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a409aec86cb7246451a66c5271845f39e">DMP_PED_Y_RATIO</link>   (17 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1adc487a4385f0370a6ae56151da68b7a8">DMP_SMD_VAR_TH</link>   (141 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a594d5c0428faf20222ee141ba809f657">DMP_SMD_VAR_TH_DRIVE</link>   (143 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abf458f7f7c9cd35026d554ed5880d3bf">DMP_SMD_DRIVE_TIMER_TH</link>   (143 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a5691bd331ec260d0fe0fd0a1da433914">DMP_SMD_TILT_ANGLE_TH</link>   (179 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa7c096463183eeeaae42bb427f950d08">DMP_BAC_SMD_ST_TH</link>   (179 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a259367de74b896fc105b565bc3464583">DMP_BAC_ST_ALPHA4</link>   (180 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abdae06f3ef6ba578fe55058cbaf574ee">DMP_BAC_ST_ALPHA4A</link>   (176 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a5749328cbc2d281e1ad2aee3b4b68bfe">DMP_WOM_ENABLE</link>   (64 * 16 + 14)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a3ed9b2377ed70f6036ee3d304bfabcd1">DMP_WOM_STATUS</link>   (64 * 16 + 6)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa23c75bc821f9da39f2009e7bd50a8f0">DMP_WOM_THRESHOLD</link>   (64 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac5f9b2f33e3af72e1600abc3cc53eee0">DMP_WOM_CNTR_TH</link>   (64 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a87c9867e9b7444fc16ae0325b8ef662d">DMP_BAC_RATE</link>   (48  * 16 + 10)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a77b61a771858d86f204616162d71158c">DMP_BAC_STATE</link>   (179 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a3595228131947c73379ddeae2dea928b">DMP_BAC_STATE_PREV</link>   (179 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9ffaf1c5fe11ee85bdfcf9c8f5de53ed">DMP_BAC_ACT_ON</link>   (182 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae014927575216291d8acc5927b2579ac">DMP_BAC_ACT_OFF</link>   (183 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a2e5ac23435bbc71152f93de8075444db">DMP_BAC_STILL_S_F</link>   (177 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af49a9d90dec6db3d252fdf3a0ce6dce4">DMP_BAC_RUN_S_F</link>   (177 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae2885cfce80f625ce111f3793f5cb954">DMP_BAC_DRIVE_S_F</link>   (178 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac7eb0bf5f491d24116a70a9dbc0e7bf2">DMP_BAC_WALK_S_F</link>   (178 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac2e17fb59581b896da9e2c8ff11953dd">DMP_BAC_SMD_S_F</link>   (178 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab49b7d22b0b845043b6ddd3db3af54aa">DMP_BAC_BIKE_S_F</link>   (178 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a51008cbf42baccb98615618ac8f11296">DMP_BAC_E1_SHORT</link>   (146 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a53a1711ad294219714d8cbc57727f587">DMP_BAC_E2_SHORT</link>   (146 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a3020d8edc704952d8d876a56dd40c39e">DMP_BAC_E3_SHORT</link>   (146 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a0b00c950bcf774db08c5dfb258c88117">DMP_BAC_VAR_RUN</link>   (148 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad63d0b91902a460ba7c0fd2f89968439">DMP_BAC_TILT_INIT</link>   (181 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ada77b31f0f6e5c0f562fcd9d5930eb2a">DMP_BAC_MAG_ON</link>   (225 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a73d82b2e43e7a5ffe6bedccab09744b5">DMP_BAC_PS_ON</link>   (74  * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ac8537d2c4e6949cc7ac8f8223c9acf45">DMP_BAC_BIKE_PREFERENCE</link>   (173 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a522b96df9c2e48fac4db5533486e77a6">DMP_BAC_MAG_I2C_ADDR</link>   (229 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a777e5c1d9c3c20207fabaff0d14fc576">DMP_BAC_PS_I2C_ADDR</link>   (75  * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aac89d9062b24a0fc980e8b871d831050">DMP_BAC_DRIVE_CONFIDENCE</link>   (144 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6acae9093b4d25ff0b002a2ed1d8584b">DMP_BAC_WALK_CONFIDENCE</link>   (144 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae6de7d8c186203cac7ab54ff7dad8e7e">DMP_BAC_SMD_CONFIDENCE</link>   (144 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a42185033ce471da3e4fa6ae54c502219">DMP_BAC_BIKE_CONFIDENCE</link>   (144 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a46e2f032b56663e770499a4d7c1e0d9b">DMP_BAC_STILL_CONFIDENCE</link>   (145 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a40f633262ef3de427003cf1abcf8efaa">DMP_BAC_RUN_CONFIDENCE</link>   (145 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a95468a13a0ea38ecb5a639890bdd3424">DMP_BAC_MODE_CNTR</link>   (150 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a92d63cddf6ae6173560140b3fec88b1e">DMP_BAC_STATE_T_PREV</link>   (185 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a710c7e62f2f7414d83a138feee5b7cba">DMP_BAC_ACT_T_ON</link>   (184 * 16 +  0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a5a3318511f731757d173b4fee3da4d8a">DMP_BAC_ACT_T_OFF</link>   (184 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af22405f047fa74a8152f3117403986a2">DMP_BAC_STATE_WRDBS_PREV</link>   (185 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aee9a18ddec39756b63b611381ed0131c">DMP_BAC_ACT_WRDBS_ON</link>   (184 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab5bdf23adfc54f3d476131f2ad54f9b3">DMP_BAC_ACT_WRDBS_OFF</link>   (184 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6e75306f1f7a9a747d57f0da61c504c9">DMP_BAC_ACT_ON_OFF</link>   (190 * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1abd01102e9cbef1e07ecf83329e350314">DMP_PREV_BAC_ACT_ON_OFF</link>   (188 * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad5fff7ef700fd47d42df32beee9cce4d">DMP_BAC_CNTR</link>   (48  * 16 +  2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af8dee60081b4cad80af437c058e9102e">DMP_FP_VAR_ALPHA</link>   (245 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ab44d51d121f0e48be906b1ebb1cf9bc1">DMP_FP_STILL_TH</link>   (246 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a1d1b9574da2c920d36b2eaa3ed8f4478">DMP_FP_MID_STILL_TH</link>   (244 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a76f83bf5fd45ced6d4733a314cdc3d69">DMP_FP_NOT_STILL_TH</link>   (246 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a866de78975f5a2f28ce0b8f37279ea02">DMP_FP_VIB_REJ_TH</link>   (241 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a86c17f923f43e8b91dd97f70ab19ebbc">DMP_FP_MAX_PICKUP_T_TH</link>   (244 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae58aeb6d2d808e0acaab6084fcd3c48f">DMP_FP_PICKUP_TIMEOUT_TH</link>   (248 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af0d2d989e04ca473f1e0d3098a854cae">DMP_FP_STILL_CONST_TH</link>   (246 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a7b68d7c518a5008de64cea9a26c4245b">DMP_FP_MOTION_CONST_TH</link>   (240 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a9da7a37b14043d4108cf0bcc47296786">DMP_FP_VIB_COUNT_TH</link>   (242 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6b29ec9f0dd72ca5a2b0f34d5453d3a4">DMP_FP_STEADY_TILT_TH</link>   (247 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a1f0f61d431ec3534064b44de84134b77">DMP_FP_STEADY_TILT_UP_TH</link>   (242 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa6f5e4607a1dfc639abf91ac15a9244a">DMP_FP_Z_FLAT_TH_MINUS</link>   (243 * 16 +  8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6417d1124ab8fb2896405dadc8dcd553">DMP_FP_Z_FLAT_TH_PLUS</link>   (243 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a25ca49b6a3f1058ee41151ef3de25cfa">DMP_FP_DEV_IN_POCKET_TH</link>   (76  * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af72e550cf5b1047e1321350859741412">DMP_FP_PICKUP_CNTR</link>   (247 * 16 +  4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a526abd8170b968c2fb5f512795d9f568">DMP_FP_RATE</link>   (240 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ae607f83da84987f4759d28a674558792">DMP_GYRO_FULLSCALE</link>   (72 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a79c9244798cda44f99854e0acd3bd971">DMP_ACC_SCALE</link>   (30 * 16 + 0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a7e25fb3fc658883a380d1ce0a3c5ca6f">DMP_ACC_SCALE2</link>   (79 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a342d30c8e1f2f3daaa0666449e66674e">DMP_EIS_AUTH_INPUT</link>   (160 * 16 +   4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa05fdfc7f6b266c8bcc685be1fba852d">DMP_EIS_AUTH_OUTPUT</link>   (160 * 16 +   0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6d553d88ea61e9c0e60cfaeec38e34b9">DMP_B2S_RATE</link>   (48  * 16 +   8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a274da14a5c0a3d8823ba432520960ef6">DMP_B2S_MTX_00</link>   (208 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a61f8ade32965f12c9c3c2c1037714f4d">DMP_B2S_MTX_01</link>   (208 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a4f463a3bb64147fbfa586a22459b9c47">DMP_B2S_MTX_02</link>   (208 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a556cadac5625a5209e58c1403c6fac27">DMP_B2S_MTX_10</link>   (208 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1afbf5355cc40032770334b5d3edbf143c">DMP_B2S_MTX_11</link>   (209 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1af324620e8e511317a85987197e2edee1">DMP_B2S_MTX_12</link>   (209 * 16 + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a1f088f9b2f35c8a59c42716038d7a556">DMP_B2S_MTX_20</link>   (209 * 16 + 8)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a8e0070b6bd23c600864032233b0b13bd">DMP_B2S_MTX_21</link>   (209 * 16 + 12)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a2e31d2e9cc26a0fbf6943f847145f671">DMP_B2S_MTX_22</link>   (210 * 16)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a6b486d71c2ddb81811c12b604324bc8d">DMP_START_ADDRESS</link>   ((unsigned short)0x1000)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a3f8983d47d9670c0469d20b41e545873">DMP_MEM_BANK_SIZE</link>   256</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a1a96fcda86b5349d3c13573f0593a800">DMP_LOAD_START</link>   0x90</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a304702b72a030fceea30b45d1ab53a5c">DMP_CODE_SIZE</link>   14301</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aac5a9f3a1598dfb9e2a86a4371c9fe7a">DMP_BAC_DRIVE</link>   0x01</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1aa50157bec343be5c91bc61251baeed28">DMP_BAC_WALK</link>   0x02</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1ad845a909137aacd227aa418cd1736e71">DMP_BAC_RUN</link>   0x04</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a735862aa0f5707caea0ec501960a5b12">DMP_BAC_BIKE</link>   0x08</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a2219ff8e90832d81910cc31a786bdf39">DMP_BAC_TILT</link>   0x10</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948__regs_8H_1a733c2a0ddeafb2454859798b25245974">DMP_BAC_STILL</link>   0x20</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ICM20948__regs_8H_1a79c9244798cda44f99854e0acd3bd971"/>    <section>
+    <title>DMP_ACC_SCALE</title>
+<indexterm><primary>DMP_ACC_SCALE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACC_SCALE</secondary></indexterm>
+<para><computeroutput>#define DMP_ACC_SCALE   (30 * 16 + 0)</computeroutput></para><para>
+Definition at line 621 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a7e25fb3fc658883a380d1ce0a3c5ca6f"/>    <section>
+    <title>DMP_ACC_SCALE2</title>
+<indexterm><primary>DMP_ACC_SCALE2</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACC_SCALE2</secondary></indexterm>
+<para><computeroutput>#define DMP_ACC_SCALE2   (79 * 16 + 4)</computeroutput></para><para>
+Definition at line 622 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af0fa3513e11a22bf0a5191ee4acf54e0"/>    <section>
+    <title>DMP_ACCEL_A_VAR</title>
+<indexterm><primary>DMP_ACCEL_A_VAR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_A_VAR</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_A_VAR   (92 * 16)</computeroutput></para><para>
+Definition at line 483 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aaacc9b1f58306cf2fdecf8a1ca516428"/>    <section>
+    <title>DMP_ACCEL_ACCURACY</title>
+<indexterm><primary>DMP_ACCEL_ACCURACY</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_ACCURACY</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_ACCURACY   (97 * 16)</computeroutput></para><para>
+Definition at line 476 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1afabea4b942c5b2370e46b3282ad63b47"/>    <section>
+    <title>DMP_ACCEL_ALPHA_VAR</title>
+<indexterm><primary>DMP_ACCEL_ALPHA_VAR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_ALPHA_VAR</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_ALPHA_VAR   (91 * 16)</computeroutput></para><para>
+Definition at line 482 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a923872bb6a5abd109592e0edb3186364"/>    <section>
+    <title>DMP_ACCEL_BIAS_X</title>
+<indexterm><primary>DMP_ACCEL_BIAS_X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_BIAS_X</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_BIAS_X   (110 * 16 +  4)</computeroutput></para><para>
+Definition at line 473 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af7907ac5a25e121e6fbd1d00199f8924"/>    <section>
+    <title>DMP_ACCEL_BIAS_Y</title>
+<indexterm><primary>DMP_ACCEL_BIAS_Y</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_BIAS_Y</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_BIAS_Y   (110 * 16 +  8)</computeroutput></para><para>
+Definition at line 474 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a90c4dfe99d49de18df117a9a92e138d1"/>    <section>
+    <title>DMP_ACCEL_BIAS_Z</title>
+<indexterm><primary>DMP_ACCEL_BIAS_Z</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_BIAS_Z</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_BIAS_Z   (110 * 16 + 12)</computeroutput></para><para>
+Definition at line 475 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6f940cd59b0690a699e385955e9f9ac9"/>    <section>
+    <title>DMP_ACCEL_CAL_INIT</title>
+<indexterm><primary>DMP_ACCEL_CAL_INIT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_INIT</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_INIT   (94 * 16 + 2)</computeroutput></para><para>
+Definition at line 484 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab6ec5d9e5f64b5799711237569b32315"/>    <section>
+    <title>DMP_ACCEL_CAL_RATE</title>
+<indexterm><primary>DMP_ACCEL_CAL_RATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_RATE</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_RATE   (94 * 16 + 4)</computeroutput></para><para>
+Definition at line 479 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ada1dddd043f433424a06234ca61ac18a"/>    <section>
+    <title>DMP_ACCEL_CAL_RESET</title>
+<indexterm><primary>DMP_ACCEL_CAL_RESET</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_RESET</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_RESET   (77 * 16)</computeroutput></para><para>
+Definition at line 477 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab4626658dc11dfcca7479f695d03f18a"/>    <section>
+    <title>DMP_ACCEL_CAL_SCALE_COVQ_IN_RANGE</title>
+<indexterm><primary>DMP_ACCEL_CAL_SCALE_COVQ_IN_RANGE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_SCALE_COVQ_IN_RANGE</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_SCALE_COVQ_IN_RANGE   (194 * 16)</computeroutput></para><para>
+Definition at line 485 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4bc8776ffc26a1a19cf2e91ed3fd1e3d"/>    <section>
+    <title>DMP_ACCEL_CAL_SCALE_COVQ_OUT_RANGE</title>
+<indexterm><primary>DMP_ACCEL_CAL_SCALE_COVQ_OUT_RANGE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_SCALE_COVQ_OUT_RANGE</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_SCALE_COVQ_OUT_RANGE   (195 * 16)</computeroutput></para><para>
+Definition at line 486 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0bf446c4ca28b815004638e6d8c37a85"/>    <section>
+    <title>DMP_ACCEL_CAL_TEMPERATURE_OFFSET_TRIM</title>
+<indexterm><primary>DMP_ACCEL_CAL_TEMPERATURE_OFFSET_TRIM</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_TEMPERATURE_OFFSET_TRIM</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_TEMPERATURE_OFFSET_TRIM   (194 * 16 + 12)</computeroutput></para><para>
+Definition at line 488 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aaf8ba2495a00e53d663aecc807d0911c"/>    <section>
+    <title>DMP_ACCEL_CAL_TEMPERATURE_SENSITIVITY</title>
+<indexterm><primary>DMP_ACCEL_CAL_TEMPERATURE_SENSITIVITY</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_CAL_TEMPERATURE_SENSITIVITY</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_CAL_TEMPERATURE_SENSITIVITY   (194 * 16 + 4)</computeroutput></para><para>
+Definition at line 487 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0e89a79bb0e78281e2441566a7e11c1f"/>    <section>
+    <title>DMP_ACCEL_COVARIANCE</title>
+<indexterm><primary>DMP_ACCEL_COVARIANCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_COVARIANCE</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_COVARIANCE   (101 * 16 + 8)</computeroutput></para><para>
+Definition at line 481 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a49765ea4cc8cd20b5c6bb011513e1e5f"/>    <section>
+    <title>DMP_ACCEL_FB_GAIN</title>
+<indexterm><primary>DMP_ACCEL_FB_GAIN</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_FB_GAIN</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_FB_GAIN   (34 * 16)</computeroutput></para><para>
+Definition at line 459 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a8f61a2edd34d0c4981d721858e659808"/>    <section>
+    <title>DMP_ACCEL_ONLY_GAIN</title>
+<indexterm><primary>DMP_ACCEL_ONLY_GAIN</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_ONLY_GAIN</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_ONLY_GAIN   (16 * 16 + 12)</computeroutput></para><para>
+Definition at line 460 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0fdb318eb9502ec7f7a4b168802cc358"/>    <section>
+    <title>DMP_ACCEL_PRE_SENSOR_DATA</title>
+<indexterm><primary>DMP_ACCEL_PRE_SENSOR_DATA</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_PRE_SENSOR_DATA</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_PRE_SENSOR_DATA   (97 * 16 + 4)</computeroutput></para><para>
+Definition at line 480 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab8d3c97b30e0830fa2f86d641d2e6a58"/>    <section>
+    <title>DMP_ACCEL_VARIANCE_THRESH</title>
+<indexterm><primary>DMP_ACCEL_VARIANCE_THRESH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ACCEL_VARIANCE_THRESH</secondary></indexterm>
+<para><computeroutput>#define DMP_ACCEL_VARIANCE_THRESH   (93 * 16)</computeroutput></para><para>
+Definition at line 478 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a274da14a5c0a3d8823ba432520960ef6"/>    <section>
+    <title>DMP_B2S_MTX_00</title>
+<indexterm><primary>DMP_B2S_MTX_00</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_00</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_00   (208 * 16)</computeroutput></para><para>
+Definition at line 631 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a61f8ade32965f12c9c3c2c1037714f4d"/>    <section>
+    <title>DMP_B2S_MTX_01</title>
+<indexterm><primary>DMP_B2S_MTX_01</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_01</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_01   (208 * 16 + 4)</computeroutput></para><para>
+Definition at line 632 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4f463a3bb64147fbfa586a22459b9c47"/>    <section>
+    <title>DMP_B2S_MTX_02</title>
+<indexterm><primary>DMP_B2S_MTX_02</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_02</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_02   (208 * 16 + 8)</computeroutput></para><para>
+Definition at line 633 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a556cadac5625a5209e58c1403c6fac27"/>    <section>
+    <title>DMP_B2S_MTX_10</title>
+<indexterm><primary>DMP_B2S_MTX_10</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_10</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_10   (208 * 16 + 12)</computeroutput></para><para>
+Definition at line 634 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1afbf5355cc40032770334b5d3edbf143c"/>    <section>
+    <title>DMP_B2S_MTX_11</title>
+<indexterm><primary>DMP_B2S_MTX_11</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_11</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_11   (209 * 16)</computeroutput></para><para>
+Definition at line 635 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af324620e8e511317a85987197e2edee1"/>    <section>
+    <title>DMP_B2S_MTX_12</title>
+<indexterm><primary>DMP_B2S_MTX_12</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_12</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_12   (209 * 16 + 4)</computeroutput></para><para>
+Definition at line 636 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a1f088f9b2f35c8a59c42716038d7a556"/>    <section>
+    <title>DMP_B2S_MTX_20</title>
+<indexterm><primary>DMP_B2S_MTX_20</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_20</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_20   (209 * 16 + 8)</computeroutput></para><para>
+Definition at line 637 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a8e0070b6bd23c600864032233b0b13bd"/>    <section>
+    <title>DMP_B2S_MTX_21</title>
+<indexterm><primary>DMP_B2S_MTX_21</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_21</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_21   (209 * 16 + 12)</computeroutput></para><para>
+Definition at line 638 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a2e31d2e9cc26a0fbf6943f847145f671"/>    <section>
+    <title>DMP_B2S_MTX_22</title>
+<indexterm><primary>DMP_B2S_MTX_22</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_MTX_22</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_MTX_22   (210 * 16)</computeroutput></para><para>
+Definition at line 639 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6d553d88ea61e9c0e60cfaeec38e34b9"/>    <section>
+    <title>DMP_B2S_RATE</title>
+<indexterm><primary>DMP_B2S_RATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_B2S_RATE</secondary></indexterm>
+<para><computeroutput>#define DMP_B2S_RATE   (48  * 16 +   8)</computeroutput></para><para>
+Definition at line 629 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae014927575216291d8acc5927b2579ac"/>    <section>
+    <title>DMP_BAC_ACT_OFF</title>
+<indexterm><primary>DMP_BAC_ACT_OFF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_OFF</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_OFF   (183 * 16 +  0)</computeroutput></para><para>
+Definition at line 564 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9ffaf1c5fe11ee85bdfcf9c8f5de53ed"/>    <section>
+    <title>DMP_BAC_ACT_ON</title>
+<indexterm><primary>DMP_BAC_ACT_ON</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_ON</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_ON   (182 * 16 +  0)</computeroutput></para><para>
+Definition at line 563 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6e75306f1f7a9a747d57f0da61c504c9"/>    <section>
+    <title>DMP_BAC_ACT_ON_OFF</title>
+<indexterm><primary>DMP_BAC_ACT_ON_OFF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_ON_OFF</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_ON_OFF   (190 * 16 +  2)</computeroutput></para><para>
+Definition at line 594 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a5a3318511f731757d173b4fee3da4d8a"/>    <section>
+    <title>DMP_BAC_ACT_T_OFF</title>
+<indexterm><primary>DMP_BAC_ACT_T_OFF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_T_OFF</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_T_OFF   (184 * 16 +  4)</computeroutput></para><para>
+Definition at line 590 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a710c7e62f2f7414d83a138feee5b7cba"/>    <section>
+    <title>DMP_BAC_ACT_T_ON</title>
+<indexterm><primary>DMP_BAC_ACT_T_ON</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_T_ON</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_T_ON   (184 * 16 +  0)</computeroutput></para><para>
+Definition at line 589 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab5bdf23adfc54f3d476131f2ad54f9b3"/>    <section>
+    <title>DMP_BAC_ACT_WRDBS_OFF</title>
+<indexterm><primary>DMP_BAC_ACT_WRDBS_OFF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_WRDBS_OFF</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_WRDBS_OFF   (184 * 16 + 12)</computeroutput></para><para>
+Definition at line 593 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aee9a18ddec39756b63b611381ed0131c"/>    <section>
+    <title>DMP_BAC_ACT_WRDBS_ON</title>
+<indexterm><primary>DMP_BAC_ACT_WRDBS_ON</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ACT_WRDBS_ON</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ACT_WRDBS_ON   (184 * 16 +  8)</computeroutput></para><para>
+Definition at line 592 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a735862aa0f5707caea0ec501960a5b12"/>    <section>
+    <title>DMP_BAC_BIKE</title>
+<indexterm><primary>DMP_BAC_BIKE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_BIKE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_BIKE   0x08</computeroutput></para><para>
+Definition at line 651 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a42185033ce471da3e4fa6ae54c502219"/>    <section>
+    <title>DMP_BAC_BIKE_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_BIKE_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_BIKE_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_BIKE_CONFIDENCE   (144 * 16 + 12)</computeroutput></para><para>
+Definition at line 584 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac8537d2c4e6949cc7ac8f8223c9acf45"/>    <section>
+    <title>DMP_BAC_BIKE_PREFERENCE</title>
+<indexterm><primary>DMP_BAC_BIKE_PREFERENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_BIKE_PREFERENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_BIKE_PREFERENCE   (173 * 16 +  8)</computeroutput></para><para>
+Definition at line 578 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab49b7d22b0b845043b6ddd3db3af54aa"/>    <section>
+    <title>DMP_BAC_BIKE_S_F</title>
+<indexterm><primary>DMP_BAC_BIKE_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_BIKE_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_BIKE_S_F   (178 * 16 + 12)</computeroutput></para><para>
+Definition at line 570 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad5fff7ef700fd47d42df32beee9cce4d"/>    <section>
+    <title>DMP_BAC_CNTR</title>
+<indexterm><primary>DMP_BAC_CNTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_CNTR</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_CNTR   (48  * 16 +  2)</computeroutput></para><para>
+Definition at line 596 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aac5a9f3a1598dfb9e2a86a4371c9fe7a"/>    <section>
+    <title>DMP_BAC_DRIVE</title>
+<indexterm><primary>DMP_BAC_DRIVE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_DRIVE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_DRIVE   0x01</computeroutput></para><para>
+Definition at line 648 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aac89d9062b24a0fc980e8b871d831050"/>    <section>
+    <title>DMP_BAC_DRIVE_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_DRIVE_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_DRIVE_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_DRIVE_CONFIDENCE   (144 * 16 +  0)</computeroutput></para><para>
+Definition at line 581 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae2885cfce80f625ce111f3793f5cb954"/>    <section>
+    <title>DMP_BAC_DRIVE_S_F</title>
+<indexterm><primary>DMP_BAC_DRIVE_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_DRIVE_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_DRIVE_S_F   (178 * 16 +  0)</computeroutput></para><para>
+Definition at line 567 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a51008cbf42baccb98615618ac8f11296"/>    <section>
+    <title>DMP_BAC_E1_SHORT</title>
+<indexterm><primary>DMP_BAC_E1_SHORT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_E1_SHORT</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_E1_SHORT   (146 * 16 +  0)</computeroutput></para><para>
+Definition at line 571 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a53a1711ad294219714d8cbc57727f587"/>    <section>
+    <title>DMP_BAC_E2_SHORT</title>
+<indexterm><primary>DMP_BAC_E2_SHORT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_E2_SHORT</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_E2_SHORT   (146 * 16 +  4)</computeroutput></para><para>
+Definition at line 572 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a3020d8edc704952d8d876a56dd40c39e"/>    <section>
+    <title>DMP_BAC_E3_SHORT</title>
+<indexterm><primary>DMP_BAC_E3_SHORT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_E3_SHORT</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_E3_SHORT   (146 * 16 +  8)</computeroutput></para><para>
+Definition at line 573 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a522b96df9c2e48fac4db5533486e77a6"/>    <section>
+    <title>DMP_BAC_MAG_I2C_ADDR</title>
+<indexterm><primary>DMP_BAC_MAG_I2C_ADDR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_MAG_I2C_ADDR</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_MAG_I2C_ADDR   (229 * 16 +  8)</computeroutput></para><para>
+Definition at line 579 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ada77b31f0f6e5c0f562fcd9d5930eb2a"/>    <section>
+    <title>DMP_BAC_MAG_ON</title>
+<indexterm><primary>DMP_BAC_MAG_ON</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_MAG_ON</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_MAG_ON   (225 * 16 +  0)</computeroutput></para><para>
+Definition at line 576 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a95468a13a0ea38ecb5a639890bdd3424"/>    <section>
+    <title>DMP_BAC_MODE_CNTR</title>
+<indexterm><primary>DMP_BAC_MODE_CNTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_MODE_CNTR</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_MODE_CNTR   (150 * 16)</computeroutput></para><para>
+Definition at line 587 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a777e5c1d9c3c20207fabaff0d14fc576"/>    <section>
+    <title>DMP_BAC_PS_I2C_ADDR</title>
+<indexterm><primary>DMP_BAC_PS_I2C_ADDR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_PS_I2C_ADDR</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_PS_I2C_ADDR   (75  * 16 +  4)</computeroutput></para><para>
+Definition at line 580 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a73d82b2e43e7a5ffe6bedccab09744b5"/>    <section>
+    <title>DMP_BAC_PS_ON</title>
+<indexterm><primary>DMP_BAC_PS_ON</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_PS_ON</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_PS_ON   (74  * 16 +  0)</computeroutput></para><para>
+Definition at line 577 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a87c9867e9b7444fc16ae0325b8ef662d"/>    <section>
+    <title>DMP_BAC_RATE</title>
+<indexterm><primary>DMP_BAC_RATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_RATE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_RATE   (48  * 16 + 10)</computeroutput></para><para>
+Definition at line 560 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad845a909137aacd227aa418cd1736e71"/>    <section>
+    <title>DMP_BAC_RUN</title>
+<indexterm><primary>DMP_BAC_RUN</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_RUN</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_RUN   0x04</computeroutput></para><para>
+Definition at line 650 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a40f633262ef3de427003cf1abcf8efaa"/>    <section>
+    <title>DMP_BAC_RUN_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_RUN_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_RUN_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_RUN_CONFIDENCE   (145 * 16 +  4)</computeroutput></para><para>
+Definition at line 586 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af49a9d90dec6db3d252fdf3a0ce6dce4"/>    <section>
+    <title>DMP_BAC_RUN_S_F</title>
+<indexterm><primary>DMP_BAC_RUN_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_RUN_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_RUN_S_F   (177 * 16 +  4)</computeroutput></para><para>
+Definition at line 566 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae6de7d8c186203cac7ab54ff7dad8e7e"/>    <section>
+    <title>DMP_BAC_SMD_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_SMD_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_SMD_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_SMD_CONFIDENCE   (144 * 16 +  8)</computeroutput></para><para>
+Definition at line 583 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac2e17fb59581b896da9e2c8ff11953dd"/>    <section>
+    <title>DMP_BAC_SMD_S_F</title>
+<indexterm><primary>DMP_BAC_SMD_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_SMD_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_SMD_S_F   (178 * 16 +  8)</computeroutput></para><para>
+Definition at line 569 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa7c096463183eeeaae42bb427f950d08"/>    <section>
+    <title>DMP_BAC_SMD_ST_TH</title>
+<indexterm><primary>DMP_BAC_SMD_ST_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_SMD_ST_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_SMD_ST_TH   (179 * 16 +  8)</computeroutput></para><para>
+Definition at line 549 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a259367de74b896fc105b565bc3464583"/>    <section>
+    <title>DMP_BAC_ST_ALPHA4</title>
+<indexterm><primary>DMP_BAC_ST_ALPHA4</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ST_ALPHA4</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ST_ALPHA4   (180 * 16 + 12)</computeroutput></para><para>
+Definition at line 550 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abdae06f3ef6ba578fe55058cbaf574ee"/>    <section>
+    <title>DMP_BAC_ST_ALPHA4A</title>
+<indexterm><primary>DMP_BAC_ST_ALPHA4A</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_ST_ALPHA4A</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_ST_ALPHA4A   (176 * 16 + 12)</computeroutput></para><para>
+Definition at line 551 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a77b61a771858d86f204616162d71158c"/>    <section>
+    <title>DMP_BAC_STATE</title>
+<indexterm><primary>DMP_BAC_STATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STATE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STATE   (179 * 16 +  0)</computeroutput></para><para>
+Definition at line 561 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a3595228131947c73379ddeae2dea928b"/>    <section>
+    <title>DMP_BAC_STATE_PREV</title>
+<indexterm><primary>DMP_BAC_STATE_PREV</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STATE_PREV</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STATE_PREV   (179 * 16 +  4)</computeroutput></para><para>
+Definition at line 562 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a92d63cddf6ae6173560140b3fec88b1e"/>    <section>
+    <title>DMP_BAC_STATE_T_PREV</title>
+<indexterm><primary>DMP_BAC_STATE_T_PREV</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STATE_T_PREV</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STATE_T_PREV   (185 * 16 +  4)</computeroutput></para><para>
+Definition at line 588 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af22405f047fa74a8152f3117403986a2"/>    <section>
+    <title>DMP_BAC_STATE_WRDBS_PREV</title>
+<indexterm><primary>DMP_BAC_STATE_WRDBS_PREV</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STATE_WRDBS_PREV</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STATE_WRDBS_PREV   (185 * 16 +  8)</computeroutput></para><para>
+Definition at line 591 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a733c2a0ddeafb2454859798b25245974"/>    <section>
+    <title>DMP_BAC_STILL</title>
+<indexterm><primary>DMP_BAC_STILL</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STILL</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STILL   0x20</computeroutput></para><para>
+Definition at line 653 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a46e2f032b56663e770499a4d7c1e0d9b"/>    <section>
+    <title>DMP_BAC_STILL_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_STILL_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STILL_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STILL_CONFIDENCE   (145 * 16 +  0)</computeroutput></para><para>
+Definition at line 585 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a2e5ac23435bbc71152f93de8075444db"/>    <section>
+    <title>DMP_BAC_STILL_S_F</title>
+<indexterm><primary>DMP_BAC_STILL_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_STILL_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_STILL_S_F   (177 * 16 +  0)</computeroutput></para><para>
+Definition at line 565 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a2219ff8e90832d81910cc31a786bdf39"/>    <section>
+    <title>DMP_BAC_TILT</title>
+<indexterm><primary>DMP_BAC_TILT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_TILT</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_TILT   0x10</computeroutput></para><para>
+Definition at line 652 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad63d0b91902a460ba7c0fd2f89968439"/>    <section>
+    <title>DMP_BAC_TILT_INIT</title>
+<indexterm><primary>DMP_BAC_TILT_INIT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_TILT_INIT</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_TILT_INIT   (181 * 16 +  0)</computeroutput></para><para>
+Definition at line 575 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0b00c950bcf774db08c5dfb258c88117"/>    <section>
+    <title>DMP_BAC_VAR_RUN</title>
+<indexterm><primary>DMP_BAC_VAR_RUN</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_VAR_RUN</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_VAR_RUN   (148 * 16 + 12)</computeroutput></para><para>
+Definition at line 574 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa50157bec343be5c91bc61251baeed28"/>    <section>
+    <title>DMP_BAC_WALK</title>
+<indexterm><primary>DMP_BAC_WALK</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_WALK</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_WALK   0x02</computeroutput></para><para>
+Definition at line 649 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6acae9093b4d25ff0b002a2ed1d8584b"/>    <section>
+    <title>DMP_BAC_WALK_CONFIDENCE</title>
+<indexterm><primary>DMP_BAC_WALK_CONFIDENCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_WALK_CONFIDENCE</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_WALK_CONFIDENCE   (144 * 16 +  4)</computeroutput></para><para>
+Definition at line 582 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac7eb0bf5f491d24116a70a9dbc0e7bf2"/>    <section>
+    <title>DMP_BAC_WALK_S_F</title>
+<indexterm><primary>DMP_BAC_WALK_S_F</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BAC_WALK_S_F</secondary></indexterm>
+<para><computeroutput>#define DMP_BAC_WALK_S_F   (178 * 16 +  4)</computeroutput></para><para>
+Definition at line 568 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0a92d1b09512287a756b28043dcbb8b3"/>    <section>
+    <title>DMP_BM_BATCH_CNTR</title>
+<indexterm><primary>DMP_BM_BATCH_CNTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BM_BATCH_CNTR</secondary></indexterm>
+<para><computeroutput>#define DMP_BM_BATCH_CNTR   (27 * 16)</computeroutput></para><para>
+Definition at line 417 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aba95b3b350650550c8229d57bb5e7931"/>    <section>
+    <title>DMP_BM_BATCH_MASK</title>
+<indexterm><primary>DMP_BM_BATCH_MASK</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BM_BATCH_MASK</secondary></indexterm>
+<para><computeroutput>#define DMP_BM_BATCH_MASK   (21 * 16 + 14)</computeroutput></para><para>
+Definition at line 419 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac6a2d1aca9a31340da83305a2a939fb9"/>    <section>
+    <title>DMP_BM_BATCH_THLD</title>
+<indexterm><primary>DMP_BM_BATCH_THLD</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_BM_BATCH_THLD</secondary></indexterm>
+<para><computeroutput>#define DMP_BM_BATCH_THLD   (19 * 16 + 12)</computeroutput></para><para>
+Definition at line 418 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0bc6135d147ede729350d9f2164f6607"/>    <section>
+    <title>DMP_CFG_FIFO_SIZE</title>
+<indexterm><primary>DMP_CFG_FIFO_SIZE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CFG_FIFO_SIZE</secondary></indexterm>
+<para><computeroutput>#define DMP_CFG_FIFO_SIZE   (4222)</computeroutput></para><para>
+Definition at line 399 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a304702b72a030fceea30b45d1ab53a5c"/>    <section>
+    <title>DMP_CODE_SIZE</title>
+<indexterm><primary>DMP_CODE_SIZE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CODE_SIZE</secondary></indexterm>
+<para><computeroutput>#define DMP_CODE_SIZE   14301</computeroutput></para><para>
+Definition at line 645 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae121461af3ab846931624de4ec07cb70"/>    <section>
+    <title>DMP_CPASS_ACCURACY</title>
+<indexterm><primary>DMP_CPASS_ACCURACY</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_ACCURACY</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_ACCURACY   (37 * 16)</computeroutput></para><para>
+Definition at line 493 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a868e30b118d7453c90fdb6d032c83cef"/>    <section>
+    <title>DMP_CPASS_BIAS_OFFSET</title>
+<indexterm><primary>DMP_CPASS_BIAS_OFFSET</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_BIAS_OFFSET</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_BIAS_OFFSET   (113 * 16 + 4)</computeroutput></para><para>
+Definition at line 505 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4eda0d2503a93f974fb30b3971d32e6e"/>    <section>
+    <title>DMP_CPASS_BIAS_SET</title>
+<indexterm><primary>DMP_CPASS_BIAS_SET</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_BIAS_SET</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_BIAS_SET   (34 * 16 + 14)</computeroutput></para><para>
+Definition at line 494 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a810d59d445ddf086ff3724e6c54dadcd"/>    <section>
+    <title>DMP_CPASS_BIAS_X</title>
+<indexterm><primary>DMP_CPASS_BIAS_X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_BIAS_X</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_BIAS_X   (126 * 16 +  4)</computeroutput></para><para>
+Definition at line 490 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1acf56b8bf0226761c92ed608052ac0313"/>    <section>
+    <title>DMP_CPASS_BIAS_Y</title>
+<indexterm><primary>DMP_CPASS_BIAS_Y</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_BIAS_Y</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_BIAS_Y   (126 * 16 +  8)</computeroutput></para><para>
+Definition at line 491 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af62e7fdd256a4efef1d614a0e3027441"/>    <section>
+    <title>DMP_CPASS_BIAS_Z</title>
+<indexterm><primary>DMP_CPASS_BIAS_Z</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_BIAS_Z</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_BIAS_Z   (126 * 16 + 12)</computeroutput></para><para>
+Definition at line 492 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a412d173e1c15bc179f171ebc47c6543c"/>    <section>
+    <title>DMP_CPASS_CAL_INIT</title>
+<indexterm><primary>DMP_CPASS_CAL_INIT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_CAL_INIT</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_CAL_INIT   (114 * 16)</computeroutput></para><para>
+Definition at line 499 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af3e1ceeaf5e498910d8a8eacdafd7a6f"/>    <section>
+    <title>DMP_CPASS_COUNT_7</title>
+<indexterm><primary>DMP_CPASS_COUNT_7</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_COUNT_7</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_COUNT_7   ( 87 * 16 + 2)</computeroutput></para><para>
+Definition at line 503 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad2e9711f07de99176236042150d09e2e"/>    <section>
+    <title>DMP_CPASS_COVARIANCE</title>
+<indexterm><primary>DMP_CPASS_COVARIANCE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_COVARIANCE</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_COVARIANCE   (115 * 16)</computeroutput></para><para>
+Definition at line 496 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1acb7870923d6e00cc41e3cd5f4758633b"/>    <section>
+    <title>DMP_CPASS_COVARIANCE_CUR</title>
+<indexterm><primary>DMP_CPASS_COVARIANCE_CUR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_COVARIANCE_CUR</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_COVARIANCE_CUR   (118 * 16 +  8)</computeroutput></para><para>
+Definition at line 497 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a80e02dbef7ae0dbe863392e50e0c01b5"/>    <section>
+    <title>DMP_CPASS_CUR_BIAS_OFFSET</title>
+<indexterm><primary>DMP_CPASS_CUR_BIAS_OFFSET</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_CUR_BIAS_OFFSET</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_CUR_BIAS_OFFSET   (114 * 16 + 4)</computeroutput></para><para>
+Definition at line 506 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aab82a386cf3fd0c198301b679c732cbe"/>    <section>
+    <title>DMP_CPASS_EST_FIRST_BIAS</title>
+<indexterm><primary>DMP_CPASS_EST_FIRST_BIAS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_EST_FIRST_BIAS</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_EST_FIRST_BIAS   (113 * 16)</computeroutput></para><para>
+Definition at line 500 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a645f06a0aeb4c13069d1b168670b76ea"/>    <section>
+    <title>DMP_CPASS_MAX_INNO</title>
+<indexterm><primary>DMP_CPASS_MAX_INNO</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MAX_INNO</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MAX_INNO   (124 * 16)</computeroutput></para><para>
+Definition at line 504 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af3cf7c596eaa9aa4ddbcad213928e7ff"/>    <section>
+    <title>DMP_CPASS_MTX_00</title>
+<indexterm><primary>DMP_CPASS_MTX_00</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_00</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_00   (23 * 16)</computeroutput></para><para>
+Definition at line 448 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a5f84509686e5137c528aa2d36d3b8d0c"/>    <section>
+    <title>DMP_CPASS_MTX_01</title>
+<indexterm><primary>DMP_CPASS_MTX_01</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_01</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_01   (23 * 16 + 4)</computeroutput></para><para>
+Definition at line 449 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae998d16f29f3297001b737924618e5ca"/>    <section>
+    <title>DMP_CPASS_MTX_02</title>
+<indexterm><primary>DMP_CPASS_MTX_02</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_02</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_02   (23 * 16 + 8)</computeroutput></para><para>
+Definition at line 450 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a8a382abd5cc8395fa813351338c959ad"/>    <section>
+    <title>DMP_CPASS_MTX_10</title>
+<indexterm><primary>DMP_CPASS_MTX_10</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_10</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_10   (23 * 16 + 12)</computeroutput></para><para>
+Definition at line 451 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a8b6d5992e83e5e2fa3dbb439551da525"/>    <section>
+    <title>DMP_CPASS_MTX_11</title>
+<indexterm><primary>DMP_CPASS_MTX_11</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_11</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_11   (24 * 16)</computeroutput></para><para>
+Definition at line 452 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aba3764f2cedf01f2e4df4ba6f2d86a10"/>    <section>
+    <title>DMP_CPASS_MTX_12</title>
+<indexterm><primary>DMP_CPASS_MTX_12</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_12</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_12   (24 * 16 + 4)</computeroutput></para><para>
+Definition at line 453 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a3b45eaed7593f38186f805010f23a3f4"/>    <section>
+    <title>DMP_CPASS_MTX_20</title>
+<indexterm><primary>DMP_CPASS_MTX_20</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_20</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_20   (24 * 16 + 8)</computeroutput></para><para>
+Definition at line 454 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac7a7d20472e8f761f2a0fcf9f5783f11"/>    <section>
+    <title>DMP_CPASS_MTX_21</title>
+<indexterm><primary>DMP_CPASS_MTX_21</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_21</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_21   (24 * 16 + 12)</computeroutput></para><para>
+Definition at line 455 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a14484271fd8f6f4b8d965c1f30f76e2c"/>    <section>
+    <title>DMP_CPASS_MTX_22</title>
+<indexterm><primary>DMP_CPASS_MTX_22</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_MTX_22</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_MTX_22   (25 * 16)</computeroutput></para><para>
+Definition at line 456 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abb9c2fcc740228e085e81da055b28031"/>    <section>
+    <title>DMP_CPASS_PRE_SENSOR_DATA</title>
+<indexterm><primary>DMP_CPASS_PRE_SENSOR_DATA</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_PRE_SENSOR_DATA</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_PRE_SENSOR_DATA   ( 87 * 16 + 4)</computeroutput></para><para>
+Definition at line 507 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1acc758e35c29cbb56699359f91338bb30"/>    <section>
+    <title>DMP_CPASS_RADIUS_3D_THRESH_ANOMALY</title>
+<indexterm><primary>DMP_CPASS_RADIUS_3D_THRESH_ANOMALY</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_RADIUS_3D_THRESH_ANOMALY</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_RADIUS_3D_THRESH_ANOMALY   (112 * 16 + 8)</computeroutput></para><para>
+Definition at line 511 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad7f4fec13f1f1d19276ef54ef5afabbd"/>    <section>
+    <title>DMP_CPASS_REF_MAG_3D</title>
+<indexterm><primary>DMP_CPASS_REF_MAG_3D</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_REF_MAG_3D</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_REF_MAG_3D   (122 * 16)</computeroutput></para><para>
+Definition at line 498 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aab1af1720e7eee916d7e029bc6fba474"/>    <section>
+    <title>DMP_CPASS_STATUS_CHK</title>
+<indexterm><primary>DMP_CPASS_STATUS_CHK</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_STATUS_CHK</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_STATUS_CHK   (25 * 16 + 12)</computeroutput></para><para>
+Definition at line 513 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a19afdaaf910bb7ce9ea60f2403d4f336"/>    <section>
+    <title>DMP_CPASS_TIME_BUFFER</title>
+<indexterm><primary>DMP_CPASS_TIME_BUFFER</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_TIME_BUFFER</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_TIME_BUFFER   (112 * 16 + 14)</computeroutput></para><para>
+Definition at line 510 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a7e49ff06ab92c6e282e8d58b1d39d790"/>    <section>
+    <title>DMP_CPASS_VAR_COUNT</title>
+<indexterm><primary>DMP_CPASS_VAR_COUNT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_CPASS_VAR_COUNT</secondary></indexterm>
+<para><computeroutput>#define DMP_CPASS_VAR_COUNT   (112 * 16 + 6)</computeroutput></para><para>
+Definition at line 502 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a54d0182209cdb7091a951c787bf72db5"/>    <section>
+    <title>DMP_DATA_INTR_CTL</title>
+<indexterm><primary>DMP_DATA_INTR_CTL</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_DATA_INTR_CTL</secondary></indexterm>
+<para><computeroutput>#define DMP_DATA_INTR_CTL   (4 * 16 + 12)</computeroutput></para><para>
+Definition at line 404 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a02e5d02d71c980f1c8c4b1508254f259"/>    <section>
+    <title>DMP_DATA_OUT_CTL1</title>
+<indexterm><primary>DMP_DATA_OUT_CTL1</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_DATA_OUT_CTL1</secondary></indexterm>
+<para><computeroutput>#define DMP_DATA_OUT_CTL1   (4 * 16)</computeroutput></para><para>
+Definition at line 402 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aba50a06bdafe060a850c566c0ca25f9b"/>    <section>
+    <title>DMP_DATA_OUT_CTL2</title>
+<indexterm><primary>DMP_DATA_OUT_CTL2</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_DATA_OUT_CTL2</secondary></indexterm>
+<para><computeroutput>#define DMP_DATA_OUT_CTL2   (4 * 16 + 2)</computeroutput></para><para>
+Definition at line 403 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1accc2ba51183326b43814d52f5a9b2380"/>    <section>
+    <title>DMP_DATA_RDY_STATUS</title>
+<indexterm><primary>DMP_DATA_RDY_STATUS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_DATA_RDY_STATUS</secondary></indexterm>
+<para><computeroutput>#define DMP_DATA_RDY_STATUS   (8 * 16 + 10)</computeroutput></para><para>
+Definition at line 414 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aead48addf5991151d33ee3ac76e0d21e"/>    <section>
+    <title>DMP_DMPRATE_CNTR</title>
+<indexterm><primary>DMP_DMPRATE_CNTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_DMPRATE_CNTR</secondary></indexterm>
+<para><computeroutput>#define DMP_DMPRATE_CNTR   (18 * 16 + 4)</computeroutput></para><para>
+Definition at line 521 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a342d30c8e1f2f3daaa0666449e66674e"/>    <section>
+    <title>DMP_EIS_AUTH_INPUT</title>
+<indexterm><primary>DMP_EIS_AUTH_INPUT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_EIS_AUTH_INPUT</secondary></indexterm>
+<para><computeroutput>#define DMP_EIS_AUTH_INPUT   (160 * 16 +   4)</computeroutput></para><para>
+Definition at line 625 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa05fdfc7f6b266c8bcc685be1fba852d"/>    <section>
+    <title>DMP_EIS_AUTH_OUTPUT</title>
+<indexterm><primary>DMP_EIS_AUTH_OUTPUT</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_EIS_AUTH_OUTPUT</secondary></indexterm>
+<para><computeroutput>#define DMP_EIS_AUTH_OUTPUT   (160 * 16 +   0)</computeroutput></para><para>
+Definition at line 626 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a8a04860d6ccdd5d7303b2fb2d0bd5487"/>    <section>
+    <title>DMP_FIFO_WATERMARK</title>
+<indexterm><primary>DMP_FIFO_WATERMARK</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FIFO_WATERMARK</secondary></indexterm>
+<para><computeroutput>#define DMP_FIFO_WATERMARK   (31 * 16 + 14)</computeroutput></para><para>
+Definition at line 405 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a25ca49b6a3f1058ee41151ef3de25cfa"/>    <section>
+    <title>DMP_FP_DEV_IN_POCKET_TH</title>
+<indexterm><primary>DMP_FP_DEV_IN_POCKET_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_DEV_IN_POCKET_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_DEV_IN_POCKET_TH   (76  * 16 + 12)</computeroutput></para><para>
+Definition at line 613 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a86c17f923f43e8b91dd97f70ab19ebbc"/>    <section>
+    <title>DMP_FP_MAX_PICKUP_T_TH</title>
+<indexterm><primary>DMP_FP_MAX_PICKUP_T_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_MAX_PICKUP_T_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_MAX_PICKUP_T_TH   (244 * 16 + 12)</computeroutput></para><para>
+Definition at line 604 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a1d1b9574da2c920d36b2eaa3ed8f4478"/>    <section>
+    <title>DMP_FP_MID_STILL_TH</title>
+<indexterm><primary>DMP_FP_MID_STILL_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_MID_STILL_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_MID_STILL_TH   (244 * 16 +  8)</computeroutput></para><para>
+Definition at line 601 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a7b68d7c518a5008de64cea9a26c4245b"/>    <section>
+    <title>DMP_FP_MOTION_CONST_TH</title>
+<indexterm><primary>DMP_FP_MOTION_CONST_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_MOTION_CONST_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_MOTION_CONST_TH   (240 * 16 +  8)</computeroutput></para><para>
+Definition at line 607 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a76f83bf5fd45ced6d4733a314cdc3d69"/>    <section>
+    <title>DMP_FP_NOT_STILL_TH</title>
+<indexterm><primary>DMP_FP_NOT_STILL_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_NOT_STILL_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_NOT_STILL_TH   (246 * 16 +  8)</computeroutput></para><para>
+Definition at line 602 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af72e550cf5b1047e1321350859741412"/>    <section>
+    <title>DMP_FP_PICKUP_CNTR</title>
+<indexterm><primary>DMP_FP_PICKUP_CNTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_PICKUP_CNTR</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_PICKUP_CNTR   (247 * 16 +  4)</computeroutput></para><para>
+Definition at line 614 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae58aeb6d2d808e0acaab6084fcd3c48f"/>    <section>
+    <title>DMP_FP_PICKUP_TIMEOUT_TH</title>
+<indexterm><primary>DMP_FP_PICKUP_TIMEOUT_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_PICKUP_TIMEOUT_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_PICKUP_TIMEOUT_TH   (248 * 16 +  8)</computeroutput></para><para>
+Definition at line 605 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a526abd8170b968c2fb5f512795d9f568"/>    <section>
+    <title>DMP_FP_RATE</title>
+<indexterm><primary>DMP_FP_RATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_RATE</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_RATE   (240 * 16 + 12)</computeroutput></para><para>
+Definition at line 615 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6b29ec9f0dd72ca5a2b0f34d5453d3a4"/>    <section>
+    <title>DMP_FP_STEADY_TILT_TH</title>
+<indexterm><primary>DMP_FP_STEADY_TILT_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_STEADY_TILT_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_STEADY_TILT_TH   (247 * 16 +  8)</computeroutput></para><para>
+Definition at line 609 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a1f0f61d431ec3534064b44de84134b77"/>    <section>
+    <title>DMP_FP_STEADY_TILT_UP_TH</title>
+<indexterm><primary>DMP_FP_STEADY_TILT_UP_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_STEADY_TILT_UP_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_STEADY_TILT_UP_TH   (242 * 16 + 12)</computeroutput></para><para>
+Definition at line 610 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af0d2d989e04ca473f1e0d3098a854cae"/>    <section>
+    <title>DMP_FP_STILL_CONST_TH</title>
+<indexterm><primary>DMP_FP_STILL_CONST_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_STILL_CONST_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_STILL_CONST_TH   (246 * 16 + 12)</computeroutput></para><para>
+Definition at line 606 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab44d51d121f0e48be906b1ebb1cf9bc1"/>    <section>
+    <title>DMP_FP_STILL_TH</title>
+<indexterm><primary>DMP_FP_STILL_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_STILL_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_STILL_TH   (246 * 16 +  4)</computeroutput></para><para>
+Definition at line 600 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1af8dee60081b4cad80af437c058e9102e"/>    <section>
+    <title>DMP_FP_VAR_ALPHA</title>
+<indexterm><primary>DMP_FP_VAR_ALPHA</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_VAR_ALPHA</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_VAR_ALPHA   (245 * 16 +  8)</computeroutput></para><para>
+Definition at line 599 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9da7a37b14043d4108cf0bcc47296786"/>    <section>
+    <title>DMP_FP_VIB_COUNT_TH</title>
+<indexterm><primary>DMP_FP_VIB_COUNT_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_VIB_COUNT_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_VIB_COUNT_TH   (242 * 16 +  8)</computeroutput></para><para>
+Definition at line 608 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a866de78975f5a2f28ce0b8f37279ea02"/>    <section>
+    <title>DMP_FP_VIB_REJ_TH</title>
+<indexterm><primary>DMP_FP_VIB_REJ_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_VIB_REJ_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_VIB_REJ_TH   (241 * 16 +  8)</computeroutput></para><para>
+Definition at line 603 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa6f5e4607a1dfc639abf91ac15a9244a"/>    <section>
+    <title>DMP_FP_Z_FLAT_TH_MINUS</title>
+<indexterm><primary>DMP_FP_Z_FLAT_TH_MINUS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_Z_FLAT_TH_MINUS</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_Z_FLAT_TH_MINUS   (243 * 16 +  8)</computeroutput></para><para>
+Definition at line 611 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6417d1124ab8fb2896405dadc8dcd553"/>    <section>
+    <title>DMP_FP_Z_FLAT_TH_PLUS</title>
+<indexterm><primary>DMP_FP_Z_FLAT_TH_PLUS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_FP_Z_FLAT_TH_PLUS</secondary></indexterm>
+<para><computeroutput>#define DMP_FP_Z_FLAT_TH_PLUS   (243 * 16 + 12)</computeroutput></para><para>
+Definition at line 612 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9ebf39784760509f273caaadc5dc1e23"/>    <section>
+    <title>DMP_GYRO_ACCURACY</title>
+<indexterm><primary>DMP_GYRO_ACCURACY</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_ACCURACY</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_ACCURACY   (138 * 16 +  2)</computeroutput></para><para>
+Definition at line 466 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a85f0d2fb3df2318c12dc1eae583c6823"/>    <section>
+    <title>DMP_GYRO_BIAS_SET</title>
+<indexterm><primary>DMP_GYRO_BIAS_SET</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_BIAS_SET</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_BIAS_SET   (138 * 16 +  6)</computeroutput></para><para>
+Definition at line 467 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0de6d60b13cc0966e1462385fb3337c5"/>    <section>
+    <title>DMP_GYRO_BIAS_X</title>
+<indexterm><primary>DMP_GYRO_BIAS_X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_BIAS_X</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_BIAS_X   (139 * 16 +  4)</computeroutput></para><para>
+Definition at line 463 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4b48919414a90bd0fdf6eef33b3f576f"/>    <section>
+    <title>DMP_GYRO_BIAS_Y</title>
+<indexterm><primary>DMP_GYRO_BIAS_Y</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_BIAS_Y</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_BIAS_Y   (139 * 16 +  8)</computeroutput></para><para>
+Definition at line 464 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1adf8bf18ddbac3d35f469ac2e3d5f7206"/>    <section>
+    <title>DMP_GYRO_BIAS_Z</title>
+<indexterm><primary>DMP_GYRO_BIAS_Z</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_BIAS_Z</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_BIAS_Z   (139 * 16 + 12)</computeroutput></para><para>
+Definition at line 465 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae607f83da84987f4759d28a674558792"/>    <section>
+    <title>DMP_GYRO_FULLSCALE</title>
+<indexterm><primary>DMP_GYRO_FULLSCALE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_FULLSCALE</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_FULLSCALE   (72 * 16 + 12)</computeroutput></para><para>
+Definition at line 618 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a372b4fd834f9050822dbb439660696a7"/>    <section>
+    <title>DMP_GYRO_LAST_TEMPR</title>
+<indexterm><primary>DMP_GYRO_LAST_TEMPR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_LAST_TEMPR</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_LAST_TEMPR   (134 * 16)</computeroutput></para><para>
+Definition at line 468 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad8bea3d7d1fb22b362afdb3ad6e646cf"/>    <section>
+    <title>DMP_GYRO_SF</title>
+<indexterm><primary>DMP_GYRO_SF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_SF</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_SF   (19 * 16)</computeroutput></para><para>
+Definition at line 458 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a07427b121d4e28c6c820974fb3e6635f"/>    <section>
+    <title>DMP_GYRO_SLOPE_X</title>
+<indexterm><primary>DMP_GYRO_SLOPE_X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_SLOPE_X</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_SLOPE_X   ( 78 * 16 +  4)</computeroutput></para><para>
+Definition at line 469 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa32e65235c8fafb46572dd00b3cffacb"/>    <section>
+    <title>DMP_GYRO_SLOPE_Y</title>
+<indexterm><primary>DMP_GYRO_SLOPE_Y</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_SLOPE_Y</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_SLOPE_Y   ( 78 * 16 +  8)</computeroutput></para><para>
+Definition at line 470 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa1f8f6f35f179d5ba129b3a0e7807b8d"/>    <section>
+    <title>DMP_GYRO_SLOPE_Z</title>
+<indexterm><primary>DMP_GYRO_SLOPE_Z</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_GYRO_SLOPE_Z</secondary></indexterm>
+<para><computeroutput>#define DMP_GYRO_SLOPE_Z   ( 78 * 16 + 12)</computeroutput></para><para>
+Definition at line 471 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a1a96fcda86b5349d3c13573f0593a800"/>    <section>
+    <title>DMP_LOAD_START</title>
+<indexterm><primary>DMP_LOAD_START</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_LOAD_START</secondary></indexterm>
+<para><computeroutput>#define DMP_LOAD_START   0x90</computeroutput></para><para>
+Definition at line 643 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a24813fc73ee09080402a4f9bd6d6d183"/>    <section>
+    <title>DMP_MAG_DISTURB_STATE</title>
+<indexterm><primary>DMP_MAG_DISTURB_STATE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MAG_DISTURB_STATE</secondary></indexterm>
+<para><computeroutput>#define DMP_MAG_DISTURB_STATE   (113 * 16 + 2)</computeroutput></para><para>
+Definition at line 501 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a920e5042fee52515c24c6da37b9fcce8"/>    <section>
+    <title>DMP_MAGN_LPF_THR_9X</title>
+<indexterm><primary>DMP_MAGN_LPF_THR_9X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MAGN_LPF_THR_9X</secondary></indexterm>
+<para><computeroutput>#define DMP_MAGN_LPF_THR_9X   (80 * 16 +  8)</computeroutput></para><para>
+Definition at line 517 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aca6ed9d97f5043745460df47c88ebf2c"/>    <section>
+    <title>DMP_MAGN_THR_9X</title>
+<indexterm><primary>DMP_MAGN_THR_9X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MAGN_THR_9X</secondary></indexterm>
+<para><computeroutput>#define DMP_MAGN_THR_9X   (80 * 16)</computeroutput></para><para>
+Definition at line 516 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a88d069562de092d7e6ee598d39e74bdf"/>    <section>
+    <title>DMP_MAR_MODE</title>
+<indexterm><primary>DMP_MAR_MODE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MAR_MODE</secondary></indexterm>
+<para><computeroutput>#define DMP_MAR_MODE   (37 * 16 + 2)</computeroutput></para><para>
+Definition at line 495 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a3f8983d47d9670c0469d20b41e545873"/>    <section>
+    <title>DMP_MEM_BANK_SIZE</title>
+<indexterm><primary>DMP_MEM_BANK_SIZE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MEM_BANK_SIZE</secondary></indexterm>
+<para><computeroutput>#define DMP_MEM_BANK_SIZE   256</computeroutput></para><para>
+Definition at line 642 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a91a080afc81550d4d9a804f3c6a83182"/>    <section>
+    <title>DMP_MOTION_EVENT_CTL</title>
+<indexterm><primary>DMP_MOTION_EVENT_CTL</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_MOTION_EVENT_CTL</secondary></indexterm>
+<para><computeroutput>#define DMP_MOTION_EVENT_CTL   (4 * 16 + 14)</computeroutput></para><para>
+Definition at line 408 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a5c265b85b11dc0da0439fee2c926b087"/>    <section>
+    <title>DMP_ODR_ACCEL</title>
+<indexterm><primary>DMP_ODR_ACCEL</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_ACCEL</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_ACCEL   (11 * 16 + 14)</computeroutput></para><para>
+Definition at line 422 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1afbc5f31380ce00a04f0df67a3b741715"/>    <section>
+    <title>DMP_ODR_ALS</title>
+<indexterm><primary>DMP_ODR_ALS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_ALS</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_ALS   (11 * 16 +  2)</computeroutput></para><para>
+Definition at line 425 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4255a4f2f3aef4a61a22ddcf96a9c197"/>    <section>
+    <title>DMP_ODR_CNTR_ACCEL</title>
+<indexterm><primary>DMP_ODR_CNTR_ACCEL</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_ACCEL</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_ACCEL   (9 * 16 + 14)</computeroutput></para><para>
+Definition at line 435 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abb113fe8811bb00402400c0dc7181f38"/>    <section>
+    <title>DMP_ODR_CNTR_ALS</title>
+<indexterm><primary>DMP_ODR_CNTR_ALS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_ALS</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_ALS   (9 * 16 +  2)</computeroutput></para><para>
+Definition at line 438 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0c5ecaa1081ab6bb37a328203fc1f229"/>    <section>
+    <title>DMP_ODR_CNTR_CPASS</title>
+<indexterm><primary>DMP_ODR_CNTR_CPASS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_CPASS</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_CPASS   (9 * 16 +  6)</computeroutput></para><para>
+Definition at line 437 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab2fe7aa9534db2b7fb892847b281ebf2"/>    <section>
+    <title>DMP_ODR_CNTR_CPASS_CALIBR</title>
+<indexterm><primary>DMP_ODR_CNTR_CPASS_CALIBR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_CPASS_CALIBR</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_CPASS_CALIBR   (9 * 16 +  4)</computeroutput></para><para>
+Definition at line 445 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9806572538ccef0de8c08ed9b7f57b28"/>    <section>
+    <title>DMP_ODR_CNTR_GEOMAG</title>
+<indexterm><primary>DMP_ODR_CNTR_GEOMAG</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_GEOMAG</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_GEOMAG   (8 * 16 +  0)</computeroutput></para><para>
+Definition at line 442 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9c7b5934cd80afbea237af1dfef83e81"/>    <section>
+    <title>DMP_ODR_CNTR_GYRO</title>
+<indexterm><primary>DMP_ODR_CNTR_GYRO</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_GYRO</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_GYRO   (9 * 16 + 10)</computeroutput></para><para>
+Definition at line 436 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a768ff08df66a7b8c1d6c39a94343d5b7"/>    <section>
+    <title>DMP_ODR_CNTR_GYRO_CALIBR</title>
+<indexterm><primary>DMP_ODR_CNTR_GYRO_CALIBR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_GYRO_CALIBR</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_GYRO_CALIBR   (9 * 16 +  8)</computeroutput></para><para>
+Definition at line 444 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae27bc54e00172024772e83365844cc53"/>    <section>
+    <title>DMP_ODR_CNTR_PQUAT6</title>
+<indexterm><primary>DMP_ODR_CNTR_PQUAT6</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_PQUAT6</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_PQUAT6   (8 * 16 +  4)</computeroutput></para><para>
+Definition at line 441 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a46c6a430d8c129e016845fcfa9368a0a"/>    <section>
+    <title>DMP_ODR_CNTR_PRESSURE</title>
+<indexterm><primary>DMP_ODR_CNTR_PRESSURE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_PRESSURE</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_PRESSURE   (9 * 16 + 12)</computeroutput></para><para>
+Definition at line 443 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab860507f6cefae89475da968df47b99b"/>    <section>
+    <title>DMP_ODR_CNTR_QUAT6</title>
+<indexterm><primary>DMP_ODR_CNTR_QUAT6</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_QUAT6</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_QUAT6   (8 * 16 + 12)</computeroutput></para><para>
+Definition at line 439 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa2628cb13951c057d7f4da3f2439c4b3"/>    <section>
+    <title>DMP_ODR_CNTR_QUAT9</title>
+<indexterm><primary>DMP_ODR_CNTR_QUAT9</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CNTR_QUAT9</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CNTR_QUAT9   (8 * 16 +  8)</computeroutput></para><para>
+Definition at line 440 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ad87bd610f57519581746d81df2cacf0a"/>    <section>
+    <title>DMP_ODR_CPASS</title>
+<indexterm><primary>DMP_ODR_CPASS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CPASS</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CPASS   (11 * 16 +  6)</computeroutput></para><para>
+Definition at line 424 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9d2640f234cf4fd1a32817a423df5268"/>    <section>
+    <title>DMP_ODR_CPASS_CALIBR</title>
+<indexterm><primary>DMP_ODR_CPASS_CALIBR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_CPASS_CALIBR</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_CPASS_CALIBR   (11 * 16 +  4)</computeroutput></para><para>
+Definition at line 432 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a358ce0686e6844be4429716602d3aaef"/>    <section>
+    <title>DMP_ODR_GEOMAG</title>
+<indexterm><primary>DMP_ODR_GEOMAG</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_GEOMAG</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_GEOMAG   (10 * 16 +  0)</computeroutput></para><para>
+Definition at line 429 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab6fb6d472c4467a5e41f85f500762290"/>    <section>
+    <title>DMP_ODR_GYRO</title>
+<indexterm><primary>DMP_ODR_GYRO</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_GYRO</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_GYRO   (11 * 16 + 10)</computeroutput></para><para>
+Definition at line 423 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a15c338040c08d6046a81fe38e5409988"/>    <section>
+    <title>DMP_ODR_GYRO_CALIBR</title>
+<indexterm><primary>DMP_ODR_GYRO_CALIBR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_GYRO_CALIBR</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_GYRO_CALIBR   (11 * 16 +  8)</computeroutput></para><para>
+Definition at line 431 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae843242671724e60bf489f684a69c5d9"/>    <section>
+    <title>DMP_ODR_PQUAT6</title>
+<indexterm><primary>DMP_ODR_PQUAT6</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_PQUAT6</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_PQUAT6   (10 * 16 +  4)</computeroutput></para><para>
+Definition at line 428 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a602deea1c4f615e19b6bd08a54d31048"/>    <section>
+    <title>DMP_ODR_PRESSURE</title>
+<indexterm><primary>DMP_ODR_PRESSURE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_PRESSURE</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_PRESSURE   (11 * 16 + 12)</computeroutput></para><para>
+Definition at line 430 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a9c6902b2505f821b7fa41c309b850850"/>    <section>
+    <title>DMP_ODR_QUAT6</title>
+<indexterm><primary>DMP_ODR_QUAT6</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_QUAT6</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_QUAT6   (10 * 16 + 12)</computeroutput></para><para>
+Definition at line 426 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae895c52fb77cead74d14d007a5f7af0c"/>    <section>
+    <title>DMP_ODR_QUAT9</title>
+<indexterm><primary>DMP_ODR_QUAT9</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_ODR_QUAT9</secondary></indexterm>
+<para><computeroutput>#define DMP_ODR_QUAT9   (10 * 16 +  8)</computeroutput></para><para>
+Definition at line 427 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a409aec86cb7246451a66c5271845f39e"/>    <section>
+    <title>DMP_PED_Y_RATIO</title>
+<indexterm><primary>DMP_PED_Y_RATIO</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PED_Y_RATIO</secondary></indexterm>
+<para><computeroutput>#define DMP_PED_Y_RATIO   (17 * 16 +  0)</computeroutput></para><para>
+Definition at line 542 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a84741b3867263e243d8e3c9b61aeba03"/>    <section>
+    <title>DMP_PEDSTD_BP_A1</title>
+<indexterm><primary>DMP_PEDSTD_BP_A1</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_BP_A1</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_BP_A1   (52 * 16 + 12)</computeroutput></para><para>
+Definition at line 528 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1adf339947a0a2215b85954a02d53bab23"/>    <section>
+    <title>DMP_PEDSTD_BP_A2</title>
+<indexterm><primary>DMP_PEDSTD_BP_A2</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_BP_A2</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_BP_A2   (52 * 16 +  8)</computeroutput></para><para>
+Definition at line 527 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4f4a8b8fe4d93817de859d727b0f96f7"/>    <section>
+    <title>DMP_PEDSTD_BP_A3</title>
+<indexterm><primary>DMP_PEDSTD_BP_A3</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_BP_A3</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_BP_A3   (52 * 16 +  4)</computeroutput></para><para>
+Definition at line 526 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a48b0b638d7b60d6d59e93f510cfa9d7b"/>    <section>
+    <title>DMP_PEDSTD_BP_A4</title>
+<indexterm><primary>DMP_PEDSTD_BP_A4</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_BP_A4</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_BP_A4   (52 * 16)</computeroutput></para><para>
+Definition at line 525 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a74f683518309d143cc95a483a521ed17"/>    <section>
+    <title>DMP_PEDSTD_BP_B</title>
+<indexterm><primary>DMP_PEDSTD_BP_B</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_BP_B</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_BP_B   (49 * 16 + 12)</computeroutput></para><para>
+Definition at line 524 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aade2fd512d2db8a140412f96f3ad0241"/>    <section>
+    <title>DMP_PEDSTD_DECI</title>
+<indexterm><primary>DMP_PEDSTD_DECI</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_DECI</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_DECI   (58 * 16)</computeroutput></para><para>
+Definition at line 538 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a87e8f1008b6dd691724ece07fd654633"/>    <section>
+    <title>DMP_PEDSTD_PEAK</title>
+<indexterm><primary>DMP_PEDSTD_PEAK</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_PEAK</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_PEAK   (57 * 16 +  4)</computeroutput></para><para>
+Definition at line 534 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a0e119d661d84b37ccc390530e9ffb9b2"/>    <section>
+    <title>DMP_PEDSTD_PEAKTHRSH</title>
+<indexterm><primary>DMP_PEDSTD_PEAKTHRSH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_PEAKTHRSH</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_PEAKTHRSH   (57 * 16 +  8)</computeroutput></para><para>
+Definition at line 531 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a1512ad6970a25717a7ca99f58a4e1c34"/>    <section>
+    <title>DMP_PEDSTD_SB</title>
+<indexterm><primary>DMP_PEDSTD_SB</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_SB</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_SB   (50 * 16 +  8)</computeroutput></para><para>
+Definition at line 529 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae84d7bdbec738b395d5094c578d109f0"/>    <section>
+    <title>DMP_PEDSTD_SB2</title>
+<indexterm><primary>DMP_PEDSTD_SB2</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_SB2</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_SB2   (60 * 16 + 14)</computeroutput></para><para>
+Definition at line 539 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ab2de66d53386e6776c0475527cefcb15"/>    <section>
+    <title>DMP_PEDSTD_SB_TIME</title>
+<indexterm><primary>DMP_PEDSTD_SB_TIME</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_SB_TIME</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_SB_TIME   (50 * 16 + 12)</computeroutput></para><para>
+Definition at line 530 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1adc4b58513ed8beb15c8078b58fe56e4a"/>    <section>
+    <title>DMP_PEDSTD_STEPCTR</title>
+<indexterm><primary>DMP_PEDSTD_STEPCTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_STEPCTR</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_STEPCTR   (54 * 16)</computeroutput></para><para>
+Definition at line 535 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a2dbc9220f6367e598b4b847e05a014b9"/>    <section>
+    <title>DMP_PEDSTD_STEPCTR2</title>
+<indexterm><primary>DMP_PEDSTD_STEPCTR2</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_STEPCTR2</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_STEPCTR2   (58 * 16 +  8)</computeroutput></para><para>
+Definition at line 536 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa2762db3824e007efc1285cd173cd1a3"/>    <section>
+    <title>DMP_PEDSTD_TIMECTR</title>
+<indexterm><primary>DMP_PEDSTD_TIMECTR</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_TIMECTR</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_TIMECTR   (60 * 16 +  4)</computeroutput></para><para>
+Definition at line 537 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abaccce000c22f2faaf9e3cd20910d4a5"/>    <section>
+    <title>DMP_PEDSTD_TIMH</title>
+<indexterm><primary>DMP_PEDSTD_TIMH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_TIMH</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_TIMH   (50 * 16 + 14)</computeroutput></para><para>
+Definition at line 533 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4863f070ea23f5d23627d35b60a51acf"/>    <section>
+    <title>DMP_PEDSTD_TIML</title>
+<indexterm><primary>DMP_PEDSTD_TIML</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTD_TIML</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTD_TIML   (50 * 16 + 10)</computeroutput></para><para>
+Definition at line 532 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a30ad972ccd471984d235d5d9a00f840e"/>    <section>
+    <title>DMP_PEDSTEP_IND</title>
+<indexterm><primary>DMP_PEDSTEP_IND</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PEDSTEP_IND</secondary></indexterm>
+<para><computeroutput>#define DMP_PEDSTEP_IND   (19 * 16 +  4)</computeroutput></para><para>
+Definition at line 541 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abd01102e9cbef1e07ecf83329e350314"/>    <section>
+    <title>DMP_PREV_BAC_ACT_ON_OFF</title>
+<indexterm><primary>DMP_PREV_BAC_ACT_ON_OFF</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_PREV_BAC_ACT_ON_OFF</secondary></indexterm>
+<para><computeroutput>#define DMP_PREV_BAC_ACT_ON_OFF   (188 * 16 +  2)</computeroutput></para><para>
+Definition at line 595 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae643e7abcd5c4db8aba3396d866ac3a5"/>    <section>
+    <title>DMP_QFB_THR_9X</title>
+<indexterm><primary>DMP_QFB_THR_9X</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_QFB_THR_9X</secondary></indexterm>
+<para><computeroutput>#define DMP_QFB_THR_9X   (80 * 16 + 12)</computeroutput></para><para>
+Definition at line 518 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1abf458f7f7c9cd35026d554ed5880d3bf"/>    <section>
+    <title>DMP_SMD_DRIVE_TIMER_TH</title>
+<indexterm><primary>DMP_SMD_DRIVE_TIMER_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_SMD_DRIVE_TIMER_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_SMD_DRIVE_TIMER_TH   (143 * 16 +  8)</computeroutput></para><para>
+Definition at line 547 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a5691bd331ec260d0fe0fd0a1da433914"/>    <section>
+    <title>DMP_SMD_TILT_ANGLE_TH</title>
+<indexterm><primary>DMP_SMD_TILT_ANGLE_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_SMD_TILT_ANGLE_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_SMD_TILT_ANGLE_TH   (179 * 16 + 12)</computeroutput></para><para>
+Definition at line 548 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1adc487a4385f0370a6ae56151da68b7a8"/>    <section>
+    <title>DMP_SMD_VAR_TH</title>
+<indexterm><primary>DMP_SMD_VAR_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_SMD_VAR_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_SMD_VAR_TH   (141 * 16 + 12)</computeroutput></para><para>
+Definition at line 545 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a594d5c0428faf20222ee141ba809f657"/>    <section>
+    <title>DMP_SMD_VAR_TH_DRIVE</title>
+<indexterm><primary>DMP_SMD_VAR_TH_DRIVE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_SMD_VAR_TH_DRIVE</secondary></indexterm>
+<para><computeroutput>#define DMP_SMD_VAR_TH_DRIVE   (143 * 16 + 12)</computeroutput></para><para>
+Definition at line 546 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a6b486d71c2ddb81811c12b604324bc8d"/>    <section>
+    <title>DMP_START_ADDRESS</title>
+<indexterm><primary>DMP_START_ADDRESS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_START_ADDRESS</secondary></indexterm>
+<para><computeroutput>#define DMP_START_ADDRESS   ((unsigned short)0x1000)</computeroutput></para><para>
+Definition at line 641 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac67073e8c4c0bdce795630c6d197fa09"/>    <section>
+    <title>DMP_STPDET_TIMESTAMP</title>
+<indexterm><primary>DMP_STPDET_TIMESTAMP</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_STPDET_TIMESTAMP</secondary></indexterm>
+<para><computeroutput>#define DMP_STPDET_TIMESTAMP   (18 * 16 +  8)</computeroutput></para><para>
+Definition at line 540 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ac5f9b2f33e3af72e1600abc3cc53eee0"/>    <section>
+    <title>DMP_WOM_CNTR_TH</title>
+<indexterm><primary>DMP_WOM_CNTR_TH</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_WOM_CNTR_TH</secondary></indexterm>
+<para><computeroutput>#define DMP_WOM_CNTR_TH   (64 * 16 + 12)</computeroutput></para><para>
+Definition at line 557 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a5749328cbc2d281e1ad2aee3b4b68bfe"/>    <section>
+    <title>DMP_WOM_ENABLE</title>
+<indexterm><primary>DMP_WOM_ENABLE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_WOM_ENABLE</secondary></indexterm>
+<para><computeroutput>#define DMP_WOM_ENABLE   (64 * 16 + 14)</computeroutput></para><para>
+Definition at line 554 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a3ed9b2377ed70f6036ee3d304bfabcd1"/>    <section>
+    <title>DMP_WOM_STATUS</title>
+<indexterm><primary>DMP_WOM_STATUS</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_WOM_STATUS</secondary></indexterm>
+<para><computeroutput>#define DMP_WOM_STATUS   (64 * 16 + 6)</computeroutput></para><para>
+Definition at line 555 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1aa23c75bc821f9da39f2009e7bd50a8f0"/>    <section>
+    <title>DMP_WOM_THRESHOLD</title>
+<indexterm><primary>DMP_WOM_THRESHOLD</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>DMP_WOM_THRESHOLD</secondary></indexterm>
+<para><computeroutput>#define DMP_WOM_THRESHOLD   (64 * 16)</computeroutput></para><para>
+Definition at line 556 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1ae5f52b3c30696d160dc1c37d5337600d"/>    <section>
+    <title>ICM20948_SPI_READ</title>
+<indexterm><primary>ICM20948_SPI_READ</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>ICM20948_SPI_READ</secondary></indexterm>
+<para><computeroutput>#define ICM20948_SPI_READ   0x80</computeroutput></para><para>
+Definition at line 19 of file ICM20948_regs.H.</para>
+    </section><anchor xml:id="_ICM20948__regs_8H_1a4d65b7cab4b646809c0704298b9cdf69"/>    <section>
+    <title>ICM20948_SPI_WRITE</title>
+<indexterm><primary>ICM20948_SPI_WRITE</primary><secondary>ICM20948_regs.H</secondary></indexterm>
+<indexterm><primary>ICM20948_regs.H</primary><secondary>ICM20948_SPI_WRITE</secondary></indexterm>
+<para><computeroutput>#define ICM20948_SPI_WRITE   0x00</computeroutput></para><para>
+Definition at line 20 of file ICM20948_regs.H.</para>
+</section>
+</section>
+</section>

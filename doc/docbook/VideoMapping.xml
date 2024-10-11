@@ -1,0 +1,371 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_VideoMapping">
+
+<para>您的 JeVois 相机能够运行多种机器视觉算法。运行哪种算法的选择由配置文件定义，该文件建立了相机分辨率、帧率和像素格式、USB 输出分辨率和像素格式以及相应的机器视觉处理模块之间的映射。</para>
+
+<para>这些定义存储在名为 <emphasis role="bold">videomappings.cfg</emphasis> 的文件中，该文件位于 microSD 卡上的 <emphasis role="bold">JEVOIS:/config/videomappings.cfg</emphasis>（来源为 <emphasis role="bold">~/jevois/Config/videomappings.cfg</emphasis>）。您可以检查和编辑此文件。</para>
+
+<para>一些映射将 USB 视频传输到主机，供人类观看（演示模式）或供主机进一步处理。这些映射定义了视频格式、分辨率和帧速率，相应的相机传感器格式、分辨率和帧率，以及使用哪个机器视觉模块从相机传感器帧计算输出视频帧。这些映射必须在 Linux 内核在 JeVois 相机内的小型计算机上启动时知道，因此它们不能在运行时更改。这样，当主机首次检测和配置 JeVois 智能相机时，就可以向主机公布通过 USB 支持的视频格式、分辨率和帧速率的列表。</para>
+
+<para>某些映射不提供任何视频输出到 USB，旨在供 Arduino 或类似设备使用。使用此类映射的机器视觉模块通常会将字符串输出到串行端口，以非常紧凑的格式指示它们看到的内容。这些映射指定相机传感器格式、分辨率和帧率，以及使用哪个机器视觉模块来处理相机帧。这些映射都可以在 <emphasis role="bold">videomappings.cfg</emphasis> 文件中指定，也可以在运行时定义（请参阅 <link linkend="_UserCli">命令行界面用户指南</link> 中的 <emphasis role="bold">setmapping2</emphasis> 命令）。</para>
+
+<para>在 JeVois-Pro 上，一些映射在实时摄像机视图上绘制 overlays 并支持 GUI 小部件。</para>
+
+<para>以下是 <emphasis role="bold">videomappings.cfg</emphasis> 示例文件。以 <emphasis>#</emphasis> 符号开头的行将被注释掉并被智能相机忽略。</para>
+
+<para><note><title>Note</title>
+
+<para><emphasis role="bold">videomapping.cfg</emphasis> 文件可能会在您安装新模块时自动更新。此外，（希望在不久的将来）将提供一个简单的用户界面。与此同时，通过在 videomapping.cfg 文件中添加或删除（或注释掉）某些行，可以为您的 JeVois 相机添加或删除视觉处理模式。</para>
+</note>
+<warning><title>Warning</title>
+
+<para>您的 videomapping.cfg 文件可以具有的活动映射（未注释掉）数量是有限制的，大约为 50 个。这受 Linux 内核中静态分配的缓冲区的限制，该缓冲区用于将有关支持的 USB 分辨率的信息传达给主机。如果您的主机不再检测到您的 JeVois 相机，则可能是您有太多的活动映射。</para>
+</warning>
+<note><title>Note</title>
+
+<para>一些有效的视频映射在预安装的 microSD 镜像上的 <emphasis role="bold">videomappings.cfg</emphasis> 中被注释掉。这是因为一旦 JeVois 相机暴露任何 BAYER 或 RGB565 视频格式，Mac OSX 就会停止检测它。因此，为了最大程度地兼容预安装的 microSD 镜像，默认情况下会禁用这些映射。如果您使用的是 Linux 或 Windows，请尝试取消注释（删除 <emphasis>#</emphasis> 符号）其中一些以激活它们。</para>
+</note>
+为了避免您的 JeVois 智能相机因为解析错误而挂起，例如在 <emphasis role="bold">videomappings.cfg</emphasis> 文件中的视频映射格式错误或重复的情况下，我们采用了以下策略：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>如果映射格式不正确（缺少字段、字段错误等），则会跳过该映射。</para>
+</listitem><listitem>
+<para>如果文件中没有 USB 输出映射，则会添加一个，YUYV 640x480 @ 30fps PassThrough。</para>
+</listitem><listitem>
+<para>如果没有默认映射（末尾标有 <emphasis>*</emphasis> ），则会选择第一个 USB 输出映射作为默认映射。</para>
+</listitem><listitem>
+<para>如果两个映射具有相同的 USB 输出像素格式、分辨率和帧速率，则第二个映射将减慢 1 fps（如果冲突超过两个，则以此类推）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>有关更多信息，请参阅 <link linkend="_namespacejevois_1a828fc05eea12bd9d7071a1bc561e1835">jevois::videoMappingsFromStream()</link>。</para>
+
+<para> 的最新映射列表在[此处]{<link xlink:href="https://github.com/jevois/jevois/blob/master/Config/videomappings-A33.cfg">https://github.com/jevois/jevois/blob/master/Config/videomappings-A33.cfg</link>}，对于，请参见[此处]{<link xlink:href="https://github.com/jevois/jevois/blob/master/Config/videomappings-Pro.cfg">https://github.com/jevois/jevois/blob/master/Config/videomappings-Pro.cfg</link>}。</para>
+
+<para>以下是 JeVois-A33 相机的示例：</para>
+
+<para><literallayout><computeroutput>######################################################################################################################
+#
+# JeVois Smart Embedded Machine Vision Toolkit - Copyright (C) 2016 by Laurent Itti, the University of Southern
+# California (USC), and iLab at USC. See http://iLab.usc.edu and http://jevois.org for information about this project.
+#
+# This file is part of the JeVois Smart Embedded Machine Vision Toolkit.  This program is free software; you can
+# redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+# Foundation, version 2.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.  You should have received a copy of the GNU General Public License along with this program;
+# if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+# Contact information: Laurent Itti - 3641 Watt Way, HNB-07A - Los Angeles, CA 90089-2520 - USA.
+# Tel: +1 213 740 3527 - itti@pollux.usc.edu - http://iLab.usc.edu - http://jevois.org
+######################################################################################################################
+#
+# JeVois 智能相机操作模式和视频映射 #
+# 格式为：&lt;USBmode&gt; &lt;USBwidth&gt; &lt;USBheight&gt; &lt;USBfps&gt; &lt;CAMmode&gt; &lt;CAMwidth&gt; &lt;CAMheight&gt; &lt;CAMfps&gt; &lt;Vendor&gt; &lt;Module&gt; [*] 
+#
+# CamMode 只能是以下之一：YUYV、BAYER、RGB565
+# USBmode 只能是以下之一：YUYV、GREY、MJPG、BAYER、RGB565、BGR24、NONE
+
+# USB 到相机模式映射（当 USBmode 不为 NONE 时）根据输出格式进行组织，输出格式应是唯一的（此文件中不应有相同的 
+# USBmode/USBwidth/USBheight/USBfps）。实际上，这些模式只能由主机的视频抓取软件选择，并且通过在该软件中选择输出格式来选择。
+# 这些模式不能由 JeVois 系统本身选择。对于这些模式，模块的 process(inframe, outframe) 函数将在每一帧上调用。
+
+# Camera-only modes（当 USBmode 为 NONE 时）模式映射没有通过 USB 的视频输出，并且通过与 JeVois 硬件通过串行端口交互来选择。
+# 当 USBmode 为 NONE 时，USBwidth、USBHeight 和 USBfps 将被忽略，应在此处设置为 0。对于这些模式，模块的 process(inframe) 
+# 函数将在每一帧上调用。这些模式通常是您在将 JeVois 相机连接到 Arduino 或类似系统时使用的模式，这些系统无法通过 USB 传输视
+# 频，并且只会通过串行端口从 JeVois 相机接收数据。
+
+# 一行末尾的可选 * 表示设备向 USB 主机宣布的默认格式。这是大多数网络摄像头程序在启动时默认选择的格式。请注意，Linux 上的 
+# guvcview 程序似乎忽略了这一点，而是选择您上次使用相机时选择的最后一个模式。此 * 不能位于具有 NONE USBmode 的映射上。整个
+# 文件中应该只有一个 *。
+
+# JeVois-A33 型号摄像机传感器支持的分辨率和帧速率：
+#
+#  SXGA (1280 x 1024): up to 15 fps
+#   VGA ( 640 x  480): up to 30 fps
+#   CIF ( 352 x  288): up to 60 fps
+#  QVGA ( 320 x  240): up to 60 fps
+#  QCIF ( 176 x  144): up to 120 fps
+# QQVGA ( 160 x  120): up to 60 fps
+# QQCIF (  88 x   72): up to 120 fps
+
+# 帧速率可以设置为从 0.1fps 到所选分辨率支持的最大值之间的任何值。这对于避免丢帧非常有用。例如，如果您有一个算法在所有可能的优
+# 化后以 26.3fps 运行，您可以将相机（和 USB）帧速率设置为 26.3，这样就不会丢帧（除非您的算法暂时执行速度较慢，因此增加一个小的
+# margin 可能是个好主意，例如，选择 26.1fps 相机和 USB 速率）。这比将帧速率设置为 30.0 更好，因为这意味着您时不时会错过下一个
+# 相机帧，然后必须等待下一个帧被捕获。如果您的算法确实以 26.3fps 的速度运行，但您指定 30.0fps 的相机帧速率，那么这些帧最终将以 
+# 15.0fps 的速度传输到 USB（即，当您完成当前帧的处理时，您已经错过了相机的下一帧，您需要等待下一帧）。
+
+# 关于 USB 传输速率的注意事项：最大像素数据传输速率为 3070*8000 = 23.9 Mbytes/s（即 3kb/USB microframe，最大 &quot;high bandwidth&quot; 
+# 设置）。虽然 USB 2.0 的最大理论速率为 480 Mbit/s，但这包括协议开销，并且并非所有带宽都可用于我们使用的等时（实时流）传输。这
+# 意味着 SXGA YUYV（2 bytes/pixel）只能通过 USB 链路以最大 ~9.3 fps 的速率传输，尽管相机可以以 15 fps 的速度抓取 SXGA YUYV。
+# Bayer 的 SXGA 可以通过 USB 实现 15 fps 的传输，因为它仅使用 1 bytes/pixel。
+
+# 要在 Linux 主机上测试各种视频格式，最好的方法通常是使用 guvcview。但是，这有两个问题：1）它添加了一些我们本身不支持的格式，
+# 如 RGB3、YU12、YV12 等，可能是通过在实际支持的模式上进行内部像素转换来实现的；2）对 RGB565 的支持似乎很脆弱，guvcview 在更改 
+# RGB565（RGB Packed 称为 RGBP）中的分辨率时经常崩溃。因此，您可能还想尝试 ffmpeg 项目中的 ffplay，它可以显示我们支持的所有模式，
+# 并且如果模式与硬件支持的模式不完全匹配，它将拒绝该模式。例如：
+
+#   ffplay /dev/video0 -pixel_format yuyv422 -video_size 640x480 
+
+# pixel_format 值为：&apos;yuyv422&apos; 表示 YUYV，&apos;gray&apos; 表示 GRAY，&apos;rgb565&apos; 表示 RGB565，&apos;mjpeg&apos; 表示 MJPG，&apos;bgr24&apos; 表示 BGR24，
+# &apos;bayer_rggb8&apos; 表示 BAYER。您可以运行 &apos;ffplay -pix_fmts&apos; 来查看 ffplay 支持的像素格式列表。
+
+# 下面是另一个我们将 JeVois 的输出记录到文件的示例：
+
+#   ffmpeg -f v4l2 -pixel_format rgb565 -video_size 320x240 -framerate 22 -i /dev/video0 output.mp4 
+
+# 在 Mac OSX 上，我们建议使用 CamTwist 应用程序，如 JeVois 文档中所述。您还可以在 OSX 上使用 ffplay：从 ffmpeg 网站下载预编译的 
+# ffplay 二进制文件，然后运行：
+
+#   ~/bin/ffplay -f avfoundation -i &quot;JeVois&quot; -video_size 640x300 -framerate 60 -pixel_format yuyv422
+
+# （假设您将 ffplay 保存到 ~/bin/ 目录中）。
+
+# Mac 兼容性说明：JeVois 智能相机在 Mac 上被正确检测到并与 PhotoBooth 配合使用，只要：1）您有一个输出 YUYV 640x480 的映射（这是 
+# PhotoBooth 将选择的映射（至少在最近的 OSX 上，如 El Capitan 等）；请注意，它还会水平翻转图像）；2）您没有带有 BAYER、RGB565 或 
+# BGR24 输出的活动（未注释掉）映射。如果您的 videomappings.cfg 中有任何未注释的 BAYER、RGB565 或 BGR24 映射，您的 JeVois 智能相
+# 机仍将被 Mac 检测到，PhotoBooth 将启动并尝试使用相机，但它只会显示黑屏。我们猜测这是 Mac 相机驱动程序中的一个错误。可以有 YUYV 
+# 输出的附加映射，以及 MJPG 或 GREY 输出的映射。
+
+################################################################################################# 
+### 直通和简单像素格式转换模式：
+#################################################################################################
+
+#BAYER 640 480 26.8 YUYV 640 480 26.8 JeVois Convert
+#BGR24 640 480 26.8 YUYV 640 480 26.8 JeVois Convert
+GREY 640 480 26.8 YUYV 640 480 26.8 JeVois Convert
+#RGB565 640 480 26.8 YUYV 640 480 26.8 JeVois Convert
+
+#MJPG 640 480 20.0 YUYV 640 480 20.0 JeVois Convert
+MJPG 352 288 60.0 BAYER 352 288 60.0 JeVois Convert
+MJPG 320 240 30.0 RGB565 320 240 30.0 JeVois Convert
+MJPG 320 240 15.0 YUYV 320 240 15.0 JeVois Convert
+MJPG 320 240 60.0 RGB565 320 240 60.0 JeVois Convert
+MJPG 176 144 120.0 BAYER 176 144 120.0 JeVois Convert
+MJPG 160 120 60.0 YUYV 160 120 60.0 JeVois Convert
+MJPG 88 72 120.0 RGB565 88 72 120.0 JeVois Convert
+
+#BAYER 1280 1024 15.0 BAYER 1280 1024 15.0 JeVois PassThrough
+#BAYER 640 480 30.0 BAYER 640 480 30.0 JeVois PassThrough
+#BAYER 352 288 60.0 BAYER 352 288 60.0 JeVois PassThrough
+#BAYER 320 240 60.0 BAYER 320 240 60.0 JeVois PassThrough
+#BAYER 176 144 120.0 BAYER 176 144 120.0 JeVois PassThrough
+#BAYER 160 120 60.0 BAYER 160 120 60.0 JeVois PassThrough
+#BAYER 88 72 120.0 BAYER 88 72 120.0 JeVois PassThrough
+
+#RGB565 1280 1024 15.0 RGB565 1280 1024 15.0 JeVois PassThrough
+#RGB565 640 480 30.0 RGB565 640 480 30.0 JeVois PassThrough
+#RGB565 320 240 60.0 RGB565 320 240 60.0 JeVois PassThrough
+#RGB565 176 144 120.0 RGB565 176 144 120.0 JeVois PassThrough
+#RGB565 160 120 60.0 RGB565 160 120 60.0 JeVois PassThrough
+#RGB565 88 72 120.0 RGB565 88 72 120.0 JeVois PassThrough
+
+#YUYV 1280 1024 7.5 YUYV 1280 1024 7.5 JeVois PassThrough
+#YUYV 640 480 30.0 YUYV 640 480 30.0 JeVois SaveVideo
+#YUYV 640 480 19.6 YUYV 640 480 19.6 JeVois PassThrough
+#YUYV 640 480 12.0 YUYV 640 480 12.0 JeVois PassThrough
+#YUYV 640 480 8.3 YUYV 640 480 8.3 JeVois PassThrough
+#YUYV 640 480 7.5 YUYV 640 480 7.5 JeVois PassThrough
+#YUYV 640 480 5.5 YUYV 640 480 5.5 JeVois PassThrough
+
+YUYV 320 240 60.0 YUYV 320 240 60.0 JeVois SaveVideo
+#YUYV 320 240 30.0 YUYV 320 240 30.0 JeVois SaveVideo
+#YUYV 320 240 15.0 YUYV 320 240 15.0 JeVois SaveVideo
+
+YUYV 160 120 60.0 YUYV 160 120 60.0 JeVois SaveVideo
+#YUYV 160 120 30.0 YUYV 160 120 30.0 JeVois PassThrough
+
+YUYV 352 288 60.0 YUYV 352 288 60.0 JeVois SaveVideo
+#YUYV 352 288 30.0 YUYV 352 288 30.0 JeVois PassThrough
+
+YUYV 176 144 120.0 YUYV 176 144 120.0 JeVois SaveVideo
+#YUYV 176 144 60.0 YUYV 176 144 60.0 JeVois PassThrough
+#YUYV 176 144 30.0 YUYV 176 144 30.0 JeVois PassThrough
+
+YUYV 88 72 120.0 YUYV 88 72 120.0 JeVois SaveVideo
+#YUYV 88 72 60.0 YUYV 88 72 60.0 JeVois PassThrough
+#YUYV 88 72 30.0 YUYV 88 72 30.0 JeVois PassThrough
+
+#################################################################################################### 
+### 将视频保存到磁盘，不通过 USB 预览 
+####################################################################################################
+
+NONE 0 0 0 YUYV 320 240 60.0 JeVois SaveVideo
+NONE 0 0 0 YUYV 320 240 30.0 JeVois SaveVideo
+NONE 0 0 0 YUYV 176 144 120.0 JeVois SaveVideo
+
+####################################################################################################
+### 演示：Saliency + gist + 人脸检测 + 目标识别 
+####################################################################################################
+
+YUYV 640 312 50.0 YUYV 320 240 50.0 JeVois DemoSalGistFaceObj
+
+####################################################################################################
+### 演示：JeVois 介绍影片，然后是 Saliency + gist + 人脸检测 + 物体识别 
+####################################################################################################
+
+YUYV 640 360 30.0 YUYV 320 240 30.0 JeVois JeVoisIntro
+YUYV 640 480 30.0 YUYV 320 240 30.0 JeVois JeVoisIntro
+
+####################################################################################################
+### Demo: Saliency and gist
+####################################################################################################
+
+#YUYV 176 90 120.0 YUYV 88 72 120.0 JeVois DemoSaliency
+#YUYV 320 150 60.0 YUYV 160 120 60.0 JeVois DemoSaliency
+#YUYV 352 180 120.0 YUYV 176 144 120.0 JeVois DemoSaliency
+#YUYV 352 180 100.0 YUYV 176 144 100.0 JeVois DemoSaliency
+YUYV 640 300 60.0 YUYV 320 240 60.0 JeVois DemoSaliency *
+#YUYV 704 360 30.0 YUYV 352 288 30.0 JeVois DemoSaliency
+#YUYV 1280 600 15.0 YUYV 640 480 15.0 JeVois DemoSaliency
+
+####################################################################################################
+### Production: Saliency and gist
+####################################################################################################
+
+# saliency + feature maps + gist
+#GREY 120 25 60.0 YUYV 320 240 60.0 JeVois SaliencyGist
+
+# saliency + feature maps
+#GREY 120 15 60.0 YUYV 320 240 60.0 JeVois SaliencyGist
+
+# saliency + gist
+#GREY 20 73 60.0 YUYV 320 240 60.0 JeVois SaliencyGist
+
+# saliency only
+#GREY 20 15 60.0 YUYV 320 240 60.0 JeVois SaliencyGist
+
+# gist only
+#GREY 72 16 60.0 YUYV 320 240 60.0 JeVois SaliencyGist
+
+#################################################################################################### 
+### 演示：背景减法 
+####################################################################################################
+
+#YUYV 640 240 15.0 YUYV 320 240 15.0 JeVois DemoBackgroundSubtract
+YUYV 320 120 30.0 YUYV 160 120 30.0 JeVois DemoBackgroundSubtract
+
+#################################################################################################### 
+### 演示：二维码和条形码检测和解码 
+####################################################################################################
+
+#YUYV 640 526 15.0 YUYV 640 480 15.0 JeVois DemoQRcode
+YUYV 320 286 30.0 YUYV 320 240 30.0 JeVois DemoQRcode
+#NONE 0 0 0 YUYV 640 480 15.0 JeVois DemoQRcode
+#NONE 0 0 0 YUYV 320 240 30.0 JeVois DemoQRcode
+
+#################################################################################################### 
+### 使用消失点跟踪道路 
+####################################################################################################
+
+NONE 0 0 0 YUYV 320 240 30.0 JeVois RoadNavigation
+#NONE 0 0 0 YUYV 176 144 120.0 JeVois RoadNavigation
+YUYV 320 256 30.0 YUYV 320 240 30.0 JeVois RoadNavigation
+YUYV 176 160 120.0 YUYV 176 144 120.0 JeVois RoadNavigation
+
+#################################################################################################### 
+### ARM-Neon SIMD 图像处理演示 
+####################################################################################################
+
+YUYV 960 240 30.0 YUYV 320 240 30.0 JeVois DemoNeon
+
+####################################################################################################
+### 使用 VLfeat 库进行密集 SIFT 
+####################################################################################################
+
+# very slow, min keypoint step is 17
+#YUYV 448 240 5.0 YUYV 320 240 5.0 JeVois DenseSift
+
+# slow too, min keypoint step is 11
+#YUYV 288 120 5.0 YUYV 160 120 5.0 JeVois DenseSift
+
+# raw keypoints only, assuming step=11, binsize=8
+GREY 128 117 5.0 YUYV 160 120 5.0 JeVois DenseSift
+
+####################################################################################################
+### Salient regions
+####################################################################################################
+
+YUYV 64 192 25.0 YUYV 320 240 25.0 JeVois SalientRegions
+#YUYV 100 400 10.0 YUYV 640 480 10.0 JeVois SalientRegions
+
+####################################################################################################
+### Superpixel image segmentation/clustering
+####################################################################################################
+
+GREY 320 240 30.0 YUYV 320 240 30.0 JeVois SuperPixelSeg
+
+####################################################################################################
+### 使用 openEyes 工具包进行眼动追踪 
+####################################################################################################
+
+#GREY 640 480 30.0 YUYV 640 480 30.0 JeVois DemoEyeTracker
+#GREY 320 240 60.0 YUYV 320 240 60.0 JeVois DemoEyeTracker
+GREY 176 144 120.0 YUYV 176 144 120.0 JeVois DemoEyeTracker
+
+#################################################################################################### 
+### 演示：ArUco 增强现实标记检测和解码
+####################################################################################################
+
+NONE 0 0 0.0 YUYV 320 240 30.0 JeVois DemoArUco
+YUYV 320 260 30.0 YUYV 320 240 30.0 JeVois DemoArUco
+YUYV 640 500 20.0 YUYV 640 480 20.0 JeVois DemoArUco
+
+#################################################################################################### 
+### 使用 Canny 进行边缘检测 
+####################################################################################################
+
+GREY 640 480 29.0 YUYV 640 480 29.0 JeVois EdgeDetection
+GREY 320 240 59.0 YUYV 320 240 59.0 JeVois EdgeDetection
+#GREY 176 144 119.0 YUYV 176 144 119.0 JeVois EdgeDetection
+
+####################################################################################################
+### 使用 4 个并行 Canny 滤波器进行边缘检测，使用不同的设置 
+####################################################################################################
+
+GREY 320 960 45.0 YUYV 320 240 45.0 JeVois EdgeDetectionX4
+
+#################################################################################################### 
+### 基于颜色的物体追踪器 
+####################################################################################################
+
+NONE 0 0 0.0 YUYV 320 240 60.0 JeVois ObjectTracker
+YUYV 320 254 60.0 YUYV 320 240 60.0 JeVois ObjectTracker
+
+#################################################################################################### 
+### GPU 彩色图像处理演示 
+####################################################################################################
+
+#RGB565 320 240 22.0 YUYV 320 240 22.0 JeVois DemoGPU
+
+####################################################################################################
+### Combo CPU multithreaded saliency/gist + 4x GPU grayscale image processing demo
+####################################################################################################
+
+GREY 160 495 60.0 YUYV 160 120 60.0 JeVois DemoCPUGPU
+
+#################################################################################################### 
+### 快速光流计算 
+####################################################################################################
+
+GREY 176 288 100 YUYV 176 144 100 JeVois OpticalFlow
+
+####################################################################################################
+### 使用 SURF 关键点进行物体检测 
+####################################################################################################
+
+YUYV 320 252 30.0 YUYV 320 240 30.0 JeVois ObjectDetect
+
+####################################################################################################
+### 使用 SURF 关键点检测和识别 Salient 区域 
+####################################################################################################
+
+YUYV 320 288 30.0 YUYV 320 240 30.0 JeVois SaliencySURF
+
+####################################################################################################
+### CPU + GPU + NEON burn test
+####################################################################################################
+
+YUYV 640 300 10.0 YUYV 320 240 10.0 JeVois BurnTest</computeroutput></literallayout> </para>
+</section>

@@ -1,0 +1,494 @@
+\hypertarget{group__debugging}{}\doxysubsection{调试辅助类、函数和宏}
+\label{group__debugging}\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+
+
+\doxysubsubsection{ }
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log$<$ Level $>$}}
+\begin{DoxyCompactList}\small\item\em Logger 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1timed__lock__guard}{jevois\+::timed\+\_\+lock\+\_\+guard}}
+\begin{DoxyCompactList}\small\item\em 在 std\+::timed\+\_\+mutex 上获取锁对象，或在等待 1 秒后 L\+F\+A\+T\+AL \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Profiler}{jevois\+::\+Profiler}}
+\begin{DoxyCompactList}\small\item\em 简单的 profiler 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Timer}{jevois\+::\+Timer}}
+\begin{DoxyCompactList}\small\item\em 简单计时器类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1TimerOne}{jevois\+::\+Timer\+One}}
+\begin{DoxyCompactList}\small\item\em 简单的一次性计时器类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Watchdog}{jevois\+::\+Watchdog}}
+\begin{DoxyCompactList}\small\item\em 简单的看门狗类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印出控制台或系统日志消息的宏，\+D\+E\+B\+UG 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gad545842aa2c640a2cbbd12bd249f1c66}{P\+L\+D\+E\+B\+UG}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+D\+E\+B\+UG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏，\+I\+N\+FO 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gaea08c108b85ea1f927c0066dc146dafe}{P\+L\+I\+N\+FO}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+I\+N\+FO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏， E\+R\+R\+OR level \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga423f8c25512020248b543a103130cabf}{P\+L\+E\+R\+R\+OR}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+E\+R\+R\+OR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(msg)
+\begin{DoxyCompactList}\small\item\em Convenience macro for users to print out console or syslog messages, F\+A\+T\+AL level. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga905cdef856c6a279bdc4a5f037a25c52}{P\+L\+F\+A\+T\+AL}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏，\+F\+A\+T\+AL 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga16c96efb84f03f7ded9bfdd977405596}{J\+E\+V\+O\+I\+S\+\_\+\+A\+S\+S\+E\+RT}}(cond)
+\begin{DoxyCompactList}\small\item\em 测试某事是否为真，如果不是，则发出 L\+F\+A\+T\+AL \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}{J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE}}(level)
+\begin{DoxyCompactList}\small\item\em Trace object. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga36695a40a90d579eef600d90c82484f5}{J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK}}(mtx)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于创建 timed\+\_\+lock\+\_\+guard 对象 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__debugging_gac5f7014e430b19db36d4284254f886ef}{jevois\+::warn\+And\+Rethrow\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并重新抛出它 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{jevois\+::warn\+And\+Ignore\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并忽略它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_gac577d140e95998b907a3d8ee82d8f9c5}{jevois\+::warn\+And\+Rethrow\+Param\+Callback\+Exception}} (std\+::string const \&descriptor, std\+::string const \&strval)
+\begin{DoxyCompactList}\small\item\em 参数回调异常的便捷函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_ga41793c253cf663f59b715c0bd2dcc2ad}{jevois\+::log\+Set\+Engine}} (\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} $\ast$e)
+\begin{DoxyCompactList}\small\item\em 设置引擎，以便所有日志消息都转发到其串行端口 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_gaede3301d7e76cf562b3c9326b7b3d686}{jevois\+::get\+Python\+Exception\+String}} (boost\+::python\+::error\+\_\+already\+\_\+set \&)
+\begin{DoxyCompactList}\small\item\em Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga5cd0b0b867a9f033762819e8af37ca35}{jevois\+::get\+Sys\+Info\+C\+PU}} ()
+\begin{DoxyCompactList}\small\item\em 获取 C\+PU 信息： frequency, thermal, load \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga98e313acb940dfe5cb5168e8b0876ba8}{jevois\+::get\+Sys\+Info\+Mem}} ()
+\begin{DoxyCompactList}\small\item\em Get memory info. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_gacab36569297392a9a62000609f3d2193}{jevois\+::get\+Sys\+Info\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Get O.\+S. version info. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois\+::log\+Level}} = L\+O\+G\+\_\+\+I\+N\+FO
+\begin{DoxyCompactList}\small\item\em 当前日志级别 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}{jevois\+::trace\+Level}} = 0
+\begin{DoxyCompactList}\small\item\em 当前跟踪级别 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__debugging_ga16c96efb84f03f7ded9bfdd977405596}\label{group__debugging_ga16c96efb84f03f7ded9bfdd977405596}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!JEVOIS\_ASSERT@{JEVOIS\_ASSERT}}
+\index{JEVOIS\_ASSERT@{JEVOIS\_ASSERT}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_ASSERT}{JEVOIS\_ASSERT}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+A\+S\+S\+E\+RT(\begin{DoxyParamCaption}\item[{}]{cond }\end{DoxyParamCaption})}
+
+
+
+测试某事是否为真，如果不是，则发出 L\+F\+A\+T\+AL 
+
+
+
+Definition at line 241 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga36695a40a90d579eef600d90c82484f5}\label{group__debugging_ga36695a40a90d579eef600d90c82484f5}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!JEVOIS\_TIMED\_LOCK@{JEVOIS\_TIMED\_LOCK}}
+\index{JEVOIS\_TIMED\_LOCK@{JEVOIS\_TIMED\_LOCK}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_TIMED\_LOCK}{JEVOIS\_TIMED\_LOCK}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK(\begin{DoxyParamCaption}\item[{}]{mtx }\end{DoxyParamCaption})}
+
+
+
+辅助宏用于创建 timed\+\_\+lock\+\_\+guard 对象 
+
+在 std\+::timed\+\_\+mutex mtx 上创建一个 timed\+\_\+lock\+\_\+guard，如果在超时之前无法锁定 mtx，则会抛出该异常。该保护程序将在销毁 时解锁互斥锁。 
+
+Definition at line 310 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}\label{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!JEVOIS\_TRACE@{JEVOIS\_TRACE}}
+\index{JEVOIS\_TRACE@{JEVOIS\_TRACE}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_TRACE}{JEVOIS\_TRACE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE(\begin{DoxyParamCaption}\item[{}]{level }\end{DoxyParamCaption})}
+
+
+
+Trace object. 
+
+像使用 std\+::lock\+\_\+guard 一样使用它。在构造时发出一条 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G()}} 消息，在销毁时发出一条消息。通常，您会在每个要跟踪的 函数中调用 J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE 作为第一个命令。 
+
+Definition at line 279 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}\label{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!LDEBUG@{LDEBUG}}
+\index{LDEBUG@{LDEBUG}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{LDEBUG}{LDEBUG}}
+{\footnotesize\ttfamily \#define L\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+方便用户打印出控制台或系统日志消息的宏，\+D\+E\+B\+UG 级别 
+
+此宏旨在与面向流的语法一起使用，用于作为参数传递给宏的所有内容。该语法一开始有点奇怪，但您很快就会习惯它。这允许在 日志中打印出任何定义了运算符 $<$$<$ 的数据类型（与 printf 样式的语法相反）。例如：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} x = 3; std::string str = \textcolor{stringliteral}{"hello"}; \mbox{\hyperlink{classjevois_1_1StepRange}{jevois::StepRange<int>}} rng(0, 5, 100);}
+\DoxyCodeLine{\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{LDEBUG}}(\textcolor{stringliteral}{"x="} << x << \textcolor{stringliteral}{" and str="} << str << \textcolor{stringliteral}{" and rng="} << rng);}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+这是发出消息的首选方式。不要使用 printf，不要使用 cout$<$$<$\char`\"{}blah\char`\"{} 等。
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G()}}、\+L\+I\+N\+F\+O() 和 \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+O\+R()}} 中不允许使用换行符（\textquotesingle{}~\newline
+\textquotesingle{} 和类似符号），因为这些可能会通过串行端口发送到 Arduino 等简单处理器，只需一个前缀（“\+D\+B\+G”、“\+I\+N\+F”、“\+E\+R\+R”）后跟消息，即可轻松解析。如果您发送多行消息，\+Je\+Vois-\/\+Inventor 可能无法运行。异常错误消息以及 \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+A\+L()}} 和 \mbox{\hyperlink{Log_8H_a8e3f8ce22d435337fb988c530e098b25}{L\+T\+H\+R\+O\+W()}} 中允许使用换行符，并且多行将作为几条连续消息发送。
+\end{DoxyWarning}
+根据设计，如果当前日志级别低于（高于）调试级别，则不会评估您的日志消息。这意味着您不必担心浪费 C\+PU 计算不会输出的消息； 例如：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{LINFO}}(\textcolor{stringliteral}{"CPU-\/intensive function says: "} << cpu\_intensive\_function());}
+\end{DoxyCode}
+
+
+如果当前日志级别为 L\+O\+G\+\_\+\+E\+R\+R，则不会运行 C\+PU 密集型函数（它仍将运行一个 \char`\"{}if\char`\"{} 语句来检查当前日志级别）。这也意味着您永远 不应假设您的日志消息将被评估。例如： \begin{DoxyVerb}@code
+\end{DoxyVerb}
+ int x = 42; L\+D\+E\+B\+UG(\char`\"{}x = \char`\"{} $<$$<$ (x++) ); // x 现在可能是 43 或 42，具体取决于当前日志级别... 
+
+\begin{DoxyNote}{Note}
+因为 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G()}} 可用于调试许多快速循环，包括通过使用 \mbox{\hyperlink{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}{J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+C\+E(level)}}，所以只有在构建期间定义了 J\+E\+V\+O\+I\+S\+\_\+\+L\+D\+E\+B\+U\+G\+\_\+\+E\+N\+A\+B\+LE 时才会编译它（通常，这是作为传递给 cmake 的选项完成的），否则它将被注释掉，这样就不会浪费 C\+P\+U。 
+\end{DoxyNote}
+
+
+Definition at line 158 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}\label{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!LERROR@{LERROR}}
+\index{LERROR@{LERROR}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{LERROR}{LERROR}}
+{\footnotesize\ttfamily \#define L\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+方便用户打印控制台或系统日志消息的宏， E\+R\+R\+OR level 
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 
+
+Definition at line 196 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}\label{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!LFATAL@{LFATAL}}
+\index{LFATAL@{LFATAL}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{LFATAL}{LFATAL}}
+{\footnotesize\ttfamily \#define L\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Convenience macro for users to print out console or syslog messages, F\+A\+T\+AL level. 
+
+方便用户抛出 std\+::runtime\+\_\+error 的便利宏，具有方便的消息格式
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} \begin{DoxyNote}{Note}
+After printing the message, this also throws std\+::runtime\+\_\+error
+\end{DoxyNote}
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 相同。此函数不会向用户提供的错误消息添加任何内容。因此，这主要用于捕获异常并通 过 \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+A\+L()}} 发出合并错误消息的情况（可能添加更多上下文详细信息）。 \begin{DoxyNote}{Note}
+这会抛出 std\+::runtime\+\_\+error 
+\end{DoxyNote}
+\mbox{\Hypertarget{group__debugging_gadf127ca2262cc160830da49c37d04e85}\label{group__debugging_gadf127ca2262cc160830da49c37d04e85}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!LINFO@{LINFO}}
+\index{LINFO@{LINFO}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{LINFO}{LINFO}}
+{\footnotesize\ttfamily \#define L\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+方便用户打印控制台或系统日志消息的宏，\+I\+N\+FO 级别 
+
+Usage syntax is the same as for \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 
+
+Definition at line 179 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_gad545842aa2c640a2cbbd12bd249f1c66}\label{group__debugging_gad545842aa2c640a2cbbd12bd249f1c66}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!PLDEBUG@{PLDEBUG}}
+\index{PLDEBUG@{PLDEBUG}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{PLDEBUG}{PLDEBUG}}
+{\footnotesize\ttfamily \#define P\+L\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+与 L\+D\+E\+B\+UG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 相同 
+
+Definition at line 166 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga423f8c25512020248b543a103130cabf}\label{group__debugging_ga423f8c25512020248b543a103130cabf}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!PLERROR@{PLERROR}}
+\index{PLERROR@{PLERROR}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{PLERROR}{PLERROR}}
+{\footnotesize\ttfamily \#define P\+L\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+与 L\+E\+R\+R\+OR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 
+
+Definition at line 204 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_ga905cdef856c6a279bdc4a5f037a25c52}\label{group__debugging_ga905cdef856c6a279bdc4a5f037a25c52}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!PLFATAL@{PLFATAL}}
+\index{PLFATAL@{PLFATAL}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{PLFATAL}{PLFATAL}}
+{\footnotesize\ttfamily \#define P\+L\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+方便用户打印控制台或系统日志消息的宏，\+F\+A\+T\+AL 级别 
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} \begin{DoxyNote}{Note}
+打印消息后，这也会引发 std\+::runtime\+\_\+error 
+\end{DoxyNote}
+
+
+Definition at line 224 of file Log.\+H.
+
+\mbox{\Hypertarget{group__debugging_gaea08c108b85ea1f927c0066dc146dafe}\label{group__debugging_gaea08c108b85ea1f927c0066dc146dafe}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!PLINFO@{PLINFO}}
+\index{PLINFO@{PLINFO}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{PLINFO}{PLINFO}}
+{\footnotesize\ttfamily \#define P\+L\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+与 L\+I\+N\+FO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 
+
+使用语法与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}} 
+
+Definition at line 187 of file Log.\+H.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__debugging_gaede3301d7e76cf562b3c9326b7b3d686}\label{group__debugging_gaede3301d7e76cf562b3c9326b7b3d686}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!getPythonExceptionString@{getPythonExceptionString}}
+\index{getPythonExceptionString@{getPythonExceptionString}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{getPythonExceptionString()}{getPythonExceptionString()}}
+{\footnotesize\ttfamily std\+::string jevois\+::get\+Python\+Exception\+String (\begin{DoxyParamCaption}\item[{boost\+::python\+::error\+\_\+already\+\_\+set \&}]{ }\end{DoxyParamCaption})}
+
+
+
+Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. 
+
+This code inspired from\+: \href{https://github.com/abingham/boost_python_exception/tree/master/src/boost_python_exception/auto_translation}{\texttt{ https\+://github.\+com/abingham/boost\+\_\+python\+\_\+exception/tree/master/src/boost\+\_\+python\+\_\+exception/auto\+\_\+translation}}
+
+您通常会在 catch(boost\+::python\+::error\+\_\+already\+\_\+set \& e) \{ ... \} 块内部使用它。 
+
+Definition at line 154 of file Python\+Exception.\+C.
+
+
+
+Referenced by jevois\+::\+Python\+Wrapper\+::pythonload(), jevois\+::\+G\+U\+Ihelper\+::report\+And\+Ignore\+Exception(), jevois\+::warn\+And\+Ignore\+Exception(), jevois\+::warn\+And\+Rethrow\+Exception(), and jevois\+::warn\+And\+Rethrow\+Param\+Callback\+Exception().
+
+\mbox{\Hypertarget{group__debugging_ga5cd0b0b867a9f033762819e8af37ca35}\label{group__debugging_ga5cd0b0b867a9f033762819e8af37ca35}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!getSysInfoCPU@{getSysInfoCPU}}
+\index{getSysInfoCPU@{getSysInfoCPU}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{getSysInfoCPU()}{getSysInfoCPU()}}
+{\footnotesize\ttfamily std\+::string jevois\+::get\+Sys\+Info\+C\+PU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取 C\+PU 信息： frequency, thermal, load 
+
+
+
+Definition at line 24 of file Sys\+Info.\+C.
+
+
+
+References jevois\+::get\+File\+String(), and jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::\+Engine\+::parse\+Command().
+
+\mbox{\Hypertarget{group__debugging_ga98e313acb940dfe5cb5168e8b0876ba8}\label{group__debugging_ga98e313acb940dfe5cb5168e8b0876ba8}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!getSysInfoMem@{getSysInfoMem}}
+\index{getSysInfoMem@{getSysInfoMem}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{getSysInfoMem()}{getSysInfoMem()}}
+{\footnotesize\ttfamily std\+::string jevois\+::get\+Sys\+Info\+Mem (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get memory info. 
+
+
+
+Definition at line 66 of file Sys\+Info.\+C.
+
+
+
+References jevois\+::get\+File\+String().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::\+Engine\+::parse\+Command().
+
+\mbox{\Hypertarget{group__debugging_gacab36569297392a9a62000609f3d2193}\label{group__debugging_gacab36569297392a9a62000609f3d2193}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!getSysInfoVersion@{getSysInfoVersion}}
+\index{getSysInfoVersion@{getSysInfoVersion}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{getSysInfoVersion()}{getSysInfoVersion()}}
+{\footnotesize\ttfamily std\+::string jevois\+::get\+Sys\+Info\+Version (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get O.\+S. version info. 
+
+
+
+Definition at line 74 of file Sys\+Info.\+C.
+
+
+
+References jevois\+::get\+File\+String().
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::draw\+System(), and jevois\+::\+Engine\+::parse\+Command().
+
+\mbox{\Hypertarget{group__debugging_ga41793c253cf663f59b715c0bd2dcc2ad}\label{group__debugging_ga41793c253cf663f59b715c0bd2dcc2ad}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!logSetEngine@{logSetEngine}}
+\index{logSetEngine@{logSetEngine}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{logSetEngine()}{logSetEngine()}}
+{\footnotesize\ttfamily void jevois\+::log\+Set\+Engine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} $\ast$}]{e }\end{DoxyParamCaption})}
+
+
+
+设置引擎，以便所有日志消息都转发到其串行端口 
+
+此功能不适用于一般用途，当用户设置其某个参数以启用将日志消息转发到串行端口时，引擎会在内部使用它。 
+
+Definition at line 143 of file Log.\+C.
+
+
+
+Referenced by jevois\+::log\+End(), jevois\+::\+Engine\+::post\+Init(), and jevois\+::\+Engine\+::$\sim$\+Engine().
+
+\mbox{\Hypertarget{group__debugging_ga7460b83ad6c4523ba897c81362742027}\label{group__debugging_ga7460b83ad6c4523ba897c81362742027}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!warnAndIgnoreException@{warnAndIgnoreException}}
+\index{warnAndIgnoreException@{warnAndIgnoreException}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{warnAndIgnoreException()}{warnAndIgnoreException()}}
+{\footnotesize\ttfamily std\+::string jevois\+::warn\+And\+Ignore\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并忽略它 
+
+用户代码可以按如下方式使用此函数，记录一些引发的异常的踪迹，然后吞掉（忽略）该异常。请谨慎使用，吞掉异常通常会破 坏使用异常的整个逻辑。示例用法：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{try} \{ do\_something\_risky\_and\_we\_dont\_care\_if\_it\_fails(); \} \textcolor{keywordflow}{catch} (...) \{ \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{jevois::warnAndIgnoreException}}(); \}}
+\end{DoxyCode}
+
+
+请注意，如果有人想以其他方式报告它（例如，在 G\+UI 中或使用 \mbox{\hyperlink{namespacejevois_a702884502b6ac843dada7c3f24e6e1fb}{draw\+Error\+Image()}} 的视频帧中），则记录到控制台的消息也会 作为字符串返回。 
+
+Definition at line 235 of file Log.\+C.
+
+
+
+References jevois\+::get\+Python\+Exception\+String(), L\+E\+R\+R\+OR, and jevois\+::split().
+
+
+
+Referenced by jevois\+::\+Camera\+::abort\+Stream(), jevois\+::\+G\+U\+Ihelper\+::compile\+Command(), jevois\+::\+Engine\+::foreach\+Video\+Mapping(), jevois\+::\+G\+U\+Ihelper\+::headless\+Display(), jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init(), jevois\+::\+G\+P\+Ushader\+::load(), jevois\+::\+Engine\+::main\+Loop(), jevois\+::\+Engine\+::post\+Init(), jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::\+Engine\+::run\+Script\+From\+File(), jevois\+::\+Engine\+::send\+Serial(), jevois\+::\+Camera\+Device\+::stream\+Off(), jevois\+::\+Camera\+::stream\+Off(), jevois\+::\+Camera\+::stream\+On(), jevois\+::\+Camera\+::$\sim$\+Camera(), jevois\+::\+Camera\+Device\+::$\sim$\+Camera\+Device(), jevois\+::\+Engine\+::$\sim$\+Engine(), jevois\+::\+Gadget\+::$\sim$\+Gadget(), jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::$\sim$\+Im\+Gui\+Backend\+M\+A\+L\+I(), and jevois\+::\+Movie\+Output\+::$\sim$\+Movie\+Output().
+
+\mbox{\Hypertarget{group__debugging_gac5f7014e430b19db36d4284254f886ef}\label{group__debugging_gac5f7014e430b19db36d4284254f886ef}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!warnAndRethrowException@{warnAndRethrowException}}
+\index{warnAndRethrowException@{warnAndRethrowException}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{warnAndRethrowException()}{warnAndRethrowException()}}
+{\footnotesize\ttfamily void jevois\+::warn\+And\+Rethrow\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并重新抛出它 
+
+不会吞下异常的用户代码可以按如下方式使用此函数来记录一些被抛出的异常的踪迹：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{try} \{ do\_something\_risky(); \} \textcolor{keywordflow}{catch} (...) \{ \mbox{\hyperlink{group__debugging_gac5f7014e430b19db36d4284254f886ef}{jevois::warnAndRethrowException}}(); \}}
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+此函数抛出异常！因此，显然只有在 catch 块内使用它才有意义。 
+\end{DoxyNote}
+
+
+Definition at line 202 of file Log.\+C.
+
+
+
+References jevois\+::get\+Python\+Exception\+String(), L\+E\+R\+R\+OR, and jevois\+::split().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess(), and jevois\+::dnn\+::\+Network\+::ready().
+
+\mbox{\Hypertarget{group__debugging_gac577d140e95998b907a3d8ee82d8f9c5}\label{group__debugging_gac577d140e95998b907a3d8ee82d8f9c5}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!warnAndRethrowParamCallbackException@{warnAndRethrowParamCallbackException}}
+\index{warnAndRethrowParamCallbackException@{warnAndRethrowParamCallbackException}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{warnAndRethrowParamCallbackException()}{warnAndRethrowParamCallbackException()}}
+{\footnotesize\ttfamily void jevois\+::warn\+And\+Rethrow\+Param\+Callback\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{descriptor,  }\item[{std\+::string const \&}]{strval }\end{DoxyParamCaption})}
+
+
+
+参数回调异常的便捷函数 
+
+由 Parameter 内部使用，可能对其他人没那么有用，包含在 jevois 命名空间中，以避免必须将 boost\+::python 拉入 Parameter，这会将其拉入几乎所有内容并大大增加编译时间。 \begin{DoxyNote}{Note}
+此函数抛出！因此显然只有在 catch 块内使用它才有意义。 
+\end{DoxyNote}
+
+
+Definition at line 273 of file Log.\+C.
+
+
+
+References jevois\+::get\+Python\+Exception\+String(), and L\+E\+R\+R\+OR.
+
+
+
+\doxysubsubsection{Variable Documentation}
+\mbox{\Hypertarget{group__debugging_ga0538fa80480e8b4b51b399d98196765b}\label{group__debugging_ga0538fa80480e8b4b51b399d98196765b}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!logLevel@{logLevel}}
+\index{logLevel@{logLevel}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{logLevel}{logLevel}}
+{\footnotesize\ttfamily int jevois\+::log\+Level = L\+O\+G\+\_\+\+I\+N\+FO}
+
+
+
+当前日志级别 
+
+通过改变此全局变量的值来设置日志级别。默认值为 L\+O\+G\+\_\+\+I\+N\+F\+O。
+
+可能的日志值在 sys/syslog.\+h 中定义，这里我们只处理以下不同数量的消息：\+L\+O\+G\+\_\+\+C\+R\+I\+T、\+L\+O\+G\+\_\+\+E\+R\+R、\+L\+O\+G\+\_\+\+I\+N\+F\+O、\+L\+O\+G\+\_\+\+D\+E\+B\+U\+G。 
+
+Definition at line 29 of file Log.\+C.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}\label{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}} 
+\index{调试辅助类、函数和宏@{调试辅助类、函数和宏}!traceLevel@{traceLevel}}
+\index{traceLevel@{traceLevel}!调试辅助类、函数和宏@{调试辅助类、函数和宏}}
+\doxyparagraph{\texorpdfstring{traceLevel}{traceLevel}}
+{\footnotesize\ttfamily int jevois\+::trace\+Level = 0}
+
+
+
+当前跟踪级别 
+
+级别越高，跟踪越详细。请注意，只有当 J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+E\+N\+A\+B\+LE 被指定为编译选项，并且跟踪消息在 L\+D\+E\+B\+UG 日志级别发出时， 这才会有效，因此在编译时还必须指定 J\+E\+V\+O\+I\+S\+\_\+\+L\+D\+E\+B\+U\+G\+\_\+\+E\+N\+A\+B\+L\+E。 
+
+Definition at line 30 of file Log.\+C.
+

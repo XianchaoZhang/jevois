@@ -79,9 +79,9 @@ namespace jevois
                              TerminalMode::Plain, TerminalMode_Values, ParamCateg);
   } // namespace serial
   
-  //! Interface to a serial port
-  /*! This class is thread-safe. Concurrent read and write (which do not seem to be supported by the O.S. or hardware)
-      are serialized through the use of a mutex in the Serial class. \ingroup core */
+  //! 串行端口接口 
+  /*! 此类是线程安全的。并发读取和写入（似乎不受操作系统或硬件支持）通过在 Serial 类中使用互斥锁进行序列化。
+       \ingroup core */
   class Serial : public UserInterface,
                  public Parameter<serial::devname, serial::baudrate, serial::format, serial::flowsoft,
                                   serial::flowhard, serial::drop, serial::linestyle, serial::mode>
@@ -93,37 +93,35 @@ namespace jevois
       //! destructor
       virtual ~Serial();
       
-      //! Set the access to blocking or not
-      /*! Default is non-blocking. If blocking, can also specify a timeout (rounded to tenth of seconds) */
+      //! 设置是否阻塞访问 
+      /*! 默认为非阻塞。如果阻塞，也可以指定超时（四舍五入到十分之一秒） */
       void setBlocking(bool blocking, std::chrono::milliseconds const & timeout);
       
-      //! Set the DTR mode off momentarily.
+      //! 暂时关闭 DTR 模式。
       void toggleDTR(std::chrono::milliseconds const & dur);
       
-      //! transmit continuous stream of zero-valued bits for specific duration.
+      //! 在特定持续时间内传输连续的零值位流。
       void sendBreak(void);
 
-      //! Read some bytes if available, and return true and a string when one is complete
+      //! 如果可用，则读取一些字节，并在完成时返回 true 和一个字符串
       bool readSome(std::string & str) override;
       
-      //! Write a string, using the line termination convention of serial::linestyle
-      /*! No line terminator should be included in the string, writeString() will add one. */
+      //! 使用 serial::linestyle 的行终止约定写入字符串 
+      /*! 字符串中不应包含行终止符，writeString() 将添加一个。 */
       void writeString(std::string const & str) override;
       
-      //! Send a file from the local microSD to the host computer
-      /*! abspath should be the full absolute path of the file. The port will be locked during the entire
-          transaction. */
+      //! 将文件从本地 microSD 发送到主机 
+      /*! abspath 应为文件的完整绝对路径。 在整个交易期间，端口将被锁定。 */
       void fileGet(std::string const & abspath);
 
-      //! Receive a file from the host and write it to the local microSD
-      /*! abspath should be the full absolute path of the file. The port will be locked during the entire
-          transaction. */
+      //! 从主机接收文件并将其写入本地 microSD 
+      /*! abspath 应为文件的完整绝对路径。整个交易期间端口将被锁定。 */
       void filePut(std::string const & abspath);
       
       //! Flush all inputs
       void flush(void);
 
-      //! Return our port type, here Hard or USB
+      //! 返回我们的端口类型，这里是 Hard 或 USB
       UserInterface::Type type() const override;
 
     protected:
@@ -134,11 +132,11 @@ namespace jevois
       void tryReconnect();
       void openPort(); // must be locked
       void writeInternal(void const * buffer, const int nbytes, bool nodrop = false);
-      int itsDev; // descriptor associated with the device file
-      termios itsSavedState; // saved state to restore in the destructor
+      int itsDev; // 与设备文件关联的描述符
+      termios itsSavedState; // 要在析构函数中恢复的已保存状态
       std::string itsPartialString;
       std::mutex itsMtx;
-      int itsWriteOverflowCounter; // counter so we do not send too many write overflow errors
+      int itsWriteOverflowCounter; // 计数器，因此我们不会发送太多写入溢出错误
       jevois::UserInterface::Type itsType;
       std::atomic<int> itsErrno;
       std::future<void> itsOpenFut;

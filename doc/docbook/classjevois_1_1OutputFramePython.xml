@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1OutputFramePython">
+<title>jevois::OutputFramePython Class Reference</title>
+<indexterm><primary>jevois::OutputFramePython</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Python 使用的 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包装器 </para>
+
+
+
+<para>此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，而仅供 <link linkend="_classjevois_1_1PythonModule">PythonModule</link> 使用。此类的用户必须确保 原始 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 将比任何和所有 <link linkend="_classjevois_1_1OutputFramePython">OutputFramePython</link> 实例都存活得更久，因为 <link linkend="_classjevois_1_1OutputFramePython">OutputFramePython</link> 只是通过不受保护的原始指针引用 源 OutputFrame。虽然 C++ 对象称为 OutputFramePython，但我们将以名称 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 将其公开给 python（参见 PythonSupport.C）。 </para>
+<para>
+Definition at line 125 of file PythonModule.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1OutputFramePython_1a8752b615d5f195f2c2b167eee885ec07">OutputFramePython</link> ()=default</para>
+
+<para>默认构造函数使 boost::python 正常运行，对象不可操作 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1OutputFramePython_1ae32e89356fe1329331a6286cd329b92e">OutputFramePython</link> (<link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> *src)</para>
+
+<para>从应该来自引擎的常规（仅移动）OutputFrame 构造 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1OutputFramePython_1a4a62284c2a39d38dd4c374918b371346">get</link> () const</para>
+
+<para>获取下一个捕获的相机图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a75ec46de34b0de442d9bc595d87c55e3">send</link> () const</para>
+
+<para>Indicate that user processing is done with the image previously obtained via <link linkend="_classjevois_1_1OutputFramePython_1a4a62284c2a39d38dd4c374918b371346">get()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1aa2da45571f40ec8e9f38f16014a508e9">sendCv1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1ac63fab09e88be10cf8e9211884e703be">sendCv</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a7f167e6caa8507caae3a8447c00c97e4">sendCvGRAY1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a GRAY cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1aff1164328effbd591ab60b3e625a8753">sendCvGRAY</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a GRAY cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a82d78f6cbd50f259fa62645e9dc53687">sendCvBGR1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a BGR cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a879c787d19686d3c933ca3789a6a1818">sendCvBGR</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a BGR cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a58537e4f4723368170c3ef63fd90ce8b">sendCvRGB1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a RGB cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1aa9dd796eea2910df805e250b94d5622f">sendCvRGB</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a RGB cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1ae55f74e67c8aa79e97073081b9e2d871">sendCvRGBA1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a RGBA cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1ab7aa6f677eff5b1c04529210fb976bcd">sendCvRGBA</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a RGBA cv::Mat after converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a3b52ab0abc95ad0425d64dcd6b63a00d">sendScaledCvGRAY1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a GRAY cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1aad85f9891b62ab3fc580f9d2f58cff87">sendScaledCvGRAY</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a GRAY cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a18b5fc14c782c87152a37dfae2c210b5">sendScaledCvBGR1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a BGR cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a7daa5f0cd971d610cd6fb2aeec50b4c5">sendScaledCvBGR</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a BGR cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a71ad549f8026a7bde6904cc165cfdd4a">sendScaledCvRGB1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a RGB cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a89debe1558ece7444d356150de58793c">sendScaledCvRGB</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a RGB cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1a05f15bcaf0006a6d2354cbc214dd229a">sendScaledCvRGBA1</link> (cv::Mat const &amp;img, int quality) const</para>
+
+<para>Shorthand to send a RGBA cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1OutputFramePython_1aa226a5b410d32251598acbcac99f2a6b">sendScaledCvRGBA</link> (cv::Mat const &amp;img) const</para>
+
+<para>Shorthand to send a RGBA cv::Mat after scaling/converting it to the current output format. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1OutputFramePython_1a8752b615d5f195f2c2b167eee885ec07"/>    <section>
+    <title>OutputFramePython()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>OutputFramePython</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>OutputFramePython</secondary></indexterm>
+<para><computeroutput>jevois::OutputFramePython::OutputFramePython ( )<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>默认构造函数使 boost::python 正常运行，对象不可操作 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1ae32e89356fe1329331a6286cd329b92e"/>    <section>
+    <title>OutputFramePython()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>OutputFramePython</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>OutputFramePython</secondary></indexterm>
+<para><computeroutput>jevois::OutputFramePython::OutputFramePython (<link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> * src)</computeroutput></para><para>
+
+<para>从应该来自引擎的常规（仅移动）OutputFrame 构造 </para>
+</para>
+<para>
+Definition at line 142 of file PythonModule.C.</para>
+<para>
+References LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1OutputFramePython_1a4a62284c2a39d38dd4c374918b371346"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::OutputFramePython::get ( ) const</computeroutput></para><para>
+
+<para>获取下一个捕获的相机图像 </para>
+</para>
+<para>
+Definition at line 145 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a75ec46de34b0de442d9bc595d87c55e3"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::send ( ) const</computeroutput></para><para>
+
+<para>Indicate that user processing is done with the image previously obtained via <link linkend="_classjevois_1_1OutputFramePython_1a4a62284c2a39d38dd4c374918b371346">get()</link> </para>
+</para>
+<para>
+Definition at line 150 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1ac63fab09e88be10cf8e9211884e703be"/>    <section>
+    <title>sendCv()</title>
+<indexterm><primary>sendCv</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCv</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCv (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 160 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1aa2da45571f40ec8e9f38f16014a508e9"/>    <section>
+    <title>sendCv1()</title>
+<indexterm><primary>sendCv1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCv1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCv1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 155 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a879c787d19686d3c933ca3789a6a1818"/>    <section>
+    <title>sendCvBGR()</title>
+<indexterm><primary>sendCvBGR</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvBGR</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvBGR (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a BGR cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 180 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a82d78f6cbd50f259fa62645e9dc53687"/>    <section>
+    <title>sendCvBGR1()</title>
+<indexterm><primary>sendCvBGR1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvBGR1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvBGR1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a BGR cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 175 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1aff1164328effbd591ab60b3e625a8753"/>    <section>
+    <title>sendCvGRAY()</title>
+<indexterm><primary>sendCvGRAY</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvGRAY</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvGRAY (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a GRAY cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 170 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a7f167e6caa8507caae3a8447c00c97e4"/>    <section>
+    <title>sendCvGRAY1()</title>
+<indexterm><primary>sendCvGRAY1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvGRAY1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvGRAY1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a GRAY cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 165 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1aa9dd796eea2910df805e250b94d5622f"/>    <section>
+    <title>sendCvRGB()</title>
+<indexterm><primary>sendCvRGB</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvRGB</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvRGB (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGB cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 190 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a58537e4f4723368170c3ef63fd90ce8b"/>    <section>
+    <title>sendCvRGB1()</title>
+<indexterm><primary>sendCvRGB1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvRGB1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvRGB1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGB cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 185 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1ab7aa6f677eff5b1c04529210fb976bcd"/>    <section>
+    <title>sendCvRGBA()</title>
+<indexterm><primary>sendCvRGBA</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvRGBA</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvRGBA (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGBA cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 200 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1ae55f74e67c8aa79e97073081b9e2d871"/>    <section>
+    <title>sendCvRGBA1()</title>
+<indexterm><primary>sendCvRGBA1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendCvRGBA1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendCvRGBA1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGBA cv::Mat after converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 195 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a7daa5f0cd971d610cd6fb2aeec50b4c5"/>    <section>
+    <title>sendScaledCvBGR()</title>
+<indexterm><primary>sendScaledCvBGR</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvBGR</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvBGR (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a BGR cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 220 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a18b5fc14c782c87152a37dfae2c210b5"/>    <section>
+    <title>sendScaledCvBGR1()</title>
+<indexterm><primary>sendScaledCvBGR1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvBGR1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvBGR1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a BGR cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 215 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1aad85f9891b62ab3fc580f9d2f58cff87"/>    <section>
+    <title>sendScaledCvGRAY()</title>
+<indexterm><primary>sendScaledCvGRAY</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvGRAY</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvGRAY (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a GRAY cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 210 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a3b52ab0abc95ad0425d64dcd6b63a00d"/>    <section>
+    <title>sendScaledCvGRAY1()</title>
+<indexterm><primary>sendScaledCvGRAY1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvGRAY1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvGRAY1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a GRAY cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 205 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a89debe1558ece7444d356150de58793c"/>    <section>
+    <title>sendScaledCvRGB()</title>
+<indexterm><primary>sendScaledCvRGB</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvRGB</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvRGB (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGB cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 230 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a71ad549f8026a7bde6904cc165cfdd4a"/>    <section>
+    <title>sendScaledCvRGB1()</title>
+<indexterm><primary>sendScaledCvRGB1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvRGB1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvRGB1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGB cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 225 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1aa226a5b410d32251598acbcac99f2a6b"/>    <section>
+    <title>sendScaledCvRGBA()</title>
+<indexterm><primary>sendScaledCvRGBA</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvRGBA</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvRGBA (cv::Mat const &amp; img) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGBA cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 240 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1OutputFramePython_1a05f15bcaf0006a6d2354cbc214dd229a"/>    <section>
+    <title>sendScaledCvRGBA1()</title>
+<indexterm><primary>sendScaledCvRGBA1</primary><secondary>jevois::OutputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::OutputFramePython</primary><secondary>sendScaledCvRGBA1</secondary></indexterm>
+<para><computeroutput>void jevois::OutputFramePython::sendScaledCvRGBA1 (cv::Mat const &amp; img, int quality) const</computeroutput></para><para>
+
+<para>Shorthand to send a RGBA cv::Mat after scaling/converting it to the current output format. </para>
+</para>
+<para>
+Definition at line 235 of file PythonModule.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

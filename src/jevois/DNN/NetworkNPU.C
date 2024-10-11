@@ -45,7 +45,7 @@
     if (VSI_NN_TENSOR_ID_NA == _id) LFATAL("NEW_VIRTUAL_TENSOR failed"); \
   } while(0)
 
-// Set const tensor dims out of this macro.
+// 在该宏之外设置 const 张量 dims。
 #define NEW_CONST_TENSOR(_id, _attr, _dtype, _ofst, _size) do {         \
     data = load_data(fp, _ofst, _size);                                 \
     _attr.vtl = FALSE;                                                  \
@@ -56,7 +56,7 @@
     if (VSI_NN_TENSOR_ID_NA == _id) LFATAL("NEW_CONST_TENSOR failed");  \
   } while(0)
 
-// Set generic tensor dims out of this macro.
+// 从该宏中设置通用张量 dims
 #define NEW_NORM_TENSOR(_id, _attr, _dtype) do {                        \
     _attr.vtl = FALSE;                                                  \
     _attr.is_const = FALSE;                                             \
@@ -65,7 +65,7 @@
     if (VSI_NN_TENSOR_ID_NA == _id) LFATAL("NEW_NORM_TENSOR failed");   \
   } while(0)
 
-// Set generic tensor dims out of this macro.
+// 从该宏中设置通用张量 dims
 #define NEW_NORM_TENSOR_FROM_HANDLE(_id, _attr, _dtype) do {            \
     _attr.vtl = FALSE;                                                  \
     _attr.is_const = FALSE;                                             \
@@ -136,7 +136,7 @@ void jevois::dnn::NetworkNPU::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::NetworkNPU::load()
 {
-  // Need to nuke the network first if it exists or we could run out of RAM:
+  // 如果网络存在，则需要先将其删除，否则我们可能会耗尽 RAM：
   if (itsGraph) { vsi_nn_ReleaseGraph(&itsGraph); itsGraph = nullptr; }
 
   // Create context if needed:
@@ -169,7 +169,7 @@ void jevois::dnn::NetworkNPU::load()
   // Get NBG file name:
   std::string const m = jevois::absolutePath(dataroot::get(), model::get());
 
-  // Check that the file does exist so we avoid cryptic errors if not:
+  // 检查文件是否存在，以便我们避免出现神秘错误，如果不存在：
   if (std::filesystem::exists(m) == false) LFATAL("Missing network file " << m << " -- ABORT");
   
   // Initialize node:
@@ -178,7 +178,7 @@ void jevois::dnn::NetworkNPU::load()
   node[0]->nn_param.nbg.type = VSI_NN_NBG_FILE;
   node[0]->nn_param.nbg.url = m.c_str();
 
-  // Create input and output tensors and attach them to the node and graph:
+  // 创建输入和输出张量并将它们附加到节点和图：
   create_tensors(oattrs, node[0], false);
   create_tensors(iattrs, node[0], true);
   
@@ -218,7 +218,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkNPU::doprocess(std::vector<cv::Mat> con
     if (tensor == nullptr) LFATAL("Network does not have input tensor " << b);
     auto const & iattr = tensor->attr;
 
-    // Check that blob and tensor are a complete match:
+    // 检查 blob 和 tensor 是否完全匹配：
     if (jevois::dnn::attrmatch(iattr, blob) == false)
       LFATAL("Input " << b << ": received " << jevois::dnn::shapestr(blob) <<
              " but want: " << jevois::dnn::shapestr(iattr));

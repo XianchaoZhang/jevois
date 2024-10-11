@@ -1,0 +1,57 @@
+\hypertarget{group__imu}{}\doxysubsection{惯性测量单元 (I\+MU) 类和函数}
+\label{group__imu}\index{惯性测量单元 (IMU) 类和函数@{惯性测量单元 (IMU) 类和函数}}
+
+
+\doxysubsubsection{ }
+这些类和函数为某些可选 Je\+Vois 成像传感器中可能存在的可选 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片提供支持。例如，\+T\+DK Inven\+Sense I\+C\+M20948：3 轴加速度计、3 轴陀螺仪、3 轴磁力计、集成数字运动处理器 (D\+MP)。 Collaboration diagram for 惯性测量单元 (I\+MU) 类和函数\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__imu}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ICM20948}{jevois\+::\+I\+C\+M20948}}
+\begin{DoxyCompactList}\small\item\em T\+DK Inven\+Sense I\+C\+M-\/20948 9D\+OF \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 高级驱动程序 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1IMU}{jevois\+::\+I\+MU}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 惯性测量单元 (\mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}) 的抽象接口 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1IMUrawData}{jevois\+::\+I\+M\+Uraw\+Data}}
+\begin{DoxyCompactList}\small\item\em 原始 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 数据 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__ICM-20948}{D\+M\+P 计算头字段}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{group__imu_ga43ee011cc956b9d2d7a5ae46aa268bff}{jevois\+::\+D\+M\+Ppacket\+Size}} (unsigned short ctl1, unsigned short ctl2)
+\begin{DoxyCompactList}\small\item\em 辅助函数根据选项确定 D\+MP 数据包大小 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__imu_ga43ee011cc956b9d2d7a5ae46aa268bff}\label{group__imu_ga43ee011cc956b9d2d7a5ae46aa268bff}} 
+\index{惯性测量单元 (IMU) 类和函数@{惯性测量单元 (IMU) 类和函数}!DMPpacketSize@{DMPpacketSize}}
+\index{DMPpacketSize@{DMPpacketSize}!惯性测量单元 (IMU) 类和函数@{惯性测量单元 (IMU) 类和函数}}
+\doxyparagraph{\texorpdfstring{DMPpacketSize()}{DMPpacketSize()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::\+D\+M\+Ppacket\+Size (\begin{DoxyParamCaption}\item[{unsigned short}]{ctl1,  }\item[{unsigned short}]{ctl2 }\end{DoxyParamCaption})}
+
+
+
+辅助函数根据选项确定 D\+MP 数据包大小 
+
+
+
+Definition at line 52 of file I\+M\+Udata.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+EL, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+C\+E\+L\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+OG, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+C\+T\+\_\+\+R\+E\+C\+O\+G\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+LS, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+A\+L\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+B\+A\+T\+C\+H\+\_\+\+M\+O\+D\+E\+\_\+\+EN, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+SS, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+BR, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+C\+A\+L\+I\+B\+R\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+C\+P\+A\+S\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+UP, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+L\+I\+P\+\_\+\+P\+I\+C\+K\+U\+P\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+O\+O\+T\+E\+R\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+NC, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+F\+S\+Y\+N\+C\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+AG, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+E\+O\+M\+A\+G\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+RO, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+CY, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+A\+C\+C\+U\+R\+A\+C\+Y\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+B\+I\+A\+S\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+C\+A\+L\+I\+BR, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+G\+Y\+R\+O\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+O\+D\+R\+\_\+\+C\+N\+T\+\_\+\+G\+Y\+R\+O\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+ET, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+E\+D\+\_\+\+S\+T\+E\+P\+D\+E\+T\+\_\+\+T\+I\+M\+E\+S\+T\+A\+M\+P\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+Q\+U\+A\+T6, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+RE, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+P\+R\+E\+S\+S\+U\+R\+E\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T6\+\_\+\+D\+A\+T\+A\+\_\+\+SZ, J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9, and J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+Q\+U\+A\+T9\+\_\+\+D\+A\+T\+A\+\_\+\+SZ.
+
+
+
+Referenced by jevois\+::\+I\+C\+M20948\+::get\+D\+M\+P().
+

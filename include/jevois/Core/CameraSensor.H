@@ -24,19 +24,20 @@ namespace jevois
   class VideoMapping;
   class Camera;
   
-  /*! \defgroup camerasensor Helper definitions for different camera sensors
+  /*! \defgroup camerasensor 不同相机传感器的辅助定义
       \ingroup core */
 
   /*! @{ */ // **********************************************************************
 
-  //! Enum for different sensor models
-  /*! Use 'any' when you either don't know (e.g., running in host mode with an unknown dumb USB webcam), or when you
-      don't care (e.g., we use 'any' in jevois-add-videomapping so that it will always succeed).
-      
-      - Parallel CSI sensors are for JeVois-A33 hardware: ov9650, ov2640, ov7725, ar0135
-      - MIPI sensors are for JeVois-Pro hardware: imx290, os08a10, ar0234
+  //! 不同传感器型号的枚举 
+  /*! 当您不知道（例如，在主机模式下使用未知的 dumb USB 网络摄像头运行）或不关心（例如，我们在 jevois-add-videomapping 
+      中使用 'any' 以便它始终成功）时，请使用 'any'。
+	  
+	  - 并行 CSI 传感器适用于 JeVois-A33 硬件：ov9650、ov2640、ov7725、ar0135
+	  - MIPI 传感器适用于 JeVois-Pro 硬件：imx290、os08a10、ar0234
+	  
+	  在这里，我们还定义了一个用于相机校准的 CameraLens 枚举。 */
 
-      Here, we also define a CameraLens enum that is used for camera calibration. */
 #ifdef JEVOIS_PRO
   JEVOIS_DEFINE_ENUM_CLASS(CameraSensor, (any) (imx290) (os08a10) (ar0234) );
   JEVOIS_DEFINE_ENUM_CLASS(CameraLens, (standard) (custom1) (custom2) (custom3) (custom4) (custom5) );
@@ -47,14 +48,14 @@ namespace jevois
                            (custom1) (custom2) (custom3) (custom4) (custom5) );
 #endif
   
-  //! Check whether a given resolution and frame rate is supported by a sensor
-  /*! Returns true if the sensor is capable of capturing video at the given format, resolution, and frame rate.*/
+  //! 检查传感器是否支持给定的分辨率和帧速率
+  /*! 如果传感器能够以给定的格式、分辨率和帧速率捕获视频，则返回 true。*/
   bool sensorSupportsFormat(CameraSensor s, VideoMapping const & m);
 
-  //! Check whether sensor has an IMU (inertial measurement unit)
+  //! 检查传感器是否有 IMU（惯性测量单元）
   bool sensorHasIMU(CameraSensor s);
 
-  //! Load a sensor preset (JeVois-Pro only) and return native sensor grab dims (when cropping and/or scaling)
+  //! 加载传感器预设（仅限 JeVois-Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时）
   void sensorPrepareSetFormat(CameraSensor s, VideoMapping const & m, unsigned int & capw, unsigned int & caph,
                               int & preset);
   

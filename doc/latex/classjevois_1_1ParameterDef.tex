@@ -1,0 +1,204 @@
+\hypertarget{classjevois_1_1ParameterDef}{}\doxysubsection{jevois\+::Parameter\+Def$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ParameterDef}\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter\+Def.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$class T$>$\newline
+class jevois\+::\+Parameter\+Def$<$ T $>$}
+
+参数定义 
+
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 用于指定参数的名称、描述、默认值、类别以及可选的有效值。参数的值类型由模板参数 T 指定。
+
+请参阅 \mbox{\hyperlink{group__validvalues}{有效值集的规范，例如，某些参数可能采用}} 以了解有效值规范的定义，允许任何值、列表中的值、范围内的值、与正则表达式匹配的值等。 
+
+Definition at line 84 of file Parameter\+Def.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter\+Def$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classjevois_1_1ParameterDef__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Parameter\+Def$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ParameterDef__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDef_a195dc00ad2a97cc6ce39fecf129d6c73}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 构造一个没有给定有效值的 Parameter\+Def，有效值是 T 可以采用的任何值 \end{DoxyCompactList}\item 
+{\footnotesize template$<$template$<$ typename $>$ class Valid\+Values\+Spec$>$ }\\\mbox{\hyperlink{classjevois_1_1ParameterDef_a66c9380d4da490a645ee5b16fb7176b9}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, Valid\+Values\+Spec$<$ T $>$ const \&valid\+Values\+Spec, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 从 Valid\+Value\+Spec 模板创建具有指定有效值的参数定义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDef_aaf74f5ef9a3413caf08a8b864e15546f}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, std\+::vector$<$ T $>$ const \&validvalues, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 使用列表中指定的有效值简写创建参数定义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDef_a447c59abc9eddd34f187bcb2b34e76e1}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$ const \&validrange, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 简写用于创建一个具有指定有效值的参数定义（范围包括边界） \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDef_a3925c6f995f0a7190db333549aa14549}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$ const \&validrange, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 简写用于从步骤范围（包括边界）中创建具有指定有效值的参数定义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDef_aec787faa51dad58371c5ab5e21cb9f94}{Parameter\+Def}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, T const \&\mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}}, boost\+::regex const \&validregex, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}})
+\begin{DoxyCompactList}\small\item\em 使用正则表达式中指定的有效值创建参数定义的简写 \end{DoxyCompactList}\item 
+const T \mbox{\hyperlink{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}{default\+Value}} () const
+\begin{DoxyCompactList}\small\item\em 获取为此参数定义指定的默认值 \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDef_a17f44d3cfc528a4471b8821da9495f7d}{default\+Value\+String}} () const
+\begin{DoxyCompactList}\small\item\em 字符串表示中的默认值 \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDef_a89dacefb191d8f1bf4b95c636701325f}{valid\+Values\+String}} () const
+\begin{DoxyCompactList}\small\item\em 字符串表示中的有效值 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterDef_a0fef540439e08c17faf9bc5d4269bfe5}{Parameter\+Core$<$ T $>$}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a195dc00ad2a97cc6ce39fecf129d6c73}\label{classjevois_1_1ParameterDef_a195dc00ad2a97cc6ce39fecf129d6c73}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+构造一个没有给定有效值的 Parameter\+Def，有效值是 T 可以采用的任何值 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a66c9380d4da490a645ee5b16fb7176b9}\label{classjevois_1_1ParameterDef_a66c9380d4da490a645ee5b16fb7176b9}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$template$<$ typename $>$ class Valid\+Values\+Spec$>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{Valid\+Values\+Spec$<$ T $>$ const \&}]{valid\+Values\+Spec,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+从 Valid\+Value\+Spec 模板创建具有指定有效值的参数定义 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_aaf74f5ef9a3413caf08a8b864e15546f}\label{classjevois_1_1ParameterDef_aaf74f5ef9a3413caf08a8b864e15546f}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{std\+::vector$<$ T $>$ const \&}]{validvalues,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+使用列表中指定的有效值简写创建参数定义 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a447c59abc9eddd34f187bcb2b34e76e1}\label{classjevois_1_1ParameterDef_a447c59abc9eddd34f187bcb2b34e76e1}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$ const \&}]{validrange,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+简写用于创建一个具有指定有效值的参数定义（范围包括边界） 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a3925c6f995f0a7190db333549aa14549}\label{classjevois_1_1ParameterDef_a3925c6f995f0a7190db333549aa14549}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range}}$<$ T $>$ const \&}]{validrange,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+简写用于从步骤范围（包括边界）中创建具有指定有效值的参数定义 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_aec787faa51dad58371c5ab5e21cb9f94}\label{classjevois_1_1ParameterDef_aec787faa51dad58371c5ab5e21cb9f94}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterDef@{ParameterDef}}
+\index{ParameterDef@{ParameterDef}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterDef()}{ParameterDef()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{boost\+::regex const \&}]{validregex,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+使用正则表达式中指定的有效值创建参数定义的简写 
+
+这允许高度灵活的有效值定义。例如，假设您希望 int 参数在 \mbox{[}0..59\mbox{]} 范围内，但它也可以具有值 72，您的正则表达式将是：
+
+\begin{DoxyVerb}^(([0-5]?[0-9])|72)$
+\end{DoxyVerb}
+ 
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}\label{classjevois_1_1ParameterDef_aa18381cf543f24bbe6122008537ee4df}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!defaultValue@{defaultValue}}
+\index{defaultValue@{defaultValue}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{defaultValue()}{defaultValue()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::default\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取为此参数定义指定的默认值 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a17f44d3cfc528a4471b8821da9495f7d}\label{classjevois_1_1ParameterDef_a17f44d3cfc528a4471b8821da9495f7d}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!defaultValueString@{defaultValueString}}
+\index{defaultValueString@{defaultValueString}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{defaultValueString()}{defaultValueString()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::default\+Value\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+字符串表示中的默认值 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a080b4c9d79c5268b40b9250905e82462}{jevois\+::\+Parameter\+Def\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a89dacefb191d8f1bf4b95c636701325f}\label{classjevois_1_1ParameterDef_a89dacefb191d8f1bf4b95c636701325f}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!validValuesString@{validValuesString}}
+\index{validValuesString@{validValuesString}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{validValuesString()}{validValuesString()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def}}$<$ T $>$\+::valid\+Values\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+字符串表示中的有效值 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterDefBase_ab3c0382f0cfd76dd272dbce20e374b50}{jevois\+::\+Parameter\+Def\+Base}}.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDef_a0fef540439e08c17faf9bc5d4269bfe5}\label{classjevois_1_1ParameterDef_a0fef540439e08c17faf9bc5d4269bfe5}} 
+\index{jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}!ParameterCore$<$ T $>$@{ParameterCore$<$ T $>$}}
+\index{ParameterCore$<$ T $>$@{ParameterCore$<$ T $>$}!jevois::ParameterDef$<$ T $>$@{jevois::ParameterDef$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterCore$<$ T $>$}{ParameterCore< T >}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+friend class \mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}}$<$ T $>$\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 136 of file Parameter\+Def.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ParameterDef_8H}{Parameter\+Def.\+H}}\end{DoxyCompactItemize}

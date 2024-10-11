@@ -56,30 +56,30 @@
 
 namespace jevois
 {
-  //! A simple semaphore
-  /*! A semaphore is a thread-safe mechanism to share resources between multiple threads of execution.
+  //! 一个简单的信号量
+  /*! 信号量是一种线程安全机制，用于在多个执行线程之间共享资源。
 
-      See this Wikipedia page for basic information: http://en.wikipedia.org/wiki/Semaphore_%28programming%29 
+      请参阅此维基百科页面了解基本信息：http://en.wikipedia.org/wiki/Semaphore_%28programming%29
 
-      This code is derived from the Neuromorphic Robotics Toolkit (NRT).
+      该代码源自神经形态机器人工具包 (NRT)。
 
-      @tparam BB defines the blocking behavior and should be a value from jevois::BlockingBehavior
+      @tparam BB 定义阻塞行为，应该是来自 jevois::BlockingBehavior 的值
 
       \ingroup types */
   template <BlockingBehavior BB>
   class Semaphore
   {
     public:
-      //! Create a semaphore with n initial resources
+      //! 创建一个具有 n 个初始资源的信号量
       Semaphore(size_t n = 0);
 
-      //! Release n resources to the semaphore
+      //! 释放n个资源给信号量
       void increment(size_t n);
 
-      //! Remove n resources from the semaphore, blocking until they are available or throwing if they are not
+      //! 从信号量中移除 n 个资源，阻塞直到它们可用，如果不可用则抛出
       void decrement(size_t n);
 
-      //! Get the current count
+      //! 获取当前计数
       size_t count() const;
 
     private:

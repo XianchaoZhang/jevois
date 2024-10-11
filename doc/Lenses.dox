@@ -1,15 +1,15 @@
-/*! \page Lenses JeVois-A33 Lens Options
+/*! \page Lenses JeVois-A33 镜头选项
 
-As of April, 2018, several different lens options are available for \jva33:
+截至 2018 年 4 月，\jva33 有几种不同的镜头可供选择：
 
-\image html jevois-lenses-small.png JeVois lens options.
+\image html jevois-lenses-small.png JeVois 镜头选项。
 
-Click <A HREF="/i/jevois-lenses.png">here for a larger version</A> of the above image.
+点击 <A HREF="/i/jevois-lenses.png"> 此处查看上图的较大版本</A>。
 
-Overview
+概述
 --------
 
-Below is a quick comparison:
+以下是快速比较：
 
 Lens           | Horizontal field of view   | Infrared-cut (IR) filter | Adjustable focus
 ---------------|----------------------------|--------------------------|----------------------------
@@ -18,111 +18,75 @@ NoIR           | 60 degrees                 | No                       | Yes
 90deg          | 90 degrees, no distortion  | Yes                      | Yes
 120deg         | 120 degrees fisheye        | Yes                      | Yes
 
-An <b>infrared-cut (IR-cut) filter</b> blocks infrared light so that the sensor only receives visible light. This ideal
-for daytime use. The \b NoIR lens with no such filter is ideal for nighttime use. You would then need to provide an
-infrared light source (typically, an array of infrared LEDs), which can illuminate your scene using a wavelength of
-light that is invisible to the human eye. In this way, JeVois can still "see", thanks to the reflected IR light, even in
-what appears to humans to be complete darkness. Many security cameras use this feature to provide nighttime monitoring.
+<b>红外截止 (IR-cut) 滤光片</b>可阻挡红外光，使传感器仅接收可见光。这非常适合白天使用。没有这种滤光片的 \b NoIR 镜头非常适合夜间使用。然后，您需要提供红外光源（通常是红外 LED 阵列），它可以使用人眼不可见的光波长照亮您的场景。这样，即使在人类看来完全黑暗的环境中，JeVois 仍能通过反射的红外光“看见”。许多安全摄像头都使用此功能提供夜间监控。
 
-A <b>no-distortion lens</b> features a broader field of view, but with very little spatial distortion of the image, so
-that straight lines in the world are seen as straight lines in the video captured by the camera.
+<b>无畸变镜头</b>的特点是视野更宽广，但图像的空间畸变非常小，使得世界上的直线在摄像机拍摄的视频中看起来也是直线。
 
-In contrast, very wide-angle <b>fisheye lenses</b> suffer from so-called barrel distortion, named because an array of
-vertical lines will be imaged by the camera as curved, as if on the surface of the barrel. This is the flip-side of
-getting a much wider field of view with fisheye compared to conventional lenses. JeVois provides an algorithm for the
-correction of barrel distortion, which runs on the GPU inside JeVois, see JeVois module \jvmod{DemoGPU} for example.
+相比之下，超广角<b>鱼眼镜头</b>会遭受所谓的桶形失真，之所以这样命名，是因为相机会将垂直线阵列成像为弯曲的，就像在桶表面上一样。与传统镜头相比，这是鱼眼镜头获得更宽视野的反面。JeVois 提供了一种校正桶形失真的算法，该算法在 JeVois 内部的 GPU 上运行，例如，请参阅 JeVois 模块 \jvmod{DemoGPU}。
 
-Note that for all except the standard lens, the lens has been adjusted at the factory for a focusing distance of 30cm to
-infinity. In addition, we asked the factory to NOT glue the lens once focused. So, you will be able to easily change
-focus by simply turning the lens. Once you have found your optimal setting, you should fix the lens using a small drop
-of glue, paint, nail polish, etc on the thread (as was done with the standard lens pre-installed in JeVois).
+请注意，除标准镜头外，所有镜头均已在工厂调整为 30 厘米至无穷远的对焦距离。此外，我们要求工厂在对焦后不要粘合镜头。因此，您只需转动镜头即可轻松改变焦距。找到最佳设置后，您应该使用螺纹上的一小滴胶水、油漆、指甲油等固定镜头（就像 JeVois 中预装的标准镜头一样）。
 
-Recommendations and usage scenarios
+建议和使用场景 
 -----------------------------------
 
-- <b>Standard lens:</b> most versatile, no distortion, fixed focus of 40cm to infinity. Provides a relatively narrower
-  field of view but this means that objects appear bigger and have more pixels on target, possibly making them easier to
-  understand by JeVois (e.g., decoding of QR-codes or ArUco markers).
+- <b>标准镜头：</b>用途最广泛，无失真，固定焦距为 40cm 至无穷远。提供相对较窄的视野，但这意味着物体看起来更大，目标上的像素更多，可能使它们更容易被 JeVois 理解（例如，解码二维码或 ArUco 标记）。
 
-- <b>NoIR lens:</b> no distortion, same field of view as the standard lens, adjustable focus, no IR-cut filter. Mostly
-  useful for night-vision applications, using an infrared illuminator as a light source.
+- <b>无红外镜头</b>：无失真，视野与标准镜头相同，可调焦距，无红外截止滤镜。主要用于夜视应用，使​​用红外照明器作为光源。
 
-- <b>90deg lens</b>: wider field of view than the standard lens, no distortion, adjustable focus. Because there is no
-  distortion, using this lens does not require any barrel correction, as is needed when using lenses with an even wider
-  field of view. Use this lens if you need a wider field of view than the original lens, with no need to correct the
-  image for distortions. Note how objects in front of JeVois will appear smaller with this lens compared to the original
-  lens. But in exchange, you will see more broadly to the sides of the optical axis.
+- <b>90 度镜头</b>：视野比标准镜头更宽，无失真，可调整焦距。由于没有失真，使用此镜头不需要任何镜筒校正，而使用视野更宽的镜头时则需要镜筒校正。如果您需要比原始镜头更宽的视野，请使用此镜头，而无需校正图像失真。请注意，与原始镜头相比，使用此镜头时 JeVois 前方的物体会显得更小。但作为交换，您将看到光轴两侧更宽广的区域。
 
-- <b>120deg lens</b>: widest field of view, barrel distortion, adjustable focus. Use this if you want a much wider field
-  of view than the original lens, with the awareness that you will likely need to spend some CPU or GPU resources
-  de-warping the barrel distortions. Note how objects in front of JeVois will appear smaller with this lens compared to
-  the original lens. But in exchange, you will see much more broadly to the sides of the optical axis.
+- <b>120 度镜头</b>：最宽视野、桶形失真、可调焦距。如果您想要比原始镜头更宽的视野，请使用此镜头，但请注意，您可能需要花费一些 CPU 或 GPU 资源来消除桶形失真。请注意，使用此镜头时，JeVois 前方的物体与原始镜头相比会显得更小。但作为交换，您将看到光轴两侧更宽广的视野。
 
-These sensors and lenses are available at https://jevoisinc.com
+这些传感器和镜头可在 https://jevoisinc.com 上找到。
 
-Adjusting or swapping lens on special JeVois units with no lens glue
---------------------------------------------------------------------
+在没有镜头胶的特殊 JeVois 装置上调整或更换镜头 
+--------------------------------------------------------------------------------
 
-Special JeVois units with no lens glue and either ov9653 or ov7725 sensors are available at https://jevoisinc.com
+无需镜头胶水且配备 ov9653 或 ov7725 传感器的特殊 JeVois 装置可在 https://jevoisinc.com 上购买
 
-These units come in a kit with the standard lens installed, and extra 90deg, 120deg, and NoIR lenses.
+这些设备包含在一套安装有标准镜头以及额外的 90 度、120 度和 NoIR 镜头的套件中。
 
-\jvimg{lens-adjust.png, 40%}
+\jvimg{镜头调整.png, 40%}
 
-Installing a new sensor and lens in a standard JeVois unit
+在标准 JeVois 装置中安装新传感器和镜头 
 ----------------------------------------------------------
 
-This requires some skills but can be done in less than 5 minutes. See the video below for full details.
+这需要一些技巧，但可以在不到 5 分钟的时间内完成。请观看下面的视频了解详细信息。
 
 \youtube{8rf643fsjSE}
 
 
-Corrective lenses
------------------
+矫正镜片
+------------------
 
-In some situations, it may also be useful to use corrective lenses placed in front of the standard lens. For example,
-one may want to achieve microscopic accuracy, or one may want to read small text, or one may just need to focus onto
-objects very close to the camera.
+在某些情况下，在标准镜头前放置矫正镜片也很有用。例如，人们可能想要实现微观精度，或者想要阅读小文本，或者可能只需要聚焦在离相机很近的物体上。
 
 \image html corrective-lens.png
 
-Above is an example using a 15x lens taken from a pair of jeweler glasses that had interchangeable lenses. Using this
-corrective lens (which was not very well aligned in this example, hence the distortions), we can focus well on the tiny
-text of that 2.5" hard drive, at a very short distance from JeVois.
+上图是使用 15 倍镜头拍摄的一个例子，该镜头取自一副带有可更换镜头的珠宝商眼镜。使用这种矫正镜头（本例中没有很好地对准，因此出现扭曲），我们可以很好地聚焦在距离 JeVois 很近的 2.5 英寸硬盘上的微小文本上。
 
-Lens shading/uniformity correction
+镜头阴影/均匀性校正 
 ----------------------------------
 
-Different lenses have different amounts of shading with eccentricity. The JeVois camera sensor chip provides some
-low-level register settings to help improve image uniformity with different lenses. If you are using some of the custom
-lenses in your JeVois camera, read on.
+不同的镜头具有不同的偏心阴影量。JeVois 相机传感器芯片提供了一些低级寄存器设置，以帮助改善不同镜头的图像均匀性。如果您在 JeVois 相机中使用了一些定制镜头，请继续阅读。
 
-Here is an example of using the 90deg no-distortion lens with the default settings, which are for a 60deg lens. Observe
-how the image gets darker near the corners of the frame:
+以下是使用 90 度无失真镜头和默认设置（适用于 60 度镜头）的示例。观察图像在画面角落附近如何变暗：
 
 \image html lens-shading.jpg
 
-Adjustment for lens shading is achieved by applying some positive gain which increases with eccentricity (distance from
-the image center), and which is applied outside a central no-correction disk. The diagram below shows the center of the
-correction zone, and the central no-correction disk (names center area of the image):
+镜头阴影的调整是通过应用一些正增益来实现的，该正增益会随着偏心率（与图像中心的距离）的增加而增加，并且应用于中央无校正盘的外部。下图显示了校正区域的中心和中央无校正盘（图像的中心区域名称）：
 
 \image html lens-diagram.png
 
-Camera registers LCC1 (0x62) and LCC3 (0x63) allow one to adjust the location of the correction disk, by specifying an
-offset (in the direction specified by bit 7 of each register, and with a magnitude specified by the remaining 6 bits)
-from the sensor's center point.
+相机寄存器 LCC1（0x62）和 LCC3（0x63）允许通过指定距离传感器中心点的偏移量（每个寄存器的第 7 位指定的方向，其余 6 位指定的幅度）来调整校正盘的位置。
 
-Here are all the relevant registers:
+以下是所有相关寄存器：
 
 \image html lens-table.png
 
-Notably, register LCC3 (0x64) sets the gain (strength of correction) and LCC4 (0x65) sets the radius of the central
-no-correction disk. Instead of a single gain parameter, one can also instead, through register LCC5 (0x66) specify 3
-different gains for Red, Green, and Blue (then using registers LLC3 (0x64) for green, LCCFB (0x9d) for blue, and LCCFR
-(0x9e) for red).
+值得注意的是，寄存器 LCC3 (0x64) 设置增益（校正强度），而 LCC4 (0x65) 设置中央无校正盘的半径。除了单个增益参数，还可以通过寄存器 LCC5 (0x66) 为红色、绿色和蓝色指定 3 个不同的增益（然后使用寄存器 LLC3 (0x64) 为绿色、LCFCFB (0x9d) 为蓝色和 LCCFR (0x9e) 为红色）。
 
-Below is a simple python program that will allow you to interactively adjust the radius of the no-correction zone, and
-the single gain factor for RGB:
+下面是一个简单的 Python 程序，它允许您以交互方式调整无校正区域的半径和 RGB 的单增益因子：
 
 \code{.py}
 #!/usr/bin/python
@@ -186,29 +150,23 @@ w2.pack()
 mainloop()
 \endcode
 
-Playing with this code you should be able to improve the uniformity of the image, but note the caveats below. Make sure
-that you have write access to the serial-over-USB device before you run this python code (e.g., `sudo chmod 777
-/dev/ttyACM0`, or run the python program as root).
+
+使用此代码，您应该能够改善图像的一致性，但请注意以下注意事项。在运行此 Python 代码之前，请确保您对串行 USB 设备具有写访问权限（例如，`sudo chmod 777 /dev/ttyACM0`，或以 root 身份运行 Python 程序）。
 
 \image html lens-corrected.jpg
 
-You may want to adjust the code to obtain different effects. The key elements here are:
+您可能需要调整代码以获得不同的效果。这里的关键元素是：
 
-- beware that using this indoors with just pointing JeVois to a blank wall may not work, as the combination of a
-  wide-angle lens, <a href="https://en.wikipedia.org/wiki/Diffuse_reflection">non-Lambertian surface properties of the
-  wall</a>, and non-uniform light source will likely increase the apparent shading. You should try outdoors, or maybe
-  use a small photographic booth like what people do to take uniformly-lit pictures of items they want to sell on eBay.
+- 请注意，在室内使用时，如果仅将 JeVois 指向空白墙壁，则可能无法正常工作，因为广角镜头、<a href="https://en.wikipedia.org/wiki/Diffuse_reflection">墙壁的非朗伯表面特性</a>和非均匀光源的组合可能会增加明显的阴影。您应该尝试在户外使用，或者使用小型照相亭，就像人们在 eBay 上拍摄想要出售的物品时使用均匀照明的照片一样。
 
-- start with sending command `setpar camreg true` to JeVois, to enable access to low-level sensor registers.
+- 首先向 JeVois 发送命令“setpar camreg true”，以启用对低级传感器寄存器的访问。
 
-- then issue commands `setcamreg REG VAL` where \p REG is the register address and \p VAL is the value. The `setcamreg`
-  command can understand decimal, octal (if starting with a leading 0), and hexadecimal (if starting with a leading 0x)
-  register addresses.
+- 然后发出命令“setcamreg REG VAL”，其中 \p REG 是寄存器地址，\p VAL 是值。“setcamreg”命令可以理解十进制、八进制（如果以 0 开头）和十六进制（如果以 0x 开头）寄存器地址。
 
-Once you have found good settings for your particular lens, you may want to issue these commands at camera start time,
-by placing the commands in \b initscript.cfg on your microSD card.
+一旦为特定镜头找到良好的设置，您可能希望在相机启动时发出这些命令，方法是将命令放在 microSD 卡上的 \b initscript.cfg 中。
 
 
 
 
 */
+

@@ -1,0 +1,650 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GUIhelperPython">
+<title>jevois::GUIhelperPython Class Reference</title>
+<indexterm><primary>jevois::GUIhelperPython</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>包装 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 以供 Python 使用 </para>
+
+
+
+<para>此类不适用于一般用途，仅供 <link linkend="_classjevois_1_1PythonModule">PythonModule</link> 使用。此类的用户必须确保原始 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 将比任何和所有 <link linkend="_classjevois_1_1GUIhelperPython">GUIhelperPython</link> 实例存活的 时间更长，因为 <link linkend="_classjevois_1_1GUIhelperPython">GUIhelperPython</link> 只是通过不受保护的原始指针引用源 GUIhelper。虽然 C++ 对象称为 GUIhelperPython，但我们将以 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 的名称将其公开给 python（参见 PythonSupport.C）。 </para>
+<para>
+Definition at line 219 of file PythonModule.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelperPython_1a1792101e1056db0df1038a3027ff85e3">GUIhelperPython</link> (<link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> *src)</para>
+
+<para>Construct from a regular <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> that should be be coming from <link linkend="_classjevois_1_1Engine">Engine</link>. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1ae0756f869b61bf817d15e357f089da82">startFrame</link> ()</para>
+
+<para>Start a new rendering frame. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1ab94627365028b8d24fde46b999aa1535">frameStarted</link> () const</para>
+
+<para>Helper to indicate that <link linkend="_classjevois_1_1GUIhelperPython_1ae0756f869b61bf817d15e357f089da82">startFrame()</link> was called, and thus <link linkend="_classjevois_1_1GUIhelperPython_1a7c071457d71d6d06f975d366b51941be">endFrame()</link> should be called. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1a9861a056bdf1368e4d83ee51db47ab75">drawImage</link> (char const *name, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw a <link linkend="_classjevois_1_1RawImage">RawImage</link>, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1aaff1dadae8b8ca6013b08e40cb9570c3">drawImage1</link> (char const *name, cv::Mat const &amp;img, bool rgb, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1afaa211d8bcb69d9c6f1f9adfa4cc43a9">drawImage2</link> (char const *name, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img, int x, int y, int w, int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1aa356c44d428c47ee0a9c6fcb14deef03">drawImage3</link> (char const *name, cv::Mat const &amp;img, bool rgb, int x, int y, int w, int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1afd649c2a46496d50407edcd1fdddffc1">drawInputFrame</link> (char const *name, <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> const &amp;frame, bool noalias=false, bool casync=false)</para>
+
+<para>Draw the input video frame from the camera using zero-copy. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1GUIhelperPython_1a61b3ba655387f7e3c86d7ef2ab3ac224">drawInputFrame2</link> (char const *name, <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> const &amp;frame, bool noalias=false, bool casync=false)</para>
+
+<para>Draw the second (scaled) input video frame from the camera using zero-copy. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1aa7f3730e03896b43277b1ee3918b7e5b">i2d</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a7879a81ec2b2126a9664f886f743050d">i2d1</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1abf8120d5f4dc9c1674cb065966d76d5a">i2ds</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1ab5893e0b30d9700d1deb29701b2bcad9">i2ds1</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1aed265181993ae9f941b44bf5b88aab11">drawLine</link> (float x1, float y1, float x2, float y2, ImU32 col=IM_COL32(128, 255, 128, 255))</para>
+
+<para>Draw line over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1ad8d35e072774a4e4fa965a977224a479">drawRect</link> (float x1, float y1, float x2, float y2, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw rectangular box over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a79b24b7439d72067f82ab2b05badfb35">drawPoly</link> (std::vector&lt; cv::Point &gt; const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a76320e1f34a193c4920a183cfbe06ff9">drawPoly1</link> (std::vector&lt; cv::Point2f &gt; const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a6ec14a3eec3fdfd22f7654d8b63f15f0">drawPoly2</link> (cv::Mat const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a4c4abee2f2ebd781ed796fd3bf5b2309">drawCircle</link> (float x, float y, float r, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw circle over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a979a1ffe795ddb41790ad63d3db5911b">drawText</link> (float x, float y, char const *txt, ImU32 col=IM_COL32(128, 255, 128, 255))</para>
+
+<para>Draw text over an image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a8c11116ed9e497bde5617d1354180852">iline</link> (int line=-1, char const *name=nullptr)</para>
+
+<para>Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1ac11b90d3c9b28f394133d4ac3452c1ab">itext</link> (char const *txt, ImU32 const &amp;col=IM_COL32_BLACK_TRANS, int line=-1)</para>
+
+<para>Draw some overlay text on top of an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a07b1e06dfdc592ac81897f5c9830bf63">itext2</link> (char const *txt)</para>
+
+<para>Draw some overlay text on top of an image, default color and line. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a091c7d1e1bebcff3499841a017fc8ccd">iinfo</link> (<link linkend="_classjevois_1_1InputFramePython">jevois::InputFramePython</link> const &amp;inframe, std::string const &amp;fpscpu, unsigned short winw=0, unsigned short winh=0)</para>
+
+<para>Display processing and video info at bottom of screen. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a30dae9b3189ba1b58773d61a28ceb98b">releaseImage</link> (char const *name)</para>
+
+<para>Release an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1aa9033960c8e86a0e8f1a18f2b6dbc41c">releaseImage2</link> (char const *name)</para>
+
+<para>Release an image, second video stream. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a7c071457d71d6d06f975d366b51941be">endFrame</link> ()</para>
+
+<para>Finish current frame and render it. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a4010eb713df8b15b3b7797fdabe64369">d2i</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a55f8df4a55f3caf772671360de947ab4">d2i1</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a3b026cc56a5c98b2ac4abb3da322e0dd">d2is</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a31fcbcd8827d12f8ad9e4968d8c878b4">d2is1</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a115115ee17963f1cce174ff2a133aaef">reportError</link> (std::string const &amp;err)</para>
+
+<para>Report an error in an overlay window. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a455d3eadc54f539f989a941554a28f82">reportAndIgnoreException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>Report current exception in a modal dialog, then ignore it. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelperPython_1a3881316b1f54b7fec190937fdc6be609">reportAndRethrowException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>Report current exception in a modal dialog, then re-throw it. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelperPython_1a0bcf027083949ebbf4f35abdb6fe47ae">getMousePos</link> ()</para>
+
+<para>ImGui helper: get mouse position. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1aca81d3bba1f2ffaca0f2712babdd7568">isMouseClicked</link> (int button_num)</para>
+
+<para>ImGui helper: check if mouse button clicked. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1affa143ceaf6159c64d31931d477251d1">isMouseDoubleClicked</link> (int button_num)</para>
+
+<para>ImGui helper: check if mouse button double-clicked. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1ac81dc2f11210ea3d347ff7cc9db1a423">isMouseDragging</link> (int button_num)</para>
+
+<para>ImGui helper: check if mouse button dragged. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1a7e6a664f72383795bc685d7dc8c40c7f">isMouseDown</link> (int button_num)</para>
+
+<para>ImGui helper: check if mouse button pressed. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelperPython_1aad3f8366d9d04b742fd272a2e1b6e362">isMouseReleased</link> (int button_num)</para>
+
+<para>ImGui helper: check if mouse button released. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelperPython_1a1792101e1056db0df1038a3027ff85e3"/>    <section>
+    <title>GUIhelperPython()</title>
+<indexterm><primary>GUIhelperPython</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>GUIhelperPython</secondary></indexterm>
+<para><computeroutput>jevois::GUIhelperPython::GUIhelperPython (<link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> * src)</computeroutput></para><para>
+
+<para>Construct from a regular <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> that should be be coming from <link linkend="_classjevois_1_1Engine">Engine</link>. </para>
+</para>
+<para>
+Definition at line 249 of file PythonModule.C.</para>
+<para>
+References LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelperPython_1a4010eb713df8b15b3b7797fdabe64369"/>    <section>
+    <title>d2i()</title>
+<indexterm><primary>d2i</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>d2i</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::d2i (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</para>
+<para>
+Definition at line 349 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a55f8df4a55f3caf772671360de947ab4"/>    <section>
+    <title>d2i1()</title>
+<indexterm><primary>d2i1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>d2i1</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::d2i1 (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</para>
+<para>
+Definition at line 355 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a3b026cc56a5c98b2ac4abb3da322e0dd"/>    <section>
+    <title>d2is()</title>
+<indexterm><primary>d2is</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>d2is</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::d2is (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</para>
+<para>
+Definition at line 361 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a31fcbcd8827d12f8ad9e4968d8c878b4"/>    <section>
+    <title>d2is1()</title>
+<indexterm><primary>d2is1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>d2is1</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::d2is1 (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</para>
+<para>
+Definition at line 367 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a4c4abee2f2ebd781ed796fd3bf5b2309"/>    <section>
+    <title>drawCircle()</title>
+<indexterm><primary>drawCircle</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawCircle</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawCircle (float x, float y, float r, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw circle over an image. </para>
+</para>
+<para>
+Definition at line 403 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a9861a056bdf1368e4d83ee51db47ab75"/>    <section>
+    <title>drawImage()</title>
+<indexterm><primary>drawImage</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawImage</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawImage (char const * name, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; img, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw a <link linkend="_classjevois_1_1RawImage">RawImage</link>, copying pixel data to an OpenGL texture. </para>
+</para>
+<para>
+Definition at line 267 of file PythonModule.C.</para>
+<para>
+References h.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aaff1dadae8b8ca6013b08e40cb9570c3"/>    <section>
+    <title>drawImage1()</title>
+<indexterm><primary>drawImage1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawImage1</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawImage1 (char const * name, cv::Mat const &amp; img, bool rgb, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</para>
+<para>
+Definition at line 276 of file PythonModule.C.</para>
+<para>
+References h.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1afaa211d8bcb69d9c6f1f9adfa4cc43a9"/>    <section>
+    <title>drawImage2()</title>
+<indexterm><primary>drawImage2</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawImage2</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawImage2 (char const * name, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; img, int x, int y, int w, int h, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</para>
+<para>
+Definition at line 285 of file PythonModule.C.</para>
+<para>
+References h, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aa356c44d428c47ee0a9c6fcb14deef03"/>    <section>
+    <title>drawImage3()</title>
+<indexterm><primary>drawImage3</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawImage3</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawImage3 (char const * name, cv::Mat const &amp; img, bool rgb, int x, int y, int w, int h, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</para>
+<para>
+Definition at line 296 of file PythonModule.C.</para>
+<para>
+References h, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1afd649c2a46496d50407edcd1fdddffc1"/>    <section>
+    <title>drawInputFrame()</title>
+<indexterm><primary>drawInputFrame</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawInputFrame</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawInputFrame (char const * name, <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> const &amp; frame, bool noalias = <computeroutput>false</computeroutput>
+, bool casync = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw the input video frame from the camera using zero-copy. </para>
+</para>
+<para>
+Definition at line 307 of file PythonModule.C.</para>
+<para>
+References h.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a61b3ba655387f7e3c86d7ef2ab3ac224"/>    <section>
+    <title>drawInputFrame2()</title>
+<indexterm><primary>drawInputFrame2</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawInputFrame2</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::drawInputFrame2 (char const * name, <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> const &amp; frame, bool noalias = <computeroutput>false</computeroutput>
+, bool casync = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw the second (scaled) input video frame from the camera using zero-copy. </para>
+</para>
+<para>
+Definition at line 316 of file PythonModule.C.</para>
+<para>
+References h.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aed265181993ae9f941b44bf5b88aab11"/>    <section>
+    <title>drawLine()</title>
+<indexterm><primary>drawLine</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawLine</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawLine (float x1, float y1, float x2, float y2, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw line over an image. </para>
+</para>
+<para>
+Definition at line 373 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a79b24b7439d72067f82ab2b05badfb35"/>    <section>
+    <title>drawPoly()</title>
+<indexterm><primary>drawPoly</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawPoly</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawPoly (std::vector&lt; cv::Point &gt; const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+<para>
+Definition at line 385 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a76320e1f34a193c4920a183cfbe06ff9"/>    <section>
+    <title>drawPoly1()</title>
+<indexterm><primary>drawPoly1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawPoly1</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawPoly1 (std::vector&lt; cv::Point2f &gt; const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+<para>
+Definition at line 391 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a6ec14a3eec3fdfd22f7654d8b63f15f0"/>    <section>
+    <title>drawPoly2()</title>
+<indexterm><primary>drawPoly2</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawPoly2</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawPoly2 (cv::Mat const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+<para>
+Definition at line 397 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ad8d35e072774a4e4fa965a977224a479"/>    <section>
+    <title>drawRect()</title>
+<indexterm><primary>drawRect</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawRect</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawRect (float x1, float y1, float x2, float y2, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw rectangular box over an image. </para>
+</para>
+<para>
+Definition at line 379 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a979a1ffe795ddb41790ad63d3db5911b"/>    <section>
+    <title>drawText()</title>
+<indexterm><primary>drawText</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>drawText</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::drawText (float x, float y, char const * txt, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw text over an image. </para>
+</para>
+<para>
+Definition at line 409 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a7c071457d71d6d06f975d366b51941be"/>    <section>
+    <title>endFrame()</title>
+<indexterm><primary>endFrame</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>endFrame</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::endFrame ( )</computeroutput></para><para>
+
+<para>Finish current frame and render it. </para>
+</para>
+<para>
+Definition at line 452 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ab94627365028b8d24fde46b999aa1535"/>    <section>
+    <title>frameStarted()</title>
+<indexterm><primary>frameStarted</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>frameStarted</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::frameStarted ( ) const</computeroutput></para><para>
+
+<para>Helper to indicate that <link linkend="_classjevois_1_1GUIhelperPython_1ae0756f869b61bf817d15e357f089da82">startFrame()</link> was called, and thus <link linkend="_classjevois_1_1GUIhelperPython_1a7c071457d71d6d06f975d366b51941be">endFrame()</link> should be called. </para>
+</para>
+<para>
+Definition at line 261 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a0bcf027083949ebbf4f35abdb6fe47ae"/>    <section>
+    <title>getMousePos()</title>
+<indexterm><primary>getMousePos</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>getMousePos</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::getMousePos ( )</computeroutput></para><para>
+
+<para>ImGui helper: get mouse position. </para>
+</para>
+<para>
+Definition at line 476 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aa7f3730e03896b43277b1ee3918b7e5b"/>    <section>
+    <title>i2d()</title>
+<indexterm><primary>i2d</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>i2d</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::i2d (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</para>
+<para>
+Definition at line 325 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a7879a81ec2b2126a9664f886f743050d"/>    <section>
+    <title>i2d1()</title>
+<indexterm><primary>i2d1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>i2d1</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::i2d1 (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</para>
+<para>
+Definition at line 331 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1abf8120d5f4dc9c1674cb065966d76d5a"/>    <section>
+    <title>i2ds()</title>
+<indexterm><primary>i2ds</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>i2ds</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::i2ds (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</para>
+<para>
+Definition at line 337 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ab5893e0b30d9700d1deb29701b2bcad9"/>    <section>
+    <title>i2ds1()</title>
+<indexterm><primary>i2ds1</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>i2ds1</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::i2ds1 (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</para>
+<para>
+Definition at line 343 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a091c7d1e1bebcff3499841a017fc8ccd"/>    <section>
+    <title>iinfo()</title>
+<indexterm><primary>iinfo</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>iinfo</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::iinfo (<link linkend="_classjevois_1_1InputFramePython">jevois::InputFramePython</link> const &amp; inframe, std::string const &amp; fpscpu, unsigned short winw = <computeroutput>0</computeroutput>
+, unsigned short winh = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>Display processing and video info at bottom of screen. </para>
+</para>
+<para>
+Definition at line 433 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a8c11116ed9e497bde5617d1354180852"/>    <section>
+    <title>iline()</title>
+<indexterm><primary>iline</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>iline</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelperPython::iline (int line = <computeroutput>-1</computeroutput>
+, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. </para>
+</para>
+<para>
+Definition at line 415 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aca81d3bba1f2ffaca0f2712babdd7568"/>    <section>
+    <title>isMouseClicked()</title>
+<indexterm><primary>isMouseClicked</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>isMouseClicked</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::isMouseClicked (int button_num)</computeroutput></para><para>
+
+<para>ImGui helper: check if mouse button clicked. </para>
+</para>
+<para>
+Definition at line 480 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1affa143ceaf6159c64d31931d477251d1"/>    <section>
+    <title>isMouseDoubleClicked()</title>
+<indexterm><primary>isMouseDoubleClicked</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>isMouseDoubleClicked</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::isMouseDoubleClicked (int button_num)</computeroutput></para><para>
+
+<para>ImGui helper: check if mouse button double-clicked. </para>
+</para>
+<para>
+Definition at line 484 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a7e6a664f72383795bc685d7dc8c40c7f"/>    <section>
+    <title>isMouseDown()</title>
+<indexterm><primary>isMouseDown</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>isMouseDown</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::isMouseDown (int button_num)</computeroutput></para><para>
+
+<para>ImGui helper: check if mouse button pressed. </para>
+</para>
+<para>
+Definition at line 492 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ac81dc2f11210ea3d347ff7cc9db1a423"/>    <section>
+    <title>isMouseDragging()</title>
+<indexterm><primary>isMouseDragging</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>isMouseDragging</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::isMouseDragging (int button_num)</computeroutput></para><para>
+
+<para>ImGui helper: check if mouse button dragged. </para>
+</para>
+<para>
+Definition at line 488 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aad3f8366d9d04b742fd272a2e1b6e362"/>    <section>
+    <title>isMouseReleased()</title>
+<indexterm><primary>isMouseReleased</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>isMouseReleased</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelperPython::isMouseReleased (int button_num)</computeroutput></para><para>
+
+<para>ImGui helper: check if mouse button released. </para>
+</para>
+<para>
+Definition at line 496 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ac11b90d3c9b28f394133d4ac3452c1ab"/>    <section>
+    <title>itext()</title>
+<indexterm><primary>itext</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>itext</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::itext (char const * txt, ImU32 const &amp; col = <computeroutput>IM_COL32_BLACK_TRANS</computeroutput>
+, int line = <computeroutput>-1</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw some overlay text on top of an image. </para>
+</para>
+<para>
+Definition at line 421 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a07b1e06dfdc592ac81897f5c9830bf63"/>    <section>
+    <title>itext2()</title>
+<indexterm><primary>itext2</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>itext2</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::itext2 (char const * txt)</computeroutput></para><para>
+
+<para>Draw some overlay text on top of an image, default color and line. </para>
+</para>
+<para>
+Definition at line 427 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a30dae9b3189ba1b58773d61a28ceb98b"/>    <section>
+    <title>releaseImage()</title>
+<indexterm><primary>releaseImage</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>releaseImage</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::releaseImage (char const * name)</computeroutput></para><para>
+
+<para>Release an image. </para>
+</para>
+<para>
+Definition at line 440 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1aa9033960c8e86a0e8f1a18f2b6dbc41c"/>    <section>
+    <title>releaseImage2()</title>
+<indexterm><primary>releaseImage2</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>releaseImage2</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::releaseImage2 (char const * name)</computeroutput></para><para>
+
+<para>Release an image, second video stream. </para>
+</para>
+<para>
+Definition at line 446 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a455d3eadc54f539f989a941554a28f82"/>    <section>
+    <title>reportAndIgnoreException()</title>
+<indexterm><primary>reportAndIgnoreException</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>reportAndIgnoreException</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::reportAndIgnoreException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Report current exception in a modal dialog, then ignore it. </para>
+</para>
+<para>
+Definition at line 464 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a3881316b1f54b7fec190937fdc6be609"/>    <section>
+    <title>reportAndRethrowException()</title>
+<indexterm><primary>reportAndRethrowException</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>reportAndRethrowException</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::reportAndRethrowException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Report current exception in a modal dialog, then re-throw it. </para>
+</para>
+<para>
+Definition at line 470 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1a115115ee17963f1cce174ff2a133aaef"/>    <section>
+    <title>reportError()</title>
+<indexterm><primary>reportError</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>reportError</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelperPython::reportError (std::string const &amp; err)</computeroutput></para><para>
+
+<para>Report an error in an overlay window. </para>
+</para>
+<para>
+Definition at line 458 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelperPython_1ae0756f869b61bf817d15e357f089da82"/>    <section>
+    <title>startFrame()</title>
+<indexterm><primary>startFrame</primary><secondary>jevois::GUIhelperPython</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelperPython</primary><secondary>startFrame</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::GUIhelperPython::startFrame ( )</computeroutput></para><para>
+
+<para>Start a new rendering frame. </para>
+</para>
+<para>
+Definition at line 253 of file PythonModule.C.</para>
+<para>
+References h.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

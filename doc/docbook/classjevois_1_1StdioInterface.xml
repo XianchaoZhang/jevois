@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1StdioInterface">
+<title>jevois::StdioInterface Class Reference</title>
+<indexterm><primary>jevois::StdioInterface</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/StdioInterface.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>基于字符串的用户界面，在主机上使用的简单终端输入/输出 </para>
+
+
+
+<para>在主机上编译 JeVois 代码时，硬件串行端口和 USB 串行端口将不可用。引擎将使用单个 <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link> 来代替这两个端口，该 <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link> 从启动 jevois-daemon 的终端的标准输入/输出读取/写入字符串。 </para>
+<para>
+Definition at line 30 of file StdioInterface.H.</para>
+Inheritance diagram for jevois::StdioInterface:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1StdioInterface__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::StdioInterface:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1StdioInterface__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1StdioInterface_1a37290c8da14b3a3d2799ce7baef792f4">StdioInterface</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1StdioInterface_1a6e85b2c06330e432d519fa4b56a6d765">~StdioInterface</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1StdioInterface_1aa3d240bb679fbec1cea83dad4aa48771">readSome</link> (std::string &amp;str) override</para>
+
+<para>如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1StdioInterface_1af945794e67aafdb291f60b4782e8c3f8">writeString</link> (std::string const &amp;str) override</para>
+
+<para>使用 serial::linestyle 的行终止约定写入字符串 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">UserInterface::Type</link> <link linkend="_classjevois_1_1StdioInterface_1aecb67e78c6057df89f9b15149ef1ba1f">type</link> () const override</para>
+
+<para>返回我们的端口类型，这里总是 Stdio </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1StdioInterface_1a37290c8da14b3a3d2799ce7baef792f4"/>    <section>
+    <title>StdioInterface()</title>
+<indexterm><primary>StdioInterface</primary><secondary>jevois::StdioInterface</secondary></indexterm>
+<indexterm><primary>jevois::StdioInterface</primary><secondary>StdioInterface</secondary></indexterm>
+<para><computeroutput>jevois::StdioInterface::StdioInterface (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 25 of file StdioInterface.C.</para>
+    </section><anchor xml:id="_classjevois_1_1StdioInterface_1a6e85b2c06330e432d519fa4b56a6d765"/>    <section>
+    <title>~StdioInterface()</title>
+<indexterm><primary>~StdioInterface</primary><secondary>jevois::StdioInterface</secondary></indexterm>
+<indexterm><primary>jevois::StdioInterface</primary><secondary>~StdioInterface</secondary></indexterm>
+<para><computeroutput>jevois::StdioInterface::~StdioInterface ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 47 of file StdioInterface.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1StdioInterface_1aa3d240bb679fbec1cea83dad4aa48771"/>    <section>
+    <title>readSome()</title>
+<indexterm><primary>readSome</primary><secondary>jevois::StdioInterface</secondary></indexterm>
+<indexterm><primary>jevois::StdioInterface</primary><secondary>readSome</secondary></indexterm>
+<para><computeroutput>bool jevois::StdioInterface::readSome (std::string &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1aa0122126d1da68237d66a33e02e3fa02">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 54 of file StdioInterface.C.</para>
+    </section><anchor xml:id="_classjevois_1_1StdioInterface_1aecb67e78c6057df89f9b15149ef1ba1f"/>    <section>
+    <title>type()</title>
+<indexterm><primary>type</primary><secondary>jevois::StdioInterface</secondary></indexterm>
+<indexterm><primary>jevois::StdioInterface</primary><secondary>type</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">jevois::UserInterface::Type</link> jevois::StdioInterface::type ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>返回我们的端口类型，这里总是 Stdio </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1ac4e4337ea4e993ed8e3230389a062224">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 69 of file StdioInterface.C.</para>
+<para>
+References jevois::UserInterface::Stdio.</para>
+    </section><anchor xml:id="_classjevois_1_1StdioInterface_1af945794e67aafdb291f60b4782e8c3f8"/>    <section>
+    <title>writeString()</title>
+<indexterm><primary>writeString</primary><secondary>jevois::StdioInterface</secondary></indexterm>
+<indexterm><primary>jevois::StdioInterface</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::StdioInterface::writeString (std::string const &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>使用 serial::linestyle 的行终止约定写入字符串 </para>
+</para>
+
+<para>字符串中不应包含行终止符，writeString() 将添加一个。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1a1ea78da97f6d939d4aca0c1ec577992a">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 62 of file StdioInterface.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_StdioInterface_8H">StdioInterface.H</link>src/jevois/Core/<link linkend="_StdioInterface_8C">StdioInterface.C</link></section>
+</section>

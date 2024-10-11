@@ -1,0 +1,200 @@
+\hypertarget{classjevois_1_1IMUi2c}{}\doxysubsection{jevois\+::I\+M\+Ui2c Class Reference}
+\label{classjevois_1_1IMUi2c}\index{jevois::IMUi2c@{jevois::IMUi2c}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Ui2c.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+具有与摄像头传感器共享的 I2C 接口的 I\+M\+U，例如 Je\+Vois-\/\+A33 A\+R0135 摄像头传感器板上的 \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 
+
+Definition at line 28 of file I\+M\+Ui2c.\+H.
+
+
+
+Inheritance diagram for jevois\+::I\+M\+Ui2c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classjevois_1_1IMUi2c__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::I\+M\+Ui2c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classjevois_1_1IMUi2c__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1IMUi2c_ad5b00a6dcf00109a67908c432cb3a9b5}{I\+M\+Ui2c}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} $>$ cam)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1IMUi2c_a011a43058a720bde53abc8930a77a16a}{$\sim$\+I\+M\+Ui2c}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1IMUi2c_a2d4196c7066f80697579843b95fcb0c2}{is\+S\+PI}} () const override
+\begin{DoxyCompactList}\small\item\em 如果我们使用 S\+PI 进行传输，则返回 true。当 I\+C\+M20948\+\_\+\+R\+E\+G\+\_\+\+U\+S\+E\+R\+\_\+\+C\+T\+RL 写入时使用； \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ I\+MU 寄存器的访问函数}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1IMUi2c_aa281e1d63729d47d758dae3bbaaaf615}{write\+Register}} (unsigned short reg, unsigned char val) override
+\begin{DoxyCompactList}\small\item\em 将值写入 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一 \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{classjevois_1_1IMUi2c_a627b9e1781328684bd7bf5955799ea08}{read\+Register}} (unsigned short reg) override
+\begin{DoxyCompactList}\small\item\em 从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一读取一个值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1IMUi2c_a8a5d3ff1f686edb4595ff204f4313764}{write\+Register\+Array}} (unsigned short reg, unsigned char const $\ast$vals, size\+\_\+t num) override
+\begin{DoxyCompactList}\small\item\em 将值数组写入相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1IMUi2c_a4ddc146d8d1246e6f8d05cf9964b4ff2}{read\+Register\+Array}} (unsigned short reg, unsigned char $\ast$vals, size\+\_\+t num) override
+\begin{DoxyCompactList}\small\item\em 从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器读取值数组 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_ad5b00a6dcf00109a67908c432cb3a9b5}\label{classjevois_1_1IMUi2c_ad5b00a6dcf00109a67908c432cb3a9b5}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!IMUi2c@{IMUi2c}}
+\index{IMUi2c@{IMUi2c}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{IMUi2c()}{IMUi2c()}}
+{\footnotesize\ttfamily jevois\+::\+I\+M\+Ui2c\+::\+I\+M\+Ui2c (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} $>$}]{cam }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 35 of file I\+M\+Ui2c.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_a011a43058a720bde53abc8930a77a16a}\label{classjevois_1_1IMUi2c_a011a43058a720bde53abc8930a77a16a}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!````~IMUi2c@{$\sim$IMUi2c}}
+\index{````~IMUi2c@{$\sim$IMUi2c}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{$\sim$IMUi2c()}{~IMUi2c()}}
+{\footnotesize\ttfamily jevois\+::\+I\+M\+Ui2c\+::$\sim$\+I\+M\+Ui2c (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 40 of file I\+M\+Ui2c.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_a2d4196c7066f80697579843b95fcb0c2}\label{classjevois_1_1IMUi2c_a2d4196c7066f80697579843b95fcb0c2}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!isSPI@{isSPI}}
+\index{isSPI@{isSPI}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{isSPI()}{isSPI()}}
+{\footnotesize\ttfamily bool jevois\+::\+I\+M\+Ui2c\+::is\+S\+PI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+如果我们使用 S\+PI 进行传输，则返回 true。当 I\+C\+M20948\+\_\+\+R\+E\+G\+\_\+\+U\+S\+E\+R\+\_\+\+C\+T\+RL 写入时使用； 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1IMU_a73e0a55b34109ae3f91a87c72ac810c3}{jevois\+::\+I\+MU}}.
+
+
+
+Definition at line 44 of file I\+M\+Ui2c.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_a627b9e1781328684bd7bf5955799ea08}\label{classjevois_1_1IMUi2c_a627b9e1781328684bd7bf5955799ea08}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!readRegister@{readRegister}}
+\index{readRegister@{readRegister}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{readRegister()}{readRegister()}}
+{\footnotesize\ttfamily unsigned char jevois\+::\+I\+M\+Ui2c\+::read\+Register (\begin{DoxyParamCaption}\item[{unsigned short}]{reg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一读取一个值 
+
+请参阅基类 \mbox{\hyperlink{classjevois_1_1IMU}{jevois\+::\+I\+MU}} 以获取完整文档。 
+
+Implements \mbox{\hyperlink{classjevois_1_1IMU_a1acc20be96d27b69cb9b8eaf00352a30}{jevois\+::\+I\+MU}}.
+
+
+
+Definition at line 79 of file I\+M\+Ui2c.\+C.
+
+
+
+References L\+D\+E\+B\+UG, and X\+I\+O\+C\+TL.
+
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_a4ddc146d8d1246e6f8d05cf9964b4ff2}\label{classjevois_1_1IMUi2c_a4ddc146d8d1246e6f8d05cf9964b4ff2}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!readRegisterArray@{readRegisterArray}}
+\index{readRegisterArray@{readRegisterArray}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{readRegisterArray()}{readRegisterArray()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+Ui2c\+::read\+Register\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器读取值数组 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1IMU_abd15f4725196633a11363240e3681515}{jevois\+::\+I\+MU}}.
+
+
+
+Definition at line 118 of file I\+M\+Ui2c.\+C.
+
+
+
+References L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and X\+I\+O\+C\+TL.
+
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_aa281e1d63729d47d758dae3bbaaaf615}\label{classjevois_1_1IMUi2c_aa281e1d63729d47d758dae3bbaaaf615}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!writeRegister@{writeRegister}}
+\index{writeRegister@{writeRegister}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{writeRegister()}{writeRegister()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+Ui2c\+::write\+Register (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将值写入 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1IMU_a95f5a6feafb3cf43ba5873bc3897027c}{jevois\+::\+I\+MU}}.
+
+
+
+Definition at line 62 of file I\+M\+Ui2c.\+C.
+
+
+
+References L\+D\+E\+B\+UG, and X\+I\+O\+C\+TL.
+
+\mbox{\Hypertarget{classjevois_1_1IMUi2c_a8a5d3ff1f686edb4595ff204f4313764}\label{classjevois_1_1IMUi2c_a8a5d3ff1f686edb4595ff204f4313764}} 
+\index{jevois::IMUi2c@{jevois::IMUi2c}!writeRegisterArray@{writeRegisterArray}}
+\index{writeRegisterArray@{writeRegisterArray}!jevois::IMUi2c@{jevois::IMUi2c}}
+\doxyparagraph{\texorpdfstring{writeRegisterArray()}{writeRegisterArray()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+Ui2c\+::write\+Register\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char const $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将值数组写入相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1IMU_a80c3dc139500b71acbca22752b8041c9}{jevois\+::\+I\+MU}}.
+
+
+
+Definition at line 96 of file I\+M\+Ui2c.\+C.
+
+
+
+References L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and X\+I\+O\+C\+TL.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{IMUi2c_8H}{I\+M\+Ui2c.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{IMUi2c_8C}{I\+M\+Ui2c.\+C}}\end{DoxyCompactItemize}

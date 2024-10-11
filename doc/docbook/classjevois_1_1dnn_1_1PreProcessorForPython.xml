@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython">
+<title>jevois::dnn::PreProcessorForPython Class Reference</title>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Pre-Processor interface exposed to the python side. </para>
+
+
+
+<para>This wrapper is passed down to the process() function of a python post-processor, it provides a python-friendly interface to <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1a8c1c54306142e98ac4fcf82d00ac2c38">b2i()</link>, blobsizes(), etc </para>
+<para>
+Definition at line 403 of file PythonModule.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1ae89503ca9f471f440adbfdfc7e1f90e7">PreProcessorForPython</link> (<link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *pp)</para>
+
+<para>Construct from an existing <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link>. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1ac8f19300dffb6ca65c5d7d3edf556694">imagesize</link> () const</para>
+
+<para>Access the last processed image size. </para>
+</listitem>
+            <listitem><para>boost::python::list <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1a5ce7dd1f19dc5c14bef2b72da40d5c9c">blobs</link> () const</para>
+
+<para>Access the last computed blobs (or empty if process() has not yet been called) </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1a24af37668ced78b0a4fe90dc10cc6f36">blobsize</link> (size_t num) const</para>
+
+<para>Access the width and height of a given blob, accounting for NCHW or NHWC. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1a8c1c54306142e98ac4fcf82d00ac2c38">b2i</link> (float x, float y, size_t blobnum)</para>
+
+<para>Convert coordinates from blob back to original image. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1ac6e3c945e937c68222d3a86e99d59551">getUnscaledCropRect</link> (size_t blobnum)</para>
+
+<para>Get unscaled crop rectangle in image coordinates. </para>
+</listitem>
+            <listitem><para>boost::python::tuple <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython_1a62a5f1e08672f067b081478a05e75e11">i2b</link> (float x, float y, size_t blobnum)</para>
+
+<para>Convert coordinates from image to blob. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1ae89503ca9f471f440adbfdfc7e1f90e7"/>    <section>
+    <title>PreProcessorForPython()</title>
+<indexterm><primary>PreProcessorForPython</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>PreProcessorForPython</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessorForPython::PreProcessorForPython (<link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * pp)</computeroutput></para><para>
+
+<para>Construct from an existing <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link>. </para>
+</para>
+
+<para>Caller must ensure that pp outlives us. </para>
+<para>
+Definition at line 584 of file PythonModule.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1a8c1c54306142e98ac4fcf82d00ac2c38"/>    <section>
+    <title>b2i()</title>
+<indexterm><primary>b2i</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>b2i</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PreProcessorForPython::b2i (float x, float y, size_t blobnum)</computeroutput></para><para>
+
+<para>Convert coordinates from blob back to original image. </para>
+</para>
+
+<para>Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the blob&apos;s width and height. This is useful to convert detected boxes back into original input coordinates. Returned as a tuple (x, y). </para>
+<para>
+Definition at line 604 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1a5ce7dd1f19dc5c14bef2b72da40d5c9c"/>    <section>
+    <title>blobs()</title>
+<indexterm><primary>blobs</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>blobs</secondary></indexterm>
+<para><computeroutput>boost::python::list jevois::dnn::PreProcessorForPython::blobs ( ) const</computeroutput></para><para>
+
+<para>Access the last computed blobs (or empty if process() has not yet been called) </para>
+</para>
+<para>
+Definition at line 593 of file PythonModule.C.</para>
+<para>
+References jevois::python::pyVecToList().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1a24af37668ced78b0a4fe90dc10cc6f36"/>    <section>
+    <title>blobsize()</title>
+<indexterm><primary>blobsize</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>blobsize</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PreProcessorForPython::blobsize (size_t num) const</computeroutput></para><para>
+
+<para>Access the width and height of a given blob, accounting for NCHW or NHWC. </para>
+</para>
+
+<para>Returned as a tuple (width, height). </para>
+<para>
+Definition at line 598 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1ac6e3c945e937c68222d3a86e99d59551"/>    <section>
+    <title>getUnscaledCropRect()</title>
+<indexterm><primary>getUnscaledCropRect</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>getUnscaledCropRect</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PreProcessorForPython::getUnscaledCropRect (size_t blobnum)</computeroutput></para><para>
+
+<para>Get unscaled crop rectangle in image coordinates. </para>
+</para>
+
+<para>This is useful to display an image overlay on top of the input image. Returned as a tuple (x, y, w, h). </para>
+<para>
+Definition at line 611 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1a62a5f1e08672f067b081478a05e75e11"/>    <section>
+    <title>i2b()</title>
+<indexterm><primary>i2b</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>i2b</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PreProcessorForPython::i2b (float x, float y, size_t blobnum)</computeroutput></para><para>
+
+<para>Convert coordinates from image to blob. </para>
+</para>
+
+<para>Given coords x,y should be in [0..w-1]x[0..h-1] where w,h are the image&apos;s width and height. This is useful to convert mouse coordinates (after they have been converted from screen to image coords) to locations within an input blob. </para>
+<para>
+Definition at line 617 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorForPython_1ac8f19300dffb6ca65c5d7d3edf556694"/>    <section>
+    <title>imagesize()</title>
+<indexterm><primary>imagesize</primary><secondary>jevois::dnn::PreProcessorForPython</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorForPython</primary><secondary>imagesize</secondary></indexterm>
+<para><computeroutput>boost::python::tuple jevois::dnn::PreProcessorForPython::imagesize ( ) const</computeroutput></para><para>
+
+<para>Access the last processed image size. </para>
+</para>
+
+<para>Returned as a tuple (width, height). </para>
+<para>
+Definition at line 587 of file PythonModule.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

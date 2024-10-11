@@ -22,9 +22,9 @@
 #include <iostream>
 #include <sstream>
 
-//! Add a new mapping to videomappings.cfg skipping duplicates
-/*! This little app was created so that we ensure perfect consistency between the kernel driver and the user code by
-    using exactly the same config file parsing code (in VideoMapping). */
+//! 向 videomappings.cfg 添加新的映射并跳过重复项 
+/*！创建这个小应用程序是为了让我们通过使用完全相同的配置文件解析代码（在 VideoMapping 中）来确保内核驱动程序和用户代码之间的
+    完美一致性。 */
 int main(int argc, char const* argv[])
 {
   jevois::logLevel = LOG_INFO;//CRIT;
@@ -38,8 +38,8 @@ int main(int argc, char const* argv[])
   args += "\n";
   std::stringstream ss(args);
   
-  // Create the new mapping by parsing the command-line args. Here we are lenient and do not check for existence of the
-  // .so or .py file, as it may get installed later, and we assume GUI is available:
+  // 通过解析命令行参数创建新映射。这里我们比较宽容，不检查 .so 或 .py 文件是否存在，因为它可能会在以后安装，
+  // 并且我们假设 GUI 可用：
   size_t defidx;
   std::vector<jevois::VideoMapping> vm =
     jevois::videoMappingsFromStream(jevois::CameraSensor::any, ss, defidx, false, true);
@@ -47,19 +47,19 @@ int main(int argc, char const* argv[])
     LFATAL("Could not parse input args into a valid video mapping: [" << ss.str() << ']');
   jevois::VideoMapping & m = vm[0];
 
-  // Parse the videomappings.cfg file and create the mappings, do not check for .so/.py existence, assume GUI exists:
+  // 解析 videomappings.cfg 文件并创建映射，不检查 .so/.py 是否存在，假设 GUI 存在：
   std::ifstream ifs(JEVOIS_ENGINE_CONFIG_FILE);
   if (ifs.is_open() == false) LFATAL("Could not open [" << JEVOIS_ENGINE_CONFIG_FILE << ']');
   std::vector<jevois::VideoMapping> mappings =
     jevois::videoMappingsFromStream(jevois::CameraSensor::any, ifs, defidx, false, true);
   ifs.close();
   
-  // Check for match, ignoring the python field since we did not set it:
+  // 检查匹配，忽略 python 字段，因为我们没有设置它：
   for (jevois::VideoMapping const & mm : mappings)
     if (m.hasSameSpecsAs(mm) && m.wdr == mm.wdr && m.vendor == mm.vendor && m.modulename == mm.modulename)
       return 0; // We found it. Nothing to add and we are done.
 
-  // Not found, so add one line to videomappings.cfg with the new mapping:
+  // 未找到，因此使用新的映射向 videomappings.cfg 添加一行：
   std::ofstream ofs(JEVOIS_ENGINE_CONFIG_FILE, std::ios_base::app);
   if (ofs.is_open() == false) LFATAL("Could not write to [" << JEVOIS_ENGINE_CONFIG_FILE << ']');
   ofs << std::endl << m << std::endl;

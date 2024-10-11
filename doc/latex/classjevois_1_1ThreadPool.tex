@@ -1,0 +1,99 @@
+\hypertarget{classjevois_1_1ThreadPool}{}\doxysubsection{jevois\+::Thread\+Pool Class Reference}
+\label{classjevois_1_1ThreadPool}\index{jevois::ThreadPool@{jevois::ThreadPool}}
+
+
+{\ttfamily \#include $<$jevois/\+Util/\+Thread\+Pool.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+具有 C\+PU 亲和力的线程池 
+
+具有额外设置的线程池，用于强制传递的任务在某些特定核心上运行。\+Je\+Vois-\/\+Pro 平台使用它来强制机器视觉任务在大核心（\+A\+RM A73） 上运行，而非关键任务在较慢的小核心（\+A\+RM A53）上运行。 
+
+Definition at line 45 of file Thread\+Pool.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ThreadPool_ac6ead839cec408586fb6d01a1b359321}{Thread\+Pool}} (unsigned int threads=std\+::thread\+::hardware\+\_\+concurrency(), bool little=false)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ThreadPool_ab78df7189f846f8607859cde466f6c64}{$\sim$\+Thread\+Pool}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func , typename... Args, std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+invocable\+\_\+v$<$ Func \&\&, Args \&\&... $>$, bool $>$  = true$>$ }\\auto \mbox{\hyperlink{classjevois_1_1ThreadPool_a80dff6d3486d80b69b64fd85b6932ccf}{execute}} (Func \&\&func, Args \&\&... args) -\/$>$ std\+::future$<$ decltype(func(args...))$>$
+\begin{DoxyCompactList}\small\item\em Execute a function and get a future. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classjevois_1_1ThreadPool_a6bc1c53a482bfc0e9056f47e78abc7e7}{get\+Pool\+Size}} () -\/$>$ size\+\_\+t
+\begin{DoxyCompactList}\small\item\em Get the pool size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ThreadPool_ac6ead839cec408586fb6d01a1b359321}\label{classjevois_1_1ThreadPool_ac6ead839cec408586fb6d01a1b359321}} 
+\index{jevois::ThreadPool@{jevois::ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!jevois::ThreadPool@{jevois::ThreadPool}}
+\doxyparagraph{\texorpdfstring{ThreadPool()}{ThreadPool()}}
+{\footnotesize\ttfamily jevois\+::\+Thread\+Pool\+::\+Thread\+Pool (\begin{DoxyParamCaption}\item[{unsigned int}]{threads = {\ttfamily std\+:\+:thread\+:\+:hardware\+\_\+concurrency()},  }\item[{bool}]{little = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 31 of file Thread\+Pool.\+C.
+
+
+
+References execute(), L\+E\+R\+R\+OR, and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1ThreadPool_ab78df7189f846f8607859cde466f6c64}\label{classjevois_1_1ThreadPool_ab78df7189f846f8607859cde466f6c64}} 
+\index{jevois::ThreadPool@{jevois::ThreadPool}!````~ThreadPool@{$\sim$ThreadPool}}
+\index{````~ThreadPool@{$\sim$ThreadPool}!jevois::ThreadPool@{jevois::ThreadPool}}
+\doxyparagraph{\texorpdfstring{$\sim$ThreadPool()}{~ThreadPool()}}
+{\footnotesize\ttfamily jevois\+::\+Thread\+Pool\+::$\sim$\+Thread\+Pool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 104 of file Thread\+Pool.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ThreadPool_a80dff6d3486d80b69b64fd85b6932ccf}\label{classjevois_1_1ThreadPool_a80dff6d3486d80b69b64fd85b6932ccf}} 
+\index{jevois::ThreadPool@{jevois::ThreadPool}!execute@{execute}}
+\index{execute@{execute}!jevois::ThreadPool@{jevois::ThreadPool}}
+\doxyparagraph{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily template$<$typename Func , typename... Args, std\+::enable\+\_\+if\+\_\+t$<$ std\+::is\+\_\+invocable\+\_\+v$<$ Func \&\&, Args \&\&... $>$, bool $>$  = true$>$ \\
+auto jevois\+::\+Thread\+Pool\+::execute (\begin{DoxyParamCaption}\item[{Func \&\&}]{func,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption}) -\/$>$  std\+::future$<$ decltype(func(args...))$>$}
+
+
+
+Execute a function and get a future. 
+
+
+
+Referenced by Thread\+Pool().
+
+\mbox{\Hypertarget{classjevois_1_1ThreadPool_a6bc1c53a482bfc0e9056f47e78abc7e7}\label{classjevois_1_1ThreadPool_a6bc1c53a482bfc0e9056f47e78abc7e7}} 
+\index{jevois::ThreadPool@{jevois::ThreadPool}!getPoolSize@{getPoolSize}}
+\index{getPoolSize@{getPoolSize}!jevois::ThreadPool@{jevois::ThreadPool}}
+\doxyparagraph{\texorpdfstring{getPoolSize()}{getPoolSize()}}
+{\footnotesize\ttfamily auto jevois\+::\+Thread\+Pool\+::get\+Pool\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) -\/$>$ size\+\_\+t}
+
+
+
+Get the pool size. 
+
+
+
+Definition at line 116 of file Thread\+Pool.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Util/\mbox{\hyperlink{ThreadPool_8H}{Thread\+Pool.\+H}}\item 
+src/jevois/\+Util/\mbox{\hyperlink{ThreadPool_8C}{Thread\+Pool.\+C}}\end{DoxyCompactItemize}

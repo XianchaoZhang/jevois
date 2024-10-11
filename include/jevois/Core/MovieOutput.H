@@ -26,53 +26,51 @@
 
 namespace jevois
 {
-  //! Video output to a movie file, using OpenCV video encoding
-  /*! This video output mode saved output frames to a file (or series of files). It is useful when developing new
-      algorithms to check the correctness of generated outputs offline, or to save some documentation/demo movies of a
-      module. \ingroup core */
+  //! 使用 OpenCV 视频编码将视频输出到电影文件
+  /*! 此视频输出模式将输出帧保存到文件（或一系列文件）。在开发新算法以离线检查生成的输出的正确性或保存模块的某些文档/
+      演示电影时，它很有用。 \ingroup core */
   class MovieOutput : public VideoOutput
   {
     public:
       //! Constructor
       MovieOutput(std::string const & fn);
       
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~MovieOutput();
 
-      //! Set the video format and frame rate
+      //! 设置视频格式和帧率
       virtual void setFormat(VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out using send()
-      /*! May throw if not buffer is available, i.e., all have been queued to send but have not yet been
-          sent. Application code must balance exactly one send() for each get(). */
+      //！获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去 /*！如果没有可用的缓冲区，则可能抛出，
+	      即，所有缓冲区都已排队等待发送但尚未发送。应用程序代码必须为每个 get() 平衡一个 send()。*/ 
       virtual void get(RawImage & img) override;
       
-      //! Send an image out
-      /*! May throw if the format is incorrect or std::overflow_error if we have not yet consumed the previous image. */
+      //! 发送图像
+      /*! 如果格式不正确，则可能抛出 std::overflow_error，如果我们尚未使用前一个图像。 */
       virtual void send(RawImage const & img) override;
 
       //! Start streaming
       virtual void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and send() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消将来的 get() 和 send() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       virtual void abortStream() override;
       
       //! Stop streaming
       virtual void streamOff() override;
 
     protected:
-      std::shared_ptr<VideoBuf> itsBuffer; //!< Our single video buffer
-      VideoMapping itsMapping; //!< Our current video mapping, we resize the input to the mapping's camera dims
+      std::shared_ptr<VideoBuf> itsBuffer; //!< 我们的单个视频缓冲区
+      VideoMapping itsMapping; //!< 我们当前的视频映射，我们将输入调整为映射的摄像头大小
 
-      void run(); //!< Use a thread to encode and save frames
+      void run(); //!< 使用线程对帧进行编码和保存
       std::future<void> itsRunFut; //!< Future for our run() thread
       jevois::BoundedBuffer<cv::Mat, jevois::BlockingBehavior::Block,
-                            jevois::BlockingBehavior::Block> itsBuf; //!< Buffer of frames to encode and write to file
-      std::atomic<bool> itsSaving; //!< True when we are saving to file
-      int itsFileNum; //!< File number, gets incremented on each streamOff() to avoid overwriting previous files
-      std::atomic<bool> itsRunning; //!< True when our run() thread should keep running
-      std::string itsFilename; //!< Current file name to save video to
+                            jevois::BlockingBehavior::Block> itsBuf; //!< 要编码并写入文件的帧缓冲区
+      std::atomic<bool> itsSaving; //!< 当我们保存到文件时为 True
+      int itsFileNum; //!< 文件编号，在每次 streamOff() 时递增，以避免覆盖以前的文件
+      std::atomic<bool> itsRunning; //!< 当我们的 run() 线程应继续运行时为 True
+      std::string itsFilename; //!< 将视频保存到的当前文件名
       std::string itsFilebase; //!< Current file base to save video to
   };
 }

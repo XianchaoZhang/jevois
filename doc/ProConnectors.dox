@@ -1,17 +1,15 @@
-/*! \page ProConnectors JeVois-Pro auxilliary connectors
+/*! \page ProConnectors JeVois-Pro 辅助连接器
 
-6-pin AUX Power connector
-=========================
+6 针 AUX 电源连接器 
+===========================
 
-This connector (located between the two USB ports at the top of the camera, see \ref ProHardware) provides power to
-auxilliary gadgets you may want to connect to JeVois-Pro. This power is derived from the main 6-24VDC barrel jack input
-of JeVois-Pro.
+此连接器（位于相机顶部的两个 USB 端口之间，请参阅 \ref ProHardware）为您可能想要连接到 JeVois-Pro 的辅助设备提供电源。此电源来自 JeVois-Pro 的主 6-24VDC 筒形插孔输入。
 
 \jvimg{aux-pwr.jpg, 30%}
 
-Note the connector orientation and the order of the colored wires above.
+注意连接器的方向和上面彩色电线的顺序。
 
-The pinout is as follows:
+引脚排列如下：
 
 Pin | Wire color | Function
 ----|------------|---------------------------------------------------------------------------------------------
@@ -22,31 +20,25 @@ Pin | Wire color | Function
 5   | Blue       | 1.8V / 500mA
 6   | Black      | GND
 
-Mating connector part number: JST SHR-06V-S-B which is 1.0mm pitch, 6-pin JST-SH series.
+配对连接器零件编号：JST SHR-06V-S-B，间距 1.0mm，6 针 JST-SH 系列。
 
-The pins for these connectors are almost impossible to crimp by hand, unless you have the special $1000+ tool sold by
-JST. Thus, please take good care of the cable that was provided with your JeVois-Pro camera. Extend the wires instead of
-cutting them very short...
+这些连接器的针脚几乎不可能用手压接，除非您有 JST 出售的 1000 美元以上的特殊工具。因此，请妥善保管 JeVois-Pro 相机附带的电缆。延长电线，而不是将它们剪得很短……
 
-Note that the current rating of each pin of this connector is 1A. Since there are only two GND pins, try to not draw
-more than 2A over the other 4 pins combined.
+请注意，此连接器每个引脚的额定电流为 1A。由于只有两个 GND 引脚，因此请尽量不要在其他 4 个引脚上消耗超过 2A 的电流。
 
 
-8-pin GPIO connector
-====================
+8 针 GPIO 连接器 
+=====================
 
-This connector (located next to the micro-HDMI connector, see \ref ProHardware) provides 6 general input/output pins
-(GPIO). The pins can be configured in various ways, as detailed below.
+此连接器（位于微型 HDMI 连接器旁边，请参阅 \ref ProHardware ）提供 6 个通用输入/输出引脚 (GPIO)。这些引脚可以以多种方式配置，如下所述。
 
-Like with the 4-pin serial port, this port expects an input voltage to be provided on pin 6 (IOREF). This is an input to
-JeVois-Pro that your must provide to tell JeVois-Pro the voltage level that you want the GPIO pins to operate at: 3.3V
-or 5V. See \ref UserSerial for more info.
+与 4 针串行端口一样，此端口需要在第 6 针（IOREF）上提供输入电压。这是 JeVois-Pro 的输入，您必须提供该输入以告诉 JeVois-Pro 您希望 GPIO 针以哪个电压水平运行：3.3V 或 5V。有关更多信息，请参阅 \ref UserSerial 。
 
 \jvimg{aux.jpg, 30%}
 
-Note the connector orientation and the order of the colored wires above.
+注意连接器的方向和上面彩色电线的顺序。
 
-The pinout is as follows:
+引脚排列如下：
 
 Pin | Wire color | Function                                                       | A311D SoC | Kernel GPIO
 ----|------------|----------------------------------------------------------------|-----------|-------------
@@ -59,71 +51,42 @@ Pin | Wire color | Function                                                     
 7   | Red        | IOREF (you provide voltage at which GPIOs operate: 3.3V or 5V) | -         | -
 8   | Black      | GND                                                            | -         | -
 
-Mating connector part number: JST SHR-08V-S-B which is 1.0mm pitch, 8-pin JST-SH series.
+配对连接器零件编号：JST SHR-08V-S-B，间距 1.0mm，8 针 JST-SH 系列。
 
-The pins for these connectors are almost impossible to crimp by hand, unless you have the special $1000+ tool sold by
-JST. Thus, please take good care of the cable that was provided with your JeVois-Pro camera. Extend the wires instead of
-cutting them very short...
+这些连接器的针脚几乎不可能用手压接，除非您有 JST 出售的 1000 美元以上的特殊工具。因此，请妥善保管 JeVois-Pro 相机附带的电缆。延长电线，而不是将它们剪得很短……
 
-\warning IOREF should always be provided and match the voltage at which your GPIOs operate. Conveniently, you can get it
-from the 6-pin AUX power connector if you will use that to power your gadgets. So, for example, if you power a 3.3V
-gadget using the yellow wire of the 6-pin AUX power connector, also feed that same 3.3V to the IOREF (red) wire of the
-8-pin GPIO connector.
+\warning 应始终提供 IOREF，并且与 GPIO 的工作电压相匹配。如果您要使用 6 针 AUX 电源连接器为小工具供电，您可以方便地从该连接器获取它。因此，例如，如果您使用 6 针 AUX 电源连接器的黄色线为 3.3V 小工具供电，则还可以将相同的 3.3V 电压馈送到 8 针 GPIO 连接器的 IOREF（红色）线。
 
-\warning IOREF and all GPIOs should operate at voltages between 3.3V and 5V. If you exceed 5.5V you could destroy the
-GPIO buffer chip on your JeVois-Pro.
+\warning IOREF 和所有 GPIO 应在 3.3V 至 5V 之间的电压下工作。如果超过 5.5V，可能会损坏 JeVois-Pro 上的 GPIO 缓冲芯片。
 
-\note We originally thought we could support 1.8V - 5V on this connector. Recently, however, we saw a footnote in the
-datasheet of the NXP NTB0104GU,115 we use for voltage translation on this connector, which says that the voltage on the
-connector should not be lower than that on the CPU chip (which is 3.3V in our design). So please consider that 1.8V is
-not officially supported, though it seems to work fine in basic testing we performed. It may damage the NBT0104 chip in
-the long term.
+\note 我们最初认为我们可以在此连接器上支持 1.8V - 5V。然而，最近我们在用于此连接器电压转换的 NXP NTB0104GU,115 数据表中看到了一个脚注，其中说连接器上的电压不应低于 CPU 芯片上的电压（在我们的设计中为 3.3V）。因此，请考虑 1.8V 不受官方支持，尽管在我们执行的基本测试中它似乎运行良好。从长远来看，它可能会损坏 NBT0104 芯片。
 
-Voltage translation with auto direction sensing
+具有自动方向感应的电压转换 
 -----------------------------------------------
 
-JVGPIO0 to JVGPIO3 are connected via a voltage level translator, an NXP NTB0104GU,115 chip. This chip automatically
-senses input or output direction. This is a great feature as we do not need an extra pin for each GPIO to indicate
-whether it currently is used as input or output and to set the translator's direction accordingly. But it comes with
-some caveats: If you are using a pin as output, but connect it to a device that could supply current, for example
-because there is a pull-up resistor on an input of your device, the NTB0104 chip could reverse its direction. Generally
-this will not destroy your hardware but it can lead to unexpected results.
+JVGPIO0 到 JVGPIO3 通过电压电平转换器（NXP NTB0104GU,115 芯片）连接。该芯片会自动检测输入或输出方向。这是一个很棒的功能，因为我们不需要为每个 GPIO 增加一个额外的引脚来指示它当前是用作输入还是输出，并相应地设置转换器的方向。但它也有一些注意事项：如果您使用引脚作为输出，但将其连接到可以提供电流的设备，例如因为设备的输入端有一个上拉电阻，NTB0104 芯片可能会反转其方向。通常这不会损坏您的硬件，但可能会导致意外结果。
 
-For example, we tried to connect a Sparkfun ICM20948 external IMU to the GPIO connector of JeVois-Pro using the SPI
-bus. We could not make it work and would always read garbage from the device and could not see SPI transfers on the pins
-of the Sparkfun board using an oscilloscope. As it turns out, the Sparkfun board has its own set of voltage translators
-with some 2.2k pullup resistors on all pins. Likely this was enough for our NTB0104 to think that all pins from the
-Sparkfun board were outputs, and thus it configured itself as sending data from the Sparkfun board to the A311D of
-JeVois-Pro on all 4 SPI pins. This is a problem since MOSI, SS, and SCLK should actually send data from the A311D to the
-Sparkfun board. To fix this, you would likely need to insert some unidirectional buffers in front of that Sparkfun IMU
-(e.g., 74HC125 or similar with 3 buffers connected A311D->Sparkfun (MOSI, SS, SCLK) and one connected Sparkfun->A311D
-(MISO); note that we have not tried this yet but we will soon).
+例如，我们尝试使用 SPI 总线将 Sparkfun ICM20948 外部 IMU 连接到 JeVois-Pro 的 GPIO 连接器。我们无法让它工作，并且总是从设备读取垃圾，并且无法使用示波器看到 Sparkfun 板引脚上的 SPI 传输。事实证明，Sparkfun 板有自己的一组电压转换器，所有引脚上都有大约 2.2k 上拉电阻。这可能足以让我们的 NTB0104 认为 Sparkfun 板的所有引脚都是输出，因此它将自身配置为通过所有 4 个 SPI 引脚将数据从 Sparkfun 板发送到 JeVois-Pro 的 A311D。这是一个问题，因为 MOSI、SS 和 SCLK 实际上应该将数据从 A311D 发送到 Sparkfun 板。为了解决这个问题，您可能需要在 Sparkfun IMU 前面插入一些单向缓冲区（例如，74HC125 或类似产品，其中 3 个缓冲区连接 A311D->Sparkfun（MOSI、SS、SCLK）和一个连接 Sparkfun->A311D（MISO）；请注意，我们还没有尝试过这个，但我们很快就会尝试）。
 
-\note Per the NTB0104 datasheet, if you really need pullup resistors on some inputs, make sure the value is 50k Ohms or
-more to avoid direction reversal.
+\note 根据 NTB0104 数据表，如果您确实需要在某些输入上使用上拉电阻，请确保其值为 50k 欧姆或更大，以避免方向反转。
 
-Because of the NBT0104, when used as inputs, JVGPIO0 to JVGPIO3 are also "sticky" as the NTB0104 will maintain the
-current drive state until it is actively changed. For example:
+由于 NBT0104，当用作输入时，JVGPIO0 至 JVGPIO3 也具有“粘性”，因为 NTB0104 将保持当前驱动状态，直到主动更改为止。例如：
 
-- Configure JVGPIO0 (purple wire) as input (see below)
-- Set and hold IOREF to 5V
-- apply 5V to the purple wire, JVGPIO0 will read as "1"
-- disconnect purple wire from 5V, it will still read as "1"
-- apply 0V (GND) to purple wire and now JVGPIO0 will read as "0"
-- disconnect purple wire from GND, it will still read as "0"
+- 将 JVGPIO0（紫色线）配置为输入（见下文）
+- 将 IOREF 设置为 5V 并保持
+- 将 5V 施加到紫色线，JVGPIO0 将读为 "1"
+- 将紫色线与 5V 断开，仍将读为 "1"
+- 将 0V（GND）施加到紫色线，现在 JVGPIO0 将读为 "0"
+- 将紫色线与 GND 断开，仍将读为 "0"
 
-JVGPIO4 and JVGPIO5 use simple MOSFETS for voltage translation, with 2k pullup resistors to IOREF. When configured as
-inputs (see below), these pins will read "1" by default because of the pullups, unless you actively drive them to 0V
-(GND), in which case they will read "0".
+JVGPIO4 和 JVGPIO5 使用简单的 MOSFET 进行电压转换，并使用 2k 上拉电阻连接到 IOREF。配置为输入时（见下文），这些引脚会因为上拉电阻而默认读取“1”，除非您主动将它们驱动至 0V（GND），在这种情况下它们将读取 "0"。
 
-For more information, check out the schematics in: \ref HardwareFiles
+欲了解更多信息，请查看以下原理图：\ref HardwareFiles
 
-Basic GPIO use
+基本 GPIO 使用 
 --------------
 
-To activate a given GPIO, look up its Kernel GPIO number from the last column of the above table, and issue these
-commands in a Linux shell as root (or in the JeVois Console, using `shell ` as a prefix), replacing \a 431 below with
-the Kernel GPIO number you want to use:
+要激活给定的 GPIO，请从上表的最后一列查找其内核 GPIO 编号，然后在 Linux shell 中以 root 身份发出这些命令（或在 JeVois 控制台中，使用 `shell` 作为前缀），将下面的 \a 431 替换为您要使用的内核 GPIO 编号：
 
 \code{.sh}
 echo 431 > /sys/class/gpio/export # claim the GPIO number 431 = GPIOH_4 / JVGPIO0 / Purple wire
@@ -132,19 +95,18 @@ echo 1 >  /sys/class/gpio/gpio431/value # to turn on, or '0' to turn off
 cat /sys/class/gpio/gpio431/value # to see the current value
 \endcode
 
-For direction, you can also use \a low to set as output and immediately set the output level to low in a glich-free
-manner, or \a high to set as output and immediately set the output level to high glitch-free.
+对于方向，您还可以使用 \a low 设置为输出并立即以无故障的方式将输出级别设置为低，或者使用 \a high 设置为输出并立即将输出级别设置为无故障的高。
 
-If you want to free up this GPIO after claiming it:
+如果您想在声明该 GPIO 后释放它：
 
 \code{.sh}
 echo 431 > /sys/class/gpio/unexport
 \endcode
 
-Using JVGPIO0 - JVGPIO5 as inputs
+使用 JVGPIO0 - JVGPIO5 作为输入 
 ---------------------------------
 
-Example for JVGPIO0:
+JVGPIO0 的示例：
 
 \code{.sh}
 echo 431 > /sys/class/gpio/export # claim the GPIO number 431 = GPIOH_4 / JVGPIO0 / Purple wire
@@ -159,10 +121,10 @@ cat /sys/class/gpio/gpio431/value # to see the current value, should read "1"
 cat /sys/class/gpio/gpio431/value # to see the current value, should now read "0"
 \endcode
 
-Using JVGPIO0 - JVGPIO3 as outputs
+使用 JVGPIO0 - JVGPIO3 作为输出 
 ----------------------------------
 
-Example for JVGPIO0:
+JVGPIO0 的示例：
 
 \code{.sh}
 echo 431 > /sys/class/gpio/export # claim the GPIO number 431 = GPIOH_4 / JVGPIO0 / Purple wire
@@ -173,14 +135,13 @@ echo 1 > /sys/class/gpio/gpio431/value # voltmeter should read the same voltage 
 echo 0 > /sys/class/gpio/gpio431/value # voltmeter should read 0V
 \endcode
 
-Using JVGPIO4 - JVGPIO5 as outputs
+
+使用 JVGPIO4 - JVGPIO5 作为输出 
 ----------------------------------
 
-We may have made a mistake and used pullups that are too strong for the A311D to overcome. Or there might be specific
-issues because these pins have special OD (open-drain) drivers on the A311D but we could not find much about this in the
-A311D datasheet. While we try to figure this out, please use this hack:
+我们可能犯了一个错误，使用了 A311D 无法克服的过强上拉电阻。或者可能存在特定问题，因为这些引脚在 A311D 上有特殊的 OD（开漏）驱动器，但我们在 A311D 数据表中找不到太多相关信息。在我们尝试解决这个问题时，请使用此技巧：
 
-Example for JVGPIO4:
+JVGPIO4 示例：
 
 \code{.sh}
 echo 425 > /sys/class/gpio/export # claim the GPIO number 425 = GPIOZ_14 / JVGPIO4 / Green wire
@@ -189,20 +150,16 @@ echo low > /sys/class/gpio/gpio431/direction # voltmeter should read 0V
 echo in > /sys/class/gpio/gpio431/direction # voltmeter should read the same voltage as you provided to IOREF
 \endcode
 
-Indeed, writing 1 to \a value does not seem to have any effect, the output is always low. By switching the pin's
-direction to \a in we basically disconnect it and let our pullup resistors drive it high.
+
+事实上，将 1 写入 \a 值似乎没有任何效果，输出始终为低。通过将引脚的方向切换为 \a，我们基本上将其断开，并让我们的上拉电阻将其驱动为高电平。
 
 
-Using JeVois-Pro GPIOs as SPI, UART, I2C, etc
+使用 JeVois-Pro GPIO 作为 SPI、UART、I2C 等 
 ---------------------------------------------
 
-\note Please be patient as this still is work in progress. We will soon post more detailed tutorials for specific
-peripherals as we test them. First on our list are an SPI and an I2C OLED displays.
+\note 请耐心等待，因为这项工作仍在进行中。我们将在测试特定外围设备时很快发布更详细的教程。我们列表中的第一个是 SPI 和 I2C OLED 显示器。
 
-Edit file \b env.txt on the BOOT partition of your microSD (when JeVois-Pro operates in Console mode, the file is in
-<b>/boot/env.txt</b>). Towards end, locate the list of kernel overlays and append the one you want (add it to \a
-overlays, separating with spaces). Doing this will claim the pins for a specific function, and load and start the
-corresponding kernel driver for that function on those pins, at boot time:
+编辑 microSD 的 BOOT 分区上的文件 \b env.txt （当 JeVois-Pro 在控制台模式下运行时，文件位于 <b>/boot/env.txt</b>）。最后，找到内核覆盖列表并附加所需的内核覆盖（将其添加到 \a overlays 中，用空格分隔）。这样做将在启动时声明特定功能的引脚，并在这些引脚上加载和启动该功能的相应内核驱动程序：
 
 \code{.sh}
 # Device Tree Overlays
@@ -222,58 +179,49 @@ corresponding kernel driver for that function on those pins, at boot time:
 overlays=icm20948 imx290
 \endcode
 
-Then reboot \jvpro and a new kernel device should be present. For example, when you activate the \a aux-spi overlay, you
-should get a new device <b>/dev/spidev1.0</b> (in addition to /dev/spidev32766.0 which is used internally for the
-JeVois-Pro on-board IMU).
 
-Beware of the auto-sensing voltage translation caveats explained above.
+然后重新启动 \jvpro，新的内核设备就会出现。例如，当您激活 \a aux-spi 覆盖时，您应该会得到一个新设备 <b>/dev/spidev1.0</b>（除了 JeVois-Pro 板载 IMU 内部使用的 /dev/spidev32766.0）。
 
-More information about GPIOs
+请注意上面解释的自动感应电压转换注意事项。
+
+有关 GPIO 的更多信息 
 ----------------------------
 
-On the Amlogic A311D chip used by JeVois-Pro, GPIOs are organized into two \a banks, where each bank is handled by a
-different controller. The first bank is the AO (always-on) bank which is powered by a supply that cannot be turned off
-by the CPU. This bank is typically used for internal GPIOs, such as enabling power for a group of CPU cores, debug UART,
-etc. The second bank is for more general GPIOs that are used in normal operation, such as I2C and SPI peripherals, etc.
+在 JeVois-Pro 使用的 Amlogic A311D 芯片上，GPIO 被组织成两个 \a 组，每个组由不同的控制器处理。第一个组是 AO（始终开启）组，由 CPU 无法关闭的电源供电。此组通常用于内部 GPIO，例如为 CPU 核心组启用电源、调试 UART 等。第二个组用于在正常运行中使用的更通用的 GPIO，例如 I2C 和 SPI 外设等。
 
-The Linux kernel device in charge of each bank is as follows:
+负责各个bank的Linux内核设备如下：
 
 Kernel device    | Bank
 -----------------|------------------
 pinctrl\@ff800014 | AO (always-on)
 pinctrl\@ff634480 | Standard
 
-Each bank is organized as a number of \a pins. You can get a list of pins here:
+每个 bank 都由多个 \a pins 组成。您可以在此处获取引脚列表：
 
 \code{.sh}
 cat /sys/kernel/debug/pinctrl/pinctrl@ff800014/pins # list pins in AO bank
 cat /sys/kernel/debug/pinctrl/pinctrl@ff634480/pins # list pins in standard bank
 \endcode
 
-These lists establish a mapping bewteen a bank's pin number as far as the kernel driver is concerned (e.g., pin 15)
-and the corresponding physical pin on the A311D chip (e.g., pin 15 in standard bank is physical pin GPIOZ_14 on the
-chip).
+就内核驱动程序而言，这些列表建立了银行引脚号（例如，引脚 15）与 A311D 芯片上相应的物理引脚（例如，标准银行中的引脚 15 是芯片上的物理引脚 GPIOZ_14）之间的映射。
 
-Pins from both banks further get combined and remapped into a single GPIO \a range, by adding an offset for each bank to
-a given pin in that bank. You can get the offsets here:
+通过为每个库添加偏移量到该库中的给定引脚，两个库的引脚进一步组合并重新映射到单个 GPIO \a 范围。您可以在此处获取偏移量：
 
 \code{.sh}
 cat /sys/kernel/debug/pinctrl/pinctrl@ff800014/gpio-ranges # AO bank
 cat /sys/kernel/debug/pinctrl/pinctrl@ff634480/gpio-ranges # standard bank
 \endcode
 
-So things are organized as follows:
+因此事情安排如下：
 
 Bank     | Bank offset | Number of pins | GPIO range
 ---------|-------------|----------------|------------
 AO       | 496         | 16             | 496 - 511
 Standard | 410         | 86             | 410 - 495
 
-This is how we came up with the <a>Kernel GPIO</a> column in the table at the begnning of this section: For example,
-purple wire is GPIOH_4 on the chip, and it is pin 21 of the standard controller which has base 410. Hence 410 + 21 = 431
-is the final GPIO number for GPIOH_4.
+这就是我们在本节开头的表格中得出<a>内核 GPIO</a>列的方法：例如，紫色线是芯片上的 GPIOH_4，它是标准控制器的引脚 21，其基数为 410。因此，410 + 21 = 431 是 GPIOH_4 的最终 GPIO 编号。
 
-For even more information, check out the schematics in: \ref HardwareFiles
+欲了解更多信息，请查看以下原理图：\ref HardwareFiles
 
 */
 

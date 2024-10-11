@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ParameterDef">
+<title>jevois::ParameterDef&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ParameterDef.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;class T&gt;
+class jevois::ParameterDef&lt; T &gt;</title></simplesect>
+
+
+<para>参数定义 </para>
+
+
+
+<para><link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> 用于指定参数的名称、描述、默认值、类别以及可选的有效值。参数的值类型由模板参数 T 指定。</para>
+
+<para>请参阅 <link linkend="_group__validvalues">有效值集的规范，例如，某些参数可能采用</link> 以了解有效值规范的定义，允许任何值、列表中的值、范围内的值、与正则表达式匹配的值等。 </para>
+<para>
+Definition at line 84 of file ParameterDef.H.</para>
+Inheritance diagram for jevois::ParameterDef&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterDef__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ParameterDef&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterDef__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDef_1a195dc00ad2a97cc6ce39fecf129d6c73">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>构造一个没有给定有效值的 ParameterDef，有效值是 T 可以采用的任何值 </para>
+</listitem>
+            <listitem><para>template&lt;template&lt; typename &gt; class ValidValuesSpec&gt; </para><para><link linkend="_classjevois_1_1ParameterDef_1a66c9380d4da490a645ee5b16fb7176b9">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, ValidValuesSpec&lt; T &gt; const &amp;validValuesSpec, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>从 ValidValueSpec 模板创建具有指定有效值的参数定义 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDef_1aaf74f5ef9a3413caf08a8b864e15546f">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, std::vector&lt; T &gt; const &amp;validvalues, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>使用列表中指定的有效值简写创建参数定义 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDef_1a447c59abc9eddd34f187bcb2b34e76e1">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt; const &amp;validrange, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>简写用于创建一个具有指定有效值的参数定义（范围包括边界） </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDef_1a3925c6f995f0a7190db333549aa14549">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt; const &amp;validrange, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>简写用于从步骤范围（包括边界）中创建具有指定有效值的参数定义 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ParameterDef_1aec787faa51dad58371c5ab5e21cb9f94">ParameterDef</link> (std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a1c5ac4b96fe3041edb8b14946356016b">name</link>, std::string const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1a51ba61e64e470f570d0fdf69aaf58364">description</link>, T const &amp;<link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link>, boost::regex const &amp;validregex, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp;<link linkend="_classjevois_1_1ParameterDefBase_1af499d9d97d06b6a0c658daed224eaace">category</link>)</para>
+
+<para>使用正则表达式中指定的有效值创建参数定义的简写 </para>
+</listitem>
+            <listitem><para>const T <link linkend="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df">defaultValue</link> () const</para>
+
+<para>获取为此参数定义指定的默认值 </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterDef_1a17f44d3cfc528a4471b8821da9495f7d">defaultValueString</link> () const</para>
+
+<para>字符串表示中的默认值 </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterDef_1a89dacefb191d8f1bf4b95c636701325f">validValuesString</link> () const</para>
+
+<para>字符串表示中的有效值 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterDef_1a0fef540439e08c17faf9bc5d4269bfe5">ParameterCore&lt; T &gt;</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDef_1a195dc00ad2a97cc6ce39fecf129d6c73"/>    <section>
+    <title>ParameterDef()<computeroutput>[1/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>构造一个没有给定有效值的 ParameterDef，有效值是 T 可以采用的任何值 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1a66c9380d4da490a645ee5b16fb7176b9"/>    <section>
+    <title>ParameterDef()<computeroutput>[2/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><computeroutput>template&lt;template&lt; typename &gt; class ValidValuesSpec&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, ValidValuesSpec&lt; T &gt; const &amp; validValuesSpec, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>从 ValidValueSpec 模板创建具有指定有效值的参数定义 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1aaf74f5ef9a3413caf08a8b864e15546f"/>    <section>
+    <title>ParameterDef()<computeroutput>[3/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, std::vector&lt; T &gt; const &amp; validvalues, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>使用列表中指定的有效值简写创建参数定义 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1a447c59abc9eddd34f187bcb2b34e76e1"/>    <section>
+    <title>ParameterDef()<computeroutput>[4/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; T &gt; const &amp; validrange, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>简写用于创建一个具有指定有效值的参数定义（范围包括边界） </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1a3925c6f995f0a7190db333549aa14549"/>    <section>
+    <title>ParameterDef()<computeroutput>[5/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt; const &amp; validrange, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>简写用于从步骤范围（包括边界）中创建具有指定有效值的参数定义 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1aec787faa51dad58371c5ab5e21cb9f94"/>    <section>
+    <title>ParameterDef()<computeroutput>[6/6]</computeroutput></title>
+<indexterm><primary>ParameterDef</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterDef</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::<link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> (std::string const &amp; name, std::string const &amp; description, T const &amp; defaultValue, boost::regex const &amp; validregex, <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>使用正则表达式中指定的有效值创建参数定义的简写 </para>
+</para>
+
+<para>这允许高度灵活的有效值定义。例如，假设您希望 int 参数在 [0..59] 范围内，但它也可以具有值 72，您的正则表达式将是：</para>
+
+<para><literallayout><computeroutput>^(([0-5]?[0-9])|72)$
+</computeroutput></literallayout> </para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDef_1aa18381cf543f24bbe6122008537ee4df"/>    <section>
+    <title>defaultValue()</title>
+<indexterm><primary>defaultValue</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>defaultValue</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>const T <link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::defaultValue ( ) const</computeroutput></para><para>
+
+<para>获取为此参数定义指定的默认值 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1a17f44d3cfc528a4471b8821da9495f7d"/>    <section>
+    <title>defaultValueString()</title>
+<indexterm><primary>defaultValueString</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>defaultValueString</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::defaultValueString ( ) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>字符串表示中的默认值 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterDefBase_1a080b4c9d79c5268b40b9250905e82462">jevois::ParameterDefBase</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterDef_1a89dacefb191d8f1bf4b95c636701325f"/>    <section>
+    <title>validValuesString()</title>
+<indexterm><primary>validValuesString</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>validValuesString</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef</link>&lt; T &gt;::validValuesString ( ) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>字符串表示中的有效值 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ParameterDefBase_1ab3c0382f0cfd76dd272dbce20e374b50">jevois::ParameterDefBase</link>.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterDef_1a0fef540439e08c17faf9bc5d4269bfe5"/>    <section>
+    <title>ParameterCore&lt; T &gt;</title>
+<indexterm><primary>ParameterCore&lt; T &gt;</primary><secondary>jevois::ParameterDef&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ParameterDef&lt; T &gt;</primary><secondary>ParameterCore&lt; T &gt;</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>friend class <link linkend="_classjevois_1_1ParameterCore">ParameterCore</link>&lt; T &gt;<computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 136 of file ParameterDef.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_ParameterDef_8H">ParameterDef.H</link></section>
+</section>

@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorStub">
+<title>jevois::dnn::PostProcessorStub Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorStub</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorStub.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的后处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道的最后一步。 除了显示从网络接收的张量的大小之外，此后处理器不执行任何操作。 在导入自定 义网络以检查输出数据格式（如果不确定）时很有用：使用此存根不会导致后处理崩溃并允许检查网络输出形状。 在花时间 为其设计新的后处理器之前，对模型进行基准测试并检查其速度是否可接受也很有用。 </para>
+<para>
+Definition at line 31 of file PostProcessorStub.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorStub:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorStub__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorStub:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorStub__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1a56117d5c58a765535ff77838b1fa7747">~PostProcessorStub</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1a97f86c434879713d1b581f7f4ab55b2a">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1aa7874788165a3486c28e66934e4fe900">process</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *preproc) override</para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1ae9eccd4da2bf7cb8613d5dde3165c87e">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1aa7874788165a3486c28e66934e4fe900">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorStub_1a56117d5c58a765535ff77838b1fa7747"/>    <section>
+    <title>~PostProcessorStub()</title>
+<indexterm><primary>~PostProcessorStub</primary><secondary>jevois::dnn::PostProcessorStub</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorStub</primary><secondary>~PostProcessorStub</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorStub::~PostProcessorStub ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 27 of file PostProcessorStub.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorStub_1a97f86c434879713d1b581f7f4ab55b2a"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorStub</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorStub</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorStub::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a6e87ca847dc8c16445168b01a2fdedb7">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 31 of file PostProcessorStub.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorStub_1aa7874788165a3486c28e66934e4fe900"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PostProcessorStub</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorStub</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorStub::process (std::vector&lt; cv::Mat &gt; const &amp; outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * preproc)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a26329a32271138357f7906c83e4856b1">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 35 of file PostProcessorStub.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorStub_1ae9eccd4da2bf7cb8613d5dde3165c87e"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PostProcessorStub</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorStub</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorStub::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorStub_1aa7874788165a3486c28e66934e4fe900">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1ac7c507221e2f1c52715b9185beaebc42">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 39 of file PostProcessorStub.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorStub_8H">PostProcessorStub.H</link>src/jevois/DNN/<link linkend="_PostProcessorStub_8C">PostProcessorStub.C</link></section>
+</section>

@@ -1,0 +1,682 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__utils">
+<title>Misc utilities</title>
+<indexterm><primary>Misc utilities</primary></indexterm>
+<section>
+<title> </title>
+
+<para>各种实用程序和辅助函数。 </para>
+Collaboration diagram for Misc utilities:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__utils.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ThreadPool">jevois::ThreadPool</link></para>
+
+<para>具有 CPU 亲和力的线程池 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__compilerutil">其他与控制编译相关的预处理器实用程序</link></para>
+</listitem>
+            <listitem><para><link linkend="_group__console">控制台访问实用程序</link></para>
+
+<para>控制台相关的实用程序和帮助函数。 </para>
+</listitem>
+            <listitem><para><link linkend="_group__coordhelpers">用于将坐标从相机分辨率转换为标准坐标的辅助函数</link></para>
+
+<para>JeVois 中的不同机器视觉算法可能以不同的相机分辨率运行，例如 1280x1024、320x240 或 176x144。当在相机帧中检测到某些感兴 趣的物品时，人们通常希望将该物品的坐标发送到串行端口。如果直接发送物品的图像坐标，就会出现问题，即现在接收器（例如 Arduino）需要知道使用了哪种相机图像分辨率，以便能够正确解释这些坐标。例如，如果视觉注意（显著性）算法使用 640x480 相 机输入运行，则相机视野中心的显著物体的坐标为 320,240。但如果将相同的显著性算法配置为处理 320x240 输入视频（以便它可以 以更高的帧速率运行），现在视野中心的物体的坐标为 160,120。如果将控制例如云台的 Arduino 连接到 JeVois，我们需要一种方法 来独立于相机使用的视频分辨率传达世界上目标物体的坐标。 </para>
+</listitem>
+            <listitem><para><link linkend="_group__demangling">Name demangling 函数</link></para>
+
+<para>Name demangling 函数返回源代码中所写的类型的原始名称，而不是编译器内部使用的名称，该名称被解析以避免跨不同命名空 间、重载等的名称冲突和混淆。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__utils_1gaf8eeacf544c62a2dad5399589ef4533e">XIOCTL</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__utils_1ga30dfc52798d0b53ad1736a622759b9ff">XIOCTL_QUIET</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__utils_1ga03db0ad166b1e653bae8910cb3d76795">XIOCTL_QUIET_ONCE</link>(dev,  req,  mem)</para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; T &gt; <link linkend="_group__utils_1ga7649d6ce325acac1606bceec036f171b">jevois::joinall</link> (std::vector&lt; std::future&lt; T &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga019e31f64c16f1b7a51bd2676acddfb9">jevois::joinall</link> (std::vector&lt; std::future&lt; void &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gac76ed513027efe252fe64756fae6d0b6">jevois::fccstr</link> (unsigned int fcc)</para>
+
+<para>将 V4L2 four-cc 代码（V4L2_PIX_FMT_...）转换为 4 字符字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga5cf98a150bb5637de6bbbbb1607ef669">jevois::cvtypestr</link> (unsigned int cvtype)</para>
+
+<para>将 cv::Mat::type() 代码转换为字符串（例如 CV_8UC1、CV_32SC3 等） </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga1ce31b21602cde5b241a59b4312ee6d5">jevois::cvBytesPerPix</link> (unsigned int cvtype)</para>
+
+<para>返回给定 OpenCV 像素类型每像素的字节数 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga34f3127327f6113672a16d3a041552df">jevois::strfcc</link> (std::string const &amp;str)</para>
+
+<para>将 JeVois 视频格式字符串转换为 V4L2 four-cc 代码 (V4L2_PIX_FMT_...) </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga4f32c685308caf5e428e27b8ccaee14b">jevois::v4l2BytesPerPix</link> (unsigned int fcc)</para>
+
+<para>返回给定 V4L2_PIX_FMT_ 每像素的字节数... </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gafa5c6faaeefd12994a07c09ed748176c">jevois::v4l2ImageSize</link> (unsigned int fcc, unsigned int width, unsigned int height)</para>
+
+<para>返回给定 V4L2_PIX_FMT_... 的图像大小（以字节为单位）, width, height </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gae3448a5e4bbd80efd03d6417974834d0">jevois::blackColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的黑色的值 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga7bf3f71d614429a46eda4d9c133e2866">jevois::whiteColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的白色的值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gad1e7ee20cd2509969dcd07acfb188f2b">jevois::applyLetterBox</link> (unsigned int &amp;imw, unsigned int &amp;imh, unsigned int const winw, unsigned int const winh, bool noalias)</para>
+
+<para>应用 letterbox 调整大小以使图像适合窗口 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_group__utils_1gac91eaef1908f07d3ecd6112eb12ef571">jevois::split</link> (std::string const &amp;input, std::string const &amp;regex=&quot;\\s+&quot;)</para>
+
+<para>使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga31195f1860c3aff445df8be6e602fecd">jevois::join</link> (std::vector&lt; std::string &gt; const &amp;strings, std::string const &amp;delimiter)</para>
+
+<para>将 tokens 向量连接成字符串 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__utils_1gac058832c57b8033f8a90e05c8ecee103">jevois::stringStartsWith</link> (std::string const &amp;str, std::string const &amp;prefix)</para>
+
+<para>如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa5a52cf5cff1d44b33db20364c07801a">jevois::replaceWhitespace</link> (std::string const &amp;str, char rep=&apos;_&apos;)</para>
+
+<para>用下划线（默认）或其他字符替换字符串中的空格字符 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga283968df765ce49751142cd55e0364d7">jevois::strip</link> (std::string const &amp;str)</para>
+
+<para>从字符串末尾去除空格（包括 CR、LF、tabs 等） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga4b0d94273d4e910b353a0ff999c23b7c">jevois::extractString</link> (std::string const &amp;str, std::string const &amp;startsep, std::string const &amp;endsep)</para>
+
+<para>提取两个分隔符之间的字符串部分 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1ga34ee23a47b698e960a477d9d4e2d435d">jevois::replaceStringFirst</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将 &apos;from&apos; 的第一个实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1gab6a5b228ce68e5634e2bb2c778b0bc34">jevois::replaceStringAll</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gafd49e84b9b5e4d95b1d4da28bdbbdb94">jevois::replaceAll</link> (std::string const &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga534153c7b53c07a0db4bbdcbb81b566f">jevois::tolower</link> (std::string const &amp;str)</para>
+
+<para>Convert string to lowercase. </para>
+</listitem>
+            <listitem><para>std::filesystem::path <link linkend="_group__utils_1gabd49e55c0ae1f31a3f30d73284469eac">jevois::absolutePath</link> (std::filesystem::path const &amp;root, std::filesystem::path const &amp;path)</para>
+
+<para>根据两个路径计算绝对路径 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">jevois::sformat</link> (char const *fmt,...) __attribute__((format(__printf__</para>
+
+<para>使用 printf 样式参数创建字符串 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string T <link linkend="_group__utils_1ga7eb44bbb053c52395d5704aa15265632">jevois::from_string</link> (std::string const &amp;str)</para>
+
+<para>从字符串转换为类型 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__utils_1gae142fbf87f70b758581c1845c2fa58e7">jevois::to_string</link> (T const &amp;val)</para>
+
+<para>从字符串转换为类型，适用于整数类型的版本 </para>
+</listitem>
+            <listitem><para>template&lt;typename dest_type , typename source_type &gt; </para><para>dest_type <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert</link> (source_type source)</para>
+
+<para>Clamped numerical conversion. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga3c42b68a3562220199677eed7cdceb51">jevois::flushcache</link> ()</para>
+
+<para>刷新缓存，有时在 turbo 模式下运行相机时可能会有用 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee">jevois::system</link> (std::string const &amp;cmd, bool errtoo=true)</para>
+
+<para>执行命令并将 stdout 输出抓取到字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga54a11682b4afc2645f69f4f0770ea1bb">jevois::secs2str</link> (double secs)</para>
+
+<para>报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga961f407b12b1d4a32577facc3d1f6ad9">jevois::secs2str</link> (std::vector&lt; double &gt; secs)</para>
+
+<para>报告以秒为单位给出的 avg+/-std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gaa9401ec9d35d0669e256673c8cdeb4f4">jevois::secs2str</link> (std::ostringstream &amp;ss, double secs)</para>
+
+<para>报告以秒为单位的持续时间（ns、us、ms 或 s） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga3d57bcea9c02b2c2b91e064d58b4b005">jevois::num2str</link> (double n)</para>
+
+<para>报告一个具有可变乘数（K、M、G、T、P、E、Z、Y）的数字，精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga074c42c36f209780e0420ca3b6e3bfc6">jevois::num2str</link> (std::ostringstream &amp;ss, double n)</para>
+
+<para>报告具有可变乘数 (K、M、G、T、P、E、Z、Y) 的数字 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga55e88d558a6aeff700099fa3180fc025">jevois::getFileString</link> (char const *fname, int skip=0)</para>
+
+<para>从文件中读取一行并将其作为字符串返回 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_group__utils_1gaf8eeacf544c62a2dad5399589ef4533e"/>    <section>
+    <title>XIOCTL</title>
+<indexterm><primary>XIOCTL</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>XIOCTL</secondary></indexterm>
+<para><computeroutput>#define XIOCTL( dev,  req,  mem)</computeroutput></para><para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 </para>
+</para>
+
+<para>该宏假定 req 是相应 ioctl 编号的标识符 (#define) </para>
+<para>
+Definition at line 198 of file Utils.H.</para>
+    </section><anchor xml:id="_group__utils_1ga30dfc52798d0b53ad1736a622759b9ff"/>    <section>
+    <title>XIOCTL_QUIET</title>
+<indexterm><primary>XIOCTL_QUIET</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>XIOCTL_QUIET</secondary></indexterm>
+<para><computeroutput>#define XIOCTL_QUIET( dev,  req,  mem)</computeroutput></para><para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</para>
+
+<para>这很有用，例如，对于 V4L2 相机格式枚举，其中应该使用增加的格式号调用 ioctl，直到失败。当发生这种情况时，我们 不想像 <link linkend="_group__utils_1gaf8eeacf544c62a2dad5399589ef4533e">XIOCTL()</link> 那样显示任何致命错误消息。此宏假定 req 是相应 ioctl 编号的标识符。 </para>
+<para>
+Definition at line 208 of file Utils.H.</para>
+    </section><anchor xml:id="_group__utils_1ga03db0ad166b1e653bae8910cb3d76795"/>    <section>
+    <title>XIOCTL_QUIET_ONCE</title>
+<indexterm><primary>XIOCTL_QUIET_ONCE</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>XIOCTL_QUIET_ONCE</secondary></indexterm>
+<para><computeroutput>#define XIOCTL_QUIET_ONCE( dev,  req,  mem)</computeroutput></para><para>
+
+<para>辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 </para>
+</para>
+
+<para>这很有用，例如，对于 V4L2 相机格式枚举，其中应该使用增加的格式号调用 ioctl，直到失败。当发生这种情况时，我们 不想像 <link linkend="_group__utils_1gaf8eeacf544c62a2dad5399589ef4533e">XIOCTL()</link> 那样显示任何致命错误消息。此宏假定 req 是相应 ioctl 编号的标识符。请注意，在此版本中，我们 会抛出任何错误。 </para>
+<para>
+Definition at line 219 of file Utils.H.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__utils_1gabd49e55c0ae1f31a3f30d73284469eac"/>    <section>
+    <title>absolutePath()</title>
+<indexterm><primary>absolutePath</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>absolutePath</secondary></indexterm>
+<para><computeroutput>std::filesystem::path jevois::absolutePath (std::filesystem::path const &amp; root, std::filesystem::path const &amp; path)</computeroutput></para><para>
+
+<para>根据两个路径计算绝对路径 </para>
+</para>
+
+<para>参数 <computeroutput>path</computeroutput> 包含可以是绝对路径也可以是相对路径；参数 <computeroutput>root</computeroutput> 应包含根路径。如果 path 是绝对路径，则返回该路径；否则， 将 root 添加到其前面并返回结果。 </para>
+<para>
+Definition at line 385 of file Utils.C.</para>
+<para>
+Referenced by jevois::Component::absolutePath(), jevois::dnn::NetworkOpenCV::load(), jevois::dnn::NetworkTPU::load(), jevois::dnn::NetworkONNX::load(), jevois::dnn::NetworkHailo::load(), jevois::dnn::NetworkNPU::load(), jevois::dnn::Pipeline::onParamChange(), jevois::dnn::Pipeline::process(), and jevois::Component::setParamsFromFile().</para>
+    </section><anchor xml:id="_group__utils_1gad1e7ee20cd2509969dcd07acfb188f2b"/>    <section>
+    <title>applyLetterBox()</title>
+<indexterm><primary>applyLetterBox</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>applyLetterBox</secondary></indexterm>
+<para><computeroutput>void jevois::applyLetterBox (unsigned int &amp; imw, unsigned int &amp; imh, unsigned int const winw, unsigned int const winh, bool noalias)</computeroutput></para><para>
+
+<para>应用 letterbox 调整大小以使图像适合窗口 </para>
+</para>
+
+<para>修改给定的图像尺寸（imw，imh），以使图像适合窗口尺寸（winw，winh），同时尽可能大，但不修改图像的纵横比。如果指定了 noalias，则缩放因子将向下舍入到最接近的整数以防止显示混叠。这可能会减小显示的图像大小。例如，对于 1920x1080 的窗口，当 noalias 为 false 时，640x480 的图像将被 leterbox 化为 1440x1080。但这是 2.25 的比例因子，可能会产生渲染混叠。当 noalias 为 true 时，leterbox 图像大小将为 1280x960（比例因子为 2.0）。 </para>
+<para>
+Definition at line 222 of file Utils.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::GPUimage::draw(), and jevois::dnn::PreProcessorBlob::process().</para>
+    </section><anchor xml:id="_group__utils_1gae3448a5e4bbd80efd03d6417974834d0"/>    <section>
+    <title>blackColor()</title>
+<indexterm><primary>blackColor</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>blackColor</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::blackColor (unsigned int fcc)</computeroutput></para><para>
+
+<para>返回对应于给定视频格式的黑色的值 </para>
+</para>
+<para>
+Definition at line 172 of file Utils.C.</para>
+<para>
+References jevois::fccstr(), JEVOISPRO_FMT_GUI, and LFATAL.</para>
+    </section><anchor xml:id="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6"/>    <section>
+    <title>clamped_convert()</title>
+<indexterm><primary>clamped_convert</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>clamped_convert</secondary></indexterm>
+<computeroutput>template&lt;typename dest_type , typename source_type &gt; </computeroutput><para><computeroutput>dest_type jevois::clamped_convert (source_type source)</computeroutput></para><para>
+
+<para>Clamped numerical conversion. </para>
+</para>
+    </section><anchor xml:id="_group__utils_1ga1ce31b21602cde5b241a59b4312ee6d5"/>    <section>
+    <title>cvBytesPerPix()</title>
+<indexterm><primary>cvBytesPerPix</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>cvBytesPerPix</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::cvBytesPerPix (unsigned int cvtype)</computeroutput></para><para>
+
+<para>返回给定 OpenCV 像素类型每像素的字节数 </para>
+</para>
+<para>
+Definition at line 89 of file Utils.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::dnn::concatenate(), jevois::dnn::NetworkTPU::doprocess(), and jevois::dnn::NetworkONNX::doprocess().</para>
+    </section><anchor xml:id="_group__utils_1ga5cf98a150bb5637de6bbbbb1607ef669"/>    <section>
+    <title>cvtypestr()</title>
+<indexterm><primary>cvtypestr</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>cvtypestr</secondary></indexterm>
+<para><computeroutput>std::string jevois::cvtypestr (unsigned int cvtype)</computeroutput></para><para>
+
+<para>将 cv::Mat::type() 代码转换为字符串（例如 CV_8UC1、CV_32SC3 等） </para>
+</para>
+<para>
+Definition at line 58 of file Utils.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::concatenate(), jevois::rawimage::convertCvBGRtoCvYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoCvYUYV(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoCvYUYV(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoCvYUYV(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::dnn::NetworkONNX::doprocess(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::dnn::PreProcessorBlob::process(), jevois::OutputFrame::sendCv(), jevois::dnn::shapestr(), and jevois::rawimage::unpackCvRGBAtoGrayRawImage().</para>
+    </section><anchor xml:id="_group__utils_1ga4b0d94273d4e910b353a0ff999c23b7c"/>    <section>
+    <title>extractString()</title>
+<indexterm><primary>extractString</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>extractString</secondary></indexterm>
+<para><computeroutput>std::string jevois::extractString (std::string const &amp; str, std::string const &amp; startsep, std::string const &amp; endsep)</computeroutput></para><para>
+
+<para>提取两个分隔符之间的字符串部分 </para>
+</para>
+
+<para>如果未找到分隔符，则返回空字符串。 </para>
+<para>
+Definition at line 316 of file Utils.C.</para>
+    </section><anchor xml:id="_group__utils_1gac76ed513027efe252fe64756fae6d0b6"/>    <section>
+    <title>fccstr()</title>
+<indexterm><primary>fccstr</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>fccstr</secondary></indexterm>
+<para><computeroutput>std::string jevois::fccstr (unsigned int fcc)</computeroutput></para><para>
+
+<para>将 V4L2 four-cc 代码（V4L2_PIX_FMT_...）转换为 4 字符字符串 </para>
+</para>
+<para>
+Definition at line 45 of file Utils.C.</para>
+<para>
+Referenced by jevois::blackColor(), jevois::VideoMapping::c2str(), jevois::CameraDevice::CameraDevice(), jevois::RawImage::clear(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::VideoMapping::cstr(), jevois::Engine::findVideoMapping(), jevois::GPUtextureDmaBuf::GPUtextureDmaBuf(), jevois::GUIhelper::iinfo(), jevois::VideoMapping::ostr(), jevois::RawImage::require(), jevois::dnn::PreProcessor::sendreport(), jevois::CameraDevice::setFormat(), jevois::Gadget::setFormat(), jevois::GPUimage::setInternal(), jevois::GPUimage::setWithDmaBuf(), jevois::v4l2BytesPerPix(), and jevois::whiteColor().</para>
+    </section><anchor xml:id="_group__utils_1ga3c42b68a3562220199677eed7cdceb51"/>    <section>
+    <title>flushcache()</title>
+<indexterm><primary>flushcache</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>flushcache</secondary></indexterm>
+<para><computeroutput>void jevois::flushcache ( )</computeroutput></para><para>
+
+<para>刷新缓存，有时在 turbo 模式下运行相机时可能会有用 </para>
+</para>
+<para>
+Definition at line 449 of file Utils.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_group__utils_1ga7eb44bbb053c52395d5704aa15265632"/>    <section>
+    <title>from_string()</title>
+<indexterm><primary>from_string</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>from_string</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::string T jevois::from_string (std::string const &amp; str)</computeroutput></para><para>
+
+<para>从字符串转换为类型 </para>
+</para>
+
+<para>对于整数类型，内部使用 std::stoll() 作为该类型，它支持前缀 0（八进制）和 0x（十六进制）。请注意八进制约定，除非您有意，否 则不要传递前导零。对于非整数类型，内部使用 operator&gt;&gt; 作为该类型，因此它适用于任何支持它的类型。 </para>
+    </section><anchor xml:id="_group__utils_1ga55e88d558a6aeff700099fa3180fc025"/>    <section>
+    <title>getFileString()</title>
+<indexterm><primary>getFileString</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>getFileString</secondary></indexterm>
+<para><computeroutput>std::string jevois::getFileString (char const * fname, int skip = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>从文件中读取一行并将其作为字符串返回 </para>
+</para>
+
+<para>有助于从虚拟内核文件系统获取信息，例如 CPU 温度等。参数 <computeroutput>skip</computeroutput> 可选地指定在返回感兴趣的行之前要跳过的行数。 </para>
+<para>
+Definition at line 541 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::NetworkTPU::doprocess(), jevois::GUIhelper::drawSystem(), jevois::getFanSpeed(), jevois::getNumInstalledSPUs(), jevois::getNumInstalledTPUs(), jevois::getSysInfoCPU(), jevois::getSysInfoMem(), jevois::getSysInfoVersion(), jevois::GUIhelper::GUIhelper(), and jevois::Engine::postInit().</para>
+    </section><anchor xml:id="_group__utils_1ga31195f1860c3aff445df8be6e602fecd"/>    <section>
+    <title>join()</title>
+<indexterm><primary>join</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>join</secondary></indexterm>
+<para><computeroutput>std::string jevois::join (std::vector&lt; std::string &gt; const &amp; strings, std::string const &amp; delimiter)</computeroutput></para><para>
+
+<para>将 tokens 向量连接成字符串 </para>
+</para>
+<para>
+Definition at line 280 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process().</para>
+    </section><anchor xml:id="_group__utils_1ga7649d6ce325acac1606bceec036f171b"/>    <section>
+    <title>joinall()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>joinall</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>joinall</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::vector&lt;T&gt; jevois::joinall (std::vector&lt; std::future&lt; T &gt;&gt; &amp; fvec, bool multiline = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</para>
+
+<para>保证 get() 将在所有 futures 上运行。如果抛出任何错误，则收集所有错误消息（如果可能，例如，抛出了 std::exception）并将它们 组装成单个字符串，形式为 &quot;[error 1][error 2] ...&quot; 或 &quot;error 1\nerror 2\n...&quot;，然后将其作为 std::runtime_error 抛出 </para>
+<para>
+Referenced by jevois::dnn::NetworkHailo::doprocess(), and jevois::dnn::PostProcessorDetectYOLO::yolo().</para>
+    </section><anchor xml:id="_group__utils_1ga019e31f64c16f1b7a51bd2676acddfb9"/>    <section>
+    <title>joinall()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>joinall</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>joinall</secondary></indexterm>
+<para><computeroutput>void jevois::joinall (std::vector&lt; std::future&lt; void &gt;&gt; &amp; fvec, bool multiline = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</para>
+
+<para>保证 get() 将在所有 futures 上运行。如果出现任何异常，则收集所有错误消息（如果可能，例如，抛出了 std::exception）并将它们 组装成单个字符串，形式为 &quot;[error 1][error 2] ...&quot; 或 &quot;error 1\nerror 2\n...&quot;，然后将其作为 std::runtime_error </para>
+    </section><anchor xml:id="_group__utils_1ga3d57bcea9c02b2c2b91e064d58b4b005"/>    <section>
+    <title>num2str()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>num2str</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>num2str</secondary></indexterm>
+<para><computeroutput>std::string jevois::num2str (double n)</computeroutput></para><para>
+
+<para>报告一个具有可变乘数（K、M、G、T、P、E、Z、Y）的数字，精度为小数点后 2 位 </para>
+</para>
+<para>
+Definition at line 511 of file Utils.C.</para>
+<para>
+References jevois::sformat().</para>
+<para>
+Referenced by jevois::dnn::NetworkOpenCV::doprocess().</para>
+    </section><anchor xml:id="_group__utils_1ga074c42c36f209780e0420ca3b6e3bfc6"/>    <section>
+    <title>num2str()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>num2str</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>num2str</secondary></indexterm>
+<para><computeroutput>void jevois::num2str (std::ostringstream &amp; ss, double n)</computeroutput></para><para>
+
+<para>报告具有可变乘数 (K、M、G、T、P、E、Z、Y) 的数字 </para>
+</para>
+
+<para>在调用此函数之前，您应该使用流中的 std::setprecision(n) 确定精度。 </para>
+<para>
+Definition at line 526 of file Utils.C.</para>
+    </section><anchor xml:id="_group__utils_1gafd49e84b9b5e4d95b1d4da28bdbbdb94"/>    <section>
+    <title>replaceAll()</title>
+<indexterm><primary>replaceAll</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>replaceAll</secondary></indexterm>
+<para><computeroutput>std::string jevois::replaceAll (std::string const &amp; str, std::string const &amp; from, std::string const &amp; to)</computeroutput></para><para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</para>
+<para>
+Definition at line 361 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process().</para>
+    </section><anchor xml:id="_group__utils_1gab6a5b228ce68e5634e2bb2c778b0bc34"/>    <section>
+    <title>replaceStringAll()</title>
+<indexterm><primary>replaceStringAll</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>replaceStringAll</secondary></indexterm>
+<para><computeroutput>size_t jevois::replaceStringAll (std::string &amp; str, std::string const &amp; from, std::string const &amp; to)</computeroutput></para><para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</para>
+<para>
+Definition at line 344 of file Utils.C.</para>
+<para>
+Referenced by jevois::dnn::readLabelsFile().</para>
+    </section><anchor xml:id="_group__utils_1ga34ee23a47b698e960a477d9d4e2d435d"/>    <section>
+    <title>replaceStringFirst()</title>
+<indexterm><primary>replaceStringFirst</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>replaceStringFirst</secondary></indexterm>
+<para><computeroutput>size_t jevois::replaceStringFirst (std::string &amp; str, std::string const &amp; from, std::string const &amp; to)</computeroutput></para><para>
+
+<para>将 &apos;from&apos; 的第一个实例替换为 &apos;to&apos; </para>
+</para>
+<para>
+Definition at line 331 of file Utils.C.</para>
+    </section><anchor xml:id="_group__utils_1gaa5a52cf5cff1d44b33db20364c07801a"/>    <section>
+    <title>replaceWhitespace()</title>
+<indexterm><primary>replaceWhitespace</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>replaceWhitespace</secondary></indexterm>
+<para><computeroutput>std::string jevois::replaceWhitespace (std::string const &amp; str, char rep = <computeroutput>&apos;_&apos;</computeroutput>
+)</computeroutput></para><para>
+
+<para>用下划线（默认）或其他字符替换字符串中的空格字符 </para>
+</para>
+<para>
+Definition at line 300 of file Utils.C.</para>
+<para>
+Referenced by jevois::StdModule::sendSerialContour2D(), jevois::StdModule::sendSerialObjDetImg2D(), jevois::StdModule::sendSerialObjReco(), jevois::StdModule::sendSerialStd1Dx(), jevois::StdModule::sendSerialStd1Dy(), jevois::StdModule::sendSerialStd2D(), and jevois::StdModule::sendSerialStd3D().</para>
+    </section><anchor xml:id="_group__utils_1ga54a11682b4afc2645f69f4f0770ea1bb"/>    <section>
+    <title>secs2str()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>secs2str</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>secs2str</secondary></indexterm>
+<para><computeroutput>std::string jevois::secs2str (double secs)</computeroutput></para><para>
+
+<para>报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 </para>
+</para>
+<para>
+Definition at line 478 of file Utils.C.</para>
+<para>
+References jevois::sformat().</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process(), jevois::Timer::stop(), jevois::Profiler::stop(), and jevois::TimerOne::stop().</para>
+    </section><anchor xml:id="_group__utils_1gaa9401ec9d35d0669e256673c8cdeb4f4"/>    <section>
+    <title>secs2str()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>secs2str</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>secs2str</secondary></indexterm>
+<para><computeroutput>void jevois::secs2str (std::ostringstream &amp; ss, double secs)</computeroutput></para><para>
+
+<para>报告以秒为单位的持续时间（ns、us、ms 或 s） </para>
+</para>
+
+<para>在调用此函数之前，您应该使用流中的 std::setprecision(n) 确定精度。 </para>
+<para>
+Definition at line 502 of file Utils.C.</para>
+    </section><anchor xml:id="_group__utils_1ga961f407b12b1d4a32577facc3d1f6ad9"/>    <section>
+    <title>secs2str()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>secs2str</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>secs2str</secondary></indexterm>
+<para><computeroutput>std::string jevois::secs2str (std::vector&lt; double &gt; secs)</computeroutput></para><para>
+
+<para>报告以秒为单位给出的 avg+/-std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 </para>
+</para>
+<para>
+Definition at line 487 of file Utils.C.</para>
+<para>
+References jevois::sformat().</para>
+    </section><anchor xml:id="_group__utils_1gaa49a5ccff29adea33326680d1e22b456"/>    <section>
+    <title>sformat()</title>
+<indexterm><primary>sformat</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>sformat</secondary></indexterm>
+<para><computeroutput>std::string jevois::sformat (char const * fmt,  ...)</computeroutput></para><para>
+
+<para>使用 printf 样式参数创建字符串 </para>
+</para>
+
+<para>Example: <literallayout><computeroutput>std::string&#32;s&#32;=&#32;jevois::sformat(&quot;MyString_%f_%d&quot;,&#32;1.0,&#32;2);
+</computeroutput></literallayout></para>
+
+<para>通常应避免使用 <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">sformat()</link>，而应使用 C++ 的流式运算符，但有一个例外，即当发出包含浮点数的串行消息时，sformat 的类似 printf 的语法可用于快速轻松地指定数值精度。 </para>
+<para>
+Definition at line 439 of file Utils.C.</para>
+<para>
+Referenced by jevois::DMPdata::activity(), jevois::dnn::NetworkTPU::doprocess(), jevois::dnn::NetworkHailo::doprocess(), jevois::GUIhelper::iinfo(), jevois::num2str(), jevois::Camera::readRegister(), jevois::dnn::PostProcessorClassify::report(), jevois::dnn::PostProcessorDetect::report(), jevois::dnn::PostProcessorYuNet::report(), jevois::secs2str(), jevois::StdModule::sendSerialObjDetImg2D(), jevois::Camera::writeRegister(), and jevois::dnn::PostProcessorDetectYOLO::yolo().</para>
+    </section><anchor xml:id="_group__utils_1gac91eaef1908f07d3ecd6112eb12ef571"/>    <section>
+    <title>split()</title>
+<indexterm><primary>split</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>split</secondary></indexterm>
+<para><computeroutput>std::vector&lt; std::string &gt; jevois::split (std::string const &amp; input, std::string const &amp; regex = <computeroutput>&quot;\\s+&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 </para>
+</para>
+<para>
+Definition at line 270 of file Utils.C.</para>
+<para>
+Referenced by jevois::drawErrorImage(), jevois::GUIhelper::drawSystem(), jevois::Serial::filePut(), jevois::GUIhelper::GUIhelper(), jevois::dnn::NetworkNPU::load(), jevois::dnn::PostProcessorClassify::onParamChange(), jevois::dnn::PostProcessorDetect::onParamChange(), jevois::Engine::parseCommand(), jevois::dnn::parseTensorSpecs(), jevois::dnn::PreProcessorBlob::process(), jevois::dnn::Pipeline::process(), jevois::dnn::Network::process(), jevois::dnn::strshape(), jevois::warnAndIgnoreException(), jevois::warnAndRethrowException(), and jevois::ChatBox::writeString().</para>
+    </section><anchor xml:id="_group__utils_1ga34f3127327f6113672a16d3a041552df"/>    <section>
+    <title>strfcc()</title>
+<indexterm><primary>strfcc</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>strfcc</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::strfcc (std::string const &amp; str)</computeroutput></para><para>
+
+<para>将 JeVois 视频格式字符串转换为 V4L2 four-cc 代码 (V4L2_PIX_FMT_...) </para>
+</para>
+
+<para>如果 str 不是以下之一，则抛出运行时错误：BAYER、YUYV、GREY、GRAY、MJPG、RGB565、BGR24 或 NONE。 </para>
+<para>
+Definition at line 111 of file Utils.C.</para>
+<para>
+References ISP_V4L2_PIX_FMT_META, and JEVOISPRO_FMT_GUI.</para>
+    </section><anchor xml:id="_group__utils_1gac058832c57b8033f8a90e05c8ecee103"/>    <section>
+    <title>stringStartsWith()</title>
+<indexterm><primary>stringStartsWith</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>stringStartsWith</secondary></indexterm>
+<para><computeroutput>bool jevois::stringStartsWith (std::string const &amp; str, std::string const &amp; prefix)</computeroutput></para><para>
+
+<para>如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） </para>
+</para>
+<para>
+Definition at line 294 of file Utils.C.</para>
+<para>
+Referenced by jevois::GUIserial::draw(), jevois::GUIconsole::draw(), jevois::GUIhelper::drawSystem(), jevois::Serial::filePut(), jevois::Engine::postInit(), and jevois::dnn::Pipeline::showInfo().</para>
+    </section><anchor xml:id="_group__utils_1ga283968df765ce49751142cd55e0364d7"/>    <section>
+    <title>strip()</title>
+<indexterm><primary>strip</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>strip</secondary></indexterm>
+<para><computeroutput>std::string jevois::strip (std::string const &amp; str)</computeroutput></para><para>
+
+<para>从字符串末尾去除空格（包括 CR、LF、tabs 等） </para>
+</para>
+<para>
+Definition at line 308 of file Utils.C.</para>
+<para>
+Referenced by jevois::Engine::runScriptFromFile().</para>
+    </section><anchor xml:id="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee"/>    <section>
+    <title>system()</title>
+<indexterm><primary>system</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>system</secondary></indexterm>
+<para><computeroutput>std::string jevois::system (std::string const &amp; cmd, bool errtoo = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>执行命令并将 stdout 输出抓取到字符串 </para>
+</para>
+
+<para>如果 errtoo 为真，我们还通过在命令后附加 2&gt;&amp;1 来抓取错误。如果命令无法以某种方式运行，或者以非零退出代码退出，则抛出 std::runtime_error。 </para>
+<para>
+Definition at line 461 of file Utils.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::GUIhelper::compileCommand(), jevois::GUIhelper::drawSystem(), jevois::getNumInstalledTPUs(), jevois::getNumInstalledVPUs(), jevois::Engine::parseCommand(), jevois::Engine::reboot(), jevois::Watchdog::run(), jevois::MovieOutput::streamOff(), and jevois::MovieOutput::~MovieOutput().</para>
+    </section><anchor xml:id="_group__utils_1gae142fbf87f70b758581c1845c2fa58e7"/>    <section>
+    <title>to_string()</title>
+<indexterm><primary>to_string</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>to_string</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::string jevois::to_string (T const &amp; val)</computeroutput></para><para>
+
+<para>从字符串转换为类型，适用于整数类型的版本 </para>
+</para>
+<para>
+Referenced by jevois::dnn::attrstr(), jevois::CameraDevice::CameraDevice(), jevois::cvtypestr(), jevois::dnn::NetworkTPU::doprocess(), jevois::dnn::NetworkHailo::doprocess(), jevois::dnn::NetworkNPU::doprocess(), jevois::GUIhelper::drawImage(), jevois::GUIhelper::drawInputFrame(), jevois::GUIhelper::drawInputFrame2(), jevois::Serial::fileGet(), jevois::dnn::getLabel(), jevois::getNumInstalledSPUs(), jevois::getNumInstalledTPUs(), jevois::StdModule::getStamp(), jevois::getSysInfoCPU(), jevois::dnn::hailo2vsi(), jevois::Engine::loadCameraCalibration(), main(), jevois::dnn::onnx2vsi(), jevois::Engine::parseCommand(), jevois::dnn::PreProcessorPythonImpl::process(), jevois::dnn::PreProcessorBlob::process(), jevois::VideoBuffers::qbuf(), jevois::Watchdog::run(), jevois::Engine::runScriptFromFile(), jevois::CameraCalibration::save(), jevois::Engine::saveCameraCalibration(), jevois::ImGuiBackendMALI::scanDevices(), jevois::StdModule::sendSerialObjDetImg2D(), jevois::Camera::setFormat(), jevois::dnn::shapestr(), jevois::dnn::Pipeline::showDataPeekWindow(), jevois::VideoMapping::sopath(), jevois::dnn::tensorattr(), and jevois::dnn::vsi2cv().</para>
+    </section><anchor xml:id="_group__utils_1ga534153c7b53c07a0db4bbdcbb81b566f"/>    <section>
+    <title>tolower()</title>
+<indexterm><primary>tolower</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>tolower</secondary></indexterm>
+<para><computeroutput>std::string jevois::tolower (std::string const &amp; str)</computeroutput></para><para>
+
+<para>Convert string to lowercase. </para>
+</para>
+<para>
+Definition at line 377 of file Utils.C.</para>
+    </section><anchor xml:id="_group__utils_1ga4f32c685308caf5e428e27b8ccaee14b"/>    <section>
+    <title>v4l2BytesPerPix()</title>
+<indexterm><primary>v4l2BytesPerPix</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>v4l2BytesPerPix</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::v4l2BytesPerPix (unsigned int fcc)</computeroutput></para><para>
+
+<para>返回给定 V4L2_PIX_FMT_ 每像素的字节数... </para>
+</para>
+<para>
+Definition at line 141 of file Utils.C.</para>
+<para>
+References jevois::fccstr(), ISP_V4L2_PIX_FMT_META, JEVOISPRO_FMT_GUI, and LFATAL.</para>
+<para>
+Referenced by jevois::RawImage::bytesize(), jevois::RawImage::bytesperpix(), jevois::rawimage::cvImage(), jevois::GPUtextureDmaBuf::GPUtextureDmaBuf(), and jevois::v4l2ImageSize().</para>
+    </section><anchor xml:id="_group__utils_1gafa5c6faaeefd12994a07c09ed748176c"/>    <section>
+    <title>v4l2ImageSize()</title>
+<indexterm><primary>v4l2ImageSize</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>v4l2ImageSize</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::v4l2ImageSize (unsigned int fcc, unsigned int width, unsigned int height)</computeroutput></para><para>
+
+<para>返回给定 V4L2_PIX_FMT_... 的图像大小（以字节为单位）, width, height </para>
+</para>
+<para>
+Definition at line 168 of file Utils.C.</para>
+<para>
+References jevois::v4l2BytesPerPix().</para>
+<para>
+Referenced by jevois::VideoMapping::c2size(), jevois::VideoMapping::csize(), jevois::VideoMapping::osize(), jevois::CameraDevice::streamOn(), and jevois::Gadget::streamOn().</para>
+    </section><anchor xml:id="_group__utils_1ga7bf3f71d614429a46eda4d9c133e2866"/>    <section>
+    <title>whiteColor()</title>
+<indexterm><primary>whiteColor</primary><secondary>Misc utilities</secondary></indexterm>
+<indexterm><primary>Misc utilities</primary><secondary>whiteColor</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::whiteColor (unsigned int fcc)</computeroutput></para><para>
+
+<para>返回对应于给定视频格式的白色的值 </para>
+</para>
+<para>
+Definition at line 197 of file Utils.C.</para>
+<para>
+References jevois::fccstr(), JEVOISPRO_FMT_GUI, and LFATAL.</para>
+<para>
+Referenced by jevois::drawErrorImage().</para>
+</section>
+</section>
+</section>

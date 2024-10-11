@@ -20,7 +20,7 @@
 #include <jevois/Component/Component.H>
 #include <jevois/Types/Enum.H>
 
-#include <ovxlib/vsi_nn_pub.h> // for data types and quantization types
+#include <ovxlib/vsi_nn_pub.h> // 用于数据类型和量化类型
 
 #include <opencv2/core/core.hpp>
 #include <vector>
@@ -31,8 +31,7 @@ namespace jevois
   {
     namespace network
     {
-      // We define all parameters for all derived classes here to avoid duplicate definitions. Different derived classes
-      // will use different subsets of all available parameters:
+      // 我们在此处定义派生类的所有参数，以避免重复定义。不同的派生类将使用所有可用参数的不同子集：  
       static jevois::ParameterCategory const ParamCateg("DNN Network Options");
 
       //! Parameter \relates jevois::dnn::Network
@@ -154,9 +153,9 @@ namespace jevois
 #endif
     }
     
-    //! Abstract class to represent a neural network
-    /*! Derived classes provide implementation via OpenCV (on CPU, OpenCL, or OpenVino/Myriad-X), Amlogic/Vivante NPU,
-        Hailo-8, Python, or Google Coral TPU. \ingroup dnn */
+    //! 表示神经网络的抽象类。 
+	/*! 派生类通过 OpenCV（CPU、OpenCL 或 OpenVino/Myriad-X）、Amlogic/Vivante NPU、Hailo-8、Python 或 Google Coral 
+	    TPU 提供实现。 \ingroup dnn */
     class Network : public Component,
                     public Parameter<network::comment, network::url, network::outreshape, network::extraintensors>
     {
@@ -165,14 +164,14 @@ namespace jevois
         using jevois::Component::Component;
 
         //! Destructor
-        /*! CAUTION: derived classes must call waitBeforeDestroy() in their destructor */
+        /*! CAUTION: 派生类必须在其析构函数中调用 waitBeforeDestroy() */
         virtual ~Network();
 
-        //! If network is currently loading, wait until that is done before destroying
-        /*! CAUTION: derived classes must call waitBeforeDestroy() in their destructor */
+        //! 如果网络正在加载，则等待加载完成后再销毁
+        /*! CAUTION: 派生类必须在其析构函数中调用 waitBeforeDestroy() */
         void waitBeforeDestroy();
         
-        //! Returns true when network is ready to run (loaded and initialized)
+        //! 当网络准备好运行（加载并初始化）时返回 true
         bool ready();
 
         //! Get shapes of all input tensors
@@ -181,22 +180,20 @@ namespace jevois
         //! Get shapes of all output tensors
         virtual std::vector<vsi_nn_tensor_attr_t> outputShapes() = 0;
         
-        //! Process input blobs and obtain output blobs
-        /*! Network implementations may push information data into the info string, which will be displayed to
-            user. Convention is: if an info line starts with '* ', it is a header, and if it starts with '- ' it is a
-            bullet. Info should always be organized into headers at the top level. */
+        //! 处理输入 blob 并获取输出 blob。 
+        /*! Network 实现可以将信息数据推送到信息字符串中，该字符串将显示给用户。约定是：如果信息行以 '* ' 开头，则它
+		    是标题，如果以 '- ' 开头，则它是项目符号。信息应始终组织到顶层的标题中。 */
         std::vector<cv::Mat> process(std::vector<cv::Mat> const & blobs, std::vector<std::string> & info);
 
-        //! Freeze/unfreeze parameters that users should not change while running
-        /*! Note: derived classes can freeze their own params by overriding this function, and should remember to still
-            call the base class jevois::dnn::Network::freeze(doit) */
+        //! 冻结/解冻用户在运行时不应更改的参数 
+		/*! 注意：派生类可以通过重写此函数来冻结自己的参数，并且应该记住仍然调用基类 jevois::dnn::Network::freeze(doit) */
         virtual void freeze(bool doit);
         
       protected:
         //! Load from disk
         virtual void load() = 0;
 
-        //! Process input blobs and obtain output blobs
+        //! 处理输入 blobs 并获取输出 blobs
         virtual std::vector<cv::Mat> doprocess(std::vector<cv::Mat> const & blobs,
                                                std::vector<std::string> & info) = 0;
 

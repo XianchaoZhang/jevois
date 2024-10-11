@@ -1,0 +1,301 @@
+\hypertarget{classjevois_1_1OutputFrame}{}\doxysubsection{jevois\+::Output\+Frame Class Reference}
+\label{classjevois_1_1OutputFrame}\index{jevois::OutputFrame@{jevois::OutputFrame}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Output\+Frame.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+围绕要通过 U\+SB 发送的原始图像的异常安全包装器 
+
+此包装器的操作方式与标准 C++11 中的 std\+:future 非常相似。用户可以通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}} 获取下一个要通过 U\+SB 发送的内存分 配但空白的图像，如果 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 仍在通过 U\+SB 发送所有缓冲区并且没有可用的空白缓冲区，则可能会阻塞，或者如果由于某种原 因（例如，\+U\+SB 断开连接，用户刚刚在其网络摄像头软件中更改了视频模式或关闭了它）获取该缓冲区失败，则可能会抛出异常 。分配的图像大小和像素类型由当前 Video\+Mapping、\+U\+SB 部分定义，即它是用户当前选择的 U\+SB 视频模式。为了节省时间，图 像缓冲区不会被清零，因此您不应假设图像填充了黑色像素，它可能包含随机像素或先前的输出帧。此外，还提供了 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 函 数，用户在将像素数据写入通过 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}} 获取的图像后即可使用该函数，以允许 U\+SB 驱动程序将该图像发送到连接的主机。如果 在 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 被销毁时尚未调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}，则如果已调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}，则会自动调用该函数。
+
+\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 实现了对输出视频帧的零拷贝、零等待访问，即：
+
+
+\begin{DoxyEnumerate}
+\item 您通过 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}} 获取的图像的像素数据直接是内存映射像素缓冲区，\+Je\+Vois 芯片上的硅硬件将通过直接内存访问 (D\+MA) 使用 该缓冲区通过 U\+SB 链路将数据流出；
+\item 只要您调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}，该缓冲区就会排队等待通过 U\+SB 发送（而不是以固定的、有规律的间隔流出图像）。\+Gadget 有多个图 像缓冲区，允许一个缓冲区通过 U\+SB 流出，而另一个缓冲区则通过 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}} 由您的应用程序填充。这些缓冲区是可回收的， 即一旦调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}，底层缓冲区就会通过 U\+SB 流出，然后发送回 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 以供您的代码将来访问。 
+\end{DoxyEnumerate}
+
+Definition at line 48 of file Output\+Frame.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1OutputFrame_a18713cd4e71a637f6d3be8032ad62093}{Output\+Frame}} (\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get}} () const
+\begin{DoxyCompactList}\small\item\em 获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 通过 U\+SB 发送出去 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send}} () const
+\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a8074a61ff928d7812b08b4b48d88c38f}{send\+Cv}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 cv\+::\+Mat 转换/缩放为当前输出格式后发送的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a8d3aa4fe5143b55b7bf2852dc6501f68}{send\+Cv\+G\+R\+AY}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 G\+R\+AY cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a5018efc55e0fb7a5300ee3fad73d45a6}{send\+Cv\+B\+GR}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_ad3e870ad348b0158243d4514abd2bc06}{send\+Cv\+R\+GB}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_ad82a3955ca32e37d277b3959f83d7374}{send\+Cv\+R\+G\+BA}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a305564548b1d620113d469f552e3374f}{send\+Scaled\+Cv\+G\+R\+AY}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 G\+R\+AY cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_ad2af232de59d25ca0d271f489ca1e43d}{send\+Scaled\+Cv\+B\+GR}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 B\+GR cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a75a18b108f185f115631f857c2b18aaf}{send\+Scaled\+Cv\+R\+GB}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 R\+GB cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFrame_a71deb595dc640af99914a4b2c72cbcaa}{send\+Scaled\+Cv\+R\+G\+BA}} (cv\+::\+Mat const \&img, int quality=75) const
+\begin{DoxyCompactList}\small\item\em 将 R\+G\+BA cv\+::\+Mat 转换为当前输出格式后发送它的简写 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1OutputFrame_aad21e8af1b54482681c66e8e5dab9d55}{$\sim$\+Output\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数，根据需要将缓冲区返回给驱动程序 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1OutputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}{Engine}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a18713cd4e71a637f6d3be8032ad62093}\label{classjevois_1_1OutputFrame_a18713cd4e71a637f6d3be8032ad62093}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!OutputFrame@{OutputFrame}}
+\index{OutputFrame@{OutputFrame}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{OutputFrame()}{OutputFrame()}}
+{\footnotesize\ttfamily jevois\+::\+Output\+Frame\+::\+Output\+Frame (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Move constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_aad21e8af1b54482681c66e8e5dab9d55}\label{classjevois_1_1OutputFrame_aad21e8af1b54482681c66e8e5dab9d55}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!````~OutputFrame@{$\sim$OutputFrame}}
+\index{````~OutputFrame@{$\sim$OutputFrame}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{$\sim$OutputFrame()}{~OutputFrame()}}
+{\footnotesize\ttfamily jevois\+::\+Output\+Frame\+::$\sim$\+Output\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数，根据需要将缓冲区返回给驱动程序 
+
+
+
+Definition at line 31 of file Output\+Frame.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}\label{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!get@{get}}
+\index{get@{get}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Output\+Frame\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 通过 U\+SB 发送出去 
+
+如果没有可用的缓冲区，则可能会抛出，即，所有内容都已排队等待发送到主机但尚未发送。应用程序代码必须为每个 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}} 平衡一个 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。 
+
+Definition at line 54 of file Output\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}\label{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!send@{send}}
+\index{send@{send}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Definition at line 62 of file Output\+Frame.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a8074a61ff928d7812b08b4b48d88c38f}\label{classjevois_1_1OutputFrame_a8074a61ff928d7812b08b4b48d88c38f}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendCv@{sendCv}}
+\index{sendCv@{sendCv}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendCv()}{sendCv()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Cv (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 cv\+::\+Mat 转换/缩放为当前输出格式后发送的简写 
+
+这主要针对 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 将重新缩放为与输出帧相同的尺寸。
+
+给定的 cv\+::\+Mat 的像素格式猜测如下：
+\begin{DoxyItemize}
+\item 如果 img.\+type() == C\+V\+\_\+8\+U\+C3，则假设为 B\+GR 像素
+\item 如果 img.\+type() == C\+V\+\_\+8\+U\+C1，则假设为 G\+R\+AY 像素
+\item 如果 img.\+type() == C\+V\+\_\+8\+U\+C4，则假设为 R\+G\+BA 像素
+\end{DoxyItemize}
+
+C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 组合，因为这可提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、 将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 70 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a5018efc55e0fb7a5300ee3fad73d45a6}\label{classjevois_1_1OutputFrame_a5018efc55e0fb7a5300ee3fad73d45a6}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendCvBGR@{sendCvBGR}}
+\index{sendCvBGR@{sendCvBGR}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendCvBGR()}{sendCvBGR()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 B\+GR cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 必须具有与输出帧相同的尺寸。 C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为 目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 90 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a8d3aa4fe5143b55b7bf2852dc6501f68}\label{classjevois_1_1OutputFrame_a8d3aa4fe5143b55b7bf2852dc6501f68}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendCvGRAY@{sendCvGRAY}}
+\index{sendCvGRAY@{sendCvGRAY}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendCvGRAY()}{sendCvGRAY()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 G\+R\+AY cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 必须具有与输出帧相同的尺寸。 C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为 目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 82 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_ad3e870ad348b0158243d4514abd2bc06}\label{classjevois_1_1OutputFrame_ad3e870ad348b0158243d4514abd2bc06}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendCvRGB@{sendCvRGB}}
+\index{sendCvRGB@{sendCvRGB}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendCvRGB()}{sendCvRGB()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 R\+GB cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 必须具有与输出帧相同的暗淡度。 C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为 目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}，将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 97 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_ad82a3955ca32e37d277b3959f83d7374}\label{classjevois_1_1OutputFrame_ad82a3955ca32e37d277b3959f83d7374}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendCvRGBA@{sendCvRGBA}}
+\index{sendCvRGBA@{sendCvRGBA}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendCvRGBA()}{sendCvRGBA()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 R\+G\+BA cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 必须具有与输出帧相同的暗淡度。 C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为 目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}，将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 105 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image().
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_ad2af232de59d25ca0d271f489ca1e43d}\label{classjevois_1_1OutputFrame_ad2af232de59d25ca0d271f489ca1e43d}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendScaledCvBGR@{sendScaledCvBGR}}
+\index{sendScaledCvBGR@{sendScaledCvBGR}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendScaledCvBGR()}{sendScaledCvBGR()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 B\+GR cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 将重新缩放为与输出帧相同的大小 。\+C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换 为目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 122 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::rescale\+Cv(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a305564548b1d620113d469f552e3374f}\label{classjevois_1_1OutputFrame_a305564548b1d620113d469f552e3374f}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendScaledCvGRAY@{sendScaledCvGRAY}}
+\index{sendScaledCvGRAY@{sendScaledCvGRAY}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendScaledCvGRAY()}{sendScaledCvGRAY()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 G\+R\+AY cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 将重新缩放为与输出帧相同的暗度。 C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换为 目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 113 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::rescale\+Cv(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a75a18b108f185f115631f857c2b18aaf}\label{classjevois_1_1OutputFrame_a75a18b108f185f115631f857c2b18aaf}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendScaledCvRGB@{sendScaledCvRGB}}
+\index{sendScaledCvRGB@{sendScaledCvRGB}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGB()}{sendScaledCvRGB()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 R\+GB cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 将重新缩放为与输出帧相同的暗淡 程度。\+C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或 转换为目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调 用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介 于 1 和 100 之间。 
+
+Definition at line 130 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::rescale\+Cv(), and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a71deb595dc640af99914a4b2c72cbcaa}\label{classjevois_1_1OutputFrame_a71deb595dc640af99914a4b2c72cbcaa}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!sendScaledCvRGBA@{sendScaledCvRGBA}}
+\index{sendScaledCvRGBA@{sendScaledCvRGBA}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGBA()}{sendScaledCvRGBA()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+::send\+Scaled\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality = {\ttfamily 75} }\end{DoxyParamCaption}) const}
+
+
+
+将 R\+G\+BA cv\+::\+Mat 转换为当前输出格式后发送它的简写 
+
+这主要适用于 Python 模块编写者，因为他们可能会使用 Open\+CV 进行所有图像处理。cv\+::\+Mat 将重新缩放为与输出帧相同的暗度 。\+C++ 模块编写者应坚持使用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}/send() 对，因为这可以提供更好的细粒度控制。请注意，cv\+::\+Mat 图像将始终被复制或转换 为目标 Raw\+Image，然后通过调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}} 立即发送出去，因此用户在使用此函数后不应调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。此函数基本上等同于调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ab0d1fea6060ee24de281934f048f07fb}{get()}}、将给定的 cv\+::\+Mat 转换为正确的输出格式，然后调用 \mbox{\hyperlink{classjevois_1_1OutputFrame_ae6dafb6fab88b4166dc4b206c21c56a8}{send()}}。仅当输出格式为 M\+J\+P\+EG 时才使用 quality，并且应介于 1 和 100 之间。 
+
+Definition at line 139 of file Output\+Frame.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::\+Raw\+Image\+::height, jevois\+::rescale\+Cv(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1OutputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}\label{classjevois_1_1OutputFrame_a3e1914489e4bed4f9f23cdeab34a43dc}} 
+\index{jevois::OutputFrame@{jevois::OutputFrame}!Engine@{Engine}}
+\index{Engine@{Engine}!jevois::OutputFrame@{jevois::OutputFrame}}
+\doxyparagraph{\texorpdfstring{Engine}{Engine}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 150 of file Output\+Frame.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{OutputFrame_8H}{Output\+Frame.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{OutputFrame_8C}{Output\+Frame.\+C}}\end{DoxyCompactItemize}

@@ -24,7 +24,7 @@ namespace jevois
 {
   class Camera;
   
-  //! IMU with I2C interface shared with camera sensor, such as ICM20948 on JeVois-A33 AR0135 camera sensor board
+  //! 具有与摄像头传感器共享的 I2C 接口的 IMU，例如 JeVois-A33 AR0135 摄像头传感器板上的 ICM20948
   class IMUi2c : public IMU
   {
     public:
@@ -35,26 +35,26 @@ namespace jevois
       //! Destructor
       virtual ~IMUi2c();
 
-      //! Returns true if we use SPI for transfers. Used when ICM20948_REG_USER_CTRL is written to
+      //! 如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写入时使用；
       virtual bool isSPI() const override;
 
-      //! @name Access functions for IMU registers
+      //! @name IMU 寄存器的访问函数
       //! @{
 
-      //! Write a value to one of the IMU registers
-      /*! See base class jevois::IMU for full docs. */
+      //! 将值写入 IMU 寄存器之一
+	  /*！请参阅基类 jevois::IMU 以获取完整文档。 */
       void writeRegister(unsigned short reg, unsigned char val) override;
 
-      //! Read a value from one of the camera's IMU registers
-      /*! See base class jevois::IMU for full docs. */
+      //! 从相机的 IMU 寄存器之一读取一个值 
+	  /*! 请参阅基类 jevois::IMU 以获取完整文档。 */
       unsigned char readRegister(unsigned short reg) override;
 
-      //! Write an array of values to the camera's IMU registers
-      /*! See base class jevois::IMU for full docs. */
+      //! 将值数组写入相机的 IMU 寄存器
+	  /*！请参阅基类 jevois::IMU 以获取完整文档。 */
       void writeRegisterArray(unsigned short reg, unsigned char const * vals, size_t num) override;
 
-      //! Read an array of values from the camera's IMU registers
-      /*! See base class jevois::IMU for full docs. */
+      //! 从相机的 IMU 寄存器读取值数组
+	  /*！请参阅基类 jevois::IMU 以获取完整文档。 */
       void readRegisterArray(unsigned short reg, unsigned char * vals, size_t num) override;
 
       //! @}

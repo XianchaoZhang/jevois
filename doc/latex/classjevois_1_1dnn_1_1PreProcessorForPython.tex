@@ -1,0 +1,146 @@
+\hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython}{}\doxysubsection{jevois\+::dnn\+::Pre\+Processor\+For\+Python Class Reference}
+\label{classjevois_1_1dnn_1_1PreProcessorForPython}\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Pre-\/\+Processor interface exposed to the python side. 
+
+This wrapper is passed down to the process() function of a python post-\/processor, it provides a python-\/friendly interface to \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_a8c1c54306142e98ac4fcf82d00ac2c38}{b2i()}}, blobsizes(), etc 
+
+Definition at line 403 of file Python\+Module.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_ae89503ca9f471f440adbfdfc7e1f90e7}{Pre\+Processor\+For\+Python}} (\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$pp)
+\begin{DoxyCompactList}\small\item\em Construct from an existing \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}}. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_ac8f19300dffb6ca65c5d7d3edf556694}{imagesize}} () const
+\begin{DoxyCompactList}\small\item\em Access the last processed image size. \end{DoxyCompactList}\item 
+boost\+::python\+::list \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_a5ce7dd1f19dc5c14bef2b72da40d5c9c}{blobs}} () const
+\begin{DoxyCompactList}\small\item\em Access the last computed blobs (or empty if process() has not yet been called) \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_a24af37668ced78b0a4fe90dc10cc6f36}{blobsize}} (size\+\_\+t num) const
+\begin{DoxyCompactList}\small\item\em Access the width and height of a given blob, accounting for N\+C\+HW or N\+H\+WC. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_a8c1c54306142e98ac4fcf82d00ac2c38}{b2i}} (float x, float y, size\+\_\+t blobnum)
+\begin{DoxyCompactList}\small\item\em Convert coordinates from blob back to original image. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_ac6e3c945e937c68222d3a86e99d59551}{get\+Unscaled\+Crop\+Rect}} (size\+\_\+t blobnum)
+\begin{DoxyCompactList}\small\item\em Get unscaled crop rectangle in image coordinates. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython_a62a5f1e08672f067b081478a05e75e11}{i2b}} (float x, float y, size\+\_\+t blobnum)
+\begin{DoxyCompactList}\small\item\em Convert coordinates from image to blob. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_ae89503ca9f471f440adbfdfc7e1f90e7}\label{classjevois_1_1dnn_1_1PreProcessorForPython_ae89503ca9f471f440adbfdfc7e1f90e7}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!PreProcessorForPython@{PreProcessorForPython}}
+\index{PreProcessorForPython@{PreProcessorForPython}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{PreProcessorForPython()}{PreProcessorForPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::\+Pre\+Processor\+For\+Python (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{pp }\end{DoxyParamCaption})}
+
+
+
+Construct from an existing \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}}. 
+
+Caller must ensure that pp outlives us. 
+
+Definition at line 584 of file Python\+Module.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_a8c1c54306142e98ac4fcf82d00ac2c38}\label{classjevois_1_1dnn_1_1PreProcessorForPython_a8c1c54306142e98ac4fcf82d00ac2c38}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!b2i@{b2i}}
+\index{b2i@{b2i}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{b2i()}{b2i()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::b2i (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{size\+\_\+t}]{blobnum }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates from blob back to original image. 
+
+Given coords x,y should be in \mbox{[}0..w-\/1\mbox{]}x\mbox{[}0..h-\/1\mbox{]} where w,h are the blob\textquotesingle{}s width and height. This is useful to convert detected boxes back into original input coordinates. Returned as a tuple (x, y). 
+
+Definition at line 604 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_a5ce7dd1f19dc5c14bef2b72da40d5c9c}\label{classjevois_1_1dnn_1_1PreProcessorForPython_a5ce7dd1f19dc5c14bef2b72da40d5c9c}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!blobs@{blobs}}
+\index{blobs@{blobs}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{blobs()}{blobs()}}
+{\footnotesize\ttfamily boost\+::python\+::list jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::blobs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the last computed blobs (or empty if process() has not yet been called) 
+
+
+
+Definition at line 593 of file Python\+Module.\+C.
+
+
+
+References jevois\+::python\+::py\+Vec\+To\+List().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_a24af37668ced78b0a4fe90dc10cc6f36}\label{classjevois_1_1dnn_1_1PreProcessorForPython_a24af37668ced78b0a4fe90dc10cc6f36}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!blobsize@{blobsize}}
+\index{blobsize@{blobsize}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{blobsize()}{blobsize()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::blobsize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num }\end{DoxyParamCaption}) const}
+
+
+
+Access the width and height of a given blob, accounting for N\+C\+HW or N\+H\+WC. 
+
+Returned as a tuple (width, height). 
+
+Definition at line 598 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_ac6e3c945e937c68222d3a86e99d59551}\label{classjevois_1_1dnn_1_1PreProcessorForPython_ac6e3c945e937c68222d3a86e99d59551}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!getUnscaledCropRect@{getUnscaledCropRect}}
+\index{getUnscaledCropRect@{getUnscaledCropRect}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{getUnscaledCropRect()}{getUnscaledCropRect()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::get\+Unscaled\+Crop\+Rect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{blobnum }\end{DoxyParamCaption})}
+
+
+
+Get unscaled crop rectangle in image coordinates. 
+
+This is useful to display an image overlay on top of the input image. Returned as a tuple (x, y, w, h). 
+
+Definition at line 611 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_a62a5f1e08672f067b081478a05e75e11}\label{classjevois_1_1dnn_1_1PreProcessorForPython_a62a5f1e08672f067b081478a05e75e11}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!i2b@{i2b}}
+\index{i2b@{i2b}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{i2b()}{i2b()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::i2b (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{size\+\_\+t}]{blobnum }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates from image to blob. 
+
+Given coords x,y should be in \mbox{[}0..w-\/1\mbox{]}x\mbox{[}0..h-\/1\mbox{]} where w,h are the image\textquotesingle{}s width and height. This is useful to convert mouse coordinates (after they have been converted from screen to image coords) to locations within an input blob. 
+
+Definition at line 617 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorForPython_ac8f19300dffb6ca65c5d7d3edf556694}\label{classjevois_1_1dnn_1_1PreProcessorForPython_ac8f19300dffb6ca65c5d7d3edf556694}} 
+\index{jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}!imagesize@{imagesize}}
+\index{imagesize@{imagesize}!jevois::dnn::PreProcessorForPython@{jevois::dnn::PreProcessorForPython}}
+\doxyparagraph{\texorpdfstring{imagesize()}{imagesize()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::imagesize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access the last processed image size. 
+
+Returned as a tuple (width, height). 
+
+Definition at line 587 of file Python\+Module.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonModule_8H}{Python\+Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonModule_8C}{Python\+Module.\+C}}\end{DoxyCompactItemize}

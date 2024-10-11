@@ -1,0 +1,499 @@
+\hypertarget{classjevois_1_1StdModule}{}\doxysubsection{jevois\+::Std\+Module Class Reference}
+\label{classjevois_1_1StdModule}\index{jevois::StdModule@{jevois::StdModule}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+支持标准化串行消息的模块的基类 
+
+可以输出标准化串行消息的模块应该从 \mbox{\hyperlink{classjevois_1_1StdModule}{Std\+Module}} 而不是 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 派生。\+Std\+Module 引入了额外的参数来设置串行消息样式和精度， 以及额外的成员函数来组装、格式化和发送标准化串行消息。\+Std\+Module 函数的 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}}、send\+Serial()、parse\+Serial()、 \mbox{\hyperlink{classjevois_1_1Module_a2734260ac62a4b5b6d5806c30631562d}{supported\+Commands()}} 等直接从 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 继承。有关标准化串行消息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。 
+
+Definition at line 197 of file Module.\+H.
+
+
+
+Inheritance diagram for jevois\+::Std\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1StdModule__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Std\+Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1StdModule__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_ab37bb3169bb11609088588bdcc849744}{Std\+Module}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1StdModule_a2c000b22a1a1622ee3c19cc55c6d1e14}{$\sim$\+Std\+Module}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_ac51cfb38ea0253160f598adb736a285b}{send\+Serial\+Img1\+Dx}} (unsigned int camw, float x, float size=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化 1D 消息以获取图像 X 坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a255d927d1a8f5ed5176803e75adc51cc}{send\+Serial\+Std1\+Dx}} (float x, float size=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化 1D 消息以获取标准化 X 坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_ad08fd4ce9ecb07e6e4896e97e186ddc0}{send\+Serial\+Img1\+Dy}} (unsigned int camh, float y, float size=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送 Y 图像坐标的标准化 1D 消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a7a944230a717be0e10d12828c8401a22}{send\+Serial\+Std1\+Dy}} (float y, float size=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化 1D 消息以获取标准化 Y 坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a6f4c76f5f2135046c6618d4de919a35c}{send\+Serial\+Img2D}} (unsigned int camw, unsigned int camh, float x, float y, float w=0.\+0F, float \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化的 2D 图像坐标消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_aba421ebe80e3bbbd6645f8950132bd04}{send\+Serial\+Std2D}} (float x, float y, float w=0.\+0F, float \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化的 2D 标准化坐标消息 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T  = int$>$ }\\void \mbox{\hyperlink{classjevois_1_1StdModule_adf074e2f70df0d9308ee75ddebbf3a0e}{send\+Serial\+Contour2D}} (unsigned int camw, unsigned int camh, std\+::vector$<$ cv\+::\+Point\+\_\+$<$ T $>$ $>$ points, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送图像坐标中多边形的标准化 2D 消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a66e97cbd48fb09b1b1d6f035d057e1dc}{send\+Serial\+Std3D}} (float x, float y, float z, float w=0.\+0F, float \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}=0.\+0F, float d=0.\+0F, float q1=0.\+0F, float q2=0.\+0F, float q3=0.\+0f, float q4=0.\+0F, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化 3D 消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_ad651ce5cab661f5b04d2264c10ce3a69}{send\+Serial\+Std3D}} (std\+::vector$<$ cv\+::\+Point3f $>$ points, std\+::string const \&id=\char`\"{}\char`\"{}, std\+::string const \&extra=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 发送标准化 3D 消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a6ca9431e0b2ac7cb08f8a4748e18b76d}{send\+Serial\+Obj\+Reco}} (std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1ObjReco}{Obj\+Reco}} $>$ const \&res)
+\begin{DoxyCompactList}\small\item\em 发送标准化对象识别消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a2aea60cc0c45c44aa7484b8fc0e56364}{send\+Serial\+Obj\+Det\+Img2D}} (unsigned int camw, unsigned int camh, float x, float y, float w, float \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1ObjReco}{Obj\+Reco}} $>$ const \&res)
+\begin{DoxyCompactList}\small\item\em 发送标准化对象检测 + 识别消息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_af18e2bf28e8a799cb85976ef4989b210}{send\+Serial\+Obj\+Det\+Img2D}} (unsigned int camw, unsigned int camh, \mbox{\hyperlink{structjevois_1_1ObjDetect}{Obj\+Detect}} const \&det)
+\begin{DoxyCompactList}\small\item\em 发送标准化的对象检测 + 识别消息 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_adae54c6c6e34fbef7b625e30404cdbb1}{send\+Serial\+Mark\+Start}} ()
+\begin{DoxyCompactList}\small\item\em 发送消息 {\bfseries{M\+A\+RK S\+T\+A\+RT}} 以指示处理的开始 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1StdModule_a7cd999cbea7ffc2543b600d8f8b464d1}{send\+Serial\+Mark\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em 发送消息 {\bfseries{M\+A\+RK S\+T\+OP}} 以指示处理结束 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1StdModule_a578a1dc15961b00f9704e477e5e0612b}{get\+Stamp}} () const
+\begin{DoxyCompactList}\small\item\em 获取包含帧/日期/时间戳的字符串，具体取决于 serstamp 参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1StdModule_ad623a7b040c5b556e00e5389a1b4a7e6}{jevois\+::\+Engine}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_a376f8c60eef8e3f314e84aee7a0968c0}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Ser\+Style,(Terse)(Normal)(Detail)(Fine))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_abe34cc079c516265898b86150cd49a56}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serstyle, Ser\+Style, \char`\"{}Style for standardized serial messages as defined in \char`\"{} \char`\"{}http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}, Ser\+Style\+::\+Terse, Ser\+Style\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_ac3dc50246ba5f0e8225d76518da92643}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serprec, unsigned int, \char`\"{}Number of decimal points in standardized serial messages as \char`\"{} \char`\"{}defined in http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}, 0U, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ unsigned int $>$(0U, 10U), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_a93fffadc82f2dbb86e2437aba1136564}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Ser\+Stamp,(None)(Frame)(Time)(Frame\+Time)(Frame\+Date\+Time))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_aa897b46ace0ae5aef551ecf17411fdf2}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (serstamp, Ser\+Stamp, \char`\"{}Prepend standardized serial messages with a frame number, \char`\"{} \char`\"{}time, frame+time, or frame+date+time. See details in \char`\"{} \char`\"{}http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}, Ser\+Stamp\+::\+None, Ser\+Stamp\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_a490c531f8036e9c9d569515ecd9e63ae}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Ser\+Mark,(None)(Start)(Stop)(Both))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1StdModule_a321ee999e762db06488b037f2d6f052f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (sermark, Ser\+Mark, \char`\"{}Send serial message to mark the beginning (M\+A\+RK S\+T\+A\+RT) of the \char`\"{} \char`\"{}processing of a video frame from the camera sensor, the end (M\+A\+RK S\+T\+OP), or both. \char`\"{} \char`\"{}Useful, among others, if one needs to know when no results were sent over serial \char`\"{} \char`\"{}on a given frame. Combine with parameter serstamp if you need to know the frame number.\char`\"{}, Ser\+Mark\+::\+None, Ser\+Mark\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1StdModule_ab37bb3169bb11609088588bdcc849744}\label{classjevois_1_1StdModule_ab37bb3169bb11609088588bdcc849744}} 
+\index{jevois::StdModule@{jevois::StdModule}!StdModule@{StdModule}}
+\index{StdModule@{StdModule}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{StdModule()}{StdModule()}}
+{\footnotesize\ttfamily jevois\+::\+Std\+Module\+::\+Std\+Module (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+instance 是用户定义的字符串，可用于区分同一模块的多个实例。 
+
+Definition at line 72 of file Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a2c000b22a1a1622ee3c19cc55c6d1e14}\label{classjevois_1_1StdModule_a2c000b22a1a1622ee3c19cc55c6d1e14}} 
+\index{jevois::StdModule@{jevois::StdModule}!````~StdModule@{$\sim$StdModule}}
+\index{````~StdModule@{$\sim$StdModule}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{$\sim$StdModule()}{~StdModule()}}
+{\footnotesize\ttfamily jevois\+::\+Std\+Module\+::$\sim$\+Std\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 77 of file Module.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1StdModule_a578a1dc15961b00f9704e477e5e0612b}\label{classjevois_1_1StdModule_a578a1dc15961b00f9704e477e5e0612b}} 
+\index{jevois::StdModule@{jevois::StdModule}!getStamp@{getStamp}}
+\index{getStamp@{getStamp}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{getStamp()}{getStamp()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Std\+Module\+::get\+Stamp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+获取包含帧/日期/时间戳的字符串，具体取决于 serstamp 参数 
+
+
+
+Definition at line 81 of file Module.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_adf074e2f70df0d9308ee75ddebbf3a0e}\label{classjevois_1_1StdModule_adf074e2f70df0d9308ee75ddebbf3a0e}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialContour2D@{sendSerialContour2D}}
+\index{sendSerialContour2D@{sendSerialContour2D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialContour2D()}{sendSerialContour2D()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template void jevois\+::\+Std\+Module\+::send\+Serial\+Contour2D (\begin{DoxyParamCaption}\item[{unsigned int}]{camw,  }\item[{unsigned int}]{camh,  }\item[{std\+::vector$<$ cv\+::\+Point\+\_\+$<$ T $>$ $>$}]{points,  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送图像坐标中多边形的标准化 2D 消息 
+
+如果您的物体周围有多边形，请使用此函数，例如，使用 cv\+::find\+Contours() 找到的轮廓之一，或者如果您有矩形物体的 4 个角。 有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转换为 标准化坐标。对于 {\bfseries{Terse}} 串行样式，将计算并输出点的重心；对于 {\bfseries{Normal}} ，将计算并输出直立边界矩形；对于 {\bfseries{Detailed}} ，将计算并输出旋转的边界矩形；对于 {\bfseries{Fine}} ，将输出所有给定的点。请确保尝试减少点数，以使消息不会太长； 例如，请参阅 Open\+CV approx\+Poly\+D\+P() 或类似函数。 
+
+Definition at line 284 of file Module.\+C.
+
+
+
+References jevois\+::coords\+::img\+To\+Std(), and jevois\+::replace\+Whitespace().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_ac51cfb38ea0253160f598adb736a285b}\label{classjevois_1_1StdModule_ac51cfb38ea0253160f598adb736a285b}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialImg1Dx@{sendSerialImg1Dx}}
+\index{sendSerialImg1Dx@{sendSerialImg1Dx}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialImg1Dx()}{sendSerialImg1Dx()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dx (\begin{DoxyParamCaption}\item[{unsigned int}]{camw,  }\item[{float}]{x,  }\item[{float}]{size = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化 1D 消息以获取图像 X 坐标 
+
+有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转 换为标准化坐标。 
+
+Definition at line 124 of file Module.\+C.
+
+
+
+References jevois\+::coords\+::img\+To\+Std\+Size(), and jevois\+::coords\+::img\+To\+Std\+X().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_ad08fd4ce9ecb07e6e4896e97e186ddc0}\label{classjevois_1_1StdModule_ad08fd4ce9ecb07e6e4896e97e186ddc0}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialImg1Dy@{sendSerialImg1Dy}}
+\index{sendSerialImg1Dy@{sendSerialImg1Dy}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialImg1Dy()}{sendSerialImg1Dy()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Img1\+Dy (\begin{DoxyParamCaption}\item[{unsigned int}]{camh,  }\item[{float}]{y,  }\item[{float}]{size = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送 Y 图像坐标的标准化 1D 消息 
+
+有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转 换为标准化坐标。 
+
+Definition at line 173 of file Module.\+C.
+
+
+
+References jevois\+::coords\+::img\+To\+Std\+Size(), and jevois\+::coords\+::img\+To\+Std\+Y().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a6f4c76f5f2135046c6618d4de919a35c}\label{classjevois_1_1StdModule_a6f4c76f5f2135046c6618d4de919a35c}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialImg2D@{sendSerialImg2D}}
+\index{sendSerialImg2D@{sendSerialImg2D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialImg2D()}{sendSerialImg2D()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Img2D (\begin{DoxyParamCaption}\item[{unsigned int}]{camw,  }\item[{unsigned int}]{camh,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{w = {\ttfamily 0.0F},  }\item[{float}]{h = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化的 2D 图像坐标消息 
+
+如果您只知道位置和可选大小，请使用此功能。如果您有角，请使用其他变体。这里将假定为直立的矩形。有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转换为标准化坐标。 
+
+Definition at line 221 of file Module.\+C.
+
+
+
+References h, jevois\+::coords\+::img\+To\+Std(), and jevois\+::coords\+::img\+To\+Std\+Size().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_adae54c6c6e34fbef7b625e30404cdbb1}\label{classjevois_1_1StdModule_adae54c6c6e34fbef7b625e30404cdbb1}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialMarkStart@{sendSerialMarkStart}}
+\index{sendSerialMarkStart@{sendSerialMarkStart}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialMarkStart()}{sendSerialMarkStart()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Mark\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+发送消息 {\bfseries{M\+A\+RK S\+T\+A\+RT}} 以指示处理的开始 
+
+可能会根据参数 {\ttfamily serstamp} 预先添加一个戳记。引擎会自动调用此功能，因此用户通常不会使用此函数。请注意，根据参数 {\ttfamily sermark} 的当前值，此函数可能不会发送任何内容。 
+
+Definition at line 519 of file Module.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::main\+Loop().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a7cd999cbea7ffc2543b600d8f8b464d1}\label{classjevois_1_1StdModule_a7cd999cbea7ffc2543b600d8f8b464d1}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialMarkStop@{sendSerialMarkStop}}
+\index{sendSerialMarkStop@{sendSerialMarkStop}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialMarkStop()}{sendSerialMarkStop()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Mark\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+发送消息 {\bfseries{M\+A\+RK S\+T\+OP}} 以指示处理结束 
+
+可能会根据参数 {\ttfamily serstamp} 添加标记。引擎会自动调用此功能，因此用户通常不会使用此函数。请注意，根据参数 {\ttfamily sermark} 的当前值，此函数可能不会发送任何内容。 
+
+Definition at line 527 of file Module.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::main\+Loop().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a2aea60cc0c45c44aa7484b8fc0e56364}\label{classjevois_1_1StdModule_a2aea60cc0c45c44aa7484b8fc0e56364}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialObjDetImg2D@{sendSerialObjDetImg2D}}
+\index{sendSerialObjDetImg2D@{sendSerialObjDetImg2D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialObjDetImg2D()}{sendSerialObjDetImg2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2D (\begin{DoxyParamCaption}\item[{unsigned int}]{camw,  }\item[{unsigned int}]{camh,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{w,  }\item[{float}]{h,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1ObjReco}{Obj\+Reco}} $>$ const \&}]{res }\end{DoxyParamCaption})}
+
+
+
+发送标准化对象检测 + 识别消息 
+
+res 应为分数和类别名称的列表，按分数降序排列。请注意，如果向量为空，则不会发送任何消息。有关对象框的信息，请参阅 \mbox{\hyperlink{classjevois_1_1StdModule_a6f4c76f5f2135046c6618d4de919a35c}{send\+Serial\+Img2\+D()}}。 
+
+Definition at line 572 of file Module.\+C.
+
+
+
+References h, jevois\+::replace\+Whitespace(), jevois\+::sformat(), and jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_af18e2bf28e8a799cb85976ef4989b210}\label{classjevois_1_1StdModule_af18e2bf28e8a799cb85976ef4989b210}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialObjDetImg2D@{sendSerialObjDetImg2D}}
+\index{sendSerialObjDetImg2D@{sendSerialObjDetImg2D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialObjDetImg2D()}{sendSerialObjDetImg2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2D (\begin{DoxyParamCaption}\item[{unsigned int}]{camw,  }\item[{unsigned int}]{camh,  }\item[{\mbox{\hyperlink{structjevois_1_1ObjDetect}{jevois\+::\+Obj\+Detect}} const \&}]{det }\end{DoxyParamCaption})}
+
+
+
+发送标准化的对象检测 + 识别消息 
+
+res 应为分数和类别名称的列表，按分数的降序排列。请注意，如果向量为空，则不会发送任何消息。有关对象框的信息，请参阅 \mbox{\hyperlink{classjevois_1_1StdModule_a6f4c76f5f2135046c6618d4de919a35c}{send\+Serial\+Img2\+D()}}。 
+
+Definition at line 602 of file Module.\+C.
+
+
+
+References jevois\+::\+Obj\+Detect\+::brx, jevois\+::\+Obj\+Detect\+::bry, jevois\+::\+Obj\+Detect\+::reco, jevois\+::\+Obj\+Detect\+::tlx, and jevois\+::\+Obj\+Detect\+::tly.
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a6ca9431e0b2ac7cb08f8a4748e18b76d}\label{classjevois_1_1StdModule_a6ca9431e0b2ac7cb08f8a4748e18b76d}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialObjReco@{sendSerialObjReco}}
+\index{sendSerialObjReco@{sendSerialObjReco}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialObjReco()}{sendSerialObjReco()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Reco (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1ObjReco}{Obj\+Reco}} $>$ const \&}]{res }\end{DoxyParamCaption})}
+
+
+
+发送标准化对象识别消息 
+
+res 应为分数和类别名称的列表，按分数降序排列。请注意，如果向量为空，则不会发送任何消息。 
+
+Definition at line 535 of file Module.\+C.
+
+
+
+References jevois\+::replace\+Whitespace().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Classify\+::report().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a255d927d1a8f5ed5176803e75adc51cc}\label{classjevois_1_1StdModule_a255d927d1a8f5ed5176803e75adc51cc}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialStd1Dx@{sendSerialStd1Dx}}
+\index{sendSerialStd1Dx@{sendSerialStd1Dx}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialStd1Dx()}{sendSerialStd1Dx()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Std1\+Dx (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{size = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化 1D 消息以获取标准化 X 坐标 
+
+有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转 换为标准化坐标。 
+
+Definition at line 138 of file Module.\+C.
+
+
+
+References jevois\+::replace\+Whitespace().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a7a944230a717be0e10d12828c8401a22}\label{classjevois_1_1StdModule_a7a944230a717be0e10d12828c8401a22}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialStd1Dy@{sendSerialStd1Dy}}
+\index{sendSerialStd1Dy@{sendSerialStd1Dy}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialStd1Dy()}{sendSerialStd1Dy()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Std1\+Dy (\begin{DoxyParamCaption}\item[{float}]{y,  }\item[{float}]{size = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化 1D 消息以获取标准化 Y 坐标 
+
+有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转 换为标准化坐标。 
+
+Definition at line 186 of file Module.\+C.
+
+
+
+References jevois\+::replace\+Whitespace().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_aba421ebe80e3bbbd6645f8950132bd04}\label{classjevois_1_1StdModule_aba421ebe80e3bbbd6645f8950132bd04}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialStd2D@{sendSerialStd2D}}
+\index{sendSerialStd2D@{sendSerialStd2D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialStd2D()}{sendSerialStd2D()}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Std2D (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{w = {\ttfamily 0.0F},  }\item[{float}]{h = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化的 2D 标准化坐标消息 
+
+如果您只知道位置和可选大小，请使用此功能。如果您有角，请使用其他变体。这里将假定为直立的矩形。有关更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 。坐标应以相机图像像素为单位，此函数将根据 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 将它们转换为标准化坐标。 
+
+Definition at line 234 of file Module.\+C.
+
+
+
+References h, and jevois\+::replace\+Whitespace().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a66e97cbd48fb09b1b1d6f035d057e1dc}\label{classjevois_1_1StdModule_a66e97cbd48fb09b1b1d6f035d057e1dc}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialStd3D@{sendSerialStd3D}}
+\index{sendSerialStd3D@{sendSerialStd3D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialStd3D()}{sendSerialStd3D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Std3D (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z,  }\item[{float}]{w = {\ttfamily 0.0F},  }\item[{float}]{h = {\ttfamily 0.0F},  }\item[{float}]{d = {\ttfamily 0.0F},  }\item[{float}]{q1 = {\ttfamily 0.0F},  }\item[{float}]{q2 = {\ttfamily 0.0F},  }\item[{float}]{q3 = {\ttfamily 0.0f},  }\item[{float}]{q4 = {\ttfamily 0.0F},  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化 3D 消息 
+
+如果您只知道位置和可选的大小以及方向四元数，请使用此函数。如果您有一堆顶点，请使用其他变体。有关更多信息，请参阅 User\+Serial\+Style。坐标应以毫米为单位。 
+
+Definition at line 385 of file Module.\+C.
+
+
+
+References h, and jevois\+::replace\+Whitespace().
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_ad651ce5cab661f5b04d2264c10ce3a69}\label{classjevois_1_1StdModule_ad651ce5cab661f5b04d2264c10ce3a69}} 
+\index{jevois::StdModule@{jevois::StdModule}!sendSerialStd3D@{sendSerialStd3D}}
+\index{sendSerialStd3D@{sendSerialStd3D}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{sendSerialStd3D()}{sendSerialStd3D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Std\+Module\+::send\+Serial\+Std3D (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point3f $>$}]{points,  }\item[{std\+::string const \&}]{id = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{extra = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+发送标准化 3D 消息 
+
+如果您只知道位置和可选的大小以及方向四元数，请使用此函数。如果您有一堆顶点，请使用其他变体。有关更多信息，请参阅 User\+Serial\+Style。坐标应以毫米为单位。 
+
+Definition at line 437 of file Module.\+C.
+
+
+
+References jevois\+::replace\+Whitespace().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1StdModule_ad623a7b040c5b556e00e5389a1b4a7e6}\label{classjevois_1_1StdModule_ad623a7b040c5b556e00e5389a1b4a7e6}} 
+\index{jevois::StdModule@{jevois::StdModule}!jevois::Engine@{jevois::Engine}}
+\index{jevois::Engine@{jevois::Engine}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{jevois::Engine}{jevois::Engine}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 281 of file Module.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a321ee999e762db06488b037f2d6f052f}\label{classjevois_1_1StdModule_a321ee999e762db06488b037f2d6f052f}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{sermark}]{,  }\item[{Ser\+Mark}]{,  }\item[{\char`\"{}Send serial message to mark the beginning (M\+A\+RK S\+T\+A\+RT) of the \char`\"{} \char`\"{}processing of a video frame from the camera}]{sensor,  }\item[{the }]{endM\+A\+R\+K S\+T\+OP,  }\item[{or both. \char`\"{} \char`\"{}}]{Useful,  }\item[{among}]{others,  }\item[{if one needs to know when no results were sent over serial \char`\"{} \char`\"{}on a given frame. Combine with parameter serstamp if you need to know the frame number.\char`\"{}}]{,  }\item[{Ser\+Mark\+::\+None}]{,  }\item[{Ser\+Mark\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_ac3dc50246ba5f0e8225d76518da92643}\label{classjevois_1_1StdModule_ac3dc50246ba5f0e8225d76518da92643}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serprec}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Number of decimal points in standardized serial messages as \char`\"{} \char`\"{}defined in http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}}]{,  }\item[{0U}]{,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ unsigned int $>$}]{0\+U, 10U,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_aa897b46ace0ae5aef551ecf17411fdf2}\label{classjevois_1_1StdModule_aa897b46ace0ae5aef551ecf17411fdf2}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serstamp}]{,  }\item[{Ser\+Stamp}]{,  }\item[{\char`\"{}Prepend standardized serial messages with a frame}]{number,  }\item[{\char`\"{} \char`\"{}}]{time,  }\item[{frame+}]{time,  }\item[{or frame+date+time. See details in \char`\"{} \char`\"{}http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}}]{,  }\item[{Ser\+Stamp\+::\+None}]{,  }\item[{Ser\+Stamp\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_abe34cc079c516265898b86150cd49a56}\label{classjevois_1_1StdModule_abe34cc079c516265898b86150cd49a56}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{serstyle}]{,  }\item[{Ser\+Style}]{,  }\item[{\char`\"{}Style for standardized serial messages as defined in \char`\"{} \char`\"{}http\+://jevois.\+org/doc/User\+Serial\+Style.\+html\char`\"{}}]{,  }\item[{Ser\+Style\+::\+Terse}]{,  }\item[{Ser\+Style\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a490c531f8036e9c9d569515ecd9e63ae}\label{classjevois_1_1StdModule_a490c531f8036e9c9d569515ecd9e63ae}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Ser\+Mark}]{,  }\item[{(None)(Start)(Stop)(Both)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a93fffadc82f2dbb86e2437aba1136564}\label{classjevois_1_1StdModule_a93fffadc82f2dbb86e2437aba1136564}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Ser\+Stamp}]{,  }\item[{(None)(Frame)(Time)(Frame\+Time)(Frame\+Date\+Time)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1StdModule_a376f8c60eef8e3f314e84aee7a0968c0}\label{classjevois_1_1StdModule_a376f8c60eef8e3f314e84aee7a0968c0}} 
+\index{jevois::StdModule@{jevois::StdModule}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::StdModule@{jevois::StdModule}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Ser\+Style}]{,  }\item[{(Terse)(Normal)(Detail)(Fine)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{Module_8H}{Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{Module_8C}{Module.\+C}}\end{DoxyCompactItemize}

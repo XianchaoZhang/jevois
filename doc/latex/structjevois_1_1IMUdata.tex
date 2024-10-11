@@ -1,0 +1,410 @@
+\hypertarget{structjevois_1_1IMUdata}{}\doxysubsection{jevois\+::I\+M\+Udata Struct Reference}
+\label{structjevois_1_1IMUdata}\index{jevois::IMUdata@{jevois::IMUdata}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Udata.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 数据 
+
+Definition at line 65 of file I\+M\+Udata.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structjevois_1_1IMUdata_a74294074f662b48fad4dcabb23e936ff}{I\+M\+Udata}} (\mbox{\hyperlink{structjevois_1_1IMUrawData}{I\+M\+Uraw\+Data}} const \&rd, double arange, double grange)
+\begin{DoxyCompactList}\small\item\em 从原始数据读数构造 \end{DoxyCompactList}\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_ad528df6cdd82a2a20b7f3622937eae25}{ax}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a0dee2c084a0204e5c7853c086163b5b4}{ax}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_aa530f37a26e2cfae1af0288a7922147d}{ay}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a368d908a3ef4f6569d619da729263baa}{ay}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a1cc5cdbc4030828db880fa8372a3e11f}{az}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_ae0d28a12ec8ed70344a0dae4675b0a05}{az}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_aaa07ec03de5a907f1f3ef125f3809e89}{gx}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_ac7ba19312b27139c1e2462c6c8478067}{gx}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_afff29b1087dcfe346b14ca9f5e7d791a}{gy}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_ab5933a5db2d5d065d0f060be680846eb}{gy}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a5659cd78ce88c9116543938629ff67a3}{gz}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a971428fc3cae58abbe64d836e7756d8b}{gz}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a310d2ee9ca31e31f7c360c0af8ee9134}{temp}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a4176632a42a65953939e02aab7211ae4}{temp}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a77709580f05d372c95392cec4268bdba}{mx}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a95c428b9065cbb5d1875b8e93c1386ee}{mx}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a73dc6b0fcbe305e4e79dd2f48e9c120d}{my}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a9bb99863a26331bdc57c74c403b0a010}{my}} () const
+\item 
+float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a0d6cc9368e91e66bb3d5afa619706d83}{mz}} ()
+\item 
+const float \& \mbox{\hyperlink{structjevois_1_1IMUdata_a5340dbea4ee8157979aa386a4027414a}{mz}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{structjevois_1_1IMUdata_ac27ca8505885c14542af9e3e8017f4f7}{v}} \mbox{[}10\mbox{]}
+\begin{DoxyCompactList}\small\item\em The values\+: ax, ay, az, gy, gy, gz, temp, mx, my, mz. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structjevois_1_1IMUdata_af25db42f8ba2d63a7ed855b98480b053}{magovf}}
+\begin{DoxyCompactList}\small\item\em 如果磁力计溢出则为 True \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a74294074f662b48fad4dcabb23e936ff}\label{structjevois_1_1IMUdata_a74294074f662b48fad4dcabb23e936ff}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!IMUdata@{IMUdata}}
+\index{IMUdata@{IMUdata}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{IMUdata()}{IMUdata()}}
+{\footnotesize\ttfamily jevois\+::\+I\+M\+Udata\+::\+I\+M\+Udata (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1IMUrawData}{jevois\+::\+I\+M\+Uraw\+Data}} const \&}]{rd,  }\item[{double}]{arange,  }\item[{double}]{grange }\end{DoxyParamCaption})}
+
+
+
+从原始数据读数构造 
+
+
+
+Definition at line 287 of file I\+M\+Udata.\+C.
+
+
+
+References jevois\+::\+I\+M\+Uraw\+Data\+::ax(), jevois\+::\+I\+M\+Uraw\+Data\+::ay(), jevois\+::\+I\+M\+Uraw\+Data\+::az(), jevois\+::\+I\+M\+Uraw\+Data\+::gx(), jevois\+::\+I\+M\+Uraw\+Data\+::gy(), jevois\+::\+I\+M\+Uraw\+Data\+::gz(), jevois\+::\+I\+M\+Uraw\+Data\+::mst2(), jevois\+::\+I\+M\+Uraw\+Data\+::mx(), jevois\+::\+I\+M\+Uraw\+Data\+::my(), jevois\+::\+I\+M\+Uraw\+Data\+::mz(), and jevois\+::\+I\+M\+Uraw\+Data\+::temp().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{structjevois_1_1IMUdata_ad528df6cdd82a2a20b7f3622937eae25}\label{structjevois_1_1IMUdata_ad528df6cdd82a2a20b7f3622937eae25}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!ax@{ax}}
+\index{ax@{ax}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{ax()}{ax()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::ax (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 73 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a0dee2c084a0204e5c7853c086163b5b4}\label{structjevois_1_1IMUdata_a0dee2c084a0204e5c7853c086163b5b4}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!ax@{ax}}
+\index{ax@{ax}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{ax()}{ax()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::ax (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 74 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_aa530f37a26e2cfae1af0288a7922147d}\label{structjevois_1_1IMUdata_aa530f37a26e2cfae1af0288a7922147d}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!ay@{ay}}
+\index{ay@{ay}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{ay()}{ay()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::ay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 75 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a368d908a3ef4f6569d619da729263baa}\label{structjevois_1_1IMUdata_a368d908a3ef4f6569d619da729263baa}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!ay@{ay}}
+\index{ay@{ay}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{ay()}{ay()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::ay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 76 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a1cc5cdbc4030828db880fa8372a3e11f}\label{structjevois_1_1IMUdata_a1cc5cdbc4030828db880fa8372a3e11f}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!az@{az}}
+\index{az@{az}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{az()}{az()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::az (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 77 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_ae0d28a12ec8ed70344a0dae4675b0a05}\label{structjevois_1_1IMUdata_ae0d28a12ec8ed70344a0dae4675b0a05}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!az@{az}}
+\index{az@{az}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{az()}{az()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::az (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 78 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_aaa07ec03de5a907f1f3ef125f3809e89}\label{structjevois_1_1IMUdata_aaa07ec03de5a907f1f3ef125f3809e89}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gx@{gx}}
+\index{gx@{gx}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gx()}{gx()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::gx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 79 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_ac7ba19312b27139c1e2462c6c8478067}\label{structjevois_1_1IMUdata_ac7ba19312b27139c1e2462c6c8478067}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gx@{gx}}
+\index{gx@{gx}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gx()}{gx()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::gx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 80 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_afff29b1087dcfe346b14ca9f5e7d791a}\label{structjevois_1_1IMUdata_afff29b1087dcfe346b14ca9f5e7d791a}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gy@{gy}}
+\index{gy@{gy}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gy()}{gy()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::gy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 81 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_ab5933a5db2d5d065d0f060be680846eb}\label{structjevois_1_1IMUdata_ab5933a5db2d5d065d0f060be680846eb}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gy@{gy}}
+\index{gy@{gy}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gy()}{gy()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::gy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 82 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a5659cd78ce88c9116543938629ff67a3}\label{structjevois_1_1IMUdata_a5659cd78ce88c9116543938629ff67a3}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gz@{gz}}
+\index{gz@{gz}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gz()}{gz()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::gz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 83 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a971428fc3cae58abbe64d836e7756d8b}\label{structjevois_1_1IMUdata_a971428fc3cae58abbe64d836e7756d8b}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!gz@{gz}}
+\index{gz@{gz}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{gz()}{gz()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::gz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 84 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a77709580f05d372c95392cec4268bdba}\label{structjevois_1_1IMUdata_a77709580f05d372c95392cec4268bdba}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!mx@{mx}}
+\index{mx@{mx}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{mx()}{mx()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::mx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 87 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a95c428b9065cbb5d1875b8e93c1386ee}\label{structjevois_1_1IMUdata_a95c428b9065cbb5d1875b8e93c1386ee}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!mx@{mx}}
+\index{mx@{mx}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{mx()}{mx()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::mx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 88 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a73dc6b0fcbe305e4e79dd2f48e9c120d}\label{structjevois_1_1IMUdata_a73dc6b0fcbe305e4e79dd2f48e9c120d}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!my@{my}}
+\index{my@{my}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{my()}{my()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::my (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 89 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a9bb99863a26331bdc57c74c403b0a010}\label{structjevois_1_1IMUdata_a9bb99863a26331bdc57c74c403b0a010}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!my@{my}}
+\index{my@{my}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{my()}{my()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::my (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 90 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a0d6cc9368e91e66bb3d5afa619706d83}\label{structjevois_1_1IMUdata_a0d6cc9368e91e66bb3d5afa619706d83}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!mz@{mz}}
+\index{mz@{mz}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{mz()}{mz()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::mz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 91 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a5340dbea4ee8157979aa386a4027414a}\label{structjevois_1_1IMUdata_a5340dbea4ee8157979aa386a4027414a}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!mz@{mz}}
+\index{mz@{mz}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{mz()}{mz()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::mz (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 92 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a310d2ee9ca31e31f7c360c0af8ee9134}\label{structjevois_1_1IMUdata_a310d2ee9ca31e31f7c360c0af8ee9134}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!temp@{temp}}
+\index{temp@{temp}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{temp()}{temp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily float\& jevois\+::\+I\+M\+Udata\+::temp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 85 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_a4176632a42a65953939e02aab7211ae4}\label{structjevois_1_1IMUdata_a4176632a42a65953939e02aab7211ae4}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!temp@{temp}}
+\index{temp@{temp}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{temp()}{temp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const float\& jevois\+::\+I\+M\+Udata\+::temp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line 86 of file I\+M\+Udata.\+H.
+
+
+
+References v.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{structjevois_1_1IMUdata_af25db42f8ba2d63a7ed855b98480b053}\label{structjevois_1_1IMUdata_af25db42f8ba2d63a7ed855b98480b053}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!magovf@{magovf}}
+\index{magovf@{magovf}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{magovf}{magovf}}
+{\footnotesize\ttfamily bool jevois\+::\+I\+M\+Udata\+::magovf}
+
+
+
+如果磁力计溢出则为 True 
+
+
+
+Definition at line 71 of file I\+M\+Udata.\+H.
+
+\mbox{\Hypertarget{structjevois_1_1IMUdata_ac27ca8505885c14542af9e3e8017f4f7}\label{structjevois_1_1IMUdata_ac27ca8505885c14542af9e3e8017f4f7}} 
+\index{jevois::IMUdata@{jevois::IMUdata}!v@{v}}
+\index{v@{v}!jevois::IMUdata@{jevois::IMUdata}}
+\doxyparagraph{\texorpdfstring{v}{v}}
+{\footnotesize\ttfamily float jevois\+::\+I\+M\+Udata\+::v\mbox{[}10\mbox{]}}
+
+
+
+The values\+: ax, ay, az, gy, gy, gz, temp, mx, my, mz. 
+
+
+
+Definition at line 70 of file I\+M\+Udata.\+H.
+
+
+
+Referenced by ax(), ay(), az(), gx(), gy(), gz(), mx(), my(), mz(), and temp().
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{IMUdata_8H}{I\+M\+Udata.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{IMUdata_8C}{I\+M\+Udata.\+C}}\end{DoxyCompactItemize}

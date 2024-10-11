@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoDisplayGUI">
+<title>jevois::VideoDisplayGUI Class Reference</title>
+<indexterm><primary>jevois::VideoDisplayGUI</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoDisplayGUI.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>使用基本 GUI 将视频输出到本地屏幕 </para>
+
+
+
+<para>此类在 JeVois-Pro 上提供加速 OpenGL-ES 显示，使用 Dear-ImGui 提供简单的图形界面。 </para>
+<para>
+Definition at line 35 of file VideoDisplayGUI.H.</para>
+Inheritance diagram for jevois::VideoDisplayGUI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayGUI__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::VideoDisplayGUI:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoDisplayGUI__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1VideoDisplayGUI_1a6b30c989e456e26fadbd93d0bcacc2c2">VideoDisplayGUI</link> (std::shared_ptr&lt; <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &gt; helper, size_t nbufs=2)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1VideoDisplayGUI_1aebaff29c81bc846c6249176deacee543">~VideoDisplayGUI</link> ()</para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1a4249f773bd26d4c9a20b39c37fc6f6bc">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧速率，分配缓冲区 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1abaae4f38841162e9deed1f24a5e5d16d">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1VideoDisplayGUI_1a926621070b48eb62ffd826c2577822f4">send()</link> 发送出去 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1a926621070b48eb62ffd826c2577822f4">send</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img) override</para>
+
+<para>Send an image out to display. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1a14a53e643e5b908132940eacc7f602c2">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1af7a06701b89c4d6a8c7fe13b07b8c3fc">abortStream</link> () override</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1VideoDisplayGUI_1a11349b56b1c284ab8d30861fbb3c9816">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayGUI_1a6b30c989e456e26fadbd93d0bcacc2c2"/>    <section>
+    <title>VideoDisplayGUI()</title>
+<indexterm><primary>VideoDisplayGUI</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>VideoDisplayGUI</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayGUI::VideoDisplayGUI (std::shared_ptr&lt; <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &gt; helper, size_t nbufs = <computeroutput>2</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 27 of file VideoDisplayGUI.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1aebaff29c81bc846c6249176deacee543"/>    <section>
+    <title>~VideoDisplayGUI()</title>
+<indexterm><primary>~VideoDisplayGUI</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>~VideoDisplayGUI</secondary></indexterm>
+<para><computeroutput>jevois::VideoDisplayGUI::~VideoDisplayGUI ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</para>
+<para>
+Definition at line 65 of file VideoDisplayGUI.C.</para>
+<para>
+References LERROR.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoDisplayGUI_1af7a06701b89c4d6a8c7fe13b07b8c3fc"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>这只会取消将来的 <link linkend="_classjevois_1_1VideoDisplayGUI_1abaae4f38841162e9deed1f24a5e5d16d">get()</link> 和 done() 调用，仍应调用 <link linkend="_classjevois_1_1VideoDisplayGUI_1a11349b56b1c284ab8d30861fbb3c9816">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 116 of file VideoDisplayGUI.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1abaae4f38841162e9deed1f24a5e5d16d"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::get (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1VideoDisplayGUI_1a926621070b48eb62ffd826c2577822f4">send()</link> 发送出去 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 78 of file VideoDisplayGUI.C.</para>
+<para>
+References jevois::RawImage::bufindex, LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1a926621070b48eb62ffd826c2577822f4"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::send (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Send an image out to display. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 88 of file VideoDisplayGUI.C.</para>
+<para>
+References jevois::RawImage::bufindex, h, LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1a4249f773bd26d4c9a20b39c37fc6f6bc"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::setFormat (<link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧速率，分配缓冲区 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 34 of file VideoDisplayGUI.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::bufindex, jevois::RawImage::fmt, jevois::RawImage::fps, jevois::RawImage::height, LDEBUG, jevois::VideoMapping::ofmt, jevois::VideoMapping::ofps, jevois::VideoMapping::oh, jevois::VideoMapping::osize(), jevois::VideoMapping::ow, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1a11349b56b1c284ab8d30861fbb3c9816"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 120 of file VideoDisplayGUI.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoDisplayGUI_1a14a53e643e5b908132940eacc7f602c2"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::VideoDisplayGUI</secondary></indexterm>
+<indexterm><primary>jevois::VideoDisplayGUI</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::VideoDisplayGUI::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 112 of file VideoDisplayGUI.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoDisplayGUI_8H">VideoDisplayGUI.H</link>src/jevois/Core/<link linkend="_VideoDisplayGUI_8C">VideoDisplayGUI.C</link></section>
+</section>

@@ -24,44 +24,37 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Pre-Processor for neural network pipeline
-    /*! This is the first step in a deep neural network processing Pipeline.
+    //! 神经网络管道的预处理器
+    /*! 这是深度神经网络处理管道的第一步。
+	
+        此预处理器的工作原理如下。例如，假设一个 1024x576 的相机输入帧和一个 224x224 的神经网络输入：
+
+        - 如果相机帧不是 RGB 或 BGR，则转换为该格式（例如，将 YUYV 转换为 RGB 或 BGR）
+
+        - 如果指定了 \p letterbox ，则在相机框架内使用网络输入的纵横比来适应最大的矩形。例如，224x224 是正方形，因此将
+		  计算出一个围绕相机框架中心的 576x576 正方形框。否则，使用整个相机框架。
         
-        This pre-processor works as follows. As an example, assume a 1024x576 camera input frame and a 224x224 neural
-        network input:
+		- 裁剪该矩形并将其调整为网络输入大小（如果 \p letterbox 关闭，则可能会拉伸）
 
-        - If camera frame is not RGB or BGR, convert to that (e.g., YUYV to RGB or BGR)
+        - 如果需要，交换 BGR/RGB（\p rgb 参数和接收到的相机帧中的颜色顺序的组合）
 
-        - If \p letterbox is specified, fit the largest possible rectangle, with the aspect ratio of the network input,
-          within the camera frame. For example, 224x224 is square so that would compute a 576x576 square box around the
-          center of the camera frame. Otherwise, use the whole camera frame.
-        
-        - Crop that rectangle and resize it to network input size (possibly with stretching if \p letterbox was off)
+        - 最准确但也最慢的路径（可以用下面的优化路径替换）：
+          + 将像素数据转换为 float32
+          + 如果不是零，则减去 \p mean
+          + 如果不是 1，则除以 \p stdev
+          + 如果不是 1，则乘以 \p scale 。此时，值通常为 [0..1] 或 [-1..1]
+          + 如果需要，则量化。例如，如果网络需要具有非对称仿射量化 NHWC:8U:1x224x224x3:AA:0.0078125:128 的 uint8，则除
+		    以量化器比例（此处为 0.0078125，因此将像素值乘以 128），然后添加零点（此处为 128）。这里的目标是尽可能多地
+			使用 8 位动态范围。网络想要什么（由其 intensors 参数指定）是在网络量化过程中确定的。
+          + 转换为网络所需的数据类型（例如，uint8）
+          + 可能将来自相机的打包 RGB（NHWC）转换为平面（NCHW）
+          + 将形状转换为 4D，批量大小（N）始终为 1
 
-        - Swap BGR/RGB if needed (combination of \p rgb parameter and color order in the received camera frame)
+        - 因为对于 uint8（以及有符号 int8 和动态定点）这几乎会导致无操作（首先从原生相机范围 [0..255] 转换为 [0..1]，然
+		  后在量化过程中拉伸回 [0..255]），所以针对这些特殊情况（例如，uint8 相机输入到量化的非对称仿射 uint8 网络输入）
+		  实现了快速路径。对于动态定点，快速路径使用快速位移操作；对于 uint8 非对称仿射，有时它是无操作。
 
-        - Most accurate but also slowest path (may be replaced by an optimized path below):
-          + convert pixel data to float32
-          + subtract \p mean if not zero
-          + divide by \p stdev if not 1
-          + multiply by \p scale if not 1. At this point, values will typically be in [0..1] or [-1..1]
-          + quantize if needed. For example, if the network expects uint8 with asymmetric affine quantization
-            NHWC:8U:1x224x224x3:AA:0.0078125:128, divide by quantizer scale (here, 0.0078125, so that multiplies the
-            pixel values by 128) then add zero point (here, 128). The goal here is to use as much of the 8-bit dynamic
-            range as possible. What the network wants (specified by its intensors parameter) is determined during the
-            network quantization process.
-          + convert to desired data type for the network (e.g., uint8)
-          + possibly convert from packed RGB from the camera (NHWC) to planar (NCHW)
-          + convert shape to 4D, with batch size (N) always 1
-
-        - Because for uint8 (and also signed int8 and dynamic-fixed-point) this leads to nearly a no-op (first transform
-          from native camera range [0..255] to, say, [0..1], then, during quantization, stretch back to [0..255]), fast
-          paths are implemented for these special cases (e.g., uint8 camera input to quantized asymmetric affine uint8
-          network input). For dynamic fixed point, the fast path uses fast bit-shifting operations; for uint8
-          asymmetric affine, it is sometimes a no-op.
-
-          You can see these steps in the JeVois-Pro GUI (in the window that shows network processing details) by
-          enabling pre-processor parameter \p details
+          您可以通过启用预处理器参数 \p details 在 JeVois-Pro GUI（在显示网络处理详细信息的窗口中）中查看这些步骤
 
           \ingroup dnn */
     class PreProcessorBlob : public PreProcessor,
@@ -79,11 +72,11 @@ namespace jevois
         void freeze(bool doit) override;
 
       protected:
-        //! Extract blobs from input image
+        //! 从输入图像中提取 blob 
         std::vector<cv::Mat> process(cv::Mat const & img, bool swaprb, std::vector<vsi_nn_tensor_attr_t> const & attrs,
                                      std::vector<cv::Rect> & crops) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 

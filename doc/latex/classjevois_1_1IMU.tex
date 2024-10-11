@@ -1,0 +1,248 @@
+\hypertarget{classjevois_1_1IMU}{}\doxysubsection{jevois\+::I\+MU Class Reference}
+\label{classjevois_1_1IMU}\index{jevois::IMU@{jevois::IMU}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+U.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 惯性测量单元 (\mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}) 的抽象接口 
+
+此类抽象低级通信接口（通过 Je\+Vois-\/\+Pro 硬件上的 S\+PI 总线，或通过与摄像头传感器芯片共享的 I2C 总线以及通过 Je\+Vois-\/\+A33 上的 自定义 ioctl() 调用。 
+
+Definition at line 27 of file I\+M\+U.\+H.
+
+
+
+Inheritance diagram for jevois\+::I\+MU\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=270pt]{classjevois_1_1IMU__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1IMU_aa14e2e8ac1098eb344671f9c17d75070}{I\+MU}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1IMU_a5ebbe6167be8989cd812d011e0af21ef}{$\sim$\+I\+MU}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1IMU_a73e0a55b34109ae3f91a87c72ac810c3}{is\+S\+PI}} () const =0
+\begin{DoxyCompactList}\small\item\em 如果我们使用 S\+PI 进行传输，则返回 true。当 I\+C\+M20948\+\_\+\+R\+E\+G\+\_\+\+U\+S\+E\+R\+\_\+\+C\+T\+RL 写时使用； \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ I\+MU 寄存器的访问函数}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1IMU_a95f5a6feafb3cf43ba5873bc3897027c}{write\+Register}} (unsigned short reg, unsigned char val)=0
+\begin{DoxyCompactList}\small\item\em 将值写入 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一 \end{DoxyCompactList}\item 
+virtual unsigned char \mbox{\hyperlink{classjevois_1_1IMU_a1acc20be96d27b69cb9b8eaf00352a30}{read\+Register}} (unsigned short reg)=0
+\begin{DoxyCompactList}\small\item\em 从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一读取一个值 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1IMU_a80c3dc139500b71acbca22752b8041c9}{write\+Register\+Array}} (unsigned short reg, unsigned char const $\ast$vals, size\+\_\+t num)=0
+\begin{DoxyCompactList}\small\item\em 将一个值数组写入相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1IMU_abd15f4725196633a11363240e3681515}{read\+Register\+Array}} (unsigned short reg, unsigned char $\ast$vals, size\+\_\+t num)=0
+\begin{DoxyCompactList}\small\item\em 从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器读取一个值数组 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ D\+MP 寄存器的访问函数}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1IMU_a3f6a9ab547f7fc835a30b46f6ea7539d}{load\+D\+M\+Pfirmware}} (bool verify=false, bool errthrow=false)
+\begin{DoxyCompactList}\small\item\em 加载 D\+MP 固件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1IMU_aa1109d7e864d45b08ce3f723e9cf6fc8}{write\+D\+M\+Pregister}} (unsigned short reg, unsigned short val)
+\begin{DoxyCompactList}\small\item\em 将值写入 D\+MP 寄存器 \end{DoxyCompactList}\item 
+unsigned short \mbox{\hyperlink{classjevois_1_1IMU_ae60c55e027cb61d663e9be06a5b43c34}{read\+D\+M\+Pregister}} (unsigned short reg)
+\begin{DoxyCompactList}\small\item\em 从 D\+MP 寄存器读取值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1IMU_a6705c75e05e1f07944828b6c4d73f9a3}{write\+D\+M\+Pregister\+Array}} (unsigned short reg, unsigned char const $\ast$vals, size\+\_\+t num)
+\begin{DoxyCompactList}\small\item\em 将值数组写入 D\+MP 寄存器 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1IMU_a281d6b0ceefd867863b8c7754ad38e41}{read\+D\+M\+Pregister\+Array}} (unsigned short reg, unsigned char $\ast$vals, size\+\_\+t num)
+\begin{DoxyCompactList}\small\item\em 从 D\+MP 寄存器读取值数组 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1IMU_aa14e2e8ac1098eb344671f9c17d75070}\label{classjevois_1_1IMU_aa14e2e8ac1098eb344671f9c17d75070}} 
+\index{jevois::IMU@{jevois::IMU}!IMU@{IMU}}
+\index{IMU@{IMU}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{IMU()}{IMU()}}
+{\footnotesize\ttfamily jevois\+::\+I\+M\+U\+::\+I\+MU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 29 of file I\+M\+U.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a5ebbe6167be8989cd812d011e0af21ef}\label{classjevois_1_1IMU_a5ebbe6167be8989cd812d011e0af21ef}} 
+\index{jevois::IMU@{jevois::IMU}!````~IMU@{$\sim$IMU}}
+\index{````~IMU@{$\sim$IMU}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{$\sim$IMU()}{~IMU()}}
+{\footnotesize\ttfamily jevois\+::\+I\+M\+U\+::$\sim$\+I\+MU (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 33 of file I\+M\+U.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1IMU_a73e0a55b34109ae3f91a87c72ac810c3}\label{classjevois_1_1IMU_a73e0a55b34109ae3f91a87c72ac810c3}} 
+\index{jevois::IMU@{jevois::IMU}!isSPI@{isSPI}}
+\index{isSPI@{isSPI}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{isSPI()}{isSPI()}}
+{\footnotesize\ttfamily virtual bool jevois\+::\+I\+M\+U\+::is\+S\+PI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+如果我们使用 S\+PI 进行传输，则返回 true。当 I\+C\+M20948\+\_\+\+R\+E\+G\+\_\+\+U\+S\+E\+R\+\_\+\+C\+T\+RL 写时使用； 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1IMUi2c_a2d4196c7066f80697579843b95fcb0c2}{jevois\+::\+I\+M\+Ui2c}}, and \mbox{\hyperlink{classjevois_1_1IMUspi_a7f0689c24ba1e0ae2c1a03d30e726d2a}{jevois\+::\+I\+M\+Uspi}}.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a3f6a9ab547f7fc835a30b46f6ea7539d}\label{classjevois_1_1IMU_a3f6a9ab547f7fc835a30b46f6ea7539d}} 
+\index{jevois::IMU@{jevois::IMU}!loadDMPfirmware@{loadDMPfirmware}}
+\index{loadDMPfirmware@{loadDMPfirmware}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{loadDMPfirmware()}{loadDMPfirmware()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+U\+::load\+D\+M\+Pfirmware (\begin{DoxyParamCaption}\item[{bool}]{verify = {\ttfamily false},  }\item[{bool}]{errthrow = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+加载 D\+MP 固件 
+
+在 Je\+Vois-\/\+A33 上，固件已由相机内核模块加载。因此，这仅在 Je\+Vois-\/\+Pro 上通过 S\+PI 加载固件有用。如果 verify 为真， 我们将读回并检查。如果 errthrow 也为真，则在验证失败时抛出异常。 
+
+Definition at line 37 of file I\+M\+U.\+C.
+
+
+
+References D\+M\+P\+\_\+\+L\+O\+A\+D\+\_\+\+S\+T\+A\+RT, D\+M\+P\+\_\+\+M\+E\+M\+\_\+\+B\+A\+N\+K\+\_\+\+S\+I\+ZE, and L\+I\+N\+FO.
+
+
+
+Referenced by jevois\+::\+I\+M\+Uspi\+::\+I\+M\+Uspi().
+
+\mbox{\Hypertarget{classjevois_1_1IMU_ae60c55e027cb61d663e9be06a5b43c34}\label{classjevois_1_1IMU_ae60c55e027cb61d663e9be06a5b43c34}} 
+\index{jevois::IMU@{jevois::IMU}!readDMPregister@{readDMPregister}}
+\index{readDMPregister@{readDMPregister}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{readDMPregister()}{readDMPregister()}}
+{\footnotesize\ttfamily unsigned short jevois\+::\+I\+M\+U\+::read\+D\+M\+Pregister (\begin{DoxyParamCaption}\item[{unsigned short}]{reg }\end{DoxyParamCaption})}
+
+
+
+从 D\+MP 寄存器读取值 
+
+这种非常低级的访问仅用于开发最佳 D\+MP 设置，不应在正常操作中使用，否则可能会导致系统崩溃。请注意，该值将从 D\+MP 处理器的大端转换为 Je\+Vois 处理器的小端。 
+
+Definition at line 138 of file I\+M\+U.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a281d6b0ceefd867863b8c7754ad38e41}\label{classjevois_1_1IMU_a281d6b0ceefd867863b8c7754ad38e41}} 
+\index{jevois::IMU@{jevois::IMU}!readDMPregisterArray@{readDMPregisterArray}}
+\index{readDMPregisterArray@{readDMPregisterArray}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{readDMPregisterArray()}{readDMPregisterArray()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+U\+::read\+D\+M\+Pregister\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})}
+
+
+
+从 D\+MP 寄存器读取值数组 
+
+
+
+Definition at line 149 of file I\+M\+U.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a1acc20be96d27b69cb9b8eaf00352a30}\label{classjevois_1_1IMU_a1acc20be96d27b69cb9b8eaf00352a30}} 
+\index{jevois::IMU@{jevois::IMU}!readRegister@{readRegister}}
+\index{readRegister@{readRegister}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{readRegister()}{readRegister()}}
+{\footnotesize\ttfamily virtual unsigned char jevois\+::\+I\+M\+U\+::read\+Register (\begin{DoxyParamCaption}\item[{unsigned short}]{reg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一读取一个值 
+
+这种非常低级的访问仅用于开发最佳 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1IMUi2c_a627b9e1781328684bd7bf5955799ea08}{jevois\+::\+I\+M\+Ui2c}}, and \mbox{\hyperlink{classjevois_1_1IMUspi_a829c91f77c78ead9bd98390002314dee}{jevois\+::\+I\+M\+Uspi}}.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_abd15f4725196633a11363240e3681515}\label{classjevois_1_1IMU_abd15f4725196633a11363240e3681515}} 
+\index{jevois::IMU@{jevois::IMU}!readRegisterArray@{readRegisterArray}}
+\index{readRegisterArray@{readRegisterArray}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{readRegisterArray()}{readRegisterArray()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+I\+M\+U\+::read\+Register\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+从相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器读取一个值数组 
+
+这种非常低级的访问仅用于开发最佳 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少 num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1IMUi2c_a4ddc146d8d1246e6f8d05cf9964b4ff2}{jevois\+::\+I\+M\+Ui2c}}, and \mbox{\hyperlink{classjevois_1_1IMUspi_ad29a0ae407351e2c0522495ecb5eeb85}{jevois\+::\+I\+M\+Uspi}}.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_aa1109d7e864d45b08ce3f723e9cf6fc8}\label{classjevois_1_1IMU_aa1109d7e864d45b08ce3f723e9cf6fc8}} 
+\index{jevois::IMU@{jevois::IMU}!writeDMPregister@{writeDMPregister}}
+\index{writeDMPregister@{writeDMPregister}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{writeDMPregister()}{writeDMPregister()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+U\+::write\+D\+M\+Pregister (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned short}]{val }\end{DoxyParamCaption})}
+
+
+
+将值写入 D\+MP 寄存器 
+
+这种非常低级的访问仅用于开发最佳 D\+MP 设置，不应在正常操作中使用，它可能会导致系统崩溃。请注意，根据 D\+MP 处理器 的要求，该值将转换为大端字节序。 
+
+Definition at line 114 of file I\+M\+U.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a6705c75e05e1f07944828b6c4d73f9a3}\label{classjevois_1_1IMU_a6705c75e05e1f07944828b6c4d73f9a3}} 
+\index{jevois::IMU@{jevois::IMU}!writeDMPregisterArray@{writeDMPregisterArray}}
+\index{writeDMPregisterArray@{writeDMPregisterArray}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{writeDMPregisterArray()}{writeDMPregisterArray()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+M\+U\+::write\+D\+M\+Pregister\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char const $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})}
+
+
+
+将值数组写入 D\+MP 寄存器 
+
+
+
+Definition at line 125 of file I\+M\+U.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a95f5a6feafb3cf43ba5873bc3897027c}\label{classjevois_1_1IMU_a95f5a6feafb3cf43ba5873bc3897027c}} 
+\index{jevois::IMU@{jevois::IMU}!writeRegister@{writeRegister}}
+\index{writeRegister@{writeRegister}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{writeRegister()}{writeRegister()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+I\+M\+U\+::write\+Register (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+将值写入 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器之一 
+
+这种非常低级的访问仅用于开发最佳 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1IMUi2c_aa281e1d63729d47d758dae3bbaaaf615}{jevois\+::\+I\+M\+Ui2c}}, and \mbox{\hyperlink{classjevois_1_1IMUspi_a5c0192150901a6ac87a2bf2d3c073cd8}{jevois\+::\+I\+M\+Uspi}}.
+
+\mbox{\Hypertarget{classjevois_1_1IMU_a80c3dc139500b71acbca22752b8041c9}\label{classjevois_1_1IMU_a80c3dc139500b71acbca22752b8041c9}} 
+\index{jevois::IMU@{jevois::IMU}!writeRegisterArray@{writeRegisterArray}}
+\index{writeRegisterArray@{writeRegisterArray}!jevois::IMU@{jevois::IMU}}
+\doxyparagraph{\texorpdfstring{writeRegisterArray()}{writeRegisterArray()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+I\+M\+U\+::write\+Register\+Array (\begin{DoxyParamCaption}\item[{unsigned short}]{reg,  }\item[{unsigned char const $\ast$}]{vals,  }\item[{size\+\_\+t}]{num }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+将一个值数组写入相机的 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器 
+
+这种非常低级的访问仅用于开发最佳 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少 num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1IMUi2c_a8a5d3ff1f686edb4595ff204f4313764}{jevois\+::\+I\+M\+Ui2c}}, and \mbox{\hyperlink{classjevois_1_1IMUspi_a16dfdbafeb959a9faba96d57d1bd3321}{jevois\+::\+I\+M\+Uspi}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{IMU_8H}{I\+M\+U.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{IMU_8C}{I\+M\+U.\+C}}\end{DoxyCompactItemize}

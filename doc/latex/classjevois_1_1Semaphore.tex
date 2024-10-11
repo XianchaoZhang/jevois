@@ -1,0 +1,104 @@
+\hypertarget{classjevois_1_1Semaphore}{}\doxysubsection{jevois\+::Semaphore$<$ BB $>$ Class Template Reference}
+\label{classjevois_1_1Semaphore}\index{jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Types/\+Semaphore.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$Blocking\+Behavior BB$>$\newline
+class jevois\+::\+Semaphore$<$ B\+B $>$}
+
+一个简单的信号量 
+
+信号量是一种线程安全机制，用于在多个执行线程之间共享资源。
+
+请参阅此维基百科页面了解基本信息：http\+://en.wikipedia.\+org/wiki/\+Semaphore\+\_\+\%28programming\%29
+
+该代码源自神经形态机器人工具包 (N\+RT)。
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em BB} & 定义阻塞行为，应该是来自 \mbox{\hyperlink{group__types_ga12724887bc7648f2f888edb9c3055e3d}{jevois\+::\+Blocking\+Behavior}} 的值 \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line 70 of file Semaphore.\+H.
+
+
+
+Inheritance diagram for jevois\+::Semaphore$<$ BB $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{classjevois_1_1Semaphore__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Semaphore_a9f894c25099a738fa53ca63304e4fdd1}{Semaphore}} (size\+\_\+t n=0)
+\begin{DoxyCompactList}\small\item\em 创建一个具有 n 个初始资源的信号量 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Semaphore_a699fc7c323b955e73e5ba0804063bb01}{increment}} (size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em 释放n个资源给信号量 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Semaphore_ae21272a583b5fc0f20437019e9bed528}{decrement}} (size\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em 从信号量中移除 n 个资源，阻塞直到它们可用，如果不可用则抛出 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Semaphore_a0eb728acb634b486ef3fc46a6afd4e2f}{count}} () const
+\begin{DoxyCompactList}\small\item\em 获取当前计数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Semaphore_a9f894c25099a738fa53ca63304e4fdd1}\label{classjevois_1_1Semaphore_a9f894c25099a738fa53ca63304e4fdd1}} 
+\index{jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}!Semaphore@{Semaphore}}
+\index{Semaphore@{Semaphore}!jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}}
+\doxyparagraph{\texorpdfstring{Semaphore()}{Semaphore()}}
+{\footnotesize\ttfamily template$<$Blocking\+Behavior BB$>$ \\
+\mbox{\hyperlink{classjevois_1_1Semaphore}{jevois\+::\+Semaphore}}$<$ BB $>$\+::\mbox{\hyperlink{classjevois_1_1Semaphore}{Semaphore}} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+创建一个具有 n 个初始资源的信号量 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Semaphore_a0eb728acb634b486ef3fc46a6afd4e2f}\label{classjevois_1_1Semaphore_a0eb728acb634b486ef3fc46a6afd4e2f}} 
+\index{jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}!count@{count}}
+\index{count@{count}!jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}}
+\doxyparagraph{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily template$<$Blocking\+Behavior BB$>$ \\
+size\+\_\+t \mbox{\hyperlink{classjevois_1_1Semaphore}{jevois\+::\+Semaphore}}$<$ BB $>$\+::count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取当前计数 
+
+\mbox{\Hypertarget{classjevois_1_1Semaphore_ae21272a583b5fc0f20437019e9bed528}\label{classjevois_1_1Semaphore_ae21272a583b5fc0f20437019e9bed528}} 
+\index{jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}!decrement@{decrement}}
+\index{decrement@{decrement}!jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}}
+\doxyparagraph{\texorpdfstring{decrement()}{decrement()}}
+{\footnotesize\ttfamily template$<$Blocking\+Behavior BB$>$ \\
+void \mbox{\hyperlink{classjevois_1_1Semaphore}{jevois\+::\+Semaphore}}$<$ BB $>$\+::decrement (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+从信号量中移除 n 个资源，阻塞直到它们可用，如果不可用则抛出 
+
+\mbox{\Hypertarget{classjevois_1_1Semaphore_a699fc7c323b955e73e5ba0804063bb01}\label{classjevois_1_1Semaphore_a699fc7c323b955e73e5ba0804063bb01}} 
+\index{jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}!increment@{increment}}
+\index{increment@{increment}!jevois::Semaphore$<$ BB $>$@{jevois::Semaphore$<$ BB $>$}}
+\doxyparagraph{\texorpdfstring{increment()}{increment()}}
+{\footnotesize\ttfamily template$<$Blocking\+Behavior BB$>$ \\
+void \mbox{\hyperlink{classjevois_1_1Semaphore}{jevois\+::\+Semaphore}}$<$ BB $>$\+::increment (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+释放n个资源给信号量 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Types/\mbox{\hyperlink{Semaphore_8H}{Semaphore.\+H}}\end{DoxyCompactItemize}

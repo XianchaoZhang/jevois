@@ -1,0 +1,339 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Concepts">
+<section xml:id="_Concepts_1autotoc_md17">
+<title>基本操作理论</title>
+
+<para></para>
+
+<para>由于 JeVois 智能相机实现了完整的 Linux 计算机（尽管 JeVois-A33 上没有显示屏），因此一切皆有可能，标准操作模式如下：</para>
+<section xml:id="_Concepts_1autotoc_md18">
+<title>JeVois-A33：通过 USB 进行流视频输出操作</title>
+
+<para><itemizedlist>
+<listitem>
+<para>当 JeVois-A33 智能相机通过 USB 连接到主机时，它会向该计算机宣布自己是两个虚拟 USB 设备：一个网络摄像头和一个串行 USB 接口。</para>
+</listitem><listitem>
+<para>主机上的用户启动视频捕获软件并选择视频格式、分辨率和帧速率。</para>
+</listitem><listitem>
+<para>智能相机上运行的 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 软件通过首先查找 <emphasis role="bold">video mapping</emphasis> 来处理此用户请求，该映射在用户选择的视频格式（这是 JeVois 智能相机的 <emphasis role="bold">output</emphasis> 视频格式）、相机传感器视频格式（这是 JeVois 智能相机的 <emphasis role="bold">camera</emphasis> 格式）和要使用的机器视觉算法（这是 JeVois <emphasis role="bold">module）之间建立对应关系。<emphasis role="bold">camera</emphasis> 和</emphasis> <emphasis role="bold">output</emphasis> 格式不必相同；例如，许多模块使用多个 panels 创建增强的视频输出，这些 panels 可以显示处理结果、向用户发送的消息等，以及从相机传感器抓取的视频帧。</para>
+</listitem><listitem>
+<para>然后，Engine 将板载摄像头传感器配置为所需的摄像头格式、分辨率和帧速率，并加载所需的机器视觉模块。视频流和机器视觉处理立即开始。</para>
+</listitem><listitem>
+<para>在每个视频帧上，<itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 从相机传感器捕获一帧（图像）。</para>
+</listitem><listitem>
+<para>该帧连同具有选定输出分辨率和格式的空图像缓冲区一起发送到机器视觉处理模块。</para>
+</listitem><listitem>
+<para>机器视觉模块被调用，它应该分析相机图像并用其处理结果填充输出图像缓冲区。</para>
+</listitem><listitem>
+<para>然后，Engine 通过 USB 将生成的输出图像发送到主机。</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 运行通过其 4 针串行端口（通常连接到 Arduino 或类似设备）或通过其串行 USB 端口接收到的任何命令。这些命令可以是调整相机传感器参数（曝光、对比度等）或机器视觉处理参数（由每个机器视觉模块实现的各种阈值或模式）的请求。</para>
+</listitem><listitem>
+<para>然后，Engine 准备循环到下一个视频帧。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>流式视频输出操作至少在两种基本场景中很有用：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>出于演示和调试/开发目的，JeVois 智能相机会实时播放视频，并附加注释以显示其处理结果。人类用户可以查看这些注释，以检查算法的运行情况。但这不是完整的机器视觉管道（因为后端是人类视觉系统）。</para>
+</listitem><listitem>
+<para>出于预处理目的，JeVois 智能相机会捕获并预处理图像，然后主机会捕获这些预处理过的帧并进一步处理它们。例如，在 JeVois 相机上运行视觉注意算法，提取场景中最有趣的 3 个位置周围的 3 个感兴趣区域，并将这 3 个区域传输到主机。然后，主机可以在这 3 个区域中进行进一步处理，例如目标识别。主机可能不会向人类用户显示任何内容，而可能只是控制自主机器人。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md19">
+<title>JeVois-Pro：带视频显示的操作</title>
+
+<para><itemizedlist>
+<listitem>
+<para>当 JeVois-Pro 连接到显示器时，它会显示摄像机看到的内容，以及它在视频流中计算和理解的内容的图形叠加（例如，检测到的物体周围的框）。</para>
+</listitem><listitem>
+<para>在每个视频帧上，<itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 从相机传感器捕获一帧（图像）。</para>
+</listitem><listitem>
+<para>该帧连同图形界面引擎 (<link linkend="_classjevois_1_1GUIhelper">GUIhelper</link>) 的句柄一起发送到机器视觉处理模块，以帮助绘制叠加层。</para>
+</listitem><listitem>
+<para>机器视觉模块被调用，它应该分析相机图像并绘制任何结果。</para>
+</listitem><listitem>
+<para>然后，Engine 使用 JeVois-Pro GPU 上的 OpenGL 将生成的图形输出发送到 HDMI 显示器。</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 运行通过其 4 针串行端口（通常连接到 Arduino 或类似设备）或通过其串行 USB 端口或集成图形用户界面 (GUI) 收到的任何命令。这些命令可以是调整相机传感器参数（曝光、对比度等）或机器视觉处理参数（由每个机器视觉模块实现的各种阈值或模式）的请求。</para>
+</listitem><listitem>
+<para>然后， <link linkend="_classjevois_1_1Engine">Engine</link> 准备循环到下一个视频帧。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>请注意，JeVois-Pro 还支持 &quot;legacy&quot; 机器视觉模块，这些模块输出的图像包含已在该图像中绘制的结果，就像上一节中的 JeVois-A33 一样。唯一的区别是，此图像不会像 JeVois-A33 那样通过 USB 传输到主机。相反，它会显示在 HDMI 显示屏上。</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md20">
+<title>JeVois-A33 和 JeVois-Pro：无视频输出操作</title>
+
+<para><itemizedlist>
+<listitem>
+<para>JeVois-A33 智能相机由 USB 电源供电，例如 USB 充电器或 USB 电池组。JeVois-Pro 由电源适配器或电池供电。</para>
+</listitem><listitem>
+<para>智能相机内部 microSD 卡上的配置文件可能会指示其立即启动特定的机器视觉模块，或者连接到智能相机的 4 针串行端口的控制器（例如 Arduino）可能会指示 JeVois 智能相机加载给定的机器视觉模块。</para>
+</listitem><listitem>
+<para>然后，引擎将为所需的相机格式、分辨率和帧速率配置板载摄像头传感器，并加载所需的机器视觉模块。</para>
+</listitem><listitem>
+<para>在每个视频帧上，<itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 从摄像头传感器捕获一帧（图像）。</para>
+</listitem><listitem>
+<para>该帧被发送到机器视觉处理模块。</para>
+</listitem><listitem>
+<para>机器视觉模块被调用，它应该分析摄像头图像。然后，它通常还会向 4 针串行端口发送有关其处理结果的短文本消息。</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 运行通过其 4 针串行端口收到的任何命令。</para>
+</listitem><listitem>
+<para>然后， <link linkend="_classjevois_1_1Engine">Engine</link> 准备循环到下一个摄像头帧。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para>无视频输出的操作通常是自主系统的首选模式。所有处理都在 JeVois 相机上进行，根本不需要主机。小型控制器（例如 Arduino）通过 4 针串行链路接收视觉结果并控制各种电机或执行器。</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md21">
+<title>视频格式：摄像机和输出，视频映射</title>
+
+<para>在 JeVois 上运行机器视觉算法时通常会考虑两种视频格式：</para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">相机格式</emphasis>：使用相机传感器捕获视频帧时使用的像素类型、分辨率和帧速率。相机传感器捕获的相机格式的视频帧被发送到 JeVois 机器视觉 <emphasis role="bold">module</emphasis> 进行处理。</para>
+</listitem><listitem>
+<para><emphasis role="bold">输出格式</emphasis>：用于通过 USB 链接将视频帧发送到 JeVois-A33 的主机，或以 &quot;legacy&quot; 模式显示在 JeVois-Pro 上的像素类型、分辨率和帧速率（见上文）。在 JeVois-A33 上，此格式由主机上运行的视频捕获软件选择。在 JeVois-Pro 上，它由用户使用图形用户界面选择。输出格式的视频帧由当前 JeVois 机器视觉 <emphasis role="bold">module</emphasis> 创建，并通过 USB 链接（JeVois-A33）或 HDMI（JeVois-Pro）传输到主机。请注意，JeVois-Pro 还支持一种称为 <emphasis role="bold">JVUI</emphasis> 的特殊输出视频格式，该格式用于在相机的视频帧上绘制 OpenGL 叠加层（而不是生成的完全光栅化的输出视频帧）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para><emphasis role="bold">camera</emphasis> 和 <emphasis role="bold">output</emphasis> 格式不必匹配，而且它们通常不匹配，因为机器视觉通常涉及将一个图像转换成另一个不同的图像，包括可能不同的像素类型、分辨率和帧速率。</para>
+
+<para>JeVois 相机能够运行多种机器视觉算法。可运行哪些算法以及相机和输出视频格式的选择由名为 <emphasis role="bold">videomappings.cfg</emphasis> 的配置文件定义，该文件在 <emphasis role="bold">camera</emphasis> 分辨率、帧速率和像素格式、<emphasis role="bold">output</emphasis> 分辨率和像素格式以及相应的机器视觉处理 <emphasis role="bold">module</emphasis> 之间建立了映射。</para>
+
+<para>欲了解更多信息，请参见 <link linkend="_PixelFormats">高级主题：图像像素格式</link> 和 VideoMapping。</para>
+</section>
+</section>
+<section xml:id="_Concepts_1autotoc_md22">
+<title>主机和平台模式</title>
+
+<para>JeVois 软件通常在 JeVois 智能相机处理器上执行。在本文档中，这称为<emphasis role="bold">平台模式</emphasis>。由于 JeVois 智能相机内的 CPU 是 ARM 架构，而当今大多数台式计算机使用 Intel 处理器架构，因此打算在 JeVois 平台上运行的代码通常是针对 ARM 的交叉编译。也就是说，使用一种特殊的编译器，该编译器在 Intel 台式计算机上运行，​​但生成打算在 ARM 计算机上运行的可执行代码。然后将编译后的代码复制到插入 JeVois 智能相机的 microSD 卡上。</para>
+
+<para>JeVois 软件也可以在<emphasis role="bold">主机模式</emphasis>下编译和运行，在这种情况下，桌面编译器用于编译和运行 JeVois 机器视觉软件。这在开发新的机器视觉模块时非常有用：人们只需在桌面上编辑、编译和运行它们，而无需将编译后的文件传输到智能相机进行执行。一旦新的机器视觉模块在主机模式下运行良好，就可以在平台模式下重新编译它，并且可以复制生成的 ARM 可执行文件并在智能相机上运行。</para>
+
+<para>由于核心 JeVois 软件是用可移植的 C++ 语言编写的，因此<emphasis role="bold">平台</emphasis>和 <emphasis role="bold">host</emphasis> 模式都是可行的。然而，由于主机和平台之间存在基本的硬件差异，因此存在一些关键差异。</para>
+
+<para>JeVois-A33 的区别如下：</para>
+
+<para><informaltable frame="all">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+<thead>
+      <row >
+<entry>
+<para>Feature </para>
+</entry><entry>
+<para>Platform </para>
+</entry><entry>
+<para>Host  </para>
+</entry></row>
+</thead><tbody>
+      <row >
+<entry>
+<para>CPU architecture </para>
+</entry><entry>
+<para>ARMv7 </para>
+</entry><entry>
+<para>Likely Intel  </para>
+</entry></row>
+      <row >
+<entry>
+<para>GPU + OpenGL-ES 2.0 </para>
+</entry><entry>
+<para>Yes, Mali-400MP2 </para>
+</entry><entry>
+<para>Likely not available  </para>
+</entry></row>
+      <row >
+<entry>
+<para>NEON multimedia acceleration </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>No unless host has ARM CPU  </para>
+</entry></row>
+      <row >
+<entry>
+<para><link linkend="_classjevois_1_1Camera">Camera</link> sensor controls </para>
+</entry><entry>
+<para>All supported by sensor </para>
+</entry><entry>
+<para>As supported by your desktop camera driver  </para>
+</entry></row>
+      <row >
+<entry>
+<para><link linkend="_classjevois_1_1Camera">Camera</link> low-level register tweaking </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>No  </para>
+</entry></row>
+      <row >
+<entry>
+<para><link linkend="_classjevois_1_1Camera">Camera</link> frame rate 0.1fps increments </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>Most likely no  </para>
+</entry></row>
+      <row >
+<entry>
+<para><link linkend="_classjevois_1_1Camera">Camera</link> turbo mode </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>No  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Display output </para>
+</entry><entry>
+<para>No </para>
+</entry><entry>
+<para>Yes  </para>
+</entry></row>
+      <row >
+<entry>
+<para>USB streaming video output </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>No  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Serial-over-USB </para>
+</entry><entry>
+<para>Yes </para>
+</entry><entry>
+<para>No  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+
+<para>JeVois-Pro 上的差异较少，因为它是一台完整的计算机，配有键盘、鼠标和显示器。主要的区别在于 JeVois-Pro 使用 64 位 ARM 处理器 (aarch64) 并具有额外的硬件功能（神经加速器、下面解释的双流视频捕获等）。</para>
+
+<para>请注意，通常会：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>在主机上以 <emphasis role="bold">host</emphasis> 模式编译并运行 JeVois 软件：在这种情况下，通常会使用 <emphasis>dumb</emphasis> 相机（任何常规网络摄像头），所有机器视觉处理都在主机 CPU 上运行，并且视频输出用于显示；或</para>
+</listitem><listitem>
+<para>在 <emphasis role="bold">platform</emphasis> 模式下交叉编译 JeVois 软件并在 JeVois 智能相机内运行它：在这种情况下，使用 JeVois 智能相机中的内置相机传感器，所有机器视觉算法都在 JeVois 智能相机内的小型处理器上运行，视频输出通过 USB 链路传输到主机 (JeVois-A33) 或 HDMI (JeVois-Pro)。当使用 JeVois-A33 通过 USB 传输时，主机计算机会运行 <emphasis>dumb</emphasis> 视频捕获软件并显示结果，但它不执行任何机器视觉处理。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md23">
+<title>JeVois-Pro 独特的优化</title>
+
+<para>JeVois-Pro 已通过多种方式进行了优化，以提供流畅、高分辨率的输出。</para>
+
+<para>众所周知，嵌入式处理器的速度不如价格昂贵且耗电的台式机处理器或专业 GPU。芯片制造商针对特定任务优化嵌入式处理器，这些任务可以促进大批量销售，例如手机和智能电视盒。在 JeVois-Pro 中，我们利用这些优化通过定制的 JeVois 软件创建高吞吐量实时机器视觉功能。定制的 JeVois 软件涵盖从低级 Linux 内核增强功能和硬件设备驱动程序到高级机器视觉支持代码。</para>
+
+<para>例如，在嵌入式处理器上通过任何非平凡的机器视觉算法处理 4K（8 MP 或 8 百万像素）甚至 1080p（2 MP）视频都是不可能的。大多数深度神经网络运行的分辨率要低得多，通常在 128x128（0.016 MP）和 513x513（0.263 MP）之间。</para>
+
+<para>   <emphasis role="bold">上图：传统方法：CPU 将大量像素数据从摄像头复制到 GPU 进行显示 - 帧速率慢，CPU 使用率高。</emphasis></para>
+
+<para>因此，在 JeVois-Pro 中，我们实现了硬件加速的双流视频捕获和显示，为用户提供了两全其美的解决方案：清晰的高分辨率显示以及通过深度神经网络或其他机器视觉算法的快速处理。我们使用了先进的技术，包括从摄像头传感器到 GPU 的零拷贝直接内存访问 (DMA) 来实现这一点。</para>
+
+<para>   <emphasis role="bold">上图：JeVois-Pro 零拷贝方法：CPU 仅将地址指针（DMABUF 句柄）从相机复制到 GPU - 帧速率更快，CPU 使用率可忽略不计。</emphasis></para>
+
+<para>JeVois-Pro 结合了摄像机图像信号处理器 (ISP)、图形处理单元 (GPU) 和神经处理单元 (NPU) 的硬件加速，即使在复杂的机器视觉管道上也能提供实时性能，从而释放 CPU 资源用于机器视觉处理和高级计算。</para>
+
+<para>   <emphasis role="bold">上图：JeVois-Pro 双流：使用 DMABUF 对全分辨率图像进行零拷贝显示，使用 CPU 或神经加速器处理低分辨率图像，使用 OpenGL 绘制覆盖图（线条、框、文本等）显示处理结果，并绘制 GUI。</emphasis></para>
+
+<para><link xlink:href="https://www.youtube.com/watch?v=aJp-mIBytno">JeVois-Pro 介绍视频</link> 中显示的所有演示都在 JeVois-Pro 上实时运行，包括显示 4 个深度网络并行运行的演示。所有检测到的框的平铺显示都在 JeVois-Pro GPU 上呈现，显示在 JeVois-Pro CPU、NPU（集成在 JeVois 处理器中的 5-TOPS 神经处理单元）、TPU（JeVois-Pro 内部 PCIe M.2 附加板上的 4-TOPS Coral Edge 张量处理单元）和外部 VPU（1-TOPS Myriad-X 矢量处理单元，单独作为 USB 加密狗设备提供）上运行的深度网络的结果。</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md24">
+<title>jevois-daemon 程序和有关 JeVois 引擎的更多详细信息</title>
+
+<para><emphasis role="bold">jevois-daemon</emphasis> 是 JeVois 智能相机内部运行的主要可执行程序。它负责在运行时加载机器视觉模块、配置相机传感器、USB 流式传输 (JeVois-A33) 或 OpenGL 显示 (JeVois-Pro) 以及串行通信接口。它还负责从相机传感器抓取视频帧、将这些视频帧传递到当前加载的机器视觉 <emphasis role="bold">module，以及将模块的输出视频帧（如果有）通过</emphasis> USB（JeVois-A33）或 HDMI（JeVois-Pro）流式传输到主机。</para>
+
+<para><emphasis role="bold">jevois-daemon</emphasis> 实现了一个引擎，可以协调从摄像头传感器到机器视觉处理再到 USB 上的视频流的数据流。</para>
+
+<para>该 <link linkend="_classjevois_1_1Engine">Engine</link> 包含以下基本元素：</para>
+
+<para><itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1VideoInput">VideoInput</link>, 实例化为用于实时视频流的 <link linkend="_classjevois_1_1Camera">Camera</link> 或用于处理预先录制的视频文件或图像序列的 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> （在算法开发期间很有用，可以对可重现的输入进行测试和优化）；</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1VideoOutput">VideoOutput</link>, 在 JeVois-A33 硬件平台上运行时可以实例化为 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 驱动程序，在 JeVois-Pro 上实例化为 <link linkend="_classjevois_1_1VideoDisplayGUI">VideoDisplayGUI</link>, 在具有图形显示器的主机上运行时实例化为 VideoDisplay, 或作为 <link linkend="_classjevois_1_1MovieOutput">MovieOutput</link> 以将输出视频帧保存到磁盘，或作为 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> （如果需要）对视觉算法进行基准测试，同时减少与传输输出帧相关的任何工作。</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 根据用户的选择在运行时加载所选的视觉处理模块；</para>
+</listitem><listitem>
+<para>任意数量的 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 对象，实例化为硬件串行端口（用于平台硬件上的 4 针 JST 1.0mm 连接器）、串行 USB 串行端口（在 JeVois 硬件通过 USB 连接到的主机上可见）或 StdioInterface（用于接受命令并直接在启动 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 的终端中打印结果，在通用计算机上运行时特别有用，而不是平台硬件）。在平台硬件上运行时，通常会创建两个 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 对象（一个硬件串行，一个串行 USB 串行），而在通用计算机上运行时，通常只创建一个 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> （类型为 <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link>, 用于直接在启动 jevois-daemon 的终端中接受命令）；</para>
+</listitem><listitem>
+<para>从 videomappings.cfg 文件导入的 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 定义列表。这些定义指定了哪些视频输出模式可用及其相应的相机设置和要使用的模块，以及哪些模式没有任何流式视频输出（例如，当仅将硬件平台连接到 Arduino 时）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para><link linkend="_classjevois_1_1Engine">Engine</link> 的主循环一直运行直到用户决定退出，基本上经过以下步骤：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>创建一个 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 对象，它是下一个可用相机帧的异常安全包装器。该帧可能尚未被捕获。 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 可以理解为一种机制，用于在将来该帧可用时（即已被相机捕获）访问该帧。这与 C++11 的 std::future 框架非常相似。</para>
+</listitem><listitem>
+<para>当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定我们将通过 USB (JeVois-A33) 流式传输视频帧时，还会创建一个 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 对象，它是下一个可用 <link linkend="_classjevois_1_1Gadget">Gadget</link> 帧的异常安全包装器。这也只是一种访问 USB 驱动程序提供的下一个空白视频缓冲区的机制，我们应该在通过 USB 将其发送到主机之前用有趣的像素数据填充它。在 JeVois-Pro 上，可以使用 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 直接在实时摄像头视图上绘制覆盖层。</para>
+</listitem><listitem>
+<para>调用当前加载的模块的 process() 函数，当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定某些视频输出要通过 JeVois-A33 上的 USB（或 JeVois-Pro 上的旧模​​式）发送时，调用 process(InputFrame, OutputFrame)，或者在实时摄像头视图上绘制覆盖时，调用 JeVois-Pro 上的 process(InputFrame, GUIhelper)，或者当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 不指定视频输出时，调用 process(InputFrame)。模块的 process() 函数抛出的任何异常都将被捕获、报告和忽略。process() 函数通常会通过 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 包装器请求下一个可用的摄像头图像（此请求可能会阻塞，直到摄像头传感器硬件捕获该帧），然后处理该图像。在视频输出到 USB 的 JeVois-A33 上，它会通过 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包装器请求下一个可用的输出图像（当 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定有 USB 视频输出时），并将一些结果绘制到该输出图像中，然后通过 USB 将其发送到主机，供某些网络摄像头程序显示或供该计算机上运行的某些自定义视觉软件进一步处理。在 JeVois-Pro 上，它可能会使用 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 在实时摄像头视图上绘制框、文本、多边形等。此外，当前加载的模块可能会通过 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 端口发出消息（例如，指示找到对象的位置，以让 Arduino 知道它）。</para>
+</listitem><listitem>
+<para>读取用户通过用户界面端口发出的任何新命令并执行适当的命令。</para>
+</listitem><listitem>
+<para>当用户选择不同的视频模式时，处理用户更改 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 的请求，无论是在连接到 JeVois-A33 硬件的主机上运行的网络摄像头软件中，还是在 JeVois-Pro 的 GUI 中。此类请求可能会触发当前模块的卸载和新模块的加载，以及更改相机像素格式、图像大小等。这些更改保证在模块的 process() 函数未运行时发生，即模块程序员不必担心在执行其 process() 函数期间图像尺寸或像素格式可能发生的变化。</para>
+</listitem><listitem>
+<para>将通过任何用户界面收到的任何用户请求传递给实际的相机硬件驱动程序，以调整相机参数（例如，当用户在其网络摄像头程序中更改对比度时，该请求将通过 USB 发送到引擎，然后引擎将其转发到相机硬件驱动程序）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>欲了解更多信息，请参阅<link linkend="_JeVoisDaemon">jevois-daemon 可执行文件</link> 和 <link linkend="_classjevois_1_1Engine">Engine</link> 。</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md25">
+<title>关键概念和术语总结</title>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">相机格式</emphasis>：使用相机传感器捕获视频帧时使用的像素类型、分辨率和帧速率。相机传感器捕获的相机格式的视频帧被发送到 JeVois 机器视觉 <emphasis role="bold">module</emphasis> 进行处理。</para>
+</listitem><listitem>
+<para><emphasis role="bold">输出 (USB) 格式</emphasis>：用于通过 USB 链接将视频帧发送到主机 (JeVois-A33) 或 HDMI 显示器 (JeVois-Pro 传统模式) 的像素类型、分辨率和帧速率。此格式由在主机 (JeVois-A33) 上运行的视频捕获软件或通过 JeVois-Pro GUI 选择。输出格式的视频帧由当前 JeVois 机器视觉 <emphasis role="bold">module</emphasis> 创建，并通过 USB 链接 (JeVois-A33) 传输到主机或通过 HDMI (JeVois-Pro) 显示。</para>
+</listitem><listitem>
+<para><emphasis role="bold">JeVois-Pro overlays</emphasis>：JeVois-Pro 不仅输出完全光栅化的图像以通过 USB 传输或通过 HDMI 显示，还允许在摄像头传感器的实时视频上绘制几何形状、文本等。这在计算上非常高效（如上所述），因为实时视频直接从传感器传输到显示器，几乎不占用任何 CPU 成本。同样，覆盖层由 JeVois-Pro GPU 上的 OpenGL 渲染，也几乎不占用任何 CPU。</para>
+</listitem><listitem>
+<para><emphasis role="bold">视频映射</emphasis>：在用户选择的 <emphasis role="bold">output</emphasis> 视频格式、<emphasis role="bold">camera</emphasis> 传感器视频格式和机器视觉 <emphasis role="bold">module</emphasis> 之间建立对应关系。<emphasis role="bold">camera</emphasis> 和 <emphasis role="bold">output</emphasis> 格式不必相同；例如，许多模块会创建增强的视频输出，其中包含多个面板，这些面板可能显示处理结果、向用户发送的消息等，以及从相机传感器抓取的视频帧。</para>
+</listitem><listitem>
+<para><emphasis role="bold">jevois-daemon</emphasis> 是 JeVois 智能相机内部运行的主要可执行程序。它负责在运行时加载机器视觉模块、配置相机传感器、USB 流和串行通信接口。它还负责从相机传感器抓取视频帧，将这些视频帧传递给当前加载的机器视觉 <emphasis role="bold">module，并通过</emphasis> USB 将模块的输出视频帧（如果有）流式传输到主机。</para>
+</listitem><listitem>
+<para><emphasis role="bold">host</emphasis> 模式：JeVois 软件在台式计算机上本地编译，<emphasis role="bold">jevois-daemon</emphasis> 在该主机上运行。视频输入来自任何兼容相机，视频输出（如果有）则输出到计算机的显示器。串行通信通过启动 <emphasis role="bold">jevois-daemon</emphasis> 的终端进行。在此模式下无法将视频流式传输到 USB。所有机器视觉处理都在主机上运行。</para>
+</listitem><listitem>
+<para><emphasis role="bold">platform</emphasis> 模式：JeVois 软件在台式计算机上针对 ARM 目标处理器进行交叉编译，然后 <emphasis role="bold">jevois-daemon</emphasis> 被复制到插入 JeVois 智能相机的 microSD 卡上。为智能相机供电后，<emphasis role="bold">jevois-daemon</emphasis> 会自动在 JeVois 智能相机内的处理器上运行。视频输入来自 JeVois 智能相机内的相机传感器，视频输出（如果有）通过 USB 传输到运行某些视频捕获软件的主机。串行通信是通过 JeVois 智能相机的 4 针串行连接器和/或使用串行 USB 链路连接到主机。JeVois 智能相机上没有显示器。所有机器视觉处理都在 JeVois 智能相机内的处理器上运行。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_Concepts_1autotoc_md26">
+<title>更多详细信息</title>
+
+<para>参见 <link linkend="_Navigation">如何浏览本文档</link> </para>
+</section>
+</section>

@@ -1,0 +1,101 @@
+\hypertarget{classjevois_1_1JpegCompressor}{}\doxysubsection{jevois\+::Jpeg\+Compressor Class Reference}
+\label{classjevois_1_1JpegCompressor}\index{jevois::JpegCompressor@{jevois::JpegCompressor}}
+
+
+{\ttfamily \#include $<$jevois/\+Image/\+Jpeg.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+turbojpeg 压缩器的简单单例包装器 
+
+大多数用户不需要使用此类，compress\+B\+R\+Gto\+Jpeg() 在内部使用它来避免在每个视频帧上重新创建 turbojpeg 压缩器对象。 
+
+Definition at line 40 of file Jpeg.\+H.
+
+
+
+Inheritance diagram for jevois\+::Jpeg\+Compressor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classjevois_1_1JpegCompressor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Jpeg\+Compressor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{classjevois_1_1JpegCompressor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1JpegCompressor_af4e52c6452a7fad2de68a0971fc702ab}{Jpeg\+Compressor}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, create the turbojpeg object. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1JpegCompressor_af30a3507a4189212d531c61a36a5534a}{$\sim$\+Jpeg\+Compressor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, frees the turbojpeg object. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{classjevois_1_1JpegCompressor_add919f60bc762ef7b9d1c820d1237fcd}{compressor}} ()
+\begin{DoxyCompactList}\small\item\em Access the compressor handle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1JpegCompressor_af4e52c6452a7fad2de68a0971fc702ab}\label{classjevois_1_1JpegCompressor_af4e52c6452a7fad2de68a0971fc702ab}} 
+\index{jevois::JpegCompressor@{jevois::JpegCompressor}!JpegCompressor@{JpegCompressor}}
+\index{JpegCompressor@{JpegCompressor}!jevois::JpegCompressor@{jevois::JpegCompressor}}
+\doxyparagraph{\texorpdfstring{JpegCompressor()}{JpegCompressor()}}
+{\footnotesize\ttfamily jevois\+::\+Jpeg\+Compressor\+::\+Jpeg\+Compressor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor, create the turbojpeg object. 
+
+
+
+Definition at line 23 of file Jpeg.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1JpegCompressor_af30a3507a4189212d531c61a36a5534a}\label{classjevois_1_1JpegCompressor_af30a3507a4189212d531c61a36a5534a}} 
+\index{jevois::JpegCompressor@{jevois::JpegCompressor}!````~JpegCompressor@{$\sim$JpegCompressor}}
+\index{````~JpegCompressor@{$\sim$JpegCompressor}!jevois::JpegCompressor@{jevois::JpegCompressor}}
+\doxyparagraph{\texorpdfstring{$\sim$JpegCompressor()}{~JpegCompressor()}}
+{\footnotesize\ttfamily jevois\+::\+Jpeg\+Compressor\+::$\sim$\+Jpeg\+Compressor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor, frees the turbojpeg object. 
+
+
+
+Definition at line 27 of file Jpeg.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1JpegCompressor_add919f60bc762ef7b9d1c820d1237fcd}\label{classjevois_1_1JpegCompressor_add919f60bc762ef7b9d1c820d1237fcd}} 
+\index{jevois::JpegCompressor@{jevois::JpegCompressor}!compressor@{compressor}}
+\index{compressor@{compressor}!jevois::JpegCompressor@{jevois::JpegCompressor}}
+\doxyparagraph{\texorpdfstring{compressor()}{compressor()}}
+{\footnotesize\ttfamily void $\ast$ jevois\+::\+Jpeg\+Compressor\+::compressor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Access the compressor handle. 
+
+
+
+Definition at line 31 of file Jpeg.\+C.
+
+
+
+Referenced by jevois\+::compress\+B\+G\+Rto\+Jpeg(), jevois\+::compress\+G\+R\+A\+Yto\+Jpeg(), jevois\+::compress\+R\+G\+B\+Ato\+Jpeg(), and jevois\+::compress\+R\+G\+Bto\+Jpeg().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Image/\mbox{\hyperlink{Jpeg_8H}{Jpeg.\+H}}\item 
+src/jevois/\+Image/\mbox{\hyperlink{Jpeg_8C}{Jpeg.\+C}}\end{DoxyCompactItemize}

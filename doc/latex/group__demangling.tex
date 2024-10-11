@@ -1,0 +1,74 @@
+\hypertarget{group__demangling}{}\doxysubsection{Name demangling 函数}
+\label{group__demangling}\index{Name demangling 函数@{Name demangling 函数}}
+
+
+\doxysubsubsection{ }
+Name demangling 函数返回源代码中所写的类型的原始名称，而不是编译器内部使用的名称，该名称被解析以避免跨不同命名空 间、重载等的名称冲突和混淆。 
+
+有关更多信息，请参阅 \href{http://en.wikipedia.org/wiki/Name_mangling}{\texttt{ http\+://en.\+wikipedia.\+org/wiki/\+Name\+\_\+mangling}}。 Collaboration diagram for Name demangling 函数\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{group__demangling}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{group__demangling_gaed135e078da2b90d91350d676e7413fc}{jevois\+::demangle}} (std\+::string const \&mangled\+Name)
+\begin{DoxyCompactList}\small\item\em Demangle a mangled name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__demangling_ga717b7381dadbb9c05f2dc6fda5344b05}{jevois\+::demangle}} (char const $\ast$mangled\+Name)
+\begin{DoxyCompactList}\small\item\em Demangle a mangled name. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string \mbox{\hyperlink{group__demangling_ga31535139a092fa0cd6aa7ab7e0339cfd}{jevois\+::demangled\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get the demangled type name of type T. \end{DoxyCompactList}\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{group__demangling_gad0fbf71c27d34d4bb1074750bb0d94ca}{jevois\+::demangled\+Name$<$ std\+::string $>$}} ()
+\begin{DoxyCompactList}\small\item\em 对 std\+::string 进行特例化以避免得到丑陋的名称 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__demangling_ga717b7381dadbb9c05f2dc6fda5344b05}\label{group__demangling_ga717b7381dadbb9c05f2dc6fda5344b05}} 
+\index{Name demangling 函数@{Name demangling 函数}!demangle@{demangle}}
+\index{demangle@{demangle}!Name demangling 函数@{Name demangling 函数}}
+\doxyparagraph{\texorpdfstring{demangle()}{demangle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string jevois\+::demangle (\begin{DoxyParamCaption}\item[{char const $\ast$}]{mangled\+Name }\end{DoxyParamCaption})}
+
+
+
+Demangle a mangled name. 
+
+\mbox{\Hypertarget{group__demangling_gaed135e078da2b90d91350d676e7413fc}\label{group__demangling_gaed135e078da2b90d91350d676e7413fc}} 
+\index{Name demangling 函数@{Name demangling 函数}!demangle@{demangle}}
+\index{demangle@{demangle}!Name demangling 函数@{Name demangling 函数}}
+\doxyparagraph{\texorpdfstring{demangle()}{demangle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::string jevois\+::demangle (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{mangled\+Name }\end{DoxyParamCaption})}
+
+
+
+Demangle a mangled name. 
+
+
+
+Referenced by jevois\+::\+Component\+::class\+Name().
+
+\mbox{\Hypertarget{group__demangling_ga31535139a092fa0cd6aa7ab7e0339cfd}\label{group__demangling_ga31535139a092fa0cd6aa7ab7e0339cfd}} 
+\index{Name demangling 函数@{Name demangling 函数}!demangledName@{demangledName}}
+\index{demangledName@{demangledName}!Name demangling 函数@{Name demangling 函数}}
+\doxyparagraph{\texorpdfstring{demangledName()}{demangledName()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::string jevois\+::demangled\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the demangled type name of type T. 
+
+\mbox{\Hypertarget{group__demangling_gad0fbf71c27d34d4bb1074750bb0d94ca}\label{group__demangling_gad0fbf71c27d34d4bb1074750bb0d94ca}} 
+\index{Name demangling 函数@{Name demangling 函数}!demangledName$<$ std::string $>$@{demangledName$<$ std::string $>$}}
+\index{demangledName$<$ std::string $>$@{demangledName$<$ std::string $>$}!Name demangling 函数@{Name demangling 函数}}
+\doxyparagraph{\texorpdfstring{demangledName$<$ std::string $>$()}{demangledName< std::string >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+std\+::string \mbox{\hyperlink{group__demangling_ga31535139a092fa0cd6aa7ab7e0339cfd}{jevois\+::demangled\+Name}}$<$ std\+::string $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+对 std\+::string 进行特例化以避免得到丑陋的名称 
+

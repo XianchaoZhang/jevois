@@ -1,0 +1,77 @@
+\hypertarget{group__parameter}{}\doxysubsection{Parameter-\/related classes and functions}
+\label{group__parameter}\index{Parameter-\/related classes and functions@{Parameter-\/related classes and functions}}
+
+
+\doxysubsubsection{ }
+Je\+Vois 框架中参数的概念体现为任何类型的单个值的包装器，以及相关文档（描述）、默认值、有效值的可能规范、获取或更改值的访问器函数 以及触发的可选回调函数当值改变时。参数用于从 Component 继承的对象中。参数的目标是公开给定视觉算法的参数，以便使用该算法的任何 代码段都会自动继承并公开这些参数。
+
+如何探索此文档模块：
+
+
+\begin{DoxyItemize}
+\item 从一些关于组件和参数的一般原理开始： Component
+\item 然后了解如何为参数指定有效值： \mbox{\hyperlink{group__validvalues}{有效值集的规范，例如，某些参数可能采用}}
+\item 然后看看如何定义参数的名称、类型、描述、默认值、类别和可选的有效值：Parameter\+Def$<$\+T$>$
+\item 然后你就可以准备 \href{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4.html}{\texttt{ Parameter}} 了
+\end{DoxyItemize}
+
+本文档模块中的其他类主要是为了支持上述类。\hypertarget{group__parameter_autotoc_md147}{}\doxyparagraph{Convenience macro to define a Parameter type}\label{group__parameter_autotoc_md147}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(ParamName, ParamType, ...)}
+\end{DoxyCode}
+
+
+Param\+Name 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 Param\+Type 是参数值的类型。 其余参数传递给 jevois\+::\+Parameter\+Def$<$\+T$>$ 的构造函数其中 T=Param\+Type。\hypertarget{group__parameter_autotoc_md148}{}\doxyparagraph{Convenience macro to define a Parameter type, with callback}\label{group__parameter_autotoc_md148}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}(ParamName, ParamType, ...)}
+\end{DoxyCode}
+
+
+Param\+Name 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 Param\+Type 是参数值的类型。 其余参数传递给 jevois\+::\+Parameter\+Def$<$\+T$>$ 的构造函数其中 T=Param\+Type。
+
+在带回调的版本中，定义的新类中包含纯虚方法，其签名如下：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{virtual} \textcolor{keywordtype}{void} onParamChange(ParamName \textcolor{keyword}{const} \& param, ParamType \textcolor{keyword}{const} \& newval) = 0;}
+\end{DoxyCode}
+
+
+继承自 Parameter$<$\+Param\+Name$>$ 的宿主类（通常是 Component）必须实现此函数的重写。如果未实现该覆盖，将发出编译时错误。 Collaboration diagram for Parameter-\/related classes and functions\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__parameter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterSummary}{jevois\+::\+Parameter\+Summary}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} 提供有关参数的摘要 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterBase}{jevois\+::\+Parameter\+Base}}
+\begin{DoxyCompactList}\small\item\em Base class for Parameter. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的可变参数，核心类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4}{jevois\+::\+Parameter$<$ Param, Tail ... $>$}}
+\begin{DoxyCompactList}\small\item\em 附加到组件的一组参数。 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 运行时添加到组件的动态参数 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}}
+\begin{DoxyCompactList}\small\item\em 多个 \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 定义可以属于的类别 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterDefBase}{jevois\+::\+Parameter\+Def\+Base}}
+\begin{DoxyCompactList}\small\item\em 参数定义的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterDef}{jevois\+::\+Parameter\+Def$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 参数定义 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterRegistry}{jevois\+::\+Parameter\+Registry}}
+\begin{DoxyCompactList}\small\item\em 与组件相关的所有参数的简单注册表 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__parameterstrconv}{参数的字符串转换}}
+\item 
+\mbox{\hyperlink{group__validvalues}{有效值集的规范，例如，某些参数可能采用}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 使用它来指定参数可以采用的有效值，这些值不受限制，来自给定列表、范围、匹配正则表达式等 \end{DoxyCompactList}\end{DoxyCompactItemize}

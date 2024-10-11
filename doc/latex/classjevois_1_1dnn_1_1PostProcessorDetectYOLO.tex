@@ -1,0 +1,132 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Detect\+Y\+O\+LO Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor\+Detect\+Y\+O\+L\+O.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+用于原始 Y\+O\+LO 解码的后处理器子组件 
+
+Definition at line 27 of file Post\+Processor\+Detect\+Y\+O\+L\+O.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+Detect\+Y\+O\+LO\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorDetectYOLO__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+Detect\+Y\+O\+LO\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorDetectYOLO__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a20f9d6dd65134226b4f8330a3ef73b34}{$\sim$\+Post\+Processor\+Detect\+Y\+O\+LO}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_adada304aade362c2828d064d8f723048}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}{yolo}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, std\+::vector$<$ int $>$ \&class\+Ids, std\+::vector$<$ float $>$ \&confidences, std\+::vector$<$ cv\+::\+Rect $>$ \&boxes, size\+\_\+t nclass, float box\+Threshold, float conf\+Threshold, cv\+::\+Size const \&bsiz, int fudge, size\+\_\+t const maxbox)
+\begin{DoxyCompactList}\small\item\em Generic raw Y\+O\+LO processing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a0249dbdaee94af6a5db0eaf20ef63672}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (scalexy, float, \char`\"{}If 0, use old-\/style Y\+O\+LO boxes (Y\+O\+L\+Ov2/v3/v4) otherwise, this is \char`\"{} \char`\"{}the scale\+\_\+xy factor for new-\/style Y\+O\+LO coordinates (Y\+O\+L\+Ov5/v7 value is usually 2.\+0 \char`\"{} \char`\"{}but check the \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}{yolo}} layer in the model\textquotesingle{}s .cfg file)\char`\"{}, 0.\+0F, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a8d1e03345f35b788e57a1494252d6b98}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (sigmoid, bool, \char`\"{}Apply sigmoid to raw Y\+O\+LO outputs, use when the last conv layers \char`\"{} \char`\"{}just before \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}{yolo}}/detection/region layers have linear activation (most \char`\"{} \char`\"{}Y\+O\+L\+Ov2/v3/v4 models, but not Y\+O\+L\+Ov5/v7 which have logistic activation on their \char`\"{} \char`\"{}last conv)\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a20f9d6dd65134226b4f8330a3ef73b34}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a20f9d6dd65134226b4f8330a3ef73b34}} 
+\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}!````~PostProcessorDetectYOLO@{$\sim$PostProcessorDetectYOLO}}
+\index{````~PostProcessorDetectYOLO@{$\sim$PostProcessorDetectYOLO}!jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorDetectYOLO()}{~PostProcessorDetectYOLO()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::$\sim$\+Post\+Processor\+Detect\+Y\+O\+LO (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 50 of file Post\+Processor\+Detect\+Y\+O\+L\+O.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_adada304aade362c2828d064d8f723048}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_adada304aade362c2828d064d8f723048}} 
+\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+
+
+Definition at line 54 of file Post\+Processor\+Detect\+Y\+O\+L\+O.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}} 
+\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}!yolo@{yolo}}
+\index{yolo@{yolo}!jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+\doxyparagraph{\texorpdfstring{yolo()}{yolo()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::yolo (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{std\+::vector$<$ int $>$ \&}]{class\+Ids,  }\item[{std\+::vector$<$ float $>$ \&}]{confidences,  }\item[{std\+::vector$<$ cv\+::\+Rect $>$ \&}]{boxes,  }\item[{size\+\_\+t}]{nclass,  }\item[{float}]{box\+Threshold,  }\item[{float}]{conf\+Threshold,  }\item[{cv\+::\+Size const \&}]{bsiz,  }\item[{int}]{fudge,  }\item[{size\+\_\+t const}]{maxbox }\end{DoxyParamCaption})}
+
+
+
+Generic raw Y\+O\+LO processing. 
+
+
+
+Definition at line 68 of file Post\+Processor\+Detect\+Y\+O\+L\+O.\+C.
+
+
+
+References jevois\+::async(), jevois\+::joinall(), L\+I\+N\+FO, L\+T\+H\+R\+OW, jevois\+::sformat(), and jevois\+::dnn\+::shapestr().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a0249dbdaee94af6a5db0eaf20ef63672}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a0249dbdaee94af6a5db0eaf20ef63672}} 
+\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{scalexy}]{,  }\item[{float}]{,  }\item[{\char`\"{}If}]{0,  }\item[{use old-\/style Y\+O\+LO boxes(Y\+O\+L\+Ov2/v3/v4)}]{otherwise,  }\item[{this is \char`\"{} \char`\"{}the scale\+\_\+xy factor for new-\/style Y\+O\+LO coordinates(Y\+O\+L\+Ov5/v7 value is usually 2.\+0 \char`\"{} \char`\"{}but check the \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}{yolo}} layer in the model \textquotesingle{}s .cfg file)\char`\"{}}]{,  }\item[{0.}]{0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a8d1e03345f35b788e57a1494252d6b98}\label{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a8d1e03345f35b788e57a1494252d6b98}} 
+\index{jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetectYOLO@{jevois::dnn::PostProcessorDetectYOLO}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{sigmoid}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Apply sigmoid to raw Y\+O\+LO}]{outputs,  }\item[{use when the last conv layers \char`\"{} \char`\"{}just before \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO_a25d60028a979ad201e3de71908a32153}{yolo}}/detection/region layers have linear activation(most \char`\"{} \char`\"{}Y\+O\+L\+Ov2/v3/v4 models, but not Y\+O\+L\+Ov5/v7 which have logistic activation on their \char`\"{} \char`\"{}last conv)\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorDetectYOLO_8H}{Post\+Processor\+Detect\+Y\+O\+L\+O.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessor_8H}{Post\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorDetectYOLO_8C}{Post\+Processor\+Detect\+Y\+O\+L\+O.\+C}}\end{DoxyCompactItemize}

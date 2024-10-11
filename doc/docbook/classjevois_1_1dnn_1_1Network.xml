@@ -1,0 +1,418 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1Network">
+<title>jevois::dnn::Network Class Reference</title>
+<indexterm><primary>jevois::dnn::Network</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/Network.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>表示神经网络的抽象类。 </para>
+
+
+
+<para>派生类通过 OpenCV（CPU、OpenCL 或 OpenVino/Myriad-X）、Amlogic/Vivante NPU、Hailo-8、Python 或 Google Coral TPU 提供实现。 </para>
+<para>
+Definition at line 159 of file Network.H.</para>
+Inheritance diagram for jevois::dnn::Network:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1Network__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::Network:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1Network__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1Network_1ae8e8da054f338bc7bbfd11403f7b7a2c">~Network</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Network_1a8f31a32c93d1e70452a613dbdc77f376">waitBeforeDestroy</link> ()</para>
+
+<para>如果网络正在加载，则等待加载完成后再销毁 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1dnn_1_1Network_1a3955dd0ca172bb88ed4a11124c561dcd">ready</link> ()</para>
+
+<para>当网络准备好运行（加载并初始化）时返回 true </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1Network_1a5c4daabb6b084f87ce330f98159ebaa7">inputShapes</link> ()=0</para>
+
+<para>Get shapes of all input tensors. </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1Network_1a98a8d50e49ba4d9f827ff9b5d4c8b68f">outputShapes</link> ()=0</para>
+
+<para>Get shapes of all output tensors. </para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1Network_1a4fe49556638054d16929006261409867">process</link> (std::vector&lt; cv::Mat &gt; const &amp;blobs, std::vector&lt; std::string &gt; &amp;info)</para>
+
+<para>处理输入 blob 并获取输出 blob。 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1Network_1af49aabe3e1317946de848f356970fa8d">freeze</link> (bool doit)</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">load</link> ()=0</para>
+
+<para>Load from disk. </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1Network_1a0715f8cd89af48245f39ed1bd00c0849">doprocess</link> (std::vector&lt; cv::Mat &gt; const &amp;blobs, std::vector&lt; std::string &gt; &amp;info)=0</para>
+
+<para>处理输入 blobs 并获取输出 blobs </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1Network_1af40220590d16906a2af262dd36dbdaed">onParamChange</link> (network::outreshape const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1ae55d9497ee2f51920d8c194ceec25e08">JEVOIS_DECLARE_PARAMETER</link> (comment, std::string, &quot;Optional comment about the network&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a03adf97d50b510a0692e41b74d183446">JEVOIS_DECLARE_PARAMETER</link> (url, std::string, &quot;Optional URL for the network&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1afbc231f63c49a5e6eecdb0fe4213619d">JEVOIS_DECLARE_PARAMETER</link> (dataroot, std::string, &quot;Root directory to use when config or model parameters &quot; &quot;are relative paths.&quot;, JEVOIS_SHARE_PATH, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a5da11b72aafbce2f8bb964fb8408c578">JEVOIS_DECLARE_PARAMETER</link> (config, std::string, &quot;Path to a text file that contains network configuration. &quot; &quot;Can have extension .prototxt (Caffe), .pbtxt (TensorFlow), or .cfg (Darknet). &quot; &quot;If path is relative, it will be prefixed by dataroot.&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a8b3c224e5ec0e8d5d36f867ffbfd483e">JEVOIS_DECLARE_PARAMETER</link> (model, std::string, &quot;Path to a binary file of model contains trained weights. &quot; &quot;Can have extension .caffemodel (Caffe), .pb (TensorFlow), .t7 or .net (Torch), &quot; &quot;.tflite (TensorFlow Lite), or .weights (Darknet). If path is relative, it will be &quot; &quot;prefixed by dataroot.&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1aeac422385e973cc8595019e3dfba1b2b">JEVOIS_DEFINE_ENUM_CLASS</link> (Target,(CPU)(OpenCL)(OpenCL_FP16)(Myriad)(NPU))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a7b02bca60cd633dccc803386c4b4b18c">JEVOIS_DECLARE_PARAMETER</link> (target, Target, &quot;OpenCV compute target to use. Changes will take effect &quot; &quot;next time you <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">load</link> a different model.&quot;, Target::CPU, Target_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1af4549a2cb4cbe421b85a521e56ae2e2d">JEVOIS_DEFINE_ENUM_CLASS</link> (Backend,(OpenCV)(InferenceEngine)(TimVX))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a9f9c7ff2aaffcbbbe67b6a6c58df839a">JEVOIS_DECLARE_PARAMETER</link> (backend, Backend, &quot;OpenCV compute backend to use. Default will use the inference &quot; &quot;engine if available, otherwise OpenCV (note that inference engine only works on Intel &quot; &quot;processors or MyriadX hardware, thus you should normally select OpenCV when running &quot; &quot;on JeVois-Pro Platform, unless you want to use an optional MyriadX accelerator). &quot; &quot;Changes will take effect next time you <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">load</link> a model.&quot;, JEVOIS_BACKEND_DEFAULT, Backend_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a6ff20f851ba5b6726e8cebab68ed3217">JEVOIS_DECLARE_PARAMETER</link> (intensors, std::string, &quot;Specification of input tensors&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1ad5d18da2ad6b47d128004cf8f103874e">JEVOIS_DECLARE_PARAMETER</link> (extraintensors, std::string, &quot;Specification of extra fixed input tensors that will be &quot; &quot;added after the regular intensors. Format is: &quot; &quot;&lt;type&gt;:&lt;shape&gt;:val1 val2 ... valN, &lt;type&gt;:&lt;shape&gt;:val1 ... valN. For example, for &quot; &quot;URetinex-Net: 32F:1x1x1:3.0&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1aabab4001278fba2a835f538c23678c1e">JEVOIS_DECLARE_PARAMETER</link> (outtensors, std::string, &quot;Specification of output tensors&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a3df396b10ead42f546e12052e6b404b8">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (outreshape, std::string, &quot;Specification of reshaped output tensors &quot; &quot;sometimes useful to re-interpret tensors to what a post-processor expects for &quot; &quot;example, TPU YoloV4-Int-VOC outputs 5D tensors 32F:1x52x52x3x85, 32F:1x26x26x3x85, &quot; &quot;32F:1x13x13x3x85 but the YOLO post-processor expects 4D, which would be specified here &quot; &quot;as 32F:1x52x52x255, 32F:1x26x26x255, 32F:1x13x13x255. Note that this only changes &quot; &quot;the description of dimensions, but does not move any pixel data around (e.g., cannot &quot; &quot;convert from NCHW to NHWC, convert data types, etc). Use sparingly and with caution.&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a455c68d54087e8430dad4045df5749a5">JEVOIS_DECLARE_PARAMETER</link> (dequant, bool, &quot;Dequantize output tensors to float32 from their native quantized type&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1ac2b66ca8b2a61d4154a7c9ed38bbe014">JEVOIS_DECLARE_PARAMETER</link> (tpunum, size_t, &quot;Coral EdgeTPU number to use to run this model, typically 0, or can be &quot; &quot;1 when using a dual-TPU add-on board, or more when using additional TPUs connected &quot; &quot;to USB ports&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1Network_1a4fe2a06fe83a699a344ee12f587172f6">JEVOIS_DECLARE_PARAMETER</link> (spunum, size_t, &quot;Hailo8 device number to use to run this model, typically 0 unless &quot; &quot;several Hailo8 accelerators are connected to the <link linkend="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee">system</link>&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Network_1ae8e8da054f338bc7bbfd11403f7b7a2c"/>    <section>
+    <title>~Network()</title>
+<indexterm><primary>~Network</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>~Network</secondary></indexterm>
+<para><computeroutput>jevois::dnn::Network::~Network ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+
+<para>CAUTION: 派生类必须在其析构函数中调用 <link linkend="_classjevois_1_1dnn_1_1Network_1a8f31a32c93d1e70452a613dbdc77f376">waitBeforeDestroy()</link> </para>
+<para>
+Definition at line 23 of file Network.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Network_1a0715f8cd89af48245f39ed1bd00c0849"/>    <section>
+    <title>doprocess()</title>
+<indexterm><primary>doprocess</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>doprocess</secondary></indexterm>
+<para><computeroutput>virtual std::vector&lt;cv::Mat&gt; jevois::dnn::Network::doprocess (std::vector&lt; cv::Mat &gt; const &amp; blobs, std::vector&lt; std::string &gt; &amp; info)<computeroutput>[protected]</computeroutput>, <computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输入 blobs 并获取输出 blobs </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1NetworkNPU_1a9d284f745c6c98178f81ba77764191be">jevois::dnn::NetworkNPU</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a2220cd1364ff986705a09399dd04481c">jevois::dnn::NetworkHailo</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkONNX_1a21f98be54505be1a17303ecbfba147b1">jevois::dnn::NetworkONNX</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a11dbdabb2b67c48da768be109d65fb1a">jevois::dnn::NetworkOpenCV</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a98da6191103197084c93a069e54a29e0">jevois::dnn::NetworkTPU</link>, and <link linkend="_classjevois_1_1dnn_1_1NetworkPython_1a04c84253cef99f51a21a862e4ae04a8f">jevois::dnn::NetworkPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1af49aabe3e1317946de848f356970fa8d"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Network::freeze (bool doit)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+
+<para>注意：派生类可以通过重写此函数来冻结自己的参数，并且应该记住仍然调用基类 jevois::dnn::Network::freeze(doit) </para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1dnn_1_1NetworkNPU_1accf0020410f345569848d7c058cdafce">jevois::dnn::NetworkNPU</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a7928fd357d2f109b44d43e5a0b6bd1a4">jevois::dnn::NetworkHailo</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkONNX_1a25d2005cbbdc106b91005e56de6f09ed">jevois::dnn::NetworkONNX</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1abe548296057d9ef38122343505e45f5c">jevois::dnn::NetworkOpenCV</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a51e003b0fd31a7ee237458685ac7416a">jevois::dnn::NetworkTPU</link>, and <link linkend="_classjevois_1_1dnn_1_1NetworkPython_1ae278bb994f487efa4634cda9954cd540">jevois::dnn::NetworkPython</link>.</para>
+<para>
+Definition at line 27 of file Network.C.</para>
+<para>
+Referenced by jevois::dnn::NetworkPython::freeze(), jevois::dnn::NetworkOpenCV::freeze(), jevois::dnn::NetworkTPU::freeze(), jevois::dnn::NetworkONNX::freeze(), jevois::dnn::NetworkHailo::freeze(), and jevois::dnn::NetworkNPU::freeze().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a5c4daabb6b084f87ce330f98159ebaa7"/>    <section>
+    <title>inputShapes()</title>
+<indexterm><primary>inputShapes</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>inputShapes</secondary></indexterm>
+<para><computeroutput>virtual std::vector&lt;vsi_nn_tensor_attr_t&gt; jevois::dnn::Network::inputShapes ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all input tensors. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1NetworkNPU_1a224fdf64248311c3249cda899f9c2c27">jevois::dnn::NetworkNPU</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a9e4569480c55437139e7bfd0988c700a">jevois::dnn::NetworkHailo</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkONNX_1a7833c8a7a47da08081db9d8fa46219a8">jevois::dnn::NetworkONNX</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a61a283e643a8a22e0cf5e743da59d1f4">jevois::dnn::NetworkOpenCV</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a93688abe7c4824e4fb4d1b95a6787a48">jevois::dnn::NetworkTPU</link>, and <link linkend="_classjevois_1_1dnn_1_1NetworkPython_1a94f56f4d22e117cab06a1fe626ba8ffe">jevois::dnn::NetworkPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>virtual void jevois::dnn::Network::load ( )<computeroutput>[protected]</computeroutput>, <computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Load from disk. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1NetworkNPU_1adf4c6a47ab88ec64c630c98fd343122c">jevois::dnn::NetworkNPU</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1a33faa2d76284bfd55d80c40135fbb7f2">jevois::dnn::NetworkHailo</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkONNX_1a427de85b73859743dd471bce63bb17e5">jevois::dnn::NetworkONNX</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a80147b1b468931c226f85c959c522805">jevois::dnn::NetworkOpenCV</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a4cd29b0560e0f9a094b902d5bc40f694">jevois::dnn::NetworkTPU</link>, and <link linkend="_classjevois_1_1dnn_1_1NetworkPython_1a4f293d1210df3aac0fdafe1a7fb574a0">jevois::dnn::NetworkPython</link>.</para>
+<para>
+Referenced by ready().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1af40220590d16906a2af262dd36dbdaed"/>    <section>
+    <title>onParamChange()</title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Network::onParamChange (network::outreshape const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 35 of file Network.C.</para>
+<para>
+References jevois::dnn::parseTensorSpecs().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a98a8d50e49ba4d9f827ff9b5d4c8b68f"/>    <section>
+    <title>outputShapes()</title>
+<indexterm><primary>outputShapes</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>outputShapes</secondary></indexterm>
+<para><computeroutput>virtual std::vector&lt;vsi_nn_tensor_attr_t&gt; jevois::dnn::Network::outputShapes ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all output tensors. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1NetworkNPU_1a29cf0728bb86204b856576b0f058f769">jevois::dnn::NetworkNPU</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkHailo_1aa7b970fa3ecc6ffe76ca1e83c2ad078c">jevois::dnn::NetworkHailo</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkONNX_1a992be87c56f00419fb9ee96d90daf964">jevois::dnn::NetworkONNX</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkOpenCV_1a32dd046edba29972d0d8c4b82ea7d02c">jevois::dnn::NetworkOpenCV</link>, <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a71ebc1fe4a9f247a039616ed077c0832">jevois::dnn::NetworkTPU</link>, and <link linkend="_classjevois_1_1dnn_1_1NetworkPython_1acc2212571cfa68babaec3612fb2c80f8">jevois::dnn::NetworkPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a4fe49556638054d16929006261409867"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::Network::process (std::vector&lt; cv::Mat &gt; const &amp; blobs, std::vector&lt; std::string &gt; &amp; info)</computeroutput></para><para>
+
+<para>处理输入 blob 并获取输出 blob。 </para>
+</para>
+
+<para><link linkend="_classjevois_1_1dnn_1_1Network">Network</link> 实现可以将信息数据推送到信息字符串中，该字符串将显示给用户。约定是：如果信息行以 &apos;* &apos; 开头，则它 是标题，如果以 &apos;- &apos; 开头，则它是项目符号。信息应始终组织到顶层的标题中。 </para>
+<para>
+Definition at line 82 of file Network.C.</para>
+<para>
+References jevois::dnn::attrdims(), jevois::dnn::attrmat(), LFATAL, jevois::dnn::shapestr(), jevois::split(), and jevois::dnn::strshape().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a3955dd0ca172bb88ed4a11124c561dcd"/>    <section>
+    <title>ready()</title>
+<indexterm><primary>ready</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>ready</secondary></indexterm>
+<para><computeroutput>bool jevois::dnn::Network::ready ( )</computeroutput></para><para>
+
+<para>当网络准备好运行（加载并初始化）时返回 true </para>
+</para>
+<para>
+Definition at line 57 of file Network.C.</para>
+<para>
+References jevois::async(), LINFO, load(), and jevois::warnAndRethrowException().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a8f31a32c93d1e70452a613dbdc77f376"/>    <section>
+    <title>waitBeforeDestroy()</title>
+<indexterm><primary>waitBeforeDestroy</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>waitBeforeDestroy</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::Network::waitBeforeDestroy ( )</computeroutput></para><para>
+
+<para>如果网络正在加载，则等待加载完成后再销毁 </para>
+</para>
+
+<para>CAUTION: 派生类必须在其析构函数中调用 <link linkend="_classjevois_1_1dnn_1_1Network_1a8f31a32c93d1e70452a613dbdc77f376">waitBeforeDestroy()</link> </para>
+<para>
+Definition at line 44 of file Network.C.</para>
+<para>
+References LINFO.</para>
+<para>
+Referenced by jevois::dnn::NetworkOpenCV::~NetworkOpenCV(), and jevois::dnn::NetworkTPU::~NetworkTPU().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1Network_1a9f9c7ff2aaffcbbbe67b6a6c58df839a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (backend , Backend , &quot;OpenCV compute backend to use. Default will use the inference &quot; &quot;engine if available, otherwise OpenCV(note that inference engine only works on Intel &quot; &quot;processors or MyriadX hardware, thus you should normally select OpenCV when running &quot; &quot;on JeVois-Pro Platform, unless you want to use an optional MyriadX accelerator). &quot; &quot;Changes will take effect next time you <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">load</link> a model.&quot; , <link linkend="_Network_8H_1a46077bf4745c7d6a0ada6b7a97129e51">JEVOIS_BACKEND_DEFAULT</link> , Backend_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1ae55d9497ee2f51920d8c194ceec25e08"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (comment , std::string , &quot;Optional comment about the network&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a5da11b72aafbce2f8bb964fb8408c578"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (config , std::string , &quot;Path to a text file that contains network configuration. &quot; &quot;Can have extension .prototxt  Caffe, . pbtxtTensorFlow, or .cfg(Darknet). &quot; &quot;If path is relative, it will be prefixed by dataroot.&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1afbc231f63c49a5e6eecdb0fe4213619d"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (dataroot , std::string , &quot;Root directory to use when config or model parameters &quot; &quot;are relative paths.&quot; , <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a455c68d54087e8430dad4045df5749a5"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (dequant , bool , &quot;Dequantize output tensors to float32 from their native quantized type&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1ad5d18da2ad6b47d128004cf8f103874e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[6/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (extraintensors , std::string , &quot;Specification of extra fixed input tensors that will be &quot; &quot;added after the regular intensors. Format is: &quot; &quot;&lt;type&gt;:&lt;shape&gt;:val1 val2 ... valN, &lt; type &gt;:&lt; shape &gt;:val1 ... valN. For example, for &quot; &quot;URetinex-Net:32F:1x1x1:3.0&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a6ff20f851ba5b6726e8cebab68ed3217"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[7/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (intensors , std::string , &quot;Specification of input tensors&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a8b3c224e5ec0e8d5d36f867ffbfd483e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[8/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (model , std::string , &quot;Path to a binary file of model contains trained weights. &quot; &quot;Can have extension .caffemodel  Caffe, . pbTensorFlow, .t7 or . netTorch, &quot; &quot;. tfliteTensorFlow Lite, or .weights(Darknet). If path is relative, it will be &quot; &quot;prefixed by dataroot.&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1aabab4001278fba2a835f538c23678c1e"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[9/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (outtensors , std::string , &quot;Specification of output tensors&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a4fe2a06fe83a699a344ee12f587172f6"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[10/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (spunum , size_t , &quot;Hailo8 device number to use to run this model, typically 0 unless &quot; &quot;several Hailo8 accelerators are connected to the <link linkend="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee">system</link>&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a7b02bca60cd633dccc803386c4b4b18c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[11/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (target , Target , &quot;OpenCV compute target to use. Changes will take effect &quot; &quot;next time you <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">load</link> a different model.&quot; , Target::CPU , Target_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1ac2b66ca8b2a61d4154a7c9ed38bbe014"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[12/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (tpunum , size_t , &quot;Coral EdgeTPU number to use to run this model, typically 0, or can be &quot; &quot;1 when using a dual-TPU add-on board, or more when using additional TPUs connected &quot; &quot;to USB ports&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a03adf97d50b510a0692e41b74d183446"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[13/13]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (url , std::string , &quot;Optional URL for the network&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1a3df396b10ead42f546e12052e6b404b8"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()</title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (outreshape , std::string , &quot;Specification of reshaped output tensors &quot; &quot;sometimes useful to re-interpret tensors to what a post-processor expects for &quot; &quot; example, TPU YoloV4-Int-VOC outputs 5D tensors 32F:1x52x52x3x85 , 32F:1x26x26x3x85 , &quot; &quot;32F:1x13x13x3x85 but the YOLO post-processor expects 4D, which would be specified here &quot; &quot;as 32F:1x52x52x255 , 32F:1x26x26x255 , 32F:1x13x13x255. Note that this only changes &quot; &quot;the description of dimensions, but does not move any pixel data around(e.g., cannot &quot; &quot;convert from NCHW to NHWC, convert data types, etc). Use sparingly and with caution.&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1af4549a2cb4cbe421b85a521e56ae2e2d"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (Backend , (OpenCV)(InferenceEngine)(TimVX) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1Network_1aeac422385e973cc8595019e3dfba1b2b"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::Network</secondary></indexterm>
+<indexterm><primary>jevois::dnn::Network</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (Target , (CPU)(OpenCL)(OpenCL_FP16)(Myriad)(NPU) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_Network_8H">Network.H</link>src/jevois/DNN/<link linkend="_Network_8C">Network.C</link></section>
+</section>

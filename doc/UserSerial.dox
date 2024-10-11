@@ -1,91 +1,60 @@
-/*! \page UserSerial Serial port user guide
+/*! \page UserSerial 串口使用指南
 
-The hardware serial port (UART port) on your JeVois smart camera is TTL-level (not RS-232 levels) and supports both 3.3V
-and 5V logic.
+JeVois 智能相机上的硬件串行端口（UART 端口）是 TTL 电平（不是 RS-232 电平），并且支持 3.3V 和 5V 逻辑。
 
-The logic voltage to use is supplied by the connected microcontroller to the smart camera (RED wire, IOREF
-voltage). This voltage should be provided by your micro-controller and should be the voltage at which your RX and TX
-signals operate). Arduino boards provide the IOREF pin for this purpose. IOREF is an input to JeVois. Thus, a 5V Arduino
-will output 5V to IOREF, and will use 5V levels for RX and TX. In contrast, a 3.3V Arduino will output 3.3V to IOREF and
-will use 3.3V levels for RX and TX.
+使用的逻辑电压由连接的微控制器提供给智能相机（红线，IOREF 电压）。此电压应由您的微控制器提供，并且应是 RX 和 TX 信号工作的电压）。Arduino 开发板为此目的提供了 IOREF 引脚。IOREF 是 JeVois 的输入。因此，5V Arduino 将向 IOREF 输出 5V，并将使用 5V 电平进行 RX 和 TX。相比之下，3.3V Arduino 将向 IOREF 输出 3.3V，并将使用 3.3V 电平进行 RX 和 TX。
 
-To connect to an Arduino board, you would typically do as follows (\jva33 is shown, pinout is the same for \jvpro):
+要连接到 Arduino 开发板，通常需要执行以下操作（显示 \jva33，引脚排列与 \jvpro 相同）：
 
 \jvimg{serial-arduino.png, 50%}
 
-Note the orientation of the connector and the order of the colored wires, for \jva33 above and \jvpro below:
+请注意连接器的方向和彩色电线的顺序，上面的 \jva33 和下面的 \jvpro：
 
 \jvimg{proserial.jpg, 15%}
 
-\note Make sure that you do not use voltages in excess of 5.5V on all pins, otherwise you may damage your JeVois unit.
+\note 确保所有引脚上的电压不要超过 5.5V，否则可能会损坏 JeVois 设备。
 
-\note Power consumption on the serial port (all pins combined) is less than 1mA. Hence, it is apporpriate to directly
-use the IOREF pin of any Arduino (which, often, is rated for 50mA or less) with JeVois.
+\note 串行端口（所有引脚合计）的功耗小于 1mA。因此，直接将任何 Arduino 的 IOREF 引脚（通常额定为 50mA 或更低）与 JeVois 一起使用是合适的。
 
-\note JeVois is not powered through the pins on the 4-pin serial connector. IOREF is an input to JeVois, only providing
-a voltage reference that determines which voltages should be used on the RX and TX pins, but IOREF is not connected to
-the main power supply of JeVois in any way. \jva33 is exclusively powered through the mini-USB connector, while \jvpro
-is exclusively powered through its barrel jack power connector.
+\note JeVois 不通过 4 针串行连接器上的针脚供电。IOREF 是 JeVois 的输入，仅提供电压参考来确定 RX 和 TX 针脚上应使用哪些电压，但 IOREF 不以任何方式连接到 JeVois 的主电源。 \jva33 仅通过 mini-USB 连接器供电，而 \jvpro 仅通过其筒式插孔电源连接器供电。
 
-Changing the serial port settings
+更改串行端口设置 
 ---------------------------------
 
-You can customize the settings of the serial port to match what your microcontroller can support, by editing the file
-<b>JEVOIS:/config/params.cfg</b> on your microSD card (source in <b>~/jevois/Config/params.cfg</b>). The following
-options are supported (see \ref JeVoisDaemon for more configurations options supported at startup, and see \ref
-jevois::Serial for full documentation of the serial interface):
+您可以通过编辑 microSD 卡上的文件 <b>JEVOIS:/config/params.cfg</b>（来源为 <b>~/jevois/Config/params.cfg</b>）自定义串行端口的设置以匹配微控制器可以支持的设置。支持以下选项（请参阅 \ref JeVoisDaemon 了解启动时支持的更多配置选项，并参阅 \ref jevois::Serial 了解串行接口的完整文档）：
 
-- \b serialdev - name of the serial device. The hardware serial port for the 4-pin connector is always <b>/dev/ttyS0</b>
-  on the JeVois platform.
-  
-- \b serial:mode - Terminal emulation mode for input, should be \b Plain or \b VT100. Default is \b Plain.
+- \b serialdev - 串行设备的名称。4 针连接器的硬件串行端口在 JeVois 平台上始终为 <b>/dev/ttyS0</b>。
+- \b serial:mode - 输入的终端仿真模式，应为 \b Plain 或 \b VT100。默认为 \b Plain。
 
-- \b serial:baudrate - baud rate to use. Should be one of 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400,
-  57600, 115200, 230400, 380400, 460800, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000,
-  4000000. Default is \b 115200. Note that some of the values listed here, which are supported by the hardware in
-  theory, do not seem to work. Some tuning of the serial drivers for Allwinner chips in the Linux kernel may be
-  required. The values \b 9600, \b 115200, and \b 1500000 (1.5 Mbps) have been confirmed to work. You should use \b 9600
-  if piping the serial data over a Bluetooth BLE link.
+- \b serial:baudrate - 要使用的波特率。应为 110、300、600、1200、2400、4800、9600、14400、19200、38400、57600、115200、230400、380400、460800、921600、1000000、1152000、1500000、2000000、2500000、3000000、3500000、
+4000000 之一。默认值为 \b 115200。请注意，此处列出的某些值理论上受硬件支持，但似乎不起作用。可能需要对 Linux 内核中 Allwinner 芯片的串行驱动程序进行一些调整。已确认值 \b 9600、\b 115200 和 \b 1500000（1.5 Mbps）可以正常工作。如果通过蓝牙 BLE 链路传输串行数据，则应使用 \b 9600。
 
-- \b serial:linestyle - End of line style: should be
-  + \b LF for 0x0a [\\n];
-  + \b CR for 0x0d [\\r];
-  + \b CRLF for 0x0d 0x0a [\\r\\n];
-  + \b Zero for 0x00 [\\0];
-  + \b Sloppy for any of CR, LF, CRLF, 0xd0 (issued by some keyboards instead of Return), or Zero as input,
-    and CRLF as outputs. \b Sloppy is the default.
+- \b serial:linestyle - 行尾样式：应为
++ \b LF 表示 0x0a [\\n];
++ \b CR 表示 0x0d [\\r];
++ \b CRLF 表示 0x0d 0x0a [\\r\\n];
++ \b Zero 表示 0x00 [\\0];
++ \b Sloppy 表示 CR、LF、CRLF、0xd0（由某些键盘发出，而不是 Return）中的任何一个，或 Zero 作为输入，CRLF 作为输出。\b Sloppy 是默认值。
 
-- \b serial:format - Data format. Should be a string with 3 characters:
-  + Number of data bits: \b 5 to \b 8, default is \b 8
-  + Parity: \b N for none, \b O for odd, \b E for even. Default is \b N
-  + Stop bits: \b 1 or \b 2. Default is \b 1
-  + Example: \b 8N1 (default)
+- \b serial:format - 数据格式。应为包含 3 个字符的字符串：
++ 数据位数：\b 5 至 \b 8，默认为 \b 8
++ 奇偶校验：\b N 表示无，\b O 表示奇数，\b E 表示偶数。默认为 \b N
++ 停止位：\b 1 或 \b 2。默认为 \b 1
++ 示例：\b 8N1（默认）
 
 
-For example, to reduce the serial rate to 9600 bauds when piping the serial data to a Bluetooth BLE transmitter, \b
-params.cfg should contain:
+例如，在将串行数据传输到蓝牙 BLE 发射器时，为了将串行速率降低到 9600 波特，\b params.cfg 应包含：
 
-\verbatim
-serialdev=/dev/ttyS0
-serial:baudrate=9600
-serial:linestyle=LF
-\endverbatim
+\verbatim serialdev=/dev/ttyS0 serial:baudrate=9600 serial:linestyle=LF \endverbatim
 
-\note The first line (serialdev=/dev/ttyS0) is necessary for the other options to be accepted. This is because,
-otherwise, the serial port is left undefined (\b serialdev is empty by default) until after \b params.cfg is parsed, and
-will be assigned a default value of /dev/ttyS0 later when jevois-engine starts its operations.
+\note 第一行 (serialdev=/dev/ttyS0) 是其他选项被接受所必需的。这是因为，否则，串行端口在解析 \b params.cfg 之前将保持未定义状态（\b serialdev 默认为空），并且稍后在 jevois-engine 启动其操作时将为其分配一个默认值 /dev/ttyS0。
 
-Wireless serial using bluetooth low energy (BLE)
+使用低功耗蓝牙（BLE）的无线串行
 ------------------------------------------------
 
-We have successfully used an Adafruit Feather 32u4 Bluefruit LE to transmit JeVois serial data over bluetooth. Using
-this, you can control JeVois from a tablet running a bluetooth serial app (such as the BlueFruit app).
+我们已成功使用 Adafruit Feather 32u4 Bluefruit LE 通过蓝牙传输 JeVois 串行数据。使用此功能，您可以通过运行蓝牙串行应用程序（例如 BlueFruit 应用程序）的平板电脑控制 JeVois。
 
-We connected its serial pins to the serial port of JeVois, and wrote a trivial piece of code that would just forward
-serial data between the serial pins and the BLE module of the Feather. It worked well at 9600 bauds but choked at 115200
-bauds. Looks like serial transmission over BLE is limited to 9600 bauds. Have a look in <b>JEVOIS:/config/params.cfg</b>
-for config options we used when transmitting serial data over Bluetooth. Other serial-to-BLE modules are available and
-should work fine as well, but we have not yet tested. The main drawback with the Feather 32u4 Bluefruit LE is its price
-($30).
+我们将其串行引脚连接到 JeVois 的串行端口，并编写了一段简单的代码，该代码只会在串行引脚和 Feather 的 BLE 模块之间转发串行数据。它在 9600 波特下工作良好，但在 115200 波特下会卡住。看起来 BLE 上的串行传输限制为 9600 波特。查看 <b>JEVOIS:/config/params.cfg</b> 以了解我们在通过蓝牙传输串行数据时使用的配置选项。其他串行到 BLE 模块可用并且应该也可以正常工作，但我们尚未测试。Feather 32u4 Bluefruit LE 的主要缺点是它的价格（30 美元）。
 
 */
+

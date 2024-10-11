@@ -1,0 +1,115 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessor}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessor}\index{jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经网络管道的后处理器 
+
+这是深度神经网络处理管道的最后一步。 
+
+Definition at line 145 of file Post\+Processor.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classjevois_1_1dnn_1_1PostProcessor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_aa1778b15bf19ee2150555b31ca27f249}{$\sim$\+Post\+Processor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}{freeze}} (bool doit)=0
+\begin{DoxyCompactList}\small\item\em 冻结/解冻运行时用户不应更改的参数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$preproc)=0
+\begin{DoxyCompactList}\small\item\em Process outputs. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false)=0
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessor_aa1778b15bf19ee2150555b31ca27f249}\label{classjevois_1_1dnn_1_1PostProcessor_aa1778b15bf19ee2150555b31ca27f249}} 
+\index{jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}!````~PostProcessor@{$\sim$PostProcessor}}
+\index{````~PostProcessor@{$\sim$PostProcessor}!jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessor()}{~PostProcessor()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+::$\sim$\+Post\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 21 of file Post\+Processor.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}\label{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}} 
+\index{jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Post\+Processor\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+冻结/解冻运行时用户不应更改的参数 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_acf6f0c764991ac2e53bf1542e21f4340}{jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a7485f25ae3ba8df8539f4ddc0fdbd991}{jevois\+::dnn\+::\+Post\+Processor\+Detect}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorClassify_a4ba86dcba285a8d0608953100c9a98ed}{jevois\+::dnn\+::\+Post\+Processor\+Classify}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_a97f86c434879713d1b581f7f4ab55b2a}{jevois\+::dnn\+::\+Post\+Processor\+Stub}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_aaee72556dbfb87dd31bbcb2fb6cb24d1}{jevois\+::dnn\+::\+Post\+Processor\+Python}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorSegment_ac026160a5dd6e559254117e598682869}{jevois\+::dnn\+::\+Post\+Processor\+Segment}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}\label{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}} 
+\index{jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}!process@{process}}
+\index{process@{process}!jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Post\+Processor\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{preproc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Process outputs. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}{jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}{jevois\+::dnn\+::\+Post\+Processor\+Detect}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorClassify_a5b590228d3ed7317b5f0d72b75e49bef}{jevois\+::dnn\+::\+Post\+Processor\+Classify}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_a9dad6013ace7669c0a05ce3680aa79c5}{jevois\+::dnn\+::\+Post\+Processor\+Python}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_aa7874788165a3486c28e66934e4fe900}{jevois\+::dnn\+::\+Post\+Processor\+Stub}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorSegment_a059864afb35985779f815f1a8cc3ec33}{jevois\+::dnn\+::\+Post\+Processor\+Segment}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}\label{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}} 
+\index{jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}!report@{report}}
+\index{report@{report}!jevois::dnn::PostProcessor@{jevois::dnn::PostProcessor}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Post\+Processor\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_acad85ce6e370180070df325547cfadbb}{jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}{jevois\+::dnn\+::\+Post\+Processor\+Detect}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorClassify_aeb2e26491fc97ecacdb29df3bc8edb7c}{jevois\+::dnn\+::\+Post\+Processor\+Classify}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython_aaaedb11fcf6790ab1b6922aa1249022b}{jevois\+::dnn\+::\+Post\+Processor\+Python}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub_ae9eccd4da2bf7cb8613d5dde3165c87e}{jevois\+::dnn\+::\+Post\+Processor\+Stub}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorSegment_a3826e0638b79af325f264a886247c7e3}{jevois\+::dnn\+::\+Post\+Processor\+Segment}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessor_8H}{Post\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessor_8C}{Post\+Processor.\+C}}\end{DoxyCompactItemize}

@@ -26,141 +26,119 @@ namespace jevois
   class VideoOutput;
   class Engine;
   
-  //! Exception-safe wrapper around a raw image to be sent over USB
-  /*! This wrapper operates much like std:future in standard C++11. Users can get the next memory-allocated but blank
-      image to be sent over USB by calling get(), which may block if all buffers are still being sent over USB by Gadget
-      and no blank one is available, or may throw if getting that buffer fails for some reason (e.g., usb disconnect,
-      user just changed video mode in their webcam software or closed it). The allocated image size and pixel type is as
-      defined by the current VideoMapping, USB section, i.e., it is the USB video mode currently selected by the
-      user. To save time, image buffers are not zeroed out, so you should not assume that the image is filled with black
-      pixels, it could contain random pixels, or previous output frames.  In addition, a send() function is provided
-      which users may use as soon as they are finished with writing the pixel data into the image obtained via get(), to
-      allow the USB driver to send that image to the connected host computer. If send() has not been called by the time
-      the OutputFrame is destroyed, it will be called automatically, if get() had been called.
+  //! 围绕要通过 USB 发送的原始图像的异常安全包装器
+  /*! 此包装器的操作方式与标准 C++11 中的 std:future 非常相似。用户可以通过调用 get() 获取下一个要通过 USB 发送的内存分
+      配但空白的图像，如果 Gadget 仍在通过 USB 发送所有缓冲区并且没有可用的空白缓冲区，则可能会阻塞，或者如果由于某种原
+	  因（例如，USB 断开连接，用户刚刚在其网络摄像头软件中更改了视频模式或关闭了它）获取该缓冲区失败，则可能会抛出异常
+	  。分配的图像大小和像素类型由当前 VideoMapping、USB 部分定义，即它是用户当前选择的 USB 视频模式。为了节省时间，图
+	  像缓冲区不会被清零，因此您不应假设图像填充了黑色像素，它可能包含随机像素或先前的输出帧。此外，还提供了 send() 函
+	  数，用户在将像素数据写入通过 get() 获取的图像后即可使用该函数，以允许 USB 驱动程序将该图像发送到连接的主机。如果
+	  在 OutputFrame 被销毁时尚未调用 send()，则如果已调用 get()，则会自动调用该函数。
+	  
+	  OutputFrame 实现了对输出视频帧的零拷贝、零等待访问，即：
+	  
+	  1. 您通过 get() 获取的图像的像素数据直接是内存映射像素缓冲区，JeVois 芯片上的硅硬件将通过直接内存访问 (DMA) 使用
+	     该缓冲区通过 USB 链路将数据流出；
+	  2. 只要您调用 send()，该缓冲区就会排队等待通过 USB 发送（而不是以固定的、有规律的间隔流出图像）。Gadget 有多个图
+	     像缓冲区，允许一个缓冲区通过 USB 流出，而另一个缓冲区则通过 get() 由您的应用程序填充。这些缓冲区是可回收的，
+		 即一旦调用 send()，底层缓冲区就会通过 USB 流出，然后发送回 Gadget 以供您的代码将来访问。
+		 
+	  \ingroup core */
 
-      OutputFrame implements a zero-copy, zero-wait access to output video frames, that is:
-
-      1. the pixel data of the image you obtain via get() is directly the memory-mapped pixel buffer that the silicon
-         hardware on the JeVois chip will use via direct-memory-access (DMA) to stream the data out over the USB link;
-      2. as soon as you call send() that buffer will be queued for sending over USB (as opposed to having a fixed,
-         regular interval at which images may be streamed out). Gadget has several image buffers, allowing one to be
-         streamed out over USB while another is being handed over for filling by your application via get(). These
-         buffers are recycled, i.e., once send() is called, the underlying buffer is streamed over USB and then sent
-         back to the Gadget for future access by your code.
-
-      \ingroup core */
   class OutputFrame
   {
     public:
       //! Move constructor
       OutputFrame(OutputFrame && other) = default;
       
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out over USB using send()
-      /*! May throw if not buffer is available, i.e., all have been queued to send to the host but have not yet been
-          sent. Application code must balance exactly one send() for each get(). */
-      RawImage const & get() const;
-
-      //! Send an image out over USB to the host computer
-      /*! May throw if the format is incorrect or std::overflow_error if we have not yet consumed the previous image. */
-      void send() const;
-
-      //! Shorthand to send a cv::Mat after converting / scaling it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat will be rescaled to the same dims as the output frame.
-
-	  The pixel format of the given cv::Mat is guessed as follows:
-	  - if img.type() == CV_8UC3, assume BGR pixels
-	  - if img.type() == CV_8UC1, assume GRAY pixels
-	  - if img.type() == CV_8UC4, assume RGBA pixels
-
-	  C++ module writers should stick to the get()/send() pair as this provides better fine-grained control. Note
-          that the cv::Mat image will always be copied or converted to the destination RawImage and will then be sent
-          out immediately by calling send(), so users should not call send() after using this function. This function is
-          basically equivalent to calling get(), converting the given cv::Mat to the proper output format, and calling
-          send(). quality is used only if the output format is MJPEG and should be between 1 and 100.*/
-      void sendCv(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a GRAY cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat must have same dims as the output frame. C++ module writers should stick to the
-          get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always be
-          copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100. */
-      void sendCvGRAY(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a BGR cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat must have same dims as the output frame. C++ module writers should stick to the
-          get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always be
-          copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
-      void sendCvBGR(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a RGB cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat must have same dims as the output frame. C++ module writers should stick to the
-          get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always be
-          copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
-      void sendCvRGB(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a RGBA cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat must have same dims as the output frame. C++ module writers should stick to the
-          get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always be
-          copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
-      void sendCvRGBA(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a GRAY cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat will be rescaled to the same dims as the output frame. C++ module writers should stick
-          to the get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always
-          be copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100. */
-      void sendScaledCvGRAY(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a BGR cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat will be rescaled to the same dims as the output frame. C++ module writers should stick
-          to the get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always
-          be copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
-      void sendScaledCvBGR(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a RGB cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat will be rescaled to the same dims as the output frame. C++ module writers should stick
-          to the get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always
-          be copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
-      void sendScaledCvRGB(cv::Mat const & img, int quality = 75) const;
-
-      //! Shorthand to send a RGBA cv::Mat after converting it to the current output format
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. The cv::Mat will be rescaled to the same dims as the output frame. C++ module writers should stick
-          to the get()/send() pair as this provides better fine-grained control. Note that the cv::Mat image will always
-          be copied or converted to the destination RawImage and will then be sent out immediately by calling send(), so
-          users should not call send() after using this function. This function is basically equivalent to calling
-          get(), converting the given cv::Mat to the proper output format, and calling send(). quality is used only if
-          the output format is MJPEG and should be between 1 and 100.*/
+	  //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 通过 USB 发送出去 
+	  /*! 如果没有可用的缓冲区，则可能会抛出，即，所有内容都已排队等待发送到主机但尚未发送。应用程序代码必须为每个 get() 
+	      平衡一个 send()。 */ 
+	  RawImage const & get() const;
+	  
+	  //！通过 USB 将图像发送到主机 
+	  /*！如果格式不正确，则可能抛出 std::overflow_error，如果我们尚未使用前一个图像。 */ 
+	  void send() const;
+	  
+	  //! 将 cv::Mat 转换/缩放为当前输出格式后发送的简写 
+	  /*! 这主要针对 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的尺寸。
+	      
+	  给定的 cv::Mat 的像素格式猜测如下：
+	  - 如果 img.type() == CV_8UC3，则假设为 BGR 像素 
+	  - 如果 img.type() == CV_8UC1，则假设为 GRAY 像素 
+	  - 如果 img.type() == CV_8UC4，则假设为 RGBA 像素
+	  
+	  C++ 模块编写者应坚持使用 get()/send() 组合，因为这可提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为目标
+	       RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 get()、
+		   将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1 和 
+		   100 之间。*/ 
+	  void sendCv(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的尺寸。
+	      C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为
+		  目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。 */ 
+	  void sendCvGRAY(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 BGR cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的尺寸。
+	      C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为
+		  目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。*/ 
+	  void sendCvBGR(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 RGB cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的暗淡度。
+	      C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为
+		  目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()，将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。*/ 
+	  void sendCvRGB(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 必须具有与输出帧相同的暗淡度。
+	      C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为
+		  目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()，将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。*/ 
+	  void sendCvRGBA(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 GRAY cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗度。
+	      C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换为
+		  目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。 */ 
+	  void sendScaledCvGRAY(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 BGR cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的大小
+	      。C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换
+		  为目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 1
+		   和 100 之间。*/ 
+	  void sendScaledCvBGR(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 RGB cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗淡
+	      程度。C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或
+		  转换为目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调
+		  用 get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介
+		  于 1 和 100 之间。*/ 
+	  void sendScaledCvRGB(cv::Mat const & img, int quality = 75) const;
+	  
+	  //! 将 RGBA cv::Mat 转换为当前输出格式后发送它的简写 
+	  /*! 这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。cv::Mat 将重新缩放为与输出帧相同的暗度
+	      。C++ 模块编写者应坚持使用 get()/send() 对，因为这可以提供更好的细粒度控制。请注意，cv::Mat 图像将始终被复制或转换
+		  为目标 RawImage，然后通过调用 send() 立即发送出去，因此用户在使用此函数后不应调用 send()。此函数基本上等同于调用 
+		  get()、将给定的 cv::Mat 转换为正确的输出格式，然后调用 send()。仅当输出格式为 MJPEG 时才使用 quality，并且应介于 
+		  1 和 100 之间。*/ 
       void sendScaledCvRGBA(cv::Mat const & img, int quality = 75) const;
       
-      //! Destructor, returns the buffers to the driver as needed
+      //! 析构函数，根据需要将缓冲区返回给驱动程序
       ~OutputFrame();
       
     private:
@@ -168,7 +146,7 @@ namespace jevois
       OutputFrame(OutputFrame const & other) = delete;
       OutputFrame & operator=(OutputFrame const & other) = delete;
 
-      // Only our friends can construct us:
+      // 只有我们的 friends 可以构造我们：
       friend class Engine;
       OutputFrame(std::shared_ptr<VideoOutput> const & gad, RawImage * excimg = nullptr);
 

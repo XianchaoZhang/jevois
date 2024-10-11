@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1python_1_1PyParHelperBase">
+<title>jevois::python::PyParHelperBase Class Reference</title>
+<indexterm><primary>jevois::python::PyParHelperBase</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonParameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>允许在 python 中创建参数的基本帮助类 </para>
+<para>
+Definition at line 28 of file PythonParameter.H.</para>
+Inheritance diagram for jevois::python::PyParHelperBase:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1python_1_1PyParHelperBase__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1python_1_1PyParHelperBase_1aa679241d805149fa084d1d057a1bceba">PyParHelperBase</link> (<link linkend="_classjevois_1_1Component">jevois::Component</link> *<link linkend="_classjevois_1_1python_1_1PyParHelperBase_1a49587e204e2514594a3c7f1ae48f9fea">comp</link>)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1aa6179272882f7ac66e4749a24cd9c1f2">~PyParHelperBase</link> ()</para>
+
+<para>从组件中移除参数 </para>
+</listitem>
+            <listitem><para>virtual boost::python::object <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1afb46b7a1e13b3328ecbbd05cac0e9e59">get</link> ()=0</para>
+
+<para>获取值，输入类型，然后包装到 python 对象中 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1ac1e28253dc835a7e069d13234fbc475d">set</link> (boost::python::object const &amp;val)=0</para>
+
+<para>从 python 对象中设置应包含正确类型的值 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1a6cf1273b22f30426b839f160979d6409">setCallback</link> (boost::python::object const &amp;cb)=0</para>
+
+<para>设置参数的回调 </para>
+</listitem>
+            <listitem><para>virtual std::shared_ptr&lt; <link linkend="_classjevois_1_1ParameterBase">jevois::ParameterBase</link> &gt; <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1aea70368dcae097b7ff160a7d6d5888bf">par</link> () const =0</para>
+
+<para>访问关联的 C++ 基础参数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Component">jevois::Component</link> * <link linkend="_classjevois_1_1python_1_1PyParHelperBase_1a49587e204e2514594a3c7f1ae48f9fea">comp</link> () const</para>
+
+<para>访问关联的 C++ 组件 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1aa679241d805149fa084d1d057a1bceba"/>    <section>
+    <title>PyParHelperBase()</title>
+<indexterm><primary>PyParHelperBase</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>PyParHelperBase</secondary></indexterm>
+<para><computeroutput>jevois::python::PyParHelperBase::PyParHelperBase (<link linkend="_classjevois_1_1Component">jevois::Component</link> * comp)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 23 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1aa6179272882f7ac66e4749a24cd9c1f2"/>    <section>
+    <title>~PyParHelperBase()</title>
+<indexterm><primary>~PyParHelperBase</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>~PyParHelperBase</secondary></indexterm>
+<para><computeroutput>jevois::python::PyParHelperBase::~PyParHelperBase ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从组件中移除参数 </para>
+</para>
+<para>
+Definition at line 27 of file PythonParameter.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1a49587e204e2514594a3c7f1ae48f9fea"/>    <section>
+    <title>comp()</title>
+<indexterm><primary>comp</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>comp</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1Component">jevois::Component</link> * jevois::python::PyParHelperBase::comp ( ) const<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>访问关联的 C++ 组件 </para>
+</para>
+<para>
+Definition at line 31 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1afb46b7a1e13b3328ecbbd05cac0e9e59"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>virtual boost::python::object jevois::python::PyParHelperBase::get ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取值，输入类型，然后包装到 python 对象中 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1python_1_1PyParHelper_1a46c4e08296186748c1bc27413528a589">jevois::python::PyParHelper&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1aea70368dcae097b7ff160a7d6d5888bf"/>    <section>
+    <title>par()</title>
+<indexterm><primary>par</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>par</secondary></indexterm>
+<para><computeroutput>virtual std::shared_ptr&lt;<link linkend="_classjevois_1_1ParameterBase">jevois::ParameterBase</link>&gt; jevois::python::PyParHelperBase::par ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>访问关联的 C++ 基础参数 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1python_1_1PyParHelper_1a1ed4bd9574d0c5004d82ff8c31ab6512">jevois::python::PyParHelper&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1ac1e28253dc835a7e069d13234fbc475d"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>virtual void jevois::python::PyParHelperBase::set (boost::python::object const &amp; val)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>从 python 对象中设置应包含正确类型的值 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1python_1_1PyParHelper_1a6dd4c9843259c9360ceea3c90c4376fd">jevois::python::PyParHelper&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1python_1_1PyParHelperBase_1a6cf1273b22f30426b839f160979d6409"/>    <section>
+    <title>setCallback()</title>
+<indexterm><primary>setCallback</primary><secondary>jevois::python::PyParHelperBase</secondary></indexterm>
+<indexterm><primary>jevois::python::PyParHelperBase</primary><secondary>setCallback</secondary></indexterm>
+<para><computeroutput>virtual void jevois::python::PyParHelperBase::setCallback (boost::python::object const &amp; cb)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置参数的回调 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1python_1_1PyParHelper_1a50eed5ea7cfcd0836546907715a7079d">jevois::python::PyParHelper&lt; T &gt;</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonParameter_8H">PythonParameter.H</link>src/jevois/Core/<link linkend="_PythonParameter_8C">PythonParameter.C</link></section>
+</section>

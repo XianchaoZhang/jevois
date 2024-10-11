@@ -1,0 +1,45 @@
+\hypertarget{group__python}{}\doxysubsection{支持用 Python 编写的 Je\+Vois 模块}
+\label{group__python}\index{支持用 Python 编写的 JeVois 模块@{支持用 Python 编写的 JeVois 模块}}
+
+
+\doxysubsubsection{ }
+除了用 C++ 编写模块外，\+Je\+Vois 还支持用 Python 编写模块。\+Je\+Vois 提供双向映射： 
+
+
+\begin{DoxyItemize}
+\item 通过导入 Python 包 {\ttfamily libjevois} ，可以在 Python 中访问 Je\+Vois 的 C++ 函数和类
+\item Je\+Vois 引擎可以直接调用实现机器视觉处理模块的 Python 类的类成员函数 
+\end{DoxyItemize}Collaboration diagram for 支持用 Python 编写的 Je\+Vois 模块\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__python}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1InputFramePython}{jevois\+::\+Input\+Frame\+Python}}
+\begin{DoxyCompactList}\small\item\em 包装 Python 使用的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1OutputFramePython}{jevois\+::\+Output\+Frame\+Python}}
+\begin{DoxyCompactList}\small\item\em Python 使用的 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1GUIhelperPython}{jevois\+::\+G\+U\+Ihelper\+Python}}
+\begin{DoxyCompactList}\small\item\em 包装 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 以供 Python 使用 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonModule}{jevois\+::\+Python\+Module}}
+\begin{DoxyCompactList}\small\item\em 包装器模块允许用户开发用 Python 编写的新模块 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython}{jevois\+::dnn\+::\+Pre\+Processor\+For\+Python}}
+\begin{DoxyCompactList}\small\item\em Pre-\/\+Processor interface exposed to the python side. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}
+\begin{DoxyCompactList}\small\item\em 允许在 python 中创建参数的基本帮助类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 类型化类，允许在 Python 中创建参数 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonParameter}{jevois\+::\+Python\+Parameter}}
+\begin{DoxyCompactList}\small\item\em python 中 jevois 参数的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1PythonWrapper}{jevois\+::\+Python\+Wrapper}}
+\begin{DoxyCompactList}\small\item\em 辅助类，用于从 C++ 运行 Python 代码 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__pysupport}{Python 支持函数}}
+\begin{DoxyCompactList}\small\item\em 帮助程序促进与 Python 之间的数据传输 \end{DoxyCompactList}\end{DoxyCompactItemize}

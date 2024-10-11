@@ -1,0 +1,139 @@
+\hypertarget{Util_2Utils_8H}{}\doxysubsection{include/jevois/\+Util/\+Utils.H File Reference}
+\label{Util_2Utils_8H}\index{include/jevois/Util/Utils.H@{include/jevois/Util/Utils.H}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/details/\+Utils\+Impl.\+H$>$}\newline
+Include dependency graph for Utils.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Util_2Utils_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Util_2Utils_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Util_2Utils_8H_af485992cff00d3b6d935d3d5de3ba0e6}{I\+S\+P\+\_\+\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+E\+TA}}~v4l2\+\_\+fourcc( \textquotesingle{}M\textquotesingle{}, \textquotesingle{}E\textquotesingle{}, \textquotesingle{}T\textquotesingle{}, \textquotesingle{}A\textquotesingle{} )
+\begin{DoxyCompactList}\small\item\em Metadata V4\+L2 format used by Amlogic A311D camera I\+SP. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Util_2Utils_8H_a4df97417f73b7fe0448944a5f5d86df7}{J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI}}~v4l2\+\_\+fourcc( \textquotesingle{}\mbox{\hyperlink{GUIhelper_8C_a518af4e11e6c072ade65a5e299f09bc9}{J}}\textquotesingle{}, \textquotesingle{}\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}\textquotesingle{}, \textquotesingle{}U\textquotesingle{}, \textquotesingle{}I\textquotesingle{} )
+\begin{DoxyCompactList}\small\item\em Je\+Vois-\/\+Pro 相机输入帧的零拷贝显示（用作 Video\+Mapping 中的输出模式） \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}{X\+I\+O\+C\+TL}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__utils_ga30dfc52798d0b53ad1736a622759b9ff}{X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__utils_ga03db0ad166b1e653bae8910cb3d76795}{X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+E\+T\+\_\+\+O\+N\+CE}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{jevois\+::fccstr}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 将 V4\+L2 four-\/cc 代码（\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...）转换为 4 字符字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}{jevois\+::cvtypestr}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 将 cv\+::\+Mat\+::type() 代码转换为字符串（例如 C\+V\+\_\+8\+U\+C1、\+C\+V\+\_\+32\+S\+C3 等） \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga1ce31b21602cde5b241a59b4312ee6d5}{jevois\+::cv\+Bytes\+Per\+Pix}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 返回给定 Open\+CV 像素类型每像素的字节数 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga34f3127327f6113672a16d3a041552df}{jevois\+::strfcc}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 将 Je\+Vois 视频格式字符串转换为 V4\+L2 four-\/cc 代码 (V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...) \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}{jevois\+::v4l2\+Bytes\+Per\+Pix}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+ 每像素的字节数... \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gafa5c6faaeefd12994a07c09ed748176c}{jevois\+::v4l2\+Image\+Size}} (unsigned int fcc, unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+... 的图像大小（以字节为单位）, width, height \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gae3448a5e4bbd80efd03d6417974834d0}{jevois\+::black\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的黑色的值 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}{jevois\+::white\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的白色的值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gad1e7ee20cd2509969dcd07acfb188f2b}{jevois\+::apply\+Letter\+Box}} (unsigned int \&imw, unsigned int \&imh, unsigned int const winw, unsigned int const winh, bool noalias)
+\begin{DoxyCompactList}\small\item\em 应用 letterbox 调整大小以使图像适合窗口 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gac91eaef1908f07d3ecd6112eb12ef571}{jevois\+::split}} (std\+::string const \&input, std\+::string const \&regex=\char`\"{}\textbackslash{}\textbackslash{}s+\char`\"{})
+\begin{DoxyCompactList}\small\item\em 使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga31195f1860c3aff445df8be6e602fecd}{jevois\+::join}} (std\+::vector$<$ std\+::string $>$ const \&strings, std\+::string const \&delimiter)
+\begin{DoxyCompactList}\small\item\em 将 tokens 向量连接成字符串 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__utils_gac058832c57b8033f8a90e05c8ecee103}{jevois\+::string\+Starts\+With}} (std\+::string const \&str, std\+::string const \&prefix)
+\begin{DoxyCompactList}\small\item\em 如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa5a52cf5cff1d44b33db20364c07801a}{jevois\+::replace\+Whitespace}} (std\+::string const \&str, char rep=\textquotesingle{}\+\_\+\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em 用下划线（默认）或其他字符替换字符串中的空格字符 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga283968df765ce49751142cd55e0364d7}{jevois\+::strip}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串末尾去除空格（包括 C\+R、\+L\+F、tabs 等） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga4b0d94273d4e910b353a0ff999c23b7c}{jevois\+::extract\+String}} (std\+::string const \&str, std\+::string const \&startsep, std\+::string const \&endsep)
+\begin{DoxyCompactList}\small\item\em 提取两个分隔符之间的字符串部分 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_ga34ee23a47b698e960a477d9d4e2d435d}{jevois\+::replace\+String\+First}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将 \textquotesingle{}from\textquotesingle{} 的第一个实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_gab6a5b228ce68e5634e2bb2c778b0bc34}{jevois\+::replace\+String\+All}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gafd49e84b9b5e4d95b1d4da28bdbbdb94}{jevois\+::replace\+All}} (std\+::string const \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga534153c7b53c07a0db4bbdcbb81b566f}{jevois\+::tolower}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em Convert string to lowercase. \end{DoxyCompactList}\item 
+std\+::filesystem\+::path \mbox{\hyperlink{group__utils_gabd49e55c0ae1f31a3f30d73284469eac}{jevois\+::absolute\+Path}} (std\+::filesystem\+::path const \&root, std\+::filesystem\+::path const \&path)
+\begin{DoxyCompactList}\small\item\em 根据两个路径计算绝对路径 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa49a5ccff29adea33326680d1e22b456}{jevois\+::sformat}} (char const $\ast$fmt,...) \+\_\+\+\_\+attribute\+\_\+\+\_\+((format(\+\_\+\+\_\+printf\+\_\+\+\_\+
+\begin{DoxyCompactList}\small\item\em 使用 printf 样式参数创建字符串 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string T \mbox{\hyperlink{group__utils_ga7eb44bbb053c52395d5704aa15265632}{jevois\+::from\+\_\+string}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string \mbox{\hyperlink{group__utils_gae142fbf87f70b758581c1845c2fa58e7}{jevois\+::to\+\_\+string}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型，适用于整数类型的版本 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename dest\+\_\+type , typename source\+\_\+type $>$ }\\dest\+\_\+type \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert}} (source\+\_\+type source)
+\begin{DoxyCompactList}\small\item\em Clamped numerical conversion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga3c42b68a3562220199677eed7cdceb51}{jevois\+::flushcache}} ()
+\begin{DoxyCompactList}\small\item\em 刷新缓存，有时在 turbo 模式下运行相机时可能会有用 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{jevois\+::system}} (std\+::string const \&cmd, bool errtoo=true)
+\begin{DoxyCompactList}\small\item\em 执行命令并将 stdout 输出抓取到字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}{jevois\+::secs2str}} (double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga961f407b12b1d4a32577facc3d1f6ad9}{jevois\+::secs2str}} (std\+::vector$<$ double $>$ secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位给出的 avg+/-\/std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gaa9401ec9d35d0669e256673c8cdeb4f4}{jevois\+::secs2str}} (std\+::ostringstream \&ss, double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间（ns、us、ms 或 s） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}{jevois\+::num2str}} (double n)
+\begin{DoxyCompactList}\small\item\em 报告一个具有可变乘数（\+K、\+M、\+G、\+T、\+P、\+E、\+Z、\+Y）的数字，精度为小数点后 2 位 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga074c42c36f209780e0420ca3b6e3bfc6}{jevois\+::num2str}} (std\+::ostringstream \&ss, double n)
+\begin{DoxyCompactList}\small\item\em 报告具有可变乘数 (K、\+M、\+G、\+T、\+P、\+E、\+Z、Y) 的数字 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga55e88d558a6aeff700099fa3180fc025}{jevois\+::get\+File\+String}} (char const $\ast$fname, int skip=0)
+\begin{DoxyCompactList}\small\item\em 从文件中读取一行并将其作为字符串返回 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Util_2Utils_8H_af485992cff00d3b6d935d3d5de3ba0e6}\label{Util_2Utils_8H_af485992cff00d3b6d935d3d5de3ba0e6}} 
+\index{Utils.H@{Utils.H}!ISP\_V4L2\_PIX\_FMT\_META@{ISP\_V4L2\_PIX\_FMT\_META}}
+\index{ISP\_V4L2\_PIX\_FMT\_META@{ISP\_V4L2\_PIX\_FMT\_META}!Utils.H@{Utils.H}}
+\doxyparagraph{\texorpdfstring{ISP\_V4L2\_PIX\_FMT\_META}{ISP\_V4L2\_PIX\_FMT\_META}}
+{\footnotesize\ttfamily \#define I\+S\+P\+\_\+\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+E\+TA~v4l2\+\_\+fourcc( \textquotesingle{}M\textquotesingle{}, \textquotesingle{}E\textquotesingle{}, \textquotesingle{}T\textquotesingle{}, \textquotesingle{}A\textquotesingle{} )}
+
+
+
+Metadata V4\+L2 format used by Amlogic A311D camera I\+SP. 
+
+
+
+Definition at line 27 of file Utils.\+H.
+
+\mbox{\Hypertarget{Util_2Utils_8H_a4df97417f73b7fe0448944a5f5d86df7}\label{Util_2Utils_8H_a4df97417f73b7fe0448944a5f5d86df7}} 
+\index{Utils.H@{Utils.H}!JEVOISPRO\_FMT\_GUI@{JEVOISPRO\_FMT\_GUI}}
+\index{JEVOISPRO\_FMT\_GUI@{JEVOISPRO\_FMT\_GUI}!Utils.H@{Utils.H}}
+\doxyparagraph{\texorpdfstring{JEVOISPRO\_FMT\_GUI}{JEVOISPRO\_FMT\_GUI}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI~v4l2\+\_\+fourcc( \textquotesingle{}\mbox{\hyperlink{GUIhelper_8C_a518af4e11e6c072ade65a5e299f09bc9}{J}}\textquotesingle{}, \textquotesingle{}\mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}}\textquotesingle{}, \textquotesingle{}U\textquotesingle{}, \textquotesingle{}I\textquotesingle{} )}
+
+
+
+Je\+Vois-\/\+Pro 相机输入帧的零拷贝显示（用作 Video\+Mapping 中的输出模式） 
+
+请注意，底层模式是 M\+A\+LI Open\+GL 使用的 R\+G\+BA ~\newline
+ 
+
+Definition at line 31 of file Utils.\+H.
+

@@ -35,7 +35,7 @@ jevois::Component * jevois::python::PyParHelperBase::comp() const
 // ####################################################################################################
 namespace
 {
-  // Function signature for PyParHelper<T>::create
+  // PyParHelper<T>::create 的函数签名
   using padp = std::shared_ptr<jevois::python::PyParHelperBase>(*)(jevois::Component *, std::string const &,
                                                                    std::string const &, boost::python::object const &,
                                                                    jevois::ParameterCategory const &);
@@ -62,9 +62,9 @@ namespace
 #ifdef JEVOIS_PRO  
   static padp padp_color = jevois::python::PyParHelper<ImColor>::create;
 #endif
-  // jevois::Parameter also supports pair<T,S>, map<K,V>, vector<T>, etc in C++...
+  // jevois::Parameter 还支持 C++ 中的 pair<T,S>、map<K,V>、vector<T> 等...
 
-  // Now create a mapping from type names exposed to python to C++ types:
+  // 现在创建一个从暴露给 python 的类型名称到 C++ 类型的映射：
   static std::map<std::string, padp> padp_map
   {
    { "bool", padp_bool },
@@ -111,10 +111,10 @@ jevois::PythonParameter::PythonParameter(boost::python::object & pyinst, std::st
     LFATAL(errmsg << "as of currently running JeVois " << JEVOIS_VERSION_STRING);
   }
   
-  // We add the parameter to component registered with the python code:
+  // 我们将参数添加到使用 python 代码注册的组件：
   jevois::Component * comp = jevois::python::engine()->getPythonComponent(pyinst.ptr()->ob_type);
 
-  // Ok, create the parameter with the desired type:
+  // 好的，创建具有所需类型的参数：
   itsPyPar = itr->second(comp, name, description, defaultValue, category);
 }
 

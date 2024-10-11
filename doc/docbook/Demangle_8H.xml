@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Demangle_8H">
+<title>include/jevois/Util/Demangle.H File Reference</title>
+<indexterm><primary>include/jevois/Util/Demangle.H</primary></indexterm>
+<programlisting>#include &lt;string&gt;
+#include &lt;typeinfo&gt;
+#include &lt;jevois/Util/details/DemangleImpl.H&gt;
+</programlisting>Include dependency graph for Demangle.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Demangle_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::string <link linkend="_group__demangling_1gaed135e078da2b90d91350d676e7413fc">jevois::demangle</link> (std::string const &amp;mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__demangling_1ga717b7381dadbb9c05f2dc6fda5344b05">jevois::demangle</link> (char const *mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__demangling_1ga31535139a092fa0cd6aa7ab7e0339cfd">jevois::demangledName</link> ()</para>
+
+<para>Get the demangled type name of type T. </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>std::string <link linkend="_group__demangling_1gad0fbf71c27d34d4bb1074750bb0d94ca">jevois::demangledName&lt; std::string &gt;</link> ()</para>
+
+<para>对 std::string 进行特例化以避免得到丑陋的名称 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

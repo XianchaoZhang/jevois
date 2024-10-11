@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1PythonWrapper">
+<title>jevois::PythonWrapper Class Reference</title>
+<indexterm><primary>jevois::PythonWrapper</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonWrapper.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>辅助类，用于从 C++ 运行 Python 代码 </para>
+
+
+
+<para>此类加载 Python 代码并使其可通过 <link linkend="_classjevois_1_1PythonWrapper_1a8a10f3634fb5a645d134783363a67e67">pyinst()</link> 访问。它旨在与其他类组合，这些类实际上将通过 <link linkend="_classjevois_1_1PythonWrapper_1a8a10f3634fb5a645d134783363a67e67">pyinst()</link> 执行一些 Python 代码。</para>
+
+<para>这里的主要约定是，python 代码将定义一个与 python 文件名完全相同的类（不带尾随的 .py 扩展名）。该类随后可通过 <link linkend="_classjevois_1_1PythonWrapper_1a8a10f3634fb5a645d134783363a67e67">pyinst()</link> 访问。</para>
+
+<para>请注意，构造函数和 <link linkend="_classjevois_1_1PythonWrapper_1a5ddf8ccc64d17a72d6eaedc450baa14b">pythonload()</link> 不会抛出错误，但如果在构造过程中发生错误，pyinst() 将会抛出错误</para>
+
+<para>通常，此类由从 <link linkend="_classjevois_1_1Component">Component</link> 继承的类继承，以创建可以运行 Python 代码的 <link linkend="_classjevois_1_1Component">Component</link> 派生类。在这种情况下， <link linkend="_classjevois_1_1PythonWrapper">PythonWrapper</link> 将在加载 Python 代码时将该同级关联注册到 <link linkend="_classjevois_1_1Engine">Engine</link> 。在从 <link linkend="_classjevois_1_1PythonWrapper">PythonWrapper</link> 继承之前从 Component（或派 生类）继承至关重要，这样当调用 <link linkend="_classjevois_1_1PythonWrapper">PythonWrapper</link> 析构函数时，Component 基类应该尚未被销毁，并且它将从 <link linkend="_classjevois_1_1Engine">Engine</link> 中取 消注册。 </para>
+<para>
+Definition at line 40 of file PythonWrapper.H.</para>
+Inheritance diagram for jevois::PythonWrapper:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1PythonWrapper__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1PythonWrapper_1a142a3816b26b41316de69be2e9681598">PythonWrapper</link> ()</para>
+
+<para>默认构造函数。稍后需要调用 <link linkend="_classjevois_1_1PythonWrapper_1a5ddf8ccc64d17a72d6eaedc450baa14b">pythonload()</link> </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1PythonWrapper_1ad8e670317eea8d0c3541001790fdb0a6">~PythonWrapper</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1PythonWrapper_1a7a7d077ef41b01ff8774b763ae6d6881">PythonWrapper</link> (std::string const &amp;path)</para>
+
+<para>Construct from path. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonWrapper_1a5ddf8ccc64d17a72d6eaedc450baa14b">pythonload</link> (std::string const &amp;path)</para>
+
+<para>如果使用了默认构造函数，则从 path 初始化 </para>
+</listitem>
+            <listitem><para>boost::python::object &amp; <link linkend="_classjevois_1_1PythonWrapper_1a8a10f3634fb5a645d134783363a67e67">pyinst</link> ()</para>
+
+<para>获取 python 类 pyinst，或者如果发生构造错误（例如，找不到文件）则抛出 </para>
+</listitem>
+            <listitem><para>boost::python::object &amp; <link linkend="_classjevois_1_1PythonWrapper_1a0516656c04c1be5b0cf1c5d6344cf707">mainModule</link> ()</para>
+
+<para>Get the main module. </para>
+</listitem>
+            <listitem><para>boost::python::object &amp; <link linkend="_classjevois_1_1PythonWrapper_1af6ab1edbb6dafc1c44f0ffcbf3b7102d">mainNamespace</link> ()</para>
+
+<para>Get the main namespace. </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1PythonWrapper_1ad6d679e3bcb9ec17c0c4802f80c81c85">constructionError</link> () const</para>
+
+<para>获取构造错误（如果有）或空字符串 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonWrapper_1a142a3816b26b41316de69be2e9681598"/>    <section>
+    <title>PythonWrapper()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>PythonWrapper</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>PythonWrapper</secondary></indexterm>
+<para><computeroutput>jevois::PythonWrapper::PythonWrapper ( )</computeroutput></para><para>
+
+<para>默认构造函数。稍后需要调用 <link linkend="_classjevois_1_1PythonWrapper_1a5ddf8ccc64d17a72d6eaedc450baa14b">pythonload()</link> </para>
+</para>
+<para>
+Definition at line 23 of file PythonWrapper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1ad8e670317eea8d0c3541001790fdb0a6"/>    <section>
+    <title>~PythonWrapper()</title>
+<indexterm><primary>~PythonWrapper</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>~PythonWrapper</secondary></indexterm>
+<para><computeroutput>jevois::PythonWrapper::~PythonWrapper ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 104 of file PythonWrapper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1a7a7d077ef41b01ff8774b763ae6d6881"/>    <section>
+    <title>PythonWrapper()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>PythonWrapper</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>PythonWrapper</secondary></indexterm>
+<para><computeroutput>jevois::PythonWrapper::PythonWrapper (std::string const &amp; path)</computeroutput></para><para>
+
+<para>Construct from path. </para>
+</para>
+<para>
+Definition at line 28 of file PythonWrapper.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonWrapper_1ad6d679e3bcb9ec17c0c4802f80c81c85"/>    <section>
+    <title>constructionError()</title>
+<indexterm><primary>constructionError</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>constructionError</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::PythonWrapper::constructionError ( ) const</computeroutput></para><para>
+
+<para>获取构造错误（如果有）或空字符串 </para>
+</para>
+<para>
+Definition at line 100 of file PythonWrapper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1a0516656c04c1be5b0cf1c5d6344cf707"/>    <section>
+    <title>mainModule()</title>
+<indexterm><primary>mainModule</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>mainModule</secondary></indexterm>
+<para><computeroutput>boost::python::object &amp; jevois::PythonWrapper::mainModule ( )</computeroutput></para><para>
+
+<para>Get the main module. </para>
+</para>
+<para>
+Definition at line 92 of file PythonWrapper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1af6ab1edbb6dafc1c44f0ffcbf3b7102d"/>    <section>
+    <title>mainNamespace()</title>
+<indexterm><primary>mainNamespace</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>mainNamespace</secondary></indexterm>
+<para><computeroutput>boost::python::object &amp; jevois::PythonWrapper::mainNamespace ( )</computeroutput></para><para>
+
+<para>Get the main namespace. </para>
+</para>
+<para>
+Definition at line 96 of file PythonWrapper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1a8a10f3634fb5a645d134783363a67e67"/>    <section>
+    <title>pyinst()</title>
+<indexterm><primary>pyinst</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>pyinst</secondary></indexterm>
+<para><computeroutput>boost::python::object &amp; jevois::PythonWrapper::pyinst ( )</computeroutput></para><para>
+
+<para>获取 python 类 pyinst，或者如果发生构造错误（例如，找不到文件）则抛出 </para>
+</para>
+<para>
+Definition at line 85 of file PythonWrapper.C.</para>
+<para>
+Referenced by jevois::dnn::NetworkPythonImpl::doprocess(), jevois::dnn::NetworkPythonImpl::freeze(), jevois::dnn::PostProcessorPythonImpl::freeze(), jevois::dnn::PreProcessorPythonImpl::freeze(), jevois::dnn::NetworkPythonImpl::load(), jevois::dnn::NetworkPythonImpl::loadpy(), jevois::dnn::PostProcessorPythonImpl::loadpy(), jevois::dnn::PreProcessorPythonImpl::loadpy(), jevois::PythonModule::parseSerial(), jevois::PythonModule::postUninit(), jevois::PythonModule::preInit(), jevois::dnn::PreProcessorPythonImpl::process(), jevois::dnn::PostProcessorPythonImpl::process(), jevois::PythonModule::process(), jevois::dnn::PostProcessorPythonImpl::report(), jevois::dnn::PreProcessorPythonImpl::report(), and jevois::PythonModule::supportedCommands().</para>
+    </section><anchor xml:id="_classjevois_1_1PythonWrapper_1a5ddf8ccc64d17a72d6eaedc450baa14b"/>    <section>
+    <title>pythonload()</title>
+<indexterm><primary>pythonload</primary><secondary>jevois::PythonWrapper</secondary></indexterm>
+<indexterm><primary>jevois::PythonWrapper</primary><secondary>pythonload</secondary></indexterm>
+<para><computeroutput>void jevois::PythonWrapper::pythonload (std::string const &amp; path)</computeroutput></para><para>
+
+<para>如果使用了默认构造函数，则从 path 初始化 </para>
+</para>
+<para>
+Definition at line 34 of file PythonWrapper.C.</para>
+<para>
+References jevois::getPythonExceptionString(), JEVOIS_CONFIG_PATH, JEVOIS_OPENCV_PYTHON_PATH, and JEVOIS_ROOT_PATH.</para>
+<para>
+Referenced by jevois::dnn::NetworkPythonImpl::loadpy(), jevois::dnn::PreProcessorPythonImpl::loadpy(), jevois::dnn::PostProcessorPythonImpl::loadpy(), and jevois::PythonModule::preInit().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonWrapper_8H">PythonWrapper.H</link>src/jevois/Core/<link linkend="_PythonWrapper_8C">PythonWrapper.C</link></section>
+</section>

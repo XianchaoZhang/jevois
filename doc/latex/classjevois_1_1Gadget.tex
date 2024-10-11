@@ -1,0 +1,240 @@
+\hypertarget{classjevois_1_1Gadget}{}\doxysubsection{jevois\+::Gadget Class Reference}
+\label{classjevois_1_1Gadget}\index{jevois::Gadget@{jevois::Gadget}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Gadget.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Je\+Vois 小工具驱动程序 -\/ 向通过 U\+SB 连接的主机计算机公开 uvcvideo 接口 
+
+\mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 是 Je\+Vois 实现的 Linux 内核小工具驱动程序的用户空间接口。\+U\+SB 小工具驱动程序是在设备上运行的 U\+SB 驱动程序， 而不是在主机计算机上运行的 U\+SB 驱动程序。小工具驱动程序实现 U\+SB 功能，例如 U\+SB 打印机、\+U\+SB 调制解调器或 U\+SB 摄像 头。在 Je\+Vois 中，\+Gadget 驱动程序使 Je\+Vois 硬件平台显示为 U\+V\+C（\+U\+SB 视频类）摄像头。由于 U\+VC 已经标准化，因此主机 计算机上不需要特殊驱动程序即可开始使用 U\+VC 设备，因为几乎所有现代操作系统都已为符合 U\+VC 标准的摄像头提供了内置驱 动程序。
+
+\mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 的内部操作相当复杂，尤其是由于它与内核端 U\+VC 小工具驱动程序的紧密交互。然而，对于用户来说，\+Gadget 只是另一 个 \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} 设备：可以设置其格式，使用 \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{get()}} 从中获取空白图像缓冲区，将结果绘制到这些缓冲区中，并在完成后使用 \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send()}} 将它们发送到主机。
+
+\mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 实现了对输出视频帧的零拷贝、零等待访问，即：
+\begin{DoxyItemize}
+\item 您通过 \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{get()}} 获取的图像的像素数据直接是内存映射像素缓冲区，\+Je\+Vois 芯片上的硅硬件将通过直接内存访问 (D\+MA) 使用该 缓冲区通过 U\+SB 链路流出数据；
+\item 只要您调用 \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send()}}，该缓冲区就会排队等待通过 U\+SB 发送（而不是以固定的、有规律的间隔流出图像）。\+Gadget 有多个图像 缓冲区，允许一个缓冲区通过 U\+SB 流出，而另一个缓冲区则通过 \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{get()}} 由您的应用程序填充。这些缓冲区是可回收的，即一旦 调用 \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send()}}，底层缓冲区就会通过 U\+SB 流出，然后发送回 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 以供您的代码将来访问。
+\end{DoxyItemize}
+
+大多数程序员永远不会直接使用 Gadget，而是使用 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 和 Output\+Frame。 
+
+Definition at line 60 of file Gadget.\+H.
+
+
+
+Inheritance diagram for jevois\+::Gadget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classjevois_1_1Gadget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Gadget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=193pt]{classjevois_1_1Gadget__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Gadget_a7bfe7a115ad10d4c60acd76ec5c3d2a6}{Gadget}} (std\+::string const \&devname, \mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}} $\ast$camera, \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} $\ast$engine, size\+\_\+t const nbufs=0, bool multicam=false)
+\begin{DoxyCompactList}\small\item\em 构造并打开设备 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1Gadget_a96222d6943d3305381b76b6460846610}{$\sim$\+Gadget}} ()
+\begin{DoxyCompactList}\small\item\em 关闭设备并释放所有资源 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_ab232e3eaee3a793d58271c7a149069a7}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send()}} 通过 U\+SB 发送出去 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img) override
+\begin{DoxyCompactList}\small\item\em 通过 U\+SB 将图像发送到主机 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_ab59e7323881b74c61c59162091b963bb}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_a58592471bacdfff49de78fe6d4ef79a1}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em 中止流式传输 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Gadget_a2b3e805524d943d4c82a92702ccdeb13}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Gadget_a7bfe7a115ad10d4c60acd76ec5c3d2a6}\label{classjevois_1_1Gadget_a7bfe7a115ad10d4c60acd76ec5c3d2a6}} 
+\index{jevois::Gadget@{jevois::Gadget}!Gadget@{Gadget}}
+\index{Gadget@{Gadget}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{Gadget()}{Gadget()}}
+{\footnotesize\ttfamily jevois\+::\+Gadget\+::\+Gadget (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{devname,  }\item[{\mbox{\hyperlink{classjevois_1_1VideoInput}{jevois\+::\+Video\+Input}} $\ast$}]{camera,  }\item[{\mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}} $\ast$}]{engine,  }\item[{size\+\_\+t const}]{nbufs = {\ttfamily 0},  }\item[{bool}]{multicam = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+构造并打开设备 
+
+此小工具需要有效的非空摄像头才能工作。 为了避免在小工具的每次操作中测试非空摄像头，我们只在构造时测试一次，然 后假设摄像头将在小工具的整个生命周期内保持运行。 使用 0 作为 nbufs 以自动设置它。 
+
+Definition at line 139 of file Gadget.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_a96222d6943d3305381b76b6460846610}\label{classjevois_1_1Gadget_a96222d6943d3305381b76b6460846610}} 
+\index{jevois::Gadget@{jevois::Gadget}!````~Gadget@{$\sim$Gadget}}
+\index{````~Gadget@{$\sim$Gadget}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{$\sim$Gadget()}{~Gadget()}}
+{\footnotesize\ttfamily jevois\+::\+Gadget\+::$\sim$\+Gadget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+关闭设备并释放所有资源 
+
+
+
+Definition at line 185 of file Gadget.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, P\+L\+E\+R\+R\+OR, and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Gadget_a58592471bacdfff49de78fe6d4ef79a1}\label{classjevois_1_1Gadget_a58592471bacdfff49de78fe6d4ef79a1}} 
+\index{jevois::Gadget@{jevois::Gadget}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+中止流式传输 
+
+这只会取消未来的 \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{get()}} 和 done() 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1Gadget_a2b3e805524d943d4c82a92702ccdeb13}{stream\+Off()}} 来关闭流式传输。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 772 of file Gadget.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}\label{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}} 
+\index{jevois::Gadget@{jevois::Gadget}!get@{get}}
+\index{get@{get}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取预分配的图像，以便我们可以填充像素数据，然后使用 \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{send()}} 通过 U\+SB 发送出去 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 806 of file Gadget.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}\label{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}} 
+\index{jevois::Gadget@{jevois::Gadget}!send@{send}}
+\index{send@{send}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+通过 U\+SB 将图像发送到主机 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 849 of file Gadget.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_ab232e3eaee3a793d58271c7a149069a7}\label{classjevois_1_1Gadget_ab232e3eaee3a793d58271c7a149069a7}} 
+\index{jevois::Gadget@{jevois::Gadget}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{jevois\+::\+Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧速率 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 201 of file Gadget.\+C.
+
+
+
+References jevois\+::fccstr(), jevois\+::\+Video\+Mapping\+::fps\+To\+V4l2(), J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+I\+N\+FO, jevois\+::\+Video\+Mapping\+::ofmt, jevois\+::\+Video\+Mapping\+::ofps, jevois\+::\+Video\+Mapping\+::oh, jevois\+::\+Video\+Mapping\+::osize(), jevois\+::\+Video\+Mapping\+::ow, X\+I\+O\+C\+TL, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_a2b3e805524d943d4c82a92702ccdeb13}\label{classjevois_1_1Gadget_a2b3e805524d943d4c82a92702ccdeb13}} 
+\index{jevois::Gadget@{jevois::Gadget}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 780 of file Gadget.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1Gadget_ab59e7323881b74c61c59162091b963bb}\label{classjevois_1_1Gadget_ab59e7323881b74c61c59162091b963bb}} 
+\index{jevois::Gadget@{jevois::Gadget}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::Gadget@{jevois::Gadget}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Gadget\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{jevois\+::\+Video\+Output}}.
+
+
+
+Definition at line 716 of file Gadget.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, L\+E\+R\+R\+OR, L\+I\+N\+FO, jevois\+::v4l2\+Image\+Size(), jevois\+::\+Raw\+Image\+::width, and X\+I\+O\+C\+TL.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{Gadget_8H}{Gadget.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{Gadget_8C}{Gadget.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Manager">
+<title>jevois::Manager Class Reference</title>
+<indexterm><primary>jevois::Manager</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Manager.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>组件对象层次结构的管理器 </para>
+
+
+
+<para>管理器应为任何组件层次结构的顶级组件。它主要负责通过命令行或其他方式处理参数值的设置。</para>
+
+<para>用户只需构建一个管理器（包括从管理器派生的引擎），向其中添加任何组件，然后在管理器上调用 init()，它将解析所有命令 行选项，将它们绑定到相关参数，并在所有子组件上调用 init()（反过来，它又在所有子组件上调用 init()，等等）。有关 init() 流程的更多信息，请参阅组件的文档。</para>
+
+<para>参数 <computeroutput>nickname</computeroutput> 不由管理器内部使用。例如，在使用连接到单个 USB 总线的多个 JeVois 摄像头的系统中，可以在 <emphasis role="bold">initscript.cfg</emphasis> 中为每个摄像头设置不同的值。 </para>
+<para>
+Definition at line 70 of file Manager.H.</para>
+Inheritance diagram for jevois::Manager:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Manager__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Manager:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Manager__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+<simplesect><title>Manager 构造、销毁、解析命令行参数</title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a02faa246d30d4a0a1fe5a2ee9c3f92e9">Manager</link> (std::string const &amp;instance=&quot;TheManager&quot;)</para>
+
+<para>没有命令行参数的构造函数 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a86fa43b347c82254561d8348a0d0009f">Manager</link> (int argc, char const *argv[], std::string const &amp;instance=&quot;TheManager&quot;)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1a3f87572d05e781b5cf5ac7abd5270351">setCommandLineArgs</link> (int argc, char const *argv[])</para>
+
+<para>设置命令行参数，如果在构造时未传递参数，则在 start() 之前调用此方法 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1Manager_1a90248c66250d7e2731702e9ffca78a82">~Manager</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</simplesect>
+<simplesect><title>管理器下的组件层次结构</title>
+        <itemizedlist>
+            <listitem><para>template&lt;class Comp , typename... Args&gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">addComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>, Args &amp;&amp;...args)</para>
+
+<para>Pseudo-constructor: 构造一个顶级组件 </para>
+</listitem>
+            <listitem><para>template&lt;class Comp , typename... Args&gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Manager_1af19547e42024de8526d32198915b5e4e">addSubComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>, Args &amp;&amp;...args)=delete</para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">addComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">jevois::Component::addSubComponent()</link> </para>
+</listitem>
+            <listitem><para>template&lt;class Comp &gt; </para><para>void <link linkend="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7">removeComponent</link> (std::shared_ptr&lt; Comp &gt; &amp;component)</para>
+
+<para>通过 shared_ptr 从管理器中删除顶级组件 </para>
+</listitem>
+            <listitem><para>template&lt;class Comp &gt; </para><para>void <link linkend="_classjevois_1_1Manager_1aff76fa1586d88b7ade0b4306a1c568a1">removeSubComponent</link> (std::shared_ptr&lt; Comp &gt; &amp;component)=delete</para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7">removeComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">jevois::Component::removeSubComponent()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1a28a49248d31fc56dc5212a51c06ca65d">removeComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>, bool warnIfNotFound=true)</para>
+
+<para>通过实例名称从管理器中删除顶级组件 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1a1ea1ceb5b9bf88808830717f6761e740">removeSubComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>, bool warnIfNotFound)=delete</para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7">removeComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">jevois::Component::removeSubComponent()</link> </para>
+</listitem>
+            <listitem><para>template&lt;class Comp  = jevois::Component&gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Manager_1a152d95af84099da4c84388ec971b7355">getComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>) const</para>
+
+<para>通过实例名称获取顶级组件 </para>
+</listitem>
+            <listitem><para>template&lt;class Comp &gt; </para><para>std::shared_ptr&lt; Comp &gt; <link linkend="_classjevois_1_1Manager_1a51c92b839d4b0f0b6ae79060ab4854af">getSubComponent</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a35393e379e00e894db6a9c12f90aa843">instanceName</link>) const =delete</para>
+
+<para>在管理器上使用 <link linkend="_classjevois_1_1Manager_1a152d95af84099da4c84388ec971b7355">getComponent()</link>，而不是 <link linkend="_classjevois_1_1Component_1a6fa8c112c371226dc469be3c66aa9f76">jevois::Component::getSubComponent()</link> </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>Manager runtime</title>
+        <itemizedlist>
+            <listitem><para>const std::vector&lt; std::string &gt; &amp; <link linkend="_classjevois_1_1Manager_1a6bc3d46769ffc9b6354c8c0428b8812a">remainingArgs</link> () const</para>
+
+<para>获取命令行未解析的剩余参数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1a573cbb9b833be4c968e52f85990ba0af">onParamChange</link> (manager::loglevel const &amp;param, manager::LogLevel const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1ab0bb8b857428ed713abb158950d13c60">onParamChange</link> (manager::tracelevel const &amp;param, unsigned int const &amp;newval) override</para>
+
+<para>Parameter callback. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be">preInit</link> () override</para>
+
+<para>Calls parseCommandLine() </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">postInit</link> () override</para>
+
+<para>Checks for the &#8211;help flag. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1ab1aff44bcdccc0b46ee442d8358265b6">constructHelpMessage</link> (std::ostream &amp;out) const</para>
+
+<para>根据模型中的所有参数构造一个帮助消息，并将其输出到 &apos;out&apos; </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Manager_1ae3fc79e4c791d304e9b0c9051846b0af">printHelpMessage</link> () const</para>
+
+<para>构造一个帮助消息并尝试将其发送到 /usr/bin/less </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a9f8a184d5e5e3d41fe75b702607e7cf0">JEVOIS_DECLARE_PARAMETER</link> (help, bool, &quot;Print this help message&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a0607298fa873ec7cce4a69261787cd16">JEVOIS_DEFINE_ENUM_CLASS</link> (LogLevel,(fatal)(error)(info)(debug))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1ac2decd6e1f0a9a1366b783e59b440d7f">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (loglevel, LogLevel, &quot;Set the minimum log level to display&quot;, LogLevel::info, LogLevel_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a7b200babd8c475f3bcf2c53e4bd18083">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (tracelevel, unsigned int, &quot;Set the minimum trace level to display&quot;, 0, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Manager_1a9344fea15ddec1a5f9436a9e31dfc801">JEVOIS_DECLARE_PARAMETER</link> (nickname, std::string, &quot;Nickname associated with this camera, useful when multiple &quot; &quot;JeVois cameras are connected to a same USB bus&quot;, &quot;jevois&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Manager_1a02faa246d30d4a0a1fe5a2ee9c3f92e9"/>    <section>
+    <title>Manager()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Manager</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>Manager</secondary></indexterm>
+<para><computeroutput>jevois::Manager::Manager (std::string const &amp; instance = <computeroutput>&quot;TheManager&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>没有命令行参数的构造函数 </para>
+</para>
+<para>
+Definition at line 27 of file Manager.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a86fa43b347c82254561d8348a0d0009f"/>    <section>
+    <title>Manager()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Manager</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>Manager</secondary></indexterm>
+<para><computeroutput>jevois::Manager::Manager (int argc, char const * argv[], std::string const &amp; instance = <computeroutput>&quot;TheManager&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>创建管理器，并可选择接受命令行参数。 </para>
+<para>
+Definition at line 32 of file Manager.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a90248c66250d7e2731702e9ffca78a82"/>    <section>
+    <title>~Manager()</title>
+<indexterm><primary>~Manager</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>~Manager</secondary></indexterm>
+<para><computeroutput>jevois::Manager::~Manager ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 45 of file Manager.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508"/>    <section>
+    <title>addComponent()</title>
+<indexterm><primary>addComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>addComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp , typename... Args&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Manager::addComponent (std::string const &amp; instanceName, Args &amp;&amp;... args)</computeroutput></para><para>
+
+<para>Pseudo-constructor: 构造一个顶级组件 </para>
+</para>
+
+<para>将创建一个 Comp 类型的组件（必须从 <link linkend="_classjevois_1_1Component">jevois::Component</link> 派生），并将其添加为管理器的子组件（使其成为所谓的顶级组件 ）。子组件在逻辑上 &quot;属于&quot; 管理器，并将在管理器被删除时自动被删除。除了构造之外，组件还将进入与管理器相同的初始 化状态。 </para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1af19547e42024de8526d32198915b5e4e"/>    <section>
+    <title>addSubComponent()</title>
+<indexterm><primary>addSubComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>addSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp , typename... Args&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Manager::addSubComponent (std::string const &amp; instanceName, Args &amp;&amp;... args)<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">addComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">jevois::Component::addSubComponent()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1ab1aff44bcdccc0b46ee442d8358265b6"/>    <section>
+    <title>constructHelpMessage()</title>
+<indexterm><primary>constructHelpMessage</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>constructHelpMessage</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::constructHelpMessage (std::ostream &amp; out) const<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>根据模型中的所有参数构造一个帮助消息，并将其输出到 &apos;out&apos; </para>
+</para>
+<para>
+Definition at line 81 of file Manager.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a152d95af84099da4c84388ec971b7355"/>    <section>
+    <title>getComponent()</title>
+<indexterm><primary>getComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>getComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp  = jevois::Component&gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Manager::getComponent (std::string const &amp; instanceName) const</computeroutput></para><para>
+
+<para>通过实例名称获取顶级组件 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a51c92b839d4b0f0b6ae79060ab4854af"/>    <section>
+    <title>getSubComponent()</title>
+<indexterm><primary>getSubComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>getSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp &gt; </computeroutput><para><computeroutput>std::shared_ptr&lt;Comp&gt; jevois::Manager::getSubComponent (std::string const &amp; instanceName) const<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>在管理器上使用 <link linkend="_classjevois_1_1Manager_1a152d95af84099da4c84388ec971b7355">getComponent()</link>，而不是 <link linkend="_classjevois_1_1Component_1a6fa8c112c371226dc469be3c66aa9f76">jevois::Component::getSubComponent()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a573cbb9b833be4c968e52f85990ba0af"/>    <section>
+    <title>onParamChange()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::onParamChange (manager::loglevel const &amp; param, manager::LogLevel const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1ab0bb8b857428ed713abb158950d13c60"/>    <section>
+    <title>onParamChange()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::onParamChange (manager::tracelevel const &amp; param, unsigned int const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter callback. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Checks for the &#8211;help flag. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">jevois::Component</link>.</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1Engine_1ad7b8927d246b350cf0be396291f79f3c">jevois::Engine</link>.</para>
+<para>
+Definition at line 59 of file Manager.C.</para>
+<para>
+References LINFO.</para>
+<para>
+Referenced by jevois::Engine::postInit().</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1ae8972fd61edf4f6589c6338b64f0b4be"/>    <section>
+    <title>preInit()</title>
+<indexterm><primary>preInit</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>preInit</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::preInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Calls parseCommandLine() </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ace4f9ea2f56c740d429de7ac0b89e7e6">jevois::Component</link>.</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1Engine_1a25d2fd8ab270cbdf4a26cc4bf9d5bac7">jevois::Engine</link>.</para>
+<para>
+Definition at line 49 of file Manager.C.</para>
+<para>
+References LERROR.</para>
+<para>
+Referenced by jevois::Engine::preInit().</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1ae3fc79e4c791d304e9b0c9051846b0af"/>    <section>
+    <title>printHelpMessage()</title>
+<indexterm><primary>printHelpMessage</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>printHelpMessage</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::printHelpMessage ( ) const<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>构造一个帮助消息并尝试将其发送到 /usr/bin/less </para>
+</para>
+<para>
+Definition at line 75 of file Manager.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a6bc3d46769ffc9b6354c8c0428b8812a"/>    <section>
+    <title>remainingArgs()</title>
+<indexterm><primary>remainingArgs</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>remainingArgs</secondary></indexterm>
+<para><computeroutput>const std::vector&lt; std::string &gt; &amp; jevois::Manager::remainingArgs ( ) const</computeroutput></para><para>
+
+<para>获取命令行未解析的剩余参数 </para>
+</para>
+
+<para>任何单独 &apos;&#8211;&apos; 后面的命令行参数都可以在 <link linkend="_classjevois_1_1Manager_1a6bc3d46769ffc9b6354c8c0428b8812a">remainingArgs()</link> 中使用 </para>
+<para>
+Definition at line 164 of file Manager.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7"/>    <section>
+    <title>removeComponent()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>removeComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>removeComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp &gt; </computeroutput><para><computeroutput>void jevois::Manager::removeComponent (std::shared_ptr&lt; Comp &gt; &amp; component)</computeroutput></para><para>
+
+<para>通过 shared_ptr 从管理器中删除顶级组件 </para>
+</para>
+
+<para><note><title>Note</title>
+
+<para>请注意，传递的 shared_ptr 在此过程中无效。如果 use_count 此后未降至零，则会发出警告（即，有其他 shared_ptr 指针指向此组件，这会阻止它被实际删除。 </para>
+</note>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a28a49248d31fc56dc5212a51c06ca65d"/>    <section>
+    <title>removeComponent()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>removeComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>removeComponent</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::removeComponent (std::string const &amp; instanceName, bool warnIfNotFound = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>通过实例名称从管理器中删除顶级组件 </para>
+</para>
+<para>
+Definition at line 168 of file Manager.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1aff76fa1586d88b7ade0b4306a1c568a1"/>    <section>
+    <title>removeSubComponent()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>removeSubComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>removeSubComponent</secondary></indexterm>
+<computeroutput>template&lt;class Comp &gt; </computeroutput><para><computeroutput>void jevois::Manager::removeSubComponent (std::shared_ptr&lt; Comp &gt; &amp; component)<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7">removeComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">jevois::Component::removeSubComponent()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a1ea1ceb5b9bf88808830717f6761e740"/>    <section>
+    <title>removeSubComponent()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>removeSubComponent</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>removeSubComponent</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::removeSubComponent (std::string const &amp; instanceName, bool warnIfNotFound)<computeroutput>[delete]</computeroutput></computeroutput></para><para>
+
+<para>在 <link linkend="_classjevois_1_1Manager">Manager</link> 上使用 <link linkend="_classjevois_1_1Manager_1a4aaa8fbdfe198ab6f7ca4e00766ec2a7">removeComponent()</link> 而不是 <link linkend="_classjevois_1_1Component_1a7737eea4256b8213662ea2a7b64ae362">jevois::Component::removeSubComponent()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a3f87572d05e781b5cf5ac7abd5270351"/>    <section>
+    <title>setCommandLineArgs()</title>
+<indexterm><primary>setCommandLineArgs</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>setCommandLineArgs</secondary></indexterm>
+<para><computeroutput>void jevois::Manager::setCommandLineArgs (int argc, char const * argv[])</computeroutput></para><para>
+
+<para>设置命令行参数，如果在构造时未传递参数，则在 start() 之前调用此方法 </para>
+</para>
+<para>
+Definition at line 38 of file Manager.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Manager_1a9f8a184d5e5e3d41fe75b702607e7cf0"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (help , bool , &quot;Print this help message&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a9344fea15ddec1a5f9436a9e31dfc801"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (nickname , std::string , &quot;Nickname associated with this camera, useful when multiple &quot; &quot;JeVois cameras are connected to a same USB bus&quot; , &quot;jevois&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1ac2decd6e1f0a9a1366b783e59b440d7f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (loglevel , LogLevel , &quot;Set the minimum log level to display&quot; , LogLevel::info , LogLevel_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a7b200babd8c475f3bcf2c53e4bd18083"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (tracelevel , unsigned int , &quot;Set the minimum trace level to display&quot; , 0 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Manager_1a0607298fa873ec7cce4a69261787cd16"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()</title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::Manager</secondary></indexterm>
+<indexterm><primary>jevois::Manager</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (LogLevel , (fatal)(error)(info)(debug) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Component/<link linkend="_Manager_8H">Manager.H</link>src/jevois/Component/<link linkend="_Manager_8C">Manager.C</link></section>
+</section>

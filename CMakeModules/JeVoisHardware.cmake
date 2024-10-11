@@ -14,14 +14,13 @@
 # Tel: +1 213 740 3527 - itti@pollux.usc.edu - http://iLab.usc.edu - http://jevois.org
 ######################################################################################################################
 
-# Option to select JeVois-A33 or JeVois-Pro hardware device. When A33 is selected (default), JEVOIS_A33 is defined and
-# files are installed in /jevois, /var/lib/jevois-microsd, etc. When Pro is selected, JEVOIS_PRO is defined and
-# files are installed in /jevoispro, /var/lib/jevoispro-microsd, etc.
+# 选择 JeVois-A33 或 JeVois-Pro 硬件设备的选项。选择 A33 时（默认），将定义 JEVOIS_A33 并将文件安装在 /jevois、
+# /var/lib/jevois-microsd 等中。选择 PRO 时，将定义 JEVOIS_PRO 并将文件安装在 /jevoispro、/var/lib/jevoispro-microsd 等中。
 #
-# For CMake, variable JEVOIS is set to "jevois" or "jevoispro" and can be used to prefix library names, directories, etc
+# 对于 CMake，变量 JEVOIS 设置为 "jevois" or "jevoispro"，用于为库名称、目录等添加前缀
 
-set(JEVOIS_HARDWARE A33 CACHE STRING "JeVois hardware platform type (A33 or PRO)")
-set_property(CACHE JEVOIS_HARDWARE PROPERTY STRINGS A33 PRO)
+set(JEVOIS_HARDWARE A33 CACHE STRING "JeVois hardware platform type (A33, DUO or PRO)")
+set_property(CACHE JEVOIS_HARDWARE PROPERTY STRINGS A33 DUO PRO)
 message(STATUS "JEVOIS_HARDWARE: ${JEVOIS_HARDWARE}")
 
 ########################################################################################################################

@@ -124,7 +124,7 @@ std::string jevois::StdModule::getStamp() const
 void jevois::StdModule::sendSerialImg1Dx(unsigned int camw, float x, float size, std::string const & id,
                                       std::string const & extra)
 {
-  // Normalize the coordinate and size using the given precision to do rounding:
+  // 使用给定的精度对坐标和大小进行规范化以进行舍入
   float const eps = std::pow(10.0F, -float(serprec::get()));
   
   jevois::coords::imgToStdX(x, camw, eps);
@@ -137,13 +137,13 @@ void jevois::StdModule::sendSerialImg1Dx(unsigned int camw, float x, float size,
 // ####################################################################################################
 void jevois::StdModule::sendSerialStd1Dx(float x, float size, std::string const & id, std::string const & extra)
 {
-  // Build the message depending on desired style:
+  // 根据所需样式构建消息：
   std::ostringstream oss; oss << std::fixed << std::setprecision(serprec::get());
 
-  // Prepend frame/date/time as possibly requested by parameter serstamp:
+  // 根据参数 serstamp 的可能要求添加 frame/date/time
   oss << getStamp();
 
-  // Format the message depending on parameter serstyle:
+  // 根据参数 serstyle 格式化消息：
   switch (serstyle::get())
   {
   case jevois::modul::SerStyle::Terse:
@@ -173,7 +173,7 @@ void jevois::StdModule::sendSerialStd1Dx(float x, float size, std::string const 
 void jevois::StdModule::sendSerialImg1Dy(unsigned int camh, float y, float size, std::string const & id,
                                          std::string const & extra)
 {
-  // Normalize the coordinate and size using the given precision to do rounding:
+  // 使用给定的精度对坐标和大小进行标准化以进行舍入：
   float const eps = std::pow(10.0F, -float(serprec::get()));
   jevois::coords::imgToStdY(y, camh, eps);
   float dummy = 0.0F; jevois::coords::imgToStdSize(dummy, size, 100, camh, eps);
@@ -185,13 +185,13 @@ void jevois::StdModule::sendSerialImg1Dy(unsigned int camh, float y, float size,
 // ####################################################################################################
 void jevois::StdModule::sendSerialStd1Dy(float y, float size, std::string const & id, std::string const & extra)
 {
-  // Build the message depending on desired style:
+  // 根据所需样式构建消息：
   std::ostringstream oss; oss << std::fixed << std::setprecision(serprec::get());
   
-  // Prepend frame/date/time as possibly requested by parameter serstamp:
+  // 按照参数 serstamp 的可能要求添加帧/日期/时间：
   oss << getStamp();
 
-  // Format the message depending on parameter serstyle:
+  // 根据参数 serstyle 格式化消息： 
   switch (serstyle::get())
   {
   case jevois::modul::SerStyle::Terse:
@@ -237,7 +237,7 @@ void jevois::StdModule::sendSerialStd2D(float x, float y, float w, float h, std:
   // Build the message depending on desired style:
   std::ostringstream oss; oss << std::fixed << std::setprecision(serprec::get());
 
-  // Prepend frame/date/time as possibly requested by parameter serstamp:
+  // 根据参数 serstamp 的可能要求添加帧/日期/时间：
   oss << getStamp();
 
   // Format the message depending on parameter serstyle:

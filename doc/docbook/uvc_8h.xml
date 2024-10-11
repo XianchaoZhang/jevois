@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_uvc_8h">
+<title>include/jevois/Core/uvc.h File Reference</title>
+<indexterm><primary>include/jevois/Core/uvc.h</primary></indexterm>
+<programlisting>#include &lt;linux/ioctl.h&gt;
+#include &lt;linux/types.h&gt;
+#include &lt;linux/usb/ch9.h&gt;
+</programlisting>Include dependency graph for uvc.h:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="uvc_8h__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="uvc_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structuvc__request__data">uvc_request_data</link></para>
+</listitem>
+            <listitem><para>struct <link linkend="_structuvc__event">uvc_event</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_uvc_8h_1a3c16f953fb7f4cc725bf726651023088">UVC_EVENT_FIRST</link>   (V4L2_EVENT_PRIVATE_START + 0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1ab0557e6df0e911d59ebd0f7688b8820a">UVC_EVENT_CONNECT</link>   (V4L2_EVENT_PRIVATE_START + 0)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1ad84d2f96c5e0290de561383f4bd1093b">UVC_EVENT_DISCONNECT</link>   (V4L2_EVENT_PRIVATE_START + 1)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1acf6e1588f9b5b6eeebbe87fb77e5c3ce">UVC_EVENT_STREAMON</link>   (V4L2_EVENT_PRIVATE_START + 2)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a64a4b35d900337f919c32c326bce3d57">UVC_EVENT_STREAMOFF</link>   (V4L2_EVENT_PRIVATE_START + 3)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a596f595dbfa71e831d03ad5a186ed9e2">UVC_EVENT_SETUP</link>   (V4L2_EVENT_PRIVATE_START + 4)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a9b7b240fe94edd37c69a9fd1c1e53f71">UVC_EVENT_DATA</link>   (V4L2_EVENT_PRIVATE_START + 5)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a658ce4431858adddb2f27fe798ca6a99">UVC_EVENT_LAST</link>   (V4L2_EVENT_PRIVATE_START + 5)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1aedfed13442b0a7a01a9dca7021fe6df7">UVC_MAX_REQUEST_SIZE</link>   512</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a3c62a0df70b32ec09822b611dc190486">UVCIOC_SEND_RESPONSE</link>   _IOW(&apos;U&apos;, 1, struct <link linkend="_structuvc__request__data">uvc_request_data</link>)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1a0403a39374e3fa566870c7c11990953e">UVC_INTF_CONTROL</link>   0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_uvc_8h_1ad07dd8caef41aa370cf9ebfed6af8775">UVC_INTF_STREAMING</link>   1</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_uvc_8h_1ab0557e6df0e911d59ebd0f7688b8820a"/>    <section>
+    <title>UVC_EVENT_CONNECT</title>
+<indexterm><primary>UVC_EVENT_CONNECT</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_CONNECT</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_CONNECT   (V4L2_EVENT_PRIVATE_START + 0)</computeroutput></para><para>
+Definition at line 24 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a9b7b240fe94edd37c69a9fd1c1e53f71"/>    <section>
+    <title>UVC_EVENT_DATA</title>
+<indexterm><primary>UVC_EVENT_DATA</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_DATA</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_DATA   (V4L2_EVENT_PRIVATE_START + 5)</computeroutput></para><para>
+Definition at line 29 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1ad84d2f96c5e0290de561383f4bd1093b"/>    <section>
+    <title>UVC_EVENT_DISCONNECT</title>
+<indexterm><primary>UVC_EVENT_DISCONNECT</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_DISCONNECT</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_DISCONNECT   (V4L2_EVENT_PRIVATE_START + 1)</computeroutput></para><para>
+Definition at line 25 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a3c16f953fb7f4cc725bf726651023088"/>    <section>
+    <title>UVC_EVENT_FIRST</title>
+<indexterm><primary>UVC_EVENT_FIRST</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_FIRST</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_FIRST   (V4L2_EVENT_PRIVATE_START + 0)</computeroutput></para><para>
+Definition at line 23 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a658ce4431858adddb2f27fe798ca6a99"/>    <section>
+    <title>UVC_EVENT_LAST</title>
+<indexterm><primary>UVC_EVENT_LAST</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_LAST</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_LAST   (V4L2_EVENT_PRIVATE_START + 5)</computeroutput></para><para>
+Definition at line 30 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a596f595dbfa71e831d03ad5a186ed9e2"/>    <section>
+    <title>UVC_EVENT_SETUP</title>
+<indexterm><primary>UVC_EVENT_SETUP</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_SETUP</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_SETUP   (V4L2_EVENT_PRIVATE_START + 4)</computeroutput></para><para>
+Definition at line 28 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a64a4b35d900337f919c32c326bce3d57"/>    <section>
+    <title>UVC_EVENT_STREAMOFF</title>
+<indexterm><primary>UVC_EVENT_STREAMOFF</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_STREAMOFF</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_STREAMOFF   (V4L2_EVENT_PRIVATE_START + 3)</computeroutput></para><para>
+Definition at line 27 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1acf6e1588f9b5b6eeebbe87fb77e5c3ce"/>    <section>
+    <title>UVC_EVENT_STREAMON</title>
+<indexterm><primary>UVC_EVENT_STREAMON</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_EVENT_STREAMON</secondary></indexterm>
+<para><computeroutput>#define UVC_EVENT_STREAMON   (V4L2_EVENT_PRIVATE_START + 2)</computeroutput></para><para>
+Definition at line 26 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a0403a39374e3fa566870c7c11990953e"/>    <section>
+    <title>UVC_INTF_CONTROL</title>
+<indexterm><primary>UVC_INTF_CONTROL</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_INTF_CONTROL</secondary></indexterm>
+<para><computeroutput>#define UVC_INTF_CONTROL   0</computeroutput></para><para>
+Definition at line 51 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1ad07dd8caef41aa370cf9ebfed6af8775"/>    <section>
+    <title>UVC_INTF_STREAMING</title>
+<indexterm><primary>UVC_INTF_STREAMING</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_INTF_STREAMING</secondary></indexterm>
+<para><computeroutput>#define UVC_INTF_STREAMING   1</computeroutput></para><para>
+Definition at line 52 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1aedfed13442b0a7a01a9dca7021fe6df7"/>    <section>
+    <title>UVC_MAX_REQUEST_SIZE</title>
+<indexterm><primary>UVC_MAX_REQUEST_SIZE</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVC_MAX_REQUEST_SIZE</secondary></indexterm>
+<para><computeroutput>#define UVC_MAX_REQUEST_SIZE   512</computeroutput></para><para>
+Definition at line 33 of file uvc.h.</para>
+    </section><anchor xml:id="_uvc_8h_1a3c62a0df70b32ec09822b611dc190486"/>    <section>
+    <title>UVCIOC_SEND_RESPONSE</title>
+<indexterm><primary>UVCIOC_SEND_RESPONSE</primary><secondary>uvc.h</secondary></indexterm>
+<indexterm><primary>uvc.h</primary><secondary>UVCIOC_SEND_RESPONSE</secondary></indexterm>
+<para><computeroutput>#define UVCIOC_SEND_RESPONSE   _IOW(&apos;U&apos;, 1, struct <link linkend="_structuvc__request__data">uvc_request_data</link>)</computeroutput></para><para>
+Definition at line 49 of file uvc.h.</para>
+</section>
+</section>
+</section>

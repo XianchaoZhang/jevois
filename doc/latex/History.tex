@@ -1,0 +1,76 @@
+\hypertarget{History_invt}{}\doxysubsection{i\+Lab 神经形态（\+Neuromorphic）视觉 C++ 工具包}\label{History_invt}
+早在 1995 年，我们就推出 i\+Lab Neuromorphic Vision C++ 工具包。该工具包可以开发受神经科学启发的计​​算机视觉模型。该工具包提供的核心元素是：
+
+
+\begin{DoxyItemize}
+\item 低级帮助类，包括 Point2D, Rectangle, Pix\+R\+G\+B$<$\+T$>$, Range, Timer, X\+Window, etc.
+\item Image$<$\+T$>$ and Image\+Set$<$\+T$>$ 模板类，有数百个图像处理函数和 copy-\/on-\/write / ref-\/counting 语义的类。
+\item 用于读/写图像文件或视频流（各种格式）的图像 I/O 函数。
+\item 低级神经网络模拟类，例如 Leaky\+Interator 和 Leaky\+Int\+Fire 神经元以及反向传播感知器类。
+\item 高级神经形态类，包括低级视觉特征的层次结构用于计算响应 color, intensity, orientation, motion, corners, T-\/junctions 等的神经 图的通道；赢者通吃的最大选择器网络；\+Saliency Map 网络表示视觉场景中的显着位置；具有内部竞争动力的 Visual Buffer 短期视觉记忆； 一个 Visual Cortex 类，用于协调特征通道变量集合的计算；包含视觉皮层的 Brain 类、用于模拟眼睛/头部运动的扫视控制器（\+Saccade Controller）、 用于记住场景中感兴趣位置的任务相关性图（\+Task-\/\+Relevance Map）、用于粗略分割场景中的目标的形状估计器（\+Shape Estimator）、一组实现的 S\+I\+FT 类 David Lowe 的用于物体/场景识别等的尺度不变特征变换（\+Scale-\/\+Invariant Feature Transform）模型。
+\item 视觉注意力的神经形态模型（寻找图像或视频流中可能吸引人类观察者眼睛或让观察者感到 surprise 的位置）、轮廓整合（模拟细长的轮廓如何 强烈吸引人类观察者的注意力） 、目标识别（使用各种策略，包括匹配特征向量、反向传播感知器、分层前馈特征提取模型等）、执行高级场景理解 的基于知识的智能视觉代理、 \`{}`gist'\textquotesingle{} 或粗略语义的快速计算整个场景的类别（例如，室内与室外），等等！
+\item 与 Video4\+Linux 和 I\+E\+E\+E-\/1394 (Fire\+Wire) camera、audio/\+D\+S\+P、串行端口、串行伺服控制器、\+G\+PS 单元等的硬件接口。这只适用于 Linux。
+\item 在 Beowulf 计算机集群上模拟复杂模型的并行处理类。
+\item 神经形态建模环境，有助于插件模型组件的运行时选择、持久模型（persistent model）调整参数的管理，以及基于其实现的模型组件集合 生成/解析各种模型的命令行选项。
+\end{DoxyItemize}
+
+该工具包已被全球数千所主要大学、研究实验室和公司使用。它是完全开源的（\+G\+P\+L）。该工具包可从 \href{http://iLab.usc.edu/toolkit/}{\texttt{ http\+://i\+Lab.\+usc.\+edu/toolkit/}} 获取。
+
+ \hypertarget{History_nrt}{}\doxysubsection{The Neuromorphic Robotics Toolkit}\label{History_nrt}
+2010 年，我们启动了 Neuromorphic Robotics Toolkit。主要目标是促进更复杂模型的部署，这些模型将在混合架构（不同 C\+PU 模型、各种 C\+P\+U+\+G\+PU 组合等）的计算机集合上运行。 N\+RT 提供了一种基于 Blackboard 的消息传递架构，允许人们轻松地将任何 C++ 数据结构从一台计算机传输到另一台 计算机。当在一台机器上运行多个线程时，这些传输的成本可以忽略不计（数据的零拷贝），并且当它们位于网络上物理上不同的机器之间时，框架透明 地处理数据的序列化（或编组 marshalling）（对于用户来说，特定模型无论是在一台机器上运行还是在机器网络上运行都没有区别，除了执行速度之外）。
+
+神经形态机器人工具包的核心是一个 C++ 库和一组工具，可帮助您编写高性能模块化软件。 N\+RT 提供了一个框架，开发人员可以在其中设计轻量级、 可互换的处理模块，这些模块通过传递消息进行通信。 N\+RT 还提供用于执行各种机器人相关处理的库，例如图像处理、点云处理等。
+
+\hypertarget{History_corefeat}{}\doxysubsubsection{Core N\+R\+T features}\label{History_corefeat}
+N\+RT is a C++-\/14 framework.
+
+模块化编程是一种软件系统，由自包含、可互换组件的接口定义组成的技术。由于每个模块都是自包含的，因此可以独立于系统的其余部分进行测试。 此外，模块之间有明确定义的接口使研究人员能够有效地将其组件的需求和功能传达给团队的其他成员。
+
+在审查了几个现有的模块化编程框架后，我们确定了以下一组需求：
+
+
+\begin{DoxyEnumerate}
+\item 在模块之间传输任意 C++ 数据类型。不像许多其他消息传递框架那样局限于一小部分简单类型，这通常会被迫将本机复杂数据结构转换为其简单类型。
+\item 当模块在同一台机器上实例化时，消息的零拷贝传输。
+\item 当模块在不同的机器上实例化时，消息在网络上的透明序列化（编组 marshalling），对于用户或程序员来说，无论消息是在本地还是通过网络传输 （当然，除了传输时间），都没有区别。
+\item 静态（编译时）定义的模块接口，以避免容易出错、基于字符串的模块端口命名或发布/订阅主题的蔓延，这些主题困扰着大多数现有的消息传递框架。
+\item 通过允许 (1) 可以操纵任何消息类型（例如消息队列）的通用消息概念和通用模块和 (2) 可拆分消息，从而增强重用模块的能力，以便可以将复杂的 复合消息分解为基本部分，然后可以在重新组装之前进行独立处理。
+\end{DoxyEnumerate}
+
+神经形态机器人工具包是我们满足此要求列表的解决方案。除此之外，它还提供了一个用于管理和创建连接模块网络的图形工具，以及一套用于启动、配置 和停止系统的管理工具。\hypertarget{History_progmodel}{}\doxysubsubsection{Programming model of N\+RT}\label{History_progmodel}
+N\+RT 的核心灵感是将大脑视为并行专业知识源的机构，多个此类源共同努力解决复杂问题。这个愿景并不新鲜，并且已经在许多早期的人工智能系统中实现， 包括 V\+I\+S\+I\+O\+NS (Hanson \& Riseman, 1978)、\+H\+E\+A\+R\+S\+A\+Y-\/\+II (Erman et al., 1980) 和 Copycat (Hofstadter \& Mitchell, 1995)。
+
+在这个计算范式中，公共知识库，\href{http://en.wikipedia.org/wiki/Blackboard_system}{\texttt{ blackboard }}被迭代更新：
+
+
+\begin{DoxyItemize}
+\item 从问题定义和先验知识开始；
+\item 每个知识源（即软件代理或模块）在 blackboard 的当前内容满足其处理先决条件（即发送适当的消息）时被触发；
+\item 并行工作时，每个专业知识源可以用部分解决方案、建议或附加信息更新 blackboard，从而允许触发其他知识源；
+\item 随着时间的推移，专家们将共同努力寻找解决方案。
+\end{DoxyItemize}
+
+其他小组也探索了 schema-\/based and blackboard 架构的机器人技术（例如，\+Arkin，1989；\+Brooks，1991；\+Xu \& van Brussel，1997） 以及认知科学（例如，van der Velde \& de Kamps，2006）。在这里，我们通过 N\+RT 开发了必要的工具，通过使用高度模块化、透明分布、 面向图形的编程，将这些类型的架构提升到用户友好性的新水平。
+
+新手用户可以通过简单地拖动和连接软件模块（blackboard 代理）来组装在计算机集合上运行的复杂系统，其中模块通过幕后的分布式 Blackboard Federation 系统进行交互（连接代表消息的发布/订阅）。类似的图形编程隐喻已被证明在以前的系统中特别有效，包括 Khoros/\+Cantata、\+A\+V\+S（高级视觉系统公司）、\+Lego Mindstorms、\+Flowstone 等。虽然这些以前的框架通常仅限于单 C\+PU 系统和模块之间更 简单的点对点信息流，但我们已经在从 288 个 C\+PU 核心 + 2048 个 G\+PU 核心的集群到一台笔记本电脑，甚至一台 10 瓦上网本（\+Intel Atom）。
+
+许多新功能允许 N\+RT 消除以前类似系统的一些主要注意事项，如本文档中所述。
+
+N\+RT 的初步开发是在 D\+A\+R\+PA Neovision2 项目下开始的。 N\+RT 的开发是为了让我们能够构建一个受神经启发的机器视觉系统，该系统可以处理、 跟踪和识别高清航拍视频中的多达 10 个对象类别 (cars, trucks, boats, people, etc) 。
+
+N\+RT 仍主要用于南加州大学 Itti 教授实验室的内部开发。但它是开源的（\+G\+PL 许可证），一旦所有功能都被认为足够强大，就会发布供公众使用。 同时，感兴趣的读者可能想查看 \href{http://nrtkit.org}{\texttt{ http\+://nrtkit.\+org}} 上的文档
+
+
+
+
+
+\hypertarget{History_jevois}{}\doxysubsection{The Je\+Vois Smart Embedded Machine Vision Toolkit}\label{History_jevois}
+Je\+Vois 框架受益于我们之前对 I\+N\+VT 和 N\+RT 的研究。它主要面向单处理器的嵌入式系统，以及基于流的处理（一张图像来自相机，一张图像输出至 U\+S\+B）。 我们为 I\+N\+VT 和 N\+RT 开发的许多创新已移植到 Je\+Vois，主要包括使用运行时可调参数的可重复使用组件构建复杂机器视觉管道的能力，以及提供一个框架 来简化组件及其参数的开发。
+
+Je\+Vois 是一个 C++-\/17 框架。
+
+我们之前框架的一些功能已删除，但可以很容易地添加，包括强大的 Image 类模板（\+Je\+Vois 只提供最小的 Raw\+Image 类，以及到 Open\+CV 图像类的转换）、 blackboard 架构和包括序列化在内的消息传递。
+
+Je\+Vois 特有的新功能包括内核级 U\+SB Gadget 驱动程序、内核级全功能相机芯片驱动程序、用户界面类以及新的引擎组件，用于协调从相机到处理再到通过 U\+SB 链路输出的数据流。
+
+本文档中更详细地介绍了这些功能。 Je\+Vois 是开源的（\+G\+PL 许可证）。 Je\+Vois 的开发部分得益于美国国家科学基金会计算探险项目的研究和推广资助。 

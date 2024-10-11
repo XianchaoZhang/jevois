@@ -1,0 +1,147 @@
+\hypertarget{Log_8H}{}\doxysubsection{include/jevois/\+Debug/\+Log.H File Reference}
+\label{Log_8H}\index{include/jevois/Debug/Log.H@{include/jevois/Debug/Log.H}}
+{\ttfamily \#include $<$sys/syslog.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+Include dependency graph for Log.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Log_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Log_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log$<$ Level $>$}}
+\begin{DoxyCompactList}\small\item\em Logger 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1timed__lock__guard}{jevois\+::timed\+\_\+lock\+\_\+guard}}
+\begin{DoxyCompactList}\small\item\em 在 std\+::timed\+\_\+mutex 上获取锁对象，或在等待 1 秒后 L\+F\+A\+T\+AL \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印出控制台或系统日志消息的宏，\+D\+E\+B\+UG 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gad545842aa2c640a2cbbd12bd249f1c66}{P\+L\+D\+E\+B\+UG}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+D\+E\+B\+UG 类似，但附加了 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏，\+I\+N\+FO 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gaea08c108b85ea1f927c0066dc146dafe}{P\+L\+I\+N\+FO}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+I\+N\+FO 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏， E\+R\+R\+OR level \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga423f8c25512020248b543a103130cabf}{P\+L\+E\+R\+R\+OR}}(msg)
+\begin{DoxyCompactList}\small\item\em 与 L\+E\+R\+R\+OR 类似但附加 errno 和 strerror(errno)，用于某些系统调用失败时 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(msg)
+\begin{DoxyCompactList}\small\item\em Convenience macro for users to print out console or syslog messages, F\+A\+T\+AL level. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga905cdef856c6a279bdc4a5f037a25c52}{P\+L\+F\+A\+T\+AL}}(msg)
+\begin{DoxyCompactList}\small\item\em 方便用户打印控制台或系统日志消息的宏，\+F\+A\+T\+AL 级别 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Log_8H_a8e3f8ce22d435337fb988c530e098b25}{L\+T\+H\+R\+OW}}(msg)
+\item 
+\#define \mbox{\hyperlink{group__debugging_ga16c96efb84f03f7ded9bfdd977405596}{J\+E\+V\+O\+I\+S\+\_\+\+A\+S\+S\+E\+RT}}(cond)
+\begin{DoxyCompactList}\small\item\em 测试某事是否为真，如果不是，则发出 L\+F\+A\+T\+AL \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}{J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE}}(level)
+\begin{DoxyCompactList}\small\item\em Trace object. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__debugging_ga36695a40a90d579eef600d90c82484f5}{J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK}}(mtx)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于创建 timed\+\_\+lock\+\_\+guard 对象 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Log_8H_a9449c6d446e218bd2184b9830b55ad1e}{J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+F\+O\+R\+\_\+\+F\+U\+T\+U\+RE}}(f)
+\begin{DoxyCompactList}\small\item\em 等待未来准备就绪，5 秒后抛出 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{Log_8H_ac3d436286f1c1018df01da4d53bb7e59}{J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+G\+E\+T\+\_\+\+F\+U\+T\+U\+RE}}(f)
+\begin{DoxyCompactList}\small\item\em 等待未来 5 秒内准备就绪，get(), 警告并忽略异常，报告超时 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__debugging_gac5f7014e430b19db36d4284254f886ef}{jevois\+::warn\+And\+Rethrow\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并重新抛出它 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{jevois\+::warn\+And\+Ignore\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 便捷函数用于捕获异常、发出一些 L\+E\+R\+R\+O\+R（取决于类型）并忽略它 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_gac577d140e95998b907a3d8ee82d8f9c5}{jevois\+::warn\+And\+Rethrow\+Param\+Callback\+Exception}} (std\+::string const \&descriptor, std\+::string const \&strval)
+\begin{DoxyCompactList}\small\item\em 参数回调异常的便捷函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_a702884502b6ac843dada7c3f24e6e1fb}{jevois\+::draw\+Error\+Image}} (std\+::string const \&errmsg, Raw\+Image \&videoerrimg)
+\begin{DoxyCompactList}\small\item\em 将错误消息显示到 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__debugging_ga41793c253cf663f59b715c0bd2dcc2ad}{jevois\+::log\+Set\+Engine}} (Engine $\ast$e)
+\begin{DoxyCompactList}\small\item\em 设置引擎，以便所有日志消息都转发到其串行端口 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_a98e29073164f0fa721c39c968bcafb36}{jevois\+::log\+End}} ()
+\begin{DoxyCompactList}\small\item\em 终止日志服务 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois\+::log\+Level}} = L\+O\+G\+\_\+\+I\+N\+FO
+\begin{DoxyCompactList}\small\item\em 当前日志级别 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}{jevois\+::trace\+Level}} = 0
+\begin{DoxyCompactList}\small\item\em 当前跟踪级别 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Log_8H_a9449c6d446e218bd2184b9830b55ad1e}\label{Log_8H_a9449c6d446e218bd2184b9830b55ad1e}} 
+\index{Log.H@{Log.H}!JEVOIS\_WAIT\_FOR\_FUTURE@{JEVOIS\_WAIT\_FOR\_FUTURE}}
+\index{JEVOIS\_WAIT\_FOR\_FUTURE@{JEVOIS\_WAIT\_FOR\_FUTURE}!Log.H@{Log.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_WAIT\_FOR\_FUTURE}{JEVOIS\_WAIT\_FOR\_FUTURE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+F\+O\+R\+\_\+\+F\+U\+T\+U\+RE(\begin{DoxyParamCaption}\item[{}]{f }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{do} \{ \textcolor{keywordflow}{if} (f.valid() \&\& f.wait\_for(std::chrono::seconds(2)) == \(\backslash\)}
+\DoxyCodeLine{std::future\_status::timeout) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"Timeout waiting for future "} \#f); \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+
+
+等待未来准备就绪，5 秒后抛出 
+
+
+
+Definition at line 314 of file Log.\+H.
+
+\mbox{\Hypertarget{Log_8H_ac3d436286f1c1018df01da4d53bb7e59}\label{Log_8H_ac3d436286f1c1018df01da4d53bb7e59}} 
+\index{Log.H@{Log.H}!JEVOIS\_WAIT\_GET\_FUTURE@{JEVOIS\_WAIT\_GET\_FUTURE}}
+\index{JEVOIS\_WAIT\_GET\_FUTURE@{JEVOIS\_WAIT\_GET\_FUTURE}!Log.H@{Log.H}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_WAIT\_GET\_FUTURE}{JEVOIS\_WAIT\_GET\_FUTURE}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+G\+E\+T\+\_\+\+F\+U\+T\+U\+RE(\begin{DoxyParamCaption}\item[{}]{f }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordflow}{do} \{ \textcolor{keywordflow}{if} (f.valid()) \{ \(\backslash\)}
+\DoxyCodeLine{  if (f.wait\_for(std::chrono::seconds(5)) == std::future\_status::timeout) \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{LERROR}}(\textcolor{stringliteral}{"Timeout waiting for future "} \#f); \(\backslash\)}
+\DoxyCodeLine{  try \{ f.get(); \} \textcolor{keywordflow}{catch} (...) \{ \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{jevois::warnAndIgnoreException}}(); \} \} \} \textcolor{keywordflow}{while}(\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+
+
+等待未来 5 秒内准备就绪，get(), 警告并忽略异常，报告超时 
+
+
+
+Definition at line 318 of file Log.\+H.
+
+\mbox{\Hypertarget{Log_8H_a8e3f8ce22d435337fb988c530e098b25}\label{Log_8H_a8e3f8ce22d435337fb988c530e098b25}} 
+\index{Log.H@{Log.H}!LTHROW@{LTHROW}}
+\index{LTHROW@{LTHROW}!Log.H@{Log.H}}
+\doxyparagraph{\texorpdfstring{LTHROW}{LTHROW}}
+{\footnotesize\ttfamily \#define L\+T\+H\+R\+OW(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{ std::string str; \{ \mbox{\hyperlink{classjevois_1_1Log}{jevois::Log<LOG\_ALERT>}}(\textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \&str) << msg; \} \(\backslash\)}
+\DoxyCodeLine{    throw std::runtime\_error(str); \} \textcolor{keywordflow}{while} (\textcolor{keyword}{false})}
+
+\end{DoxyCode}
+
+
+Definition at line 235 of file Log.\+H.
+

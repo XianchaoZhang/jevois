@@ -54,11 +54,11 @@ void jevois::dnn::PreProcessorPythonImpl::freeze(bool doit)
 // ####################################################################################################
 void jevois::dnn::PreProcessorPythonImpl::loadpy(std::string const & pypath)
 {
-  // Load the code and instantiate the python object:
+  // 加载代码并实例化 python 对象：
   PythonWrapper::pythonload(JEVOIS_SHARE_PATH "/" + pypath);
   LINFO("Loaded " << pypath);
 
-  // Now that we are fully up and ready, call python module's init() function if implemented:
+  // 现在我们已经完全准备好了，如果实现了，则调用 python 模块的 init() 函数：
   if (jevois::python::hasattr(PythonWrapper::pyinst(), "init")) PythonWrapper::pyinst().attr("init")();
 }
 
@@ -67,20 +67,19 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorPythonImpl::process(cv::Mat const 
                                                                   std::vector<vsi_nn_tensor_attr_t> const & attrs,
                                                                   std::vector<cv::Rect> & crops)
 {
-  // Convert the attrs to a list of strings:
+  // 将 attrs 转换为字符串列表：
   boost::python::list alist;
   for (vsi_nn_tensor_attr_t const & a : attrs) alist.append(jevois::dnn::attrstr(a));
 
   // Run the python code:
   boost::python::object ret = PythonWrapper::pyinst().attr("process")(img, swaprb, alist);
 
-  // We expect a tuple with first a vector of blobs, then a vector of crops:
+  // 我们期望一个元组首先是一个 blob 向量，然后是一个 crop 向量：
   if (boost::python::len(ret) != 2)
     throw std::invalid_argument("Expected two return lists for blobs,crops but received " +
                                 std::to_string(boost::python::len(ret)));
 
-  // For the crops, we want cv::Rect but they are not exposing it to python it seems. So let's just accept tuples
-  // ( (x,y), (w,h) )
+  // 对于裁剪，我们需要 cv::Rect，但似乎他们没有将其暴露给 Python。所以我们只接受元组 ( (x,y), (w,h) )
 #define CROPERR "PreProcessorPython::process: crops should be ( (x,y), (w,h) )"
 
   crops.clear();
@@ -101,7 +100,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorPythonImpl::process(cv::Mat const 
     crops.emplace_back(cv::Rect(x, y, w, h));
   }
 
-  // For the blobs, we have a converter:
+  // 对于 blob，我们有一个转换器：
   boost::python::list ml = boost::python::extract<boost::python::list>(ret[0]);
   return jevois::python::pyListToVec<cv::Mat>(ml);
 }
@@ -110,7 +109,7 @@ std::vector<cv::Mat> jevois::dnn::PreProcessorPythonImpl::process(cv::Mat const 
 void jevois::dnn::PreProcessorPythonImpl::report(jevois::StdModule *, jevois::RawImage * outimg,
                                                  jevois::OptGUIhelper * helper, bool overlay, bool idle)
 {
-  // default constructed boost::python::object is None on the python side
+  // 默认构造的 boost::python::object 在 python 端为 None
   if (outimg)
   {
 #ifdef JEVOIS_PRO

@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1UserInterface">
+<title>jevois::UserInterface Class Reference</title>
+<indexterm><primary>jevois::UserInterface</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/UserInterface.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>基于字符串的用户界面的抽象基类 </para>
+
+
+
+<para>用户通过发出文本命令和接收文本答案与 JeVois 硬件交互。UserInterface 是此类通信的抽象基类，其派生类为 Serial（在平台硬件上， 使用硬件串行和 USB 串行）或 StdioInterface（在主机上，使用终端中的用户输入和输出）。</para>
+
+<para>请参阅 <link linkend="_UserCli">命令行界面用户指南</link> 了解命令行界面的用户文档。 </para>
+<para>
+Definition at line 31 of file UserInterface.H.</para>
+Inheritance diagram for jevois::UserInterface:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1UserInterface__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::UserInterface:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1UserInterface__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Types    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">Type</link> { <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a3656183169810334a96b91129dc9d881">Type::Hard</link>, 
+<link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a7aca5ec618f7317328dcd7014cf9bdcf">Type::USB</link>, 
+<link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88af9f805b30fdb6c23233caaae223ccfaa">Type::Stdio</link>, 
+<link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a1e3042b2e2a5550b412b37edd1c36b34">Type::GUI</link>
+ }</para>
+
+<para>接口类型的枚举 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1UserInterface_1a9c8cba99a6be0c317e231dcb0b2519eb">UserInterface</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1UserInterface_1a55d4a1a02d729f405e2997099b0662d9">~UserInterface</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1UserInterface_1aa0122126d1da68237d66a33e02e3fa02">readSome</link> (std::string &amp;str)=0</para>
+
+<para>读取一些字节（如果可用），并在完成时（按下 RETURN 键）返回 true 和一个字符串 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1UserInterface_1a1ea78da97f6d939d4aca0c1ec577992a">writeString</link> (std::string const &amp;str)=0</para>
+
+<para>写入字符串 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1UserInterface_1a89da1172f885dca912feb6935a4ab102">writeString</link> (std::string const &amp;prefix, std::string const &amp;str)</para>
+
+<para>写入一个字符串，并在前面添加前缀 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">Type</link> <link linkend="_classjevois_1_1UserInterface_1ac4e4337ea4e993ed8e3230389a062224">type</link> () const =0</para>
+
+<para>派生类必须实现此并返回其接口类型 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Member Enumeration Documentation</title>
+<anchor xml:id="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88"/>    <section>
+    <title>Type</title>
+<indexterm><primary>Type</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>Type</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">jevois::UserInterface::Type</link><computeroutput>[strong]</computeroutput></computeroutput></para><para>
+
+<para>接口类型的枚举 </para>
+</para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Hard</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>Hard</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a3656183169810334a96b91129dc9d881"/>Hard</entry><entry></entry></row><row><entry><indexterm><primary>USB</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>USB</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a7aca5ec618f7317328dcd7014cf9bdcf"/>USB</entry><entry></entry></row><row><entry><indexterm><primary>Stdio</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>Stdio</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88af9f805b30fdb6c23233caaae223ccfaa"/>Stdio</entry><entry></entry></row><row><entry><indexterm><primary>GUI</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>GUI</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88a1e3042b2e2a5550b412b37edd1c36b34"/>GUI</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 56 of file UserInterface.H.</para>
+</section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1UserInterface_1a9c8cba99a6be0c317e231dcb0b2519eb"/>    <section>
+    <title>UserInterface()</title>
+<indexterm><primary>UserInterface</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>UserInterface</secondary></indexterm>
+<para><computeroutput>jevois::UserInterface::UserInterface (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 21 of file UserInterface.C.</para>
+    </section><anchor xml:id="_classjevois_1_1UserInterface_1a55d4a1a02d729f405e2997099b0662d9"/>    <section>
+    <title>~UserInterface()</title>
+<indexterm><primary>~UserInterface</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>~UserInterface</secondary></indexterm>
+<para><computeroutput>jevois::UserInterface::~UserInterface ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 26 of file UserInterface.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1UserInterface_1aa0122126d1da68237d66a33e02e3fa02"/>    <section>
+    <title>readSome()</title>
+<indexterm><primary>readSome</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>readSome</secondary></indexterm>
+<para><computeroutput>virtual bool jevois::UserInterface::readSome (std::string &amp; str)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>读取一些字节（如果可用），并在完成时（按下 RETURN 键）返回 true 和一个字符串 </para>
+</para>
+
+<para>如果用户输入尚未完成（尚未按下 RETURN 键），则 str 保持不变。RETURN（行尾）标记不会复制到 str 中，只会复制直到行尾标 记为止接收到的字符。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Serial_1a50f7553bdbf0fdfe4e5d2d06689317df">jevois::Serial</link>, <link linkend="_classjevois_1_1GUIserial_1a743adac54253b9e078bee56b9b6697f1">jevois::GUIserial</link>, <link linkend="_classjevois_1_1GUIconsole_1a3966366168ae49c34e9654cc557a68c3">jevois::GUIconsole</link>, and <link linkend="_classjevois_1_1StdioInterface_1aa3d240bb679fbec1cea83dad4aa48771">jevois::StdioInterface</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1UserInterface_1ac4e4337ea4e993ed8e3230389a062224"/>    <section>
+    <title>type()</title>
+<indexterm><primary>type</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>type</secondary></indexterm>
+<para><computeroutput>virtual <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">Type</link> jevois::UserInterface::type ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>派生类必须实现此并返回其接口类型 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Serial_1ab7dcc08de36dac64332e1f9f6a671d96">jevois::Serial</link>, <link linkend="_classjevois_1_1GUIconsole_1ab7f910f792c292503357d7ff3812b432">jevois::GUIconsole</link>, and <link linkend="_classjevois_1_1StdioInterface_1aecb67e78c6057df89f9b15149ef1ba1f">jevois::StdioInterface</link>.</para>
+<para>
+Referenced by jevois::Engine::mainLoop(), jevois::Engine::runScriptFromFile(), and jevois::Engine::sendSerial().</para>
+    </section><anchor xml:id="_classjevois_1_1UserInterface_1a89da1172f885dca912feb6935a4ab102"/>    <section>
+    <title>writeString()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>writeString</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::UserInterface::writeString (std::string const &amp; prefix, std::string const &amp; str)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>写入一个字符串，并在前面添加前缀 </para>
+</para>
+
+<para>字符串中不应包含行终止符，writeString() 将添加一个。在 <link linkend="_classjevois_1_1Serial">Serial</link> 派生类中，这将使用 serial::linestyle 的行终止约定来支 持不同的样式（CR、CRLF、LF 等）。 </para>
+<para>
+Definition at line 30 of file UserInterface.C.</para>
+    </section><anchor xml:id="_classjevois_1_1UserInterface_1a1ea78da97f6d939d4aca0c1ec577992a"/>    <section>
+    <title>writeString()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>writeString</primary><secondary>jevois::UserInterface</secondary></indexterm>
+<indexterm><primary>jevois::UserInterface</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>virtual void jevois::UserInterface::writeString (std::string const &amp; str)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>写入字符串 </para>
+</para>
+
+<para>字符串中不应包含行终止符，writeString() 将添加一个。在 <link linkend="_classjevois_1_1Serial">Serial</link> 派生类中，这将使用 serial::linestyle 的行终止约定来支 持不同的样式（CR、CRLF、LF 等）。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1Serial_1a06bd87b9e59a6aad3c8c184b2406edb5">jevois::Serial</link>, <link linkend="_classjevois_1_1GUIconsole_1a1c1c01b706e10e6ce35b74ba7e063c4b">jevois::GUIconsole</link>, <link linkend="_classjevois_1_1GUIserial_1aa8e430f5527ba55f21468c99cd007587">jevois::GUIserial</link>, and <link linkend="_classjevois_1_1StdioInterface_1af945794e67aafdb291f60b4782e8c3f8">jevois::StdioInterface</link>.</para>
+<para>
+Referenced by jevois::Engine::mainLoop(), jevois::Component::paramInfo(), jevois::Engine::parseCommand(), jevois::PythonModule::parseSerial(), jevois::Engine::runScriptFromFile(), and jevois::Engine::sendSerial().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_UserInterface_8H">UserInterface.H</link>src/jevois/Core/<link linkend="_UserInterface_8C">UserInterface.C</link></section>
+</section>

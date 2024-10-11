@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Gadget">
+<title>jevois::Gadget Class Reference</title>
+<indexterm><primary>jevois::Gadget</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/Gadget.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>JeVois 小工具驱动程序 - 向通过 USB 连接的主机计算机公开 uvcvideo 接口 </para>
+
+
+
+<para><link linkend="_classjevois_1_1Gadget">Gadget</link> 是 JeVois 实现的 Linux 内核小工具驱动程序的用户空间接口。USB 小工具驱动程序是在设备上运行的 USB 驱动程序， 而不是在主机计算机上运行的 USB 驱动程序。小工具驱动程序实现 USB 功能，例如 USB 打印机、USB 调制解调器或 USB 摄像 头。在 JeVois 中，Gadget 驱动程序使 JeVois 硬件平台显示为 UVC（USB 视频类）摄像头。由于 UVC 已经标准化，因此主机 计算机上不需要特殊驱动程序即可开始使用 UVC 设备，因为几乎所有现代操作系统都已为符合 UVC 标准的摄像头提供了内置驱 动程序。</para>
+
+<para><link linkend="_classjevois_1_1Gadget">Gadget</link> 的内部操作相当复杂，尤其是由于它与内核端 UVC 小工具驱动程序的紧密交互。然而，对于用户来说，Gadget 只是另一 个 <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> 设备：可以设置其格式，使用 <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">get()</link> 从中获取空白图像缓冲区，将结果绘制到这些缓冲区中，并在完成后使用 <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send()</link> 将它们发送到主机。</para>
+
+<para><link linkend="_classjevois_1_1Gadget">Gadget</link> 实现了对输出视频帧的零拷贝、零等待访问，即：<itemizedlist>
+<listitem>
+<para>您通过 <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">get()</link> 获取的图像的像素数据直接是内存映射像素缓冲区，JeVois 芯片上的硅硬件将通过直接内存访问 (DMA) 使用该 缓冲区通过 USB 链路流出数据；</para>
+</listitem><listitem>
+<para>只要您调用 <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send()</link>，该缓冲区就会排队等待通过 USB 发送（而不是以固定的、有规律的间隔流出图像）。Gadget 有多个图像 缓冲区，允许一个缓冲区通过 USB 流出，而另一个缓冲区则通过 <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">get()</link> 由您的应用程序填充。这些缓冲区是可回收的，即一旦 调用 <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send()</link>，底层缓冲区就会通过 USB 流出，然后发送回 <link linkend="_classjevois_1_1Gadget">Gadget</link> 以供您的代码将来访问。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>大多数程序员永远不会直接使用 Gadget，而是使用 <link linkend="_classjevois_1_1Engine">Engine</link> 和 OutputFrame。 </para>
+<para>
+Definition at line 60 of file Gadget.H.</para>
+Inheritance diagram for jevois::Gadget:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Gadget__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Gadget:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Gadget__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Gadget_1a7bfe7a115ad10d4c60acd76ec5c3d2a6">Gadget</link> (std::string const &amp;devname, <link linkend="_classjevois_1_1VideoInput">VideoInput</link> *camera, <link linkend="_classjevois_1_1Engine">Engine</link> *engine, size_t const nbufs=0, bool multicam=false)</para>
+
+<para>构造并打开设备 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1Gadget_1a96222d6943d3305381b76b6460846610">~Gadget</link> ()</para>
+
+<para>关闭设备并释放所有资源 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1ab232e3eaee3a793d58271c7a149069a7">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧速率 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send()</link> 通过 USB 发送出去 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img) override</para>
+
+<para>通过 USB 将图像发送到主机 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1ab59e7323881b74c61c59162091b963bb">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1a58592471bacdfff49de78fe6d4ef79a1">abortStream</link> () override</para>
+
+<para>中止流式传输 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Gadget_1a2b3e805524d943d4c82a92702ccdeb13">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Gadget_1a7bfe7a115ad10d4c60acd76ec5c3d2a6"/>    <section>
+    <title>Gadget()</title>
+<indexterm><primary>Gadget</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>Gadget</secondary></indexterm>
+<para><computeroutput>jevois::Gadget::Gadget (std::string const &amp; devname, <link linkend="_classjevois_1_1VideoInput">jevois::VideoInput</link> * camera, <link linkend="_classjevois_1_1Engine">jevois::Engine</link> * engine, size_t const nbufs = <computeroutput>0</computeroutput>
+, bool multicam = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>构造并打开设备 </para>
+</para>
+
+<para>此小工具需要有效的非空摄像头才能工作。 为了避免在小工具的每次操作中测试非空摄像头，我们只在构造时测试一次，然 后假设摄像头将在小工具的整个生命周期内保持运行。 使用 0 作为 nbufs 以自动设置它。 </para>
+<para>
+Definition at line 139 of file Gadget.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1a96222d6943d3305381b76b6460846610"/>    <section>
+    <title>~Gadget()</title>
+<indexterm><primary>~Gadget</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>~Gadget</secondary></indexterm>
+<para><computeroutput>jevois::Gadget::~Gadget ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>关闭设备并释放所有资源 </para>
+</para>
+<para>
+Definition at line 185 of file Gadget.C.</para>
+<para>
+References JEVOIS_TRACE, PLERROR, and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Gadget_1a58592471bacdfff49de78fe6d4ef79a1"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>中止流式传输 </para>
+</para>
+
+<para>这只会取消未来的 <link linkend="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31">get()</link> 和 done() 调用，仍应调用 <link linkend="_classjevois_1_1Gadget_1a2b3e805524d943d4c82a92702ccdeb13">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 772 of file Gadget.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1a63a43ef68898deff23a9b9d1730fea31"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::get (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取预分配的图像，以便我们可以填充像素数据，然后使用 <link linkend="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f">send()</link> 通过 USB 发送出去 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 806 of file Gadget.C.</para>
+<para>
+References jevois::RawImage::bufindex, JEVOIS_TRACE, LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1aea013e8c9c6d93f5c11a56507b9aa69f"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::send (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>通过 USB 将图像发送到主机 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 849 of file Gadget.C.</para>
+<para>
+References jevois::RawImage::bufindex, jevois::RawImage::fmt, jevois::RawImage::height, JEVOIS_TRACE, LDEBUG, LFATAL, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1ab232e3eaee3a793d58271c7a149069a7"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::setFormat (<link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧速率 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 201 of file Gadget.C.</para>
+<para>
+References jevois::fccstr(), jevois::VideoMapping::fpsToV4l2(), JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LINFO, jevois::VideoMapping::ofmt, jevois::VideoMapping::ofps, jevois::VideoMapping::oh, jevois::VideoMapping::osize(), jevois::VideoMapping::ow, XIOCTL, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1a2b3e805524d943d4c82a92702ccdeb13"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 780 of file Gadget.C.</para>
+<para>
+References JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LDEBUG, and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1Gadget_1ab59e7323881b74c61c59162091b963bb"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::Gadget</secondary></indexterm>
+<indexterm><primary>jevois::Gadget</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::Gadget::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 716 of file Gadget.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::bufindex, jevois::RawImage::fmt, jevois::RawImage::fps, jevois::RawImage::height, JEVOIS_TIMED_LOCK, JEVOIS_TRACE, LDEBUG, LERROR, LINFO, jevois::v4l2ImageSize(), jevois::RawImage::width, and XIOCTL.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_Gadget_8H">Gadget.H</link>src/jevois/Core/<link linkend="_Gadget_8C">Gadget.C</link></section>
+</section>

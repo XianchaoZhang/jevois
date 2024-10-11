@@ -49,14 +49,14 @@ jevois::GUIeditor::~GUIeditor()
 // ##############################################################################################################
 void jevois::GUIeditor::refresh()
 {
-  // If we have an open file that is not one of our fixed items, we want to keep that one open:
+  // 如果我们打开了一个文件，但它不是我们的固定项目之一，我们希望保持该文件打开：
   bool keep_current = false; EditorItem current_item;
   if (itsCurrentItem >= int(itsNumFixedItems)) { current_item = itsItems[itsCurrentItem]; keep_current = true; }
   
-  // Remove all dynamic files, keep the fixed ones:
+  // 删除所有动态文件，保留固定文件：
   itsItems.resize(itsNumFixedItems);
 
-  // Do we have a CMakeLists for the current module?
+  // 我们是否有当前模块的 CMakeLists？
   if (itsItems[0].filename == "*")
   {
     jevois::VideoMapping const & vm = itsHelper->engine()->getCurrentVideoMapping();
@@ -71,7 +71,7 @@ void jevois::GUIeditor::refresh()
     {
       std::filesystem::path const path = dent.path();
       
-      // Check that the extension is one we want:
+      // 检查扩展是否是我们想要的：
       if (itsExtensions.find(path.extension()) == itsExtensions.end()) continue;
 
       // Create an entry:
@@ -82,7 +82,7 @@ void jevois::GUIeditor::refresh()
   // Keep the current item?
   if (keep_current) itsItems.emplace_back(std::move(current_item));
   
-  // Add an entry for file browser / creation:
+  // 为文件浏览器/创建添加一个条目：
   itsItems.emplace_back(EditorItem { "**", "Browse / Create file...", EditorSaveAction::Reload });
   
   // Update index of current file:
@@ -98,13 +98,12 @@ void jevois::GUIeditor::refresh()
     }
     else ++i;
 
-  // If the currently open file is not in our list anymore, load file 0:
+  // 如果当前打开的文件不再在我们的列表中，则加载文件 0：
   if (not_found)
   {
     itsNewItem = 0;
     itsWantLoad = true;
-    // If we have some edits, we will ask to save, and then to possibly reload the module (or reboot, etc). Prevent
-    // asking to reload:
+    // 如果我们有一些编辑，我们将要求保存，然后可能重新加载模块（或重新启动等）。 防止要求重新加载：
     itsOverrideReloadModule = IsEdited();
   }
 }
@@ -112,14 +111,14 @@ void jevois::GUIeditor::refresh()
 // ##############################################################################################################
 void jevois::GUIeditor::draw()
 {
-  // Create combo entries for imgui:
+  // 为 imgui 创建组合条目：
   char const * items[itsItems.size()];
   for (int i = 0; EditorItem const & c : itsItems) items[i++] = c.displayname.c_str();
 
-  // Check if the user is trying to select a different file:
+  // 检查用户是否尝试选择其他文件：
   if (ImGui::Combo(("##"+itsId+"editorcombo").c_str(), &itsNewItem, items, itsItems.size())) itsWantLoad = true;
   
-  // Want to load a new file? check if we need to save the current one first:
+  // 想要加载新文件？先检查是否需要保存当前文件：
   if (itsWantLoad && itsWantAction == false)
   {
     if (IsEdited())
@@ -141,7 +140,7 @@ void jevois::GUIeditor::draw()
     }
   }
   
-  // Need to execute an action after a save?
+  // 保存后需要执行操作吗？
   if (itsWantAction)
   {
     switch (itsItems[itsCurrentItem].action)
@@ -154,8 +153,8 @@ void jevois::GUIeditor::draw()
       // --------------------------------------------------
     case jevois::EditorSaveAction::Reload:
     {
-      // Skip if override requested by refresh(), typically because we loaded a new module but a config file from the
-      // old module was open so we asked to save, now we don't want to ask to reload again:
+      // 如果 refresh() 请求覆盖，则跳过，通常是因为我们加载了新模块，但是旧模块中的配置文件已打开，因此我们要求保存，
+	  // 现在我们不想再次要求重新加载：
       if (itsOverrideReloadModule)
       {
         itsOverrideReloadModule = false;
@@ -164,7 +163,7 @@ void jevois::GUIeditor::draw()
         break;
       }
 
-      // Ask whether to reload the module now or later:
+      // 询问是否立即或稍后重新加载模块：
       static int reload_default = 0;
       int ret = itsHelper->modal("Reload Module?", "Reload Machine Vision Module for changes to take effect?",
                                  &reload_default, "Reload", "Later");
@@ -176,7 +175,7 @@ void jevois::GUIeditor::draw()
         itsOkToLoad = itsWantLoad;
         break;
         
-      case 2: // Later selected: we don't want action anymore
+      case 2: // 选择稍后：我们不再需要操作 
         itsWantAction = false;
         itsOkToLoad = itsWantLoad;
         break;
@@ -198,7 +197,7 @@ void jevois::GUIeditor::draw()
         itsWantAction = false;
         break;
         
-      case 2: // Later selected: we don't want action anymore
+      case 2: // 选择稍后：我们不再需要操作 
         itsWantAction = false;
         break;
 
@@ -218,7 +217,7 @@ void jevois::GUIeditor::draw()
     // --------------------------------------------------
     case jevois::EditorSaveAction::Compile:
     {
-      // Ask whether to compile the module now or later:
+      // 询问是否立即编译模块还是稍后编译：
       static int compile_default = 0;
       int ret = itsHelper->modal("Compile Module?", "Compile Machine Vision Module for changes to take effect?",
                                  &compile_default, "Compile", "Later");
@@ -337,7 +336,7 @@ void jevois::GUIeditor::draw()
     ImGui::EndPopup();
   }
 
-  // Draw a save button if we are read/write:
+  // 如果我们可以读/写，则绘制一个保存按钮：
   if (ro == false)
   {
     ImGui::SameLine();
@@ -347,7 +346,7 @@ void jevois::GUIeditor::draw()
   
   ImGui::Separator();
 
-  // Render the editor in a child window so it can scroll correctly:
+  // 在子窗口中呈现编辑器，以便它可以正确滚动：
   auto cpos = GetCursorPosition();
 
   ImGui::Text("%6d/%-6d %6d lines  | %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, GetTotalLines(),
@@ -361,12 +360,12 @@ void jevois::GUIeditor::draw()
 // ##############################################################################################################
 void jevois::GUIeditor::loadFile(std::filesystem::path const & fn)
 {
-  // Loading will happen in the main loop. Here we just create a new item:
+  // 加载将在主循环中进行。这里我们只需创建一个新项目：
   for (int i = 0; EditorItem const & item : itsItems)
     if (item.filename == fn) { itsNewItem = i; itsWantLoad = true; return; } else ++i;
 
-  // Not already in our list of items, create a new one.  Add an entry for our new file. If it's compilable, then action
-  // on save should be to compile, otherwise it should be to reload the module:
+  // 尚未在我们的项目列表中，请创建一个新的。为我们的新文件添加一个条目。如果它是可编译的，则保存时的操作应该是编译，
+  // 否则应该是重新加载模块：
   EditorSaveAction action = EditorSaveAction::Reload;
   if (fn.filename() == "CMakeLists.txt")
     action = EditorSaveAction::Compile;
@@ -391,7 +390,7 @@ void jevois::GUIeditor::loadFileInternal(std::filesystem::path const & fpath, st
   
   if (fpath == "*")
   {
-    // If filename is "*", replace by the module's source code name:
+    // 如果文件名为 "*"，则替换为模块的源代码名称：
     jevois::VideoMapping const & vm = itsHelper->engine()->getCurrentVideoMapping();
     fn = vm.srcpath();
     failtxt = "Could not open Module's source code";
@@ -399,7 +398,7 @@ void jevois::GUIeditor::loadFileInternal(std::filesystem::path const & fpath, st
   }
   else if (fpath == "#")
   {
-    // If filename is "#", replace by the module's CMakeLists.txt:
+    // 如果文件名是 "#"，则用模块的 CMakeLists.txt 替换：
     jevois::VideoMapping const & vm = itsHelper->engine()->getCurrentVideoMapping();
     fn = vm.cmakepath();
     failtxt = "Could not open Module's CMakeLists.txt";
@@ -407,7 +406,7 @@ void jevois::GUIeditor::loadFileInternal(std::filesystem::path const & fpath, st
   }
   else if (fpath.is_relative())
   {
-    // If path is relative, make it within the module's path (if any):
+    // 如果路径是相对的，则使其在模块的路径内（如果有）：
     auto m = itsHelper->engine()->module();
     if (m) fn = m->absolutePath(fpath);
     special_path = true;
@@ -421,17 +420,16 @@ void jevois::GUIeditor::loadFileInternal(std::filesystem::path const & fpath, st
   std::ifstream t(fn);
   if (t.good())
   {
-    // Load the whole file and set it as our text:
+    // 加载整个文件并将其设置为我们的文本：
     std::string str((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
     SetText(str);
 
-    // Is this a known file in our pull-down list? Otherwise we need to create a new item:
+    // 这是我们下拉列表中的已知文件吗？否则我们需要创建一个新项目：
     for (int i = 0; EditorItem const & item : itsItems)
       if (item.filename == fpath) { itsCurrentItem = i; got_it = true; break; } else ++i;
 
-    // Set the language, read-only, and possibly action according to file extension. C++/C source files are editable if
-    // there is a CMakeLists.txt in the same directory (e.g., newly created or cloned module, excludes jevoisbase
-    // modules), and then a compilation action will be triggered on save:
+    // 根据文件扩展名设置语言、只读和可能的操作。如果同一目录中存在 CMakeLists.txt（例如，新创建或克隆的模块，不包括 
+	// jevoisbase 模块），则 C++/C 源文件是可编辑的，然后在保存时会触发编译操作：
     if (fn.filename() == "CMakeLists.txt")
     {
       SetLanguageDefinition(TextEditor::LanguageDefinition::CMake());
@@ -477,15 +475,15 @@ void jevois::GUIeditor::loadFileInternal(std::filesystem::path const & fpath, st
     else { LINFO("File " << fn << " not found."); SetReadOnly(true); }
   }
 
-  // If this is a new file, add an item to our pull-down list:
+  // 如果这是一个新文件，则将一个项目添加到我们的下拉列表中：
   if (got_it == false && special_path == false)
   {
     itsItems.emplace_back(EditorItem { fn, "File " + fn.string(), action });
     itsCurrentItem = itsItems.size() - 1;
   }
-  else if (fpath == "*") itsItems[itsCurrentItem].action = action; // Force compile action if needed on module's src
+  else if (fpath == "*") itsItems[itsCurrentItem].action = action; // 如果需要，则在模块的 src 上强制编译操作
   
-  // Remember the filename, for saveFile():
+  // 记住文件名，用于 saveFile()：
   itsFilename = fn;
   itsNewItem = itsCurrentItem;
   itsWantLoad = false;
@@ -509,11 +507,11 @@ void jevois::GUIeditor::saveFile()
   // Mark as un-edited:
   SetEdited(false);
 
-  // Delete modinfo.html if any, GUIhelper will re-compute it when the info tab is selected:
+  // 如果有 modinfo.html，则删除它，当选择信息选项卡时，GUIhelper 会重新计算它：
   std::filesystem::path mi = itsFilename.parent_path() / "modinfo.html";
   if (std::filesystem::exists(mi)) std::filesystem::remove(mi);
 
-  // After a save, execute any required action like reload module, reboot, recompile, etc:
+  // 保存后，执行任何所需的操作，如重新加载模块、重新启动、重新编译等：
   itsWantAction = true;
 }
 

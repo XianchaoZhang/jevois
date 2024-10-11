@@ -1,0 +1,121 @@
+\hypertarget{classjevois_1_1ImGuiBackend}{}\doxysubsection{jevois\+::Im\+Gui\+Backend Class Reference}
+\label{classjevois_1_1ImGuiBackend}\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Im\+Gui\+Backend.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Backend for Im\+Gui on Je\+Vois-\/\+Pro. 
+
+This abstract base class provides an interface used by \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI}{Video\+Display\+G\+UI}}. Derived implementations are available for S\+D\+L2 (to be used on Je\+Vois-\/\+Pro host) and Mali framebuffer + evdev (to be used on Je\+Vois-\/\+Pro platform). 
+
+Definition at line 33 of file Im\+Gui\+Backend.\+H.
+
+
+
+Inheritance diagram for jevois\+::Im\+Gui\+Backend\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classjevois_1_1ImGuiBackend__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Im\+Gui\+Backend\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{classjevois_1_1ImGuiBackend__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiBackend_ae33d7f8ec8066dedbcab612e8afd8bc5}{Im\+Gui\+Backend}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ImGuiBackend_ac59b3ad1807875aba0bd2b8a5ef6b069}{$\sim$\+Im\+Gui\+Backend}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance, free resources. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackend_af0666fcfa9fb5284b74865b3a5e5a72d}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool fullscreen=false, float scale=1.\+0f, bool conslock=false)=0
+\begin{DoxyCompactList}\small\item\em Initialize the underlying engine that will process events, create windows, etc. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackend_ab7db3f98de08fb763935b179c0031eea}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool fullscreen=false)=0
+\begin{DoxyCompactList}\small\item\em Avoid warning about overloaded virtual. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ImGuiBackend_a181905b959ba0c5d7b9bb5f4f75e54ff}{init}} (unsigned short w, unsigned short \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, E\+G\+L\+Native\+Window\+Type win)
+\begin{DoxyCompactList}\small\item\em Avoid warning about overloaded virtual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackend_ae33d7f8ec8066dedbcab612e8afd8bc5}\label{classjevois_1_1ImGuiBackend_ae33d7f8ec8066dedbcab612e8afd8bc5}} 
+\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}!ImGuiBackend@{ImGuiBackend}}
+\index{ImGuiBackend@{ImGuiBackend}!jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+\doxyparagraph{\texorpdfstring{ImGuiBackend()}{ImGuiBackend()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Backend\+::\+Im\+Gui\+Backend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 23 of file Im\+Gui\+Backend.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackend_ac59b3ad1807875aba0bd2b8a5ef6b069}\label{classjevois_1_1ImGuiBackend_ac59b3ad1807875aba0bd2b8a5ef6b069}} 
+\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}!````~ImGuiBackend@{$\sim$ImGuiBackend}}
+\index{````~ImGuiBackend@{$\sim$ImGuiBackend}!jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+\doxyparagraph{\texorpdfstring{$\sim$ImGuiBackend()}{~ImGuiBackend()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Backend\+::$\sim$\+Im\+Gui\+Backend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for safe inheritance, free resources. 
+
+
+
+Definition at line 27 of file Im\+Gui\+Backend.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackend_ab7db3f98de08fb763935b179c0031eea}\label{classjevois_1_1ImGuiBackend_ab7db3f98de08fb763935b179c0031eea}} 
+\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}!init@{init}}
+\index{init@{init}!jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+\doxyparagraph{\texorpdfstring{init()}{init()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Display\+Backend\+::init}
+
+
+
+Avoid warning about overloaded virtual. 
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiBackend_af0666fcfa9fb5284b74865b3a5e5a72d}\label{classjevois_1_1ImGuiBackend_af0666fcfa9fb5284b74865b3a5e5a72d}} 
+\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}!init@{init}}
+\index{init@{init}!jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+\doxyparagraph{\texorpdfstring{init()}{init()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Im\+Gui\+Backend\+::init (\begin{DoxyParamCaption}\item[{unsigned short}]{w,  }\item[{unsigned short}]{h,  }\item[{bool}]{fullscreen = {\ttfamily false},  }\item[{float}]{scale = {\ttfamily 1.0f},  }\item[{bool}]{conslock = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Initialize the underlying engine that will process events, create windows, etc. 
+
+The init starts with the given initial window/framebuffer size. \mbox{\Hypertarget{classjevois_1_1ImGuiBackend_a181905b959ba0c5d7b9bb5f4f75e54ff}\label{classjevois_1_1ImGuiBackend_a181905b959ba0c5d7b9bb5f4f75e54ff}} 
+\index{jevois::ImGuiBackend@{jevois::ImGuiBackend}!init@{init}}
+\index{init@{init}!jevois::ImGuiBackend@{jevois::ImGuiBackend}}
+\doxyparagraph{\texorpdfstring{init()}{init()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void jevois\+::\+Video\+Display\+Backend\+::init}
+
+
+
+Avoid warning about overloaded virtual. 
+
+
+
+Definition at line 57 of file Video\+Display\+Backend.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiBackend_8H}{Im\+Gui\+Backend.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiBackend_8C}{Im\+Gui\+Backend.\+C}}\end{DoxyCompactItemize}

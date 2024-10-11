@@ -51,12 +51,11 @@
 #include <boost/preprocessor/stringize.hpp>
 #include <boost/preprocessor/if.hpp>
 
-/*! \defgroup compilerutil Miscellaneous preprocessor utilities related to controlling compilation
+/*! \defgroup compilerutil 其他与控制编译相关的预处理器实用程序
     \ingroup utils */
 
-// Get the compiler name: (see http://stackoverflow.com/questions/19204792/c-if-elif-endif-dont-seem-to-work for why we
-// use 2 variables; JEVOIS_COMPILER_NAME is used for macro expansion with the name, JEVOIS_COMPILER used for #if
-// testing):
+//  获取编译器名称：（请参阅 http://stackoverflow.com/questions/19204792/c-if-elif-endif-dont-seem-to-work 了解我们
+// 为什么使用 2 个变量；JEVOIS_COMPILER_NAME 用于带名称的宏扩展，JEVOIS_COMPILER 用于 #if // 测试）：
 #define JEVOIS_COMPILER_GCC 1
 #define JEVOIS_COMPILER_CLANG 2
 #define JEVOIS_COMPILER_OTHER 3
@@ -75,11 +74,10 @@
 #define JEVOIS_PRAGMA(x) _Pragma(BOOST_PP_STRINGIZE(JEVOIS_COMPILER_NAME x))
 
 /*! @def JEVOIS_BEGIN_UNCHECKED_INCLUDES
-    A series of preprocessor directives that turns off specific warnings as
-    errors until the matching JEVOIS_END_UNCHECKED_INCLUDES.  This is useful for
-    libraries that are written with code that won't compile under -Wall.
+    一系列预处理器指令，将特定警告关闭为错误，直到匹配 JEVOIS_END_UNCHECKED_INCLUDES。
+    这对于使用在 -Wall 下无法编译的代码编写的库很有用。
 
-    Must be followed by a matching JEVOIS_END_UNCHECKED_INCLUDES
+    必须跟随着匹配的 JEVOIS_END_UNCHECKED_INCLUDES
     @ingroup compilerutil */
 #define JEVOIS_BEGIN_UNCHECKED_INCLUDES JEVOIS_PRAGMA(diagnostic push) \
   JEVOIS_PRAGMA(diagnostic ignored "-Wpragmas") \
@@ -94,6 +92,6 @@
   JEVOIS_PRAGMA(diagnostic ignored "-Wall")
 
 /*! @def JEVOIS_END_UNCHECKED_INCLUDES
-    Turns back on all warnings that were in effect prior to an JEVOIS_BEGIN_UNCHECKED_INCLUDES.
+    重新打开 JEVOIS_BEGIN_UNCHECKED_INCLUDES 之前有效的所有警告。
     @ingroup compilerutil */
 #define JEVOIS_END_UNCHECKED_INCLUDES JEVOIS_PRAGMA(diagnostic pop)

@@ -1,39 +1,29 @@
-/*! \page CompilingJeVoisBase Compiling JeVoisBase software from source
+/*! \page CompilingJeVoisBase 从源代码编译 JeVoisBase 软件
 
-JeVoisBase vision software is in a repository called \c jevoisbase and located at https://github.com/jevois
+JeVoisBase 视觉软件位于名为 \c jevoisbase 的存储库中，位于 https://github.com/jevois
 
-It provides a base collection of 25+ machine vision modules. Those are the modules that are bundled with the JeVois
-smart camera by default. They provide a wide range of machine vision algorithms, including visual attention and gist of
-a scene, object recognition, QRcode decoding, object tracking, road following, etc.
+它提供了超过 25 个机器视觉模块的基本集合。这些模块默认与 JeVois 智能相机捆绑在一起。它们提供了广泛的机器视觉算法，包括视觉注意（visual attention）和场景要点（gist of a scene）、目标识别、QRcode 解码、目标跟踪、道路跟踪（road following）等。
 
-Compiling JeVoisBase software from source is only supported on Ubuntu Linux 20.04 amd64.
+仅 Ubuntu Linux 20.04 amd64 支持从源代码编译 JeVoisBase 软件。
 
-Before you attempt to compile JeVoisBase, you should compile jevois for both host and platform as explained in \ref
-CompilingJeVois
+在尝试编译 JeVoisBase 之前，您应该为主机和平台编译 jevois，如 \ref CompilingJeVois 中所述
 
 Theory
 ------
 
-The JeVoisBase core software is written in C++-17. It uses the facilities provided by the JeVois core software, and
-implements machine vision modules that can run on the JeVois smart camera.
+JeVoisBase 核心软件采用 C++-17 编写。它使用 JeVois 核心软件提供的功能，并实现可在 JeVois 智能相机上运行的机器视觉模块。
 
-The JeVoisBase software is configured and compiled using [CMake](https://cmake.org), like the JeVois software.
+JeVoisBase 软件使用 [CMake](https://cmake.org) 进行配置和编译，与 JeVois 软件一样。
 
-Like the core JeVois software, it can be compiled natively on your Linux computer (\b host mode), in which case
-video will be captured from any connected camera, and video output will be to your computer's display. It can also be
-cross-compiled for the CPU inside the JeVois smart camera (\b platform mode), in which case video will be captured
-from the video sensor inside the JeVois camera, and video output will be streamed over the USB link.
+与核心 JeVois 软件一样，它可以在您的 Linux 计算机上本地编译（\b host 模式），在这种情况下，视频将从任何连接的摄像头捕获，视频输出将发送到您的计算机显示器。它还可以为 JeVois 智能摄像头内的 CPU 进行交叉编译（\b platform 模式），在这种情况下，视频将从 JeVois 摄像头内的视频传感器捕获，视频输出将通过 USB 链路进行流式传输。
 
-Because several machine vision modules in JeVoisBase use the same components, such as for example a visual attention
-component, JeVoisBase is architectured as:
+由于 JeVoisBase 中的多个机器视觉模块使用相同的组件，例如视觉注意（visual attention）组件，因此 JeVoisBase 的架构如下：
 
-- \c libjevoisbase.so on \jva33 or \c libjevoisprobase.so on \jvpro contains all the components, i.e., elementary
-  machine vision algorithms.
+- \jva33 上的 \c libjevoisbase.so 或 \jvpro 上的 \c libjevoisprobase.so 包含所有组件，即基本的机器视觉算法。
 
-- Modules then simply connect a collection of those components together, to the camera input, and to the video streaming
-  output over USB or HDMI.
+- 然后，模块只需将这些组件的集合连接在一起，连接到摄像头输入，并通过 USB 或 HDMI 连接到视频流输出。
 
-Getting the source code from GitHub
+从 GitHub 获取源代码 
 -----------------------------------
 
 \verbatim
@@ -41,82 +31,79 @@ cd
 git clone https://github.com/jevois/jevoisbase.git
 \endverbatim
 
-Before compiling for the first time: Getting the contributed packages
+首次编译之前：获取贡献的软件包 
 ---------------------------------------------------------------------
 
-\note The compilation scripts now do this automatically.
+\note 编译脚本现在会自动执行此操作。
 
-The directory <b>jevoisbase/Contrib</b> is for a collection of contributed source code packages.
+目录 <b>jevoisbase/Contrib</b> 用于收集贡献的源代码包。
 
-Before you attempt to compile jevoisbase the first time, you should download and patch those contributed packages, as
-follows:
+在您第一次尝试编译 jevoisbase 之前，您应该下载并修补那些贡献的软件包，如下所示：
 
 \verbatim
 cd jevoisbase/Contrib
 ./reinstall.sh
 \endverbatim
 
-JeVois-A33: Full reconfiguration and compilation
+JeVois-A33：完全重新配置和编译
 ------------------------------------------------
 
-Scripts are provided to recompile everything:
+提供了脚本来重新编译所有内容：
 
-- \c rebuild-host.sh will
-  + Compile natively for your computer's CPU
-  + Object files will be in \c hbuild/ which the script creates
-  + Modules and libraries will be installed in \c /jevois (to match their location on the platform hardware)
-  + Thus, modules are ready to use immediately on your computer.
+- \c rebuild-host.sh 将
+  + 为您计算机的 CPU 进行本机编译
+  + 目标文件将位于脚本创建的 \c hbuild/ 中
+  + 模块和库将安装在 \c /jevois 中（以匹配它们在平台硬件上的位置）
+  + 因此，模块可立即在您的计算机上使用。
 
-- \c rebuild-platform.sh will
-  + Cross-compile for the CPU inside the JeVois smart camera (arm-gnueabi-hf)
-  + Object files will be in \c pbuild/ which the script creates
-  + Modules, config files, etc will be installed to staging directory <b>/var/lib/jevois-microsd/</b> (see
-      \ref ProgrammerOrganization) which can later be flashed to microSD.
+- \c rebuild-platform.sh 将
+  + 为 JeVois 智能相机 (arm-gnueabi-hf) 内的 CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \c pbuild/ 中
+  + 模块、配置文件等将安装到暂存目录 <b>/var/lib/jevois-microsd/</b>（参见 \ref ProgrammerOrganization），稍后可将其刷入 microSD。
 
-Once jevoisbase is compiled and installed for host, you can try it out using \ref JeVoisDaemon.
+一旦为主机编译并安装 jevoisbase，您就可以使用 \ref JeVoisDaemon 进行尝试。
 
-JeVois-Pro: Full reconfiguration and compilation
+JeVois-Pro：完全重新配置和编译 
 ------------------------------------------------
 
-Scripts are provided to recompile everything:
+提供了脚本来重新编译所有内容：
 
-- \c rebuild-pro-host.sh will
-  + Compile natively for your computer's CPU
-  + Object files will be in \c phbuild/ which the script creates
-  + Modules and libraries will be installed in \c /jevoispro (to match their location on the platform hardware)
-  + Thus, modules are ready to use immediately on your computer.
+- \c rebuild-pro-host.sh 将
+  + 为您计算机的 CPU 进行本地编译
+  + 目标文件将位于脚本创建的 \c phbuild/ 中
+  + 模块和库将安装在 \c /jevoispro 中（以匹配它们在平台硬件上的位置）
+  + 因此，模块可立即在您的计算机上使用。
 
-- \c rebuild-pro-platform.sh will
-  + Cross-compile for the ARM CPU inside the JeVois-Pro smart camera
-  + Object files will be in \b ppbuild/ which the script creates
-  + Config files used by JeVois at runtime will be staged into <b>/var/lib/jevoispro-microsd/config/</b>
-  + Executables including \c jevois-daemon will be staged into <b>/var/lib/jevoispro-build/usr/bin/</b>
-  + Include files will be staged into <b>/var/lib/jevoispro-build/usr/include/jevois/</b>
-  + The core JeVois Base library (\b libjevoisprobase.so) will be staged into <b>/var/lib/jevoispro-build/usr/lib/</b>
-  + Documentation files are staged into <b>/var/lib/jevoispro-build/usr/share/doc/jevoispro-platform/</b>
-  + Thus, because all target files are stored into the staging area, they will be ready to be used as
-    dependencies when you try to compile new custom machine vision modules.
+- \c rebuild-pro-platform.sh 将
+  + 为 JeVois-Pro 智能相机内的 ARM CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \b ppbuild/ 中
+  + JeVois 在运行时使用的配置文件将暂存到 <b>/var/lib/jevoispro-microsd/config/</b>
+  + 包括 \c jevois-daemon 的可执行文件将暂存到 <b>/var/lib/jevoispro-build/usr/bin/</b>
+  + 包含文件将暂存到 <b>/var/lib/jevoispro-build/usr/include/jevois/</b>
+  + 核心 JeVois Base 库 (\b libjevoisprobase.so) 将暂存到 <b>/var/lib/jevoispro-build/usr/lib/</b>
+  + 文档文件将暂存到<b>/var/lib/jevoispro-build/usr/share/doc/jevoispro-platform/</b>
+  + 因此，由于所有目标文件都存储在暂存区中，因此当您尝试编译新的自定义机器视觉模块时，它们将可以用作依赖项。
 
-- \c rebuild-pro-platform-pdeb.sh will
-  + Cross-compile for the ARM CPU inside the JeVois-Pro smart camera
-  + Object files will be in \b ppdbuild/ which the script creates
-  + A deb package will be created that should be installed on the camera while logged on the camera.
-  + File locations are the same as above for host.
+- \c rebuild-pro-platform-pdeb.sh 将
+  + 为 JeVois-Pro 智能相机内的 ARM CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \b ppdbuild/ 中
+  + 将创建一个 deb 包，该包应在登录相机时安装在相机上。
+  + 文件位置与上述主机相同。
 
-Once jevoisbase is compiled and installed for host, you can try it out using \ref JeVoisDaemon.
+一旦为主机编译并安装 jevoisbase，您就可以使用 \ref JeVoisDaemon 进行尝试。
 
-Here is a walkthrough of what you should see when compiling jevois and jevoisbase from source for \jvpro:
+下面是从 \jvpro 源代码编译 jevois 和 jevoisbase 时应该看到的内容的演示：
 
 \youtube{TnQW0gMJzTo}
 
-Partial re-compilation
+部分重新编译 
 ----------------------
 
-The scripts \c rebuild-host.sh and \c rebuild-platform.sh clear and recompile everything.
+脚本 \c rebuild-host.sh 和 \c rebuild-platform.sh 清除并重新编译所有内容。
 
-You should run them at least once.
+您应该至少运行它们一次。
 
-Then, if you are just changing a few files, you can only recompile what is needed, as follows:
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
 
 - \jva33: for host
 \verbatim
@@ -154,9 +141,9 @@ sudo make install
 cd ppdbuild
 make -j
 sudo make install
-sudo cpack # will re-generate the deb package into ppdbuild/jevoisprobase-platform_XXX_arm64.deb
-# You can then copy this file to microSD, switch JeVois-Pro to console boot, then
-# `apt remove jevoisprobase-platform` to nuke the existing version and then `dpkg -i <your_new_deb>`.
+sudo cpack # 将重新生成 deb 包到 ppdbuild/jevoisprobase-platform_XXX_arm64.deb
+# 然后您可以将此文件复制到 microSD，将 JeVois-Pro 切换到控制台启动，然后
+# `apt remove jevoisprobase-platform` 删除现有版本，然后 `dpkg -i <your_new_deb>`。
 \endverbatim
 
 */

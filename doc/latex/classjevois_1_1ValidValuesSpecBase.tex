@@ -1,0 +1,102 @@
+\hypertarget{classjevois_1_1ValidValuesSpecBase}{}\doxysubsection{jevois\+::Valid\+Values\+Spec\+Base$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ValidValuesSpecBase}\index{jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Valid\+Values\+Spec.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}
+
+用于为类型指定一组有效值的基类 
+
+定义新的派生有效值规范时请注意：确保定义 \mbox{\hyperlink{structjevois_1_1VideoMapping_ad08d440b2fdbff06067ec4f2bfff3a79}{operator$<$$<$()}} 并且复制构造函数按预期工作（这意味着如果数据成员很复杂， 则可能必须明确定义它）。 
+
+Definition at line 42 of file Valid\+Values\+Spec.\+H.
+
+
+
+Inheritance diagram for jevois\+::Valid\+Values\+Spec\+Base$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ValidValuesSpecBase__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_a693a4adb87c6f1aceb1318b258e805f9}{Valid\+Values\+Spec\+Base}} ()
+\begin{DoxyCompactList}\small\item\em 构造，对于基类，这是一个 no-\/op \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_a102b2d59bdc9bd6c6c51d4ae7362a774}{$\sim$\+Valid\+Values\+Spec\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}{check\+Value\+Validity}} (T const \&val) const =0
+\begin{DoxyCompactList}\small\item\em 检查提议的值是否有效，如果是虚拟的，则返回 true \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}{str}} () const =0
+\begin{DoxyCompactList}\small\item\em 将有效值的规范转换为可读字符串 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecBase_a693a4adb87c6f1aceb1318b258e805f9}\label{classjevois_1_1ValidValuesSpecBase_a693a4adb87c6f1aceb1318b258e805f9}} 
+\index{jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}!ValidValuesSpecBase@{ValidValuesSpecBase}}
+\index{ValidValuesSpecBase@{ValidValuesSpecBase}!jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecBase()}{ValidValuesSpecBase()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{jevois\+::\+Valid\+Values\+Spec\+Base}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{Valid\+Values\+Spec\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+构造，对于基类，这是一个 no-\/op 
+
+请注意，我们要明确构造函数，否则我们会对字符串和在各种 Valid\+Value\+Spec 派生函数上定义的 operator$<$$<$ 中不存在 的内容产生错误命中。 \mbox{\Hypertarget{classjevois_1_1ValidValuesSpecBase_a102b2d59bdc9bd6c6c51d4ae7362a774}\label{classjevois_1_1ValidValuesSpecBase_a102b2d59bdc9bd6c6c51d4ae7362a774}} 
+\index{jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}!````~ValidValuesSpecBase@{$\sim$ValidValuesSpecBase}}
+\index{````~ValidValuesSpecBase@{$\sim$ValidValuesSpecBase}!jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ValidValuesSpecBase()}{~ValidValuesSpecBase()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{jevois\+::\+Valid\+Values\+Spec\+Base}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{Valid\+Values\+Spec\+Base}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}\label{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}} 
+\index{jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}!checkValueValidity@{checkValueValidity}}
+\index{checkValueValidity@{checkValueValidity}!jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{checkValueValidity()}{checkValueValidity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{jevois\+::\+Valid\+Values\+Spec\+Base}}$<$ T $>$\+::check\+Value\+Validity (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+检查提议的值是否有效，如果是虚拟的，则返回 true 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_a888360c78deb6d25850ff0ad790aee2b}{jevois\+::\+Valid\+Values\+Spec\+Regex$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a55dad4d0f53eb5cfc9e41e5ebf79715f}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a2c3c2fe52507913ca04e836b13698410}{jevois\+::\+Valid\+Values\+Spec\+Range$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a63ff2546ce2aa835022ca230a4277b68}{jevois\+::\+Valid\+Values\+Spec\+List$<$ T $>$}}, and \mbox{\hyperlink{classjevois_1_1ValidValuesSpecNone_af4b999b1a9b817e3a6b5ef8ecbcfc2fc}{jevois\+::\+Valid\+Values\+Spec\+None$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}\label{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}} 
+\index{jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}!str@{str}}
+\index{str@{str}!jevois::ValidValuesSpecBase$<$ T $>$@{jevois::ValidValuesSpecBase$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{jevois\+::\+Valid\+Values\+Spec\+Base}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+将有效值的规范转换为可读字符串 
+
+注意，\+G\+UI 可能希望解析此字符串，因此请保持格式紧凑。通常，类型：\mbox{[}valuesdescription\mbox{]}， 例如，请参阅 None\+:\mbox{[}\mbox{]}、\+List\+:\mbox{[}A$\vert$\+B$\vert$C\mbox{]} 等的派生类。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex_adc27085c6f685943d9521714313854a9}{jevois\+::\+Valid\+Values\+Spec\+Regex$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a8ea21d22b160b7855e3b87cb1f318234}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a8a49658bf1c3fade28f574f615a5943a}{jevois\+::\+Valid\+Values\+Spec\+Range$<$ T $>$}}, \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a3f6eebccf8a1af9dd773491c05cee7b3}{jevois\+::\+Valid\+Values\+Spec\+List$<$ T $>$}}, and \mbox{\hyperlink{classjevois_1_1ValidValuesSpecNone_ad1da5d6bc713b7b87842561310fb80b1}{jevois\+::\+Valid\+Values\+Spec\+None$<$ T $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ValidValuesSpec_8H}{Valid\+Values\+Spec.\+H}}\end{DoxyCompactItemize}

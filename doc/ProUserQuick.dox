@@ -1,150 +1,113 @@
-/*! \page ProUserQuick JeVois-Pro Quickstart user guide
+/*! \page ProUserQuick JeVois-Pro 快速入门用户指南
 
 
-Basics
+基础知识 
 ======
 
-For more details and step-by-step instructions, see the different sections under \ref User
+有关更多详细信息和分步说明，请参阅 \ref User 下的不同部分
 
-New users, be sure to check out [JeVois Start](/start/start.html).
+新用户请务必查看 [JeVois Start](/start/start.html)。
 
-- Your HDMI display must support at least 1080p/60Hz (1920x1080 at 60 frames/s). If your computer monitor does not work,
-  try your HD or 4K television.
+- 您的 HDMI 显示器必须至少支持 1080p/60Hz（1920x1080，60 帧/秒）。如果您的计算机显示器不工作，请尝试使用高清或 4K 电视。
 
-- Standard USB keyboards and mice should be detected automatically. Please try the most generic ones you have, if your
-  fancy ones are not detected.
+- 标准 USB 键盘和鼠标应该会自动检测。如果您喜欢的键盘和鼠标没有被检测到，请尝试使用您最通用的键盘和鼠标。
 
-- To insert the microSD card into JeVois-Pro, see \ref JeVoisProIntro
+- 要将 microSD 卡插入 JeVois-Pro，请参阅 \ref JeVoisProIntro
 
-- To connect JeVois-Pro see \ref ProUserConnect
+- 要连接 JeVois-Pro，请参阅 \ref ProUserConnect
 
-Troubleshooting
-===============
+故障排除 
+================
 
-- <b>I see the JeVois-Pro boot logo, but after that my monitor goes blank, or reports that picture is out of range.</b>
-  Your monitor needs to support at least 1080p (1920x1080). In some early shipments, we had set the
-  resolution to 1080p30Hz, but it turns out that 1080p60Hz is more widely supported. Please try this fix:
-  + carefully eject the microSD card from JeVois-Pro, as shown in
-    [this video](https://www.youtube.com/watch?v=0wMplgtwuAc)
-  + attach it to a computer using a card reader
-  + open the drive called \b BOOT
-  + in there, find file \b env.txt and open it using a plain text editor (e.g., Notepad, TextEdit, nano, etc). Just
-    double-clicking on it should do the trick.
-  + scroll down to the line that says: `hdmi=1080p30hz` and replace 30 by 60
-  + save the file and cleanly eject the disk
-  + insert the microSD back into JeVois-Pro and it should work.
+- <b>我看到了 JeVois-Pro 启动徽标，但之后我的显示器变黑，或者报告图片超出范围。</b> 您的显示器至少需要支持 1080p (1920x1080)。在一些早期发货中，我们将分辨率设置为 1080p30Hz，但事实证明 1080p60Hz 得到了更广泛的支持。请尝试此修复：
+  + 小心地从 JeVois-Pro 中弹出 microSD 卡，如 [此视频](https://www.youtube.com/watch?v=0wMplgtwuAc) 所示
+  + 使用读卡器将其连接到计算机
+  + 打开名为 \b BOOT 的驱动器
+  + 在其中，找到文件 \b env.txt 并使用纯文本编辑器（例如 Notepad、TextEdit、nano 等）打开它。只需双击它就可以了。
+  + 向下滚动到显示“hdmi=1080p30hz”的行，并将 30 替换为 60
+  + 保存文件并干净地弹出磁盘
+  + 将 microSD 重新插入 JeVois-Pro，它应该可以工作。
 
-- <b>The top and bottom of the video are clipped</b>. Many televisions indeed crop the picture slightly by default. You
-  need to go through the menus of your television and find a picture setting for "full native", "full resolution",
-  "full 100%", etc. Here is an example with a Sceptre 4K TV:
-  
-  \jvimg{sceptrenormal.jpg, 10%}
-  Above: in normal mode on this TV, the picture is cropped slightly (see the line of text at the bottom of the
-  screen). Click on picture to enlarge.
-  
-  \jvimg{sceptrefull.jpg, 10%}
-  Above: Using the TV's remote to set the TV to "full 100%" eliminates the cropping. Click on picture to enlarge.
+- <b>视频的顶部和底部被裁剪</b>。许多电视确实默认会略微裁剪图片。您需要浏览电视菜单，找到“全原生”、“全分辨率”、“全 100%”等图片设置。以下是 Sceptre 4K 电视的示例：\jvimg{sceptrenormal.jpg, 10%} 上图：此电视在正常模式下，图片略微裁剪（参见屏幕底部的文本行）。点击图片放大。\jvimg{sceptrefull.jpg, 10%} 上图：使用电视遥控器将电视设置为“全 100%”可消除裁剪。点击图片放大。
 
 
 
-Boot modes
+启动模式 
+===========
+
+在 GUI 的 \b 系统选项卡下，您可以为 JeVois-Pro 选择不同的启动模式：
+
+- JeVois：在启动时启动 JeVois 软件。
+- Ubuntu 控制台：在启动时启动文本控制台。
+- Ubuntu 图形：启动 X-Windows 并提供图形登录。
+
+进入控制台或图形模式后，在终端中发出以下命令进行切换：
+
+\code{.py} sudo systemctl set-default jevoispro.target # 启动到 JeVois 软件 sudo systemctl set-default multi-user.target # 启动到 Ubuntu 控制台 sudo systemctl set-default graphic.target # 启动到 Ubuntu 图形 \endcode
+
+然后
+
+\code{.py} sudo shutdown -h now \endcode
+
+拔掉电源并重新插入。
+
+\note 软件重置（shutdown -r）目前不起作用。这可能是硬件问题，但我们稍后可能会创建软件解决方法。
+
+密码 
 ==========
 
-Under the \b System tab of the GUI, you can select different boot modes for JeVois-Pro:
+用户 \a jevois 的密码为 \b jevois 并且可以使用 sudo（使用该密码）。
 
-- JeVois: starts the JeVois software on boot.
-- Ubuntu console: starts a text console on boot.
-- Ubuntu graphical: starts X-Windows and provides a graphical login.
+用户 \a root 的密码为 \b jevois
 
-Once you are in either console or graphical mode, issue these commands in a terminal to switch:
+JeVois-Pro 软件默认以 root 身份运行。
 
-\code{.py}
-sudo systemctl set-default jevoispro.target # to boot to JeVois software
-sudo systemctl set-default multi-user.target # to boot to Ubuntu console
-sudo systemctl set-default graphical.target # to boot to Ubuntu graphical
-\endcode
+手动启动 JeVois 软件 
+=====================================
 
-Then
+如果您已切换到控制台启动，则登录后（以 jevois/jevois 或 root/jevois 身份），您可以从命令行启动 JeVois 软件：
 
-\code{.py}
-sudo shutdown -h now
-\endcode
+\code{.py} sudo jevoispro.sh \endcode
 
-Unplug power and plug it back in.
+请注意，ARM 为我们的芯片 (Amlogic A311D) 提供的 GPU 驱动程序仅在全屏帧缓冲模式下工作。因此，它们在 JeVois-Pro 模式或控制台模式下启动时工作正常。但是，如果您从 X-windows 中的终端运行“sudo jevoispro.sh”，您将遇到两个图形界面 (X-windows 和 JeVois GUI) 之间的冲突。您将看到 2 个鼠标指针，一些 X 窗口将在 JeVois 显示屏上刷新，等等。因此，如果您想手动运行 jevoispro.sh，请从控制台模式执行。
 
-\note Software reset (shutdown -r) currently does not work. It is likely a hardware issue but we may be able to create a
-software workaround later.
+当您处于控制台模式时，您可以通过输入以下命令启动 X-windows：
 
-Passwords
-=========
+\code{.py} startx \endcode
 
-User \a jevois has password \b jevois and is capable of sudo (using that password).
+当您从 X 注销时，您将返回到您的控制台。
 
-User \a root has password \b jevois
+这对于开发非常有用。您可以执行以下操作：
 
-JeVois-Pro software runs as root by default.
+- 切换到控制台启动并重新启动
+- 以 root/jevois 身份登录
+- 运行 `jevoispro.sh`
+- 如果要退出，请激活图形用户界面的 \p allowquit 参数（您需要先打开显示系统参数）。或者您也可以从 `jevoispro.sh --gui --allowquit` 开始，这将允许您在按下 ESC 键时退出 JeVois 软件。
+- 如果您需要编辑一些文件、下载一些文件等，并且您喜欢在 X-windows 中执行这些操作，则在完成后运行 `startx` 并从中注销。
+- 然后您可以再次运行 `jevoispro.sh`，等等。
 
-Starting JeVois software manually
+WiFi 或有线网络 
+==========================
+
+参见 \ref ProNetwork
+
+启用 4K 显示分辨率 
 =================================
 
-If you have switched to Console boot, after you login (either as jevois/jevois or root/jevois), you can start the JeVois
-software from the command-line:
-
-\code{.py}
-sudo jevoispro.sh
-\endcode
-
-Note that the GPU drivers provided by ARM for our chip (Amlogic A311D) work in full-screen framebuffer mode only. So
-they work perfectly when booting in JeVois-Pro mode or Console mode. But if you run `sudo jevoispro.sh` from a terminal
-in X-windows, you will get conflicts between two graphical interfaces (X-windows and the JeVois GUI). You will see 2
-mouse pointers, some X windows will refresh on top of the JeVois display, etc. Thus, if you want to run jevoispro.sh
-manually, do it from the console mode.
-
-When you are in console mode, you can start X-windows by typing:
-
-\code{.py}
-startx
-\endcode
-
-and when you logout from X, you will get back to your console.
-
-This is very useful for development. You would do as follows:
-
-- switch to console boot and reboot
-- login as root/jevois
-- run `jevoispro.sh`
-- if you want to exit, activate the \p allowquit parameter of the Graphical User Interface (you need to turn on showing
-  system parameters first). Or you could also start with `jevoispro.sh --gui --allowquit` which will allow you to
-  exit JeVois software when you press the ESC key.
-- if you need to edit some files, download some files, etc and you like to do that in X-windows, then `startx` and
-  logout from it when you are done.
-- then you can run `jevoispro.sh` again, etc.
-
-WiFi or wired networking
-========================
-
-See \ref ProNetwork
-
-Enabling 4K display resolution
-==============================
-
-Do this by editing the \p hdmi value in <b>/boot/env.txt</b> on the microSD card. For example, for 4K at 30Hz:
+通过在 microSD 卡上的 <b>/boot/env.txt</b> 中编辑 \p hdmi 值来执行此操作。例如，对于 30Hz 的 4K：
 
 \verbatim
 hdmi=2160p30hz
 \endverbatim
 
-Note that the camera will overall run a bit slower at 4K than at the default 1080p. We posit that this is due to more
-contention on the memory bus, as we use DMA all the way from camera sensor to GPU to display, so the CPU workload should
-not significantly increase at 4K.
+请注意，相机在 4K 分辨率下的整体运行速度会比默认的 1080p 分辨率下略慢。我们认为这是由于内存总线上的争用加剧所致，因为我们从相机传感器到 GPU 再到显示器全程都使用 DMA，因此 CPU 工作负载在 4K 分辨率下不会显著增加。
 
-Overclocking the CPU
-====================
+超频 CPU 
+=====================
 
-Overclocking the CPU to 2.4 GHz (big cores, default is 2.208 GHz) and 2.208 GHz (little cores, default 1.8 GHz) is quite
-stable in our testing, especially if you make sure your cooling is strong (see \ref UserProFan to edit fan settings).
+在我们的测试中，将 CPU 超频至 2.4 GHz（大核，默认为 2.208 GHz）和 2.208 GHz（小核，默认为 1.8 GHz）非常稳定，特别是如果您确保冷却性能强劲（请参阅 \ref UserProFan 编辑风扇设置）。
 
-First, you need to enable overcloking by editing <b>/boot/env.txt</b> on the microSD card:
+首先，您需要通过编辑 microSD 卡上的 <b>/boot/env.txt</b> 来启用超频：
 
 \code{.py}
 # Maximum CPU Frequency of Little Core A53
@@ -156,11 +119,10 @@ max_freq_a53=2208
 max_freq_a73=2400
 \endcode
 
-This just sets the maximum possible frequency. But by default, the operating frequencies are still 2.2/1.8 GHz at boot
-time.
 
-Then reboot \jvpro and, in the GUI, select the Parameters tab, then enable "Show System Parameters", and under "Engine
-Options" you can set the desired cpu max speeds. You can set those values in the \p params.cfg config file (see Config
-tab in the GUI) if you want them to be the default at boot time.
+这只是设置了最大可能频率。但默认情况下，启动时的工作频率仍为 2.2/1.8 GHz。
+
+然后重新启动 \jvpro，在 GUI 中选择“参数”选项卡，然后启用“显示系统参数”，在“引擎选项”下，您可以设置所需的 CPU 最大速度。如果您希望在启动时将这些值设置为默认值，则可以在 \p params.cfg 配置文件中设置这些值（参见 GUI 中的“配置”选项卡）。
 
 */
+

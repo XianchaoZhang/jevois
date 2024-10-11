@@ -22,17 +22,15 @@
 
 namespace jevois
 {
-  /*! \defgroup imu Inertial Measurement Unit (IMU) classes and functions
+  /*! \defgroup imu 惯性测量单元 (IMU) 类和函数
       \ingroup core
 
-      These classes and functions provide support for optional IMU chips that may be present in some of the optional
-      JeVois imaging sensors. For example, TDK InvenSense ICM20948: 3-axis accelerometer, 3-axis gyroscope, 3-axis
-      magnetometer, integrated digital motion processor (DMP). */
+      这些类和函数为某些可选 JeVois 成像传感器中可能存在的可选 IMU 芯片提供支持。例如，TDK InvenSense ICM20948：3 
+	  轴加速度计、3 轴陀螺仪、3 轴磁力计、集成数字运动处理器 (DMP)。*/
 
-  //! Raw IMU data
-  /*! These are raw measurements from the sensor. Note that they are unscaled and thus their meaning depends on the
-      selected scales for the sensors (e.g., +/-2g or +/-16g for the accelerometer). Use IMUdata for scaled
-      measurements.  \ingroup imu */
+  //! 原始 IMU 数据 
+  /*! 这些是来自传感器的原始测量值。请注意，它们未缩放，因此其含义取决于所选传感器的比例（例如，加速度计为 +/-2g 或
+       +/-16g）。使用 IMUdata 进行缩放测量。  \ingroup imu */
   struct IMUrawData
   {
       short v[11]; //!< The values: ax, ay, az, gy, gy, gz, temp, mx, my, mz, mst2
@@ -61,16 +59,16 @@ namespace jevois
       inline short const & mst2() const { return v[10]; }
   };
   
-  //! IMU data
-  /*! These are scaled measurements from the sensor, in absolute units (g for accelerations, degrees per second (dps)
-      for gyro, degrees Celsius for temperature, and micro-Tesla for magnetometer).  \ingroup imu */
+  //! IMU 数据
+  /*！这些是来自传感器的缩放测量值，采用绝对单位（加速度为 g、陀螺仪为每秒度数 (dps)、温度为摄氏度、磁力计为微特斯拉
+      ）。  \ingroup imu */
   struct IMUdata
   {
-      //! Construct from a raw data reading
+      //! 从原始数据读数构造
       IMUdata(IMUrawData const & rd, double arange, double grange);
       
       float v[10]; //!< The values: ax, ay, az, gy, gy, gz, temp, mx, my, mz
-      bool magovf; //!< True if magnetometer overflow
+      bool magovf; //!< 如果磁力计溢出则为 True
       
       inline float & ax() { return v[0]; }
       inline float const & ax() const { return v[0]; }
@@ -94,23 +92,23 @@ namespace jevois
       inline float const & mz() const { return v[9]; }
   };
 
-  /*! \defgroup icmdmpheader ICM-20948 DMP computation header fields
+  /*! \defgroup ICM-20948 DMP 计算头字段
       \ingroup imu */
   /*! @{ */
-#define JEVOIS_DMP_ACCEL           0x8000 /*!< calibrated accel if accel calibrated, raw accel otherwise */
+#define JEVOIS_DMP_ACCEL           0x8000 /*!< 如果加速度已校准，则为校准加速度，否则为原始加速度 */
 #define JEVOIS_DMP_GYRO            0x4000 /*!< raw gyro */
 #define JEVOIS_DMP_CPASS           0x2000 /*!< raw magnetic */
 #define JEVOIS_DMP_ALS             0x1000 /*!< ALS/proximity */
 #define JEVOIS_DMP_QUAT6           0x0800 /*!< game rotation vector */
-#define JEVOIS_DMP_QUAT9           0x0400 /*!< rotation vector with heading accuracy */
-#define JEVOIS_DMP_PQUAT6          0x0200 /*!< truncated game rotation vector for batching */
-#define JEVOIS_DMP_GEOMAG          0x0100 /*!< geomag rotation vector with heading accuracy */
+#define JEVOIS_DMP_QUAT9           0x0400 /*!< 具有航向精度的旋转矢量 */
+#define JEVOIS_DMP_PQUAT6          0x0200 /*!< 用于批处理的截断游戏旋转矢量 */
+#define JEVOIS_DMP_GEOMAG          0x0100 /*!< 具有航向精度的 geomag 旋转矢量 */
 #define JEVOIS_DMP_PRESSURE        0x0080 /*!< pressure */
 #define JEVOIS_DMP_GYRO_CALIBR     0x0040 /*!< calibrated gyro */
 #define JEVOIS_DMP_CPASS_CALIBR    0x0020 /*!< calibrated magnetic */
-#define JEVOIS_DMP_PED_STEPDET     0x0010 /*!< timestamp when each step is detected */
-#define JEVOIS_DMP_HEADER2         0x0008 /*!< enable/disable data output in data output control register 2 */
-#define JEVOIS_DMP_PED_STEPIND     0x0007 /*!< number of steps detected is in 3 LSBs of header (JEVOIS: always 0...) */
+#define JEVOIS_DMP_PED_STEPDET     0x0010 /*!< 检测到每个步骤的时间戳 */
+#define JEVOIS_DMP_HEADER2         0x0008 /*!< 在数据输出控制寄存器 2 中启用/禁用数据输出 */
+#define JEVOIS_DMP_PED_STEPIND     0x0007 /*!< 检测到的步数为 3标题的 LSB（JEVOIS：始终为 0...）*/
 
 #define JEVOIS_DMP_ACCEL_ACCURACY  0x4000 /*!< accel accuracy when changes (HEADER2) */
 #define JEVOIS_DMP_GYRO_ACCURACY   0x2000 /*!< gyro accuracy when changes (HEADER2) */
@@ -121,18 +119,17 @@ namespace jevois
 #define JEVOIS_DMP_ACT_RECOG       0x0080 /*!< Activity recognition engine (HEADER2)*/
       /*! @} */
 
-  //! DMP data (Digital Motion Processor)
-  /*! The digital motion processor (DMP) inside the ICM-20948 IMU chip can compute a variety of things that range from
-      simply the raw data buffered at a fixed rate to quaternions to activity detection (footsteps, driving, biking,
-      etc). The chip must be operating in DMP mode for this data to be available. In addition, one can configure which
-      data is computed and output by the DMP. \ingroup imu */
+  //! DMP 数据（数字运动处理器）
+  /*！ICM-20948 IMU 芯片内的数字运动处理器 (DMP) 可以计算各种各样的东西，从简单的以固定速率缓冲的原始数据到四元数再到活
+      动检测（脚步声、驾驶、骑自行车等）。芯片必须在 DMP 模式下运行才能获得这些数据。此外，还可以配置由 DMP 计算和输出
+	  哪些数据。 \ingroup imu */
   struct DMPdata
   {
-      //! Populate our fields from a packet received from the DMP
+      //! 从 DMP 收到的数据包中填充我们的字段
       void parsePacket(unsigned char const * packet, size_t siz);
 
-      unsigned short header1; //!< Header 1 fields that indicate what data is valid
-      unsigned short header2; //!< Header 2 fields that indicate what data is valid
+      unsigned short header1; //!< Header 1 字段指示哪些数据有效 
+      unsigned short header2; //!< Header 2 字段指示哪些数据有效 
 
       short accel[3]; //!< Raw accelerometer data (when JEVOIS_DMP_ACCEL in header1)
       short gyro[3]; //!< Raw gyro data (when JEVOIS_DMP_GYRO in header1)
@@ -164,26 +161,24 @@ namespace jevois
       unsigned short bacstate; //!< Activity recognition state (when JEVOIS_DMP_ACT_RECOG in header2)
       long bacts; //!< Activity recognition timestamp (when JEVOIS_DMP_ACT_RECOG in header2)
 
-      unsigned short odrcnt; //!< Output data rate counter (always here but unclear what it is)
+      unsigned short odrcnt; //!< 输出数据速率计数器（总是在这里但不清楚它是什么）
 
-      //!< Decode start/stop of activities into a string
-      /*! Requires that JEVOIS_DMP_ACT_RECOG be set in header2 and correct data rates are used. This function returns
-          strings that contain start or stop as a prefix, then each activity. Activities are: drive, walk, run, bike,
-          tilt, still. */
+      //!< 将活动的开始/停止解码为字符串 
+	  /*! 要求在 header2 中设置 JEVOIS_DMP_ACT_RECOG 并使用正确的数据速率。此函数返回包含开始或停止作为前缀的字符串，
+	      然后是每个活动。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 */
       std::vector<std::string> activity();
 
-      //!< Decode current ongoing activities into a string
-      /*! Requires that JEVOIS_DMP_ACT_RECOG be set in header2 and correct data rates are used. This function returns
-          strings that contain the name of each ongoing event. Warning, it has state, so you should only call this
-          function for any activity-related parsing after you start using it, and you should call it for every reading
-          from the DMP. Activities are: drive, walk, run, bike, tilt, still. */
+      //!< 将当前正在进行的活动解码为字符串 
+	  /*! 要求在 header2 中设置 JEVOIS_DMP_ACT_RECOG 并使用正确的数据速率。此函数返回包含每个正在进行的事件的名称的字
+	      符串。警告，它有状态，因此您应该在开始使用它后仅调用此函数进行任何与活动相关的解析，并且您应该在每次从 DMP 
+		  读取时调用它。活动包括：驾驶、步行、跑步、骑自行车、倾斜、静止。 */
       std::vector<std::string> activity2();
 
-      //! Convert a long fixed-point value to float
+      //! 将长定点值转换为浮点数
       static float fix2float(long val);
 };
 
-  //! Helper function to determine DMP packet size depending on options
+  //! 辅助函数根据选项确定 DMP 数据包大小
   /*! \ingroup imu */
   size_t DMPpacketSize(unsigned short ctl1, unsigned short ctl2);
 };

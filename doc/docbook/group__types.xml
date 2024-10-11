@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__types">
+<title>JeVois 特定类型和通用辅助类</title>
+<indexterm><primary>JeVois 特定类型和通用辅助类</primary></indexterm>
+<section>
+<title> </title>
+
+<para>这些类型和类支持核心 JeVois 实现。请特别注意非常有用的 JEVOIS_DEFINE_ENUM_CLASS(name, SEQ) 宏，它用于定义可在参数中使 用的新枚举，以允许菜单样式的参数。 </para>
+<section xml:id="_group__types_1autotoc_md149">
+<title>JEVOIS_DEFINE_ENUM_CLASS（name，SEQ）</title>
+
+<para>用于定义新枚举类类型的辅助宏。SEQ 应为 BOOST_PP_SEQ（请参阅下面的示例语法）。您将获得：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>使用提供的名称和值声明和定义的枚举类</para>
+</listitem><listitem>
+<para>枚举值的静态 const std::vector，包含枚举可以采用的所有值，在 name_Values 中</para>
+</listitem><listitem>
+<para>std::string 的静态 const std::vector，包含枚举可以采用的所有值的字符串名称，在 name_Strings 中</para>
+</listitem><listitem>
+<para>枚举的 operator&lt;&lt; 和 operator&gt;&gt;。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>您可以在定义参数定义时使用 name_Values 来列出所有有效值，并且流运算符将允许您通过字符串设置参数值等。</para>
+
+<para>例如：</para>
+
+<para><literallayout><computeroutput>JEVOIS_DEFINE_ENUM_CLASS(myEnum,&#32;(One)&#32;(Two)&#32;(Three));
+</computeroutput></literallayout></para>
+
+<para>展开为：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>首先，枚举类的实际定义，其值按顺序指定： <literallayout><computeroutput>enum&#32;class&#32;myEnum&#32;{&#32;One,&#32;Two,&#32;Three&#32;};
+</computeroutput></literallayout></para>
+</listitem><listitem>
+<para>第二，一个静态 const 向量，包含所有枚举值，按您指定的顺序列出： <literallayout><computeroutput>static&#32;std::vector&lt;myEnum&gt;&#32;const&#32;myEnum_Values&#32;{&#32;myEnum::One,&#32;myEnum::Two,&#32;myEnum::Three&#32;};
+</computeroutput></literallayout></para>
+</listitem><listitem>
+<para>第三个，一个静态字符串 const 向量，其中包含字符串形式的所有枚举值，按您指定的顺序列出： <literallayout><computeroutput>static&#32;std::vector&lt;std::string&gt;&#32;const&#32;myEnum_Strings&#32;{&#32;&quot;One&quot;,&#32;&quot;Two&quot;,&#32;&quot;Three&quot;&#32;};
+</computeroutput></literallayout></para>
+</listitem><listitem>
+<para>最后，两个流运算符允许您在枚举值和字符串之间进行转换： <literallayout><computeroutput>inline&#32;std::ostream&#32;&amp;&#32;operator&lt;&lt;(std::ostream&#32;&amp;&#32;os,&#32;myEnum&#32;const&#32;&amp;&#32;v)&#32;{
+&#32;&#32;std::vector&lt;myEnum&gt;::const_iterator&#32;vitr&#32;=&#32;myEnum_Values.begin(),&#32;vend&#32;=&#32;myEnum_Values.end();
+&#32;&#32;std::vector&lt;std::string&gt;::const_iterator&#32;sitr&#32;=&#32;myEnum_Strings.begin();
+&#32;&#32;while&#32;(vitr&#32;!=&#32;vend)&#32;if&#32;(v&#32;==&#32;*vitr)&#32;{&#32;os&#32;&lt;&lt;&#32;*sitr;&#32;return&#32;os;&#32;}&#32;else&#32;{&#32;++vitr;&#32;++sitr;&#32;}
+&#32;&#32;return&#32;os;
+}
+
+inline&#32;std::istream&#32;&amp;&#32;operator&gt;&gt;(std::istream&#32;&amp;&#32;is,&#32;myEnum&#32;&amp;&#32;v)&#32;{
+&#32;&#32;std::string&#32;s;&#32;is&#32;&gt;&gt;&#32;s;
+&#32;&#32;std::vector&lt;myEnum&gt;::const_iterator&#32;vitr&#32;=&#32;myEnum_Values.begin(),&#32;vend&#32;=&#32;myEnum_Values.end();
+&#32;&#32;std::vector&lt;std::string&gt;::const_iterator&#32;sitr&#32;=&#32;myEnum_Strings.begin();
+&#32;&#32;while&#32;(vitr&#32;!=&#32;vend)&#32;if&#32;(s&#32;==&#32;*sitr)&#32;{&#32;v&#32;=&#32;*vitr;&#32;return&#32;is;&#32;}&#32;else&#32;{&#32;++vitr;&#32;++sitr;&#32;}
+&#32;&#32;throw&#32;std::range_error(&quot;Invalid&#32;value&#32;[&quot;&#32;+&#32;s&#32;+&#32;&quot;]&#32;for&#32;Enum&#32;class&#32;myEnum&quot;);
+};
+</computeroutput></literallayout></para>
+</listitem></itemizedlist>
+</para>
+
+<para>请注意，如果给定的字符串与枚举值之一的字符串表示形式不匹配，则 <computeroutput>operator&gt;&gt;</computeroutput> 将如何抛出。 </para>
+</section>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer&lt; T, WhenFull, WhenEmpty &gt;</link></para>
+
+<para>线程安全同步生产者/消费者队列 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Range">jevois::Range&lt; T &gt;</link></para>
+
+<para>通用 <link linkend="_classjevois_1_1Range">Range</link> 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Semaphore">jevois::Semaphore&lt; BB &gt;</link></para>
+
+<para>一个简单的信号量 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Singleton">jevois::Singleton&lt; T &gt;</link></para>
+
+<para>一个通用的 singleton 类，用于强制一个对象的单个实例 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StepRange">jevois::StepRange&lt; T &gt;</link></para>
+
+<para>具有 step 的通用 range 类 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_group__types_1ga12724887bc7648f2f888edb9c3055e3d">jevois::BlockingBehavior</link> { <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">jevois::BlockingBehavior::Block</link>, 
+<link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f">jevois::BlockingBehavior::Throw</link>
+ }</para>
+
+<para>尝试无法立即完成的操作时的行为 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_group__types_1ga12724887bc7648f2f888edb9c3055e3d"/>    <section>
+    <title>BlockingBehavior</title>
+<indexterm><primary>BlockingBehavior</primary><secondary>JeVois 特定类型和通用辅助类</secondary></indexterm>
+<indexterm><primary>JeVois 特定类型和通用辅助类</primary><secondary>BlockingBehavior</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_group__types_1ga12724887bc7648f2f888edb9c3055e3d">jevois::BlockingBehavior</link><computeroutput>[strong]</computeroutput></computeroutput></para><para>
+
+<para>尝试无法立即完成的操作时的行为 </para>
+</para>
+
+<para>定义 Semaphore、BoundedBuffer 等的行为。 </para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Block</primary><secondary>JeVois 特定类型和通用辅助类</secondary></indexterm>
+<indexterm><primary>JeVois 特定类型和通用辅助类</primary><secondary>Block</secondary></indexterm>
+<anchor xml:id="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2"/>Block</entry><entry>
+<para>阻塞直到操作可以完成 </para>
+</entry></row><row><entry><indexterm><primary>Throw</primary><secondary>JeVois 特定类型和通用辅助类</secondary></indexterm>
+<indexterm><primary>JeVois 特定类型和通用辅助类</primary><secondary>Throw</secondary></indexterm>
+<anchor xml:id="_group__types_1gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f"/>Throw</entry><entry>
+<para>如果操作无法立即完成，则抛出 std::runtime_error </para>
+</entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 25 of file BlockingBehavior.H.</para>
+</section>
+</section>
+</section>

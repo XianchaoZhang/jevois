@@ -1,119 +1,97 @@
-/*! \page ProCompile JeVois-Pro: Cloning and compiling C++ modules on device
+/*! \page ProCompile JeVois-Pro：在设备上克隆和编译 C++ 模块
 
-\jvpro: Starting with \jvversion{1.20.0}, you can edit and compile C++ modules on a running camera. It is quite slow,
-but it works quite well. This is useful mainly to get a module started and for small debugging edits. For more extensive
-C++ code writing, we recommend using the JeVois-Pro SDK on a powerful Linux desktop, testing your module in host mode
-first, and then cross-compiling it to run on the camera. See \ref Programmer for more info.
+\jvpro：从 \jvversion{1.20.0} 开始，您可以在正在运行的相机上编辑和编译 C++ 模块。虽然速度很慢，但效果很好。这主要用于启动模块和进行小型调试编辑。对于更广泛的 C++ 代码编写，我们建议在功能强大的 Linux 桌面上使用 JeVois-Pro SDK，首先在主机模式下测试模块，然后交叉编译以在相机上运行。有关更多信息，请参阅 \ref 程序员。
 
-Step 1: Clone an existing module to provide a working starting point
-====================================================================
+步骤 1：克隆现有模块以提供工作起点 
+=========================================================================
 
-In the \a System tab of the GUI, click "Create new machine vision module..."
+在 GUI 的 \a 系统选项卡中，单击 "Create new machine vision module..."
 
 \jvimg{newmodule01.jpg, 60%}
 
-Step 2: Select which module to clone
-====================================
+第 2 步：选择要克隆的模块 
+======================================
 
-Click on the "..." menu at top and select a module to clone.
+单击顶部的 "..." 菜单并选择要克隆的模块。
 
 \jvimg{newmodule02.jpg, 60%}
 
-Here we are going to clone the \b PassThrough module, with 1920x1080 video for display purposes, and 512x288 greyscale
-video for processing purposes:
+这里我们将克隆 \b PassThrough 模块，使用 1920x1080 视频进行显示，使用 512x288 灰度视频进行处理：
 
 \jvimg{newmodule03.jpg, 60%}
 
-A new module will be created with vendor name \a Testing and module name \a MyPassThrough (if you clone the same module
-several time, you will get \a MyPassThrough2, \a MyPassThrough3, etc). The source code will be saved in
-<b>/jevoispro/modules/Testing/MyPassThrough/</b> and you should back it up often in case your microSD card gets corrupt
-somehow. Feel free to edit those names if you do not like them. Then click the \b Create button.
+将创建一个新模块，其供应商名称为 \a Testing ，模块名称为 \a MyPassThrough （如果您多次克隆同一个模块，您将获得 \a MyPassThrough2 、\a MyPassThrough3 等）。源代码将保存在 <b>/jevoispro/modules/Testing/MyPassThrough/</b> 中，您应该经常备份它，以防您的 microSD 卡以某种方式损坏。如果您不喜欢这些名称，请随意编辑它们。然后单击 \b Create 按钮。
 
 \jvimg{newmodule04.jpg, 60%}
 
 
-Step 3: Initial compilation of the clone
+步骤3：克隆的初始编译
 ========================================
 
-Once it is copied, a new window will open, and we will attempt to compile the clone right away. Please be patient, this
-takes a while (several minutes).
+复制完成后，会打开一个新窗口，我们会立即尝试编译克隆。请耐心等待，这需要一段时间（几分钟）。
 
 \jvimg{newmodule05.jpg, 60%}
 
-Once compilation is complete (which should always work on fresh clones), you will be asked whether you want to run the
-module. Click \b Yes to run it.
+编译完成后（这应该始终适用于新克隆），系统将询问您是否要运行该模块。单击 \b Yes 运行它。
 
 \jvimg{newmodule06.jpg, 60%}
 
-Step 4: Edit code
+步骤4：编辑代码
 =================
 
-Once the clone is loaded and running, you can access its source code in the \a Code tab of the GUI.
+一旦克隆被加载并运行，您就可以在 GUI 的 \a Code 选项卡中访问其源代码。
 
 \jvimg{newmodule07.jpg, 60%}
 
-Note that both the C++ source and the associated CMakeLists.txt are available in the code editor. Most users will not
-have to modify CMakeLists.txt unless they want to link against extra libraries or compile additional source files.
+请注意，C++ 源代码和相关的 CMakeLists.txt 均可在代码编辑器中使用。大多数用户无需修改 CMakeLists.txt，除非他们想要链接到额外的库或编译额外的源文件。
 
 \jvimg{newmodule08.jpg, 60%}
 
-Let's try an edit. In \b PassThrough, at some point we draw a green circle around the mouse pointer. This is to demo the
-ability to draw things on top of rendered windows, using an ImGui foreground draw list. Let's change the radius of that
-green circle from 20 to 120 pixels.
+让我们尝试一下编辑。在 \b PassThrough 中，我们在某个点绘制一个绿色圆圈围绕鼠标指针。这是为了演示使用 ImGui 前景绘制列表在渲染窗口顶部绘制内容的能力。让我们将该绿色圆圈的半径从 20 像素更改为 120 像素。
 
-\note Remember to edit the correct <b>process()</b> function. If your module is running in JeVois-Pro GUI mode, then you
-want to edit the function with this signature: <b>virtual void process(jevois::InputFrame && inframe, jevois::GUIhelper
-& helper) override</b>
+\note 记得编辑正确的 <b>process()</b> 函数。如果您的模块在 JeVois-Pro GUI 模式下运行，则需要使用以下签名编辑该函数：<b>virtual void process(jevois::InputFrame && inframe, jevois::GUIhelper & helper) override</b>
 
 \jvimg{newmodule09.jpg, 60%}
 
-Click \b Save to save the modified code (or hit CTRL-S):
+单击 \b Save 保存修改后的代码（或按 CTRL-S）：
 
 \jvimg{newmodule10.jpg, 60%}
 
-This will trigger a recompilation.
+这将触发重新编译。
 
 \jvimg{newmodule11.jpg, 60%}
 
-Once compiled, you can run the module:
+编译完成后，您可以运行该模块：
 
 \jvimg{newmodule12.jpg, 60%}
 
-Yep, that green circle around the mouse pointer is larger now!
+是的，鼠标指针周围的绿色圆圈现在更大了！
 
 \jvimg{newmodule13.jpg, 60%}
 
-Step 5: Dealing with errors
-===========================
+第 5 步：处理错误 
+============================
 
-If any step in the build process fails, you will see an error message. Here let's add some buggy C++ code to see what
-happens:
+如果构建过程中的任何步骤失败，您将看到一条错误消息。这里让我们添加一些有缺陷的 C++ 代码来看看会发生什么：
 
 \jvimg{newmodule14.jpg, 60%}
 
-That will trigger a compilation error:
+这将触发编译错误：
 
 \jvimg{newmodule15.jpg, 60%}
 
-If you scroll back up to the top of the compilation window, you can use the buttons to edit the offending source code or
-CMakeLists.txt:
+如果您向上滚动到编译窗口的顶部，您可以使用按钮来编辑有问题的源代码或 CMakeLists.txt：
 
 \jvimg{newmodule16.jpg, 60%}
 
-Step 6: Dealing hard crashes
-============================
+第 6 步：处理硬崩溃 
+=============================
 
-If you modify a module in such a way that it hard crashes the whole JeVois framework (e.g., segmentation fault by
-accessing memory past the end of an array), then you will not be able to load and run that module anymore, which means
-that you cannot easily change its source code anymore.
+如果您以某种方式修改模块，导致整个 JeVois 框架严重崩溃（例如，通过访问数组末尾的内存而导致分段错误），那么您将无法再加载和运行该模块，这意味着您无法再轻松更改其源代码。
 
-The way to handle this is as follows: load any other working module. Then in the Code editor, select "Browse / Create
-file..." at the end of the standard files. Then navigate to the C++ source code of your file, for example
-/jevoispro/modules/Testing/MyX.C and open that file.
+处理方法如下：加载任何其他工作模块。然后在代码编辑器中，选择标准文件末尾的“浏览/创建文件...”。然后导航到文件的 C++ 源代码，例如 /jevoispro/modules/Testing/MyX.C 并打开该文件。
 
-Fix the code and save. This will recompile the module. Because the source file was selected manually, we do not know
-which videomapping (camera resolution, etc) you want to run on that code. Hence, after compiling, it will fail to load
-with an internal error. That is ok, just ignore the error, and from the pull-down list of available modules you can now
-manually select your module.
+修复代码并保存。这将重新编译模块。由于源文件是手动选择的，我们不知道您想在该代码上运行哪种视频映射（相机分辨率等）。因此，编译后，它将因内部错误而无法加载。没关系，只需忽略错误，然后从可用模块的下拉列表中，您现在可以手动选择模块。
 
 */
+

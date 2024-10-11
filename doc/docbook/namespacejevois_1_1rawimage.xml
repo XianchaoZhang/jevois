@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespacejevois_1_1rawimage">
+<title>jevois::rawimage Namespace Reference</title>
+<indexterm><primary>jevois::rawimage</primary></indexterm>
+<section>
+<title> </title>
+
+<para>用于 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换、处理、绘制的函数 </para>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> { 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e">Font5x7</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388">Font7x13</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b">Font8x13bold</link>, 
+
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8">Font9x15bold</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4">Font10x20</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69">Font11x22</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340">Font12x22</link>, 
+
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494">Font14x26</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0">Font15x28</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b">Font16x29</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c">Font20x38</link>
+ }</para>
+
+<para>可用于 <link linkend="_group__image_1ga893e982b449643c8853afe424fb72c09">writeText()</link> 的字体 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga20c3651602d9b2d003988b9bcd674f03">cvImage</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>从现有 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据创建 OpenCV 图像，共享像素内存而不是复制它 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_namespacejevois_1_1rawimage_1a28053035013862dd0dd48c4601216655">convertToCvGray</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素执行颜色转换为 OpenCV 灰度字节 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga6f005034f93fc03530498eae898f9b22">convertToCvBGR</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素执行颜色转换为 OpenCV BGR 字节 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga41c623fdf6e26eca8908b1129b56312f">convertToCvRGB</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB 字节进行颜色转换 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga028f56e85446eef9d27bd51c71867dd2">convertToCvRGBA</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB-A 字节进行颜色转换 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gac56b219fa6df460b3a9beaf7712d5c77">byteSwap</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>交换 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中的字节对 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga05c4650464e447a89a2a2c60d1956748">paste</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将一张图像粘贴到另一张相同像素类型的图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae83668f61639d6a6f4de5e11d02ca015">pasteGreyToYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将灰度字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae9f19d7535b689d5c0b4bb31133463da">pasteBGRtoYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int dx, int dy)</para>
+
+<para>将 BGR 字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga3ff72f69a31242d3d77ac1c61e82c4d6">pasteRGBtoYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int dx, int dy)</para>
+
+<para>将 RGB 字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa8a5444f39661f76fb160f1f6eead381">roipaste</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将图像中的 ROI 粘贴到相同像素类型的另一个图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga529a42aed4e4681e38910e8793e6064c">drawDisk</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int rad, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一个圆盘 disk </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae7d102e1c456f87337d66a9a2fc11a58">drawCircle</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col)</para>
+
+<para>在YUYV图像中绘制一个圆圈 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__image_1ga0d1d1903484f89b7a8db5485fe1784a7">clipLine</link> (int wxmin, int wymin, int wxmax, int wymax, int &amp;x1, int &amp;y1, int &amp;x2, int &amp;y2)</para>
+
+<para>剪裁一条线以适合 viewport [wxmin...wxmax[ x [wymin...wymax] </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga7cf2b2c4e6460835fbc671367a60feb9">drawLine</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一条线 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa32b3e227c9904699d616e2a32c9506d">drawRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int thick, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一个矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa023840c2ca7c4997b4b456927131cdf">drawRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga458eebde298cccaa70c778878223c17b">drawFilledRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制填充矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga2696d3febc217f295d5532c26255c26b">writeText</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, std::string const &amp;txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中写一些文字 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga893e982b449643c8853afe424fb72c09">writeText</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, char const *txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中写一些文字 </para>
+</listitem>
+            <listitem><para>int <link linkend="_namespacejevois_1_1rawimage_1ade194717387b31534b54f3e4db39eff0">itext</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, std::string const &amp;txt, int y=3, unsigned int col=<link linkend="_namespacejevois_1_1yuyv_1a76df58773f59d7f784b5fb1804f15387">jevois::yuyv::White</link>, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中简写一些文本，x = 3 并返回下一个 y 位置 </para>
+</listitem>
+            <listitem><para>int <link linkend="_namespacejevois_1_1rawimage_1ae7bcb207e1bdbd84d96aad62da0ad7c8">itext</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, char const *txt, int y=3, unsigned int col=<link linkend="_namespacejevois_1_1yuyv_1a76df58773f59d7f784b5fb1804f15387">jevois::yuyv::White</link>, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中简写一些文本，x = 3 并返回下一个 y 位置 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga748b79664f7d9c00f2706e726276a09f">convertCvBGRtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>将 BGR cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga8d0578936bcb62de35eec980b933de52">convertCvRGBtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>将 RGB cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga5c34b763c90ed987d80a1dc58e75524c">convertCvRGBAtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>使用已分配的像素和像素类型将 RGBA cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gad05785dce156be8a1e4d473ea07e3f67">convertCvGRAYtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>使用已分配的像素和像素类型将灰色 cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1_1rawimage_1a8d4333176ceabdbadb22ffcb6b2d9d52">unpackCvRGBAtoGrayRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst)</para>
+
+<para>将 RGBA cv::Mat 分割成 4 倍高的灰色 RawImage，其中已分配像素 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa830449161c068b13cd986844a2c428e">hFlipYUYV</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>水平翻转 YUYV <link linkend="_classjevois_1_1RawImage">RawImage</link> 同时保留颜色信息 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga887e3d1b0329cc864014c04a90689f59">convertCvRGBtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga2865d43005acc85a1f49b868eedc76cc">convertCvBGRtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga13704ff98cb3e041adea2154fd42499c">convertCvGRAYtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gad00957ca65ed08071e6b05d6cfe19fc3">convertCvRGBAtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1_1rawimage_1a49a5d99c4f6ce1c5610076bc16945147">convertBayerToYUYV</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst)</para>
+
+<para>从 Bayer 转换为 YUYV，仅供 <link linkend="_classjevois_1_1Camera">Camera</link> 类内部使用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1_1rawimage_1a66e0d4c68f4490cbe8b34b84661f65c2">convertGreyToYUYV</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst)</para>
+
+<para>从灰色（单色）转换为 YUYV，仅供 <link linkend="_classjevois_1_1Camera">Camera</link> 类内部使用 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespacejevois_1_1rawimage_1a49a5d99c4f6ce1c5610076bc16945147"/>    <section>
+    <title>convertBayerToYUYV()</title>
+<indexterm><primary>convertBayerToYUYV</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>convertBayerToYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertBayerToYUYV (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst)</computeroutput></para><para>
+
+<para>从 Bayer 转换为 YUYV，仅供 <link linkend="_classjevois_1_1Camera">Camera</link> 类内部使用 </para>
+</para>
+<para>
+Definition at line 1629 of file RawImageOps.C.</para>
+<para>
+References cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::CameraDevice::get().</para>
+    </section><anchor xml:id="_namespacejevois_1_1rawimage_1a66e0d4c68f4490cbe8b34b84661f65c2"/>    <section>
+    <title>convertGreyToYUYV()</title>
+<indexterm><primary>convertGreyToYUYV</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>convertGreyToYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertGreyToYUYV (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst)</computeroutput></para><para>
+
+<para>从灰色（单色）转换为 YUYV，仅供 <link linkend="_classjevois_1_1Camera">Camera</link> 类内部使用 </para>
+</para>
+<para>
+Definition at line 1649 of file RawImageOps.C.</para>
+<para>
+References cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::CameraDevice::get().</para>
+    </section><anchor xml:id="_namespacejevois_1_1rawimage_1a28053035013862dd0dd48c4601216655"/>    <section>
+    <title>convertToCvGray()</title>
+<indexterm><primary>convertToCvGray</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>convertToCvGray</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rawimage::convertToCvGray (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src)</computeroutput></para><para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素执行颜色转换为 OpenCV 灰度字节 </para>
+</para>
+<para>
+Definition at line 246 of file RawImageOps.C.</para>
+<para>
+References cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::InputFrame::getCvGRAY(), and jevois::InputFrame::getCvGRAYp().</para>
+    </section><anchor xml:id="_namespacejevois_1_1rawimage_1ae7bcb207e1bdbd84d96aad62da0ad7c8"/>    <section>
+    <title>itext()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>itext</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>itext</secondary></indexterm>
+<para><computeroutput>int jevois::rawimage::itext (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img, char const * txt, int y = <computeroutput>3</computeroutput>
+, unsigned int col = <computeroutput><link linkend="_namespacejevois_1_1yuyv_1a76df58773f59d7f784b5fb1804f15387">jevois::yuyv::White</link></computeroutput>
+, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font = <computeroutput><link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>在图像中简写一些文本，x = 3 并返回下一个 y 位置 </para>
+</para>
+<para>
+Definition at line 780 of file RawImageOps.C.</para>
+<para>
+References Font10x20, Font11x22, Font12x22, Font14x26, Font15x28, Font16x29, Font20x38, Font5x7, Font6x10, Font7x13, Font8x13bold, Font9x15bold, LFATAL, and writeText().</para>
+    </section><anchor xml:id="_namespacejevois_1_1rawimage_1ade194717387b31534b54f3e4db39eff0"/>    <section>
+    <title>itext()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>itext</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>itext</secondary></indexterm>
+<para><computeroutput>int jevois::rawimage::itext (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img, std::string const &amp; txt, int y = <computeroutput>3</computeroutput>
+, unsigned int col = <computeroutput><link linkend="_namespacejevois_1_1yuyv_1a76df58773f59d7f784b5fb1804f15387">jevois::yuyv::White</link></computeroutput>
+, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font = <computeroutput><link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>在图像中简写一些文本，x = 3 并返回下一个 y 位置 </para>
+</para>
+<para>
+Definition at line 774 of file RawImageOps.C.</para>
+<para>
+Referenced by jevois::GUIhelper::itext().</para>
+    </section><anchor xml:id="_namespacejevois_1_1rawimage_1a8d4333176ceabdbadb22ffcb6b2d9d52"/>    <section>
+    <title>unpackCvRGBAtoGrayRawImage()</title>
+<indexterm><primary>unpackCvRGBAtoGrayRawImage</primary><secondary>jevois::rawimage</secondary></indexterm>
+<indexterm><primary>jevois::rawimage</primary><secondary>unpackCvRGBAtoGrayRawImage</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::unpackCvRGBAtoGrayRawImage (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst)</computeroutput></para><para>
+
+<para>将 RGBA cv::Mat 分割成 4 倍高的灰色 RawImage，其中已分配像素 </para>
+</para>
+<para>
+Definition at line 1348 of file RawImageOps.C.</para>
+<para>
+References jevois::async(), jevois::cvtypestr(), jevois::RawImage::fmt, h, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Console_8H">
+<title>include/jevois/Util/Console.H File Reference</title>
+<indexterm><primary>include/jevois/Util/Console.H</primary></indexterm>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Console_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>bool <link linkend="_group__console_1gadb6b6c4de8c91afbd75b26fd21e1267c">jevois::isInputDevice</link> (int fd)</para>
+
+<para>指示此 fd（应来自 /dev/input/eventX）是否是键盘、鼠标等 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gac71712656cfebf518ed5700bf3e9e3ed">jevois::getConsoleFd</link> ()</para>
+
+<para>获取控制台的文件描述符 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gab9a802bcfa42386853cc58f86c5d023f">jevois::getActiveTTY</link> ()</para>
+
+<para>获取当前活动 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga4a8b4e6208cca24fc399107e48eb133c">jevois::muteKeyboard</link> (int tty, int &amp;kb_mode)</para>
+
+<para>防止 keystrokes 到达 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga5fffa3f01add1a9dab7f031361a01282">jevois::unMuteKeyboard</link> (int tty, int kb_mode)</para>
+
+<para>恢复给定 tty 的键盘模式 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

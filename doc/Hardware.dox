@@ -1,66 +1,56 @@
-/*! \page Hardware Overview of the JeVois-A33 hardware platform
+/*! \page Hardware JeVois-A33 硬件平台概述 
 \tableofcontents
 
 \image html kickstarter-main.png
 
-Features at a glance:
+功能一览：
 
-- 1.3MP camera capable of video capture at
-  + SXGA (1280 x 1024): up to 15 fps (frames/second)
-  + VGA (640 x 480): up to 30 fps
-  + CIF (352 x 288): up to 60 fps
-  + QVGA (320 x 240): up to 60 fps
-  + QCIF (176 x 144): up to 120 fps
-  + QQVGA (160 x 120): up to 60 fps
-  + QQCIF (88 x 72): up to 120 fps
-  + Rolling shutter, F2.8, 65deg horizontal field of view.
+- 1.3MP 摄像头，能够以以下分辨率拍摄视频
+  + SXGA (1280 x 1024)：最高 15 fps（帧/秒）
+  + VGA (640 x 480)：最高 30 fps
+  + CIF (352 x 288)：最高 60 fps
+  + QVGA (320 x 240)：最高 60 fps
+  + QCIF (176 x 144)：最高 120 fps
+  + QQVGA (160 x 120)：最高 60 fps
+  + QQCIF (88 x 72)：最高 120 fps
+  + 滚动快门，F2.8，65 度水平视野。
 
-- Quad-core ARM Cortex A7 processor, default clock 1.35GHz. Supports hard floating-point operations (VFPv4) and NEON
-  SIMD multimedia instructions.
+- 四核 ARM Cortex A7 处理器，默认时钟频率 1.35GHz。支持硬浮点运算 (VFPv4) 和 NEON SIMD 多媒体指令。
 
-- Dual-core MALI-400 GPU (graphics processing unit), supports OpenGL-ES 2.0.
+- 双核 MALI-400 GPU（图形处理单元），支持 OpenGL-ES 2.0。
 
-- 256MB DDR3-1600 SDRAM.
+- 256MB DDR3-1600 SDRAM。
 
-- USB-powered (requires USB 3.0 port or Y-cable to two USB 2.0 ports). Maximum power usage 3.5 Watts, with 1.5 Watt -
-  2.5 Watt typical depending on which machine vision algorithm is running on the JeVois processor.
+- USB 供电（需要 USB 3.0 端口或 Y 型电缆连接到两个 USB 2.0 端口）。最大功耗为 3.5 瓦，通常为 1.5 瓦 - 2.5 瓦，具体取决于 JeVois 处理器上运行的机器视觉算法。
 
-- Integrated cooling fan ensures that CPU and GPU can run at their maximum frequency even under sustained full
-  processing load (system chip typically runs at less than 50C under full load for days or weeks, whereas the first
-  threshold to start reducting clock speed to avoid processor overheating is at 75C).
+- 集成冷却风扇确保 CPU 和 GPU 即使在持续满处理负荷下也能以最大频率运行（系统芯片通常在满负荷下连续几天或几周以低于 50C 的温度运行，而开始降低时钟速度以避免处理器过热的第一个阈值是 75C）。
 
-- Mini-USB 2.0 type-B 5-pin port, for power and video data.
+- Mini-USB 2.0 B 型 5 针端口，用于电源和视频数据。
 
-- USB Video Class (UVC) compliant interface to a host computer, JeVois platform shows up as a standard USB webcam with
-  no need to install drivers on Windows, MacOS, Android, and Linux (iOS detects the device but does not seem to support
-  webcam class devices as of iOS 9, either from JeVois or from other manufacturers we tested).
+- USB 视频类 (UVC) 兼容接口到主机，JeVois 平台显示为标准 USB 网络摄像头，无需在 Windows、MacOS、Android 和 Linux 上安装驱动程序（iOS 检测到该设备，但从 iOS 9 开始似乎不支持网络摄像头类设备，无论是来自 JeVois 还是我们测试的其他制造商）。
 
-- Dual-voltage serial port (UART 5V or 3.3V, selected through a VCC-IO pin), allows the device to communicate directly
-  with Arduino or other embedded controllers.
+- 双电压串行端口（UART 5V 或 3.3V，通过 VCC-IO 引脚选择），允许设备直接与 Arduino 或其他嵌入式控制器通信。
 
-- Micro-SD socket holds embedded operating system, JeVois machine vision modules, and can store user data (e.g., video
-  captured by the device).
+- Micro-SD 插槽可容纳嵌入式操作系统、JeVois 机器视觉模块，并可存储用户数据（例如设备捕获的视频）。
 
-- One two-color LED: Green: power is good (USB ports are not too weak to power the device). Orange: power is good and
-  camera is streaming video frames.
+- 一个双色 LED：绿色：电源良好（USB 端口的功率还不足以为设备供电）。橙色：电源良好，摄像头正在传输视频帧。
 
-- Plastic case included with 4 holes for secure mounting.
+- 塑料外壳带有 4 个孔，用于安全安装。
 
 \image html weight.jpg
 
-- Only 17 grams, with the following breakdown:
-  + Fan: 4.1 grams
-  + Plastic case: 5.4 grams
-  + Electronics, camera sensor, lens: 7.5 grams
+- 仅 17 克，具体重量如下：
+  + 风扇：4.1 克
+  + 塑料外壳：5.4 克
+  + 电子产品、摄像头传感器、镜头：7.5 克
 
 \image html proto-legend.jpg
 
-The JeVois hardware is the result of state of the art electronics design and manufacturing. The actual size of the
-photograph below is less than 30mm (1.2 inch) wide.
+JeVois 硬件是最先进的电子设计和制造的成果。下面照片的实际尺寸宽度小于 30 毫米（1.2 英寸）。
 
 \image html pcb-closeup-low.jpg
 
-Regulatory information
+监管信息 
 ----------------------
 
 - HS Tariff code: 8525804000
@@ -72,3 +62,4 @@ Regulatory information
 \image html fan-sticker.png
 
 */
+

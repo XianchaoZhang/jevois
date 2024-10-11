@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_IMUdata_8H">
+<title>include/jevois/Core/IMUdata.H File Reference</title>
+<indexterm><primary>include/jevois/Core/IMUdata.H</primary></indexterm>
+<programlisting>#include &lt;vector&gt;
+#include &lt;string&gt;
+</programlisting>Include dependency graph for IMUdata.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="IMUdata_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="IMUdata_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structjevois_1_1IMUrawData">jevois::IMUrawData</link></para>
+
+<para>原始 <link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1IMUdata">jevois::IMUdata</link></para>
+
+<para><link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1DMPdata">jevois::DMPdata</link></para>
+
+<para>DMP 数据（数字运动处理器） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga15e567b32084f496bf9112c3c263a9b1">JEVOIS_DMP_ACCEL</link>   0x8000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga68da7edc514c5f5487212744b8b02c84">JEVOIS_DMP_GYRO</link>   0x4000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gabb2ba2bba15dbcf098f9b05424cdfe1e">JEVOIS_DMP_CPASS</link>   0x2000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga3a95b92aae53c0aa476260515a5296db">JEVOIS_DMP_ALS</link>   0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga3ca7a7d645e32c06a989ec58214888bb">JEVOIS_DMP_QUAT6</link>   0x0800</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gae121214599e34bcb8c18bdafe2d147bb">JEVOIS_DMP_QUAT9</link>   0x0400</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gaf1b2dd8f682cdf018e3ecd8b7d181b0b">JEVOIS_DMP_PQUAT6</link>   0x0200</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga5e83c764684816a9356fc3cc2862edfa">JEVOIS_DMP_GEOMAG</link>   0x0100</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gab822d961e558f44a00bc87ad59928791">JEVOIS_DMP_PRESSURE</link>   0x0080</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga07dcc5954211f0ceb85240a15d2cfdf2">JEVOIS_DMP_GYRO_CALIBR</link>   0x0040</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gaaf66d3c8dd279117598eafbfc6fdff79">JEVOIS_DMP_CPASS_CALIBR</link>   0x0020</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga679e97c4234845744a222de261ab0cb0">JEVOIS_DMP_PED_STEPDET</link>   0x0010</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga0d2be514ab0e80f6b19831bd783aa995">JEVOIS_DMP_HEADER2</link>   0x0008</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gabfa8ab2c07e23bb752ab8e5afc930dfa">JEVOIS_DMP_PED_STEPIND</link>   0x0007</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gab07da0f78126b07336cbd6490ad4801d">JEVOIS_DMP_ACCEL_ACCURACY</link>   0x4000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga9383289eaf941d0324d4e8b9ff9368f3">JEVOIS_DMP_GYRO_ACCURACY</link>   0x2000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga9e3a6203e26fa68a5b37ce68226de130">JEVOIS_DMP_CPASS_ACCURACY</link>   0x1000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gaf94b04dfd4a6573fc09eb961f85d2290">JEVOIS_DMP_FSYNC</link>   0x0800</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1gabdfb09963be423b6d59a9478f043efd3">JEVOIS_DMP_FLIP_PICKUP</link>   0x0400</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga0ed8b945886acdbe6d452402c56f4cc3">JEVOIS_DMP_BATCH_MODE_EN</link>   0x0100</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__ICM-20948_1ga0e4ab651d2bc2270e20c29891224b5ae">JEVOIS_DMP_ACT_RECOG</link>   0x0080</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>size_t <link linkend="_group__imu_1ga43ee011cc956b9d2d7a5ae46aa268bff">jevois::DMPpacketSize</link> (unsigned short ctl1, unsigned short ctl2)</para>
+
+<para>辅助函数根据选项确定 DMP 数据包大小 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

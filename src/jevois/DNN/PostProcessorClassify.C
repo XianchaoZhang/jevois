@@ -38,7 +38,7 @@ void jevois::dnn::PostProcessorClassify::onParamChange(postprocessor::classes co
 {
   if (val.empty()) return;
 
-  // Get the dataroot of our network. We assume that there is a sub-component named "network" that is a sibling of us:
+  // 获取我们网络的数据根。我们假设有一个名为 "network" 的子组件是我们的兄弟：
   std::vector<std::string> dd = jevois::split(Component::descriptor(), ":");
   dd.back() = "network"; dd.emplace_back("dataroot");
   std::string const dataroot = engine()->getParamStringUnique(jevois::join(dd, ":"));
@@ -70,7 +70,7 @@ void jevois::dnn::PostProcessorClassify::process(std::vector<cv::Mat> const & ou
   }
   else jevois::dnn::topK((float const *)out.data, fMaxProb, MaxClass, sz, topk);
 
-  // Collect the top-k results that are also above threshold:
+  // 收集高于阈值的 top-k 个结果：
   float const t = cthresh::get(); float const fac = 100.0F * scorescale::get();
   
   for (uint32_t i = 0; i < topk; ++i)
@@ -87,7 +87,7 @@ void jevois::dnn::PostProcessorClassify::report(jevois::StdModule * mod, jevois:
 {
   uint32_t const topk = top::get();
 
-  // If desired, write results to output image:
+  // 如果需要，将结果写入输出图像：
   if (outimg && overlay)
   {
     int y = 16;
@@ -104,7 +104,7 @@ void jevois::dnn::PostProcessorClassify::report(jevois::StdModule * mod, jevois:
   }
 
 #ifdef JEVOIS_PRO
-  // If desired, write results to GUI:
+  // 如果需要，将结果写入 GUI：
   if (helper)
   {
     if (idle == false && ImGui::CollapsingHeader("Classification results", ImGuiTreeNodeFlags_DefaultOpen))
@@ -128,6 +128,6 @@ void jevois::dnn::PostProcessorClassify::report(jevois::StdModule * mod, jevois:
   (void)idle; (void)helper; // keep compiler happy  
 #endif
   
-  // If desired, send results to serial port:
+  // 如果需要，将结果发送到串行端口：
   if (mod) mod->sendSerialObjReco(itsObjRec);
 }

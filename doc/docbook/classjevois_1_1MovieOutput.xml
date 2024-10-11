@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1MovieOutput">
+<title>jevois::MovieOutput Class Reference</title>
+<indexterm><primary>jevois::MovieOutput</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/MovieOutput.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>使用 OpenCV 视频编码将视频输出到电影文件 </para>
+
+
+
+<para>此视频输出模式将输出帧保存到文件（或一系列文件）。在开发新算法以离线检查生成的输出的正确性或保存模块的某些文档/ 演示电影时，它很有用。 </para>
+<para>
+Definition at line 32 of file MovieOutput.H.</para>
+Inheritance diagram for jevois::MovieOutput:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1MovieOutput__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::MovieOutput:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1MovieOutput__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1MovieOutput_1a01cd97237133eb8f98201f6020562076">MovieOutput</link> (std::string const &amp;fn)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1MovieOutput_1a0c8e34c50faa34e3ea3f991b28d5596a">~MovieOutput</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieOutput_1a8613022e6abc3897663b010f564b6e25">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧率 </para>
+</listitem>
+            <listitem><para>即，所有缓冲区都已排队等待发送但尚未发送。应用程序代码必须为每个 <link linkend="_classjevois_1_1MovieOutput_1abe2589047ca93b97c7fc5d05b36a9acf">get</link> () 平衡一个 <link linkend="_classjevois_1_1MovieOutput_1a5dcac04ce2ca902f50ea0d6547a72705">send</link>() 。 */virtual void get(<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieOutput_1a5dcac04ce2ca902f50ea0d6547a72705">send</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img) override</para>
+
+<para>发送图像 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieOutput_1acd08cef18b6ee9ab13ea9b616322a296">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieOutput_1af1f5a85a4c8f318165b210000b7a9541">abortStream</link> () override</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577">run</link> ()</para>
+
+<para>使用线程对帧进行编码和保存 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1MovieOutput_1ab2b9f363d4df1ce122ae47b3559041df">itsBuffer</link></para>
+
+<para>我们的单个视频缓冲区 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> <link linkend="_classjevois_1_1MovieOutput_1a8444a374c262f01aada7f43e4d46eda8">itsMapping</link></para>
+
+<para>我们当前的视频映射，我们将输入调整为映射的摄像头大小 </para>
+</listitem>
+            <listitem><para>std::future&lt; void &gt; <link linkend="_classjevois_1_1MovieOutput_1aeaeb5898bebf6ae28f3fbc786be44076">itsRunFut</link></para>
+
+<para>Future for our <link linkend="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577">run()</link> thread. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt; cv::Mat, <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">jevois::BlockingBehavior::Block</link>, <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">jevois::BlockingBehavior::Block</link> &gt; <link linkend="_classjevois_1_1MovieOutput_1a8d10ecc9f288dc6dd20c467180f5db76">itsBuf</link></para>
+
+<para>要编码并写入文件的帧缓冲区 </para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1MovieOutput_1a7a4faca797199c65a155f7dea17b2926">itsSaving</link></para>
+
+<para>当我们保存到文件时为 True </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1MovieOutput_1a5ac7ca08f0bd83ac40f43ec5964e49b1">itsFileNum</link></para>
+
+<para>文件编号，在每次 <link linkend="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c">streamOff()</link> 时递增，以避免覆盖以前的文件 </para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1MovieOutput_1a8441e3b4e94728ee518ba8f2bb33bebd">itsRunning</link></para>
+
+<para>当我们的 <link linkend="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577">run()</link> 线程应继续运行时为 True </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1MovieOutput_1a944af89fc7e1fa87eb5425c796709998">itsFilename</link></para>
+
+<para>将视频保存到的当前文件名 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1MovieOutput_1a625090100654077c44148362f30c7257">itsFilebase</link></para>
+
+<para>Current file base to save video to. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieOutput_1a01cd97237133eb8f98201f6020562076"/>    <section>
+    <title>MovieOutput()</title>
+<indexterm><primary>MovieOutput</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>MovieOutput</secondary></indexterm>
+<para><computeroutput>jevois::MovieOutput::MovieOutput (std::string const &amp; fn)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 32 of file MovieOutput.C.</para>
+<para>
+References jevois::async(), itsRunFut, and run().</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a0c8e34c50faa34e3ea3f991b28d5596a"/>    <section>
+    <title>~MovieOutput()</title>
+<indexterm><primary>~MovieOutput</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>~MovieOutput</secondary></indexterm>
+<para><computeroutput>jevois::MovieOutput::~MovieOutput ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</para>
+<para>
+Definition at line 39 of file MovieOutput.C.</para>
+<para>
+References LERROR, LINFO, jevois::system(), and jevois::warnAndIgnoreException().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieOutput_1af1f5a85a4c8f318165b210000b7a9541"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>这只会取消将来的 <link linkend="_classjevois_1_1MovieOutput_1abe2589047ca93b97c7fc5d05b36a9acf">get()</link> 和 <link linkend="_classjevois_1_1MovieOutput_1a5dcac04ce2ca902f50ea0d6547a72705">send()</link> 调用，仍应调用 <link linkend="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 102 of file MovieOutput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1abe2589047ca93b97c7fc5d05b36a9acf"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::get ( ) &amp;<computeroutput>[override]</computeroutput></computeroutput></para><para>
+Definition at line 63 of file MovieOutput.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::bufindex, jevois::RawImage::fmt, jevois::RawImage::fps, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577"/>    <section>
+    <title>run()</title>
+<indexterm><primary>run</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>run</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::run ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>使用线程对帧进行编码和保存 </para>
+</para>
+<para>
+Definition at line 127 of file MovieOutput.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by MovieOutput().</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a5dcac04ce2ca902f50ea0d6547a72705"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::send (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>发送图像 </para>
+</para>
+
+<para>如果格式不正确，则可能抛出 std::overflow_error，如果我们尚未使用前一个图像。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 81 of file MovieOutput.C.</para>
+<para>
+References jevois::rawimage::convertToCvBGR(), LERROR, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a8613022e6abc3897663b010f564b6e25"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::setFormat (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧率 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 56 of file MovieOutput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 108 of file MovieOutput.C.</para>
+<para>
+References LERROR, LINFO, and jevois::system().</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1acd08cef18b6ee9ab13ea9b616322a296"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::MovieOutput::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 96 of file MovieOutput.C.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieOutput_1a8d10ecc9f288dc6dd20c467180f5db76"/>    <section>
+    <title>itsBuf</title>
+<indexterm><primary>itsBuf</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsBuf</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1BoundedBuffer">jevois::BoundedBuffer</link>&lt;cv::Mat, <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">jevois::BlockingBehavior::Block</link>, <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">jevois::BlockingBehavior::Block</link>&gt; jevois::MovieOutput::itsBuf<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>要编码并写入文件的帧缓冲区 </para>
+</para>
+<para>
+Definition at line 69 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1ab2b9f363d4df1ce122ae47b3559041df"/>    <section>
+    <title>itsBuffer</title>
+<indexterm><primary>itsBuffer</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsBuffer</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoBuf">VideoBuf</link>&gt; jevois::MovieOutput::itsBuffer<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们的单个视频缓冲区 </para>
+</para>
+<para>
+Definition at line 63 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a625090100654077c44148362f30c7257"/>    <section>
+    <title>itsFilebase</title>
+<indexterm><primary>itsFilebase</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsFilebase</secondary></indexterm>
+<para><computeroutput>std::string jevois::MovieOutput::itsFilebase<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Current file base to save video to. </para>
+</para>
+<para>
+Definition at line 74 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a944af89fc7e1fa87eb5425c796709998"/>    <section>
+    <title>itsFilename</title>
+<indexterm><primary>itsFilename</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsFilename</secondary></indexterm>
+<para><computeroutput>std::string jevois::MovieOutput::itsFilename<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>将视频保存到的当前文件名 </para>
+</para>
+<para>
+Definition at line 73 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a5ac7ca08f0bd83ac40f43ec5964e49b1"/>    <section>
+    <title>itsFileNum</title>
+<indexterm><primary>itsFileNum</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsFileNum</secondary></indexterm>
+<para><computeroutput>int jevois::MovieOutput::itsFileNum<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>文件编号，在每次 <link linkend="_classjevois_1_1MovieOutput_1a30ac2a1e46edbcc88ea47bcbe1283d3c">streamOff()</link> 时递增，以避免覆盖以前的文件 </para>
+</para>
+<para>
+Definition at line 71 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a8444a374c262f01aada7f43e4d46eda8"/>    <section>
+    <title>itsMapping</title>
+<indexterm><primary>itsMapping</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsMapping</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> jevois::MovieOutput::itsMapping<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们当前的视频映射，我们将输入调整为映射的摄像头大小 </para>
+</para>
+<para>
+Definition at line 64 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1aeaeb5898bebf6ae28f3fbc786be44076"/>    <section>
+    <title>itsRunFut</title>
+<indexterm><primary>itsRunFut</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsRunFut</secondary></indexterm>
+<para><computeroutput>std::future&lt;void&gt; jevois::MovieOutput::itsRunFut<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Future for our <link linkend="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577">run()</link> thread. </para>
+</para>
+<para>
+Definition at line 67 of file MovieOutput.H.</para>
+<para>
+Referenced by MovieOutput().</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a8441e3b4e94728ee518ba8f2bb33bebd"/>    <section>
+    <title>itsRunning</title>
+<indexterm><primary>itsRunning</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsRunning</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::MovieOutput::itsRunning<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>当我们的 <link linkend="_classjevois_1_1MovieOutput_1a1b2c4d537acd9148563f096d2671b577">run()</link> 线程应继续运行时为 True </para>
+</para>
+<para>
+Definition at line 72 of file MovieOutput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieOutput_1a7a4faca797199c65a155f7dea17b2926"/>    <section>
+    <title>itsSaving</title>
+<indexterm><primary>itsSaving</primary><secondary>jevois::MovieOutput</secondary></indexterm>
+<indexterm><primary>jevois::MovieOutput</primary><secondary>itsSaving</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::MovieOutput::itsSaving<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>当我们保存到文件时为 True </para>
+</para>
+<para>
+Definition at line 70 of file MovieOutput.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_MovieOutput_8H">MovieOutput.H</link>src/jevois/Core/<link linkend="_MovieOutput_8C">MovieOutput.C</link></section>
+</section>

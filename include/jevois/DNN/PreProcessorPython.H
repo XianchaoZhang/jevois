@@ -27,8 +27,8 @@ namespace jevois
     class PreProcessorPythonImpl;
     class PreProcessorForPython;
     
-    //! Pre-Processor for neural network pipeline written in python
-    /*! This is the first step in a deep neural network processing Pipeline. \ingroup dnn */
+    //! 用 python 编写的神经网络管道预处理器
+    /*! 这是深度神经网络处理管道的第一步。 \ingroup dnn */
     class PreProcessorPython : public PreProcessor, public jevois::Parameter<preprocessor::pypre>
     {
       public:
@@ -41,21 +41,20 @@ namespace jevois
         //! Freeze/unfreeze parameters that users should not change while running
         void freeze(bool doit) override;
 
-        //! Extract blobs from input image
+        //! 从输入图像中提取 blob 
         std::vector<cv::Mat> process(cv::Mat const & img, bool swaprb, std::vector<vsi_nn_tensor_attr_t> const & attrs,
                                      std::vector<cv::Rect> & crops) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 
       protected:
-        // Load the python code as soon as the file is set, and call init() on it if defined
+        // 设置文件后立即加载 python 代码，如果定义了，则调用 init()；
         void onParamChange(preprocessor::pypre const & param, std::string const & newval) override;
 
-        // Python init() may create new dynamic parameters, but in onParamChange() we are locked up, so we need to use a
-        // sub-Component for our actual implementation, and the sub can get its dynamic parameters created while our own
-        // params are locked up...
+        // Python init() 可能会创建新的动态参数，但是在 onParamChange() 中我们被锁定，因此我们需要使用子组件进行实际实现，
+		// 并且子组件可以在我们自己的 // 参数被锁定时获取其创建的动态参数……
         std::shared_ptr<PreProcessorPythonImpl> itsImpl;
      };
 

@@ -24,12 +24,10 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Post-Processor for neural network pipeline
-    /*! This is the last step in a deep neural network processing Pipeline. This post-processor does nothing except
-        displaying the sizes of the received tensors from the network. Useful when importing custom networks to inspect
-        the output data format if one is unsure: using this stub will not crash post-processing and will allow one to
-        inspect network output shapes. Also useful to benchmark a model and check that its speed is acceptable before
-        spending time designing a new post-processor for it. \ingroup dnn */
+    //! 神经网络管道的后处理器
+    /*! 这是深度神经网络处理管道的最后一步。 除了显示从网络接收的张量的大小之外，此后处理器不执行任何操作。 在导入自定
+	    义网络以检查输出数据格式（如果不确定）时很有用：使用此存根不会导致后处理崩溃并允许检查网络输出形状。 在花时间
+		为其设计新的后处理器之前，对模型进行基准测试并检查其速度是否可接受也很有用。 \ingroup dnn */
     class PostProcessorStub : public PostProcessor
     {
       public:
@@ -40,13 +38,13 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorStub();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         void freeze(bool doit) override;
         
-        //! Process outputs and draw/send some results
+        //! 处理输出并绘制/发送一些结果
         void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
     };

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_VideoMapping_8H">
+<title>include/jevois/Core/VideoMapping.H File Reference</title>
+<indexterm><primary>include/jevois/Core/VideoMapping.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/CameraSensor.H&gt;
+#include &lt;jevois/Types/Enum.H&gt;
+#include &lt;iosfwd&gt;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;linux/videodev2.h&gt;
+</programlisting>Include dependency graph for VideoMapping.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="VideoMapping_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="VideoMapping_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link></para>
+
+<para>用于保存处理 <link linkend="_classjevois_1_1Engine">Engine</link> 的视频映射定义的简单结构 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; VideoMapping &gt; <link linkend="_namespacejevois_1a828fc05eea12bd9d7071a1bc561e1835">jevois::videoMappingsFromStream</link> (CameraSensor s, std::istream &amp;is, size_t &amp;defidx, bool checkso, bool hasgui)</para>
+
+<para>解析配置文件中的所有映射，并指出哪一个是默认的 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

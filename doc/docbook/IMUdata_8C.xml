@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_IMUdata_8C">
+<title>src/jevois/Core/IMUdata.C File Reference</title>
+<indexterm><primary>src/jevois/Core/IMUdata.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Core/IMUdata.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/Core/ICM20948_regs.H&gt;
+</programlisting>Include dependency graph for IMUdata.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="IMUdata_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a575e311fcf976145ab9024c26b9f96eb">JEVOIS_DMP_HEADER_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1acbc9cd9f9aba03b1c7a2c4826f5b2240">JEVOIS_DMP_ACCEL_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a4c9a7ded4e66110fab6e4edec4eeaaae">JEVOIS_DMP_GYRO_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1abcdc69f41b18f77ba106d7f90b015938">JEVOIS_DMP_CPASS_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a0ccb05363dd433151af629acab18b944">JEVOIS_DMP_ALS_DATA_SZ</link>   8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a8a71bec0b30763047345f85575f68745">JEVOIS_DMP_QUAT6_DATA_SZ</link>   12</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1ade83d3844321d10a0c22aa1cf28f4591">JEVOIS_DMP_QUAT9_DATA_SZ</link>   14</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a9c3765a728e448c0b8f2caf8f82702a1">JEVOIS_DMP_PQUAT6_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a9509ab61983144c6f89868036997f985">JEVOIS_DMP_GEOMAG_DATA_SZ</link>   14</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a7496335eb99774ed660f7ad4c32c19e5">JEVOIS_DMP_PRESSURE_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1ad7613f4844268200ac9537faaff1beac">JEVOIS_DMP_GYRO_BIAS_DATA_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a233f9ac8911e13f28ea1c4e1dfbf4a6a">JEVOIS_DMP_CPASS_CALIBR_DATA_SZ</link>   12</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a5352033a1dabdb3ccf330afe01ce21d0">JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ</link>   4</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1acba498bb77d7303fea95214cae46ddab">JEVOIS_DMP_FOOTER_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a379e5bc8831bb2d0ca6f978286e19ff3">JEVOIS_DMP_HEADER2_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a607b87c52443c7b0458c368b4458feb7">JEVOIS_DMP_ACCEL_ACCURACY_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a1209fdfe3d17cd76ed914369228e33cc">JEVOIS_DMP_GYRO_ACCURACY_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a85ad1db7a0a8a830cc2521f8134d7078">JEVOIS_DMP_CPASS_ACCURACY_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a74ed1d7a34c70c8c9641c1ca5ac7500d">JEVOIS_DMP_FSYNC_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a845c2fe12b575b987bf5ef697e94270c">JEVOIS_DMP_FLIP_PICKUP_SZ</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a5fc85bb063dd867b12fffe7246a39f97">JEVOIS_DMP_ACT_RECOG_SZ</link>   6</para>
+</listitem>
+            <listitem><para>#define <link linkend="_IMUdata_8C_1a4664a13287b5be00f62bfb25be4df4cb">JEVOIS_DMP_ODR_CNT_GYRO_SZ</link>   2</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_IMUdata_8C_1a607b87c52443c7b0458c368b4458feb7"/>    <section>
+    <title>JEVOIS_DMP_ACCEL_ACCURACY_SZ</title>
+<indexterm><primary>JEVOIS_DMP_ACCEL_ACCURACY_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_ACCEL_ACCURACY_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ACCEL_ACCURACY_SZ   2</computeroutput></para><para>
+Definition at line 41 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1acbc9cd9f9aba03b1c7a2c4826f5b2240"/>    <section>
+    <title>JEVOIS_DMP_ACCEL_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_ACCEL_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_ACCEL_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ACCEL_DATA_SZ   6</computeroutput></para><para>
+Definition at line 25 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a5fc85bb063dd867b12fffe7246a39f97"/>    <section>
+    <title>JEVOIS_DMP_ACT_RECOG_SZ</title>
+<indexterm><primary>JEVOIS_DMP_ACT_RECOG_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_ACT_RECOG_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ACT_RECOG_SZ   6</computeroutput></para><para>
+Definition at line 46 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a0ccb05363dd433151af629acab18b944"/>    <section>
+    <title>JEVOIS_DMP_ALS_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_ALS_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_ALS_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ALS_DATA_SZ   8</computeroutput></para><para>
+Definition at line 28 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a85ad1db7a0a8a830cc2521f8134d7078"/>    <section>
+    <title>JEVOIS_DMP_CPASS_ACCURACY_SZ</title>
+<indexterm><primary>JEVOIS_DMP_CPASS_ACCURACY_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_CPASS_ACCURACY_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_CPASS_ACCURACY_SZ   2</computeroutput></para><para>
+Definition at line 43 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a233f9ac8911e13f28ea1c4e1dfbf4a6a"/>    <section>
+    <title>JEVOIS_DMP_CPASS_CALIBR_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_CPASS_CALIBR_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_CPASS_CALIBR_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_CPASS_CALIBR_DATA_SZ   12</computeroutput></para><para>
+Definition at line 35 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1abcdc69f41b18f77ba106d7f90b015938"/>    <section>
+    <title>JEVOIS_DMP_CPASS_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_CPASS_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_CPASS_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_CPASS_DATA_SZ   6</computeroutput></para><para>
+Definition at line 27 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a845c2fe12b575b987bf5ef697e94270c"/>    <section>
+    <title>JEVOIS_DMP_FLIP_PICKUP_SZ</title>
+<indexterm><primary>JEVOIS_DMP_FLIP_PICKUP_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_FLIP_PICKUP_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_FLIP_PICKUP_SZ   2</computeroutput></para><para>
+Definition at line 45 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1acba498bb77d7303fea95214cae46ddab"/>    <section>
+    <title>JEVOIS_DMP_FOOTER_SZ</title>
+<indexterm><primary>JEVOIS_DMP_FOOTER_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_FOOTER_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_FOOTER_SZ   2</computeroutput></para><para>
+Definition at line 37 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a74ed1d7a34c70c8c9641c1ca5ac7500d"/>    <section>
+    <title>JEVOIS_DMP_FSYNC_SZ</title>
+<indexterm><primary>JEVOIS_DMP_FSYNC_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_FSYNC_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_FSYNC_SZ   2</computeroutput></para><para>
+Definition at line 44 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a9509ab61983144c6f89868036997f985"/>    <section>
+    <title>JEVOIS_DMP_GEOMAG_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_GEOMAG_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_GEOMAG_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GEOMAG_DATA_SZ   14</computeroutput></para><para>
+Definition at line 32 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a1209fdfe3d17cd76ed914369228e33cc"/>    <section>
+    <title>JEVOIS_DMP_GYRO_ACCURACY_SZ</title>
+<indexterm><primary>JEVOIS_DMP_GYRO_ACCURACY_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_GYRO_ACCURACY_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GYRO_ACCURACY_SZ   2</computeroutput></para><para>
+Definition at line 42 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1ad7613f4844268200ac9537faaff1beac"/>    <section>
+    <title>JEVOIS_DMP_GYRO_BIAS_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_GYRO_BIAS_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_GYRO_BIAS_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GYRO_BIAS_DATA_SZ   6</computeroutput></para><para>
+Definition at line 34 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a4c9a7ded4e66110fab6e4edec4eeaaae"/>    <section>
+    <title>JEVOIS_DMP_GYRO_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_GYRO_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_GYRO_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GYRO_DATA_SZ   6</computeroutput></para><para>
+Definition at line 26 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a379e5bc8831bb2d0ca6f978286e19ff3"/>    <section>
+    <title>JEVOIS_DMP_HEADER2_SZ</title>
+<indexterm><primary>JEVOIS_DMP_HEADER2_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_HEADER2_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_HEADER2_SZ   2</computeroutput></para><para>
+Definition at line 40 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a575e311fcf976145ab9024c26b9f96eb"/>    <section>
+    <title>JEVOIS_DMP_HEADER_SZ</title>
+<indexterm><primary>JEVOIS_DMP_HEADER_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_HEADER_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_HEADER_SZ   2</computeroutput></para><para>
+Definition at line 24 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a4664a13287b5be00f62bfb25be4df4cb"/>    <section>
+    <title>JEVOIS_DMP_ODR_CNT_GYRO_SZ</title>
+<indexterm><primary>JEVOIS_DMP_ODR_CNT_GYRO_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_ODR_CNT_GYRO_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ODR_CNT_GYRO_SZ   2</computeroutput></para><para>
+Definition at line 49 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a5352033a1dabdb3ccf330afe01ce21d0"/>    <section>
+    <title>JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ</title>
+<indexterm><primary>JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ   4</computeroutput></para><para>
+Definition at line 36 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a9c3765a728e448c0b8f2caf8f82702a1"/>    <section>
+    <title>JEVOIS_DMP_PQUAT6_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_PQUAT6_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_PQUAT6_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_PQUAT6_DATA_SZ   6</computeroutput></para><para>
+Definition at line 31 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a7496335eb99774ed660f7ad4c32c19e5"/>    <section>
+    <title>JEVOIS_DMP_PRESSURE_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_PRESSURE_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_PRESSURE_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_PRESSURE_DATA_SZ   6</computeroutput></para><para>
+Definition at line 33 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1a8a71bec0b30763047345f85575f68745"/>    <section>
+    <title>JEVOIS_DMP_QUAT6_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_QUAT6_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_QUAT6_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_QUAT6_DATA_SZ   12</computeroutput></para><para>
+Definition at line 29 of file IMUdata.C.</para>
+    </section><anchor xml:id="_IMUdata_8C_1ade83d3844321d10a0c22aa1cf28f4591"/>    <section>
+    <title>JEVOIS_DMP_QUAT9_DATA_SZ</title>
+<indexterm><primary>JEVOIS_DMP_QUAT9_DATA_SZ</primary><secondary>IMUdata.C</secondary></indexterm>
+<indexterm><primary>IMUdata.C</primary><secondary>JEVOIS_DMP_QUAT9_DATA_SZ</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_QUAT9_DATA_SZ   14</computeroutput></para><para>
+Definition at line 30 of file IMUdata.C.</para>
+</section>
+</section>
+</section>

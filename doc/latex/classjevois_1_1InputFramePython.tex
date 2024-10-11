@@ -1,0 +1,416 @@
+\hypertarget{classjevois_1_1InputFramePython}{}\doxysubsection{jevois\+::Input\+Frame\+Python Class Reference}
+\label{classjevois_1_1InputFramePython}\index{jevois::InputFramePython@{jevois::InputFramePython}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+包装 Python 使用的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 
+
+此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，仅供 \mbox{\hyperlink{classjevois_1_1PythonModule}{Python\+Module}} 使用。此类的用户必须确保原 始 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 将比任何和所有 \mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} 实例都存活得更久，因为 \mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} 只是通过不受保护的原始指针引用源 Input\+Frame。虽然 C++ 对象称为 Input\+Frame\+Python，但我们将以 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 的名称将其公开给 python（请参阅 Python\+Support.\+C）。 
+
+Definition at line 43 of file Python\+Module.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1InputFramePython_a4c69807b9e27b5e8c4ba31c232f2ef7b}{Input\+Frame\+Python}} ()=default
+\begin{DoxyCompactList}\small\item\em 默认构造函数使 boost\+::python 正常运行，对象不可操作 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1InputFramePython_a45d7e3214832f4becb498a6feb9a9352}{Input\+Frame\+Python}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} $\ast$src)
+\begin{DoxyCompactList}\small\item\em 从来自引擎的常规（仅移动）\+Input\+Frame 构造 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_a51b9198e19438744a15047cc7546da16}{get1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 获取下一个捕获的相机图像，默认参数值的薄包装器 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_a10c441d43a0a81fa0e3bef06c7ba7964}{get}} () const
+\begin{DoxyCompactList}\small\item\em 获取下一个捕获的相机图像，默认参数值的薄包装器 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1InputFramePython_af89b58b0e6dd18193f5f02120a83b802}{has\+Scaled\+Image}} () const
+\begin{DoxyCompactList}\small\item\em 检查 Je\+Vois\+Pro 平台 I\+SP 缩放的第二个输入图像是否可用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1InputFramePython_add8c1241ee775035b6117e0e59808dff}{done}} () const
+\begin{DoxyCompactList}\small\item\em 表明用户处理已完成，且已通过 \mbox{\hyperlink{classjevois_1_1InputFramePython_a10c441d43a0a81fa0e3bef06c7ba7964}{get()}} 获得先前的图像; \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1InputFramePython_af52d1c2b252f955275b1a30dfe507fef}{done2}} () const
+\begin{DoxyCompactList}\small\item\em 表明用户处理已完成，且已通过 \mbox{\hyperlink{classjevois_1_1InputFramePython_a174de47269fce02f95e092d1360c2885}{get2()}} 获得 I\+SP 缩放图像; \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_a4d0e38254189121e348025fb61521b88}{get21}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 获取接下来捕获的摄像头图像，\+I\+SP 缩放的第二帧 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_a174de47269fce02f95e092d1360c2885}{get2}} () const
+\begin{DoxyCompactList}\small\item\em 获取接下来捕获的摄像头图像，\+I\+SP 缩放的第二帧 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_a62427dbabe506e5fb4e994426c4cd0e3}{getp1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 获取下一个用于处理 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 的捕获相机图像 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1InputFramePython_aecb80b0817cae14d3388e96d0178bea4}{getp}} () const
+\begin{DoxyCompactList}\small\item\em 获取下一个用于处理 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 的捕获相机图像 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_ae3e325ecdd2ee84618a84793ea803a21}{get\+Cv\+G\+R\+A\+Y1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像作为 G\+R\+AY cv\+::\+Mat 获取并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_af9906b9d9538797938def8efe7ce3c5b}{get\+Cv\+G\+R\+AY}} () const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像作为 G\+R\+AY cv\+::\+Mat 获取并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a9b4a1903001e19a7b552ff296175c30a}{get\+Cv\+B\+G\+R1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像作为 B\+GR cv\+::\+Mat 获取并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a6e912adb9160832b67143bd47150f7f1}{get\+Cv\+B\+GR}} () const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像作为 B\+GR cv\+::\+Mat 获取并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_af21f5927899180a417280f52b2937c6d}{get\+Cv\+R\+G\+B1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 简写以 R\+GB cv\+::\+Mat 获取输入图像并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_ac985bd296e01cb132602fc300dfea068}{get\+Cv\+R\+GB}} () const
+\begin{DoxyCompactList}\small\item\em 简写以 R\+GB cv\+::\+Mat 获取输入图像并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a2eebc37873c90fa459fb3e81bdd51df3}{get\+Cv\+R\+G\+B\+A1}} (bool casync) const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像获取为 R\+G\+BA cv\+::\+Mat 并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a135f75ed03e9abade03e717b9d7161fb}{get\+Cv\+R\+G\+BA}} () const
+\begin{DoxyCompactList}\small\item\em 简写以将输入图像获取为 R\+G\+BA cv\+::\+Mat 并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a0f6de3653cb29ce77cfda27fd65b2958}{get\+Cv\+G\+R\+A\+Yp}} () const
+\begin{DoxyCompactList}\small\item\em 简写为 G\+R\+AY cv\+::\+Mat 获取输入图像进行处理并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_abe778e3633781191e35046f4e018833f}{get\+Cv\+B\+G\+Rp}} () const
+\begin{DoxyCompactList}\small\item\em 简写为获取输入图像以作为 B\+GR cv\+::\+Mat 进行处理并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a3199342339b3c850ffa62bf6169f4190}{get\+Cv\+R\+G\+Bp}} () const
+\begin{DoxyCompactList}\small\item\em 简写为 R\+GB cv\+::\+Mat 获取输入图像进行处理并释放原始缓冲区 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1InputFramePython_a6b4fb29e4cc941dbd088168a8892a0af}{get\+Cv\+R\+G\+B\+Ap}} () const
+\begin{DoxyCompactList}\small\item\em 简写以获取输入图像以将其作为 R\+G\+BA cv\+::\+Mat 进行处理并释放原始缓冲区 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1InputFramePython_a8881a5bdcf66f1f2e3683ea6b8eab741}{G\+U\+Ihelper\+Python}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a4c69807b9e27b5e8c4ba31c232f2ef7b}\label{classjevois_1_1InputFramePython_a4c69807b9e27b5e8c4ba31c232f2ef7b}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!InputFramePython@{InputFramePython}}
+\index{InputFramePython@{InputFramePython}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{InputFramePython()}{InputFramePython()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+Input\+Frame\+Python\+::\+Input\+Frame\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+默认构造函数使 boost\+::python 正常运行，对象不可操作 
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a45d7e3214832f4becb498a6feb9a9352}\label{classjevois_1_1InputFramePython_a45d7e3214832f4becb498a6feb9a9352}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!InputFramePython@{InputFramePython}}
+\index{InputFramePython@{InputFramePython}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{InputFramePython()}{InputFramePython()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+Input\+Frame\+Python\+::\+Input\+Frame\+Python (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} $\ast$}]{src }\end{DoxyParamCaption})}
+
+
+
+从来自引擎的常规（仅移动）\+Input\+Frame 构造 
+
+
+
+Definition at line 31 of file Python\+Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_add8c1241ee775035b6117e0e59808dff}\label{classjevois_1_1InputFramePython_add8c1241ee775035b6117e0e59808dff}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!done@{done}}
+\index{done@{done}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{done()}{done()}}
+{\footnotesize\ttfamily void jevois\+::\+Input\+Frame\+Python\+::done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+表明用户处理已完成，且已通过 \mbox{\hyperlink{classjevois_1_1InputFramePython_a10c441d43a0a81fa0e3bef06c7ba7964}{get()}} 获得先前的图像; 
+
+
+
+Definition at line 69 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_af52d1c2b252f955275b1a30dfe507fef}\label{classjevois_1_1InputFramePython_af52d1c2b252f955275b1a30dfe507fef}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!done2@{done2}}
+\index{done2@{done2}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{done2()}{done2()}}
+{\footnotesize\ttfamily void jevois\+::\+Input\+Frame\+Python\+::done2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+表明用户处理已完成，且已通过 \mbox{\hyperlink{classjevois_1_1InputFramePython_a174de47269fce02f95e092d1360c2885}{get2()}} 获得 I\+SP 缩放图像; 
+
+
+
+Definition at line 74 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a10c441d43a0a81fa0e3bef06c7ba7964}\label{classjevois_1_1InputFramePython_a10c441d43a0a81fa0e3bef06c7ba7964}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!get@{get}}
+\index{get@{get}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个捕获的相机图像，默认参数值的薄包装器 
+
+
+
+Definition at line 39 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a51b9198e19438744a15047cc7546da16}\label{classjevois_1_1InputFramePython_a51b9198e19438744a15047cc7546da16}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!get1@{get1}}
+\index{get1@{get1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{get1()}{get1()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::get1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个捕获的相机图像，默认参数值的薄包装器 
+
+
+
+Definition at line 34 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a174de47269fce02f95e092d1360c2885}\label{classjevois_1_1InputFramePython_a174de47269fce02f95e092d1360c2885}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!get2@{get2}}
+\index{get2@{get2}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{get2()}{get2()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::get2 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取接下来捕获的摄像头图像，\+I\+SP 缩放的第二帧 
+
+
+
+Definition at line 54 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a4d0e38254189121e348025fb61521b88}\label{classjevois_1_1InputFramePython_a4d0e38254189121e348025fb61521b88}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!get21@{get21}}
+\index{get21@{get21}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{get21()}{get21()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::get21 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+获取接下来捕获的摄像头图像，\+I\+SP 缩放的第二帧 
+
+
+
+Definition at line 49 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a6e912adb9160832b67143bd47150f7f1}\label{classjevois_1_1InputFramePython_a6e912adb9160832b67143bd47150f7f1}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvBGR@{getCvBGR}}
+\index{getCvBGR@{getCvBGR}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvBGR()}{getCvBGR()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+B\+GR (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像作为 B\+GR cv\+::\+Mat 获取并释放原始缓冲区 
+
+
+
+Definition at line 94 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a9b4a1903001e19a7b552ff296175c30a}\label{classjevois_1_1InputFramePython_a9b4a1903001e19a7b552ff296175c30a}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvBGR1@{getCvBGR1}}
+\index{getCvBGR1@{getCvBGR1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvBGR1()}{getCvBGR1()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+B\+G\+R1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像作为 B\+GR cv\+::\+Mat 获取并释放原始缓冲区 
+
+
+
+Definition at line 89 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_abe778e3633781191e35046f4e018833f}\label{classjevois_1_1InputFramePython_abe778e3633781191e35046f4e018833f}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvBGRp@{getCvBGRp}}
+\index{getCvBGRp@{getCvBGRp}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvBGRp()}{getCvBGRp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+B\+G\+Rp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写为获取输入图像以作为 B\+GR cv\+::\+Mat 进行处理并释放原始缓冲区 
+
+
+
+Definition at line 124 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_af9906b9d9538797938def8efe7ce3c5b}\label{classjevois_1_1InputFramePython_af9906b9d9538797938def8efe7ce3c5b}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvGRAY@{getCvGRAY}}
+\index{getCvGRAY@{getCvGRAY}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvGRAY()}{getCvGRAY()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像作为 G\+R\+AY cv\+::\+Mat 获取并释放原始缓冲区 
+
+
+
+Definition at line 84 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_ae3e325ecdd2ee84618a84793ea803a21}\label{classjevois_1_1InputFramePython_ae3e325ecdd2ee84618a84793ea803a21}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvGRAY1@{getCvGRAY1}}
+\index{getCvGRAY1@{getCvGRAY1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvGRAY1()}{getCvGRAY1()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+G\+R\+A\+Y1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像作为 G\+R\+AY cv\+::\+Mat 获取并释放原始缓冲区 
+
+
+
+Definition at line 79 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a0f6de3653cb29ce77cfda27fd65b2958}\label{classjevois_1_1InputFramePython_a0f6de3653cb29ce77cfda27fd65b2958}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvGRAYp@{getCvGRAYp}}
+\index{getCvGRAYp@{getCvGRAYp}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvGRAYp()}{getCvGRAYp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+G\+R\+A\+Yp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写为 G\+R\+AY cv\+::\+Mat 获取输入图像进行处理并释放原始缓冲区 
+
+
+
+Definition at line 119 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_ac985bd296e01cb132602fc300dfea068}\label{classjevois_1_1InputFramePython_ac985bd296e01cb132602fc300dfea068}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGB@{getCvRGB}}
+\index{getCvRGB@{getCvRGB}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGB()}{getCvRGB()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+GB (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写以 R\+GB cv\+::\+Mat 获取输入图像并释放原始缓冲区 
+
+
+
+Definition at line 104 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_af21f5927899180a417280f52b2937c6d}\label{classjevois_1_1InputFramePython_af21f5927899180a417280f52b2937c6d}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGB1@{getCvRGB1}}
+\index{getCvRGB1@{getCvRGB1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGB1()}{getCvRGB1()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+G\+B1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+简写以 R\+GB cv\+::\+Mat 获取输入图像并释放原始缓冲区 
+
+
+
+Definition at line 99 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a135f75ed03e9abade03e717b9d7161fb}\label{classjevois_1_1InputFramePython_a135f75ed03e9abade03e717b9d7161fb}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGBA@{getCvRGBA}}
+\index{getCvRGBA@{getCvRGBA}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGBA()}{getCvRGBA()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像获取为 R\+G\+BA cv\+::\+Mat 并释放原始缓冲区 
+
+
+
+Definition at line 114 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a2eebc37873c90fa459fb3e81bdd51df3}\label{classjevois_1_1InputFramePython_a2eebc37873c90fa459fb3e81bdd51df3}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGBA1@{getCvRGBA1}}
+\index{getCvRGBA1@{getCvRGBA1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGBA1()}{getCvRGBA1()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+G\+B\+A1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+简写以将输入图像获取为 R\+G\+BA cv\+::\+Mat 并释放原始缓冲区 
+
+
+
+Definition at line 109 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a6b4fb29e4cc941dbd088168a8892a0af}\label{classjevois_1_1InputFramePython_a6b4fb29e4cc941dbd088168a8892a0af}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGBAp@{getCvRGBAp}}
+\index{getCvRGBAp@{getCvRGBAp}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGBAp()}{getCvRGBAp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+G\+B\+Ap (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写以获取输入图像以将其作为 R\+G\+BA cv\+::\+Mat 进行处理并释放原始缓冲区 
+
+
+
+Definition at line 134 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a3199342339b3c850ffa62bf6169f4190}\label{classjevois_1_1InputFramePython_a3199342339b3c850ffa62bf6169f4190}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getCvRGBp@{getCvRGBp}}
+\index{getCvRGBp@{getCvRGBp}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getCvRGBp()}{getCvRGBp()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Input\+Frame\+Python\+::get\+Cv\+R\+G\+Bp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+简写为 R\+GB cv\+::\+Mat 获取输入图像进行处理并释放原始缓冲区 
+
+
+
+Definition at line 129 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_aecb80b0817cae14d3388e96d0178bea4}\label{classjevois_1_1InputFramePython_aecb80b0817cae14d3388e96d0178bea4}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getp@{getp}}
+\index{getp@{getp}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getp()}{getp()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::getp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个用于处理 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 的捕获相机图像 
+
+
+
+Definition at line 64 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a62427dbabe506e5fb4e994426c4cd0e3}\label{classjevois_1_1InputFramePython_a62427dbabe506e5fb4e994426c4cd0e3}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!getp1@{getp1}}
+\index{getp1@{getp1}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{getp1()}{getp1()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Input\+Frame\+Python\+::getp1 (\begin{DoxyParamCaption}\item[{bool}]{casync }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个用于处理 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 的捕获相机图像 
+
+
+
+Definition at line 59 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_af89b58b0e6dd18193f5f02120a83b802}\label{classjevois_1_1InputFramePython_af89b58b0e6dd18193f5f02120a83b802}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!hasScaledImage@{hasScaledImage}}
+\index{hasScaledImage@{hasScaledImage}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{hasScaledImage()}{hasScaledImage()}}
+{\footnotesize\ttfamily bool jevois\+::\+Input\+Frame\+Python\+::has\+Scaled\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+检查 Je\+Vois\+Pro 平台 I\+SP 缩放的第二个输入图像是否可用 
+
+
+
+Definition at line 44 of file Python\+Module.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1InputFramePython_a8881a5bdcf66f1f2e3683ea6b8eab741}\label{classjevois_1_1InputFramePython_a8881a5bdcf66f1f2e3683ea6b8eab741}} 
+\index{jevois::InputFramePython@{jevois::InputFramePython}!GUIhelperPython@{GUIhelperPython}}
+\index{GUIhelperPython@{GUIhelperPython}!jevois::InputFramePython@{jevois::InputFramePython}}
+\doxyparagraph{\texorpdfstring{GUIhelperPython}{GUIhelperPython}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1GUIhelperPython}{G\+U\+Ihelper\+Python}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 116 of file Python\+Module.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonModule_8H}{Python\+Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonModule_8C}{Python\+Module.\+C}}\end{DoxyCompactItemize}

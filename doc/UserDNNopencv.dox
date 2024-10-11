@@ -1,174 +1,106 @@
-/*! \page UserDNNopencv Running neural networks on JeVois-A33 or JeVois-Pro using OpenCV
+/*! \page UserDNNopencv 使用 OpenCV 在 JeVois-A33 或 JeVois-Pro 上运行神经网络
 
-OpenCV provides a %DNN module that allows one to run neural network inference on \jva33 and \jvpro. This is usually the
-easiest way to run a neural net, as no conversion, quantizationm etc is needed. However, this is also the slowest for
-\jvpro as the inference runs on CPU, which is slower than some of the dedicated hardware accelerators available on
-\jvpro.
+OpenCV 提供了一个 %DNN 模块，允许在 \jva33 和 \jvpro 上运行神经网络推理。这通常是运行神经网络最简单的方法，因为不需要转换、量化等。然而，这也是 \jvpro 最慢的方法，因为推理在 CPU 上运行，这比 \jvpro 上可用的一些专用硬件加速器要慢。
 
-Supported neural network frameworks
-===================================
+支持的神经网络框架====================================
 
 - Caffe
 - TensorFlow
-- ONNX (and pyTorch via conversion to ONNX)
+- ONNX（以及通过转换为 ONNX 的 pyTorch）
 - Darknet
 
-Procedure
-=========
+程序 =========
 
-- Read and understand the JeVois docs about \ref UserDNNoverview
+- 阅读并理解有关 \ref UserDNNoverview 的 JeVois 文档
 
-- Check out the [official OpenCV DNN docs](https://docs.opencv.org/4.x/d2/d58/tutorial_table_of_content_dnn.html)
+- 查看 [官方 OpenCV DNN 文档](https://docs.opencv.org/4.x/d2/d58/tutorial_table_of_content_dnn.html)
 
-- Everything you need for runtime inference (OpenCV full, with all available backends, targets, etc) is pre-installed on
-  your JeVois microSD.
+- 运行时推理所需的一切（完整的 OpenCV，包括所有可用的后端、目标等）都已预先安装在您的 JeVois microSD 上。
 
-- Obtain a model: train your own, or download a pretrained model.
+- 获得模型：训练您自己的模型，或下载预先训练的模型。
 
-- Obtain some parameters about the model (e.g., pre-processing mean, stdev, scale, expected input image size, RGB or
-  BGR, packed (NWHC) or planar (NCHW) pixels, etc).
+- 获取有关模型的一些参数（例如，预处理平均值、标准差、比例、预期输入图像大小、RGB 或 BGR、打包（NWHC）或平面（NCHW）像素等）。
 
-- Copy model to JeVois microSD card under JEVOIS[PRO]:/share/dnn/custom/
+- 将模型复制到 JEVOIS[PRO]:/share/dnn/custom/ 下的 JeVois microSD 卡
 
-- Create a JeVois model zoo entry for your model, where you specify the model parameters and the location where you
-  copied your model files. Typically this is a YAML file under JEVOIS[PRO]:/share/dnn/custom/
+- 为您的模型创建一个 JeVois 模型动物园条目，在其中指定模型参数和复制模型文件的位置。通常，这是 JEVOIS[PRO]:/share/dnn/custom/ 下的 YAML 文件
 
-- Launch the JeVois \jvmod{DNN} module. It will scan the custom directory for any valid YAML file, and make your model
-  available as one available value for the \p pipe parameter of the DNN module's Pipeline component. Select that pipe to
-  run your model.
+- 启动 JeVois \jvmod{DNN} 模块。它将扫描自定义目录以查找任何有效的 YAML 文件，并使您的模型作为 DNN 模块的 Pipeline 组件的 \p 管道参数的一个可用值。选择该管道以运行您的模型。
 
-Example: Image Classification with ResNet-18 in Caffe
-=====================================================
+示例：使用 Caffe 中的 ResNet-18 进行图像分类 =======================================================
 
-Let's run a ResNet-18 image classification model. Here, we will just get a pretrained model on the ImageNet dataset, but
-the steps should be very similar for a model that you have trained on your own custom dataset.
+让我们运行 ResNet-18 图像分类模型。在这里，我们将只获得一个在 ImageNet 数据集上经过预训练的模型，但对于您在自己的自定义数据集上训练的模型，步骤应该非常相似。
 
-A quick web search for "ResNet-18 Caffe" turns up this link that seems to have everything we need:
-https://github.com/HolmesShuan/ResNet-18-Caffemodel-on-ImageNet
+在网上快速搜索“ResNet-18 Caffe”会出现这个链接，它似乎有我们需要的一切：https://github.com/HolmesShuan/ResNet-18-Caffemodel-on-ImageNet
 
-1. Get the model and copy to microSD
-------------------------------------
+1. 获取模型并复制到microSD ------------------------------------
 
-First we donwload the model. With Caffe, that is two files: a \b .prototxt file that describes the network's layers, and
-a \b .caffemodel file that contains the trained weights.
+首先我们下载模型。对于 Caffe，有两个文件：一个 \b .prototxt 文件，描述网络层；一个 \b .caffemodel 文件，包含训练后的权重。
 
-Out of the available files on that GitHub link, we want **deploy.prototxt** which is the one used for runtime inference;
-we will save it as **JEVOIS[PRO]:/share/dnn/custom/resnet-18.prototxt**. Then we get the trained weights and save those
-to **JEVOIS[PRO]:/share/dnn/custom/resnet-18.caffemodel**.
+在该 GitHub 链接上可用的文件中，我们需要 **deploy.prototxt**，它是用于运行时推理的文件；我们将它保存为 **JEVOIS[PRO]:/share/dnn/custom/resnet-18.prototxt**。然后我们获得训练后的权重并将其保存到 **JEVOIS[PRO]:/share/dnn/custom/resnet-18.caffemodel**。
 
-\note On \jva33, the easiest way to save to microSD is to eject it from the camera and connect it to your desktop. On
-\jvpro, you may want to connect the camera to a network (see \ref ProNetwork) and use the methods explained in \ref
-ProUserQuick for a smoother workflow: in particular, see the section about booting up in console mode, so that one can
-then easily switch between running X to browse the web, download files, etc and then back to the console to start the
-JeVois software.
+\note 在 \jva33 上，将数据保存到 microSD 的最简单方法是将其从相机中弹出并将其连接到您的桌面。在 \jvpro 上，您可能希望将相机连接到网络（请参阅 \ref ProNetwork）并使用 \ref ProUserQuick 中说明的方法，以获得更顺畅的工作流程：特别是，请参阅有关在控制台模式下启动的部分，这样就可以轻松地在运行 X 以浏览网页、下载文件等之间切换，然后返回控制台以启动 JeVois 软件。
 
-\note On \jvpro running, the JEVOISPRO: partition of the microSD is mounted on /jevoispro, so the files go into
-/jevoispro/share/dnn/custom/
+\note 在 \jvpro 运行时，microSD 的 JEVOISPRO：分区安装在 /jevoispro 上，因此文件进入 /jevoispro/share/dnn/custom/
 
-2. Get some information about pre-processing
---------------------------------------------
+2. 获取一些有关预处理的信息 --------------------------------------------
 
-Now we need pre-processing parameters, such as image size, means and scale, etc. We look at **train.prototxt** to find
-any clues, and we find:
+现在我们需要预处理参数，例如图像大小、均值和尺度等。我们查看**train.prototxt**来寻找任何线索，我们发现：
 
-- **crop_size: 224** (that means the model expects 224x224 input images)
+- **crop_size: 224**（这意味着模型需要 224x224 的输入图像）
 
-- **mean_value: 104; mean_value: 117; mean_value: 123** (we will use these means; unclear here whether they are
-  in RGB or BGR order).
+- **平均值：104；平均值：117；平均值：123**（我们将使用这些平均值；这里不清楚它们是按 RGB 顺序还是 BGR 顺序）。
 
-- it is not clear at this point whether the model expects RGB or BGR, NCHW or NHWC, we don't know about scale or stdev
-  of the inputs...  We can play with those once the model is running.
+- 目前尚不清楚模型是否需要 RGB 或 BGR、NCHW 或 NHWC，我们不知道输入的比例或标准差......模型运行后，我们可以研究这些。
 
-- To find out the input shape, we can use Lutz Roeder's great [Netron](https://netron.app/) online model inspection
-  tool:
-  + Point your browser to https://netron.app/
-  + click "Open Model..."
-  + upload resnet-18.prototxt
-  + click on the boxes for the input and output layers to see some info about them
-  + We find out that for this resnet-18, input shape is 1x3x224x224, which is NCHW order (planar RGB color)
+- 要找出输入形状，我们可以使用 Lutz Roeder 出色的 [Netron](https://netron.app/) 在线模型检查工具：
++ 将浏览器指向 https://netron.app/
++ 单击“打开模型...”
++ 上传 resnet-18.prototxt
++ 单击输入层和输出层的框以查看有关它们的一些信息
++ 我们发现对于这个 resnet-18，输入形状为 1x3x224x224，即 NCHW 顺序（平面 RGB 颜色）
 
-- Intel OpenVino staff are very good as documenting model inputs and outputs. Though the particular model we are using
-  here may not be exactly the same as the one they used, a quick search for "openvino resnet-18" turns up
-  https://docs.openvino.ai/latest/omz_models_model_resnet_18_pytorch.html which gives us some interesting information on
-  the original model:
-  + input shape NCWH:1x3x224x224
-  + mean [123.675, 116.28, 103.53]
-  + scale [58.395, 57.12, 57.375]
-  + channel order RGB
+- Intel OpenVino 员工非常擅长记录模型输入和输出。虽然我们在这里使用的特定模型可能与他们使用的模型不完全相同，但快速搜索“openvino resnet-18”会出现 https://docs.openvino.ai/latest/omz_models_model_resnet_18_pytorch.html，它为我们提供了有关原始模型的一些有趣信息：
++ 输入形状 NCWH:1x3x224x224
++ 平均值 [123.675, 116.28, 103.53]
++ 比例 [58.395, 57.12, 57.375]
++ 通道顺序 RGB
 
-Let's use those. As explained in \ref UserDNNconv, in JeVois, preprocessing \p scale is a scalar of usually small value
-(like 0.0078125), but pre-processing \p stdev is also available, which is a triplet usually around [64 64 64]; so it
-looks like scale given here should be interpreted as \p stdev for our purposes.
+让我们使用它们。如 \ref UserDNNconv 中所述，在 JeVois 中，预处理 \p scale 是一个通常很小的标量（如 0.0078125），但预处理 \p stdev 也可用，它通常是 [64 64 64] 左右的三元组；因此，为了我们的目的，这里给出的 scale 似乎应该被解释为 \p stdev。
 
-\note Ideally, you will know all these parameters by virtue of having trained your own custom model yourself, as opposed
-to just downloading a generic pre-trained model as we do here.
+\note 理想情况下，您将通过自己训练自己的自定义模型来了解所有这些参数，而不是像我们在这里一样仅仅下载通用的预训练模型。
 
-3. Create a YAML zoo file so that JeVois can run our model
-----------------------------------------------------------
+3. 创建一个 YAML zoo 文件，以便 JeVois 可以运行我们的模型 ----------------------------------------------------------
 
-We model our YAML file after some other classification models that run in OpenCV using Caffe on \jvpro. For example, in
-<b>opencv.yml</b> (available in the Config tab of \jvpro), we find that SqueezeNet also is a caffemodel. So we create
-our own YAML file **JEVOIS[PRO]:/share/dnn/custom/resnet-18.yml** inspired by the one from SqueezeNet:
+我们根据 \jvpro 上使用 Caffe 在 OpenCV 中运行的一些其他分类模型对我们的 YAML 文件进行建模。例如，在 <b>opencv.yml</b>（可在 \jvpro 的“配置”选项卡中找到）中，我们发现 SqueezeNet 也是一个 caffemodel。因此，我们受 SqueezeNet 的启发，创建了自己的 YAML 文件 **JEVOIS[PRO]:/share/dnn/custom/resnet-18.yml**：
 
-\code{.py}
-%YAML 1.0
----
+\code{.py} %YAML 1.0 ---
 
-ResNet-18:
-  preproc: Blob
-  nettype: OpenCV
-  postproc: Classify
-  model: "dnn/custom/resnet-18.caffemodel"
-  config: "dnn/custom/resnet-18.prototxt"
-  intensors: "NCHW:32F:1x3x224x224"
-  mean: "123.675 116.28 103.53"
-  scale: 1.0
-  stdev: "58.395 57.12 57.375" # see below, will need to be adjusted!
-  rgb: true
-  classes: "coral/classification/imagenet_labels.txt"
-  classoffset: 1
-\endcode
+ResNet-18： preproc：Blob nettype：OpenCV postproc：分类模型：“dnn/custom/resnet-18.caffemodel”配置：“dnn/custom/resnet-18.prototxt”强度：“NCHW：32F：1x3x224x224”平均值：“123.675 116.28 103.53”比例：1.0 stdev：“58.395 57.12 57.375”# 见下文，需要调整！ rgb：true 类：“coral/classification/imagenet_labels.txt”类偏移量：1 \endcode
 
-\note For \p classes, we use an existing ImageNet label file that is already pre-loaded on our microSD, since the GitHub
-repo used above did not provide one. Because that label file has a first entry for "background", which is not used in
-many models, we may have to use a \p classoffset of 1 to shift the class labels in case our network does not use that
-extra class name. If you use a custom-trained model, you should also copy a file **resnet-18.labels** to microSD, that
-describes your class names (one class label per line), and then set the classes parameter to that file.
+\note 对于 \p 类，我们使用已预加载到 microSD 上的现有 ImageNet 标签文件，因为上面使用的 GitHub 存储库未提供该文件。由于该标签文件的第一个条目为“background”，而这在许多模型中并未使用，因此如果我们的网络不使用该额外类名，我们可能必须使用 \p classoffset 1 来移动类标签。如果您使用自定义训练模型，您还应将文件 **resnet-18.labels** 复制到 microSD，该文件描述了您的类名（每行一个类标签），然后将 classes 参数设置为该文件。
 
-If you wonder what the various entries in the YAML file mean, check out \ref UserDNNoverview, each one is documented in
-the classes that use them (jevois::dnn::PreProcessor, jevois::dnn::Network, jevois::dnn::PostProcessor,
-jevois::dnn::Pipeline).
+如果您想知道 YAML 文件中各个条目的含义，请查看 \ref UserDNNoverview，每个条目都记录在使用它们的类中（jevois::dnn::PreProcessor、jevois::dnn::Network、jevois::dnn::PostProcessor、jevois::dnn::Pipeline）。
 
-4. Test the model and adjust any parameters
--------------------------------------------
+4. 测试模型并调整任何参数 -------------------------------------------
 
-- Select the \jvmod{DNN} machine vision module
+- 选择 \jvmod{DNN} 机器视觉模块
 
-- Set the \p pipe parameter to **OpenCV:Classify:ResNet-18**
+- 将 \p 管道参数设置为 **OpenCV:Classify:ResNet-18**
 
-- If you do not see the outputs you were expecting, try adjusting the PreProcessor parameters live in the JeVois
-  GUI. Here, for example, initially the network did not show any output classes above threshold. Since we were unsure
-  about \p stdev, we can set it to [1 1 1] in the GUI, and now we see the expected outputs!
+- 如果您没有看到预期的输出，请尝试在 JeVois GUI 中实时调整预处理器参数。例如，最初网络没有显示任何高于阈值的输出类别。由于我们不确定 \p stdev，我们可以在 GUI 中将其设置为 [1 1 1]，现在我们看到了预期的输出！
 
-- If you need to adjust the YAML file settings, in \jvpro you can find that file under the Config tab.  So here we edit
-  our YAML file to change:
-  \code{.py}
-  stdev: "1 1 1"
-  \endcode
-  Or, since [1 1 1] is the default, we can just delete the **stdev:** line.
+- 如果您需要调整 YAML 文件设置，您可以在 \jvpro 的“配置”选项卡下找到该文件。因此，我们在这里编辑 YAML 文件以进行更改：\code{.py} stdev: "1 1 1" \endcode 或者，由于 [1 1 1] 是默认值，我们可以删除 **stdev:** 行。
 
 \jvimg{resnet18-opencv.png, 70%}
 
-It works (here shown on JeVois-Pro)! Not the fastest since it runs on CPU, but a successful model
-import. Bookcase/bookshop classification outputs is usually what we get for classification models trained on ImageNet,
-when pointing the camera to that bookshelf.
+它成功了（此处显示在 JeVois-Pro 上）！由于它在 CPU 上运行，所以不是最快的，但模型导入成功。当将相机指向书架时，书柜/书店分类输出通常是我们在 ImageNet 上训练的分类模型所获得的结果。
 
-Maybe we have an incorrect order for the means (RGB vs. BGR). Once you confirm whether your model expects RGB or BGR,
-and which mean value is for R, G, and B, then you can adjust the mean parameter live in the GUI or in the YAML file.
+也许我们对平均值的顺序（RGB 与 BGR）有误。一旦您确认模型需要的是 RGB 还是 BGR，以及 R、G 和 B 的平均值是多少，您就可以在 GUI 或 YAML 文件中实时调整平均值参数。
 
-5. Tips
--------
+5. 提示 -------
 
-See \ref UserDNNtips
+请参阅 \ref UserDNNtips
 
 */
+

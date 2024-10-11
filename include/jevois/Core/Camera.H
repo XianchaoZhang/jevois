@@ -25,139 +25,118 @@
 
 namespace jevois
 {
-  //! JeVois camera driver class - grabs frames from a Video4Linux camera sensor
-  /*! On the platform hardware, the Camera class provides access to the camera sensor on the parallel camera bus
-      (CSI). On other hardware, it can provide access to any Video4Linux2 camera (e.g., USB webcam), although with some
-      limitations, such as:
-      - cannot read/write raw camera registers.
-      - usually cannot select any frames/s but instead limited to a few fixed values like 15fps, 30fps.
-      - usually limited to 30fps max (no 60fps or 120fps modes like on JeVois platform hardware)
-      - usually limited number of controls (exposure, gain, etc) available.
-
-      The camera runs a thread that handles capturing frames automatically. Users can access the next grabbed frame
-      using get(), which may block until the frame is fully captured. Once they are finished with a frame obtained
-      through get(), users should hand it back to the Camera by calling done(). When using the JeVois Engine and a
-      Module, get() and done() are automatically called in an exception-safe manner through the use of the InputFrame
-      class. Indeed, video grabbing uses a fixed set of image buffers that are allocated by the Linux kernel when a
-      video format is configured, and the camera hardware then cycles through the buffers.  On the platform, the camera
-      image buffers are allocated in the ION carveout memory area, which is a reserved memory zone configured in the
-      Linux kernel, and the USB output buffers are also allocated in that zone. To avoid reserving too much memory that
-      will not be used, the ION carveout reservation is quite small by default, but is sufficient for 3 1280x1024 YUYV
-      buffers.
-
-      Camera implements a zero-copy, zero-wait access to input video frames, that is:
-      - the pixel data of the image you obtain via get() is directly the memory-mapped pixel buffer that the silicon
-        hardware on the JeVois chip uses via direct-memory-access (DMA) to stream the pixel data from the camera chip to
-        processor memory;
-      - as soon as an image is captured by the camera hardware, get() unblocks and returns it (as opposed to having a
-        fixed, regular interval at which images may be available). Camera has several image buffers, allowing one to be
-        captured while another is being handed over for processing via get(). These buffers are recycled, i.e., once
-        done() is called, the underlying buffer is sent back to the camera hardware for future capture.
-
-      Camera will drop frames if they are not processed by user code fast enough. That is, if all buffers have been
-      grabbed already and not yet handed over through get() and then returned by done(), then the next camera sensor
-      frame will be dropped.
-
-      Most programmers will never use Camera directly, instead using Engine and InputFrame. \ingroup core */
+  //! JeVois camera driver class - 从 Video4Linux 相机传感器抓取帧
+  /*! 在平台硬件上，Camera 类提供对并行相机总线 (CSI-DVP) 上的相机传感器的访问。在其他硬件上，它可以提供对任何 
+      Video4Linux2 相机（例如，USB 网络摄像头）的访问，但有一些限制，例如：
+      - 无法读取/写入原始相机寄存器。
+	  - 通常无法选择任何帧/秒，而是限制为几个固定值，如 15fps、30fps。
+	  - 通常限制为最大 30fps（没有 60fps 或 120fps 模式）
+	  - 通常可用的控件数量有限（曝光、增益等）。
+	  
+	  相机运行一个线程来自动处理帧的捕获。用户可以使用 get() 访问下一个抓取的帧，这可能会阻塞，直到帧被完全捕获。
+	  一旦他们完成了通过 get() 获得的帧，用户应该通过调用 done() 将其交还给相机。当使用 JeVois Engine 和 Module 时，
+	  通过使用 InputFrame 类，get() 和 done() 会以异常安全的方式自动调用。实际上，视频抓取使用一组固定的图像缓冲区，
+	  这些缓冲区由 Linux 内核在配置视频格式时分配，然后相机硬件循环通过缓冲区。在平台上，相机图像缓冲区分配在 
+	  ION carveout 内存区域中，这是在 Linux 内核中配置的保留内存区域，USB 输出缓冲区也分配在该区域中。为了避免保留
+	  太多不会使用的内存，ION carveout 保留默认很小，但足以容纳 3 个 1280x1024 YUYV 缓冲区。
+	  
+	  相机实现了对输入视频帧的零复制、零等待访问，即：
+	  - 您通过 get() 获取的图像的像素数据直接是内存映射的像素缓冲区，JeVois 芯片上的硅硬件通过直接内存访问 (DMA) 使
+	    用该缓冲区将像素数据从相机芯片传输到处理器内存；
+	  - 一旦相机硬件捕获图像，get() 就会解除阻塞并返回该图像（而不是以固定的、有规律的间隔来获取图像）。相机有多个
+	    图像缓冲区，允许捕获一个图像缓冲区，同时将另一个图像缓冲区通过 get() 交由其处理。这些缓冲区会被回收，即一旦
+		调用 done()，底层缓冲区就会被发送回相机硬件以供将来捕获。
+	  
+	  如果用户代码处理帧的速度不够快，相机就会丢帧。也就是说，如果所有缓冲区都已抓取但尚未通过 get() 移交并由 done() 
+	  返回，则下一个相机传感器帧将被丢弃。
+	  
+	  大多数程序员永远不会直接使用 Camera，而是使用 Engine 和 InputFrame。 \ingroup core */ 
   class Camera : public VideoInput
   {
     public:
-      //! Construct and open the device
-      /*! \param devname device name, e.g., /dev/video0
-          \param s currently installed camera sensor
-          \param nbufs number of video grab buffers, or 0 for automatic. */
+      //! 构造并打开设备
+	  /*! \param devname 设备名称，例如 /dev/video0 
+	     \param s 当前安装的摄像头传感器 
+		 \param nbufs 视频抓取缓冲区的数量，或 0 表示自动。 */
+
       Camera(std::string const & devname, jevois::CameraSensor s = jevois::CameraSensor::any,
              unsigned int const nbufs = 0);
 
-      //! Close the device and free all resources
+      //! 关闭设备并释放所有资源
       ~Camera();
 
       //! Start streaming
       void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       void abortStream() override;
       
       //! Stop streaming
       void streamOff() override;
 
-      //! Get the next captured buffer
-      /*! Throws if we are not streaming or blocks until an image is available (has been captured). img should have been
-          created by the caller (with no pixel buffer allocated) and will be filled in by what we receive from the
-          device here. */
-      void get(RawImage & img) override;
+      //！获取下一个捕获的缓冲区
+	  /*！如果我们没有进行流式传输或阻塞直到图像可用（已被捕获），则抛出。img 应该由调用者创建（没有分配像素缓冲区），并
+	      将由我们从此处的设备接收到的内容填充。*/ 
+	  void get(RawImage & img) override;
 
-      //! Check whether a second input image scaled by the JeVoisPro Platform ISP is available
-      /*! Returns false unless we are on JeVois-Pro Platform and the camera format modifier jevois::CropType::CropScale
-          is currently in use. */
-      bool hasScaledImage() const override;
+      //！检查是否有由 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 
+	  /*！除非我们在 JeVois-Pro 平台上并且相机格式修饰符 jevois::CropType::CropScale 当前正在使用中，否则返回 false。 */ 
+	  bool hasScaledImage() const override;
 
-      //! Get the next captured buffer, for second ISP-scaled image
-      /*! On JeVois-Pro Platform only, the camera ISP can output 2 frames: 1) raw from sensor, 2) scaled by ISP. This
-          function is to access the ISP scaled frame. Throws if not JeVois-Pro Platform or the camera stream type is not
-          jevois::StreamType::RawAndScaled. Throws if we are not streaming or blocks until an image is available (has
-          been captured). img should have been created by the caller (with no pixel buffer allocated) and will be filled
-          in by what we receive from the device here. */
-      void get2(RawImage & img) override;
+      //！获取下一个捕获的缓冲区，用于第二个 ISP 缩放图像
+	  /*！仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此功能用于访问 ISP 缩放帧。
+	      如果不是 JeVois-Pro 平台或相机流类型不是 jevois::StreamType::RawAndScaled，则抛出。如果我们没有流式传输或阻塞直到
+		  图像可用（已捕获），则抛出。img 应该由调用者创建（没有分配像素缓冲区），并将由我们从此处的设备收到的内容填充。*/ 
+	  void get2(RawImage & img) override;
 
-      //! Indicate that user processing is done with an image previously obtained via get()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled.
+      //！指示用户已完成先前通过 get() 获取的图像的处理 
+	  /*！处理完 RawImage 数据后，应在 get() 之后尽快调用此方法，以便可以回收利用。
+	  
+	      在 RawImage 上调用 done() 会使图像无效，特别是其像素缓冲区。用户应确保在调用 done() 后不会尝试使用图像或像素缓冲区。*/ 
+	  void done(RawImage & img) override;
 
-          Calling done() on a RawImage invalidates the image and in particular its pixel buffer. Users should make sure
-          that no attempt to use the image or the pixel buffer will be made after done() is called. */
-      void done(RawImage & img) override;
+      //！指示用户已完成先前通过 get2() 获取的图像的处理 
+	  /*！处理完 RawImage 数据后，应尽快在 get2() 之后调用此函数，以便可以回收该数据。
+	  
+	      在 RawImage 上调用 done2() 会使图像无效，特别是其像素缓冲区。用户应确保在调用 done2() 后不会尝试使用图像或像素缓冲区。*/ 
+	  void done2(RawImage & img) override;
 
-      //! Indicate that user processing is done with an image previously obtained via get2()
-      /*! You should call this as soon after get2() as possible, once you are finished with the RawImage data so that it
-          can be recycled.
+      //！获取有关 control 的信息，如果硬件不支持则抛出 
+	  /*！调用者应将 qc 清零，然后将 id 字段设置为所需的控件 id。有关更多信息，请参阅 VIDIOC_QUERYCTRL。*/ 
+	  void queryControl(struct v4l2_queryctrl & qc) const override;
 
-          Calling done2() on a RawImage invalidates the image and in particular its pixel buffer. Users should make sure
-          that no attempt to use the image or the pixel buffer will be made after done2() is called. */
-      void done2(RawImage & img) override;
+      //! 获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 
+	  /*! 调用者应将 qm 清零，然后将 id 和 index 字段设置为所需的控件 id 和菜单项索引。有关更多信息，请参阅 VIDIOC_QUERYMENU。*/ 
+	  void queryMenu(struct v4l2_querymenu & qm) const override; 
+	  
+	  //! 获取 control 的当前值，如果硬件不支持则抛出 
+	  /*! 这只是传递到 VIDIOC_G_CTRL，用户应将 ctrl 清零，然后在 ctrl.id 中设置所需的控件 ID。*/ 
+	  void getControl(struct v4l2_control & ctrl) const; 
+	  
+	  //! 设置 control，如果 control 不受支持或硬件拒绝该值则抛出 
+	  /*! 这只是传递到 VIDIOC_S_CTRL */ 
+	  void setControl(struct v4l2_control const & ctrl) override;
 
-      //! Get information about a control, throw if unsupported by hardware
-      /*! Caller should zero-out qc and then set the id field to the desired control id. See VIDIOC_QUERYCTRL for more
-          information. */
-      void queryControl(struct v4l2_queryctrl & qc) const override;
+      //!设置视频格式和帧率 
+	  void setFormat(VideoMapping const & m) override;
 
-      //! Get the available menu entry names for a menu-type control, throw if unsupported by hardware
-      /*! Caller should zero-out qm and then set the id and index fields to the desired control id and menu item
-          index. See VIDIOC_QUERYMENU for more information. */
-      void queryMenu(struct v4l2_querymenu & qm) const override;
-     
-      //! Get a control's current value, throw if unsupported by hardware
-      /*! This is just a pass-through to VIDIOC_G_CTRL, users should zero-out ctrl and then set in ctrl.id the desired
-          control ID. */
-      void getControl(struct v4l2_control & ctrl) const;
-      
-      //! Set a control, throw if control not supported or the hardware rejects the value
-      /*! This is just a pass-through to VIDIOC_S_CTRL */
-      void setControl(struct v4l2_control const & ctrl) override;
+      //! 将值写入相机的某个寄存器 
+	  /*! 这种非常低级的访问仅用于开发最佳相机设置，不应在正常操作中使用，否则可能会导致系统崩溃。 */ 
+	  void writeRegister(unsigned short reg, unsigned short val);
 
-      //! Set the video format and frame rate
-      void setFormat(VideoMapping const & m) override;
+      //! 从相机的一个寄存器读取一个值 
+	  /*! 这种非常低级的访问仅用于开发最佳相机设置，不应在正常操作中使用，否则可能会导致系统崩溃。 */ 
+	  unsigned short readRegister(unsigned short reg);
 
-      //! Write a value to one of the camera's registers
-      /*! This very low-level access is for development of optimal camera settings only and should not be used in normal
-          operation, it can crash your system. */
-      void writeRegister(unsigned short reg, unsigned short val);
+      //! 锁定相机并返回其文件描述符 
+	  /*! 由 IMUi2c 使用，通过与相机传感器共享的 I2C 总线访问 IMU 寄存器。请谨慎使用并确保捕获异常，这样您就可以保证调用 unlock()，
+	      否则您的相机将卡住并启用流式传输。 */ 
+	  int lock();
 
-      //! Read a value from one of the camera's registers
-      /*! This very low-level access is for development of optimal camera settings only and should not be used in normal
-          operation, it can crash your system. */
-      unsigned short readRegister(unsigned short reg);
-
-      //! Lock the camera and return its file descriptor
-      /*! Used by IMUi2c to access the IMU registers over the I2C bus shared with the camera sensor. Use with caution
-          and make sure you catch exceptions so you can guarantee that you will call unlock(), otherwise your camera
-          will be stuck and enable to stream. */
-      int lock();
-
-      //! Unlock the camera that was previously locked by lock()
-      void unlock();
-      
+      //! 解锁先前通过 lock() 锁定的相机 
+	  void unlock(); 
+	  
     protected:
       //! Sensor flags
       /*! Keep this in sync with jevois-sdk/linux-3.4/drivers/media/video/sunxi-vfe/device/camera.h */

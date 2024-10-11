@@ -21,7 +21,7 @@
 
 namespace jevois
 {
-  //! Get CPU info: frequency, thermal, load
+  //! 获取 CPU 信息： frequency, thermal, load
   /*! \ingroup debugging */
   std::string getSysInfoCPU();
 
@@ -33,19 +33,19 @@ namespace jevois
   /*! \ingroup debugging */
   std::string getSysInfoVersion();
 
-  //! Get the number of Coral TPUs present on this system
+  //! 获取此系统上存在的 Coral TPU 数量
   size_t getNumInstalledTPUs();
 
-  //! Get the number of Myriad-X VPUs present on this system
+  //! 获取此系统上存在的 Myriad-X VPU 数量
   size_t getNumInstalledVPUs();
   
-  //! Get the number of JeVois-Pro NPUs present on this system
+  //! 获取此系统上存在的 JeVois-Pro NPU 数量
   size_t getNumInstalledNPUs();
 
-  //! Get the number of Hailo8 SPUs present on this system
+  //! 获取此系统上存在的 Hailo8 SPU 数量
   size_t getNumInstalledSPUs();
 
-  //! Get fan speed in percent, only meaningful on JeVois-Pro Platform, all others return 0
+  //! 获取风扇速度百分比，仅在 JeVois-Pro 平台上有意义，其他所有平台均返回 0
   int getFanSpeed();
   
 } // namespace jevois

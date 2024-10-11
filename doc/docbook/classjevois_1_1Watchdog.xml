@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Watchdog">
+<title>jevois::Watchdog Class Reference</title>
+<indexterm><primary>jevois::Watchdog</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Watchdog.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>简单的看门狗类 </para>
+
+
+
+<para>如果至少每超时秒不调用 <link linkend="_classjevois_1_1Watchdog_1ae7eec59faaae3fad15ffb096580e419d">reset()</link>，则此类将终止当前进程。 如果超时 &lt;= 0.0，则看门狗处于非活动状态（永远不会超时并终 止进程）。 请注意，为了尽可能轻量，此类运行一个后台线程，循环每超时秒迭代一次，因此确切的终止时间是近似的。 </para>
+<para>
+Definition at line 28 of file Watchdog.H.</para>
+Collaboration diagram for jevois::Watchdog:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Watchdog__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Watchdog_1acd34bd8e63e8dd720c590278af072476">Watchdog</link> (double timeout)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Watchdog_1a9e830e6fd03d6500bea0f2245af5e802">~Watchdog</link> ()</para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Watchdog_1ae7eec59faaae3fad15ffb096580e419d">reset</link> ()</para>
+
+<para>重置我们的内部计时器。如果这种情况至少每超时秒不发生一次，则进程将被终止 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1Watchdog_1a6b0d1fea2f3472f561a08e6cde87098f">run</link> (double timeout)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::future&lt; void &gt; <link linkend="_classjevois_1_1Watchdog_1ab525661f43747fe4127d872a960640b3">itsRunFut</link></para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1Watchdog_1a08efab030b3bcb8c5ec5ec10c0354ec0">itsReset</link> = true</para>
+</listitem>
+            <listitem><para>std::atomic&lt; bool &gt; <link linkend="_classjevois_1_1Watchdog_1a94a2219ac5b4ad5447d0c4b8f3170089">itsRunning</link> = false</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Watchdog_1acd34bd8e63e8dd720c590278af072476"/>    <section>
+    <title>Watchdog()</title>
+<indexterm><primary>Watchdog</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>Watchdog</secondary></indexterm>
+<para><computeroutput>jevois::Watchdog::Watchdog (double timeout)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 27 of file Watchdog.C.</para>
+<para>
+References jevois::async_little(), itsRunFut, itsRunning, and run().</para>
+    </section><anchor xml:id="_classjevois_1_1Watchdog_1a9e830e6fd03d6500bea0f2245af5e802"/>    <section>
+    <title>~Watchdog()</title>
+<indexterm><primary>~Watchdog</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>~Watchdog</secondary></indexterm>
+<para><computeroutput>jevois::Watchdog::~Watchdog ( )</computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</para>
+<para>
+Definition at line 37 of file Watchdog.C.</para>
+<para>
+References JEVOIS_WAIT_GET_FUTURE.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Watchdog_1ae7eec59faaae3fad15ffb096580e419d"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void jevois::Watchdog::reset ( )</computeroutput></para><para>
+
+<para>重置我们的内部计时器。如果这种情况至少每超时秒不发生一次，则进程将被终止 </para>
+</para>
+<para>
+Definition at line 47 of file Watchdog.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Watchdog_1a6b0d1fea2f3472f561a08e6cde87098f"/>    <section>
+    <title>run()</title>
+<indexterm><primary>run</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>run</secondary></indexterm>
+<para><computeroutput>void jevois::Watchdog::run (double timeout)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 51 of file Watchdog.C.</para>
+<para>
+References LERROR, jevois::system(), and jevois::to_string().</para>
+<para>
+Referenced by Watchdog().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1Watchdog_1a08efab030b3bcb8c5ec5ec10c0354ec0"/>    <section>
+    <title>itsReset</title>
+<indexterm><primary>itsReset</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>itsReset</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::Watchdog::itsReset = true<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 43 of file Watchdog.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Watchdog_1ab525661f43747fe4127d872a960640b3"/>    <section>
+    <title>itsRunFut</title>
+<indexterm><primary>itsRunFut</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>itsRunFut</secondary></indexterm>
+<para><computeroutput>std::future&lt;void&gt; jevois::Watchdog::itsRunFut<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 42 of file Watchdog.H.</para>
+<para>
+Referenced by Watchdog().</para>
+    </section><anchor xml:id="_classjevois_1_1Watchdog_1a94a2219ac5b4ad5447d0c4b8f3170089"/>    <section>
+    <title>itsRunning</title>
+<indexterm><primary>itsRunning</primary><secondary>jevois::Watchdog</secondary></indexterm>
+<indexterm><primary>jevois::Watchdog</primary><secondary>itsRunning</secondary></indexterm>
+<para><computeroutput>std::atomic&lt;bool&gt; jevois::Watchdog::itsRunning = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 44 of file Watchdog.H.</para>
+<para>
+Referenced by Watchdog().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Watchdog_8H">Watchdog.H</link>src/jevois/Debug/<link linkend="_Watchdog_8C">Watchdog.C</link></section>
+</section>

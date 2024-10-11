@@ -1,0 +1,99 @@
+\hypertarget{CameraDevice_8C}{}\doxysubsection{src/jevois/\+Core/\+Camera\+Device.C File Reference}
+\label{CameraDevice_8C}\index{src/jevois/Core/CameraDevice.C@{src/jevois/Core/CameraDevice.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Camera\+Device.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Async.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Mapping.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Image/\+Raw\+Image\+Ops.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+C\+M20948\+\_\+regs.\+H$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/select.\+h$>$}\newline
+Include dependency graph for Camera\+Device.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{CameraDevice_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_aec794ed344cbed89f6859526071ce4b2}{F\+D\+L\+D\+E\+B\+UG}}(msg)~\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_ad974e026cd678b223877059cbfb7c55a}{F\+D\+L\+I\+N\+FO}}(msg)~\mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_a73fca3d993165a5875ebe979ac90f6c3}{F\+D\+L\+E\+R\+R\+OR}}(msg)~\mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_aaf8913a1ae88e40edd0c458745d7d6d5}{F\+D\+L\+F\+A\+T\+AL}}(msg)~\mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_aed2b434e6d20c65e9a71e99744d8be13}{V4\+L2\+\_\+\+M\+O\+D\+E\+\_\+\+V\+I\+D\+EO}}~2
+\item 
+\#define \mbox{\hyperlink{CameraDevice_8C_a1e384862033151e0edde4f67ce458dc2}{V4\+L2\+\_\+\+C\+O\+L\+O\+R\+S\+P\+A\+C\+E\+\_\+\+D\+E\+F\+A\+U\+LT}}~v4l2\+\_\+colorspace(0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{CameraDevice_8C_aec794ed344cbed89f6859526071ce4b2}\label{CameraDevice_8C_aec794ed344cbed89f6859526071ce4b2}} 
+\index{CameraDevice.C@{CameraDevice.C}!FDLDEBUG@{FDLDEBUG}}
+\index{FDLDEBUG@{FDLDEBUG}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{FDLDEBUG}{FDLDEBUG}}
+{\footnotesize\ttfamily \#define F\+D\+L\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 32 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{CameraDevice_8C_a73fca3d993165a5875ebe979ac90f6c3}\label{CameraDevice_8C_a73fca3d993165a5875ebe979ac90f6c3}} 
+\index{CameraDevice.C@{CameraDevice.C}!FDLERROR@{FDLERROR}}
+\index{FDLERROR@{FDLERROR}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{FDLERROR}{FDLERROR}}
+{\footnotesize\ttfamily \#define F\+D\+L\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 34 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{CameraDevice_8C_aaf8913a1ae88e40edd0c458745d7d6d5}\label{CameraDevice_8C_aaf8913a1ae88e40edd0c458745d7d6d5}} 
+\index{CameraDevice.C@{CameraDevice.C}!FDLFATAL@{FDLFATAL}}
+\index{FDLFATAL@{FDLFATAL}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{FDLFATAL}{FDLFATAL}}
+{\footnotesize\ttfamily \#define F\+D\+L\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 35 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{CameraDevice_8C_ad974e026cd678b223877059cbfb7c55a}\label{CameraDevice_8C_ad974e026cd678b223877059cbfb7c55a}} 
+\index{CameraDevice.C@{CameraDevice.C}!FDLINFO@{FDLINFO}}
+\index{FDLINFO@{FDLINFO}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{FDLINFO}{FDLINFO}}
+{\footnotesize\ttfamily \#define F\+D\+L\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Dev\+Name $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 33 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{CameraDevice_8C_a1e384862033151e0edde4f67ce458dc2}\label{CameraDevice_8C_a1e384862033151e0edde4f67ce458dc2}} 
+\index{CameraDevice.C@{CameraDevice.C}!V4L2\_COLORSPACE\_DEFAULT@{V4L2\_COLORSPACE\_DEFAULT}}
+\index{V4L2\_COLORSPACE\_DEFAULT@{V4L2\_COLORSPACE\_DEFAULT}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{V4L2\_COLORSPACE\_DEFAULT}{V4L2\_COLORSPACE\_DEFAULT}}
+{\footnotesize\ttfamily \#define V4\+L2\+\_\+\+C\+O\+L\+O\+R\+S\+P\+A\+C\+E\+\_\+\+D\+E\+F\+A\+U\+LT~v4l2\+\_\+colorspace(0)}
+
+
+
+Definition at line 72 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{CameraDevice_8C_aed2b434e6d20c65e9a71e99744d8be13}\label{CameraDevice_8C_aed2b434e6d20c65e9a71e99744d8be13}} 
+\index{CameraDevice.C@{CameraDevice.C}!V4L2\_MODE\_VIDEO@{V4L2\_MODE\_VIDEO}}
+\index{V4L2\_MODE\_VIDEO@{V4L2\_MODE\_VIDEO}!CameraDevice.C@{CameraDevice.C}}
+\doxyparagraph{\texorpdfstring{V4L2\_MODE\_VIDEO}{V4L2\_MODE\_VIDEO}}
+{\footnotesize\ttfamily \#define V4\+L2\+\_\+\+M\+O\+D\+E\+\_\+\+V\+I\+D\+EO~2}
+
+
+
+Definition at line 39 of file Camera\+Device.\+C.
+

@@ -23,20 +23,21 @@
 namespace jevois
 {
   //! No-op VideoOutput derivative for when there is no video output
-  /*! This class derived from VideoOutput does (almost) nothing and can be used by Engine when no video output is
-      desired. \ingroup core */
+  //! 当没有视频输出时，无操作 VideoOutput 派生类 
+  /*! 这个从 VideoOutput 派生的类几乎不执行任何操作，可以在不需要视频输出时由 Engine 使用它。\ingroup core */ 
   class VideoOutputNone : public VideoOutput
   {
     public:
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~VideoOutputNone();
 
-      //! Set the video format and frame rate
-      /*! In VideoOutputNone, this is a no-op. */
+      //! 设置视频格式和帧速率 
+	  /*! 在 VideoOutputNone 中，这是一个无操作。 */
       void setFormat(VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out using send()
-      /*! In VideoOutputNone, this returns a blank buffer. */
+      //！获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去 
+	  /*！在 VideoOutputNone 中，这将返回一个空白缓冲区。 */ 
+
       void get(RawImage & img) override;
       
       //! Send an image out

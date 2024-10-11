@@ -1,0 +1,146 @@
+\hypertarget{classjevois_1_1VideoOutput}{}\doxysubsection{jevois\+::Video\+Output Class Reference}
+\label{classjevois_1_1VideoOutput}\index{jevois::VideoOutput@{jevois::VideoOutput}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Output.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+视频输出的基类。\+Gadget、\+Movie\+Output、\+Video\+Display 和 \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}} 均从其派生 
+
+此虚拟基类提供 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 所需的视频输出接口。 
+
+Definition at line 27 of file Video\+Output.\+H.
+
+
+
+Inheritance diagram for jevois\+::Video\+Output\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1VideoOutput__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1VideoOutput_af270aa4c4a41f77e50ce7e8f0c7df596}{$\sim$\+Video\+Output}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)=0
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img)=0
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{send}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img)=0
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}{stream\+On}} ()=0
+\begin{DoxyCompactList}\small\item\em 开始流式传输 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}{abort\+Stream}} ()=0
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{stream\+Off}} ()=0
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_af270aa4c4a41f77e50ce7e8f0c7df596}\label{classjevois_1_1VideoOutput_af270aa4c4a41f77e50ce7e8f0c7df596}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!````~VideoOutput@{$\sim$VideoOutput}}
+\index{````~VideoOutput@{$\sim$VideoOutput}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{$\sim$VideoOutput()}{~VideoOutput()}}
+{\footnotesize\ttfamily jevois\+::\+Video\+Output\+::$\sim$\+Video\+Output (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 21 of file Video\+Output.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}\label{classjevois_1_1VideoOutput_a43746f01cfb2b9a1ace149dc7a10498a}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Abort streaming. 
+
+这只会取消将来的 \mbox{\hyperlink{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}{get()}} 和 \mbox{\hyperlink{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}{send()}} 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}{stream\+Off()}} 来关闭流式传输。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Gadget_a58592471bacdfff49de78fe6d4ef79a1}{jevois\+::\+Gadget}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_ab38f4ed907c70e1cbf0e9d3a788aa5c2}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_af7a06701b89c4d6a8c7fe13b07b8c3fc}{jevois\+::\+Video\+Display\+G\+UI}}, \mbox{\hyperlink{classjevois_1_1MovieOutput_af1f5a85a4c8f318165b210000b7a9541}{jevois\+::\+Movie\+Output}}, and \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a43d7042bdaebcf90fa03f6f527c20deb}{jevois\+::\+Video\+Output\+None}}.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}\label{classjevois_1_1VideoOutput_a2df0375b2f2353aa1d1bc28db1a72ff9}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!get@{get}}
+\index{get@{get}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Gadget_a63a43ef68898deff23a9b9d1730fea31}{jevois\+::\+Gadget}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a39307dc451da6bbefbfafcfd1bd538df}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_abaae4f38841162e9deed1f24a5e5d16d}{jevois\+::\+Video\+Display\+G\+UI}}, and \mbox{\hyperlink{classjevois_1_1VideoOutputNone_abbcffaff5cc4f8598b699839a4e6bfc8}{jevois\+::\+Video\+Output\+None}}.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}\label{classjevois_1_1VideoOutput_a3098503da63b44104ba95d46ab620322}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!send@{send}}
+\index{send@{send}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::send (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Gadget_aea013e8c9c6d93f5c11a56507b9aa69f}{jevois\+::\+Gadget}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a2c4acdf51bc75b0f6e2093227db4b141}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a926621070b48eb62ffd826c2577822f4}{jevois\+::\+Video\+Display\+G\+UI}}, \mbox{\hyperlink{classjevois_1_1MovieOutput_a5dcac04ce2ca902f50ea0d6547a72705}{jevois\+::\+Movie\+Output}}, and \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a5098384ddb2b6a98be345d60a5929804}{jevois\+::\+Video\+Output\+None}}.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}\label{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+设置视频格式和帧速率 
+
+有时这可以作为无操作来实现。对于 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 类，我们无法决定和设置格式，它是作为接收 U\+S\+B/\+U\+VC 命令的结果设置的，以便 U\+SB 主机准备好接收具有所选格式和帧大小的图像。对于 Video\+Display 类，这 会分配输出缓冲区，并且必须在流式传输开始之前调用。
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 从其自己的 \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{set\+Format()}} 中调用此方法（以及相机上的 \mbox{\hyperlink{classjevois_1_1VideoOutput_aa65384cf09377d6ced5449debd20f1fb}{set\+Format()}}），因此通常只需在 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 级别设置格式，而不是直接在 \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}} 上设置格式。 
+
+Implemented in \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a1acda833d425751fcf879e6f8bdc42dc}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a4249f773bd26d4c9a20b39c37fc6f6bc}{jevois\+::\+Video\+Display\+G\+UI}}, \mbox{\hyperlink{classjevois_1_1MovieOutput_a8613022e6abc3897663b010f564b6e25}{jevois\+::\+Movie\+Output}}, \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a97a8762ecc4858e32a492e786080939b}{jevois\+::\+Video\+Output\+None}}, and \mbox{\hyperlink{classjevois_1_1Gadget_ab232e3eaee3a793d58271c7a149069a7}{jevois\+::\+Gadget}}.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}\label{classjevois_1_1VideoOutput_a3a6cc3865116dc74cd065237dc170387}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Gadget_a2b3e805524d943d4c82a92702ccdeb13}{jevois\+::\+Gadget}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a8183c77d23ce5bd26222513e1536c413}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a11349b56b1c284ab8d30861fbb3c9816}{jevois\+::\+Video\+Display\+G\+UI}}, \mbox{\hyperlink{classjevois_1_1MovieOutput_a30ac2a1e46edbcc88ea47bcbe1283d3c}{jevois\+::\+Movie\+Output}}, and \mbox{\hyperlink{classjevois_1_1VideoOutputNone_a0b81122d31d106cda61d3ae1f195012a}{jevois\+::\+Video\+Output\+None}}.
+
+\mbox{\Hypertarget{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}\label{classjevois_1_1VideoOutput_a60065f4341aa2d533e6f457d296d6120}} 
+\index{jevois::VideoOutput@{jevois::VideoOutput}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::VideoOutput@{jevois::VideoOutput}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Video\+Output\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+开始流式传输 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1Gadget_ab59e7323881b74c61c59162091b963bb}{jevois\+::\+Gadget}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGL_a724f39d6a2261d8e91d757f4b0e2574a}{jevois\+::\+Video\+Display\+GL}}, \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI_a14a53e643e5b908132940eacc7f602c2}{jevois\+::\+Video\+Display\+G\+UI}}, \mbox{\hyperlink{classjevois_1_1MovieOutput_acd08cef18b6ee9ab13ea9b616322a296}{jevois\+::\+Movie\+Output}}, and \mbox{\hyperlink{classjevois_1_1VideoOutputNone_ae045404603f6a560085cb4102e1e2bcf}{jevois\+::\+Video\+Output\+None}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{VideoOutput_8H}{Video\+Output.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{VideoOutput_8C}{Video\+Output.\+C}}\end{DoxyCompactItemize}

@@ -1,59 +1,56 @@
-/*! \page ProNetwork JeVois-Pro: Connecting to a wired or WiFi network
+/*! \page ProNetwork JeVois-Pro：连接到有线或 WiFi 网络
 
 
-Easiest: USB to wired networking
-================================
+最简单：USB 转有线网络 
+==================================
 
-If you have a wired network that runs a DHCP server, you can just use a USB-to-Ethernet adapter like the one below.
+如果您有一个运行 DHCP 服务器的有线网络，则您只需使用如下所示的 USB 转以太网适配器即可。
 
 \jvimg{usb-ether.jpg, 5%}
 
-It should be automatically detected and configured. To check from the JeVois-Pro console, you can issue `shell ifconfig`
-and inspect the configuration. You can then move to the System tab and try to ping jevois.usc.edu
+它应该会自动检测和配置。要从 JeVois-Pro 控制台检查，您可以发出“shell ifconfig”并检查配置。然后您可以转到“系统”选项卡并尝试 ping jevois.usc.edu
 
-USB to Wifi networking with RTL8812AU adapter
-=============================================
+使用 RTL8812AU 适配器的 USB 转 Wifi 网络 
+=================================================
 
-Many Wifi adapters are not by default included in the Linux kernel because they contain closed-source code.
+许多 Wifi 适配器默认不包含在 Linux 内核中，因为它们包含闭源代码。
 
-We have pre-installed drivers for the popular Realtek RTL8812AU chip present in many adapters of various brands.
+我们已预装了多种品牌适配器中流行的 Realtek RTL8812AU 芯片的驱动程序。
 
 \jvimg{usb-wifi.jpeg, 5%}
 
-To select a Wifi network, the easiest is to proceed as follows:
-- In JeVois-Pro System tab, choose to reboot to Linux Console.
-- Restart the camera.
-- login as \a root with password \a jevois
-- type `startx`
-- at the top-right, select the networking icon and pick a network and enter the Wifi password.
-- check that the network is working, for example, launch the web browser and browse around.
-- at top-right, log out. This will get you back to the console.
-- check that the network is still working, for example `ping jevois.usc.edu`
-- type `jevoispro.sh` to start JeVois software
-- in the System tab, select to reboot to JeVois-Pro and reboot the machine.
+要选择 Wifi 网络，最简单的方法是按以下步骤操作：
+- 在 JeVois-Pro 系统选项卡中，选择重新启动到 Linux 控制台。
+- 重新启动相机。
+- 以 \a root 身份登录，密码为 \a jevois
+- 键入 `startx`
+- 在右上角，选择网络图标，选择一个网络并输入 Wifi 密码。
+- 检查网络是否正常工作，例如，启动 Web 浏览器并浏览。
+- 在右上角，注销。这将使您返回到控制台。
+- 检查网络是否仍在工作，例如 `ping jevois.usc.edu`
+- 键入 `jevoispro.sh` 以启动 JeVois 软件
+- 在系统选项卡中，选择重新启动到 JeVois-Pro 并重新启动机器。
 
-The configuration should be persistent and your Wifi network should be selected on boot automatically.
+该配置应该是持久的，并且您的 Wifi 网络应该在启动时自动选择。
 
-M.2 PCI-express Wifi networking
-===============================
+M.2 PCI-express Wifi 网络 
+=================================
 
-If you will not be using a Coral TPU, you can use the M.2 A+E slot in JeVois-Pro to connect a Wifi card.
+如果您不使用 Coral TPU，则可以使用 JeVois-Pro 中的 M.2 A+E 插槽连接 Wifi 卡。
 
 \jvimg{m2-wifi.jpg, 5%}
 
-Proceed as follows:
+步骤如下：
 
-- choose one that uses PCIe. We have had good success with Intel-based cards.
-- make sure the chip is supported by Linux kernel 4.9.x; in particular, some of the latest Intel AX210 chipsets require
-  kernel 5.10+ and will not work on JeVois-Pro. See
-  [here](https://www.intel.com/content/www/us/en/support/articles/000005511/wireless.html) if you are planning to use an
-  Intel chipset, or search the web for linux compatibility for other chipsets.
-- make sure it is M.2 2230 (22mm x 30mm) A-key or E-key (most M.2 Wifi cards should be).
-- Open JeVois-Pro (4 screws)
-- Remove the TPU board if you have one
-- Insert Wifi card
-- Secure it using an M2x5mm screw
+- 选择使用 PCIe 的。我们在使用基于 Intel 的卡方面取得了良好的成功。
+- 确保该芯片受 Linux 内核 4.9.x 支持；特别是，一些最新的 Intel AX210 芯片组需要内核 5.10+，并且无法在 JeVois-Pro 上运行。如果您打算使用 Intel 芯片组，请参阅[此处](https://www.intel.com/content/www/us/en/support/articles/000005511/wireless.html)，或者在网上搜索其他芯片组的 Linux 兼容性。
+- 确保它是 M.2 2230 (22mm x 30mm) A-key 或 E-key（大多数 M.2 Wifi 卡应该都是）。
+- 打开 JeVois-Pro（4 个螺钉）
+- 如果有 TPU 板，请将其移除
+- 插入 Wifi 卡
+- 使用 M2x5mm 螺钉将其固定
 
-The card should be detected. You can then configure it as above for the USB to Wifi case.
+应该可以检测到卡。然后，您可以按照上述方法针对 USB 转 Wifi 的情况进行配置。
 
 */
+

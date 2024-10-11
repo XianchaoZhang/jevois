@@ -1,0 +1,796 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ProStatus">
+
+<para>更新时间：2021 年 9 月 9 日</para>
+<section xml:id="_ProStatus_1autotoc_md106">
+<title>Legend</title>
+
+<para><itemizedlist>
+<listitem>
+<para>已实现、测试并运行：</para>
+</listitem><listitem>
+<para>尚未实现或无法运行：</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_ProStatus_1autotoc_md107">
+<title>目前发展状况</title>
+
+<para><informaltable frame="all">
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+      <colspec colname='c3'/>
+<thead>
+      <row >
+<entry>
+<para>Feature </para>
+</entry><entry align='center'>
+<para>Status </para>
+</entry><entry>
+<para>Notes  </para>
+</entry></row>
+</thead><tbody>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>All 19 internal power supplies operational from single 12-24 VDC input </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>4x A73 big cores running at full speed with no errors under full load </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>2x A53 little cores running at full speed with no errors under full load </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>4GB LPDDR4 working with no error at full DDR4-3200 speed </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>ARM NEON accelerated multimedia processor instructions tested and working </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>A311D MALI GPU OpenGL-ES 3.2 working using ARM demos (framebuffer mode) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Micro-SD / TF card working at SDR104 (104 MBytes/s) speed </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>HDMI output, video + sound </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>2x USB 2.0 type-A ports at top of camera provide power and are working </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Mini-USB 2.0 OTG port working, both in host and in device modes </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>4-pin micro-serial port working </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>6-pin AUX power port working (outputs 5V, 3.3V, 1.8V for accessories) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>8-pin GPIO port working (configurable as SPI+I2C, or general GPIO) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(12)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Thermally stable operation under full load </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Camera sensor connector working, camera functionality </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Camera sensor connector working, dual-camera functionality </para>
+</entry><entry align='center'>
+<para>? </para>
+</entry><entry>
+<para>(10)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Camera sensor connector working, SPI inertial measurement unit (IMU) functionality </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>M.2 E-Key connector working with PCIe M.2 cards (Coral TPU, Wifi cards) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>M.2 E-Key connector working with USB/SDIO M.2 cards (Wifi/bluetooth cards) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Wired ethernet using add-on USB-to-RJ45 converter </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Variable-speed cooling fan control </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Bootloader, Linux Kernel 4.9.x, partitions, Ubuntu 20.04 </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Custom kernel device tree </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Boot to X-windows and use as a regular computer when connecting keyboard/mouse </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Play Youtube videos with sound over HDMI </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Boot to console </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Boot to JeVois software </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois-Pro video + serial + storage over mini-USB OTG, kernel Gadget driver </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(13)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois-Pro control via JeVois Inventor </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(14)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Software reset </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 2MP camera sensor detection and basic 1080p @ 30fps operation </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 use 4x MIPI-CSI lanes for lowest latency </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 hardware-accelerated conversion from Bayer to YUYV, RGB, RGBA, GREY </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 support for basic controls (brightness, exposure, gain, etc) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 frame cropping support, any size from native 1080p </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(11)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 ISP-based hardware-accelerated frame scaling support, any size </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(11)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 ISP-based dual-stream capture, e.g., YUYV 1920x1080 + RGB 512x288 </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 native 720p support </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(1)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Sony IMX-290 frame rate control </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(2)  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>TDK ICM-29048 inertial measurement uint (IMU) detection over 7MHz SPI bus </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>TDK ICM-29048 IMU basic operation, accel, gyro, compass, temperature over 7MHz SPI </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>TDK ICM-29048 IMU upload digital motion processor (DMP) code </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>TDK ICM-29048 IMU run digital motion processor (DMP) code </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(3)  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>OpenCV 4.5.3 + OpenVino 2021.4 + all OpenCV-Contrib + Python3 bindings </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>OpenGL-ES 3.2 framebuffer </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>OpenCL 1.2 </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Python 3.8 + numpy + scipy + any aarch64 python packages </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>TensorFlow Lite 2.5 </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Mediapipe 0.8 python </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Vulkan, hardware H.265 encode/decode, etc </para>
+</entry><entry align='center'>
+<para>? </para>
+</entry><entry>
+<para>(4)  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois use OpenGL for 1080p display @ 30fps over HDMI </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois OpenGL support for zero-copy video display using DMABUF, EGLImageKHR </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois OpenGL DMABUF, EGLImageKHR support for RGB, RGBA, YUYV, GREY direct display </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois OpenGL support for DMABUF display of YUYV, RGB, RGBA, GREY from camera </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois OpenGL support for display of processed YUYV, RGB, RGBA, GREY using shaders </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(7)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois capture fullsize+scaled streams from camera, display fullsize, process scaled </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois new on-screen graphical user interface using Dear ImGui 1.83 </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois new ImGui backend for MALI OpenGL-ES GPU in framebuffer mode </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois new drivers to capture console keyboard/mouse events and pass to ImGui </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois run OpenCV machine vision algorithms written in C++ </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois run other machine vision algorithms written in C++ </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois run OpenCV machine vision algorithms written in Python </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois run other machine vision algorithms written in Python </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois support for Python modules to draw OpenGL overlays (box, text, etc) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois-Pro run machine vision algorithms developed for JeVois-A33, C++ and Python </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois-Pro enhance some JeVois-A33 algorithms to use DMABUF zero-copy + OpenGL </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois new dual threadpool with user-selectable big/little affinity </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois new async_big() and <link linkend="_namespacejevois_1a5dbfbd62f0701adcef770280e0bc31f6">async_little()</link> thread launching functions </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para> </para>
+</entry><entry align='center'>
+<para>- </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>New JeVois deep neural network (DNN) framework </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN framework support for classification, detection, semantic segmentation </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN framework hierarchical model zoo with 30+ pre-trained models </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN framework download and run custom models </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on CPU using OpenCV DNN module </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on A311D 5-TOPS integrated neural processing uint (NPU) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois custom kernel driver to enable Coral 4-TOPS accelerator over PCIe-2.1 (5 Gbps) </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on Coral 4-TOPS accelerator, PCIe-2.1 (5 Gbps) M.2 card </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on Coral 4-TOPS accelerator, USB-2.0 (480 Mbps) dongle </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on Myriad-X 1-TOPS accelerator with OpenVino, PCIe-2.1 M.2 card </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on Myriad-X 1-TOPS accelerator with OpenVino, USB-2.0 dongle </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run models on CPU, A311D NPU, Coral TPU, Myriad-X VPU in parallel </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>JeVois DNN run multiple models on one CPU, NPU, TPU, VPU hardware, time multiplexed </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Support for Coral M.2 board with 2xTPU chips using 2xPCIe lanes, made by Google </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>(5)  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Support for custom JeVois 2xTPU board with 1 TPU on PCIe and the other on USB </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+      <row >
+<entry>
+<para>Support for custom JeVois 2xTPU + eMMC board with PCIe hub + 2 TPUs on PCIe </para>
+</entry><entry align='center'>
+<para> </para>
+</entry><entry>
+<para>-  </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</informaltable>
+</para>
+</section>
+<section xml:id="_ProStatus_1autotoc_md108">
+<title>注意：</title>
+
+<para><orderedlist>
+<listitem>
+<para>使用 IMX-290 数据表的 720p 设置时，ARM ISP 硬件报告帧冲突。可能是 ISP 与以 720p 运行的传感器之间的硬件不兼容，或 ARM 的 ISP 内核驱动程序存在错误。仍然可以以 1080p 捕获并使用硬件加速重新缩放到 720p。</para>
+</listitem><listitem>
+<para>需要在 V4L2 的 ARM ISP 内核驱动程序中添加对 VIDIOC_S_PARM 和 VIDIOC_G_PARM 的支持。当前帧速率由所选的 IMX290 操作模式和传感器设置决定（默认 1080p @ 30fps）。</para>
+</listitem><listitem>
+<para>可能是我们的原型板上存在电压转换问题，也可能是软件问题。A311D 芯片可能太弱，无法以 7MHz SPI 速度驱动基于电阻的分压器。我们正在使用有源电压转换器芯片对传感器板进行硬件修订。对于早期原型，假设 DMP 无法运行。</para>
+</listitem><listitem>
+<para>这些功能已被证明可以在使用 A311D 芯片的其他开发板上工作，因此它们应该可以工作，可能在安装了必要的驱动程序和其他软件之后。</para>
+</listitem><listitem>
+<para>A331D 仅有 1x PCIe 通道。请注意，如果您使用 Coral 团队开发和销售的 Coral 双 TPU 板，您将只能访问 JeVois 上的一个 TPU。我们设计了一个双 TPU 板，使用 PCIe 交换机将两个 TPU 连接到 A311D 的 1x PCIe 总线。该板工作得很好。</para>
+</listitem><listitem>
+<para>着色器中的一些混叠问题似乎只存在于 A311D 上，而不存在于我们的桌面 GPU 上，这要求处理后的图像以整数缩放因子显示，这可能是由于 A311D OpenGL-ES 处理器的精度低于桌面完整 OpenGL。例如，如果将 640x480 YUYV 处理输出缩放以适应全屏高度（从 640x480 到 1440x1080 像素，缩放因子 2.25），则将显示混叠伪影，但如果按因子 2（1280x960）缩放，则显示正常。这只会影响“旧式”JeVois 机器视觉模块，这些模块使用基于像素的绘图函数将处理结果绘制到输入图像的副本中，从而创建新的输出图像。 JeVois-Pro 上首选的新处理方式是使用零拷贝 DMABUF 简单地显示从相机捕获的 1080p 原始图像，然后让机器视觉模块在其上绘制 ImGui/OpenGL 覆盖层，让 OpenGL 渲染图像和覆盖层（可能带有 alpha 混合）。在这种情况下，不存在混叠问题。</para>
+</listitem><listitem>
+<para>双摄像头传感器所需的信号已布线但尚未测试，因为我们还没有双传感器原型板。双摄像头传感器板可以使用 2 个独立的 MIPI-CSI 时钟，每个传感器最多可以使用 2 个 MIPI 通道。单摄像头传感器板（例如默认的 Sony IMX290 板）使用一个 MIPI-CSI 时钟和最多 4 个 MIPI 通道。</para>
+</listitem><listitem>
+<para>支持将摄像机画面裁剪或缩放到任意大小，但OpenGL、OpenCV 等通常要求图像宽度和高度为 32 的倍数。</para>
+</listitem><listitem>
+<para>参见 <link linkend="_ProConnectors">JeVois-Pro 辅助连接器</link></para>
+</listitem><listitem>
+<para>由于 JeVois-Pro 具有 HDMI 输出，因此像我们在 JeVois-A33 上所做的那样模拟 USB 网络摄像头就没那么有趣了。在算法开发过程中，您只需将 JeVois-Pro 直接连接到显示器、键盘和鼠标，JeVois-Pro 具有完整的图形用户界面，可让您调整参数、运行各种机器视觉模块、编辑 Python 代码等。对于算法完成后的无头操作，请使用 4 针微型串行端口将机器视觉结果输出为文本字符串（例如，“在 X、Y 处检测到面部”，或“QRcode 解码值为 Z”，等等）。</para>
+</listitem><listitem>
+<para>JeVois-Inventor 是一款桌面应用程序，可用于控制没有显示器或键盘/鼠标的 JeVois-A33 智能相机。由于 JeVois-Pro 有显示器和键盘/鼠标，因此 JeVois-Inventor 的功能已转换为可直接在 JeVois-Pro 中运行的完整图形用户界面，从而完全不再需要主机。 </para>
+</listitem></orderedlist>
+</para>
+</section>
+</section>

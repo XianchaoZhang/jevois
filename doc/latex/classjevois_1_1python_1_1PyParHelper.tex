@@ -1,0 +1,193 @@
+\hypertarget{classjevois_1_1python_1_1PyParHelper}{}\doxysubsection{jevois\+::python\+::Py\+Par\+Helper$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1python_1_1PyParHelper}\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::python\+::\+Py\+Par\+Helper$<$ T $>$}
+
+类型化类，允许在 Python 中创建参数 
+
+Definition at line 59 of file Python\+Parameter.\+H.
+
+
+
+Inheritance diagram for jevois\+::python\+::Py\+Par\+Helper$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=259pt]{classjevois_1_1python_1_1PyParHelper__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::python\+::Py\+Par\+Helper$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1python_1_1PyParHelper__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_abeecdbabeca7ae643a75aa10b22b5209}{Py\+Par\+Helper}} (\mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_a49587e204e2514594a3c7f1ae48f9fea}{comp}}, std\+::string const \&name, std\+::string const \&description, boost\+::python\+::object const \&default\+Value, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&category)
+\begin{DoxyCompactList}\small\item\em 创建并将参数添加到组件 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a2303424ccbc354ddfa9e7014b4eed4a5}{$\sim$\+Py\+Par\+Helper}} ()
+\begin{DoxyCompactList}\small\item\em 从组件中删除参数 \end{DoxyCompactList}\item 
+boost\+::python\+::object \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a46c4e08296186748c1bc27413528a589}{get}} () override
+\begin{DoxyCompactList}\small\item\em 获取值，输入类型，然后包装到 python 对象中 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a6dd4c9843259c9360ceea3c90c4376fd}{set}} (boost\+::python\+::object const \&val) override
+\begin{DoxyCompactList}\small\item\em 从 python 对象设置值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a50eed5ea7cfcd0836546907715a7079d}{set\+Callback}} (boost\+::python\+::object const \&cb) override
+\begin{DoxyCompactList}\small\item\em Set the parameter\textquotesingle{}s callback. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1ParameterBase}{jevois\+::\+Parameter\+Base}} $>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a1ed4bd9574d0c5004d82ff8c31ab6512}{par}} () const override
+\begin{DoxyCompactList}\small\item\em 访问关联的 C++ 基本参数，用于将 strget()、strset()、freeze() 等转发给它 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}} $>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a1f916bea5c134cada18beced3ef8a1e2}{create}} (\mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_a49587e204e2514594a3c7f1ae48f9fea}{comp}}, std\+::string const \&name, std\+::string const \&description, boost\+::python\+::object const \&default\+Value, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&category)
+\begin{DoxyCompactList}\small\item\em 创建并将参数添加到组件 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$ T $>$ $>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_a2fee47ce7f792ef04f0e135bdd7f810f}{its\+Param}}
+\item 
+boost\+::python\+::object \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper_ae49471ca935c9c64d5858468ced2c076}{its\+Py\+Callback}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_abeecdbabeca7ae643a75aa10b22b5209}\label{classjevois_1_1python_1_1PyParHelper_abeecdbabeca7ae643a75aa10b22b5209}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!PyParHelper@{PyParHelper}}
+\index{PyParHelper@{PyParHelper}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{PyParHelper()}{PyParHelper()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{Py\+Par\+Helper}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$}]{comp,  }\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{boost\+::python\+::object const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+创建并将参数添加到组件 
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a2303424ccbc354ddfa9e7014b4eed4a5}\label{classjevois_1_1python_1_1PyParHelper_a2303424ccbc354ddfa9e7014b4eed4a5}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!````~PyParHelper@{$\sim$PyParHelper}}
+\index{````~PyParHelper@{$\sim$PyParHelper}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$PyParHelper()}{~PyParHelper()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{Py\+Par\+Helper}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+从组件中删除参数 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a1f916bea5c134cada18beced3ef8a1e2}\label{classjevois_1_1python_1_1PyParHelper_a1f916bea5c134cada18beced3ef8a1e2}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!create@{create}}
+\index{create@{create}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}$>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} $\ast$}]{comp,  }\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{boost\+::python\+::object const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+创建并将参数添加到组件 
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a46c4e08296186748c1bc27413528a589}\label{classjevois_1_1python_1_1PyParHelper_a46c4e08296186748c1bc27413528a589}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!get@{get}}
+\index{get@{get}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+boost\+::python\+::object \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取值，输入类型，然后包装到 python 对象中 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_afb46b7a1e13b3328ecbbd05cac0e9e59}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a1ed4bd9574d0c5004d82ff8c31ab6512}\label{classjevois_1_1python_1_1PyParHelper_a1ed4bd9574d0c5004d82ff8c31ab6512}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!par@{par}}
+\index{par@{par}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{par()}{par()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1ParameterBase}{jevois\+::\+Parameter\+Base}}$>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::par (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+访问关联的 C++ 基本参数，用于将 strget()、strset()、freeze() 等转发给它 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_aea70368dcae097b7ff160a7d6d5888bf}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a6dd4c9843259c9360ceea3c90c4376fd}\label{classjevois_1_1python_1_1PyParHelper_a6dd4c9843259c9360ceea3c90c4376fd}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!set@{set}}
+\index{set@{set}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::set (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从 python 对象设置值 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_ac1e28253dc835a7e069d13234fbc475d}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a50eed5ea7cfcd0836546907715a7079d}\label{classjevois_1_1python_1_1PyParHelper_a50eed5ea7cfcd0836546907715a7079d}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!setCallback@{setCallback}}
+\index{setCallback@{setCallback}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{setCallback()}{setCallback()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::set\+Callback (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{cb }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the parameter\textquotesingle{}s callback. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelperBase_a6cf1273b22f30426b839f160979d6409}{jevois\+::python\+::\+Py\+Par\+Helper\+Base}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_a2fee47ce7f792ef04f0e135bdd7f810f}\label{classjevois_1_1python_1_1PyParHelper_a2fee47ce7f792ef04f0e135bdd7f810f}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!itsParam@{itsParam}}
+\index{itsParam@{itsParam}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsParam}{itsParam}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1DynamicParameter}{jevois\+::\+Dynamic\+Parameter}}$<$T$>$ $>$ \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::its\+Param\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 87 of file Python\+Parameter.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1python_1_1PyParHelper_ae49471ca935c9c64d5858468ced2c076}\label{classjevois_1_1python_1_1PyParHelper_ae49471ca935c9c64d5858468ced2c076}} 
+\index{jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}!itsPyCallback@{itsPyCallback}}
+\index{itsPyCallback@{itsPyCallback}!jevois::python::PyParHelper$<$ T $>$@{jevois::python::PyParHelper$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsPyCallback}{itsPyCallback}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+boost\+::python\+::object \mbox{\hyperlink{classjevois_1_1python_1_1PyParHelper}{jevois\+::python\+::\+Py\+Par\+Helper}}$<$ T $>$\+::its\+Py\+Callback\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 88 of file Python\+Parameter.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonParameter_8H}{Python\+Parameter.\+H}}\end{DoxyCompactItemize}

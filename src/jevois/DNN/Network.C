@@ -43,7 +43,7 @@ void jevois::dnn::Network::onParamChange(network::outreshape const &, std::strin
 // ####################################################################################################
 void jevois::dnn::Network::waitBeforeDestroy()
 {
-  // Do not destroy a network that is loading, and do not throw...
+  // 不要破坏正在加载的网络，也不要抛出...
   size_t count = 0;
   while (itsLoading.load())
   {
@@ -56,10 +56,10 @@ void jevois::dnn::Network::waitBeforeDestroy()
 // ####################################################################################################
 bool jevois::dnn::Network::ready()
 {
-  // If we are loaded, we are ready to process:
+  // 如果已加载，则可开始处理：
   if (itsLoaded.load()) return true;
   
-  // If we are loading, check whether loading is complete or threw, otherwise return false as we keep loading:
+  // 如果正在加载，则检查加载是否完成或抛出，否则返回 false，因为我们会继续加载：
   if (itsLoading.load())
   {
     if (itsLoadFut.valid() && itsLoadFut.wait_for(std::chrono::milliseconds(2)) == std::future_status::ready)
@@ -70,7 +70,7 @@ bool jevois::dnn::Network::ready()
     return false;
   }
   
-  // Otherwise, trigger an async load:
+  // 否则，触发异步加载：
   itsLoading.store(true);
   itsLoadFut = jevois::async(std::bind(&jevois::dnn::Network::load, this));
   LINFO("Loading network...");
@@ -87,7 +87,7 @@ std::vector<cv::Mat> jevois::dnn::Network::process(std::vector<cv::Mat> const & 
   std::vector<cv::Mat> outs;
   std::string const c = comment::get();
   
-  // Add any extra input tensors?
+  // 添加任何额外的输入张量？
   std::string const extra = extraintensors::get();
   if (extra.empty() == false)
   {
@@ -102,7 +102,7 @@ std::vector<cv::Mat> jevois::dnn::Network::process(std::vector<cv::Mat> const & 
       if (tok.size() != 3)
         LFATAL("Malformed extra tensor, need <type>:<shape>:val1 val2 ... valN (separate multiple tensors by comma)");
 
-      // Decode type and convert to vsi, only those types that OpenCV can support:
+      // 解码类型并转换为 vsi，仅 OpenCV 可以支持的类型：
       if (tok[0] == "8U") attr.dtype.vx_type = VSI_NN_TYPE_UINT8;
       else if (tok[0] == "8S") attr.dtype.vx_type = VSI_NN_TYPE_INT8;
       else if (tok[0] == "16U") attr.dtype.vx_type = VSI_NN_TYPE_UINT16;
@@ -192,14 +192,14 @@ std::vector<cv::Mat> jevois::dnn::Network::process(std::vector<cv::Mat> const & 
       newblobs.emplace_back(std::move(b));
     }
 
-    // NOTE: Keep the code below in sync with the default case (no extra inputs). Both branches are duplicated to avoid
-    // having to make a copy of blobs into newblobs in the standard case when we do not have any extra inputs:
-    
-    // Show info about input tensors:
+    // 注意：使下面的代码与默认情况（无额外输入）保持同步。两个分支都重复，以避免在没有任何额外输入时在标准情况下
+	// 将 blob 复制到 newblobs 中： 
+	
+	// 显示有关输入张量的信息：
     info.emplace_back("* Input Tensors");
     for (cv::Mat const & b : newblobs) info.emplace_back("- " + jevois::dnn::shapestr(b));
 
-    // Run processing on the derived class:
+    // 在派生类上运行处理：
     info.emplace_back("* Network");
     if (c.empty() == false) info.emplace_back(c);
   
@@ -207,22 +207,22 @@ std::vector<cv::Mat> jevois::dnn::Network::process(std::vector<cv::Mat> const & 
   }
   else
   {
-    // Show info about input tensors:
+    // 显示有关输入张量的信息：
     info.emplace_back("* Input Tensors");
     for (cv::Mat const & b : blobs) info.emplace_back("- " + jevois::dnn::shapestr(b));
     
-    // Run processing on the derived class:
+    // 在派生类上运行处理：
     info.emplace_back("* Network");
     if (c.empty() == false) info.emplace_back(c);
     
     outs = std::move(doprocess(blobs, info));
   }
     
-  // Show info about output tensors:
+  // 显示有关输出张量的信息：
   info.emplace_back("* Output Tensors");
   for (size_t i = 0; i < outs.size(); ++i) info.emplace_back("- " + jevois::dnn::shapestr(outs[i]));
 
-  // Possibly reshape the tensors:
+  // 可能重塑张量：
   if (itsReshape.empty() == false)
   {
     if (itsReshape.size() != outs.size())

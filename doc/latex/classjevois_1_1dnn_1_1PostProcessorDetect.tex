@@ -1,0 +1,312 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Detect Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorDetect}\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor\+Detect.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经网络管道的后处理器 
+
+Definition at line 31 of file Post\+Processor\+Detect.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+Detect\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorDetect__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+Detect\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorDetect__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a9c95d1af399f260dbea1eb95aa8e9bab}{$\sim$\+Post\+Processor\+Detect}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a7485f25ae3ba8df8539f4ddc0fdbd991}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$preproc) override
+\begin{DoxyCompactList}\small\item\em 处理输出并绘制/发送一些结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false) override
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a2bd0bb02da9f461e0f59c83c74d882a2}{on\+Param\+Change}} (postprocessor\+::detecttype const \&param, postprocessor\+::\+Detect\+Type const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a74df62acaad0b3d8b7c4e411f0b69306}{on\+Param\+Change}} (postprocessor\+::classes const \&param, std\+::string const \&val) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, std\+::string $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a375b46f5356a21ed5e3f9696e9a72dea}{its\+Labels}}
+\begin{DoxyCompactList}\small\item\em 从对象 ID 映射到类名 \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1ObjDetect}{Obj\+Detect}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a154e733500bf262b60544bd328b4b30c}{its\+Detections}}
+\item 
+cv\+::\+Size \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a87047e1791d560cb6fd2ae4562e779d3}{its\+Image\+Size}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}{Post\+Processor\+Detect\+Y\+O\+LO}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a52f562990785dc91b7c0e6c081710f31}{its\+Y\+O\+LO}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a84adac06aa16ed42c7344ef7d7b57384}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (maxnbox, unsigned int, \char`\"{}Max number of top-\/scoring boxes to \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}{report}} (for Y\+O\+LO flavors, \char`\"{} \char`\"{}this is the max for each scale)\char`\"{}, 500, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a2cb89e11872a466b1290df9a510d59a3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (dthresh, float, \char`\"{}Detection box threshold (in percent confidence) above which \char`\"{} \char`\"{}predictions will be reported. Not all networks use a separate box threshold, \char`\"{} \char`\"{}many only use one threshold confidence threshold (cthresh parameter). The Y\+O\+LO \char`\"{} \char`\"{}family is an example that uses both box and classification confidences\char`\"{}, 15.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+0F, 100.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a1c6d925c2701db32435cb45ade85642b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Detect\+Type,(Faster\+R\+C\+NN)(Y\+O\+LO)(S\+SD)(T\+P\+U\+S\+SD)(R\+A\+W\+Y\+O\+LO)(Y\+O\+L\+Ov10)(Y\+O\+L\+Ov10pp))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_acde111e7f5a52943ca8eba2110f0806a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (detecttype, Detect\+Type, \char`\"{}Type of detection output format\char`\"{}, Detect\+Type\+::\+Y\+O\+LO, Detect\+Type\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_ad3541e17ab228527b9caec0039677e98}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (nms, float, \char`\"{}Non-\/maximum suppression intersection-\/over-\/union threshold in percent\char`\"{}, 45.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+0F, 100.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_abece3397d2d388ab37f16f363f4e69e4}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (anchors, std\+::string, \char`\"{}For Y\+O\+LO-\/type detection models with raw outputs, \char`\"{} \char`\"{}list of anchors. Should be formatted as\+: w1, h1, w2, h2, ...  ww1, hh1, ww2, hh2, \char`\"{} \char`\"{}...  ... where individual entries for a given Y\+O\+LO layer are separated by commas, \char`\"{} \char`\"{}and successive Y\+O\+LO layers (from large to small, e.\+g., first the anchors for 52x52, \char`\"{} \char`\"{}then for 26x26, then for 13x13) are separated by semicolons. Leave empty \char`\"{} \char`\"{}for other models.\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_aa3087bdfbabd30751a16731fe1e71e75}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (alpha, unsigned char, \char`\"{}Alpha channel value for drawn results\char`\"{}, 64, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a9c95d1af399f260dbea1eb95aa8e9bab}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a9c95d1af399f260dbea1eb95aa8e9bab}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!````~PostProcessorDetect@{$\sim$PostProcessorDetect}}
+\index{````~PostProcessorDetect@{$\sim$PostProcessorDetect}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorDetect()}{~PostProcessorDetect()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Detect\+::$\sim$\+Post\+Processor\+Detect (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 31 of file Post\+Processor\+Detect.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a7485f25ae3ba8df8539f4ddc0fdbd991}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a7485f25ae3ba8df8539f4ddc0fdbd991}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 35 of file Post\+Processor\+Detect.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a74df62acaad0b3d8b7c4e411f0b69306}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a74df62acaad0b3d8b7c4e411f0b69306}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{postprocessor\+::classes const \&}]{param,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file Post\+Processor\+Detect.\+C.
+
+
+
+References jevois\+::\+Component\+::descriptor(), and jevois\+::split().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a2bd0bb02da9f461e0f59c83c74d882a2}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a2bd0bb02da9f461e0f59c83c74d882a2}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{postprocessor\+::detecttype const \&}]{param,  }\item[{postprocessor\+::\+Detect\+Type const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 55 of file Post\+Processor\+Detect.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!process@{process}}
+\index{process@{process}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{preproc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+处理输出并绘制/发送一些结果 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 68 of file Post\+Processor\+Detect.\+C.
+
+
+
+References jevois\+::dnn\+::\+Pre\+Processor\+::b2i(), jevois\+::dnn\+::\+Pre\+Processor\+::blobsize(), jevois\+::dnn\+::clamp(), jevois\+::dnn\+::get\+Label(), jevois\+::dnn\+::\+Pre\+Processor\+::imagesize(), L\+F\+A\+T\+AL, L\+T\+H\+R\+OW, o, and jevois\+::dnn\+::shapestr().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!report@{report}}
+\index{report@{report}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a39c05309740013de3f1f595c1808e168}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 393 of file Post\+Processor\+Detect.\+C.
+
+
+
+References jevois\+::rawimage\+::draw\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Text(), jevois\+::rawimage\+::\+Font10x20, jevois\+::yuyv\+::\+Light\+Green, o, jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2\+D(), jevois\+::sformat(), jevois\+::dnn\+::string\+To\+R\+G\+B\+A(), and jevois\+::rawimage\+::write\+Text().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_aa3087bdfbabd30751a16731fe1e71e75}\label{classjevois_1_1dnn_1_1PostProcessorDetect_aa3087bdfbabd30751a16731fe1e71e75}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{alpha}]{,  }\item[{unsigned char}]{,  }\item[{\char`\"{}Alpha channel value for drawn results\char`\"{}}]{,  }\item[{64}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a2cb89e11872a466b1290df9a510d59a3}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a2cb89e11872a466b1290df9a510d59a3}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{dthresh}]{,  }\item[{float}]{,  }\item[{\char`\"{}Detection box threshold (in percent confidence) above which \char`\"{} \char`\"{}predictions will be reported. Not all networks use a separate box}]{threshold,  }\item[{\char`\"{} \char`\"{}many only use one threshold confidence threshold(cthresh parameter). The Y\+O\+LO \char`\"{} \char`\"{}family is an example that uses both box and classification confidences\char`\"{}}]{,  }\item[{15.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+0\+F, 100.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a84adac06aa16ed42c7344ef7d7b57384}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a84adac06aa16ed42c7344ef7d7b57384}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{maxnbox}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Max number of top-\/scoring boxes to \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetect_a399f8ebfbfec8d4934b9f353fd65da4d}{report}} (for Y\+O\+LO flavors, \char`\"{} \char`\"{}this is the max for each scale)\char`\"{}}]{,  }\item[{500}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_ad3541e17ab228527b9caec0039677e98}\label{classjevois_1_1dnn_1_1PostProcessorDetect_ad3541e17ab228527b9caec0039677e98}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{nms}]{,  }\item[{float}]{,  }\item[{\char`\"{}Non-\/maximum suppression intersection-\/over-\/union threshold in percent\char`\"{}}]{,  }\item[{45.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+0\+F, 100.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_abece3397d2d388ab37f16f363f4e69e4}\label{classjevois_1_1dnn_1_1PostProcessorDetect_abece3397d2d388ab37f16f363f4e69e4}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{anchors}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}For Y\+O\+LO-\/type detection models with raw}]{outputs,  }\item[{\char`\"{} \char`\"{}list of anchors. Should be formatted as\+:w1}]{,  }\item[{h1}]{,  }\item[{w2}]{,  }\item[{h2}]{,  }\item[{}]{ww1,  }\item[{hh1}]{,  }\item[{ww2}]{,  }\item[{hh2}]{,  }\item[{\char`\"{} \char`\"{}... ... where individual entries for a given Y\+O\+LO layer are separated by}]{commas,  }\item[{\char`\"{} \char`\"{}and successive Y\+O\+LO layers(from large to small, e.\+g., first the anchors for 52x52, \char`\"{} \char`\"{}then for 26x26, then for 13x13) are separated by semicolons. Leave empty \char`\"{} \char`\"{}for other models.\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_acde111e7f5a52943ca8eba2110f0806a}\label{classjevois_1_1dnn_1_1PostProcessorDetect_acde111e7f5a52943ca8eba2110f0806a}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{detecttype}]{,  }\item[{Detect\+Type}]{,  }\item[{\char`\"{}Type of detection output format\char`\"{}}]{,  }\item[{Detect\+Type\+::\+Y\+O\+LO}]{,  }\item[{Detect\+Type\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a1c6d925c2701db32435cb45ade85642b}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a1c6d925c2701db32435cb45ade85642b}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Detect\+Type}]{,  }\item[{(Faster\+R\+C\+NN)(Y\+O\+LO)(S\+SD)(T\+P\+U\+S\+SD)(R\+A\+W\+Y\+O\+LO)(Y\+O\+L\+Ov10)(Y\+O\+L\+Ov10pp)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a154e733500bf262b60544bd328b4b30c}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a154e733500bf262b60544bd328b4b30c}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!itsDetections@{itsDetections}}
+\index{itsDetections@{itsDetections}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{itsDetections}{itsDetections}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structjevois_1_1ObjDetect}{Obj\+Detect}}$>$ jevois\+::dnn\+::\+Post\+Processor\+Detect\+::its\+Detections\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 58 of file Post\+Processor\+Detect.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a87047e1791d560cb6fd2ae4562e779d3}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a87047e1791d560cb6fd2ae4562e779d3}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!itsImageSize@{itsImageSize}}
+\index{itsImageSize@{itsImageSize}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{itsImageSize}{itsImageSize}}
+{\footnotesize\ttfamily cv\+::\+Size jevois\+::dnn\+::\+Post\+Processor\+Detect\+::its\+Image\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 59 of file Post\+Processor\+Detect.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a375b46f5356a21ed5e3f9696e9a72dea}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a375b46f5356a21ed5e3f9696e9a72dea}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!itsLabels@{itsLabels}}
+\index{itsLabels@{itsLabels}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{itsLabels}{itsLabels}}
+{\footnotesize\ttfamily std\+::map$<$int, std\+::string$>$ jevois\+::dnn\+::\+Post\+Processor\+Detect\+::its\+Labels\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+从对象 ID 映射到类名 
+
+
+
+Definition at line 57 of file Post\+Processor\+Detect.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorDetect_a52f562990785dc91b7c0e6c081710f31}\label{classjevois_1_1dnn_1_1PostProcessorDetect_a52f562990785dc91b7c0e6c081710f31}} 
+\index{jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}!itsYOLO@{itsYOLO}}
+\index{itsYOLO@{itsYOLO}!jevois::dnn::PostProcessorDetect@{jevois::dnn::PostProcessorDetect}}
+\doxyparagraph{\texorpdfstring{itsYOLO}{itsYOLO}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorDetectYOLO}{Post\+Processor\+Detect\+Y\+O\+LO}}$>$ jevois\+::dnn\+::\+Post\+Processor\+Detect\+::its\+Y\+O\+LO\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 60 of file Post\+Processor\+Detect.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorDetect_8H}{Post\+Processor\+Detect.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessor_8H}{Post\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorDetect_8C}{Post\+Processor\+Detect.\+C}}\end{DoxyCompactItemize}

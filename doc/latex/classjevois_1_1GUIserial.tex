@@ -1,0 +1,170 @@
+\hypertarget{classjevois_1_1GUIserial}{}\doxysubsection{jevois\+::G\+U\+Iserial Class Reference}
+\label{classjevois_1_1GUIserial}\index{jevois::GUIserial@{jevois::GUIserial}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iserial.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple class to monitor a serial port in the Je\+Vois-\/\+Pro G\+UI. 
+
+This class opens a window and displays traffic on a given serial port. Its interface is the same as a regular \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} (or its parent, \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}}), with the addition of a \mbox{\hyperlink{classjevois_1_1GUIserial_a6fdfd59976c1605f3c5ad0dda4a19629}{draw()}} function to render into a window managed by the caller. 
+
+Definition at line 33 of file G\+U\+Iserial.\+H.
+
+
+
+Inheritance diagram for jevois\+::G\+U\+Iserial\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1GUIserial__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::G\+U\+Iserial\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1GUIserial__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1GUIserial_a84368716ee417704e09f9edfeb5f7c32}{$\sim$\+G\+U\+Iserial}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIserial_a743adac54253b9e078bee56b9b6697f1}{read\+Some}} (std\+::string \&str) override
+\begin{DoxyCompactList}\small\item\em Read some bytes if available, and return true and a string when one is complete. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}{write\+String}} (std\+::string const \&str) override
+\begin{DoxyCompactList}\small\item\em Write a string, using the line termination convention of serial\+::linestyle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIserial_a6fdfd59976c1605f3c5ad0dda4a19629}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Render into Im\+Gui. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GUIserial_aa3264cd7d39230ec9a1800baccef7bc1}{Serial}} (std\+::string const \&instance, \mbox{\hyperlink{classjevois_1_1UserInterface_a22393038109a677827db1d2728404d88}{User\+Interface\+::\+Type}} \mbox{\hyperlink{classjevois_1_1Serial_ab7dcc08de36dac64332e1f9f6a671d96}{type}})
+\begin{DoxyCompactList}\small\item\em Inherited constructor ok. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIserial_a5bf133693c44d48a911ca147bf5f4aac}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear the contents of the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIserial_a84368716ee417704e09f9edfeb5f7c32}\label{classjevois_1_1GUIserial_a84368716ee417704e09f9edfeb5f7c32}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!````~GUIserial@{$\sim$GUIserial}}
+\index{````~GUIserial@{$\sim$GUIserial}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{$\sim$GUIserial()}{~GUIserial()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Iserial\+::$\sim$\+G\+U\+Iserial (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for safe inheritance. 
+
+
+
+Definition at line 23 of file G\+U\+Iserial.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIserial_a5bf133693c44d48a911ca147bf5f4aac}\label{classjevois_1_1GUIserial_a5bf133693c44d48a911ca147bf5f4aac}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!clear@{clear}}
+\index{clear@{clear}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iserial\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Clear the contents of the window. 
+
+
+
+Definition at line 126 of file G\+U\+Iserial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIserial_a6fdfd59976c1605f3c5ad0dda4a19629}\label{classjevois_1_1GUIserial_a6fdfd59976c1605f3c5ad0dda4a19629}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!draw@{draw}}
+\index{draw@{draw}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iserial\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Render into Im\+Gui. 
+
+Render into a window that was already opened and will be closed by the caller. 
+
+Definition at line 56 of file G\+U\+Iserial.\+C.
+
+
+
+References jevois\+::string\+Starts\+With().
+
+\mbox{\Hypertarget{classjevois_1_1GUIserial_a743adac54253b9e078bee56b9b6697f1}\label{classjevois_1_1GUIserial_a743adac54253b9e078bee56b9b6697f1}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!readSome@{readSome}}
+\index{readSome@{readSome}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{readSome()}{readSome()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Iserial\+::read\+Some (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Read some bytes if available, and return true and a string when one is complete. 
+
+If the monitor window is open, anything read will also be displayed in the window. 
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Serial_a50f7553bdbf0fdfe4e5d2d06689317df}{jevois\+::\+Serial}}.
+
+
+
+Definition at line 27 of file G\+U\+Iserial.\+C.
+
+
+
+References jevois\+::\+Serial\+::read\+Some().
+
+\mbox{\Hypertarget{classjevois_1_1GUIserial_aa3264cd7d39230ec9a1800baccef7bc1}\label{classjevois_1_1GUIserial_aa3264cd7d39230ec9a1800baccef7bc1}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!Serial@{Serial}}
+\index{Serial@{Serial}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{Serial()}{Serial()}}
+{\footnotesize\ttfamily jevois\+::\+Serial\+::\+Serial}
+
+
+
+Inherited constructor ok. 
+
+
+
+Definition at line 61 of file Serial.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}\label{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}} 
+\index{jevois::GUIserial@{jevois::GUIserial}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::GUIserial@{jevois::GUIserial}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Iserial\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Write a string, using the line termination convention of serial\+::linestyle. 
+
+No line terminator should be included in the string, \mbox{\hyperlink{classjevois_1_1GUIserial_aa8e430f5527ba55f21468c99cd007587}{write\+String()}} will add one. If the monitor window is open, anything written will also be displayed in the window. 
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Serial_a06bd87b9e59a6aad3c8c184b2406edb5}{jevois\+::\+Serial}}.
+
+
+
+Definition at line 42 of file G\+U\+Iserial.\+C.
+
+
+
+References jevois\+::\+Serial\+::write\+String().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIserial_8H}{G\+U\+Iserial.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIserial_8C}{G\+U\+Iserial.\+C}}\end{DoxyCompactItemize}

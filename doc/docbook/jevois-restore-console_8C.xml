@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_jevois-restore-console_8C">
+<title>src/Apps/jevois-restore-console.C File Reference</title>
+<indexterm><primary>src/Apps/jevois-restore-console.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Util/Console.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;linux/input.h&gt;
+#include &lt;linux/kd.h&gt;
+#include &lt;linux/keyboard.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;cctype&gt;
+</programlisting>Include dependency graph for jevois-restore-console.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="jevois-restore-console_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_jevois-restore-console_8C_1a2b760810e5bb0cfb55f0c7d6d74d4438">main</link> (int, char const **)</para>
+
+<para>在 jevoispro-daemon 剧烈崩溃后恢复控制台操作 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_jevois-restore-console_8C_1a2b760810e5bb0cfb55f0c7d6d74d4438"/>    <section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>jevois-restore-console.C</secondary></indexterm>
+<indexterm><primary>jevois-restore-console.C</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int , char const ** )</computeroutput></para><para>
+
+<para>在 jevoispro-daemon 剧烈崩溃后恢复控制台操作 </para>
+</para>
+<para>
+Definition at line 32 of file jevois-restore-console.C.</para>
+<para>
+References jevois::getActiveTTY(), jevois::getConsoleFd(), jevois::logEnd(), jevois::logLevel, and jevois::unMuteKeyboard().</para>
+</section>
+</section>
+</section>

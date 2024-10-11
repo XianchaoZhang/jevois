@@ -1,0 +1,95 @@
+\hypertarget{group__camerasensor}{}\doxysubsection{不同相机传感器的辅助定义}
+\label{group__camerasensor}\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+
+
+\doxysubsubsection{ }
+Collaboration diagram for 不同相机传感器的辅助定义\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{group__camerasensor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}{jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Sensor,(any)(imx290)(os08a10)(ar0234))
+\begin{DoxyCompactList}\small\item\em 不同传感器型号的枚举 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__camerasensor_ga07ea2c95fcfd090f0afa39305ba0720c}{jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Lens,(standard)(custom1)(custom2)(custom3)(custom4)(custom5))
+\item 
+bool \mbox{\hyperlink{group__camerasensor_gaee01f42d6948f5d178890b28663806af}{jevois\+::sensor\+Supports\+Format}} (Camera\+Sensor s, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否支持给定的分辨率和帧速率 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__camerasensor_ga6bc708204f2eb1175885c149ced0b4fd}{jevois\+::sensor\+Has\+I\+MU}} (Camera\+Sensor s)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否有 I\+M\+U（惯性测量单元） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__camerasensor_ga241cf199fdeeac006a137918af9bab0b}{jevois\+::sensor\+Prepare\+Set\+Format}} (Camera\+Sensor s, \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m, unsigned int \&capw, unsigned int \&caph, int \&preset)
+\begin{DoxyCompactList}\small\item\em 加载传感器预设（仅限 Je\+Vois-\/\+Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__camerasensor_ga07ea2c95fcfd090f0afa39305ba0720c}\label{group__camerasensor_ga07ea2c95fcfd090f0afa39305ba0720c}} 
+\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Camera\+Lens}]{,  }\item[{(standard)(custom1)(custom2)(custom3)(custom4)(custom5)}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}\label{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}} 
+\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{,  }\item[{(any)(imx290)(os08a10)(ar0234)}]{ }\end{DoxyParamCaption})}
+
+
+
+不同传感器型号的枚举 
+
+当您不知道（例如，在主机模式下使用未知的 dumb U\+SB 网络摄像头运行）或不关心（例如，我们在 jevois-\/add-\/videomapping 中使用 \textquotesingle{}any\textquotesingle{} 以便它始终成功）时，请使用 \textquotesingle{}any\textquotesingle{}。
+
+
+\begin{DoxyItemize}
+\item 并行 C\+SI 传感器适用于 Je\+Vois-\/\+A33 硬件：ov9650、ov2640、ov7725、ar0135
+\item M\+I\+PI 传感器适用于 Je\+Vois-\/\+Pro 硬件：imx290、os08a10、ar0234
+\end{DoxyItemize}
+
+在这里，我们还定义了一个用于相机校准的 Camera\+Lens 枚举。 \mbox{\Hypertarget{group__camerasensor_ga6bc708204f2eb1175885c149ced0b4fd}\label{group__camerasensor_ga6bc708204f2eb1175885c149ced0b4fd}} 
+\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}!sensorHasIMU@{sensorHasIMU}}
+\index{sensorHasIMU@{sensorHasIMU}!不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+\doxyparagraph{\texorpdfstring{sensorHasIMU()}{sensorHasIMU()}}
+{\footnotesize\ttfamily bool jevois\+::sensor\+Has\+I\+MU (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{s }\end{DoxyParamCaption})}
+
+
+
+检查传感器是否有 I\+M\+U（惯性测量单元） 
+
+
+
+Definition at line 273 of file Camera\+Sensor.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::post\+Init().
+
+\mbox{\Hypertarget{group__camerasensor_ga241cf199fdeeac006a137918af9bab0b}\label{group__camerasensor_ga241cf199fdeeac006a137918af9bab0b}} 
+\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}!sensorPrepareSetFormat@{sensorPrepareSetFormat}}
+\index{sensorPrepareSetFormat@{sensorPrepareSetFormat}!不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+\doxyparagraph{\texorpdfstring{sensorPrepareSetFormat()}{sensorPrepareSetFormat()}}
+{\footnotesize\ttfamily void jevois\+::sensor\+Prepare\+Set\+Format (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{s,  }\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m,  }\item[{unsigned int \&}]{capw,  }\item[{unsigned int \&}]{caph,  }\item[{int \&}]{preset }\end{DoxyParamCaption})}
+
+
+
+加载传感器预设（仅限 Je\+Vois-\/\+Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） 
+
+
+
+Referenced by jevois\+::\+Camera\+::set\+Format().
+
+\mbox{\Hypertarget{group__camerasensor_gaee01f42d6948f5d178890b28663806af}\label{group__camerasensor_gaee01f42d6948f5d178890b28663806af}} 
+\index{不同相机传感器的辅助定义@{不同相机传感器的辅助定义}!sensorSupportsFormat@{sensorSupportsFormat}}
+\index{sensorSupportsFormat@{sensorSupportsFormat}!不同相机传感器的辅助定义@{不同相机传感器的辅助定义}}
+\doxyparagraph{\texorpdfstring{sensorSupportsFormat()}{sensorSupportsFormat()}}
+{\footnotesize\ttfamily bool jevois\+::sensor\+Supports\+Format (\begin{DoxyParamCaption}\item[{Camera\+Sensor}]{s,  }\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})}
+
+
+
+检查传感器是否支持给定的分辨率和帧速率 
+
+如果传感器能够以给定的格式、分辨率和帧速率捕获视频，则返回 true。 

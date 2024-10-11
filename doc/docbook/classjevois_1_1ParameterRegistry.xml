@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ParameterRegistry">
+<title>jevois::ParameterRegistry Class Reference</title>
+<indexterm><primary>jevois::ParameterRegistry</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ParameterRegistry.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>与组件相关的所有参数的简单注册表 </para>
+
+
+
+<para>此注册表允许循环或搜索组件中的给定参数。 </para>
+<para>
+Definition at line 33 of file ParameterRegistry.H.</para>
+Inheritance diagram for jevois::ParameterRegistry:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterRegistry__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ParameterRegistry_1a02d5c9fa250dd8f30435dc0c1c056624">~ParameterRegistry</link> ()</para>
+
+<para>用于安全继承的虚析构函数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterRegistry_1adf4ceddeff80e01f0b5834a07375bc79">addParameter</link> (<link linkend="_classjevois_1_1ParameterBase">ParameterBase</link> *const param)</para>
+
+<para>Parameter 类使用此方法在构造时向其所属的 <link linkend="_classjevois_1_1Component">Component</link> 注册自身 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterRegistry_1a7d94666529bf485a4842809b1700e777">removeParameter</link> (<link linkend="_classjevois_1_1ParameterBase">ParameterBase</link> *const param)</para>
+
+<para>Parameter 类使用此方法在其所属的 <link linkend="_classjevois_1_1Component">Component</link> 销毁时取消注册 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterRegistry_1a2821f71a96a7c2fd25a0c1cea65477cb">callbackInitCall</link> ()</para>
+
+<para>对于所有具有从未调用过的回调的参数，使用默认参数值调用它； </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterRegistry_1a90717717700965c100968cff0188e244">Component</link></para>
+
+<para>允许 <link linkend="_classjevois_1_1Component">Component</link> 和 <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link> 访问我们的注册表数据，其他所有人都被锁定 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>class <link linkend="_classjevois_1_1ParameterRegistry_1a50d041c305f4de6136af16e3a190215f">DynamicParameter</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterRegistry_1a02d5c9fa250dd8f30435dc0c1c056624"/>    <section>
+    <title>~ParameterRegistry()</title>
+<indexterm><primary>~ParameterRegistry</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>~ParameterRegistry</secondary></indexterm>
+<para><computeroutput>jevois::ParameterRegistry::~ParameterRegistry ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚析构函数 </para>
+</para>
+<para>
+Definition at line 25 of file ParameterRegistry.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterRegistry_1adf4ceddeff80e01f0b5834a07375bc79"/>    <section>
+    <title>addParameter()</title>
+<indexterm><primary>addParameter</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>addParameter</secondary></indexterm>
+<para><computeroutput>void jevois::ParameterRegistry::addParameter (<link linkend="_classjevois_1_1ParameterBase">jevois::ParameterBase</link> *const param)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter 类使用此方法在构造时向其所属的 <link linkend="_classjevois_1_1Component">Component</link> 注册自身 </para>
+</para>
+<para>
+Definition at line 29 of file ParameterRegistry.C.</para>
+<para>
+References JEVOIS_TRACE, LDEBUG, LFATAL, and jevois::ParameterBase::name().</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterRegistry_1a2821f71a96a7c2fd25a0c1cea65477cb"/>    <section>
+    <title>callbackInitCall()</title>
+<indexterm><primary>callbackInitCall</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>callbackInitCall</secondary></indexterm>
+<para><computeroutput>void jevois::ParameterRegistry::callbackInitCall ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>对于所有具有从未调用过的回调的参数，使用默认参数值调用它； </para>
+</para>
+<para>
+Definition at line 63 of file ParameterRegistry.C.</para>
+<para>
+References JEVOIS_TRACE.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterRegistry_1a7d94666529bf485a4842809b1700e777"/>    <section>
+    <title>removeParameter()</title>
+<indexterm><primary>removeParameter</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>removeParameter</secondary></indexterm>
+<para><computeroutput>void jevois::ParameterRegistry::removeParameter (<link linkend="_classjevois_1_1ParameterBase">jevois::ParameterBase</link> *const param)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Parameter 类使用此方法在其所属的 <link linkend="_classjevois_1_1Component">Component</link> 销毁时取消注册 </para>
+</para>
+<para>
+Definition at line 44 of file ParameterRegistry.C.</para>
+<para>
+References JEVOIS_TRACE, LDEBUG, LERROR, and jevois::ParameterBase::name().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterRegistry_1a90717717700965c100968cff0188e244"/>    <section>
+    <title>Component</title>
+<indexterm><primary>Component</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>Component</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1Component">Component</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+
+<para>允许 <link linkend="_classjevois_1_1Component">Component</link> 和 <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link> 访问我们的注册表数据，其他所有人都被锁定 </para>
+</para>
+<para>
+Definition at line 51 of file ParameterRegistry.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterRegistry_1a50d041c305f4de6136af16e3a190215f"/>    <section>
+    <title>DynamicParameter</title>
+<indexterm><primary>DynamicParameter</primary><secondary>jevois::ParameterRegistry</secondary></indexterm>
+<indexterm><primary>jevois::ParameterRegistry</primary><secondary>DynamicParameter</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>friend class <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 52 of file ParameterRegistry.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Component/<link linkend="_ParameterRegistry_8H">ParameterRegistry.H</link>src/jevois/Component/<link linkend="_ParameterRegistry_8C">ParameterRegistry.C</link></section>
+</section>

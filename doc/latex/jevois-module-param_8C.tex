@@ -1,0 +1,41 @@
+\hypertarget{jevois-module-param_8C}{}\doxysubsection{src/\+Apps/jevois-\/module-\/param.C File Reference}
+\label{jevois-module-param_8C}\index{src/Apps/jevois-\/module-\/param.C@{src/Apps/jevois-\/module-\/param.C}}
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Mapping.\+H$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+Include dependency graph for jevois-\/module-\/param.C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jevois-module-param_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{jevois-module-param_8C_abf9e6b7e6f15df4b525a2e7705ba3089}{main}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em 解析 videomappings.\+cfg 并输出要传递给 jevois 内核模块的字符串 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{jevois-module-param_8C_abf9e6b7e6f15df4b525a2e7705ba3089}\label{jevois-module-param_8C_abf9e6b7e6f15df4b525a2e7705ba3089}} 
+\index{jevois-\/module-\/param.C@{jevois-\/module-\/param.C}!main@{main}}
+\index{main@{main}!jevois-\/module-\/param.C@{jevois-\/module-\/param.C}}
+\doxyparagraph{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+解析 videomappings.\+cfg 并输出要传递给 jevois 内核模块的字符串 
+
+创建这个小应用程序是为了通过使用完全相同的配置文件解析和排序代码（在 Video\+Mapping 中）来确保内核驱动程序和用户代码之间的 完美一致性。 
+
+Definition at line 28 of file jevois-\/module-\/param.\+C.
+
+
+
+References jevois\+::\+Video\+Mapping\+::fps\+To\+Uvc(), J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+G\+I\+N\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+F\+I\+LE, L\+F\+A\+T\+AL, jevois\+::log\+End(), jevois\+::log\+Level, and jevois\+::video\+Mappings\+From\+Stream().
+

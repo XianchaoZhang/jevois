@@ -57,7 +57,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkTPU::inputShapes()
 {
   if (ready() == false) LFATAL("Network is not ready");
   
-  // Shapes are embedded in the network file, but can be overridden:
+  // 形状嵌入在网络文件中，但可以被覆盖：
   std::string const inshapes = intensors::get();
   if (inshapes.empty() == false) return jevois::dnn::parseTensorSpecs(inshapes);
 
@@ -80,7 +80,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkTPU::outputShapes()
 {
   if (ready() == false) LFATAL("Network is not ready");
 
-  // Shapes are embedded in the network file, but can be overridden:
+  // 形状嵌入在网络文件中，但可以被覆盖：
   std::string const outshapes = outtensors::get();
   if (outshapes.empty() == false) return jevois::dnn::parseTensorSpecs(outshapes);
 
@@ -101,7 +101,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkTPU::outputShapes()
 // ####################################################################################################
 void jevois::dnn::NetworkTPU::load()
 {
-  // Need to nuke the network first if it exists or we could run out of RAM:
+  // 如果网络存在，则需要先将其清除，否则我们可能会耗尽 RAM：
   itsInterpreter.reset();
   itsModel.reset();
   itsErrorReporter.itsErrors.clear();
@@ -179,7 +179,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkTPU::doprocess(std::vector<cv::Mat> con
     auto * itensor = itsInterpreter->tensor(input_indices[b]);
     if (itensor == nullptr) LFATAL("Network has Null input tensor " << b);
 
-    // Make sure input dims are a match:
+    // 确保输入 dims 匹配：
     TfLiteIntArray const & tfindims = *itensor->dims;
     cv::MatSize const & cvindims = cvin.size;
     for (int i = 0; i < tfindims.size; ++i)
@@ -187,13 +187,13 @@ std::vector<cv::Mat> jevois::dnn::NetworkTPU::doprocess(std::vector<cv::Mat> con
         LFATAL("Input " << b << " mismatch: blob is " << jevois::dnn::shapestr(cvin) <<
                " but network wants " << jevois::dnn::shapestr(itensor));
 
-    // Make sure total sizes in bytes are a match too:
+    // 确保总大小（以字节为单位）也匹配：
     size_t const cvsiz = cvin.total() * cvin.elemSize();
     size_t const tfsiz = itensor->bytes;
     if (cvsiz != tfsiz) LFATAL("Input " << b << " size mismatch: blob has " << cvsiz <<
                                " but network wants " << tfsiz << " bytes. Maybe type is wrong in intensors?");
 
-    // Copy input blob to input tensor:
+    // 将输入 blob 复制到输入张量：
     uint8_t * input = tflite::GetTensorData<uint8_t>(itensor);
     if (input == nullptr) LFATAL("Input tensor " << b << " is null in network");
     std::memcpy(input, cvin.data, cvsiz);
@@ -213,12 +213,12 @@ std::vector<cv::Mat> jevois::dnn::NetworkTPU::doprocess(std::vector<cv::Mat> con
     auto const * otensor = itsInterpreter->tensor(output_indices[o]);
     if (otensor == nullptr) LFATAL("Network produced Null output tensor " << o);
 
-    // Allocate an OpenCV output array of dims that match our output tensor:
+    // 分配一个与我们的输出张量匹配的 OpenCV 输出 dims 数组：
     TfLiteIntArray const & tfdims = *otensor->dims;
     std::vector<int> cvdims; size_t sz = 1;
     for (int i = 0; i < tfdims.size; ++i) { cvdims.emplace_back(tfdims.data[i]); sz *= tfdims.data[i]; }
 
-    // Convert/copy output tensor data to OpenCV arrays:
+    // 将输出张量数据转换/复制到 OpenCV 数组：
     TfLiteType const ot = otensor->type;
     std::string const otname = TfLiteTypeGetName(ot);
     bool notdone = true;
@@ -250,7 +250,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkTPU::doprocess(std::vector<cv::Mat> con
     
     if (notdone)
     {
-      // We just want to copy the data untouched, except that OpenCV does not support as many pixel types as tensorflow:
+      // 我们只想复制不受影响的数据，但 OpenCV 不支持像 tensorflow 那样多的像素类型：
       switch (ot)
       {
       case kTfLiteInt64: // used by DeepLabV3. Just convert to int32:

@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ParameterBase">
+<title>jevois::ParameterBase Class Reference</title>
+<indexterm><primary>jevois::ParameterBase</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Parameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Base class for Parameter. </para>
+
+
+
+<para>将字符串接口公开给 Parameter，而派生模板类将公开 value-based 接口。 </para>
+<para>
+Definition at line 113 of file Parameter.H.</para>
+Inheritance diagram for jevois::ParameterBase:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ParameterBase__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ParameterBase_1afb8e2a6c43ef97c7625c2d1a064cde4c">ParameterBase</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ParameterBase_1abc9a5ddc1a05f3ee91a17b0dd03174ed">~ParameterBase</link> ()</para>
+
+<para>Destructor, 将从其所有者组件中删除参数 </para>
+</listitem>
+            <listitem><para>virtual const std::string &amp; <link linkend="_classjevois_1_1ParameterBase_1a8117ea414837acfaa3c194406ab3b6dd">name</link> () const =0</para>
+
+<para>Get the parameter name. </para>
+</listitem>
+            <listitem><para>virtual std::string <link linkend="_classjevois_1_1ParameterBase_1a6cee45eb55e639246f471ccac72e95ea">descriptor</link> () const =0</para>
+
+<para>获取参数完全限定名称，也称为描述符，包括拥有 <link linkend="_classjevois_1_1Component">Component</link> 和所有父组件的名称 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ParameterBase_1a73b52118989ca2cae2632f5c710035f4">strset</link> (std::string const &amp;valstring)=0</para>
+
+<para>从其字符串表示形式设置值 </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ParameterBase_1a3ae3dc26472435191e90b9f4db1951aa">strget</link> () const =0</para>
+
+<para>Get the value as a string. </para>
+</listitem>
+            <listitem><para>virtual const <link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> <link linkend="_classjevois_1_1ParameterBase_1ac3654762a1c846ada35e56bf2fdafe64">summary</link> () const =0</para>
+
+<para>Get summary info about this parameter. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ParameterBase_1aeb82f8d408f72e7490f5a25cf41e48c5">freeze</link> (bool doit)</para>
+
+<para>冻结或取消冻结一个参数；冻结的参数不能被 set()，但是仍然允许 get() </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ParameterBase_1add20d4eb71c8f56abf970cdf2e171ade">frozen</link> () const</para>
+
+<para>Returns whether parameter is frozen. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1ParameterBase_1a6460f1a7cecaa8e651f8d77c4721358d">reset</link> ()=0</para>
+
+<para>Reset this parameter to its default value. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>boost::shared_mutex <link linkend="_classjevois_1_1ParameterBase_1aaf5684bf44c88b81560f482181af04d3">itsMutex</link></para>
+
+<para>用于保护参数值的互斥锁 </para>
+</listitem>
+            <listitem><para>volatile bool <link linkend="_classjevois_1_1ParameterBase_1a42a8faeaa6a3c56aa415d9793299ee8a">itsFrozen</link></para>
+
+<para>为 true 时，参数被冻结（只读，不会显示在帮助消息中） </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ParameterBase_1a9fcd18166d07b16f30274eb6237fda8b">itsVirgin</link></para>
+
+<para>参数尚未明确设置，需要在初始化时调用回调（如果有） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterBase_1a1b0e830b1463dc40f819202e817bb307">ParameterRegistry</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterBase_1afb8e2a6c43ef97c7625c2d1a064cde4c"/>    <section>
+    <title>ParameterBase()</title>
+<indexterm><primary>ParameterBase</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>ParameterBase</secondary></indexterm>
+<para><computeroutput>jevois::ParameterBase::ParameterBase ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1abc9a5ddc1a05f3ee91a17b0dd03174ed"/>    <section>
+    <title>~ParameterBase()</title>
+<indexterm><primary>~ParameterBase</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>~ParameterBase</secondary></indexterm>
+<para><computeroutput>virtual jevois::ParameterBase::~ParameterBase ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor, 将从其所有者组件中删除参数 </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterBase_1a6cee45eb55e639246f471ccac72e95ea"/>    <section>
+    <title>descriptor()</title>
+<indexterm><primary>descriptor</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>descriptor</secondary></indexterm>
+<para><computeroutput>virtual std::string jevois::ParameterBase::descriptor ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取参数完全限定名称，也称为描述符，包括拥有 <link linkend="_classjevois_1_1Component">Component</link> 和所有父组件的名称 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1ace71e5059c62014c4e4498c4515360c4">jevois::ParameterCore&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1aeb82f8d408f72e7490f5a25cf41e48c5"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::ParameterBase::freeze (bool doit)</computeroutput></para><para>
+
+<para>冻结或取消冻结一个参数；冻结的参数不能被 set()，但是仍然允许 get() </para>
+</para>
+<para>
+Referenced by jevois::Component::freezeParam().</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1add20d4eb71c8f56abf970cdf2e171ade"/>    <section>
+    <title>frozen()</title>
+<indexterm><primary>frozen</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>frozen</secondary></indexterm>
+<para><computeroutput>bool jevois::ParameterBase::frozen ( ) const</computeroutput></para><para>
+
+<para>Returns whether parameter is frozen. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1a8117ea414837acfaa3c194406ab3b6dd"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>virtual const std::string&amp; jevois::ParameterBase::name ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get the parameter name. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1a2f72b49144d03843dad2e84b0eade908">jevois::ParameterCore&lt; T &gt;</link>.</para>
+<para>
+Referenced by jevois::ParameterRegistry::addParameter(), and jevois::ParameterRegistry::removeParameter().</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1a6460f1a7cecaa8e651f8d77c4721358d"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>virtual void jevois::ParameterBase::reset ( )<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Reset this parameter to its default value. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1ad4816cae3f11bb5acb7a154a8de6385f">jevois::ParameterCore&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1a3ae3dc26472435191e90b9f4db1951aa"/>    <section>
+    <title>strget()</title>
+<indexterm><primary>strget</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>strget</secondary></indexterm>
+<para><computeroutput>virtual const std::string jevois::ParameterBase::strget ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get the value as a string. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1a127d83697e47a6ec36fee2dee9bb77dc">jevois::ParameterCore&lt; T &gt;</link>.</para>
+<para>
+Referenced by jevois::Component::getParamString().</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1a73b52118989ca2cae2632f5c710035f4"/>    <section>
+    <title>strset()</title>
+<indexterm><primary>strset</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>strset</secondary></indexterm>
+<para><computeroutput>virtual void jevois::ParameterBase::strset (std::string const &amp; valstring)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>从其字符串表示形式设置值 </para>
+</para>
+
+<para>如果给定的字符串不能转换为 Parameter 值，或者该值根据我们的有效值规范无效或被 Parameter 的回调拒绝（如果有）， 则 
+                <formalpara>
+                    <title>
+Exceptions                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>std::range_error。</entry>
+                                <entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1a1121687474dc9e676217545de1ac3040">jevois::ParameterCore&lt; T &gt;</link>.</para>
+<para>
+Referenced by jevois::Component::setParamString().</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1ac3654762a1c846ada35e56bf2fdafe64"/>    <section>
+    <title>summary()</title>
+<indexterm><primary>summary</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>summary</secondary></indexterm>
+<para><computeroutput>virtual const <link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> jevois::ParameterBase::summary ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get summary info about this parameter. </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1ParameterCore_1a14f89b6c9cec27634da16afa912289c4">jevois::ParameterCore&lt; T &gt;</link>.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterBase_1a1b0e830b1463dc40f819202e817bb307"/>    <section>
+    <title>ParameterRegistry</title>
+<indexterm><primary>ParameterRegistry</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>ParameterRegistry</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1ParameterRegistry">ParameterRegistry</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 154 of file Parameter.H.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ParameterBase_1a42a8faeaa6a3c56aa415d9793299ee8a"/>    <section>
+    <title>itsFrozen</title>
+<indexterm><primary>itsFrozen</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>itsFrozen</secondary></indexterm>
+<para><computeroutput>volatile bool jevois::ParameterBase::itsFrozen<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>为 true 时，参数被冻结（只读，不会显示在帮助消息中） </para>
+</para>
+<para>
+Definition at line 150 of file Parameter.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1aaf5684bf44c88b81560f482181af04d3"/>    <section>
+    <title>itsMutex</title>
+<indexterm><primary>itsMutex</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>itsMutex</secondary></indexterm>
+<para><computeroutput>boost::shared_mutex jevois::ParameterBase::itsMutex<computeroutput>[mutable]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>用于保护参数值的互斥锁 </para>
+</para>
+<para>
+Definition at line 149 of file Parameter.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ParameterBase_1a9fcd18166d07b16f30274eb6237fda8b"/>    <section>
+    <title>itsVirgin</title>
+<indexterm><primary>itsVirgin</primary><secondary>jevois::ParameterBase</secondary></indexterm>
+<indexterm><primary>jevois::ParameterBase</primary><secondary>itsVirgin</secondary></indexterm>
+<para><computeroutput>bool jevois::ParameterBase::itsVirgin<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>参数尚未明确设置，需要在初始化时调用回调（如果有） </para>
+</para>
+<para>
+Definition at line 151 of file Parameter.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_Parameter_8H">Parameter.H</link></section>
+</section>

@@ -1,0 +1,208 @@
+\hypertarget{classjevois_1_1GPUtexture}{}\doxysubsection{jevois\+::G\+P\+Utexture Class Reference}
+\label{classjevois_1_1GPUtexture}\index{jevois::GPUtexture@{jevois::GPUtexture}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Utexture.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple class to hold an Open\+GL texture. 
+
+Open\+GL textures are used to transfer image data from C\+PU to G\+PU and then allow the G\+PU to perform some processing on the data. Processing is typically done by using \char`\"{}shader\char`\"{} G\+PU programs that transform the texture\textquotesingle{}s pixel data and render it, in some user-\/programmable way. 
+
+Definition at line 28 of file G\+P\+Utexture.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUtexture_af84db966d1623be0791676b750b1b604}{G\+P\+Utexture}} (G\+Lsizei width, G\+Lsizei height, G\+Lenum format, bool create\+Framebuffer)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GPUtexture_aa31324ac112914438192b596b2fa891a}{$\sim$\+G\+P\+Utexture}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, frees the texture in Open\+GL. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUtexture_a01c9026de6b30922b52929f169ed8746}{set\+Pixels}} (void const $\ast$data)
+\begin{DoxyCompactList}\small\item\em Copy pixel data from memory location to the texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUtexture_a43042ab7bb40222e7a9b8b81543c311e}{get\+Pixels}} (void $\ast$data) const
+\begin{DoxyCompactList}\small\item\em Copy pixel data from the texture to already-\/allocated memory location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const G\+Lsizei \mbox{\hyperlink{classjevois_1_1GPUtexture_ac872dcb438ae941b711486ffc805deff}{Width}}
+\item 
+const G\+Lsizei \mbox{\hyperlink{classjevois_1_1GPUtexture_a4f23e11ef561ba6af839aa5b2fb0f4d8}{Height}}
+\item 
+const G\+Lenum \mbox{\hyperlink{classjevois_1_1GPUtexture_ab22c8f36424b1897b1e92b75eb6c6f77}{Format}}
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUtexture_a5f6aecbe4ee825e5656e0ec14847560e}{Id}}
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUtexture_a3232b14d753e1eed889c563126ac6ee2}{Framebuffer\+Id}}
+\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUtexture_a202e3d5533761facc08a706e735e222f}{Render\+Buffer\+Id}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_af84db966d1623be0791676b750b1b604}\label{classjevois_1_1GPUtexture_af84db966d1623be0791676b750b1b604}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!GPUtexture@{GPUtexture}}
+\index{GPUtexture@{GPUtexture}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{GPUtexture()}{GPUtexture()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Utexture\+::\+G\+P\+Utexture (\begin{DoxyParamCaption}\item[{G\+Lsizei}]{width,  }\item[{G\+Lsizei}]{height,  }\item[{G\+Lenum}]{format,  }\item[{bool}]{create\+Framebuffer }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+format should be as in gl\+Tex\+Image2\+D(), typically only G\+L\+\_\+\+R\+G\+BA or G\+L\+\_\+\+L\+U\+M\+I\+N\+A\+N\+CE are supported on embedded hardware platforms. 
+
+Definition at line 21 of file G\+P\+Utexture.\+C.
+
+
+
+References Format, Framebuffer\+Id, G\+L\+\_\+\+C\+H\+E\+CK, Height, Id, L\+D\+E\+B\+UG, L\+E\+R\+R\+OR, Render\+Buffer\+Id, and Width.
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_aa31324ac112914438192b596b2fa891a}\label{classjevois_1_1GPUtexture_aa31324ac112914438192b596b2fa891a}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!````~GPUtexture@{$\sim$GPUtexture}}
+\index{````~GPUtexture@{$\sim$GPUtexture}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{$\sim$GPUtexture()}{~GPUtexture()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Utexture\+::$\sim$\+G\+P\+Utexture (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, frees the texture in Open\+GL. 
+
+
+
+Definition at line 56 of file G\+P\+Utexture.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a43042ab7bb40222e7a9b8b81543c311e}\label{classjevois_1_1GPUtexture_a43042ab7bb40222e7a9b8b81543c311e}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!getPixels@{getPixels}}
+\index{getPixels@{getPixels}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{getPixels()}{getPixels()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Utexture\+::get\+Pixels (\begin{DoxyParamCaption}\item[{void $\ast$}]{data }\end{DoxyParamCaption}) const}
+
+
+
+Copy pixel data from the texture to already-\/allocated memory location. 
+
+data should have been allocated by caller and have the correct size given the textute width, height, and format. 
+
+Definition at line 87 of file G\+P\+Utexture.\+C.
+
+
+
+References G\+L\+\_\+\+C\+H\+E\+CK.
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a01c9026de6b30922b52929f169ed8746}\label{classjevois_1_1GPUtexture_a01c9026de6b30922b52929f169ed8746}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!setPixels@{setPixels}}
+\index{setPixels@{setPixels}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{setPixels()}{setPixels()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Utexture\+::set\+Pixels (\begin{DoxyParamCaption}\item[{void const $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Copy pixel data from memory location to the texture. 
+
+data should have been allocated by caller and have the correct size given the textute width, height, and format. 
+
+Definition at line 64 of file G\+P\+Utexture.\+C.
+
+
+
+References G\+L\+\_\+\+C\+H\+E\+CK.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_ab22c8f36424b1897b1e92b75eb6c6f77}\label{classjevois_1_1GPUtexture_ab22c8f36424b1897b1e92b75eb6c6f77}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!Format@{Format}}
+\index{Format@{Format}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{Format}{Format}}
+{\footnotesize\ttfamily const G\+Lenum jevois\+::\+G\+P\+Utexture\+::\+Format}
+
+
+
+Definition at line 51 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a3232b14d753e1eed889c563126ac6ee2}\label{classjevois_1_1GPUtexture_a3232b14d753e1eed889c563126ac6ee2}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!FramebufferId@{FramebufferId}}
+\index{FramebufferId@{FramebufferId}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{FramebufferId}{FramebufferId}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Utexture\+::\+Framebuffer\+Id}
+
+
+
+Definition at line 53 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a4f23e11ef561ba6af839aa5b2fb0f4d8}\label{classjevois_1_1GPUtexture_a4f23e11ef561ba6af839aa5b2fb0f4d8}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!Height@{Height}}
+\index{Height@{Height}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{Height}{Height}}
+{\footnotesize\ttfamily const G\+Lsizei jevois\+::\+G\+P\+Utexture\+::\+Height}
+
+
+
+Definition at line 50 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a5f6aecbe4ee825e5656e0ec14847560e}\label{classjevois_1_1GPUtexture_a5f6aecbe4ee825e5656e0ec14847560e}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!Id@{Id}}
+\index{Id@{Id}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Utexture\+::\+Id}
+
+
+
+Definition at line 52 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_a202e3d5533761facc08a706e735e222f}\label{classjevois_1_1GPUtexture_a202e3d5533761facc08a706e735e222f}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!RenderBufferId@{RenderBufferId}}
+\index{RenderBufferId@{RenderBufferId}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{RenderBufferId}{RenderBufferId}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Utexture\+::\+Render\+Buffer\+Id}
+
+
+
+Definition at line 54 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+\mbox{\Hypertarget{classjevois_1_1GPUtexture_ac872dcb438ae941b711486ffc805deff}\label{classjevois_1_1GPUtexture_ac872dcb438ae941b711486ffc805deff}} 
+\index{jevois::GPUtexture@{jevois::GPUtexture}!Width@{Width}}
+\index{Width@{Width}!jevois::GPUtexture@{jevois::GPUtexture}}
+\doxyparagraph{\texorpdfstring{Width}{Width}}
+{\footnotesize\ttfamily const G\+Lsizei jevois\+::\+G\+P\+Utexture\+::\+Width}
+
+
+
+Definition at line 49 of file G\+P\+Utexture.\+H.
+
+
+
+Referenced by G\+P\+Utexture().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUtexture_8H}{G\+P\+Utexture.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUtexture_8C}{G\+P\+Utexture.\+C}}\end{DoxyCompactItemize}

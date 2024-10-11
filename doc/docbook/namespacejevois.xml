@@ -1,0 +1,1020 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_namespacejevois">
+<title>jevois Namespace Reference</title>
+<indexterm><primary>jevois</primary></indexterm>
+<section>
+<title> </title>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+
+<para>有关更多详细信息，请参阅 <link xlink:href="http://jevois.org/doc/html/topics.html">主题</link>。 </para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois_1_1coords">coords</link></para>
+
+<para>用于将坐标从相机分辨率转换为标准坐标的辅助函数的命名空间 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1details">details</link></para>
+
+<para>Details that do not affect users of JeVois code. </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1dnn">dnn</link></para>
+
+<para>深度神经网络 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1font">font</link></para>
+
+<para>Fonts available for drawing text strings into <link linkend="_classjevois_1_1RawImage">RawImage</link>. </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1python">python</link></para>
+
+<para>Python 相关的帮助程序和函数 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1rawimage">rawimage</link></para>
+
+<para>用于 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换、处理、绘制的函数 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1rgb565">rgb565</link></para>
+
+<para>辅助 RGB565 颜色 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1shader">shader</link></para>
+
+<para>OpenGL shaders for video rendering. </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1yuyv">yuyv</link></para>
+
+<para>辅助 YUYV 颜色 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1BoundedBuffer">BoundedBuffer</link></para>
+
+<para>线程安全同步生产者/消费者队列 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Camera">Camera</link></para>
+
+<para>JeVois camera driver class - 从 Video4Linux 相机传感器抓取帧 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1CameraCalibration">CameraCalibration</link></para>
+
+<para>用于相机校准的辅助类，允许某些模块计算物体的 3D 位置 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1CameraDevice">CameraDevice</link></para>
+
+<para>附件类，用于保存与 V4L2 相机设备相关的所有数据 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ChatBox">ChatBox</link></para>
+
+<para>A simple helper class for a chat box rendered in ImGui. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Component">Component</link></para>
+
+<para>模型层次结构的组成部分。 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1DMPdata">DMPdata</link></para>
+
+<para>DMP 数据（数字运动处理器） </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link></para>
+
+<para>用于打开共享对象 (.so) 文件并加载其中包含的函数的类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1DynamicParameter">DynamicParameter</link></para>
+
+<para>运行时添加到组件的动态参数 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1EditorItem">EditorItem</link></para>
+
+<para>Helper class to represent a <link linkend="_classjevois_1_1GUIeditor">GUIeditor</link> file in a pull-down menu. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Engine">Engine</link></para>
+
+<para>JeVois processing engine - 从相机传感器获取图像，对其进行处理，并通过 USB 发送结果。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Gadget">Gadget</link></para>
+
+<para>JeVois 小工具驱动程序 - 向通过 USB 连接的主机计算机公开 uvcvideo 接口 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GPUimage">GPUimage</link></para>
+
+<para>Class to hold a <link linkend="_classjevois_1_1GPUtexture">GPUtexture</link>, <link linkend="_classjevois_1_1GPUprogram">GPUprogram</link>, and other data associated with rendering an image in OpenGL. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GPUprogram">GPUprogram</link></para>
+
+<para>Simple class to load and compile some OpenGL-ES program. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GPUshader">GPUshader</link></para>
+
+<para>Simple class to load and compile some OpenGL-ES shader code. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GPUtexture">GPUtexture</link></para>
+
+<para>Simple class to hold an OpenGL texture. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GPUtextureDmaBuf">GPUtextureDmaBuf</link></para>
+
+<para>Simple class to hold an OpenGL texture with in-GPU pixel format conversion and DMABUF acceleration. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIconsole">GUIconsole</link></para>
+
+<para>Simple console with coloring and completion. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIeditor">GUIeditor</link></para>
+
+<para>Editor panel for JeVois-Pro GUI. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link></para>
+
+<para>Helper class to assist modules in creating graphical and GUI elements. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIhelperPython">GUIhelperPython</link></para>
+
+<para>包装 <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> 以供 Python 使用 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1GUIserial">GUIserial</link></para>
+
+<para>Simple class to monitor a serial port in the JeVois-Pro GUI. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ICM20948">ICM20948</link></para>
+
+<para>TDK InvenSense ICM-20948 9DOF <link linkend="_classjevois_1_1IMU">IMU</link> 高级驱动程序 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ImGuiBackend">ImGuiBackend</link></para>
+
+<para>Backend for ImGui on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ImGuiBackendMALI">ImGuiBackendMALI</link></para>
+
+<para>BackendMALI for ImGui on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ImGuiImage">ImGuiImage</link></para>
+
+<para>Wrapper for an image that can be rendered into ImGui. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1IMU">IMU</link></para>
+
+<para><link linkend="_classjevois_1_1ICM20948">ICM20948</link> 惯性测量单元 (<link linkend="_classjevois_1_1IMU">IMU</link>) 的抽象接口 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1IMUdata">IMUdata</link></para>
+
+<para><link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1IMUi2c">IMUi2c</link></para>
+
+<para>具有与摄像头传感器共享的 I2C 接口的 IMU，例如 JeVois-A33 AR0135 摄像头传感器板上的 <link linkend="_classjevois_1_1ICM20948">ICM20948</link> </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1IMUrawData">IMUrawData</link></para>
+
+<para>原始 <link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1IMUspi">IMUspi</link></para>
+
+<para>具有 SPI 接口的 IMU，例如 JeVois-Pro IMX290 摄像头传感器板上的 <link linkend="_classjevois_1_1ICM20948">ICM20948</link> <link linkend="_classjevois_1_1IMU">IMU</link> </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFrame">InputFrame</link></para>
+
+<para>原始相机输入帧周围的异常安全包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link></para>
+
+<para>包装 Python 使用的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1JpegCompressor">JpegCompressor</link></para>
+
+<para>turbojpeg 压缩器的简单单例包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Log">Log</link></para>
+
+<para>Logger 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Manager">Manager</link></para>
+
+<para>组件对象层次结构的管理器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Module">Module</link></para>
+
+<para>视觉处理模块的虚基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1MovieInput">MovieInput</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1MovieOutput">MovieOutput</link></para>
+
+<para>使用 OpenCV 视频编码将视频输出到电影文件 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1ObjDetect">ObjDetect</link></para>
+
+<para>一个用于存储对象检测结果的简单结构 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1ObjReco">ObjReco</link></para>
+
+<para>一个用于存储对象识别结果的简单结构 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link></para>
+
+<para>围绕要通过 USB 发送的原始图像的异常安全包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1OutputFramePython">OutputFramePython</link></para>
+
+<para>Python 使用的 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4">Parameter&lt; Param, Tail ... &gt;</link></para>
+
+<para>附加到组件的一组参数。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterBase">ParameterBase</link></para>
+
+<para>Base class for Parameter. </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1ParameterCategory">ParameterCategory</link></para>
+
+<para>多个 <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> 定义可以属于的类别 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterCore">ParameterCore</link></para>
+
+<para><link linkend="_classjevois_1_1Component">Component</link> 的可变参数，核心类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link></para>
+
+<para>参数定义 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterDefBase">ParameterDefBase</link></para>
+
+<para>参数定义的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterRegistry">ParameterRegistry</link></para>
+
+<para>与组件相关的所有参数的简单注册表 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link></para>
+
+<para><link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> 提供有关参数的摘要 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Profiler">Profiler</link></para>
+
+<para>简单的 profiler 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonModule">PythonModule</link></para>
+
+<para>包装器模块允许用户开发用 Python 编写的新模块 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonParameter">PythonParameter</link></para>
+
+<para>python 中 jevois 参数的包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1PythonWrapper">PythonWrapper</link></para>
+
+<para>辅助类，用于从 C++ 运行 Python 代码 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Range">Range</link></para>
+
+<para>通用 <link linkend="_classjevois_1_1Range">Range</link> 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1RawImage">RawImage</link></para>
+
+<para>来自 V4L2 <link linkend="_classjevois_1_1Camera">Camera</link> 和/或发送到 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 的原始图像 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Semaphore">Semaphore</link></para>
+
+<para>一个简单的信号量 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Serial">Serial</link></para>
+
+<para>串行端口接口 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Singleton">Singleton</link></para>
+
+<para>一个通用的 singleton 类，用于强制一个对象的单个实例 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StdioInterface">StdioInterface</link></para>
+
+<para>基于字符串的用户界面，在主机上使用的简单终端输入/输出 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StdModule">StdModule</link></para>
+
+<para>支持标准化串行消息的模块的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StepRange">StepRange</link></para>
+
+<para>具有 step 的通用 range 类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ThreadPool">ThreadPool</link></para>
+
+<para>具有 CPU 亲和力的线程池 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1timed__lock__guard">timed_lock_guard</link></para>
+
+<para>在 std::timed_mutex 上获取锁对象，或在等待 1 秒后 LFATAL </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Timer">Timer</link></para>
+
+<para>简单计时器类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1TimerOne">TimerOne</link></para>
+
+<para>简单的一次性计时器类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1UserInterface">UserInterface</link></para>
+
+<para>基于字符串的用户界面的抽象基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecBase">ValidValuesSpecBase</link></para>
+
+<para>用于为类型指定一组有效值的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecList">ValidValuesSpecList</link></para>
+
+<para>有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecNone">ValidValuesSpecNone</link></para>
+
+<para>Open/None 有效值规范，T 可以采用的任何值都有效 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecRange">ValidValuesSpecRange</link></para>
+
+<para>基于范围的有效值规范，包含边界 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecRegex">ValidValuesSpecRegex</link></para>
+
+<para>基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ValidValuesSpecStepRange">ValidValuesSpecStepRange</link></para>
+
+<para>基于 <link linkend="_classjevois_1_1StepRange">StepRange</link> 的有效值规范，包含边界 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link></para>
+
+<para>V4L2 视频缓冲区，保存在 shared_ptr 中 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoBuffers">VideoBuffers</link></para>
+
+<para>V4L2 视频帧（相机或小工具）的缓冲区集合，带有与 MMAP 区域挂钩的钩子 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayBackend">VideoDisplayBackend</link></para>
+
+<para>Backend for VideoDisplay on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayBackendMALI">VideoDisplayBackendMALI</link></para>
+
+<para>Backend for VideoDisplay on JeVois-Pro host using MALI. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayGL">VideoDisplayGL</link></para>
+
+<para>视频输出到本地屏幕 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayGUI">VideoDisplayGUI</link></para>
+
+<para>使用基本 GUI 将视频输出到本地屏幕 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoInput">VideoInput</link></para>
+
+<para>视频输入的基类，将派生为 <link linkend="_classjevois_1_1Camera">Camera</link> 和 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link></para>
+
+<para>用于保存处理 <link linkend="_classjevois_1_1Engine">Engine</link> 的视频映射定义的简单结构 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link></para>
+
+<para>视频输出的基类。Gadget、MovieOutput、VideoDisplay 和 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> 均从其派生 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Watchdog">Watchdog</link></para>
+
+<para>简单的看门狗类 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">OptGUIhelper</link> = <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_classjevois_1_1GUIeditor_1a3c72a4e20c54a79e897c98c9390429c0">EditorSaveAction</link> </para>
+
+<para>Helper enum for actions to execute after saving a config file. </para>
+</listitem>
+            <listitem><para>enum <link linkend="_group__types_1ga12724887bc7648f2f888edb9c3055e3d">BlockingBehavior</link> { <link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2">BlockingBehavior::Block</link>, 
+<link linkend="_group__types_1gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f">BlockingBehavior::Throw</link>
+ }</para>
+
+<para>尝试无法立即完成的操作时的行为 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8775d20a2bef3f1548e85360e9608656">paramValToString</link> (T const &amp;val, std::string &amp;result)</para>
+
+<para>将 T 转换为字符串，供 jevois::Parameter 使用 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga828ed097b767a329b9ef81b25671af91">paramValToString&lt; unsigned char &gt;</link> (unsigned char const &amp;val, std::string &amp;result)</para>
+
+<para>将 T 转换为机器可读的字符串，专门将无符号字符转换为数字，而不是字符 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga9181607df247a37a9f6f3048fc5274f9">paramStringToVal</link> (std::string const &amp;valstring, T &amp;result)</para>
+
+<para>从字符串到 T 的机器可读转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;typename Q &gt; </para><para>void <link linkend="_group__parameterstrconv_1gab2ed13d224cb5afce6b018c5750bd376">paramValToString</link> (std::vector&lt; <link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link> &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的字符串输出，用于 ​​jevois::Parameter：输出 [<computeroutput>Element1</computeroutput>, <computeroutput>Element2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename Q &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga231b033ee2dd96aea6c349a50d81f28b">paramStringToVal</link> (std::string const &amp;valstring, std::vector&lt; <link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link> &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 [<computeroutput>Element1</computeroutput>, <computeroutput>Element2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename F , typename S &gt; </para><para>void <link linkend="_group__parameterstrconv_1gaf8c330b3092d43e1b51a4726c2c37490">paramValToString</link> (std::pair&lt; <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, S &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>first</computeroutput> <computeroutput>second</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename F , typename S &gt; </para><para>void <link linkend="_group__parameterstrconv_1gaa4d379683d33f681a73fd3dd7326cb24">paramStringToVal</link> (std::string const &amp;valstring, std::pair&lt; <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, S &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>first</computeroutput> <computeroutput>second</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1gad80d460be599086f5446ca420ec8c7e2">paramValToString</link> (cv::Point_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>x</computeroutput> <computeroutput>y</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga0401340fc2f5faba4060a8919e9f90b1">paramStringToVal</link> (std::string const &amp;valstring, cv::Point_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>x</computeroutput> <computeroutput>y</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1gae1463dc259923946a4b432c86cc36ffc">paramValToString</link> (cv::Size_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>width</computeroutput> <computeroutput>height</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga6e9f701bba18de827137f2569b6136bd">paramStringToVal</link> (std::string const &amp;valstring, cv::Size_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>width</computeroutput> <computeroutput>height</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga050076c5ac771a52a203c08b0fe21963">paramValToString</link> (cv::Scalar_&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>r</computeroutput> <computeroutput>g</computeroutput> <computeroutput>b</computeroutput> <computeroutput>a</computeroutput> </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga645ebe139c475a906c9d0ba3a3a2700e">paramStringToVal</link> (std::string const &amp;valstring, cv::Scalar_&lt; T &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>r</computeroutput> <computeroutput>g</computeroutput> <computeroutput>b</computeroutput> <computeroutput>a</computeroutput> 或子集模板 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8677d178b2ca79ef97fb448064cab026">paramValToString&lt; ImColor &gt;</link> (ImColor const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读输出为字符串，用于 jevois::Parameter: 输出 <computeroutput>R</computeroutput> <computeroutput>G</computeroutput> <computeroutput>B</computeroutput> <computeroutput>A，每个</computeroutput> 0..255 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga3b97261e1b34103c923492b251b16ade">paramStringToVal&lt; ImColor &gt;</link> (std::string const &amp;valstring, ImColor &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 <computeroutput>R</computeroutput> <computeroutput>G</computeroutput> <computeroutput>B</computeroutput> <computeroutput>A，每个</computeroutput> 0..255 </para>
+</listitem>
+            <listitem><para>template&lt;typename K , typename V &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga4f532edee49623462389446878802425">paramValToString</link> (std::map&lt; K, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读输出到字符串，用于 jevois::Parameter：输出 [<computeroutput>Key1:Value1</computeroutput>, <computeroutput>Key2:Value2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;typename K , typename V &gt; </para><para>void <link linkend="_group__parameterstrconv_1ga0589bb4a03f4ab3644ca150930a98e20">paramStringToVal</link> (std::string const &amp;valstring, std::map&lt; K, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> &gt; &amp;result)</para>
+
+<para>来自字符串的机器可读输入，用于 jevois::Parameter：读取 [<computeroutput>Key1:Value1</computeroutput>, <computeroutput>Key2:Value2</computeroutput>, ...] </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8434bf9159dcbaab41546816f39d3816">paramValToString&lt; bool &gt;</link> (bool const &amp;val, std::string &amp;result)</para>
+
+<para>将 bool 转换为机器可读的字符串，以便在 jevois::Parameter 中使用； </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga8500220c721730cb23bd49ba8f9b1a91">paramStringToVal&lt; bool &gt;</link> (std::string const &amp;valstring, bool &amp;result)</para>
+
+<para>从字符串到布尔值的机器可读转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga391a3919aabdde5c2f6c0a2ff92c201f">paramValToString&lt; std::string &gt;</link> (std::string const &amp;val, std::string &amp;result)</para>
+
+<para>机器可读的字符串到字符串的转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>void <link linkend="_group__parameterstrconv_1ga98169733c0aaff712d9484cd1f20a3e8">paramStringToVal&lt; std::string &gt;</link> (std::string const &amp;valstring, std::string &amp;result)</para>
+
+<para>机器可读的字符串到字符串的转换，用于 jevois::Parameter </para>
+</listitem>
+            <listitem><para><link linkend="_group__camerasensor_1ga3bb4c5f1d277f41f06b4e689d9f3b1dd">JEVOIS_DEFINE_ENUM_CLASS</link> (CameraSensor,(any)(imx290)(os08a10)(ar0234))</para>
+
+<para>不同传感器型号的枚举 </para>
+</listitem>
+            <listitem><para><link linkend="_group__camerasensor_1ga07ea2c95fcfd090f0afa39305ba0720c">JEVOIS_DEFINE_ENUM_CLASS</link> (CameraLens,(standard)(custom1)(custom2)(custom3)(custom4)(custom5))</para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__camerasensor_1gaee01f42d6948f5d178890b28663806af">sensorSupportsFormat</link> (CameraSensor s, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m)</para>
+
+<para>检查传感器是否支持给定的分辨率和帧速率 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__camerasensor_1ga6bc708204f2eb1175885c149ced0b4fd">sensorHasIMU</link> (CameraSensor s)</para>
+
+<para>检查传感器是否有 IMU（惯性测量单元） </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__camerasensor_1ga241cf199fdeeac006a137918af9bab0b">sensorPrepareSetFormat</link> (CameraSensor s, <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m, unsigned int &amp;capw, unsigned int &amp;caph, int &amp;preset)</para>
+
+<para>加载传感器预设（仅限 JeVois-Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__imu_1ga43ee011cc956b9d2d7a5ae46aa268bff">DMPpacketSize</link> (unsigned short ctl1, unsigned short ctl2)</para>
+
+<para>辅助函数根据选项确定 DMP 数据包大小 </para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> &gt; <link linkend="_namespacejevois_1a828fc05eea12bd9d7071a1bc561e1835">videoMappingsFromStream</link> (CameraSensor s, std::istream &amp;is, size_t &amp;defidx, bool checkso, bool hasgui)</para>
+
+<para>解析配置文件中的所有映射，并指出哪一个是默认的 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1gac5f7014e430b19db36d4284254f886ef">warnAndRethrowException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并重新抛出它 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga7460b83ad6c4523ba897c81362742027">warnAndIgnoreException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>便捷函数用于捕获异常、发出一些 LERROR（取决于类型）并忽略它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1gac577d140e95998b907a3d8ee82d8f9c5">warnAndRethrowParamCallbackException</link> (std::string const &amp;descriptor, std::string const &amp;strval)</para>
+
+<para>参数回调异常的便捷函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1a702884502b6ac843dada7c3f24e6e1fb">drawErrorImage</link> (std::string const &amp;errmsg, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;videoerrimg)</para>
+
+<para>将错误消息显示到 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__debugging_1ga41793c253cf663f59b715c0bd2dcc2ad">logSetEngine</link> (<link linkend="_classjevois_1_1Engine">Engine</link> *e)</para>
+
+<para>设置引擎，以便所有日志消息都转发到其串行端口 </para>
+</listitem>
+            <listitem><para>void <link linkend="_namespacejevois_1a98e29073164f0fa721c39c968bcafb36">logEnd</link> ()</para>
+
+<para>终止日志服务 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1gaede3301d7e76cf562b3c9326b7b3d686">getPythonExceptionString</link> (boost::python::error_already_set &amp;)</para>
+
+<para>Python 异常转换为字符串，以便我们可以将回溯打印到我们的 serlog stream. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga5cd0b0b867a9f033762819e8af37ca35">getSysInfoCPU</link> ()</para>
+
+<para>获取 CPU 信息： frequency, thermal, load </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1ga98e313acb940dfe5cb5168e8b0876ba8">getSysInfoMem</link> ()</para>
+
+<para>Get memory info. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__debugging_1gacab36569297392a9a62000609f3d2193">getSysInfoVersion</link> ()</para>
+
+<para>Get O.S. version info. </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a6ab540ea34f56b48165b563719c5cad5">getNumInstalledTPUs</link> ()</para>
+
+<para>获取此系统上存在的 Coral TPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a26961977d36a68b1cc6fb0f67298aa12">getNumInstalledVPUs</link> ()</para>
+
+<para>获取此系统上存在的 Myriad-X VPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1a4bc07166fd9b5ae7a021fcb04a170746">getNumInstalledNPUs</link> ()</para>
+
+<para>获取此系统上存在的 JeVois-Pro NPU 数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_namespacejevois_1aae7970fe8c32c8285c24c352ab960163">getNumInstalledSPUs</link> ()</para>
+
+<para>获取此系统上存在的 Hailo8 SPU 数量 </para>
+</listitem>
+            <listitem><para>int <link linkend="_namespacejevois_1a3c137ebcbbdda157639ae3e711568db2">getFanSpeed</link> ()</para>
+
+<para>获取风扇速度百分比，仅在 JeVois-Pro 平台上有意义，其他所有平台均返回 0 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_namespacejevois_1a49a55dd8be92ab5bd902dcd5ca560a66">opengl_error</link> (int err)</para>
+
+<para>Function to write OpenGL errors in clear witout requiring GLUT. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gaf446f726ba6d8e2d87aa87e5cd041518">convertYUYVtoYUV422</link> (unsigned char const *src, int width, int height, unsigned char *dst)</para>
+
+<para>辅助从打包的 YUYV 转换为平面 YUV422 </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gac8019b137a50caf3afe8f93b8041d815">compressBGRtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga055d9848dc85723e4429ac6b4f98812e">compressBGRtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 BGR cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gaf968b68fd408477de51a6fcf41be48d9">compressRGBtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga8a53f108718df36751b7b2b4fd16fbce">compressRGBtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 RGB cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gad721785df8a36bbc0081acf691b84cfc">compressRGBAtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gadd51281893168dd79429e9777eabe0e0">compressRGBAtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 RGBA cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gab4e9f0c744d97117a37eae05da2c2a6d">compressGRAYtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gab4829fbfa937795d50f95b3d60596a31">compressGRAYtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 Gray cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga6607626cad0258d69b6ead8d1ced4f52">rescaleCv</link> (cv::Mat const &amp;img, cv::Size const &amp;newdims)</para>
+
+<para>重新缩放 OpenCV 图像，选择正确的插值类型 </para>
+</listitem>
+            <listitem><para>template&lt;class Function , class... Args&gt; </para><para>std::future&lt; std::invoke_result_t&lt; std::decay_t&lt; Function &gt;, std::decay_t&lt; Args &gt;... &gt; &gt; <link linkend="_namespacejevois_1a5c82f5b2b9dd4a98d343f9e54eea0fff">async</link> (Function &amp;&amp;f, Args &amp;&amp;... args)</para>
+
+<para>使用线程池异步执行 </para>
+</listitem>
+            <listitem><para>template&lt;class Function , class... Args&gt; </para><para>std::future&lt; std::invoke_result_t&lt; std::decay_t&lt; Function &gt;, std::decay_t&lt; Args &gt;... &gt; &gt; <link linkend="_namespacejevois_1a5dbfbd62f0701adcef770280e0bc31f6">async_little</link> (Function &amp;&amp;f, Args &amp;&amp;... args)</para>
+
+<para>使用线程池异步执行 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::vector&lt; T &gt; <link linkend="_group__utils_1ga7649d6ce325acac1606bceec036f171b">joinall</link> (std::vector&lt; std::future&lt; T &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga019e31f64c16f1b7a51bd2676acddfb9">joinall</link> (std::vector&lt; std::future&lt; void &gt;&gt; &amp;fvec, bool multiline=true)</para>
+
+<para>从多个异步线程收集结果，这些线程都返回 T 结果 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__console_1gadb6b6c4de8c91afbd75b26fd21e1267c">isInputDevice</link> (int fd)</para>
+
+<para>指示此 fd（应来自 /dev/input/eventX）是否是键盘、鼠标等 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gac71712656cfebf518ed5700bf3e9e3ed">getConsoleFd</link> ()</para>
+
+<para>获取控制台的文件描述符 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__console_1gab9a802bcfa42386853cc58f86c5d023f">getActiveTTY</link> ()</para>
+
+<para>获取当前活动 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga4a8b4e6208cca24fc399107e48eb133c">muteKeyboard</link> (int tty, int &amp;kb_mode)</para>
+
+<para>防止 keystrokes 到达 tty </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__console_1ga5fffa3f01add1a9dab7f031361a01282">unMuteKeyboard</link> (int tty, int kb_mode)</para>
+
+<para>恢复给定 tty 的键盘模式 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__demangling_1gaed135e078da2b90d91350d676e7413fc">demangle</link> (std::string const &amp;mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__demangling_1ga717b7381dadbb9c05f2dc6fda5344b05">demangle</link> (char const *mangledName)</para>
+
+<para>Demangle a mangled name. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__demangling_1ga31535139a092fa0cd6aa7ab7e0339cfd">demangledName</link> ()</para>
+
+<para>Get the demangled type name of type T. </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>std::string <link linkend="_group__demangling_1gad0fbf71c27d34d4bb1074750bb0d94ca">demangledName&lt; std::string &gt;</link> ()</para>
+
+<para>对 std::string 进行特例化以避免得到丑陋的名称 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gac76ed513027efe252fe64756fae6d0b6">fccstr</link> (unsigned int fcc)</para>
+
+<para>将 V4L2 four-cc 代码（V4L2_PIX_FMT_...）转换为 4 字符字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga5cf98a150bb5637de6bbbbb1607ef669">cvtypestr</link> (unsigned int cvtype)</para>
+
+<para>将 cv::Mat::type() 代码转换为字符串（例如 CV_8UC1、CV_32SC3 等） </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga1ce31b21602cde5b241a59b4312ee6d5">cvBytesPerPix</link> (unsigned int cvtype)</para>
+
+<para>返回给定 OpenCV 像素类型每像素的字节数 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga34f3127327f6113672a16d3a041552df">strfcc</link> (std::string const &amp;str)</para>
+
+<para>将 JeVois 视频格式字符串转换为 V4L2 four-cc 代码 (V4L2_PIX_FMT_...) </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga4f32c685308caf5e428e27b8ccaee14b">v4l2BytesPerPix</link> (unsigned int fcc)</para>
+
+<para>返回给定 V4L2_PIX_FMT_ 每像素的字节数... </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gafa5c6faaeefd12994a07c09ed748176c">v4l2ImageSize</link> (unsigned int fcc, unsigned int width, unsigned int height)</para>
+
+<para>返回给定 V4L2_PIX_FMT_... 的图像大小（以字节为单位）, width, height </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1gae3448a5e4bbd80efd03d6417974834d0">blackColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的黑色的值 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_group__utils_1ga7bf3f71d614429a46eda4d9c133e2866">whiteColor</link> (unsigned int fcc)</para>
+
+<para>返回对应于给定视频格式的白色的值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gad1e7ee20cd2509969dcd07acfb188f2b">applyLetterBox</link> (unsigned int &amp;imw, unsigned int &amp;imh, unsigned int const winw, unsigned int const winh, bool noalias)</para>
+
+<para>应用 letterbox 调整大小以使图像适合窗口 </para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_group__utils_1gac91eaef1908f07d3ecd6112eb12ef571">split</link> (std::string const &amp;input, std::string const &amp;regex=&quot;\\s+&quot;)</para>
+
+<para>使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga31195f1860c3aff445df8be6e602fecd">join</link> (std::vector&lt; std::string &gt; const &amp;strings, std::string const &amp;delimiter)</para>
+
+<para>将 tokens 向量连接成字符串 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__utils_1gac058832c57b8033f8a90e05c8ecee103">stringStartsWith</link> (std::string const &amp;str, std::string const &amp;prefix)</para>
+
+<para>如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa5a52cf5cff1d44b33db20364c07801a">replaceWhitespace</link> (std::string const &amp;str, char rep=&apos;_&apos;)</para>
+
+<para>用下划线（默认）或其他字符替换字符串中的空格字符 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga283968df765ce49751142cd55e0364d7">strip</link> (std::string const &amp;str)</para>
+
+<para>从字符串末尾去除空格（包括 CR、LF、tabs 等） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga4b0d94273d4e910b353a0ff999c23b7c">extractString</link> (std::string const &amp;str, std::string const &amp;startsep, std::string const &amp;endsep)</para>
+
+<para>提取两个分隔符之间的字符串部分 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1ga34ee23a47b698e960a477d9d4e2d435d">replaceStringFirst</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将 &apos;from&apos; 的第一个实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_group__utils_1gab6a5b228ce68e5634e2bb2c778b0bc34">replaceStringAll</link> (std::string &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gafd49e84b9b5e4d95b1d4da28bdbbdb94">replaceAll</link> (std::string const &amp;str, std::string const &amp;from, std::string const &amp;to)</para>
+
+<para>将所有 &apos;from&apos; 实例替换为 &apos;to&apos; </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga534153c7b53c07a0db4bbdcbb81b566f">tolower</link> (std::string const &amp;str)</para>
+
+<para>Convert string to lowercase. </para>
+</listitem>
+            <listitem><para>std::filesystem::path <link linkend="_group__utils_1gabd49e55c0ae1f31a3f30d73284469eac">absolutePath</link> (std::filesystem::path const &amp;root, std::filesystem::path const &amp;path)</para>
+
+<para>根据两个路径计算绝对路径 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1gaa49a5ccff29adea33326680d1e22b456">sformat</link> (char const *fmt,...) __attribute__((format(__printf__</para>
+
+<para>使用 printf 样式参数创建字符串 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string T <link linkend="_group__utils_1ga7eb44bbb053c52395d5704aa15265632">from_string</link> (std::string const &amp;str)</para>
+
+<para>从字符串转换为类型 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::string <link linkend="_group__utils_1gae142fbf87f70b758581c1845c2fa58e7">to_string</link> (T const &amp;val)</para>
+
+<para>从字符串转换为类型，适用于整数类型的版本 </para>
+</listitem>
+            <listitem><para>template&lt;typename dest_type , typename source_type &gt; </para><para>dest_type <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">clamped_convert</link> (source_type source)</para>
+
+<para>Clamped numerical conversion. </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga3c42b68a3562220199677eed7cdceb51">flushcache</link> ()</para>
+
+<para>刷新缓存，有时在 turbo 模式下运行相机时可能会有用 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga63b839e0e7f2fa177df3755ee1205fee">system</link> (std::string const &amp;cmd, bool errtoo=true)</para>
+
+<para>执行命令并将 stdout 输出抓取到字符串 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga54a11682b4afc2645f69f4f0770ea1bb">secs2str</link> (double secs)</para>
+
+<para>报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga961f407b12b1d4a32577facc3d1f6ad9">secs2str</link> (std::vector&lt; double &gt; secs)</para>
+
+<para>报告以秒为单位给出的 avg+/-std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1gaa9401ec9d35d0669e256673c8cdeb4f4">secs2str</link> (std::ostringstream &amp;ss, double secs)</para>
+
+<para>报告以秒为单位的持续时间（ns、us、ms 或 s） </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga3d57bcea9c02b2c2b91e064d58b4b005">num2str</link> (double n)</para>
+
+<para>报告一个具有可变乘数（K、M、G、T、P、E、Z、Y）的数字，精度为小数点后 2 位 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__utils_1ga074c42c36f209780e0420ca3b6e3bfc6">num2str</link> (std::ostringstream &amp;ss, double n)</para>
+
+<para>报告具有可变乘数 (K、M、G、T、P、E、Z、Y) 的数字 </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_group__utils_1ga55e88d558a6aeff700099fa3180fc025">getFileString</link> (char const *fname, int skip=0)</para>
+
+<para>从文件中读取一行并将其作为字符串返回 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">logLevel</link> = LOG_INFO</para>
+
+<para>当前日志级别 </para>
+</listitem>
+            <listitem><para>int <link linkend="_group__debugging_1ga293cae43e521f4f49ae381d1c931c7b2">traceLevel</link> = 0</para>
+
+<para>当前跟踪级别 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce"/>    <section>
+    <title>OptGUIhelper</title>
+<indexterm><primary>OptGUIhelper</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>OptGUIhelper</secondary></indexterm>
+<para><computeroutput>using <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> = typedef <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link></computeroutput></para><para>
+Definition at line 25 of file GUIhelper.H.</para>
+</section>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIeditor_1a3c72a4e20c54a79e897c98c9390429c0"/>    <section>
+    <title>EditorSaveAction</title>
+<indexterm><primary>EditorSaveAction</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>EditorSaveAction</secondary></indexterm>
+<para><computeroutput>enum EditorSaveAction<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Helper enum for actions to execute after saving a config file. </para>
+</para>
+<para>
+Definition at line 34 of file GUIeditor.H.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_namespacejevois_1a5c82f5b2b9dd4a98d343f9e54eea0fff"/>    <section>
+    <title>async()</title>
+<indexterm><primary>async</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>async</secondary></indexterm>
+<computeroutput>template&lt;class Function , class... Args&gt; </computeroutput><para><computeroutput>std::future&lt;std::invoke_result_t&lt;std::decay_t&lt;Function&gt;, std::decay_t&lt;Args&gt;...&gt; &gt; jevois::async (Function &amp;&amp; f, Args &amp;&amp;... args)</computeroutput></para><para>
+
+<para>使用线程池异步执行 </para>
+</para>
+<para>
+Referenced by jevois::rawimage::byteSwap(), jevois::GUIhelper::compileCommand(), jevois::dnn::NetworkHailo::doprocess(), jevois::MovieOutput::MovieOutput(), jevois::dnn::Pipeline::process(), jevois::dnn::Network::ready(), jevois::rawimage::unpackCvRGBAtoGrayRawImage(), and jevois::dnn::PostProcessorDetectYOLO::yolo().</para>
+    </section><anchor xml:id="_namespacejevois_1a5dbfbd62f0701adcef770280e0bc31f6"/>    <section>
+    <title>async_little()</title>
+<indexterm><primary>async_little</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>async_little</secondary></indexterm>
+<computeroutput>template&lt;class Function , class... Args&gt; </computeroutput><para><computeroutput>std::future&lt;std::invoke_result_t&lt;std::decay_t&lt;Function&gt;, std::decay_t&lt;Args&gt;...&gt; &gt; jevois::async_little (Function &amp;&amp; f, Args &amp;&amp;... args)</computeroutput></para><para>
+
+<para>使用线程池异步执行 </para>
+</para>
+<para>
+Referenced by jevois::CameraDevice::CameraDevice(), jevois::GUIhelper::drawSystem(), jevois::Engine::Engine(), and jevois::Watchdog::Watchdog().</para>
+    </section><anchor xml:id="_namespacejevois_1a702884502b6ac843dada7c3f24e6e1fb"/>    <section>
+    <title>drawErrorImage()</title>
+<indexterm><primary>drawErrorImage</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>drawErrorImage</secondary></indexterm>
+<para><computeroutput>void jevois::drawErrorImage (std::string const &amp; errmsg, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; videoerrimg)</computeroutput></para><para>
+
+<para>将错误消息显示到 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中 </para>
+</para>
+
+<para>错误消息应由一个字符串组成，其中多行可能由 \n 字符分隔，例如 <link linkend="_group__debugging_1ga7460b83ad6c4523ba897c81362742027">warnAndIgnoreException()</link> 返回的字符串。该消息将写入 图像中，该图像应该是有效的（）。这对于显示通过 USB 发送的视频流中的模块异常很有用。 </para>
+<para>
+Definition at line 299 of file Log.C.</para>
+<para>
+References jevois::RawImage::clear(), jevois::rawimage::drawDisk(), jevois::rawimage::drawLine(), jevois::RawImage::fmt, jevois::rawimage::Font10x20, jevois::rawimage::Font14x26, jevois::rawimage::Font6x10, jevois::rawimage::Font7x13, jevois::RawImage::height, LERROR, split(), jevois::RawImage::valid(), whiteColor(), jevois::RawImage::width, and jevois::rawimage::writeText().</para>
+    </section><anchor xml:id="_namespacejevois_1a3c137ebcbbdda157639ae3e711568db2"/>    <section>
+    <title>getFanSpeed()</title>
+<indexterm><primary>getFanSpeed</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>getFanSpeed</secondary></indexterm>
+<para><computeroutput>int jevois::getFanSpeed ( )</computeroutput></para><para>
+
+<para>获取风扇速度百分比，仅在 JeVois-Pro 平台上有意义，其他所有平台均返回 0 </para>
+</para>
+<para>
+Definition at line 153 of file SysInfo.C.</para>
+<para>
+References getFileString().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem().</para>
+    </section><anchor xml:id="_namespacejevois_1a4bc07166fd9b5ae7a021fcb04a170746"/>    <section>
+    <title>getNumInstalledNPUs()</title>
+<indexterm><primary>getNumInstalledNPUs</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>getNumInstalledNPUs</secondary></indexterm>
+<para><computeroutput>size_t jevois::getNumInstalledNPUs ( )</computeroutput></para><para>
+
+<para>获取此系统上存在的 JeVois-Pro NPU 数量 </para>
+</para>
+<para>
+Definition at line 127 of file SysInfo.C.</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::dnn::Pipeline::Pipeline().</para>
+    </section><anchor xml:id="_namespacejevois_1aae7970fe8c32c8285c24c352ab960163"/>    <section>
+    <title>getNumInstalledSPUs()</title>
+<indexterm><primary>getNumInstalledSPUs</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>getNumInstalledSPUs</secondary></indexterm>
+<para><computeroutput>size_t jevois::getNumInstalledSPUs ( )</computeroutput></para><para>
+
+<para>获取此系统上存在的 Hailo8 SPU 数量 </para>
+</para>
+<para>
+Definition at line 138 of file SysInfo.C.</para>
+<para>
+References getFileString(), and to_string().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::dnn::Pipeline::Pipeline().</para>
+    </section><anchor xml:id="_namespacejevois_1a6ab540ea34f56b48165b563719c5cad5"/>    <section>
+    <title>getNumInstalledTPUs()</title>
+<indexterm><primary>getNumInstalledTPUs</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>getNumInstalledTPUs</secondary></indexterm>
+<para><computeroutput>size_t jevois::getNumInstalledTPUs ( )</computeroutput></para><para>
+
+<para>获取此系统上存在的 Coral TPU 数量 </para>
+</para>
+<para>
+Definition at line 87 of file SysInfo.C.</para>
+<para>
+References getFileString(), system(), and to_string().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::dnn::Pipeline::Pipeline().</para>
+    </section><anchor xml:id="_namespacejevois_1a26961977d36a68b1cc6fb0f67298aa12"/>    <section>
+    <title>getNumInstalledVPUs()</title>
+<indexterm><primary>getNumInstalledVPUs</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>getNumInstalledVPUs</secondary></indexterm>
+<para><computeroutput>size_t jevois::getNumInstalledVPUs ( )</computeroutput></para><para>
+
+<para>获取此系统上存在的 Myriad-X VPU 数量 </para>
+</para>
+<para>
+Definition at line 112 of file SysInfo.C.</para>
+<para>
+References system().</para>
+<para>
+Referenced by jevois::GUIhelper::drawSystem(), and jevois::dnn::Pipeline::Pipeline().</para>
+    </section><anchor xml:id="_namespacejevois_1a98e29073164f0fa721c39c968bcafb36"/>    <section>
+    <title>logEnd()</title>
+<indexterm><primary>logEnd</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>logEnd</secondary></indexterm>
+<para><computeroutput>void jevois::logEnd ( )</computeroutput></para><para>
+
+<para>终止日志服务 </para>
+</para>
+
+<para>您必须在准备结束程序时调用此方法，以停止记录器线程。否则，ThreadPool 将卡在一个正在运行的线程上，并且永远不会退出。 </para>
+<para>
+Definition at line 144 of file Log.C.</para>
+<para>
+References logSetEngine().</para>
+<para>
+Referenced by main().</para>
+    </section><anchor xml:id="_namespacejevois_1a49a55dd8be92ab5bd902dcd5ca560a66"/>    <section>
+    <title>opengl_error()</title>
+<indexterm><primary>opengl_error</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>opengl_error</secondary></indexterm>
+<para><computeroutput>std::string jevois::opengl_error (int err)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>Function to write OpenGL errors in clear witout requiring GLUT. </para>
+</para>
+<para>
+Definition at line 60 of file OpenGL.H.</para>
+    </section><anchor xml:id="_namespacejevois_1a828fc05eea12bd9d7071a1bc561e1835"/>    <section>
+    <title>videoMappingsFromStream()</title>
+<indexterm><primary>videoMappingsFromStream</primary><secondary>jevois</secondary></indexterm>
+<indexterm><primary>jevois</primary><secondary>videoMappingsFromStream</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link>&gt; jevois::videoMappingsFromStream (CameraSensor s, std::istream &amp; is, size_t &amp; defidx, bool checkso, bool hasgui)</computeroutput></para><para>
+
+<para>解析配置文件中的所有映射，并指出哪一个是默认的 </para>
+</para>
+
+<para>文件的内容已排序，以便生成的向量按以下顺序排列：1) 格式 fcc，然后是 2) 分辨率（从大到小，先看 x），以及 3) 帧速率 （从高到低）。</para>
+
+<para>相机格式字段可以有冒号分隔的前缀，用于指定 WDR（宽动态范围）相机捕获模式和/或当相机输入暗淡与传感器原生暗淡不匹配 时的裁剪与重新缩放行为（仅对 JeVois-Pro 有效）。</para>
+
+<para>输出宽度和高度可以是绝对的，也可以是相对于相机宽度和高度（如果前缀为 + 或 - 符号）。</para>
+
+<para>如果输出格式重复，每增加一个重复，帧速率就会降低 1fps。这是因为我们需要向主机提供不同的视频格式，以便用户可以选择 他们想要的格式。例如： <literallayout><computeroutput>YUYV 320 240 60.0 YUYV 320 240 60.0 JeVois SaveVideo
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorX MyModule
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorY MyModule
+YUYV 320 240 60.0 YUYV 320 240 60.0 VendorZ MyModule
+</computeroutput></literallayout></para>
+
+<para>将被消除歧义为：</para>
+
+<para><literallayout><computeroutput>YUYV 320 240 60.0 YUYV 320 240 60.0 JeVois SaveVideo
+YUYV 320 240 59.0 YUYV 320 240 60.0 VendorX MyModule
+YUYV 320 240 58.0 YUYV 320 240 60.0 VendorY MyModule
+YUYV 320 240 57.0 YUYV 320 240 60.0 VendorZ MyModule
+</computeroutput></literallayout></para>
+
+<para>并且在 <emphasis role="bold">guvcview</emphasis> 或主机上运行的类似程序中，这 4 个映射将可用，因为它们对应 4 个不同的帧速率。建议您在 JeVois 命 令行界面中发出 <emphasis role="bold">listmapping</emphasis> 命令以确认在进行任何调整后在运行时使用的最终映射；有关详细信息，请参阅 <link linkend="_UserCli">命令行界面用户指南</link> 。</para>
+
+<para>defidx 是结果映射向量中默认格式的索引。如果指定了多个默认格式，则以第一个为准。</para>
+
+<para>有关如何组织 <emphasis role="bold">videomappings.cfg</emphasis> 的说明，请参阅 <link linkend="_UserModes">视频模式和映射用户指南</link> </para>
+<para>
+Referenced by main().</para>
+</section>
+</section>
+</section>

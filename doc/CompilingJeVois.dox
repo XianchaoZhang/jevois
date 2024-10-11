@@ -1,29 +1,21 @@
-/*! \page CompilingJeVois Compiling JeVois core software from source
+/*! \page CompilingJeVois 从源代码编译 JeVois 核心软件
 
-JeVois core software is in a repository called \b jevois and located at https://github.com/jevois
+JeVois 核心软件位于名为 \b jevois 的存储库中，位于 https://github.com/jevois
 
-Compiling JeVois core software from source is only supported on Ubuntu Linux (version 16.10 amd64 recommended).
+仅 Ubuntu Linux（建议使用 20.04（1.20.0）/24.04（1.21.0） amd64 版本）支持从源代码编译 JeVois 核心软件。
 
-Before you attempt to compile JeVois, you should go through the [INSTALL
-instructions](https://github.com/jevois/jevois/blob/master/INSTALL) at least once. As part of this, you will download
-all JeVois core software and all necessary Ubuntu packages.
+在尝试编译 JeVois 之前，您应该至少阅读一次 [INSTALL 说明](https://github.com/jevois/jevois/blob/master/INSTALL)。作为此过程的一部分，您将下载所有 JeVois 核心软件和所有必要的 Ubuntu 软件包。
 
-Theory
-------
+理论  
+----- 
 
-The JeVois core software is written in C++-17. It provides code for video capture from a camera sensor, video output to
-a USB link, serial communications, basic low-level image processing functions, support for creating more advanced
-machine vision algorithms from collections of components with runtime-tunable parameters, and support for
-loading/unloading machine vision modules at runtime.
+JeVois 核心软件是用 C++-17 编写的。它提供从摄像头传感器捕获视频、将视频输出到 USB 链路、串行通信、基本低级图像处理功能的代码，支持从具有运行时可调参数的组件集合创建更高级的机器视觉算法，以及支持在运行时加载/卸载机器视觉模块。
 
-The JeVois core software is configured and compiled using [CMake](https://cmake.org).
+JeVois 核心软件使用 [CMake](https://cmake.org) 配置和编译。
 
-It can be compiled natively on your Linux computer (\b host mode), in which case video will be captured from any
-connected camera, and video output will be to your computer's display. It can also be cross-compiled for the CPU inside
-the JeVois smart camera (\b platform mode), in which case video will be captured from the video sensor inside the
-JeVois camera, and video output will be streamed over the USB link.
+它可以在您的 Linux 计算机上本地编译（\b host 模式），在这种情况下，视频将从任何连接的摄像头捕获，视频输出将发送到您的计算机显示器。它还可以为 JeVois 智能摄像头内的 CPU 进行交叉编译（\b platform 模式），在这种情况下，视频将从 JeVois 摄像头内的视频传感器捕获，视频输出将通过 USB 链路进行流式传输。
 
-Getting the source code from GitHub
+从 GitHub 获取源代码 
 -----------------------------------
 
 \verbatim
@@ -31,7 +23,7 @@ cd
 git clone https://github.com/jevois/jevois.git
 \endverbatim
 
-We also strongly recommend that you get the other JeVois source code repositories from GitHub:
+我们还强烈建议您从 GitHub 获取其他 JeVois 源代码存储库：
 
 \verbatim
 git clone https://github.com/jevois/jevoisbase.git
@@ -40,7 +32,7 @@ git clone https://github.com/jevois/samplepythonmodule.git
 git clone https://github.com/jevois/jevois-tutorials.git
 \endverbatim
 
-and, for \jva33:
+对于 \jva33：
 \verbatim
 git clone https://github.com/jevois/jevois-sdk.git
 \endverbatim
@@ -50,125 +42,96 @@ or, for \jvpro:
 git clone https://github.com/jevois/jevoispro-sdk.git
 \endverbatim
 
-SDK needed to cross-compile code
+交叉编译代码所需的 SDK 
 --------------------------------
 
-To compile jevois, jevoisbase, samplemodule, etc for host, you can just proceed to the next section.
+要为主机编译 jevois、jevoisbase、samplemodule 等，您只需继续下一部分即可。
 
-To cross-compile these for platform, you first need the JeVois SDK installed, as it will provide ARM libraries needed to
-cross-compile. The easiest is to install \b jevois-sdk-dev or \b jevoispro-sdk-dev debian files, as detailed in \ref
-ProgrammerSource
+要为平台交叉编译这些，首先需要安装 JeVois SDK，因为它将提供交叉编译所需的 ARM 库。最简单的方法是安装 \b jevois-sdk-dev 或 \b jevoispro-sdk-dev debian  文件，详情请参阅 \ref ProgrammerSource
 
-JeVois-A33: Full reconfiguration and compilation
+JeVois-A33：完全重新配置和编译
 ------------------------------------------------
 
-There are two ways to compile software for \jva33:
+有两种方法可以为 \jva33 编译软件：
 
-- \b host: compiles natively on your amd64 desktop for execution on that amd64 desktop. Use this during development as
-  it allows you to compile your code on your desktop and then test it immediately using a regular webcam. Of course,
-  some modules will not work on desktop, for example if they use ARM-specific NEON instructions. But in general this is
-  the fastest way to develop and debug new machine vision modules.
+- \b host： 在您的 amd64 桌面上本地编译，以便在该 amd64 桌面上执行。在开发期间使用此功能，因为它允许您在桌面上编译代码，然后立即使用常规网络摄像头对其进行测试。当然，某些模块在桌面上不起作用，例如如果它们使用 ARM 特定的 NEON 指令。但总的来说，这是开发和调试新机器视觉模块的最快方法。
 
-- \b platform: cross-compiles on your desktop code for ARM target processor, which is the architecture used in
-  \jva33. The cross-compiled files will be stored in a staging area (\b /var/lib/jevois-build and \b
-  /var/lib/jevois-microsd) that can then be flashed to microSD.
+- \b platform： 在您的桌面上交叉编译适用于 ARM 目标处理器的代码，这是 \jva33 中使用的架构。交叉编译的文件将存储在暂存区（\b /var/lib/jevois-build 和 \b /var/lib/jevois-microsd ）中，然后可以将其刷入 microSD。
 
-Scripts are provided to recompile everything:
+提供了脚本来重新编译所有内容：
 
-- \c rebuild-host.sh will
-  + Compile natively for your computer's CPU
-  + Object files will be in \b hbuild/ which the script creates
-  + Executables will be installed to \b /usr/bin
-  + Include files to be used by module developers will be installed in \b /usr/include/jevois
-  + JeVois config files will be installed in \b /jevois (to match their location on the platform hardware). This
-    is also where you should install machine vision modules for JeVois.
-  + Thus, all files and executables are ready to use immediately on your computer.
+- \c rebuild-host.sh 将
+  + 为您计算机的 CPU 进行本地编译
+  + 目标文件将位于脚本创建的 \b hbuild/ 中
+  + 可执行文件将安装到 \b /usr/bin
+  + 模块开发人员使用的包含文件将安装在 \b /usr/include/jevois 中
+  + JeVois 配置文件将安装在 \b /jevois 中（以匹配其在平台硬件上的位置）。这也是您应该为 JeVois 安装机器视觉模块的地方。
+  + 因此，所有文件和可执行文件都可以立即在您的计算机上使用。
 
-- \c rebuild-platform.sh will
-  + Cross-compile for the ARM CPU inside the JeVois smart camera
-  + Object files will be in \b pbuild/ which the script creates
-  + Config files used by JeVois at runtime will be staged into <b>/var/lib/jevois-microsd/config/</b> and will later
-    be installed into <b>/jevois/config/</b> on the actual microSD card.
-  + Executables including \c jevois-daemon will be staged into <b>/var/lib/jevois-build/usr/bin/</b> and will later
-    be installed into <b>/usr/bin/</b> on the actual microSD card.
-  + Include files will be staged into <b>/var/lib/jevois-build/usr/include/jevois/</b> and will later be installed into
-    <b>/usr/include/jevois/</b> on the actual microSD card.
-  + The core JeVois library (\b libjevois.so) will be staged into <b>/var/lib/jevois-build/usr/lib/</b> and will later
-    be installed into <b>/usr/lib/</b> on the actual microSD card.
-  + Documentation files are staged into <b>/var/lib/jevois-build/usr/share/doc/jevois-platform/</b> and will be
-    installed into <b>/usr/share/doc/jevois-platform/</b> on the actual microSD card.
-  + Thus, because all target files are stored into the staging area, they will be ready to be flashed to
-    microSD that can then be inserted into your JeVois smart camera.
+- \c rebuild-platform.sh 将
+  + 为 JeVois 智能相机内的 ARM CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \b pbuild/ 中
+  + JeVois 在运行时使用的配置文件将暂存到 <b>/var/lib/jevois-microsd/config/</b> 中，稍后将安装到实际 microSD 卡上的 <b>/jevois/config/</b> 中。
+  + 包括 \c jevois-daemon 在内的可执行文件将暂存到 <b>/var/lib/jevois-build/usr/bin/</b> 中，稍后将安装到实际 microSD 卡上的 <b>/usr/bin/</b> 中。
+  + 包含文件将暂存到 <b>/var/lib/jevois-build/usr/include/jevois/</b> 中，稍后将安装到实际 microSD 卡上的 <b>/usr/include/jevois/</b> 中。
+  + 核心 JeVois 库 (\b libjevois.so) 将暂存到 <b>/var/lib/jevois-build/usr/lib/</b> 中，稍后将安装到实际 microSD 卡上的 <b>/usr/lib/</b> 中。
+  + 文档文件将暂存到 <b>/var/lib/jevois-build/usr/share/doc/jevois-platform/</b> 中，稍后将安装到实际 microSD 卡上的 <b>/usr/share/doc/jevois-platform/</b> 中。
+  + 因此，由于所有目标文件都存储在暂存区中，它们将准备好被闪存到 microSD，然后可以将其插入到您的 JeVois 智能相机中。
 
-The main executable that is created is \c jevois-daemon, which basically implements a JeVois Engine that will
-orchestrate the flow of data from camera sensor to machine vision processing to video streaming over USB. See
-\ref JeVoisDaemon for more info.
+创建的主要可执行文件是 \c jevois-daemon，它基本上实现了 JeVois 引擎，它将协调从相机传感器到机器视觉处理再到 USB 视频流的数据流。有关更多信息，请参阅 \ref JeVoisDaemon。
 
-JeVois-Pro: Full reconfiguration and compilation
+JeVois-Pro：完全重新配置和编译 
 ------------------------------------------------
 
-There are three ways to compile software for \jvpro:
+有三种方法可以为 \jvpro 编译软件：
 
-- \b host: compiles natively on your amd64 desktop for execution on that amd64 desktop. Use this during development as
-  it allows you to compile your code on your desktop and then test it immediately using a regular webcam. Of course,
-  some modules will not work on desktop, for example if they use the NPU. But in general this is the fastest way to
-  develop and debug new machine vision modules.
+- \b host：在您的 amd64 桌面上本地编译，以便在该 amd64 桌面上执行。在开发期间使用此功能，因为它允许您在桌面上编译代码，然后立即使用常规网络摄像头对其进行测试。当然，某些模块在桌面上不起作用，例如如果它们使用 NPU。但总的来说，这是开发和调试新机器视觉模块的最快方法。
 
-- \b platform: cross-compiles on your desktop code for arm64 target processor, which is the architecture used in
-  \jvpro. Typically, you would only need to run this if you want to place \a support files in a staging area (\b
-  /var/lib/jevoispro-build and \b /var/lib/jevoispro-microsd) that can then be referenced when you compile other modules
-  that will need to link against or otherwise use those files.
+- \b platform：在您的桌面上交叉编译 arm64 目标处理器的代码，这是 \jvpro 中使用的架构。通常，如果您想要将 \a 支持文件放置在暂存区（\b /var/lib/jevoispro-build 和 \b /var/lib/jevoispro-microsd），则只需运行此操作，然后在编译需要链接或以其他方式使用这些文件的其他模块时可以引用这些文件。
 
-- \b platform-pdeb: cross-compiles on your desktop code for arm64 target processor of \jvpro, and creates a \a native
-  arm64 deb package that you can later copy to your microSD and install on \jvpro. Typically, you would do this once you
-  have tested and debugged a new machine vision module in host mode, and you are now ready to try it out on the \jvpro
-  camera.
+- \b platform-pdeb：在您的桌面上交叉编译 \jvpro 的 arm64 目标处理器代码，并创建一个 \a 原生 arm64 deb 包，您稍后可以将其复制到 microSD 并安装在 \jvpro 上。通常，您会在主机模式下测试和调试新的机器视觉模块后执行此操作，现在您已准备好在 \jvpro 相机上试用它。
 
-Scripts are provided to recompile everything:
+提供了脚本来重新编译所有内容：
 
-- \c rebuild-pro-host.sh will
-  + Compile natively for your computer's CPU
-  + Object files will be in \b phbuild/ which the script creates
-  + Executables will be installed to \b /usr/bin
-  + Include files to be used by module developers will be installed in \b /usr/include/jevois
-  + JeVois config files will be installed in \b /jevoispro and this
-    is also where machine vision modules and shared data for JeVois-Pro will be installed later.
-  + Thus, all files and executables are ready to use immediately on your computer.
+- \c rebuild-pro-host.sh 将
+  + 为您计算机的 CPU 进行本地编译
+  + 目标文件将位于脚本创建的 \b phbuild/ 中
+  + 可执行文件将安装到 \b /usr/bin
+  + 模块开发人员要使用的包含文件将安装在 \b /usr/include/jevois 中
+  + JeVois 配置文件将安装在 \b /jevoispro 中，这也是稍后安装机器视觉模块和 JeVois-Pro 共享数据的地方。
+  + 因此，所有文件和可执行文件都可以立即在您的计算机上使用。
 
-- \c rebuild-pro-platform.sh will
-  + Cross-compile for the ARM CPU inside the JeVois-Pro smart camera
-  + Object files will be in \b ppbuild/ which the script creates
-  + Config files used by JeVois at runtime will be staged into <b>/var/lib/jevoispro-microsd/config/</b>
-  + Executables including \c jevois-daemon will be staged into <b>/var/lib/jevoispro-build/usr/bin/</b>
-  + Include files will be staged into <b>/var/lib/jevoispro-build/usr/include/jevois/</b>
-  + The core JeVois library (\b libjevoispro.so) will be staged into <b>/var/lib/jevoispro-build/usr/lib/</b>
-  + Documentation files are staged into <b>/var/lib/jevoispro-build/usr/share/doc/jevoispro-platform/</b>
-  + Thus, because all target files are stored into the staging area, they will be ready to be used as
-    dependencies when you try to compile jevoisbase or new custom machine vision modules.
+- \c rebuild-pro-platform.sh 将
+  + 为 JeVois-Pro 智能相机内的 ARM CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \b ppbuild/ 中
+  + JeVois 在运行时使用的配置文件将暂存到 <b>/var/lib/jevoispro-microsd/config/</b>
+  + 包括 \c jevois-daemon 的可执行文件将暂存到 <b>/var/lib/jevoispro-build/usr/bin/</b>
+  + 包含文件将暂存到 <b>/var/lib/jevoispro-build/usr/include/jevois/</b>
+  + 核心 JeVois 库 (\b libjevoispro.so) 将暂存到 <b>/var/lib/jevoispro-build/usr/lib/</b>
+  + 文档文件将暂存到<b>/var/lib/jevoispro-build/usr/share/doc/jevoispro-platform/</b>
+  + 因此，由于所有目标文件都存储在暂存区中，因此当您尝试编译 jevoisbase 或新的自定义机器视觉模块时，它们将可以用作依赖项。
 
-- \c rebuild-pro-platform-pdeb.sh will
-  + Cross-compile for the ARM CPU inside the JeVois-Pro smart camera
-  + Object files will be in \b ppdbuild/ which the script creates
-  + A deb package will be created that should be installed on the camera while logged on the camera.
-  + File locations are the same as above for host.
+- \c rebuild-pro-platform-pdeb.sh 将
+  + 为 JeVois-Pro 智能相机内的 ARM CPU 进行交叉编译
+  + 目标文件将位于脚本创建的 \b ppdbuild/ 中
+  + 将创建一个 deb 包，该包应在登录相机时安装在相机上。
+  + 文件位置与上述主机相同。
 
-The main executable that is created is \c jevoispro-daemon, which basically implements a JeVois Engine that will
-orchestrate the flow of data from camera sensor to machine vision processing to video display over HDMI. See
-\ref JeVoisDaemon for more info.
+创建的主要可执行文件是 \c jevoispro-daemon，它基本上实现了 JeVois 引擎，该引擎将协调从相机传感器到机器视觉处理再到 HDMI 视频显示的数据流。有关更多信息，请参阅 \ref JeVoisDaemon。
 
-Here is a walkthrough of what you should see when compiling jevois and jevoisbase from source for \jvpro:
+下面是从 \jvpro 源代码编译 jevois 和 jevoisbase 时应该看到的内容的演示：
 
 \youtube{TnQW0gMJzTo}
 
 
-Partial re-compilation
+部分重新编译 
 ----------------------
 
-The scripts \c rebuild-host.sh, \c rebuild-platform.sh, etc clear and recompile everything. This takes a while.
+脚本 \c rebuild-host.sh、\c rebuild-platform.sh 等会清除并重新编译所有内容。这需要一段时间。
 
-You should run them at least once.
+您应该至少运行它们一次。
 
-Then, if you are just changing a few files, you can only recompile what is needed, as follows:
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
 
 - \jva33: for host
 \verbatim
@@ -205,41 +168,26 @@ sudo make install
 cd ppdbuild
 make -j
 sudo make install
-sudo cpack # will re-generate the deb package into ppdbuild/jevoispro-platform_XXX_arm64.deb with arm64 arch.
-# You can then copy this file to microSD, switch JeVois-Pro to console boot, then
-# `apt remove jevoispro-platform` to nuke the existing version and then `dpkg -i <your_new_deb>`.
+sudo cpack # 将使用 arm64 arch 将 deb 包重新生成为 ppdbuild/jevoispro-platform_XXX_arm64.deb。
+# 然后，您可以将此文件复制到 microSD，将 JeVois-Pro 切换到控制台启动，然后
+# `apt remove jevoispro-platform` 删除现有版本，然后 `dpkg -i <your_new_deb>`。
 \endverbatim
 
-\note When you `apt remove jevoispro-platform` it will also remove jevoisprobase-platform. So make sure you have
-compiled it and packed it as a deb ready to install, using the instructions at \ref CompilingJeVoisBase
 
-Advanced configuration flags
+\note 当您 `apt remove jevoispro-platform` 时，它也会删除 jevoisprobase-platform。因此，请确保您已编译它并将其打包为可安装的 deb，使用 \ref CompilingJeVoisBase 中的说明
+
+高级配置标志 
 ----------------------------
 
-The scripts \c rebuild-host.sh, \c rebuild-platform.sh, etc pass down any command-line arguments to cmake. Available
-flags include (see CMakeLists.txt in jevois/ for the latest):
+脚本 \c rebuild-host.sh, \c rebuild-platform.sh  等将所有命令行参数传递给 cmake。可用标志包括（请参阅 jevois/ 中的 CMakeLists.txt 了解最新信息）：
 
-- \b -DJEVOIS_LDEBUG_ENABLE=ON Enable debug-level messages. Those are turned off by default so that they do not use any
-  CPU and do not slow down operations. Turning them on is useful for low-level debugging. Beware that some sections of
-  the USB streaming code are time-critical and may fail (i.e., give USB errors) when LDEBUG is enabled. Note that This
-  just enables LDEBUG statements to be compiled. To see them at runtime, you also need to set the \p loglevel parameter
-  to debug level, see UserCli for info about the \p loglevel parameter.
+- \b -DJEVOIS_LDEBUG_ENABLE=ON 启用调试级别消息。默认情况下，这些消息处于关闭状态，因此它们不会使用任何 CPU 并且不会减慢操作速度。打开它们对于低级调试很有用。请注意，USB 流式传输代码的某些部分对时间至关重要，并且在启用 LDEBUG 时可能会失败（即给出 USB 错误）。请注意，这只会启用 LDEBUG 语句进行编译。要在运行时查看它们，您还需要将 \p loglevel 参数设置为调试级别，有关 \p loglevel 参数的信息，请参阅 UserCli。
 
-- \b -DJEVOIS_TRACE_ENABLE=ON Enable function tracing, which will issue a message (at the LDEBUG level) each time a
-  particular function is entered, and another when it is exited. Functions that you want to trace need to have a
-  JEVOIS_TRACE(level) statement in them. Because trace messages are at the LDEBUG level, if LDEBUG is not enabled (see
-  above), trace messages will not be seen.
+- \b -DJEVOIS_TRACE_ENABLE=ON 启用函数跟踪，每次进入特定函数时都会发出一条消息（在 LDEBUG 级别），退出时会发出另一条消息。要跟踪的函数需要在其中包含 JEVOIS_TRACE(level) 语句。由于跟踪消息处于 LDEBUG 级别，因此如果未启用 LDEBUG（参见上文），则不会看到跟踪消息。
 
-- \b -DJEVOIS_USE_SYNC_LOG=ON Uses synchronous logging, i.e., we wait until each log message is printed out before
-  continuing execution. This interferes with time-critical code sections, such as anything related to USB
-  streaming. Hence, by default, logging in JeVois is asynchronous, messages are just pushed into a queue without waiting
-  for them to be printed out, and a separate thread then prints them out. This asynchronous logging eliminates most
-  slowdown due to logging, but it may be confusing when debugging things that interact with the Linux system or kernel,
-  as the order in which JeVois messages versus syslog messages will appear may not reflect the true ordering of what
-  happened.
+- \b -DJEVOIS_USE_SYNC_LOG=ON 使用同步日志记录，即，我们等到每条日志消息都打印出来后再继续执行。这会干扰时间关键的代码部分，例如与 USB 流相关的任何内容。因此，默认情况下，JeVois 中的日志记录是异步的，消息只是被推送到队列中而不等待它们被打印出来，然后由单独的线程将它们打印出来。这种异步日志记录消除了由于日志记录而导致的大部分减速，但在调试与 Linux 系统或内核交互的东西时可能会造成混淆，因为 JeVois 消息与 syslog 消息出现的顺序可能无法反映发生事件的真实顺序。
 
-- \b -DJEVOIS_LOG_TO_FILE=ON Enable sending all log messages to file jevois.log instead of console. Only works with
-  async logging.
+- \b -DJEVOIS_LOG_TO_FILE=ON 启用将所有日志消息发送到文件 jevois.log 而不是控制台。仅适用于异步日志记录。
 
 */
 

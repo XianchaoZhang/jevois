@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Singleton">
+<title>jevois::Singleton&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::Singleton&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Types/Singleton.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;class T&gt;
+class jevois::Singleton&lt; T &gt;</title></simplesect>
+
+
+<para>一个通用的 singleton 类，用于强制一个对象的单个实例 </para>
+
+
+
+<para><link linkend="_classjevois_1_1Singleton">Singleton</link> 类应该被任何需要的类继承：<orderedlist>
+<listitem>
+<para>只有一个实例</para>
+</listitem><listitem>
+<para>可全局访问</para>
+</listitem></orderedlist>
+</para>
+
+<para>请注意，目前无法保证 <link linkend="_classjevois_1_1Singleton">Singleton</link> 的析构顺序，因此应注意不要在 <link linkend="_classjevois_1_1Singleton">Singleton</link> 的析构函数中引用另一个 Singleton。</para>
+
+<para>这个特定的实现来自：http://stackoverflow.com/questions/1008019/c-singleton-design-pattern</para>
+
+<para>以下是 <link linkend="_classjevois_1_1Singleton">Singleton</link> 的使用示例：</para>
+
+<para><literallayout><computeroutput>class&#32;MyClass&#32;:&#32;public&#32;Singleton&lt;MyClass&gt;
+{
+public:
+&#32;&#32;void&#32;doIt()&#32;{...}
+
+private:
+&#32;&#32;MyClass();
+};
+
+int&#32;main()
+{
+&#32;&#32;...
+&#32;&#32;MyClass::instance().doIt();
+&#32;&#32;...
+}
+</computeroutput></literallayout></para>
+
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>T</entry>
+                                <entry>
+<para>被设为单例的类。</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                该类最初由 Rand Voorhies 在 Neuromorphic Robotics Toolkit 中设计。 </para>
+<para>
+Definition at line 89 of file Singleton.H.</para>
+Inheritance diagram for jevois::Singleton&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Singleton__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Static Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>static T &amp; <link linkend="_classjevois_1_1Singleton_1a58760e3f99432b63bef1067bb1fd676d">instance</link> ()</para>
+
+<para>获取类 T 的全局唯一实例 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Singleton_1aea6e48a85622c9f8286bbe97599a7408">Singleton</link> ()</para>
+
+<para>只有从 <link linkend="_classjevois_1_1Singleton">Singleton</link> 继承的类才能通过其受保护的默认构造函数 <link linkend="_classjevois_1_1Singleton_1aea6e48a85622c9f8286bbe97599a7408">Singleton()</link> 来构造它； </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Singleton_1aea6e48a85622c9f8286bbe97599a7408"/>    <section>
+    <title>Singleton()</title>
+<indexterm><primary>Singleton</primary><secondary>jevois::Singleton&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Singleton&lt; T &gt;</primary><secondary>Singleton</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Singleton">jevois::Singleton</link>&lt; T &gt;::<link linkend="_classjevois_1_1Singleton">Singleton</link> ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>只有从 <link linkend="_classjevois_1_1Singleton">Singleton</link> 继承的类才能通过其受保护的默认构造函数 <link linkend="_classjevois_1_1Singleton_1aea6e48a85622c9f8286bbe97599a7408">Singleton()</link> 来构造它； </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Singleton_1a58760e3f99432b63bef1067bb1fd676d"/>    <section>
+    <title>instance()</title>
+<indexterm><primary>instance</primary><secondary>jevois::Singleton&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Singleton&lt; T &gt;</primary><secondary>instance</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>static T&amp; <link linkend="_classjevois_1_1Singleton">jevois::Singleton</link>&lt; T &gt;::instance ( )<computeroutput>[static]</computeroutput></computeroutput></para><para>
+
+<para>获取类 T 的全局唯一实例 </para>
+</para>
+
+<para>如果尚未创建类 T 的全局唯一实例，则此方法将以线程安全的方式创建它。 </para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Types/<link linkend="_Singleton_8H">Singleton.H</link></section>
+</section>

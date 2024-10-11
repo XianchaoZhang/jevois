@@ -1,0 +1,65 @@
+\hypertarget{PythonOpenCV_8H}{}\doxysubsection{include/jevois/\+Core/\+Python\+Open\+CV.H File Reference}
+\label{PythonOpenCV_8H}\index{include/jevois/Core/PythonOpenCV.H@{include/jevois/Core/PythonOpenCV.H}}
+{\ttfamily \#include $<$Python.\+h$>$}\newline
+{\ttfamily \#include $<$numpy/ndarrayobject.\+h$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/python.\+hpp$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+Include dependency graph for Python\+Open\+C\+V.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{PythonOpenCV_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{PythonOpenCV_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{PythonOpenCV_8H_ab6e6ee86736f9ebb56e74ae21bf3ff8a}{N\+P\+Y\+\_\+\+N\+O\+\_\+\+D\+E\+P\+R\+E\+C\+A\+T\+E\+D\+\_\+\+A\+PI}}~N\+P\+Y\+\_\+1\+\_\+7\+\_\+\+A\+P\+I\+\_\+\+V\+E\+R\+S\+I\+ON
+\item 
+\#define \mbox{\hyperlink{PythonOpenCV_8H_a1dbb0f1a245a4dc0666126cbfec04739}{E\+R\+R\+W\+R\+A\+P2}}(expr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{PythonOpenCV_8H_a1dbb0f1a245a4dc0666126cbfec04739}\label{PythonOpenCV_8H_a1dbb0f1a245a4dc0666126cbfec04739}} 
+\index{PythonOpenCV.H@{PythonOpenCV.H}!ERRWRAP2@{ERRWRAP2}}
+\index{ERRWRAP2@{ERRWRAP2}!PythonOpenCV.H@{PythonOpenCV.H}}
+\doxyparagraph{\texorpdfstring{ERRWRAP2}{ERRWRAP2}}
+{\footnotesize\ttfamily \#define E\+R\+R\+W\+R\+A\+P2(\begin{DoxyParamCaption}\item[{}]{expr }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \textcolor{keywordflow}{try}                                           \(\backslash\)}
+\DoxyCodeLine{  \{                                             \(\backslash\)}
+\DoxyCodeLine{    PyAllowThreads allowThreads;                \(\backslash\)}
+\DoxyCodeLine{    expr;                                       \(\backslash\)}
+\DoxyCodeLine{  \}                                             \(\backslash\)}
+\DoxyCodeLine{  catch (\textcolor{keyword}{const} cv::Exception \&e)                \(\backslash\)}
+\DoxyCodeLine{  \{                                             \(\backslash\)}
+\DoxyCodeLine{    PyErr\_SetString(opencv\_error, e.what());    \(\backslash\)}
+\DoxyCodeLine{    return 0;                                   \(\backslash\)}
+\DoxyCodeLine{  \}}
+
+\end{DoxyCode}
+
+
+Definition at line 64 of file Python\+Open\+C\+V.\+H.
+
+\mbox{\Hypertarget{PythonOpenCV_8H_ab6e6ee86736f9ebb56e74ae21bf3ff8a}\label{PythonOpenCV_8H_ab6e6ee86736f9ebb56e74ae21bf3ff8a}} 
+\index{PythonOpenCV.H@{PythonOpenCV.H}!NPY\_NO\_DEPRECATED\_API@{NPY\_NO\_DEPRECATED\_API}}
+\index{NPY\_NO\_DEPRECATED\_API@{NPY\_NO\_DEPRECATED\_API}!PythonOpenCV.H@{PythonOpenCV.H}}
+\doxyparagraph{\texorpdfstring{NPY\_NO\_DEPRECATED\_API}{NPY\_NO\_DEPRECATED\_API}}
+{\footnotesize\ttfamily \#define N\+P\+Y\+\_\+\+N\+O\+\_\+\+D\+E\+P\+R\+E\+C\+A\+T\+E\+D\+\_\+\+A\+PI~N\+P\+Y\+\_\+1\+\_\+7\+\_\+\+A\+P\+I\+\_\+\+V\+E\+R\+S\+I\+ON}
+
+
+
+Definition at line 49 of file Python\+Open\+C\+V.\+H.
+

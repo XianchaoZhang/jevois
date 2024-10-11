@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_CameraDevice_8C">
+<title>src/jevois/Core/CameraDevice.C File Reference</title>
+<indexterm><primary>src/jevois/Core/CameraDevice.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/CameraDevice.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/Util/Async.H&gt;
+#include &lt;jevois/Core/VideoMapping.H&gt;
+#include &lt;jevois/Image/RawImageOps.H&gt;
+#include &lt;jevois/Core/ICM20948_regs.H&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/select.h&gt;
+</programlisting>Include dependency graph for CameraDevice.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="CameraDevice_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1aec794ed344cbed89f6859526071ce4b2">FDLDEBUG</link>(msg)   <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1ad974e026cd678b223877059cbfb7c55a">FDLINFO</link>(msg)   <link linkend="_group__debugging_1gadf127ca2262cc160830da49c37d04e85">LINFO</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1a73fca3d993165a5875ebe979ac90f6c3">FDLERROR</link>(msg)   <link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1aaf8913a1ae88e40edd0c458745d7d6d5">FDLFATAL</link>(msg)   <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1aed2b434e6d20c65e9a71e99744d8be13">V4L2_MODE_VIDEO</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CameraDevice_8C_1a1e384862033151e0edde4f67ce458dc2">V4L2_COLORSPACE_DEFAULT</link>   v4l2_colorspace(0)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_CameraDevice_8C_1aec794ed344cbed89f6859526071ce4b2"/>    <section>
+    <title>FDLDEBUG</title>
+<indexterm><primary>FDLDEBUG</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>FDLDEBUG</secondary></indexterm>
+<para><computeroutput>#define FDLDEBUG( msg)   <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</computeroutput></para><para>
+Definition at line 32 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_CameraDevice_8C_1a73fca3d993165a5875ebe979ac90f6c3"/>    <section>
+    <title>FDLERROR</title>
+<indexterm><primary>FDLERROR</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>FDLERROR</secondary></indexterm>
+<para><computeroutput>#define FDLERROR( msg)   <link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</computeroutput></para><para>
+Definition at line 34 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_CameraDevice_8C_1aaf8913a1ae88e40edd0c458745d7d6d5"/>    <section>
+    <title>FDLFATAL</title>
+<indexterm><primary>FDLFATAL</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>FDLFATAL</secondary></indexterm>
+<para><computeroutput>#define FDLFATAL( msg)   <link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</computeroutput></para><para>
+Definition at line 35 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_CameraDevice_8C_1ad974e026cd678b223877059cbfb7c55a"/>    <section>
+    <title>FDLINFO</title>
+<indexterm><primary>FDLINFO</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>FDLINFO</secondary></indexterm>
+<para><computeroutput>#define FDLINFO( msg)   <link linkend="_group__debugging_1gadf127ca2262cc160830da49c37d04e85">LINFO</link>(&apos;[&apos; &lt;&lt; itsDevName &lt;&lt; &apos;:&apos; &lt;&lt; itsFd &lt;&lt; &quot;] &quot; &lt;&lt; msg)</computeroutput></para><para>
+Definition at line 33 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_CameraDevice_8C_1a1e384862033151e0edde4f67ce458dc2"/>    <section>
+    <title>V4L2_COLORSPACE_DEFAULT</title>
+<indexterm><primary>V4L2_COLORSPACE_DEFAULT</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>V4L2_COLORSPACE_DEFAULT</secondary></indexterm>
+<para><computeroutput>#define V4L2_COLORSPACE_DEFAULT   v4l2_colorspace(0)</computeroutput></para><para>
+Definition at line 72 of file CameraDevice.C.</para>
+    </section><anchor xml:id="_CameraDevice_8C_1aed2b434e6d20c65e9a71e99744d8be13"/>    <section>
+    <title>V4L2_MODE_VIDEO</title>
+<indexterm><primary>V4L2_MODE_VIDEO</primary><secondary>CameraDevice.C</secondary></indexterm>
+<indexterm><primary>CameraDevice.C</primary><secondary>V4L2_MODE_VIDEO</secondary></indexterm>
+<para><computeroutput>#define V4L2_MODE_VIDEO   2</computeroutput></para><para>
+Definition at line 39 of file CameraDevice.C.</para>
+</section>
+</section>
+</section>

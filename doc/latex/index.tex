@@ -1,0 +1,49 @@
+\hypertarget{index_welcome}{}\doxysubsection{欢迎阅读 Je\+Vois 智能嵌入式机器视觉工具包文档。}\label{index_welcome}
+新用户请务必查看 \href{/start/start.html}{\texttt{ Je\+Vois Start}}。
+
+  
+
+与依赖人类观察者来解释所见内容的传统相机不同，\+Je\+Vois 在相机内部运行强大的机器视觉和深度学习算法。这样您就可以直接将 Je\+Vois-\/\+Pro 连接到定制机器人、家庭自动化系统、无人机、监控系统等。您可以让 Je\+Vois-\/\+Pro 处理机器视觉，而您则专注于开发系统的高级功能。
+
+Je\+Vois 主要是一个开发和教育工具：它提供了一个基于 Linux 的编程环境（\+C++ 或 Python），方便您编写自己的机器视觉管道，以便在相机内部的处理器上实时操作。
+
+Je\+Vois 工具包主要设计用于在嵌入式智能相机硬件上运行，但它也可以在最近的基于 Linux 的计算机（包括 Raspberry Pi）上运行。该工具包有助于从相机传感器捕获图像，通过某种机器视觉算法处理捕获的图像，并通过 U\+SB 链路（\+Je\+Vois-\/\+A33）将处理后的结果发送到主机或使用 Open\+G\+L（\+Je\+Vois-\/\+Pro）显示结果。
+
+有两种硬件型号可供选择：\hypertarget{index_hardjevoisa33}{}\doxysubsection{Je\+Vois-\/\+A33 U\+S\+B 供电智能网络摄像头}\label{index_hardjevoisa33}
+
+
+Je\+Vois-\/\+A33 是一款小型 U\+SB 供电智能网络摄像头。对于主机来说，\+Je\+Vois-\/\+A33 智能摄像头看起来就像普通的 U\+SB 网络摄像头，并且完全即插即用，在较新版本的 Windows、\+Mac\+OS 和 Linux 上无需安装驱动程序：\+Je\+Vois 智能摄像头符合 U\+SB 视频类 (U\+VC) 修订版 1.\+1。与普通 U\+SB 网络摄像头一样，用户可以选择图像分辨率、帧速率并调整摄像头设置，如亮度、曝光、色彩平衡等。但 Je\+Vois 智能摄像头输出的图像是通过某种视觉算法处理摄像头帧的结果，而不是像普通 U\+SB 网络摄像头那样简单地输出原始摄像头帧。
+
+Je\+Vois 智能相机是一款紧凑型（39mm x 32mm x 19mm, or 1.\+5\char`\"{} x 1.\+25\char`\"{} x 0.\+75"）、\+U\+SB 供电、独立且功能强大的四核 A\+RM 计算机，运行 Linux 操作系统。\hypertarget{index_hardjevoispro}{}\doxysubsection{Je\+Vois-\/\+Pro 独立深度学习相机}\label{index_hardjevoispro}
+  
+
+Je\+Vois-\/\+Pro 是一款小型的全 Linux 计算机。除了 6 核 C\+PU 外，它还集成了用于深度神经网络的各种硬件加速器。由于它是一台全功能计算机，因此 Je\+Vois-\/\+Pro 的主要输出是 H\+D\+MI 显示器。无需主机，因为可以直接将键盘、鼠标和显示器连接到 Je\+Vois-\/\+Pro。\hypertarget{index_特点}{}\doxysubsection{常见特点}\label{index_特点}
+为了便于编程和配置，所有操作系统、核心 Je\+Vois 软件以及任何必要的数据文件都存储在一张高速 Micro-\/\+SD 卡上，可以轻松取出并插入台式机或笔记本电脑。这也使得该平台“牢不可破”且非常容易被黑客入侵。
+
+除了视频输出外，\+Je\+Vois 智能相机还包括一个硬件串行端口和一个串行 U\+SB 端口（\+Je\+Vois-\/\+Pro 还包括其他硬件端口）。智能相机可以通过这些端口发送简单的文本字符串，例如，指示在相机视频流中发现感兴趣对象的坐标。这些旨在供嵌入式控制器使用，包括 Arduino 或任何其他支持串行通信（\+T\+TL 电平为 3.\+3V 或 5V 的 U\+A\+R\+T）的控制器。用户或微控制器还可以通过串行端口向智能相机发送简单的文本命令。
+
+Je\+Vois 软件框架结合了用 C 编写的用于相机传感器和 U\+SB 输出的定制 Linux 内核驱动程序，以及用 C++-\/17 编写的定制高级视觉处理框架。该框架旨在轻松与其他开源库集成，包括 tiny-\/dnn、\+Open\+C\+V、boost、z\+Bar、\+Eigen、turbojpeg 等。\+Je\+Vois 操作系统基础设施是使用 buildroot 框架构建的，该框架已有数百个库和模块可用，添加新库或模块相对容易。核心 Je\+Vois 软件由 cmake 管理，这使得创建新的视觉处理模块变得容易，并且允许同时为主机（例如，用于开发、调试和测试的基于 Intel 的 Linux 桌面）和平台硬件（\+A\+RM 处理器）编译相同的源代码。
+
+\hypertarget{index_contents}{}\doxysubsection{目录}\label{index_contents}
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{Handling}{Je\+Vois 智能相机处理和注意事项}}
+\item \mbox{\hyperlink{Hardware}{Je\+Vois-\/\+A33 硬件平台概述}}
+\item \mbox{\hyperlink{ProHardware}{Je\+Vois-\/\+Pro 硬件平台概述}}
+\item \mbox{\hyperlink{ProStatus}{Je\+Vois-\/\+Pro 开发状态}}
+\item \mbox{\hyperlink{UserConnect}{将 Je\+Vois-\/\+A33 连接到电源和数据}}
+\item \mbox{\hyperlink{ProUserConnect}{将 Je\+Vois-\/\+Pro 连接到电源和数据}}
+\item \mbox{\hyperlink{Concepts}{本文档中使用的概念}}
+\item \mbox{\hyperlink{JeVoisInventor}{Je\+Vois-\/\+A33：\+Je\+Vois Inventor 图形用户界面}}
+\item \mbox{\hyperlink{JeVoisProIntro}{Je\+Vois-\/\+Pro：新用户介绍}}
+\item \mbox{\hyperlink{Navigation}{如何浏览本文档}}
+\item \mbox{\hyperlink{Versions}{版本历史}}
+\item \mbox{\hyperlink{User}{用户指南}}
+\item \mbox{\hyperlink{UserTutos}{用户教程}}
+\item \mbox{\hyperlink{Programmer}{程序员指南}}
+\item \mbox{\hyperlink{ProgrammerTutos}{程序员教程}}
+\item \mbox{\hyperlink{JeVoisBaseDocs}{Je\+Vois\+Base 机器视觉模块文档}}
+\item \mbox{\hyperlink{History}{Je\+Vois 框架背后的历史背景}}
+\end{DoxyItemize}
+
+有关如何使用和编程 Je\+Vois 的教程，请参阅 \href{/tutorials}{\texttt{ Je\+Vois 教程}}。 

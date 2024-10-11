@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ChatBox">
+<title>jevois::ChatBox Class Reference</title>
+<indexterm><primary>jevois::ChatBox</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/ChatBox.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>A simple helper class for a chat box rendered in ImGui. </para>
+
+
+
+<para>This is used, for example, to create interactive dialogues with large language models (LLMs). Users can input text in an input box, and answers can be shown in the main window above. This chatbox is intended to operate fully asynchronously:</para>
+
+<para><itemizedlist>
+<listitem>
+<para>call <link linkend="_classjevois_1_1ChatBox_1a088a47b72df7495721c292d5d5eca7a7">get()</link> to retrieve any new input messages entered by the user. This is non-blocking and returns immediately. The returned string will be empty except after the user presses [RETURN] in the input box, in which case the whole entered input will be returned.</para>
+</listitem><listitem>
+<para>call <link linkend="_classjevois_1_1ChatBox_1a91a7add4923f41476f706a2cdb04ea24">writeString()</link> to add to the text that is written out in the main window.</para>
+</listitem><listitem>
+<para>call <link linkend="_classjevois_1_1ChatBox_1a07bfd761354cd67af7aa005c36644ec5">draw()</link> on every video frame.</para>
+</listitem></itemizedlist>
+</para>
+
+<para>Note: because it is primarily intended for use in python, this class is not thread-safe (for example, calling <link linkend="_classjevois_1_1ChatBox_1a91a7add4923f41476f706a2cdb04ea24">writeString()</link> and <link linkend="_classjevois_1_1ChatBox_1a07bfd761354cd67af7aa005c36644ec5">draw()</link> concurrently might crash the system. In most applications, the <link linkend="_classjevois_1_1ChatBox">ChatBox</link> member functions would all be called sequentially from a single thread). </para>
+<para>
+Definition at line 47 of file ChatBox.H.</para>
+Collaboration diagram for jevois::ChatBox:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ChatBox__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ChatBox_1a5cfa67975687f0d5cda7a873189476f1">ChatBox</link> (std::string title=&quot;JeVois-Pro <link linkend="_classjevois_1_1ChatBox">ChatBox</link>&quot;)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ChatBox_1a75b79288abde8f7efee56fc4b8525577">~ChatBox</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1ChatBox_1a088a47b72df7495721c292d5d5eca7a7">get</link> ()</para>
+
+<para>Get input string from user, or empty if no new input. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ChatBox_1a91a7add4923f41476f706a2cdb04ea24">writeString</link> (std::string const &amp;out)</para>
+
+<para>Update text that is displayed above input box (output from the underlying chat bot) </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ChatBox_1a07bfd761354cd67af7aa005c36644ec5">draw</link> ()</para>
+
+<para>Render into an ImGui window. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ChatBox_1a4db96aba5ba9e812b5b91bf2ca2bf058">freeze</link> (bool doit)</para>
+
+<para>Freeze/unfreeze the input box, typically to prevent new inputs until current reply is done. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ChatBox_1afb3803fe04f632765c9d949e072d9888">clear</link> ()</para>
+
+<para>Clear all displayed text: </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ChatBox_1a76fe4a35bf6d84f0967ffcb60f7fed5a">callback</link> (ImGuiInputTextCallbackData *data)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::deque&lt; std::pair&lt; bool, std::string &gt; &gt; <link linkend="_classjevois_1_1ChatBox_1aff13eb8ef9571365e71389fb38e1c169">itsData</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1ChatBox_1a212080c62a03c5351c3df01d2d5e7e48">itsLastInput</link></para>
+</listitem>
+            <listitem><para>char <link linkend="_classjevois_1_1ChatBox_1a2397f5c88a099fdc28a950ee51ac5167">itsInputBuf</link> [1024]</para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_classjevois_1_1ChatBox_1ae690b2318e5e720de4cc1bb54efff867">itsHistory</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ChatBox_1ad629e0240983287354154bb4a78c844e">itsHistoryPos</link> = 0</para>
+</listitem>
+            <listitem><para>const std::string <link linkend="_classjevois_1_1ChatBox_1a4751a2382e857fa0db9ba6898c33efe3">itsTitle</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ChatBox_1af591fbf0e9aee66a05f4bc583da29827">itsFrozen</link> = false</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1ChatBox_1aa76d24d0035a28db3551a243e5ef7592">itsWaitState</link> = 10</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ChatBox_1a5cfa67975687f0d5cda7a873189476f1"/>    <section>
+    <title>ChatBox()</title>
+<indexterm><primary>ChatBox</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>ChatBox</secondary></indexterm>
+<para><computeroutput>jevois::ChatBox::ChatBox (std::string title = <computeroutput>&quot;JeVois-Pro <link linkend="_classjevois_1_1ChatBox">ChatBox</link>&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 29 of file ChatBox.C.</para>
+<para>
+References itsInputBuf.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a75b79288abde8f7efee56fc4b8525577"/>    <section>
+    <title>~ChatBox()</title>
+<indexterm><primary>~ChatBox</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>~ChatBox</secondary></indexterm>
+<para><computeroutput>jevois::ChatBox::~ChatBox ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 35 of file ChatBox.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ChatBox_1a76fe4a35bf6d84f0967ffcb60f7fed5a"/>    <section>
+    <title>callback()</title>
+<indexterm><primary>callback</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>callback</secondary></indexterm>
+<para><computeroutput>int jevois::ChatBox::callback (ImGuiInputTextCallbackData * data)</computeroutput></para><para>
+Definition at line 216 of file ChatBox.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1afb3803fe04f632765c9d949e072d9888"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void jevois::ChatBox::clear ( )</computeroutput></para><para>
+
+<para>Clear all displayed text: </para>
+</para>
+<para>
+Definition at line 39 of file ChatBox.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a07bfd761354cd67af7aa005c36644ec5"/>    <section>
+    <title>draw()</title>
+<indexterm><primary>draw</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>draw</secondary></indexterm>
+<para><computeroutput>void jevois::ChatBox::draw ( )</computeroutput></para><para>
+
+<para>Render into an ImGui window. </para>
+</para>
+<para>
+Definition at line 96 of file ChatBox.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a4db96aba5ba9e812b5b91bf2ca2bf058"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::ChatBox::freeze (bool doit)</computeroutput></para><para>
+
+<para>Freeze/unfreeze the input box, typically to prevent new inputs until current reply is done. </para>
+</para>
+<para>
+Definition at line 83 of file ChatBox.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a088a47b72df7495721c292d5d5eca7a7"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>std::string jevois::ChatBox::get ( )</computeroutput></para><para>
+
+<para>Get input string from user, or empty if no new input. </para>
+</para>
+<para>
+Definition at line 45 of file ChatBox.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a91a7add4923f41476f706a2cdb04ea24"/>    <section>
+    <title>writeString()</title>
+<indexterm><primary>writeString</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::ChatBox::writeString (std::string const &amp; out)</computeroutput></para><para>
+
+<para>Update text that is displayed above input box (output from the underlying chat bot) </para>
+</para>
+<para>
+Definition at line 62 of file ChatBox.C.</para>
+<para>
+References jevois::split().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1ChatBox_1aff13eb8ef9571365e71389fb38e1c169"/>    <section>
+    <title>itsData</title>
+<indexterm><primary>itsData</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsData</secondary></indexterm>
+<para><computeroutput>std::deque&lt;std::pair&lt;bool , std::string&gt; &gt; jevois::ChatBox::itsData<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 72 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1af591fbf0e9aee66a05f4bc583da29827"/>    <section>
+    <title>itsFrozen</title>
+<indexterm><primary>itsFrozen</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsFrozen</secondary></indexterm>
+<para><computeroutput>bool jevois::ChatBox::itsFrozen = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 78 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1ae690b2318e5e720de4cc1bb54efff867"/>    <section>
+    <title>itsHistory</title>
+<indexterm><primary>itsHistory</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsHistory</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; jevois::ChatBox::itsHistory<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 75 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1ad629e0240983287354154bb4a78c844e"/>    <section>
+    <title>itsHistoryPos</title>
+<indexterm><primary>itsHistoryPos</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsHistoryPos</secondary></indexterm>
+<para><computeroutput>int jevois::ChatBox::itsHistoryPos = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 76 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a2397f5c88a099fdc28a950ee51ac5167"/>    <section>
+    <title>itsInputBuf</title>
+<indexterm><primary>itsInputBuf</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsInputBuf</secondary></indexterm>
+<para><computeroutput>char jevois::ChatBox::itsInputBuf[1024]<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 74 of file ChatBox.H.</para>
+<para>
+Referenced by ChatBox().</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a212080c62a03c5351c3df01d2d5e7e48"/>    <section>
+    <title>itsLastInput</title>
+<indexterm><primary>itsLastInput</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsLastInput</secondary></indexterm>
+<para><computeroutput>std::string jevois::ChatBox::itsLastInput<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 73 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1a4751a2382e857fa0db9ba6898c33efe3"/>    <section>
+    <title>itsTitle</title>
+<indexterm><primary>itsTitle</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsTitle</secondary></indexterm>
+<para><computeroutput>const std::string jevois::ChatBox::itsTitle<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 77 of file ChatBox.H.</para>
+    </section><anchor xml:id="_classjevois_1_1ChatBox_1aa76d24d0035a28db3551a243e5ef7592"/>    <section>
+    <title>itsWaitState</title>
+<indexterm><primary>itsWaitState</primary><secondary>jevois::ChatBox</secondary></indexterm>
+<indexterm><primary>jevois::ChatBox</primary><secondary>itsWaitState</secondary></indexterm>
+<para><computeroutput>int jevois::ChatBox::itsWaitState = 10<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 79 of file ChatBox.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_ChatBox_8H">ChatBox.H</link>src/jevois/GPU/<link linkend="_ChatBox_8C">ChatBox.C</link></section>
+</section>

@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GUIeditor">
+<title>jevois::GUIeditor Class Reference</title>
+<indexterm><primary>jevois::GUIeditor</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GUIeditor.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Editor panel for JeVois-Pro GUI. </para>
+
+
+
+<para>This panel allows one to select one of several files, and to edit it. </para>
+<para>
+Definition at line 46 of file GUIeditor.H.</para>
+Inheritance diagram for jevois::GUIeditor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIeditor__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::GUIeditor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIeditor__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GUIeditor_1a0a9c15b70fa00740468744c62a58487a">GUIeditor</link> (<link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> *helper, std::string const &amp;imguiid, std::vector&lt; <link linkend="_structjevois_1_1EditorItem">EditorItem</link> &gt; &amp;&amp;fixeditems, std::string const &amp;scanpath, std::string const &amp;prefix, std::set&lt; std::string &gt; &amp;&amp;extensions)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1GUIeditor_1a80a8535160fd57f8783d77ac048733a3">~GUIeditor</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIeditor_1adc20942ade23a56da23230eccd0f6203">draw</link> ()</para>
+
+<para>Draw the editor into ImGui. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIeditor_1acd32d4103482d0b78b655e9209bbed0c">loadFile</link> (std::filesystem::path const &amp;fn)</para>
+
+<para>Load a file and set it as the current file. </para>
+</listitem>
+            <listitem><para>const std::filesystem::path &amp; <link linkend="_classjevois_1_1GUIeditor_1a701d6375396844bb70f0772449c1379c">getLoadedFilePath</link> () const</para>
+
+<para>Get path of file last loaded with <link linkend="_classjevois_1_1GUIeditor_1acd32d4103482d0b78b655e9209bbed0c">loadFile()</link>, may be empty. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIeditor_1abe340740b32bd38a101247ebbd76d6ee">refresh</link> ()</para>
+
+<para>Refresh list of files. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIeditor_1a91cafbba64beffe0bca87557f0bc0c1d">saveFile</link> ()</para>
+
+<para>Save a file. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_classjevois_1_1GUIeditor_1a3c72a4e20c54a79e897c98c9390429c0">EditorSaveAction</link> </para>
+
+<para>Helper enum for actions to execute after saving a config file. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIeditor_1a0a9c15b70fa00740468744c62a58487a"/>    <section>
+    <title>GUIeditor()</title>
+<indexterm><primary>GUIeditor</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>GUIeditor</secondary></indexterm>
+<para><computeroutput>jevois::GUIeditor::GUIeditor (<link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> * helper, std::string const &amp; imguiid, std::vector&lt; <link linkend="_structjevois_1_1EditorItem">EditorItem</link> &gt; &amp;&amp; fixeditems, std::string const &amp; scanpath, std::string const &amp; prefix, std::set&lt; std::string &gt; &amp;&amp; extensions)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 31 of file GUIeditor.C.</para>
+<para>
+References JEVOIS_SHARE_PATH, and saveFile().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIeditor_1a80a8535160fd57f8783d77ac048733a3"/>    <section>
+    <title>~GUIeditor()</title>
+<indexterm><primary>~GUIeditor</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>~GUIeditor</secondary></indexterm>
+<para><computeroutput>jevois::GUIeditor::~GUIeditor ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 46 of file GUIeditor.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIeditor_1adc20942ade23a56da23230eccd0f6203"/>    <section>
+    <title>draw()</title>
+<indexterm><primary>draw</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>draw</secondary></indexterm>
+<para><computeroutput>void jevois::GUIeditor::draw ( )</computeroutput></para><para>
+
+<para>Draw the editor into ImGui. </para>
+</para>
+<para>
+Definition at line 112 of file GUIeditor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIeditor_1a701d6375396844bb70f0772449c1379c"/>    <section>
+    <title>getLoadedFilePath()</title>
+<indexterm><primary>getLoadedFilePath</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>getLoadedFilePath</secondary></indexterm>
+<para><computeroutput>const std::filesystem::path &amp; jevois::GUIeditor::getLoadedFilePath ( ) const</computeroutput></para><para>
+
+<para>Get path of file last loaded with <link linkend="_classjevois_1_1GUIeditor_1acd32d4103482d0b78b655e9209bbed0c">loadFile()</link>, may be empty. </para>
+</para>
+<para>
+Definition at line 494 of file GUIeditor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIeditor_1acd32d4103482d0b78b655e9209bbed0c"/>    <section>
+    <title>loadFile()</title>
+<indexterm><primary>loadFile</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>loadFile</secondary></indexterm>
+<para><computeroutput>void jevois::GUIeditor::loadFile (std::filesystem::path const &amp; fn)</computeroutput></para><para>
+
+<para>Load a file and set it as the current file. </para>
+</para>
+<para>
+Definition at line 361 of file GUIeditor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIeditor_1abe340740b32bd38a101247ebbd76d6ee"/>    <section>
+    <title>refresh()</title>
+<indexterm><primary>refresh</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>refresh</secondary></indexterm>
+<para><computeroutput>void jevois::GUIeditor::refresh ( )</computeroutput></para><para>
+
+<para>Refresh list of files. </para>
+</para>
+<para>
+Definition at line 50 of file GUIeditor.C.</para>
+<para>
+References jevois::VideoMapping::cmakepath(), and jevois::VideoMapping::path().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIeditor_1a91cafbba64beffe0bca87557f0bc0c1d"/>    <section>
+    <title>saveFile()</title>
+<indexterm><primary>saveFile</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>saveFile</secondary></indexterm>
+<para><computeroutput>void jevois::GUIeditor::saveFile ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Save a file. </para>
+</para>
+<para>
+Definition at line 498 of file GUIeditor.C.</para>
+<para>
+References LINFO.</para>
+<para>
+Referenced by GUIeditor().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIeditor_1a3c72a4e20c54a79e897c98c9390429c0"/>    <section>
+    <title>EditorSaveAction</title>
+<indexterm><primary>EditorSaveAction</primary><secondary>jevois::GUIeditor</secondary></indexterm>
+<indexterm><primary>jevois::GUIeditor</primary><secondary>EditorSaveAction</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_classjevois_1_1GUIeditor_1a3c72a4e20c54a79e897c98c9390429c0">EditorSaveAction</link><computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Helper enum for actions to execute after saving a config file. </para>
+</para>
+<para>
+Definition at line 34 of file GUIeditor.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GUIeditor_8H">GUIeditor.H</link>src/jevois/GPU/<link linkend="_GUIeditor_8C">GUIeditor.C</link></section>
+</section>

@@ -1,0 +1,67 @@
+\hypertarget{namespacejevois_1_1coords}{}\doxysubsection{jevois\+::coords Namespace Reference}
+\label{namespacejevois_1_1coords}\index{jevois::coords@{jevois::coords}}
+
+
+\doxysubsubsection{ }
+用于将坐标从相机分辨率转换为标准坐标的辅助函数的命名空间 
+
+有关更多详细信息，请参阅 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}} 。 \doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{img\+To\+Std}} (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&camimg, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 将相机坐标就地转换为标准化坐标，以确定图像大小 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_1_1coords_ae621e121aecf4517d49ee93a047b9a7d}{img\+To\+Std}} (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度从相机现场转换为标准化坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga22830c058b06d45804ac9acc9e43d939}{img\+To\+StdX}} (float \&x, unsigned int const width, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度将 X 坐标从相机现场转换为标准化坐标 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga3c03b605134727c861576a87ccd0fcb7}{img\+To\+StdY}} (float \&y, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度将 Y 坐标从相机现场转换为标准化 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_gac6b2bbdd9348f3da2e4f9dd304bf3343}{img\+To\+Std\+Size}} (float \&w, float \&\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用给定的图像宽度和高度，将尺寸从相机现场转换为标准化 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{std\+To\+Img}} (float \&x, float \&y, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&camimg, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__coordhelpers_gadc6d1e599f2c8e464a69f25b54fd6f45}{std\+To\+Img}} (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将坐标从标准化坐标转换为图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacejevois_1_1coords_af348fba8df5bc4a080b59955dcccaae1}{std\+To\+Img\+Size}} (float \&x, float \&y, unsigned int const width, unsigned int const height, float const eps=0.\+1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})
+\begin{DoxyCompactList}\small\item\em 使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将尺寸从标准化转换为图像 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{namespacejevois_1_1coords_ae621e121aecf4517d49ee93a047b9a7d}\label{namespacejevois_1_1coords_ae621e121aecf4517d49ee93a047b9a7d}} 
+\index{jevois::coords@{jevois::coords}!imgToStd@{imgToStd}}
+\index{imgToStd@{imgToStd}!jevois::coords@{jevois::coords}}
+\doxyparagraph{\texorpdfstring{imgToStd()}{imgToStd()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::img\+To\+Std (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{unsigned int const}]{width,  }\item[{unsigned int const}]{height,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用给定的图像宽度和高度从相机现场转换为标准化坐标 
+
+width and height 用于指定相机图像的像素宽度和高度，这是源坐标系。目标坐标系是标准化坐标系，x 在 \mbox{[}-\/1000 ... 1000\mbox{]} 内 ，y 在 \mbox{[}-\/750 ... 750\mbox{]} 内。
+
+eps 用于对返回的坐标进行舍入，这很方便避免通过串行端口发送非常长的浮点值。 
+
+Definition at line 26 of file Coordinates.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT.
+
+\mbox{\Hypertarget{namespacejevois_1_1coords_af348fba8df5bc4a080b59955dcccaae1}\label{namespacejevois_1_1coords_af348fba8df5bc4a080b59955dcccaae1}} 
+\index{jevois::coords@{jevois::coords}!stdToImgSize@{stdToImgSize}}
+\index{stdToImgSize@{stdToImgSize}!jevois::coords@{jevois::coords}}
+\doxyparagraph{\texorpdfstring{stdToImgSize()}{stdToImgSize()}}
+{\footnotesize\ttfamily void jevois\+::coords\+::std\+To\+Img\+Size (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{unsigned int const}]{width,  }\item[{unsigned int const}]{height,  }\item[{float const}]{eps = {\ttfamily 0.1\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}} }\end{DoxyParamCaption})}
+
+
+
+使用 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 建立图像大小，将尺寸从标准化转换为图像 
+
+
+
+Definition at line 74 of file Coordinates.\+C.
+
+
+
+References h, and J\+E\+V\+O\+I\+S\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+A\+S\+P\+E\+CT.
+

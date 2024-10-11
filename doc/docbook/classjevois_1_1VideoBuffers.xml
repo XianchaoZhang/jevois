@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoBuffers">
+<title>jevois::VideoBuffers Class Reference</title>
+<indexterm><primary>jevois::VideoBuffers</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoBuffers.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>V4L2 视频帧（相机或小工具）的缓冲区集合，带有与 MMAP 区域挂钩的钩子 </para>
+
+
+
+<para>相机和小工具都使用 <link linkend="_classjevois_1_1VideoBuffers">VideoBuffers</link> 对象来管理其视频缓冲区。VideoBuffer 只是 <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> 对象的向量，具有对缓冲区进行排 队的附加功能（将其发送到内核驱动程序，以便将其与新的相机帧一起归档，或者使其内容通过 USB 链接流出），以及对缓冲 区进行出队（获取下一个抓取的相机帧，或下一个由用户代码填充的空 USB 缓冲区）。</para>
+
+<para>请注意，此类不提供线程安全性，在多线程访问的情况下必须进行外部保护。</para>
+
+<para><link linkend="_classjevois_1_1VideoBuffers">VideoBuffers</link> 主要供 <link linkend="_classjevois_1_1Camera">Camera</link> 和 <link linkend="_classjevois_1_1Gadget">Gadget</link> 内部使用。机器视觉程序员应该只使用 <link linkend="_classjevois_1_1Module">Module</link> 以及 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 和 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 包 装器。 </para>
+<para>
+Definition at line 39 of file VideoBuffers.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1VideoBuffers_1abffa1a97eecc04cbe95b112991828e24">VideoBuffers</link> (char const *name, int const fd, v4l2_buf_type type, size_t const num=4)</para>
+
+<para>构造并分配 MMAP 的视频缓冲区 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1VideoBuffers_1ab70c94a41bbd35d989a5c31e01aeef83">~VideoBuffers</link> ()</para>
+
+<para>释放 MMAP 的内存区域 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size</link> () const</para>
+
+<para>获取分配的缓冲区数量 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1VideoBuffers_1a1b03a5d79dabb25eb678b50e0f0bb124">nqueued</link> () const</para>
+
+<para>获取排队的缓冲区数量，始终位于 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>[ size_t ] </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1VideoBuffers_1a06cbda1079fb6967394932d4830edad9">get</link> (size_t const index) const</para>
+
+<para>通过索引获取一个缓冲区 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>] </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1a91d88f67f937ddce64b43d6547789811">qbuf</link> (size_t const index)</para>
+
+<para>将一个缓冲区排队到 V4L2，通过索引 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>] </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1ac2b9869138eea91b446fdedcbffe13fe">qbuf</link> (struct v4l2_buffer &amp;buf)</para>
+
+<para>通过 v4l2_buffer 将一个缓冲区排队到 V4L2 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1a19fea52fc8e627029354a0142b0e88f0">qbufall</link> ()</para>
+
+<para>对所有缓冲区进行排队，通常在捕获设备上开始流式传输时使用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1a43e93703207df68dc1385e3e0b5ec3b8">qbufallbutone</link> (size_t const index)</para>
+
+<para>除了一个指定的缓冲区之外，对尚未排队的所有缓冲区进行排队 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1ad041aac409788b59eacc3596c2a3d035">dqbuf</link> (struct v4l2_buffer &amp;buf)</para>
+
+<para>出队下一个捕获/显示的缓冲区，阻塞直到有一个可用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuffers_1a0ee60508a074c08b238f7089a568f4cf">dqbufall</link> ()</para>
+
+<para>出队所有缓冲区，通常用于停止流，但这可能需要一些时间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoBuffers_1abffa1a97eecc04cbe95b112991828e24"/>    <section>
+    <title>VideoBuffers()</title>
+<indexterm><primary>VideoBuffers</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>VideoBuffers</secondary></indexterm>
+<para><computeroutput>jevois::VideoBuffers::VideoBuffers (char const * name, int const fd, v4l2_buf_type type, size_t const num = <computeroutput>4</computeroutput>
+)</computeroutput></para><para>
+
+<para>构造并分配 MMAP 的视频缓冲区 </para>
+</para>
+
+<para>Type 是缓冲区类型，通常为 V4L2_BUF_TYPE_VIDEO_CAPTURE、V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE 或 V4L2_BUF_TYPE_VIDEO_OUTPUT。<note><title>Note</title>
+
+<para>name 仅用于调试消息，因此我们可以区分摄像头和 USB 缓冲区。 </para>
+</note>
+</para>
+<para>
+Definition at line 30 of file VideoBuffers.C.</para>
+<para>
+References FDLDEBUG, FDLFATAL, LFATAL, and XIOCTL.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1ab70c94a41bbd35d989a5c31e01aeef83"/>    <section>
+    <title>~VideoBuffers()</title>
+<indexterm><primary>~VideoBuffers</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>~VideoBuffers</secondary></indexterm>
+<para><computeroutput>jevois::VideoBuffers::~VideoBuffers ( )</computeroutput></para><para>
+
+<para>释放 MMAP 的内存区域 </para>
+</para>
+<para>
+Definition at line 91 of file VideoBuffers.C.</para>
+<para>
+References FDLDEBUG, and XIOCTL_QUIET.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoBuffers_1ad041aac409788b59eacc3596c2a3d035"/>    <section>
+    <title>dqbuf()</title>
+<indexterm><primary>dqbuf</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>dqbuf</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::dqbuf (struct v4l2_buffer &amp; buf)</computeroutput></para><para>
+
+<para>出队下一个捕获/显示的缓冲区，阻塞直到有一个可用 </para>
+</para>
+<para>
+Definition at line 183 of file VideoBuffers.C.</para>
+<para>
+References FDLFATAL, and XIOCTL_QUIET_ONCE.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a0ee60508a074c08b238f7089a568f4cf"/>    <section>
+    <title>dqbufall()</title>
+<indexterm><primary>dqbufall</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>dqbufall</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::dqbufall ( )</computeroutput></para><para>
+
+<para>出队所有缓冲区，通常用于停止流，但这可能需要一些时间 </para>
+</para>
+<para>
+Definition at line 208 of file VideoBuffers.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a06cbda1079fb6967394932d4830edad9"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">jevois::VideoBuf</link> &gt; jevois::VideoBuffers::get (size_t const index) const</computeroutput></para><para>
+
+<para>通过索引获取一个缓冲区 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>] </para>
+</para>
+<para>
+Definition at line 127 of file VideoBuffers.C.</para>
+<para>
+References FDLFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a1b03a5d79dabb25eb678b50e0f0bb124"/>    <section>
+    <title>nqueued()</title>
+<indexterm><primary>nqueued</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>nqueued</secondary></indexterm>
+<para><computeroutput>size_t jevois::VideoBuffers::nqueued ( ) const</computeroutput></para><para>
+
+<para>获取排队的缓冲区数量，始终位于 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>[ size_t ] </para>
+</para>
+<para>
+Definition at line 121 of file VideoBuffers.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a91d88f67f937ddce64b43d6547789811"/>    <section>
+    <title>qbuf()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>qbuf</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>qbuf</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::qbuf (size_t const index)</computeroutput></para><para>
+
+<para>将一个缓冲区排队到 V4L2，通过索引 [0 .. <link linkend="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7">size()</link>] </para>
+</para>
+
+<para>请注意，如果在输出设备上使用，则会抛出异常，因为我们不知道 bytesused 应使用什么值（缓冲区中有多少数据；这对于 支持流出 MJPG 图像是必要的，其使用的字节数是可变的）。 在这些设备上改用 qbuf(v4l2_buffer)，通常使用从 <link linkend="_classjevois_1_1VideoBuffers_1ad041aac409788b59eacc3596c2a3d035">dqbuf()</link> 获得的缓冲区，并且当它包含 MJPG 图像时，在该缓冲区的 bytesused 字段中设置使用的字节数。 </para>
+<para>
+Definition at line 135 of file VideoBuffers.C.</para>
+<para>
+References FDLFATAL, jevois::to_string(), and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1ac2b9869138eea91b446fdedcbffe13fe"/>    <section>
+    <title>qbuf()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>qbuf</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>qbuf</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::qbuf (struct v4l2_buffer &amp; buf)</computeroutput></para><para>
+
+<para>通过 v4l2_buffer 将一个缓冲区排队到 V4L2 </para>
+</para>
+
+<para>调用者负责设置 v4l2_buf 中的所有字段，包括与之前请求的有效且尚未排队的缓冲区相对应的索引。通常，这由输出设备使 用，输出设备首先通过 <link linkend="_classjevois_1_1VideoBuffers_1ad041aac409788b59eacc3596c2a3d035">dqbuf()</link> 获取缓冲区，然后将像素数据填充到其中，然后将其发送回 <link linkend="_classjevois_1_1VideoBuffers_1a91d88f67f937ddce64b43d6547789811">qbuf()</link>。 </para>
+<para>
+Definition at line 159 of file VideoBuffers.C.</para>
+<para>
+References jevois::to_string(), and XIOCTL_QUIET.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a19fea52fc8e627029354a0142b0e88f0"/>    <section>
+    <title>qbufall()</title>
+<indexterm><primary>qbufall</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>qbufall</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::qbufall ( )</computeroutput></para><para>
+
+<para>对所有缓冲区进行排队，通常在捕获设备上开始流式传输时使用 </para>
+</para>
+<para>
+Definition at line 170 of file VideoBuffers.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a43e93703207df68dc1385e3e0b5ec3b8"/>    <section>
+    <title>qbufallbutone()</title>
+<indexterm><primary>qbufallbutone</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>qbufallbutone</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuffers::qbufallbutone (size_t const index)</computeroutput></para><para>
+
+<para>除了一个指定的缓冲区之外，对尚未排队的所有缓冲区进行排队 </para>
+</para>
+<para>
+Definition at line 176 of file VideoBuffers.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuffers_1a219dbd9a76e31cfef67c7b55539694b7"/>    <section>
+    <title>size()</title>
+<indexterm><primary>size</primary><secondary>jevois::VideoBuffers</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuffers</primary><secondary>size</secondary></indexterm>
+<para><computeroutput>size_t jevois::VideoBuffers::size ( ) const</computeroutput></para><para>
+
+<para>获取分配的缓冲区数量 </para>
+</para>
+<para>
+Definition at line 115 of file VideoBuffers.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoBuffers_8H">VideoBuffers.H</link>src/jevois/Core/<link linkend="_VideoBuffers_8C">VideoBuffers.C</link></section>
+</section>

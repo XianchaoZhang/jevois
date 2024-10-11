@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Profiler">
+<title>jevois::Profiler Class Reference</title>
+<indexterm><primary>jevois::Profiler</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Profiler.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>简单的 profiler 类 </para>
+
+
+
+<para>此类报告在指定的间隔内针对每个检查点字符串分别计算的 <link linkend="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5">start()</link> 和每个 <link linkend="_classjevois_1_1Profiler_1aae3dbbb1b93dd4c8f06d294da2d36234">checkpoint()</link> 调用之间所花费的时间。 由于 JeVois 模块通常以视频速率工作，因此此类仅报告通过 <link linkend="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5">start()</link>、checkpoint() 和 <link linkend="_classjevois_1_1Profiler_1a767bf583c44557e8dc1fb4004df0bf88">stop()</link> 进行一定次数迭代后的平均时间。 因此，即使两个检查点之间的时间只有几微秒，通过每 100 帧仅报告一次，也不会使整体帧速率降低太多。 请参阅 <link linkend="_classjevois_1_1Timer">Timer</link> 以获 取仅具有 <link linkend="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5">start()</link> 和 <link linkend="_classjevois_1_1Profiler_1a767bf583c44557e8dc1fb4004df0bf88">stop()</link> 的更轻量级类。 </para>
+<para>
+Definition at line 33 of file Profiler.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Profiler_1a2d794677178f6b1e7de772142ebd531c">Profiler</link> (char const *prefix, size_t interval=100, int loglevel=LOG_INFO)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5">start</link> ()</para>
+
+<para>开始时间测量周期 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Profiler_1aae3dbbb1b93dd4c8f06d294da2d36234">checkpoint</link> (char const *description)</para>
+
+<para>注意特定事件的时间 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Profiler_1a767bf583c44557e8dc1fb4004df0bf88">stop</link> ()</para>
+
+<para>结束时间测量期，如果达到报告间隔，则报告每个检查点所花费的时间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Profiler_1a2d794677178f6b1e7de772142ebd531c"/>    <section>
+    <title>Profiler()</title>
+<indexterm><primary>Profiler</primary><secondary>jevois::Profiler</secondary></indexterm>
+<indexterm><primary>jevois::Profiler</primary><secondary>Profiler</secondary></indexterm>
+<para><computeroutput>jevois::Profiler::Profiler (char const * prefix, size_t interval = <computeroutput>100</computeroutput>
+, int loglevel = <computeroutput>LOG_INFO</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 24 of file Profiler.C.</para>
+<para>
+References LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Profiler_1aae3dbbb1b93dd4c8f06d294da2d36234"/>    <section>
+    <title>checkpoint()</title>
+<indexterm><primary>checkpoint</primary><secondary>jevois::Profiler</secondary></indexterm>
+<indexterm><primary>jevois::Profiler</primary><secondary>checkpoint</secondary></indexterm>
+<para><computeroutput>void jevois::Profiler::checkpoint (char const * description)</computeroutput></para><para>
+
+<para>注意特定事件的时间 </para>
+</para>
+
+<para>将报告此事件与前一个事件（或第一个检查点的 <link linkend="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5">start()</link>）之间的增量时间。请注意，我们在表中为每个描述值创建了一个 新的唯一条目，因此您应保持传递的唯一描述数量较少（不包括帧号或某些参数值）。描述以原始 C 字符串的形式传递，以 鼓励您仅使用字符串文字。 </para>
+<para>
+Definition at line 39 of file Profiler.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Profiler_1a94a031182f9927c5545090f1f05cb1a5"/>    <section>
+    <title>start()</title>
+<indexterm><primary>start</primary><secondary>jevois::Profiler</secondary></indexterm>
+<indexterm><primary>jevois::Profiler</primary><secondary>start</secondary></indexterm>
+<para><computeroutput>void jevois::Profiler::start ( )</computeroutput></para><para>
+
+<para>开始时间测量周期 </para>
+</para>
+<para>
+Definition at line 33 of file Profiler.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Profiler_1a767bf583c44557e8dc1fb4004df0bf88"/>    <section>
+    <title>stop()</title>
+<indexterm><primary>stop</primary><secondary>jevois::Profiler</secondary></indexterm>
+<indexterm><primary>jevois::Profiler</primary><secondary>stop</secondary></indexterm>
+<para><computeroutput>void jevois::Profiler::stop ( )</computeroutput></para><para>
+
+<para>结束时间测量期，如果达到报告间隔，则报告每个检查点所花费的时间 </para>
+</para>
+
+<para>报告的时间是从开始到每个检查点。 </para>
+<para>
+Definition at line 74 of file Profiler.C.</para>
+<para>
+References LDEBUG, LERROR, LFATAL, LINFO, and jevois::secs2str().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Profiler_8H">Profiler.H</link>src/jevois/Debug/<link linkend="_Profiler_8C">Profiler.C</link></section>
+</section>

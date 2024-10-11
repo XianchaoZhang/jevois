@@ -21,9 +21,9 @@
 
 namespace jevois
 {
-  //! Abstract interface to an ICM20948 inertial measurement unit (IMU)
-  /*! This class abstracts the low-level communication interface (over SPI bus on JeVois-Pro hardware, or over I2C bus
-      shared with the camera sensor chip and through custom ioctl() calls on JeVois-A33.  \ingroup imu */
+  //! ICM20948 惯性测量单元 (IMU) 的抽象接口 
+  /*! 此类抽象低级通信接口（通过 JeVois-Pro 硬件上的 SPI 总线，或通过与摄像头传感器芯片共享的 I2C 总线以及通过 JeVois-A33 上的
+      自定义 ioctl() 调用。  \ingroup imu */
   class IMU
   {
     public:
@@ -34,73 +34,60 @@ namespace jevois
       //! Destructor
       virtual ~IMU();
 
-      //! Returns true if we use SPI for transfers. Used when ICM20948_REG_USER_CTRL is written to
+      //! 如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写时使用；
       virtual bool isSPI() const = 0;
       
-      //! @name Access functions for IMU registers
+      //! @name IMU 寄存器的访问函数
       //! @{
 
-      //! Write a value to one of the IMU registers
-      /*! This very low-level access is for development of optimal IMU settings only and should not be used in normal
-          operation, it can crash your system. Bank selection is included in this function. */
+      //! 将值写入 IMU 寄存器之一 
+	  /*! 这种非常低级的访问仅用于开发最佳 IMU 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 */
       virtual void writeRegister(unsigned short reg, unsigned char val) = 0;
 
-      //! Read a value from one of the camera's IMU registers
-      /*! This very low-level access is for development of optimal IMU settings only and should not be used in normal
-          operation, it can crash your system. Bank selection is included in this function. */
+      //! 从相机的 IMU 寄存器之一读取一个值 
+	  /*! 这种非常低级的访问仅用于开发最佳 IMU 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 */
       virtual unsigned char readRegister(unsigned short reg) = 0;
 
-      //! Write an array of values to the camera's IMU registers
-      /*! This very low-level access is for development of optimal IMU settings only and should not be used in normal
-          operation, it can crash your system. Memory for vals should have been allocated by the caller with at least
-          num bytes. num must be less than 32. Bank selection is included in this function. */
+      //! 将一个值数组写入相机的 IMU 寄存器 
+	  /*! 这种非常低级的访问仅用于开发最佳 IMU 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少
+	       num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 */
       virtual void writeRegisterArray(unsigned short reg, unsigned char const * vals, size_t num) = 0;
 
-      //! Read an array of values from the camera's IMU registers
-      /*! This very low-level access is for development of optimal IMU settings only and should not be used in normal
-          operation, it can crash your system. Memory for vals should have been allocated by the caller with at least
-          num bytes. num must be less than 32. Bank selection is included in this function. */
+      //! 从相机的 IMU 寄存器读取一个值数组 
+	  /*! 这种非常低级的访问仅用于开发最佳 IMU 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少
+	       num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 */
       virtual void readRegisterArray(unsigned short reg, unsigned char * vals, size_t num) = 0;
 
       //! @}
 
-      //! @name Access functions for DMP registers
+      //! @name DMP 寄存器的访问函数
       //! @{
 
-      //! Load the DMP firmware
-      /*! On JeVois-A33, the firmware is already loaded by the camera kernel module. So this is only useful on
-          JeVois-Pro to load the firmware over SPI. If verify is true, we will read it back and check. If errthrow is
-          also true, throws an exception if verification fails. */
+      //! 加载 DMP 固件 
+	  /*! 在 JeVois-A33 上，固件已由相机内核模块加载。因此，这仅在 JeVois-Pro 上通过 SPI 加载固件有用。如果 verify 为真，
+	      我们将读回并检查。如果 errthrow 也为真，则在验证失败时抛出异常。 */
       void loadDMPfirmware(bool verify = false, bool errthrow = false);
       
-      //! Write a value to a DMP register
-      /*! This very low-level access is for development of optimal DMP settings only and should not be used in normal
-          operation, it can crash your system. Note that the value will be converted to big endian, as required by the
-          DMP processor. */
+      //! 将值写入 DMP 寄存器 
+	  /*! 这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，它可能会导致系统崩溃。请注意，根据 DMP 处理器
+	      的要求，该值将转换为大端字节序。 */
       void writeDMPregister(unsigned short reg, unsigned short val);
 
-      //! Read a value from a DMP register
-      /*! This very low-level access is for development of optimal DMP settings only and should not be used in normal
-          operation, it can crash your system. Note that the value will be converted from big endian of DMP processor to
-          little endian of the JeVois processor.*/
+      //! 从 DMP 寄存器读取值 
+	  /*! 这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，否则可能会导致系统崩溃。请注意，该值将从 DMP 
+	      处理器的大端转换为 JeVois 处理器的小端。 */
       unsigned short readDMPregister(unsigned short reg);
 
-      //! Write an array of values to DMP registers
-      /*! This very low-level access is for development of optimal DMP settings only and should not be used in normal
-          operation, it can crash your system. Memory for vals should have been allocated by the caller with at least
-          num bytes. num must be less than 32. This function does not handle crossing of memory banks, so the caller
-          should segment the calls to match memory bank boundaries. Finally, this function does not perform any endian
-          conversion. Callers should be aware that the DMP is a 16-bit big endian system while the JeVois processor is
-          little endian. */
+      //! 将值数组写入 DMP 寄存器
+	  /*！这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，它可能会导致系统崩溃。调用者应该为 vals 分
+	      配至少 num 个字节的内存。num 必须小于 32。此函数不处理内存组的交叉，因此调用者应该分段调用以匹配内存组边界。
+		  最后，此函数不执行任何字节序转换。调用者应该知道 DMP 是一个 16 位大端系统，而 JeVois 处理器是小端系统。 */
       void writeDMPregisterArray(unsigned short reg, unsigned char const * vals, size_t num);
 
-      //! Read an array of values from DMP registers
-      /*! This very low-level access is for development of optimal DMP settings only and should not be used in normal
-          operation, it can crash your system. Memory for vals should have been allocated by the caller with at least
-          num bytes. num must be less than 32. This function does not handle crossing of memory banks, so the caller
-          should segment the calls to match memory bank boundaries. Finally, this function does not perform any endian
-          conversion. Callers should be aware that the DMP is a 16-bit big endian system while the JeVois processor is
-          little endian. */
+      //! 从 DMP 寄存器读取值数组
+	  /*！这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应为 vals 分
+	      配至少 num 个字节的内存。num 必须小于 32。此函数不处理内存组的交叉，因此调用者应分段调用以匹配内存组边界。
+		  最后，此函数不执行任何字节序转换。调用者应该知道 DMP 是一个 16 位大端系统，而 JeVois 处理器是小端。 */
       void readDMPregisterArray(unsigned short reg, unsigned char * vals, size_t num);
       
       //! @}

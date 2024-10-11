@@ -1,55 +1,35 @@
-/*! \page JeVoisDaemon The jevois-daemon executable
+/*! \page JeVoisDaemon jevois-daemon 可执行文件
 
-\note For readability, we just use \b jevois-daemon below, but you should replace that by \b jevoispro-daemon when using
-\jvpro
+\note 为了便于阅读，我们下面只使用 \b jevois-daemon ，但在使用 \jvpro 时，应将其替换为 \b jevoispro-daemon
 
-The main executable that is created when compiling the JeVois framework is \b jevois-daemon on \jva33 or
-\b jevoispro-daemon on \jvpro, which basically implements a jevois::Engine that will orchestrate the flow of data from
-camera sensor to machine vision processing to video streaming over USB.
+编译 JeVois 框架时创建的主要可执行文件是 \jva33 上的 \b jevois-daemon 或 \jvpro 上的 \b jevoispro-daemon ，它基本上实现了 jevois::Engine，它将协调从摄像头传感器到机器视觉处理再到 USB 上的视频流的数据流。
 
-\note \c jevois-deamon can run on host (when compiling jevois for host), in which case all machine vision algorithms
-will run on your host computer. In this mode, you would usually use a regular USB camera, or you might want to use the
-JeVois smart camera configured with only pass-through video mappings (so that the JeVois camera does not do any
-processing on its own). See \ref UserModes and [the PassThrough
-module](http://jevois.org/moddoc/PassThrough/modinfo.html). Running jevois-daemon on the host with the JeVois camera in
-pass-through mode is often useful to collect training data (for example, pictures of objects to recognize later) as they
-are seen by the JeVois camera.
+\note \c jevois-deamon 可以在主机上运行（当为主机编译 jevois 时），在这种情况下，所有机器视觉算法都将在主机上运行。在此模式下，您通常会使用常规 USB 摄像头，或者您可能希望使用仅配置了直通视频映射的 JeVois 智能摄像头（这样 JeVois 摄像头就不会自行进行任何处理）。请参阅 \ref UserModes 和 [PassThrough 模块](http://jevois.org/moddoc/PassThrough/modinfo.html)。在 JeVois 摄像头处于直通模式的情况下在主机上运行 jevois-daemon 通常有助于收集 JeVois 摄像头看到的训练数据（例如，稍后要识别的物体图片）。
 
-\note \c jevois-daemon also runs on the JeVois smart camera hardware, immediately as soon as it is plugged in and has
-booted up. In such case, the smart camera hardware is doing all the machine vision processing. When operating in this
-mode, normally you would not want to run jevois-daemon again on the host computer, as this would amount to running
-jevois-daemon twice, back to back. One exception is for the collection of training data as described above. Instead, you
-would usually want to run a plain video viewer on your host, such as guvcview, or some custom machine vision code which
-you have developed, which will grab video frames from the JeVois camera and will then process them further on your host
-computer.
+\note \c jevois-daemon 还可在 JeVois 智能相机硬件上运行，只要插入并启动即可。在这种情况下，智能相机硬件将执行所有机器视觉处理。在此模式下操作时，通常您不会希望在主机上再次运行 jevois-daemon，因为这相当于连续运行 jevois-daemon 两次。一个例外是如上所述的训练数据收集。相反，您通常希望在主机上运行普通的视频查看器，例如 guvcview，或者您开发的一些自定义机器视觉代码，它将从 JeVois 相机抓取视频帧，然后在主机上进一步处理它们。
 
-Running jevois-daemon on host
-=============================
+在主机上运行 jevois-daemon 
+==============================
 
-To run it on your host computer, either install jevois and jevoisbase deb packages for host (see \ref
-ProgrammerSource). Or get the source code from GitHub and recompile (see \ref CompilingJeVois and \ref
-CompilingJeVoisBase) and then just run \c rebuild-host.sh both in jevois and in jevoisbase.
+要在主机上运行它，请为主机安装 jevois 和 jevoisbase deb 包（请参阅 \ref ProgrammerSource ）。或者从 GitHub 获取源代码并重新编译（请参阅 \ref CompilingJeVois 和 \ref CompilingJeVoisBase ），然后在 jevois 和 jevoisbase 中运行 \c rebuild-host.sh 。
 
-Then, plug in any USB camera, and type
+然后插入任意 USB 摄像头，并输入
 
 \verbatim
 jevois-daemon
 \endverbatim
 
-You should see video from your webcam processed on your desktop in a window. Note that the JeVois core software does not
-provide any module, so make sure you proceed to compiling and installing jevoisbase before you try to use jevois-daemon.
+您应该会在窗口中看到桌面上处理过的来自网络摄像头的视频。请注意，JeVois 核心软件不提供任何模块，因此请确保在尝试使用 jevois-daemon 之前继续编译和安装 jevoisbase。
 
-\b jevois-daemon accepts a number of command-line arguments, try
+\b jevois-daemon 接受许多命令行参数，请尝试
 
 \verbatim
 jevois-daemon --help
 \endverbatim
 
-to see them. Note that some of these will disappear once jevois-daemon starts, such as \c cameradev which specifies the
-camera (or video input file) to use. Once jevois-daemon is running, that parameter cannot be changed anymore.
+才能看到它们。请注意，jevois-daemon 启动后，其中一些将会消失，例如 \c cameradev 指定要使用的相机（或视频输入文件）。一旦 jevois-daemon 运行，该参数就无法再更改。
 
-Once \c jevois-daemon is running, you can interact with the JeVois system by typing commands in the terminal in which
-you started jevois-daemon.  For example, try:
+一旦 \c jevois-daemon 运行，您就可以通过在启动 jevois-daemon 的终端中键入命令来与 JeVois 系统交互。例如，尝试：
 
 \verbatim
 info
@@ -57,25 +37,20 @@ help
 listmappings
 \endverbatim
 
-To start jevois-daemon in a specific mode, find its number in the listmapping list, then type 'quit' to exit
-jevois-daemon, and finally
+要以特定模式启动 jevois-daemon，请在 listmapping 列表中找到其编号，然后键入 'quit' 退出 jevois-daemon，最后
 
 \verbatim
 jevois-daemon --videomapping=19
 \endverbatim
 
-to start it again in using that new video mapping (here, mapping 19 was for Demo QR-code according to listmappings). See
-\ref UserCli for more info about commands, and http://jevois.org/start/start.html for a list of video mappings that
-correspond to the default collection of modules in jevoisbase.
+使用新的视频映射重新启动它（此处，根据列表映射，映射 19 用于演示二维码）。有关命令的更多信息，请参阅 \ref UserCli ，有关与 jevoisbase 中的默认模块集合相对应的视频映射列表，请参阅 http://jevois.org/start/start.html。
 
-\note If your USB webcam cannot support the camera resolution required by a given video mapping, then you will get an
-error and that mapping cannot run on host.
+\note 如果您的 USB 网络摄像头无法支持给定视频映射所需的摄像头分辨率，那么您将收到错误，并且该映射无法在主机上运行。
 
-jevois-daemon options
-=====================
+jevois-daemon 选项 
+=======================
 
-As of this writing, \c jevois-daemon \c --help returns (reproduced here mostly to help people searching this doc by
-keywords):
+在撰写本文时， \c jevois-daemon \c --help 返回（在此重现主要是为了帮助人们通过关键字搜索此文档）：
 
 \verbatim
 General Options:  
@@ -131,30 +106,26 @@ Engine Options:
 
 \endverbatim
 
-jevois-daemon config files
-==========================
 
-\note For \jvpro, replace \b /jevois/ below with \b /jevoispro/
+jevois-daemon 配置文件 
+============================
 
-jevois-daemon uses several config files, source is in <b>jevois/Config/</b> and they get installed into
-<b>/jevois/config/</b> on host and <b>JEVOIS:/jevois/config/</b> on platform microSD.
+\note 对于 \jvpro，将下面的 \b /jevois/ 替换为 \b /jevoispro/
 
-- \b videomappings.cfg Lits of available videomappings, see \ref UserModes
+jevois-daemon 使用多个配置文件，源位于 <b>jevois/Config/</b> 并且它们安装到主机上的 <b>/jevois/config/</b> 和平台 microSD 上的 <b>JEVOIS:/jevois/config/</b> 中。
 
-- \b params.cfg Parameters that get set on startup, this is equivalent to specifying these parameters from the
-  command-line
+- \b videomappings.cfg 可用视频映射列表，请参阅 \ref UserModes
 
-- \b initscript.cfg Script that gets run on startup, you can put in this file any valid commands as you have typed them
-  interactively, see \ref UserCli for more info.
+- \b params.cfg 启动时设置的参数，这相当于从命令行指定这些参数
 
-Running jevois-daemon on JeVois-A33 platform
-============================================
+- \b initscript.cfg 在启动时运行的脚本，您可以在此文件中放入任何有效的命令，就像您以交互方式输入它们一样，有关更多信息，请参阅 \ref UserCli 。
 
-\c jevois-daemon starts automatically on the platform. The script that starts it is installed in
-<b>LINUX:/usr/bin/jevois.sh</b> on the microSD. Its source is in <b>jevois/bin/jevois.sh</b> and it gets installed to
-microSD staging as part of the rebuild-platform.sh process.
+在 JeVois-A33 平台上运行 jevois-daemon 
+===============================================
 
-You can edit this script, for example if you wish to run jevois-daemon in the \c gdb debugger, just replace the line
+\c jevois-daemon 在平台上自动启动。启动它的脚本安装在 microSD 上的 <b>LINUX:/usr/bin/jevois.sh</b> 中。它的源代码位于 <b>jevois/bin/jevois.sh</b> 中，并作为 rebuild-platform.sh 过程的一部分安装到 microSD 暂存区。
+
+您可以编辑此脚本，例如，如果您希望在 \c gdb 调试器中运行 jevois-daemon，只需替换该行
 
 \verbatim
 /usr/bin/jevois-daemon ${opts}
@@ -166,18 +137,15 @@ by
 gdb --args /usr/bin/jevois-daemon ${opts}
 \endverbatim
 
-Note that since the addition of Python support in \jvversion{1.1}, libcrypto gets pulled in when \c jevois-daemon
-starts, and this causes problems with gdb on the platform. Thus, when gdb starts on the platform, issue a
+请注意，自从 \jvversion{1.1} 添加了 Python 支持后，\c jevois-daemon 启动时会引入 libcrypto，这会导致平台上的 gdb 出现问题。因此，当 gdb 在平台上启动时，发出
 
 \verbatim
 handle SIGILL nostop noprint
 \endverbatim
 
-before you give gdb the \c run command. See https://www.raspberrypi.org/forums/viewtopic.php?p=155085 for the same issue
-reported on the Raspberry Pi.
+在向 gdb 发出 \c run 命令之前。请参阅 https://www.raspberrypi.org/forums/viewtopic.php?p=155085 以了解 Raspberry Pi 上报告的相同问题。
 
-Instead of running in gdb, which sometimes struggles with many threads, etc you can enable core dumps, run jevois-daemon
-normally until it crashes, and then use gdb to find the error in the core file:
+您可以启用核心转储，正常运行 jevois-daemon 直到它崩溃，然后使用 gdb 在核心文件中查找错误，而不是在 gdb 中运行（有时它会在处理许多线程等时遇到困难）：
 
 \verbatim
 ulimit -c unlimited # enable core dumps
@@ -188,19 +156,17 @@ bt # to show the backtrace leading to the crash
 quit
 \endverbatim
 
-Running jevois-daemon on JeVois-Pro platform
-============================================
 
-\c jevoispro-daemon starts automatically on the platform. The script that starts it is installed in
-<b>LINUX:/usr/bin/jevoispro.sh</b> on the microSD. Its source is in <b>jevois/bin/jevoispro.sh</b> and it gets installed
-to microSD as part of the rebuild-platform-pdeb.sh process of package \b jevois.
+在 JeVois-Pro 平台上运行 jevois-daemon 
+===============================================
 
-To debug hard crashes, proceed as follows: boot into console, enable core dumps, run jevoispro-daemon normally until it
-crashes, and then use gdb to find the error in the core file:
+\c jevoispro-daemon 在平台上自动启动。启动它的脚本安装在 microSD 上的 <b>LINUX:/usr/bin/jevoispro.sh</b> 中。它的源代码位于 <b>jevois/bin/jevoispro.sh</b> 中，并作为 \b jevois 包的 rebuild-platform-pdeb.sh 过程的一部分安装到 microSD 中。
 
-First, switch to console boot as described in \ref ProUserQuick
+要调试硬崩溃，请按以下步骤操作：启动控制台，启用核心转储，正常运行 jevoispro-daemon 直到它崩溃，然后使用 gdb 在核心文件中查找错误：
 
-Then reboot and login as root / jevois, and:
+首先，按照 \ref ProUserQuick 中的说明切换到控制台启动
+
+然后重新启动并以 root / jevois 身份登录，然后：
 
 \verbatim
 ulimit -c unlimited # enable core dumps
@@ -210,6 +176,7 @@ gdb /usr/bin/jevoispro-daemon core
 bt # to show the backtrace leading to the crash
 quit
 \endverbatim
+
 
 */
 

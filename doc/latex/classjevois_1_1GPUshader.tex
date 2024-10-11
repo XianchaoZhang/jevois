@@ -1,0 +1,128 @@
+\hypertarget{classjevois_1_1GPUshader}{}\doxysubsection{jevois\+::G\+P\+Ushader Class Reference}
+\label{classjevois_1_1GPUshader}\index{jevois::GPUshader@{jevois::GPUshader}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Ushader.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple class to load and compile some Open\+G\+L-\/\+ES shader code. 
+
+Definition at line 25 of file G\+P\+Ushader.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUshader_a2973eedaabde3aa207fbadb59581f61d}{G\+P\+Ushader}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GPUshader_ad0c7d94a6b2d007ace33d326999e6d2c}{$\sim$\+G\+P\+Ushader}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUshader_a1d6b40660b4a4e6516ad3ef17318e02c}{load}} (char const $\ast$filename, G\+Luint type)
+\begin{DoxyCompactList}\small\item\em Load a shader from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GPUshader_ab3edb68dd55c72b9fc2ee00fec943c6b}{set}} (char const $\ast$name, char const $\ast$str, G\+Luint type)
+\begin{DoxyCompactList}\small\item\em Load a shader from inlined code in a C-\/string. \end{DoxyCompactList}\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUshader_afcebe92f5f77d06bda983c2f4d0d16fc}{id}} () const
+\begin{DoxyCompactList}\small\item\em Get the shader\textquotesingle{}s ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUshader_a2973eedaabde3aa207fbadb59581f61d}\label{classjevois_1_1GPUshader_a2973eedaabde3aa207fbadb59581f61d}} 
+\index{jevois::GPUshader@{jevois::GPUshader}!GPUshader@{GPUshader}}
+\index{GPUshader@{GPUshader}!jevois::GPUshader@{jevois::GPUshader}}
+\doxyparagraph{\texorpdfstring{GPUshader()}{GPUshader()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Ushader\+::\+G\+P\+Ushader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 21 of file G\+P\+Ushader.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GPUshader_ad0c7d94a6b2d007ace33d326999e6d2c}\label{classjevois_1_1GPUshader_ad0c7d94a6b2d007ace33d326999e6d2c}} 
+\index{jevois::GPUshader@{jevois::GPUshader}!````~GPUshader@{$\sim$GPUshader}}
+\index{````~GPUshader@{$\sim$GPUshader}!jevois::GPUshader@{jevois::GPUshader}}
+\doxyparagraph{\texorpdfstring{$\sim$GPUshader()}{~GPUshader()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Ushader\+::$\sim$\+G\+P\+Ushader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+Definition at line 26 of file G\+P\+Ushader.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUshader_afcebe92f5f77d06bda983c2f4d0d16fc}\label{classjevois_1_1GPUshader_afcebe92f5f77d06bda983c2f4d0d16fc}} 
+\index{jevois::GPUshader@{jevois::GPUshader}!id@{id}}
+\index{id@{id}!jevois::GPUshader@{jevois::GPUshader}}
+\doxyparagraph{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Ushader\+::id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the shader\textquotesingle{}s ID. 
+
+
+
+Definition at line 32 of file G\+P\+Ushader.\+C.
+
+
+
+Referenced by jevois\+::\+G\+P\+Uprogram\+::\+G\+P\+Uprogram().
+
+\mbox{\Hypertarget{classjevois_1_1GPUshader_a1d6b40660b4a4e6516ad3ef17318e02c}\label{classjevois_1_1GPUshader_a1d6b40660b4a4e6516ad3ef17318e02c}} 
+\index{jevois::GPUshader@{jevois::GPUshader}!load@{load}}
+\index{load@{load}!jevois::GPUshader@{jevois::GPUshader}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Ushader\+::load (\begin{DoxyParamCaption}\item[{char const $\ast$}]{filename,  }\item[{G\+Luint}]{type }\end{DoxyParamCaption})}
+
+
+
+Load a shader from file. 
+
+type should be G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER or G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER 
+
+Definition at line 36 of file G\+P\+Ushader.\+C.
+
+
+
+References L\+F\+A\+T\+AL, P\+L\+F\+A\+T\+AL, and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+Referenced by jevois\+::\+G\+P\+Uprogram\+::\+G\+P\+Uprogram().
+
+\mbox{\Hypertarget{classjevois_1_1GPUshader_ab3edb68dd55c72b9fc2ee00fec943c6b}\label{classjevois_1_1GPUshader_ab3edb68dd55c72b9fc2ee00fec943c6b}} 
+\index{jevois::GPUshader@{jevois::GPUshader}!set@{set}}
+\index{set@{set}!jevois::GPUshader@{jevois::GPUshader}}
+\doxyparagraph{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+P\+Ushader\+::set (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{char const $\ast$}]{str,  }\item[{G\+Luint}]{type }\end{DoxyParamCaption})}
+
+
+
+Load a shader from inlined code in a C-\/string. 
+
+type should be G\+L\+\_\+\+V\+E\+R\+T\+E\+X\+\_\+\+S\+H\+A\+D\+ER or G\+L\+\_\+\+F\+R\+A\+G\+M\+E\+N\+T\+\_\+\+S\+H\+A\+D\+ER. Name is only used for info and error messages, so typically can just be \char`\"{}vertex\char`\"{} or \char`\"{}fragment\char`\"{} or something describing which instantiation of those. 
+
+Definition at line 57 of file G\+P\+Ushader.\+C.
+
+
+
+References G\+L\+\_\+\+C\+H\+E\+CK, L\+D\+E\+B\+UG, and L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::\+G\+P\+Uprogram\+::\+G\+P\+Uprogram().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUshader_8H}{G\+P\+Ushader.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUshader_8C}{G\+P\+Ushader.\+C}}\end{DoxyCompactItemize}

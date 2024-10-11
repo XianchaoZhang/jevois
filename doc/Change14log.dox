@@ -1,29 +1,24 @@
-/*! \page Change14log Changes and new features in JeVois 1.4
+/*! \page Change14log JeVois 1.4 中的变化和新功能
 
-JeVois 1.4 brings the following new features:
+JeVois 1.4 带来以下新功能：
 
-- New <b>/jevois/share/</b> directory to store data that may be shared across several machine vision modules, such as
-  neural network config files and weights, pre-trained classifiers, etc
+- 新的 <b>/jevois/share/</b> 目录用于存储可在多个机器视觉模块之间共享的数据，例如神经网络配置文件和权重、预训练分类器等
 
-- Object recognition on ImageNet (1000 object categories) and Pascal VOC using Darknet and Darknet YOLO. Not fully
-  optimized for speed yet but already looking very promising.
+- 使用 Darknet 和 Darknet YOLO 在 ImageNet（1000 个目标类别）和 Pascal VOC 上进行目标识别。尚未完全优化速度，但看起来已经非常有前途。
   \image html darknet-demo.png 
-  See two new modules in jevoisbase:
-  + \jvmod{DarknetSingle} passes a central 224x224 crop to a Darknet neural network. The neural network precicts the top
-    N object category candidates (among 1000 possible from imagenet), and those above a minimum confidence threshold are
-    shown and sent to serial.
-  + \jvmod{DarknetYOLO} passes a whole 640x480 frame to a Darknet YOLO (you only look once) network that combines
-    detection (finding where objects might be) and identification (what objects are) for all objects in the scene in one
-    pass.
+  查看 jevoisbase 中的两个新模块：
+  + \jvmod{DarknetSingle} 将中央 224x224 裁剪图传递到 Darknet 神经网络。神经网络预测前 N 个目标类别候选（在 imagenet 中可能的 1000 个候选中），并且显示那些高于最低置信度阈值的目标并发送到串行。
+  + \jvmod{DarknetYOLO} 将整个 640x480 帧传递到 Darknet YOLO（you only look once）网络，该网络结合了对场景中所有目标的检测（查找目标可能在哪里）和识别（目标是什么），只需一次传递即可。
 
     \youtube{d5CfljT5kec}
 
-- A few more image conversion functions in RawImageOps.H
+- RawImageOps.H 中增加了一些图像转换函数
 
-- New machine vision modules for ARtoolkit (ultra fast detection of augmented reality markers), Darknet, Darknet YOLO.
+- ARtoolkit（增强现实标记的超快速检测）、Darknet、Darknet YOLO 的新机器视觉模块。
 
-- Updated \jvmod{RoadNavigation} module to output correct VP information.
+- 更新 \jvmod{RoadNavigation} 模块以输出正确的 VP 信息。
 
-- New tutorial on how to build a simple vision-guided mobile robot
+- 关于如何构建简单的视觉引导移动机器人的新教程
 
 */
+

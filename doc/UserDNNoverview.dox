@@ -1,108 +1,85 @@
 namespace jevois {
 namespace dnn {
 
-/*! \page UserDNNoverview Running neural networks on JeVois-A33 and JeVois-Pro
+/*! \page UserDNNoverview 在 JeVois-A33 和 JeVois-Pro 上运行神经网络
 
-The JeVois \jvmod{DNN} module provides a generic engine to run neural network inference on \jva33 and \jvpro. Note that
-currently no neural network training is available on JeVois yet, as training usually requires large servers with big
-GPUs. Thus here we assume that you have an already-trained model which you want to use on your JeVois camera for runtime
-inference on live video streams.
+JeVois \jvmod{DNN} 模块提供了一个通用引擎，用于在 \jva33 和 \jvpro 上运行神经网络推理。请注意，目前 JeVois 上还没有提供神经网络训练，因为训练通常需要大型服务器和大型 GPU。因此，我们假设您有一个已经训练好的模型，您想在 JeVois 相机上使用它来对实时视频流进行运行时推理。
 
-While we here focus on the JeVois \jvmod{DNN} module, several older modules provide DNN functionality:
+虽然我们在这里重点介绍 JeVois \jvmod{DNN} 模块，但有几个较旧的模块提供了 DNN 功能：
 
-- \jvmod{TensorFlowEasy}: TensorFlow-Lite object classification on CPU using TensorFlow API
-- \jvmod{TensorFlowSaliency}: Itti et al. (1998) saliency model + TensorFlow-Lite object classification
-  on CPU using TensorFlow API
-- \jvmod{TensorFlowSingle}: TensorFlow-Lite object classification on CPU using TensorFlow API
-- \jvmod{DarknetSingle}: Darknet object recognition on CPU, using Darknet API
-- \jvmod{DarknetSaliency}: Itti et al. (1998) saliency model + Darknet object recognition on CPU, Darknet API
-- \jvmod{DarknetYOLO}: Darknet YOLO object detection on CPU, Darknet API
-- \jvmod{DetectionDNN}: Object detection using OpenCV on CPU
-- \jvmod{PyDetectionDNN}: Object detection using OpenCV on CPU, Python version
-- \jvmod{PyClassificationDNN}: Object classification using OpenCV on CPU, Python version
-- \jvmod{PyEmotion}: Facial emotion recognition network, in Python
+- \jvmod{TensorFlowEasy}：使用 TensorFlow API 在 CPU 上进行 TensorFlow-Lite 对象分类
+- \jvmod{TensorFlowSaliency}：Itti 等人 (1998) 显著性模型 + 使用 TensorFlow API 在 CPU 上进行 TensorFlow-Lite 对象分类
+- \jvmod{TensorFlowSingle}：使用 TensorFlow API 在 CPU 上进行 TensorFlow-Lite 对象分类
+- \jvmod{DarknetSingle}：使用 Darknet API 在 CPU 上进行 Darknet 对象识别
+- \jvmod{DarknetSaliency}：Itti 等人(1998) 显著性模型 + CPU 上的 Darknet 对象识别，Darknet API
+- \jvmod{DarknetYOLO}：CPU 上的 Darknet YOLO 对象检测，Darknet API
+- \jvmod{DetectionDNN}：使用 CPU 上的 OpenCV 进行对象检测
+- \jvmod{PyDetectionDNN}：使用 CPU 上的 OpenCV 进行对象检测，Python 版本
+- \jvmod{PyClassificationDNN}：使用 CPU 上的 OpenCV 进行对象分类，Python 版本
+- \jvmod{PyEmotion}：Python 中的面部情绪识别网络
 
-- \jvpro only: \jvmod{PyFaceMesh}: Facial landmarks using MediaPipe
-- \jvpro only: \jvmod{PyHandDetector}: Hand landmarks using MediaPipe
-- \jvpro only: \jvmod{PyPoseDetector}: Body pose landmarks using MediaPipe
+- 仅限 \jvpro：\jvmod{PyFaceMesh}：使用 MediaPipe 的面部标志
+- 仅限 \jvpro：\jvmod{PyHandDetector}：使用 MediaPipe 的手部标志
+- 仅限 \jvpro：\jvmod{PyPoseDetector}：使用 MediaPipe 的身体姿势标志
 
-- \jvpro only: \jvmod{MultiDNN}: Run multiple neural networks in parallel, display in quadrants
-- \jvpro only: \jvmod{MultiDNN2}: Run multiple neural networks in parallel, overlapped displays
-- \jvpro only: \jvmod{PyCoralClassify}: Run classification models on optional Coral TPU, using Coral Python API
-- \jvpro only: \jvmod{PyCoralDetect}: Run detection models on optional Coral TPU, using Coral Python API
-- \jvpro only: \jvmod{PyCoralSegment}: Run segmentation models on optional Coral TPU, using Coral Python API
+- 仅限 \jvpro：\jvmod{MultiDNN}：并行运行多个神经网络，以象限显示
+- 仅限 \jvpro：\jvmod{MultiDNN2}：并行运行多个神经网络，重叠显示
+- 仅限 \jvpro：\jvmod{PyCoralClassify}：使用 Coral Python API 在可选 Coral TPU 上运行分类模型
+- 仅限 \jvpro：\jvmod{PyCoralDetect}：使用 Coral Python API 在可选 Coral TPU 上运行检测模型
+- 仅限 \jvpro：\jvmod{PyCoralSegment}：使用 Coral Python API 在可选 Coral TPU 上运行分割模型
 
-\note On \jvpro, some of these modules are under the **Legacy** list of modules in the graphical interface.
+\note 在 \jvpro 上，其中一些模块位于图形界面中的 **Legacy** 模块列表下。
 
-JeVois-Pro DNN Benchmarks with various hardware accelerators
-============================================================
+JeVois-Pro DNN 与各种硬件加速器的基准测试 
+=================================================================
 
-See \ref JeVoisProBenchmarks
+参见 \ref JeVoisProBenchmarks
 
-JeVois DNN framework overview
-=============================
+JeVois DNN 框架概述 
+===============================
 
-The \jvmod{DNN} module implements a Pipeline component, which serves as overall inference orchestrator, as well as a
-factory for three sub-components:
+\jvmod{DNN} 模块实现了一个 Pipeline 组件，该组件作为总体推理协调器，同时还可作为三个子组件的工厂：
 
-- PreProcessor: receives an image from the camere sensor and prepares it for network inference (e.g., resize, swap
-  RGB to BGR, quantize, etc).\n
-  Available variants:
-  + \ref PreProcessorBlob (C++): should be appropriate for most networks that expect one image as input
-  + write your own in Python following the interface described in PreProcessor, PreProcessorPython,
-    and the example in \ref PyPreBlob.py
+- 预处理器：从摄像头传感器接收图像并准备进行网络推理（例如，调整大小、将 RGB 交换为 BGR、量化等）。\n 可用变体：
++ \ref PreProcessorBlob (C++)：应该适用于大多数需要一张图像作为输入的网络
++ 按照 PreProcessor、PreProcessorPython 中描述的接口和 \ref PyPreBlob.py 中的示例，用 Python 编写自己的程序
 
-- Network: receives a pre-processed image and runs neural network inference, producing some outputs.\n
-  Available variants:
-  + NetworkOpenCV (C++) for OpenCV, OpenVino/Myriad-X, and TIM-VX/NPU
+- 网络：接收预处理的图像并运行神经网络推理，产生一些输出。\n 可用变体：
+  + NetworkOpenCV (C++)，适用于 OpenCV、OpenVino/Myriad-X 和 TIM-VX/NPU
   + NetworkNPU (C++)
   + NetworkHailo (C++)
   + NetworkTPU (C++)
-  + NetworkONNX (C++) for ONNX Runtime (also available in Python)
-  + write your own in python following the interface in Network, NetworkPython and the example in \ref PyNetOpenCV.py
+  + NetworkONNX (C++)，适用于 ONNX Runtime（也提供 Python 版本）
+  + 按照 Network、NetworkPython 中的接口和 \ref PyNetOpenCV.py 中的示例，用 Python 编写您自己的程序
 
-- PostProcessor: receives the raw network outputs and presents them in a human-friendly way. For example, draw boxes
-  on the live camera video after running an object detection network.\n
-  Available variants:
+- PostProcessor：接收原始网络输出并以人性化的方式呈现它们。例如，在运行对象检测网络后在实时摄像机视频上绘制框。\n 可用变体：
   + PostProcessorClassify
   + PostProcessorDetect
-  + PostProcessorSegment (semantic segmentation)
-  + PostProcessorYuNet (for face detection boxes + markers on eyes, nose, and mouth)
-  + PostProcessorStub (useful to test a model for speed before you write your own preprocessor)
-  + write your own using the interface in PostProcessor, PostProcessorPython and the example in \ref PyPostClassify.py
+  + PostProcessorSegment（语义分割）
+  + PostProcessorYuNet（用于面部检测框 + 眼睛、鼻子和嘴巴上的标记）
+  + PostProcessorStub（在编写自己的预处理器之前，可用于测试模型的速度）
+  + 使用 PostProcessor、PostProcessorPython 中的接口和 \ref PyPostClassify.py 中的示例编写自己的预处理器
 
-The parameters of a Pipeline are specified in a YAML file that describes which pre-processor to use, which network type,
-which post-processor, and various parameters for these, as well as where the trained weights are stored on
-microSD. These YAML files are stored in JEVOIS[PRO]:/share/dnn/ and available on \jvpro through the Config tab of the
-user interface.
+管道的参数在 YAML 文件中指定，该文件描述了要使用哪个预处理器、哪种网络类型、哪种后处理器以及这些预处理器的各种参数，以及训练后的权重在 microSD 上的存储位置。这些 YAML 文件存储在 JEVOIS[PRO]:/share/dnn/ 中，可通过用户界面的 Config 选项卡在 \jvpro 上访问。
 
-A given network is selected in the \jvmod{DNN} module via the \p pipe parameter of the Pipeline component. Available
-pipes are described in that parameter as:
+在 \jvmod{DNN} 模块中，通过 Pipeline 组件的 \p pipe 参数选择给定网络。该参数中描述的可用管道如下：
 
 \verbatim
 <ACCEL>:<TYPE>:<NAME>
 \endverbatim
 
-where ACCEL is one of (OpenCV, NPU, SPU, TPU, VPU, NPUX, VPUX, Python), and TYPE is one of (Stub, Classify, Detect,
-%Segment, YuNet, Python, Custom).
+其中 ACCEL 是 (OpenCV、NPU、SPU、TPU、VPU、NPUX、VPUX、Python) 之一，TYPE 是 (Stub、Classify、Detect、%Segment、YuNet、Python、Custom) 之一。
 
-The following keys are used in the JeVois-Pro GUI (\p pipe parameter of Pipeline component):
+JeVois-Pro GUI（Pipeline 组件的 \p 管道参数）中使用了以下键：
 
-- **OpenCV:** network loaded by OpenCV DNN framework and running on CPU.
-- **ORT:** network loaded by ONNX Runtime framework and running on CPU.
-- **NPU:** network running native on the JeVois-Pro integrated 5-TOPS NPU (neural processing unit).
-- **TPU:** network running on the optional 4-TOPS Google Coral TPU accelerator (tensor processing unit).
-- **SPU:** network running on the optional 26-TOPS Hailo8 SPU accelerator (stream processing unit).
-- **VPU:** network running on the optional 1-TOPS MyriadX VPU accelerator (vector processing unit).
-- **NPUX:** network loaded by OpenCV and running on NPU via the TIM-VX OpenCV extension. To run efficiently, network
-        should have been quantized to int8, otherwise some slow CPU-based emulation will occur.
-- **VPUX:** network optimized for VPU but running on CPU if VPU is not available. Note that VPUX entries are
-        automatically created by scanning all VPU entries and changing their target from Myriad to CPU, if a VPU
-        accelerator is not detected. If a VPU is detected, then VPU models are listed and VPUX ones are not.
-        VPUX emulation runs on the JeVois-Pro CPU using the Arm Compute Library to provide efficient implementation
-        of various network layers and operations.
-        
-For example:
+- **OpenCV：**由 OpenCV DNN 框架加载并在 CPU 上运行的网络。
+- **ORT：**由 ONNX Runtime 框架加载并在 CPU 上运行的网络。
+- **NPU：**在 JeVois-Pro 集成的 5-TOPS NPU（神经处理单元）上原生运行的网络。
+- **TPU：**在可选的 4-TOPS Google Coral TPU 加速器（张量处理单元）上运行的网络。
+- **SPU：**在可选的 26-TOPS Hailo8 SPU 加速器（流处理单元）上运行的网络。
+- **VPU：**在可选的 1-TOPS MyriadX VPU 加速器（矢量处理单元）上运行的网络。
+- **NPUX：**由 OpenCV 加载并通过 TIM-VX OpenCV 扩展在 NPU 上运行的网络。为了高效运行，网络应该量化为 int8，否则会出现一些基于 CPU 的缓慢仿真。
+- **VPUX：**针对 VPU 优化的网络，但如果 VPU 不可用，则在 CPU 上运行。请注意，如果未检测到 VPU 加速器，则通过扫描所有 VPU 条目并将其目标从 Myriad 更改为 CPU 来自动创建 VPUX 条目。如果检测到 VPU，则列出 VPU 模型，而不列出 VPUX 模型。VPUX 仿真在 JeVois-Pro CPU 上运行，使用 Arm Compute Library 来高效实现各种网络层和操作。例如：
 
 \code{.py}
 %YAML 1.0
@@ -123,60 +100,41 @@ SqueezeNet:
   classoffset: 1
 \endcode
 
-will be available in the \jvmod{DNN} module via the \p pipe parameter of Pipeline as **OpenCV:Classify:SqueezeNet**
+将在 \jvmod{DNN} 模块中通过 Pipeline 的 \p 管道参数以 **OpenCV:Classify:SqueezeNet** 形式提供
 
-For an up-to-date list of supported keys in the YAML file, see all the parameters defined (using
-`JEVOIS_DECLARE_PARAMETER(...)`) in:
+有关 YAML 文件中支持的键的最新列表，请参阅以下定义的所有参数（使用“JEVOIS_DECLARE_PARAMETER(...)”）：
 
-- \ref PreProcessor.H
-- \ref Network.H
-- \ref PostProcessor.H
-- \ref Pipeline.H
+- \ref 预处理器.H
+- \ref 网络.H
+- \ref 后处理器.H
+- \ref 管道.H
 
-From the links above, click on <em>Go to the source code of this file</em> to see the parameter definitions.
+从上面的链接中，点击<em>转到此文件的源代码</em>来查看参数定义。
 
-Procedure to add a new network
-==============================
+添加新网络的程序 
+================================
 
-- Everything you need at runtime (OpenCV full, with all available backends, targets, etc, OpenVino, Coral EdgeTPU
-  libraries, Hailo libraries, NPU libraries, etc) is pre-installed on JeVois, so you do not need to install any
-  additional software on the camera to run your custom networks using these frameworks.
+- 运行时所需的一切（完整的 OpenCV，包含所有可用的后端、目标等、OpenVino、Coral EdgeTPU 库、Hailo 库、NPU​​ 库等）都已预先安装在 JeVois 上，因此您无需在相机上安装任何其他软件即可使用这些框架运行您的自定义网络。
 
-- Obtain a model: train your own, or download a pretrained model.
+- 获得模型：训练您自己的模型，或下载预先训练的模型。
 
-- Obtain some parameters about the model (e.g., pre-processing mean, stdev, scale, expected input image size, RGB or
-  BGR, packed (NWHC) or planar (NCHW) pixels, names of the input and output layers, etc).
+- 获取有关模型的一些参数（例如，预处理平均值、标准差、比例、预期输入图像大小、RGB 或 BGR、打包（NWHC）或平面（NCHW）像素、输入和输出层的名称等）。
 
-- For running on \jvpro, convert/quantize the model on your desktop Linux computer, so that it is optimized to run on
-  one of the available neural accelerators, like integrated NPU, Hailo8, Coral TPU, etc.
-  
-  + This will require that you install a vendor-provided SDK for each target accelerator (e.g., Amlogic NPU SDK,
-    OpenVino SDK, Hailo SDK, Coral EdgeTPU compiler), on a fast Linux desktop with plenty of RAM, disk space, and
-    possibly a big nVidia GPU.
-    
-  + For quantization, you will also need a <em>representative sample dataset</em>. This usually is about 100 images from
-    the validation set used for your model. The goal is to run this dataset through the original network (forward
-    inference only) and record the range of values encountered on every layer. These ranges of values will then be used
-    to quantize the layers with best accuracy.
+- 要在 \jvpro 上运行，请在您的 Linux 台式机上转换/量化模型，以便对其进行优化以在可用的神经加速器之一上运行，例如集成 NPU、Hailo8、Coral TPU 等。
+  + 这将要求您在具有大量 RAM、磁盘空间以及可能具有大型 nVidia GPU 的快速 Linux 台式机上为每个目标加速器安装供应商提供的 SDK（例如，Amlogic NPU SDK、OpenVino SDK、Hailo SDK、Coral EdgeTPU 编译器）。
+  + 对于量化，您还需要一个<em>代表性样本数据集</em>。这通常是来自用于您的模型的验证集的大约 100 张图像。目标是通过原始网络（仅前向推理）运行此数据集并记录在每一层遇到的值的范围。然后，这些值的范围将用于以最佳精度量化各层。
 
-  + Using the vendor SDK for the acelerator of your choice, convert and quantize the model on your fast Linux desktop.
-  
-- Copy model to JeVois microSD card under JEVOIS[PRO]:/share/dnn/custom/
+  + 使用您选择的加速器的供应商 SDK，在快速的 Linux 桌面上转换和量化模型。
+- 将模型复制到 JEVOIS[PRO]:/share/dnn/custom/ 下的 JeVois microSD 卡
 
-- Create a JeVois model zoo entry for your model, where you specify the model parameters and the location where you
-  copied your model files. Typically this is a YAML file under JEVOIS[PRO]:/share/dnn/custom/
+- 为您的模型创建一个 JeVois 模型动物园条目，在其中指定模型参数和复制模型文件的位置。通常，这是 JEVOIS[PRO]:/share/dnn/custom/ 下的 YAML 文件
 
-- On the camera, launch the JeVois \jvmod{DNN} module. It will scan the custom directory for any valid YAML file, and
-  make your model available through the \p pipe parameter of the DNN module's Pipeline component. Select that pipe to
-  run your model.
+- 在相机上，启动 JeVois \jvmod{DNN} 模块。它将扫描自定义目录以查找任何有效的 YAML 文件，并通过 DNN 模块的 Pipeline 组件的 \p 管道参数使您的模型可用。选择该管道以运行您的模型。
 
-- You can adjust many parameters while the model is running (e.g., confidence threshold, pre-processing mean and scale,
-  swap RGB/BGR), while others are frozen at runtime (e.g., input tensor dimensions, post-processor type). Once you
-  determine good values for the online-tunable parameters, you can copy those values to your YAML file. Frozen
-  parameters can only changed in the YAML file.
+- 您可以在模型运行时调整许多参数（例如，置信度阈值、预处理平均值和比例、交换 RGB/BGR），而其他参数在运行时被冻结（例如，输入张量维度、后处理器类型）。一旦确定了在线可调参数的良好值，您就可以将这些值复制到 YAML 文件中。冻结的参数只能在 YAML 文件中更改。
 
-Details for the available frameworks
-====================================
+可用框架的详细信息 
+======================================
 
 - \jva33 and \jvpro: \subpage UserDNNconv
 - \jva33 and \jvpro: \subpage UserDNNopencv

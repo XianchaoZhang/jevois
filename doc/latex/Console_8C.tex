@@ -1,0 +1,126 @@
+\hypertarget{Console_8C}{}\doxysubsection{src/jevois/\+Util/\+Console.C File Reference}
+\label{Console_8C}\index{src/jevois/Util/Console.C@{src/jevois/Util/Console.C}}
+{\ttfamily \#include $<$jevois/\+Util/\+Console.\+H$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$linux/input.\+h$>$}\newline
+{\ttfamily \#include $<$linux/kd.\+h$>$}\newline
+{\ttfamily \#include $<$linux/keyboard.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+Include dependency graph for Console.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Console_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Console_8C_a22dd9d967cbe39a94c26153f1e96ec1e}{N\+E\+L\+E\+MS}}(x)~(sizeof(x) / sizeof((x)\mbox{[}0\mbox{]}))
+\item 
+\#define \mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}}~(sizeof(unsigned long) $\ast$ 8)
+\item 
+\#define \mbox{\hyperlink{Console_8C_a1f296f3f5ec473b603ee32e2f7577fcb}{N\+B\+I\+TS}}(x)~((((x)-\/1)/\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})+1)
+\item 
+\#define \mbox{\hyperlink{Console_8C_a4521467edec9387fad3ae8761f0f4b1d}{O\+FF}}(x)~((x)\%\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})
+\item 
+\#define \mbox{\hyperlink{Console_8C_af647a68a4985fd16c40d533b0ab21bac}{L\+O\+NG}}(x)~((x)/\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})
+\item 
+\#define \mbox{\hyperlink{Console_8C_a9bfbfcfdf94e66aad3e5113c5acf4072}{test\+\_\+bit}}(bit,  array)~((array\mbox{[}\mbox{\hyperlink{Console_8C_af647a68a4985fd16c40d533b0ab21bac}{L\+O\+NG}}(bit)\mbox{]} $>$$>$ \mbox{\hyperlink{Console_8C_a4521467edec9387fad3ae8761f0f4b1d}{O\+FF}}(bit)) \& 1)
+\item 
+\#define \mbox{\hyperlink{Console_8C_af2fc38646a7edd6cb16e696e984cdda8}{K\+D\+S\+K\+B\+M\+U\+TE}}~0x4\+B51
+\item 
+\#define \mbox{\hyperlink{Console_8C_a05edebcc5a34e87e3ee374a93996fed9}{K\+D\+S\+K\+B\+M\+O\+DE}}~0x4\+B45
+\item 
+\#define \mbox{\hyperlink{Console_8C_a381947de92299381e59a3186786527e1}{K\+\_\+\+O\+FF}}~0x04
+\item 
+\#define \mbox{\hyperlink{Console_8C_a468a80bf7d05ad64839d72049c41760f}{I\+S\+\_\+\+C\+O\+N\+S\+O\+LE}}(fd)~isatty(fd) \&\& ioctl(fd, K\+D\+G\+K\+B\+T\+Y\+PE, \&arg) == 0 \&\& ((arg == K\+B\+\_\+101) $\vert$$\vert$ (arg == K\+B\+\_\+84))
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}\label{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}} 
+\index{Console.C@{Console.C}!BITS\_PER\_LONG@{BITS\_PER\_LONG}}
+\index{BITS\_PER\_LONG@{BITS\_PER\_LONG}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{BITS\_PER\_LONG}{BITS\_PER\_LONG}}
+{\footnotesize\ttfamily \#define B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG~(sizeof(unsigned long) $\ast$ 8)}
+
+\mbox{\Hypertarget{Console_8C_a468a80bf7d05ad64839d72049c41760f}\label{Console_8C_a468a80bf7d05ad64839d72049c41760f}} 
+\index{Console.C@{Console.C}!IS\_CONSOLE@{IS\_CONSOLE}}
+\index{IS\_CONSOLE@{IS\_CONSOLE}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{IS\_CONSOLE}{IS\_CONSOLE}}
+{\footnotesize\ttfamily \#define I\+S\+\_\+\+C\+O\+N\+S\+O\+LE(\begin{DoxyParamCaption}\item[{}]{fd }\end{DoxyParamCaption})~isatty(fd) \&\& ioctl(fd, K\+D\+G\+K\+B\+T\+Y\+PE, \&arg) == 0 \&\& ((arg == K\+B\+\_\+101) $\vert$$\vert$ (arg == K\+B\+\_\+84))}
+
+
+
+Definition at line 83 of file Console.\+C.
+
+\mbox{\Hypertarget{Console_8C_a381947de92299381e59a3186786527e1}\label{Console_8C_a381947de92299381e59a3186786527e1}} 
+\index{Console.C@{Console.C}!K\_OFF@{K\_OFF}}
+\index{K\_OFF@{K\_OFF}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{K\_OFF}{K\_OFF}}
+{\footnotesize\ttfamily \#define K\+\_\+\+O\+FF~0x04}
+
+
+
+Definition at line 76 of file Console.\+C.
+
+\mbox{\Hypertarget{Console_8C_a05edebcc5a34e87e3ee374a93996fed9}\label{Console_8C_a05edebcc5a34e87e3ee374a93996fed9}} 
+\index{Console.C@{Console.C}!KDSKBMODE@{KDSKBMODE}}
+\index{KDSKBMODE@{KDSKBMODE}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{KDSKBMODE}{KDSKBMODE}}
+{\footnotesize\ttfamily \#define K\+D\+S\+K\+B\+M\+O\+DE~0x4\+B45}
+
+
+
+Definition at line 73 of file Console.\+C.
+
+\mbox{\Hypertarget{Console_8C_af2fc38646a7edd6cb16e696e984cdda8}\label{Console_8C_af2fc38646a7edd6cb16e696e984cdda8}} 
+\index{Console.C@{Console.C}!KDSKBMUTE@{KDSKBMUTE}}
+\index{KDSKBMUTE@{KDSKBMUTE}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{KDSKBMUTE}{KDSKBMUTE}}
+{\footnotesize\ttfamily \#define K\+D\+S\+K\+B\+M\+U\+TE~0x4\+B51}
+
+
+
+Definition at line 70 of file Console.\+C.
+
+\mbox{\Hypertarget{Console_8C_af647a68a4985fd16c40d533b0ab21bac}\label{Console_8C_af647a68a4985fd16c40d533b0ab21bac}} 
+\index{Console.C@{Console.C}!LONG@{LONG}}
+\index{LONG@{LONG}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{LONG}{LONG}}
+{\footnotesize\ttfamily \#define L\+O\+NG(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x)/\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})}
+
+\mbox{\Hypertarget{Console_8C_a1f296f3f5ec473b603ee32e2f7577fcb}\label{Console_8C_a1f296f3f5ec473b603ee32e2f7577fcb}} 
+\index{Console.C@{Console.C}!NBITS@{NBITS}}
+\index{NBITS@{NBITS}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{NBITS}{NBITS}}
+{\footnotesize\ttfamily \#define N\+B\+I\+TS(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((((x)-\/1)/\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})+1)}
+
+\mbox{\Hypertarget{Console_8C_a22dd9d967cbe39a94c26153f1e96ec1e}\label{Console_8C_a22dd9d967cbe39a94c26153f1e96ec1e}} 
+\index{Console.C@{Console.C}!NELEMS@{NELEMS}}
+\index{NELEMS@{NELEMS}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{NELEMS}{NELEMS}}
+{\footnotesize\ttfamily \#define N\+E\+L\+E\+MS(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~(sizeof(x) / sizeof((x)\mbox{[}0\mbox{]}))}
+
+
+
+Definition at line 33 of file Console.\+C.
+
+\mbox{\Hypertarget{Console_8C_a4521467edec9387fad3ae8761f0f4b1d}\label{Console_8C_a4521467edec9387fad3ae8761f0f4b1d}} 
+\index{Console.C@{Console.C}!OFF@{OFF}}
+\index{OFF@{OFF}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{OFF}{OFF}}
+{\footnotesize\ttfamily \#define O\+FF(\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})~((x)\%\mbox{\hyperlink{Console_8C_a2f660aa23a5dbc0f4b8df48b4302b8c3}{B\+I\+T\+S\+\_\+\+P\+E\+R\+\_\+\+L\+O\+NG}})}
+
+\mbox{\Hypertarget{Console_8C_a9bfbfcfdf94e66aad3e5113c5acf4072}\label{Console_8C_a9bfbfcfdf94e66aad3e5113c5acf4072}} 
+\index{Console.C@{Console.C}!test\_bit@{test\_bit}}
+\index{test\_bit@{test\_bit}!Console.C@{Console.C}}
+\doxyparagraph{\texorpdfstring{test\_bit}{test\_bit}}
+{\footnotesize\ttfamily \#define test\+\_\+bit(\begin{DoxyParamCaption}\item[{}]{bit,  }\item[{}]{array }\end{DoxyParamCaption})~((array\mbox{[}\mbox{\hyperlink{Console_8C_af647a68a4985fd16c40d533b0ab21bac}{L\+O\+NG}}(bit)\mbox{]} $>$$>$ \mbox{\hyperlink{Console_8C_a4521467edec9387fad3ae8761f0f4b1d}{O\+FF}}(bit)) \& 1)}
+

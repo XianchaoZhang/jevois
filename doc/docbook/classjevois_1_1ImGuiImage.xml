@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ImGuiImage">
+<title>jevois::ImGuiImage Class Reference</title>
+<indexterm><primary>jevois::ImGuiImage</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/ImGuiImage.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Wrapper for an image that can be rendered into ImGui. </para>
+
+
+
+<para>The wrapper combines an OpenCV image and an OpenGL texture. </para>
+<para>
+Definition at line 30 of file ImGuiImage.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiImage_1a75a6f92e7d97390f4140ea9b7936069e">ImGuiImage</link> ()</para>
+
+<para>Constructor, image is uninitialized and <link linkend="_classjevois_1_1ImGuiImage_1a1fad2fc89d7886330a54a34ad1d27c1b">loaded()</link> returns false. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiImage_1a14a8fbbdbc4d77bb03b492aa04ca1b3a">load</link> (std::string const &amp;fname)</para>
+
+<para>Load from file. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiImage_1a54e2461d7651c3df245d69bc562eb660">load</link> (cv::Mat const &amp;img, bool isbgr=true)</para>
+
+<para>Load from an OpenCV image. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1ImGuiImage_1a1fad2fc89d7886330a54a34ad1d27c1b">loaded</link> () const</para>
+
+<para>Returns true if an image has been loaded through <link linkend="_classjevois_1_1ImGuiImage_1a14a8fbbdbc4d77bb03b492aa04ca1b3a">load()</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiImage_1a4a44b3b13c73e5e848561c6dd964bb4a">clear</link> ()</para>
+
+<para>Free the texture and revert to un-initialized state. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiImage_1a888e4426d22c1d0251b0c56ede93b7f5">~ImGuiImage</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1ImGuiImage_1a3dcd6cd1522f7c3c0062fb81ae11f884">draw</link> (ImVec2 const &amp;pos, ImVec2 const &amp;size, ImDrawList *dl=nullptr)</para>
+
+<para>Draw into into current ImGui window or a drawlist. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiImage_1a75a6f92e7d97390f4140ea9b7936069e"/>    <section>
+    <title>ImGuiImage()</title>
+<indexterm><primary>ImGuiImage</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>ImGuiImage</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiImage::ImGuiImage ( )</computeroutput></para><para>
+
+<para>Constructor, image is uninitialized and <link linkend="_classjevois_1_1ImGuiImage_1a1fad2fc89d7886330a54a34ad1d27c1b">loaded()</link> returns false. </para>
+</para>
+<para>
+Definition at line 27 of file ImGuiImage.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiImage_1a888e4426d22c1d0251b0c56ede93b7f5"/>    <section>
+    <title>~ImGuiImage()</title>
+<indexterm><primary>~ImGuiImage</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>~ImGuiImage</secondary></indexterm>
+<para><computeroutput>jevois::ImGuiImage::~ImGuiImage ( )</computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+
+<para>Deletes the associated GPU texture and OpenCV pixel data. </para>
+<para>
+Definition at line 94 of file ImGuiImage.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ImGuiImage_1a4a44b3b13c73e5e848561c6dd964bb4a"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiImage::clear ( )</computeroutput></para><para>
+
+<para>Free the texture and revert to un-initialized state. </para>
+</para>
+<para>
+Definition at line 88 of file ImGuiImage.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiImage_1a3dcd6cd1522f7c3c0062fb81ae11f884"/>    <section>
+    <title>draw()</title>
+<indexterm><primary>draw</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>draw</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiImage::draw (ImVec2 const &amp; pos, ImVec2 const &amp; size, ImDrawList * dl = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw into into current ImGui window or a drawlist. </para>
+</para>
+<para>
+Definition at line 98 of file ImGuiImage.C.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiImage_1a54e2461d7651c3df245d69bc562eb660"/>    <section>
+    <title>load()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>load</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiImage::load (cv::Mat const &amp; img, bool isbgr = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Load from an OpenCV image. </para>
+</para>
+
+<para>Allocates a texture on the GPU for the image. </para>
+<para>
+Definition at line 31 of file ImGuiImage.C.</para>
+<para>
+References LFATAL, and jevois::rescaleCv().</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiImage_1a14a8fbbdbc4d77bb03b492aa04ca1b3a"/>    <section>
+    <title>load()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>load</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::ImGuiImage::load (std::string const &amp; fname)</computeroutput></para><para>
+
+<para>Load from file. </para>
+</para>
+<para>
+Definition at line 76 of file ImGuiImage.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1ImGuiImage_1a1fad2fc89d7886330a54a34ad1d27c1b"/>    <section>
+    <title>loaded()</title>
+<indexterm><primary>loaded</primary><secondary>jevois::ImGuiImage</secondary></indexterm>
+<indexterm><primary>jevois::ImGuiImage</primary><secondary>loaded</secondary></indexterm>
+<para><computeroutput>bool jevois::ImGuiImage::loaded ( ) const</computeroutput></para><para>
+
+<para>Returns true if an image has been loaded through <link linkend="_classjevois_1_1ImGuiImage_1a14a8fbbdbc4d77bb03b492aa04ca1b3a">load()</link> </para>
+</para>
+<para>
+Definition at line 84 of file ImGuiImage.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_ImGuiImage_8H">ImGuiImage.H</link>src/jevois/GPU/<link linkend="_ImGuiImage_8C">ImGuiImage.C</link></section>
+</section>

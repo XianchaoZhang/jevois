@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structuvc__event">
+<title>uvc_event Struct Reference</title>
+<indexterm><primary>uvc_event</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/uvc.h&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<para>
+Definition at line 40 of file uvc.h.</para>
+Collaboration diagram for uvc_event:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="structuvc__event__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>union {</para>
+        <itemizedlist>
+            <listitem><para>   enum usb_device_speed <link linkend="_structuvc__event_1a3bb7f93dcebf971dc020ad29493d3efd">speed</link></para>
+</listitem>
+            <listitem><para>   struct usb_ctrlrequest <link linkend="_structuvc__event_1a1d781b3e7993411999a2cbfeeb90d9fb">req</link></para>
+</listitem>
+            <listitem><para>   struct <link linkend="_structuvc__request__data">uvc_request_data</link> <link linkend="_structuvc__event_1a9ba143357d2ed540b11b696c224e8b99">data</link></para>
+</listitem>
+        </itemizedlist>
+</listitem>
+            <listitem><para>}; </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_structuvc__event_1a667f6eec95f894e29c398d909b9f16da"/>    <section>
+    <title>@1</title>
+<para><computeroutput>union { ... } </computeroutput></para>    </section><anchor xml:id="_structuvc__event_1a9ba143357d2ed540b11b696c224e8b99"/>    <section>
+    <title>data</title>
+<indexterm><primary>data</primary><secondary>uvc_event</secondary></indexterm>
+<indexterm><primary>uvc_event</primary><secondary>data</secondary></indexterm>
+<para><computeroutput>struct <link linkend="_structuvc__request__data">uvc_request_data</link> uvc_event::data</computeroutput></para><para>
+Definition at line 45 of file uvc.h.</para>
+    </section><anchor xml:id="_structuvc__event_1a1d781b3e7993411999a2cbfeeb90d9fb"/>    <section>
+    <title>req</title>
+<indexterm><primary>req</primary><secondary>uvc_event</secondary></indexterm>
+<indexterm><primary>uvc_event</primary><secondary>req</secondary></indexterm>
+<para><computeroutput>struct usb_ctrlrequest uvc_event::req</computeroutput></para><para>
+Definition at line 44 of file uvc.h.</para>
+    </section><anchor xml:id="_structuvc__event_1a3bb7f93dcebf971dc020ad29493d3efd"/>    <section>
+    <title>speed</title>
+<indexterm><primary>speed</primary><secondary>uvc_event</secondary></indexterm>
+<indexterm><primary>uvc_event</primary><secondary>speed</secondary></indexterm>
+<para><computeroutput>enum usb_device_speed uvc_event::speed</computeroutput></para><para>
+Definition at line 43 of file uvc.h.</para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+include/jevois/Core/<link linkend="_uvc_8h">uvc.h</link></section>
+</section>

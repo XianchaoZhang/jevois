@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Module">
+<title>jevois::Module Class Reference</title>
+<indexterm><primary>jevois::Module</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/Module.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>视觉处理模块的虚基类 </para>
+
+
+
+<para><link linkend="_classjevois_1_1Module">Module</link> 是实现摄像头到 USB 逐帧视频处理的基类。 <link linkend="_classjevois_1_1Engine">Engine</link> 根据最终用户选择的当前 VideoMapping（例如，主机上的网络摄像 头查看程序设置的当前图像分辨率、格式和帧速率）实例化一个从 <link linkend="_classjevois_1_1Module">Module</link> 派生的类。 根据 videomappings.cfg 中的 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 定义和用户选择的当前 VideoMapping，Module 被加载为共享对象 (.so) 文件。</para>
+
+<para><link linkend="_classjevois_1_1Module">Module</link> 自 Component，因此可以包含：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>任意数量的 Parameter 设置</para>
+</listitem><listitem>
+<para>任意复杂的 <link linkend="_classjevois_1_1Component">Component</link> 对象子层次结构，用于实现各种功能。所有子组件的 Parameter 设置均可供 <link linkend="_classjevois_1_1Module">Module</link> 和 <link linkend="_classjevois_1_1Engine">Engine</link> 使用。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>这样，人们就可以高效地实现复杂的视觉处理管道，并大量重复使用代码。例如，人们可能首先想要实现一个 EdgeDetector 或 Saliency 组件，并为各种阈值、特征等设置 Parameter。然后，人们可以创建任意数量的顶级对象，这些对象派生自 Module， 并且可能在子组件层次结构中包含一个或多个 EdgeDetector、Saliency 等组件，模块中的实现只是将图像从一个 <link linkend="_classjevois_1_1Component">Component</link> 路由到另一个，以创建处理管道。</para>
+
+<para>从 <link linkend="_classjevois_1_1Module">Module</link> 派生的类应该实现最多四个函数：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 同时指定特定的相机分辨率和格式以及 USB 分辨率和格式时，Engine 主循环每次迭代都会调用一次 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process(InputFrame &amp;&amp; inframe, OutputFrame &amp;&amp; outframe)</link>。此函数应处理接收到的输入帧并用结果填充输出帧的像素缓冲 区。在调用 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 之前，已经为输入和输出图像分配了内存。由于输出图像实际上是由 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 驱动程序（最终由 Linux 内核）分配的，因此其像素内存位置无法移动（因此，不要尝试复制输出图像或用另一个图像替换它等；只需将像素数 据写入输出图像的像素阵列）。视频模式或帧速率没有限制，除非 <link linkend="_classjevois_1_1Camera">Camera</link> 硬件支持，并且受 USB 带宽限制。对于大多数实现 ，匹配输入和输出帧速率是最简单的，这意味着每次调用 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 都会访问和使用提供的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 和 OutputFrame（一 输入一输出处理管道）。但这不是强制性的。例如，用于飞行无人机的运动流计算 <link linkend="_classjevois_1_1Module">Module</link> 可能具有 320x240 YUYV 53.0fps 输入和 100x142 GREY 10.6fps 输出（由于此示例中的输出帧速率比输入低 5 倍，因此 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 函数每调用 5 次才会获取 、填充和发送一次 OutputFrame；process() 函数的实现应该跟踪这一点，例如，通过每次调用 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 时递增的成员变量 ）。除了填充 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 的像素数据之外，process() 还可以使用 <link linkend="_classjevois_1_1Module_1a25fcd554bf1ee47e02c51ff1844f5482">sendSerial()</link> 通过串行端口发送结果（例如，供连接到 JeVois 平台硬件的 Arduino 使用）。</para>
+</listitem><listitem>
+<para>当当前 <link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> 指定特定的相机分辨率和格式，并且 USB 输出格式为 NONE 时，每个 <link linkend="_classjevois_1_1Camera">Camera</link> 帧调用一次 <link linkend="_classjevois_1_1Module_1a81c140e6db5945679845aa9108b8ecd4">process(InputFrame &amp;&amp; inframe)</link>。此函数应处理接收到的输入帧，然后通常使用 <link linkend="_classjevois_1_1Module_1a25fcd554bf1ee47e02c51ff1844f5482">sendSerial()</link> 将结果发送到串行端口（例 如，供连接到 JeVois 平台硬件的 Arduino 使用）。对视频模式或帧速率没有限制，除非 <link linkend="_classjevois_1_1Camera">Camera</link> 硬件支持。</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1Module_1a4fa64441f85b9a23f17d972b1d9b2c51">parseSerial(std::string const &amp; str, std::shared_ptr&lt;UserInterface&gt; s)</link> 允许 <link linkend="_classjevois_1_1Module">Module</link> 支持自定义用户命令。Engine 会将串行或其他它 <link linkend="_classjevois_1_1UserInterface">UserInterface</link> 收到的不理解的任何命令转发给此函数。您应该将其用于超出 Parameter 设置（ <link linkend="_classjevois_1_1Engine">Engine</link> 本身已经支持）或 <link linkend="_classjevois_1_1Engine">Engine</link> 内置命令（参见 <link linkend="_UserCli">命令行界面用户指南</link> ）的范围。例如，可以在此处实现一个名为 &quot;start&quot; 的命令 ，以允许用户启动某些特定的东西。</para>
+</listitem><listitem>
+<para>supportsCommands(std::ostream &amp; os) 应输出 <link linkend="_classjevois_1_1Module_1a4fa64441f85b9a23f17d972b1d9b2c51">parseSerial()</link> 支持的任何自定义命令的可读描述。当用户通过 <link linkend="_classjevois_1_1Serial">Serial</link> 端口 输入 &quot;help&quot; 时，将显示这些描述。</para>
+</listitem></itemizedlist>
+</para>
+
+<para><note><title>Note</title>
+
+<para>每个模块实现文件都应包含对模块类的 <link linkend="_Module_8H_1a19a74668397740a2cd4813240e547179">JEVOIS_REGISTER_MODULE(MODULENAME)</link> 的调用。这会创建一些纯 C 入口点，当 从动态库 (.so) 文件加载模块以实例化模块时，将使用这些入口点。有关示例，请参阅 <link linkend="_ModuleTutorial">关于如何为 JeVois 编写新的机器视觉模块的教程</link> 。 </para>
+</note>
+</para>
+<para>
+Definition at line 89 of file Module.H.</para>
+Inheritance diagram for jevois::Module:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Module__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Module:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Module__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Module_1a54270630932fa6c82953ae2ce29048f4">Module</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1Module_1abf23791ed64fa61f8e85339da72291cd">~Module</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe, <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp;outframe)</para>
+
+<para>处理函数，从相机接收帧并通过 USB 发送帧的版本 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1a81c140e6db5945679845aa9108b8ecd4">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe)</para>
+
+<para>处理函数，从相机接收帧但不使用 USB 的版本 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1a9f9619482c39de5a86b99600b4cf9020">process</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp;inframe, <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &amp;helper)</para>
+
+<para>处理函数，从相机接收帧的版本，没有 USB，但在 JeVois-Pro 上有 GUI 输出 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1a25fcd554bf1ee47e02c51ff1844f5482">sendSerial</link> (std::string const &amp;str)</para>
+
+<para>通过 &apos;serout&apos; 串行端口发送字符串 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1a4fa64441f85b9a23f17d972b1d9b2c51">parseSerial</link> (std::string const &amp;str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s)</para>
+
+<para>从串行端口接收包含用户命令的字符串 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1Module_1a2734260ac62a4b5b6d5806c30631562d">supportedCommands</link> (std::ostream &amp;os)</para>
+
+<para>此模块支持的自定义命令的可读描述 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Module_1a54270630932fa6c82953ae2ce29048f4"/>    <section>
+    <title>Module()</title>
+<indexterm><primary>Module</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>Module</secondary></indexterm>
+<para><computeroutput>jevois::Module::Module (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>instance 是一个用户定义的字符串，可用于区分同一模块的多个实例。 </para>
+<para>
+Definition at line 31 of file Module.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1abf23791ed64fa61f8e85339da72291cd"/>    <section>
+    <title>~Module()</title>
+<indexterm><primary>~Module</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>~Module</secondary></indexterm>
+<para><computeroutput>jevois::Module::~Module ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</para>
+<para>
+Definition at line 36 of file Module.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Module_1a4fa64441f85b9a23f17d972b1d9b2c51"/>    <section>
+    <title>parseSerial()</title>
+<indexterm><primary>parseSerial</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>parseSerial</secondary></indexterm>
+<para><computeroutput>void jevois::Module::parseSerial (std::string const &amp; str, std::shared_ptr&lt; <link linkend="_classjevois_1_1UserInterface">UserInterface</link> &gt; s)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从串行端口接收包含用户命令的字符串 </para>
+</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1ac13d3c929ebab9aea708576cdb50c420">jevois::PythonModule</link>.</para>
+<para>
+Definition at line 63 of file Module.C.</para>
+<para>
+Referenced by jevois::PythonModule::parseSerial().</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1a81c140e6db5945679845aa9108b8ecd4"/>    <section>
+    <title>process()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::Module::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理函数，从相机接收帧但不使用 USB 的版本 </para>
+</para>
+
+<para>此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 对象是一个简单的包装器，以确 保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随 时从 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器来实现。 <link linkend="_classjevois_1_1Engine">Engine</link> （它为您的模块调用每个帧的 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link>）将捕获任何异常并继续下一帧。</para>
+
+<para>基类中的默认实现只是抛出。派生类应该覆盖它。 </para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1a611eeb138989c87e696128ff54efd154">jevois::PythonModule</link>.</para>
+<para>
+Definition at line 44 of file Module.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1a9f9619482c39de5a86b99600b4cf9020"/>    <section>
+    <title>process()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::Module::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe, <link linkend="_classjevois_1_1GUIhelper">GUIhelper</link> &amp; helper)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理函数，从相机接收帧的版本，没有 USB，但在 JeVois-Pro 上有 GUI 输出 </para>
+</para>
+
+<para>此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 对象是一个简单的包装器，以确保 即使处理函数在处理过程中的任何时候抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随时从 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器来实现。 <link linkend="_classjevois_1_1Engine">Engine</link> （ 它为您的模块的每一帧调用 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link>）将捕获任何异常并继续下一帧。</para>
+
+<para>基类中的默认实现只是抛出。派生类应该覆盖它。 </para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1aa15495d16fa453eeff122334e8bd6be5">jevois::PythonModule</link>.</para>
+<para>
+Definition at line 49 of file Module.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a"/>    <section>
+    <title>process()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::Module::process (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> &amp;&amp; inframe, <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> &amp;&amp; outframe)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理函数，从相机接收帧并通过 USB 发送帧的版本 </para>
+</para>
+
+<para>此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 和 <link linkend="_classjevois_1_1OutputFrame">OutputFrame</link> 对象是简单的 包装器，以确保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机和 USB 驱动程序。如果发生 任何错误，可以随时从 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器 来实现。 <link linkend="_classjevois_1_1Engine">Engine</link> （它为您的模块调用每个帧的 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link>）将捕获任何异常并继续下一帧。</para>
+
+<para>基类中的默认实现只是抛出。派生类应该覆盖它。 </para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1a58900c6b311c9a740d969125839ab474">jevois::PythonModule</link>.</para>
+<para>
+Definition at line 40 of file Module.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1a25fcd554bf1ee47e02c51ff1844f5482"/>    <section>
+    <title>sendSerial()</title>
+<indexterm><primary>sendSerial</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>sendSerial</secondary></indexterm>
+<para><computeroutput>void jevois::Module::sendSerial (std::string const &amp; str)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>通过 &apos;serout&apos; 串行端口发送字符串 </para>
+</para>
+
+<para>默认实现只是将字符串发送到 <link linkend="_classjevois_1_1Engine">Engine</link> 中 &apos;serout&apos; Parameter 指定的串行端口（可以是硬件串行端口、USB 串行端口、两者或都不是 ；有关 <computeroutput>serout</computeroutput> 的信息，请参阅 <link linkend="_UserCli">命令行界面用户指南</link> ）。大多数情况下无需覆盖。通常，您会在 <link linkend="_classjevois_1_1Module_1aeee04cc9f45ee39774e7f2ce6116059a">process()</link> 中使用此函数来发送一些处 理结果。</para>
+
+<para>请注意，Engine 中默认的 &apos;serout&apos; Parameter 设置为 None。这是为了让用户在视觉处理的串行输出流开始之前配置参数、获取参数 值、可能阅读帮助消息等。一旦准备好接收串行输出，通常会通过 JeVois 命令行发出命令 &apos;setpar serout Hard &apos;以启用到硬件串行 端口的串行输出。Arduino 会在准备好工作时发出该 setpar 命令。有关示例，请参阅 ArduinoTutorial。 </para>
+<para>
+Definition at line 54 of file Module.C.</para>
+<para>
+References LFATAL, and jevois::Engine::sendSerial().</para>
+    </section><anchor xml:id="_classjevois_1_1Module_1a2734260ac62a4b5b6d5806c30631562d"/>    <section>
+    <title>supportedCommands()</title>
+<indexterm><primary>supportedCommands</primary><secondary>jevois::Module</secondary></indexterm>
+<indexterm><primary>jevois::Module</primary><secondary>supportedCommands</secondary></indexterm>
+<para><computeroutput>void jevois::Module::supportedCommands (std::ostream &amp; os)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>此模块支持的自定义命令的可读描述 </para>
+</para>
+
+<para>此处的格式是免费的。只需使用 std::endl 来划分行，这些行将由串行端口转换为适当的行尾。默认实现将 &quot;None&quot; 写入 os。 </para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1PythonModule_1aaee2b1ee201fdeebe73a2287c35ea83f">jevois::PythonModule</link>.</para>
+<para>
+Definition at line 67 of file Module.C.</para>
+<para>
+Referenced by jevois::PythonModule::supportedCommands().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_Module_8H">Module.H</link>src/jevois/Core/<link linkend="_Module_8C">Module.C</link></section>
+</section>

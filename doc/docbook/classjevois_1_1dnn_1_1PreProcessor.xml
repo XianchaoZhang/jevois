@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PreProcessor">
+<title>jevois::dnn::PreProcessor Class Reference</title>
+<indexterm><primary>jevois::dnn::PreProcessor</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PreProcessor.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的预处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道的第一步。</para>
+
+<para>派生类必须实现纯虚拟方法：<itemizedlist>
+<listitem>
+<para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link>：处理输入图像并生成一些张量 (blob)</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7f6bb6482d8bd5b22be49185aed3c2a4">report()</link>：描述 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 对人类做了什么</para>
+</listitem><listitem>
+<para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a72917bb3bcf01737deaa85e545bcf215">freeze()</link>：冻结/解冻用户在运行时不应更改的参数</para>
+</listitem></itemizedlist>
+</para>
+
+<para>它们应该保留一些关于要报告的内容的内部状态，因为 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7f6bb6482d8bd5b22be49185aed3c2a4">report()</link> 总是在每一帧上被调用，但是如果网络速度较慢，则 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 的调用频率可能会较低。 </para>
+<para>
+Definition at line 107 of file PreProcessor.H.</para>
+Inheritance diagram for jevois::dnn::PreProcessor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessor__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PreProcessor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessor__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a31269c81e3f1ecc1bc98482cf135f3df">PreProcessor</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1af2180a14662488d6fe376b10935fa578">~PreProcessor</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a72917bb3bcf01737deaa85e545bcf215">freeze</link> (bool doit)=0</para>
+
+<para>冻结/解冻运行时用户不应更改的参数 </para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process</link> (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;img, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp;attrs)</para>
+
+<para>从输入图像中提取 blob </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a756dba15be6389e8fd773e7bce9d6d6a">sendreport</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false)</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+            <listitem><para>const cv::Size &amp; <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a146de314f411fdccbb007de56114945d">imagesize</link> () const</para>
+
+<para>访问最后处理的图像大小 </para>
+</listitem>
+            <listitem><para>const std::vector&lt; cv::Mat &gt; &amp; <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a3ead2199062666efc8e1815dc2d19a0d">blobs</link> () const</para>
+
+<para>访问最后计算的 blob（如果尚未调用 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link>，则为空） </para>
+</listitem>
+            <listitem><para>cv::Size <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1afb6d50de0b157e25736031c3a0fe90fe">blobsize</link> (size_t num) const</para>
+
+<para>访问给定 blob 的宽度和高度，考虑 NCHW 或 NHWC </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1af3f4668117e37f2109d482b6f6511261">b2i</link> (float &amp;x, float &amp;y, size_t blobnum=0)</para>
+
+<para>将 blob 中的坐标转换回原始图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a2366489ae9aa9058048bd6d16dd2f53c">b2i</link> (float &amp;x, float &amp;y, cv::Size const &amp;bsiz, bool letterboxed)</para>
+
+<para>将 blob 的坐标转换回原始图像，给定一个已知的 blob 大小 </para>
+</listitem>
+            <listitem><para>cv::Rect <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a2bef3a5bb57250f2b487a2cf51d1f544">getUnscaledCropRect</link> (size_t blobnum=0)</para>
+
+<para>在图像坐标中获取未缩放的裁剪矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab2d1f44c81418cb9a3b91ee5da84a05c">getUnscaledCropRect</link> (size_t blobnum, int &amp;tlx, int &amp;tly, int &amp;brx, int &amp;bry)</para>
+
+<para>在图像坐标中获取未缩放的裁剪矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a63fe5d3748e433687cc435321d5a2f46">i2b</link> (float &amp;x, float &amp;y, size_t blobnum=0)</para>
+
+<para>将坐标从图像转换为 blob </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7fe82c8c0d787da1846858b504329a5e">i2b</link> (float &amp;x, float &amp;y, cv::Size const &amp;bsiz, bool letterboxed)</para>
+
+<para>将坐标从图像转换为 blob </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython">PreProcessorForPython</link> &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a185fd5f10802adbeb87da637bfc86064">getPreProcForPy</link> () const</para>
+
+<para>获取指向我们的 python 友好接口的指针 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a0f9703abfd50ab9a363ad9d44ec8224a">process</link> (cv::Mat const &amp;img, bool isrgb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp;attrs, std::vector&lt; cv::Rect &gt; &amp;crops)=0</para>
+
+<para>从输入图像中提取 blob </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7f6bb6482d8bd5b22be49185aed3c2a4">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false)=0</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a07e56edf6759d1d6e84d37d6495302bc">JEVOIS_DECLARE_PARAMETER</link> (rgb, bool, &quot;When true, model works with RGB input images instead BGR ones&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7c10da01d06e703c3cb9dac79a58dfbc">JEVOIS_DECLARE_PARAMETER</link> (scale, float, &quot;Value scaling factor applied to input pixels after mean subtraction, &quot; &quot;or 0.0 to extract an unscaled UINT8 blob, typically for use with quantized networks&quot;, 2.0F/255.0F, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a8035c8fc94d7772603bb3b37d7c506e0">JEVOIS_DECLARE_PARAMETER</link> (mean, cv::Scalar, &quot;Mean values subtracted from input image, in the same RGB/BGR &quot; &quot;order as the network&apos;s input&quot;, cv::Scalar(127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, 127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, 127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1addb0d7f0cfb7c251eff8f30b48d8a2ac">JEVOIS_DECLARE_PARAMETER</link> (stdev, cv::Scalar, &quot;Input image is divided by stdev after mean subtraction and scale &quot; &quot;factor are applied. This is rarely used. Same RGB/BGR order as the network&apos;s input&quot;, cv::Scalar(1.0F, 1.0F, 1.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1aa235cb65db70a9878609492c80ca8175">JEVOIS_DECLARE_PARAMETER</link> (letterbox, bool, &quot;When true, extract the largest possible box from the input image &quot; &quot;with same aspect ratio as the network&apos;s input tensor, and then rescale it to that &quot; &quot;tensor&apos;s width and height (hence with cropping but no distortion). Otherwise, use &quot; &quot;the whole image and rescale it to the network&apos;s input width and height with some &quot; &quot;possible stretching.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a692152838c1e21d653ecd30109834dc9">JEVOIS_DECLARE_PARAMETER</link> (showin, bool, &quot;Show outline of cropped image fed to network&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a9a4fa89ef038bc17b95d60c1c4ad9f07">JEVOIS_DECLARE_PARAMETER</link> (details, bool, &quot;Show more details about the pre-processing steps&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7cb8150ba2f64fecbb134b882ccf3e1b">JEVOIS_DEFINE_ENUM_CLASS</link> (InterpMode,(Nearest)(Linear)(Cubic)(Area)(Lanczos4))</para>
+
+<para>Enum for image resizing modes. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessor_1aa1cbaf0d37576a63aade6834514bdd3b">JEVOIS_DECLARE_PARAMETER</link> (interp, InterpMode, &quot;Image interpolation to use when resizing the input image &quot; &quot;from camera to network input dims&quot;, InterpMode::Nearest, InterpMode_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a31269c81e3f1ecc1bc98482cf135f3df"/>    <section>
+    <title>PreProcessor()</title>
+<indexterm><primary>PreProcessor</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>PreProcessor</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessor::PreProcessor (std::string const &amp; instance)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 26 of file PreProcessor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1af2180a14662488d6fe376b10935fa578"/>    <section>
+    <title>~PreProcessor()</title>
+<indexterm><primary>~PreProcessor</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>~PreProcessor</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessor::~PreProcessor ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 31 of file PreProcessor.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a2366489ae9aa9058048bd6d16dd2f53c"/>    <section>
+    <title>b2i()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>b2i</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>b2i</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::b2i (float &amp; x, float &amp; y, cv::Size const &amp; bsiz, bool letterboxed)</computeroutput></para><para>
+
+<para>将 blob 的坐标转换回原始图像，给定一个已知的 blob 大小 </para>
+</para>
+
+<para>给定的坐标 x,y 应该在 [0..w-1]x[0..h-1] 中，其中 w,h 是 blob 的宽度和高度。这对于将检测到的框转换回原始输入坐 标很有用。 </para>
+<para>
+Definition at line 60 of file PreProcessor.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1af3f4668117e37f2109d482b6f6511261"/>    <section>
+    <title>b2i()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>b2i</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>b2i</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::b2i (float &amp; x, float &amp; y, size_t blobnum = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>将 blob 中的坐标转换回原始图像 </para>
+</para>
+<para>
+Definition at line 50 of file PreProcessor.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::process(), and jevois::dnn::PostProcessorYuNet::process().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a3ead2199062666efc8e1815dc2d19a0d"/>    <section>
+    <title>blobs()</title>
+<indexterm><primary>blobs</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>blobs</secondary></indexterm>
+<para><computeroutput>const std::vector&lt; cv::Mat &gt; &amp; jevois::dnn::PreProcessor::blobs ( ) const</computeroutput></para><para>
+
+<para>访问最后计算的 blob（如果尚未调用 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link>，则为空） </para>
+</para>
+<para>
+Definition at line 35 of file PreProcessor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1afb6d50de0b157e25736031c3a0fe90fe"/>    <section>
+    <title>blobsize()</title>
+<indexterm><primary>blobsize</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>blobsize</secondary></indexterm>
+<para><computeroutput>cv::Size jevois::dnn::PreProcessor::blobsize (size_t num) const</computeroutput></para><para>
+
+<para>访问给定 blob 的宽度和高度，考虑 NCHW 或 NHWC </para>
+</para>
+<para>
+Definition at line 43 of file PreProcessor.C.</para>
+<para>
+References jevois::dnn::attrsize(), and LFATAL.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::process(), and jevois::dnn::PostProcessorYuNet::process().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a72917bb3bcf01737deaa85e545bcf215"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>virtual void jevois::dnn::PreProcessor::freeze (bool doit)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻运行时用户不应更改的参数 </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1ab7e8c771814ccefdfabdad7069f9c11d">jevois::dnn::PreProcessorBlob</link>, and <link linkend="_classjevois_1_1dnn_1_1PreProcessorPython_1a511d2fa7d4bf242e4116e0b021729f79">jevois::dnn::PreProcessorPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a185fd5f10802adbeb87da637bfc86064"/>    <section>
+    <title>getPreProcForPy()</title>
+<indexterm><primary>getPreProcForPy</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>getPreProcForPy</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1PreProcessorForPython">jevois::dnn::PreProcessorForPython</link> &gt; jevois::dnn::PreProcessor::getPreProcForPy ( ) const</computeroutput></para><para>
+
+<para>获取指向我们的 python 友好接口的指针 </para>
+</para>
+<para>
+Definition at line 127 of file PreProcessor.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorPythonImpl::process().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1ab2d1f44c81418cb9a3b91ee5da84a05c"/>    <section>
+    <title>getUnscaledCropRect()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>getUnscaledCropRect</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>getUnscaledCropRect</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::getUnscaledCropRect (size_t blobnum, int &amp; tlx, int &amp; tly, int &amp; brx, int &amp; bry)</computeroutput></para><para>
+
+<para>在图像坐标中获取未缩放的裁剪矩形 </para>
+</para>
+<para>
+Definition at line 88 of file PreProcessor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a2bef3a5bb57250f2b487a2cf51d1f544"/>    <section>
+    <title>getUnscaledCropRect()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>getUnscaledCropRect</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>getUnscaledCropRect</secondary></indexterm>
+<para><computeroutput>cv::Rect jevois::dnn::PreProcessor::getUnscaledCropRect (size_t blobnum = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>在图像坐标中获取未缩放的裁剪矩形 </para>
+</para>
+<para>
+Definition at line 81 of file PreProcessor.C.</para>
+<para>
+References LFATAL.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorSegment::process().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a7fe82c8c0d787da1846858b504329a5e"/>    <section>
+    <title>i2b()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>i2b</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>i2b</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::i2b (float &amp; x, float &amp; y, cv::Size const &amp; bsiz, bool letterboxed)</computeroutput></para><para>
+
+<para>将坐标从图像转换为 blob </para>
+</para>
+
+<para>给定坐标 x、y 应位于 [0..w-1]x[0..h-1] 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转 换为图像坐标之后）转换为输入 blob 内的位置很有用。 </para>
+<para>
+Definition at line 105 of file PreProcessor.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a63fe5d3748e433687cc435321d5a2f46"/>    <section>
+    <title>i2b()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>i2b</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>i2b</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::i2b (float &amp; x, float &amp; y, size_t blobnum = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>将坐标从图像转换为 blob </para>
+</para>
+
+<para>给定坐标 x、y 应位于 [0..w-1]x[0..h-1] 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转 换为图像坐标之后）转换为输入 blob 内的位置很有用。 </para>
+<para>
+Definition at line 95 of file PreProcessor.C.</para>
+<para>
+References LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a146de314f411fdccbb007de56114945d"/>    <section>
+    <title>imagesize()</title>
+<indexterm><primary>imagesize</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>imagesize</secondary></indexterm>
+<para><computeroutput>const cv::Size &amp; jevois::dnn::PreProcessor::imagesize ( ) const</computeroutput></para><para>
+
+<para>访问最后处理的图像大小 </para>
+</para>
+<para>
+Definition at line 39 of file PreProcessor.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::process(), and jevois::dnn::PostProcessorYuNet::process().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a0f9703abfd50ab9a363ad9d44ec8224a"/>    <section>
+    <title>process()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>virtual std::vector&lt;cv::Mat&gt; jevois::dnn::PreProcessor::process (cv::Mat const &amp; img, bool isrgb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp; attrs, std::vector&lt; cv::Rect &gt; &amp; crops)<computeroutput>[protected]</computeroutput>, <computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>从输入图像中提取 blob </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1aa9783db0f5b8c8be3fdfa230b4353a1a">jevois::dnn::PreProcessorBlob</link>, and <link linkend="_classjevois_1_1dnn_1_1PreProcessorPython_1a3d59fafa2aece57c8b44d6f3f29a2427">jevois::dnn::PreProcessorPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7"/>    <section>
+    <title>process()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::PreProcessor::process (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; img, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp; attrs)</computeroutput></para><para>
+
+<para>从输入图像中提取 blob </para>
+</para>
+<para>
+Definition at line 131 of file PreProcessor.C.</para>
+<para>
+References jevois::rawimage::convertToCvBGR(), jevois::rawimage::convertToCvRGB(), jevois::rawimage::cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a7f6bb6482d8bd5b22be49185aed3c2a4"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>virtual void jevois::dnn::PreProcessor::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[protected]</computeroutput>, <computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1a8bbc88440016a12ddbdef6d680414684">jevois::dnn::PreProcessorBlob</link>, and <link linkend="_classjevois_1_1dnn_1_1PreProcessorPython_1a035eb07051345a634219486127a7e916">jevois::dnn::PreProcessorPython</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a756dba15be6389e8fd773e7bce9d6d6a"/>    <section>
+    <title>sendreport()</title>
+<indexterm><primary>sendreport</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>sendreport</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessor::sendreport (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1ab3a6c1968c2b3f580413b653c6bd96f7">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Definition at line 155 of file PreProcessor.C.</para>
+<para>
+References jevois::rawimage::drawRect(), jevois::fccstr(), jevois::GUIhelper::i2d(), jevois::yuyv::MedGrey, jevois::dnn::shapestr(), and jevois::RawImage::width.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a9a4fa89ef038bc17b95d60c1c4ad9f07"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (details , bool , &quot;Show more details about the pre-processing steps&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1aa1cbaf0d37576a63aade6834514bdd3b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (interp , InterpMode , &quot;Image interpolation to use when resizing the input image &quot; &quot;from camera to network input dims&quot; , InterpMode::Nearest , InterpMode_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1aa235cb65db70a9878609492c80ca8175"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (letterbox , bool , &quot;When true, extract the largest possible box from the input image &quot; &quot;with same aspect ratio as the network &apos;s input tensor, and then rescale it to that &quot; &quot;tensor &apos;s width and height(hence with cropping but no distortion). Otherwise, use &quot; &quot;the whole image and rescale it to the network &apos;s input width and height with some &quot; &quot;possible stretching.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a8035c8fc94d7772603bb3b37d7c506e0"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (mean , cv::Scalar , &quot;Mean values subtracted from input image, in the same RGB/BGR &quot; &quot;order as the network &apos;s input&quot; , cv::Scalar(127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, 127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, 127.5<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>) , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a07e56edf6759d1d6e84d37d6495302bc"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (rgb , bool , &quot;When true, model works with RGB input images instead BGR ones&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a7c10da01d06e703c3cb9dac79a58dfbc"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[6/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (scale , float , &quot;Value scaling factor applied to input pixels after mean subtraction, &quot; &quot;or 0.0 to extract an unscaled UINT8 blob, typically for use with quantized networks&quot; , 2.0F/255. 0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a692152838c1e21d653ecd30109834dc9"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[7/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (showin , bool , &quot;Show outline of cropped image fed to network&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1addb0d7f0cfb7c251eff8f30b48d8a2ac"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[8/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (stdev , cv::Scalar , &quot;Input image is divided by stdev after mean subtraction and scale &quot; &quot;factor are applied. This is rarely used. Same RGB/BGR order as the network&apos;s input&quot; , cv::Scalar(1.0F, 1.0F, 1.0F) , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessor_1a7cb8150ba2f64fecbb134b882ccf3e1b"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()</title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::PreProcessor</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessor</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (InterpMode , (Nearest)(Linear)(Cubic)(Area)(Lanczos4) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for image resizing modes. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PreProcessor_8H">PreProcessor.H</link>src/jevois/DNN/<link linkend="_PreProcessor_8C">PreProcessor.C</link></section>
+</section>

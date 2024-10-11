@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1MovieInput">
+<title>jevois::MovieInput Class Reference</title>
+<indexterm><primary>jevois::MovieInput</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/MovieInput.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Movie 将永远循环播放以提供持续的输入。这是 OpenCV VideoCapture 类的直接包装器，因此当文件名包含类似 printf 的 d 占位符（表示帧号）时，它支持许多不同的视频文件格式和图像序列。有关更多详细信息，请参阅 VideoCapture 的 OpenCV 文档。</para>
+
+<para>请注意，影片帧将调整大小以匹配 <link linkend="_classjevois_1_1MovieInput_1a187b60ea9aff977f18f2dcf670176c16">setFormat()</link> 指定的尺寸，并将转换为 <link linkend="_classjevois_1_1MovieInput_1a187b60ea9aff977f18f2dcf670176c16">setFormat()</link> 中指定的像素类型。 </para>
+<para>
+Definition at line 34 of file MovieInput.H.</para>
+Inheritance diagram for jevois::MovieInput:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1MovieInput__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::MovieInput:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1MovieInput__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1MovieInput_1a03595c02e83d14474939de92cb3b90a5">MovieInput</link> (std::string const &amp;filename, unsigned int const nbufs=3)</para>
+
+<para>Constructor, opens the movie file. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1MovieInput_1a3c09fe71ee13e4c7c0cca2ddeea63e82">~MovieInput</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a4d63a898143eb06f43eeb7ec415540ab">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1af62321bb00bffc0b92ba6670ec26a8b3">abortStream</link> () override</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1ad38e27e1488b2b6e304a996b59f48e34">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始 </para>
+</listitem>
+            <listitem><para>jevois::CropType::CropScale 当前正在使用中，否则返回 false。 *virtual bool <link linkend="_classjevois_1_1MovieInput_1a09fe8c83e52442fdeea3b0ce87b9b666">hasScaledImage</link> () const override</para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1MovieInput_1ad70d0764ccf491fc0ab62e3ea7a27f4e">get2</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a6e3baa6de425bb4339278d2008ede8a2">done</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>表示用户处理已完成，并且之前已通过 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 获取了图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1ab5050d10314ac30dac58793ccc779cca">done2</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+
+<para>表示用户处理已完成，并且之前已通过 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 获取了图像 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1ab35f89f0134ba39ef77769be0708add7">queryControl</link> (struct v4l2_queryctrl &amp;qc) const override</para>
+
+<para>获取有关控件的信息，如果硬件不支持则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a5207f114db186734424048add3f53011">queryMenu</link> (struct v4l2_querymenu &amp;qm) const override</para>
+
+<para>获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a57b9900899f0ad0698d028a9ac41f394">getControl</link> (struct v4l2_control &amp;ctrl) const override</para>
+
+<para>获取控件的当前值，如果硬件不支持则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1adcb950c84c9772e0058646d6c15d07f4">setControl</link> (struct v4l2_control const &amp;ctrl) override</para>
+
+<para>设置控件，如果硬件拒绝该值则抛出 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1MovieInput_1a187b60ea9aff977f18f2dcf670176c16">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧速率 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>cv::VideoCapture <link linkend="_classjevois_1_1MovieInput_1a912be2e5e8ca027cc4bc6572cccb568b">itsCap</link></para>
+
+<para>我们的 OpenCV 视频捕获，也适用于电影和图像文件 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1MovieInput_1ab1912d907e752e4a04ed3f373a5fb92f">itsRawFrame</link></para>
+
+<para>在任何调整大小或转换之前最后捕获的原始 OpenCV 帧 </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1MovieInput_1ade10aaa5372aa98012f7c9c3a2004d31">itsBuf</link></para>
+
+<para>我们用于主帧的单个视频缓冲区 </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1MovieInput_1a8efea0d39ab3baa8fb94fff485446393">itsBuf2</link></para>
+
+<para>我们用于第二帧（处理帧）的单个视频缓冲区 </para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> <link linkend="_classjevois_1_1MovieInput_1a3c54b40922dd05e581cc6c9b10efacd3">itsMapping</link></para>
+
+<para>我们当前的视频映射，我们将输入调整为映射的相机大小 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieInput_1a03595c02e83d14474939de92cb3b90a5"/>    <section>
+    <title>MovieInput()</title>
+<indexterm><primary>MovieInput</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>MovieInput</secondary></indexterm>
+<para><computeroutput>jevois::MovieInput::MovieInput (std::string const &amp; filename, unsigned int const nbufs = <computeroutput>3</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor, opens the movie file. </para>
+</para>
+<para>
+Definition at line 27 of file MovieInput.C.</para>
+<para>
+References itsCap, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a3c09fe71ee13e4c7c0cca2ddeea63e82"/>    <section>
+    <title>~MovieInput()</title>
+<indexterm><primary>~MovieInput</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>~MovieInput</secondary></indexterm>
+<para><computeroutput>jevois::MovieInput::~MovieInput ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</para>
+<para>
+Definition at line 35 of file MovieInput.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieInput_1af62321bb00bffc0b92ba6670ec26a8b3"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>这只会取消未来的 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 和 <link linkend="_classjevois_1_1MovieInput_1a6e3baa6de425bb4339278d2008ede8a2">done()</link> 调用，仍应调用 <link linkend="_classjevois_1_1MovieInput_1ad38e27e1488b2b6e304a996b59f48e34">streamOff()</link> 来关闭流式传输。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a8174d4f9d1472537254b96c3c47dfa49">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 43 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a6e3baa6de425bb4339278d2008ede8a2"/>    <section>
+    <title>done()</title>
+<indexterm><primary>done</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>done</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::done (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>表示用户处理已完成，并且之前已通过 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 获取了图像 </para>
+</para>
+
+<para>处理完 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据后，应尽快在 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲 区无效。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a214001a66dbf369f15fe80e739897af1">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 167 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1ab5050d10314ac30dac58793ccc779cca"/>    <section>
+    <title>done2()</title>
+<indexterm><primary>done2</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>done2</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::done2 (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>表示用户处理已完成，并且之前已通过 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 获取了图像 </para>
+</para>
+
+<para>处理完 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据后，应尽快在 <link linkend="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730">get()</link> 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲 区无效。 </para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1ab3409889a6d425ba0634154fccc045bb">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 175 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a46a05e27ad822daccf6a92a92212a730"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::get (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1acff6f2844e64a7a36cf974982adc2d74">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 57 of file MovieInput.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::bufindex, jevois::rawimage::convertCvBGRtoRawImage(), jevois::RawImage::fmt, jevois::RawImage::fps, jevois::RawImage::height, LFATAL, LINFO, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1ad70d0764ccf491fc0ab62e3ea7a27f4e"/>    <section>
+    <title>get2()</title>
+<indexterm><primary>get2</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>get2</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::get2 (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1aad25ccc42637b6d5ef6070505c6bf703">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 115 of file MovieInput.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::bufindex, jevois::rawimage::convertCvBGRtoRawImage(), jevois::RawImage::fmt, jevois::RawImage::fps, jevois::RawImage::height, LINFO, and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a57b9900899f0ad0698d028a9ac41f394"/>    <section>
+    <title>getControl()</title>
+<indexterm><primary>getControl</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>getControl</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::getControl (struct v4l2_control &amp; ctrl) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取控件的当前值，如果硬件不支持则抛出 </para>
+</para>
+
+<para>在 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> 中，这只会抛出 std::runtime_error </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a7750b74bc3735beac18130978689dbc3">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 190 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a09fe8c83e52442fdeea3b0ce87b9b666"/>    <section>
+    <title>hasScaledImage()</title>
+<indexterm><primary>hasScaledImage</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>hasScaledImage</secondary></indexterm>
+<para><computeroutput>bool jevois::MovieInput::hasScaledImage ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Reimplemented from <link linkend="_classjevois_1_1VideoInput_1a41102ca791ba4febde317d33d2cf7716">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 51 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1ab35f89f0134ba39ef77769be0708add7"/>    <section>
+    <title>queryControl()</title>
+<indexterm><primary>queryControl</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>queryControl</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::queryControl (struct v4l2_queryctrl &amp; qc) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取有关控件的信息，如果硬件不支持则抛出 </para>
+</para>
+
+<para>在 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> 中，这只会抛出 std::runtime_error </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a77cba2f7ad186e1248626791ba43fce3">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 182 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a5207f114db186734424048add3f53011"/>    <section>
+    <title>queryMenu()</title>
+<indexterm><primary>queryMenu</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>queryMenu</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::queryMenu (struct v4l2_querymenu &amp; qm) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 </para>
+</para>
+
+<para>在 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> 中，这只会抛出 std::runtime_error </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a866ddfa5dafbc1822d1ebaf543829b98">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 186 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1adcb950c84c9772e0058646d6c15d07f4"/>    <section>
+    <title>setControl()</title>
+<indexterm><primary>setControl</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>setControl</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::setControl (struct v4l2_control const &amp; ctrl)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置控件，如果硬件拒绝该值则抛出 </para>
+</para>
+
+<para>在 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> 中，这只会抛出 std::runtime_error </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a749b4ea4c3bd2a5f140a30d5649be248">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 194 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a187b60ea9aff977f18f2dcf670176c16"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::setFormat (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧速率 </para>
+</para>
+
+<para>从输入影片文件读取的视频帧将重新缩放（如有必要）为该格式的分辨率，并将转换（如有必要）为该格式的像素类型。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a684d1d126adbab60f5d6498908c79770">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 198 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1ad38e27e1488b2b6e304a996b59f48e34"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a3f510040f77ca90428e5808d0fe58397">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 47 of file MovieInput.C.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a4d63a898143eb06f43eeb7ec415540ab"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::MovieInput::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoInput_1a813adf4eabcd417e7aae21f43db80af4">jevois::VideoInput</link>.</para>
+<para>
+Definition at line 39 of file MovieInput.C.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1MovieInput_1ade10aaa5372aa98012f7c9c3a2004d31"/>    <section>
+    <title>itsBuf</title>
+<indexterm><primary>itsBuf</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>itsBuf</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoBuf">VideoBuf</link>&gt; jevois::MovieInput::itsBuf<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们用于主帧的单个视频缓冲区 </para>
+</para>
+<para>
+Definition at line 100 of file MovieInput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a8efea0d39ab3baa8fb94fff485446393"/>    <section>
+    <title>itsBuf2</title>
+<indexterm><primary>itsBuf2</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>itsBuf2</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoBuf">VideoBuf</link>&gt; jevois::MovieInput::itsBuf2<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们用于第二帧（处理帧）的单个视频缓冲区 </para>
+</para>
+<para>
+Definition at line 101 of file MovieInput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a912be2e5e8ca027cc4bc6572cccb568b"/>    <section>
+    <title>itsCap</title>
+<indexterm><primary>itsCap</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>itsCap</secondary></indexterm>
+<para><computeroutput>cv::VideoCapture jevois::MovieInput::itsCap<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们的 OpenCV 视频捕获，也适用于电影和图像文件 </para>
+</para>
+<para>
+Definition at line 98 of file MovieInput.H.</para>
+<para>
+Referenced by MovieInput().</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1a3c54b40922dd05e581cc6c9b10efacd3"/>    <section>
+    <title>itsMapping</title>
+<indexterm><primary>itsMapping</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>itsMapping</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> jevois::MovieInput::itsMapping<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>我们当前的视频映射，我们将输入调整为映射的相机大小 </para>
+</para>
+<para>
+Definition at line 102 of file MovieInput.H.</para>
+    </section><anchor xml:id="_classjevois_1_1MovieInput_1ab1912d907e752e4a04ed3f373a5fb92f"/>    <section>
+    <title>itsRawFrame</title>
+<indexterm><primary>itsRawFrame</primary><secondary>jevois::MovieInput</secondary></indexterm>
+<indexterm><primary>jevois::MovieInput</primary><secondary>itsRawFrame</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::MovieInput::itsRawFrame<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>在任何调整大小或转换之前最后捕获的原始 OpenCV 帧 </para>
+</para>
+<para>
+Definition at line 99 of file MovieInput.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_MovieInput_8H">MovieInput.H</link>src/jevois/Core/<link linkend="_MovieInput_8C">MovieInput.C</link></section>
+</section>

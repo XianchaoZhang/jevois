@@ -1,0 +1,568 @@
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{Change11log}{Je\+Vois 1.\+1 中的变化和新功能}}
+\item \mbox{\hyperlink{Change12log}{Je\+Vois 1.\+2 中的变化和新功能}}
+\item \mbox{\hyperlink{Change13log}{Je\+Vois 1.\+3 中的变化和新功能}}
+\item \mbox{\hyperlink{Change14log}{Je\+Vois 1.\+4 中的变化和新功能}}
+\item \mbox{\hyperlink{Change15log}{Je\+Vois 1.\+5 中的变化和新功能}}
+\item \mbox{\hyperlink{Change16log}{Je\+Vois 1.\+6 中的变化和新功能}}
+\item \mbox{\hyperlink{Change17log}{Je\+Vois 1.\+7 中的变化和新功能}}
+\item \mbox{\hyperlink{Change18log}{Je\+Vois 1.\+8 中的变化和新功能}}
+\item \mbox{\hyperlink{Change19log}{Je\+Vois 1.\+9 中的变化和新功能}}
+\item \mbox{\hyperlink{Change110log}{Je\+Vois 1.\+10 中的变化和新功能}}
+\item \mbox{\hyperlink{Change111log}{Je\+Vois 1.\+11 中的变化和新功能}}
+\item \mbox{\hyperlink{Change112log}{Je\+Vois 1.\+12 中的变化和新功能}}
+\item \mbox{\hyperlink{Change113log}{Je\+Vois 1.\+13 中的变化和新功能}}
+\item \mbox{\hyperlink{Change114log}{Je\+Vois 1.\+14 中的变化和新功能}}
+\item \mbox{\hyperlink{Change115log}{Je\+Vois 1.\+15 中的变化和新功能}}
+\item \mbox{\hyperlink{Change117log}{Je\+Vois 1.\+17 中的变化和新功能}}
+\item \mbox{\hyperlink{Change118log}{Je\+Vois 1.\+18 中的变化和新功能}}
+\item \mbox{\hyperlink{Change119log}{Je\+Vois 1.\+19 中的变化和新功能}}
+\item \mbox{\hyperlink{Change120log}{Je\+Vois 1.\+20 中的变化和新功能}}
+\item Change121log 
+\end{DoxyItemize}\hypertarget{Change11log}{}\doxysubsection{Je\+Vois 1.1 中的变化和新功能}\label{Change11log}
+Je\+Vois 1.\+1 带来了两个主要的新功能：\hypertarget{Change11log_autotoc_md0}{}\doxyparagraph{增加了将 Je\+Vois 内部的 micro\+S\+D 卡导出为虚拟 U\+S\+B 闪存驱动器的支持}\label{Change11log_autotoc_md0}
+这很困难，需要对 Linux 内核进行大量的 hacking，并使用我们值得信赖的 Le\+Croy U\+SB 数据包嗅探器来找出错误，但现在它似乎可以完美地与 Windows、\+Mac 和 Linux 主机配合使用。这意味着您现在可以直接编辑配置文件、安装新的机器视觉模块、复制模块的训练数据等到 Je\+Vois，而无需弹出 micro\+SD 卡，并且 Je\+Vois 正在运行。即使您将大文件复制到 micro\+S\+D，视频速度也不会变慢，因为视频流在 U\+SB 总线上分配了保留带宽（同步）。
+
+下面是一个示例，我们浏览 Je\+Vois 内部 micro\+SD 上的 Je\+Vois 模块，通过 U\+SB 链接访问它，同时流式传输视频：
+
+
+
+但是，能够在更改 micro\+SD 内容的同时切换各种视觉模块会带来一些潜在的数据一致性问题，因此，目前，我们将其限制为仅允许文件访问而不允许流式传输视频。\hypertarget{Change11log_autotoc_md1}{}\doxyparagraph{主机和平台上支持 Python 3.\+5 + Python Open\+C\+V 3.\+2.\+0}\label{Change11log_autotoc_md1}
+对于所有 Python 爱好者来说，这是一个好消息：\+Je\+Vois 现在支持完整的 Python 3.\+5，包括与 opencv 3.\+2.\+0 的 Python 绑定。这意味着您现在可以用 Python 为 Je\+Vois 编写机器视觉模块，既可以使用 Je\+Vois 导出的用于处理相机和 U\+SB 视频帧的 A\+P\+I，也可以使用 Open\+CV Python A\+P\+I。查看这个用 Python 编写并使用 Python Open\+CV Canny 边缘检测函数的 \href{https://github.com/jevois/jevoisbase/blob/master/src/Modules/PythonOpenCV/PythonOpenCV.py}{\texttt{ 演示边缘检测模块}}，它在 Je\+Vois 相机内部工作：
+
+
+
+在 Je\+Vois 相机上以 640x480 分辨率实现 86.\+5fps，并且用 Python 编写？确实如此！
+
+总的来说，这两项改进应该有助于在 Je\+Vois 上进行快速开发和原型设计：直接在导出到主机作为虚拟闪存驱动器的 Je\+Vois micro\+SD 上编辑 python 模块，然后只需在视频抓取软件中选择相应的视频分辨率即可查看结果。
+
+我们希望这将允许许多用户直接在 Je\+Vois 上使用 Python 学习 Open\+C\+V。\hypertarget{Change11log_autotoc_md2}{}\doxyparagraph{使用简单的 apt-\/get 命令在 Ubuntu 上安装 Je\+Vois 开发套件}\label{Change11log_autotoc_md2}
+我们为以下内容创建了 Ubuntu 软件包：
+
+
+\begin{DoxyItemize}
+\item jevois-\/opencv：为主机编译的 Open\+CV 3.\+2.\+0，其设置与 Je\+Vois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-\/opencv-\/3.2.\+0 中，这样它就不会干扰您主机系统上可能安装的任何其他 Open\+C\+V，而这些 Open\+CV 可能是其他软件所需要的。
+\item jevois-\/host：为在主机上执行而编译的 Je\+Vois 核心软件
+\item jevois-\/platform：交叉编译的 Je\+Vois 核心软件，用于在 Je\+Vois 平台硬件上执行
+\item jevoisbase-\/host：为在主机上执行而编译的 Je\+Vois 基础模块
+\item jevoisbase-\/platform：交叉编译的 Je\+Vois 基础模块，用于在 Je\+Vois 平台硬件上执行
+\item jevois-\/sdk：编译的引导加载程序、根文件系统和其他配置文件。
+\item jevois-\/sdk-\/dev：为 Je\+Vois 平台架构编译的交叉编译器和交叉编译库。
+\end{DoxyItemize}
+
+由于 jevois-\/sdk-\/dev 将所有其他依赖项都带入，因此启动和运行 Je\+Vois 开发现在只需一个 apt-\/get install 命令。\hypertarget{Change11log_autotoc_md3}{}\doxyparagraph{其他改进}\label{Change11log_autotoc_md3}
+
+\begin{DoxyItemize}
+\item Je\+Vois 命令行界面添加了一些新命令：{\ttfamily sync}, {\ttfamily date}, {\ttfamily restart}, {\ttfamily usbsd}
+\item \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 现在包含一个额外的 {\bfseries{fps}} 字段，模块可以使用它来了解帧速率预期
+\item 命令行界面中的 {\ttfamily info} 现在报告当前视频映射
+\item 启用降低帧速率以允许在低光下运行时增加曝光时间。通过在 Je\+Vois 命令行界面中选择 {\bfseries{shade}} 白平衡预设来激活它：{\ttfamily setcam presetwb 9}
+\item 将许多与 Je\+Vois 相关的文件（启动和核心除外）重新定位到 J\+E\+V\+O\+IS 分区，以便可以通过 U\+SB 导出 micro\+SD 来实时修改它们。
+\item {\ttfamily rebuild-\/platform.\+sh} 现在支持 3 个安装目标：
+\begin{DoxyItemize}
+\item 无需额外参数 -\/ 安装到模块源中的 jvpkg/ 目录，与以前一样
+\item 使用 {\ttfamily -\/-\/staging} -\/ 安装到 micro\+SD 暂存区，以便稍后刷入 micro\+SD
+\item 使用 {\ttfamily -\/-\/microsd} -\/ 安装到 /media/username/\+J\+E\+V\+O\+I\+S/，可以是已安装的 Je\+Vois micro\+S\+D，也可以是实时 Je\+Vois 摄像头，通过 U\+SB 导出其 micro\+S\+D。
+\end{DoxyItemize}
+
+这将大大简化开发周期：无需再安装/弹出 micro\+SD 卡，只需在 Je\+Vois 中直接编译并安装即可。
+\item 新的启动选项 {\bfseries{B\+O\+OT\+:serialtty}} 和 {\bfseries{B\+O\+OT\+:usbserialtty}} 在硬件串行或 U\+SB 串行端口而不是 Je\+Vois 控制台上提供 Linux 登录提示。
+\item 重新组织 jevoisbase 并添加单独的包含目录，以方便创建 debian 软件包。 
+\end{DoxyItemize}\hypertarget{Change12log}{}\doxysubsection{Je\+Vois 1.2 中的变化和新功能}\label{Change12log}
+Je\+Vois 1.\+2 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 增加了直接编译和安装新模块到 micro\+SD 的支持：{\ttfamily ./rebuild-\/platform.sh -\/-\/live} 将交叉编译模块，指示连接的 Je\+Vois 相机将其 micro\+SD 导出为虚拟闪存驱动器，将交叉编译的模块安装到 micro\+S\+D，弹出虚拟闪存驱动器，然后重新启动 Je\+Vois。新模块已准备好立即使用。
+\item 更多文档和教程
+\item 现在报告 Python 错误的完整堆栈跟踪
+\item 新的视频错误报告，显示视频流中的异常消息，以简化平台硬件上模块的调试：
+\end{DoxyItemize}
+
+
+
+
+\begin{DoxyItemize}
+\item 增加了对 std\+::pair、cv\+::\+Size 和 cv\+::\+Point 类型的 Je\+Vois 参数的支持 
+\end{DoxyItemize}\hypertarget{Change13log}{}\doxysubsection{Je\+Vois 1.3 中的变化和新功能}\label{Change13log}
+Je\+Vois 1.\+3 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 新的标准化串行消息允许各种 Je\+Vois 机器视觉模块和 Arduino 代码之间实现更高的互操作性。请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}}
+\item 新的主机命令 {\ttfamily jevois-\/add-\/videomapping} 用于将新的视频映射添加到 {\bfseries{videomappings.\+cfg，检查是否有重复。现在，它用于新模块的}} {\ttfamily postinstall} 脚本中。
+\item 新的主机命令“jevois-\/cmd”向 Je\+Vois 发送简单命令并获取结果，而无需打开串行终端并将其连接到 Je\+Vois。
+\item 新的主机命令 {\ttfamily jevois-\/cmd} 指示连接的 Je\+Vois 相机开始/停止将其 micro\+SD 导出为虚拟闪存驱动器。
+\item 新文档，包括 \mbox{\hyperlink{UserLighting}{优化不同光照条件下的性能}}
+\item C++ 和 Python 的新教程 
+\end{DoxyItemize}\hypertarget{Change14log}{}\doxysubsection{Je\+Vois 1.4 中的变化和新功能}\label{Change14log}
+Je\+Vois 1.\+4 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 新的 {\bfseries{/jevois/share/}} 目录用于存储可在多个机器视觉模块之间共享的数据，例如神经网络配置文件和权重、预训练分类器等
+\item 使用 Darknet 和 Darknet Y\+O\+LO 在 Image\+Net（1000 个目标类别）和 Pascal V\+OC 上进行目标识别。尚未完全优化速度，但看起来已经非常有前途。  查看 jevoisbase 中的两个新模块：
+\begin{DoxyItemize}
+\item  将中央 224x224 裁剪图传递到 Darknet 神经网络。神经网络预测前 N 个目标类别候选（在 imagenet 中可能的 1000 个候选中），并且显示那些高于最低置信度阈值的目标并发送到串行。
+\item  将整个 640x480 帧传递到 Darknet Y\+O\+L\+O（you only look once）网络，该网络结合了对场景中所有目标的检测（查找目标可能在哪里）和识别（目标是什么），只需一次传递即可。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+
+
+\begin{DoxyItemize}
+\item Raw\+Image\+Ops.\+H 中增加了一些图像转换函数
+\item A\+Rtoolkit（增强现实标记的超快速检测）、\+Darknet、\+Darknet Y\+O\+LO 的新机器视觉模块。
+\item 更新 模块以输出正确的 VP 信息。
+\item 关于如何构建简单的视觉引导移动机器人的新教程 
+\end{DoxyItemize}\hypertarget{Change15log}{}\doxysubsection{Je\+Vois 1.5 中的变化和新功能}\label{Change15log}
+Je\+Vois 1.\+5 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 已更新至 Open\+CV 3.\+3.\+0，包括 Open\+C\+V-\/\+Contrib 包和 python 3.\+6 支持
+\item 与 buildroot 2017.\+08 合并，将 Je\+Vois 操作系统更新为：
+\begin{DoxyItemize}
+\item gcc/g++-\/7.2.\+0
+\item boost-\/1.\+64.\+0
+\item python-\/3.\+6.\+1
+\item python-\/numpy-\/1.\+8.\+0
+\item eigen-\/3.\+3.\+3
+\item tbb-\/4.\+4
+\item attr-\/2.\+4.\+47
+\item binutils-\/2.\+29
+\item busybox-\/1.\+27.\+1
+\item bzip2-\/1.\+0.\+6
+\item clapack-\/3.\+2.\+1
+\item dhrystone-\/2
+\item diffutils-\/3.\+6
+\item dos2unix-\/7.\+3.\+4
+\item expat-\/2.\+2.\+2
+\item ffmpeg-\/3.\+3.\+3
+\item fftw-\/3.\+3.\+6-\/pl2
+\item findutils-\/4.\+6.\+0
+\item flann-\/1.\+9.\+1
+\item gawk-\/4.\+1.\+4
+\item gdb-\/7.\+11.\+1
+\item glibc-\/2.\+25
+\item gmp-\/6.\+1.\+2
+\item grep-\/3.\+1
+\item gsl-\/2.\+3
+\item gst1-\/plugins-\/base-\/1.\+12.\+2
+\item gstreamer1-\/1.\+12.\+2
+\item jasper-\/version-\/2.\+0.\+13
+\item jpeg-\/turbo-\/1.\+5.\+2
+\item keyutils-\/1.\+5.\+10
+\item lapack-\/3.\+7.\+1
+\item leptonica-\/1.\+74.\+4
+\item libcurl-\/7.\+55.\+0
+\item libffi-\/3.\+2.\+1
+\item libglib2-\/2.\+52.\+2
+\item liblinear-\/2.\+1
+\item libpng-\/1.\+6.\+31
+\item libpthread-\/stubs-\/0.\+4
+\item libump-\/ec0680628744f30b8fac35e41a7bd8e23e59c39f
+\item libv4l-\/1.\+12.\+5
+\item libyaml-\/0.\+1.\+6
+\item libyuv-\/1ebf86795cb213a37f06eb1ef3713cff080568ea
+\item linux-\/headers-\/3.\+4.\+113
+\item memstat-\/1.\+0
+\item memtester-\/4.\+3.\+0
+\item mpdecimal-\/2.\+4.\+1
+\item ncurses-\/6.\+0
+\item openblas-\/f04af36ad0e85b64f12a7c38095383192cc52345
+\item oprofile-\/1.\+1.\+0
+\item pcre-\/8.\+41
+\item popt-\/1.\+16
+\item protobuf-\/3.\+3.\+0
+\item ramsmp-\/3.\+5.\+0
+\item ramspeed-\/2.\+6.\+0
+\item readline-\/7.\+0
+\item sed-\/4.\+4
+\item sqlite-\/3190300
+\item strace-\/4.\+18
+\item stress-\/1.\+0.\+4
+\item stress-\/ng-\/0.\+06.\+15
+\item sunxi-\/cedarx-\/b8f52d913f73720e50d8f1b2f8610467b575dc45
+\item sunxi-\/mali-\/d343311efc8db166d8371b28494f0f27b6a5872
+\item tesseract-\/ocr-\/3.\+05.\+00
+\item tiff-\/4.\+0.\+8
+\item util-\/linux-\/2.\+30.\+1
+\item valgrind-\/3.\+12.\+0
+\item whetstone-\/1.\+2
+\item xutil\+\_\+util-\/macros-\/1.\+19.\+1
+\item xz-\/5.\+2.\+3
+\item zbar-\/854a5d97059e395807091ac4d80c53f7968abb8f
+\item zlib-\/1.\+2.\+11
+\end{DoxyItemize}
+\item N\+O\+T\+E：平台（基于 buildroot）现在比主机（假设为 Ubuntu 17.\+04）略有领先。随着 Ubuntu 未来的发布，部分差异可能会消失，但与此同时请注意：
+\end{DoxyItemize}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Software }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Platform }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ubuntu 17.\+04  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Software }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Platform }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Ubuntu 17.\+04  }\\\cline{1-3}
+\endhead
+gcc / g++ &7.\+2 &6.\+3  \\\cline{1-3}
+python &3.\+6 &3.\+5  \\\cline{1-3}
+boost &1.\+64 &1.\+62  \\\cline{1-3}
+\end{longtabu}
+
+
+对于大多数人来说，这应该没有什么区别。因为 g++ 7.\+2 比 6.\+3 更严格，所以在为平台编译代码时，与主机相比，您可能会收到一些额外的警告。无论如何，您都应该修复它们，因为主机设置将很快转移到 g++7。
+\begin{DoxyItemize}
+\item 将 tiny-\/dnn 更新为 Git\+Hub 的最新版本（最近没有任何版本）。这会稍微改变 A\+P\+I，请参阅 jevoisbase 中更新的 Object\+Recognition 组件。
+\item 对 jevois-\/flash-\/card 进行小改进，以避免错误地擦除大硬盘。
+\item 此版本更改了平台操作系统 (buildroot)。您需要从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 获取新的 Je\+Vois Debian 软件包
+\item 推荐的升级工作流程：请参阅 \href{http://jevois.org/tutorials/ProgrammerSetup.html}{\texttt{ http\+://jevois.\+org/tutorials/\+Programmer\+Setup.\+html}} 下的升级部分。
+\item 添加了新的 {\ttfamily help2} 命令行界面命令，仅显示有关当前视觉模块的更紧凑的帮助信息。
+\item 增加了对 darknet 的分析，这将使人们能够轻松找出哪些深度神经网络层需要花费大量时间进行计算。 
+\end{DoxyItemize}\hypertarget{Change16log}{}\doxysubsection{Je\+Vois 1.6 中的变化和新功能}\label{Change16log}
+Je\+Vois 1.\+6 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 修复了 Ubuntu 16.\+04 上 Debian 软件包依赖项的错误。
+\item 支持 Ubuntu 16.\+04、17.04 和（新）17.10（仅限所有 amd64）的 Je\+Vois Debian 软件包。
+\item 改进的文档脚本。
+\item 已更新至最新的 darknet-\/nnpack。新的神经网络即将推出！
+\item 在 U\+SB 协议中启用了一种变通方法，使 Je\+Vois 对某些 Windows 10 计算机发出的虚假请求更加可靠。希望这能帮助一些遇到 Windows 10 问题的人。
+\item 将 U\+VC 控制单元的名称更改为 \char`\"{}\+Je\+Vois-\/\+A33 Video Camera\char`\"{}，以便伪造 Windows 版本的用户知道这是他们的 Je\+Vois 摄像机（\+Mac 和 Linux 已经正确使用制造商和产品字符串，因此对它们来说没有变化）。
+\item 修复了 Y\+O\+LO 启动时的小错误，在深度网络加载时显示更好的消息。 
+\end{DoxyItemize}\hypertarget{Change17log}{}\doxysubsection{Je\+Vois 1.7 中的变化和新功能}\label{Change17log}
+Je\+Vois 1.\+7 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 已更新至最新 Open\+CV 版本 3.\+4.\+0
+\item 新的样本目标检测（sample object detection）和姿势估计模块，以启发 F\+I\+R\+ST 机器人学生（及其他人）：（\+C++ 版）和 和（\+Python 版）。
+\item 当不使用 U\+SB 输出时，\+Python 错误报告的小错误得到修复。
+\item 修复 Python 模块中 process() 无效重载（overloads）的错误。现在使用两个入口点，当视频映射具有 U\+SB 输出时使用 process()，而当视频映射没有 U\+SB 输出时使用 process\+No\+U\+S\+B()。
+\item 添加了线条剪辑（line clipping）功能，以避免在进行近乎单一的 3D 投影时浪费时间绘制可能非常长的线条（尽管大部分在视口之外）。 
+\end{DoxyItemize}\hypertarget{Change18log}{}\doxysubsection{Je\+Vois 1.8 中的变化和新功能}\label{Change18log}
+Je\+Vois 1.\+8 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 支持针对移动设备优化的 Tensor\+Flow Lite，允许在 Je\+Vois 上运行 Tensor\+Flow 深度神经网络。请参阅、 和，了解使用 mobilenet 和压缩 mobilenet 预训练网络的示例模块，这些网络可以识别 1000 种不同的目标类别。这些网络可以在 Je\+Vois 内部的小型处理器上以高达 83 次推理/秒 (mobilenet\+\_\+v1\+\_\+0.\+25\+\_\+128\+\_\+quant) 的速度运行。
+\item Bugfix：现在可以从传感器（使用 {\ttfamily getcam absexp}）正确读回绝对曝光设置（使用 {\ttfamily setcam autoexp 1} and then {\ttfamily setcam absexp 123}）。请注意，根据帧速率，读回的值可能会被截断，这可能会限制曝光时间。
+\item 添加了启动选项（默认情况下禁用），用于连接连接到单个 U\+SB 总线的 3 个 Je\+Vois 摄像机的流视频。有关详细信息，请参阅 \mbox{\hyperlink{Multicam}{Je\+Vois-\/\+A33 通过连接到一个 U\+SB 总线的多个 Je\+Vois 摄像机流式传输视频}} 。
+\item 添加了选项（默认启用），当串行缓冲区已满时，静默丢弃串行消息。这避免了 Je\+Vois 在尝试通过 U\+SB 连接发送串行消息但主机上无人监听时出现挂起的问题。
+\item 更改了 {\ttfamily jevois-\/cmd} 主机脚本以使用 python 串行端口处理而不是简单的 shell 命令。应该可以提高某些较新主机 Linux 版本的可靠性。
+\item 在 中添加了对无 U\+SB 视频流操作的支持。
+\item 新的启动选项：创建一个空文件 {\bfseries{B\+O\+OT\+:quietcmd，以禁止在命令行上收到每个成功命令后向用户发送}} \textquotesingle{}OK\textquotesingle{}。仅推荐高级用户使用。
+\item 新的启动选项：创建一个空文件 {\bfseries{B\+O\+OT\+:nopython，以禁用对用}} python 编写的模块的支持。激活后，尝试加载 python 模块将引发异常。禁用 python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。 
+\end{DoxyItemize}\hypertarget{Change19log}{}\doxysubsection{Je\+Vois 1.9 中的变化和新功能}\label{Change19log}
+Je\+Vois 1.\+9 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 引入了新的 \mbox{\hyperlink{JeVoisInventor}{Je\+Vois-\/\+A33：\+Je\+Vois Inventor 图形用户界面}} ，它使使用完整的 Open\+CV 和完整的 Python 3.\+6 编程 Je\+Vois 比以往更加容易。
+\item 升级至 Open\+CV 3.\+4.\+2，所有贡献模块包括深度神经网络 (D\+NN)
+\item  现在支持 Y\+O\+LO v3，速度更快、更准确、占用内存更少，并有 80 个目标类别。
+\item 新模块 和 展示了如何使用 Open\+CV D\+NN 框架（\+C++ 和 Python）使用目标检测 + 识别深度神经网络。支持的网络格式为 Caffe、\+Tensor\+Flow、\+Darknet 和 Torch。提供的示例包括：
+\begin{DoxyItemize}
+\item Open\+CV 人脸检测器，\+Caffe 模型
+\item Mobile\+Net + 在 Pascal V\+OC 上训练的 S\+S\+D（20 个目标类），\+Caffe 模型
+\item Mobile\+Net + 在 Coco 上训练的 S\+S\+D（80 个目标类），\+Tensor\+Flow 模型
+\item Mobile\+Net v2 + 在 Coco 上训练的 S\+S\+D（80 个目标类），\+Tensor\+Flow 模型
+\item Darknet Tiny Y\+O\+LO v3 在 Coco 上训练的 Darknet Tiny Y\+O\+LO v3（80 个目标类），\+Darknet 模型
+\item Darknet Tiny Y\+O\+LO v2 在 Pascal V\+OC 上训练的 Darknet Tiny Y\+O\+LO v2（20 个目标类），\+Darknet 模型
+\end{DoxyItemize}
+\item 将预先训练的 Mobile\+Net v2 网络添加到
+\item 用于目标识别结果以及目标框检测 + 识别的新标准化消息，该消息在 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}} 中定义并用于所有深度网络模块。
+\item 两个新教程解释了如何在 Arduino 上解码这些消息，并附有示例 Arduino 代码：User\+Arduino\+Blink 和 User\+Arduino\+Y\+O\+LO
+\item 增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 仍在开发中。下一版本中将提供更多信息。
+\item 在主循环中添加了一个帧计数器，并使用 jevois\+::\+Module\+::frame\+Num() 访问它。需要跟踪帧号的模块不再需要实现自己的计数器，可以使用这个计数器。
+\item 向 \mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} 添加了参数 {\ttfamily serstamp，可选择在所有标准化串行消息前面添加帧号、时间、帧+时间等} 
+\item 向 \mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}} 添加了参数 {\ttfamily serlimit，以限制每个视频帧发送的串行消息数量，避免串行链路过载。} 
+\item 添加了参数 {\ttfamily sermark，可选择标记每帧的开始和结束。如果需要知道何时处理了一帧但未找到结果，因此未发送其他串行消息，则很有用。} 
+\item 添加了用于目标识别的标准化消息并将其用于神经网络模块（\+Tensor\+Flow，\+Darknet）
+\item 新的命令行界面命令：shell（允许在 Je\+Vois 上运行 Unix 命令）
+\item 新的命令行界面命令用于获取有关相机的机器信息：cmdinfo、caminfo、modcmdinfo、paraminfo
+\item 修复了 中的错误，该错误在无 U\+SB 输出的情况下操作时会发送不正确的数据。
+\item 在 Je\+Vois 内核中启用了 swap 支持。默认情况下不启用，以免减慢启动时间，但如果需要，可以轻松创建 swap 文件并使用 Je\+Vois 命令行界面的 {\ttfamily shell} 命令激活它。 
+\end{DoxyItemize}\hypertarget{Change110log}{}\doxysubsection{Je\+Vois 1.10 中的变化和新功能}\label{Change110log}
+Je\+Vois 1.\+10 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 改进的 Je\+Vois Inventor 允许测试 Je\+Vois 的无头（无 U\+SB 视频输出）操作
+\item 升级到 Open\+CV 4.\+0.\+0-\/beta，所有贡献模块包括深度神经网络 (D\+NN) 和非免费
+\item  现在支持 Y\+O\+LO v3，速度更快、更准确、占用内存更少，并有 80 个对象类别。
+\item 新模块 展示了如何使用 Open\+CV D\+NN 框架（\+Python 版）使用对象识别深度神经网络。支持的网络格式包括 Caffe、\+Tensor\+Flow、\+Darknet、\+Torch 和 O\+N\+N\+X。提供的示例包括：
+\item 在 Image\+Net 上训练的 Squeeze\+Net v1.\+1（1000 个对象类别），\+Caffe 模型
+\item 即将推出更多内容！请贡献力量！
+\item 关于用 Python 实现光流、无头操作等的几个新教程。
+\item 增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 和 A\+R0135（全局快门，\+M12 镜头支架）的开发仍在进行中，\+I\+C\+M-\/20948 9-\/D\+OF I\+MU 位于图像传感器的正后方。下一版本将提供更多信息。
+\item 增加了从原始 B\+A\+Y\+ER 相机帧到 Y\+U\+YV 的即时转换支持。对于只能输出 B\+A\+Y\+ER 的传感器（如 A\+R0135 全局快门传感器）非常有用。
+\item 修复了‘jevois-\/usbsd’对某些用户无法正常工作的问题。
+\item 更好地处理模块启动错误、配置文件错误等，这样即使 viion 模块完全加载失败或某些配置文件是伪造的，\+Inventor 也不会卡住。
+\item 附加支持从 C++ 和 Python 访问原始相机传感器寄存器和原始 I\+MU 寄存器。
+\item 有关可选镜头、可选传感器等的更多文档。
+\item 修补某些机器上缺少的 C\+P\+U\+\_\+\+S\+E\+T\+S\+I\+ZE 定义（需要在 jevoisbase 中编译 Tensor\+Flow）。 
+\end{DoxyItemize}\hypertarget{Change111log}{}\doxysubsection{Je\+Vois 1.11 中的变化和新功能}\label{Change111log}
+Je\+Vois 1.\+11 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 升级到 Open\+CV 4.\+0.\+0，包含所有贡献模块，包括深度神经网络 (D\+NN) 和非免费
+\item 在 jevois-\/inventor 中添加对 Mac\+OS Mojave 的支持
+\item 修复主机 jevois-\/daemon 中的一个错误
+\item 增加了对灰度传感器的支持（例如 A\+R0135 单色）
+\item 支持 I\+C\+M-\/20948 惯性传感器中的完整 9-\/D\+OF 访问（仅随可选的 A\+R0135 全局快门相机传感器升级而提供）
+\item 增加了从原始 B\+A\+Y\+ER 和原始 G\+R\+EY 相机帧到 Y\+U\+YV 的即时转换支持。对于只能输出 B\+A\+Y\+ER 或 G\+R\+EY 的传感器（如 A\+R0135 全局快门传感器）非常有用。 
+\end{DoxyItemize}\hypertarget{Change112log}{}\doxysubsection{Je\+Vois 1.12 中的变化和新功能}\label{Change112log}
+Je\+Vois 1.\+12 带来以下新功能：
+
+
+
+
+\begin{DoxyItemize}
+\item 升级到 Open\+CV 4.\+0.\+1，包含所有贡献模块，包括深度神经网络（\+D\+N\+N）和非免费模块。
+\item  中提供了新的 mobilenet\+\_\+v2\+\_\+1.\+0\+\_\+224\+\_\+quant，这是一种具有高精度的量化 Mobile\+Net V2。
+\item jevois-\/inventor 为 Mac\+OS Mojave 提供更多支持
+\item 增加了对 ov2640 1600x1200 传感器的支持：此传感器支持：\+Y\+U\+Y\+V、\+B\+A\+Y\+E\+R、\+R\+G\+B565 和
+\begin{DoxyItemize}
+\item U\+X\+GA (1600 x 1200)\+: up to 15 fps
+\item S\+X\+GA (1280 x 1024)\+: up to 15 fps
+\item 720p (1280 x 720)\+: up to 15 fps
+\item X\+GA (1024 x 768)\+: up to 15 fps
+\item S\+V\+GA ( 800 x 600)\+: up to 40 fps
+\item V\+GA ( 640 x 480)\+: up to 40 fps
+\item C\+IF ( 352 x 288)\+: up to 60 fps
+\item Q\+V\+GA ( 320 x 240)\+: up to 60 fps
+\item Q\+C\+IF ( 176 x 144)\+: up to 60 fps
+\item Q\+Q\+V\+GA ( 160 x 120)\+: up to 60 fps
+\item Q\+Q\+C\+IF ( 88 x 72)\+: up to 60 fps
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+但请注意，\+U\+SB 2.\+0 带宽限制（最高 24 Mbyte/s 的视频数据）可能会限制通过 U\+SB 传输视频时的帧速率。
+
+
+\begin{DoxyItemize}
+\item 新模块 使用 Open\+CV 中的 F\+E\+R+ O\+N\+NX 深度神经网络识别 Python 中的面部情绪。
+\item 新增对 I\+C\+M-\/20948 惯性测量单元芯片的增强支持。\+Je\+Vois I\+C\+M20948 驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 Je\+Vois 传感器上的摄像头传感器驱动程序集成。目前，只有 On\+Semi (Aptina) A\+R0135 全局快门可选摄像头传感器配备了 I\+M\+U。
+
+请参阅新模块 和，并参阅 \mbox{\hyperlink{Sensors}{Je\+Vois-\/\+A33 相机传感器选项}} 。
+
+该芯片的规格相当令人印象深刻：
+\begin{DoxyItemize}
+\item 3 轴 16 位加速度计，全范围灵敏度可选为 +/-\/2g、+/-\/4g、+/-\/8g 和 +/-\/16g。
+\item 加速度计数据速率从 4 Hz 到 1125 Hz。
+\item 3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-\/250dps（度/秒）、+/-\/500dps、+/-\/1000dps 和 +/-\/2000dps。
+\item 陀螺仪数据速率从 4 Hz 到 1125 Hz。
+\item 3 轴 16 位磁力计（指南针），范围宽达 +/-\/4900u\+T（微特斯拉）。
+\item 磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。
+\item 16 位温度传感器，读出速率高达 8 k\+Hz。
+\item R\+AW 数据模式（随时获取当前传感器值）、缓冲 (F\+I\+FO) 数据模式（传感器值以固定速率累积到 F\+I\+FO 中）和数字运动处理模式 (D\+M\+P；原始数据在芯片上处理)。
+\item 片上数字运动处理器 (D\+MP) 可以在 I\+MU 芯片内部计算：
+\begin{DoxyItemize}
+\item 四元数 6（使用加速度计 + 陀螺仪），
+\item 四元数 9（使用加速度计 + 陀螺仪 + 指南针），
+\item geomag 四元数（使用加速度计 + 指南针），
+\item 翻转/拾取检测，
+\item 步数检测和计数，
+\item 基本活动识别：驾驶、行走、跑步、骑自行车、倾斜、静止。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+使用片上计算的四元数，使用以高精度、固定速率获取传感器数据并动态应用各种校准、漂移校正和补偿的算法，可以高度准确地实时估计传感器在 3D 世界中的姿势及其移动方式。请注意，与 I\+MU 的通信是通过 400k\+Hz I2C 总线进行的，这可能会限制数据读出率，具体取决于从 I\+MU 请求的数据。此 I\+MU 有 3 种基本操作模式（参数 {\ttfamily mode} 只能在 params.\+cfg 中设置）：
+\item R\+A\+W：可以使用 get\+Raw() 或 get() 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以完全规则的间隔调用 get()，则读数中会出现一些时间抖动。\+I\+MU 不为其数据提供任何时间戳。
+\item F\+I\+F\+O：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte F\+I\+FO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启时，陀螺仪速率决定 F\+I\+FO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 get\+Raw() 或 get()。但您需要注意，当使用高传感器数据速率时，\+F\+I\+FO 可能会很快填满并溢出。
+\item D\+M\+P：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (D\+MP)。然后，\+D\+MP 计算四元数、活动识别等，并在这些算法的结果可用时将数据包推送到 F\+I\+F\+O。
+\item 新的 jevoisextra 模块 Y\+O\+LO Light 运行 Alexey\+AB 的 yolo2\+\_\+light，支持 I\+N\+T8 和 X\+N\+OR 推理。但是，到目前为止，我们只有 I\+N\+T8 模型，它们的运行速度比 Y\+O\+LO 的 darknet-\/nnpack 实现或 Open\+CV 实现慢大约两倍。因此，尚不清楚 X\+N\+OR 推理是否真的会大幅提高速度。 
+\end{DoxyItemize}\hypertarget{Change113log}{}\doxysubsection{Je\+Vois 1.13 中的变化和新功能}\label{Change113log}
+Je\+Vois 1.\+13 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 升级到 Open\+CV 4.\+1.\+0，包含所有贡献模块，包括深度神经网络（\+D\+N\+N）和非免费模块。
+\item 升级到 buildroot 2019.\+05-\/rc2，其中包含
+\item {\itshape 升级的} gcc/g++/gfortran 8.\+3
+\item {\itshape 升级的} {\bfseries{boost-\/1.\+70.\+0}} 
+\item {\itshape 升级的} binutils-\/2.\+32
+\item {\itshape 升级的} {\bfseries{eigen-\/3.\+3.\+7}} 
+\item {\itshape 升级的} {\bfseries{python-\/3.\+7.\+3}} 
+\item {\itshape 升级的} {\bfseries{python-\/numpy-\/1.\+16.\+3}} 
+\item {\itshape 新的} {\bfseries{python-\/scipy-\/1.\+3.\+0}} 
+\item {\itshape 新的} {\bfseries{python-\/pip-\/19.\+1，可以调用它安装新的}} python 包（目前，只有没有编译依赖项的纯 python 包才可以轻松安装。我们正在开发 piwheels 的变体，以允许安装任何可用的 python 包，即将推出！）
+\item 对于不耐烦的人，这里有一个 {\itshape pip} 的迷你教程：
+\item 将没有任何编译的 C++ 代码的轮子复制到 micro\+SD 卡的某个位置（例如，在 {\bfseries{J\+E\+V\+O\+IS\+:/packages/}} 中）。例如，{\ttfamily jsondiff-\/1.\+1.\+2-\/py3-\/none-\/any.\+whl} 来自 \href{http://piwheels.org}{\texttt{ http\+://piwheels.\+org}}（请参阅 Je\+Vois 用户教程，了解如何将文件复制到 micro\+S\+D）。名称中没有 {\bfseries{none-\/any}} 的轮子可能无法工作。
+\item 在 Je\+Vois Inventor 的控制台中，输入：\begin{DoxyVerb}shell pip install /jevois/packages/jsondiff-1.1.2-py3-none-any.whl \end{DoxyVerb}
+ 您应该会看到类似以下内容：\begin{DoxyVerb}shell pip install /jevois/packages/jsondiff-1.1.2-py3-none-any.whl
+
+正在处理 ./packages/jsondiff-1.1.2-py3-none-any.whl 正在安装收集的包：jsondiff 已成功安装 jsondiff-1.1.2 OK \end{DoxyVerb}
+
+\item 就是这样！现在您可以在 Python 模块中“导入 jsondiff”。同样，如果您的 wheel 有依赖项，尤其是编译的依赖项，此操作将失败。我们正在努力解决此问题。 
+\end{DoxyItemize}\hypertarget{Change114log}{}\doxysubsection{Je\+Vois 1.14 中的变化和新功能}\label{Change114log}
+Je\+Vois 1.\+14 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 升级到 Open\+CV 4.\+1.\+1，包含所有贡献模块，包括深度神经网络（\+D\+N\+N）和非免费模块。
+\item 新的自动相机传感器检测。现在可以选择将文件 {\bfseries{B\+O\+OT\+:sensor}} 写入安装在 Je\+Vois 智能相机中的传感器名称（ov9650、ov7725、ov2640、ar0135 等）。如果 {\bfseries{B\+O\+OT\+:sensor}} 中有正确的传感器，您仍将加快 Je\+Vois 的启动时间，但 Je\+Vois 现在将依次尝试所有支持的传感器，直到找到一个可用的传感器。\+Allwinner 内核视频捕获驱动程序已修改为允许正确卸载和重新加载（卸载用于挂起和崩溃制造商的代码），并在加载时同步检测传感器（而不是将检测委托给内核线程）。
+\item 目前，检测顺序为：{\bfseries{B\+O\+OT\+:sensor}} 中指定的传感器或 ov9650（如果没有 {\bfseries{B\+O\+OT\+:sensor}} 文件）、ov7725、ov2640、ar0135、ov9650。您将看到 Je\+Vois 智能相机在启动时尝试检测的每个传感器都有一个橙色 L\+ED 闪烁。一旦找到正确的传感器，\+L\+ED 将在几秒钟后变为常亮橙色。
+\item 全局 Je\+Vois 参数 {\ttfamily camerasens} 允许人们知道安装了哪个传感器。只需在 Je\+Vois Inventor 控制台中输入：\begin{DoxyVerb}getpar camerasens \end{DoxyVerb}
+ 即可获取值。
+\item 新的深度网络：
+\item  中支持 Mnas\+Net 优化的 auto\+ML 网络
+\item  中支持 inception\+\_\+v1\+\_\+224\+\_\+quant\+\_\+20181026 高精度（但速度较慢）网络
+\item  中的新参数 {\ttfamily model} 允许用户在运行时轻松选择网络，而无需编辑模块的 {\bfseries{params.\+cfg}} 文件。
+\item 改进了 ov2640 低分辨率（\+C\+IF 及更低分辨率）图像捕获。以前，低分辨率下捕获的图像与高分辨率下的图像相比非常暗且放大。现在已修复此问题。这是真正的硬件 C\+I\+F（加上基于 D\+SP 的缩小功能，可实现更低的分辨率），因此它支持硬件宣传的最大帧速率 60fps（与网络上其他驱动程序中使用的方法相反，这些驱动程序以最大 30fps 的 V\+GA 捕获，然后使用板载 D\+SP 缩小）。
+\item 使用 A\+R0135 传感器对色彩平衡进行轻微改进。
+\item 对于 C++ 程序员：new Parameter$<$\+T$>$\+::reset() 将参数重置为其默认值。 
+\end{DoxyItemize}\hypertarget{Change115log}{}\doxysubsection{Je\+Vois 1.15 中的变化和新功能}\label{Change115log}
+Je\+Vois 1.\+15 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 已更新至 Open\+CV 4.\+4.\+0
+\item 从 github 更新 Darknet 和 N\+N\+P\+A\+CK 至最新版本。
+\item 更新至 Tensor\+Flow 1.\+15.\+3，在 mobilenet 上的运行速度提高了约 25。
+\item 更新了有关如何训练自定义 Tensor\+Flow 模型的教程，网址为 \href{http://jevois.org/tutorials/UserTensorFlowTraining.html}{\texttt{ http\+://jevois.\+org/tutorials/\+User\+Tensor\+Flow\+Training.\+html}}
+\item jevoisextra 中更新至 Dlib 19.\+20。
+\item 修复了早期版本中已禁用的 G\+PU 驱动程序。
+\item 在 Demo\+G\+PU 中添加对 Y\+U\+YV 输出的支持，以便可以在 Je\+Vois Inventor 中使用。请注意，从原生 R\+G\+B565 到 Y\+U\+YV 的转换是在 Je\+Vois C\+PU 上完成的，因此会使用一些周期。
+\item 更新了 Ar\+Uco 模块以使用现在支持的新字典：\+A\+T\+A\+G\+\_\+16h5、\+A\+T\+A\+G\+\_\+25h9、\+A\+T\+A\+G\+\_\+36h10 和 A\+T\+A\+G\+\_\+36h11。解析可选参数配置文件时，现在还支持 April\+Tag 配置参数。
+\item 在无头 A\+Rtoolkit 中添加了对除 Y\+U\+YV 之外的模式的支持。这对于使用来自相机传感器的原始 B\+A\+Y\+ER 图像格式支持 1280x1024 的 15fps 操作非常有用。
+\item 改进了 I\+C\+M-\/20948 I\+M\+U（惯性测量单元）和 D\+M\+P（数字运动处理器）支持：
+\item 新增对 F\+S\+Y\+NC 输入的支持，其中 I\+MU 和 D\+MP 可以在从摄像头传感器接收到帧同步脉冲时发出信号（摄像头传感器在每个新帧开始之前发出一个脉冲）。除了获取脉冲之外，我们还获取了最后一次 I\+MU 测量和 F\+S\+Y\+NC 脉冲之间的微秒延迟。这对于需要 I\+MU 和视频传感器之间紧密耦合的应用非常有用，例如视觉惯性里程计。
+\item 命令行界面上的新功能允许用户修改低级 I\+MU 和 D\+MP 寄存器：
+\item setimureg {\ttfamily reg} {\ttfamily val} -\/ 将原始 I\+MU 寄存器 {\ttfamily reg} 设置为值 {\ttfamily val} 
+\item getimureg {\ttfamily reg} -\/ 获取原始 I\+MU 寄存器的值 {\ttfamily reg} 
+\item setimuregs {\ttfamily reg} {\ttfamily num} {\ttfamily val1} ... {\ttfamily valn} -\/ 设置原始 I\+MU 寄存器值数组
+\item getimuregs {\ttfamily reg} {\ttfamily num} -\/ 获取原始 I\+MU 寄存器值数组
+\item setdmpreg {\ttfamily reg} {\ttfamily val} -\/ 将原始 D\+MP 寄存器 {\ttfamily reg} 设置为值 {\ttfamily val} 
+\item getdmpreg {\ttfamily reg} -\/ 获取原始 D\+MP 寄存器的值 {\ttfamily reg} 
+\item setdmpregs {\ttfamily reg} {\ttfamily num} {\ttfamily val1} ... {\ttfamily valn} -\/ 设置原始 D\+MP 数组寄存器值
+\item getdmpregs {\ttfamily reg} {\ttfamily num} -\/ 获取原始 D\+MP 寄存器值数组
+\end{DoxyItemize}
+
+寄存器和值可以以十进制、十六进制（前缀为 0x）或八进制（前缀为 0 -\/ 注意这一点并小心 -\/ 如果您写入 010，它将是八进制 10）指定。返回的值始终为十六进制（无前缀）。请注意，上述功能默认不激活，以防止新手用户犯错。要激活它们，请在 Je\+Vois 控制台上发出“setpar camreg 1”。
+
+
+\begin{DoxyItemize}
+\item 为我们的 C++ 内部函数添加了更多 python 绑定。
+\item 使用 A\+R0135 传感器对色彩平衡进行轻微改进。
+\item 如果温度系统文件格式不正确，则使用新的异常处理来避免主机版 jevois-\/daemon 上出现模糊的 stoi() 异常。谢谢 Marc！ 
+\end{DoxyItemize}\hypertarget{Change117log}{}\doxysubsection{Je\+Vois 1.17 中的变化和新功能}\label{Change117log}
+Je\+Vois 1.\+17 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 已更新至 Open\+CV 4.\+5.\+4、\+Open\+Vino 2021.\+4 L\+TS
+\item 已更新至 Tensor\+Flow 2.\+5.\+0
+\item 线程池改进，在 Je\+Vois-\/\+Pro 上具有更好的大/小亲和力处理。
+\item Je\+Vois-\/\+A33：新的 Je\+Vois D\+NN 框架，使用 Open\+CV 运行各种深度学习模型，进行分类、检测和语义分割（支持 Caffe、\+O\+N\+N\+X、\+Tensor\+Flow 等）。将您自己的模型添加到 J\+E\+V\+O\+IS\+:/share/dnn/models.yml（并将相应的模型和权重文件复制到 micro\+S\+D）以直接运行它们。
+\item D\+N\+N：当预期的网络输入/输出与收到的输入/输出不同时，会出现更友好的错误消息。
+\item Je\+Vois-\/\+Pro：对 Linux 内核进行了小幅增强，更新了 N\+PU 内核模块。
+\item 升级到最新的 numpy，现在默认安装在平台上，并具有相应的 A\+PI 更改。
+\item Je\+Vois-\/\+Pro：更好的构建和包装系统。
+\item Je\+Vois-\/\+Pro：models.yml 模型库中有更多深度学习模型。
+\item Je\+Vois-\/\+Pro：更好的风扇控制。
+\item 添加了更多文档。
+\item 修复了各种错误并改进了性能。 
+\end{DoxyItemize}\hypertarget{Change118log}{}\doxysubsection{Je\+Vois 1.18 中的变化和新功能}\label{Change118log}
+Je\+Vois 1.\+18 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 新增对 Hailo-\/8 神经加速器的支持，在可装入 Je\+Vois-\/\+Pro 的小型 M.\+2 A+E 2230 板上最高可达 26-\/T\+O\+P\+S！这是迄今为止最快的神经加速器，它可以运行更大的模型，如 Y\+O\+L\+Ov5m 或 Y\+O\+L\+Ov7，帧速率非常不错。请参阅 \mbox{\hyperlink{JeVoisProBenchmarks}{Je\+Vois-\/\+Pro 深度神经网络基准}} 中的 S\+PU 条目
+\item 已更新至 Open\+CV 4.\+6.\+0、\+Open\+Vino 2022.\+1
+\item 支持 T\+I\+M-\/\+VX 库直接通过 Open\+CV 在 Je\+Vois-\/\+Pro 集成 N\+PU 上执行模型（无需转换为 N\+PU blob 格式，直接从 O\+N\+NX 加载模型等；模型仍应量化为 int8）。请参阅 \href{https://github.com/VeriSilicon/TIM-VX}{\texttt{ T\+I\+M-\/\+VX}} 和 \href{https://github.com/opencv/opencv/wiki/TIM-VX-Backend-For-Running-OpenCV-On-NPU}{\texttt{ Open\+C\+V+\+T\+I\+M-\/\+VX}}。
+\item 通过 A\+RM Compute Backend 到 Open\+CV 支持 A\+RM C\+PU 上的 Intel Myriad-\/X 仿真。请参阅 \href{https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_ARM_CPU.html}{\texttt{ A\+RM C\+PU 插件}} 和 \href{https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md}{\texttt{ github repo}}。即使您没有 V\+PU 硬件加密狗，也可以为 V\+PU 加载任何 Open\+Vino 模型并使用基于 C\+PU 的仿真进行尝试。不过，与实际的 V\+PU 芯片相比，仿真速度相当慢。请参阅 \mbox{\hyperlink{JeVoisProBenchmarks}{Je\+Vois-\/\+Pro 深度神经网络基准}} 中的 V\+PU 与 V\+P\+UX
+\item 核心 Je\+Vois：新增对动态 Je\+Vois 参数的支持。这些是强类型参数，可通过命令行、控制台或 G\+UI 访问。
+\item Python：允许在 Python 模块中创建和访问 Je\+Vois 参数。请查看 作为示例。\+Python 模块现在可以具有可调参数，用户可以在 G\+UI 中调整这些参数，就像 C++ 模块一样。
+\item Python：添加了对 Python 组件的支持。这些是 Je\+Vois 组件对象，可以像 C++ 组件一样组装成组件层次结构，但它们是用 Python 编写的。\+Python 组件可以保存从 Python 创建的 Je\+Vois 参数。
+\item Core Je\+Vois：转向使用 std\+::filesystem 进行文件和路径操作
+\item D\+N\+N：支持用 Python 编写的预处理器、网络和后处理器。这将使添加新网络类型变得更加容易，因为网络设计者通常会提供 Python 中的预处理和后处理代码。现在可以轻松将这些代码移植到 Je\+Vois。请查看：
+\item Py\+Pre\+Blob.\+py -\/ Python 中的示例预处理器
+\item Py\+Net\+Open\+C\+V.\+py -\/ 使用 Open\+CV A\+PI 加载网络并运行推理
+\item Py\+Post\+Classify.\+py -\/ 报告得分最高的类别
+\item D\+N\+N：当预期的网络输入/输出与收到的输入/输出不同时，会出现更好的错误消息。
+\item D\+N\+N：更好、更通用的预处理。在 G\+UI 中检查 Pre\+Processor\+::details 时能够显示大量详细信息。
+\item D\+N\+N：\+R\+AW Y\+O\+LO 预处理得到极大改进，速度提高了约 4 倍，支持各种 yolo 形状以及新旧坐标样式。更好地处理 Y\+O\+LO 锚点。
+\item Je\+Vois-\/\+Pro G\+U\+I：改进的文本编辑器，新的 \mbox{\hyperlink{classjevois_1_1GUIeditor}{jevois\+::\+G\+U\+Ieditor}} 类。添加了文件浏览器和键盘快捷键支持。现在可以编辑磁盘上的任何文件，并在需要时创建新文件。
+\item Open\+GL G\+U\+I：添加了 d2i() 以将屏幕坐标转换为显示的图像。请参阅 新 G\+UI 版本中的使用示例
+\item Je\+Vois-\/\+Pro：支持 4K 显示器。可以通过编辑 /boot/env.txt 启用，默认情况下不启用，因为它会稍微减慢整体操作速度，可能是因为内存总线上的流量较高。
+\item Je\+Vois-\/\+Pro：models.yml model zoo 中提供了更多深度学习模型。将 model.\+yml 拆分为 npu、tpu、vpu 等单独的子文件。添加了对可以设置和取消设置的全局参数的支持。现在，新的 zoo 文件更易于阅读和编辑。可以通过 Je\+Vois-\/\+Pro G\+UI 的 Config 选项卡直接访问 zoo 文件。
+\item Je\+Vois-\/\+Pro：更好的风扇控制。注意：由于 /sys/ 中当前没有可用的 Hailo 温度，如果 Je\+Vois-\/\+Pro 中安装了 Hailo-\/8 加速器，我们始终将风扇速度调至 100。
+\item 关于如何将深度网络转换为 Je\+Vois-\/\+Pro 上各种加速器的新文档和教程：
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{UserDNNoverview}{在 Je\+Vois-\/\+A33 和 Je\+Vois-\/\+Pro 上运行神经网络}}
+\item \mbox{\hyperlink{UserDNNconv}{为 Je\+Vois-\/\+Pro 转换和量化深度神经网络}}
+\item \mbox{\hyperlink{UserDNNopencv}{使用 Open\+CV 在 Je\+Vois-\/\+A33 或 Je\+Vois-\/\+Pro 上运行神经网络}}
+\item \mbox{\hyperlink{UserDNNnpu}{为 Je\+Vois-\/\+Pro N\+PU 转换并运行神经网络}}
+\item \mbox{\hyperlink{UserDNNspu}{为 Hailo-\/8 S\+PU 转换并运行神经网络}}
+\item \mbox{\hyperlink{UserDNNtpu}{为 Coral T\+PU 转换并运行神经网络}}
+\item \mbox{\hyperlink{UserDNNvpu}{转换并运行 Myriad-\/X V\+PU 的神经网络}}
+\end{DoxyItemize}
+\item 用更广泛使用的 jevois\+::frame\+Num() 自由函数替换 Je\+Vois 模块中的 \mbox{\hyperlink{classjevois_1_1Engine_a34175bdc63bd923183dabb20f3b17374}{frame\+Num()}}。报告当前视频帧数。加载新的机器视觉模块时重置为 0。
+\item 添加了新的用途，例如 \mbox{\hyperlink{group__utils_ga7649d6ce325acac1606bceec036f171b}{jevois\+::joinall()}}\mbox{\hyperlink{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}{、jevois\+::num2str()}}\mbox{\hyperlink{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}{、jevois\+::secs2str()}}、\+Hailo 相关助手、量化相关等
+\item 新的 \mbox{\hyperlink{Log_8H_a8e3f8ce22d435337fb988c530e098b25}{L\+T\+H\+R\+O\+W()}} 宏类似于 \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+A\+L()}}，但不会在控制台中显示错误，而只是将其抛出。在子例程中很有用，调用者将捕获任何异常并可能重新格式化它以提供统一的错误消息。就像普通的抛出一样，除了可以使用与 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G()}}、\+L\+I\+N\+F\+O() 等相同的 Je\+Vois 流语法。
+\item 修复了各种错误并改进了性能。 
+\end{DoxyItemize}\hypertarget{Change119log}{}\doxysubsection{Je\+Vois 1.19 中的变化和新功能}\label{Change119log}
+Je\+Vois 1.\+19 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item 新增对 C\+PU 上 O\+N\+NX Runtime 框架的支持，包括 C++ 和 Python。这允许您在 C\+PU 上运行 O\+N\+NX 网络，其兼容性比 Open\+CV 框架提供的更高。请参阅 D\+NN 模块中的新 O\+RT 管道类型。添加了几个示例网络。
+\item 提高了用 Python 为 D\+NN 模块编写预处理器、网络和后处理器的能力。在 jevoisbase 中提供了几个新示例：
+\begin{DoxyItemize}
+\item share-\/jevoispro/pydnn/net/\+Py\+Net\+Open\+C\+V.\+py -\/ 使用 Open\+CV 加载网络并运行推理
+\item share-\/jevoispro/pydnn/net/\+Py\+Net\+O\+R\+T.\+py -\/ 使用 O\+N\+NX Runtime 加载网络并运行推理
+\item share-\/jevoispro/pydnn/net/\+Py\+Net\+U\+Retinex.\+py -\/ Py\+Net\+O\+R\+T.\+py 的变体，带有针对此网络的额外固定输入
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+Classify.\+py -\/ Python 中的简单目标分类后处理器
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+D\+A\+M\+Oyolo.\+py -\/ D\+A\+M\+O-\/\+Y\+O\+LO 网络的目标检测后处理器
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+Depth.\+py -\/ 将深度图显示为半透明覆盖（emi-\/transparent overlay）
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+Stub.\+py -\/ 不执行任何操作，可作为新网络类型的起点
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+U\+Retinex.\+py -\/ 显示部分覆盖（overlay），并带有用户鼠标交互示例
+\item share-\/jevoispro/pydnn/post/\+Py\+Post\+Yolo.\+py -\/ 我们非常快速的 C++ Y\+O\+LO 后处理器的包装器
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+请记住，由于 python 非重入或非并行，如果预处理、网络推理或后处理中的多个程序都在 python 中，则将强制同步 D\+NN 处理，这可能会降低慢速网络上 G\+UI 的帧速率。
+
+
+\begin{DoxyItemize}
+\item 已更新至 Open\+CV 4.\+7.\+0、\+Open\+Vino 2022.\+3、\+Edge\+T\+PU 1.\+16、\+Py\+Coral 2.\+0.\+0、\+Hailo\+RT 4.\+13.\+0
+\item Core Je\+Vois：修复了从文件中选择默认视频映射的问题，更新了贡献以包含 onnxruntime，清理了 C\+Make\+Lists.\+txt 中的一些包含和依赖路径。
+\item Core Je\+Vois：为 \mbox{\hyperlink{namespacejevois_a6ab540ea34f56b48165b563719c5cad5}{get\+Num\+Installed\+T\+P\+Us()}}、get\+Fan\+Speed() 等添加了更多 Python 绑定
+\item Movie input：增加了对 Je\+Vois-\/\+Pro 中双流的支持（其中一种分辨率的输入被发送到显示器，而另一种分辨率的同一图像被发送到处理）。要使用预先录制的电影输入而不是实时视频，请使用 {\ttfamily jevoispro.\+sh -\/-\/cameradev=/path/to/movie.mp4}。还修复了电影倒带和循环播放问题。
+\item Programmers：创建了新的 github repo {\itshape mydnn} 作为 Je\+Vois D\+NN 模块的示例独立克隆。您可以修改它、交叉编译它并将其安装在您的相机上。
+\item D\+N\+N：\+Pre\+Processor\+Blob 现在默认仅返回 1 个 blob，可以通过参数 {\ttfamily numin（发送到网络的输入数量）进行更改。然后，可以使用新的网络参数} {\ttfamily extraintensors} 来指定额外的固定输入。这在 U\+Retinex\+Net 示例中使用，因为该网络既需要图像输入，也需要设置曝光参数的单个浮点输入。
+\item D\+N\+N：在 Pre\+Processor 中添加了 i2b()，允许将坐标从输入图像转换为 blob，这在将鼠标坐标首先从显示转换为图像（使用 Gui\+Helper\+::d2i()），然后从图像转换为 blob（使用新的 Pre\+Processor\+::i2b()）时非常有用。d2i() 和 i2b() 都可以正确处理信箱（letterboxing）、缩放（scaling）、拉伸（streching）等。请参阅 Py\+Post\+U\+Retinex.\+py 中的使用示例
+\item D\+N\+N：改进的语义分割后处理器以允许阈值（只有高于阈值的值才会显示为半透明的 Open\+GL overlay）。
+\item Je\+Vois-\/\+Pro：改进了 Im\+Gui 渲染的清晰度，现在即使在 G\+UI 比例 1 下看起来也非常漂亮（在 G\+UI 的 \char`\"{}\+Parameters\char`\"{} 选项卡下，启用 \char`\"{}\+Show Systems Parameters\char`\"{}，然后在图形用户界面部分中，使用 gui 比例参数）。
+\item Je\+Vois-\/\+Pro：为 Im\+G\+UI 添加了更多 Python 包装器，以允许用户在 Python 中检查鼠标坐标、按钮点击等。\+Py\+Post\+U\+Retinex.\+py 中的使用示例
+\item Je\+Vois-\/\+Pro：支持使用 gadget 串行将串行输出发送到 U\+S\+B。可以在 Je\+Vois-\/\+Pro G\+UI 的系统选项卡下启用 gadget，之后可以将模块输出和/或日志发送到以设备模式运行的 mini-\/\+U\+SB 端口。然后，您可以使用常规 U\+S\+B-\/A 转 mini-\/\+U\+SB 电缆将 Je\+Vois-\/\+Pro 连接到主机，并且 Je\+Vois-\/\+Pro 串行控制台将可通过 /dev/tty\+A\+C\+M0 在主机上访问。
+\item Serial-\/over-\/\+U\+S\+B：现在可以处理 U\+SB 电缆断开/重新连接，方法是在连接丢失后尝试重新打开设备。还可以更好地处理电缆断开时 U\+SB 发送缓冲区溢出。
+\item Je\+Vois-\/\+Pro：更多深度学习模型，包括几个新的 O\+N\+N\+X-\/\+Runtime 模型。为 model zoo 条目添加了注释和 U\+RL 字段。
+\item Je\+Vois-\/\+Pro：更好的风扇控制，包括对 Hailo-\/8 加速器板的温度监控。
+\item Je\+Vois-\/\+Pro：更好地显示模块信息，并带有项目符号文本的换行。
+\item Je\+Vois-\/\+Pro：管道中的新 {\ttfamily benchmark} 参数可运行自动基准测试，该基准测试根据当前管道滤波器循环遍历所有可用网络。基准测试统计数据以 H\+T\+ML 表格格式保存到 /jevoispro/share/benchmarks.html
+\item Je\+Vois-\/\+Pro：我们有 8M\+P/4K O\+S08a10 传感器板和 2.\+3\+MP 全局快门 A\+R0234\+CS 的工作原型。\+A\+R0234 上的颜色校准效果不佳，需要调整内核中的 I\+SP 校准。如果您对这些传感器感兴趣，请告诉我们。添加了基于哪个内核 overlay 处于活动状态的相机传感器自动检测。
+\item 修复了各种错误并改进了性能。 
+\end{DoxyItemize}\hypertarget{Change120log}{}\doxysubsection{Je\+Vois 1.20 中的变化和新功能}\label{Change120log}
+Je\+Vois 1.\+20 带来以下新功能：
+
+
+\begin{DoxyItemize}
+\item Je\+Vois-\/\+Pro：新功能可直接在正在运行的 Je\+Vois-\/\+Pro 相机上克隆和编译 C++ 模块。速度有点慢，但运行良好！修改和重新编译我们捆绑的 C++ 模块之一的步骤是：1) 使用单击 G\+UI 系统选项卡中的 \char`\"{}\+Create new machine vision module...\char`\"{} 时弹出的弹出窗口中的克隆选项克隆模块。这会将模块克隆到其自己的单独目录中，然后对其进行编译和运行。2) 然后您可以编辑其源代码，当您保存更改时，模块将重新编译并运行。
+\item Je\+Vois-\/\+Pro：新的演示模式，循环遍历各种模块（在 /jevoispro/config/demodata.yml 中定义）。要启用，请在 Engine 的参数 \char`\"{}demomode\char`\"{} 中设置一个非零时间（以秒为单位）（在 G\+UI 中，启用 \char`\"{}\+Show systems parameters\char`\"{} 以查看 Engine 的参数）。
+\item 改进了对 C\+PU 上 O\+N\+NX 运行时框架的支持，包括 C++ 和 Python。
+\item 修复了一些 jevoisbase 模块中的一系列我们没有看到的警告，因为它们触发了各种第三方库，所以某些警告被关闭了。
+\item 更新至 Open\+CV 4.\+8.\+0。
+\item Je\+Vois-\/\+Pro：在系统选项卡中添加了一个按钮，以便轻松编辑风扇配置，这可以让您找到调整风扇全速的阈值。现在检测 Hailo 芯片的存在并从中获取温度（如果存在）。
+\item Je\+Vois-\/\+Pro：对 C\+Make 流程和贡献进行了重大重组，它们现在安装到 /jevoispro 以允许在设备上进行编译。
+\item 修复了各种错误并改进了性能。 
+\end{DoxyItemize}

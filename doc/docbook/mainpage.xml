@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_mainpage">
+<section xml:id="_index_1welcome">
+<title>欢迎阅读 JeVois 智能嵌入式机器视觉工具包文档。</title>
+
+<para>新用户请务必查看 <link xlink:href="/start/start.html">JeVois Start</link>。</para>
+
+<para>  </para>
+
+<para>与依赖人类观察者来解释所见内容的传统相机不同，JeVois 在相机内部运行强大的机器视觉和深度学习算法。这样您就可以直接将 JeVois-Pro 连接到定制机器人、家庭自动化系统、无人机、监控系统等。您可以让 JeVois-Pro 处理机器视觉，而您则专注于开发系统的高级功能。</para>
+
+<para>JeVois 主要是一个开发和教育工具：它提供了一个基于 Linux 的编程环境（C++ 或 Python），方便您编写自己的机器视觉管道，以便在相机内部的处理器上实时操作。</para>
+
+<para>JeVois 工具包主要设计用于在嵌入式智能相机硬件上运行，但它也可以在最近的基于 Linux 的计算机（包括 Raspberry Pi）上运行。该工具包有助于从相机传感器捕获图像，通过某种机器视觉算法处理捕获的图像，并通过 USB 链路（JeVois-A33）将处理后的结果发送到主机或使用 OpenGL（JeVois-Pro）显示结果。</para>
+
+<para>有两种硬件型号可供选择：</para>
+</section>
+<section xml:id="_index_1hardjevoisa33">
+<title>JeVois-A33 USB 供电智能网络摄像头</title>
+
+<para></para>
+
+<para>JeVois-A33 是一款小型 USB 供电智能网络摄像头。对于主机来说，JeVois-A33 智能摄像头看起来就像普通的 USB 网络摄像头，并且完全即插即用，在较新版本的 Windows、MacOS 和 Linux 上无需安装驱动程序：JeVois 智能摄像头符合 USB 视频类 (UVC) 修订版 1.1。与普通 USB 网络摄像头一样，用户可以选择图像分辨率、帧速率并调整摄像头设置，如亮度、曝光、色彩平衡等。但 JeVois 智能摄像头输出的图像是通过某种视觉算法处理摄像头帧的结果，而不是像普通 USB 网络摄像头那样简单地输出原始摄像头帧。</para>
+
+<para>JeVois 智能相机是一款紧凑型（39mm x 32mm x 19mm, or 1.5&quot; x 1.25&quot; x 0.75&quot;）、USB 供电、独立且功能强大的四核 ARM 计算机，运行 Linux 操作系统。</para>
+</section>
+<section xml:id="_index_1hardjevoispro">
+<title>JeVois-Pro 独立深度学习相机</title>
+
+<para>  </para>
+
+<para>JeVois-Pro 是一款小型的全 Linux 计算机。除了 6 核 CPU 外，它还集成了用于深度神经网络的各种硬件加速器。由于它是一台全功能计算机，因此 JeVois-Pro 的主要输出是 HDMI 显示器。无需主机，因为可以直接将键盘、鼠标和显示器连接到 JeVois-Pro。</para>
+</section>
+<section xml:id="_index_1特点">
+<title>常见特点</title>
+
+<para>为了便于编程和配置，所有操作系统、核心 JeVois 软件以及任何必要的数据文件都存储在一张高速 Micro-SD 卡上，可以轻松取出并插入台式机或笔记本电脑。这也使得该平台“牢不可破”且非常容易被黑客入侵。</para>
+
+<para>除了视频输出外，JeVois 智能相机还包括一个硬件串行端口和一个串行 USB 端口（JeVois-Pro 还包括其他硬件端口）。智能相机可以通过这些端口发送简单的文本字符串，例如，指示在相机视频流中发现感兴趣对象的坐标。这些旨在供嵌入式控制器使用，包括 Arduino 或任何其他支持串行通信（TTL 电平为 3.3V 或 5V 的 UART）的控制器。用户或微控制器还可以通过串行端口向智能相机发送简单的文本命令。</para>
+
+<para>JeVois 软件框架结合了用 C 编写的用于相机传感器和 USB 输出的定制 Linux 内核驱动程序，以及用 C++-17 编写的定制高级视觉处理框架。该框架旨在轻松与其他开源库集成，包括 tiny-dnn、OpenCV、boost、zBar、Eigen、turbojpeg 等。JeVois 操作系统基础设施是使用 buildroot 框架构建的，该框架已有数百个库和模块可用，添加新库或模块相对容易。核心 JeVois 软件由 cmake 管理，这使得创建新的视觉处理模块变得容易，并且允许同时为主机（例如，用于开发、调试和测试的基于 Intel 的 Linux 桌面）和平台硬件（ARM 处理器）编译相同的源代码。</para>
+
+<para></para>
+</section>
+<section xml:id="_index_1contents">
+<title>目录</title>
+
+<para><itemizedlist>
+<listitem>
+<para><link linkend="_Handling">JeVois 智能相机处理和注意事项</link></para>
+</listitem><listitem>
+<para><link linkend="_Hardware">JeVois-A33 硬件平台概述</link></para>
+</listitem><listitem>
+<para><link linkend="_ProHardware">JeVois-Pro 硬件平台概述</link></para>
+</listitem><listitem>
+<para><link linkend="_ProStatus">JeVois-Pro 开发状态</link></para>
+</listitem><listitem>
+<para><link linkend="_UserConnect">将 JeVois-A33 连接到电源和数据</link></para>
+</listitem><listitem>
+<para><link linkend="_ProUserConnect">将 JeVois-Pro 连接到电源和数据</link></para>
+</listitem><listitem>
+<para><link linkend="_Concepts">本文档中使用的概念</link></para>
+</listitem><listitem>
+<para><link linkend="_JeVoisInventor">JeVois-A33：JeVois Inventor 图形用户界面</link></para>
+</listitem><listitem>
+<para><link linkend="_JeVoisProIntro">JeVois-Pro：新用户介绍</link></para>
+</listitem><listitem>
+<para><link linkend="_Navigation">如何浏览本文档</link></para>
+</listitem><listitem>
+<para><link linkend="_Versions">版本历史</link></para>
+</listitem><listitem>
+<para><link linkend="_User">用户指南</link></para>
+</listitem><listitem>
+<para><link linkend="_UserTutos">用户教程</link></para>
+</listitem><listitem>
+<para><link linkend="_Programmer">程序员指南</link></para>
+</listitem><listitem>
+<para><link linkend="_ProgrammerTutos">程序员教程</link></para>
+</listitem><listitem>
+<para><link linkend="_JeVoisBaseDocs">JeVoisBase 机器视觉模块文档</link></para>
+</listitem><listitem>
+<para><link linkend="_History">JeVois 框架背后的历史背景</link></para>
+</listitem></itemizedlist>
+</para>
+
+<para>有关如何使用和编程 JeVois 的教程，请参阅 <link xlink:href="/tutorials">JeVois 教程</link>。 </para>
+</section>
+</chapter>

@@ -1,0 +1,131 @@
+\hypertarget{classjevois_1_1Log}{}\doxysubsection{jevois\+::Log$<$ Level $>$ Class Template Reference}
+\label{classjevois_1_1Log}\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$int Level$>$\newline
+class jevois\+::\+Log$<$ Level $>$}
+
+Logger 类 
+
+用户通常不会直接使用此类，而是调用 \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G(msg)}}、\+L\+I\+N\+F\+O(msg) 等宏之一。请注意，默认情况下，日志记录是异步的，即， 在发出日志消息时，它会被组装然后推入队列，然后另一个线程将其从队列中弹出并显示。在编译时定义 J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+E\+\_\+\+S\+Y\+N\+C\+\_\+\+L\+OG 以立即显示消息，但请注意，这可能会破坏 U\+SB 严格的时间要求。 
+
+Definition at line 52 of file Log.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Log_ae91245519027f922cfad05ad76ffcdd4}{Log}} (char const $\ast$full\+File\+Name, char const $\ast$function\+Name, std\+::string $\ast$outstr=nullptr)
+\begin{DoxyCompactList}\small\item\em 构造一个新的 Log，为日志流添加前缀 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Log_ab6e15d85aa9d6cd49a7f202ea1a48e32}{$\sim$\+Log}} ()
+\begin{DoxyCompactList}\small\item\em 关闭日志，输出聚合消息 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\\mbox{\hyperlink{classjevois_1_1Log}{Log}}$<$ Level $>$ \& \mbox{\hyperlink{classjevois_1_1Log_ab4cb33e1a351a1b8549fb3480127487a}{operator$<$$<$}} (T const \&out\+\_\+item)
+\begin{DoxyCompactList}\small\item\em 为任何具有为 ostream 定义的 operator$<$$<$ 的类型重载流输入运算符。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Log}{Log}}$<$ Level $>$ \& \mbox{\hyperlink{classjevois_1_1Log_acd901f0c564df04b431ef78f9e95a897}{operator$<$$<$}} (uint8\+\_\+t const \&out\+\_\+item)
+\begin{DoxyCompactList}\small\item\em uint8 的 operator$<$$<$ 重载（将其显示为 int 而不是 char） \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Log}{Log}}$<$ Level $>$ \& \mbox{\hyperlink{classjevois_1_1Log_aca97686c2c47fce74d2149a33a5f88b9}{operator$<$$<$}} (int8\+\_\+t const \&out\+\_\+item)
+\begin{DoxyCompactList}\small\item\em int8 的 operator$<$$<$ 重载（将其显示为 int 而不是 char） \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Log_a319d8a0b2172cb220899cc59a71c7143}{Log}} (char const $\ast$, char const $\ast$, std\+::string $\ast$outstr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Log_ae91245519027f922cfad05ad76ffcdd4}\label{classjevois_1_1Log_ae91245519027f922cfad05ad76ffcdd4}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!Log@{Log}}
+\index{Log@{Log}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$int Level$>$ \\
+\mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$\+::\mbox{\hyperlink{classjevois_1_1Log}{Log}} (\begin{DoxyParamCaption}\item[{char const $\ast$}]{full\+File\+Name,  }\item[{char const $\ast$}]{function\+Name,  }\item[{std\+::string $\ast$}]{outstr = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+构造一个新的 Log，为日志流添加前缀 
+
+如果 outstr 非空，则在销毁时将日志消息复制到其中。 
+
+Definition at line 149 of file Log.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Log_ab6e15d85aa9d6cd49a7f202ea1a48e32}\label{classjevois_1_1Log_ab6e15d85aa9d6cd49a7f202ea1a48e32}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!````~Log@{$\sim$Log}}
+\index{````~Log@{$\sim$Log}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$Log()}{~Log()}}
+{\footnotesize\ttfamily template$<$int Level$>$ \\
+\mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1Log}{Log}}}
+
+
+
+关闭日志，输出聚合消息 
+
+
+
+Definition at line 177 of file Log.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Log_a319d8a0b2172cb220899cc59a71c7143}\label{classjevois_1_1Log_a319d8a0b2172cb220899cc59a71c7143}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!Log@{Log}}
+\index{Log@{Log}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{Log()}{Log()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ L\+O\+G\+\_\+\+A\+L\+E\+RT $>$\+::\mbox{\hyperlink{classjevois_1_1Log}{Log}} (\begin{DoxyParamCaption}\item[{char const $\ast$}]{,  }\item[{char const $\ast$}]{,  }\item[{std\+::string $\ast$}]{outstr }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file Log.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Log_aca97686c2c47fce74d2149a33a5f88b9}\label{classjevois_1_1Log_aca97686c2c47fce74d2149a33a5f88b9}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$int Level$>$ \\
+\mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$ \& \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{int8\+\_\+t const \&}]{out\+\_\+item }\end{DoxyParamCaption})}
+
+
+
+int8 的 operator$<$$<$ 重载（将其显示为 int 而不是 char） 
+
+
+
+Definition at line 195 of file Log.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Log_ab4cb33e1a351a1b8549fb3480127487a}\label{classjevois_1_1Log_ab4cb33e1a351a1b8549fb3480127487a}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$int Level$>$ \\
+template$<$class T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Log}{Log}}$<$Level$>$\& \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{T const \&}]{out\+\_\+item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+为任何具有为 ostream 定义的 operator$<$$<$ 的类型重载流输入运算符。 
+
+
+
+Definition at line 64 of file Log.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Log_acd901f0c564df04b431ef78f9e95a897}\label{classjevois_1_1Log_acd901f0c564df04b431ef78f9e95a897}} 
+\index{jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::Log$<$ Level $>$@{jevois::Log$<$ Level $>$}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$int Level$>$ \\
+\mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$ \& \mbox{\hyperlink{classjevois_1_1Log}{jevois\+::\+Log}}$<$ Level $>$\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{uint8\+\_\+t const \&}]{out\+\_\+item }\end{DoxyParamCaption})}
+
+
+
+uint8 的 operator$<$$<$ 重载（将其显示为 int 而不是 char） 
+
+
+
+Definition at line 187 of file Log.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Debug/\mbox{\hyperlink{Log_8H}{Log.\+H}}\item 
+src/jevois/\+Debug/\mbox{\hyperlink{Log_8C}{Log.\+C}}\end{DoxyCompactItemize}

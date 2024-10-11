@@ -1,0 +1,150 @@
+\hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl}{}\doxysubsection{jevois\+::dnn\+::Network\+Python\+Impl Class Reference}
+\label{classjevois_1_1dnn_1_1NetworkPythonImpl}\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+
+
+\doxysubsubsection{ }
+
+
+Definition at line 27 of file Network\+Python.\+C.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+Python\+Impl\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkPythonImpl__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+Python\+Impl\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkPythonImpl__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_ab1c57a67bf7eb38add5d699fbd90833b}{loadpy}} (std\+::string const \&pypath)
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_a0bb54a91a7a1e6ebc508764643f4c4a3}{$\sim$\+Network\+Python\+Impl}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_a53c08709820e02c00647e647d5a60af0}{freeze}} (bool doit)
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_ad3c233acf9fc6bc1a46f74e2cb3530c2}{load}} ()
+\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_a9519323739b032d8b6d66bb04d375e8a}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, std\+::vector$<$ std\+::string $>$ \&info)
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl_a70906f6c599ad75ab6ed79dff19f68d2}{Component}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_a0bb54a91a7a1e6ebc508764643f4c4a3}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_a0bb54a91a7a1e6ebc508764643f4c4a3}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!````~NetworkPythonImpl@{$\sim$NetworkPythonImpl}}
+\index{````~NetworkPythonImpl@{$\sim$NetworkPythonImpl}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{$\sim$NetworkPythonImpl()}{~NetworkPythonImpl()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Python\+Impl\+::$\sim$\+Network\+Python\+Impl (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Definition at line 42 of file Network\+Python.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_a70906f6c599ad75ab6ed79dff19f68d2}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_a70906f6c599ad75ab6ed79dff19f68d2}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!Component@{Component}}
+\index{Component@{Component}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{Component()}{Component()}}
+{\footnotesize\ttfamily jevois\+::\+Component\+::\+Component}
+
+
+
+Constructor. 
+
+创建组件的标准方法是通过 \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{Component\+::add\+Sub\+Component()}} 或 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{Manager\+::add\+Component()}}，而不是手动构建。通过构造函数构造的组件 （例如，调用 new 操作符）将不会附加到 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 层次结构。建议派生组件也有一个实例构造函数参数并将其传递给 base \mbox{\hyperlink{classjevois_1_1Component}{Component}} 类， 以允许复杂系统包含同一 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的多个实例。事实上，对于大多数组件来说，继承的构造函数是合适的：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyComp : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Component}{jevois::Component}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{  \textcolor{comment}{// 继承的构造函数}}
+\DoxyCodeLine{  \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a90717717700965c100968cff0188e244}{jevois::Component::Component}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{// 用于安全继承的虚拟析构函数}}
+\DoxyCodeLine{  \textcolor{keyword}{virtual} \string~MyComp();}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+ 
+
+Definition at line 32 of file Component.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_a9519323739b032d8b6d66bb04d375e8a}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_a9519323739b032d8b6d66bb04d375e8a}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+Python\+Impl\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Definition at line 69 of file Network\+Python.\+C.
+
+
+
+References L\+F\+A\+T\+AL, jevois\+::\+Python\+Wrapper\+::pyinst(), and jevois\+::python\+::py\+Vec\+To\+List().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_a53c08709820e02c00647e647d5a60af0}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_a53c08709820e02c00647e647d5a60af0}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+Impl\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+Definition at line 46 of file Network\+Python.\+C.
+
+
+
+References jevois\+::python\+::hasattr(), and jevois\+::\+Python\+Wrapper\+::pyinst().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_ad3c233acf9fc6bc1a46f74e2cb3530c2}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_ad3c233acf9fc6bc1a46f74e2cb3530c2}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!load@{load}}
+\index{load@{load}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+Impl\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 63 of file Network\+Python.\+C.
+
+
+
+References jevois\+::\+Python\+Wrapper\+::pyinst().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPythonImpl_ab1c57a67bf7eb38add5d699fbd90833b}\label{classjevois_1_1dnn_1_1NetworkPythonImpl_ab1c57a67bf7eb38add5d699fbd90833b}} 
+\index{jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}!loadpy@{loadpy}}
+\index{loadpy@{loadpy}!jevois::dnn::NetworkPythonImpl@{jevois::dnn::NetworkPythonImpl}}
+\doxyparagraph{\texorpdfstring{loadpy()}{loadpy()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+Impl\+::loadpy (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{pypath }\end{DoxyParamCaption})}
+
+
+
+Definition at line 52 of file Network\+Python.\+C.
+
+
+
+References jevois\+::python\+::hasattr(), J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, L\+I\+N\+FO, jevois\+::\+Python\+Wrapper\+::pyinst(), and jevois\+::\+Python\+Wrapper\+::pythonload().
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkPython_8C}{Network\+Python.\+C}}\end{DoxyCompactItemize}

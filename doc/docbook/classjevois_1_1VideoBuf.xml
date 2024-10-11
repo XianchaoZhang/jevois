@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoBuf">
+<title>jevois::VideoBuf Class Reference</title>
+<indexterm><primary>jevois::VideoBuf</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoBuf.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>V4L2 视频缓冲区，保存在 shared_ptr 中 </para>
+
+
+
+<para>在构造时从给定的文件描述符请求 MMAP 的内存区域，并在析构时取消映射。VideoBuf 用于通过 <link linkend="_classjevois_1_1RawImage">RawImage</link> 将 MMAP 的视频缓冲 区从 <link linkend="_classjevois_1_1Camera">Camera</link> 和 <link linkend="_classjevois_1_1Gadget">Gadget</link> 驱动程序传递到应用程序代码。实际的内存分配由内核驱动程序执行。因此，VideoBuf 像素数组不能从 一个内存位置移动到另一个内存位置。 </para>
+<para>
+Definition at line 28 of file VideoBuf.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1VideoBuf_1a76713e36bfec1face9268c09dbe9d599">VideoBuf</link> (int const fd, size_t const <link linkend="_classjevois_1_1VideoBuf_1a9c614f71b82aa50c3ff49095fb1d2379">length</link>, unsigned int offset, int const dmafd)</para>
+
+<para>构造和分配 MMAP 的内存 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1VideoBuf_1a69aec2582dcd9ed5a4eb39435acdece9">~VideoBuf</link> ()</para>
+
+<para>析构函数取消内存映射 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuf_1a9cae44ccadd21f1da597270b6dc8a7f4">sync</link> ()</para>
+
+<para>同步数据 </para>
+</listitem>
+            <listitem><para>void * <link linkend="_classjevois_1_1VideoBuf_1a9d1a60731d392b46c80d5a2202353d24">data</link> () const</para>
+
+<para>获取指向缓​​冲区数据的指针 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1VideoBuf_1a9c614f71b82aa50c3ff49095fb1d2379">length</link> () const</para>
+
+<para>获取分配的内存长度 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoBuf_1a914a906ef44faef51aefd857044b919b">setBytesUsed</link> (size_t n)</para>
+
+<para>设置使用的字节数，例如，对于应用程序代码压缩到缓冲区的 MJPEG 图像 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1VideoBuf_1a4460b9f320b27d8e38bf1eb6c39d6a10">bytesUsed</link> () const</para>
+
+<para>获取已使用的字节数，仅对MJPEG图像有效 </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1VideoBuf_1abf52de4a4291fc574dafa5f15b1d3b60">dmaFd</link> () const</para>
+
+<para>获取与此缓冲区关联的 dma_buf fd，该 fd 在构造时给出 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoBuf_1a76713e36bfec1face9268c09dbe9d599"/>    <section>
+    <title>VideoBuf()</title>
+<indexterm><primary>VideoBuf</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>VideoBuf</secondary></indexterm>
+<para><computeroutput>jevois::VideoBuf::VideoBuf (int const fd, size_t const length, unsigned int offset, int const dmafd)</computeroutput></para><para>
+
+<para>构造和分配 MMAP 的内存 </para>
+</para>
+
+<para>主要用于调试目的（支持 VideoDisplay），如果 fd 为 -1，则我们执行常规内存分配而不是 mmap。 </para>
+<para>
+Definition at line 27 of file VideoBuf.C.</para>
+<para>
+References length(), and PLFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1a69aec2582dcd9ed5a4eb39435acdece9"/>    <section>
+    <title>~VideoBuf()</title>
+<indexterm><primary>~VideoBuf</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>~VideoBuf</secondary></indexterm>
+<para><computeroutput>jevois::VideoBuf::~VideoBuf ( )</computeroutput></para><para>
+
+<para>析构函数取消内存映射 </para>
+</para>
+<para>
+Definition at line 49 of file VideoBuf.C.</para>
+<para>
+References PLERROR.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoBuf_1a4460b9f320b27d8e38bf1eb6c39d6a10"/>    <section>
+    <title>bytesUsed()</title>
+<indexterm><primary>bytesUsed</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>bytesUsed</secondary></indexterm>
+<para><computeroutput>size_t jevois::VideoBuf::bytesUsed ( ) const</computeroutput></para><para>
+
+<para>获取已使用的字节数，仅对MJPEG图像有效 </para>
+</para>
+<para>
+Definition at line 123 of file VideoBuf.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1a9d1a60731d392b46c80d5a2202353d24"/>    <section>
+    <title>data()</title>
+<indexterm><primary>data</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>data</secondary></indexterm>
+<para><computeroutput>void * jevois::VideoBuf::data ( ) const</computeroutput></para><para>
+
+<para>获取指向缓​​冲区数据的指针 </para>
+</para>
+<para>
+Definition at line 105 of file VideoBuf.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1abf52de4a4291fc574dafa5f15b1d3b60"/>    <section>
+    <title>dmaFd()</title>
+<indexterm><primary>dmaFd</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>dmaFd</secondary></indexterm>
+<para><computeroutput>int jevois::VideoBuf::dmaFd ( ) const</computeroutput></para><para>
+
+<para>获取与此缓冲区关联的 dma_buf fd，该 fd 在构造时给出 </para>
+</para>
+<para>
+Definition at line 129 of file VideoBuf.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1a9c614f71b82aa50c3ff49095fb1d2379"/>    <section>
+    <title>length()</title>
+<indexterm><primary>length</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>length</secondary></indexterm>
+<para><computeroutput>size_t jevois::VideoBuf::length ( ) const</computeroutput></para><para>
+
+<para>获取分配的内存长度 </para>
+</para>
+<para>
+Definition at line 111 of file VideoBuf.C.</para>
+<para>
+Referenced by VideoBuf().</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1a914a906ef44faef51aefd857044b919b"/>    <section>
+    <title>setBytesUsed()</title>
+<indexterm><primary>setBytesUsed</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>setBytesUsed</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuf::setBytesUsed (size_t n)</computeroutput></para><para>
+
+<para>设置使用的字节数，例如，对于应用程序代码压缩到缓冲区的 MJPEG 图像 </para>
+</para>
+<para>
+Definition at line 117 of file VideoBuf.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoBuf_1a9cae44ccadd21f1da597270b6dc8a7f4"/>    <section>
+    <title>sync()</title>
+<indexterm><primary>sync</primary><secondary>jevois::VideoBuf</secondary></indexterm>
+<indexterm><primary>jevois::VideoBuf</primary><secondary>sync</secondary></indexterm>
+<para><computeroutput>void jevois::VideoBuf::sync ( )</computeroutput></para><para>
+
+<para>同步数据 </para>
+</para>
+
+<para>这在某些情况下可能很有用，可以避免支持 DMA 的驱动程序和 CPU 之间的缓存一致性问题。 </para>
+<para>
+Definition at line 85 of file VideoBuf.C.</para>
+<para>
+References clearcache(), and LERROR.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoBuf_8H">VideoBuf.H</link>src/jevois/Core/<link linkend="_VideoBuf_8C">VideoBuf.C</link></section>
+</section>

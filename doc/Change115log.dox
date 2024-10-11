@@ -1,55 +1,45 @@
-/*! \page Change115log Changes and new features in JeVois 1.15
+/*! \page Change115log JeVois 1.15 中的变化和新功能
 
 
-JeVois 1.15 brings the following new features:
+JeVois 1.15 带来以下新功能：
 
-- Updated to OpenCV 4.4.0
+- 已更新至 OpenCV 4.4.0
 
-- Updated Darknet and NNPACK to latest from github.
+- 从 github 更新 Darknet 和 NNPACK 至最新版本。
 
-- Updated to TensorFlow 1.15.3, which runs about 25% faster on mobilenet.
+- 更新至 TensorFlow 1.15.3，在 mobilenet 上的运行速度提高了约 25%。
 
-- Updated tutorial on how to train custom TensorFlow models at http://jevois.org/tutorials/UserTensorFlowTraining.html
+- 更新了有关如何训练自定义 TensorFlow 模型的教程，网址为 http://jevois.org/tutorials/UserTensorFlowTraining.html
 
-- Updated to Dlib 19.20 in jevoisextra.
+- jevoisextra 中更新至 Dlib 19.20。
 
-- Fixed GPU drivers which had been disabled in earlier builds.
+- 修复了早期版本中已禁用的 GPU 驱动程序。
 
-- Add support for YUYV output in DemoGPU, so that it can be used in JeVois Inventor. Note that the conversion from
-  native RGB565 to YUYV is done on the JeVois CPU and hence uses some cycles.
+- 在 DemoGPU 中添加对 YUYV 输出的支持，以便可以在 JeVois Inventor 中使用。请注意，从原生 RGB565 到 YUYV 的转换是在 JeVois CPU 上完成的，因此会使用一些周期。
 
-- Updated ArUco module to use new dictionaries now supported: ATAG_16h5, ATAG_25h9, ATAG_36h10 and ATAG_36h11. Also now
-  supporting the AprilTag config parameters when parsing the optional parameter config file.
+- 更新了 ArUco 模块以使用现在支持的新字典：ATAG_16h5、ATAG_25h9、ATAG_36h10 和 ATAG_36h11。解析可选参数配置文件时，现在还支持 AprilTag 配置参数。
 
-- Added support for modes other than YUYV in headless ARtoolkit. This is useful to support 15fps operation at 1280x1024
-  by using raw BAYER image format from the camera sensor.
+- 在无头 ARtoolkit 中添加了对除 YUYV 之外的模式的支持。这对于使用来自相机传感器的原始 BAYER 图像格式支持 1280x1024 的 15fps 操作非常有用。
 
-- Improved ICM-20948 IMU (inertial measurement unit) and DMP (digital motion processor) support:
-  + new support for FSYNC input, where the IMU and DMP can signal when they receive a frame sync pulse from the camera
-    sensor (one pulse is emitted by the camera sensor before the start of each new frame). In addition to getting the
-    pulse, we also get the delay in microseconds between the last IMU measurement and the FSYNC pulse. This is very
-    useful for applications that require tight coupling between the IMU and the video sensor, such as visual-inertial
-    odometry.
-  + new functions on the command-line interface to allow users to tinker with low-level IMU and DMP registers:
-    - setimureg \c reg \c val - set raw IMU register \c reg to value \c val
-    - getimureg \c reg - get value of raw IMU register \c reg
-    - setimuregs \c reg \c num \c val1 ... \c valn - set array of raw IMU register values
-    - getimuregs \c reg \c num - get array of raw IMU register values
-    - setdmpreg \c reg \c val - set raw DMP register \c reg to value \c val
-    - getdmpreg \c reg - get value of raw DMP register \c reg
-    - setdmpregs \c reg \c num \c val1 ... \c valn - set array of raw DMP register values
-    - getdmpregs \c reg \c num - get array of raw DMP register values
+- 改进了 ICM-20948 IMU（惯性测量单元）和 DMP（数字运动处理器）支持：
+  + 新增对 FSYNC 输入的支持，其中 IMU 和 DMP 可以在从摄像头传感器接收到帧同步脉冲时发出信号（摄像头传感器在每个新帧开始之前发出一个脉冲）。除了获取脉冲之外，我们还获取了最后一次 IMU 测量和 FSYNC 脉冲之间的微秒延迟。这对于需要 IMU 和视频传感器之间紧密耦合的应用非常有用，例如视觉惯性里程计。
+  + 命令行界面上的新功能允许用户修改低级 IMU 和 DMP 寄存器：
+    - setimureg \c reg \c val - 将原始 IMU 寄存器 \c reg 设置为值 \c val
+    - getimureg \c reg - 获取原始 IMU 寄存器的值 \c reg
+    - setimuregs \c reg \c num \c val1 ... \c valn - 设置原始 IMU 寄存器值数组
+    - getimuregs \c reg \c num - 获取原始 IMU 寄存器值数组
+    - setdmpreg \c reg \c val - 将原始 DMP 寄存器 \c reg 设置为值 \c val
+    - getdmpreg \c reg - 获取原始 DMP 寄存器的值 \c reg
+    - setdmpregs \c reg \c num \c val1 ... \c valn - 设置原始 DMP 数组寄存器值
+    - getdmpregs \c reg \c num - 获取原始 DMP 寄存器值数组
 
-    The registers and values can be specified in decimal, hex (with prefix 0x), or octal (with prefix 0 - beware of this
-    and be careful - if you write 010 it will be octal 10). The values returned are always in hex (with no prefix).
-    Note that the above functions are not activated by default, to prevent mistakes by rookie users. To activate them,
-    issue a `setpar camreg 1` on the JeVois console.
+寄存器和值可以以十进制、十六进制（前缀为 0x）或八进制（前缀为 0 - 注意这一点并小心 - 如果您写入 010，它将是八进制 10）指定。返回的值始终为十六进制（无前缀）。请注意，上述功能默认不激活，以防止新手用户犯错。要激活它们，请在 JeVois 控制台上发出 `setpar camreg 1`。
 
-- Added more python bindings to our C++ internal functions.
+- 为我们的 C++ 内部函数添加了更多 python 绑定。
 
-- Minor improvement to color balance with AR0135 sensor.
+- 使用 AR0135 传感器对色彩平衡进行轻微改进。
 
-- New exception handing to avoid obscure stoi() exception on host version of jevois-daemon if temperature system file is
-  ill-formed. Thanks Marc!
+- 如果温度系统文件格式不正确，则使用新的异常处理来避免主机版 jevois-daemon 上出现模糊的 stoi() 异常。谢谢 Marc！
 
 */
+

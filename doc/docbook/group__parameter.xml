@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__parameter">
+<title>Parameter-related classes and functions</title>
+<indexterm><primary>Parameter-related classes and functions</primary></indexterm>
+<section>
+<title> </title>
+
+<para>JeVois 框架中参数的概念体现为任何类型的单个值的包装器，以及相关文档（描述）、默认值、有效值的可能规范、获取或更改值的访问器函数 以及触发的可选回调函数当值改变时。参数用于从 Component 继承的对象中。参数的目标是公开给定视觉算法的参数，以便使用该算法的任何 代码段都会自动继承并公开这些参数。</para>
+
+<para>如何探索此文档模块：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>从一些关于组件和参数的一般原理开始： Component</para>
+</listitem><listitem>
+<para>然后了解如何为参数指定有效值： <link linkend="_group__validvalues">有效值集的规范，例如，某些参数可能采用</link></para>
+</listitem><listitem>
+<para>然后看看如何定义参数的名称、类型、描述、默认值、类别和可选的有效值：ParameterDef&lt;T&gt;</para>
+</listitem><listitem>
+<para>然后你就可以准备 <link xlink:href="classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4.html">Parameter</link> 了</para>
+</listitem></itemizedlist>
+</para>
+
+<para>本文档模块中的其他类主要是为了支持上述类。</para>
+<section xml:id="_group__parameter_1autotoc_md147">
+<title>Convenience macro to define a Parameter type</title>
+
+<para><literallayout><computeroutput>JEVOIS_DECLARE_PARAMETER(ParamName,&#32;ParamType,&#32;...)
+</computeroutput></literallayout></para>
+
+<para>ParamName 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 ParamType 是参数值的类型。 其余参数传递给 jevois::ParameterDef&lt;T&gt; 的构造函数其中 T=ParamType。</para>
+</section>
+<section xml:id="_group__parameter_1autotoc_md148">
+<title>Convenience macro to define a Parameter type, with callback</title>
+
+<para><literallayout><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName,&#32;ParamType,&#32;...)
+</computeroutput></literallayout></para>
+
+<para>ParamName 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 ParamType 是参数值的类型。 其余参数传递给 jevois::ParameterDef&lt;T&gt; 的构造函数其中 T=ParamType。</para>
+
+<para>在带回调的版本中，定义的新类中包含纯虚方法，其签名如下：</para>
+
+<para><literallayout><computeroutput>virtual&#32;void&#32;onParamChange(ParamName&#32;const&#32;&amp;&#32;param,&#32;ParamType&#32;const&#32;&amp;&#32;newval)&#32;=&#32;0;
+</computeroutput></literallayout></para>
+
+<para>继承自 Parameter&lt;ParamName&gt; 的宿主类（通常是 Component）必须实现此函数的重写。如果未实现该覆盖，将发出编译时错误。 </para>
+</section>
+Collaboration diagram for Parameter-related classes and functions:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__parameter.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterSummary">jevois::ParameterSummary</link></para>
+
+<para><link linkend="_classjevois_1_1ParameterSummary">ParameterSummary</link> 提供有关参数的摘要 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterBase">jevois::ParameterBase</link></para>
+
+<para>Base class for Parameter. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterCore">jevois::ParameterCore&lt; T &gt;</link></para>
+
+<para><link linkend="_classjevois_1_1Component">Component</link> 的可变参数，核心类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4">jevois::Parameter&lt; Param, Tail ... &gt;</link></para>
+
+<para>附加到组件的一组参数。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1DynamicParameter">jevois::DynamicParameter&lt; T &gt;</link></para>
+
+<para>运行时添加到组件的动态参数 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1ParameterCategory">jevois::ParameterCategory</link></para>
+
+<para>多个 <link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> 定义可以属于的类别 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterDefBase">jevois::ParameterDefBase</link></para>
+
+<para>参数定义的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterDef">jevois::ParameterDef&lt; T &gt;</link></para>
+
+<para>参数定义 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ParameterRegistry">jevois::ParameterRegistry</link></para>
+
+<para>与组件相关的所有参数的简单注册表 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__parameterstrconv">参数的字符串转换</link></para>
+</listitem>
+            <listitem><para><link linkend="_group__validvalues">有效值集的规范，例如，某些参数可能采用</link></para>
+
+<para><link linkend="_classjevois_1_1ParameterDef">ParameterDef</link> 使用它来指定参数可以采用的有效值，这些值不受限制，来自给定列表、范围、匹配正则表达式等 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+</section>

@@ -22,43 +22,40 @@
 
 namespace jevois
 {
-  //! Thread-safe synchronized producer/consumer queue
-  /*! BoundedBuffer is designed for use in producer/consumer scenarios where multiple threads wish to push and pop data
-      onto/from the buffer asynchronously.  Threads that try to pop data when the buffer is empty will either sleep
-      until data is actually available or get an exception (depending on template args), and threads that try to push
-      data when the buffer is full will either block until some space is available in the buffer or get an exception
-      (depending on template args).
+  //! 线程安全同步生产者/消费者队列 
+  /*! BoundedBuffer 专为生产者/消费者场景而设计，其中多个线程希望异步将数据推送到缓冲区或从缓冲区弹出数据。当缓冲区为空时尝
+      试弹出数据的线程将处于休眠状态，直到数据实际可用或出现异常（取决于模板参数），而当缓冲区已满时尝试推送数据的线程将处于
+      阻塞状态，直到缓冲区中有可用空间或出现异常（取决于模板参数）。
 
-      @tparam WhenFull blocking behavior (as jevois::BlockingBehavior) when attempting to push into a full buffer
-      @tparam WhenEmpty blocking behavior (as jevois::BlockingBehavior) when attempting to pop from an empty buffer
+      @tparam WhenFull 尝试推送到满缓冲区时的阻塞行为（如 jevois::BlockingBehavior）
+      @tparam WhenEmpty 尝试从空缓冲区弹出时的阻塞行为（如 jevois::BlockingBehavior）
 
       \ingroup types */
   template <typename T, BlockingBehavior WhenFull, BlockingBehavior WhenEmpty>
   class BoundedBuffer
   {
     public:
-      //! Create a new BoundedBuffer with no data and a given size
+      //! 创建一个没有数据且具有给定大小的新 BoundedBuffer
       BoundedBuffer(size_t const siz);
 
-      //! Push a new data element into the buffer, potentially sleeping or throwing if buffer is full, copy version
+      //! 将新数据元素推送到缓冲区，如果缓冲区已满，则可能会休眠或抛出，copy version
       void push(T const & val);
 
-      //! Push a new data element into the buffer, potentially sleeping or throwing if buffer is full, move version
+      //! 将新数据元素推送到缓冲区，如果缓冲区已满，可能会休眠或抛出， move version
       void push(T && val);
 
-      //! Pop oldest data element off of the buffer, potentially sleeping until one is available or throwing if empty
+      //! 从缓冲区弹出最旧的数据元素，可能会处于休眠状态直到有一个数据可用，或者如果为空则抛出
       T pop();
 
-      //! Current number of items actually in the buffer
-      /*! This function is mostly provided for informational messages and beware that the actual filled size may
-	  change in a multithreaded environment between the time we return here and the time the caller tries to
-	  use the result. */
+      //! 缓冲区中实际的当前项目数
+      /*！此函数主要用于信息性消息，请注意，在多线程环境中，从我们返回此处到调用者尝试使用结果之间，实际填充的大小可能会发
+          生变化。 */
       size_t filled_size() const;
 
-      //! Max (allocated at construction) size of the buffer
+      //! 缓冲区的最大大小（构造时分配）
       size_t size() const;
 
-      //! Clear all contents, resetting filled_size() to zero (size() remains unchanged at the max possible size)
+      //! 清除所有内容，将 filled_size() 重置为零（size() 保持在最大可能大小不变）
       void clear();
       
     private:

@@ -1,0 +1,2658 @@
+以下页面将帮助您使用 Je\+Vois 进行编程。
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{ProCompile}{Je\+Vois-\/\+Pro：在设备上克隆和编译 C++ 模块}}
+\item \mbox{\hyperlink{ProgrammerSource}{Je\+Vois Ubuntu 软件包和源代码存储库}}
+\item \mbox{\hyperlink{Virtualbox}{使用 Virtualbox 在虚拟机中设置 jevois-\/sdk}}
+\item \mbox{\hyperlink{ProgrammerOrganization}{主机和平台上 Je\+Vois 文件的组织}}
+\item \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}}
+\item \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}}
+\item \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}}
+\item \mbox{\hyperlink{FlashingToSD}{刷入 micro\+SD 卡}}
+\item \mbox{\hyperlink{ProgrammerSDK}{程序员 S\+DK 和编写新模块}}
+\item \mbox{\hyperlink{ModuleTutorial}{关于如何为 Je\+Vois 编写新的机器视觉模块的教程}}
+\item \mbox{\hyperlink{ModuleTips}{编写机器视觉模块的技巧}}
+\item \mbox{\hyperlink{ProgrammerPython}{使用 Python 编程机器视觉模块}}
+\item \mbox{\hyperlink{ModulePythonTutorial}{关于如何用 Python 编写新的机器视觉模块的教程}}
+\item \mbox{\hyperlink{Debugging}{调试 Je\+Vois 软件}}
+\item \mbox{\hyperlink{ProgrammingGuidelines}{Je\+Vois 核心框架贡献者的通用编程指南}}
+\item \mbox{\hyperlink{DocumentationRules}{文档规则和指南}} 
+\end{DoxyItemize}\hypertarget{ProCompile}{}\doxysubsection{Je\+Vois-\/\+Pro：在设备上克隆和编译 C++ 模块}\label{ProCompile}
+：从 开始，您可以在正在运行的相机上编辑和编译 C++ 模块。虽然速度很慢，但效果很好。这主要用于启动模块和进行小型调试编辑。对于更广泛的 C++ 代码编写，我们建议在功能强大的 Linux 桌面上使用 Je\+Vois-\/\+Pro S\+D\+K，首先在主机模式下测试模块，然后交叉编译以在相机上运行。有关更多信息，请参阅 程序员。
+
+步骤 1：克隆现有模块以提供工作起点 =========================================================================
+
+在 G\+UI 的 {\itshape 系统选项卡中，单击“创建新的机器视觉模块}...”
+
+  
+
+第 2 步：选择要克隆的模块 ======================================
+
+单击顶部的“...”菜单并选择要克隆的模块。
+
+  
+
+这里我们将克隆 {\bfseries{Pass\+Through}} 模块，使用 1920x1080 视频进行显示，使用 512x288 灰度视频进行处理：
+
+  
+
+将创建一个新模块，其供应商名称为 {\itshape Testing，模块名称为} {\itshape My\+Pass\+Through（如果您多次克隆同一个模块，您将获得} {\itshape My\+Pass\+Through2、{\itshape My\+Pass\+Through3} 等）。源代码将保存在} {\bfseries{/jevoispro/modules/\+Testing/\+My\+Pass\+Through/}} 中，您应该经常备份它，以防您的 micro\+SD 卡以某种方式损坏。如果您不喜欢这些名称，请随意编辑它们。然后单击 {\bfseries{创建按钮。}} 
+
+  
+
+步骤3：克隆的初始编译========================================
+
+复制完成后，会打开一个新窗口，我们会立即尝试编译克隆。请耐心等待，这需要一段时间（几分钟）。
+
+  
+
+编译完成后（这应该始终适用于新克隆），系统将询问您是否要运行该模块。单击 {\bfseries{Yes}} 运行它。
+
+  
+
+步骤4：编辑代码=================
+
+一旦克隆被加载并运行，您就可以在 G\+UI 的 {\itshape Code} 选项卡中访问其源代码。
+
+  
+
+请注意，\+C++ 源代码和相关的 C\+Make\+Lists.\+txt 均可在代码编辑器中使用。大多数用户无需修改 C\+Make\+Lists.\+txt，除非他们想要链接到额外的库或编译额外的源文件。
+
+  
+
+让我们尝试一下编辑。在 {\bfseries{Pass\+Through}} 中，我们在某个点绘制一个绿色圆圈围绕鼠标指针。这是为了演示使用 Im\+Gui 前景绘制列表在渲染窗口顶部绘制内容的能力。让我们将该绿色圆圈的半径从 20 像素更改为 120 像素。
+
+\begin{DoxyNote}{Note}
+记得编辑正确的 {\bfseries{process()}} 函数。如果您的模块在 Je\+Vois-\/\+Pro G\+UI 模式下运行，则需要使用以下签名编辑该函数：{\bfseries{virtual void process(jevois\+::\+Input\+Frame \&\& inframe, jevois\+::\+G\+U\+Ihelper \& helper) override}}
+\end{DoxyNote}
+  
+
+单击 {\bfseries{Save}} 保存修改后的代码（或按 C\+T\+R\+L-\/\+S）：
+
+  
+
+这将触发重新编译。
+
+  
+
+编译完成后，您可以运行该模块：
+
+  
+
+是的，鼠标指针周围的绿色圆圈现在更大了！
+
+  
+
+第 5 步：处理错误 ============================
+
+如果构建过程中的任何步骤失败，您将看到一条错误消息。这里让我们添加一些有缺陷的 C++ 代码来看看会发生什么：
+
+  
+
+这将触发编译错误：
+
+  
+
+如果您向上滚动到编译窗口的顶部，您可以使用按钮来编辑有问题的源代码或 C\+Make\+Lists.\+txt：
+
+  
+
+第 6 步：处理硬崩溃 =============================
+
+如果您以某种方式修改模块，导致整个 Je\+Vois 框架严重崩溃（例如，通过访问数组末尾的内存而导致分段错误），那么您将无法再加载和运行该模块，这意味着您无法再轻松更改其源代码。
+
+处理方法如下：加载任何其他工作模块。然后在代码编辑器中，选择标准文件末尾的“浏览/创建文件...”。然后导航到文件的 C++ 源代码，例如 /jevoispro/modules/\+Testing/\+MyX.C 并打开该文件。
+
+修复代码并保存。这将重新编译模块。由于源文件是手动选择的，我们不知道您想在该代码上运行哪种视频映射（相机分辨率等）。因此，编译后，它将因内部错误而无法加载。没关系，只需忽略错误，然后从可用模块的下拉列表中，您现在可以手动选择模块。 \hypertarget{ProgrammerSource}{}\doxysubsection{Je\+Vois Ubuntu 软件包和源代码存储库}\label{ProgrammerSource}
+所有 Je\+Vois 软件都是开源的。
+
+它是根据 G\+NU 通用公共许可证授权的。请注意此许可证的病毒性质，即，如果您将任何 Je\+Vois 源代码集成到您自己的项目中，那么您也必须发布派生的源代码。
+
+请参阅 \href{https://www.gnu.org/licenses/gpl-3.0.en.html}{\texttt{ G\+NU G\+PL 页面}} 了解更多信息。
+
+所有 Je\+Vois 源代码均托管在 Github 上，网址为 \href{https://github.com/jevois}{\texttt{ https\+://github.\+com/jevois}}
+
+提供了以下存储库：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{jevois：核心}} C++17 Je\+Vois 软件。
+\item {\bfseries{jevoisbase：\+Je\+Vois}} 的超过 25 个机器视觉模块的基本集合。
+\item {\bfseries{samplemodule：\+Je\+Vois}} 的示例独立模块，用作新模块的模板。
+\item {\bfseries{samplepythonmodule：\+Je\+Vois}} 的示例 Python 独立模块，用作新模块的模板。
+\item {\bfseries{jevois-\/sdk：为}} 相机提供 Linux 内核和操作系统的框架，可刷入 micro\+SD 卡。
+\item {\bfseries{jevoispro-\/sdk：为}} 相机提供 Linux 内核和操作系统的框架，可刷入 micro\+SD 卡。
+\end{DoxyItemize}\hypertarget{ProgrammerSource_autotoc_md96}{}\doxysubsubsection{从 jevois.\+usc.\+edu 安装预编译代码}\label{ProgrammerSource_autotoc_md96}
+请参阅 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 了解最新说明。
+
+我们为上面列出的 Git\+Hub 存储库提供预编译的 Ubuntu deb 包。\hypertarget{ProgrammerSource_autotoc_md97}{}\doxyparagraph{设置 jevois.\+usc.\+edu apt 源}\label{ProgrammerSource_autotoc_md97}
+截至撰写本文时，对于运行 Ubuntu 20.\+04 amd64 的桌面：
+
+\begin{DoxyVerb}sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DD24C027
+sudo add-apt-repository "deb https://jevois.usc.edu/apt focal main"
+sudo apt update
+sudo apt upgrade # see note below
+sudo apt autoremove
+sudo apt purge modemmanager
+sudo usermod -aG dialout $USER # need to reboot to take effect
+sudo usermod -aG video $USER # need to reboot to take effect
+\end{DoxyVerb}
+
+
+\begin{DoxyNote}{Note}
+从 开始，jevois.\+usc.\+edu 现在还托管 Google Coral Edge\+T\+PU 和 Hailo deb 包的镜像副本，因此您不需要从各自的供应商处获取这些包。
+\end{DoxyNote}
+\hypertarget{ProgrammerSource_autotoc_md98}{}\doxysubsubsection{为 Je\+Vois-\/\+A33 开发安装 Ubuntu 软件包}\label{ProgrammerSource_autotoc_md98}
+因为在 上运行的操作系统尽可能小，并且没有包管理系统、编译器等，所以 的总体策略是我们在桌面计算机上交叉编译所有代码，并将编译结果放入暂存区，然后将其刷入 micro\+S\+D。
+
+因此， 的所有软件包均适用于 Intel amd64 架构，并将安装在桌面上，但有些软件包确实包含 Je\+Vois-\/\+A33 的 A\+RM 处理器的交叉编译代码。此交叉编译代码将从暂存复制到 micro\+S\+D。
+
+ 的以下软件包可在 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 上获取：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{jevois-\/opencv：\+Open\+CV}} 4.\+x 为主机编译，其设置与 Je\+Vois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-\/opencv-\/4.x，这样它就不会干扰您主机系统上可能安装的任何其他 Open\+C\+V，而这些 Open\+CV 可能是其他软件所需要的。
+\item {\bfseries{jevois-\/host：为在主机上执行而编译的}} Je\+Vois 核心软件
+\item {\bfseries{jevois-\/platform：\+Je\+Vois}} 核心软件交叉编译，用于在 Je\+Vois 平台硬件上执行
+\item {\bfseries{jevoisbase-\/host：为在主机上执行而编译的}} Je\+Vois 基础模块
+\item {\bfseries{jevoisbase-\/platform：\+Je\+Vois}} 基础模块交叉编译，用于在 Je\+Vois 平台硬件上执行
+\item {\bfseries{jevois-\/sdk：编译的引导加载程序、根文件系统和其他配置文件。}} 
+\item {\bfseries{jevois-\/sdk-\/dev：为}} Je\+Vois 平台架构编译的交叉编译器和交叉编译库。
+\end{DoxyItemize}
+
+由于 jevois-\/sdk-\/dev 将所有其他依赖项都带入，因此启动和运行 Je\+Vois 开发现在只需一个 apt-\/get install 命令。
+
+有关这些不同软件包中文件组织的详细信息，请参阅 \mbox{\hyperlink{ProgrammerOrganization}{主机和平台上 Je\+Vois 文件的组织}}\hypertarget{ProgrammerSource_autotoc_md99}{}\doxyparagraph{为 Je\+Vois-\/\+A33 安装哪些软件包？}\label{ProgrammerSource_autotoc_md99}
+
+\begin{DoxyItemize}
+\item 如果您只想在桌面上安装并运行 \mbox{\hyperlink{JeVoisInventor}{Je\+Vois-\/\+A33：\+Je\+Vois Inventor 图形用户界面}} \begin{DoxyVerb}  sudo apt install jevois-inventor\end{DoxyVerb}
+
+\item 如果您只想在带有标准网络摄像头的主机上运行 Je\+Vois 软件 (jevois-\/daemon)： \begin{DoxyVerb}  sudo apt install jevois-host jevoisbase-host\end{DoxyVerb}
+
+\item 如果您希望 jevois 和 jevoisbase 针对平台硬件进行交叉编译： \begin{DoxyVerb}  sudo apt install jevois-platform jevoisbase-platform\end{DoxyVerb}
+
+\item 如果您希望能够使用 jevois-\/flash-\/card 刷新 micro\+SD 卡：\begin{DoxyVerb}sudo apt install jevois-sdk \end{DoxyVerb}
+
+\item 如果您希望能够为 Je\+Vois 平台硬件交叉编译新模块： \begin{DoxyVerb}  sudo apt install jevois-sdk\end{DoxyVerb}
+
+\item 如果您希望能够重新编译平台 Linux 内核或更改平台操作系统或向平台添加新的 buildroot 包：
+
+您需要从源代码重建 jevois-\/sdk。按照 \href{https://github.com/jevois}{\texttt{ https\+://github.\+com/jevois}} 上的 jevois 存储库的 I\+N\+S\+T\+A\+LL 文件中的说明进行操作。
+\end{DoxyItemize}\hypertarget{ProgrammerSource_autotoc_md100}{}\doxysubsubsection{为 Je\+Vois-\/\+Pro 开发安装 Ubuntu 软件包}\label{ProgrammerSource_autotoc_md100}
+因为 运行完整的 Ubuntu 操作系统，所以在相机上安装软件包就像在普通计算机上安装一样。
+
+以下软件包可在 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 上获取，适用于 {\itshape amd64（安装在桌面上）：} 
+
+
+\begin{DoxyItemize}
+\item {\bfseries{jevoispro-\/opencv：为主机编译的}} Open\+CV 4.\+x，其设置与 Je\+Vois-\/\+Pro 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevois-\/opencv-\/4.x，这样它就不会干扰您主机系统上可能安装的任何其他 Open\+C\+V，而这些 Open\+CV 可能是其他软件所需要的。
+\item {\bfseries{jevoispro-\/openvino：英特尔神经网络框架}} Open\+Vino 为主机编译，其设置与 Je\+Vois 平台硬件使用的设置相匹配。我们将此包安装到 /usr/share/jevoispro-\/openvino-\/x 中，这样它就不会干扰您主机系统上可能安装的任何其他 Open\+Vino，而其他软件可能需要这些安装。
+\item {\bfseries{jevoispro-\/host：编译用于主机执行的}} Je\+Vois 核心软件。
+\item {\bfseries{jevoisprobase-\/host：编译用于主机上执行的}} Je\+Vois 基础模块。
+\item {\bfseries{jevoispro-\/platform：\+Je\+Vois}} 核心软件为 arm64 处理器交叉编译为 {\itshape 支持包，它将提供必要的} A\+RM 库，以便您以后交叉编译自己的机器视觉模块。
+\item {\bfseries{jevoisprobase-\/platform：\+Je\+Vois}} 基础模块为 arm64 处理器交叉编译为 {\itshape 支持包，它将提供必要的} A\+RM 库，以便您以后交叉编译自己的机器视觉模块。
+\item {\bfseries{jevoispro-\/sdk-\/dev：交叉编译的操作系统和库，安装在主机上以支持}} Je\+Vois 软件在该平台的交叉编译。也就是说，在桌面上安装 jevoispro-\/sdk-\/dev 将允许您为平台交叉编译 jevois 和 jevoisbase，找到可能需要的必要交叉编译库。
+\end{DoxyItemize}
+
+以下软件包可在 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 上获取，适用于 {\itshape arm64（安装在} Je\+Vois-\/\+Pro 上）：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{jevoispro-\/opencv：为}} Je\+Vois-\/\+Pro 编译的 Open\+CV 4.\+x。我们将此包安装到相机上的 /usr/share/jevois-\/opencv-\/4.x 中。
+\item {\bfseries{jevoispro-\/openvino：为}} Je\+Vois-\/\+Pro 编译的英特尔神经网络框架 Open\+Vino。我们将此包安装到相机上的 /usr/share/jevoispro-\/openvino-\/x 中。
+\item {\bfseries{jevoispro-\/platform：\+Je\+Vois}} 核心软件交叉编译，用于在 Je\+Vois-\/\+Pro 平台硬件上执行，作为 arm64 的本机包。
+\item {\bfseries{jevoisprobase-\/platform：\+Je\+Vois}} 基础模块已编译，可在 Je\+Vois-\/\+Pro 平台硬件上执行，作为 arm64 的 {\itshape 本机包。} 
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+安装 jevoispro-\/sdk-\/dev 将自动将所有其他包作为依赖项拉取。
+\end{DoxyNote}
+以下是您将看到的内容的演练：
+
+\hypertarget{ProgrammerSource_autotoc_md101}{}\doxyparagraph{在桌面主机上为 Je\+Vois-\/\+Pro 安装哪些软件包？}\label{ProgrammerSource_autotoc_md101}
+
+\begin{DoxyItemize}
+\item 如果您只想在带有标准网络摄像头的主机上运行 Je\+Vois 软件 (jevois-\/daemon)： \begin{DoxyVerb}  sudo apt install jevoispro-host jevoisprobase-host\end{DoxyVerb}
+
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+是的，这将拉取超过 500 个依赖包，这是正常的，只需选择 Yes 即可全部安装。它们包括 Je\+Vois 使用的许多库、\+Coral 库、\+Boost、\+Open\+CV 和 Open\+Vino 等。
+\end{DoxyNote}
+
+\begin{DoxyItemize}
+\item 如果您希望将 jevois 和 jevoisbase 交叉编译为平台硬件，作为 {\itshape support} 包安装在您的主机上（稍后需要从源代码交叉编译您自己的模块）： \begin{DoxyVerb}  sudo apt install jevoispro-platform jevoisprobase-platform\end{DoxyVerb}
+
+\item 如果您希望能够交叉编译 jevois、jevoisbase 或 Je\+Vois 平台硬件的新模块： \begin{DoxyVerb}  sudo apt install jevoispro-sdk-dev\end{DoxyVerb}
+
+\item 如果您希望能够重新编译平台 Linux 内核或者更改平台操作系统：
+
+您需要使用 {\ttfamily rebuild-\/os.\+sh} 从源代码重建 jevoispro-\/sdk，如下所述。
+\end{DoxyItemize}\hypertarget{ProgrammerSource_autotoc_md102}{}\doxyparagraph{在 Je\+Vois-\/\+Pro 智能相机上安装哪些软件包？}\label{ProgrammerSource_autotoc_md102}
+\begin{DoxyNote}{Note}
+apt 源 jevois.\+usc.\+edu 和 Google Coral 的源已经在 micro\+SD 上配置，因此您不需要使用上面详述的 {\ttfamily add-\/apt-\/repository} 命令将它们添加到您的相机。
+\end{DoxyNote}
+在运行以下命令之前，你需要将相机连接到网络，如 \mbox{\hyperlink{ProNetwork}{Je\+Vois-\/\+Pro：连接到有线或 Wi\+Fi 网络}} 中所述
+
+\begin{DoxyNote}{Note}
+jevoispro-\/opencv、jevoispro-\/openvino、jevoispro-\/platform 和 jevoisprobase-\/platform 已预装在 micro\+SD 上。
+\end{DoxyNote}
+运行以下命令最简单的方法是将 Je\+Vois-\/\+Pro 切换到控制台启动，如 \mbox{\hyperlink{ProUserQuick}{Je\+Vois-\/\+Pro 快速入门用户指南}} 中所述，然后以用户 {\itshape root} 身份使用密码 {\itshape jevois} 登录
+
+
+\begin{DoxyItemize}
+\item 如果您想将 jevoispro-\/platform 和 jevoisprobase-\/platform 更新到 jevois.\+usc.\+edu 发布的最新官方版本： \begin{DoxyVerb}  sudo apt update
+  sudo apt upgrade\end{DoxyVerb}
+
+\item 如果您不小心弄乱了 micro\+SD 上的 jevois 或 jevoisbase（例如，删除了一些关键文件）并想要重新安装在 jevois.\+usc.\+edu 上发布的最新官方版本： \begin{DoxyVerb}  sudo apt purge jevoispro-platform jevoisprobase-platform
+  sudo apt update
+  sudo apt install jevoispro-platform jevoisprobase-platform\end{DoxyVerb}
+ 如果这不能解决您的问题，您可能需要重新刷新您的 micro\+S\+D。
+\item 如果您修改了 jevois 和 jevoisbase，然后从源代码对其进行了交叉编译（请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} 和 \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}} ），并且想要在相机上安装这些软件包： \begin{DoxyVerb}  sudo apt purge jevoispro-platform jevoisprobase-platform
+  # 将您创建的 debs 放到 microSD 上
+  dpkg -i jevoispro-platform-XXX_arm64.deb
+  dpkg -i jevoisprobase-platform-XXX_arm64.deb\end{DoxyVerb}
+
+\end{DoxyItemize}\hypertarget{ProgrammerSource_autotoc_md103}{}\doxysubsubsection{Je\+Vois-\/\+A33 操作系统源代码下载并从头开始构建}\label{ProgrammerSource_autotoc_md103}
+这仅推荐给想要修改 Linux 内核或 Je\+Vois 操作系统的高级程序员。
+
+下载和安装说明位于 \href{https://github.com/jevois/jevois/blob/master/INSTALL}{\texttt{ jevois 存储库的 I\+N\+S\+T\+A\+LL 文件}}。\hypertarget{ProgrammerSource_autotoc_md104}{}\doxysubsubsection{Je\+Vois-\/\+Pro 操作系统源代码下载并从头开始构建}\label{ProgrammerSource_autotoc_md104}
+这仅推荐给想要修改 Je\+Vois-\/\+Pro 的 Linux 内核或操作系统的高级程序员。如果您只需要交叉编译的操作系统以便编译和链接自定义代码，请安装 {\bfseries{jevoispro-\/sdk-\/dev}} deb 包。
+
+\begin{DoxyVerb}git clone https://github.com/jevois/jevoispro-sdk.git
+cd jevoispro-sdk
+./rebuild-os.sh
+\end{DoxyVerb}
+
+
+这将需要很长时间，可能超过 12 小时，具体取决于您的计算机和网络速度。
+
+\begin{DoxyNote}{Note}
+如果您还想重新创建 {\bfseries{jevoispro-\/sdk-\/dev}} deb 包，以便以后可以将其安装在另一台台式计算机上，请使用 {\ttfamily ./rebuild-\/os -\/deb}
+\end{DoxyNote}
+以下是运行“rebuild-\/os.sh”时应该看到的内容的演练：
+
+ \hypertarget{Virtualbox}{}\doxysubsection{使用 Virtualbox 在虚拟机中设置 jevois-\/sdk}\label{Virtualbox}
+强烈建议您使用虚拟机软件来全新安装 Ubuntu，并将 Je\+Vois 开发环境安装到其中。这样，您就不会遇到 Je\+Vois 所需的软件包版本不同以及您在台式机和笔记本电脑上运行的其他应用程序所需的软件包版本不同导致的问题。
+
+以下是使用免费 Virtualbox 软件执行此操作的简要说明：
+
+
+\begin{DoxyItemize}
+\item 从 \href{https://www.virtualbox.org/wiki/Downloads}{\texttt{ https\+://www.\+virtualbox.\+org/wiki/\+Downloads}} 下载并安装 Virtualbox（获取适合您当前计算机的版本，称为 {\itshape host} computer，例如，如果使用 Mac，请获取适用于 OS X 主机的版本）。
+\item 下载并安装相应的 Virtual\+Box Oracle VM Virtual\+Box 扩展包，确保扩展包的版本与您安装的 Virtualbox 版本完全匹配。
+\item {\itshape I\+M\+P\+O\+R\+T\+A\+N\+T：您必须重启计算机，安装才能在稍后正常运行。特别是对于} Mac 用户来说，重启 Mac 的情况并不常见，但您需要在此处重启，否则视频捕获稍后可能无法正常工作。
+\item 创建一个新的虚拟机：选择 Linux 64 位操作系统，分配尽可能多的 R\+AM 和 C\+P\+U（通常将滑块移动到变为红色的位置），然后创建一个新的虚拟硬盘，使用 V\+DI 方法并选择至少 50GB 大小。
+\end{DoxyItemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{DoxyItemize}
+\item 从 \href{https://www.ubuntu.com/download/desktop}{\texttt{ https\+://www.\+ubuntu.\+com/download/desktop}} 获取 Ubuntu 20.\+04 Desttop amd64 iso 文件
+\item 启动虚拟机。由于虚拟机尚未安装操作系统，因此系统会要求您提供 iso 文件，请选择刚刚下载的 Ubuntu iso。
+\item 安装 Ubuntu。确保将整个虚拟磁盘分配给单个根分区（当询问如何格式化磁盘时，这是默认设置），以便根分区中有足够的空间。
+\item 安装 Ubuntu 后，您可以启动它，打开终端，然后按照 \mbox{\hyperlink{ProgrammerSource}{Je\+Vois Ubuntu 软件包和源代码存储库}} 和 \href{http://jevois.org/tutorials/ProgrammerSetup.html}{\texttt{ 程序员安装教程}} 中的详细说明安装 Je\+Vois S\+D\+K。
+\item 为了能够抓取视频，请转到虚拟机的设置（\+Virtualbox 主面板中的黄色齿轮），并确保在“端口”、“\+U\+S\+B”下启用 U\+SB 2.\+0 或 U\+SB 3.\+0。然后插入 U\+SB 摄像头，并为其添加设备过滤器（单击 U\+SB 连接器顶部带有 + 号的图标）。我们建议您重新启动虚拟机和主机。
+\end{DoxyItemize}
+
+
+
+
+
+
+\begin{DoxyItemize}
+\item 返回虚拟机，通过输入：\begin{DoxyVerb}sudo apt install guvcview \end{DoxyVerb}
+ 安装“guvcview”，您应该能够从 U\+SB 摄像头中获取视频。
+\end{DoxyItemize}
+
+\hypertarget{Virtualbox_autotoc_md146}{}\doxyparagraph{无头 Virtual\+Box}\label{Virtualbox_autotoc_md146}
+使用 Linux 主机时，在终端中运行 Je\+Vois S\+DK 虚拟机通常更方便，而无需整个图形界面。这样您就可以简单地将命令从另一个终端复制/粘贴到运行虚拟机的终端。您无法在那台无头机器上运行 jevois-\/inventor，因此这更适合 C++ 开发和编译。
+
+要启用无头模式，您需要在虚拟机上启用 S\+SH 端口转发规则，如下所示：
+
+
+\begin{DoxyItemize}
+\item 在主机上的终端中，如果您还没有密钥，请创建一个带有空密码的密钥： \begin{DoxyVerb}  ssh-keygen -t rsa\end{DoxyVerb}
+ 当提示输入密码时，只需按 E\+N\+T\+ER 键。
+\item 在虚拟机上，安装 openssh-\/server： \begin{DoxyVerb}  sudo apt install openssh-server\end{DoxyVerb}
+
+\item 在 Virtual\+Box 中，选择虚拟机的 {\itshape Settings，然后选择} {\itshape Network，点击} {\itshape Advanced，然后点击} {\itshape Port Forwarding}。点击带有绿色加号的小图标添加规则，如下所示：
+\begin{DoxyItemize}
+\item name\+: ssh
+\item protocol\+: T\+CP
+\item Host IP\+: leave blank
+\item Host port\+: 3000 (or any unused port over 1000)
+\item Guest IP\+: leave blank
+\item Guest port\+: 22
+\end{DoxyItemize}
+
+然后单击确定。这会将与主机端口 3000 建立的连接转发到虚拟机端口 22（ssh）。
+\item 将密钥从主机复制到虚拟机： \begin{DoxyVerb}  ssh-copy-id -p 3000 jevois@localhost\end{DoxyVerb}
+ 当系统询问时，输入密码 {\itshape jevois} 
+\item 您现在可以关闭虚拟机并关闭 Virtual\+Box。
+\item 要以无头方式启动虚拟机并登录：\begin{DoxyVerb}VBoxManage startvm UbuSdk2004 --type headless sleep 20 ssh -p 3000 jevois@localhost \end{DoxyVerb}
+
+\end{DoxyItemize}
+
+将上面的 {\itshape Ubu\+Sdk2004} 替换为您在创建虚拟机时选择的名称（这是在 Virtual\+Box 图形界面中机器列表侧栏上显示的名称）。
+
+一切完成，您现在应该登录到虚拟机了。完成后记得使用“sudo shutdown -\/h now”关闭它。 \hypertarget{ProgrammerOrganization}{}\doxysubsection{主机和平台上 Je\+Vois 文件的组织}\label{ProgrammerOrganization}
+如 \mbox{\hyperlink{Concepts}{本文档中使用的概念}} 中所述，\+Je\+Vois 软件可以同时为台式计算机（主机模式，通常使用英特尔计算机快速开发和测试新的机器视觉算法）和 Je\+Vois 平台硬件（平台模式，其中所有内容都为 Je\+Vois 内部的 A\+RM 处理器进行交叉编译）编译和安装。
+
+另一个因素是，在编译各种元素（\+Linux 内核、\+Linux 操作系统和实用程序、\+Open\+CV 和其他库、\+Je\+Vois 核心、\+Je\+Vois 模块等）时，\+Je\+Vois 的 micro\+SD 可能不可用。因此，在平台模式下编译和安装将利用一些所谓的暂存区，即主机上的一些目录，各种零碎将组装到这些目录中，以便稍后将它们刷入 micro\+S\+D。\hypertarget{ProgrammerOrganization_autotoc_md80}{}\doxysubsubsection{组织概况}\label{ProgrammerOrganization_autotoc_md80}
+
+\begin{DoxyItemize}
+\item 在平台上，所有模块和配置文件都安装到专用的 V\+F\+AT 分区中：
+\begin{DoxyItemize}
+\item \+:{\bfseries{/jevois}} （\+Je\+Vois 可以将其导出为虚拟 U\+SB 驱动器）。
+\item \+:{\bfseries{/jevoispro}} 
+\end{DoxyItemize}
+\item 可执行文件、核心库和包含文件照常安装到 {\bfseries{/usr/bin}} 、{\bfseries{/usr/lib}} 、{\bfseries{/usr/include}} 等中。
+\item 因此，在主机上，我们还将所有模块和配置文件安装到 {\bfseries{/jevois}} 或 {\bfseries{/jevoispro}} 中（这主要是为了避免主机和平台上的路径不同而出现意外，并排除故障为什么在主机模式下运行良好的模块在平台上运行时找不到其数据文件）。
+\item 同样，我们还像往常一样将为主机本地编译的可执行文件、库和包含文件安装到 {\bfseries{/usr/bin}} 、{\bfseries{/usr/lib}} 、{\bfseries{/usr/include}} 等位置。
+\item ：此外，\+Je\+Vois 平台的引导加载程序、引导配置文件和编译的操作系统被放置在第一个暂存目录 {\bfseries{/var/lib/jevois-\/build}} 中，该目录专用于最终进入 micro\+SD 上的 {\bfseries{L\+I\+N\+UX}} 和 {\bfseries{B\+O\+OT}} 分区的所有文件。
+\item ：平台的交叉编译机器视觉模块、库和配置文件被放置在第二个暂存目录 {\bfseries{/var/lib/jevois-\/microsd}} 中，该目录专用于最终进入 micro\+SD 上的 {\bfseries{J\+E\+V\+O\+IS}} 分区的所有文件。
+\item ：最终的 micro\+SD 闪存脚本 {\bfseries{jevois-\/flash-\/card}} 将 {\bfseries{/var/lib/jevois-\/build}} 和 {\bfseries{/var/lib/jevois-\/microsd}} 的内容合并到最终的 micro\+SD 卡中。
+\item ：相机的操作系统、交叉编译库等位于 {\bfseries{/usr/share/jevoispro-\/sdk}} 
+\end{DoxyItemize}\hypertarget{ProgrammerOrganization.dox_autotoc_md81}{}\doxysubsubsection{Je\+Vois-\/\+A33 组织详情}\label{ProgrammerOrganization.dox_autotoc_md81}
+
+\begin{DoxyItemize}
+\item 为 {\bfseries{host}} 编译和安装 {\bfseries{jevois}} 时（在 {\bfseries{jevois}} 中使用 {\ttfamily ./rebuild-\/host.sh}；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件安装到 {\bfseries{/jevois/config/}}
+\item 包括 {\ttfamily jevois-\/daemon} 的可执行文件安装到 {\bfseries{/usr/bin/}}
+\item 包含文件（为 host 编译模块时需要）安装到 {\bfseries{/usr/include/jevois/}}
+\item 核心 Je\+Vois 库（{\bfseries{libjevois.\+so}} ）安装到 {\bfseries{/usr/lib/}}
+\item 文档文件安装到 {\bfseries{/usr/share/doc/jevois-\/host/}}
+\item 在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上尝试执行 {\ttfamily dpkg -\/c jevois-\/host-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 确认。
+\end{DoxyItemize}
+\item 交叉编译并安装 {\bfseries{platform}} 的 {\bfseries{jevois}} 时（在 {\bfseries{jevois}} 中使用 {\ttfamily ./rebuild-\/platform.sh}；参见 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件暂存到 {\bfseries{/var/lib/jevois-\/microsd/config/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/jevois/config/}} 中。
+\item 包括 {\ttfamily jevois-\/daemon} 在内的可执行文件暂存到 {\bfseries{/var/lib/jevois-\/build/usr/bin/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/bin/}} 中。
+\item 包含文件暂存到 {\bfseries{/var/lib/jevois-\/build/usr/include/jevois/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/include/jevois/}} 中。
+\item 核心 Je\+Vois 库 ({\bfseries{libjevois.\+so}} ) 暂存到 {\bfseries{/var/lib/jevois-\/build/usr/lib/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/lib/}} 中。
+\item 文档文件暂存到 {\bfseries{/var/lib/jevois-\/build/usr/share/doc/jevois-\/platform/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/share/doc/jevois-\/platform/}} 中。
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevois-\/platform-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。
+\end{DoxyItemize}
+\item 为 {\bfseries{host}} 编译和安装 {\bfseries{jevoisbase}} （或者类似地，{\bfseries{samplemodule}} 或您自己的模块）时（在 {\bfseries{jevoisbase}} 内使用 {\ttfamily ./rebuild-\/host.sh}（或您的模块的源代码树）；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件安装到 {\bfseries{/jevois/config/}}
+\item 机器视觉模块安装到 {\bfseries{/jevois/modules/}}
+\item 可执行文件（如果有）安装到 {\bfseries{/usr/bin/}}
+\item 包含文件（在为主机编译其他模块时可能需要）安装到 {\bfseries{/usr/include/jevoisbase/}}
+\item 库（如果有）安装到 {\bfseries{/usr/lib/}}
+\item 文档文件安装到 {\bfseries{/usr/share/doc/jevoisbase-\/host/}} +尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoisbase-\/host-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。
+\end{DoxyItemize}
+\item 在为 {\bfseries{platform}} 交叉编译和安装 {\bfseries{jevoisbase（或类似地，{\bfseries{samplemodule}} 或您自己的模块）时（使用}} {\bfseries{jevoisbase}} 中的 {\ttfamily ./rebuild-\/platform.sh}（或您的模块的源代码树）；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件暂存到 {\bfseries{/var/lib/jevois-\/microsd/config/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/jevois/config/}} 中。
+\item 机器视觉模块暂存到 {\bfseries{/var/lib/jevois-\/microsd/modules/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/jevois/modules/}} 中。
+\item 可执行文件（如果有）暂存到 {\bfseries{/var/lib/jevois-\/build/usr/bin/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/bin/}} 中。
+\item 包含文件暂存到 {\bfseries{/var/lib/jevois-\/build/usr/include/jevoisbase/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/include/jevoisbase/}} 中。
+\item 库（如果有）（例如，{\bfseries{libjevoisbase.\+so}} ）暂存到 {\bfseries{/var/lib/jevois-\/microsd/lib/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/jevois/lib/}} 中。请注意此处与主机相比的偏差；这样，在主机上，可以轻松加载库，而无需特别摆弄库路径，而在平台上，最好将它们放在 {\bfseries{/jevois/}} 中，以便在 Je\+Vois 运行时通过 U\+SB 导出 {\bfseries{J\+E\+V\+O\+IS}} 分区来升级它们。
+\item 文档文件暂存到 {\bfseries{/var/lib/jevois-\/build/usr/share/doc/jevoisbase-\/platform/}} 中，并将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/share/doc/jevoisbase-\/platform/}} 中。
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoisbase-\/platform-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。
+\end{DoxyItemize}
+\item {\bfseries{Open\+CV}} 安装在主机上的 {\bfseries{/usr/share/jevois-\/opencv-\/\+V\+E\+R\+S\+I\+O\+N/}} 中，安装在平台上的 {\bfseries{/usr/bin/}}、{\bfseries{/usr/lib/}}、{\bfseries{/usr/include/}} 等中。这里主机和平台之间再次存在差异，这是因为不希望在主机上过于突兀，因为越来越多的其他软件包倾向于依赖 Ubuntu 提供的标准 Open\+CV 软件包，即使这些软件包可能不适合 Je\+Vois（例如，较旧的 Open\+CV 版本，可能没有贡献，可能没有 Python 或不同的 Python 版本等）
+\item {\bfseries{jevois-\/sdk}} Ubuntu 软件包提供了创建 Je\+Vois micro\+SD 卡所需的以下文件，这些文件是运行 {\bfseries{jevois-\/sdk}} 中从源代码进行复杂完整重建的部分结果：
+\begin{DoxyItemize}
+\item {\ttfamily /usr/bin/jevois-\/flash-\/card} 脚本，用于为 Je\+Vois 刷写 micro\+SD 卡。
+\item 引导加载程序文件、平台的 Linux 操作系统等位于 {\bfseries{/var/lib/jevois-\/build/boot/}}
+\item 尝试对从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 执行 {\ttfamily dpkg -\/c jevois-\/sdk-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。
+\end{DoxyItemize}
+\item {\bfseries{jevois-\/sdk-\/dev}} Ubuntu 软件包提供了进一步开发所需的以下附加文件（例如，交叉编译的 Open\+CV 库、交叉编译的 boost、交叉编译器等），这些文件是在 {\bfseries{jevois-\/sdk}} 中从源代码运行复杂的完整重建的一些结果：
+\begin{DoxyItemize}
+\item 在 {\bfseries{/usr/share/jevois-\/sdk/out/}} 中预编译的整个 buildroot 树
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{ProgrammerOrganization.dox_autotoc_md82}{}\doxysubsubsection{Je\+Vois-\/\+Pro 组织详情}\label{ProgrammerOrganization.dox_autotoc_md82}
+由于我们有三种不同的构建，所以事情可能会有点令人困惑：
+
+
+\begin{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/host.\+sh}：为主机（\+Intel/\+A\+MD amd64 处理器）编译并创建一个要安装在主机（amd64）上的包。使用它来编译您将在主机上运行的 Je\+Vois 软件，这在开发新的机器视觉模块时非常有用（无需将文件复制到相机进行测试，只需使用您的桌面即可）。
+\item {\ttfamily rebuild-\/pro-\/platform.\+sh}：针对平台 (A\+RM arm64) 进行交叉编译，并创建一个 {\itshape support} 包以安装在主机 (amd64) 上。此包包含放置在暂存目录中的 arm64 文件，以便我们可以从主机访问它们，这就是我们将其称为 {\itshape support} 包的原因：它支持为 Je\+Vois 平台交叉编译依赖软件。这是必需的，以便您以后可以为平台交叉编译自己的机器视觉模块，因为这些模块将链接到为平台交叉编译的核心 Je\+Vois 库。
+\item {\ttfamily rebuild-\/pro-\/platform-\/pdeb.\+sh}：针对平台 (A\+RM arm64) 进行交叉编译，并创建一个要安装在平台 (arm64) 上的本机包。这是我们用来将 Je\+Vois 软件部署到相机的。我们创建 arm64 包，然后将它们安装在相机上。
+\end{DoxyItemize}
+
+考虑到这一点：
+
+
+\begin{DoxyItemize}
+\item 为 {\bfseries{host}} 编译和安装 {\bfseries{jevois}} 时（在 {\bfseries{jevois}} 中使用 {\ttfamily ./rebuild-\/pro-\/host.sh}；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件安装到 {\bfseries{/jevoispro/config/}}
+\item 包括 {\ttfamily jevoispro-\/daemon} 的可执行文件安装到 {\bfseries{/usr/bin/}}
+\item 包含文件（编译主机模块时需要）安装到 {\bfseries{/usr/include/jevois/}}
+\item 核心 Je\+Vois 库（{\bfseries{libjevoispro.\+so}} ）安装到 {\bfseries{/usr/lib/}}
+\item 文档文件安装到 {\bfseries{/usr/share/doc/jevoispro-\/host/}}
+\item 在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上尝试执行 {\ttfamily dpkg -\/c jevoispro-\/host-\/\+V\+E\+R\+S\+I\+O\+N.\+deb}确认。
+\end{DoxyItemize}
+\item 在交叉编译和安装 {\bfseries{platform}} 的 {\bfseries{jevois}} 作为 {\itshape support} 包时，将其安装在主机上（在 {\bfseries{jevois}} 中使用 {\ttfamily ./rebuild-\/pro-\/platform.sh}；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/config/}}
+\item 包括 {\ttfamily jevoispro-\/daemon} 的可执行文件暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/bin/}}
+\item 包含文件暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/include/jevois/}}，并将在您交叉编译自己的机器视觉模块时使用。
+\item 核心 Je\+Vois 库 ({\bfseries{libjevoispro.\+so}} ) 暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/lib/}} 中，并将在您交叉编译自己的机器视觉模块时使用。
+\item 文档文件暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/share/doc/jevois-\/platform/}}
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoispro-\/platform-\/\+V\+E\+R\+S\+I\+O\+N\+\_\+amd64.\+deb} 进行确认。
+\end{DoxyItemize}
+\item 当将 {\bfseries{jevois}} 交叉编译为 {\bfseries{platform}} 的 {\itshape native} 平台 (arm64) 包时（在 {\bfseries{jevois}} 中使用 {\ttfamily ./rebuild-\/pro-\/platform-\/pdeb.sh}；参见 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item 您将为 arm64（64 位 A\+R\+M）创建一个 deb 包，其文件位置与主机上使用的相同。
+\item 应在登录平台时使用 dpkg 将此包安装在 Je\+Vois-\/\+Pro 平台上。
+\item 在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上尝试 {\ttfamily dpkg -\/c jevoispro-\/platform-\/\+V\+E\+R\+S\+I\+O\+N\+\_\+arm64.\+deb} 以确认所有文件位置。
+\end{DoxyItemize}
+\item 为 {\bfseries{host}} 编译和安装 {\bfseries{jevoisbase（或者类似地，{\bfseries{samplemodule}} 或您自己的模块）时（使用}} {\bfseries{jevoisbase}} 中的 {\ttfamily ./rebuild-\/pro-\/host.sh}（或您的模块的源代码树）；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件安装到 {\bfseries{/jevoispro/config/}}
+\item 机器视觉模块安装到 {\bfseries{/jevoispro/modules/}}
+\item 可执行文件（如果有）安装到 {\bfseries{/usr/bin/}}
+\item 包含文件（在为主机编译其他模块时可能需要）安装到 {\bfseries{/usr/include/jevoisbase/}}
+\item 库（如果有）安装到 {\bfseries{/usr/lib/}}
+\item 文档文件安装到{\bfseries{/usr/share/doc/jevoisprobase-\/host/}}
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoisprobase-\/host-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。
+\end{DoxyItemize}
+\item 在交叉编译和安装 {\bfseries{platform}} 的 {\bfseries{jevoisbase（或者类似地，{\bfseries{samplemodule}} 或您自己的模块）作为}} {\itshape support} 包安装在主机上时（使用 {\bfseries{jevoisbase}} 中的 {\ttfamily ./rebuild-\/pro-\/platform.sh}（或您的模块的源代码树）；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item Je\+Vois 在运行时使用的配置文件暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/config/}}
+\item 机器视觉模块暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/modules/}}
+\item 可执行文件（如果有）暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/bin/}}
+\item 包含文件暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/include/jevoisbase/}}
+\item 库（如果有）（例如，{\bfseries{libjevoisprobase.\+so}} ）暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/lib/}} 中，并将在交叉编译您自己的模块时使用。
+\item 文档文件暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/share/doc/jevoisbase-\/platform/}}
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoisprobase-\/platform-\/\+V\+E\+R\+S\+I\+O\+N\+\_\+amd64.\+deb} 进行确认。
+\end{DoxyItemize}
+\item 当将 {\bfseries{jevoisbase}} 交叉编译为 {\itshape native} 平台 (arm64) 包（或者类似地，{\bfseries{samplemodule}} 或您自己的模块）用于 {\bfseries{platform}} 时（使用 {\bfseries{jevoisbase}} 中的 {\ttfamily ./rebuild-\/pro-\/platform-\/pdeb.sh}（或您的模块的源代码树）；请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）：
+\begin{DoxyItemize}
+\item 您将为 arm64（64 位 A\+R\+M）创建一个 deb 包，其文件位置与主机相同。
+\item 应在登录平台时使用 dpkg 将此包安装在 Je\+Vois-\/\+Pro 平台上。
+\item 在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上尝试 {\ttfamily dpkg -\/c jevoisprobase-\/platform-\/\+V\+E\+R\+S\+I\+O\+N\+\_\+arm64.\+deb} 以确认所有文件位置。
+\end{DoxyItemize}
+\item {\bfseries{Open\+CV}} 和 {\bfseries{Open\+Vino}} 安装到主机和平台上的 {\bfseries{/usr/share/jevoispro-\/opencv-\/\+V\+E\+R\+S\+I\+O\+N/}} 和 {\bfseries{/usr/share/jevoispro-\/openvino-\/\+V\+E\+R\+S\+I\+O\+N/}}，以避免与您可能已经拥有的其他 Open\+CV 和 Open\+Vino 安装发生冲突。
+\item {\bfseries{jevoispro-\/sdk-\/dev}} Ubuntu 主机包提供了交叉编译 Je\+Vois 软件所需的以下文件：
+\begin{DoxyItemize}
+\item {\bfseries{/usr/share/jevoispro-\/sdk/jevoispro-\/sysroot}} 包含在 Je\+Vois-\/\+Pro 上运行的整个操作系统的净化版本。净化方式是将所有符号链接转换为 jevoispro-\/sysroot 目录中的相对位置，而不是在标准 Linux 操作系统中拥有一些绝对符号链接（这些绝对链接最终会指向根文件系统中的库和其他文件，适用于 Intel A\+M\+D64，而不是所需的 A\+R\+M64 库和文件）。
+\item 尝试在从 \href{https://jevois.usc.edu}{\texttt{ https\+://jevois.\+usc.\+edu}} 下载的 deb 上运行 {\ttfamily dpkg -\/c jevoispro-\/sdk-\/dev-\/\+V\+E\+R\+S\+I\+O\+N.\+deb} 进行确认。 
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{CompilingJeVois}{}\doxysubsection{从源代码编译 Je\+Vois 核心软件}\label{CompilingJeVois}
+Je\+Vois 核心软件位于名为 {\bfseries{jevois}} 的存储库中，位于 \href{https://github.com/jevois}{\texttt{ https\+://github.\+com/jevois}}
+
+仅 Ubuntu Linux（建议使用 20.\+04（1.20.\+0）/24.04（1.21.\+0） amd64 版本）支持从源代码编译 Je\+Vois 核心软件。
+
+在尝试编译 Je\+Vois 之前，您应该至少阅读一次 \href{https://github.com/jevois/jevois/blob/master/INSTALL}{\texttt{ I\+N\+S\+T\+A\+LL 说明}}。作为此过程的一部分，您将下载所有 Je\+Vois 核心软件和所有必要的 Ubuntu 软件包。\hypertarget{CompilingJeVois_autotoc_md4}{}\doxyparagraph{理论}\label{CompilingJeVois_autotoc_md4}
+Je\+Vois 核心软件是用 C++-\/17 编写的。它提供从摄像头传感器捕获视频、将视频输出到 U\+SB 链路、串行通信、基本低级图像处理功能的代码，支持从具有运行时可调参数的组件集合创建更高级的机器视觉算法，以及支持在运行时加载/卸载机器视觉模块。
+
+Je\+Vois 核心软件使用 \href{https://cmake.org}{\texttt{ C\+Make}} 配置和编译。
+
+它可以在您的 Linux 计算机上本地编译（{\bfseries{host}} 模式），在这种情况下，视频将从任何连接的摄像头捕获，视频输出将发送到您的计算机显示器。它还可以为 Je\+Vois 智能摄像头内的 C\+PU 进行交叉编译（{\bfseries{platform}} 模式），在这种情况下，视频将从 Je\+Vois 摄像头内的视频传感器捕获，视频输出将通过 U\+SB 链路进行流式传输。\hypertarget{CompilingJeVois_autotoc_md5}{}\doxyparagraph{从 Git\+Hub 获取源代码}\label{CompilingJeVois_autotoc_md5}
+\begin{DoxyVerb}cd
+git clone https://github.com/jevois/jevois.git
+\end{DoxyVerb}
+
+
+我们还强烈建议您从 Git\+Hub 获取其他 Je\+Vois 源代码存储库：
+
+\begin{DoxyVerb}git clone https://github.com/jevois/jevoisbase.git
+git clone https://github.com/jevois/samplemodule.git
+git clone https://github.com/jevois/samplepythonmodule.git
+git clone https://github.com/jevois/jevois-tutorials.git
+\end{DoxyVerb}
+
+
+对于： \begin{DoxyVerb}git clone https://github.com/jevois/jevois-sdk.git
+\end{DoxyVerb}
+
+
+or, for\+: \begin{DoxyVerb}git clone https://github.com/jevois/jevoispro-sdk.git
+\end{DoxyVerb}
+\hypertarget{CompilingJeVois_autotoc_md6}{}\doxyparagraph{交叉编译代码所需的 S\+DK}\label{CompilingJeVois_autotoc_md6}
+要为主机编译 jevois、jevoisbase、samplemodule 等，您只需继续下一部分即可。
+
+要为平台交叉编译这些，首先需要安装 Je\+Vois S\+D\+K，因为它将提供交叉编译所需的 A\+RM 库。最简单的方法是安装 {\bfseries{jevois-\/sdk-\/dev}} 或 {\bfseries{jevoispro-\/sdk-\/dev}} debian 文件，详情请参阅 \mbox{\hyperlink{ProgrammerSource}{Je\+Vois Ubuntu 软件包和源代码存储库}}\hypertarget{CompilingJeVois_autotoc_md7}{}\doxyparagraph{Je\+Vois-\/\+A33：完全重新配置和编译}\label{CompilingJeVois_autotoc_md7}
+有两种方法可以为 编译软件：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{host：}} 在您的 amd64 桌面上本地编译，以便在该 amd64 桌面上执行。在开发期间使用此功能，因为它允许您在桌面上编译代码，然后立即使用常规网络摄像头对其进行测试。当然，某些模块在桌面上不起作用，例如如果它们使用 A\+RM 特定的 N\+E\+ON 指令。但总的来说，这是开发和调试新机器视觉模块的最快方法。
+\item {\bfseries{platform：}} 在您的桌面上交叉编译适用于 A\+RM 目标处理器的代码，这是 中使用的架构。交叉编译的文件将存储在暂存区（{\bfseries{/var/lib/jevois-\/build}} 和 {\bfseries{/var/lib/jevois-\/microsd}} ）中，然后可以将其刷入 micro\+S\+D。
+\end{DoxyItemize}
+
+提供了脚本来重新编译所有内容：
+
+
+\begin{DoxyItemize}
+\item {\ttfamily rebuild-\/host.\+sh} 将
+\begin{DoxyItemize}
+\item 为您计算机的 C\+PU 进行本地编译
+\item 目标文件将位于脚本创建的 {\bfseries{hbuild/}} 中
+\item 可执行文件将安装到 {\bfseries{/usr/bin}} 
+\item 模块开发人员使用的包含文件将安装在 {\bfseries{/usr/include/jevois}} 中
+\item Je\+Vois 配置文件将安装在 {\bfseries{/jevois}} 中（以匹配其在平台硬件上的位置）。这也是您应该为 Je\+Vois 安装机器视觉模块的地方。
+\item 因此，所有文件和可执行文件都可以立即在您的计算机上使用。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/platform.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois 智能相机内的 A\+RM C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\bfseries{pbuild/}} 中
+\item Je\+Vois 在运行时使用的配置文件将暂存到 {\bfseries{/var/lib/jevois-\/microsd/config/}} 中，稍后将安装到实际 micro\+SD 卡上的 {\bfseries{/jevois/config/}} 中。
+\item 包括 {\ttfamily jevois-\/daemon} 在内的可执行文件将暂存到 {\bfseries{/var/lib/jevois-\/build/usr/bin/}} 中，稍后将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/bin/}} 中。
+\item 包含文件将暂存到 {\bfseries{/var/lib/jevois-\/build/usr/include/jevois/}} 中，稍后将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/include/jevois/}} 中。
+\item 核心 Je\+Vois 库 ({\bfseries{libjevois.\+so}}) 将暂存到 {\bfseries{/var/lib/jevois-\/build/usr/lib/}} 中，稍后将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/lib/}} 中。
+\item 文档文件将暂存到 {\bfseries{/var/lib/jevois-\/build/usr/share/doc/jevois-\/platform/}} 中，稍后将安装到实际 micro\+SD 卡上的 {\bfseries{/usr/share/doc/jevois-\/platform/}} 中。
+\item 因此，由于所有目标文件都存储在暂存区中，它们将准备好被闪存到 micro\+S\+D，然后可以将其插入到您的 Je\+Vois 智能相机中。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+创建的主要可执行文件是 {\ttfamily jevois-\/daemon，它基本上实现了} Je\+Vois 引擎，它将协调从相机传感器到机器视觉处理再到 U\+SB 视频流的数据流。有关更多信息，请参阅 Je\+Vois\+Daemon。\hypertarget{CompilingJeVois_autotoc_md8}{}\doxyparagraph{Je\+Vois-\/\+Pro：完全重新配置和编译}\label{CompilingJeVois_autotoc_md8}
+有三种方法可以为 编译软件：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{host：在您的}} amd64 桌面上本地编译，以便在该 amd64 桌面上执行。在开发期间使用此功能，因为它允许您在桌面上编译代码，然后立即使用常规网络摄像头对其进行测试。当然，某些模块在桌面上不起作用，例如如果它们使用 N\+P\+U。但总的来说，这是开发和调试新机器视觉模块的最快方法。
+\item {\bfseries{platform：在您的桌面上交叉编译}} arm64 目标处理器的代码，这是 中使用的架构。通常，如果您想要将 {\itshape 支持文件放置在暂存区（{\bfseries{/var/lib/jevoispro-\/build}} 和} {\bfseries{/var/lib/jevoispro-\/microsd），则只需运行此操作，然后在编译需要链接或以其他方式使用这些文件的其他模块时可以引用这些文件。}} 
+\item {\bfseries{platform-\/pdeb：在您的桌面上交叉编译}} 的 arm64 目标处理器代码，并创建一个 {\itshape 原生} arm64 deb 包，您稍后可以将其复制到 micro\+SD 并安装在 上。通常，您会在主机模式下测试和调试新的机器视觉模块后执行此操作，现在您已准备好在 相机上试用它。
+\end{DoxyItemize}
+
+提供了脚本来重新编译所有内容：
+
+
+\begin{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/host.\+sh} 将
+\begin{DoxyItemize}
+\item 为您计算机的 C\+PU 进行本地编译
+\item 目标文件将位于脚本创建的 {\bfseries{phbuild/}} 中
+\item 可执行文件将安装到 {\bfseries{/usr/bin}} 
+\item 模块开发人员要使用的包含文件将安装在 {\bfseries{/usr/include/jevois}} 中
+\item Je\+Vois 配置文件将安装在 {\bfseries{/jevoispro}} 中，这也是稍后安装机器视觉模块和 Je\+Vois-\/\+Pro 共享数据的地方。
+\item 因此，所有文件和可执行文件都可以立即在您的计算机上使用。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/platform.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois-\/\+Pro 智能相机内的 A\+RM C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\bfseries{ppbuild/}} 中
+\item Je\+Vois 在运行时使用的配置文件将暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/config/}}
+\item 包括 {\ttfamily jevois-\/daemon} 的可执行文件将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/bin/}}
+\item 包含文件将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/include/jevois/}}
+\item 核心 Je\+Vois 库 ({\bfseries{libjevoispro.\+so}}) 将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/lib/}}
+\item 文档文件将暂存到{\bfseries{/var/lib/jevoispro-\/build/usr/share/doc/jevoispro-\/platform/}}
+\item 因此，由于所有目标文件都存储在暂存区中，因此当您尝试编译 jevoisbase 或新的自定义机器视觉模块时，它们将可以用作依赖项。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/platform-\/pdeb.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois-\/\+Pro 智能相机内的 A\+RM C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\bfseries{ppdbuild/}} 中
+\item 将创建一个 deb 包，该包应在登录相机时安装在相机上。
+\item 文件位置与上述主机相同。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+创建的主要可执行文件是 {\ttfamily jevoispro-\/daemon，它基本上实现了} Je\+Vois 引擎，该引擎将协调从相机传感器到机器视觉处理再到 H\+D\+MI 视频显示的数据流。有关更多信息，请参阅 Je\+Vois\+Daemon。
+
+下面是从 源代码编译 jevois 和 jevoisbase 时应该看到的内容的演示：
+
+\hypertarget{CompilingJeVois_autotoc_md9}{}\doxyparagraph{部分重新编译}\label{CompilingJeVois_autotoc_md9}
+脚本 {\ttfamily rebuild-\/host.\+sh、{\ttfamily rebuild-\/platform.\+sh} 等会清除并重新编译所有内容。这需要一段时间。} 
+
+您应该至少运行它们一次。
+
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
+
+
+\begin{DoxyItemize}
+\item \+: for host \begin{DoxyVerb}cd hbuild
+make -j
+sudo make install
+make doc     # optional; if desired
+\end{DoxyVerb}
+
+\item \+: for platform \begin{DoxyVerb}cd pbuild
+make -j
+sudo make install
+\end{DoxyVerb}
+
+\item \+: for host \begin{DoxyVerb}cd phbuild
+make -j
+sudo make install
+make doc     # optional; if desired
+\end{DoxyVerb}
+
+\item \+: for platform {\itshape support} files \begin{DoxyVerb}cd ppbuild
+make -j
+sudo make install
+\end{DoxyVerb}
+
+\item \+: for platform {\itshape native} deb \begin{DoxyVerb}cd ppdbuild
+make -j
+sudo make install
+sudo cpack # 将使用 arm64 arch 将 deb 包重新生成为 ppdbuild/jevoispro-platform_XXX_arm64.deb。
+# 然后，您可以将此文件复制到 microSD，将 JeVois-Pro 切换到控制台启动，然后
+# `apt remove jevoispro-platform` 删除现有版本，然后 `dpkg -i <your_new_deb>`。
+\end{DoxyVerb}
+
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+当您 {\ttfamily apt remove jevoispro-\/platform} 时，它也会删除 jevoisprobase-\/platform。因此，请确保您已编译它并将其打包为可安装的 deb，使用 \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}} 中的说明
+\end{DoxyNote}
+\hypertarget{CompilingJeVois_autotoc_md10}{}\doxyparagraph{高级配置标志}\label{CompilingJeVois_autotoc_md10}
+脚本 {\ttfamily rebuild-\/host.\+sh}, {\ttfamily rebuild-\/platform.\+sh} 等将所有命令行参数传递给 cmake。可用标志包括（请参阅 jevois/ 中的 C\+Make\+Lists.\+txt 了解最新信息）：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{-\/D\+J\+E\+V\+O\+I\+S\+\_\+\+L\+D\+E\+B\+U\+G\+\_\+\+E\+N\+A\+B\+LE=ON}} 启用调试级别消息。默认情况下，这些消息处于关闭状态，因此它们不会使用任何 C\+PU 并且不会减慢操作速度。打开它们对于低级调试很有用。请注意，\+U\+SB 流式传输代码的某些部分对时间至关重要，并且在启用 L\+D\+E\+B\+UG 时可能会失败（即给出 U\+SB 错误）。请注意，这只会启用 L\+D\+E\+B\+UG 语句进行编译。要在运行时查看它们，您还需要将 {\ttfamily loglevel} 参数设置为调试级别，有关 {\ttfamily loglevel} 参数的信息，请参阅 User\+Cli。
+\item {\bfseries{-\/D\+J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+E\+N\+A\+B\+LE=ON}} 启用函数跟踪，每次进入特定函数时都会发出一条消息（在 L\+D\+E\+B\+UG 级别），退出时会发出另一条消息。要跟踪的函数需要在其中包含 \mbox{\hyperlink{group__debugging_ga9061a9b1a920652dd863efb219c0d9d4}{J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+C\+E(level)}} 语句。由于跟踪消息处于 L\+D\+E\+B\+UG 级别，因此如果未启用 L\+D\+E\+B\+U\+G（参见上文），则不会看到跟踪消息。
+\item {\bfseries{-\/D\+J\+E\+V\+O\+I\+S\+\_\+\+U\+S\+E\+\_\+\+S\+Y\+N\+C\+\_\+\+L\+OG=ON}} 使用同步日志记录，即，我们等到每条日志消息都打印出来后再继续执行。这会干扰时间关键的代码部分，例如与 U\+SB 流相关的任何内容。因此，默认情况下，\+Je\+Vois 中的日志记录是异步的，消息只是被推送到队列中而不等待它们被打印出来，然后由单独的线程将它们打印出来。这种异步日志记录消除了由于日志记录而导致的大部分减速，但在调试与 Linux 系统或内核交互的东西时可能会造成混淆，因为 Je\+Vois 消息与 syslog 消息出现的顺序可能无法反映发生事件的真实顺序。
+\item {\bfseries{-\/D\+J\+E\+V\+O\+I\+S\+\_\+\+L\+O\+G\+\_\+\+T\+O\+\_\+\+F\+I\+LE=ON}} 启用将所有日志消息发送到文件 jevois.\+log 而不是控制台。仅适用于异步日志记录。 
+\end{DoxyItemize}\hypertarget{CompilingJeVoisBase}{}\doxysubsection{从源代码编译 Je\+Vois\+Base 软件}\label{CompilingJeVoisBase}
+Je\+Vois\+Base 视觉软件位于名为 {\ttfamily jevoisbase} 的存储库中，位于 \href{https://github.com/jevois}{\texttt{ https\+://github.\+com/jevois}}
+
+它提供了超过 25 个机器视觉模块的基本集合。这些模块默认与 Je\+Vois 智能相机捆绑在一起。它们提供了广泛的机器视觉算法，包括视觉注意（visual attention）和场景要点（gist of a scene）、目标识别、\+Q\+Rcode 解码、目标跟踪、道路跟踪（road following）等。
+
+仅 Ubuntu Linux 20.\+04 amd64 支持从源代码编译 Je\+Vois\+Base 软件。
+
+在尝试编译 Je\+Vois\+Base 之前，您应该为主机和平台编译 jevois，如 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} 中所述\hypertarget{CompilingJeVoisBase_autotoc_md11}{}\doxyparagraph{Theory}\label{CompilingJeVoisBase_autotoc_md11}
+Je\+Vois\+Base 核心软件采用 C++-\/17 编写。它使用 Je\+Vois 核心软件提供的功能，并实现可在 Je\+Vois 智能相机上运行的机器视觉模块。
+
+Je\+Vois\+Base 软件使用 \href{https://cmake.org}{\texttt{ C\+Make}} 进行配置和编译，与 Je\+Vois 软件一样。
+
+与核心 Je\+Vois 软件一样，它可以在您的 Linux 计算机上本地编译（{\bfseries{host}} 模式），在这种情况下，视频将从任何连接的摄像头捕获，视频输出将发送到您的计算机显示器。它还可以为 Je\+Vois 智能摄像头内的 C\+PU 进行交叉编译（{\bfseries{platform}} 模式），在这种情况下，视频将从 Je\+Vois 摄像头内的视频传感器捕获，视频输出将通过 U\+SB 链路进行流式传输。
+
+由于 Je\+Vois\+Base 中的多个机器视觉模块使用相同的组件，例如视觉注意（visual attention）组件，因此 Je\+Vois\+Base 的架构如下：
+
+
+\begin{DoxyItemize}
+\item  上的 {\ttfamily libjevoisbase.\+so} 或 上的 {\ttfamily libjevoisprobase.\+so} 包含所有组件，即基本的机器视觉算法。
+\item 然后，模块只需将这些组件的集合连接在一起，连接到摄像头输入，并通过 U\+SB 或 H\+D\+MI 连接到视频流输出。
+\end{DoxyItemize}\hypertarget{CompilingJeVoisBase_autotoc_md12}{}\doxyparagraph{从 Git\+Hub 获取源代码}\label{CompilingJeVoisBase_autotoc_md12}
+\begin{DoxyVerb}cd
+git clone https://github.com/jevois/jevoisbase.git
+\end{DoxyVerb}
+\hypertarget{CompilingJeVoisBase_autotoc_md13}{}\doxyparagraph{首次编译之前：获取贡献的软件包}\label{CompilingJeVoisBase_autotoc_md13}
+\begin{DoxyNote}{Note}
+编译脚本现在会自动执行此操作。
+\end{DoxyNote}
+目录 {\bfseries{jevoisbase/\+Contrib}} 用于收集贡献的源代码包。
+
+在您第一次尝试编译 jevoisbase 之前，您应该下载并修补那些贡献的软件包，如下所示：
+
+\begin{DoxyVerb}cd jevoisbase/Contrib
+./reinstall.sh
+\end{DoxyVerb}
+\hypertarget{CompilingJeVoisBase_autotoc_md14}{}\doxyparagraph{Je\+Vois-\/\+A33：完全重新配置和编译}\label{CompilingJeVoisBase_autotoc_md14}
+提供了脚本来重新编译所有内容：
+
+
+\begin{DoxyItemize}
+\item {\ttfamily rebuild-\/host.\+sh} 将
+\begin{DoxyItemize}
+\item 为您计算机的 C\+PU 进行本机编译
+\item 目标文件将位于脚本创建的 {\ttfamily hbuild/} 中
+\item 模块和库将安装在 {\ttfamily /jevois} 中（以匹配它们在平台硬件上的位置）
+\item 因此，模块可立即在您的计算机上使用。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/platform.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois 智能相机 (arm-\/gnueabi-\/hf) 内的 C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\ttfamily pbuild/} 中
+\item 模块、配置文件等将安装到暂存目录 {\bfseries{/var/lib/jevois-\/microsd/}}（参见 Programmer\+Organization），稍后可将其刷入 micro\+S\+D。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+一旦为主机编译并安装 jevoisbase，您就可以使用 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} 进行尝试。\hypertarget{CompilingJeVoisBase_autotoc_md15}{}\doxyparagraph{Je\+Vois-\/\+Pro：完全重新配置和编译}\label{CompilingJeVoisBase_autotoc_md15}
+提供了脚本来重新编译所有内容：
+
+
+\begin{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/host.\+sh} 将
+\begin{DoxyItemize}
+\item 为您计算机的 C\+PU 进行本地编译
+\item 目标文件将位于脚本创建的 {\ttfamily phbuild/} 中
+\item 模块和库将安装在 {\ttfamily /jevoispro} 中（以匹配它们在平台硬件上的位置）
+\item 因此，模块可立即在您的计算机上使用。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/platform.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois-\/\+Pro 智能相机内的 A\+RM C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\bfseries{ppbuild/}} 中
+\item Je\+Vois 在运行时使用的配置文件将暂存到 {\bfseries{/var/lib/jevoispro-\/microsd/config/}}
+\item 包括 {\ttfamily jevois-\/daemon} 的可执行文件将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/bin/}}
+\item 包含文件将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/include/jevois/}}
+\item 核心 Je\+Vois Base 库 ({\bfseries{libjevoisprobase.\+so}}) 将暂存到 {\bfseries{/var/lib/jevoispro-\/build/usr/lib/}}
+\item 文档文件将暂存到{\bfseries{/var/lib/jevoispro-\/build/usr/share/doc/jevoispro-\/platform/}}
+\item 因此，由于所有目标文件都存储在暂存区中，因此当您尝试编译新的自定义机器视觉模块时，它们将可以用作依赖项。
+\end{DoxyItemize}
+\item {\ttfamily rebuild-\/pro-\/platform-\/pdeb.\+sh} 将
+\begin{DoxyItemize}
+\item 为 Je\+Vois-\/\+Pro 智能相机内的 A\+RM C\+PU 进行交叉编译
+\item 目标文件将位于脚本创建的 {\bfseries{ppdbuild/}} 中
+\item 将创建一个 deb 包，该包应在登录相机时安装在相机上。
+\item 文件位置与上述主机相同。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+一旦为主机编译并安装 jevoisbase，您就可以使用 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} 进行尝试。
+
+下面是从 源代码编译 jevois 和 jevoisbase 时应该看到的内容的演示：
+
+\hypertarget{CompilingJeVoisBase_autotoc_md16}{}\doxyparagraph{部分重新编译}\label{CompilingJeVoisBase_autotoc_md16}
+脚本 {\ttfamily rebuild-\/host.\+sh} 和 {\ttfamily rebuild-\/platform.\+sh} 清除并重新编译所有内容。
+
+您应该至少运行它们一次。
+
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
+
+
+\begin{DoxyItemize}
+\item \+: for host \begin{DoxyVerb}cd hbuild
+make -j
+sudo make install
+make doc     # optional; if desired
+\end{DoxyVerb}
+
+\item \+: for platform \begin{DoxyVerb}cd pbuild
+make -j
+sudo make install
+make jvpkg   # if desired
+\end{DoxyVerb}
+
+\item \+: for host \begin{DoxyVerb}cd phbuild
+make -j
+sudo make install
+make doc     # optional; if desired
+\end{DoxyVerb}
+
+\item \+: for platform {\itshape support} files \begin{DoxyVerb}cd ppbuild
+make -j
+sudo make install
+\end{DoxyVerb}
+
+\item \+: for platform deb \begin{DoxyVerb}cd ppdbuild
+make -j
+sudo make install
+sudo cpack # 将重新生成 deb 包到 ppdbuild/jevoisprobase-platform_XXX_arm64.deb
+# 然后您可以将此文件复制到 microSD，将 JeVois-Pro 切换到控制台启动，然后
+# `apt remove jevoisprobase-platform` 删除现有版本，然后 `dpkg -i <your_new_deb>`。
+\end{DoxyVerb}
+ 
+\end{DoxyItemize}\hypertarget{JeVoisDaemon}{}\doxysubsection{jevois-\/daemon 可执行文件}\label{JeVoisDaemon}
+\begin{DoxyNote}{Note}
+为了便于阅读，我们下面只使用 {\bfseries{jevois-\/daemon}} ，但在使用 时，应将其替换为 {\bfseries{jevoispro-\/daemon}} 
+\end{DoxyNote}
+编译 Je\+Vois 框架时创建的主要可执行文件是 上的 {\bfseries{jevois-\/daemon}} 或 上的 {\bfseries{jevoispro-\/daemon}} ，它基本上实现了 jevois\+::\+Engine，它将协调从摄像头传感器到机器视觉处理再到 U\+SB 上的视频流的数据流。
+
+\begin{DoxyNote}{Note}
+{\ttfamily jevois-\/deamon} 可以在主机上运行（当为主机编译 jevois 时），在这种情况下，所有机器视觉算法都将在主机上运行。在此模式下，您通常会使用常规 U\+SB 摄像头，或者您可能希望使用仅配置了直通视频映射的 Je\+Vois 智能摄像头（这样 Je\+Vois 摄像头就不会自行进行任何处理）。请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 和 \href{http://jevois.org/moddoc/PassThrough/modinfo.html}{\texttt{ Pass\+Through 模块}}。在 Je\+Vois 摄像头处于直通模式的情况下在主机上运行 jevois-\/daemon 通常有助于收集 Je\+Vois 摄像头看到的训练数据（例如，稍后要识别的物体图片）。
+
+{\ttfamily jevois-\/daemon} 还可在 Je\+Vois 智能相机硬件上运行，只要插入并启动即可。在这种情况下，智能相机硬件将执行所有机器视觉处理。在此模式下操作时，通常您不会希望在主机上再次运行 jevois-\/daemon，因为这相当于连续运行 jevois-\/daemon 两次。一个例外是如上所述的训练数据收集。相反，您通常希望在主机上运行普通的视频查看器，例如 guvcview，或者您开发的一些自定义机器视觉代码，它将从 Je\+Vois 相机抓取视频帧，然后在主机上进一步处理它们。
+\end{DoxyNote}
+\hypertarget{JeVoisDaemon_autotoc_md39}{}\doxysubsubsection{在主机上运行 jevois-\/daemon}\label{JeVoisDaemon_autotoc_md39}
+要在主机上运行它，请为主机安装 jevois 和 jevoisbase deb 包（请参阅 \mbox{\hyperlink{ProgrammerSource}{Je\+Vois Ubuntu 软件包和源代码存储库}} ）。或者从 Git\+Hub 获取源代码并重新编译（请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} 和 \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}} ），然后在 jevois 和 jevoisbase 中运行 {\ttfamily rebuild-\/host.\+sh} 。
+
+然后插入任意 U\+SB 摄像头，并输入
+
+\begin{DoxyVerb}jevois-daemon
+\end{DoxyVerb}
+
+
+您应该会在窗口中看到桌面上处理过的来自网络摄像头的视频。请注意，\+Je\+Vois 核心软件不提供任何模块，因此请确保在尝试使用 jevois-\/daemon 之前继续编译和安装 jevoisbase。
+
+{\bfseries{jevois-\/daemon}} 接受许多命令行参数，请尝试
+
+\begin{DoxyVerb}jevois-daemon --help
+\end{DoxyVerb}
+
+
+才能看到它们。请注意，jevois-\/daemon 启动后，其中一些将会消失，例如 {\ttfamily cameradev} 指定要使用的相机（或视频输入文件）。一旦 jevois-\/daemon 运行，该参数就无法再更改。
+
+一旦 {\ttfamily jevois-\/daemon} 运行，您就可以通过在启动 jevois-\/daemon 的终端中键入命令来与 Je\+Vois 系统交互。例如，尝试：
+
+\begin{DoxyVerb}info
+help
+listmappings
+\end{DoxyVerb}
+
+
+要以特定模式启动 jevois-\/daemon，请在 listmapping 列表中找到其编号，然后键入 \textquotesingle{}quit\textquotesingle{} 退出 jevois-\/daemon，最后
+
+\begin{DoxyVerb}jevois-daemon --videomapping=19
+\end{DoxyVerb}
+
+
+使用新的视频映射重新启动它（此处，根据列表映射，映射 19 用于演示二维码）。有关命令的更多信息，请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} ，有关与 jevoisbase 中的默认模块集合相对应的视频映射列表，请参阅 \href{http://jevois.org/start/start.html}{\texttt{ http\+://jevois.\+org/start/start.\+html}}。
+
+\begin{DoxyNote}{Note}
+如果您的 U\+SB 网络摄像头无法支持给定视频映射所需的摄像头分辨率，那么您将收到错误，并且该映射无法在主机上运行。
+\end{DoxyNote}
+\hypertarget{JeVoisDaemon_autotoc_md40}{}\doxysubsubsection{jevois-\/daemon 选项}\label{JeVoisDaemon_autotoc_md40}
+在撰写本文时， {\ttfamily jevois-\/daemon} {\ttfamily --help} 返回（在此重现主要是为了帮助人们通过关键字搜索此文档）：
+
+\begin{DoxyVerb}General Options:  
+  --tracelevel (unsigned int) default=[0]
+    Set the minimum trace level to display
+
+  --loglevel (jevois::manager::LogLevel) default=[info] List:[fatal|error|info]
+    Set the minimum log level to display
+
+  --help (bool) default=[false]
+    Print this help message
+
+
+Engine Options:  
+  --usbserialdev (string) default=[]
+    Over-the-USB serial device name, or empty
+
+  --cameradev (string) default=[/dev/video0]
+    Camera device name (if starting with /dev/v...), or movie file name (e.g., movie.mpg) or image sequence (e.g., im%02d.jpg, to read frames im00.jpg, im01.jpg, etc).
+
+  --cameranbuf (unsigned int) default=[0]
+    Number of video input (camera) buffers, or 0 for automatic.
+
+  --serout (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB]
+    Send module serial messages to selected serial port(s)
+
+  --cpumax (unsigned int) default=[1344] List:[120|240|312|408|480|504|600|648|720|816|912|1008|1044|1056|1080|1104|1116|1152|1200|1224|1248|1296|1344]
+    CPU maximum frequency in MHz
+
+  --videomapping (int) default=[-1]
+    Index of Video Mapping to use, or -1 to use the default mapping
+
+  --camreg (bool) default=[false]
+    Enable raw access to camera registers through setcamreg and getcamreg
+
+  --cpumode (jevois::engine::CPUmode) default=[Performance] List:[PowerSave|Conservative|OnDemand|Interactive|Performance]
+    CPU frequency modulation mode
+
+  --gadgetdev (string) default=[]
+    Gadget device name. This is used on platform hardware only. On host hardware, a display window will be used unless gadgetdev is None (useful for benchmarking) or is a file stem for a movie file that does not start with /dev/ (and which should contain a printf-style directive for a single int argument, the movie number).
+
+  --camturbo (bool) default=[false]
+    Enable camera turbo mode by relaxing the need for DMA-coherent video buffer memory. This can accelerate severalfolds access to the captured image data, but it may also yield stripe artifacts with some modules, such as PassThrough. The stripes are pieces of incorrect data in the cache. You should experiment with each particular module. Turbo mode is not recommended for any production-grade application.
+
+  --gadgetnbuf (unsigned int) default=[0]
+    Number of video output (USB video) buffers, or 0 for auto
+
+  --serlog (jevois::engine::SerPort) default=[None] List:[None|All|Hard|USB]
+    Show log and debug messages on selected serial port(s)
+
+  --serialdev (string) default=[stdio]
+    Hardware (4-pin connector) serial device name, or 'stdio' to use the console, or empty for no hardware serial port\end{DoxyVerb}
+\hypertarget{JeVoisDaemon_autotoc_md41}{}\doxysubsubsection{jevois-\/daemon 配置文件}\label{JeVoisDaemon_autotoc_md41}
+\begin{DoxyNote}{Note}
+对于，将下面的 {\bfseries{/jevois/}} 替换为 {\bfseries{/jevoispro/}} 
+\end{DoxyNote}
+jevois-\/daemon 使用多个配置文件，源位于 {\bfseries{jevois/\+Config/}} 并且它们安装到主机上的 {\bfseries{/jevois/config/}} 和平台 micro\+SD 上的 {\bfseries{J\+E\+V\+O\+IS\+:/jevois/config/}} 中。
+
+
+\begin{DoxyItemize}
+\item {\bfseries{videomappings.\+cfg}} 可用视频映射列表，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}}
+\item {\bfseries{params.\+cfg}} 启动时设置的参数，这相当于从命令行指定这些参数
+\item {\bfseries{initscript.\+cfg}} 在启动时运行的脚本，您可以在此文件中放入任何有效的命令，就像您以交互方式输入它们一样，有关更多信息，请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} 。
+\end{DoxyItemize}\hypertarget{JeVoisDaemon.dox_autotoc_md42}{}\doxysubsubsection{在 Je\+Vois-\/\+A33 平台上运行 jevois-\/daemon}\label{JeVoisDaemon.dox_autotoc_md42}
+{\ttfamily jevois-\/daemon} 在平台上自动启动。启动它的脚本安装在 micro\+SD 上的 {\bfseries{L\+I\+N\+UX\+:/usr/bin/jevois.sh}} 中。它的源代码位于 {\bfseries{jevois/bin/jevois.\+sh}} 中，并作为 rebuild-\/platform.\+sh 过程的一部分安装到 micro\+SD 暂存区。
+
+您可以编辑此脚本，例如，如果您希望在 {\ttfamily gdb} 调试器中运行 jevois-\/daemon，只需替换该行
+
+\begin{DoxyVerb}/usr/bin/jevois-daemon ${opts}
+\end{DoxyVerb}
+
+
+by
+
+\begin{DoxyVerb}gdb --args /usr/bin/jevois-daemon ${opts}
+\end{DoxyVerb}
+
+
+请注意，自从 添加了 Python 支持后，{\ttfamily jevois-\/daemon} 启动时会引入 libcrypto，这会导致平台上的 gdb 出现问题。因此，当 gdb 在平台上启动时，发出
+
+\begin{DoxyVerb}handle SIGILL nostop noprint
+\end{DoxyVerb}
+
+
+在向 gdb 发出 {\ttfamily run} 命令之前。请参阅 \href{https://www.raspberrypi.org/forums/viewtopic.php?p=155085}{\texttt{ https\+://www.\+raspberrypi.\+org/forums/viewtopic.\+php?p=155085}} 以了解 Raspberry Pi 上报告的相同问题。
+
+您可以启用核心转储，正常运行 jevois-\/daemon 直到它崩溃，然后使用 gdb 在核心文件中查找错误，而不是在 gdb 中运行（有时它会在处理许多线程等时遇到困难）：
+
+\begin{DoxyVerb}ulimit -c unlimited # enable core dumps
+jevois.sh # get to the part that crashes and it will quit, dumping a file named 'core'
+gdb /usr/bin/jevois-daemon core
+# press return a few times until you get a prompt
+bt # to show the backtrace leading to the crash
+quit
+\end{DoxyVerb}
+\hypertarget{JeVoisDaemon_autotoc_md43}{}\doxysubsubsection{在 Je\+Vois-\/\+Pro 平台上运行 jevois-\/daemon}\label{JeVoisDaemon_autotoc_md43}
+{\ttfamily jevoispro-\/daemon} 在平台上自动启动。启动它的脚本安装在 micro\+SD 上的 {\bfseries{L\+I\+N\+UX\+:/usr/bin/jevoispro.sh}} 中。它的源代码位于 {\bfseries{jevois/bin/jevoispro.\+sh}} 中，并作为 {\bfseries{jevois}} 包的 rebuild-\/platform-\/pdeb.\+sh 过程的一部分安装到 micro\+SD 中。
+
+要调试硬崩溃，请按以下步骤操作：启动控制台，启用核心转储，正常运行 jevoispro-\/daemon 直到它崩溃，然后使用 gdb 在核心文件中查找错误：
+
+首先，按照 \mbox{\hyperlink{ProUserQuick}{Je\+Vois-\/\+Pro 快速入门用户指南}} 中的说明切换到控制台启动
+
+然后重新启动并以 root / jevois 身份登录，然后：
+
+\begin{DoxyVerb}ulimit -c unlimited # enable core dumps
+jevoispro.sh # get to the part that crashes and it will quit, dumping a file named 'core'
+gdb /usr/bin/jevoispro-daemon core
+# press return a few times until you get a prompt
+bt # to show the backtrace leading to the crash
+quit
+\end{DoxyVerb}
+ \hypertarget{FlashingToSD}{}\doxysubsection{刷入 micro\+SD 卡}\label{FlashingToSD}
+因为 运行完整的 Ubuntu 操作系统，并带有 Debian 包管理器，所以重新刷新 micro\+SD 应该非常容易，并且只有在它严重损坏时才需要这样做。
+
+在 上，重新刷新更为常见，因为这是更新核心软件的唯一方法，因为 操作系统是准系统并且没有包管理器。\hypertarget{FlashingToSD_autotoc_md32}{}\doxysubsubsection{Je\+Vois-\/\+Pro 流程}\label{FlashingToSD_autotoc_md32}
+
+\begin{DoxyItemize}
+\item 如果您只需要安装软件包，例如 {\bfseries{jevois}} 和 {\bfseries{jevoisbase}} 的定制版本，请按照 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} 和 \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}} 末尾的说明进行操作
+\item 如果您的 micro\+SD 严重损坏，请从 \href{http://jevois.org/start/software.html}{\texttt{ http\+://jevois.\+org/start/software.\+html}} 下载 micro\+SD 映像或按照 Programmer\+Source（上一节）中的说明从源代码构建一个。
+\item 然后按照 \mbox{\hyperlink{NewMicroSD}{如何为 Je\+Vois 格式化新的 Micro\+SD 卡}} 中的说明进行操作
+\end{DoxyItemize}\hypertarget{FlashingToSD_autotoc_md33}{}\doxysubsubsection{Je\+Vois-\/\+A33 流程}\label{FlashingToSD_autotoc_md33}
+当您在 {\bfseries{jevois}} 和 {\bfseries{jevoisbase}} 中运行 {\ttfamily ./rebuild-\/platform.sh} 时，编译后的文件将安装到暂存区（参见 Programmer\+Organization）。
+
+在 Je\+Vois 智能相机上运行它们的最后一步是将整个 Linux 操作系统、内核、\+Je\+Vois 框架（包括 {\ttfamily jevois-\/daemon）和} jevoisbase 模块刷入 micro\+S\+D。
+
+为此，运行
+
+\begin{DoxyVerb}jevois-flash-card
+\end{DoxyVerb}
+
+
+并以交互方式回答问题。
+
+当您安装 Je\+Vois Ubuntu 软件包或运行 {\ttfamily jevois-\/build.\+sh} 从源代码重建整个 buildroot 时，{\ttfamily jevois-\/flash-\/card} 会安装在 {\bfseries{/usr/bin/}} 中。其源代码位于 {\bfseries{jevois-\/sdk/jevois-\/build/jevois-\/flash-\/card}} 中。
+
+一旦你这样做了几次，并且确信自己知道自己在做什么，你可以指示 {\ttfamily jevois-\/flash-\/card} 不要询问任何问题。只要绝对确定你为你的 SD 卡使用了正确的设备，这样你就不会因为一个小打字错误而毁掉你的主硬盘：
+
+\begin{DoxyVerb}jevois-flash-card -y /dev/sdX
+\end{DoxyVerb}
+
+
+其中，您将 {\bfseries{/dev/sdX}} 替换为分配给 micro\+SD 卡的设备。在某些笔记本电脑上，该设备被称为 {\bfseries{/dev/mmcblk\+X。}} 
+
+\begin{DoxyNote}{Note}
+如果您进行大量需要重新刷新的开发（例如，为 Je\+Vois 开发内核代码），那么投资购买超快 micro\+SD 卡可能是值得的。虽然使用普通的 10 级 micro\+SD 卡运行 jevois-\/flash-\/card 可能需要大约 5 分钟，但我们已经能够使用 1800x、1900x 或 V30、\+V60 或 V90 U\+H\+S-\/\+II micro\+SD 卡将此时间缩短到 40 秒以内。
+\end{DoxyNote}
+\hypertarget{FlashingToSD_autotoc_md34}{}\doxyparagraph{更新一些代码后重新刷新-\/完全重新编译}\label{FlashingToSD_autotoc_md34}
+\begin{DoxyVerb}cd ~/jevois && ./rebuild-platform.sh
+cd ~/jevoisbase && ./rebuild-platform.sh
+cd ~/mymodule && ./rebuild-platform.sh     # optional: for your own modules
+jevois-flash-card -y /dev/sdX
+\end{DoxyVerb}
+\hypertarget{FlashingToSD_autotoc_md35}{}\doxyparagraph{部分代码更新后重新刷新}\label{FlashingToSD_autotoc_md35}
+\begin{DoxyVerb}cd ~/jevois/pbuild && make -j
+cd ~/jevoisbase/pbuild && make -j
+cd ~/mymodule && make -j     # optional: for your own modules
+jevois-flash-card -y /dev/sdX
+\end{DoxyVerb}
+\hypertarget{FlashingToSD_autotoc_md36}{}\doxyparagraph{从 github 提取最新版本并重新刷新 -\/ 完全重新编译}\label{FlashingToSD_autotoc_md36}
+\begin{DoxyVerb}cd ~/jevois && git pull && ./rebuild-platform.sh
+cd ~/jevoisbase && git pull && ./rebuild-platform.sh
+cd ~/mymodule && ./rebuild-platform.sh     # optional: for your own modules
+jevois-flash-card -y /dev/sdX
+\end{DoxyVerb}
+\hypertarget{FlashingToSD_autotoc_md37}{}\doxyparagraph{从 github 拉取最新版本并重新刷新 -\/ 部分重新编译}\label{FlashingToSD_autotoc_md37}
+\begin{DoxyVerb}cd ~/jevois && git pull && cd pbuild && make -j
+cd ~/jevoisbase && git pull && cd pbuild && make -j
+cd ~/mymodule/pbuild && make -j     # optional: for your own modules
+jevois-flash-card -y /dev/sdX
+\end{DoxyVerb}
+ \hypertarget{ProgrammerSDK}{}\doxysubsection{程序员 S\+DK 和编写新模块}\label{ProgrammerSDK}
+Je\+Vois 程序员软件开发工具包 (S\+DK) 允许您为 Je\+Vois 创建自己的机器视觉模块。\+S\+DK 非常复杂，因为它不仅包含 Je\+Vois 核心软件，还包含 Je\+Vois 相机的自定义 Linux 内核，以及 Je\+Vois 相机内运行的完整 Linux 操作系统和实用程序集。\hypertarget{ProgrammerSDK_autotoc_md89}{}\doxysubsubsection{开始使用 Je\+Vois 程序员 S\+DK}\label{ProgrammerSDK_autotoc_md89}
+要开始使用程序员 S\+D\+K，可以安装预编译的 deb 包，也可以从源代码构建，详情请参阅 \mbox{\hyperlink{ProgrammerSource}{Je\+Vois Ubuntu 软件包和源代码存储库}}\hypertarget{ProgrammerSDK_autotoc_md90}{}\doxysubsubsection{编写新模块：单个独立模块}\label{ProgrammerSDK_autotoc_md90}
+已在 {\bfseries{/usr/bin}} 中创建脚本 {\ttfamily jevois-\/create-\/module} （源位于 {\bfseries{$\sim$/jevois/scripts/}} ）以自动执行创建新模块的过程。它基本上克隆了 \href{https://github.com/jevois/samplemodule}{\texttt{ https\+://github.\+com/jevois/samplemodule}} 并将其中的一些名称更改为您提供的新名称：
+
+\begin{DoxyVerb}# USAGE: jevois-create-module <VendorName> <ModuleName>
+# 创建一个名为 tolower（ModuleName）的项目目录并填充它：
+
+jevois-create-module MyVendor MyAlgo
+
+# Module is setup in myalgo/
+\end{DoxyVerb}
+
+
+现在编辑您的模块以实际做一些有趣的事情，并更新模块内联文档中的所有自定义 doxygen 标签，例如 @videomapping 等等（有关自定义 doxygen 标签的更多信息请参阅下文）。
+
+还请检查 {\bfseries{icon.\+png}} 和源代码所在目录中的其他文件，并根据需要更新它们。
+
+然后你可以使用
+
+\begin{DoxyVerb}./rebuild-host.sh
+./rebuild-platform.sh
+./rebuild-pro-host.sh
+./rebuild-pro-platform-pdeb.sh
+\end{DoxyVerb}
+
+
+就像你对 jevois 和 jevoisbase 所做的那样。
+
+\begin{DoxyNote}{Note}
+如果您收到错误 {\bfseries{cc1plus\+: fatal error\+: jevois/\+Config/\+Config.\+H\+: No such file or directory}}，只需在您的 {\bfseries{jevois}} 存储库中运行 {\ttfamily rebuild-\/platform.\+sh} 。请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}}
+\end{DoxyNote}
+\hypertarget{ProgrammerSDK_autotoc_md91}{}\doxyparagraph{Je\+Vois-\/\+Pro：在相机上安装模块}\label{ProgrammerSDK_autotoc_md91}
+运行 {\ttfamily ./rebuild-\/pro-\/platform-\/pdeb.sh} 后，将在 ppdbuild/ 中创建一个 .deb 文件
+
+
+\begin{DoxyItemize}
+\item 将其复制到您的 micro\+S\+D。
+\item 使用其中的 micro\+SD 启动相机。
+\item 在 Je\+Vois-\/\+Pro 控制台中，输入 {\ttfamily shell dpkg -\/i /path/to/your-\/module-\/package.deb}。如果您已经安装了以前的版本，请先运行 {\ttfamily shell dpkg -\/r your-\/module-\/package} 以将其删除。
+\item 在 Config 选项卡中，编辑 videomappings.\+cfg 以添加模块的新映射。保存文件。
+\item 您的模块现在应该出现在可用模块菜单下，您可以选择它并运行它。
+\end{DoxyItemize}\hypertarget{ProgrammerSDK_autotoc_md92}{}\doxyparagraph{Je\+Vois-\/\+A33：将您的模块添加到 micro\+S\+D 卡：jvpkg}\label{ProgrammerSDK_autotoc_md92}
+{\ttfamily rebuild-\/platform.\+sh} 创建了一个 Je\+Vois 包文件（它只是一个 zip）：
+
+\begin{DoxyVerb}myalgo/MyVendor_MyAlgo.jvpkg
+\end{DoxyVerb}
+
+
+将正确安装的 Je\+Vois Micro\+S\+D（按照 \href{http://jevois.org/start}{\texttt{ Je\+Vois Start}} 中的步骤从磁盘映像制作一个）插入您的计算机，然后将 .jvpkg 文件复制到您的 micro\+SD 的 J\+E\+V\+O\+IS\+:/packages/ 目录中。
+
+您的智能相机将在下次启动时解压、配置并删除.\+jvpkg 文件。
+
+确保留出足够的时间来完成这项工作。这可能需要几分钟（取决于模块的文件大小、micro\+SD 卡速度等）。
+
+还要记住编辑 micro\+SD 的 J\+E\+V\+O\+IS 分区中的 config/videomappings.\+cfg，以添加将使用您的模块的新映射。
+
+了解更多信息：
+
+
+\begin{DoxyItemize}
+\item jvpkg 软件包由 {\ttfamily /usr/bin/jevois-\/jvpkg}（源在 {\ttfamily $\sim$/jevois/scripts/jevois-\/jvpkg}）创建，由 {\ttfamily make jvpkg} 调用
+\item 并在平台启动时由运行的 {\ttfamily /usr/bin/jevois.sh}（源在 {\ttfamily $\sim$/jevois/bin/jevois.sh}）解压。
+\end{DoxyItemize}\hypertarget{ProgrammerSDK_autotoc_md93}{}\doxysubsubsection{模块文档和元数据}\label{ProgrammerSDK_autotoc_md93}
+一个非常讨厌的 perl 脚本 {\ttfamily /usr/bin/jevois-\/modinfo} （源代码位于 {\ttfamily $\sim$/jevois/scripts/jevois-\/modinfo} ）将解析您的模块并为其生成单页文档。这个脚本很乱，而且操作相当脆弱。它会在您编译模块时自动调用（请参阅 {\bfseries{$\sim$/jevois/\+C\+Make\+Modules/\+Je\+Vois}}.cmake 中的规则）。
+
+该脚本通过解析其目录中的模块和其他文件来创建 modinfo.\+html（和 modinfo.\+yaml，当前未使用）。
+
+模块文档中的特殊 doxygen 标签将被解析，以下是一些示例：
+
+
+\begin{DoxyItemize}
+\item @author 示例作者
+\item @displayname My Algo（仅当您想显示与类名不同的名称时才需要）
+\item @videomapping Y\+U\+YV 640 480 28.\+5 Y\+U\+YV 640 480 28.\+5 Sample\+Vendor Sample\+Module
+\item @modulecommand mycommand -\/ 模块特定命令的描述
+\item @youtubevideo Abc\+De567 -\/ 指向 You\+Tube 视频的链接，将与屏幕截图一起显示在文档中
+\item @email sampleemail@samplecompany.\+com
+\item @address 123 First Street, Los Angeles, CA 90012
+\item @copyright 版权所有 (C) 2017 by Sample Author
+\item @mainurl \href{http://samplecompany.com}{\texttt{ http\+://samplecompany.\+com}}
+\item @supporturl \href{http://samplecompany.com/support}{\texttt{ http\+://samplecompany.\+com/support}}
+\item @otherurl \href{http://samplecompany.com/about}{\texttt{ http\+://samplecompany.\+com/about}}
+\item @license G\+PL v3
+\item @distribution 不受限制
+\item @restrictions 无
+\end{DoxyItemize}
+
+如果存在特殊命名的文件，也将使用它：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{icon.\+png}} （或任何其他扩展名，如 .jpg 等）：模块的图标。
+\item {\bfseries{screenshot$\ast$}}.$\ast$ ：屏幕截图，将按照 {\ttfamily ls} 列出的顺序出现在文档中。
+\item {\bfseries{video$\ast$}}.$\ast$ ：演示视频，将按照 {\ttfamily ls} 列出的顺序出现在文档中。
+\item {\bfseries{postinstall}} ：模块解压后将执行的脚本。您可以在此脚本中使用该命令{\ttfamily jevois-\/add-\/videomapping} （安装在 {\bfseries{/usr/bin/}} 中，源位于 {\bfseries{$\sim$/jevois/src/\+Apps/}} 中）将模块安装时应安装的任何视频映射添加到 {\bfseries{videomappings.\+cfg}} 文件中。这通常是使用 doxygen 标签在文档中列出的所有映射的子集。
+\item {\bfseries{params.\+cfg}} ：模块加载时应设置的参数值。这些是在模块初始化之前设置的。
+\item {\bfseries{script.\+cfg}} ：jevois 命令行界面命令脚本，应在模块加载时运行。此脚本在模块初始化后运行。
+\item {\bfseries{jvpkg-\/exclude.\+cfg}} ：不应包含在 jvpkg 包中的文件列表。格式与 {\ttfamily tar -\/-\/exclude-\/from} 相同
+\end{DoxyItemize}\hypertarget{ProgrammerSDK_autotoc_md94}{}\doxysubsubsection{部分编译}\label{ProgrammerSDK_autotoc_md94}
+脚本 {\ttfamily rebuild-\/host.\+sh} 和 {\ttfamily rebuild-\/platform.\+sh} 清除并重新编译所有内容。
+
+您应该至少运行它们一次。
+
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
+
+
+\begin{DoxyItemize}
+\item \+: for host \begin{DoxyVerb}cd hbuild
+make -j
+sudo make install
+\end{DoxyVerb}
+
+\item \+: for platform \begin{DoxyVerb}cd pbuild
+make -j
+sudo make install
+make jvpkg
+\end{DoxyVerb}
+
+\item \+: for host \begin{DoxyVerb}cd phbuild
+make -j
+sudo make install
+make doc     # optional; if desired
+\end{DoxyVerb}
+
+\item \+: for platform \begin{DoxyVerb}cd ppdbuild
+make -j
+sudo make install
+sudo cpack # will re-generate the deb package into ppdbuild/
+\end{DoxyVerb}
+
+\end{DoxyItemize}\hypertarget{ProgrammerSDK_autotoc_md95}{}\doxysubsubsection{编写新模块：具有共享组件的集合}\label{ProgrammerSDK_autotoc_md95}
+在这种更复杂的场景中，您希望创建一个模块集合，并且一些组件算法将由几个模块共享。
+
+然后，首选方法是将共享算法编写为 jevois 组件对象，并将它们全部编译成共享库 (.so)。然后，使用某些组件的每个模块都会自动触发共享库的加载。这是 {\bfseries{jevoisbase}} 中采用的方法
+
+有关这方面的指导，请检查 {\bfseries{jevoisbase}} 中的 {\bfseries{C\+Make\+Lists.\+txt。}} 
+
+请注意，已定义了几个 C\+Make 宏来帮助您；它们位于 {\bfseries{jevois/\+C\+Make\+Modules/\+Je\+Vois.\+cmake}} 中
+
+在 jevoisbase 中，我们将 {\bfseries{src/\+Components}} 下的所有内容编译为 {\bfseries{libjevoisbase.\+so}} 
+
+然后，我们将 {\bfseries{src/\+Modules}} 下的每个模块编译成一个 {\bfseries{}}.so 文件，该文件被标记为依赖于 {\bfseries{libjevoisbase.\+so}} 
+
+要创建自己的 {\bfseries{jevoisbase}} {\bfseries{C\+Make\+Lists.\+txt}} ，大约需要保留并修改 {\bfseries{jevoisbase}} {\bfseries{C\+Make\+Lists.\+txt}} 的前 50 行以适应您的项目。{\bfseries{jevoisbase}} {\bfseries{C\+Make\+Lists.\+txt}} 的其余部分基本上是添加所需的依赖项，例如 Z\+Bar 库、\+Open\+CV 库等，这些将因您的特定项目而异。 \hypertarget{ModuleTutorial}{}\doxysubsection{关于如何为 Je\+Vois 编写新的机器视觉模块的教程}\label{ModuleTutorial}
+\hypertarget{ModuleTutorial_overview}{}\doxysubsubsection{概述}\label{ModuleTutorial_overview}
+机器视觉 C++ 模块被编程为从 \mbox{\hyperlink{classjevois_1_1Module}{jevois\+::\+Module}} 派生的单个类，它指定了基本接口。
+
+作为初步（略微过于简化）的想法，\+Je\+Vois 视觉模块的整体工作流程是它们实现一个处理功能，该功能将接收由相机传感器捕获的图像，以及将通过 U\+SB 发送到主机的预分配输出图像。处理功能的任务是使用处理输入图像的结果填充输出图像。
+
+在本教程中，我们首先向您展示如何编写几个非常简单的模块，以引入必要的概念。在本教程的最后，我们将为您指出进一步的详细阅读内容。
+
+：以下教程创建在 Je\+Vois-\/\+Pro 上以 \char`\"{}legacy mode\char`\"{} 运行的模块，即模块接收一个图像作为输入并输出包含处理结果的新图像。有关使用 /jvpro 的新 \char`\"{}\+Pro/\+G\+U\+I\char`\"{} 模式的模块的示例，请查看 jevoisbase 中许多示例的源代码：\mbox{\hyperlink{UserDemos}{捆绑视觉模块和演示的用户指南}}
+
+在开始之前，您应该了解 \mbox{\hyperlink{Concepts}{本文档中使用的概念}} 。\hypertarget{ModuleTutorial.dox_映射像素格式和视频映射}{}\doxyparagraph{映射像素格式和视频映射}\label{ModuleTutorial.dox_映射像素格式和视频映射}
+提醒一下，\+Je\+Vois 智能相机可以捕捉以下相机像素格式的图像：\+Y\+U\+Y\+V、\+B\+A\+Y\+ER 或 R\+G\+B565。这些格式是相机传感器芯片支持的格式。
+
+Je\+Vois 可以向通过 U\+SB 连接的主机发送更广泛的像素格式：\+Y\+U\+Y\+V、\+G\+R\+E\+Y、\+M\+J\+P\+G、\+B\+A\+Y\+E\+R、\+R\+G\+B565 和 B\+G\+R24。
+
+有关这些格式的解释，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 了解详情。\hypertarget{ModuleTutorial.dox_videomappings}{}\doxyparagraph{摄像头到 U\+S\+B 视频映射}\label{ModuleTutorial.dox_videomappings}
+当主机通过 上的 U\+SB 或 上的用户选择特定图像分辨率和像素格式时，将调用模块。视频映射列表将给定的输出分辨率和像素类型与应使用的相应相机分辨率和像素类型以及应调用的机器视觉模块关联起来。有关详细信息，请参见 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 。
+
+由于输出视频格式由 上的主机或 上的用户选择，因此不可协商。如果在 {\bfseries{videomappings.\+cfg}} 中指定了调用特定机器视觉模块的视频映射，则该模块必须执行（或抛出异常）并处理从相机接收的图像以生成所需的输出图像。
+
+\doxysubparagraph*{}\hypertarget{ModuleTutorial_getstarted}{}\doxysubsubsection{入门：pass-\/through 模块}\label{ModuleTutorial_getstarted}
+让我们编写一个 pass-\/through 模块：该模块只是将从相机接收的图像中的像素数据复制到将通过 U\+SB 发送的图像中。因此，直通模块使您的 Je\+Vois 智能相机表现得像普通的 U\+SB 相机。
+
+以下是完整、有效的代码。我们将逐步介绍它：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{Module_8H}{jevois/Core/Module.H}}>}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{comment}{// Simple module that just passes the captured camera frames through to USB host}}
+\DoxyCodeLine{4 \textcolor{keyword}{class }TutorialPassThrough : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}}}
+\DoxyCodeLine{5 \{}
+\DoxyCodeLine{6   \textcolor{keyword}{public}:}
+\DoxyCodeLine{7     \textcolor{comment}{// Default base class constructor ok}}
+\DoxyCodeLine{8     \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}{jevois::Module::Module}};}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10     \textcolor{comment}{// Virtual destructor for safe inheritance}}
+\DoxyCodeLine{11     \textcolor{keyword}{virtual} \string~TutorialPassThrough() \{ \}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{comment}{// Processing function}}
+\DoxyCodeLine{14     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process}}(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe, \mbox{\hyperlink{classjevois_1_1OutputFrame}{jevois::OutputFrame}} \&\& outframe)\textcolor{keyword}{ override}}
+\DoxyCodeLine{15 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{16       \textcolor{comment}{// Wait for next available camera image:}}
+\DoxyCodeLine{17       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} \textcolor{keyword}{const} inimg = inframe.get(\textcolor{keyword}{true});}
+\DoxyCodeLine{18       }
+\DoxyCodeLine{19       \textcolor{comment}{// Wait for an image from our gadget driver into which we will put our results:}}
+\DoxyCodeLine{20       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} outimg = outframe.get();}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22       \textcolor{comment}{// Enforce that the input and output formats and image sizes match:}}
+\DoxyCodeLine{23       outimg.\mbox{\hyperlink{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}{require}}(\textcolor{stringliteral}{"output"}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}{width}}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}{height}}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a0f74c21f145dd4ff5e3140b5632d67a2}{fmt}});}
+\DoxyCodeLine{24       }
+\DoxyCodeLine{25       \textcolor{comment}{// Just copy the pixel data over:}}
+\DoxyCodeLine{26       memcpy(outimg.\mbox{\hyperlink{classjevois_1_1RawImage_ac2202ecd3324959d17c06a191624d2a6}{pixelsw}}<\textcolor{keywordtype}{void}>(), inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a0afe5d7d00f4048ecbf6d5c908d98638}{pixels}}<\textcolor{keywordtype}{void}>(), outimg.\mbox{\hyperlink{classjevois_1_1RawImage_a454ebfb26b63a7601ff66bf0ec96497e}{bytesize}}());}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28       \textcolor{comment}{// Let camera know we are done processing the input image:}}
+\DoxyCodeLine{29       inframe.done(); \textcolor{comment}{// NOTE: optional here, inframe destructor would call it anyway}}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31       \textcolor{comment}{// Send the output image with our processing results to the host over USB:}}
+\DoxyCodeLine{32       outframe.send(); \textcolor{comment}{// NOTE: optional here, outframe destructor would call it anyway}}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{34 \};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{comment}{// Allow the module to be loaded as a shared object (.so) file:}}
+\DoxyCodeLine{37 \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{JEVOIS\_REGISTER\_MODULE}}(TutorialPassThrough);}
+\end{DoxyCodeInclude}
+
+
+解释：
+
+
+\begin{DoxyItemize}
+\item 第 1 至 4 行：所有机器视觉模块都应源自 jevois\+::\+Module，它建立了 Je\+Vois Engine 与您的模块协同工作的接口。
+\item 第 8 行：我们的模块在构造时不需要做任何事情，因此我们只需使用从基础 Module 类继承的构造函数，也就是说，我们在构造时所做的只是基类需要做的事情。有关继承构造函数的更多信息，请参阅 \href{http://en.cppreference.com/w/cpp/language/using_declaration}{\texttt{ http\+://en.\+cppreference.\+com/w/cpp/language/using\+\_\+declaration}}。
+\item 第 11 行：在派生类（如本模块）中声明并实现标记为 {\ttfamily virtual} 的析构函数是一种很好的做法。有关更多信息，请参阅 \href{http://www.geeksforgeeks.org/g-fact-37/}{\texttt{ http\+://www.\+geeksforgeeks.\+org/g-\/fact-\/37/}}。
+\item 第 14 行，process() 的语法：当 Je\+Vois Engine 加载为当前机器视觉模块时，它将在您的模块上调用 process() 函数。process() 的语法在 Module 基类中定义。我们建议使用 {\ttfamily override} 关键字，以便编译器为您检查您是否确实实现了 Engine 将使用的这个确切函数，而不是，如果您在第 14 行的 process 声明中输入了拼写错误，则只需声明一个语法略有不同的新函数（在这种情况下，\+Engine 不会调用此函数，您的模块也不会执行任何操作）。
+\item 第 14 行，\+Input\+Frame 和 Output\+Frame：这两个类是辅助类，允许您的 process() 函数在需要时访问输入和输出图像。为了优化吞吐量和 Je\+Vois 中的 C\+PU 使用率，我们在此采用与 std\+::future 类似的设计用于 Input\+Frame 和 Output\+Frame：您可以将它们视为图像的句柄，这些图像可能可用也可能不可用，但肯定会在未来某个时间可用。在调用 process() 时，只会向您提供这些未来图像的句柄。如果您暂时不需要图像，并且首先想在 process() 函数中做一些初步设置，那么只需将这些句柄准备好以备将来使用。当您准备好使用其中一个图像时，只需在其句柄上调用 get()，这将返回实际图像。如果图像尚未准备好，例如，它仍在被相机传感器捕获，那么 get() 将阻塞，直到图像准备好供您使用。有关更多信息，请阅读并理解 C++11 中 Future 和 Promise 的概念。您可能想查看这个不错的教程： \href{http://thispointer.com/c11-multithreading-part-8-stdfuture-stdpromise-and-returning-values-from-thread/}{\texttt{ http\+://thispointer.\+com/c11-\/multithreading-\/part-\/8-\/stdfuture-\/stdpromise-\/and-\/returning-\/values-\/from-\/thread/}} 或网络上的其他内容。
+\item 第 14 行，参数使用移动语义：您可能注意到了 Input\+Frame 和 Output\+Frame 后面的 \&\& 符号。这意味着传递给 process() 的参数使用移动语义传递。这在这里并不重要，只是源于以下事实：由于 Input\+Frame 和 Output\+Frame 直接连接到相机传感器和 U\+SB 接口，因此我们禁止 Engine 以外的任何人创建它们。因此您无法构造 Input\+Frame，只有 Engine 可以。\+Engine 使用其对相机和 U\+SB 接口的私有访问权限为您构造 Input\+Frame 和 Output\+Frame。然后，它只需将构造的对象交给您的 process() 函数并忘记它们。有关移动语义的更多信息，您可以查看 \href{http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html}{\texttt{ http\+://www.\+cprogramming.\+com/c++11/rvalue-\/references-\/and-\/move-\/semantics-\/in-\/c++11.\+html}} 或网络上的其他常规 C++11 教程。
+\item 第 17 行：在 pass-\/through 模块中，在获得输入和输出图像之前，我们无需执行任何操作。因此，我们只需在 inimg 上调用 get() 即可首先从相机获取图像。图像可能立即可用，或者 get() 可能会阻塞，直到可用为止。返回的 Raw\+Image 是一种简约的数据结构，它基本上会告诉您图像的宽度、高度、像素类型，并允许您访问像素数组。它是一种轻量级结构，复制 Raw\+Image 对象只会共享底层像素数组，而不是复制它。这与 Open\+CV 的 cv\+::\+Mat 中的行为相同。
+\item 第 20 行：同样，在获得输出图像之前，我们无法在 pass-\/through 中执行任何操作，因此我们在这里只获取它，这可能会阻塞直到它可用。在更复杂的模块中，可以在一个线程中开始处理输入图像，同时在另一个线程中等待输出图像。我们稍后会研究这方面的例子。
+\item 第 23 行：视觉模块可以对输入和输出图像大小和像素格式强制执行一些要求。这是通过使用 Raw\+Image 的 require() 函数实现的。对于直通，我们将支持任何输入图像尺寸和像素，但是，由于我们不会对像素数据进行任何处理，而只是将其复制到输出，因此我们必须强制输出图像尺寸和像素类型与输入的完全匹配。如果不满足要求，require() 函数只会抛出异常。引擎将捕获该异常，发出一些错误消息，安全地取消分配任何内存缓冲区，然后转到下一个视频帧。
+\item 第 26 行：现在我们准备使用输入图像中的像素数据填充输出图像的像素数组。请注意，输出图像的像素数组已由引擎（和 U\+SB 驱动程序）分配。它是不可协商的，因为它是由连接到 Je\+Vois 相机的主机设置的，并且由主机上的用户选择他们希望接收的视频分辨率和模式。不要尝试更改图像大小或格式，或重新分配 outimg 持有的像素数组。只需接受 outimg 的尺寸、像素类型和像素数组地址，然后将像素数据写入像素数组。请注意此处有关 Raw\+Image 的一些详细信息：
+\begin{DoxyItemize}
+\item pixels$<$type$>$() 返回指向像素数组的只读指针，转换为所需类型
+\item pixelsw$<$type$>$() 返回指向像素数组的读写指针，转换为所需类型
+\item bytesize() 返回 pixel 数组的大小（以字节为单位）。
+\end{DoxyItemize}
+\item 第 29 行：现在我们已经处理完输入图像，我们可以通知相机了。相机使用一组固定的预分配（在 Linux 内核中）内存映射缓冲区，连接到相机传感器的 C\+PU 芯片中的硬件可以使用直接内存访问 (D\+MA) 直接写入其中。因此，一旦不再需要缓冲区，就立即释放它，这样相机就可以使用它来捕获未来的视频帧。
+\item 第 32 行：相同的缓冲逻辑适用于 U\+SB 驱动程序。
+\item 第 37 行：此宏添加了一些普通的 C 语言钩子，允许模块在运行时从编译此模块获得的共享库 (.so) 文件中加载并实例化为 C++ 类。这是每个 Je\+Vois 模块的必需语句。
+\end{DoxyItemize}
+
+\doxysubparagraph*{}\hypertarget{ModuleTutorial_addopencv}{}\doxysubsubsection{添加一些图像处理：图像格式转换模块}\label{ModuleTutorial_addopencv}
+现在让我们看看如何轻松使用 Open\+CV 来实际处理从相机接收到的图像。我们在这里开发了一个简单的图像格式转换模块：它可以从相机传感器上可用的任何像素格式（\+Y\+U\+Y\+V、\+B\+A\+Y\+E\+R、\+R\+G\+B565）转换为 Je\+Vois 向通过 U\+SB 连接的主机公开的任何像素格式（\+Y\+U\+Y\+V、\+G\+R\+E\+Y、\+M\+J\+P\+G、\+B\+A\+Y\+E\+R、\+R\+G\+B565、\+B\+G\+R24）。
+
+为了使此示例模块简单，我们将分两步使用图像转换函数：
+
+
+\begin{DoxyItemize}
+\item 从相机图像格式转换为 B\+G\+R24，这是 Open\+CV 中彩色图像的默认格式（每个像素的蓝色、绿色和红色通道各为 8 位）。事实上，\+Je\+Vois 中使用的许多像素格式转换函数都是使用 Open\+CV 实现的。
+\item 通过 U\+SB 从 B\+G\+R24 转换为主机请求的格式。
+\end{DoxyItemize}
+
+这并不总是进行这种转换的最有效方法（需要两次传递），但它避免了需要编写的格式转换函数数量的组合爆炸式增长，并且它在 Je\+Vois 处理器上的运行速度足够快。
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{Module_8H}{jevois/Core/Module.H}}>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{RawImageOps_8H}{jevois/Image/RawImageOps.H}}>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{comment}{// Simple module to convert between any supported camera grab formats and USB output formats}}
+\DoxyCodeLine{7 \textcolor{keyword}{class }TutorialConvert : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9   \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \textcolor{comment}{// Default base class constructor ok}}
+\DoxyCodeLine{11     \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}{jevois::Module::Module}};}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{comment}{// Virtual destructor for safe inheritance}}
+\DoxyCodeLine{14     \textcolor{keyword}{virtual} \string~TutorialConvert() \{ \}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{comment}{// Processing function}}
+\DoxyCodeLine{17     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process}}(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe, \mbox{\hyperlink{classjevois_1_1OutputFrame}{jevois::OutputFrame}} \&\& outframe)\textcolor{keyword}{ override}}
+\DoxyCodeLine{18 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{19       \textcolor{comment}{// Wait for next available camera image:}}
+\DoxyCodeLine{20       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} inimg = inframe.get();}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22       \textcolor{comment}{// Convert it to BGR24:}}
+\DoxyCodeLine{23       cv::Mat imgbgr = \mbox{\hyperlink{group__image_ga6f005034f93fc03530498eae898f9b22}{jevois::rawimage::convertToCvBGR}}(inimg);}
+\DoxyCodeLine{24   }
+\DoxyCodeLine{25       \textcolor{comment}{// Let camera know we are done processing the input image:}}
+\DoxyCodeLine{26       inframe.done();}
+\DoxyCodeLine{27       }
+\DoxyCodeLine{28       \textcolor{comment}{// Wait for an image from our gadget driver into which we will put our results:}}
+\DoxyCodeLine{29       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} outimg = outframe.get();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31       \textcolor{comment}{// Require that output has same dims as input, allow any output format:}}
+\DoxyCodeLine{32       outimg.\mbox{\hyperlink{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}{require}}(\textcolor{stringliteral}{"output"}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}{width}}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}{height}}, outimg.\mbox{\hyperlink{classjevois_1_1RawImage_a0f74c21f145dd4ff5e3140b5632d67a2}{fmt}});}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34       \textcolor{comment}{// TutorialConvert from BGR to desired output format:}}
+\DoxyCodeLine{35       \mbox{\hyperlink{group__image_ga748b79664f7d9c00f2706e726276a09f}{jevois::rawimage::convertCvBGRtoRawImage}}(imgbgr, outimg);}
+\DoxyCodeLine{36       }
+\DoxyCodeLine{37       \textcolor{comment}{// Send the output image with our processing results to the host over USB:}}
+\DoxyCodeLine{38       outframe.send();}
+\DoxyCodeLine{39     \}}
+\DoxyCodeLine{40 \};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{comment}{// Allow the module to be loaded as a shared object (.so) file:}}
+\DoxyCodeLine{43 \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{JEVOIS\_REGISTER\_MODULE}}(TutorialConvert);}
+\end{DoxyCodeInclude}
+
+
+让我们关注一下新事物：
+
+
+\begin{DoxyItemize}
+\item 第 23 行：\+Je\+Vois 提供的 Raw\+Image 类主要用作已在 Linux 内核中分配的像素缓冲区数据的智能指针。它不用于处理，但我们编写了一些函数来将简单的绘图（圆形、矩形、一些文本等）直接转换为将通过 U\+SB 发送的原始图像。因此，当想要处理图像时，通常我们首先将其转换为 Open\+CV 或其他图像格式，具体取决于我们想要实现的视觉算法。这种转换可以通过两种方式进行：
+\begin{DoxyItemize}
+\item 零拷贝：如果可以直接使用相机的像素格式，那么 Je\+Vois 提供的函数可以通过在两者之间共享像素数据，将 Raw\+Image 重新解释为 Open\+CV cv\+::\+Mat 图像。这里没有显示这种方法，但如果您可以直接使用相机的像素类型，则这是首选方法。
+\item 转换为不同的像素格式：如果还想要相机传感器芯片本身未提供的不同像素格式，则可以创建一个新的 Open\+CV cv\+::\+Mat 图像，其像素阵列内存与源 Raw\+Image 不同。然后，​​\+Je\+Vois 提供了可以从任何相机像素格式转换为几种不同 Open\+CV 像素格式的函数。在这里我们使用其中之一，convert\+To\+Cv\+B\+G\+R()。
+\end{DoxyItemize}
+\item 第 26 行：一旦输入图像被转换为​​ Open\+CV 中新分配的像素阵列（该阵列与原始输入图像的阵列分开），我们就不再需要原始输入图像，我们将继续仅使用 Open\+CV 图像。因此，我们可以将与原始输入图像关联的内存缓冲区返回给相机，以便它可以使用它来捕获未来的视频帧。
+\item 第 29 行：我们已经完成了一半的工作（从相机格式到 B\+G\+R），但现在要继续进行第二部分（从 B\+GR 到 U\+SB 主机请求的格式），我们需要准备好输出图像。因此我们在这里请求它，并且可能会等待它。
+\item 第 32 行：在这个简单的教程中，我们不允许对图像大小进行任何缩放。因此，我们要求输出分辨率应与输入分辨率相同。我们对输出像素类型没有要求，因此我们在这里只指定 {\bfseries{outimg.\+fmt}} 作为所需的输出像素类型（也就是说，我们只是说，无论 U\+SB 主机选择了哪种像素格式并且已经在输出图像中，我们都可以接受）。
+\item 第 35 行：现在我们使用 Je\+Vois 框架中的一些辅助转换函数将 Open\+CV B\+GR 图像转换为 U\+SB 主机请求的格式。
+\item 第 38 行：我们已完成并准备通过 U\+SB 将转换后的图像发送到主机。
+\end{DoxyItemize}
+
+\doxysubparagraph*{}\hypertarget{ModuleTutorial_addparams}{}\doxysubsubsection{添加模块参数并使用 Open\+C\+V：边缘检测模块}\label{ModuleTutorial_addparams}
+大多数机器视觉模块都提供参数，允许调整其操作。这些参数包括阈值、算法模式、精度设置等。
+
+因此，许多框架（例如 Open\+C\+V）大体上依赖于具有许多参数的函数。例如，在 Open\+CV 中调用 Canny 边缘检测器的方式是调用以下函数：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} Canny(InputArray image, OutputArray edges, \textcolor{keywordtype}{double} threshold1, \textcolor{keywordtype}{double} threshold2, \textcolor{keywordtype}{int} apertureSize = 3, \textcolor{keywordtype}{bool} L2gradient = \textcolor{keyword}{false})}
+\end{DoxyCode}
+
+
+除了可能对长列表中哪个值属于哪个参数产生混淆（\+Python 等语言通过允许按名称访问参数来解决）之外，这种方法的一个主要问题是，每个使用 Canny 的函数都必须为用户提供一种设置参数的机制（threshold1、threshold2 等），或者在大多数情况下，这些参数最终将被硬连线，从而限制最终应用程序对不同图像大小、环境类型等的适用性。
+
+相比之下，在 Je\+Vois 框架中，人们将创建一个 Canny Module，并使用 Parameter 设置阈值，其中 Parameter 是实际参数值的丰富包装器。\+Je\+Vois 框架中的参数概念体现了对任何类型的单个值的包装器，以及相关文档（描述）、默认值、有效值的可能规范、用于获取或更改值的访问器函数以及在值更改时触发的可选回调函数。参数旨在用于从组件继承的对象（ Module 继承自 Component ，稍后将详细介绍 Component -\/ 现在只需将 Component 等同于 Module ）。参数的目标是以某种方式公开给定视觉算法的参数，以便使用该算法的任何代码都会自动继承和公开这些参数。
+
+参数设置可以通过使用具有参数的视觉算法的代码来完成，但更多时候，它留给用户。在特定的视觉管道中，可以在开始时为参数提供合理的默认值，然后将这些参数留给想要修改它们的最终用户访问。\+Je\+Vois 中的参数修改是在应用程序启动时通过解析命令行参数来处理的，当实例化新的处理模块时，或者在运行时，通过与通过其串行端口管理系统的引擎交互来处理。
+
+我们在 Je\+Vois 框架中实现参数的方式乍一看似乎有些不合常规，但就编写具有大量参数的新算法时尽量减少负担而言，这是我们迄今为止发现的最佳方式。在我们早期的框架中，i\+Lab 神经形态视觉工具包 (i\+N\+VT) 于 1995 年开始使用，参数作为成员变量包含在算法组件中。程序员的负担太重了，以至于他们通常不包含参数，而是硬连线值，只是为了避免这种负担。负担来自以下要求：
+
+
+\begin{DoxyItemize}
+\item 我们希望能够支持任何类型的参数
+\item 我们希望每个参数都有名称、描述、默认值、有效值的规范
+\item 我们希望参数出现在帮助消息中的相关组中
+\item 我们希望支持回调，即在尝试更改参数值时调用的函数
+\item 我们希望回调是拥有给定参数的模块的成员函数，因为更改该参数值通常会触发该模块中的某种重新组织（否则可能不需要回调）。
+\end{DoxyItemize}
+
+可以使用类数据成员作为参数的可能实现（类似于我们在 i\+N\+VT 中使用的），这里显示一个示例 {\bfseries{int}} 参数来指定从 Module 派生的 My\+Module 类中保存的队列的大小：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ParamDef<int> sizeparamdef(\textcolor{stringliteral}{"size"}, \textcolor{stringliteral}{"Queue size"}, 5, Range<int>(1, 100));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class }MyModule : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keyword}{public}:}
+\DoxyCodeLine{      Param<int> sizeparam; \textcolor{comment}{// ouch}}
+\DoxyCodeLine{}
+\DoxyCodeLine{      \textcolor{keywordtype}{void} sizeParamCallback(\textcolor{keywordtype}{int} newval) \{ myqueue.resize(newval); \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{      MyModule(std::string \textcolor{keyword}{const} \& instance) : \mbox{\hyperlink{namespacejevois}{jevois}}::Module(instance),}
+\DoxyCodeLine{                                               sizeparam(sizeparamdef)  \textcolor{comment}{// ouch}}
+\DoxyCodeLine{      \{}
+\DoxyCodeLine{        sizeparam.setCallback(\&MyModule::sizeParamCallback); \textcolor{comment}{// ouch}}
+\DoxyCodeLine{        \textcolor{comment}{// 我们无法在构造函数初始化列表中设置回调，因为 MyModule 当时尚未构造}}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+
+
+因此，我们最终得到了 3 个名称，人们不知道该如何处理它们，只会使用令人困惑的名称（sizeparamdef、sizeparam、size\+Param\+Callback），并且我们必须 1) 使用某个任意名称（此处为 sizeparamdef）在某处指定名称、描述等的定义，然后使用其他名称（此处为 sizeparam）将 param 的成员变量添加到模块，然后构造 param，这通常需要将其链接到其定义，以便我们可以获得默认值等，最后挂接回调（请注意，当我们构造 sizeparam 时，\+My\+Comp 尚未完全构造，因此当时引用 size\+Param\+Callback() 充其量是可疑的）。实际上，情况甚至更糟，因为通常 paramdef、模块类声明和模块实现可能位于 3 个不同的文件中。
+
+我们为神经形态机器人工具包 (N\+RT) 开发并针对 Je\+Vois 改进的方法的工作原理如下：
+
+
+\begin{DoxyItemize}
+\item 每个参数都是一个独特的新类类型。我们用一个名称创建该类型一次，它保存参数值和定义数据。\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R(\+Param\+Name, Param\+Type, ...) 可变宏进一步促进了这一点。
+\item 对于带有回调的参数，它们的类类型包括一个纯虚 on\+Param\+Change(param, value) 函数，该函数需要由 host 模块实现。\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K(\+Param\+Name, Param\+Type, ...) 可变宏促进了这一点。on\+Param\+Change() 的第一个参数是参数类类型，因此具有许多参数的 host 模块将具有许多不同的 on\+Param\+Change() 函数，每参数个有一个回调。
+\item 模块使用可变参数模板从其参数继承，使得从多个参数继承变得简短而容易。
+\item 每个参数都公开简单函数 get()、set() 等（参见 Parameter\+Core 和 Parameter\+Base）。在具有许多参数的模块中，访问参数是通过消除想要在哪个基类（即哪个参数）上访问 get()、set() 等函数的歧义来实现的，这可以通过调用 param\+\_\+x\+::get() 与 param\+\_\+y\+::get() 等来实现
+\item 无需声明参数成员变量（而是从它们继承）。
+\item 无需在组件构造时执行任何操作。
+\item 无需手动将组件宿主类中的回调函数挂接到参数。
+\item 强大的编译时检查，确保程序员没有忘记为每个声明为具有回调的参数编写回调函数。
+\item 始终只使用一个名称来表示该参数及其所有相关机制（定义、回调）。
+\item 编写脚本以搜索源树以获取有关组件所有参数的信息非常容易，因为这些参数始终都在 Parameter$<$ ... $>$ 继承语句中指定。
+\end{DoxyItemize}
+
+让我们深入研究并实现一个边缘检测模块，该模块使用 Open\+CV 中的 Canny 函数并公开其参数，以便用户可以通过串行命令行界面使用它们：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{Module_8H}{jevois/Core/Module.H}}>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{RawImageOps_8H}{jevois/Image/RawImageOps.H}}>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{comment}{// Parameters for our module:}}
+\DoxyCodeLine{7 \textcolor{keyword}{static} \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois::ParameterCategory}} \textcolor{keyword}{const} ParamCateg(\textcolor{stringliteral}{"Edge Detection Options"});}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh1, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"First threshold for hysteresis"}, 50.0, ParamCateg);}
+\DoxyCodeLine{10 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh2, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"Second threshold for hysteresis"}, 150.0, ParamCateg);}
+\DoxyCodeLine{11 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(aperture, \textcolor{keywordtype}{int}, \textcolor{stringliteral}{"Aperture size for the Sobel operator"}, 3, \mbox{\hyperlink{classjevois_1_1Range}{jevois::Range<int>}}(3, 53), ParamCateg);}
+\DoxyCodeLine{12 \mbox{\hyperlink{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}(l2grad, \textcolor{keywordtype}{bool}, \textcolor{stringliteral}{"Use more accurate L2 gradient norm if true, L1 if false"}, \textcolor{keyword}{false}, ParamCateg);}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{comment}{// Simple module to detect edges using the Canny algorithm from OpenCV}}
+\DoxyCodeLine{15 \textcolor{keyword}{class }TutorialEdgeDetection : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}},}
+\DoxyCodeLine{16                       \textcolor{keyword}{public} jevois::Parameter<thresh1, thresh2, aperture, l2grad>}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18   \textcolor{keyword}{public}:}
+\DoxyCodeLine{19     \textcolor{comment}{// Default base class constructor ok}}
+\DoxyCodeLine{20     \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}{jevois::Module::Module}};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{comment}{// Virtual destructor for safe inheritance}}
+\DoxyCodeLine{23     \textcolor{keyword}{virtual} \string~TutorialEdgeDetection() \{ \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \textcolor{comment}{// Processing function}}
+\DoxyCodeLine{26     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process}}(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe, \mbox{\hyperlink{classjevois_1_1OutputFrame}{jevois::OutputFrame}} \&\& outframe)\textcolor{keyword}{ override}}
+\DoxyCodeLine{27 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{28       \textcolor{comment}{// Wait for next available camera image:}}
+\DoxyCodeLine{29       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} inimg = inframe.get();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31       \textcolor{comment}{// Convert to OpenCV grayscale:}}
+\DoxyCodeLine{32       cv::Mat grayimg = \mbox{\hyperlink{namespacejevois_1_1rawimage_a28053035013862dd0dd48c4601216655}{jevois::rawimage::convertToCvGray}}(inimg);}
+\DoxyCodeLine{33   }
+\DoxyCodeLine{34       \textcolor{comment}{// Let camera know we are done processing the input image:}}
+\DoxyCodeLine{35       inframe.done();}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37       \textcolor{comment}{// Wait for an image from our gadget driver into which we will put our results. Require that it must have same}}
+\DoxyCodeLine{38       \textcolor{comment}{// image size as the input image, and greyscale pixels:}}
+\DoxyCodeLine{39       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} outimg = outframe.get();}
+\DoxyCodeLine{40       outimg.\mbox{\hyperlink{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}{require}}(\textcolor{stringliteral}{"output"}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}{width}}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}{height}}, V4L2\_PIX\_FMT\_GREY);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42       \textcolor{comment}{// Compute Canny edges directly into the output image:}}
+\DoxyCodeLine{43       cv::Mat edges = \mbox{\hyperlink{group__image_ga20c3651602d9b2d003988b9bcd674f03}{jevois::rawimage::cvImage}}(outimg); \textcolor{comment}{// Pixel data of "edges" shared with "outimg", no copy}}
+\DoxyCodeLine{44       cv::Canny(grayimg, edges, thresh1::get(), thresh2::get(), aperture::get(), l2grad::get());}
+\DoxyCodeLine{45       }
+\DoxyCodeLine{46       \textcolor{comment}{// Send the output image with our processing results to the host over USB:}}
+\DoxyCodeLine{47       outframe.send();}
+\DoxyCodeLine{48     \}}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{// Callback function for parameter l2grad}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} onParamChange(l2grad \textcolor{keyword}{const} \& param, \textcolor{keywordtype}{bool} \textcolor{keyword}{const} \& newval)\textcolor{keyword}{ override}}
+\DoxyCodeLine{52 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{53       \mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{LINFO}}(\textcolor{stringliteral}{"you changed l2grad to be "} + \mbox{\hyperlink{group__utils_gae142fbf87f70b758581c1845c2fa58e7}{std::to\_string}}(newval));}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 \};}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{comment}{// Allow the module to be loaded as a shared object (.so) file:}}
+\DoxyCodeLine{58 \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{JEVOIS\_REGISTER\_MODULE}}(TutorialEdgeDetection);}
+\end{DoxyCodeInclude}
+
+
+
+\begin{DoxyItemize}
+\item 第 7 行：将所有一起工作的参数归入某个类别是一个好主意。为了实现这一点，我们在这里创建一个参数类别。当在命令行界面中键入 {\ttfamily help} 时，属于给定类别的参数将一起出现。
+\item 第 9 -\/ 12 行：我们声明了 4 个参数。对于每个参数，我们指定
+\begin{DoxyItemize}
+\item 参数的名称（需要符合语法要求才能用作 C++ 类名）。
+\item 参数值的类型（可以是任何有效的 C++ 类型，包括您创建的任何自定义类）。
+\item 参数的描述，将出现在模块的帮助消息和文档中。
+\item 参数的默认值。
+\item 可选：从可接受值列表、范围、带步长的范围或正则表达式中指定有效值。这里我们仅为 {\ttfamily aperture} 参数指定此项，该参数被限制为取值范围从 3 到 53。
+\item 用于在帮助消息中将相关参数分组在一起的参数类别。
+\end{DoxyItemize}
+\item 第 16 行：我们的模块继承自 \href{http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html}{\texttt{ jevois\+::\+Parameter}}，并将我们所需的所有参数作为模板参数传递。事实上，\href{http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html}{\texttt{ jevois\+::\+Parameter}} 是一个可变参数类模板，可以接受任意数量的模板参数；它将简单地将每个参数作为基础逐一添加到我们的模块类中。因为我们最终从每个参数继承，这意味着我们的模块“是”一个 {\ttfamily thresh1} 参数，也是“是”一个 {\ttfamily thresh2} 参数，等等。虽然模块“是”它的每个参数（而不是像使用数据成员作为参数那样“拥有”它们）乍一看可能不合常规，但正如上面所解释的那样，这大大减轻了程序员的负担。
+\item 第 32 行：我们将输入图像转换为灰度，因为我们将在灰度模式下应用边缘检测算法。
+\item 第 40 行：请注意，这里我们需要 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+EY 作为输出格式，因为边缘检测算法的结果将是灰度图像。
+\item 第 43 行：这是零拷贝的示例，将 Raw\+Image 重新解释为具有预分配共享像素阵列的 cv\+::\+Mat 图像。得益于此，cv\+::\+Canny 函数的结果（将计算到 {\ttfamily edge} cv\+::\+Mat 图像中）可以通过 U\+SB 直接发送到主机，因为 {\ttfamily edge} 图像与我们的输出原始图像共享其像素数据。
+\item 第 44 行：从 Open\+CV 调用 Canny 边缘检测函数，将参数值传递给它。由于我们的模块“是”{\ttfamily thresh1} ，也是“是”{\ttfamily thresh2} ，等等，并且每个参数都提供了一个 get() 函数来访问其值，因此我们需要消除要调用哪个 get() 的歧义，这可以通过明确指定要调用哪个基类（即哪个参数）来实现。因此，我们使用语法 {\ttfamily thresh1\+::get()} 来调用 {\ttfamily thresh1} 基类的 get() 函数，其他参数也是如此。其他参数函数以相同的方式消除歧义，例如 {\ttfamily thresh1\+::set(value)} 将在运行时设置参数 {\ttfamily thresh1} 的值。
+\item 第 51 -\/ 54 行：参数 {\ttfamily l2grad} 在第 12 行被声明为具有回调。因此，这里是该回调的实现。这里我们只显示一条信息消息（它将显示在命令行界面中）。如果您已使用回调声明该参数（如我们在第 12 行所做的那样），除非您在此处提供 on\+Param\+Change() 的实现，否则您的代码将无法编译，也就是说，我们在编译时检查已请求的每个回调是否正确实现参数。
+\end{DoxyItemize}
+
+\doxysubparagraph*{}\hypertarget{ModuleTutorial_multithreaded}{}\doxysubsubsection{多线程：并行运行 4 个边缘检测算法}\label{ModuleTutorial_multithreaded}
+Je\+Vois 智能相机配备四核处理器，可让您并行运行多个操作。
+
+C++11 提供了许多便利，使得编写并行代码变得非常容易，即：
+
+
+\begin{DoxyItemize}
+\item lambda 函数：这些函数是在需要时“即时”声明和定义的，通常目的是只在那个地方使用一次。重要的是，它们可以访问创建 lambda 函数的范围内存在的所有变量。这使得编写简单的函数变得容易，这些函数将在执行线程中运行，并使用在创建 lambda 时可用的变量。
+\item std\+::async 函数在新的操作线程中启动函数。std\+::async 返回 std\+::future，它是函数完成后可能的未来结果的句柄。如果对该未来调用 get()，则调用者将阻塞，直到执行我们函数的线程完成为止。
+\end{DoxyItemize}
+
+让我们通过实现一个增强的边缘检测模块来看一下，该模块使用 4 组不同的参数（例如，从非常精细到非常粗糙的边缘检测）运行 4 种 Canny 算法。我们将 4 个得到的边缘图像一个接一个地放在另一个上面，从而得到一个高度是输入图像 4 倍的输出图像。
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{Module_8H}{jevois/Core/Module.H}}>}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <\mbox{\hyperlink{RawImageOps_8H}{jevois/Image/RawImageOps.H}}>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <opencv2/core/core.hpp>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <opencv2/imgproc/imgproc.hpp>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <future>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{comment}{// Parameters for our module:}}
+\DoxyCodeLine{8 \textcolor{keyword}{static} \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois::ParameterCategory}} \textcolor{keyword}{const} ParamCateg(\textcolor{stringliteral}{"Edge Detection Options"});}
+\DoxyCodeLine{9 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh1, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"First threshold for hysteresis"}, 20.0, ParamCateg);}
+\DoxyCodeLine{10 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh2, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"Second threshold for hysteresis"}, 60.0, ParamCateg);}
+\DoxyCodeLine{11 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(aperture, \textcolor{keywordtype}{int}, \textcolor{stringliteral}{"Aperture size for the Sobel operator"}, 3, ParamCateg);}
+\DoxyCodeLine{12 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(l2grad, \textcolor{keywordtype}{bool}, \textcolor{stringliteral}{"Use more accurate L2 gradient norm if true, L1 if false"}, \textcolor{keyword}{false}, ParamCateg);}
+\DoxyCodeLine{13 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh1delta, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"First threshold delta over threads"}, 50.0, ParamCateg);}
+\DoxyCodeLine{14 \mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{JEVOIS\_DECLARE\_PARAMETER}}(thresh2delta, \textcolor{keywordtype}{double}, \textcolor{stringliteral}{"Second threshold delta over threads"}, 50.0, ParamCateg);}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// Simple module to detect edges, running 4 filters in parallel with 4 different settings}}
+\DoxyCodeLine{17 \textcolor{keyword}{class }TutorialEdgeDetectionX4 : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Module}{jevois::Module}},}
+\DoxyCodeLine{18                         \textcolor{keyword}{public} jevois::Parameter<thresh1, thresh2, aperture, l2grad, thresh1delta, thresh2delta>}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20   \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \textcolor{comment}{// Default base class constructor ok}}
+\DoxyCodeLine{22     \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}{jevois::Module::Module}};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{comment}{// Virtual destructor for safe inheritance}}
+\DoxyCodeLine{25     \textcolor{keyword}{virtual} \string~TutorialEdgeDetectionX4() \{ \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{comment}{// Processing function}}
+\DoxyCodeLine{28     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process}}(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe, \mbox{\hyperlink{classjevois_1_1OutputFrame}{jevois::OutputFrame}} \&\& outframe)\textcolor{keyword}{ override}}
+\DoxyCodeLine{29 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{30       \textcolor{comment}{// Wait for next available camera image:}}
+\DoxyCodeLine{31       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} inimg = inframe.get();}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33       \textcolor{comment}{// Convert to grayscale:}}
+\DoxyCodeLine{34       cv::Mat grayimg = \mbox{\hyperlink{namespacejevois_1_1rawimage_a28053035013862dd0dd48c4601216655}{jevois::rawimage::convertToCvGray}}(inimg);}
+\DoxyCodeLine{35   }
+\DoxyCodeLine{36       \textcolor{comment}{// Let camera know we are done processing the input image:}}
+\DoxyCodeLine{37       inframe.done();}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39       \textcolor{comment}{// Wait for an image from our gadget driver into which we will put our results:}}
+\DoxyCodeLine{40       \mbox{\hyperlink{classjevois_1_1RawImage}{jevois::RawImage}} outimg = outframe.get();}
+\DoxyCodeLine{41       outimg.\mbox{\hyperlink{classjevois_1_1RawImage_aacde26c84586c08d1e913694670d2d8e}{require}}(\textcolor{stringliteral}{"output"}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_a8b04939022b754b9e375772d3f3ee85f}{width}}, inimg.\mbox{\hyperlink{classjevois_1_1RawImage_aaa1eeb6405c5c5fceea6d772b52474b5}{height}} * 4, V4L2\_PIX\_FMT\_GREY);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43       \textcolor{comment}{// Launch 4 Canny filters in parallel. We launch 3 threads and will do the fourth in the current thread:}}
+\DoxyCodeLine{44       std::vector<std::future<void> > fut;}
+\DoxyCodeLine{45       }
+\DoxyCodeLine{46       \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 3; ++i)}
+\DoxyCodeLine{47         fut.push\_back(\mbox{\hyperlink{namespacejevois_a5c82f5b2b9dd4a98d343f9e54eea0fff}{jevois::async}}([\&](\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{48               \textcolor{comment}{// Compute Canny edges directly into the output image, offset by i images down. The last argument of the}}
+\DoxyCodeLine{49               \textcolor{comment}{// cv::Mat constructor below is the address of an already-\/allocated pixel buffer for the cv::Mat:}}
+\DoxyCodeLine{50               cv::Mat edges(grayimg.rows, grayimg.cols, CV\_8UC1, outimg.pixelsw<unsigned char>() + i * grayimg.total());}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52               cv::Canny(grayimg, edges, thresh1::get() + i * thresh1delta::get(),}
+\DoxyCodeLine{53                         thresh2::get() + i * thresh2delta::get(), aperture::get(), l2grad::get());}
+\DoxyCodeLine{54             \}, i));}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56       \textcolor{comment}{// Fourth one (same code as above except for the async, and for i=3):}}
+\DoxyCodeLine{57       cv::Mat edges(grayimg.rows, grayimg.cols, CV\_8UC1, outimg.\mbox{\hyperlink{classjevois_1_1RawImage_ac2202ecd3324959d17c06a191624d2a6}{pixelsw}}<\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}>() + 3 * grayimg.total());}
+\DoxyCodeLine{58       cv::Canny(grayimg, edges, thresh1::get() + 3 * thresh1delta::get(),}
+\DoxyCodeLine{59                 thresh2::get() + 3 * thresh2delta::get(), aperture::get(), l2grad::get());}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61       \textcolor{comment}{// The fourth one is done now, wait for all the threads to complete. Note: using async() is preferred to using}}
+\DoxyCodeLine{62       \textcolor{comment}{// std::thread, as get() below will throw if any exception was thrown by a thread, as opposed to std::thread}}
+\DoxyCodeLine{63       \textcolor{comment}{// violently terminating the program on exception. In case two or more threads threw, we can here avoid}}
+\DoxyCodeLine{64       \textcolor{comment}{// termination by catching the exceptions one by one. Here we just ignore (since we are done anyway) but could}}
+\DoxyCodeLine{65       \textcolor{comment}{// throw just once if any of the threads threw:}}
+\DoxyCodeLine{66       \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \& f : fut) \textcolor{keywordflow}{try} \{ f.get(); \} \textcolor{keywordflow}{catch} (...) \{ \mbox{\hyperlink{group__debugging_ga7460b83ad6c4523ba897c81362742027}{jevois::warnAndIgnoreException}}(); \}}
+\DoxyCodeLine{67       }
+\DoxyCodeLine{68       \textcolor{comment}{// Send the output image with our processing results to the host over USB:}}
+\DoxyCodeLine{69       outframe.send();}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 \};}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73 \textcolor{comment}{// Allow the module to be loaded as a shared object (.so) file:}}
+\DoxyCodeLine{74 \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{JEVOIS\_REGISTER\_MODULE}}(TutorialEdgeDetectionX4);}
+\end{DoxyCodeInclude}
+
+
+让我们看看与前面的例子相比有什么新的：
+
+
+\begin{DoxyItemize}
+\item 第 7 至 14 行：现在我们又有两个参数，{\ttfamily thresh1delta} 和 {\ttfamily thresh2delta} ，它们是我们在每个线程中增加 thresh1 和 thresh2 的量。因此，第一个边缘检测器将使用 thresh1，第二个将使用 thresh1 + thresh1delta，第三个将使用 thresh1 + 2 $\ast$ thresh1delta，等等
+\item 第 41 行：我们的输出图像将把 4 个边缘图一个叠一个地存储，因此我们要求输出图像的宽度相同，但高度是输入图像的 4 倍。
+\item 第 44 行：如果在 Future 被销毁（超出范围）时尚未执行 get()，std\+::future 的析构函数将隐式调用 get()。因此，如果我们没有将使用 std\+::async 时返回的 Future 存储在某个地方，它们将被销毁，并且我们的进程将被阻止，直到下面循环的每次迭代所请求的处理完成，从而一个接一个地执行 4 个边缘检测。为了并行执行它们，我们将保持 std\+::async 返回的 Future 处于活动状态，直到我们准备好从我们的 4 个线程收集所有结果。
+\item 第 46 行：我们使用 std\+::async 启动 3 个并行线程，并将在当前线程中运行第 4 个边缘检测器。
+\item 第 47 行：每个线程将运行一个 lambda 函数，该函数将被授予访问权限（通过引用）当前范围（\mbox{[}\&\mbox{]} 符号）中存在的所有变量，并且该函数接受一个 {\ttfamily int} 参数 {\ttfamily i} （我们要运行的边缘检测器的实例编号）。
+\item 第 50 行：正如注释中所说，我们创建一个 cv\+::\+Mat，其中包含原始输出图像数组中的像素，{\ttfamily i} 图像向下。
+\item 第 52 -\/ 53 行：我们在线程 {\ttfamily i} 中运行 Canny，使用参数 thresh1 + i $\ast$ thresh1delta 等
+\item 第 57 -\/ 59 行：这本质上与我们的 lambda 函数中的代码相同，但我们不需要使用 std\+::async 为我们的第 4 个边缘检测器创建另一个线程，我们可以在当前线程中运行它。
+\item 第 61 行：当我们到达这里时，cv\+::\+Canny 的第 4 次调用已完成。因此其他 3 次调用也应该已准备就绪。
+\item 第 66 行：我们只需在每个 Future 上运行 get() 即可等待所有线程完成。请注意，get() 具有异常转发功能，即，如果线程中运行的函数抛出异常，它也可能抛出异常。在这里，我们只需捕获、警告和忽略任何异常。
+\end{DoxyItemize}
+
+\doxysubparagraph*{}\hypertarget{ModuleTutorial_moremoduletutorial}{}\doxysubsubsection{更多模块教程和示例}\label{ModuleTutorial_moremoduletutorial}
+更多信息请参见：
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{ProgrammerSDK}{程序员 S\+DK 和编写新模块}} 介绍如何创建和编译新模块
+\item \href{/basedoc/}{\texttt{ Je\+Vois\+Base 模块集合的文档}} 
+\end{DoxyItemize}\hypertarget{ModuleTips}{}\doxysubsection{编写机器视觉模块的技巧}\label{ModuleTips}
+\doxysubparagraph*{}\hypertarget{ModuleTips_moduletipsexceptions}{}\doxysubsubsection{处理异常}\label{ModuleTips_moduletipsexceptions}
+Je\+Vois 框架完全支持使用异常。我们相信这提供了更易读的代码，其中主要流程是预期可以工作的流程。这与 Linux 内核等形成了鲜明对比，后者只是一大堆 {\ttfamily if} 语句来检查某些操作是否成功。
+
+因此，在 Module process() 函数中，如果出现任何问题，正确的做法是抛出异常。\+Engine 将捕获异常，进行清理并继续处理下一个视频帧，希望能够取得更好的结果。
+
+我们建议抛出 {\ttfamily std\+::runtime\+\_\+error} ，因为这将向用户提供更详细的消息（错误消息将显示异常的 {\ttfamily what()} 字符串）。
+
+为了实现异常安全并避免内存泄漏，最简单（也可能是最好的）的方法是始终使用动态分配内存的异常安全包装器。最常见的是 {\ttfamily std\+::shared\+\_\+ptr} ，当没有人再引用它时，它将自动释放分配的内存。
+
+因此，而不是：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} process(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keywordtype}{char} * tmpdata = \textcolor{keyword}{new} \textcolor{keywordtype}{char}[100];}
+\DoxyCodeLine{}
+\DoxyCodeLine{  do\_something\_that\_could\_throw();}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{delete} [] tmpdata;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+如果发生异常，则会泄漏 {\ttfamily tmpdata} 内存，只需使用：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} process(\mbox{\hyperlink{classjevois_1_1InputFrame}{jevois::InputFrame}} \&\& inframe)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  std::shared\_ptr<char> tmpdata(\textcolor{keyword}{new} \textcolor{keywordtype}{char}[100]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  do\_something\_that\_could\_throw();}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+{\ttfamily shared\+\_\+ptr} 会在超出范围时自动释放内存（因为 {\ttfamily process()} 函数正常结束，或者因为发生异常）。您也可以只使用 {\ttfamily std\+::string} 或 {\ttfamily std\+::vector} 作为 {\ttfamily tmpdata} ，因为它们会在超出范围时释放内存（包括因为引发异常）。{\ttfamily std\+::unique\+\_\+ptr} 也适用于此。
+
+\doxysubparagraph*{}\hypertarget{ModuleTips_moduletipscoords}{}\doxysubsubsection{坐标}\label{ModuleTips_moduletipscoords}
+Je\+Vois 可以处理各种视频分辨率的图像。如果它检测到帧中的某个物体并想将其坐标传达给 Arduino，那么就会出现使用哪种分辨率以及如何让 Arduino 知道的问题。
+
+例如，如果算法处理 640x480 的视频，那么在坐标 320,240 处检测到的物体位于视野的中心。但如果相机在 320x240 处抓取，那么坐标 320,240 就在视野的右下角。仅仅让 Arduino 知道在 320,240 处检测到了某物可能会造成混淆。
+
+我们不需要让 Arduino 来支持多种摄像头分辨率，而是在 Je\+Vois 中提供一个标准化的坐标系：
+
+参见 \mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+
+使用 \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{img\+To\+Std()}} 将图像坐标转换为标准坐标。
+
+相反地​​使用 \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{std\+To\+Img()}}。 \hypertarget{ProgrammerPython}{}\doxysubsection{使用 Python 编程机器视觉模块}\label{ProgrammerPython}
+从 开始，您可以使用 Python 3.\+x 为 Je\+Vois 编写机器视觉模块。\hypertarget{ProgrammerPython_autotoc_md83}{}\doxysubsubsection{概述}\label{ProgrammerPython_autotoc_md83}
+基本框架如下：
+
+
+\begin{DoxyItemize}
+\item 核心 Je\+Vois 软件提供的许多基本设施都经过了包装，以便可以通过 Python 访问。例如，这包括视频帧捕获、图像转换、通过 U\+SB 输出视频帧、日志消息、向串行端口发送消息等。
+\item Open\+CV 也被包装到 Python 中，并且可以在用 Python 编写的 Je\+Vois 模块中使用。这允许人们使用 Open\+CV 提供的机器视觉和图像处理功能。在这个框架中，图像表示为 Python numpy 数组。\+Je\+Vois 核心公开了函数，允许将摄像机视频帧和输出视频帧转换为 Python numpy 数组或相反。
+\item 用 Python 编写的 Je\+Vois 模块应由一个公开特定接口的 Python 类组成，包括一个 process() 函数，每次模块要处理新的视频帧时 Je\+Vois 引擎都会调用该函数，并且应通过 U\+SB 将输出图像发送到主机，以及一个 process\+No\+U\+S\+B() 函数，在没有 U\+SB 视频输出的情况下处理摄像头帧时会调用该函数（这两个函数的名称不同，因为 Python 不支持成员函数重载）。请注意，由于 \href{https://www.chiefdelphi.com/forums/showthread.php?t=159883&page=6}{\texttt{ 此线程}} 上的用户讨论，此问题已在 中得到修复。
+\item 因此，\+Python 集成以双向方式工作：
+\begin{DoxyItemize}
+\item Je\+Vois 核心提供了一个 {\bfseries{libjevois}} Python 库，可供用 Python 编写的模块使用。
+\item 用 Python 编写的模块公开一个具有特定成员函数的类，当模块加载时，\+Je\+Vois 核心将实例化并调用该类。
+\item Je\+Vois 核心像调用 C++ 模块一样调用用 Python 编写的模块，使用 process() 函数，如 \mbox{\hyperlink{Concepts}{本文档中使用的概念}} 中所述。
+\end{DoxyItemize}
+\item 用 Python 编写的 Je\+Vois 模块在其他方面与用 C++ 编写的模块一样：当主机选择特定视频分辨率时，它们会被加载，这对应于 {\bfseries{videomappings.\+cfg}} 中与感兴趣的模块匹配的条目。它们在 {\bfseries{J\+E\+V\+O\+IS\+:/modules}} 下还有一个目录，并且它们可能具有与 C++ 模块相同的辅助文件。
+\end{DoxyItemize}\hypertarget{ProgrammerPython_autotoc_md84}{}\doxysubsubsection{例子}\label{ProgrammerPython_autotoc_md84}
+jevoisbase 中的模块可以帮助您了解其工作原理：
+
+
+\begin{DoxyItemize}
+\item \href{/basedoc/jvpkg_2modules_2JeVois_2PythonTest_2PythonTest_8py_source.html}{\texttt{ Python\+Test}} 使用 Je\+Vois 导出的函数和类。
+\item \href{/basedoc/jvpkg_2modules_2JeVois_2PythonOpenCV_2PythonOpenCV_8py_source.html}{\texttt{ Python\+Open\+CV}} 也使用 Open\+C\+V。
+\item \href{/basedoc/jvpkg_2modules_2JeVois_2PythonSandbox_2PythonSandbox_8py_source.html}{\texttt{ Python\+Sandbox}} 也使用 Open\+C\+V。
+\end{DoxyItemize}\hypertarget{ProgrammerPython_autotoc_md85}{}\doxysubsubsection{Je\+Vois 核心对用 Python 编写的模块的期望}\label{ProgrammerPython_autotoc_md85}
+就像模块 C++ 抽象基类定义了 Je\+Vois 引擎如何使用 C++ 模块的接口一样，\+Python 模块应该按如下方式组织：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{J\+E\+V\+O\+IS\+:/modules/vendor/}} 下目录中的单个 .py 文件声明一个 Python 类，其文件名主干（不带扩展名）、目录名和类名完全匹配。
+\item 模块可以声明和实现（所有都是可选的，但大多数模块至少应该实现一个 process() 函数才有用）：
+\begin{DoxyItemize}
+\item 无参数的构造函数：{\ttfamily \+\_\+\+\_\+init\+\_\+\+\_\+(self)}
+\item 带有 U\+SB 输出的 Process 函数：{\ttfamily process(self, inframe, outframe)}
+\item 无 U\+SB 输出的 Process 函数：{\ttfamily process\+No\+U\+S\+B(self, inframe)}
+\item  带有 G\+UI 输出的 Process 函数：{\ttfamily process\+G\+U\+I(self, inframe, guihelper)}
+\item 用于解析 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 转发给模块的串行命令的函数，返回一个字符串：{\ttfamily parse\+Serial(self, str)}
+\item 用于返回描述模块支持的自定义命令的字符串的函数，用于 Je\+Vois 帮助消息：{\ttfamily supported\+Commands(self)}
+\item 用于在模块卸载之前进行清理的函数：{\ttfamily uninit()}（在 及更高版本中）
+\item 请注意，send\+Serial() 由 C++ 模块基类提供允许派生模块通过串行端口发送消息不应定义，也不会被调用（因为它是由 Je\+Vois 核心库而不是模块实现的）；相反，\+Je\+Vois 核心库向 Python 模块公开了一个函数 {\ttfamily jevois.\+send\+Serial()}，该函数可实现相同的结果。对于访问原始相机或 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 寄存器的函数也是如此：
+\end{DoxyItemize}
+\item jevois.\+write\+Cam\+Register()
+\item jevois.\+read\+Cam\+Register()
+\item jevois.\+write\+I\+M\+Uregister()
+\item jevois.\+read\+I\+M\+Uregister()
+\item jevois.\+frame\+Num()
+\end{DoxyItemize}\hypertarget{ProgrammerPython_autotoc_md86}{}\doxysubsubsection{Je\+Vois 核心提供的 Python 绑定}\label{ProgrammerPython_autotoc_md86}
+Je\+Vois 核心软件的以下函数和类已包装以供 Python 使用。要使用给定类或函数的 Python 版本，只需检查 C++ 文档并假设将使用相同的类名、函数名以及参数的数量和类型（下面提到的几个例外情况除外）。
+
+请参阅 \mbox{\hyperlink{PythonSupport_8C}{Python\+Support.\+C}} 中的 {\itshape B\+O\+O\+S\+T\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+O\+D\+U\+L\+E()} 中的源代码，了解最新的 Python 绑定列表。
+
+可以通过以下方式将绑定导入 Python：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{import} pyjevois}
+\DoxyCodeLine{\textcolor{keywordflow}{if} pyjevois.pro: \textcolor{keyword}{import} libjevoispro \textcolor{keyword}{as} jevois}
+\DoxyCodeLine{\textcolor{keywordflow}{else}: \textcolor{keyword}{import} libjevois \textcolor{keyword}{as} jevois}
+\end{DoxyCode}
+
+
+每个用 Python 编写的 Je\+Vois 模块都应以该导入开始。
+
+由于所有 Python 绑定都在 {\bfseries{jevois}} 模块下（实际上是 libjevois，我们将其导入为 jevois），因此您应该通过在 {\bfseries{jevois}} 模块名称前面加上前缀来调用它们。
+
+例如，考虑在 jevois C++ 命名空间中定义的 C++ 函数 \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{fccstr()}}，其签名为：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// 将 V4L2 four-\/cc 代码（V4L2\_PIX\_FMT\_...）转换为 4 个字符的字符串 }}
+\DoxyCodeLine{std::string \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{fccstr}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} fcc); }
+\end{DoxyCode}
+
+
+从 Python 调用此函数的形式如下：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{s = \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{jevois.fccstr}}(code)}
+\end{DoxyCode}
+
+
+将调用 Je\+Vois 的 C++ 函数 \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{fccstr()}}，将变量 {\bfseries{code}} 的内容传递给它（该变量应为 C++ 函数所期望的正整数，否则绑定引擎将抛出输入参数类型不正确的异常）。然后，\+C++ 函数返回的 C++ 字符串将被复制到 Python 字符串 {\bfseries{s}} ，并且可以在 Python 中进一步使用，就像任何 Python 字符串一样。\hypertarget{ProgrammerPython_autotoc_md87}{}\doxyparagraph{绑定列表}\label{ProgrammerPython_autotoc_md87}
+单击下面的任何类或函数即可查看其文档。虽然该文档适用于 C++ 版本，但此处列出的函数和类与 Python 具有精确绑定，但您可以忽略任何 C++ 限定符（{\ttfamily const} 和类似）和引用/指针规范（参数名称前的 {\ttfamily \&} 或 {\ttfamily $\ast$）。} 
+
+\begin{DoxyNote}{Note}
+请参阅 \mbox{\hyperlink{PythonSupport_8C}{Python\+Support.\+C}} 中 {\itshape B\+O\+O\+S\+T\+\_\+\+P\+Y\+T\+H\+O\+N\+\_\+\+M\+O\+D\+U\+L\+E()} 的源代码，了解最新的 Python 绑定列表。
+\end{DoxyNote}
+
+\begin{DoxyItemize}
+\item 在 \mbox{\hyperlink{Util_2Utils_8H}{Utils.\+H}} 中声明的通用实用函数
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{fccstr()}}
+\item \mbox{\hyperlink{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}{cvtypestr()}}
+\item \mbox{\hyperlink{group__utils_ga34f3127327f6113672a16d3a041552df}{strfcc()}}
+\item \mbox{\hyperlink{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}{v4l2\+Bytes\+Per\+Pix()}}
+\item \mbox{\hyperlink{group__utils_gafa5c6faaeefd12994a07c09ed748176c}{v4l2\+Image\+Size()}}
+\item \mbox{\hyperlink{group__utils_gae3448a5e4bbd80efd03d6417974834d0}{black\+Color()}}
+\item \mbox{\hyperlink{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}{white\+Color()}}
+\item \mbox{\hyperlink{group__utils_ga3c42b68a3562220199677eed7cdceb51}{flushcache()}}
+\item \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{system()}}
+\end{DoxyItemize}
+\item 在 \mbox{\hyperlink{Coordinates_8H}{Coordinates.\+H}} 中声明的坐标助手
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{group__coordhelpers_ga8ba21a5c6f04aaf017269c72329126cb}{img\+To\+Std()}}
+\item \mbox{\hyperlink{group__coordhelpers_ga353d977e4cee5c0ddd2b331fb4ff60d5}{std\+To\+Img()}}
+\item \mbox{\hyperlink{group__coordhelpers_ga22830c058b06d45804ac9acc9e43d939}{img\+To\+Std\+X()}}
+\item \mbox{\hyperlink{group__coordhelpers_ga3c03b605134727c861576a87ccd0fcb7}{img\+To\+Std\+Y()}}
+\item \mbox{\hyperlink{group__coordhelpers_gac6b2bbdd9348f3da2e4f9dd304bf3343}{img\+To\+Std\+Size()}}
+\item \mbox{\hyperlink{namespacejevois_1_1coords_af348fba8df5bc4a080b59955dcccaae1}{std\+To\+Img\+Size()}}
+\end{DoxyItemize}
+\item 支持从相机和 U\+SB 传输原始图像缓冲区，来自 \mbox{\hyperlink{RawImage_8H}{Raw\+Image.\+H}}
+\begin{DoxyItemize}
+\item 类 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}
+\item 成员函数：invalidate()、valid()、clear()、require()、bytesperpix()、bytesize()、coords\+Ok()
+\item 成员变量：width、height、fmt、fps
+\end{DoxyItemize}
+\item 按名称表示原始格式的 Y\+U\+YV 颜色，如 \mbox{\hyperlink{RawImage_8H}{Raw\+Image.\+H}}
+\begin{DoxyItemize}
+\item 这些颜色映射到 Python 枚举 {\bfseries{jevois.\+Y\+U\+YV}}，其值为 Black = 0x8000、\+Dark\+Grey = 0x8050、\+Med\+Grey = 0x8080、\+Light\+Grey = 0x80a0、\+White = 0x80ff、\+Dark\+Green = 0x0000、\+Med\+Green = 0x0040、\+Light\+Green = 0x00ff、\+Dark\+Teal = 0x7070、\+Med\+Teal = 0x7090、\+Light\+Teal = 0x70b0、\+Dark\+Purple = 0xa030、\+Med\+Purple = 0xa050、\+Light\+Purple = 0xa080、\+Dark\+Pink = 0xff00、\+Med\+Pink = 0xff80、\+Light\+Pink = 0xffff。
+\end{DoxyItemize}
+\item 相机传感器和 U\+SB 输出支持的 Video4\+Linux2 (V4\+L2) \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 像素格式：
+\begin{DoxyItemize}
+\item 这些映射到常量 {\bfseries{jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+S\+R\+G\+G\+B8、jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+Y\+U\+Y\+V、jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+G\+R\+E\+Y、jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+R\+G\+B565、jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+J\+P\+EG 和 jevois.\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+B\+G\+R24}}。
+\end{DoxyItemize}
+\item 输入帧包装器，包装 \mbox{\hyperlink{Module_8H}{Module.\+H}} 的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 类
+\begin{DoxyItemize}
+\item class \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}}
+\item 成员函数的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 类的输入帧包装器：get()、done()、get\+Cv\+G\+R\+A\+Y()、get\+Cv\+B\+G\+R()、get\+Cv\+R\+G\+B()、get\+Cv\+R\+G\+B\+A()
+\end{DoxyItemize}
+\item \mbox{\hyperlink{Module_8H}{Module.\+H}} 中 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 类的输出帧包装器
+\begin{DoxyItemize}
+\item class \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}}
+\item 成员函数的 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 类的输出帧包装器：get()、send()、send\+Cv()、send\+Cv\+G\+R\+A\+Y()、send\+Cv\+B\+G\+R()、send\+Cv\+R\+G\+B()、send\+Cv\+R\+G\+B\+A()、send\+Scaled\+Cv\+G\+R\+A\+Y()、send\+Scaled\+Cv\+B\+G\+R()、send\+Scaled\+Cv\+R\+G\+B()、send\+Scaled\+Cv\+R\+G\+B\+A()
+\end{DoxyItemize}
+\item 对原始图像的操作，如 \mbox{\hyperlink{RawImageOps_8H}{Raw\+Image\+Ops.\+H}} 中声明的
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{group__image_ga20c3651602d9b2d003988b9bcd674f03}{cv\+Image()}}
+\item \mbox{\hyperlink{namespacejevois_1_1rawimage_a28053035013862dd0dd48c4601216655}{convert\+To\+Cv\+Gray()}}
+\item \mbox{\hyperlink{group__image_ga6f005034f93fc03530498eae898f9b22}{convert\+To\+Cv\+B\+G\+R()}}
+\item \mbox{\hyperlink{group__image_ga41c623fdf6e26eca8908b1129b56312f}{convert\+To\+Cv\+R\+G\+B()}}
+\item \mbox{\hyperlink{group__image_ga028f56e85446eef9d27bd51c71867dd2}{convert\+To\+Cv\+R\+G\+B\+A()}}
+\item \mbox{\hyperlink{group__image_gac56b219fa6df460b3a9beaf7712d5c77}{byte\+Swap()}}
+\item \mbox{\hyperlink{group__image_ga05c4650464e447a89a2a2c60d1956748}{paste()}}
+\item \mbox{\hyperlink{group__image_gae83668f61639d6a6f4de5e11d02ca015}{paste\+Grey\+To\+Y\+U\+Y\+V()}}
+\item \mbox{\hyperlink{group__image_gaa8a5444f39661f76fb160f1f6eead381}{roipaste()}}
+\item \mbox{\hyperlink{group__image_ga529a42aed4e4681e38910e8793e6064c}{draw\+Disk()}}
+\item \mbox{\hyperlink{group__image_gae7d102e1c456f87337d66a9a2fc11a58}{draw\+Circle()}}
+\item \mbox{\hyperlink{group__image_ga7cf2b2c4e6460835fbc671367a60feb9}{draw\+Line()}}
+\item \mbox{\hyperlink{group__image_gaa32b3e227c9904699d616e2a32c9506d}{draw\+Rect()}}
+\item \mbox{\hyperlink{group__image_ga2696d3febc217f295d5532c26255c26b}{write\+Text()}}，字体通过 Python 枚举 {\bfseries{jevois.\+Font}} 选择，其值为 {\bfseries{Font5x7, Font6x10, Font7x13, Font8x13bold, Font9x15bold, Font10x20, Font11x22, Font12x22, Font14x26, Font15x28, Font16x29, Font20x38}}。
+\item \mbox{\hyperlink{group__image_gad05785dce156be8a1e4d473ea07e3f67}{convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image()}}
+\item \mbox{\hyperlink{group__image_ga748b79664f7d9c00f2706e726276a09f}{convert\+Cv\+B\+G\+Rto\+Raw\+Image()}}
+\item \mbox{\hyperlink{group__image_ga8d0578936bcb62de35eec980b933de52}{convert\+Cv\+R\+G\+Bto\+Raw\+Image()}}
+\item \mbox{\hyperlink{group__image_ga5c34b763c90ed987d80a1dc58e75524c}{convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image()}}
+\item \mbox{\hyperlink{namespacejevois_1_1rawimage_a8d4333176ceabdbadb22ffcb6b2d9d52}{unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image()}}
+\item \mbox{\hyperlink{group__image_gaa830449161c068b13cd986844a2c428e}{h\+Flip\+Y\+U\+Y\+V()}}
+\end{DoxyItemize}
+\item 在 \mbox{\hyperlink{Timer_8H}{Timer.\+H}} 中声明的 \mbox{\hyperlink{classjevois_1_1Timer}{Timer}} 类
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Timer}{Timer}} 类（请注意，构造函数接受参数；请参阅下文了解日志级别定义）
+\item 成员函数：start()、stop()
+\end{DoxyItemize}
+\item 在 \mbox{\hyperlink{Profiler_8H}{Profiler.\+H}} 中声明的 \mbox{\hyperlink{classjevois_1_1Profiler}{Profiler}} 类
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Profiler}{Profiler}} 类（请注意，构造函数接受参数；请参阅下文了解日志级别定义）
+\item 成员函数：start()、checkpoint()、stop()
+\end{DoxyItemize}
+\item 在 Sys\+Info.\+H 中声明的系统实用程序
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{group__debugging_ga5cd0b0b867a9f033762819e8af37ca35}{get\+Sys\+Info\+C\+P\+U()}}
+\item \mbox{\hyperlink{group__debugging_ga98e313acb940dfe5cb5168e8b0876ba8}{get\+Sys\+Info\+Mem()}}
+\item \mbox{\hyperlink{group__debugging_gacab36569297392a9a62000609f3d2193}{get\+Sys\+Info\+Version()}}
+\end{DoxyItemize}
+\item 日志记录函数，\mbox{\hyperlink{Log_8H}{Log.\+H}} 中声明的宏的简化版本，采用单个字符串参数，而不是 C++ 端使用的流式接口（因此，\+Python 程序员应使用 Python 字符串 format() 函数将各种变量值放置在该字符串中）：
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+U\+G()}}、\+L\+I\+N\+F\+O()、\+L\+E\+R\+R\+O\+R()、\+L\+F\+A\+T\+A\+L()
+\item 定义为常量的日志级别：{\bfseries{jevois.\+L\+O\+G\+\_\+\+D\+E\+B\+U\+G、jevois.\+L\+O\+G\+\_\+\+I\+N\+F\+O、jevois.\+L\+O\+G\+\_\+\+E\+R\+R、jevois.\+L\+O\+G\+\_\+\+C\+R\+IT}}。
+\end{DoxyItemize}
+\item 在 上，\+G\+U\+Ihelper\+Python 公开的函数，它是 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 的代理。
+\end{DoxyItemize}\hypertarget{ProgrammerPython_autotoc_md88}{}\doxysubsubsection{代码文档和附件文件}\label{ProgrammerPython_autotoc_md88}
+遵循与 \mbox{\hyperlink{ProgrammerSDK}{程序员 S\+DK 和编写新模块}} 中 \char`\"{}模块文档和元数据\char`\"{} 下的相同规则
+
+请参阅 jevoisbase 中的示例 Python 模块，了解如何将其转换为 Python doxygen 指令的示例。 \hypertarget{ModulePythonTutorial}{}\doxysubsection{关于如何用 Python 编写新的机器视觉模块的教程}\label{ModulePythonTutorial}
+\hypertarget{ModulePythonTutorial_pyoverview}{}\doxysubsubsection{概述}\label{ModulePythonTutorial_pyoverview}
+机器视觉 Python 模块被编程为单个类，该类公开了 Je\+Vois Engine 所需的特定接口。请参阅 \mbox{\hyperlink{ProgrammerPython}{使用 Python 编程机器视觉模块}} 了解简介。
+
+作为初步（略微过于简化）的想法，\+Je\+Vois 视觉模块的整体工作流程是它们实现一个处理功能，该功能将接收由相机传感器捕获的图像，以及将通过 U\+SB 发送到主机的预分配输出图像。处理功能的任务是使用处理输入图像的结果填充输出图像。
+
+在本教程中，我们首先向您展示如何编写几个非常简单的模块，以引入必要的概念。在本教程的最后，我们将为您指出进一步的详细阅读内容。
+
+：以下教程创建在 Je\+Vois-\/\+Pro 上以“传统模式”运行的模块，即模块接收一个图像作为输入并输出包含处理结果的新图像。有关使用 /jvpro 的新“\+Pro/\+G\+U\+I”模式的模块的示例，请查看 jevoisbase 中许多示例的源代码：\mbox{\hyperlink{UserDemos}{捆绑视觉模块和演示的用户指南}}
+
+在开始之前，您应该了解 概念。\hypertarget{ModulePythonTutorial.dox_pymappings}{}\doxyparagraph{像素格式和视频映射}\label{ModulePythonTutorial.dox_pymappings}
+提醒一下，\+Je\+Vois 智能相机可以捕捉以下相机像素格式的图像：\+Y\+U\+Y\+V、\+B\+A\+Y\+ER 或 R\+G\+B565。这些格式是相机传感器芯片支持的格式。
+
+Je\+Vois 可以向通过 U\+SB 连接的主机发送更广泛的像素格式：\+Y\+U\+Y\+V、\+G\+R\+E\+Y、\+M\+J\+P\+G、\+B\+A\+Y\+E\+R、\+R\+G\+B565 和 B\+G\+R24。
+
+有关这些格式的解释，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 了解详情。\hypertarget{ModulePythonTutorial.dox_pyvideomappings}{}\doxyparagraph{摄像头到 U\+S\+B 视频映射}\label{ModulePythonTutorial.dox_pyvideomappings}
+当主机通过 上的 U\+SB 或 上的用户选择特定图像分辨率和像素格式时，将调用模块。视频映射列表将给定的输出分辨率和像素类型与应使用的相应相机分辨率和像素类型以及应调用的机器视觉模块关联起来。再次参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}} 了解详细信息。
+
+由于输出视频格式由 上的主机或 上的用户选择，因此不可协商。如果在 {\bfseries{videomappings.\+cfg}} 中指定了调用特定机器视觉模块的视频映射，则该模块必须执行（或抛出异常）并处理从相机接收的图像以生成所需的输出图像。
+
+：对于 Je\+Vois-\/\+Pro，将以下示例中的“import libjevois as jevois”替换为以下内容：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{导入 pyjevois 如果 pyjevois.pro: 导入 libjevoispro 作为 jevois 否则: 导入 libjevois 作为 jevois }
+\end{DoxyCode}
+
+
+\doxysubparagraph*{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#@section pygetstarted 入门：边缘检测模块}
+
+这里我们使用 Open\+CV 的 Canny 边缘检测器在 Python 中编写了一个简单的边缘检测模块。我们将抓取一个彩色视频帧，将其转换为灰度，计算边缘图（也是灰度），然后通过 U\+SB 将其发送到主机。
+
+以下是完整、有效的代码。我们将逐步介绍它：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{keyword}{import} libjevois \textcolor{keyword}{as} jevois}
+\DoxyCodeLine{2 \textcolor{keyword}{import} cv2}
+\DoxyCodeLine{3 \textcolor{keyword}{import} numpy \textcolor{keyword}{as} np}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{\#\# Simple example of image processing using OpenCV in Python on JeVois}}
+\DoxyCodeLine{6 \textcolor{comment}{\#}}
+\DoxyCodeLine{7 \textcolor{comment}{\# This module by default simply converts the input image to a grayscale OpenCV image, and then applies the Canny}}
+\DoxyCodeLine{8 \textcolor{comment}{\# edge detection algorithm. Try to edit it to do something else (note that the videomapping associated with this}}
+\DoxyCodeLine{9 \textcolor{comment}{\# module has grayscale image outputs, so that is what you should output).}}
+\DoxyCodeLine{10 \textcolor{comment}{\#}}
+\DoxyCodeLine{11 \textcolor{comment}{\# @author Laurent Itti}}
+\DoxyCodeLine{12 \textcolor{comment}{\# }}
+\DoxyCodeLine{13 \textcolor{comment}{\# @displayname Python Tutorial 1}}
+\DoxyCodeLine{14 \textcolor{comment}{\# @videomapping GRAY 640 480 20.0 YUYV 640 480 20.0 JeVois PythonOpenCV}}
+\DoxyCodeLine{15 \textcolor{comment}{\# @email itti\(\backslash\)@usc.edu}}
+\DoxyCodeLine{16 \textcolor{comment}{\# @address University of Southern California, HNB-\/07A, 3641 Watt Way, Los Angeles, CA 90089-\/2520, USA}}
+\DoxyCodeLine{17 \textcolor{comment}{\# @copyright Copyright (C) 2017 by Laurent Itti, iLab and the University of Southern California}}
+\DoxyCodeLine{18 \textcolor{comment}{\# @mainurl http://jevois.org}}
+\DoxyCodeLine{19 \textcolor{comment}{\# @supporturl http://jevois.org/doc}}
+\DoxyCodeLine{20 \textcolor{comment}{\# @otherurl http://iLab.usc.edu}}
+\DoxyCodeLine{21 \textcolor{comment}{\# @license GPL v3}}
+\DoxyCodeLine{22 \textcolor{comment}{\# @distribution Unrestricted}}
+\DoxyCodeLine{23 \textcolor{comment}{\# @restrictions None}}
+\DoxyCodeLine{24 \textcolor{comment}{\# @ingroup modules}}
+\DoxyCodeLine{25 \textcolor{keyword}{class }PythonTutorial1:}
+\DoxyCodeLine{26     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{27     \textcolor{comment}{\#\# Process function with USB output}}
+\DoxyCodeLine{28     \textcolor{keyword}{def }process(self, inframe, outframe):}
+\DoxyCodeLine{29         \textcolor{comment}{\# Get the next camera image (may block until it is captured) and convert it to OpenCV GRAY:}}
+\DoxyCodeLine{30         inimggray = inframe.getCvGRAY()}
+\DoxyCodeLine{31         }
+\DoxyCodeLine{32         \textcolor{comment}{\# Detect edges using the Canny algorithm from OpenCV:}}
+\DoxyCodeLine{33         edges = cv2.Canny(inimggray, 100, 200, apertureSize = 3)}
+\DoxyCodeLine{34         }
+\DoxyCodeLine{35         \textcolor{comment}{\# Convert our GRAY output image to video output format and send to host over USB:}}
+\DoxyCodeLine{36         outframe.sendCvGRAY(edges)}
+\end{DoxyCodeInclude}
+
+
+解释：
+
+
+\begin{DoxyItemize}
+\item 第 1 行：\+Je\+Vois 核心向 Python 公开了一个名为 libjevois 的库。这允许 Python 模块使用 Je\+Vois 中编写的一些核心功能。有关详细信息，请参阅 Programmer\+Python。在这里，我们将这个库以别名 {\bfseries{jevois}} 导入到我们的模块中。
+\item 第 2 行：同样，\+Open\+C\+V（用 C++ 编写）公开了绑定，允许 Python 程序调用 Open\+CV 的图像处理函数。这里我们也导入了该库。
+\item 第 3 行：另一个库 numpy 可用于处理数组（包括图像）。实际上，\+Open\+CV 使用 numpy ND 数组来表示图像。
+\item 第 5-\/24 行：我们使用 doxygen 和 Je\+Vois 的自定义标签来记录代码，以便根据代码中的注释自动创建一个简单的文档页面。此模块的页面位于 \href{/moddoc/PythonOpenCV/modinfo.html}{\texttt{ 此处}}，它是根据代码中的注释自动生成的。有关详细信息，请参阅 Programmer\+S\+D\+K。
+\item 第 25 行：我们声明一个类。其名称必须与文件名（不带 .py 扩展名）和存储此模块的目录名完全匹配。
+\item 第 28 行：\+Je\+Vois 引擎需要一个名为 {\ttfamily process()} 的函数，它将在每个视频帧上调用该函数。引擎将为我们提供一个名为 {\bfseries{inframe}} 的输入帧（\+C++ 类 \mbox{\hyperlink{classjevois_1_1InputFrame}{jevois\+::\+Input\+Frame}} 的包装器，它是相机传感器帧的代理），以及一个名为 {\bfseries{outframe}} 的输出帧（\+C++ 类 \mbox{\hyperlink{classjevois_1_1OutputFrame}{jevois\+::\+Output\+Frame}} 的包装器，它是可以通过 U\+SB 发送的视频缓冲区的代理）。我们在 {\ttfamily process()} 函数中的任务是从通过 {\bfseries{inframe}} 包装器获取的输入图像创建一个输出图像，我们将使用 {\bfseries{outframe}} 包装器通过 U\+SB 链接发送该输出图像。
+\item 第 30 行：在本教程中，我们需要一张灰度输入图像。我们从内帧中提取它。此调用可能会阻塞，直到相机传感器完成下一帧的捕获。有关更多详细信息，请参阅 jevois\+::\+Input\+Frame。
+\item 第 33 行：我们使用 Open\+CV 检测灰度图像中的边缘，请参阅http\+://docs.opencv.\+org/trunk/da/d22/tutorial\+\_\+py\+\_\+canny.html 以获得关于其工作原理的非常详细的解释。
+\item 第 36 行：我们通过 U\+SB 将输出图像发送到主机。请注意此处如何使用 {\ttfamily send\+Cv\+G\+R\+A\+Y()，因为我们的边缘图是灰度图。send\+Cv\+G\+R\+A\+Y()} 会将灰度图转换为主机所期望的任何图像（这取决于调用我们模块的视频映射）。
+\end{DoxyItemize}
+
+\doxysubparagraph*{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#@section pysandbox 自己尝试一下：沙盒模块}
+
+这里我们使用 Open\+CV 的拉普拉斯检测器编写了一个简单的彩色图像过滤模块。我们将抓取一个彩色视频帧，对其应用过滤器，并将颜色结果通过 U\+SB 发送到主机。
+
+以下是完整、有效的代码。我们将逐步介绍它：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{keyword}{import} libjevois \textcolor{keyword}{as} jevois}
+\DoxyCodeLine{2 \textcolor{keyword}{import} cv2}
+\DoxyCodeLine{3 \textcolor{keyword}{import} numpy \textcolor{keyword}{as} np}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{comment}{\#\# Simple example of image processing using OpenCV in Python on JeVois}}
+\DoxyCodeLine{6 \textcolor{comment}{\#}}
+\DoxyCodeLine{7 \textcolor{comment}{\# This module is here for you to experiment with Python OpenCV on JeVois.}}
+\DoxyCodeLine{8 \textcolor{comment}{\#}}
+\DoxyCodeLine{9 \textcolor{comment}{\# By default, we get the next video frame from the camera as an OpenCV BGR (color) image named 'inimg'.}}
+\DoxyCodeLine{10 \textcolor{comment}{\# We then apply some image processing to it to create an output BGR image named 'outimg'.}}
+\DoxyCodeLine{11 \textcolor{comment}{\# We finally add some text drawings to outimg and send it to host over USB.}}
+\DoxyCodeLine{12 \textcolor{comment}{\#}}
+\DoxyCodeLine{13 \textcolor{comment}{\# @author Laurent Itti}}
+\DoxyCodeLine{14 \textcolor{comment}{\# }}
+\DoxyCodeLine{15 \textcolor{comment}{\# @displayname Python Tutorial 2}}
+\DoxyCodeLine{16 \textcolor{comment}{\# @videomapping YUYV 352 288 30.0 YUYV 352 288 30.0 JeVois PythonSandbox}}
+\DoxyCodeLine{17 \textcolor{comment}{\# @email itti\(\backslash\)@usc.edu}}
+\DoxyCodeLine{18 \textcolor{comment}{\# @address University of Southern California, HNB-\/07A, 3641 Watt Way, Los Angeles, CA 90089-\/2520, USA}}
+\DoxyCodeLine{19 \textcolor{comment}{\# @copyright Copyright (C) 2017 by Laurent Itti, iLab and the University of Southern California}}
+\DoxyCodeLine{20 \textcolor{comment}{\# @mainurl http://jevois.org}}
+\DoxyCodeLine{21 \textcolor{comment}{\# @supporturl http://jevois.org/doc}}
+\DoxyCodeLine{22 \textcolor{comment}{\# @otherurl http://iLab.usc.edu}}
+\DoxyCodeLine{23 \textcolor{comment}{\# @license GPL v3}}
+\DoxyCodeLine{24 \textcolor{comment}{\# @distribution Unrestricted}}
+\DoxyCodeLine{25 \textcolor{comment}{\# @restrictions None}}
+\DoxyCodeLine{26 \textcolor{comment}{\# @ingroup modules}}
+\DoxyCodeLine{27 \textcolor{keyword}{class }PythonTutorial2:}
+\DoxyCodeLine{28     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{29     \textcolor{comment}{\#\# Constructor}}
+\DoxyCodeLine{30     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{31         \textcolor{comment}{\# Instantiate a JeVois Timer to measure our processing framerate:}}
+\DoxyCodeLine{32         self.timer = \mbox{\hyperlink{classjevois_1_1Timer}{jevois.Timer}}(\textcolor{stringliteral}{"sandbox"}, 100, jevois.LOG\_INFO)}
+\DoxyCodeLine{33         }
+\DoxyCodeLine{34     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{35     \textcolor{comment}{\#\# Process function with USB output}}
+\DoxyCodeLine{36     \textcolor{keyword}{def }process(self, inframe, outframe):}
+\DoxyCodeLine{37         \textcolor{comment}{\# Get the next camera image (may block until it is captured) and here convert it to OpenCV BGR by default. If}}
+\DoxyCodeLine{38         \textcolor{comment}{\# you need a grayscale image instead, just use getCvGRAY() instead of getCvBGR(). Also supported are getCvRGB()}}
+\DoxyCodeLine{39         \textcolor{comment}{\# and getCvRGBA():}}
+\DoxyCodeLine{40         inimg = inframe.getCvBGR()}
+\DoxyCodeLine{41         }
+\DoxyCodeLine{42         \textcolor{comment}{\# Start measuring image processing time (NOTE: does not account for input conversion time):}}
+\DoxyCodeLine{43         self.timer.start()}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         \textcolor{comment}{\# Detect edges using the Laplacian algorithm from OpenCV:}}
+\DoxyCodeLine{46         \textcolor{comment}{\#}}
+\DoxyCodeLine{47         \textcolor{comment}{\# Replace the line below by your own code! See for example}}
+\DoxyCodeLine{48         \textcolor{comment}{\# -\/ http://docs.opencv.org/trunk/d4/d13/tutorial\_py\_filtering.html}}
+\DoxyCodeLine{49         \textcolor{comment}{\# -\/ http://docs.opencv.org/trunk/d9/d61/tutorial\_py\_morphological\_ops.html}}
+\DoxyCodeLine{50         \textcolor{comment}{\# -\/ http://docs.opencv.org/trunk/d5/d0f/tutorial\_py\_gradients.html}}
+\DoxyCodeLine{51         \textcolor{comment}{\# -\/ http://docs.opencv.org/trunk/d7/d4d/tutorial\_py\_thresholding.html}}
+\DoxyCodeLine{52         \textcolor{comment}{\#}}
+\DoxyCodeLine{53         \textcolor{comment}{\# and so on. When they do "img = cv2.imread('name.jpg', 0)" in these tutorials, the last 0 means they want a}}
+\DoxyCodeLine{54         \textcolor{comment}{\# gray image, so you should use getCvGRAY() above in these cases. When they do not specify a final 0 in imread()}}
+\DoxyCodeLine{55         \textcolor{comment}{\# then usually they assume color and you should use getCvBGR() here.}}
+\DoxyCodeLine{56         \textcolor{comment}{\#}}
+\DoxyCodeLine{57         \textcolor{comment}{\# The simplest you could try is:}}
+\DoxyCodeLine{58         \textcolor{comment}{\#    outimg = inimg}}
+\DoxyCodeLine{59         \textcolor{comment}{\# which will make a simple copy of the input image to output.}}
+\DoxyCodeLine{60         outimg = cv2.Laplacian(inimg, -\/1, ksize=5, scale=0.25, delta=127)}
+\DoxyCodeLine{61                 }
+\DoxyCodeLine{62         \textcolor{comment}{\# Write a title:}}
+\DoxyCodeLine{63         cv2.putText(outimg, \textcolor{stringliteral}{"JeVois Python Sandbox"}, (3, 20), cv2.FONT\_HERSHEY\_SIMPLEX, 0.5, (255,255,255),}
+\DoxyCodeLine{64                     1, cv2.LINE\_AA)}
+\DoxyCodeLine{65         }
+\DoxyCodeLine{66         \textcolor{comment}{\# Write frames/s info from our timer into the edge map (NOTE: does not account for output conversion time):}}
+\DoxyCodeLine{67         fps = self.timer.stop()}
+\DoxyCodeLine{68         height, width, channels = outimg.shape \textcolor{comment}{\# if outimg is grayscale, change to: height, width = outimg.shape}}
+\DoxyCodeLine{69         cv2.putText(outimg, fps, (3, height -\/ 6), cv2.FONT\_HERSHEY\_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE\_AA)}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         \textcolor{comment}{\# Convert our BGR output image to video output format and send to host over USB. If your output image is not}}
+\DoxyCodeLine{72         \textcolor{comment}{\# BGR, you can use sendCvGRAY(), sendCvRGB(), or sendCvRGBA() as appropriate:}}
+\DoxyCodeLine{73         outframe.sendCvBGR(outimg)}
+\end{DoxyCodeInclude}
+
+
+解释：
+
+
+\begin{DoxyItemize}
+\item 第 1-\/27 行：与上面的教程相同。
+\item 第 30 行：构造函数。在此模块中，我们将使用我们类的持久成员对象，即 Je\+Vois 提供的 Timer（请参阅 jevois\+::\+Timer）。它将测量处理每帧所需的时间，并每 100 帧报告一次平均帧速率。由于计时器将保留在许多帧中，因此我们将其声明为我们类的成员变量，并在我们模块的构造函数中对其进行初始化。
+\item 第 32 行：我们将计时器添加为我们类的新成员变量，并对其进行初始化。
+\item 第 36 行：\+Je\+Vois 引擎需要一个名为 {\ttfamily process()} 的函数，它将在每个视频帧上调用该函数。与上面的上一个教程相同。
+\item 第 40 行：在本教程中，我们需要一个彩色输入图像。我们从内框中提取它，作为“\+B\+G\+R”颜色，因为出于历史原因，这是 Open\+CV 的首选颜色格式（尽管 R\+GB 现在在其他机器视觉库中更受欢迎）。此调用可能会阻塞，直到相机传感器完成下一帧的捕获。有关更多详细信息，请参阅 jevois\+::\+Input\+Frame。
+\item 第 43 行：通过 {\ttfamily process()} 开始测量当前运行的时间
+\item 第 60 行：我们使用 Open\+CV 计算彩色图像中的拉普拉斯算子，请参阅 \href{http://docs.opencv.org/trunk/d5/db5/tutorial_laplace_operator.html}{\texttt{ http\+://docs.\+opencv.\+org/trunk/d5/db5/tutorial\+\_\+laplace\+\_\+operator.\+html}}，其中有关于其工作原理的非常详细的解释（请注意，他们在灰度图像上运行它，而我们在这里在彩色图像上运行它）。正如在推荐中所写，此模块邀请您尝试并尝试一些其他图像过滤器（选择那些接收彩色图像并输出相同大小的彩色图像的过滤器）。事实上，本教程也作为 {\bfseries{jevoisbase}} 中的模块 \href{/moddoc/PythonSandbox/modinfo.html}{\texttt{ Python Sandbox}} 存在，并预装在最新的 micro\+SD 图像上。请参阅 \href{/tutorials}{\texttt{ Je\+Vois 交互式教程}} 以获取如何使用它的示例。
+\item 第 63-\/64 行：在输出图像顶部附近写一个标题。有关 {\ttfamily put\+Text()} 的详细信息，请参阅 \href{http://docs.opencv.org/3.2.0/d6/d6e/group__imgproc__draw.html}{\texttt{ http\+://docs.\+opencv.\+org/3.\+2.\+0/d6/d6e/group\+\_\+\+\_\+imgproc\+\_\+\+\_\+draw.\+html}}
+\item 第 67 行：告诉我们的计时器停止测量此帧的时间。当我们停止它时，它还会返回一个字符串，其中包含平均帧数/秒、\+C\+PU 使用率、\+C\+PU 温度和 C\+PU 频率，并且每 100 帧更新一次。在这里，我们将该信息存储到字符串 {\bfseries{fps}} 中，我们将在结果顶部显示该字符串。
+\item 第 68 行：获取图像宽度、高度和通道数。这里我们需要这些信息，以便计算框架底部的 Y 坐标，我们将使用该坐标在底部附近显示文本。
+\item 第 69 行：在帧底部附近写入 fps 信息。
+\item 第 73 行：我们通过 U\+SB 将输出图像发送到主机。请注意此处如何使用 {\ttfamily send\+Cv\+B\+G\+R()，因为我们的输出图像具有} B\+GR 颜色。send\+Cv\+B\+G\+R() 将从 B\+GR 转换为主机期望的任何颜色（这取决于调用我们模块的视频映射）。
+\end{DoxyItemize}
+
+\doxysubparagraph*{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#@section pylowlevel 使用 Je\+Vois 原始图像进行更细粒度的控制}
+
+在上述两个教程中，我们使用了最简单的方法，即将输入图像转换为 Open\+C\+V，然后处理 Open\+CV 图像，并将输出图像从 Open\+CV 转换为将通过 U\+SB 发送的原始图像缓冲区。虽然这对于入门来说很棒，但我们确实需要花费一些成本（即时间）来转换图像。核心 Je\+Vois 库还公开了对相机传感器原始图像数据和将通过 U\+SB 发送的原始输出缓冲区的低级访问。
+
+这里我们编写了一个完全不使用 Open\+CV 的模块。它使用直接处理原始 Y\+U\+YV 图像的 Je\+Vois 绘图函数。这样就无需从 Y\+U\+Y\+V（相机传感器原始格式）转换为 B\+G\+R，然后再转换为 Y\+U\+Y\+V（通过 U\+SB 链接本地发送的格式）。
+
+以下是完整、有效的代码。我们将逐步介绍它：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{1 \textcolor{keyword}{import} libjevois \textcolor{keyword}{as} jevois}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{comment}{\#\# Simple test of programming JeVois modules in Python}}
+\DoxyCodeLine{4 \textcolor{comment}{\#}}
+\DoxyCodeLine{5 \textcolor{comment}{\# This module by default simply draws a cricle and a text message onto the grabbed video frames.}}
+\DoxyCodeLine{6 \textcolor{comment}{\#}}
+\DoxyCodeLine{7 \textcolor{comment}{\# Feel free to edit it and try something else. Note that this module does not import OpenCV, see the PythonOpenCV for a}}
+\DoxyCodeLine{8 \textcolor{comment}{\# minimal JeVois module written in Python that uses OpenCV.}}
+\DoxyCodeLine{9 \textcolor{comment}{\#}}
+\DoxyCodeLine{10 \textcolor{comment}{\# @author Laurent Itti}}
+\DoxyCodeLine{11 \textcolor{comment}{\#}}
+\DoxyCodeLine{12 \textcolor{comment}{\# @displayname Python Tutorial 3}}
+\DoxyCodeLine{13 \textcolor{comment}{\# @videomapping YUYV 640 480 15.0 YUYV 640 480 15.0 JeVois PythonTutorial3}}
+\DoxyCodeLine{14 \textcolor{comment}{\# @email itti\(\backslash\)@usc.edu}}
+\DoxyCodeLine{15 \textcolor{comment}{\# @address University of Southern California, HNB-\/07A, 3641 Watt Way, Los Angeles, CA 90089-\/2520, USA}}
+\DoxyCodeLine{16 \textcolor{comment}{\# @copyright Copyright (C) 2017 by Laurent Itti, iLab and the University of Southern California}}
+\DoxyCodeLine{17 \textcolor{comment}{\# @mainurl http://jevois.org}}
+\DoxyCodeLine{18 \textcolor{comment}{\# @supporturl http://jevois.org/doc}}
+\DoxyCodeLine{19 \textcolor{comment}{\# @otherurl http://iLab.usc.edu}}
+\DoxyCodeLine{20 \textcolor{comment}{\# @license GPL v3}}
+\DoxyCodeLine{21 \textcolor{comment}{\# @distribution Unrestricted}}
+\DoxyCodeLine{22 \textcolor{comment}{\# @restrictions None}}
+\DoxyCodeLine{23 \textcolor{comment}{\# @ingroup modules}}
+\DoxyCodeLine{24 \textcolor{keyword}{class }PythonTTutorial3:}
+\DoxyCodeLine{25     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{26     \textcolor{comment}{\#\# Constructor}}
+\DoxyCodeLine{27     \textcolor{keyword}{def }\_\_init\_\_(self):}
+\DoxyCodeLine{28         jevois.LINFO(\textcolor{stringliteral}{"PythonTest Constructor"})}
+\DoxyCodeLine{29         jevois.LINFO(dir(jevois))}
+\DoxyCodeLine{30         self.frame = 0 \textcolor{comment}{\# a simple frame counter used to demonstrate sendSerial()}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{33     \textcolor{comment}{\#\# Process function with no USB output}}
+\DoxyCodeLine{34     \textcolor{keyword}{def }processNoUSB(self, inframe):}
+\DoxyCodeLine{35         jevois.LFATAL(\textcolor{stringliteral}{"process no usb not implemented"})}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{38     \textcolor{comment}{\#\# Process function with USB output}}
+\DoxyCodeLine{39     \textcolor{keyword}{def }process(self, inframe, outframe):}
+\DoxyCodeLine{40         jevois.LINFO(\textcolor{stringliteral}{"process with usb"})}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{comment}{\# Get the next camera image (may block until it is captured):}}
+\DoxyCodeLine{43         inimg = inframe.get()}
+\DoxyCodeLine{44         jevois.LINFO(\textcolor{stringliteral}{"Input image is \{\} \{\}x\{\}"}.format(\mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{jevois.fccstr}}(inimg.fmt), inimg.width, inimg.height))}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46         \textcolor{comment}{\# Get the next available USB output image:}}
+\DoxyCodeLine{47         outimg = outframe.get()}
+\DoxyCodeLine{48         jevois.LINFO(\textcolor{stringliteral}{"Output image is \{\} \{\}x\{\}"}.format(\mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{jevois.fccstr}}(outimg.fmt), outimg.width, outimg.height))}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50         \textcolor{comment}{\# Example of getting pixel data from the input and copying to the output:}}
+\DoxyCodeLine{51         jevois.paste(inimg, outimg, 0, 0)}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53         \textcolor{comment}{\# We are done with the input image:}}
+\DoxyCodeLine{54         inframe.done()}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56         \textcolor{comment}{\# Example of in-\/place processing:}}
+\DoxyCodeLine{57         jevois.hFlipYUYV(outimg)}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59         \textcolor{comment}{\# Example of simple drawings:}}
+\DoxyCodeLine{60         jevois.drawCircle(outimg, int(outimg.width/2), int(outimg.height/2), int(outimg.height/2.2), 2, 0x80ff)}
+\DoxyCodeLine{61         jevois.writeText(outimg, \textcolor{stringliteral}{"Hi from Python!"}, 20, 20, 0x80ff, jevois.Font.Font10x20)}
+\DoxyCodeLine{62         }
+\DoxyCodeLine{63         \textcolor{comment}{\# We are done with the output, ready to send it to host over USB:}}
+\DoxyCodeLine{64         outframe.send()}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66         \textcolor{comment}{\# Send a string over serial (e.g., to an Arduino). Remember to tell the JeVois Engine to display those messages,}}
+\DoxyCodeLine{67         \textcolor{comment}{\# as they are turned off by default. For example: 'setpar serout All' in the JeVois console:}}
+\DoxyCodeLine{68         jevois.sendSerial(\textcolor{stringliteral}{"DONE frame \{\}"}.format(self.frame));}
+\DoxyCodeLine{69         self.frame += 1}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{72     \textcolor{comment}{\#\# Parse a serial command forwarded to us by the JeVois Engine, return a string}}
+\DoxyCodeLine{73     \textcolor{keyword}{def }parseSerial(self, str):}
+\DoxyCodeLine{74         jevois.LINFO(\textcolor{stringliteral}{"parseserial received command [\{\}]"}.format(str))}
+\DoxyCodeLine{75         \textcolor{keywordflow}{if} str == \textcolor{stringliteral}{"hello"}:}
+\DoxyCodeLine{76             \textcolor{keywordflow}{return} self.hello()}
+\DoxyCodeLine{77         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"ERR Unsupported command"}}
+\DoxyCodeLine{78     }
+\DoxyCodeLine{79     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{80     \textcolor{comment}{\#\# Return a string that describes the custom commands we support, for the JeVois help message}}
+\DoxyCodeLine{81     \textcolor{keyword}{def }supportedCommands(self):}
+\DoxyCodeLine{82         \textcolor{comment}{\# use \(\backslash\)n seperator if your module supports several commands}}
+\DoxyCodeLine{83         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"hello -\/ print hello using python"}}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{comment}{\# \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{86     \textcolor{comment}{\#\# Internal method that gets invoked as a custom command}}
+\DoxyCodeLine{87     \textcolor{keyword}{def }hello(self):}
+\DoxyCodeLine{88         \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Hello from python!"}}
+\DoxyCodeLine{89         }
+\end{DoxyCodeInclude}
+
+
+解释：
+
+
+\begin{DoxyItemize}
+\item 第 1-\/24 行：与上文相同。
+\item 第 27-\/30 行：构造函数。我们使用 Je\+Vois \mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+F\+O()}} 日志记录函数打印几条消息。这些消息将被发送到硬件串行端口（如果您在 Je\+Vois 控制台中键入“setpar serlog Hard”）、\+U\+SB 串行端口（如果键入“setpar serlog U\+S\+B”）或两者（如果键入“setpar serlog All”）。有关 {\bfseries{serlog}} 的详细信息，请参阅 User\+Cli。
+\item 第 34-\/35 行：\+Je\+Vois 还支持处理来自摄像头传感器的视频帧但不产生任何视频输出的模块。这些模块通常只会通过串行端口产生文本输出。请参阅 概念。在 C++ 中，我们有两个 process() 函数的重载，但这在 Python 中是不可能的，因此这两个函数采用不同的名称：process() 和 process\+No\+U\+S\+B()。在这里，我们没有实现仅接受摄像头图像的 {\ttfamily process\+No\+U\+S\+B()} 函数，但我们为其提供了一个框架。在几个 {\bfseries{jevoisbase}} C++ 模块中提供了此函数实现的示例。在 \mbox{\hyperlink{UserDemos}{捆绑视觉模块和演示的用户指南}} 下查找声称{\itshape ​​支持无 U\+SB 输出映射}的模块以了解详细信息（例如，\+Demo\+Ar\+Uco）。
+\item 第 39 行：这是我们的 {\ttfamily process()} 函数，将视频输出到 U\+S\+B。
+\item 第 43 行：我们从相机传感器获取原始视频帧。根据我们推荐的视频映射（参见第 13 行的注释），我们预计这将是 Y\+U\+Y\+V。有关像素格式和视频映射的复习，请参阅 User\+Modes。此处 {\ttfamily get()} 返回的对象是 Python 包装的 \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 对象。它包含指向 Linux 内核中分配的内存缓冲区的直接指针，相机传感器使用直接内存访问 (D\+MA) 将像素信息填充到该缓冲区中。因此，jevois\+::\+Raw\+Image 是一个{\itshape 轻量级}对象，它只保存指向像素数据的共享指针，并假定拥有该数据的副本。因此，与上面的教程不同，到目前为止，我们对来自相机传感器的原始像素数组没有进行任何复制或转换。这非常快。
+\item 第 47 行：我们还将输出视频缓冲区作为原始 Y\+U\+YV \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} 获取。这里，\+Raw\+Image 再次直接指向 Linux 内核分配的原始像素缓冲区，该缓冲区将直接用于通过 D\+MA 通过 U\+SB 链路传输数据。非常高效的零拷贝访问。
+\item 第 51 行：在本教程模块中，我们首先将相机传感器中的像素复制到输出原始缓冲区中，以便用户可以看到相机所看到的内容。在更复杂的场景中，输入缓冲区可以复制到输出缓冲区内的一个小窗口（例如，如 中所示），或者可能根本不复制，只是以某种方式处理以产生将要发送的计算输出图像（例如，从输入图像计算边缘图）。因此，我们在这里只需将 {\bfseries{inimg}} 粘贴到 {\bfseries{outimg}} 中，从 {\bfseries{outimg}} 中的左上角 (0,0) 位置开始。
+\item 第 54 行：从此点开始，我们将只处理输出图像，这样我们就可以释放输入图像，以便其缓冲区被回收到相机传感器内核驱动程序，以用于后续帧捕获。通常，最好尽早将输入帧标记为已完成，以便其缓冲区尽早可供相机传感器使用。
+\item 第 57 行：\+Je\+Vois 核心提供了许多可直接在 Y\+U\+YV 图像上进行的操作。例如，在这里，我们将输出图像水平翻转。有关更多操作，请参阅 image。
+\item 第 60-\/61 行：\+Je\+Vois 核心还提供了可直接处理 Y\+U\+YV 图像的简单绘图函数。同样，请参阅 \mbox{\hyperlink{group__image}{Raw 零拷贝/内存映射视频图像和支持函数}} 了解详情。在这里，我们只画一个圆圈并写入一条文本消息。
+\item 第 64 行：一旦我们完成并确定输出图像，我们就可以通过 U\+SB 将其发送到主机。在输出帧上对 {\ttfamily send()} 的调用是可选的，当 {\ttfamily process()} 结束时，它无论如何都会被调用。
+\item 第 68 行：这是将文本字符串发送到 {\bfseries{serout}} 串行端口的示例，例如用于连接到 Je\+Vois 的 Arduino。引擎参数 {\bfseries{serout}} 决定该字符串将去往何处（硬件串行端口、\+U\+SB 串行、无或两者）。请注意，默认情况下它不会去往任何端口。您需要在 Je\+Vois 控制台（或配置文件中）发出“setpar serout Hard”以将输出发送到硬件串行端口。有关 {\bfseries{serout}} 的更多信息，请参阅 User\+Cli。
+\item 第 69 行：我们增加内部帧计数器，此帧的处理已完成。\+Je\+Vois 引擎将在下一帧再次调用 {\ttfamily process()。} 
+\item 第 73-\/77 行：模块可以选择支持自定义命令，这些命令添加到 Je\+Vois 引擎已经解释的命令中。这是通过在模块中实现 {\ttfamily parse\+Serial()} 函数来实现的。\+Je\+Vois 引擎会将通过命令行界面收到的任何无法识别的命令转发给该函数。在这里，我们支持一个新命令 {\ttfamily hello，它将调用我们模块的} {\ttfamily hello()} 成员函数（第 87-\/88 行）。{\ttfamily parse\+Serial()} 函数应返回一个字符串，形式为“\+O\+K”或“\+E\+RR some error message”，或者它可能抛出一个异常（引擎将捕获该异常并以以“\+E\+RR ”开头的消息报告）。引擎会将此处返回的任何字符串转发到适当的 {\bfseries{serlog}} 串行端口（有关 {\bfseries{serlog}} 的详细信息，请参阅 User\+Cli）。
+\item 第 81-\/83 行：如果我们支持自定义命令，则应通过在 {\ttfamily 帮助消息中描述它们来让用户知道。这是通过在模块中实现成员函数} {\ttfamily supports\+Commands(self)} 来实现的。当用户在命令行界面中键入 {\ttfamily help} 时，引擎将调用它。此函数应返回一个包含命令名称和简要说明的字符串。如果模块支持多个命令，则仅返回一个字符串，并使用换行符 \textbackslash{}n 分隔不同的命令。
+\item 第 87-\/88 行：这是当用户在命令行界面上输入 {\ttfamily hello} 时调用的模块成员函数。
+\end{DoxyItemize}
+
+\doxysubparagraph*{\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#@section pymoremoduletutorial 更多模块教程和示例}
+
+更多信息请参见：
+
+
+\begin{DoxyItemize}
+\item \href{/basedoc/}{\texttt{ Je\+Vois\+Base 模块集合的文档}}，查找用 Python 编写的文档（每个模块文档页面顶部的语言字段）。
+\item \href{/tutorials/}{\texttt{ Je\+Vois 教程}} 
+\end{DoxyItemize}\hypertarget{Debugging}{}\doxysubsection{调试 Je\+Vois 软件}\label{Debugging}
+\hypertarget{Debugging_autotoc_md27}{}\doxysubsubsection{在主机上调试}\label{Debugging_autotoc_md27}
+在 Je\+Vois 上调试新的机器视觉模块的最简单方法是首先在您的桌面（主机）计算机上编译并运行它们（参见 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} 和 \mbox{\hyperlink{CompilingJeVoisBase}{从源代码编译 Je\+Vois\+Base 软件}} ）。
+
+当您在主机上运行 {\bfseries{jevois-\/daemon}} （参见 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} ）时，错误消息将打印在您启动它的终端窗口中。
+
+您还可以在 {\bfseries{gdb}} （\+G\+NU 调试器）中运行 {\bfseries{jevois-\/daemon}} 并查看它可能在哪里崩溃。
+
+有时，由于我们在 Je\+Vois 中使用了大量线程，因此运行效果不佳。您可以改为通过启用 coredump、运行 jevois-\/daemon 直到其崩溃，然后使用 gdb 检查 core 文件来进行离线调试。有关详细信息，请参阅 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} 。\hypertarget{Debugging_autotoc_md28}{}\doxyparagraph{调试编译器和链接器错误}\label{Debugging_autotoc_md28}
+编译错误报告得相当详细。但链接器错误更难调试。如果您最终收到有关缺少库的错误消息，则查看哪个链接器命令被准确调用以及其中指定的所有路径很有用，以检查库丢失的原因。
+
+C\+Make 允许您通过指定 {\ttfamily V\+E\+R\+B\+O\+SE=1} 作为 make 选项切换到详细模式。因此，如果您收到缺少库的错误，那么
+
+\begin{DoxyVerb}cd hbuild/ # or pbuild/, phbuild/, etc
+make VERBOSE=1
+\end{DoxyVerb}
+
+
+这将向您显示已运行的链接器命令。然后您可以查看所有 {\ttfamily -\/L...} 参数并检查 C\+Make\+List.\+txt 以了解未找到库的原因。\hypertarget{Debugging_autotoc_md29}{}\doxyparagraph{启用调试级别消息}\label{Debugging_autotoc_md29}
+您可以在编译 jevois 时打开 C\+Make 标志 {\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+L\+D\+E\+B\+U\+G\+\_\+\+E\+N\+A\+B\+LE} 和 {\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+C\+E\+\_\+\+E\+N\+A\+B\+LE} 以启用超详细调试消息（请参阅 \mbox{\hyperlink{CompilingJeVois}{从源代码编译 Je\+Vois 核心软件}} ）。请注意，这些标志仅允许编译这些消息。要查看它们，您还需要在运行时将参数 {\ttfamily loglevel} 设置为 {\ttfamily debug} （请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} ）。
+
+如果您更改这些标志，则必须重新编译所有内容（重新编译 jevois、jevoisbase、您的模块等）。\hypertarget{Debugging_autotoc_md30}{}\doxysubsubsection{Je\+Vois-\/\+Pro：在平台硬件上调试}\label{Debugging_autotoc_md30}
+ 最简单的调试工作流程可能是：
+
+
+\begin{DoxyItemize}
+\item 按照 \mbox{\hyperlink{ProUserQuick}{Je\+Vois-\/\+Pro 快速入门用户指南}} 中的说明切换到控制台启动
+\item 启用核心转储并运行 {\ttfamily jevoispro.\+sh}，然后使用 {\ttfamily gdb} 查找错误，按照 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} 中的说明
+\end{DoxyItemize}\hypertarget{Debugging_autotoc_md31}{}\doxysubsubsection{Je\+Vois-\/\+A33：调试平台硬件上的启动过程}\label{Debugging_autotoc_md31}
+如果您正在修改 Je\+Vois 智能相机硬件上的低级软件，并且在启动时遇到困难，您可以启用启动消息。这要求您在启动期间连接到 Je\+Vois 4 针硬件串行端口，因为启动消息将发送到该串行端口。这对于解决任何启动问题非常有用，甚至可以在智能相机启动时进入登录提示符而不是自动启动 {\bfseries{jevois-\/daemon。}} 
+
+这需要您将 Je\+Vois 相机的 4 针串行端口连接到终端。您可以使用：
+
+
+\begin{DoxyItemize}
+\item U\+SB 转串口电缆或 dongle（也称为 F\+T\+DI 电缆或 U\+S\+B\+I\+SP dongle 等）。然后按照 \mbox{\hyperlink{UserSerial}{串口使用指南}} 中所示进行连接，并使用 {\bfseries{screen}} 、{\bfseries{Hyper\+Terminal}} 等与其通信（请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} ，但将其中的 {\bfseries{tty\+A\+C\+M0}} 替换为 {\bfseries{tty\+U\+S\+B0}} 或将 U\+SB 转串口适配器插入主机时由 {\bfseries{dmesg}} 命令创建和报告的任何设备）。
+\item Arduino 或其他微控制器
+\item 任何其他提供 T\+TL 级串行终端的设备
+\end{DoxyItemize}
+
+然后你可以：
+
+
+\begin{DoxyItemize}
+\item 编辑 micro\+SD 上的 {\bfseries{B\+O\+OT\+:u\+Env.\+txt}} ，以启用向串行端口发送详细启动消息
+\item 创建一个空文件 {\bfseries{B\+O\+OT\+:login}} ，\+Je\+Vois 相机启动时会检测到该文件。如果该文件存在，{\bfseries{jevois-\/daemon}} 将不会自动启动，而是会在串行控制台上收到登录提示。用户名是 {\bfseries{root}} ，没有密码。登录后，您可以通过运行 {\bfseries{/usr/bin/jevois.sh}} 手动启动 Je\+Vois 软件，就像它会自动启动一样。
+\item 如果您出于某种原因不想启动 U\+SB 串行功能，请创建一个空文件 {\bfseries{B\+O\+OT\+:nousbserial}} 。
+\item 如果您希望在 4 针硬件串行端口而不是 Je\+Vois 控制台上获取登录提示，请 创建一个空文件 {\bfseries{B\+O\+OT\+:serialtty}} 。
+\item 如果您希望在串行 U\+SB 端口而不是 Je\+Vois 控制台上获取登录提示，请创建一个空文件 {\bfseries{B\+O\+OT\+:usbserialtty}} 。如果 {\bfseries{B\+O\+OT\+:nousbserial}} 也存在，则无效。
+\item 如果您出于某种原因不想启用 micro\+S\+D-\/over-\/\+U\+SB 功能，请 创建一个空文件 {\bfseries{B\+O\+OT\+:nousbsd}} 。
+\item  如果您希望在启动时自动通过 U\+SB 导出 micro\+SD J\+E\+V\+O\+IS 分区，请创建一个空文件 {\bfseries{B\+O\+OT\+:usbsdauto}} 。请注意，这将强制 J\+E\+V\+O\+IS 分区在设备端为只读（并且它将在主机上可读写），即 Je\+Vois 处理器将无法 1) 编译 python 模块，2) 将任何视频文件或其他数据写入 micro\+S\+D。
+\item  创建一个空文件 {\bfseries{B\+O\+OT\+:multicam}} 以降低 Je\+Vois 请求的 U\+SB 带宽。这将允许您将最多 3 个 Je\+Vois 相机连接到单个 U\+SB 端口（通过集线器）。默认情况下，\+Je\+Vois 请求所有可用的 U\+SB 同步带宽，以最大限度地减少主机图像捕获和图像接收之间的延迟。有关更多详细信息，请参阅 \mbox{\hyperlink{Multicam}{Je\+Vois-\/\+A33 通过连接到一个 U\+SB 总线的多个 Je\+Vois 摄像机流式传输视频}} 。
+\item  创建一个空文件 {\bfseries{B\+O\+OT\+:quietcmd}} ，以禁止在命令行上收到每个成功命令后向用户发送 \textquotesingle{}OK\textquotesingle{}。仅推荐高级用户使用。
+\item  创建一个空文件 {\bfseries{B\+O\+OT\+:nopython}} 禁用对用 python 编写的模块的支持。激活后，尝试加载 python 模块将引发异常。禁用 python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。
+\item 编辑文件 {\bfseries{$\sim$/jevois/bin/jevois.sh}}，该文件将作为 {\bfseries{L\+I\+N\+UX\+:/usr/bin/jevois.sh}} 安装到 micro\+S\+D，例如在 {\bfseries{gdb}} 中启动 {\bfseries{jevois-\/daemon}} （参见 \mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} ）。
+\end{DoxyItemize}
+
+
+
+另请查看此视频（有些旧了，现在看起来可能有点不同）：
+
+ \hypertarget{ProgrammingGuidelines}{}\doxysubsection{Je\+Vois 核心框架贡献者的通用编程指南}\label{ProgrammingGuidelines}
+\begin{DoxyNote}{Note}
+这些编程指南适用于希望为核心 Je\+Vois 框架 (libjevois.\+so) 做出贡献的程序员，并且非常严格。对于只想编写使用 Je\+Vois 核心框架的新机器视觉模块的程序员，指导方针要宽松得多，并在 jevoisbase 的文档中进行了描述。
+\end{DoxyNote}
+\hypertarget{ProgrammingGuidelines_general}{}\doxysubsubsection{一般规则和缩进}\label{ProgrammingGuidelines_general}
+
+\begin{DoxyItemize}
+\item Je\+Vois 使用 doxygen 进行文档编制，使用感叹号 (!) 注释样式。在开始编写代码之前，您应该了解 doxygen 并查看 Je\+Vois 其余部分的文档编制方式。未记录或记录不当的代码可能会被删除。另请参阅\href{DocumentationRules.html}{\texttt{ 此处}}，了解有关棘手文档案例的更多解释（一旦您了解 doxygen 的基础知识）。
+\item Je\+Vois 将所有警告视为错误。因此，如果有警告，您的代码将无法编译。这是一个功能：如果您的代码有警告，则说明您做错了！如果您包含的文件来自不是您编写的库，并且有警告，则可以使用以下命令： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__compilerutil_ga63d1052bb64ba1d6d28317fc52c4a8f7}{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES}}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <trashystuff.h>}}
+\DoxyCodeLine{\mbox{\hyperlink{group__compilerutil_ga03b352fa0cf830470c4b8fdbf810f81e}{JEVOIS\_END\_UNCHECKED\_INCLUDES}}}
+\end{DoxyCode}
+
+\item 源代码行长度为 120。将其添加到您的 {\bfseries{$\sim$/.emacs}} 进行设置：
+\end{DoxyItemize}
+
+\begin{DoxyVerb}  ;; set default line wrap len:
+  (setq default-fill-column 120)\end{DoxyVerb}
+
+
+
+\begin{DoxyItemize}
+\item Je\+Vois 使用 astyle 来确保我们各种文本编辑器的缩进样式统一。\+Je\+Vois 中包含一个样式文件，可以在 jevois/scripts/astylerc 中找到。要使用此样式文件，请使用 –options 标志调用 astyle，例如 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{astyle myfile -\/-\/options=/path/to/\mbox{\hyperlink{namespacejevois}{jevois}}/scripts/astylerc}
+\end{DoxyCode}
+
+\item 符合此样式的缩进由以下 emacs 规则定义，位于 emacs 缩进的默认 C 模式之上（将其添加到 {\ttfamily $\sim$/}.emacs 以激活）： \begin{DoxyVerb}  ;; JeVois indentation style for C++ and such
+  (defun my-c-mode-common-hook ()
+    (local-set-key "\C-h" 'backward-delete-char)
+    ;; this will make sure spaces are used instead of tabs
+    (setq tab-width 4 indent-tabs-mode nil)
+    (setq indent-tabs-mode 'nil)
+    (setq c-basic-offset 2)
+    (c-set-offset 'substatement-open 0)
+    (c-set-offset 'statement-case-open 0)
+    (c-set-offset 'case-label 0)
+    (c-set-offset 'brace-list-open 0)
+    (c-set-offset 'access-label -2)
+    (c-set-offset 'inclass 4)
+    (c-set-offset 'member-init-intro 4)
+    ;; include possible ! as comment start string so that indentation starts after it
+    (setq comment-start-skip "/\\*+!* *\\|//+ *")
+     
+    ;; type C-c C-s or C-c C-o while editing to see what other rules to add here...
+  )
+  
+  (add-hook 'c-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'c++-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'perl-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'cperl-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'emacs-lisp-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'nroff-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'tcl-mode-hook 'my-c-mode-common-hook)
+  (add-hook 'makefile-mode-hook 'my-c-mode-common-hook)\end{DoxyVerb}
+
+\item 如果您使用 vi，请使用以下配置： \begin{DoxyVerb}  "-------------Essential JeVois Style Compliance Settings-------------
+   
+  " Disable old-school vi compatability
+  set nocompatible
+  
+  " Allow plugins to control our indentation
+  filetype plugin indent on
+  
+  " Set each auto-indent level to equal two spaces
+  set shiftwidth=2
+  
+  " Let each tab equal two spaces
+  set tabstop=2
+  
+  " Make sure vim turns all tabs into spaces
+  set expandtab
+  
+  " Make vim indent our code properly
+  set smartindent
+  
+  " Make the maximum line length equal 120
+  set textwidth=120
+  
+  "-------------Other cool vim tricks-------------
+  
+  " Use a cool menu when autocompleting filenames, commands, etc...
+  set wildmenu
+  set wildmode=list:longest
+  
+  " Make vim automatically change directories to the directory of any file you open. 
+  " This means that when you open a file, then want to open another using :tabe, :o, etc,
+  " you can just type in the relative path from the file you're currently editing.
+  set autochdir
+  
+  " When editing the JeVois library, it is a total pain when you are editing a .H file in jevois/include/whatever/whatever, 
+  " and then decide you need to edit the source .C file in the jevois/src/whatever/whatever. This little function will 
+  " automatically back track in the directory tree for you, find the corresponding .C or .H file, and open it in a new
+  " tab. 
+  " To use it, just type ,o (that's a comma, and then a lower-case o). 
+  function! OpenOther()
+    if expand("%:e") == "C"
+      exe "tabe" fnameescape(expand("%:p:r:s?src?include?").".H")
+    elseif expand("%:e") == "H"
+      exe "tabe" fnameescape(expand("%:p:r:s?include?src?").".C")
+    endif
+  endfunction
+  nmap ,o :call OpenOther()<CR>\end{DoxyVerb}
+
+\end{DoxyItemize}\hypertarget{ProgrammingGuidelines_fileorg}{}\doxysubsubsection{文件组织}\label{ProgrammingGuidelines_fileorg}
+
+\begin{DoxyItemize}
+\item Je\+Vois 对 C++ 文件仅使用文件扩展名 .H 和 .C。
+\item Je\+Vois 使用 Camel\+Case 约定作为文件名和类名。模板元编程使用的辅助类是个例外，它们通常使用小写加下划线的名称，以类似于 S\+T\+L（请参阅下文了解更多详细信息）。
+\item Je\+Vois 库主要分为 jevois/include/jevois/ 和 jevois/src/jevois/ 目录。然后这些目录进一步分为 Core、\+Debug、\+Image 等。构建系统从这些文件创建共享库 libjevois.\+so。视觉模块程序员通过在 jevois/include 下包含适当的头文件 (.H) 并链接到 libjevois.\+so（详情如下）来使用 Je\+Vois 库。在添加到核心 Je\+Vois 框架时（而不是仅仅编写新的视觉模块），请记住：
+\begin{DoxyItemize}
+\item jevois/ 下的每个目录都应包含可以逻辑分组在一起的文件 -\/ 例如，\+Debug 目录用于调试函数和类，\+Image 用于图像处理等。每个目录都包含一组实现特定功能的类。
+\item 所有头文件必须以 .H 扩展名命名，并应放入包含目录中。应拆分头文件，以便用户不需要知道的所有后端功能都隐藏在 {\ttfamily details} 子目录中。通常，此类后端功能可以拆分为 Helpers 文件（包含任何帮助程序类，可包含在类定义主体之前）和 Impl 实现文件（包含任何内联代码）。例如，\+Parameter 框架涉及 jevois/include/jevois/\+Component/\+Parameter.\+H 中的主要定义和编程接口，它依赖于 jevois/include/jevois/\+Component/details/\+Parameter\+Helpers.\+H 中定义的一些帮助程序类（使用 Parameter 的程序员不需要知道），并且具有 jevois/include/jevois/\+Component/details/\+Parameter\+Impl.\+H 中定义的一些内联实现代码（使用 Parameter 的程序员也不需要知道）。这种组织方式使得生成省略所有令人讨厌的实施细节的用户文档变得容易。
+\item 所有非内联、非模板实现源文件都应以 .C 扩展名命名，并应按照与其 .H 文件相同的相对路径进入 jevois/src/ 目录。
+\item 应将尽可能多的代码移入 .C 文件，这样用户就不必一遍又一遍地重新编译我们的 .H 文件。模板代码是例外，在大多数情况下必须将其移入 .H 文件。
+\item 所有头文件和源文件都应包含样板序言/许可证。只需从另一个文件复制即可。
+\end{DoxyItemize}
+\item 类成员变量的名称以 \char`\"{}its\char`\"{} 开头，以便向阅读代码的人表明它们是成员变量。
+\item Je\+Vois 成员函数使用以小写字母开头的 camel\+Case。
+\item Je\+Vois free 函数通常使用 name\+\_\+with\+\_\+underscores，或者以小写字母开头的 camel\+Case。
+\item 一般而言，每个类一个文件。文件名和类名必须完全匹配。如果几个类在概念上属于同一类，那么可以将它们放在同一个文件中。
+\item 所有 .H 文件都使用包含保护，这将防止文件被多次包含，从而产生一些关于重新定义内容的错误。没有 .C 文件使用包含保护。我们使用 g++ 支持的编译指示来包含保护：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// ....}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item 因此，一个新类通常涉及以下一组文件：
+\begin{DoxyItemize}
+\item {\ttfamily include/jevois/\+X\+X\+X/\+My\+Class.\+H} ：仅包含声明和文档。绝对没有实际的实现代码。仅在此文件中声明将使用您的类且不需要关心其内部工作原理的程序员感兴趣的内容。此文件中的所有内容都应使用 doxygen 标记进行记录。
+\item {\ttfamily include/jevois/\+X\+X\+X/details/\+My\+Class\+Helpers.\+H} ：包含 My\+Class.\+H 中的主要声明生效之前必须知道的支持声明。例如，如果最终用户只使用派生类，而基类不包含他们应该关心的信息，则在 details/\+My\+Class\+Helpers.\+H 中声明基类，并在 My\+Class.\+H 的顶部包含 details/\+My\+Class\+Helpers.\+H。此文件中没有 doxygen 标记，文档是可选的，主要面向高级程序员。
+\item {\ttfamily include/jevois/\+X\+X\+X/details/\+My\+Class\+Impl.\+H} ：仅包含内联和模板实现。此文件中没有 doxygen 标记，文档是可选的，主要面向高级程序员。
+\item {\ttfamily src/jevois/\+X\+X\+X/\+My\+Class.\+C} ：包含所有非模板、非内联实现。文档是可选的。
+\end{DoxyItemize}
+
+例如参见以下文件：
+\begin{DoxyItemize}
+\item jevois/include/jevois/\+Component/details/\+Parameter\+Helpers.\+H 准备工作对只使用 Je\+Vois 框架的程序员来说毫无意义
+\item jevois/include/jevois/\+Component/\+Parameter.\+H 为使用 Je\+Vois 框架的程序员提供文档接口
+\item jevois/include/jevois/\+Component/details/\+Parameter\+Impl.\+H 内联函数和模板实现对仅使用 Je\+Vois 框架的程序员来说毫无意义
+\item jevois/src/jevois/\+Component/\+Parameter.\+C 不存在，因为 Parameter 是一个完全模板化、完全内联的类，但可能包含任何非模板、非内联的实现，而这些实现对于仅使用 Je\+Vois 框架的程序员来说毫无意义
+\end{DoxyItemize}
+\item 要在 Je\+Vois 源代码中查找特定单词，我们建议将以下宏添加到您的 {\ttfamily $\sim$/.bash\+\_\+aliases} 或 {\ttfamily $\sim$/.bashrc}： \begin{DoxyVerb}# do a grep on c sources (e.g., for kernel, u-boot, etc) or c++ sources (for JeVois, NRT, etc)
+xg () {
+   grep $* `find . -name "*.[hcHC]"`
+}
+\end{DoxyVerb}
+
+\end{DoxyItemize}
+
+您可以按如下方式使用它，例如，查找引用 Je\+Vois 提供的函数 {\ttfamily \mbox{\hyperlink{group__debugging_gac5f7014e430b19db36d4284254f886ef}{warn\+And\+Rethrow\+Exception()}}} 的所有文件，该函数可帮助程序员处理异常：\begin{DoxyVerb}itti@iLab1:~/jevois/software/jevois$ xg warnAndRethrowException ./include/jevois/Debug/Log.H: try { do_something_risky(); } catch (...) { jevois::warnAndRethrowException(); } ./include/jevois/Debug/Log.H: void warnAndRethrowException[[noreturn]](); ./src/jevois/Debug/Log.C:void jevois::warnAndRethrowException() \end{DoxyVerb}
+ 显示它是在 Log.\+H 中声明并在 \mbox{\hyperlink{Log_8C}{Log.\+C}} 中实现的，因此您现在可以打开这些文件以获取更多信息。\hypertarget{ProgrammingGuidelines_constcorr}{}\doxysubsubsection{Const 正确性}\label{ProgrammingGuidelines_constcorr}
+Je\+Vois 专门使用从右到左的约定来限定 const 限定符。这是因为这是清楚地阅读包含 const 的语句的最佳方式，只需从右到左大声朗读即可。例如：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \textcolor{keyword}{const} * prt1; \textcolor{comment}{// ptr1 是指向 const int 的指针（从右向左读取；可以改变指针地址，但不能改变指向的 int 值） }}
+\DoxyCodeLine{\textcolor{keywordtype}{int} * \textcolor{keyword}{const} ptr2; \textcolor{comment}{// ptr2 是指向 int 的 const 指针（不能改变地址，但可以改变 int 值） }}
+\DoxyCodeLine{\textcolor{keywordtype}{int} \textcolor{keyword}{const} * \textcolor{keyword}{const} ptr3; \textcolor{comment}{// ptr3 是指向 const int 的 const 指针（const 地址，const 值） }}
+\end{DoxyCode}
+
+
+有关更多详细信息和示例，请参阅 \href{http://en.wikipedia.org/wiki/Const-correctness}{\texttt{ http\+://en.\+wikipedia.\+org/wiki/\+Const-\/correctness}}。另请参阅此文：http\+://www.dansaks.\+com/articles/1999-\/02\%20const\%20T\%20vs\%20T\%20const.\+pdf 和此文：http\+://www.parashift.\+com/c++-\/faq-\/lite/const-\/correctness.html
+
+
+\begin{DoxyItemize}
+\item Je\+Vois 是 const 正确的代码（除了错误和遗漏！）。编写 jevois 代码时，请确保它是 const 正确的。例如：
+\begin{DoxyItemize}
+\item 函数的输入参数通常由 const 引用接收。例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} myfunc(std::string \textcolor{keyword}{const} \& arg);}
+\end{DoxyCode}
+
+\item 不修改对象任何成员变量的成员函数应声明为 const。例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyClass }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \textcolor{keyword}{public}:}
+\DoxyCodeLine{  \textcolor{keywordtype}{int} getX()\textcolor{keyword}{ const }}
+\DoxyCodeLine{\textcolor{keyword}{  }\{ \textcolor{keywordflow}{return} x; \} \textcolor{comment}{// 由于我们不修改 x 或 MyClass 中的任何其他内容，因此 getX() 被声明为 const }}
+\DoxyCodeLine{ \textcolor{keyword}{private}:}
+\DoxyCodeLine{  \textcolor{keywordtype}{int} x; \} }
+\end{DoxyCode}
+
+\item 不会被修改的临时变量应声明为 const。例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{double} \textcolor{keyword}{const} perimeter = 2.0 * M\_PI * radius; \textcolor{comment}{// 假设周长以后不会被修改 }}
+\end{DoxyCode}
+
+\item 类中的互斥锁通常应声明为 {\ttfamily mutable} ，这将允许它在类的 const 实例或类的 const 成员函数中被锁定/解锁。
+\item 对于函数的返回值：如果可能，返回一个 const ref（即，您正在返回一个不会很快消失的 const ref，通常在返回类的数据成员之一时将其用于类的访问器函数），否则按值返回（非常量）。虽然按非常量值返回可能会带来危险，但它也允许移动语义。如果您返回向量、字符串等，这一点尤其重要，因为通过按非常量值返回它，它实际上将被移动（在大多数情况下），而不是复制。
+\item 在极少数情况下，如果从逻辑上讲这更有意义，则更希望将成员函数保持为 const，即使它可能会修改类的一些成员非可变变量。您必须对这些情况做出判断，并在函数内部使用 {\ttfamily const\+\_\+cast} 。例如，考虑 Component 中 class\+Name() 访问器函数的实现，该函数返回组件类的名称。its\+Class\+Name 在 Component.\+H 中声明为 Component 的 const 字符串数据成员，这是有道理的，因为任何 Component 的类名都不能修改。对于所有 const 数据成员，为 its\+Class\+Name 赋值的唯一方法是在构造期间。但我们希望报告从 Component 派生的任何类的类名，而该类名在基 Component 类的构造期间是无法访问的。出于这个原因，我们将在第一次请求时设置类名（此时我们知道从 Component 派生的对象将被完全构造）： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::string \textcolor{keyword}{const} \& \mbox{\hyperlink{classjevois_1_1Component_a94393bebf75e11ddb4287b2f23489dc8}{jevois::Component::className}}()\textcolor{keyword}{ const }}
+\DoxyCodeLine{\textcolor{keyword}{}\{}
+\DoxyCodeLine{  boost::shared\_lock<boost::shared\_mutex> lck(itsMetaMtx);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{// 我们需要完全构造（派生！）组件以使 demangle 正常工作，因此这里有 const\_cast：}}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (itsClassName.empty()) *(\textcolor{keyword}{const\_cast<}std::string *\textcolor{keyword}{>}(\&itsClassName)) = \mbox{\hyperlink{group__demangling_gaed135e078da2b90d91350d676e7413fc}{jevois::demangle}}(\textcolor{keyword}{typeid}(*this).name());}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} itsClassName; \} }
+\end{DoxyCode}
+ 因此我们使用 {\ttfamily const\+\_\+cast} 在第一次请求时设置 const 成员变量 its\+Class\+Name。
+\item 有关更多详细信息和示例，请参阅http\+://en.wikipedia.\+org/wiki/\+Const-\/correctness。
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{ProgrammingGuidelines_localvar}{}\doxysubsubsection{局部变量}\label{ProgrammingGuidelines_localvar}
+
+\begin{DoxyItemize}
+\item 局部变量名应该选择较长、更具描述性的名称，而不是较短的名称。例如
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{// Bad...}}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < c; ++i);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\textcolor{comment}{// Better...}}
+\DoxyCodeLine{\textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} itemIdx = 0; itemIdx < itemCount; ++itemIdx);}
+\end{DoxyCode}
+\hypertarget{ProgrammingGuidelines_useinline}{}\doxysubsubsection{正确使用 inline、virtual、override、final 等}\label{ProgrammingGuidelines_useinline}
+
+\begin{DoxyItemize}
+\item 在声明中，不要写 inline（例如，在类声明中）。\+Inline 是一个实现细节，只看你的接口（声明）的人不应该被它打扰。
+\item 在定义（函数的实现）中，这是添加 inline 的正确位置。对于模板函数，将 inline 添加到与模板相同的行。
+\end{DoxyItemize}
+
+例子：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} T>}
+\DoxyCodeLine{\textcolor{keyword}{class }Stuff}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keyword}{public}:}
+\DoxyCodeLine{    \textcolor{keywordtype}{void} doit();   \textcolor{comment}{// NO INLINE HERE IN DECLARATION}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{...}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// IN IMPLEMENTATION FILE:}}
+\DoxyCodeLine{template <\textcolor{keyword}{class }T> inline}
+\DoxyCodeLine{Stuff<T>::doit()}
+\DoxyCodeLine{\{ ... \}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item virtual、override、final 的规则与 inline 相反：在声明中指定它（类的用户需要知道什么是虚拟的，并且可以安全地由派生类重新实现），从定义中省略它（一旦函数被声明为虚拟的，它就会保持这种状态）。
+\end{DoxyItemize}\hypertarget{ProgrammingGuidelines_capi}{}\doxysubsubsection{大小写规则}\label{ProgrammingGuidelines_capi}
+
+\begin{DoxyItemize}
+\item 类名应该以大写字母开头，采用 Camel\+Case 命名法，例如：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyCoolClass;}
+\DoxyCodeLine{\textcolor{keyword}{class }ImageSegmenter;}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item 变量应采用驼峰式命名法，以小写字母开头，例如 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{bool} isRunning;}
+\DoxyCodeLine{\textcolor{keywordtype}{size\_t} arraySize;}
+\end{DoxyCode}
+
+\item 成员变量应采用驼峰命名法 (camel\+Case)，以前缀 \char`\"{}its\char`\"{} 开头，例如：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyClass}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keywordtype}{size\_t} itsCounter;}
+\DoxyCodeLine{  std::vector<int> itsStorage;}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item 函数名称应采用驼峰命名法 (camel\+Case)，以小写字母开头，例如：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} doSomething(\textcolor{keywordtype}{int} paramOne);}
+\DoxyCodeLine{ }
+\DoxyCodeLine{\textcolor{keyword}{class }MyClass}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keywordtype}{void} doSomethingElse(\textcolor{keywordtype}{int} paramTwo);}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Typedef 只是类型的简单别名，应该是以大写字母开头的 Camel\+Case，例如：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{typedef} jevois::Dims<float> FloatingDims;}
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item 任何花哨的元编程的结果（例如，编译时检查设置的静态 const 变量或 typedef）都应全部用小写字母书写，并用下划线分隔单词，例如：
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keyword}{class} T1, \textcolor{keyword}{class} T2> }
+\DoxyCodeLine{\textcolor{keyword}{struct }simple\_promotion}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{// Even though this is a typedef, we use lowercase and an underscore to emphasize}}
+\DoxyCodeLine{  \textcolor{comment}{// that it is part of some fancy metaprogramming}}
+\DoxyCodeLine{  \textcolor{keyword}{typedef} decltype(*(T1*)\textcolor{keyword}{nullptr} + *(T2*)\textcolor{keyword}{nullptr})) promoted\_type;}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+ \hypertarget{DocumentationRules}{}\doxysubsection{文档规则和指南}\label{DocumentationRules}
+\begin{DoxyWarning}{Warning}
+此页面包含大量损坏内容，需要进行重大修复
+\end{DoxyWarning}
+\hypertarget{DocumentationRules_tags}{}\doxysubsubsection{标记你的代码}\label{DocumentationRules_tags}
+在您的评论中使用以下内容代替纯字符串：
+
+
+\begin{DoxyItemize}
+\item \textbackslash{}todo 将在待办事项列表中添加一项
+\item \textbackslash{}test 将在测试列表中添加一项
+\item \textbackslash{}bug 将在错误列表中添加一项
+\item \textbackslash{}deprecated 将在弃用列表中添加一项
+\end{DoxyItemize}
+
+例如：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//! Cool class}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/*! 做一些很酷的事情的类。}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)todo Make it hot too */}}
+\DoxyCodeLine{\textcolor{keyword}{class }CoolClass \{ ... \};}
+\end{DoxyCode}
+\hypertarget{DocumentationRules_grel}{}\doxysubsubsection{Modules，相关函数组}\label{DocumentationRules_grel}
+一般来说，我们的目标是用户应该能够访问信息：
+
+
+\begin{DoxyItemize}
+\item 通过浏览文档的 Modules 部分
+\item 通过搜索名称，或浏览各种类列表、文件列表等
+\item 通过相关文档页面之间的链接
+\end{DoxyItemize}
+
+看看 Generic\+Image 是如何实现的。
+
+
+\begin{DoxyItemize}
+\item 首先，在 Generic\+Image.\+H 中，我们从一个顶级组开始，它将很好地显示在文档的 {\ttfamily Modules} 部分下： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*! \(\backslash\)defgroup genericimage GenericImage 类和概念}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    GenericImage 是任何像素类型图像的薄包装器。编写适用于 GenericImage 的通用算法可将其应用于任何图像类型。 */}}
+\end{DoxyCode}
+
+\item 然后，我们记录 Generic\+Image 本身，使其属于 genericimage 组： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*! GenericImage class}}
+\DoxyCodeLine{\textcolor{comment}{    ...}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)ingroup genericimage */}}
+\DoxyCodeLine{\textcolor{keyword}{class }GenericImage \{ ... \};}
+\end{DoxyCode}
+
+\item 最后，如果您想交叉链接到其他组，请使用 \textbackslash{}see 命令；例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*! \(\backslash\)defgroup genericimageoperators GenericImage Operators}}
+\DoxyCodeLine{\textcolor{comment}{    ...}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)ingroup genericimage}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)see image */}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/*! @\{ */} \textcolor{comment}{// **********************************************************************}}
+\DoxyCodeLine{...\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{/*! @\} */} \textcolor{comment}{// **********************************************************************}}
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+请注意我们如何使用 arrobas 花括号将所有将要定义的运算符包含到我们的组中。
+
+\begin{DoxyNote}{Note}
+为什么要使用这个而不是每个操作符中的一堆 \textbackslash{}relates 指令？这将使每个操作符出现在 Generic\+Image 类的文档页面中，这很好，只是它掩盖了我们关于所有 Generic\+Image 操作符如何工作、提升像素等的一般注释块。
+\end{DoxyNote}
+\hypertarget{DocumentationRules_enumhelp}{}\doxysubsubsection{辅助枚举或其他辅助程序}\label{DocumentationRules_enumhelp}
+对于具有帮助程序的类，例如，一些枚举定义了与类相关的函数的参数：只需将您的组定义为仅包含类；然后为每个帮助程序指明它与类相关。这将在类的文档页面中列出帮助程序，而不是使组的页面杂乱无章。例如，请参阅 Image.\+H 中如何完成：
+\begin{DoxyItemize}
+\item 我们定义一个名为 \textquotesingle{}image\textquotesingle{} 的组
+\item 在图像的文档中，我们提到它在 image 组中
+\item 但在 Image\+Init\+Policy 和 Image\+Flags 的文档中，我们只是将它们标记为与图像类相关，而不是在组中。因此，它们将出现在图像类的文档中，但不会出现在描述组的页面中。这是所需的行为，因为在组的页面中，我们希望有一个清晰、整洁的高级视图，而在类文档中，我们需要了解详细信息。
+\end{DoxyItemize}
+
+但是，对于仅在函数中使用且不能与类关联的枚举，我们必须将它们添加到函数所属的组中。请查看 Text.\+H 中的示例：\+Text\+Anchor 已记录并添加到 textdrawing 组中，就像 draw\+Text() 函数一样。\hypertarget{DocumentationRules_macro}{}\doxysubsubsection{记录宏}\label{DocumentationRules_macro}
+
+\begin{DoxyItemize}
+\item 所有内部 Je\+Vois 宏（不能由用户直接使用）的名称都应以 {\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+M\+A\+C\+R\+O\+\_\+} 开头
+\item 用户可能使用的所有 Je\+Vois 宏的名称都应以 {\ttfamily J\+E\+V\+O\+I\+S\+\_\+} 开头
+\item 仅定义值的简单宏可以像类、变量等一样记录下来
+\item 声明复杂函数的宏（其内部内容对最终用户毫无意义）应按如下方式记录。首先，在 .H 文件中，只编写一个不附加任何内容的文档块，其中包含宏名称的 \textbackslash{}def： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//! 宏的可选简要说明}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/*! \(\backslash\)def JEVOIS\_MY\_MACRO(x, y)}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)hideinitializer}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    实现 blah 的便利宏。 */}}
+\end{DoxyCode}
+ 然后，在隐藏在 details/ 子目录中的 Impl.\+H 文件中定义您的宏，但不要记录宏定义本身。最后，要从其他文档中创建指向您的宏定义的链接，请使用 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{/*! blah blah. See for example \#JEVOIS\_MY\_MACRO(x, y) */}}
+\end{DoxyCode}
+
+
+例如，请参阅 Types/\+Enum.\+H 和 Types/details/\+Enum\+Impl.\+H 中的 \#J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+S\+S(name, S\+E\+Q)
+\end{DoxyItemize}\hypertarget{DocumentationRules_enums}{}\doxysubsubsection{Je\+Vois 枚举}\label{DocumentationRules_enums}
+对于使用 Je\+Vois\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS 定义的枚举，我们基本上手动指示 doxygen 我们正在创建一个新类。将以下内容调整为您自己的枚举：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//! 假设的 BoundedSet 插入策略}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{/*! \(\backslash\)class BoundedSetInsertPolicy}}
+\DoxyCodeLine{\textcolor{comment}{    尝试将新元素推送到集合中时，如果它与集合中已有的元素匹配：}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    -\/ if \(\backslash\)c jevois::BoundedSetInsertPolicy::Preserve, 则保留旧策略并丢弃新传入的策略，或者，}}
+\DoxyCodeLine{\textcolor{comment}{    -\/ if \(\backslash\)c jevois::BoundedSetInsertPolicy::Replace, 则用新策略替换旧策略。}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    \(\backslash\)relates BoundedSet */}}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Manager_a0607298fa873ec7cce4a69261787cd16}{JEVOIS\_DEFINE\_ENUM\_CLASS}}(BoundedSetInsertPolicy, (Preserve) (Replace) );}
+\end{DoxyCode}
+ 

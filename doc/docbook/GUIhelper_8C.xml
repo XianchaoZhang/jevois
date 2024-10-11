@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_GUIhelper_8C">
+<title>src/jevois/GPU/GUIhelper.C File Reference</title>
+<indexterm><primary>src/jevois/GPU/GUIhelper.C</primary></indexterm>
+<programlisting>#include &lt;math.h&gt;
+#include &lt;imgui.h&gt;
+#include &lt;imgui_internal.h&gt;
+#include &lt;algorithm&gt;
+#include &lt;jevois/GPU/GUIhelper.H&gt;
+#include &lt;jevois/GPU/GUIconsole.H&gt;
+#include &lt;jevois/GPU/GPUimage.H&gt;
+#include &lt;jevois/Core/Module.H&gt;
+#include &lt;jevois/GPU/GUIeditor.H&gt;
+#include &lt;jevois/GPU/GUIserial.H&gt;
+#include &lt;jevois/Debug/SysInfo.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/DNN/Utils.H&gt;
+#include &lt;jevois/Debug/PythonException.H&gt;
+#include &lt;glm/gtc/matrix_transform.hpp&gt;
+#include &lt;glm/gtx/euler_angles.hpp&gt;
+#include &lt;fstream&gt;
+#include &lt;set&gt;
+</programlisting>Include dependency graph for GUIhelper.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="GUIhelper_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structTinyImGUIdemo">TinyImGUIdemo</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1adf4d73301961430d50d7edd96f92ce38">IMGUI_DEFINE_MATH_OPERATORS</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>(i,  x,  y,  z)   for(<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> i=x;i&lt;y;i+=z)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link>(y)   sin((y+t)*.03)*(1-sin(t*3)*cos(y/99+t))*9</para>
+</listitem>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31">H</link>(p,  w)   <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>(k,0,5,1)d-&gt;AddCircleFilled(p+<link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link>(1,-1)*w*k/8,w*(1-k/5),k&lt;4?0xff000000+k*0x554400:-1);</para>
+</listitem>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1a518af4e11e6c072ade65a5e299f09bc9">J</link>(b)   <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>(i,0,<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>,1){<link linkend="_structTinyImGUIdemo">TinyImGUIdemo</link>&amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>=<link linkend="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991">G</link>[int(i)];if(b*o.z&gt;0)<link linkend="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31">H</link>(o.p,(o.z*.3+4)*o.w)}</para>
+</listitem>
+            <listitem><para>#define <link linkend="_GUIhelper_8C_1a66056ccf8d4fa1692ec296f02710f197">O</link>(b)   i=t+1.6+j/99;if(b*sin(i)&gt;0)<link linkend="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31">H</link>(c+v*j+u*(cos(i)*40+<link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link>(j)),30)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>using <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> = ImVec2</para>
+</listitem>
+            <listitem><para>using <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> = float</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_GUIhelper_8C_1a05d68c2cfcae72873423c466fb09d82d">drawTinyImGUIdemo</link> (ImDrawList *d, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> a, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> b, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link>, ImVec4, <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> t)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link></para>
+</listitem>
+            <listitem><para><link linkend="_structTinyImGUIdemo">TinyImGUIdemo</link> <link linkend="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991">G</link> [999]</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31"/>    <section>
+    <title>H</title>
+<indexterm><primary>H</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>H</secondary></indexterm>
+<para><computeroutput>#define H( p,  w)   <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>(k,0,5,1)d-&gt;AddCircleFilled(p+<link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link>(1,-1)*w*k/8,w*(1-k/5),k&lt;4?0xff000000+k*0x554400:-1);</computeroutput></para><para>
+Definition at line 2494 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1adf4d73301961430d50d7edd96f92ce38"/>    <section>
+    <title>IMGUI_DEFINE_MATH_OPERATORS</title>
+<indexterm><primary>IMGUI_DEFINE_MATH_OPERATORS</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>IMGUI_DEFINE_MATH_OPERATORS</secondary></indexterm>
+<para><computeroutput>#define IMGUI_DEFINE_MATH_OPERATORS</computeroutput></para><para>
+Definition at line 23 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1a518af4e11e6c072ade65a5e299f09bc9"/>    <section>
+    <title>J</title>
+<indexterm><primary>J</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>J</secondary></indexterm>
+<para><computeroutput>#define J( b)   <link linkend="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd">L</link>(i,0,<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>,1){<link linkend="_structTinyImGUIdemo">TinyImGUIdemo</link>&amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>=<link linkend="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991">G</link>[int(i)];if(b*o.z&gt;0)<link linkend="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31">H</link>(o.p,(o.z*.3+4)*o.w)}</computeroutput></para><para>
+Definition at line 2495 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1a8edd4c14cf4fc3ad2d155ac3d00920cd"/>    <section>
+    <title>L</title>
+<indexterm><primary>L</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>L</secondary></indexterm>
+<para><computeroutput>#define L( i,  x,  y,  z)   for(<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> i=x;i&lt;y;i+=z)</computeroutput></para><para>
+Definition at line 2492 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1a66056ccf8d4fa1692ec296f02710f197"/>    <section>
+    <title>O</title>
+<indexterm><primary>O</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>O</secondary></indexterm>
+<para><computeroutput>#define O( b)   i=t+1.6+j/99;if(b*sin(i)&gt;0)<link linkend="_GUIhelper_8C_1a251ee9f915563bc8c09c1623b5e29e31">H</link>(c+v*j+u*(cos(i)*40+<link linkend="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd">Q</link>(j)),30)</computeroutput></para><para>
+Definition at line 2496 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1ad49b2456b1c91fc075a3290010ac23dd"/>    <section>
+    <title>Q</title>
+<indexterm><primary>Q</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>Q</secondary></indexterm>
+<para><computeroutput>#define Q( y)   sin((y+t)*.03)*(1-sin(t*3)*cos(y/99+t))*9</computeroutput></para><para>
+Definition at line 2493 of file GUIhelper.C.</para>
+</section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f"/>    <section>
+    <title>F</title>
+<indexterm><primary>F</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>F</secondary></indexterm>
+<para><computeroutput>using <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> =  float</computeroutput></para><para>
+Definition at line 2491 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e"/>    <section>
+    <title>V</title>
+<indexterm><primary>V</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>V</secondary></indexterm>
+<para><computeroutput>using <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> =  ImVec2</computeroutput></para><para>
+Definition at line 2491 of file GUIhelper.C.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_GUIhelper_8C_1a05d68c2cfcae72873423c466fb09d82d"/>    <section>
+    <title>drawTinyImGUIdemo()</title>
+<indexterm><primary>drawTinyImGUIdemo</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>drawTinyImGUIdemo</secondary></indexterm>
+<para><computeroutput>void drawTinyImGUIdemo (ImDrawList * d, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> a, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> b, <link linkend="_GUIhelper_8C_1ae2f8ce1b9df9c1f556ba34db7c140c5e">V</link> , ImVec4 , <link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link> t)</computeroutput></para><para>
+Definition at line 2497 of file GUIhelper.C.</para>
+<para>
+References G, h, J, L, O, and Q.</para>
+<para>
+Referenced by jevois::GUIhelper::drawTweaks().</para>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_GUIhelper_8C_1a6624f4e052741ab64e953601b163d991"/>    <section>
+    <title>G</title>
+<indexterm><primary>G</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>G</secondary></indexterm>
+<para><computeroutput><link linkend="_structTinyImGUIdemo">TinyImGUIdemo</link> G[999]</computeroutput></para><para>
+Definition at line 2491 of file GUIhelper.C.</para>
+<para>
+Referenced by convertYUYVtoRGB24(), convertYUYVtoRGBYL(), convertYUYVtoRGBYLinternal(), and drawTinyImGUIdemo().</para>
+    </section><anchor xml:id="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7"/>    <section>
+    <title>h</title>
+<indexterm><primary>h</primary><secondary>GUIhelper.C</secondary></indexterm>
+<indexterm><primary>GUIhelper.C</primary><secondary>h</secondary></indexterm>
+<para><computeroutput>int h</computeroutput></para><para>
+Definition at line 2491 of file GUIhelper.C.</para>
+<para>
+Referenced by convertYUYVtoRGB24(), convertYUYVtoRGBYL(), jevois::GPUimage::draw(), jevois::rawimage::drawFilledRect(), jevois::GUIhelper::drawImage(), jevois::GUIhelperPython::drawImage(), jevois::GUIhelperPython::drawImage1(), jevois::GUIhelperPython::drawImage2(), jevois::GUIhelperPython::drawImage3(), jevois::GUIhelper::drawInputFrame(), jevois::GUIhelperPython::drawInputFrame(), jevois::GUIhelper::drawInputFrame2(), jevois::GUIhelperPython::drawInputFrame2(), jevois::rawimage::drawLine(), jevois::rawimage::drawRect(), drawTinyImGUIdemo(), jevois::VideoDisplayBackend::getWindowSize(), jevois::GUIhelper::GUIhelper(), jevois::coords::imgToStdSize(), jevois::VideoDisplayBackendMALI::init(), jevois::ImGuiBackendMALI::init(), jevois::Engine::loadCameraCalibration(), jevois::VideoDisplayBackend::newFrame(), jevois::dnn::PreProcessorPythonImpl::process(), jevois::RawImage::require(), jevois::GUIhelper::resetstate(), jevois::rawimage::roipaste(), jevois::CameraCalibration::save(), jevois::VideoDisplayGUI::send(), jevois::VideoDisplayGL::send(), jevois::StdModule::sendSerialImg2D(), jevois::StdModule::sendSerialObjDetImg2D(), jevois::StdModule::sendSerialStd2D(), jevois::StdModule::sendSerialStd3D(), jevois::GUIhelper::startFrame(), jevois::GUIhelperPython::startFrame(), jevois::coords::stdToImgSize(), and jevois::rawimage::unpackCvRGBAtoGrayRawImage().</para>
+</section>
+</section>
+</section>

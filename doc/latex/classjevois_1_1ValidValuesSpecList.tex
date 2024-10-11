@@ -1,0 +1,146 @@
+\hypertarget{classjevois_1_1ValidValuesSpecList}{}\doxysubsection{jevois\+::Valid\+Values\+Spec\+List$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ValidValuesSpecList}\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Valid\+Values\+Spec.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Valid\+Values\+Spec\+List$<$ T $>$}
+
+有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 
+
+Definition at line 85 of file Valid\+Values\+Spec.\+H.
+
+
+
+Inheritance diagram for jevois\+::Valid\+Values\+Spec\+List$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classjevois_1_1ValidValuesSpecList__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Valid\+Values\+Spec\+List$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classjevois_1_1ValidValuesSpecList__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a8e3fbba3f721c0ac3cd958a9b870a56e}{Valid\+Values\+Spec\+List}} ()=delete
+\begin{DoxyCompactList}\small\item\em 没有默认构造函数，始终需要提供一个列表 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a946948487b13a6190fc322174c912508}{Valid\+Values\+Spec\+List}} (std\+::vector$<$ T $>$ const \&valid\+\_\+list)
+\begin{DoxyCompactList}\small\item\em 从向量中给定的有效值列表构造 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a3c4eee3c3836a6ae8778a04ed37140e1}{$\sim$\+Valid\+Values\+Spec\+List}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a63ff2546ce2aa835022ca230a4277b68}{check\+Value\+Validity}} (T const \&val) const
+\begin{DoxyCompactList}\small\item\em 检查提议的值是否有效，当且仅当值在我们的列表中时返回 true \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_a3f6eebccf8a1af9dd773491c05cee7b3}{str}} () const
+\begin{DoxyCompactList}\small\item\em 转换为可读字符串 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::vector$<$ T $>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList_ac7d193be631719a830abadafff785447}{its\+Valid\+List}}
+\begin{DoxyCompactList}\small\item\em Our list of valid values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_a8e3fbba3f721c0ac3cd958a9b870a56e}\label{classjevois_1_1ValidValuesSpecList_a8e3fbba3f721c0ac3cd958a9b870a56e}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!ValidValuesSpecList@{ValidValuesSpecList}}
+\index{ValidValuesSpecList@{ValidValuesSpecList}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecList()}{ValidValuesSpecList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{Valid\+Values\+Spec\+List}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+没有默认构造函数，始终需要提供一个列表 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_a946948487b13a6190fc322174c912508}\label{classjevois_1_1ValidValuesSpecList_a946948487b13a6190fc322174c912508}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!ValidValuesSpecList@{ValidValuesSpecList}}
+\index{ValidValuesSpecList@{ValidValuesSpecList}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecList()}{ValidValuesSpecList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{Valid\+Values\+Spec\+List}} (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{valid\+\_\+list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+从向量中给定的有效值列表构造 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_a3c4eee3c3836a6ae8778a04ed37140e1}\label{classjevois_1_1ValidValuesSpecList_a3c4eee3c3836a6ae8778a04ed37140e1}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!````~ValidValuesSpecList@{$\sim$ValidValuesSpecList}}
+\index{````~ValidValuesSpecList@{$\sim$ValidValuesSpecList}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ValidValuesSpecList()}{~ValidValuesSpecList()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{Valid\+Values\+Spec\+List}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_a63ff2546ce2aa835022ca230a4277b68}\label{classjevois_1_1ValidValuesSpecList_a63ff2546ce2aa835022ca230a4277b68}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!checkValueValidity@{checkValueValidity}}
+\index{checkValueValidity@{checkValueValidity}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{checkValueValidity()}{checkValueValidity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::check\+Value\+Validity (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+检查提议的值是否有效，当且仅当值在我们的列表中时返回 true 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_a3f6eebccf8a1af9dd773491c05cee7b3}\label{classjevois_1_1ValidValuesSpecList_a3f6eebccf8a1af9dd773491c05cee7b3}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!str@{str}}
+\index{str@{str}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+转换为可读字符串 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecList_ac7d193be631719a830abadafff785447}\label{classjevois_1_1ValidValuesSpecList_ac7d193be631719a830abadafff785447}} 
+\index{jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}!itsValidList@{itsValidList}}
+\index{itsValidList@{itsValidList}!jevois::ValidValuesSpecList$<$ T $>$@{jevois::ValidValuesSpecList$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsValidList}{itsValidList}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const std\+::vector$<$T$>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List}}$<$ T $>$\+::its\+Valid\+List\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our list of valid values. 
+
+
+
+Definition at line 105 of file Valid\+Values\+Spec.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ValidValuesSpec_8H}{Valid\+Values\+Spec.\+H}}\end{DoxyCompactItemize}

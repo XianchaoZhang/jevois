@@ -1,0 +1,263 @@
+\hypertarget{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4}{}\doxysubsection{jevois\+::Parameter$<$ Param, Tail ... $>$ Class Template Reference}
+\label{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4}\index{jevois::Parameter$<$ Param, Tail ... $>$@{jevois::Parameter$<$ Param, Tail ... $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$class Param, class ... Tail$>$\newline
+class jevois\+::\+Parameter$<$ Param, Tail ... $>$}
+
+附加到组件的一组参数。 
+
+这个可变参数模板类只是为了方便在一个语句中向 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 添加多个参数。
+
+我们在 Je\+Vois 框架中实现 Parameter 的方式乍一看似乎不正统，但这是我们迄今为止发现的最佳方法，即在编写有大量参数的新组件时最小化 负担。在我们早期的框架中，i\+Lab Neuromorphic Vision Toolkit （i\+N\+V\+T） 始于 1995 年，参数作为成员变量包含在组件中。程序员的负担 如此之重，以至于他们通常不包括参数以及硬连线值，只是为了避免这种负担。负担来自以下要求：
+
+
+\begin{DoxyItemize}
+\item 我们希望能够支持任何类型的参数
+\item 我们希望每个参数都有名称、描述、默认值、有效值的规范
+\item 我们希望参数显示在帮助消息中的相关组中
+\item 我们希望支持回调，即在尝试更改参数值时调用的函数
+\item 我们通常希望回调是 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的成员函数，因为更改参数值通常会触发该组件中的一些重组（否则可能不需要回调）。
+\end{DoxyItemize}
+
+可以使用类数据成员作为参数实现（类似于我们在 i\+N\+VT 中使用的），此处显示了一个示例 int 参数，用于指定派生自 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的类 My\+Comp 中持有的队列的大小：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ParamDef<int> sizeparamdef(\textcolor{stringliteral}{"size"}, \textcolor{stringliteral}{"Queue size"}, 5, Range<int>(1, 100), categ);}
+\DoxyCodeLine{\textcolor{keyword}{class }MyComp : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Component}{jevois::Component}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{Param<int> sizeparam; \textcolor{comment}{// ouch}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} sizeParamCallback(\textcolor{keywordtype}{int} newval) \{ myqueue.resize(newval); \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{MyComp(std::string \textcolor{keyword}{const} \& instance) :}
+\DoxyCodeLine{   \mbox{\hyperlink{namespacejevois}{jevois}}::Component(instance),}
+\DoxyCodeLine{   sizeparam(sizeparamdef)  \textcolor{comment}{// ouch}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  sizeparam.setCallback(\&MyComp::sizeParamCallback); \textcolor{comment}{// ouch}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+
+
+我们基本上最终得到了 3 个人们不知道该如何处理的名称，并且只会使用令人困惑的名称（sizeparamdef、sizeparam、size\+Param\+Callback）， 我们不得不 1） 使用一些任意名称（此处为 sizeparamdef）在某处指定名称、描述等的定义，然后使用其他名称（此处为 sizeparam）将 param 的成员变量添加到组件中， 然后构造参数，这通常需要将其链接到其定义，以便我们可以获取默认值等，最后挂接回调（请注意，当我们构造 sizeparam 时，\+My\+Comp 尚未完全构造，因此在那个时候引用 size\+Param\+Callback() 充其量是可疑的）。实际上，情况更糟，因为通常 paramdef、 组件类声明和组件实现应该在 3 个不同的文件中。
+
+\begin{DoxyNote}{Note}
+{\itshape \`{}`计算机科学中只有两件难的事情：缓存失效和命名事物。'\textquotesingle{} {\bfseries{-- Phil Karlton}}}
+\end{DoxyNote}
+我们为 Neuromorphic Robotics Toolkit （\+N\+R\+T） 开发并为 Je\+Vois 改进的方法如下：
+
+
+\begin{DoxyItemize}
+\item 每个参数都是一个唯一的新类类型。使用一个名称创建该类型一次，它包含参数值和定义数据。\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R(\+Param\+Name, Param\+Type, ...) 可变参数宏进一步促进了这一点。
+\item 对于带回调的参数，它们的类类型包括一个纯虚拟的 on\+Param\+Change(param, value) 函数，该函数需要由宿主组件实现。这是通过 J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K(\+Param\+Name, Param\+Type, ...) 可变参数宏实现的。on\+Param\+Change() 的第一个参数 是 class 类型，因此有许多参数的宿主组件将有许多不同的 on\+Param\+Change() 函数，每个参数都有一个回调。
+\item 组件使用可变参数模板从其参数继承，使从多个参数继承变得简短而简单。
+\item 每个参数都公开了简单的函数 get(), set(), 等（参见 \mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}} 和 Parameter\+Base）。在有许多参数的组件中，访问参数是通过 消除想要访问哪个基类（即哪个参数）的歧义来实现的，这是通过调用 paramx\+::get() vs paramy\+::get() 等来实现的。 等来实现的
+\item 无需声明参数成员变量（我们从它们继承）。
+\item 在组件的构造中无需执行任何操作。
+\item 无需手动将组件宿主类中的回调函数挂接到参数上。
+\item 实现回调时，宿主类的所有成员都可用（因为宿主类继承自 Parameter）。这一点至关重要，因为通常会实现回调，以便宿主组件在参数值 更改时采取一些操作，例如，以某种方式重新配置自身。
+\item 强大的编译时检查，确保程序员没有忘记为每个声明为具有回调的参数编写回调函数。
+\item 该参数及其所有关联机制（定义、回调）仅使用一个名称。
+\item 编写脚本来搜索源码树以获取有关组件的所有参数的信息很容易，因为这些参数都在 Parameter$<$ ... $>$ 继承语句中指定。
+\end{DoxyItemize}
+
+需要注意的是：通常需要对参数使用短名称，例如 \char`\"{}size\char`\"{}, \char`\"{}length\char`\"{}, \char`\"{}dims\char`\"{}, \char`\"{}threshold\char`\"{} 等，这些名称可能会在多个组件之间发生冲突， 因为在构建使用这些组件的更复杂的组件或系统时，将包含这些组件的 .H 文件。对于 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 来说，这不是问题，模块是一个终端实体，通常 编写为单个 .C 文件，没有 .H 文件。对于打算广泛使用的组件，我们目前建议将所有参数放在一个命名空间中，该命名空间是组件类名称的小 写版本。
+
+下面是 Manager.\+H 中的实现。我们从声明参数开始，在声明 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 类时继承。我们在新的命名空间 {\itshape manager} 中声明参数，以避免名称 与其他组件的参数发生冲突：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keyword}{namespace }\mbox{\hyperlink{namespacejevois}{jevois}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{keyword}{namespace }manager}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{keyword}{static} ParameterCategory \textcolor{keyword}{const} ParamCateg(\textcolor{stringliteral}{"General Options"});}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    //! Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    JEVOIS\_DECLARE\_PARAMETER(help, \textcolor{keywordtype}{bool}, \textcolor{stringliteral}{"Print this help message"}, \textcolor{keyword}{false}, ParamCateg);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef JEVOIS\_LDEBUG\_ENABLE}}
+\DoxyCodeLine{\textcolor{comment}{    //! Enum for Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    \mbox{\hyperlink{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}{JEVOIS\_DEFINE\_ENUM\_CLASS}}(LogLevel, (fatal) (error) (info) (debug) );}
+\DoxyCodeLine{\textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{\textcolor{comment}{    //! Enum for Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    \mbox{\hyperlink{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}{JEVOIS\_DEFINE\_ENUM\_CLASS}}(LogLevel, (fatal) (error) (info) );}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    //! Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK(loglevel, LogLevel, \textcolor{stringliteral}{"Set the minimum log level to display"},}
+\DoxyCodeLine{                                           LogLevel::info, LogLevel\_Values, ParamCateg);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    //! Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK(tracelevel, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}, \textcolor{stringliteral}{"Set the minimum trace level to display"},}
+\DoxyCodeLine{                                           0, ParamCateg);}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{    //! Parameter \(\backslash\)relates jevois::Manager}}
+\DoxyCodeLine{\textcolor{comment}{}    JEVOIS\_DECLARE\_PARAMETER(nickname, std::string, \textcolor{stringliteral}{"Nickname associated with this camera, useful when multiple "}}
+\DoxyCodeLine{                             \textcolor{stringliteral}{"JeVois cameras are connected to a same USB bus"}, \textcolor{stringliteral}{"jevois"}, ParamCateg);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{// \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{  //! 组件对象层次结构的管理器}}
+\DoxyCodeLine{\textcolor{comment}{}\textcolor{comment}{  /*! 管理器应为任何组件层次结构的顶级组件。它主要负责通过命令行或其他方式处理参数值的设置。}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{      用户只需构建一个管理器（包括从管理器派生的引擎），向其中添加任何组件，然后在管理器上调用 init()，它将解析所有命令}}
+\DoxyCodeLine{\textcolor{comment}{      行选项，将它们绑定到相关参数，并在所有子组件上调用 init()（反过来，它又在所有子组件上调用 init()，等等）。有关 }}
+\DoxyCodeLine{\textcolor{comment}{      init() 流程的更多信息，请参阅组件的文档。}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{      参数 \(\backslash\)p nickname 不由管理器内部使用。例如，在使用连接到单个 USB 总线的多个 JeVois 摄像头的系统中，可以在 }}
+\DoxyCodeLine{\textcolor{comment}{      \(\backslash\)b initscript.cfg 中为每个摄像头设置不同的值。}}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{      \(\backslash\)ingroup component */}}
+\DoxyCodeLine{  \textcolor{keyword}{class }Manager : \textcolor{keyword}{public} Component,}
+\DoxyCodeLine{                  \textcolor{keyword}{public} Parameter<manager::help, manager::loglevel, manager::tracelevel, manager::nickname>}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{    \textcolor{keyword}{public}:}
+\end{DoxyCodeInclude}
+
+
+对于我们声明的带回调的参数，我们在定义中进一步包含了 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} class overrides，用于它们添加到我们的管理器类中的纯虚拟 on\+Param\+Change() 函数。请注意这些函数的签名：第一个参数是对此回调所针对的参数的常量引用，其主要作用是消除组件可能有的 不同 on\+Param\+Change() 函数之间的歧义。第二个参数是建议的新参数值。on\+Param\+Change() 函数应该检查候选的新值，（1）如果 它不喜欢它，则抛出 std\+::range\+\_\+error 并带有一条描述性消息，说明为什么该值被拒绝，（2）否则，假设该值被接受，然后回调 可以分配资源或使用该值进行其他工作（\+Parameter 对象的实际修改在上游处理，回调无需担心：如果它返回而没有抛出，则建议的 值将成为 Parameter 的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免多个不同的线程破坏参数和/或并发参数值 更改。因此，回调应该尝试快速执行，而不应该在参数上调用 set() 等，因为这将始终死锁（如果您的回调需要知道参数的当前值， 则允许 get()）。
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{      //! Parameter callback}}
+\DoxyCodeLine{\textcolor{comment}{}      \textcolor{keywordtype}{void} onParamChange(manager::loglevel \textcolor{keyword}{const} \& param, manager::LogLevel \textcolor{keyword}{const} \& newval) \textcolor{keyword}{override};}
+\DoxyCodeLine{\textcolor{comment}{}}
+\DoxyCodeLine{\textcolor{comment}{      //! Parameter callback}}
+\DoxyCodeLine{\textcolor{comment}{}      \textcolor{keywordtype}{void} onParamChange(manager::tracelevel \textcolor{keyword}{const} \& param, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \textcolor{keyword}{const} \& newval) \textcolor{keyword}{override};}
+\end{DoxyCodeInclude}
+
+
+\mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 的构造函数、析构函数等无需执行任何操作。唯一需要做的是在 \mbox{\hyperlink{Manager_8C}{Manager.\+C}} 中实现 on\+Param\+Change() 函数。请注意，我们不给第 一个参数命名（它是对参数本身的引用；第一个参数对于消除不同参数的各种 on\+Param\+Change() 函数之间的歧义是必要的，但通常我们只关心 新值，不需要参数的句柄）。为了避免编译器警告我们的回调不使用第一个参数：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Manager_a573cbb9b833be4c968e52f85990ba0af}{jevois::Manager::onParamChange}}(jevois::manager::loglevel \textcolor{keyword}{const} \&, jevois::manager::LogLevel \textcolor{keyword}{const} \& newval)}
+\DoxyCodeLine{\{ }
+\DoxyCodeLine{  \textcolor{keywordflow}{switch}(newval)}
+\DoxyCodeLine{  \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{case} jevois::manager::LogLevel::fatal: \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois::logLevel}} = LOG\_CRIT; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{  \textcolor{keywordflow}{case} jevois::manager::LogLevel::error: \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois::logLevel}} = LOG\_ERR; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{  \textcolor{keywordflow}{case} jevois::manager::LogLevel::info: \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois::logLevel}} = LOG\_INFO; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifdef JEVOIS\_LDEBUG\_ENABLE}}
+\DoxyCodeLine{  \textcolor{keywordflow}{case} jevois::manager::LogLevel::debug: \mbox{\hyperlink{group__debugging_ga0538fa80480e8b4b51b399d98196765b}{jevois::logLevel}} = LOG\_DEBUG; \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// \#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#}}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Manager_a573cbb9b833be4c968e52f85990ba0af}{jevois::Manager::onParamChange}}(jevois::manager::tracelevel \textcolor{keyword}{const} \&, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \textcolor{keyword}{const} \& newval)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#if !defined(JEVOIS\_TRACE\_ENABLE) || !defined(JEVOIS\_LDEBUG\_ENABLE)}}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (newval)}
+\DoxyCodeLine{    \mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{LERROR}}(\textcolor{stringliteral}{"Debug trace has been disabled at compile-\/time, re-\/compile with -\/DJEVOIS\_LDEBUG\_ENABLE=ON and "}}
+\DoxyCodeLine{           \textcolor{stringliteral}{"-\/DJEVOIS\_TRACE\_ENABLE=ON to see trace info"});}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \mbox{\hyperlink{group__debugging_ga293cae43e521f4f49ae381d1c931c7b2}{jevois::traceLevel}} = newval;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+
+宿主组件可以通过使用参数名称作为前缀来调用参数的成员函数来使用它们（此前缀基本上是选择我们想要运行给定函数的基类）。例如，在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 中，如果已在命令行中设置了 {\ttfamily help} 参数，我们将执行一些操作，然后冻结它。在 \mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}} 和 Parameter\+Core$<$\+T$>$ 中 定义的所有成员函数 (get(), set(), strget(), strset(), name(), descriptor(), summary(), freeze(), etc)在每个参数上都可用：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{jevois::Manager::postInit}}()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \textcolor{comment}{// 如果在命令行上给出了 -\/-\/help，则打印帮助消息并退出：}}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (help::get()) \{ printHelpMessage(); \mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{LINFO}}(\textcolor{stringliteral}{"JeVois: exit after help message"}); exit(0); \}}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{// -\/-\/help 参数仅用于解析命令行参数。完成后，我们在此将其隐藏为我们将在 JeVois 控制台中提供一个 'help' 命令：}}
+\DoxyCodeLine{  help::freeze(\textcolor{keyword}{true});}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{comment}{// 如果尚未编译跟踪，请不要使用不起作用的 tracelevel 参数让用户感到困惑：}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#if !defined(JEVOIS\_TRACE\_ENABLE) || !defined(JEVOIS\_LDEBUG\_ENABLE)}}
+\DoxyCodeLine{  tracelevel::freeze(\textcolor{keyword}{true});}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\}}
+\end{DoxyCodeInclude}
+
+
+为了完整起见，如果您想知道 J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R(\+Param\+Name, Param\+Type, ...) and J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K(\+Param\+Name, Param\+Type, ...) 到底是做什么的，它们位于 Parameter\+Helpers.\+H 中， 并在此处复制：
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Convenience macro to define a Parameter type. All the ... args are passed to ParameterDef}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define JEVOIS\_DECLARE\_PARAMETER(ParamName, ParamType, ...)             \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  struct ParamName : public virtual jevois::ParameterRegistry, public jevois::ParameterCore<ParamType> \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  \{                                                                     \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    typedef ParamType type;                                             \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline ParamName() : jevois::ParameterCore<ParamType>(jevois::ParameterDef<ParamType>(\#ParamName, \_\_VA\_ARGS\_\_)) \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ jevois::ParameterRegistry::addParameter(this); \}                  \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline virtual \string~ParamName()                                         \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ jevois::ParameterRegistry::removeParameter(this); \}               \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline virtual jevois::Component const * owner() const override     \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ return dynamic\_cast<jevois::Component const *>(static\_cast<jevois::ParameterRegistry const *>(this)); \} \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  \};}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// Convenience macro to define a Parameter type with callback. All the ... args are passed to ParameterDef}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK(ParamName, ParamType, ...) \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  struct ParamName : public virtual jevois::ParameterRegistry, public jevois::ParameterCore<ParamType> \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  \{                                                                     \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    typedef ParamType type;                                             \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    virtual void onParamChange(ParamName const \& param, ParamType const \& newval) = 0; \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline ParamName() : jevois::ParameterCore<ParamType>(jevois::ParameterDef<ParamType>(\#ParamName, \_\_VA\_ARGS\_\_)) \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ setCallback([this](ParamType const \& newval) \{ this-\/>onParamChange(*this, newval); \}); \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{      jevois::ParameterRegistry::addParameter(this); \}                  \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline virtual \string~ParamName()                                         \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ jevois::ParameterRegistry::removeParameter(this); \}               \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{                                                                        \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    inline virtual jevois::Component const * owner() const override     \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{    \{ return dynamic\_cast<jevois::Component const *>(static\_cast<jevois::ParameterRegistry const *>(this)); \} \(\backslash\)}}
+\DoxyCodeLine{\textcolor{preprocessor}{  \};}}
+\DoxyCodeLine{}
+\end{DoxyCodeInclude}
+
+
+另请参阅 Engine.\+H 或 jevoisbase 库中的许多组件。 
+
+Definition at line 361 of file Parameter.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter$<$ Param, Tail ... $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Parameter$<$ Param, Tail ... $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4__coll__graph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Parameter_8H}{Parameter.\+H}}\end{DoxyCompactItemize}

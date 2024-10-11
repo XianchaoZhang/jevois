@@ -1,0 +1,78 @@
+\hypertarget{JeVoisProBenchmarks_autotoc_md58}{}\doxysubsection{Je\+Vois-\/\+Pro 神经网络后端}\label{JeVoisProBenchmarks_autotoc_md58}
+以下测量是在运行（2022 年 9 月）的 智能相机上进行的。
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Open\+CV\+:}} 由 Open\+CV D\+NN 框架加载并在 C\+PU 上运行的网络。
+\item {\bfseries{O\+RT\+:}} 由 O\+N\+NX Runtime 框架加载并在 C\+PU 上运行的网络。
+\item {\bfseries{N\+PU\+:}} 在 Je\+Vois-\/\+Pro 集成的 5-\/T\+O\+PS N\+P\+U（神经处理单元）上原生运行的网络。
+\item {\bfseries{T\+PU\+:}} 在可选的 4-\/T\+O\+PS Google Coral T\+PU 加速器（张量处理单元）上运行的网络。
+\item {\bfseries{S\+PU\+:}} 在可选的 26-\/T\+O\+PS Hailo8 S\+PU 加速器（流处理单元）上运行的网络。
+\item {\bfseries{V\+PU\+:}} 在可选的 1-\/T\+O\+PS MyriadX V\+PU 加速器（矢量处理单元）上运行的网络。
+\item {\bfseries{N\+P\+UX\+:}} 由 Open\+CV 加载并通过 T\+I\+M-\/\+VX Open\+CV 扩展在 N\+PU 上运行的网络。为了高效运行，网络应该量化为 int8，否则会出现一些基于 C\+PU 的缓慢仿真。
+\item {\bfseries{V\+P\+UX\+:}} 针对 V\+PU 优化的网络，但如果 V\+PU 不可用，则在 C\+PU 上运行。请注意，如果未检测到 V\+PU 加速器，则通过扫描所有 V\+PU 条目并将其目标从 Myriad 更改为 C\+PU 来自动创建 V\+P\+UX 条目。如果检测到 V\+P\+U，则列出 V\+PU 模型，而不列出 V\+P\+UX 模型。\+V\+P\+UX 仿真使用 Arm Compute Library 在 Je\+Vois-\/\+Pro C\+PU 上运行，以高效实现各种网络层和操作。
+\end{DoxyItemize}\hypertarget{JeVoisProBenchmarks_autotoc_md59}{}\doxysubsection{基准测试条件}\label{JeVoisProBenchmarks_autotoc_md59}
+
+\begin{DoxyItemize}
+\item 显示器已开启，分辨率为 1920x1080/60\+Hz。如果启用 4K 显示器，操作会稍微慢一些，可能是因为内存总线的张力较大。
+\item 使用了 模块，其中 1920x1080 Y\+U\+YV 视频捕获用于显示目的，以及 1024x576 R\+G\+B24 捕获用于视觉处理。
+\item 批处理大小始终为 1，即我们每次测量预处理、推断和后处理一帧的往返时间。批处理大小越大，性能通常越高，但这不是实时场景（会导致捕获视频帧和推断结果可用并显示之间的延迟越大）。
+\item {\bfseries{这些基准测试仅适用于 Je\+Vois-\/\+Pro，并不代表特定加速器的峰值性能。}} 特别是：
+\begin{DoxyItemize}
+\item 使用的 Myriad-\/X V\+PU 是一个 U\+SB 加密狗，通过 480 Mbit/s U\+SB 2.\+0 链路连接到 Je\+Vois-\/\+Pro。加密狗支持 5 G\+Bit/s U\+SB 3.\+0，但 Je\+Vois-\/\+Pro C\+PU 没有可用的 U\+SB 3.\+0 端口。
+\item N\+PU 集成到 Je\+Vois-\/\+Pro 的 Amlogic A311D 处理器中，因此具有最高的内存带宽（直接访问处理器主 R\+AM 的内存）和最高的可用内存（高达 4 GB 的主 R\+A\+M）。
+\item Coral Edge T\+PU 和 Hailo-\/8 S\+PU 是 Je\+Vois-\/\+Pro 内可选安装的 M.\+2 2230 A+E 卡。数据传输通过 P\+C\+Ie 以 5 G\+Bits/s 的速度进行。请注意，\+Hailo-\/8 最多可支持 P\+C\+Ie x4，但 Je\+Vois-\/\+Pro 的 A311D 处理器只有一个 P\+C\+Ie x1 通道。还请注意，\+Hailo-\/8 可以支持比 A311D 所能提供的更大的 P\+C\+Ie 事务数据包（最多 4 K\+B）（最多 256 字节）。
+\item Coral Edge T\+PU 芯片上只有大约 6.\+5 MB 的可用 R\+A\+M。因此，对于较大的网络，性能会较慢，因为某些权重可能需要在每个视频帧上通过 P\+C\+Ie 不断加载/卸载。例如，5-\/\+T\+O\+PS N\+PU 上的 Inception-\/\+V3 为 45 fps，而 4-\/T\+O\+PS T\+PU 上只有 21 fps，因为模型大小约为 25 M\+B。
+\item 您只能在 Je\+Vois-\/\+Pro 内安装一张 M.\+2 2230 A+E 卡，因此您必须在 Hailo-\/8 卡、单 T\+PU 卡或双 T\+PU 卡之间进行选择（只有 Je\+Vois 制造的双 T\+PU 卡才有效；谷歌制造的双 T\+PU 卡需要 P\+C\+Ie x2 链路，而 Je\+Vois-\/\+Pro 只有 P\+C\+Ie x1）。
+\item {\itshape Pre\+Proc} 时间包括将输入视频（1024x576 R\+G\+B24）调整为网络的输入大小，并可能交换 R\+G\+B/\+B\+GR 顺序、\+N\+C\+H\+W/\+N\+H\+WC 顺序、均值减法、按比例因子和/或标准差进行标准化，以及量化为网络所需的数据类型。
+\item {\itshape Network} 推理时间包括从主存储器到设备的数据传输、片上推理、将输出的数据传输回主存储器，以及可能的反量化为 float32。
+\item {\itshape Post\+Proc} 时间包括网络输出的解码（例如，从原始 Y\+O\+LO 层输出解码 Y\+O\+LO 框），以及使用 Open\+GL 绘制结果。
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{JeVoisProBenchmarks_autotoc_md60}{}\doxysubsection{基准测试结果}\label{JeVoisProBenchmarks_autotoc_md60}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{8}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Pipeline}&\cellcolor{\tableheadbgcolor}\textbf{ Input}&\cellcolor{\tableheadbgcolor}\textbf{ Output}&\cellcolor{\tableheadbgcolor}\textbf{ Pre\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Network}&\cellcolor{\tableheadbgcolor}\textbf{ Post\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Total}&\cellcolor{\tableheadbgcolor}\textbf{ F\+PS
+
+
+
+}\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Pipeline}&\cellcolor{\tableheadbgcolor}\textbf{ Input}&\cellcolor{\tableheadbgcolor}\textbf{ Output}&\cellcolor{\tableheadbgcolor}\textbf{ Pre\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Network}&\cellcolor{\tableheadbgcolor}\textbf{ Post\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Total}&\cellcolor{\tableheadbgcolor}\textbf{ F\+PS
+
+
+
+}\\\cline{1-8}
+\endhead
+\end{longtabu}
+\hypertarget{JeVoisProBenchmarks_autotoc_md61}{}\doxysubsection{旧基准}\label{JeVoisProBenchmarks_autotoc_md61}
+随着软件的不断发展，我们提供了较旧的基准以供比较。通常，随着 Open\+CV 中添加了更多优化的内核，在具有 Open\+CV 后端的 C\+PU 上运行的网络应该会随着时间的推移而变得更快。在硬件加速器上运行的网络往往保持不变。预处理和后处理在我们的控制之下，我们努力随着时间的推移使它们变得更快，尽管有时添加更多功能可能会略微降低速度。
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{JeVoisProBenchmarks118}{Je\+Vois-\/\+Pro 深度神经网络基准测试基于旧版 Je\+Vois 1.\+18.\+0 软件}} 
+\end{DoxyItemize}\hypertarget{JeVoisProBenchmarks118}{}\doxysubsection{Je\+Vois-\/\+Pro 深度神经网络基准测试基于旧版 Je\+Vois 1.18.0 软件}\label{JeVoisProBenchmarks118}
+请参阅 \mbox{\hyperlink{JeVoisProBenchmarks}{Je\+Vois-\/\+Pro 深度神经网络基准}} 了解最新版本。
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{8}{|X[-1]}|}
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Pipeline}&\cellcolor{\tableheadbgcolor}\textbf{ Input}&\cellcolor{\tableheadbgcolor}\textbf{ Output}&\cellcolor{\tableheadbgcolor}\textbf{ Pre\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Network}&\cellcolor{\tableheadbgcolor}\textbf{ Post\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Total}&\cellcolor{\tableheadbgcolor}\textbf{ F\+PS
+
+
+
+}\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\cellcolor{\tableheadbgcolor}\textbf{ Pipeline}&\cellcolor{\tableheadbgcolor}\textbf{ Input}&\cellcolor{\tableheadbgcolor}\textbf{ Output}&\cellcolor{\tableheadbgcolor}\textbf{ Pre\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Network}&\cellcolor{\tableheadbgcolor}\textbf{ Post\+Proc}&\cellcolor{\tableheadbgcolor}\textbf{ Total}&\cellcolor{\tableheadbgcolor}\textbf{ F\+PS
+
+
+
+}\\\cline{1-8}
+\endhead
+\end{longtabu}

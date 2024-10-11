@@ -510,17 +510,17 @@ jevois::PythonModule::PythonModule(jevois::VideoMapping const & m) :
 // ####################################################################################################
 void jevois::PythonModule::preInit()
 {
-  // Load the python code and instantiate the python class:
+  // 加载 python 代码并实例化 python 类：
   PythonWrapper::pythonload(itsPyPath);
 
-  // Call python module's init() function if implemented:
+  // 如果已实现，则调用 python 模块的 init() 函数：
   if (jevois::python::hasattr(PythonWrapper::pyinst(), "init")) PythonWrapper::pyinst().attr("init")();
 }
 
 // ####################################################################################################
 void jevois::PythonModule::postUninit()
 {
-  // Call python module's uninit() function if implemented:
+  // 如果实现了，则调用 python 模块的 uninit() 函数：
   if (jevois::python::hasattr(PythonWrapper::pyinst(), "uninit")) PythonWrapper::pyinst().attr("uninit")();
 }
 
@@ -627,8 +627,8 @@ boost::python::tuple jevois::dnn::PreProcessorForPython::i2b(float x, float y, s
 // ####################################################################################################
 jevois::dnn::PostProcessorDetectYOLOforPython::PostProcessorDetectYOLOforPython()
 {
-  // We need to add our sub under an existing "pypost" sub of our module. The hierarchy typically is:
-  // DNN->pipeline->postproc->pypost
+  // 我们需要在模块的现有 "pypost" 子模块下添加我们的子模块。层次结构通常是： 
+  // DNN->pipeline->postproc->pypost 
   std::shared_ptr<Module> m = jevois::python::engine()->module();
   if (!m) LFATAL("Cannot instantiate without a current running module");
   std::shared_ptr<Component> pi = m->getSubComponent("pipeline");

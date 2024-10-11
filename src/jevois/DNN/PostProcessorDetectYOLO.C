@@ -57,7 +57,7 @@ void jevois::dnn::PostProcessorDetectYOLO::freeze(bool doit)
 }
 
 // ####################################################################################################
-// Helper code from the detect_library of the NPU
+// 来自 NPU 命名空间的 detect_library 的辅助代码
 namespace
 {
   inline float logistic_activate(float x)
@@ -70,21 +70,20 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo(std::vector<cv::Mat> const & out
                                                 size_t nclass, float boxThreshold, float confThreshold,
                                                 cv::Size const & bsiz, int fudge, size_t const maxbox)
 {
-  if (nclass == 0) nclass = 1; // Assume 1 class if no list of classes was given
+  if (nclass == 0) nclass = 1; // 如果没有给出类别列表，则假设为 1 个类 
   size_t const nouts = outs.size();
   if (nouts == 0) LTHROW("No output tensors received");
   if (itsAnchors.size() != nouts) LTHROW("Need " << nouts << " sets of anchors");
 
-  // Various networks will yield their YOLO outputs in various orders. But our default anchors (and the doc for the
-  // anchors parameter) assumes order from large to small, e.g., first 52x52, then 26x26, then 13x13. So here we need to
-  // sort the outputs in decreasing size order to get the correct yolonum:
+  // 各种网络将以各种顺序产生其 YOLO 输出。但我们的默认锚点（以及 anchors 参数的文档）假设从大到小的顺序，例如，首先是
+  //  52x52，然后是 26x26，然后是 13x13。所以在这里我们需要按大小递减顺序对输出进行排序以获得正确的 yolonum：
   if (itsYoloNum.empty())
   {
     for (size_t i = 0; i < nouts; ++i) itsYoloNum.emplace_back(i);
     std::sort(itsYoloNum.begin(), itsYoloNum.end(),
               [&outs](int const & a, int const & b) { return outs[a].total() > outs[b].total(); });
 
-    // Allow users to check our assignment:
+    // 允许用户检查我们的任务：
     for (size_t i = 0; i < nouts; ++i)
     {
       int const yn = itsYoloNum[i];
@@ -96,7 +95,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo(std::vector<cv::Mat> const & out
     }
   }
   
-  // Run each scale in a thread:
+  // 在线程中运行每个 scale：
   bool sigmo = sigmoid::get();
   float scale_xy = scalexy::get();
   std::vector<std::future<void>> fvec;
@@ -106,7 +105,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo(std::vector<cv::Mat> const & out
       { yolo_one(outs[i], classIds, confidences, boxes, nclass, itsYoloNum[i], boxThreshold, confThreshold,
                  bsiz, fudge, maxbox, sigmo, scale_xy); }, i));
 
-  // Use joinall() to get() all futures and throw a single consolidated exception if any thread threw:
+  // 使用 joinall() 来 get() 所有未来，如果任何线程抛出，则抛出单个合并异常：
   jevois::joinall(fvec);
 }
 
@@ -126,7 +125,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo_one(cv::Mat const & out, std::ve
   // n_anchors = 5 for yoloface, yolov2
   // n_anchors = 3 for yolov3/v4/v5/v7 and those have 3 separate output tensors for 3 scales
 
-  // Try NCHW first (e.g., from NPU):
+  // 首先尝试 NCHW（例如，来自 NPU）：
   bool nchw = true;
   int w = msiz[3];
   int h = msiz[2];
@@ -135,7 +134,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo_one(cv::Mat const & out, std::ve
   int n = msiz[1] / bbsize;
   if (msiz[1] % bbsize)
   {
-    // Ok, try NHWC (e.g., YOLOv5 on Hailo):
+    // 好的，尝试 NHWC（例如，Hailo 上的 YOLOv5）：
     nchw = false;
     w = msiz[2];
     h = msiz[1];
@@ -154,47 +153,47 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo_one(cv::Mat const & out, std::ve
   if (int(biases.size()) != n*2)
     LTHROW(n << " boxes received but only " << biases.size()/2 << " boxw,boxh anchors provided");
 
-  // Stride from one box field (coords, score, class) to the next:
+  // 从一个框字段（coords、score、class）跨度到下一个框字段：
   size_t const stride = nchw ? h * w : 1;
   size_t const nextloc = nchw ? 1 : n * bbsize;
   float const * locptr = (float const *)out.data;
   size_t const ncs = nclass * stride;
 
-  // Loop over all locations:
+  // 循环遍历所有位置：
   for (int row = 0; row < h; ++row)
     for (int col = 0; col < w; ++col)
     {
-      // locptr points to the set of boxes at the current location. Initialize ptr to the first box:
+      // locptr 指向当前位置的框集合。将 ptr 初始化为第一个框：
       float const * ptr = locptr;
       
-      // Loop over all boxes per location:
+      // 循环遍历每个位置的所有框：
       for (int nn = 0; nn < n; ++nn)
       {
-        // Apply logistic activation to box score:
+        // 将逻辑激活应用于框分数：
         float box_score = ptr[coords * stride];
         if (sigmo) box_score = logistic_activate(box_score);
         
         if (box_score > boxThreshold)
         {
-          // Get index of highest-scoring class and its score:
+          // 获取得分最高的类别的索引及其分数：
           size_t const class_index = (coords + 1) * stride;
           size_t maxidx = 0; float prob = 0.0F;
           for (size_t k = 0; k < ncs; k += stride)
             if (ptr[class_index + k] > prob) { prob = ptr[class_index + k]; maxidx = k; }
           if (sigmo) prob = logistic_activate(prob);
 
-          // Combine box and class scores:
+          // 结合框和类别分数：
           prob *= box_score;
 
-          // If best class was above threshold, keep that box:
+          // 如果最佳类别高于阈值，则保留该框：
           if (prob > confThreshold)
           {
-            // Decode the box and scale it to input blob dims:
+            // 解码该框并将其缩放到输入 blob dims：
             cv::Rect b;
 
             if (scale_xy)
             {
-              // New coordinates style, as in YOLOv5/7:
+              // 新的坐标样式，与 YOLOv5/7 中相同：
               float bx = ptr[0 * stride], by = ptr[1 * stride], bw = ptr[2 * stride], bh = ptr[3 * stride];
               if (sigmo)
               {
@@ -211,7 +210,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo_one(cv::Mat const & out, std::ve
             }
             else
             {
-              // Old-style coordinates, as in YOLOv2/3/4:
+              // 旧式坐标，如 YOLOv2/3/4 中：
               b.width = expf(ptr[2 * stride]) * biases[2*nn] * bfac * bsiz.width / w + 0.499F;
               b.height = expf(ptr[3 * stride]) * biases[2*nn+1] * bfac * bsiz.height / h + 0.499F;
               b.x = (col + logistic_activate(ptr[0 * stride])) * bsiz.width / w + 0.499F - b.width / 2;
@@ -226,7 +225,7 @@ void jevois::dnn::PostProcessorDetectYOLO::yolo_one(cv::Mat const & out, std::ve
           }
         }
 
-        // Next box within the current location:
+        // 当前位置内的下一个框：
         ptr += bbsize * stride;
       }
       // Next location:

@@ -24,63 +24,63 @@ namespace jevois
 {
   namespace python
   {
-    //! Base helper class to allow creation of Parameter in python \ingroup python
+    //! 允许在 python 中创建参数的基本帮助类 \ingroup python
     class PyParHelperBase
     {
       public:
         //! Constructor
         PyParHelperBase(jevois::Component * comp);
         
-        //! Remove param from component
+        //! 从组件中移除参数
         virtual ~PyParHelperBase();
         
-        //! Get the value, typed, then wrapped into python object
+        //! 获取值，输入类型，然后包装到 python 对象中
         virtual boost::python::object get() = 0;
         
-        //! Set the value from python object that should contain a value of the correct type
+        //! 从 python 对象中设置应包含正确类型的值
         virtual void set(boost::python::object const & val) = 0;
 
-        //! Set the parameter's callback
+        //! 设置参数的回调
         virtual void setCallback(boost::python::object const & cb) = 0;
 
-        //! Access the associated C++ base Parameter
+        //! 访问关联的 C++ 基础参数
         virtual std::shared_ptr<jevois::ParameterBase> par() const = 0;
 
       protected:
-        //! Access the associated C++ Component
+        //! 访问关联的 C++ 组件
         jevois::Component * comp() const;
 
       private:
         jevois::Component * itsComp;
     };
     
-    //! Typed class to allow creation of Parameter in Python \ingroup python
+    //! 类型化类，允许在 Python 中创建参数 \ingroup python
     template <typename T>
     class PyParHelper : public PyParHelperBase
     {
       public:
-        //! Create and add the parameter to the component
+        //! 创建并将参数添加到组件
         static std::shared_ptr<jevois::python::PyParHelperBase>
         create(jevois::Component * comp, std::string const & name, std::string const & description,
                boost::python::object const & defaultValue, jevois::ParameterCategory const & category);
 
-        //! Create and add the parameter to the component
+        //! 创建并将参数添加到组件
         PyParHelper(jevois::Component * comp, std::string const & name, std::string const & description,
                     boost::python::object const & defaultValue, jevois::ParameterCategory const & category);
         
-        //! Remove param from component
+        //! 从组件中删除参数
         virtual ~PyParHelper();
         
-        //! Get the value, typed, then wrapped into python object
+        //! 获取值，输入类型，然后包装到 python 对象中
         boost::python::object get() override;
         
-        //! Set the value from python object
+        //! 从 python 对象设置值
         void set(boost::python::object const & val) override;
 
         //! Set the parameter's callback
         void setCallback(boost::python::object const & cb) override;
 
-        //! Access the associated C++ base parameter, used to forward strget(), strset(), freeze(), etc to it
+        //! 访问关联的 C++ 基本参数，用于将 strget()、strset()、freeze() 等转发给它
         std::shared_ptr<jevois::ParameterBase> par() const override;
 
       protected:
@@ -89,44 +89,43 @@ namespace jevois
     };
   } // namespace python
 
-  //! Wrapper for jevois Parameter in python
-  /*! This wrapper allows python modules to create JeVois Parameter objects, allowing users to interact with the
-      parameters through the console, JeVois-Inventor, or the JeVois-Pro GUI. This class does not actually contain the
-      parameter, it is just an interface. Parameters belong to the Component associated with the python code via
-      PythonWrapper. \ingroup python */
+  //! python 中 jevois 参数的包装器
+  /*! 此包装器允许 python 模块创建 JeVois 参数对象，从而允许用户通过控制台、JeVois-Inventor 或 JeVois-Pro GUI 与参数进
+      行交互。此类实际上并不包含参数，它只是一个接口。参数通过 PythonWrapper 属于与 python 代码关联的组件。
+	   \ingroup python */
   class PythonParameter
   {
     public:
-      //! Constructor. Adds a dynamic parameter to the Component associated with pyinst
+      //! 构造函数。向与 pyinst 关联的组件添加动态参数
       PythonParameter(boost::python::object & pyinst, std::string const & name, std::string const & typ,
                       std::string const & description, boost::python::object const & defaultValue,
                       jevois::ParameterCategory const & category);
 
-      //! Destructor. Removes the dynamic parameter from the associated Component
+      //! 析构函数。从关联组件中移除动态参数
       ~PythonParameter();
       
       //! Get the parameter name
       std::string const & name() const;
 
-      //! Get the parameter fully-qualified name, aka descriptor, including names of owning Component and all parents
+      //! 获取参数的完全限定名称，又名描述符，包括拥有组件和所有父组件的名称
       std::string descriptor() const;
 
       //! Get the value of this Parameter
       boost::python::object get() const;
 
-      //! Set the value of this Parameter
-      /*! Will throw if the new value is not accepted, in which case the old value will remain in the Parameter. */
+      //! 设置此参数的值
+	  /*！如果不接受新值，则会抛出，在这种情况下旧值将保留在参数中。 */
       void set(boost::python::object const & newVal);
 
       //! Get the value as a string
       std::string const strget() const;
 
-      //! Set the value from a string representation of it
-      /*! @throws std::range_error if the given string cannot be converted to a Parameter value, or the value is invalid
-          according to our valid values spec or rejected by the Parameter's callback (if any). */
+      //! 从它的字符串表示形式设置值
+	  /*！如果给定的字符串不能转换为参数值，或者该值根据我们的有效值规范无效或被参数的回调拒绝（如果有），则 
+	      @throws std::range_error。 */
       void strset(std::string const & valstring);
 
-      //! Freeze/unfreeze this parameter, it becomes read-only and will not show up in the help message
+      //! 冻结/解冻此参数，它将变为只读并且不会显示在帮助消息中
       void freeze(bool doit);
 
       //! Returns whether parameter is frozen
@@ -135,19 +134,14 @@ namespace jevois
       //! Reset this parameter to its default value
       void reset();
 
-      //! Set the parameter's callback
-      /*! The callback function is called each time one tries to change the value of the parameter. It will also be
-          called one first time, with the current parameter value, as soon as the callback is set.
-
-          The callback should examine the candidate value newval and (1) if it does not like it, throw and with a
-          descriptive message of why the value is rejected, (2) otherwise, it is assumed that the value is accepted and
-          the callback can then allocate resources or do other work with that value (the actual modification of the
-          Parameter object is handled upstream and the callback does not need to worry about it: if it returns without
-          throwing, the proposed value will become the new value of the Parameter). The Parameter is locked-up for
-          writing as long as the callback is running, to avoid destruction of the parameter and/or concurrent parameter
-          value changes by several different threads. Thus, callbacks should try to execute quickly, and should not call
-          set(), etc on the parameter as this will always deadlock (get() is allowed if your callback needs to know the
-          current value of the parameter). */
+      //! 设置参数的回调 
+	  /*! 每次尝试更改参数值时都会调用回调函数。设置回调后，还会使用当前参数值第一次调用该函数。
+	  
+	      回调应该检查候选值 newval 并且 (1) 如果不喜欢它，则抛出异常并附带一条描述性消息说明拒绝该值的原因，(2) 否则，
+		  假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（Parameter 对象的实际修改在上游处理，回调不需要
+		  担心它：如果它返回而没有抛出异常，则建议的值将成为 Parameter 的新值）。只要回调正在运行，Parameter 就会被锁
+		  定以进行写入，以避免破坏参数和/或多个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调
+		  用 set() 等，因为这始终会导致死锁（如果回调需要知道参数的当前值，则允许使用 get()）。 */
       void setCallback(boost::python::object const & cb);
 
     private:

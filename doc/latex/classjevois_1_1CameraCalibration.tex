@@ -1,0 +1,217 @@
+\hypertarget{classjevois_1_1CameraCalibration}{}\doxysubsection{jevois\+::Camera\+Calibration Class Reference}
+\label{classjevois_1_1CameraCalibration}\index{jevois::CameraCalibration@{jevois::CameraCalibration}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Camera\+Calibration.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+用于相机校准的辅助类，允许某些模块计算物体的 3D 位置 
+
+此代码大量派生自 Open\+CV 源代码树中的 calibrate\+\_\+camera.\+cpp。随着 Open\+CV 更新而保持更新。 
+
+Definition at line 27 of file Camera\+Calibration.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1CameraCalibration_ae8f67e788176d7496e13737d7662f4f9}{load}} (std\+::string const \&fname)
+\begin{DoxyCompactList}\small\item\em Load from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraCalibration_a410313ca6a298e7fdd86054ee441085e}{save}} (std\+::string const \&fname) const
+\begin{DoxyCompactList}\small\item\em Save to file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+jevois\+::\+Camera\+Sensor \mbox{\hyperlink{classjevois_1_1CameraCalibration_ad5fb67b6782ffb3c05dbd82f29a07624}{sensor}} = jevois\+::\+Camera\+Sensor\+::any
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} sensor. \end{DoxyCompactList}\item 
+jevois\+::\+Camera\+Lens \mbox{\hyperlink{classjevois_1_1CameraCalibration_a4d5553e5246eb3b83707b309b0a39e8c}{lens}} = jevois\+::\+Camera\+Lens\+::standard
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} lens. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1CameraCalibration_a99b33e43b6f434bc7176ef5c61ec28cc}{w}} = 0
+\item 
+int \mbox{\hyperlink{classjevois_1_1CameraCalibration_ad3d988e3a20ec599ff1b12780f7679e0}{h}} = 0
+\begin{DoxyCompactList}\small\item\em Image width and height (camera resolution) \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1CameraCalibration_a89e0eb0be6dcdd8d833034aab4c92c2a}{cam\+Matrix}} = cv\+::\+Mat\+::eye(3, 3, C\+V\+\_\+64F)
+\begin{DoxyCompactList}\small\item\em 3x3 camera matrix \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1CameraCalibration_ab3b7fb5b8c5fb84bdaa17c3865bc3e87}{dist\+Coeffs}} = cv\+::\+Mat\+::zeros(5, 1, C\+V\+\_\+64F)
+\begin{DoxyCompactList}\small\item\em 5x1 distortion coefficients \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classjevois_1_1CameraCalibration_ab6aa0b3f9ff514ae06782c85bd885471}{avg\+Reproj\+Err}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Average reprojection error. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_ae8f67e788176d7496e13737d7662f4f9}\label{classjevois_1_1CameraCalibration_ae8f67e788176d7496e13737d7662f4f9}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!load@{load}}
+\index{load@{load}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Calibration\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fname }\end{DoxyParamCaption})}
+
+
+
+Load from file. 
+
+Throws std\+::runtime\+\_\+error if file not found 
+
+Definition at line 23 of file Camera\+Calibration.\+C.
+
+
+
+References avg\+Reproj\+Err, cam\+Matrix, dist\+Coeffs, h, lens, sensor, and w.
+
+
+
+Referenced by jevois\+::\+Engine\+::load\+Camera\+Calibration().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_a410313ca6a298e7fdd86054ee441085e}\label{classjevois_1_1CameraCalibration_a410313ca6a298e7fdd86054ee441085e}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!save@{save}}
+\index{save@{save}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Calibration\+::save (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fname }\end{DoxyParamCaption}) const}
+
+
+
+Save to file. 
+
+Throws std\+::runtime\+\_\+error if file cannot be written 
+
+Definition at line 38 of file Camera\+Calibration.\+C.
+
+
+
+References h, and jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::\+Engine\+::save\+Camera\+Calibration().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_ab6aa0b3f9ff514ae06782c85bd885471}\label{classjevois_1_1CameraCalibration_ab6aa0b3f9ff514ae06782c85bd885471}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!avgReprojErr@{avgReprojErr}}
+\index{avgReprojErr@{avgReprojErr}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{avgReprojErr}{avgReprojErr}}
+{\footnotesize\ttfamily double jevois\+::\+Camera\+Calibration\+::avg\+Reproj\+Err = 0.\+0}
+
+
+
+Average reprojection error. 
+
+
+
+Definition at line 35 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_a89e0eb0be6dcdd8d833034aab4c92c2a}\label{classjevois_1_1CameraCalibration_a89e0eb0be6dcdd8d833034aab4c92c2a}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!camMatrix@{camMatrix}}
+\index{camMatrix@{camMatrix}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{camMatrix}{camMatrix}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Camera\+Calibration\+::cam\+Matrix = cv\+::\+Mat\+::eye(3, 3, C\+V\+\_\+64F)}
+
+
+
+3x3 camera matrix 
+
+
+
+Definition at line 33 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_ab3b7fb5b8c5fb84bdaa17c3865bc3e87}\label{classjevois_1_1CameraCalibration_ab3b7fb5b8c5fb84bdaa17c3865bc3e87}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!distCoeffs@{distCoeffs}}
+\index{distCoeffs@{distCoeffs}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{distCoeffs}{distCoeffs}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Camera\+Calibration\+::dist\+Coeffs = cv\+::\+Mat\+::zeros(5, 1, C\+V\+\_\+64F)}
+
+
+
+5x1 distortion coefficients 
+
+
+
+Definition at line 34 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_ad3d988e3a20ec599ff1b12780f7679e0}\label{classjevois_1_1CameraCalibration_ad3d988e3a20ec599ff1b12780f7679e0}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!h@{h}}
+\index{h@{h}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{h}{h}}
+{\footnotesize\ttfamily int jevois\+::\+Camera\+Calibration\+::h = 0}
+
+
+
+Image width and height (camera resolution) 
+
+
+
+Definition at line 32 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), and jevois\+::\+Engine\+::save\+Camera\+Calibration().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_a4d5553e5246eb3b83707b309b0a39e8c}\label{classjevois_1_1CameraCalibration_a4d5553e5246eb3b83707b309b0a39e8c}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!lens@{lens}}
+\index{lens@{lens}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{lens}{lens}}
+{\footnotesize\ttfamily jevois\+::\+Camera\+Lens jevois\+::\+Camera\+Calibration\+::lens = jevois\+::\+Camera\+Lens\+::standard}
+
+
+
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} lens. 
+
+
+
+Definition at line 31 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), and jevois\+::\+Engine\+::save\+Camera\+Calibration().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_ad5fb67b6782ffb3c05dbd82f29a07624}\label{classjevois_1_1CameraCalibration_ad5fb67b6782ffb3c05dbd82f29a07624}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!sensor@{sensor}}
+\index{sensor@{sensor}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{sensor}{sensor}}
+{\footnotesize\ttfamily jevois\+::\+Camera\+Sensor jevois\+::\+Camera\+Calibration\+::sensor = jevois\+::\+Camera\+Sensor\+::any}
+
+
+
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} sensor. 
+
+
+
+Definition at line 30 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), and jevois\+::\+Engine\+::save\+Camera\+Calibration().
+
+\mbox{\Hypertarget{classjevois_1_1CameraCalibration_a99b33e43b6f434bc7176ef5c61ec28cc}\label{classjevois_1_1CameraCalibration_a99b33e43b6f434bc7176ef5c61ec28cc}} 
+\index{jevois::CameraCalibration@{jevois::CameraCalibration}!w@{w}}
+\index{w@{w}!jevois::CameraCalibration@{jevois::CameraCalibration}}
+\doxyparagraph{\texorpdfstring{w}{w}}
+{\footnotesize\ttfamily int jevois\+::\+Camera\+Calibration\+::w = 0}
+
+
+
+Definition at line 32 of file Camera\+Calibration.\+H.
+
+
+
+Referenced by load(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), and jevois\+::\+Engine\+::save\+Camera\+Calibration().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{CameraCalibration_8H}{Camera\+Calibration.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{CameraCalibration_8C}{Camera\+Calibration.\+C}}\end{DoxyCompactItemize}

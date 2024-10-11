@@ -1,0 +1,252 @@
+\hypertarget{classjevois_1_1dnn_1_1NetworkPython}{}\doxysubsection{jevois\+::dnn\+::Network\+Python Class Reference}
+\label{classjevois_1_1dnn_1_1NetworkPython}\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+Python.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+通过 python 调用的 D\+NN 神经网络的包装器 
+
+Definition at line 31 of file Network\+Python.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkPython__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkPython__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_afa49f351452600d00f5797cfef47eb55}{Network\+Python}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a33ee9c1d634d990b081a7180fe7ff26c}{$\sim$\+Network\+Python}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_ae278bb994f487efa4634cda9954cd540}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻参数，用户在运行时不应更改 \end{DoxyCompactList}\item 
+std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a94f56f4d22e117cab06a1fe626ba8ffe}{input\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all input tensors. \end{DoxyCompactList}\item 
+std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_acc2212571cfa68babaec3612fb2c80f8}{output\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all output tensors. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a4f293d1210df3aac0fdafe1a7fb574a0}{load}} () override
+\begin{DoxyCompactList}\small\item\em Load from disk. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a04c84253cef99f51a21a862e4ae04a8f}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info) override
+\begin{DoxyCompactList}\small\item\em Process input blobs and obtain output blobs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_aaafca750819187a097d8b9d2f33c015c}{on\+Param\+Change}} (network\+::pynet const \&param, std\+::string const \&newval) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl}{Network\+Python\+Impl}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_acab11cf7bc025ec7a36f1aafd76d02d6}{its\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a75b023323fe4c43c4122ed5bd00a35fb}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (pynet, std\+::string, \char`\"{}Full path of the python network processor file. \char`\"{} \char`\"{}Name of class defined in the file must match the file name without \char`\"{} \char`\"{}the trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_afa49f351452600d00f5797cfef47eb55}\label{classjevois_1_1dnn_1_1NetworkPython_afa49f351452600d00f5797cfef47eb55}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!NetworkPython@{NetworkPython}}
+\index{NetworkPython@{NetworkPython}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{NetworkPython()}{NetworkPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Python\+::\+Network\+Python (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 86 of file Network\+Python.\+C.
+
+
+
+References its\+Impl.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_a33ee9c1d634d990b081a7180fe7ff26c}\label{classjevois_1_1dnn_1_1NetworkPython_a33ee9c1d634d990b081a7180fe7ff26c}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!````~NetworkPython@{$\sim$NetworkPython}}
+\index{````~NetworkPython@{$\sim$NetworkPython}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{$\sim$NetworkPython()}{~NetworkPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Python\+::$\sim$\+Network\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 93 of file Network\+Python.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_a04c84253cef99f51a21a862e4ae04a8f}\label{classjevois_1_1dnn_1_1NetworkPython_a04c84253cef99f51a21a862e4ae04a8f}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+Python\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Process input blobs and obtain output blobs. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 115 of file Network\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_ae278bb994f487efa4634cda9954cd540}\label{classjevois_1_1dnn_1_1NetworkPython_ae278bb994f487efa4634cda9954cd540}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻参数，用户在运行时不应更改 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 97 of file Network\+Python.\+C.
+
+
+
+References jevois\+::dnn\+::\+Network\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_a94f56f4d22e117cab06a1fe626ba8ffe}\label{classjevois_1_1dnn_1_1NetworkPython_a94f56f4d22e117cab06a1fe626ba8ffe}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!inputShapes@{inputShapes}}
+\index{inputShapes@{inputShapes}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{inputShapes()}{inputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Python\+::input\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all input tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 124 of file Network\+Python.\+C.
+
+
+
+References jevois\+::dnn\+::parse\+Tensor\+Specs().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_a4f293d1210df3aac0fdafe1a7fb574a0}\label{classjevois_1_1dnn_1_1NetworkPython_a4f293d1210df3aac0fdafe1a7fb574a0}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!load@{load}}
+\index{load@{load}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Load from disk. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 120 of file Network\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_aaafca750819187a097d8b9d2f33c015c}\label{classjevois_1_1dnn_1_1NetworkPython_aaafca750819187a097d8b9d2f33c015c}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Python\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{network\+::pynet const \&}]{param,  }\item[{std\+::string const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 109 of file Network\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_acc2212571cfa68babaec3612fb2c80f8}\label{classjevois_1_1dnn_1_1NetworkPython_acc2212571cfa68babaec3612fb2c80f8}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!outputShapes@{outputShapes}}
+\index{outputShapes@{outputShapes}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{outputShapes()}{outputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Python\+::output\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all output tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 128 of file Network\+Python.\+C.
+
+
+
+References jevois\+::dnn\+::parse\+Tensor\+Specs().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_a75b023323fe4c43c4122ed5bd00a35fb}\label{classjevois_1_1dnn_1_1NetworkPython_a75b023323fe4c43c4122ed5bd00a35fb}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{pynet}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Full path of the python network processor file. \char`\"{} \char`\"{}Name of class defined in the file must match the file name without \char`\"{} \char`\"{}the trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkPython_acab11cf7bc025ec7a36f1aafd76d02d6}\label{classjevois_1_1dnn_1_1NetworkPython_acab11cf7bc025ec7a36f1aafd76d02d6}} 
+\index{jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}!itsImpl@{itsImpl}}
+\index{itsImpl@{itsImpl}!jevois::dnn::NetworkPython@{jevois::dnn::NetworkPython}}
+\doxyparagraph{\texorpdfstring{itsImpl}{itsImpl}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPythonImpl}{Network\+Python\+Impl}}$>$ jevois\+::dnn\+::\+Network\+Python\+::its\+Impl\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 62 of file Network\+Python.\+H.
+
+
+
+Referenced by Network\+Python().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkPython_8H}{Network\+Python.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{Network_8H}{Network.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkPython_8C}{Network\+Python.\+C}}\end{DoxyCompactItemize}

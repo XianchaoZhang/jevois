@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_PythonSupport_8C">
+<title>src/jevois/Core/PythonSupport.C File Reference</title>
+<indexterm><primary>src/jevois/Core/PythonSupport.C</primary></indexterm>
+<programlisting>#include &lt;boost/python.hpp&gt;
+#include &lt;jevois/Core/PythonSupport.H&gt;
+#include &lt;jevois/Core/Engine.H&gt;
+#include &lt;jevois/Image/RawImage.H&gt;
+#include &lt;jevois/Image/RawImageOps.H&gt;
+#include &lt;jevois/Core/PythonModule.H&gt;
+#include &lt;jevois/Core/PythonParameter.H&gt;
+#include &lt;jevois/Core/UserInterface.H&gt;
+#include &lt;jevois/Core/StdioInterface.H&gt;
+#include &lt;jevois/Core/Serial.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/Util/Coordinates.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Debug/Timer.H&gt;
+#include &lt;jevois/Debug/Profiler.H&gt;
+#include &lt;jevois/Debug/SysInfo.H&gt;
+#include &lt;jevois/Core/Camera.H&gt;
+#include &lt;jevois/Core/IMU.H&gt;
+#include &lt;jevois/Component/ParameterStringConversion.H&gt;
+#include &lt;jevois/DNN/PreProcessorPython.H&gt;
+#include &lt;jevois/DNN/Utils.H&gt;
+#include &lt;jevois/GPU/ChatBox.H&gt;
+#include &lt;jevois/Core/PythonOpenCV.H&gt;
+</programlisting>Include dependency graph for PythonSupport.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="PythonSupport_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1python">jevois::python</link></para>
+
+<para>Python 相关的帮助程序和函数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a7d399fcbebb74300921248d831d6ab6f">PY_ARRAY_UNIQUE_SYMBOL</link>   pbcvt_ARRAY_API</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a4503909cc777ed9ee3997b35652da42d">JEVOIS_PYTHON_FUNC</link>(funcname)   boost::python::def(#funcname, jevois::funcname)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a245065578f5150d044f17b0ee282726e">JEVOIS_PYTHON_RAWIMAGE_FUNC</link>(funcname)   boost::python::def(#funcname, jevois::rawimage::funcname)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a77d4384bb10b2f4246b0bd1735203c2f">JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL</link>(val)   value(#val, jevois::rawimage::val)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a2d2fc533f7abf51ce76061cc5dfefe7e">JEVOIS_PYTHON_ENUM_VAL</link>(val)   value(#val, jevois::python::val)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1a54e2129317214dd88848ab1b259ec4bd">JEVOIS_PYTHON_CONSTANT</link>(cst)   boost::python::scope().attr(#cst) = cst;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_PythonSupport_8C_1afa6be5ad1250fbb888cc15e26221daac">JEVOIS_PYTHON_DNN_FUNC</link>(funcname)   boost::python::def(#funcname, jevois::dnn::funcname)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adc">jevois::python::YUYV</link> { 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcadc153f018f28d7933cffa9d58c026935">jevois::python::Black</link> = 0x8000, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca718cc96bfc0c8fcf6b9ba49da7b8f8aa">jevois::python::DarkGrey</link> = 0x8050, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaf8e8177a2a54688a176d666135770d9a">jevois::python::MedGrey</link> = 0x8080, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca80a5c41b5e4f0e4174780207bc61f707">jevois::python::LightGrey</link> = 0x80a0, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaad755af91b53637a3e336ac5d60f7c3d">jevois::python::White</link> = 0x80ff, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca5986cf811b4a698d8c6cec3558b3cd08">jevois::python::DarkGreen</link> = 0x0000, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca6c54dca6d730e5a7663e831c758f3451">jevois::python::MedGreen</link> = 0x0040, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca05e6386b2748cc2db02f0ec5fe1d7327">jevois::python::LightGreen</link> = 0x00ff, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca454b4dc795468e6374e83a71f2f5967e">jevois::python::DarkTeal</link> = 0x7070, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca858b8d541180d417047481c0b1672c44">jevois::python::MedTeal</link> = 0x7090, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca0c241a61cc8cb4807ea7a273aa6731ad">jevois::python::LightTeal</link> = 0x70b0, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca7a19a44688c04becd4f2ab90a96734b1">jevois::python::DarkPurple</link> = 0xa030, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca9dea82ec995e2d8d4f42e7138787c7b0">jevois::python::MedPurple</link> = 0xa050, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcaab0873f92033d86c163608a3e262d2df">jevois::python::LightPurple</link> = 0xa080, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca719568d2dc61c98b896dd93cecaad531">jevois::python::DarkPink</link> = 0xff00, 
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adca30e29e74e511a55788647c690f8d7675">jevois::python::MedPink</link> = 0xff80, 
+
+<link linkend="_namespacejevois_1_1python_1ab6e62a633a3a22ed99aa2bfe47847adcacc2bb0685aaba843418bcb600f6d170a">jevois::python::LightPink</link> = 0xffff
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_PythonSupport_8C_1a5800ee17ececc573f221ffeae02a71a1">JEVOIS_PYTHON_CONSTANT</link> (LOG_DEBUG)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1aad49f8558742ea939b97f672fe5ad0e6">JEVOIS_PYTHON_CONSTANT</link> (LOG_INFO)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a1fbe3f917b13c8047ce2d25c2cdb5662">JEVOIS_PYTHON_CONSTANT</link> (LOG_ERR)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a7e34f46e20e67c5d8b71238a0308cc43">JEVOIS_PYTHON_CONSTANT</link> (LOG_CRIT)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a6bcf862f900ff8ced0cc8c4641f8fa77">JEVOIS_PYTHON_FUNC</link> (fccstr)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a2b666fb7bd514e16248454770e05c838">JEVOIS_PYTHON_FUNC</link> (cvtypestr)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a9295df5cc326ebed368454e19da1c0c2">JEVOIS_PYTHON_FUNC</link> (cvBytesPerPix)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a5b45b0fba29fa7c87fa1b72ea565bed0">JEVOIS_PYTHON_FUNC</link> (strfcc)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1aa4446d5bde852322a136829526cb25b0">JEVOIS_PYTHON_FUNC</link> (v4l2BytesPerPix)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a00ffc2ebb99839622df58551f474857d">JEVOIS_PYTHON_FUNC</link> (v4l2ImageSize)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1ab4ddfc9fd4001dbe94d2bf106c2390e9">JEVOIS_PYTHON_FUNC</link> (blackColor)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a71c343a855e9d47b5f4545f6de8d105a">JEVOIS_PYTHON_FUNC</link> (whiteColor)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1a6e252bd2b1022d4f5b44ffd450d41236">JEVOIS_PYTHON_FUNC</link> (flushcache)</para>
+</listitem>
+            <listitem><para><link linkend="_PythonSupport_8C_1aef6fd133810fc733e2c2b8651b857e1c">JEVOIS_PYTHON_FUNC</link> (system)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>Engine * <link linkend="_namespacejevois_1_1python_1a3a8c677a1515acb56189a5d2bf9ac787">jevois::python::engineForPythonModule</link> = nullptr</para>
+</listitem>
+            <listitem><para>void(* <link linkend="_PythonSupport_8C_1a21b200b1b3c72e2a13cd48609c3d5d01">imgToStd1</link> )(float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;camimg, float const eps) = <link linkend="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb">jevois::coords::imgToStd</link></para>
+</listitem>
+            <listitem><para>void(* <link linkend="_PythonSupport_8C_1afcdb475e10c1774deba82c9226eeaf5b">imgToStd2</link> )(float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps)</para>
+</listitem>
+            <listitem><para>void(* <link linkend="_PythonSupport_8C_1ab74846d90b86c75a39e4907339b40bdb">stdToImg1</link> )(float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;camimg, float const eps) = <link linkend="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5">jevois::coords::stdToImg</link></para>
+</listitem>
+            <listitem><para>void(* <link linkend="_PythonSupport_8C_1a1c9235dcf32568ec130dc02cbd8b476d">stdToImg2</link> )(float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_PythonSupport_8C_1a54e2129317214dd88848ab1b259ec4bd"/>    <section>
+    <title>JEVOIS_PYTHON_CONSTANT</title>
+<indexterm><primary>JEVOIS_PYTHON_CONSTANT</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_CONSTANT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_CONSTANT( cst)   boost::python::scope().attr(#cst) = cst;</computeroutput></para><para>
+Definition at line 59 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1afa6be5ad1250fbb888cc15e26221daac"/>    <section>
+    <title>JEVOIS_PYTHON_DNN_FUNC</title>
+<indexterm><primary>JEVOIS_PYTHON_DNN_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_DNN_FUNC</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_DNN_FUNC( funcname)   boost::python::def(#funcname, jevois::dnn::funcname)</computeroutput></para><para>
+Definition at line 62 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a2d2fc533f7abf51ce76061cc5dfefe7e"/>    <section>
+    <title>JEVOIS_PYTHON_ENUM_VAL</title>
+<indexterm><primary>JEVOIS_PYTHON_ENUM_VAL</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_ENUM_VAL</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_ENUM_VAL( val)   value(#val, jevois::python::val)</computeroutput></para><para>
+Definition at line 56 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a4503909cc777ed9ee3997b35652da42d"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC</title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_FUNC( funcname)   boost::python::def(#funcname, jevois::funcname)</computeroutput></para><para>
+Definition at line 47 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a77d4384bb10b2f4246b0bd1735203c2f"/>    <section>
+    <title>JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL</title>
+<indexterm><primary>JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_RAWIMAGE_ENUM_VAL( val)   value(#val, jevois::rawimage::val)</computeroutput></para><para>
+Definition at line 53 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a245065578f5150d044f17b0ee282726e"/>    <section>
+    <title>JEVOIS_PYTHON_RAWIMAGE_FUNC</title>
+<indexterm><primary>JEVOIS_PYTHON_RAWIMAGE_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_RAWIMAGE_FUNC</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_RAWIMAGE_FUNC( funcname)   boost::python::def(#funcname, jevois::rawimage::funcname)</computeroutput></para><para>
+Definition at line 50 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a7d399fcbebb74300921248d831d6ab6f"/>    <section>
+    <title>PY_ARRAY_UNIQUE_SYMBOL</title>
+<indexterm><primary>PY_ARRAY_UNIQUE_SYMBOL</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>PY_ARRAY_UNIQUE_SYMBOL</secondary></indexterm>
+<para><computeroutput>#define PY_ARRAY_UNIQUE_SYMBOL   pbcvt_ARRAY_API</computeroutput></para><para>
+Definition at line 42 of file PythonSupport.C.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_PythonSupport_8C_1a7e34f46e20e67c5d8b71238a0308cc43"/>    <section>
+    <title>JEVOIS_PYTHON_CONSTANT()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_CONSTANT</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_CONSTANT</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_CONSTANT (LOG_CRIT )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a5800ee17ececc573f221ffeae02a71a1"/>    <section>
+    <title>JEVOIS_PYTHON_CONSTANT()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_CONSTANT</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_CONSTANT</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_CONSTANT (LOG_DEBUG )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a1fbe3f917b13c8047ce2d25c2cdb5662"/>    <section>
+    <title>JEVOIS_PYTHON_CONSTANT()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_CONSTANT</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_CONSTANT</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_CONSTANT (LOG_ERR )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1aad49f8558742ea939b97f672fe5ad0e6"/>    <section>
+    <title>JEVOIS_PYTHON_CONSTANT()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_CONSTANT</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_CONSTANT</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_CONSTANT (LOG_INFO )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1ab4ddfc9fd4001dbe94d2bf106c2390e9"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[1/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (blackColor )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a9295df5cc326ebed368454e19da1c0c2"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[2/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (cvBytesPerPix )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a2b666fb7bd514e16248454770e05c838"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[3/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (cvtypestr )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a6bcf862f900ff8ced0cc8c4641f8fa77"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[4/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (fccstr )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a6e252bd2b1022d4f5b44ffd450d41236"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[5/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (flushcache )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a5b45b0fba29fa7c87fa1b72ea565bed0"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[6/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (strfcc )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1aef6fd133810fc733e2c2b8651b857e1c"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[7/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (system )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1aa4446d5bde852322a136829526cb25b0"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[8/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (v4l2BytesPerPix )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a00ffc2ebb99839622df58551f474857d"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[9/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (v4l2ImageSize )</computeroutput></para>    </section><anchor xml:id="_PythonSupport_8C_1a71c343a855e9d47b5f4545f6de8d105a"/>    <section>
+    <title>JEVOIS_PYTHON_FUNC()<computeroutput>[10/10]</computeroutput></title>
+<indexterm><primary>JEVOIS_PYTHON_FUNC</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>JEVOIS_PYTHON_FUNC</secondary></indexterm>
+<para><computeroutput>JEVOIS_PYTHON_FUNC (whiteColor )</computeroutput></para></section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_PythonSupport_8C_1a21b200b1b3c72e2a13cd48609c3d5d01"/>    <section>
+    <title>imgToStd1</title>
+<indexterm><primary>imgToStd1</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>imgToStd1</secondary></indexterm>
+<para><computeroutput>void(* imgToStd1) (float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;camimg, float const eps) = <link linkend="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb">jevois::coords::imgToStd</link></computeroutput></para><para>
+Definition at line 292 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1afcdb475e10c1774deba82c9226eeaf5b"/>    <section>
+    <title>imgToStd2</title>
+<indexterm><primary>imgToStd2</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>imgToStd2</secondary></indexterm>
+<para><computeroutput>void(* imgToStd2) (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps)</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=
+&#32;&#32;&#32;&#32;<link linkend="_group__coordhelpers_1ga8ba21a5c6f04aaf017269c72329126cb">jevois::coords::imgToStd</link>
+</programlisting><para>
+Definition at line 293 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1ab74846d90b86c75a39e4907339b40bdb"/>    <section>
+    <title>stdToImg1</title>
+<indexterm><primary>stdToImg1</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>stdToImg1</secondary></indexterm>
+<para><computeroutput>void(* stdToImg1) (float &amp;x, float &amp;y, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp;camimg, float const eps) = <link linkend="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5">jevois::coords::stdToImg</link></computeroutput></para><para>
+Definition at line 298 of file PythonSupport.C.</para>
+    </section><anchor xml:id="_PythonSupport_8C_1a1c9235dcf32568ec130dc02cbd8b476d"/>    <section>
+    <title>stdToImg2</title>
+<indexterm><primary>stdToImg2</primary><secondary>PythonSupport.C</secondary></indexterm>
+<indexterm><primary>PythonSupport.C</primary><secondary>stdToImg2</secondary></indexterm>
+<para><computeroutput>void(* stdToImg2) (float &amp;x, float &amp;y, unsigned int const width, unsigned int const height, float const eps)</computeroutput></para><emphasis role="strong">Initial value:</emphasis><programlisting>=
+&#32;&#32;&#32;&#32;<link linkend="_group__coordhelpers_1ga353d977e4cee5c0ddd2b331fb4ff60d5">jevois::coords::stdToImg</link>
+</programlisting><para>
+Definition at line 299 of file PythonSupport.C.</para>
+</section>
+</section>
+</section>

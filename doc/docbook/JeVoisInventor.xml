@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_JeVoisInventor">
+
+<para>JeVois Inventor 是 JeVois-A33 智能相机的图形前端，可在主机（PC、Mac、Linux）上运行。它使用完整的 Python + OpenCV 轻松编写在 JeVois 上运行的新计算机视觉管道。</para>
+
+<para>JeVois Inventor 不与 JeVois-Pro 一起使用。相反，JeVois-Pro 直接在相机中提供相同的功能。如果您正在使用 JeVois-Pro，则可以跳过此页面。</para>
+
+<para>此前端是为不阅读用户手册的人创建的，因此请随意探索！</para>
+
+<para></para>
+
+<para>尽管如此，这里还是有几点建议。</para>
+
+<para><note><title>Note</title>
+
+<para>JeVois Inventor 目前处于测试阶段。请通过电子邮件将评论和错误报告发送至 <link xlink:href="mailto:jevois.org@gmail.com">jevois.org@gmail.com</link> 帮助我们改进此软件</para>
+</note>
+</para>
+<section xml:id="_JeVoisInventor_1autotoc_md44">
+<title>安装 JeVois Inventor</title>
+
+<para><itemizedlist>
+<listitem>
+<para>Windows:<itemizedlist>
+<listitem>
+<para>在 Windows 7 和 Windows 10 上测试。</para>
+</listitem><listitem>
+<para>从 <link xlink:href="http://jevois.org/start">http://jevois.org/start</link> 下载 <emphasis role="bold">jevois-inventor_XXX.zip</emphasis>（XXX 会因版本而异）</para>
+</listitem><listitem>
+<para>Windows 7（不是 8 或 10）用户需要安装驱动程序，请参阅 <link xlink:href="http://jevois.org/doc/USBserialWindows.html">http://jevois.org/doc/USBserialWindows.html</link></para>
+</listitem><listitem>
+<para>解压缩 zip 内容</para>
+</listitem><listitem>
+<para>双击 <computeroutput>jevois-inventor.exe</computeroutput></para>
+</listitem><listitem>
+<para>如果未检测到 JeVois 相机，请参阅下面的 &quot;Troubleshooting&quot;</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>Linux:<itemizedlist>
+<listitem>
+<para>适用于 20.04（focal）、18.04 amd64（bionic）和（仅限旧版本）16.04 amd64（xenial）并经过测试</para>
+</listitem><listitem>
+<para>从 <link xlink:href="http://jevois.org/start">http://jevois.org/start</link> 下载 <emphasis role="bold">jevois-inventor_XXX.deb</emphasis>（XXX 会因版本而异）</para>
+</listitem><listitem>
+<para><computeroutput>sudo dpkg -i jevois-inventor_XXX.deb</computeroutput> #（XXX 会根据版本而变化）</para>
+</listitem><listitem>
+<para><computeroutput>sudo killall ModemManager</computeroutput> #（ModemManager 会干扰 JeVois）</para>
+</listitem><listitem>
+<para><computeroutput>jevois-inventor</computeroutput></para>
+</listitem><listitem>
+<para>如果您希望避免每次连接 JeVois 时都必须更改其视频和串行端口的权限，则需要将您的用户添加到 <emphasis role="bold">video</emphasis> 和 <emphasis role="bold">dialout</emphasis> 组，如下所示：<literallayout><computeroutput>sudo apt purge modemmanager sudo usermod -aG dialout $USER sudo usermod -aG video $USER </computeroutput></literallayout> 并重新启动计算机以使设置生效。</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>MacOS:<itemizedlist>
+<listitem>
+<para>已在 Catalina、Mojave、High Sierra 上测试。无法在 Snow Leopard 上运行，因为版本太旧。抱歉，我们没有中间版本可供测试...</para>
+</listitem><listitem>
+<para>从 <link xlink:href="http://jevois.org/start">http://jevois.org/start</link> 下载 <emphasis role="bold">jevois-inventor_XXX.dmg</emphasis>（XXX 会因版本而异）</para>
+</listitem><listitem>
+<para>双击 DMG 文件以将其打开</para>
+</listitem><listitem>
+<para>将 jevois-inventor 拖到桌面或应用程序文件夹</para>
+</listitem><listitem>
+<para>双击 jevois-inventor。如果您的 Mac 拒绝打开它，请按住 <computeroutput>CTRL</computeroutput> 并单击 JeVois Inventor 图标，然后从下拉菜单中选择 <emphasis role="bold">打开。现在应该可以打开它了。</emphasis> </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md45">
+<title>您的 JeVois 智能相机</title>
+
+<para>  </para>
+
+<para>另请参阅：<itemizedlist>
+<listitem>
+<para><link linkend="_Hardware">JeVois-A33 硬件平台概述</link></para>
+</listitem><listitem>
+<para><link linkend="_Handling">JeVois 智能相机处理和注意事项</link></para>
+</listitem><listitem>
+<para><link linkend="_UserConnect">将 JeVois-A33 连接到电源和数据</link></para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md46">
+<title>检测您的 JeVois 智能相机</title>
+
+<para>检测是全自动的。无需指定设备，无需查找端口。</para>
+
+<para>只需启动 JeVois Inventor，将装有最新 JeVois 软件的 microSD 卡插入相机，然后将相机连接到主机。</para>
+
+<para>一旦检测到摄像头， 机器视觉模块将自动启动。</para>
+
+<para>  </para>
+
+<para>您可以随时断开 JeVois，JeVois Inventor 应该会检测到。下次连接 JeVois 时，JeVois Inventor 也应该会再次检测到它。</para>
+
+<para>Troubleshooting:</para>
+
+<para><itemizedlist>
+<listitem>
+<para>Linux：您可能有权限问题。每次 JeVois 启动后（橙色 LED 常亮），请尝试“sudo chmod 777 /dev/video0 /dev/ttyACM0”。</para>
+</listitem><listitem>
+<para>有关如何使用普通视频捕获设备开始使用 JeVois 的更多详细说明：</para>
+</listitem><listitem>
+<para><link linkend="_UserStartWindows">JeVois-A33：开始使用 Windows 主机</link></para>
+</listitem><listitem>
+<para><link linkend="_UserStartLinux">JeVois-A33：Linux 主机入门</link></para>
+</listitem><listitem>
+<para><link linkend="_UserStartMac">JeVois-A33：Mac 主机入门 \tableofcontents</link></para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md47">
+<title>尝试各种机器视觉模块</title>
+
+<para>使用<emphasis role="bold">视觉模块</emphasis>菜单选择给定的机器视觉模块。</para>
+
+<para>  </para>
+
+<para>用 Python 编写的模块以粗体突出显示。您可以直接在 JeVois Inventor 中编辑这些模块的代码（见下文）。</para>
+
+<para>在 <emphasis role="bold">Info</emphasis> 选项卡下，您可以浏览模块的文档。您可以按 <computeroutput>CTRL</computeroutput> + 鼠标滚轮来放大/缩小。</para>
+
+<para><note><title>Note</title>
+
+<para>目前，JeVois Inventor 仅支持 YUYV 捕获，我们认为这是 Qt（我们用于开发 JeVois Inventor 的小部件工具包）的 QCamera 类的限制。我们正在研究修复此问题，可能通过修复 Qt 的核心。</para>
+</note>
+更多信息：现在可能是熟悉几个关键概念的好时机：概念</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md48">
+<title>调整参数</title>
+
+<para>许多机器视觉模块公开了可由用户调整的参数。</para>
+
+<para>点击<emphasis role="bold"></emphasis> 参数选项卡，查看当前模块的参数。</para>
+
+<para>  </para>
+
+<para><itemizedlist>
+<listitem>
+<para>将鼠标悬停在参数的小部件上可以查看此参数功能的描述</para>
+</listitem><listitem>
+<para>将鼠标悬停在参数名称上可查看其完整的机器导向名称和数据类型</para>
+</listitem><listitem>
+<para>单击 <emphasis role="bold">重置按钮可将参数重置为其默认值</emphasis> </para>
+</listitem><listitem>
+<para>切换<emphasis role="bold">显示冻结参数</emphasis>以显示在运行时无法更改的参数（这些参数通常只能在加载模块时通过配置文件设置一次）。</para>
+</listitem><listitem>
+<para>切换<emphasis role="bold">显示系统参数</emphasis>以显示与 JeVois 核心系统相关的参数，而不是当前的机器视觉模块。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md49">
+<title>通过命令行控制台与 JeVois 通信</title>
+
+<para>JeVois 提供了一个简单的命令行界面，允许人们通过 JeVois 的 4 针串行端口或通过 Serial-over-USB 端口（JeVois Inventor 使用）运行命令、设置参数等。</para>
+
+<para>该接口主要用来让微控制器或主机配置 JeVois。实际上，每次单击 JeVois Inventor 中的按钮时，都会使用此命令行接口向 JeVois 发送命令。</para>
+
+<para>  </para>
+
+<para><itemizedlist>
+<listitem>
+<para>单击底部的输入行即可输入命令。命令输入行具有完整的历史记录，因此您可以使用向上/向下光标键重新输入先前输入的命令。</para>
+</listitem><listitem>
+<para>将鼠标悬停在 <emphasis role="bold">Enter</emphasis> 按钮旁边的“？”上，即可查看当前可用命令的列表。</para>
+</listitem><listitem>
+<para>在左上角，选择发送日志消息的位置（无处、发送到 USB、发送到 4 针串行端口或两者）。某些模块会发出日志消息，以便让您了解其运行的详细信息，或让您了解任何错误情况。</para>
+</listitem><listitem>
+<para>在右上角，选择将模块输出消息发送到何处（无处、发送到 USB、发送到 4 针串行端口或两者）。模块输出消息包含当前机器视觉管道在输入视频中发现的结果。例如，它可以流式传输已识别对象的名称，或检测到的标记标签或颜色斑点的坐标和大小。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>  </para>
+
+<para>在上面的示例中，JeVois 检测到了 ArUco 标记标签（ID 为 U42、U27、U18 和 U43）、两个蓝色斑点（由名为 <emphasis role="bold">blob0</emphasis> 的颜色检测器检测）和一个黄色斑点（由 <emphasis role="bold">blob1</emphasis> 检测）。对于每个检测到的对象，JeVois 还会发送其 4 个角的 4 个标准化（介于 -1000 和 1000 之间，以 0 为中心）2D 坐标（详细消息格式）。</para>
+
+<para>有关这些消息及其详细程度（简洁、正常、详细或精细）的更多信息，请参阅 <link linkend="_UserSerialStyle">标准化串行消息格式</link></para>
+
+<para>有关 JeVois 命令行界面的更多信息，请参阅 <link linkend="_UserCli">命令行界面用户指南</link></para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md50">
+<title>更改相机设置</title>
+
+<para>有时使用低级相机传感器控件（例如白平衡、增益和曝光）来优化机器视觉算法的性能很有用。选择 <emphasis role="bold">相机选项卡可访问这些传感器控件。</emphasis> </para>
+
+<para>  </para>
+
+<para><itemizedlist>
+<listitem>
+<para>请注意某些控制如何依赖于其他控制（例如，当自动增益处于活动状态时，增益被禁用并且无法更改）。</para>
+</listitem><listitem>
+<para>单击每个控件旁边的 <emphasis role="bold">Reset</emphasis> 即可恢复为其默认值。</para>
+</listitem><listitem>
+<para>关于绝对曝光控制的特别说明：要启用绝对曝光，请先为 <emphasis role="bold">autoexp</emphasis> 参数选择 <emphasis role="bold">manual。这将激活</emphasis> <emphasis role="bold">absexp</emphasis> 和 <emphasis role="bold">gain</emphasis> 滑块，同时关闭 <emphasis role="bold">autogain。请注意，<emphasis role="bold">absexp</emphasis> 的可用范围取决于当前相机传感器分辨率和帧速率，因为我们无法将图像曝光超过大约一个帧周期（帧速率的倒数）。因此，在大多数情况下，当您将滑块一直拖到最大值时，它会迅速回到当前视频分辨率和帧速率允许的最大值，这是正常的。</emphasis> </para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md51">
+<title>配置文件</title>
+
+<para>配置文件允许为 JeVois 或给定模块设置一些参数，这些参数将在每次启动 JeVois 或调用该模块时使用。您可以将其视为为 JeVois 或给定模块设置默认首选项。</para>
+
+<para>单击 <emphasis role="bold">Config</emphasis> 选项卡，然后您可以选择 4 个配置文件之一：</para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">JeVois initscript.cfg：</emphasis>JeVois 启动时运行一次的全局配置文件。如果您希望 JeVois 自动启动一个特定的机器视觉模块而无需任何用户干预（无头模式），则此文件很有用，例如当 JeVois 用于只有 Arduino 控制器且没有主机计算机来运行 JeVois Inventor 的机器人时。</para>
+</listitem><listitem>
+<para><emphasis role="bold">JeVois videomappings.cfg：</emphasis>这是 JeVois 通过 USB 传输的视频分辨率与相应的相机传感器分辨率之间的映射列表，以及要运行的机器视觉模块。当主机计算机向 JeVois 请求给定的视频格式时，此文件用于决定在 JeVois 上运行哪个机器视觉模块。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>有关详细信息，请参阅 <link linkend="_UserModes">视频模式和映射用户指南</link></para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">模块的 params.cfg：</emphasis>其中包含当前模块的参数，每次加载模块时以及启动模块之前都应设置这些参数。例如， 等深度神经网络模块使用此文件来配置将使用哪个神经网络。</para>
+</listitem><listitem>
+<para><emphasis role="bold">模块的 script.cfg：</emphasis>这是当前模块的脚本文件，在模块加载和初始化后运行。可以将其他参数或相机控制设置放入此文件中。例如， 使用此文件配置并行运行的四个颜色 blob 检测器的四种颜色。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>  </para>
+
+<para>请注意底部的两个中间按钮：</para>
+
+<para><itemizedlist>
+<listitem>
+<para><emphasis role="bold">C：将当前相机控制（使用</emphasis> <emphasis role="bold">相机选项卡手动调整）粘贴到当前显示的文件（只有脚本文件可以接受此功能）</emphasis> </para>
+</listitem><listitem>
+<para><emphasis role="bold">P：将当前模块参数（使用</emphasis> <emphasis role="bold">参数选项卡手动调整）粘贴到当前显示的文件（参数和脚本文件都可以接受此功能）</emphasis> </para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md52">
+<title>编辑机器视觉代码</title>
+
+<para><note><title>Note</title>
+
+<para>目前，此功能仅支持 Python 模块。目前尚不清楚我们是否也能支持 C++ 模块。因此，您应该选择一个 Python 模块（在 <emphasis role="bold">Vision Module</emphasis> 下拉菜单中以粗体显示）。可以看到 C++ 模块的源代码，但目前在 JeVois Inventor 中是只读的。</para>
+</note>
+选择 <emphasis role="bold">代码选项卡可以访问编辑器来查看当前正在运行的模块的源代码。</emphasis> </para>
+
+<para>  </para>
+
+<para>编辑代码，按 <computeroutput>CTRL</computeroutput>-S 保存到 JeVois，您将立即看到结果。</para>
+
+<para>不要害羞，只需尝试一些 OpenCV 代码，看看会发生什么。基本思路是，您从相机传感器获得一个图像 <emphasis role="bold">inimg，您的任务是创建一个输出图像</emphasis> <emphasis role="bold">outimg，该图像将通过</emphasis> USB 发送到主机。</para>
+
+<para>关于编辑器的一些说明：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>它具有语法高亮功能（关键字、注释等使用不同颜色）</para>
+</listitem><listitem>
+<para>自动缩进（如果在 <computeroutput>:</computeroutput> 后按 <computeroutput>RETURN</computeroutput>，缩进会增加）</para>
+</listitem><listitem>
+<para>使用 <computeroutput>TAB</computeroutput> 添加缩进，使用 <computeroutput>Shift+TAB</computeroutput> 减少缩进</para>
+</listitem><listitem>
+<para>缩进（前导空格）以灰点显示</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md53">
+<title>创建一个新的机器视觉模块</title>
+
+<para>从<emphasis role="bold">Vision Module</emphasis>下拉菜单中选择<emphasis role="bold">New Python Module...</emphasis>。</para>
+
+<para>  </para>
+
+<para>输入数据。<emphasis role="bold">所有字段均为必填项。</emphasis> <emphasis role="bold">完成按钮只有在您输入可接受的数据后才会启用。将鼠标悬停在每个字段上即可查看提示。</emphasis> </para>
+
+<para><note><title>Note</title>
+
+<para>模块名称和模块供应商必须以大写字母开头。除非您输入至少一个大写字母，否则您将无法在这些框中输入任何内容。请务必将鼠标悬停在每个字段上并阅读工具提示以获取更多信息。</para>
+</note>
+对于简单模块，您通常会为 USB 输出和相机传感器选择相同的分辨率。对于更复杂的模块，例如并排显示输出，左侧显示原始视频帧，右侧显示机器视觉结果，它们可能会有所不同（例如，在并排示例中，相机传感器分辨率可能是 320x240，而 USB 输出将是 640x240）。模块编写者有责任创建具有正确分辨率的输出图像，然后 JeVois 核心会通过 USB 将其发送到主机。</para>
+
+<para>要开始编写新模块，请查看 ModulePythonTutorial、\​​ref ProgrammerPython 和 <link linkend="_ProgrammerTutos">程序员教程</link></para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md54">
+<title>系统设置</title>
+
+<para>如果您想停止视频流，请使用 <emphasis role="bold">系统选项卡。在使用</emphasis> <computeroutput>setmapping2</computeroutput> 命令以无头模式启动模块之前，需要执行此操作。例如，请参阅<link xlink:href="http://jevois.org/tutorials/UserPanTilt.html">关于为 JeVois 制作摇摄/倾斜云台的教程</link>，无 USB 输出运行部分。</para>
+
+<para>  </para>
+
+<para>您还可以将 JeVois 中的 microSD 作为虚拟闪存驱动器导出到主机。启用后，桌面上会出现一个新的闪存驱动器，您可以浏览 JeVois 的 microSD 上的文件。这对于备份您的自定义模块或加载新训练的深度神经网络非常有用。</para>
+
+<para>  </para>
+
+<para>当您在 JeVois 内浏览 microSD 时，您无法更改或使用机器视觉模块。完成后，请从主机中正确弹出虚拟 USB 驱动器（安全移除、拖到垃圾箱、弹出按钮等），JeVois 将重新启动以考虑您对其 microSD 卡所做的更改。</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md55">
+<title>深入了解</title>
+
+<para>JeVois Inventor 只是 JeVois 核心的简单前端。除了 JeVois Inventor 支持的功能外，您还可以使用 JeVois 完成更多任务。请参阅 <link xlink:href="http://jevois.org/doc/">http://jevois.org/doc/</link> 以获取更全面的文档。</para>
+
+<para>特别要注意的是：</para>
+
+<para><itemizedlist>
+<listitem>
+<para><link xlink:href="/tutorials">用户教程</link></para>
+</listitem><listitem>
+<para><link xlink:href="/tutorials">程序员教程</link> 向您展示使用 Inventor 在 JeVois 上进行 Python + OpenCv 编程的简单示例。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md56">
+<title>发行说明</title>
+
+<para>JeVois Inventor 0.1.0<itemizedlist>
+<listitem>
+<para>初始版本</para>
+</listitem></itemizedlist>
+</para>
+
+<para>JeVois Inventor 0.2.0<itemizedlist>
+<listitem>
+<para>在 Windows 平台上更好地检测设备</para>
+</listitem><listitem>
+<para>将旋转框附加到所有滑块</para>
+</listitem><listitem>
+<para>为所有编辑器添加行号并突出显示当前行</para>
+</listitem><listitem>
+<para>从文件菜单添加了指向各种文档页面的链接。</para>
+</listitem></itemizedlist>
+</para>
+</section>
+<section xml:id="_JeVoisInventor_1autotoc_md57">
+<title>Windows 故障排除</title>
+
+<para>JeVois Inventor 会尝试自动检测 JeVois 相机，这样您不必在每次启动 Inventor 或重新启动相机时选择其设备。</para>
+
+<para>JeVois 智能相机是一个复合 USB 设备，包含三个子设备：<itemizedlist>
+<listitem>
+<para>USB 视频类 (UVC) 视频相机，用于通过 USB 传输视频；</para>
+</listitem><listitem>
+<para>CDC-ACM 串行 USB 端口，用于向 JeVois 发送命令；</para>
+</listitem><listitem>
+<para>大容量存储设备，用于将 JeVois 内部的 microSD 卡作为虚拟闪存驱动器进行访问。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>要工作，JeVois Inventor 需要检测至少前两个子设备。在 Linux 和 MacOS 上，通过枚举所有连接的摄像头和串行端口，并找到制造商或产品描述中包含单词 <emphasis>JeVois</emphasis> 的设备，此方法效果很好。</para>
+
+<para>但是，此功能（由 JeVois Inventor 所用的 <link xlink:href="http://qt.io">Qt</link> 小部件工具包提供）似乎在 Windows 平台上无法很好地工作。尽管 JeVois 相机在连接时会向主机发送制造商和产品描述，但 Windows 似乎会忽略这些内容。相反，Windows 会为 JeVois 分配名称，而这些名称似乎是您计算机上先前加载的驱动程序 (.inf) 文件中存在的任何名称。</para>
+
+<para>如果 Inventor 无法检测到您的 JeVois 相机，请尝试以下操作：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>断开相机连接并打开<emphasis role="bold">控制面板</emphasis>，然后打开<emphasis role="bold">设备管理器</emphasis>。</para>
+</listitem><listitem>
+<para>展开<emphasis role="bold">成像设备</emphasis>（或 Windows 10 上的<emphasis role="bold">相机</emphasis>）和<emphasis role="bold">端口（COM 和 LPT）</emphasis>的条目。</para>
+</listitem><listitem>
+<para>连接 JeVois 并等待 Windows 检测到它。</para>
+</listitem><listitem>
+<para>应出现一个新的成像设备和一个新的端口；记下它们的名称。在下面的示例中，JeVois 被分配了 <emphasis>UVC Camera</emphasis> 作为相机子设备的名称，<emphasis>Gadget Serial</emphasis> 作为串行 USB 子设备的名称。在 Windows 7 上，您可能需要使用 <computeroutput>jevois-serial.inf</computeroutput>（如 <link linkend="_USBserialWindows">使用 USB 串行连接到 JeVois：Windows 主机</link> 中所述）来安装正确的 USB 串行驱动程序。根据您的 Windows 版本和已安装驱动程序的历史记录，这些名称会有很大差异。如果您以前没有在计算机上使用过 USB 相机或串行 USB 适配器，它们将正确包含单词 <emphasis>JeVois（即，JeVois</emphasis> 是第一个检测到的此类设备，然后 Windows 将获取并使用该设备宣传的正确名称）。</para>
+
+<para></para>
+</listitem><listitem>
+<para>从 JeVois Inventor 0.2.0 开始，如果 JeVois 无法自动检测到，您将被邀请手动选择相机、USB 串行或两个子设备。使用您首次连接 JeVois 相机时在<emphasis role="bold">设备管理器</emphasis>中记下的名称：</para>
+
+<para></para>
+</listitem><listitem>
+<para>为了避免每次重新启动 Inventor 时都需要选择设备名称，您可以尝试卸载现有驱动程序，以便下次 Windows 检测到 JeVois 并重新安装驱动程序时会提取正确的名称：<itemizedlist>
+<listitem>
+<para>连接 JeVois 并等待 Windows 检测到它。</para>
+</listitem><listitem>
+<para>在 <emphasis role="bold">设备管理器</emphasis> 中，右键单击设备并选择 <emphasis role="bold">卸载</emphasis>。接受卸载。对相机设备和（仅限 Windows 7）串行端口设备执行此操作（您无法在 Windows 10 上卸载 Microsoft 串行端口设备）。</para>
+</listitem><listitem>
+<para>断开 JeVois。</para>
+</listitem><listitem>
+<para>一分钟后，再次连接 JeVois。您应该会看到一些有关检测到新设备的消息。不要触摸任何东西，让 Windows 安装驱动程序。一两分钟后，驱动程序应该已经安装并可以使用。</para>
+</listitem><listitem>
+<para>对于串行 USB 端口，在 Windows 10 上它是内置的，您无法更改它，它的名称固定为“USB 串行设备”。因此，JeVois Inventor 除了接受包含单词 JeVois 的名称外，还接受此名称。在 Windows 7 上，使用 <computeroutput>jevois-serial.inf</computeroutput>（如 <link linkend="_USBserialWindows">使用 USB 串行连接到 JeVois：Windows 主机</link> 中所述）安装正确的驱动程序。</para>
+</listitem><listitem>
+<para>在<emphasis role="bold">设备管理器</emphasis>中的<emphasis role="bold">成像设备</emphasis>（或<emphasis role="bold">相机</emphasis>）下，确认 JeVois 相机子设备的名称现在为“JeVois-A33 摄像机”。</para>
+</listitem><listitem>
+<para>在<emphasis role="bold">端口（COM 和 LPT）</emphasis>下，名称现在应为“JeVois-A33 Serial-over-USB”（Windows 7）或“USB 串行端口”（Windows 10）。</para>
+</listitem><listitem>
+<para>Inventor 现在应该会自动检测您的相机，无需手动选择设备。</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para> </para>
+</section>
+</section>

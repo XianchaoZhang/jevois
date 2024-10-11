@@ -1,0 +1,216 @@
+\hypertarget{classjevois_1_1ParameterDefBase}{}\doxysubsection{jevois\+::Parameter\+Def\+Base Class Reference}
+\label{classjevois_1_1ParameterDefBase}\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter\+Def.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+参数定义的基类 
+
+这会向定义公开基于字符串的接口，而派生类模板将公开基于值的接口。用户永远不应直接创建 Parameter\+Def\+Base，而应创建正 确模板化的 Parameter\+Def$<$\+T$>$，因为 Parameter\+Def$<$\+T$>$ 派生自 Parameter\+Base。 
+
+Definition at line 45 of file Parameter\+Def.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter\+Def\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classjevois_1_1ParameterDefBase__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Parameter\+Def\+Base\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ParameterDefBase__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ParameterDefBase_acbf7b717f5b3b0e10b5484796261c869}{Parameter\+Def\+Base}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}}, std\+::string const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}}, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&\mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}}=\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}}())
+\begin{DoxyCompactList}\small\item\em Construct a \mbox{\hyperlink{classjevois_1_1ParameterDefBase}{Parameter\+Def\+Base}}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ParameterDefBase_ad08c350c58a7f34ae25d04c6f05a35cf}{$\sim$\+Parameter\+Def\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}{name}} () const
+\begin{DoxyCompactList}\small\item\em 参数名称（不带前导 \char`\"{}-\/-\/\char`\"{}） \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}{description}} () const
+\begin{DoxyCompactList}\small\item\em 参数作用的描述 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} \& \mbox{\hyperlink{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}{category}} () const
+\begin{DoxyCompactList}\small\item\em The Parameter category. \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a080b4c9d79c5268b40b9250905e82462}{default\+Value\+String}} () const =0
+\begin{DoxyCompactList}\small\item\em 字符串表示中的默认值 \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDefBase_ab3c0382f0cfd76dd272dbce20e374b50}{valid\+Values\+String}} () const =0
+\begin{DoxyCompactList}\small\item\em 字符串表示中的有效值 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDefBase_aab0826b473373a6b47d7802b52d7b65e}{its\+Name}}
+\begin{DoxyCompactList}\small\item\em Our name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a37a6fbb6408122809f94b510bc4e5e93}{its\+Description}}
+\begin{DoxyCompactList}\small\item\em Our description string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} \mbox{\hyperlink{classjevois_1_1ParameterDefBase_a0cb06235148789a9d4fe3053b74de2f3}{its\+Category}}
+\begin{DoxyCompactList}\small\item\em Our category. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_acbf7b717f5b3b0e10b5484796261c869}\label{classjevois_1_1ParameterDefBase_acbf7b717f5b3b0e10b5484796261c869}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!ParameterDefBase@{ParameterDefBase}}
+\index{ParameterDefBase@{ParameterDefBase}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{ParameterDefBase()}{ParameterDefBase()}}
+{\footnotesize\ttfamily jevois\+::\+Parameter\+Def\+Base\+::\+Parameter\+Def\+Base (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category = {\ttfamily \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}}()} }\end{DoxyParamCaption})}
+
+
+
+Construct a \mbox{\hyperlink{classjevois_1_1ParameterDefBase}{Parameter\+Def\+Base}}. 
+
+
+
+Definition at line 32 of file Parameter\+Def.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_ad08c350c58a7f34ae25d04c6f05a35cf}\label{classjevois_1_1ParameterDefBase_ad08c350c58a7f34ae25d04c6f05a35cf}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!````~ParameterDefBase@{$\sim$ParameterDefBase}}
+\index{````~ParameterDefBase@{$\sim$ParameterDefBase}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{$\sim$ParameterDefBase()}{~ParameterDefBase()}}
+{\footnotesize\ttfamily jevois\+::\+Parameter\+Def\+Base\+::$\sim$\+Parameter\+Def\+Base (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 38 of file Parameter\+Def.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}\label{classjevois_1_1ParameterDefBase_af499d9d97d06b6a0c658daed224eaace}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!category@{category}}
+\index{category@{category}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{category()}{category()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structjevois_1_1ParameterCategory}{jevois\+::\+Parameter\+Category}} \& jevois\+::\+Parameter\+Def\+Base\+::category (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The Parameter category. 
+
+
+
+Definition at line 50 of file Parameter\+Def.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_a080b4c9d79c5268b40b9250905e82462}\label{classjevois_1_1ParameterDefBase_a080b4c9d79c5268b40b9250905e82462}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!defaultValueString@{defaultValueString}}
+\index{defaultValueString@{defaultValueString}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{defaultValueString()}{defaultValueString()}}
+{\footnotesize\ttfamily virtual const std\+::string jevois\+::\+Parameter\+Def\+Base\+::default\+Value\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+字符串表示中的默认值 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterDef_a17f44d3cfc528a4471b8821da9495f7d}{jevois\+::\+Parameter\+Def$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}\label{classjevois_1_1ParameterDefBase_a51ba61e64e470f570d0fdf69aaf58364}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!description@{description}}
+\index{description@{description}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Parameter\+Def\+Base\+::description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+参数作用的描述 
+
+
+
+Definition at line 46 of file Parameter\+Def.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}\label{classjevois_1_1ParameterDefBase_a1c5ac4b96fe3041edb8b14946356016b}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!name@{name}}
+\index{name@{name}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Parameter\+Def\+Base\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+参数名称（不带前导 \char`\"{}-\/-\/\char`\"{}） 
+
+
+
+Definition at line 42 of file Parameter\+Def.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_ab3c0382f0cfd76dd272dbce20e374b50}\label{classjevois_1_1ParameterDefBase_ab3c0382f0cfd76dd272dbce20e374b50}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!validValuesString@{validValuesString}}
+\index{validValuesString@{validValuesString}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{validValuesString()}{validValuesString()}}
+{\footnotesize\ttfamily virtual const std\+::string jevois\+::\+Parameter\+Def\+Base\+::valid\+Values\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+字符串表示中的有效值 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1ParameterDef_a89dacefb191d8f1bf4b95c636701325f}{jevois\+::\+Parameter\+Def$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_a0cb06235148789a9d4fe3053b74de2f3}\label{classjevois_1_1ParameterDefBase_a0cb06235148789a9d4fe3053b74de2f3}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!itsCategory@{itsCategory}}
+\index{itsCategory@{itsCategory}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{itsCategory}{itsCategory}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} jevois\+::\+Parameter\+Def\+Base\+::its\+Category\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our category. 
+
+
+
+Definition at line 73 of file Parameter\+Def.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_a37a6fbb6408122809f94b510bc4e5e93}\label{classjevois_1_1ParameterDefBase_a37a6fbb6408122809f94b510bc4e5e93}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!itsDescription@{itsDescription}}
+\index{itsDescription@{itsDescription}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{itsDescription}{itsDescription}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Parameter\+Def\+Base\+::its\+Description\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our description string. 
+
+
+
+Definition at line 72 of file Parameter\+Def.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterDefBase_aab0826b473373a6b47d7802b52d7b65e}\label{classjevois_1_1ParameterDefBase_aab0826b473373a6b47d7802b52d7b65e}} 
+\index{jevois::ParameterDefBase@{jevois::ParameterDefBase}!itsName@{itsName}}
+\index{itsName@{itsName}!jevois::ParameterDefBase@{jevois::ParameterDefBase}}
+\doxyparagraph{\texorpdfstring{itsName}{itsName}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Parameter\+Def\+Base\+::its\+Name\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Our name. 
+
+
+
+Definition at line 71 of file Parameter\+Def.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ParameterDef_8H}{Parameter\+Def.\+H}}\item 
+src/jevois/\+Component/\mbox{\hyperlink{ParameterDef_8C}{Parameter\+Def.\+C}}\end{DoxyCompactItemize}

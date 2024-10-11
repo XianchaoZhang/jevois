@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1PythonParameter">
+<title>jevois::PythonParameter Class Reference</title>
+<indexterm><primary>jevois::PythonParameter</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonParameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>python 中 jevois 参数的包装器 </para>
+
+
+
+<para>此包装器允许 python 模块创建 JeVois 参数对象，从而允许用户通过控制台、JeVois-Inventor 或 JeVois-Pro GUI 与参数进 行交互。此类实际上并不包含参数，它只是一个接口。参数通过 <link linkend="_classjevois_1_1PythonWrapper">PythonWrapper</link> 属于与 python 代码关联的组件。 </para>
+<para>
+Definition at line 96 of file PythonParameter.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1PythonParameter_1a82cc85a1a26ca18da5e1c5f61779e39b">PythonParameter</link> (boost::python::object &amp;pyinst, std::string const &amp;<link linkend="_classjevois_1_1PythonParameter_1a394b319e6170be2b1a1fbb8e45a7e3cd">name</link>, std::string const &amp;typ, std::string const &amp;description, boost::python::object const &amp;defaultValue, <link linkend="_structjevois_1_1ParameterCategory">jevois::ParameterCategory</link> const &amp;category)</para>
+
+<para>构造函数。向与 pyinst 关联的组件添加动态参数 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1PythonParameter_1ae72c34896e743f22826b606bf69a17ed">~PythonParameter</link> ()</para>
+
+<para>析构函数。从关联组件中移除动态参数 </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1PythonParameter_1a394b319e6170be2b1a1fbb8e45a7e3cd">name</link> () const</para>
+
+<para>Get the parameter name. </para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1PythonParameter_1af499e643c4d52b6f661774b1c72545a2">descriptor</link> () const</para>
+
+<para>获取参数的完全限定名称，又名描述符，包括拥有组件和所有父组件的名称 </para>
+</listitem>
+            <listitem><para>boost::python::object <link linkend="_classjevois_1_1PythonParameter_1a8d835a6a494016c0e425db94678a5321">get</link> () const</para>
+
+<para>Get the value of this Parameter. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonParameter_1a15ce916d224e17ee1450068a8439ac35">set</link> (boost::python::object const &amp;newVal)</para>
+
+<para>设置此参数的值 </para>
+</listitem>
+            <listitem><para>const std::string <link linkend="_classjevois_1_1PythonParameter_1aa29a16abba15d27891186109f7be199a">strget</link> () const</para>
+
+<para>Get the value as a string. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonParameter_1a4804be1f5600ce0d793c5f4626667b36">strset</link> (std::string const &amp;valstring)</para>
+
+<para>从它的字符串表示形式设置值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonParameter_1aa97065b2c1262d5b963c3c9ab7e2d484">freeze</link> (bool doit)</para>
+
+<para>冻结/解冻此参数，它将变为只读并且不会显示在帮助消息中 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1PythonParameter_1a74e9f525fb59de184012481df7abedc0">frozen</link> () const</para>
+
+<para>Returns whether parameter is frozen. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonParameter_1a6454d8fde8d238477ce3b2101ca1e6c3">reset</link> ()</para>
+
+<para>Reset this parameter to its default value. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1PythonParameter_1ab0e8e81614ec8781ff801b95fe18c9fe">setCallback</link> (boost::python::object const &amp;cb)</para>
+
+<para>设置参数的回调 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonParameter_1a82cc85a1a26ca18da5e1c5f61779e39b"/>    <section>
+    <title>PythonParameter()</title>
+<indexterm><primary>PythonParameter</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>PythonParameter</secondary></indexterm>
+<para><computeroutput>jevois::PythonParameter::PythonParameter (boost::python::object &amp; pyinst, std::string const &amp; name, std::string const &amp; typ, std::string const &amp; description, boost::python::object const &amp; defaultValue, <link linkend="_structjevois_1_1ParameterCategory">jevois::ParameterCategory</link> const &amp; category)</computeroutput></para><para>
+
+<para>构造函数。向与 pyinst 关联的组件添加动态参数 </para>
+</para>
+<para>
+Definition at line 100 of file PythonParameter.C.</para>
+<para>
+References JEVOIS_VERSION_STRING, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1ae72c34896e743f22826b606bf69a17ed"/>    <section>
+    <title>~PythonParameter()</title>
+<indexterm><primary>~PythonParameter</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>~PythonParameter</secondary></indexterm>
+<para><computeroutput>jevois::PythonParameter::~PythonParameter ( )</computeroutput></para><para>
+
+<para>析构函数。从关联组件中移除动态参数 </para>
+</para>
+<para>
+Definition at line 122 of file PythonParameter.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1PythonParameter_1af499e643c4d52b6f661774b1c72545a2"/>    <section>
+    <title>descriptor()</title>
+<indexterm><primary>descriptor</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>descriptor</secondary></indexterm>
+<para><computeroutput>std::string jevois::PythonParameter::descriptor ( ) const</computeroutput></para><para>
+
+<para>获取参数的完全限定名称，又名描述符，包括拥有组件和所有父组件的名称 </para>
+</para>
+<para>
+Definition at line 130 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1aa97065b2c1262d5b963c3c9ab7e2d484"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::PythonParameter::freeze (bool doit)</computeroutput></para><para>
+
+<para>冻结/解冻此参数，它将变为只读并且不会显示在帮助消息中 </para>
+</para>
+<para>
+Definition at line 150 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a74e9f525fb59de184012481df7abedc0"/>    <section>
+    <title>frozen()</title>
+<indexterm><primary>frozen</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>frozen</secondary></indexterm>
+<para><computeroutput>bool jevois::PythonParameter::frozen ( ) const</computeroutput></para><para>
+
+<para>Returns whether parameter is frozen. </para>
+</para>
+<para>
+Definition at line 154 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a8d835a6a494016c0e425db94678a5321"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>boost::python::object jevois::PythonParameter::get ( ) const</computeroutput></para><para>
+
+<para>Get the value of this Parameter. </para>
+</para>
+<para>
+Definition at line 134 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a394b319e6170be2b1a1fbb8e45a7e3cd"/>    <section>
+    <title>name()</title>
+<indexterm><primary>name</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>name</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::PythonParameter::name ( ) const</computeroutput></para><para>
+
+<para>Get the parameter name. </para>
+</para>
+<para>
+Definition at line 126 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a6454d8fde8d238477ce3b2101ca1e6c3"/>    <section>
+    <title>reset()</title>
+<indexterm><primary>reset</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>reset</secondary></indexterm>
+<para><computeroutput>void jevois::PythonParameter::reset ( )</computeroutput></para><para>
+
+<para>Reset this parameter to its default value. </para>
+</para>
+<para>
+Definition at line 158 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a15ce916d224e17ee1450068a8439ac35"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void jevois::PythonParameter::set (boost::python::object const &amp; newVal)</computeroutput></para><para>
+
+<para>设置此参数的值 </para>
+</para>
+<para>
+Definition at line 138 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1ab0e8e81614ec8781ff801b95fe18c9fe"/>    <section>
+    <title>setCallback()</title>
+<indexterm><primary>setCallback</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>setCallback</secondary></indexterm>
+<para><computeroutput>void jevois::PythonParameter::setCallback (boost::python::object const &amp; cb)</computeroutput></para><para>
+
+<para>设置参数的回调 </para>
+</para>
+
+<para>每次尝试更改参数值时都会调用回调函数。设置回调后，还会使用当前参数值第一次调用该函数。</para>
+
+<para>回调应该检查候选值 newval 并且 (1) 如果不喜欢它，则抛出异常并附带一条描述性消息说明拒绝该值的原因，(2) 否则， 假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（Parameter 对象的实际修改在上游处理，回调不需要 担心它：如果它返回而没有抛出异常，则建议的值将成为 Parameter 的新值）。只要回调正在运行，Parameter 就会被锁 定以进行写入，以避免破坏参数和/或多个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调 用 <link linkend="_classjevois_1_1PythonParameter_1a15ce916d224e17ee1450068a8439ac35">set()</link> 等，因为这始终会导致死锁（如果回调需要知道参数的当前值，则允许使用 <link linkend="_classjevois_1_1PythonParameter_1a8d835a6a494016c0e425db94678a5321">get()</link>）。 </para>
+<para>
+Definition at line 162 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1aa29a16abba15d27891186109f7be199a"/>    <section>
+    <title>strget()</title>
+<indexterm><primary>strget</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>strget</secondary></indexterm>
+<para><computeroutput>const std::string jevois::PythonParameter::strget ( ) const</computeroutput></para><para>
+
+<para>Get the value as a string. </para>
+</para>
+<para>
+Definition at line 142 of file PythonParameter.C.</para>
+    </section><anchor xml:id="_classjevois_1_1PythonParameter_1a4804be1f5600ce0d793c5f4626667b36"/>    <section>
+    <title>strset()</title>
+<indexterm><primary>strset</primary><secondary>jevois::PythonParameter</secondary></indexterm>
+<indexterm><primary>jevois::PythonParameter</primary><secondary>strset</secondary></indexterm>
+<para><computeroutput>void jevois::PythonParameter::strset (std::string const &amp; valstring)</computeroutput></para><para>
+
+<para>从它的字符串表示形式设置值 </para>
+</para>
+<para>
+Definition at line 146 of file PythonParameter.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonParameter_8H">PythonParameter.H</link>src/jevois/Core/<link linkend="_PythonParameter_8C">PythonParameter.C</link></section>
+</section>

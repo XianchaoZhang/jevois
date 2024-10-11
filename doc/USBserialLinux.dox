@@ -1,159 +1,83 @@
-/*! \page USBserialLinux Connecting to JeVois using serial-over-USB: Linux host
+/*! \page USBserialLinux 使用串行 USB 连接到 JeVois：Linux 主机
 
 
-This feature is not yet available on \jvpro but will soon be...
+该功能目前在 \jvpro 上还不可用，但很快就会可用……
 
-\section serusblinuxgen Finding the serial-over-USB device on Linux host
+\section serusblinuxgen 在 Linux 主机上查找串行 USB 设备
 
-On Linux, first look for the port that was created when you plugged in your JeVois smart camera. Most likely it will be
-\b /dev/ttyACM0 unless you already have some other modem device connected to your host computer. To find out, inspect
-messages displayed when you type `dmesg` in a Linux terminal after you have connected your JeVois smart camera. Allow at
-least 10 seconds for the smart camera to boot up and to be detected by your host computer. The output of the `dmesg`
-command should contain some messages about detection of your JeVois smart camera, both its video component and its
-serial port component:
+在 Linux 上，首先查找插入 JeVois 智能相机时创建的端口。除非您已经有其他调制解调器设备连接到主机，否则最有可能的是 \b /dev/ttyACM0。要找出答案，请在连接 JeVois 智能相机后，在 Linux 终端中输入“dmesg”时检查显示的消息。等待至少 10 秒钟让智能相机启动并被主机检测到。“dmesg”命令的输出应包含一些有关检测 JeVois 智能相机（包括其视频组件和串行端口组件）的消息：
 
-\verbatim
-[...]
-[4768736.704777] usb 1-1.3: new high-speed USB device number 13 using xhci_hcd
-[4768736.809464] usb 1-1.3: New USB device found, idVendor=1d6b, idProduct=0102
-[4768736.809470] usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
-[4768736.809473] usb 1-1.3: Product: JeVois-A33 Smart Camera
-[4768736.809476] usb 1-1.3: Manufacturer: JeVois Inc
-[4768736.847915] uvcvideo: Found UVC 1.00 device JeVois-A33 Smart Camera (1d6b:0102)
-[4768736.849892] input: JeVois-A33 Smart Camera as /devices/pci0000:00/0000:00:1c.6/0000:09:00.0/usb1/1-1/1-1.3/1-1.3:1.0/input/input29
-[4768736.851499] cdc_acm 1-1.3:1.2: ttyACM0: USB ACM device
-\endverbatim
+\verbatim [...] [4768736.704777] usb 1-1.3：使用 xhci_hcd 的新高速 USB 设备编号 13 [4768736.809464] usb 1-1.3：发现新 USB 设备，idVendor=1d6b，idProduct=0102 [4768736.809470] usb 1-1.3：新 USB 设备字符串：Mfr=1，Product=2，SerialNumber=0 [4768736.809473] usb 1-1.3：产品：JeVois-A33 智能相机 [4768736.809476] usb 1-1.3：制造商：JeVois Inc [4768736.847915] uvcvideo：发现 UVC 1.00 设备JeVois-A33 智能摄像头 (1d6b:0102) [4768736.849892] 输入：JeVois-A33 智能摄像头为 /devices/pci0000:00/0000:00:1c.6/0000:09:00.0/usb1/1-1/1-1.3/1-1.3:1.0/input/input29 [4768736.851499] cdc_acm 1-1.3:1.2: ttyACM0: USB ACM 设备 \endverbatim
 
-In the above example, the JeVois smart camera was detected as a UVC (USB Video Class) device and a corresponding video
-device entry was created in \b /devices/pci... which typically would then also be aliased to \b /dev/video0 for easier
-access.  In addition, the serial-over-USB port of the JeVois camera was detected as a CDC-ACM serial port, and was
-assigned device name \b ttyACM0 in this example.
+在上面的例子中，JeVois 智能相机被检测为 UVC（USB 视频类）设备，并在 \b /devices/pci... 中创建了相应的视频设备条目，该条目通常也会被别名为 \b /dev/video0 以方便访问。此外，JeVois 相机的串行 USB 端口被检测为 CDC-ACM 串行端口，并在此示例中分配了设备名称 \b ttyACM0。
 
-To connect to your JeVois smart camera using the serial-over-USB link, start a terminal program. Default configuration
-is 115200 8N1.
+要使用串行 USB 链接连接到您的 JeVois 智能相机，请启动终端程序。默认配置为 115200 8N1。
 
-\section serusblinuxperm Permission issues
+\section serusblinuxperm 权限问题
 
-On Ubuntu, a program called ModemManager is installed and runs by default. It will try to connect to any new
-serial-over-USB device and to probe it by sending it modem configuration commands. JeVois will ignore these commands,
-but ModemManager will keep sending strings to JeVois for up to a minute after JeVois is connected. So, it is better to
-just get rid of ModemManager:
+在 Ubuntu 上，会默认安装并运行一个名为 ModemManager 的程序。它将尝试连接到任何新的串行 USB 设备，并通过向其发送调制解调器配置命令来探测它。JeVois 将忽略这些命令，但 ModemManager 会在 JeVois 连接后继续向 JeVois 发送字符串长达一分钟。因此，最好直接删除 ModemManager：
 
-\verbatim
-sudo apt purge modemmanager # to get rid of it entirely, you can always re-install it later if ever needed
-\endverbatim
+\verbatim sudo apt purge modemmanager # 彻底删除它，以后如果需要，您可以随时重新安装它 \endverbatim
 
-On Linux, by default, you may not have permission to access the JeVois serial-over-USB port. You can fix this in
-two ways:
-- add your user to the \b dialout group, by issuing
-  \verbatim
-  sudo usermod -aG dialout $USER
-  groups $USER # check that you are now in the dialout group
-  \endverbatim
-  and reboot your machine for the settings to take effect.
-- or just change the access permissions of the port (but note that you will have to do this each time you plugin your
-  JeVois camera):
-  \verbatim
-  sudo chmod 777 /dev/ttyACM0
-  \endverbatim
+在 Linux 上，默认情况下，您可能没有权限访问 JeVois 串行 USB 端口。您可以通过两种方式解决此问题：
+- 将您的用户添加到 \b dialout 组，方法是发出 \verbatim sudo usermod -aG dialout $USER groups $USER # 检查您现在是否在 dialout 组中 \endverbatim 并重新启动您的机器以使设置生效。
+- 或者只是更改端口的访问权限（但请注意，每次插入 JeVois 相机时都必须这样做）： \verbatim sudo chmod 777 /dev/ttyACM0 \endverbatim
 
-To test the connection, the best is to use \ref JeVoisInventor
+要测试连接，最好使用 \ref JeVoisInventor
 
-\section serusblinuxscreen Using the screen command
+\section serusblinuxscreen 使用 screen 命令
 
-\verbatim
-sudo apt-get install screen       # if not already installed
-sudo screen /dev/ttyACM0 115200
-\endverbatim
+\verbatim sudo apt-get install screen # 如果尚未安装 sudo screen /dev/ttyACM0 115200 \endverbatim
 
-\note The `screen` program does not (as far as we know) provide an option for command echo (to see what you are
-typing). Hence, as you type, you will not see what you type. This is normal.
+\note 据我们所知，“screen”程序不提供命令回显选项（查看您正在输入的内容）。因此，当您输入时，您将看不到您输入的内容。这是正常的。
 
-\note To scroll up while using `screen`, type \c CTRL-A \c ESC and you can then use the arrow keys or mouse wheel to
-scroll up. Type \c RETURN twice when you are ready to go back to interactive mode.
+\note 要在使用“屏幕”时向上滚动，请键入 \c CTRL-A \c ESC，然后可以使用箭头键或鼠标滚轮向上滚动。当您准备返回交互模式时，请键入 \c RETURN 两次。
 
-\section serusblinuxminicom Using the minicom software
+\section serusblinuxminicom 使用 minicom 软件
 
-You can also use \c minicom or other serial communication software. Minicom is nice because it allows you to enable
-local echo (so you can see what you type):
+您还可以使用 \c minicom 或其他串行通信软件。Minicom 很不错，因为它允许您启用本地回显（这样您就可以看到您输入的内容）：
 
-\verbatim
-sudo apt-get install minicom       # if not already installed
-sudo minicom -D /dev/ttyACM0
-\endverbatim
+\verbatim sudo apt-get install minicom # 如果尚未安装 sudo minicom -D /dev/ttyACM0 \endverbatim
 
-To enable local echo, type the following keystrokes: \c CTRL-A \c Z (for configuration menu), then \c E (local echo
-on/off). Note that even though minicom makes it look like you can corect typos, you still cannot; for example, typing
-`helx` then \c BACKSPACE and then `p` (to correct from helx to help) will transmit the message `helx` followed by a
-\c BACKSPACE character followed by `p` and this will still be an incorrect command for JeVois.
+要启用本地回显，请键入以下按键：\c CTRL-A \c Z（用于配置菜单），然后 \c E（本地回显打开/关闭）。请注意，尽管 minicom 让您看起来可以纠正拼写错误，但您仍然不能；例如，键入“helx”然后 \c BACKSPACE 然后“p”（将 helx 更正为 help）将传输消息“helx”后跟 \c BACKSPACE 字符，后跟“p”，而这对于 JeVois 来说仍然是一个错误命令。
 
-\section serusblinuxbeware Beware of ModemManager or similar on Linux
+\section serusblinuxbeware 警惕 Linux 上的 ModemManager 或类似程序
 
-Many Linux distributions, including Ubuntu, monitor the connection of modems, so that they can be detected in a
-plug-and-play manner. Because the JeVois serial-over-USB port looks to a host computer like a new modem (this is so that
-no driver is required), your host computer may try to send modem configuration commands to JeVois as you connect
-it.
+许多 Linux 发行版（包括 Ubuntu）都会监控调制解调器的连接，以便能够以即插即用的方式检测到它们。由于 JeVois 串行 USB 端口在主机看来就像一个新的调制解调器（这样就不需要驱动程序了），因此当您连接 JeVois 时，主机可能会尝试向 JeVois 发送调制解调器配置命令。
 
-JeVois will safely ignore these commands, but it may take a few minutes for your host computer to give up on trying to
-initialize JeVois as a modem that can dial out over telephone lines. While your host computer is trying to configure
-JeVois as a modem, the commands it sends will interfere with any commands you may type. To avoid this and to allow you
-to use the serial-over-USB port as soon as it is detected by your host, turn off the modem manager feature of your Linux
-host. For example, on Ubuntu:
+JeVois 将安全地忽略这些命令，但主机可能需要几分钟才能放弃尝试将 JeVois 初始化为可以通过电话线拨号的调制解调器。当您的主机尝试将 JeVois 配置为调制解调器时，它发送的命令将干扰您可能输入的任何命令。为了避免这种情况并允许您在主机检测到串行 USB 端口后立即使用它，请关闭 Linux 主机的调制解调器管理器功能。例如，在 Ubuntu 上：
 
-\verbatim
-sudo killall ModemManager
-\endverbatim
+\verbatim sudo Killall ModemManager \endverbatim
 
-Using shortcut shell command jevois-cmd
-=======================================
+使用快捷 shell 命令 jevois-cmd ==========================================
 
 \jvversion{1.3}
 
 
-Under Linux, the \b jevois package provides the command `jevois-cmd` in <b>/usr/bin</b> of the host computer (source in
-<b>~/jevois/scripts</b>), which can be executed directly in any terminal on the host computer (as opposed to being run
-in the JeVois command-line interface after opening some serial terminal to it). Use it as follows:
+在 Linux 下，\b jevois 软件包在主机的 <b>/usr/bin</b> 中提供了命令 `jevois-cmd`（源代码位于 <b>~/jevois/scripts</b>），可以直接在主机的任何终端中执行（而不是在打开某个串行终端后在 JeVois 命令行界面中运行）。使用方法如下：
 
-\verbatim
-jevois-cmd help
-\endverbatim
+\verbatim jevois-cmd 帮助 \endverbatim
 
-Connects to JeVois using the serial-over-USB port, issues the command `help` to jevois, collects an displays the results
-returned by JeVois.
+使用串行 USB 端口连接到 JeVois，向 jevois 发出命令“help”，收集并显示 JeVois 返回的结果。
 
-Any valid JeVois command-line command can be sent. For example:
+可以发送任何有效的 JeVois 命令行命令。例如：
 
-\verbatim
-jevois-cmd setpar cpumax 1200
-\endverbatim
+\verbatim jevois-cmd 设置 cpumax 1200 \endverbatim
 
-should return
+应该返回
 
-\verbatim
-OK
-\endverbatim
+\verbatim 确定 \endverbatim
 
-and a subsequent
+以及随后的
 
-\verbatim
-jevois-cmd info
-\endverbatim
+\verbatim jevois-cmd 信息 \endverbatim
 
-should show the updated CPU frequency of 1200 MHz as follows:
+应显示更新后的 CPU 频率 1200 MHz，如下所示：
 
-\verbatim
-INFO: JeVois 1.3.0
-INFO: Linux version 3.4.39
-INFO: CPU: 1200MHz, 28C, load: 0.98 0.53 0.22 1/59 86
-INFO: MemTotal: 238452 kB, MemFree: 170188 kB
-INFO: OUT: YUYV 640x300 @ 60fps CAM: YUYV 320x240 @ 60fps MOD: JeVois:DemoSaliency
-OK
-\endverbatim
+\verbatim INFO：JeVois 1.3.0 INFO：Linux 版本 3.4.39 INFO：CPU：1200MHz，28C，负载：0.98 0.53 0.22 1/59 86 INFO：MemTotal：238452 kB，MemFree：170188 kB INFO：OUT：YUYV 640x300 @ 60fps CAM：YUYV 320x240 @ 60fps MOD：JeVois：DemoSaliency OK \endverbatim
 
 
-\note If JeVois complains about errors but you know that your command is correct, maybe the Linux \b ModemManager is
-running on your host computer and is trying to configure JeVois as a modem, sending it all kinds of commands that JeVois
-is not interested in. See above.
+\note 如果 JeVois 抱怨错误，但您知道您的命令是正确的，那么 Linux \b ModemManager 可能正在您的主机上运行，​​并试图将 JeVois 配置为调制解调器，向其发送 JeVois 不感兴趣的各种命令。见上文。
 
 */
 

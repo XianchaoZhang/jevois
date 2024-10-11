@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Serial">
+<title>jevois::Serial Class Reference</title>
+<indexterm><primary>jevois::Serial</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/Serial.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>串行端口接口 </para>
+
+
+
+<para>此类是线程安全的。并发读取和写入（似乎不受操作系统或硬件支持）通过在 <link linkend="_classjevois_1_1Serial">Serial</link> 类中使用互斥锁进行序列化。 </para>
+<para>
+Definition at line 85 of file Serial.H.</para>
+Inheritance diagram for jevois::Serial:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Serial__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Serial:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Serial__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1aa3264cd7d39230ec9a1800baccef7bc1">Serial</link> (std::string const &amp;instance, <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">UserInterface::Type</link> <link linkend="_classjevois_1_1Serial_1ab7dcc08de36dac64332e1f9f6a671d96">type</link>)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1Serial_1a900273caa5b0b40c4a0e039399dfb64d">~Serial</link> ()</para>
+
+<para>destructor </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a17962e924e8caeeeee75bacbbe0964bb">setBlocking</link> (bool blocking, std::chrono::milliseconds const &amp;timeout)</para>
+
+<para>设置是否阻塞访问 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a542b90af764230a4a50c1b71a818f632">toggleDTR</link> (std::chrono::milliseconds const &amp;dur)</para>
+
+<para>暂时关闭 DTR 模式。 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a310cb18132f446c9d6852cfd4654f00a">sendBreak</link> (void)</para>
+
+<para>在特定持续时间内传输连续的零值位流。 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1Serial_1a50f7553bdbf0fdfe4e5d2d06689317df">readSome</link> (std::string &amp;str) override</para>
+
+<para>如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a06bd87b9e59a6aad3c8c184b2406edb5">writeString</link> (std::string const &amp;str) override</para>
+
+<para>使用 serial::linestyle 的行终止约定写入字符串 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a75519929a28fc26d785a84f64c0f352e">fileGet</link> (std::string const &amp;abspath)</para>
+
+<para>将文件从本地 microSD 发送到主机 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a66ac0d80417158476aee615c05aa3640">filePut</link> (std::string const &amp;abspath)</para>
+
+<para>从主机接收文件并将其写入本地 microSD </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a1a86de2b818bec6f38083a8e782e5736">flush</link> (void)</para>
+
+<para>Flush all inputs. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">UserInterface::Type</link> <link linkend="_classjevois_1_1Serial_1ab7dcc08de36dac64332e1f9f6a671d96">type</link> () const override</para>
+
+<para>返回我们的端口类型，这里是 Hard 或 USB </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1a159fa2d1b226adc859e874aa771820c8">postInit</link> () override</para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Serial_1afe39197a374d85599ac823e60e3d263a">postUninit</link> () override</para>
+
+<para>Called after all sub-Components are uninit()ed. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a95dd3765242d009b312ef07866108941">JEVOIS_DECLARE_PARAMETER</link> (devname, std::string, &quot;Device file name&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a8ce7e8ae9d7f8397a69040baa8ae670f">JEVOIS_DECLARE_PARAMETER</link> (baudrate, unsigned int, &quot;Baudrate&quot;, 115200, { 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 230400, 460800, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000 }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a09702a0052bc7bc562ea20b653d9fe1f">JEVOIS_DECLARE_PARAMETER</link> (format, std::string, &quot;Data format&quot;, &quot;8N1&quot;, boost::regex(&quot;^[5-8][NEO][12]$&quot;), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a2d5c84667f99bbc694486fda3c618d89">JEVOIS_DECLARE_PARAMETER</link> (flowsoft, bool, &quot;Use soft (XON/XOFF) flow control&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1abc14de108a2111e2e924546ed3484a1b">JEVOIS_DECLARE_PARAMETER</link> (flowhard, bool, &quot;Use hard (RTS/CTS) flow control&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a9fea7c2236091db5c238766627928a6c">JEVOIS_DECLARE_PARAMETER</link> (drop, bool, &quot;Silently drop write data when write buffer is full. Useful to &quot; &quot;avoid blocking when writing messages to serial-over-USB port and the host is &quot; &quot;not listening to it. Note that even when drop is false, we will still drop &quot; &quot;data after repeated attempts to send it, and will report an error (as opposed to &quot; &quot;silently dropping when drop is true).&quot;, true, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1ab3736991e5ffb59fbf71d8361f06d519">JEVOIS_DEFINE_ENUM_CLASS</link> (LineStyle,(LF)(CR)(CRLF)(Zero)(Sloppy))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a25e06d5b82facb12841347c4a4948649">JEVOIS_DECLARE_PARAMETER</link> (linestyle, LineStyle, &quot;End of line style: LF is for 0x0a [\\n] CR is for 0x0d [\\r] &quot; &quot;CRLF is for 0x0d 0x0a [\\r\\n] Zero is for 0x00 [\\0] Sloppy accepts any of &quot; &quot;CR, LF, CRLF, 0xd0 (issued by some keyboards instead of Return), and Zero as input &quot; &quot;and issues CRLF in outputs.&quot;, LineStyle::Sloppy, LineStyle_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a6e022a62da7730755d3973ec5b7c6100">JEVOIS_DEFINE_ENUM_CLASS</link> (TerminalMode,(Plain)(VT100))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Serial_1a196723d35fccaf8b116e1583c6ef7d74">JEVOIS_DECLARE_PARAMETER</link> (mode, TerminalMode, &quot;Terminal emulation mode for input&quot;, TerminalMode::Plain, TerminalMode_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Serial_1aa3264cd7d39230ec9a1800baccef7bc1"/>    <section>
+    <title>Serial()</title>
+<indexterm><primary>Serial</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>Serial</secondary></indexterm>
+<para><computeroutput>jevois::Serial::Serial (std::string const &amp; instance, <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">UserInterface::Type</link> type)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 61 of file Serial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a900273caa5b0b40c4a0e039399dfb64d"/>    <section>
+    <title>~Serial()</title>
+<indexterm><primary>~Serial</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>~Serial</secondary></indexterm>
+<para><computeroutput>jevois::Serial::~Serial ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>destructor </para>
+</para>
+<para>
+Definition at line 410 of file Serial.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Serial_1a75519929a28fc26d785a84f64c0f352e"/>    <section>
+    <title>fileGet()</title>
+<indexterm><primary>fileGet</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>fileGet</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::fileGet (std::string const &amp; abspath)</computeroutput></para><para>
+
+<para>将文件从本地 microSD 发送到主机 </para>
+</para>
+
+<para>abspath 应为文件的完整绝对路径。 在整个交易期间，端口将被锁定。 </para>
+<para>
+Definition at line 418 of file Serial.C.</para>
+<para>
+References jevois::to_string().</para>
+<para>
+Referenced by jevois::Engine::parseCommand().</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a66ac0d80417158476aee615c05aa3640"/>    <section>
+    <title>filePut()</title>
+<indexterm><primary>filePut</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>filePut</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::filePut (std::string const &amp; abspath)</computeroutput></para><para>
+
+<para>从主机接收文件并将其写入本地 microSD </para>
+</para>
+
+<para>abspath 应为文件的完整绝对路径。整个交易期间端口将被锁定。 </para>
+<para>
+Definition at line 442 of file Serial.C.</para>
+<para>
+References jevois::split(), and jevois::stringStartsWith().</para>
+<para>
+Referenced by jevois::Engine::parseCommand().</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a1a86de2b818bec6f38083a8e782e5736"/>    <section>
+    <title>flush()</title>
+<indexterm><primary>flush</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>flush</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::flush (void )</computeroutput></para><para>
+
+<para>Flush all inputs. </para>
+</para>
+<para>
+Definition at line 400 of file Serial.C.</para>
+<para>
+References LDEBUG.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a159fa2d1b226adc859e874aa771820c8"/>    <section>
+    <title>postInit()</title>
+<indexterm><primary>postInit</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>postInit</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::postInit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called after all sub-Components are init()ed. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1ae33c39b7b433a471c76f841a725aca8c">jevois::Component</link>.</para>
+<para>
+Definition at line 66 of file Serial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1afe39197a374d85599ac823e60e3d263a"/>    <section>
+    <title>postUninit()</title>
+<indexterm><primary>postUninit</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>postUninit</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::postUninit ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Called after all sub-Components are uninit()ed. </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Component_1abd9cafdcc5e9981b72130aeb3d9ae83f">jevois::Component</link>.</para>
+<para>
+Definition at line 200 of file Serial.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a50f7553bdbf0fdfe4e5d2d06689317df"/>    <section>
+    <title>readSome()</title>
+<indexterm><primary>readSome</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>readSome</secondary></indexterm>
+<para><computeroutput>bool jevois::Serial::readSome (std::string &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>如果可用，则读取一些字节，并在完成时返回 true 和一个字符串 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1aa0122126d1da68237d66a33e02e3fa02">jevois::UserInterface</link>.</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1GUIserial_1a743adac54253b9e078bee56b9b6697f1">jevois::GUIserial</link>.</para>
+<para>
+Definition at line 262 of file Serial.C.</para>
+<para>
+References SERFATAL.</para>
+<para>
+Referenced by jevois::GUIserial::readSome().</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a310cb18132f446c9d6852cfd4654f00a"/>    <section>
+    <title>sendBreak()</title>
+<indexterm><primary>sendBreak</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>sendBreak</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::sendBreak (void )</computeroutput></para><para>
+
+<para>在特定持续时间内传输连续的零值位流。 </para>
+</para>
+<para>
+Definition at line 253 of file Serial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a17962e924e8caeeeee75bacbbe0964bb"/>    <section>
+    <title>setBlocking()</title>
+<indexterm><primary>setBlocking</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>setBlocking</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::setBlocking (bool blocking, std::chrono::milliseconds const &amp; timeout)</computeroutput></para><para>
+
+<para>设置是否阻塞访问 </para>
+</para>
+
+<para>默认为非阻塞。如果阻塞，也可以指定超时（四舍五入到十分之一秒） </para>
+<para>
+Definition at line 213 of file Serial.C.</para>
+<para>
+References SERFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a542b90af764230a4a50c1b71a818f632"/>    <section>
+    <title>toggleDTR()</title>
+<indexterm><primary>toggleDTR</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>toggleDTR</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::toggleDTR (std::chrono::milliseconds const &amp; dur)</computeroutput></para><para>
+
+<para>暂时关闭 DTR 模式。 </para>
+</para>
+<para>
+Definition at line 234 of file Serial.C.</para>
+<para>
+References SERFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1ab7dcc08de36dac64332e1f9f6a671d96"/>    <section>
+    <title>type()</title>
+<indexterm><primary>type</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>type</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">jevois::UserInterface::Type</link> jevois::Serial::type ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>返回我们的端口类型，这里是 Hard 或 USB </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1ac4e4337ea4e993ed8e3230389a062224">jevois::UserInterface</link>.</para>
+<para>
+Definition at line 414 of file Serial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a06bd87b9e59a6aad3c8c184b2406edb5"/>    <section>
+    <title>writeString()</title>
+<indexterm><primary>writeString</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::Serial::writeString (std::string const &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>使用 serial::linestyle 的行终止约定写入字符串 </para>
+</para>
+
+<para>字符串中不应包含行终止符，writeString() 将添加一个。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1UserInterface_1a1ea78da97f6d939d4aca0c1ec577992a">jevois::UserInterface</link>.</para>
+<para>
+Reimplemented in <link linkend="_classjevois_1_1GUIserial_1aa8e430f5527ba55f21468c99cd007587">jevois::GUIserial</link>.</para>
+<para>
+Definition at line 316 of file Serial.C.</para>
+<para>
+Referenced by jevois::GUIserial::writeString().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Serial_1a8ce7e8ae9d7f8397a69040baa8ae670f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (baudrate , unsigned int , &quot;Baudrate&quot; , 115200 , { 110, 300, 600, 1200, 2400, 4800, 9600, 14400, 19200, 38400, 57600, 115200, 230400, 460800, 921600, 1000000, 1152000, 1500000, 2000000, 2500000, 3000000, 3500000, 4000000 } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a95dd3765242d009b312ef07866108941"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (devname , std::string , &quot;Device file name&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a9fea7c2236091db5c238766627928a6c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (drop , bool , &quot;Silently drop write data when write buffer is full. Useful to &quot; &quot;avoid blocking when writing messages to serial-over-USB port and the host is &quot; &quot;not listening to it. Note that even when drop is false, we will still drop &quot; &quot;data after repeated attempts to send it, and will report an error(as opposed to &quot; &quot;silently dropping when drop is true).&quot; , true , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1abc14de108a2111e2e924546ed3484a1b"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (flowhard , bool , &quot;Use hard (RTS/CTS) flow control&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a2d5c84667f99bbc694486fda3c618d89"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (flowsoft , bool , &quot;Use soft (XON/XOFF) flow control&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a09702a0052bc7bc562ea20b653d9fe1f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[6/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (format , std::string , &quot;Data format&quot; , &quot;8N1&quot; , boost::regex(&quot;^[5-8][NEO][12]$&quot;) , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a25e06d5b82facb12841347c4a4948649"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[7/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (linestyle , LineStyle , &quot;End of line style: LF is for 0x0a  CR is for 0x0d  &quot; &quot;CRLF is for 0x0d 0x0a  Zero is for 0x00  Sloppy accepts any of &quot; &quot; CR[\\n][\\r][\\r\\n][\\0], LF , CRLF , 0xd0(issued by some keyboards instead of Return) , and Zero as input &quot; &quot;and issues CRLF in outputs.&quot; , LineStyle::Sloppy , LineStyle_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a196723d35fccaf8b116e1583c6ef7d74"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[8/8]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (mode , TerminalMode , &quot;Terminal emulation mode for input&quot; , TerminalMode::Plain , TerminalMode_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1ab3736991e5ffb59fbf71d8361f06d519"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (LineStyle , (LF)(CR)(CRLF)(Zero)(Sloppy) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Serial_1a6e022a62da7730755d3973ec5b7c6100"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::Serial</secondary></indexterm>
+<indexterm><primary>jevois::Serial</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (TerminalMode , (Plain)(VT100) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_Serial_8H">Serial.H</link>src/jevois/Core/<link linkend="_Serial_8C">Serial.C</link></section>
+</section>

@@ -52,18 +52,16 @@
 
 namespace jevois
 {
-  //! A generic singleton class to enforce a single instance of an object
-  /*! The Singleton class should be inherited by any class which needs:
-        -# To have only one instance
-        -# To be globally accessible
+  //!  一个通用的 singleton 类，用于强制一个对象的单个实例 
+  /*! Singleton 类应该被任何需要的类继承：
+      -# 只有一个实例 
+      -# 可全局访问
+    
+    请注意，目前无法保证 Singleton 的析构顺序，因此应注意不要在 Singleton 的析构函数中引用另一个 Singleton。
 
-      Note that there are currently no guarantees on the order of destruction of Singletons, so care should be taken to
-      never reference another Singleton in the destructor of a Singleton.
+    这个特定的实现来自：http://stackoverflow.com/questions/1008019/c-singleton-design-pattern
 
-      This particular implementation is from:
-      http://stackoverflow.com/questions/1008019/c-singleton-design-pattern
-
-      The following is an example use of the Singleton:
+    以下是 Singleton 的使用示例：
 
       @code
       class MyClass : public Singleton<MyClass>
@@ -83,25 +81,24 @@ namespace jevois
       }
       @endcode
 
-      @tparam T The class that is being made the singleton.
+      @tparam T 被设为单例的类。
 
-      This class was first designed by Rand Voorhies in the Neuromorphic Robotics Toolkit.
+      该类最初由 Rand Voorhies 在 Neuromorphic Robotics Toolkit 中设计。
       \ingroup types */
   template <class T>
   class Singleton
   {
     public:
-      //! Get the global, unique instance of the class T
-      /*! If the global, unique instance of class T has not yet been created, then this method will create it in a
-          thread-safe manner. */
+      //! 获取类 T 的全局唯一实例 
+      /*! 如果尚未创建类 T 的全局唯一实例，则此方法将以线程安全的方式创建它。 */
       static T & instance();
 
     protected:
-      //! Only classes that inherit from Singleton can construct it via its protected default constructor
+      //! 只有从 Singleton 继承的类才能通过其受保护的默认构造函数 Singleton() 来构造它；
       Singleton();
 
     private:
-      // Prevent copy-construction and copy, only allow default construction
+      // 防止复制构造和复制，只允许默认构造
       Singleton(Singleton const &) = delete;
       void operator=(Singleton const &) = delete;
   };  

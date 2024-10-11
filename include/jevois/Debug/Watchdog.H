@@ -21,11 +21,10 @@
 
 namespace jevois
 {
-  //! Simple watchdog class
-  /*! This class will kill the current process if reset() is not called at least every timeout seconds. If timeout <=
-      0.0 then the watchdog is inactive (will never time out and kill the process). Note that to be as lightweight as
-      possible, this class runs a background thread with a loop that iterates every timeout seconds, so the exact kill
-      time is approximate. \ingroup debugging */
+  //! 简单的看门狗类
+  /*! 如果至少每超时秒不调用 reset()，则此类将终止当前进程。 如果超时 <= 0.0，则看门狗处于非活动状态（永远不会超时并终
+      止进程）。 请注意，为了尽可能轻量，此类运行一个后台线程，循环每超时秒迭代一次，因此确切的终止时间是近似的。
+	   \ingroup debugging */
   class Watchdog
   {
     public:
@@ -35,7 +34,7 @@ namespace jevois
       //! Virtual destructor for safe inheritance
       ~Watchdog();
       
-      //! Reset our internal timer. If this does not happen at least every timeout seconds, process is killed
+      //! 重置我们的内部计时器。如果这种情况至少每超时秒不发生一次，则进程将被终止
       void reset();
 
     protected:

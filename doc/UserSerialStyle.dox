@@ -1,317 +1,194 @@
-/*! \page UserSerialStyle Standardized serial messages formatting
+/*! \page UserSerialStyle 标准化串行消息格式
 
 \jvversion{1.3}
 
-JeVois provides a standardized set of serial output messages, with the goal of harmonizing serial messages across many
-machine vision modules, so that different vision modules can control an Arduino or similar embedded controller in the
-same way. Users can then experiment with different machine vision modules without needing to rewrite and reflash their
-Arduino code. For example, a motorized pan/tilt head can be directly controlled by a color-based object tracker, a
-saliency-based visual attention module, an object recognition module, or an ArUco virtual reality marker detection
-module using the same Arduino code to receive the control messages from JeVois and to actuate the pan/tilt motors.
+JeVois 提供了一组标准化的串行输出消息，目的是协调多个机器视觉模块之间的串行消息，以便不同的视觉模块能够以相同的方式控制 Arduino 或类似的嵌入式控制器。然后，用户可以尝试使用不同的机器视觉模块，而无需重写和重新刷新他们的 Arduino 代码。例如，电动平移/倾斜云台可以直接由基于颜色的物体跟踪器、基于显着性的视觉注意模块、物体识别模块或 ArUco 虚拟现实标记检测模块控制，使用相同的 Arduino 代码接收来自 JeVois 的控制消息并启动平移/倾斜电机。
 
-The standardized serial messages focus (at least for now) onto sending location and identity information (in 1D, 2D, or
-3D) about things that have been detected by JeVois.
+标准化串行消息重点（至少目前）是发送 JeVois 检测到的事物的位置和身份信息（1D、2D 或 3D）。
 
-Modules that wish to send standardized messages as defined below should derive from jevois::StdModule instead of
-jevois::Module. The class jevois::StdModule adds parameters that allow end users to control the formatting of the serial
-messages, and additional member functions that assist programmers in issuing standardized messages.
+希望发送如下定义的标准化消息的模块应该从 jevois::StdModule 派生，而不是从 jevois::Module 派生。jevois::StdModule 类添加了允许最终用户控制串行消息格式的参数，以及帮助程序员发出标准化消息的附加成员函数。
 
-The parameters \p serstyle and \p serprec of jevois::StdModule define the following standardized serial message
-styles. Parameter \p serstamp allow additional stamping of every message with a frame number, date, and/or time.
+jevois::StdModule 的参数 \p serstyle 和 \p serprec 定义以下标准化串行消息样式。参数 \p serstamp 允许使用帧编号、日期和/或时间对每条消息进行额外的标记。
 
-\note Beware that \p serstyle and \p serprec are reset to their default value each time a vision processing module is
-loaded. Hence, you should set them after loading the module. Parameter \p sertamp is not affected by module change,
-because it is owned by the JeVois Engine.
+\note 请注意，每次加载视觉处理模块时，\p serstyle 和 \p serprec 都会重置为默认值。因此，您应该在加载模块后设置它们。参数 \p sertamp 不受模块更改的影响，因为它归 JeVois 引擎所有。
 
-Coordinates conventions and precision
-=====================================
+坐标约定和精度 ========================================
 
-All 1D and 2D coordinates use the JeVois standardized coordinates (between -1000 and 1000), as defined in \ref
-coordhelpers.
+所有 1D 和 2D 坐标均使用 JeVois 标准坐标（介于 -1000 和 1000 之间），如 \ref coordhelpers 中所定义。
 
-All 3D coordinates are assumed to arise from a calibrated camera and are expressed in millimeters of real-world space.
+所有 3D 坐标均假定来自经过校准的相机，并以真实世界空间的毫米为单位表示。
 
-Parameter \c serprec defines the precision with which these coordinate will be sent out over serial, as the number of
-decimal positions after the decimal point. For example:
+参数 \c serprec 定义这些坐标通过串行发送的精度，即小数点后的小数位数。例如：
 
-- When \c serprec is 0, coordinates will be sent as integer numbers, e.g., 123 (no trailing decimal point).
-- When \c serprec is 1, coordinates will be sent with 1 decimal position, e.g., 123.4
-- When \c serprec is 2, coordinates will be sent with 2 decimal positions, e.g., 123.45
-- And so on.
+- 当 \c serprec 为 0 时，坐标将以整数形式发送，例如 123（无尾随小数点）。
+- 当 \c serprec 为 1 时，坐标将以 1 位小数发送，例如 123.4
+- 当 \c serprec 为 2 时，坐标将以 2 位小数发送，例如 123.45
+- 依此类推。
 
-Given the already large range of -1000 to 1000 provided by the \ref coordhelpers for 1D and 2D coordinates, or the quite
-high (millimeter) accuracy of 3D coordinates, the expectation is that \c serprec will be non-zero only in exceptional
-situations. Most Arduino control software can reasonably be expected to support \c serprec=0 only.
+鉴于 \ref coordhelpers 为 1D 和 2D 坐标提供的 -1000 到 1000 的范围已经很大，或者 3D 坐标的精度相当高（毫米），因此预期 \c serprec 仅在特殊情况下才为非零。大多数 Arduino 控制软件可以合理地预期仅支持 \c serprec=0。
 
-One-dimensional (1D) location messages
-======================================
+一维（1D）位置消息======================================
 
-1D location messages are used to communicate the location of something on a 1D axis (usually, the horizontal axis). For
-example, the \a x coordinate of the vanishing point in the \jvmod{RoadNavigation} module.
+1D 位置消息用于传达某物在 1D 轴（通常是水平轴）上的位置。例如，\jvmod{RoadNavigation} 模块中消失点的 \a x 坐标。
 
-Inputs from machine vision module:
+来自机器视觉模块的输入：
 
-- \a x the standardized 1D position of the center of the reported object.
+- \a x 报告对象中心的标准化一维位置。
 
-- \a id a text string describing what the reported object is (e.g., which ArUco marker ID it has). To ease parsing by
-  the receiving Arduino, ID should have no white space. Any white space will be replaced by underscores.
+- \a id 描述所报告对象是什么的文本字符串（例如，它具有哪个 ArUco 标记 ID）。为了便于接收 Arduino 解析，ID 中不应有空格。任何空格都将被下划线替换。
 
-- \a size the standardized 1D size of the reported object (thus, object extends from x-size/2 to x+size/2). Note that
-  size will be output with the same precision as the coordinate.
+- \a size 报告对象的标准化 1D 大小（因此，对象从 x-size/2 延伸到 x+size/2）。请注意，size 将以与坐标相同的精度输出。
 
-- \a extra any additional text string about the reported object.
+- \a extra 有关报告对象的任何附加文本字符串。
 
-- \a xmin and \a xmax the standardized 1D positions of the two edges of the reported object. For 1D objects, specifying
-  \a xmin and \a xmax is equivalent to specifying \a x and \a size (but that is not always true in 2D, 3D, etc).
+- \a xmin 和 \a xmax 报告对象两个边缘的标准化 1D 位置。对于 1D 对象，指定 \a xmin 和 \a xmax 相当于指定 \a x 和 \a size（但在 2D、3D 等中并非总是如此）。
 
-Serial messages:
+串行消息：
 
-serstyle | message
----------|---------------------------------------------------------------------------------------------------------
-Terse    | <tt>T1 x</tt>
-Normal   | <tt>N1 id x size</tt>
-Detail   | <tt>D1 id xmin xmax extra</tt>
-Fine     | N/A - a \c D1D message will be issued instead.
+serstyle | 消息 ---------|----------------------------------------------------------------------------------------------------------------- Terse | <tt>T1 x</tt> Normal | <tt>N1 id x size</tt> Detail | <tt>D1 id xmin xmax extra</tt> Fine | N/A - 将改为发出 \c D1D 消息。
 
-Two-dimensional (2D) location messages
-======================================
+二维（2D）位置消息======================================
 
-2D location messages are used to communicate the location of something in 2D space (usually, the plane of the camera
-image). For example, the \a x,y standardized coordinates of an object detected by the \jvmod{ObjectDetect} module.
+2D 位置消息用于传达 2D 空间中某物的位置（通常是相机图像的平面）。例如，\jvmod{ObjectDetect} 模块检测到的对象的 \a x,y 标准化坐标。
 
-Inputs from machine vision module:
+来自机器视觉模块的输入：
 
-- <em>x,y</em> the standardized 2D position of the center of the reported object.
+- <em>x,y</em> 报告对象中心的标准化二维位置。
 
-- \a id a text string describing what the reported object is (e.g., which ArUco marker ID it has). To ease parsing by
-  the receiving Arduino, ID should have no white space. Any white space will be replaced by underscores.
+- \a id 描述所报告对象是什么的文本字符串（例如，它具有哪个 ArUco 标记 ID）。为了便于接收 Arduino 解析，ID 中不应有空格。任何空格都将被下划线替换。
 
-- <em>w,h</em> the standardized width and height of the reported object (thus, object extends from x-w/2 to x+w/2
-  horizontally, and from y-h/2 to y+h/2 vertically).  Note that size data will be output with the same precision as the
-  coordinate data.
+- <em>w,h</em> 报告对象的标准化宽度和高度（因此，对象水平方向从 x-w/2 延伸到 x+w/2，垂直方向从 y-h/2 延伸到 y+h/2）。请注意，尺寸数据将以与坐标数据相同的精度输出。
 
-- \a extra any additional text string about the reported object.
+- \a extra 有关报告对象的任何附加文本字符串。
 
-- <em>x1,y1</em> ... <em>x4,y4</em> the standardized x,y coordinates of the 4 corners of a bounding rectangle around the
-  reported object.
-  
-- <em>x1,y1</em> ... <em>xn,yn</em> the standardized x,y coordinates of <em>n</em> vertices of a bounding polygon around
-  the reported object. Note than n can vary from object to object.
+- <em>x1,y1</em> ... <em>x4,y4</em> 报告对象周围边界矩形的 4 个角的标准化 x,y 坐标。
+- <em>x1,y1</em> ... <em>xn,yn</em> 报告对象周围边界多边形的 <em>n</em> 个顶点的标准化 x,y 坐标。请注意，n 可能因对象而异。
 
-Serial messages:
+串行消息：
 
-serstyle | message
----------|---------------------------------------------------------------------------------------------------------
-Terse    | <tt>T2 x y</tt>
-Normal   | <tt>N2 id x y w h</tt>
-Detail   | <tt>D2 id x1 y1 x2 y2 x3 y3 x4 y4 extra</tt>
-Fine     | <tt>F2 id n x1 y1 ... xn yn extra</tt>
+塞尔风格|留言---------|---------------------------------------- -------------------------------------------------- ---------------- 简洁| <tt>T2 x y</tt> 正常 | <tt>N2 id x y w h</tt> 详细信息 | <tt>D2 id x1 y1 x2 y2 x3 y3 x4 y4 额外</tt> <tt>F2 id n x1 y1 ... xn yn 额外</tt>
 
-\note The tightness of the bounding box for \b Normal and \b Detail messages depends on what information a machine
-vision module produces. Typically, machine vision modules will invoke the serial message functions of jevois::StdModule
-with a list of 2D vertices defining a shape (polygonal contour). In \b Normal style, an upright bounding rectangle is
-fit to those vertices to generate the message, and a rotated rectangle is fit around the vertices to generate the \b
-Detail message.
+\note \b Normal 和 \b Detail 消息的边界框的紧密度取决于机器视觉模块生成的信息。通常，机器视觉模块将使用定义形状（多边形轮廓）的 2D 顶点列表调用 jevois::StdModule 的串行消息函数。在 \b Normal 样式中，垂直边界矩形适合这些顶点以生成消息，旋转矩形适合顶点以生成 \b Detail 消息。
 
-Three-dimensional (3D) location messages
-========================================
+三维（3D）位置消息========================================
 
 
-\warning This is not fully tested yet!
+\warning 这尚未完全测试！
 
 
-3D location messages are used to communicate the location of something in the real-world's 3D space, and usually are
-available from modules where the camera has been calibrated and an object of known real-world size is observed by the
-camera. For example, the ArUco module can recover the full 3D location and pose of markers of known real-world size.
+3D 位置消息用于传达现实世界 3D 空间中某物的位置，通常可从已校准相机且相机观察到已知现实世界大小的物体的模块获得。例如，ArUco 模块可以恢复已知现实世界大小的标记的完整 3D 位置和姿势。
 
-We use the [right-hand rule](https://en.wikipedia.org/wiki/Right-hand_rule) for 3D coordinates as it is the dominant
-convention in robotics. We also follow the conventions of [REP-0103](http://www.ros.org/reps/rep-0103.html) of the
-Robotics Operating System (ROS) for camera frames (called <em>suffix frames</em>) to ease inter-operability, except that
-we report distances in millimeters as opposed to meters:
+我们使用 [右手定则](https://en.wikipedia.org/wiki/Right-hand_rule) 来表示 3D 坐标，因为它是机器人学中的主导惯例。我们还遵循机器人操作系统 (ROS) 的 [REP-0103](http://www.ros.org/reps/rep-0103.html) 中关于相机框架（称为<em>后缀框架</em>）的惯例，以简化互操作性，但我们以毫米而不是米为单位报告距离：
 
-- X axis points right
-- Y axis points down
-- Z axis points forward
+- X 轴指向右
+- Y 轴指向下
+- Z 轴指向前
 
-Inputs from machine vision module:
+来自机器视觉模块的输入：
 
-- <em>x,y,z</em> the real-world 3D position of the center of the reported object in millimeters from the camera's
-  optical center.
+- <em>x,y,z</em> 报告物体中心的实际 3D 位置（以毫米为单位），距离相机的光学中心。
 
-- \a id a text string describing what the reported object is (e.g., which ArUco marker ID it has). To ease parsing by
-  the receiving Arduino, ID should have no white space. Any white space will be replaced by underscores.
+- \a id 描述所报告对象是什么的文本字符串（例如，它具有哪个 ArUco 标记 ID）。为了便于接收 Arduino 解析，ID 中不应有空格。任何空格都将被下划线替换。
 
-- <em>w,h,d</em> the width (X axis), height (Y axis), and depth (Z axis) of the reported object in mm (thus, object
-  extends from x-w/2 to x+w/2 horizontally, from y-h/2 to y+h/2 vertically, and from from z-d/2 t z+d/2 along the
-  optical axis of the camera). Note that size data will be output with the same precision as the coordinate data.
+- <em>w,h,d</em> 报告物体的宽度（X 轴）、高度（Y 轴）和深度（Z 轴），单位为毫米（因此，物体水平方向从 x-w/2 延伸到 x+w/2，垂直方向从 y-h/2 延伸到 y+h/2，沿相机光轴方向从 z-d/2 延伸到 z+d/2）。请注意，尺寸数据将以与坐标数据相同的精度输出。
 
-- \a extra any additional text string about the reported object.
+- \a extra 有关报告对象的任何附加文本字符串。
 
-- <em>q1,q2,q3,q4</em> a quaternion that relates the object's frame to the camera's frame, if appropriate.
+- <em>q1,q2,q3,q4</em> 一个将物体的框架与相机的框架相关联的四元数（如果合适）。
 
-- <em>x1,y1,zn</em> ... <em>xn,yn,zn</em> the 3D coordinates of <em>n</em> vertices defining a 3D polyhedron around the
-  object.
+- <em>x1,y1,zn</em> ... <em>xn,yn,zn</em> 定义对象周围 3D 多面体的 <em>n</em> 个顶点的 3D 坐标。
 
-Serial messages:
+串行消息：
 
-serstyle | message
----------|---------------------------------------------------------------------------------------------------------
-Terse    | <tt>T3 x y z</tt>
-Normal   | <tt>N3 id x y z w h d</tt>
-Detail   | <tt>D3 id x y z w h d q1 q2 q3 q4 extra</tt>
-Fine     | <tt>F3 id n x1 y1 z1 ... xn yn zn extra</tt>
+塞尔风格|留言---------|---------------------------------------- -------------------------------------------------- ---------------- 简洁| <tt>T3 x y z</tt> 正常 | <tt>N3 id x y z w h d</tt> 详细信息 | <tt>D3 id x y z w h d q1 q2 q3 q4 额外</tt> <tt>F3 id n x1 y1 z1 ... xn yn zn 额外</tt>
 
-New machine vision modules can use the convenience functions provided in the jevois::StdModule class to send
-standardized serial messages.
+新的机器视觉模块可以使用 jevois::StdModule 类中提供的便捷函数来发送标准化串行消息。
 
-\note If you will use the quaternion data (\b Detail message style), you should probably set the \p serprec parameter to
-something non-zero to get enough accuracy in the quaternion values.
+\note 如果您将使用四元数数据（\b 详细消息样式），您可能应该将 \p serprec 参数设置为非零值以获得四元数值的足够精度。
 
-Object recognition messages
-===========================
+物体识别消息 ==============================
 
 \jvversion{1.8.2}
 
-Several modules, such as \jvmod{TensorFlowEasy}, \jvmod{DarknetSingle}, etc recognize objects that may belong to a given
-set of categories. These modules send an object recognition message for each detected object.
+\jvmod{TensorFlowEasy}、\jvmod{DarknetSingle} 等多个模块可识别可能属于给定类别集的对象。这些模块会为每个检测到的对象发送对象识别消息。
 
-A recognition consists of a number of category:score pairs, where \a category is the name of the object category (type
-of object), and \a score is the recognition score for this category, in the range 0.0 ... 100.0
+识别由多个类别：分数对组成，其中 \a 类别是对象类别（对象类型）的名称，\a 分数是此类别的识别分数，范围为 0.0 ... 100.0
 
-Note that many algorithms provide a list of such pairs as their results, to cover possible ambiguous recognition. For
-example, <b>cat:77.2 dog:27.3</b> indicates that the algorithm is quite confident it is looking at a cat, but, with a
-lower confidence, it thinks it could also be looking at a dog.
+请注意，许多算法都会提供此类配对的列表作为其结果，以涵盖可能出现的模糊识别。例如，<b>cat:77.2 dog:27.3</b> 表示算法非常确信它正在看一只猫，但是，如果置信度较低，它认为它也可能正在看一只狗。
 
-serstyle | message
----------|---------------------------------------------------------------------------------------------------------
-Terse    | <tt>TO topcateg</tt>
-Normal   | <tt>NO topcateg:topscore</tt>
-Detail   | <tt>DO topcateg:topscore categ2:score2 ... categN:scoreN</tt>
-Fine     | <tt>FO topcateg:topscore categ2:score2 ... categN:scoreN</tt>
+serstyle | 消息 ---------|----------------------------------------------------------------------------------------------------------------- 简洁 | <tt>TO topcateg</tt> 正常 | <tt>NO topcateg:topscore</tt> 详细信息 | <tt>DO topcateg:topscore categ2:score2 ... categN:scoreN</tt> 精细 | <tt>FO topcateg:topscore categ2:score2 ... categN:scoreN</tt>
 
-where \a topcateg is the category name of the top-scoring category, and \a topscore its score, whereas \a categ2 is the
-second-to-top scoring category, and so on. The number 2...N of secondary recognitions may vary from one message to the
-next and could be zero, but \a topcateg and \a topscore are always guaranteed to be present (if there are no results, no
-message will be sent).
+其中 \a topcateg 是得分最高的类别的类别名称，\a topscore 是其得分，而 \a categ2 是得分第二高的类别，依此类推。2...N 次级识别的数量可能因消息而异，也可能为零，但 \a topcateg 和 \a topscore 始终保证存在（如果没有结果，则不会发送任何消息）。
 
-Note that some object category names may contain spaces, e.g., <b>dining table</b>; when the message is constructed, any
-white space is replaced by underscores (e.g., <b>dining_table</b>) to make parsing of messages by Arduino and similar
-easier.
+请注意，某些对象类别名称可能包含空格，例如 <b>dining table</b>；构造消息时，任何空格都会被下划线替换（例如 <b>dining_table</b>），以便 Arduino 和类似程序更容易解析消息。
 
-Object detection + recognition messages
-=======================================
+物体检测 + 识别消息 ===========================================
 
-Some modules, like \jvmod{DarknetYOLO}, \jvmod{TensorFlowSaliency}, and \jvmod{DarknetSaliency} first detect one or more
-bounding boxes that may contain an object, and then recognize which object might be in each box.
+一些模块，如 \jvmod{DarknetYOLO}、\jvmod{TensorFlowSaliency} 和 \jvmod{DarknetSaliency} 首先检测可能包含对象的一个​​或多个边界框，然后识别每个框中可能存在哪个对象。
 
-These modules send Two-dimensional (2D) location messages as detailed above (T2, N2, D2, F2 messages), with the
-following information in the \a id and \a extra fields:
+这些模块发送如上所述的二维（2D）位置消息（T2、N2、D2、F2 消息），并在 \a id 和 \a extra 字段中包含以下信息：
 
-serstyle | id                         | extra
----------|----------------------------|---------------------------------------------------------------
-Terse    | <tt>topcateg</tt>          | (no extra)
-Normal   | <tt>topcateg:topscore</tt> | (no extra)
-Detail   | <tt>topcateg:topscore</tt> | <tt>categ2:score2 ... categN:scoreN</tt>
-Fine     | <tt>topcateg:topscore</tt> | <tt>categ2:score2 ... categN:scoreN</tt>
+serstyle | id | extra ---------|----------------------------------------|--------------------------------------------------------------- 简洁 | <tt>topcateg</tt> | (无额外) 正常 | <tt>topcateg:topscore</tt> | (无额外) 详细信息 | <tt>topcateg:topscore</tt> | <tt>categ2:score2 ... categN:scoreN</tt> 精细 | <tt>topcateg:topscore</tt> | <tt>categ2:score2 ... categN:scoreN</tt>
 
-where \a topcateg is the category name of the top-scoring category, and \a topscore its score, whereas \a categ2 is the
-second-to-top scoring category, and so on. The same notes as for object recognition messages apply.
+其中 \a topcateg 是得分最高的类别的类别名称，\a topscore 是其得分，而 \a categ2 是得分第二高的类别，依此类推。与对象识别消息相同的注释也适用。
 
-Optional stamping of serial messages with frame number, date and time
-=====================================================================
+可选地在串行消息上标记帧号、日期和时间 ============================================================================
 
 \jvversion{1.8.1}
 
-Parameter \p serstamp allows for optional stamping of standardized serial messages by date, time, or frame number.
+参数 \p serstamp 允许选择性地按日期、时间或帧号标记标准化串行消息。
 
-Note that JeVois does not have a battery, and hence its internal clock is reset to Jan 1, 1970 UTC upon each power
-up. An external computer can, however, set the date using the JeVois `date` command. See \ref UserCli for more
-information about the `date command` and how to set/retrive the date and time of JeVois.
+请注意，JeVois 没有电池，因此每次通电时，其内部时钟都会重置为 1970 年 1 月 1 日 UTC。但是，外部计算机可以使用 JeVois `date` 命令设置日期。有关 `date 命令` 以及如何设置/检索 JeVois 的日期和时间的更多信息，请参阅 \ref UserCli。
 
-Stamps are prepended to standardized serial messages, and are followed by a single space. Beware that using stamps will
-hence add one field (for the stamp) to the beginning of each standardized serial message. An Arduino that was programmed
-to respond to T2 messages will likely be confused if receiving messages that start with a date or frame number, and the
-Arduino code should hence be adjusted accordingly.
+标记被添加到标准化串行消息的前面，后面跟着一个空格。请注意，使用标记将在每个标准化串行消息的开头添加一个字段（用于标记）。如果 Arduino 被编程为响应 T2 消息，那么如果接收以日期或帧号开头的消息，它可能会感到困惑，因此 Arduino 代码应该进行相应调整。
 
-Stamping modes:
+冲压方式：
 
-|serstamp       | stamp format              | example for frame 769, on Dec 24, 2017 at 15:52:42 |
-|---------------|---------------------------|----------------------------------------------------|
-|None           | No stamp                  |                                                    |
-|Frame          | FRAME                     | 769                                                |
-|Time           | hh:mm:ss                  | 15:52:42                                           |
-|FrameTime      | FRAME/hh:mm:ss            | 769/15:52:42                                       |
-|FrameDateTime  | FRAME/YYYY-MM-DD/hh:mm:ss | 769/2017-12-24/15:52:42                            |
+|serstamp | 邮票格式 | 帧 769 的示例，于 2017 年 12 月 24 日 15:52:42 | |---------------|------------------------------|----------------------------------------| |无 | 无邮票 | | |帧 | FRAME | 769 | |时间 | hh:mm:ss | 15:52:42 | |FrameTime | FRAME/hh:mm:ss | 769/15:52:42 | |FrameDateTime | FRAME/YYYY-MM-DD/hh:mm:ss | 769/2017-12-24/15:52:42 |
 
-So, if \p serstyle is \b Terse and one is detecting a target at x=123, y=456, the message would change from, with
-default \p serstamp of \b None:
+因此，如果 \p serstyle 为 \b Terse，且检测到 x=123、y=456 处的目标，则消息将从默认的 \p serstamp 变为 \b None：
 
-\verbatim
-T2 123 456
-\endverbatim
+\逐字 T2 123 456 \end逐字
 
-to, with \p serstamp of \b FrameDateTime:
+到，使用 \b FrameDateTime 的 \p serstamp：
 
-\verbatim
-769/2017-12-24/15:52:42 T2 123 456
-\endverbatim
+\逐字 769/2017-12-24/15:52:42 T2 123 456 \end逐字
 
-Optional frame markers
-======================
+可选框架标记 ========================
 
 \jvversion{1.8.2}
 
-Parameter \p sermark allows one to possibly send the following messages, either just before a video frame from the
-camera sensor is processed (start mark message), just after (stop mark message), or both:
+参数 \p sermark 允许发送以下消息，要么在处理来自摄像机传感器的视频帧之前（开始标记消息），要么在处理之后（停止标记消息），或者两者兼而有之：
 
-|sermark    | start mark message | stop mark message |
-|-----------|--------------------|-------------------|
-|None       | (no message)       | (no message)      |
-|Start      | MARK START         | (no message)      |
-|Stop       | (no message)       | MARK STOP         |
-|Both       | MARK START         | MARK STOP         |
+|sermark | 开始标记消息 | 停止标记消息 | |-----------|--------------------|-------------------| |无 | (无消息) | (无消息) | |开始 | 标记开始 | (无消息) | |停止 | (无消息) | 标记停止 | |两者 | 标记开始 | 标记停止 |
 
-Note that a stamp may be sent just before the mark, depending on the value of parameter \p serstamp.
+请注意，可能会在标记之前发送一个戳记，具体取决于参数 \p serstamp 的值。
 
 
-Limiting the number of serial messages per video frame
-======================================================
+限制每个视频帧的串行消息数量 ===========================================================
 
 \jvversion{1.8.1}
 
-Parameter \p serlimit of the JeVois Engine can be set to limit the number of serial messages that are sent on every
-video frame, to avoid overloading the serial link. For example, if a module sends one message for each detected item,
-but many items are present, \p serlimit can be used to limit the number of items that will be reported over serial port.
+JeVois Engine 的参数 \p serlimit 可以设置为限制每个视频帧上发送的串行消息数量，以避免串行链路过载。例如，如果模块为每个检测到的项目发送一条消息，但存在许多项目，则可以使用 \p serlimit 来限制将通过串行端口报告的项目数量。
 
-Note how the limit per frame cannot be strictly enforced if modules send messages using sendSerial() from asynchronous
-threads. The basic way \p serlimit works under the hood is that a (thread-safe) counter is incremented for each message
-sent by sendSerial() or its derivatives like SendSerialImg2D(), etc, and the counter is reset to zero at the completion
-of each call to the module's process() function (be it normal completion or exception).
+请注意，如果模块使用来自异步线程的 sendSerial() 发送消息，则无法严格执行每帧的限制。 \p serlimit 的基本工作方式是，对于 sendSerial() 或其派生函数（如 SendSerialImg2D() 等）发送的每条消息，都会增加一个（线程安全）计数器，并且每次调用模块的 process() 函数（无论是正常完成还是异常）完成后，计数器都会重置为零。
 
 
-Recommendations for embedded controllers and robots
-===================================================
+嵌入式控制器和机器人的建议 =======================================================
 
-- A robot that can only orient towards something along one axis (e.g., steering of a robot car) would usually expect \c
-  T1 messages.
+- 只能沿着一个轴朝向某物（例如，机器人汽车的转向）的机器人通常会期待 \c T1 消息。
 
-- A robot that can only orient towards something in the 2D image plane (e.g., a motorized pan/tilt head) would usually
-  expect \c T2 messages.
+- 只能朝向 2D 图像平面中的某个物体（例如，电动平移/倾斜云台）的机器人通常会期待 \c T2 消息。
 
-- A robot that can move an end-effector towards an object in 3D space (e.g., robot arm with no gripper) would usually
-  expect \c T3 messages.
+- 可以将末端执行器移向 3D 空间中的物体的机器人（例如，没有夹持器的机械臂）通常会期待 \c T3 消息。
 
-- A robot that will take different actions depending on what the object is would typically expect \c N1, \c N2, or \c
-  N3 messages, then decoding the \a id field to decide what to do.
+- 机器人会根据物体采取不同的动作，通常会期望 \c N1、\c N2 或 \c N3 消息，然后解码 \a id 字段来决定要做什么。
 
-- A robot that also needs to know the size of an object in a controlled setting (e.g., inspection robot that may eject
-  defective items that are coming on a conveyor belt, with the camera placed at a fixed distance above the belt and
-  looking down at it) would typically expect \c D1, \c D2, or \c D3 messages, or, if shape is important, \c F2
-  or \c F3 messages.
+- 机器人还需要在受控环境中了解物体的尺寸（例如，检查机器人可能会弹出传送带上的有缺陷的物品，摄像机放置在传送带上方固定距离处并向下观察它）通常会期望 \c D1、\c D2 或 \c D3 消息，或者，如果形状很重要，则期望 \c F2 或 \c F3 消息。
 
-- A robot that can move an end-effector towards an object in 3D space and grasp it (e.g., robot arm with a gripper)
-  would usually expect \c N3, \c D3, or \c F3 messages.
+- 可以将末端执行器移向 3D 空间中的物体并抓住该物体的机器人（例如，带有夹持器的机械臂）通常会期望 \c N3、\c D3 或 \c F3 消息。
 
 
 
 */
+

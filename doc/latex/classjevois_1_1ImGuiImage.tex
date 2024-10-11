@@ -1,0 +1,150 @@
+\hypertarget{classjevois_1_1ImGuiImage}{}\doxysubsection{jevois\+::Im\+Gui\+Image Class Reference}
+\label{classjevois_1_1ImGuiImage}\index{jevois::ImGuiImage@{jevois::ImGuiImage}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Im\+Gui\+Image.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Wrapper for an image that can be rendered into Im\+Gui. 
+
+The wrapper combines an Open\+CV image and an Open\+GL texture. 
+
+Definition at line 30 of file Im\+Gui\+Image.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiImage_a75a6f92e7d97390f4140ea9b7936069e}{Im\+Gui\+Image}} ()
+\begin{DoxyCompactList}\small\item\em Constructor, image is uninitialized and \mbox{\hyperlink{classjevois_1_1ImGuiImage_a1fad2fc89d7886330a54a34ad1d27c1b}{loaded()}} returns false. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiImage_a14a8fbbdbc4d77bb03b492aa04ca1b3a}{load}} (std\+::string const \&fname)
+\begin{DoxyCompactList}\small\item\em Load from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiImage_a54e2461d7651c3df245d69bc562eb660}{load}} (cv\+::\+Mat const \&img, bool isbgr=true)
+\begin{DoxyCompactList}\small\item\em Load from an Open\+CV image. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1ImGuiImage_a1fad2fc89d7886330a54a34ad1d27c1b}{loaded}} () const
+\begin{DoxyCompactList}\small\item\em Returns true if an image has been loaded through \mbox{\hyperlink{classjevois_1_1ImGuiImage_a14a8fbbdbc4d77bb03b492aa04ca1b3a}{load()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiImage_a4a44b3b13c73e5e848561c6dd964bb4a}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Free the texture and revert to un-\/initialized state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ImGuiImage_a888e4426d22c1d0251b0c56ede93b7f5}{$\sim$\+Im\+Gui\+Image}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ImGuiImage_a3dcd6cd1522f7c3c0062fb81ae11f884}{draw}} (Im\+Vec2 const \&pos, Im\+Vec2 const \&size, Im\+Draw\+List $\ast$dl=nullptr)
+\begin{DoxyCompactList}\small\item\em Draw into into current Im\+Gui window or a drawlist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a75a6f92e7d97390f4140ea9b7936069e}\label{classjevois_1_1ImGuiImage_a75a6f92e7d97390f4140ea9b7936069e}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!ImGuiImage@{ImGuiImage}}
+\index{ImGuiImage@{ImGuiImage}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{ImGuiImage()}{ImGuiImage()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Image\+::\+Im\+Gui\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Constructor, image is uninitialized and \mbox{\hyperlink{classjevois_1_1ImGuiImage_a1fad2fc89d7886330a54a34ad1d27c1b}{loaded()}} returns false. 
+
+
+
+Definition at line 27 of file Im\+Gui\+Image.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a888e4426d22c1d0251b0c56ede93b7f5}\label{classjevois_1_1ImGuiImage_a888e4426d22c1d0251b0c56ede93b7f5}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!````~ImGuiImage@{$\sim$ImGuiImage}}
+\index{````~ImGuiImage@{$\sim$ImGuiImage}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{$\sim$ImGuiImage()}{~ImGuiImage()}}
+{\footnotesize\ttfamily jevois\+::\+Im\+Gui\+Image\+::$\sim$\+Im\+Gui\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Deletes the associated G\+PU texture and Open\+CV pixel data. 
+
+Definition at line 94 of file Im\+Gui\+Image.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a4a44b3b13c73e5e848561c6dd964bb4a}\label{classjevois_1_1ImGuiImage_a4a44b3b13c73e5e848561c6dd964bb4a}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!clear@{clear}}
+\index{clear@{clear}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Image\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Free the texture and revert to un-\/initialized state. 
+
+
+
+Definition at line 88 of file Im\+Gui\+Image.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a3dcd6cd1522f7c3c0062fb81ae11f884}\label{classjevois_1_1ImGuiImage_a3dcd6cd1522f7c3c0062fb81ae11f884}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!draw@{draw}}
+\index{draw@{draw}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Image\+::draw (\begin{DoxyParamCaption}\item[{Im\+Vec2 const \&}]{pos,  }\item[{Im\+Vec2 const \&}]{size,  }\item[{Im\+Draw\+List $\ast$}]{dl = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Draw into into current Im\+Gui window or a drawlist. 
+
+
+
+Definition at line 98 of file Im\+Gui\+Image.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a54e2461d7651c3df245d69bc562eb660}\label{classjevois_1_1ImGuiImage_a54e2461d7651c3df245d69bc562eb660}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!load@{load}}
+\index{load@{load}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{load()}{load()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Image\+::load (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{isbgr = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Load from an Open\+CV image. 
+
+Allocates a texture on the G\+PU for the image. 
+
+Definition at line 31 of file Im\+Gui\+Image.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and jevois\+::rescale\+Cv().
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a14a8fbbdbc4d77bb03b492aa04ca1b3a}\label{classjevois_1_1ImGuiImage_a14a8fbbdbc4d77bb03b492aa04ca1b3a}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!load@{load}}
+\index{load@{load}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{load()}{load()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Im\+Gui\+Image\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fname }\end{DoxyParamCaption})}
+
+
+
+Load from file. 
+
+
+
+Definition at line 76 of file Im\+Gui\+Image.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1ImGuiImage_a1fad2fc89d7886330a54a34ad1d27c1b}\label{classjevois_1_1ImGuiImage_a1fad2fc89d7886330a54a34ad1d27c1b}} 
+\index{jevois::ImGuiImage@{jevois::ImGuiImage}!loaded@{loaded}}
+\index{loaded@{loaded}!jevois::ImGuiImage@{jevois::ImGuiImage}}
+\doxyparagraph{\texorpdfstring{loaded()}{loaded()}}
+{\footnotesize\ttfamily bool jevois\+::\+Im\+Gui\+Image\+::loaded (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns true if an image has been loaded through \mbox{\hyperlink{classjevois_1_1ImGuiImage_a14a8fbbdbc4d77bb03b492aa04ca1b3a}{load()}} 
+
+
+
+Definition at line 84 of file Im\+Gui\+Image.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiImage_8H}{Im\+Gui\+Image.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{ImGuiImage_8C}{Im\+Gui\+Image.\+C}}\end{DoxyCompactItemize}

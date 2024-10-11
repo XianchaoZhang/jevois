@@ -1,0 +1,434 @@
+\hypertarget{classjevois_1_1MovieInput}{}\doxysubsection{jevois\+::Movie\+Input Class Reference}
+\label{classjevois_1_1MovieInput}\index{jevois::MovieInput@{jevois::MovieInput}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Movie\+Input.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Movie 将永远循环播放以提供持续的输入。这是 Open\+CV Video\+Capture 类的直接包装器，因此当文件名包含类似 printf 的 d 占位符（表示帧号）时，它支持许多不同的视频文件格式和图像序列。有关更多详细信息，请参阅 Video\+Capture 的 Open\+CV 文档。
+
+请注意，影片帧将调整大小以匹配 \mbox{\hyperlink{classjevois_1_1MovieInput_a187b60ea9aff977f18f2dcf670176c16}{set\+Format()}} 指定的尺寸，并将转换为 \mbox{\hyperlink{classjevois_1_1MovieInput_a187b60ea9aff977f18f2dcf670176c16}{set\+Format()}} 中指定的像素类型。 
+
+Definition at line 34 of file Movie\+Input.\+H.
+
+
+
+Inheritance diagram for jevois\+::Movie\+Input\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classjevois_1_1MovieInput__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Movie\+Input\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1MovieInput__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1MovieInput_a03595c02e83d14474939de92cb3b90a5}{Movie\+Input}} (std\+::string const \&filename, unsigned int const nbufs=3)
+\begin{DoxyCompactList}\small\item\em Constructor, opens the movie file. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1MovieInput_a3c09fe71ee13e4c7c0cca2ddeea63e82}{$\sim$\+Movie\+Input}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a4d63a898143eb06f43eeb7ec415540ab}{stream\+On}} () override
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_af62321bb00bffc0b92ba6670ec26a8b3}{abort\+Stream}} () override
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_ad38e27e1488b2b6e304a996b59f48e34}{stream\+Off}} () override
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始 \end{DoxyCompactList}\item 
+jevois\+::\+Crop\+Type\+::\+Crop\+Scale 当前正在使用中，否则返回 false。 $\ast$virtual bool \mbox{\hyperlink{classjevois_1_1MovieInput_a09fe8c83e52442fdeea3b0ce87b9b666}{has\+Scaled\+Image}} () const override
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1MovieInput_ad70d0764ccf491fc0ab62e3ea7a27f4e}{get2}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a6e3baa6de425bb4339278d2008ede8a2}{done}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 表示用户处理已完成，并且之前已通过 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 获取了图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_ab5050d10314ac30dac58793ccc779cca}{done2}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img) override
+\begin{DoxyCompactList}\small\item\em 表示用户处理已完成，并且之前已通过 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 获取了图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_ab35f89f0134ba39ef77769be0708add7}{query\+Control}} (struct v4l2\+\_\+queryctrl \&qc) const override
+\begin{DoxyCompactList}\small\item\em 获取有关控件的信息，如果硬件不支持则抛出 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a5207f114db186734424048add3f53011}{query\+Menu}} (struct v4l2\+\_\+querymenu \&qm) const override
+\begin{DoxyCompactList}\small\item\em 获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a57b9900899f0ad0698d028a9ac41f394}{get\+Control}} (struct v4l2\+\_\+control \&ctrl) const override
+\begin{DoxyCompactList}\small\item\em 获取控件的当前值，如果硬件不支持则抛出 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_adcb950c84c9772e0058646d6c15d07f4}{set\+Control}} (struct v4l2\+\_\+control const \&ctrl) override
+\begin{DoxyCompactList}\small\item\em 设置控件，如果硬件拒绝该值则抛出 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1MovieInput_a187b60ea9aff977f18f2dcf670176c16}{set\+Format}} (\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&m) override
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧速率 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Video\+Capture \mbox{\hyperlink{classjevois_1_1MovieInput_a912be2e5e8ca027cc4bc6572cccb568b}{its\+Cap}}
+\begin{DoxyCompactList}\small\item\em 我们的 Open\+CV 视频捕获，也适用于电影和图像文件 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{classjevois_1_1MovieInput_ab1912d907e752e4a04ed3f373a5fb92f}{its\+Raw\+Frame}}
+\begin{DoxyCompactList}\small\item\em 在任何调整大小或转换之前最后捕获的原始 Open\+CV 帧 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1MovieInput_ade10aaa5372aa98012f7c9c3a2004d31}{its\+Buf}}
+\begin{DoxyCompactList}\small\item\em 我们用于主帧的单个视频缓冲区 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}} $>$ \mbox{\hyperlink{classjevois_1_1MovieInput_a8efea0d39ab3baa8fb94fff485446393}{its\+Buf2}}
+\begin{DoxyCompactList}\small\item\em 我们用于第二帧（处理帧）的单个视频缓冲区 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} \mbox{\hyperlink{classjevois_1_1MovieInput_a3c54b40922dd05e581cc6c9b10efacd3}{its\+Mapping}}
+\begin{DoxyCompactList}\small\item\em 我们当前的视频映射，我们将输入调整为映射的相机大小 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a03595c02e83d14474939de92cb3b90a5}\label{classjevois_1_1MovieInput_a03595c02e83d14474939de92cb3b90a5}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!MovieInput@{MovieInput}}
+\index{MovieInput@{MovieInput}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{MovieInput()}{MovieInput()}}
+{\footnotesize\ttfamily jevois\+::\+Movie\+Input\+::\+Movie\+Input (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{unsigned int const}]{nbufs = {\ttfamily 3} }\end{DoxyParamCaption})}
+
+
+
+Constructor, opens the movie file. 
+
+
+
+Definition at line 27 of file Movie\+Input.\+C.
+
+
+
+References its\+Cap, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a3c09fe71ee13e4c7c0cca2ddeea63e82}\label{classjevois_1_1MovieInput_a3c09fe71ee13e4c7c0cca2ddeea63e82}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!````~MovieInput@{$\sim$MovieInput}}
+\index{````~MovieInput@{$\sim$MovieInput}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{$\sim$MovieInput()}{~MovieInput()}}
+{\footnotesize\ttfamily jevois\+::\+Movie\+Input\+::$\sim$\+Movie\+Input (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 35 of file Movie\+Input.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieInput_af62321bb00bffc0b92ba6670ec26a8b3}\label{classjevois_1_1MovieInput_af62321bb00bffc0b92ba6670ec26a8b3}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Abort streaming. 
+
+这只会取消未来的 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 和 \mbox{\hyperlink{classjevois_1_1MovieInput_a6e3baa6de425bb4339278d2008ede8a2}{done()}} 调用，仍应调用 \mbox{\hyperlink{classjevois_1_1MovieInput_ad38e27e1488b2b6e304a996b59f48e34}{stream\+Off()}} 来关闭流式传输。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a8174d4f9d1472537254b96c3c47dfa49}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 43 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a6e3baa6de425bb4339278d2008ede8a2}\label{classjevois_1_1MovieInput_a6e3baa6de425bb4339278d2008ede8a2}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!done@{done}}
+\index{done@{done}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{done()}{done()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::done (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+表示用户处理已完成，并且之前已通过 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 获取了图像 
+
+处理完 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据后，应尽快在 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲 区无效。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a214001a66dbf369f15fe80e739897af1}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 167 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ab5050d10314ac30dac58793ccc779cca}\label{classjevois_1_1MovieInput_ab5050d10314ac30dac58793ccc779cca}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!done2@{done2}}
+\index{done2@{done2}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{done2()}{done2()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::done2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+表示用户处理已完成，并且之前已通过 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 获取了图像 
+
+处理完 \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} 数据后，应尽快在 \mbox{\hyperlink{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}{get()}} 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲 区无效。 
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoInput_ab3409889a6d425ba0634154fccc045bb}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 175 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}\label{classjevois_1_1MovieInput_a46a05e27ad822daccf6a92a92212a730}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!get@{get}}
+\index{get@{get}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_acff6f2844e64a7a36cf974982adc2d74}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 57 of file Movie\+Input.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, L\+I\+N\+FO, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ad70d0764ccf491fc0ab62e3ea7a27f4e}\label{classjevois_1_1MovieInput_ad70d0764ccf491fc0ab62e3ea7a27f4e}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!get2@{get2}}
+\index{get2@{get2}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{get2()}{get2()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::get2 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&}]{img }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoInput_aad25ccc42637b6d5ef6070505c6bf703}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 115 of file Movie\+Input.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Raw\+Image\+::bufindex, jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::fps, jevois\+::\+Raw\+Image\+::height, L\+I\+N\+FO, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a57b9900899f0ad0698d028a9ac41f394}\label{classjevois_1_1MovieInput_a57b9900899f0ad0698d028a9ac41f394}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!getControl@{getControl}}
+\index{getControl@{getControl}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{getControl()}{getControl()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::get\+Control (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+control \&}]{ctrl }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取控件的当前值，如果硬件不支持则抛出 
+
+在 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} 中，这只会抛出 std\+::runtime\+\_\+error 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a7750b74bc3735beac18130978689dbc3}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 190 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a09fe8c83e52442fdeea3b0ce87b9b666}\label{classjevois_1_1MovieInput_a09fe8c83e52442fdeea3b0ce87b9b666}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!hasScaledImage@{hasScaledImage}}
+\index{hasScaledImage@{hasScaledImage}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{hasScaledImage()}{hasScaledImage()}}
+{\footnotesize\ttfamily bool jevois\+::\+Movie\+Input\+::has\+Scaled\+Image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1VideoInput_a41102ca791ba4febde317d33d2cf7716}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 51 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ab35f89f0134ba39ef77769be0708add7}\label{classjevois_1_1MovieInput_ab35f89f0134ba39ef77769be0708add7}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!queryControl@{queryControl}}
+\index{queryControl@{queryControl}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{queryControl()}{queryControl()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::query\+Control (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+queryctrl \&}]{qc }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取有关控件的信息，如果硬件不支持则抛出 
+
+在 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} 中，这只会抛出 std\+::runtime\+\_\+error 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a77cba2f7ad186e1248626791ba43fce3}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 182 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a5207f114db186734424048add3f53011}\label{classjevois_1_1MovieInput_a5207f114db186734424048add3f53011}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!queryMenu@{queryMenu}}
+\index{queryMenu@{queryMenu}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{queryMenu()}{queryMenu()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::query\+Menu (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+querymenu \&}]{qm }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 
+
+在 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} 中，这只会抛出 std\+::runtime\+\_\+error 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a866ddfa5dafbc1822d1ebaf543829b98}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 186 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_adcb950c84c9772e0058646d6c15d07f4}\label{classjevois_1_1MovieInput_adcb950c84c9772e0058646d6c15d07f4}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!setControl@{setControl}}
+\index{setControl@{setControl}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{setControl()}{setControl()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::set\+Control (\begin{DoxyParamCaption}\item[{struct v4l2\+\_\+control const \&}]{ctrl }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置控件，如果硬件拒绝该值则抛出 
+
+在 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} 中，这只会抛出 std\+::runtime\+\_\+error 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a749b4ea4c3bd2a5f140a30d5649be248}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 194 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a187b60ea9aff977f18f2dcf670176c16}\label{classjevois_1_1MovieInput_a187b60ea9aff977f18f2dcf670176c16}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::set\+Format (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} const \&}]{m }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+设置视频格式和帧速率 
+
+从输入影片文件读取的视频帧将重新缩放（如有必要）为该格式的分辨率，并将转换（如有必要）为该格式的像素类型。 
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a684d1d126adbab60f5d6498908c79770}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 198 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ad38e27e1488b2b6e304a996b59f48e34}\label{classjevois_1_1MovieInput_ad38e27e1488b2b6e304a996b59f48e34}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a3f510040f77ca90428e5808d0fe58397}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 47 of file Movie\+Input.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a4d63a898143eb06f43eeb7ec415540ab}\label{classjevois_1_1MovieInput_a4d63a898143eb06f43eeb7ec415540ab}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Movie\+Input\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Start streaming. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1VideoInput_a813adf4eabcd417e7aae21f43db80af4}{jevois\+::\+Video\+Input}}.
+
+
+
+Definition at line 39 of file Movie\+Input.\+C.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ade10aaa5372aa98012f7c9c3a2004d31}\label{classjevois_1_1MovieInput_ade10aaa5372aa98012f7c9c3a2004d31}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!itsBuf@{itsBuf}}
+\index{itsBuf@{itsBuf}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{itsBuf}{itsBuf}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ jevois\+::\+Movie\+Input\+::its\+Buf\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们用于主帧的单个视频缓冲区 
+
+
+
+Definition at line 100 of file Movie\+Input.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a8efea0d39ab3baa8fb94fff485446393}\label{classjevois_1_1MovieInput_a8efea0d39ab3baa8fb94fff485446393}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!itsBuf2@{itsBuf2}}
+\index{itsBuf2@{itsBuf2}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{itsBuf2}{itsBuf2}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1VideoBuf}{Video\+Buf}}$>$ jevois\+::\+Movie\+Input\+::its\+Buf2\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们用于第二帧（处理帧）的单个视频缓冲区 
+
+
+
+Definition at line 101 of file Movie\+Input.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a912be2e5e8ca027cc4bc6572cccb568b}\label{classjevois_1_1MovieInput_a912be2e5e8ca027cc4bc6572cccb568b}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!itsCap@{itsCap}}
+\index{itsCap@{itsCap}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{itsCap}{itsCap}}
+{\footnotesize\ttfamily cv\+::\+Video\+Capture jevois\+::\+Movie\+Input\+::its\+Cap\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们的 Open\+CV 视频捕获，也适用于电影和图像文件 
+
+
+
+Definition at line 98 of file Movie\+Input.\+H.
+
+
+
+Referenced by Movie\+Input().
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_a3c54b40922dd05e581cc6c9b10efacd3}\label{classjevois_1_1MovieInput_a3c54b40922dd05e581cc6c9b10efacd3}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!itsMapping@{itsMapping}}
+\index{itsMapping@{itsMapping}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{itsMapping}{itsMapping}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} jevois\+::\+Movie\+Input\+::its\+Mapping\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们当前的视频映射，我们将输入调整为映射的相机大小 
+
+
+
+Definition at line 102 of file Movie\+Input.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1MovieInput_ab1912d907e752e4a04ed3f373a5fb92f}\label{classjevois_1_1MovieInput_ab1912d907e752e4a04ed3f373a5fb92f}} 
+\index{jevois::MovieInput@{jevois::MovieInput}!itsRawFrame@{itsRawFrame}}
+\index{itsRawFrame@{itsRawFrame}!jevois::MovieInput@{jevois::MovieInput}}
+\doxyparagraph{\texorpdfstring{itsRawFrame}{itsRawFrame}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::\+Movie\+Input\+::its\+Raw\+Frame\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+在任何调整大小或转换之前最后捕获的原始 Open\+CV 帧 
+
+
+
+Definition at line 99 of file Movie\+Input.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{MovieInput_8H}{Movie\+Input.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{MovieInput_8C}{Movie\+Input.\+C}}\end{DoxyCompactItemize}

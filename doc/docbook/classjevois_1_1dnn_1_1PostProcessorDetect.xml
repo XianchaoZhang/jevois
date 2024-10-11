@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect">
+<title>jevois::dnn::PostProcessorDetect Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorDetect.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的后处理器 </para>
+<para>
+Definition at line 31 of file PostProcessorDetect.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorDetect:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorDetect__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorDetect:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorDetect__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a9c95d1af399f260dbea1eb95aa8e9bab">~PostProcessorDetect</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a7485f25ae3ba8df8539f4ddc0fdbd991">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a39c05309740013de3f1f595c1808e168">process</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *preproc) override</para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a399f8ebfbfec8d4934b9f353fd65da4d">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a39c05309740013de3f1f595c1808e168">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a2bd0bb02da9f461e0f59c83c74d882a2">onParamChange</link> (postprocessor::detecttype const &amp;param, postprocessor::DetectType const &amp;val) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a74df62acaad0b3d8b7c4e411f0b69306">onParamChange</link> (postprocessor::classes const &amp;param, std::string const &amp;val) override</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; int, std::string &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a375b46f5356a21ed5e3f9696e9a72dea">itsLabels</link></para>
+
+<para>从对象 ID 映射到类名 </para>
+</listitem>
+            <listitem><para>std::vector&lt; <link linkend="_structjevois_1_1ObjDetect">ObjDetect</link> &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a154e733500bf262b60544bd328b4b30c">itsDetections</link></para>
+</listitem>
+            <listitem><para>cv::Size <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a87047e1791d560cb6fd2ae4562e779d3">itsImageSize</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO">PostProcessorDetectYOLO</link> &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a52f562990785dc91b7c0e6c081710f31">itsYOLO</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a84adac06aa16ed42c7344ef7d7b57384">JEVOIS_DECLARE_PARAMETER</link> (maxnbox, unsigned int, &quot;Max number of top-scoring boxes to <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a399f8ebfbfec8d4934b9f353fd65da4d">report</link> (for YOLO flavors, &quot; &quot;this is the max for each scale)&quot;, 500, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a2cb89e11872a466b1290df9a510d59a3">JEVOIS_DECLARE_PARAMETER</link> (dthresh, float, &quot;Detection box threshold (in percent confidence) above which &quot; &quot;predictions will be reported. Not all networks use a separate box threshold, &quot; &quot;many only use one threshold confidence threshold (cthresh parameter). The YOLO &quot; &quot;family is an example that uses both box and classification confidences&quot;, 15.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 100.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a1c6d925c2701db32435cb45ade85642b">JEVOIS_DEFINE_ENUM_CLASS</link> (DetectType,(FasterRCNN)(YOLO)(SSD)(TPUSSD)(RAWYOLO)(YOLOv10)(YOLOv10pp))</para>
+
+<para>Enum. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1acde111e7f5a52943ca8eba2110f0806a">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (detecttype, DetectType, &quot;Type of detection output format&quot;, DetectType::YOLO, DetectType_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1ad3541e17ab228527b9caec0039677e98">JEVOIS_DECLARE_PARAMETER</link> (nms, float, &quot;Non-maximum suppression intersection-over-union threshold in percent&quot;, 45.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 100.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1abece3397d2d388ab37f16f363f4e69e4">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (anchors, std::string, &quot;For YOLO-type detection models with raw outputs, &quot; &quot;list of anchors. Should be formatted as: w1, h1, w2, h2, ...  ww1, hh1, ww2, hh2, &quot; &quot;...  ... where individual entries for a given YOLO layer are separated by commas, &quot; &quot;and successive YOLO layers (from large to small, e.g., first the anchors for 52x52, &quot; &quot;then for 26x26, then for 13x13) are separated by semicolons. Leave empty &quot; &quot;for other models.&quot;, &quot;&quot;, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1aa3087bdfbabd30751a16731fe1e71e75">JEVOIS_DECLARE_PARAMETER</link> (alpha, unsigned char, &quot;Alpha channel value for drawn results&quot;, 64, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a9c95d1af399f260dbea1eb95aa8e9bab"/>    <section>
+    <title>~PostProcessorDetect()</title>
+<indexterm><primary>~PostProcessorDetect</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>~PostProcessorDetect</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorDetect::~PostProcessorDetect ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 31 of file PostProcessorDetect.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a7485f25ae3ba8df8539f4ddc0fdbd991"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetect::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a6e87ca847dc8c16445168b01a2fdedb7">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 35 of file PostProcessorDetect.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a74df62acaad0b3d8b7c4e411f0b69306"/>    <section>
+    <title>onParamChange()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetect::onParamChange (postprocessor::classes const &amp; param, std::string const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 43 of file PostProcessorDetect.C.</para>
+<para>
+References jevois::Component::descriptor(), and jevois::split().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a2bd0bb02da9f461e0f59c83c74d882a2"/>    <section>
+    <title>onParamChange()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetect::onParamChange (postprocessor::detecttype const &amp; param, postprocessor::DetectType const &amp; val)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 55 of file PostProcessorDetect.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a39c05309740013de3f1f595c1808e168"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetect::process (std::vector&lt; cv::Mat &gt; const &amp; outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * preproc)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a26329a32271138357f7906c83e4856b1">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 68 of file PostProcessorDetect.C.</para>
+<para>
+References jevois::dnn::PreProcessor::b2i(), jevois::dnn::PreProcessor::blobsize(), jevois::dnn::clamp(), jevois::dnn::getLabel(), jevois::dnn::PreProcessor::imagesize(), LFATAL, LTHROW, o, and jevois::dnn::shapestr().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a399f8ebfbfec8d4934b9f353fd65da4d"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorDetect::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a39c05309740013de3f1f595c1808e168">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1ac7c507221e2f1c52715b9185beaebc42">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 393 of file PostProcessorDetect.C.</para>
+<para>
+References jevois::rawimage::drawRect(), jevois::GUIhelper::drawRect(), jevois::GUIhelper::drawText(), jevois::rawimage::Font10x20, jevois::yuyv::LightGreen, o, jevois::StdModule::sendSerialObjDetImg2D(), jevois::sformat(), jevois::dnn::stringToRGBA(), and jevois::rawimage::writeText().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1aa3087bdfbabd30751a16731fe1e71e75"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (alpha , unsigned char , &quot;Alpha channel value for drawn results&quot; , 64 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a2cb89e11872a466b1290df9a510d59a3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (dthresh , float , &quot;Detection box threshold (in percent confidence) above which &quot; &quot;predictions will be reported. Not all networks use a separate box threshold, &quot; &quot;many only use one threshold confidence threshold(cthresh parameter). The YOLO &quot; &quot;family is an example that uses both box and classification confidences&quot; , 15. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 100.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a84adac06aa16ed42c7344ef7d7b57384"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (maxnbox , unsigned int , &quot;Max number of top-scoring boxes to <link linkend="_classjevois_1_1dnn_1_1PostProcessorDetect_1a399f8ebfbfec8d4934b9f353fd65da4d">report</link> (for YOLO flavors, &quot; &quot;this is the max for each scale)&quot; , 500 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1ad3541e17ab228527b9caec0039677e98"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (nms , float , &quot;Non-maximum suppression intersection-over-union threshold in percent&quot; , 45. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 100.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1abece3397d2d388ab37f16f363f4e69e4"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (anchors , std::string , &quot;For YOLO-type detection models with raw outputs, &quot; &quot;list of anchors. Should be formatted as:w1 , h1 , w2 , h2 ,  ww1, hh1 , ww2 , hh2 , &quot; &quot;... ... where individual entries for a given YOLO layer are separated by commas, &quot; &quot;and successive YOLO layers(from large to small, e.g., first the anchors for 52x52, &quot; &quot;then for 26x26, then for 13x13) are separated by semicolons. Leave empty &quot; &quot;for other models.&quot; , &quot;&quot; , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1acde111e7f5a52943ca8eba2110f0806a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (detecttype , DetectType , &quot;Type of detection output format&quot; , DetectType::YOLO , DetectType_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a1c6d925c2701db32435cb45ade85642b"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()</title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (DetectType , (FasterRCNN)(YOLO)(SSD)(TPUSSD)(RAWYOLO)(YOLOv10)(YOLOv10pp) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a154e733500bf262b60544bd328b4b30c"/>    <section>
+    <title>itsDetections</title>
+<indexterm><primary>itsDetections</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>itsDetections</secondary></indexterm>
+<para><computeroutput>std::vector&lt;<link linkend="_structjevois_1_1ObjDetect">ObjDetect</link>&gt; jevois::dnn::PostProcessorDetect::itsDetections<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 58 of file PostProcessorDetect.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a87047e1791d560cb6fd2ae4562e779d3"/>    <section>
+    <title>itsImageSize</title>
+<indexterm><primary>itsImageSize</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>itsImageSize</secondary></indexterm>
+<para><computeroutput>cv::Size jevois::dnn::PostProcessorDetect::itsImageSize<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 59 of file PostProcessorDetect.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a375b46f5356a21ed5e3f9696e9a72dea"/>    <section>
+    <title>itsLabels</title>
+<indexterm><primary>itsLabels</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>itsLabels</secondary></indexterm>
+<para><computeroutput>std::map&lt;int, std::string&gt; jevois::dnn::PostProcessorDetect::itsLabels<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>从对象 ID 映射到类名 </para>
+</para>
+<para>
+Definition at line 57 of file PostProcessorDetect.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorDetect_1a52f562990785dc91b7c0e6c081710f31"/>    <section>
+    <title>itsYOLO</title>
+<indexterm><primary>itsYOLO</primary><secondary>jevois::dnn::PostProcessorDetect</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorDetect</primary><secondary>itsYOLO</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1dnn_1_1PostProcessorDetectYOLO">PostProcessorDetectYOLO</link>&gt; jevois::dnn::PostProcessorDetect::itsYOLO<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 60 of file PostProcessorDetect.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorDetect_8H">PostProcessorDetect.H</link>include/jevois/DNN/<link linkend="_PostProcessor_8H">PostProcessor.H</link>src/jevois/DNN/<link linkend="_PostProcessorDetect_8C">PostProcessorDetect.C</link></section>
+</section>

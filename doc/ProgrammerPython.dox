@@ -2,96 +2,69 @@ namespace jevois
 {
 namespace rawimage
 {
-/*! \page ProgrammerPython Programming machine vision modules with Python
+/*! \page ProgrammerPython 使用 Python 编程机器视觉模块
 
-Starting with \jvversion{1.1}, you can program machine vision modules for JeVois in Python 3.x.
+从 \jvversion{1.1} 开始，您可以使用 Python 3.x 为 JeVois 编写机器视觉模块。
 
-Overview
+概述 
 ========
 
-The basic framework is as follows:
+基本框架如下：
 
-- Many of the basic facilities provided by the core JeVois software are wrapped so that they can be accessed from
-  Python. This includes, for example, video frame capture, image conversion, video frame output over USB, log messages,
-  sending messages to serial port, etc.
+- 核心 JeVois 软件提供的许多基本设施都经过了包装，以便可以通过 Python 访问。例如，这包括视频帧捕获、图像转换、通过 USB 输出视频帧、日志消息、向串行端口发送消息等。
 
-- OpenCV is also wrapped to Python and can be used in JeVois modules written in Python. This allows one to use the
-  machine vision and image processing functions provided by OpenCV. In this framework, images are represented as Python
-  numpy arrays. Functions are exposed by the JeVois core to allow converting camera video frames and output video frames
-  to/from Python numpy arrays.
+- OpenCV 也被包装到 Python 中，并且可以在用 Python 编写的 JeVois 模块中使用。这允许人们使用 OpenCV 提供的机器视觉和图像处理功能。在这个框架中，图像表示为 Python numpy 数组。JeVois 核心公开了函数，允许将摄像机视频帧和输出视频帧转换为 Python numpy 数组或相反。
 
-- JeVois modules written in Python should consist of a single Python class that exposes a specific interface, including
-  a process() function that will be called by the JeVois engine each time a new video frame is to be processed by the
-  module and an output image should be sent over USB to a host computer, and a processNoUSB() function that will be
-  called to process camera frame with no USB video output (both functions have different names because Python does not
-  support member function overloading). Note how this was fixed in \jvversion{1.6.2} thanks to user discussions on [this
-  thread](https://www.chiefdelphi.com/forums/showthread.php?t=159883&page=6).
+- 用 Python 编写的 JeVois 模块应由一个公开特定接口的 Python 类组成，包括一个 process() 函数，每次模块要处理新的视频帧时 JeVois 引擎都会调用该函数，并且应通过 USB 将输出图像发送到主机，以及一个 processNoUSB() 函数，在没有 USB 视频输出的情况下处理摄像头帧时会调用该函数（这两个函数的名称不同，因为 Python 不支持成员函数重载）。请注意，由于 [此线程](https://www.chiefdelphi.com/forums/showthread.php?t=159883&page=6) 上的用户讨论，此问题已在 \jvversion{1.6.2} 中得到修复。
 
-- So, the Python integration works in a two-way manner:
-  + JeVois core provides a \b libjevois Python library that can be used by modules written in Python.
-  + Modules written in python expose a class with specific member functions, which will be instantiated and called
-    by the JeVois core when the modules is loaded.
-  + Modules written in Python are invoked by the JeVois core just like C++ modules, using a process() function as
-    explained in \ref Concepts.
+- 因此，Python 集成以双向方式工作：
+  + JeVois 核心提供了一个 \b libjevois Python 库，可供用 Python 编写的模块使用。
+  + 用 Python 编写的模块公开一个具有特定成员函数的类，当模块加载时，JeVois 核心将实例化并调用该类。
+  + JeVois 核心像调用 C++ 模块一样调用用 Python 编写的模块，使用 process() 函数，如 \ref Concepts 中所述。
 
-- JeVois modules written in Python are otherwise treated just like modules written in C++: They get loaded when a
-  particular video resolution is selected by the host computer, which corresponds to an entry in \b videomappings.cfg
-  that matches the modules of interest. They also have a directory under <b>JEVOIS:/modules</b> and they may have the
-  same auxiliary files as C++ modules do.
+- 用 Python 编写的 JeVois 模块在其他方面与用 C++ 编写的模块一样：当主机选择特定视频分辨率时，它们会被加载，这对应于 \b videomappings.cfg 中与感兴趣的模块匹配的条目。它们在 <b>JEVOIS:/modules</b> 下还有一个目录，并且它们可能具有与 C++ 模块相同的辅助文件。
 
-Examples
+例子 
 ========
 
-Modules in jevoisbase are available to help you understand how this works:
+jevoisbase 中的模块可以帮助您了解其工作原理：
 
-- [PythonTest](/basedoc/jvpkg_2modules_2JeVois_2PythonTest_2PythonTest_8py_source.html) uses functions and classes
-  exported by JeVois.
+- [PythonTest](/basedoc/jvpkg_2modules_2JeVois_2PythonTest_2PythonTest_8py_source.html) 使用 JeVois 导出的函数和类。
 
-- [PythonOpenCV](/basedoc/jvpkg_2modules_2JeVois_2PythonOpenCV_2PythonOpenCV_8py_source.html) also uses OpenCV.
+- [PythonOpenCV](/basedoc/jvpkg_2modules_2JeVois_2PythonOpenCV_2PythonOpenCV_8py_source.html) 也使用 OpenCV。
 
-- [PythonSandbox](/basedoc/jvpkg_2modules_2JeVois_2PythonSandbox_2PythonSandbox_8py_source.html) also uses OpenCV.
+- [PythonSandbox](/basedoc/jvpkg_2modules_2JeVois_2PythonSandbox_2PythonSandbox_8py_source.html) 也使用 OpenCV。
 
-JeVois core expectations from modules written in Python
-=======================================================
+JeVois 核心对用 Python 编写的模块的期望 
+==========================================================
 
-Just like the Module C++ abstract base class defines an interface for how C++ modules will be used by the JeVois Engine,
-Python modules should be organized as follow:
+就像模块 C++ 抽象基类定义了 JeVois 引擎如何使用 C++ 模块的接口一样，Python 模块应该按如下方式组织：
 
-- A single .py file in a directory under <b>JEVOIS:/modules/vendor/</b> declares a Python class, with the filename stem
-  (without extension), directory name, and class name all an exact match.
+- <b>JEVOIS:/modules/vendor/</b> 下目录中的单个 .py 文件声明一个 Python 类，其文件名主干（不带扩展名）、目录名和类名完全匹配。
 
-- The module may declare and implememt (all are optional, but most modules should at least implement one of the
-  process() functions to be useful):
-  + Constructor with no arguments: `__init__(self)`
-  + Process function with USB output: `process(self, inframe, outframe)`
-  + Process function with no USB output: `processNoUSB(self, inframe)`
-  + \jvpro Process function with GUI output: `processGUI(self, inframe, guihelper)`
-  + Function to parse a serial command forwarded to the module by the JeVois Engine, return a string:
-    `parseSerial(self, str)`
-  + Function to return a string that describes the custom commands the module supports, for the JeVois help message:
-    `supportedCommands(self)`
-  + Function to cleanup just before the module will be unloaded: `uninit()` (in \jvversion{1.7.1} and later)
-  + Note that sendSerial() which is provided by the C++ Module base class to allow derived modules to send messages over
-    the serial port should not be defined and will not be invoked (since it is implemented by the JeVois core library
-    rather than the module); instead, a function `jevois.sendSerial()` is exposed to Python modules by the JeVois core
-    library which achieves the same result. Likewise for the functions that access raw camera or IMU registers:
-    - jevois.writeCamRegister()
-    - jevois.readCamRegister()
-    - jevois.writeIMUregister()
-    - jevois.readIMUregister()
-    - jevois.frameNum()
+- 模块可以声明和实现（所有都是可选的，但大多数模块至少应该实现一个 process() 函数才有用）：
+  + 无参数的构造函数：`__init__(self)`
+  + 带有 USB 输出的 Process 函数：`process(self, inframe, outframe)`
+  + 无 USB 输出的 Process 函数：`processNoUSB(self, inframe)`
+  + \jvpro 带有 GUI 输出的 Process 函数：`processGUI(self, inframe, guihelper)`
+  + 用于解析 JeVois Engine 转发给模块的串行命令的函数，返回一个字符串：`parseSerial(self, str)`
+  + 用于返回描述模块支持的自定义命令的字符串的函数，用于 JeVois 帮助消息：`supportedCommands(self)`
+  + 用于在模块卸载之前进行清理的函数：`uninit()`（在 \jvversion{1.7.1} 及更高版本中）
+  + 请注意，sendSerial() 由 C++ 模块基类提供允许派生模块通过串行端口发送消息不应定义，也不会被调用（因为它是由 JeVois 核心库而不是模块实现的）；相反，JeVois 核心库向 Python 模块公开了一个函数 `jevois.sendSerial()`，该函数可实现相同的结果。对于访问原始相机或 IMU 寄存器的函数也是如此：
+- jevois.writeCamRegister()
+- jevois.readCamRegister()
+- jevois.writeIMUregister()
+- jevois.readIMUregister()
+- jevois.frameNum()
 
-Python bindings provided by JeVois core
-=======================================
+JeVois 核心提供的 Python 绑定 
+=========================================
 
-The following functions and classes of the JeVois core software are wrapped for use in Python. To use the Python version
-of a given class or function, just inspect the C++ documentation and assume that the same class name, function name, and
-number and types of arguments will be used (except for a few exceptions noted below).
+JeVois 核心软件的以下函数和类已包装以供 Python 使用。要使用给定类或函数的 Python 版本，只需检查 C++ 文档并假设将使用相同的类名、函数名以及参数的数量和类型（下面提到的几个例外情况除外）。
 
-Refer to the source code in \a BOOST_PYTHON_MODULE() in \ref PythonSupport.C for the latest up-to-date list of Python
-bindings.
+请参阅 \ref PythonSupport.C 中的 \a BOOST_PYTHON_MODULE() 中的源代码，了解最新的 Python 绑定列表。
 
-The bindings can be imported into Python through:
+可以通过以下方式将绑定导入 Python：
 
 \code{.py}
 import pyjevois
@@ -99,40 +72,33 @@ if pyjevois.pro: import libjevoispro as jevois
 else: import libjevois as jevois
 \endcode
 
-Every JeVois module written in Python should start with that import.
+每个用 Python 编写的 JeVois 模块都应以该导入开始。
 
-Since all Python bindings are under the \b jevois module (actually, libjevois which we import as jevois), you should
-call these by prefixing the \b jevois module name.
+由于所有 Python 绑定都在 \b jevois 模块下（实际上是 libjevois，我们将其导入为 jevois），因此您应该通过在 \b jevois 模块名称前面加上前缀来调用它们。
 
-For example, consider the C++ function fccstr() defined in the jevois C++ namespace with signature:
+例如，考虑在 jevois C++ 命名空间中定义的 C++ 函数 fccstr()，其签名为：
 
 \code
-  // Convert a V4L2 four-cc code (V4L2_PIX_FMT_...) to a 4-char string
-  std::string fccstr(unsigned int fcc);
+  // 将 V4L2 four-cc 代码（V4L2_PIX_FMT_...）转换为 4 个字符的字符串 
+  std::string fccstr(unsigned int fcc); 
 \endcode
 
-Invoking this function from Python would take the form:
+从 Python 调用此函数的形式如下：
 
 \code{.py}
 s = jevois.fccstr(code)
 \endcode
 
-will invoke the C++ function fccstr() of JeVois, passing it the contents of variable \b code (which should be a positive
-integer number as expected by the C++ function, otherwise the binding engine will throw an exception for incorrect input
-argument type). The C++ string returned by the C++ function will then be copied to Python string \b s and will be
-available for further use in Python, as any Python strings.
+将调用 JeVois 的 C++ 函数 fccstr()，将变量 \b code 的内容传递给它（该变量应为 C++ 函数所期望的正整数，否则绑定引擎将抛出输入参数类型不正确的异常）。然后，C++ 函数返回的 C++ 字符串将被复制到 Python 字符串 \b s ，并且可以在 Python 中进一步使用，就像任何 Python 字符串一样。
 
-List of bindings
+绑定列表 
 ----------------
 
-Click on any of the classes or functions below to see its documentation. Although the doc is for the C++ version, the
-functions and classes listed here have an exact binding to Python, except that you can ignore any C++ qualifiers
-(\c const and similar) and reference/pointer specifications (\c & or \c * before an argument name).
+单击下面的任何类或函数即可查看其文档。虽然该文档适用于 C++ 版本，但此处列出的函数和类与 Python 具有精确绑定，但您可以忽略任何 C++ 限定符（\c const 和类似）和引用/指针规范（参数名称前的 \c & 或 \c *）。
 
-\note Refer to the source code in \a BOOST_PYTHON_MODULE() in \ref PythonSupport.C for the latest up-to-date list of
-Python bindings.
+\note 请参阅 \ref PythonSupport.C 中 \a BOOST_PYTHON_MODULE() 的源代码，了解最新的 Python 绑定列表。
 
-- General utility functions declared in \ref Utils.H
+- 在 \ref Utils.H 中声明的通用实用函数
   + fccstr()
   + cvtypestr()
   + strfcc()
@@ -143,7 +109,7 @@ Python bindings.
   + flushcache()
   + system()
 
-- Coordinate helpers declared in \ref Coordinates.H
+- 在 \ref Coordinates.H 中声明的坐标助手
   + imgToStd()
   + stdToImg()
   + imgToStdX()
@@ -151,31 +117,25 @@ Python bindings.
   + imgToStdSize()
   + stdToImgSize()
 
-- Support for raw image buffers from camera and to USB from \ref RawImage.H
-  + class RawImage
-  + member functions: invalidate(), valid(), clear(), require(), bytesperpix(), bytesize(), coordsOk()
-  + member variables: width, height, fmt, fps
+- 支持从相机和 USB 传输原始图像缓冲区，来自 \ref RawImage.H
+  + 类 RawImage
+  + 成员函数：invalidate()、valid()、clear()、require()、bytesperpix()、bytesize()、coordsOk()
+  + 成员变量：width、height、fmt、fps
 
-- Raw format YUYV colors by name as in \ref RawImage.H
-  + These are mapped to a Python enum <b>jevois.YUYV</b> with values Black = 0x8000, DarkGrey = 0x8050, MedGrey =
-    0x8080, LightGrey = 0x80a0, White = 0x80ff, DarkGreen = 0x0000, MedGreen = 0x0040, LightGreen = 0x00ff, DarkTeal =
-    0x7070, MedTeal = 0x7090, LightTeal = 0x70b0, DarkPurple = 0xa030, MedPurple = 0xa050, LightPurple = 0xa080,
-    DarkPink = 0xff00, MedPink = 0xff80, LightPink = 0xffff.
+- 按名称表示原始格式的 YUYV 颜色，如 \ref RawImage.H
+  + 这些颜色映射到 Python 枚举 <b>jevois.YUYV</b>，其值为 Black = 0x8000、DarkGrey = 0x8050、MedGrey = 0x8080、LightGrey = 0x80a0、White = 0x80ff、DarkGreen = 0x0000、MedGreen = 0x0040、LightGreen = 0x00ff、DarkTeal = 0x7070、MedTeal = 0x7090、LightTeal = 0x70b0、DarkPurple = 0xa030、MedPurple = 0xa050、LightPurple = 0xa080、DarkPink = 0xff00、MedPink = 0xff80、LightPink = 0xffff。
 
-- Video4Linux2 (V4L2) RawImage pixel formats supported by the camera sensor and by the USB output:
-  + These are mapped to constants <b>jevois.V4L2_PIX_FMT_SRGGB8, jevois.V4L2_PIX_FMT_YUYV, jevois.V4L2_PIX_FMT_GREY,
-    jevois.V4L2_PIX_FMT_RGB565, jevois.V4L2_PIX_FMT_MJPEG, and jevois.V4L2_PIX_FMT_BGR24</b>.
+- 相机传感器和 USB 输出支持的 Video4Linux2 (V4L2) RawImage 像素格式：
+  + 这些映射到常量 <b>jevois.V4L2_PIX_FMT_SRGGB8、jevois.V4L2_PIX_FMT_YUYV、jevois.V4L2_PIX_FMT_GREY、jevois.V4L2_PIX_FMT_RGB565、jevois.V4L2_PIX_FMT_MJPEG 和 jevois.V4L2_PIX_FMT_BGR24</b>。
 
-- Input frame wrappers around the InputFrame class from \ref Module.H
+- 输入帧包装器，包装 \ref Module.H 的 InputFrame 类
   + class InputFrame
-  + member functions: get(), done(), getCvGRAY(), getCvBGR(), getCvRGB(), getCvRGBA()
-  
-- Output frame wrappers around the OutputFrame class from \ref Module.H
+  + 成员函数的 InputFrame 类的输入帧包装器：get()、done()、getCvGRAY()、getCvBGR()、getCvRGB()、getCvRGBA() 
+- \ref Module.H 中 OutputFrame 类的输出帧包装器
   + class OutputFrame
-  + member functions: get(), send(), sendCv(), sendCvGRAY(), sendCvBGR(), sendCvRGB(), sendCvRGBA(),
-    sendScaledCvGRAY(), sendScaledCvBGR(), sendScaledCvRGB(), sendScaledCvRGBA()
+  + 成员函数的 OutputFrame 类的输出帧包装器：get()、send()、sendCv()、sendCvGRAY()、sendCvBGR()、sendCvRGB()、sendCvRGBA()、sendScaledCvGRAY()、sendScaledCvBGR()、sendScaledCvRGB()、sendScaledCvRGBA()
 
-- Operations on raw images as declared in \ref RawImageOps.H
+- 对原始图像的操作，如 \ref RawImageOps.H 中声明的
   + cvImage()
   + convertToCvGray()
   + convertToCvBGR()
@@ -189,8 +149,7 @@ Python bindings.
   + drawCircle()
   + drawLine()
   + drawRect()
-  + writeText() with font selected through a Python enum <b>jevois.Font</b> with values <b>Font5x7, Font6x10, Font7x13,
-    Font8x13bold, Font9x15bold, Font10x20, Font11x22, Font12x22, Font14x26, Font15x28, Font16x29, Font20x38</b>.
+  + writeText()，字体通过 Python 枚举 <b>jevois.Font</b> 选择，其值为 <b>Font5x7, Font6x10, Font7x13, Font8x13bold, Font9x15bold, Font10x20, Font11x22, Font12x22, Font14x26, Font15x28, Font16x29, Font20x38</b>。
   + convertCvGRAYtoRawImage()
   + convertCvBGRtoRawImage()
   + convertCvRGBtoRawImage()
@@ -198,35 +157,33 @@ Python bindings.
   + unpackCvRGBAtoGrayRawImage()
   + hFlipYUYV()
 
-- Timer class declared in \ref Timer.H
-  + class Timer (note that constructor takes arguments; see below for log level definitions)
-  + member functions: start(), stop()
+- 在 \ref Timer.H 中声明的 Timer 类
+  + Timer 类（请注意，构造函数接受参数；请参阅下文了解日志级别定义）
+  + 成员函数：start()、stop()
 
-- Profiler class declared in \ref Profiler.H
-  + class Profiler (note that constructor takes arguments; see below for log level definitions)
-  + member functions: start(), checkpoint(), stop()
+- 在 \ref Profiler.H 中声明的 Profiler 类
+  + Profiler 类（请注意，构造函数接受参数；请参阅下文了解日志级别定义）
+  + 成员函数：start()、checkpoint()、stop()
 
-- System utilities declared in SysInfo.H
+- 在 SysInfo.H 中声明的系统实用程序
   + getSysInfoCPU()
   + getSysInfoMem()
   + getSysInfoVersion()
 
-- Logging functions, simplified versions of the macros declared in \ref Log.H, taking a single string argument instead
-  of the streaming interface used on the C++ side (hence, Python programmers should use the Python string format()
-  function to place various variable values in that string):
-  + LDEBUG(), LINFO(), LERROR(), LFATAL()
-  + Log levels defined as constants: <b>jevois.LOG_DEBUG, jevois.LOG_INFO, jevois.LOG_ERR, jevois.LOG_CRIT</b>.
+- 日志记录函数，\ref Log.H 中声明的宏的简化版本，采用单个字符串参数，而不是 C++ 端使用的流式接口（因此，Python 程序员应使用 Python 字符串 format() 函数将各种变量值放置在该字符串中）：
+  + LDEBUG()、LINFO()、LERROR()、LFATAL()
+  + 定义为常量的日志级别：<b>jevois.LOG_DEBUG、jevois.LOG_INFO、jevois.LOG_ERR、jevois.LOG_CRIT</b>。
 
-- On \jvpro, functions exposed by GUIhelperPython, which is a proxy to GUIhelper.
+- 在 \jvpro 上，GUIhelperPython 公开的函数，它是 GUIhelper 的代理。
 
-Code documentation and accessory files
-======================================
+代码文档和附件文件 
+==========================================
 
-Follow the same rules as in \ref ProgrammerSDK, under "Module documentation and metadata"
+遵循与 \ref ProgrammerSDK 中 "模块文档和元数据" 下的相同规则
 
-See the sample Python modules in jevoisbase for examples of how this translates to Python doxygen directives.
+请参阅 jevoisbase 中的示例 Python 模块，了解如何将其转换为 Python doxygen 指令的示例。
 
 */
 
-}
-}
+} }
+

@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4">
+<title>jevois::Parameter&lt; Param, Tail ... &gt; Class Template Reference</title>
+<indexterm><primary>jevois::Parameter&lt; Param, Tail ... &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/Parameter.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;class Param, class ... Tail&gt;
+class jevois::Parameter&lt; Param, Tail ... &gt;</title></simplesect>
+
+
+<para>附加到组件的一组参数。 </para>
+
+
+
+<para>这个可变参数模板类只是为了方便在一个语句中向 <link linkend="_classjevois_1_1Component">Component</link> 添加多个参数。</para>
+
+<para>我们在 JeVois 框架中实现 Parameter 的方式乍一看似乎不正统，但这是我们迄今为止发现的最佳方法，即在编写有大量参数的新组件时最小化 负担。在我们早期的框架中，iLab Neuromorphic Vision Toolkit （iNVT） 始于 1995 年，参数作为成员变量包含在组件中。程序员的负担 如此之重，以至于他们通常不包括参数以及硬连线值，只是为了避免这种负担。负担来自以下要求：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>我们希望能够支持任何类型的参数</para>
+</listitem><listitem>
+<para>我们希望每个参数都有名称、描述、默认值、有效值的规范</para>
+</listitem><listitem>
+<para>我们希望参数显示在帮助消息中的相关组中</para>
+</listitem><listitem>
+<para>我们希望支持回调，即在尝试更改参数值时调用的函数</para>
+</listitem><listitem>
+<para>我们通常希望回调是 <link linkend="_classjevois_1_1Component">Component</link> 的成员函数，因为更改参数值通常会触发该组件中的一些重组（否则可能不需要回调）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>可以使用类数据成员作为参数实现（类似于我们在 iNVT 中使用的），此处显示了一个示例 int 参数，用于指定派生自 <link linkend="_classjevois_1_1Component">Component</link> 的类 MyComp 中持有的队列的大小：</para>
+
+<para><literallayout><computeroutput>ParamDef&lt;int&gt;&#32;sizeparamdef(&quot;size&quot;,&#32;&quot;Queue&#32;size&quot;,&#32;5,&#32;Range&lt;int&gt;(1,&#32;100),&#32;categ);
+class&#32;MyComp&#32;:&#32;public&#32;jevois::Component
+{
+public:
+Param&lt;int&gt;&#32;sizeparam;&#32;//&#32;ouch
+
+void&#32;sizeParamCallback(int&#32;newval)&#32;{&#32;myqueue.resize(newval);&#32;}
+
+MyComp(std::string&#32;const&#32;&amp;&#32;instance)&#32;:
+&#32;&#32;&#32;jevois::Component(instance),
+&#32;&#32;&#32;sizeparam(sizeparamdef)&#32;&#32;//&#32;ouch
+{
+&#32;&#32;sizeparam.setCallback(&amp;MyComp::sizeParamCallback);&#32;//&#32;ouch
+}
+};
+</computeroutput></literallayout></para>
+
+<para>我们基本上最终得到了 3 个人们不知道该如何处理的名称，并且只会使用令人困惑的名称（sizeparamdef、sizeparam、sizeParamCallback）， 我们不得不 1） 使用一些任意名称（此处为 sizeparamdef）在某处指定名称、描述等的定义，然后使用其他名称（此处为 sizeparam）将 param 的成员变量添加到组件中， 然后构造参数，这通常需要将其链接到其定义，以便我们可以获取默认值等，最后挂接回调（请注意，当我们构造 sizeparam 时，MyComp 尚未完全构造，因此在那个时候引用 sizeParamCallback() 充其量是可疑的）。实际上，情况更糟，因为通常 paramdef、 组件类声明和组件实现应该在 3 个不同的文件中。</para>
+
+<para><note><title>Note</title>
+
+<para><emphasis>`&#8216;计算机科学中只有两件难的事情：缓存失效和命名事物。&#8217;&apos; <emphasis role="bold">&#8211; Phil Karlton</emphasis></emphasis></para>
+</note>
+我们为 Neuromorphic Robotics Toolkit （NRT） 开发并为 JeVois 改进的方法如下：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>每个参数都是一个唯一的新类类型。使用一个名称创建该类型一次，它包含参数值和定义数据。JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) 可变参数宏进一步促进了这一点。</para>
+</listitem><listitem>
+<para>对于带回调的参数，它们的类类型包括一个纯虚拟的 onParamChange(param, value) 函数，该函数需要由宿主组件实现。这是通过 JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) 可变参数宏实现的。onParamChange() 的第一个参数 是 class 类型，因此有许多参数的宿主组件将有许多不同的 onParamChange() 函数，每个参数都有一个回调。</para>
+</listitem><listitem>
+<para>组件使用可变参数模板从其参数继承，使从多个参数继承变得简短而简单。</para>
+</listitem><listitem>
+<para>每个参数都公开了简单的函数 get(), set(), 等（参见 <link linkend="_classjevois_1_1ParameterCore">ParameterCore</link> 和 ParameterBase）。在有许多参数的组件中，访问参数是通过 消除想要访问哪个基类（即哪个参数）的歧义来实现的，这是通过调用 paramx::get() vs paramy::get() 等来实现的。 等来实现的</para>
+</listitem><listitem>
+<para>无需声明参数成员变量（我们从它们继承）。</para>
+</listitem><listitem>
+<para>在组件的构造中无需执行任何操作。</para>
+</listitem><listitem>
+<para>无需手动将组件宿主类中的回调函数挂接到参数上。</para>
+</listitem><listitem>
+<para>实现回调时，宿主类的所有成员都可用（因为宿主类继承自 Parameter）。这一点至关重要，因为通常会实现回调，以便宿主组件在参数值 更改时采取一些操作，例如，以某种方式重新配置自身。</para>
+</listitem><listitem>
+<para>强大的编译时检查，确保程序员没有忘记为每个声明为具有回调的参数编写回调函数。</para>
+</listitem><listitem>
+<para>该参数及其所有关联机制（定义、回调）仅使用一个名称。</para>
+</listitem><listitem>
+<para>编写脚本来搜索源码树以获取有关组件的所有参数的信息很容易，因为这些参数都在 Parameter&lt; ... &gt; 继承语句中指定。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>需要注意的是：通常需要对参数使用短名称，例如 &quot;size&quot;, &quot;length&quot;, &quot;dims&quot;, &quot;threshold&quot; 等，这些名称可能会在多个组件之间发生冲突， 因为在构建使用这些组件的更复杂的组件或系统时，将包含这些组件的 .H 文件。对于 <link linkend="_classjevois_1_1Module">Module</link> 来说，这不是问题，模块是一个终端实体，通常 编写为单个 .C 文件，没有 .H 文件。对于打算广泛使用的组件，我们目前建议将所有参数放在一个命名空间中，该命名空间是组件类名称的小 写版本。</para>
+
+<para>下面是 Manager.H 中的实现。我们从声明参数开始，在声明 <link linkend="_classjevois_1_1Manager">Manager</link> 类时继承。我们在新的命名空间 <emphasis>manager</emphasis> 中声明参数，以避免名称 与其他组件的参数发生冲突：</para>
+
+<para><literallayout><computeroutput><emphasis role="keyword">namespace&#32;</emphasis><link linkend="_namespacejevois">jevois</link>
+{
+&#32;&#32;<emphasis role="keyword">namespace&#32;</emphasis>manager
+&#32;&#32;{
+&#32;&#32;&#32;&#32;<emphasis role="keyword">static</emphasis>&#32;ParameterCategory&#32;<emphasis role="keyword">const</emphasis>&#32;ParamCateg(<emphasis role="stringliteral">&quot;General&#32;Options&quot;</emphasis>);
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;JEVOIS_DECLARE_PARAMETER(help,&#32;<emphasis role="keywordtype">bool</emphasis>,&#32;<emphasis role="stringliteral">&quot;Print&#32;this&#32;help&#32;message&quot;</emphasis>,&#32;<emphasis role="keyword">false</emphasis>,&#32;ParamCateg);
+
+<emphasis role="preprocessor">#ifdef&#32;JEVOIS_LDEBUG_ENABLE</emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Enum&#32;for&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;<link linkend="_group__camerasensor_1ga3bb4c5f1d277f41f06b4e689d9f3b1dd">JEVOIS_DEFINE_ENUM_CLASS</link>(LogLevel,&#32;(fatal)&#32;(error)&#32;(info)&#32;(debug)&#32;);
+<emphasis role="preprocessor">#else</emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Enum&#32;for&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;<link linkend="_group__camerasensor_1ga3bb4c5f1d277f41f06b4e689d9f3b1dd">JEVOIS_DEFINE_ENUM_CLASS</link>(LogLevel,&#32;(fatal)&#32;(error)&#32;(info)&#32;);
+<emphasis role="preprocessor">#endif</emphasis>
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(loglevel,&#32;LogLevel,&#32;<emphasis role="stringliteral">&quot;Set&#32;the&#32;minimum&#32;log&#32;level&#32;to&#32;display&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;LogLevel::info,&#32;LogLevel_Values,&#32;ParamCateg);
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(tracelevel,&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>,&#32;<emphasis role="stringliteral">&quot;Set&#32;the&#32;minimum&#32;trace&#32;level&#32;to&#32;display&quot;</emphasis>,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;0,&#32;ParamCateg);
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;\relates&#32;jevois::Manager</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;JEVOIS_DECLARE_PARAMETER(nickname,&#32;std::string,&#32;<emphasis role="stringliteral">&quot;Nickname&#32;associated&#32;with&#32;this&#32;camera,&#32;useful&#32;when&#32;multiple&#32;&quot;</emphasis>
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;JeVois&#32;cameras&#32;are&#32;connected&#32;to&#32;a&#32;same&#32;USB&#32;bus&quot;</emphasis>,&#32;<emphasis role="stringliteral">&quot;jevois&quot;</emphasis>,&#32;ParamCateg);
+&#32;&#32;}
+
+&#32;&#32;<emphasis role="comment">//&#32;######################################################################</emphasis><emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;//!&#32;组件对象层次结构的管理器</emphasis>
+<emphasis role="comment"></emphasis><emphasis role="comment">&#32;&#32;/*!&#32;管理器应为任何组件层次结构的顶级组件。它主要负责通过命令行或其他方式处理参数值的设置。</emphasis>
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;用户只需构建一个管理器（包括从管理器派生的引擎），向其中添加任何组件，然后在管理器上调用&#32;init()，它将解析所有命令</emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;行选项，将它们绑定到相关参数，并在所有子组件上调用&#32;init()（反过来，它又在所有子组件上调用&#32;init()，等等）。有关&#32;</emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;init()&#32;流程的更多信息，请参阅组件的文档。</emphasis>
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;参数&#32;\p&#32;nickname&#32;不由管理器内部使用。例如，在使用连接到单个&#32;USB&#32;总线的多个&#32;JeVois&#32;摄像头的系统中，可以在&#32;</emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;\b&#32;initscript.cfg&#32;中为每个摄像头设置不同的值。</emphasis>
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;\ingroup&#32;component&#32;*/</emphasis>
+&#32;&#32;<emphasis role="keyword">class&#32;</emphasis>Manager&#32;:&#32;<emphasis role="keyword">public</emphasis>&#32;Component,
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>&#32;Parameter&lt;manager::help,&#32;manager::loglevel,&#32;manager::tracelevel,&#32;manager::nickname&gt;
+&#32;&#32;{
+&#32;&#32;&#32;&#32;<emphasis role="keyword">public</emphasis>:
+</computeroutput></literallayout></para>
+
+<para>对于我们声明的带回调的参数，我们在定义中进一步包含了 <link linkend="_classjevois_1_1Manager">Manager</link> class overrides，用于它们添加到我们的管理器类中的纯虚拟 onParamChange() 函数。请注意这些函数的签名：第一个参数是对此回调所针对的参数的常量引用，其主要作用是消除组件可能有的 不同 onParamChange() 函数之间的歧义。第二个参数是建议的新参数值。onParamChange() 函数应该检查候选的新值，（1）如果 它不喜欢它，则抛出 std::range_error 并带有一条描述性消息，说明为什么该值被拒绝，（2）否则，假设该值被接受，然后回调 可以分配资源或使用该值进行其他工作（Parameter 对象的实际修改在上游处理，回调无需担心：如果它返回而没有抛出，则建议的 值将成为 Parameter 的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免多个不同的线程破坏参数和/或并发参数值 更改。因此，回调应该尝试快速执行，而不应该在参数上调用 set() 等，因为这将始终死锁（如果您的回调需要知道参数的当前值， 则允许 get()）。</para>
+
+<para><literallayout><computeroutput><emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;callback</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;onParamChange(manager::loglevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;param,&#32;manager::LogLevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;newval)&#32;<emphasis role="keyword">override</emphasis>;
+<emphasis role="comment"></emphasis>
+<emphasis role="comment">&#32;&#32;&#32;&#32;&#32;&#32;//!&#32;Parameter&#32;callback</emphasis>
+<emphasis role="comment"></emphasis>&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordtype">void</emphasis>&#32;onParamChange(manager::tracelevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;param,&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;newval)&#32;<emphasis role="keyword">override</emphasis>;
+</computeroutput></literallayout></para>
+
+<para><link linkend="_classjevois_1_1Manager">Manager</link> 的构造函数、析构函数等无需执行任何操作。唯一需要做的是在 <link linkend="_Manager_8C">Manager.C</link> 中实现 onParamChange() 函数。请注意，我们不给第 一个参数命名（它是对参数本身的引用；第一个参数对于消除不同参数的各种 onParamChange() 函数之间的歧义是必要的，但通常我们只关心 新值，不需要参数的句柄）。为了避免编译器警告我们的回调不使用第一个参数：</para>
+
+<para><literallayout><computeroutput>
+<emphasis role="comment">//&#32;######################################################################</emphasis>
+<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_classjevois_1_1Manager_1a573cbb9b833be4c968e52f85990ba0af">jevois::Manager::onParamChange</link>(jevois::manager::loglevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;,&#32;jevois::manager::LogLevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;newval)
+{&#32;
+&#32;&#32;<emphasis role="keywordflow">switch</emphasis>(newval)
+&#32;&#32;{
+&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;jevois::manager::LogLevel::fatal:&#32;<link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link>&#32;=&#32;LOG_CRIT;&#32;<emphasis role="keywordflow">break</emphasis>;
+&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;jevois::manager::LogLevel::error:&#32;<link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link>&#32;=&#32;LOG_ERR;&#32;<emphasis role="keywordflow">break</emphasis>;
+&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;jevois::manager::LogLevel::info:&#32;<link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link>&#32;=&#32;LOG_INFO;&#32;<emphasis role="keywordflow">break</emphasis>;
+<emphasis role="preprocessor">#ifdef&#32;JEVOIS_LDEBUG_ENABLE</emphasis>
+&#32;&#32;<emphasis role="keywordflow">case</emphasis>&#32;jevois::manager::LogLevel::debug:&#32;<link linkend="_group__debugging_1ga0538fa80480e8b4b51b399d98196765b">jevois::logLevel</link>&#32;=&#32;LOG_DEBUG;&#32;<emphasis role="keywordflow">break</emphasis>;
+<emphasis role="preprocessor">#endif</emphasis>
+&#32;&#32;}
+}
+
+<emphasis role="comment">//&#32;######################################################################</emphasis>
+<emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_classjevois_1_1Manager_1a573cbb9b833be4c968e52f85990ba0af">jevois::Manager::onParamChange</link>(jevois::manager::tracelevel&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;,&#32;<emphasis role="keywordtype">unsigned</emphasis>&#32;<emphasis role="keywordtype">int</emphasis>&#32;<emphasis role="keyword">const</emphasis>&#32;&amp;&#32;newval)
+{
+<emphasis role="preprocessor">#if&#32;!defined(JEVOIS_TRACE_ENABLE)&#32;||&#32;!defined(JEVOIS_LDEBUG_ENABLE)</emphasis>
+&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(newval)
+&#32;&#32;&#32;&#32;<link linkend="_group__debugging_1gad364e6e39b7970e4548d99dc3c0c68cc">LERROR</link>(<emphasis role="stringliteral">&quot;Debug&#32;trace&#32;has&#32;been&#32;disabled&#32;at&#32;compile-time,&#32;re-compile&#32;with&#32;-DJEVOIS_LDEBUG_ENABLE=ON&#32;and&#32;&quot;</emphasis>
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="stringliteral">&quot;-DJEVOIS_TRACE_ENABLE=ON&#32;to&#32;see&#32;trace&#32;info&quot;</emphasis>);
+<emphasis role="preprocessor">#endif</emphasis>
+&#32;&#32;
+&#32;&#32;<link linkend="_group__debugging_1ga293cae43e521f4f49ae381d1c931c7b2">jevois::traceLevel</link>&#32;=&#32;newval;
+}
+
+</computeroutput></literallayout></para>
+
+<para>宿主组件可以通过使用参数名称作为前缀来调用参数的成员函数来使用它们（此前缀基本上是选择我们想要运行给定函数的基类）。例如，在 <link linkend="_classjevois_1_1Manager">Manager</link> 中，如果已在命令行中设置了 <computeroutput>help</computeroutput> 参数，我们将执行一些操作，然后冻结它。在 <link linkend="_classjevois_1_1ParameterBase">ParameterBase</link> 和 ParameterCore&lt;T&gt; 中 定义的所有成员函数 (get(), set(), strget(), strset(), name(), descriptor(), summary(), freeze(), etc)在每个参数上都可用：</para>
+
+<para><literallayout><computeroutput><emphasis role="keywordtype">void</emphasis>&#32;<link linkend="_classjevois_1_1Manager_1a5b640dec7af4a35e140462db23c94db6">jevois::Manager::postInit</link>()
+{
+&#32;&#32;<emphasis role="comment">//&#32;如果在命令行上给出了&#32;--help，则打印帮助消息并退出：</emphasis>
+&#32;&#32;<emphasis role="keywordflow">if</emphasis>&#32;(help::get())&#32;{&#32;printHelpMessage();&#32;<link linkend="_group__debugging_1gadf127ca2262cc160830da49c37d04e85">LINFO</link>(<emphasis role="stringliteral">&quot;JeVois:&#32;exit&#32;after&#32;help&#32;message&quot;</emphasis>);&#32;exit(0);&#32;}
+&#32;&#32;
+&#32;&#32;<emphasis role="comment">//&#32;--help&#32;参数仅用于解析命令行参数。完成后，我们在此将其隐藏为我们将在&#32;JeVois&#32;控制台中提供一个&#32;&apos;help&apos;&#32;命令：</emphasis>
+&#32;&#32;help::freeze(<emphasis role="keyword">true</emphasis>);
+&#32;&#32;
+&#32;&#32;<emphasis role="comment">//&#32;如果尚未编译跟踪，请不要使用不起作用的&#32;tracelevel&#32;参数让用户感到困惑：</emphasis>
+<emphasis role="preprocessor">#if&#32;!defined(JEVOIS_TRACE_ENABLE)&#32;||&#32;!defined(JEVOIS_LDEBUG_ENABLE)</emphasis>
+&#32;&#32;tracelevel::freeze(<emphasis role="keyword">true</emphasis>);
+<emphasis role="preprocessor">#endif</emphasis>
+}
+</computeroutput></literallayout></para>
+
+<para>为了完整起见，如果您想知道 JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) and JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) 到底是做什么的，它们位于 ParameterHelpers.H 中， 并在此处复制：</para>
+
+<para><literallayout><computeroutput>
+<emphasis role="comment">//&#32;Convenience&#32;macro&#32;to&#32;define&#32;a&#32;Parameter&#32;type.&#32;All&#32;the&#32;...&#32;args&#32;are&#32;passed&#32;to&#32;ParameterDef</emphasis>
+<emphasis role="preprocessor">#define&#32;JEVOIS_DECLARE_PARAMETER(ParamName,&#32;ParamType,&#32;...)&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;struct&#32;ParamName&#32;:&#32;public&#32;virtual&#32;jevois::ParameterRegistry,&#32;public&#32;jevois::ParameterCore&lt;ParamType&gt;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;typedef&#32;ParamType&#32;type;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;ParamName()&#32;:&#32;jevois::ParameterCore&lt;ParamType&gt;(jevois::ParameterDef&lt;ParamType&gt;(#ParamName,&#32;__VA_ARGS__))&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;jevois::ParameterRegistry::addParameter(this);&#32;}&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;virtual&#32;~ParamName()&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;jevois::ParameterRegistry::removeParameter(this);&#32;}&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;virtual&#32;jevois::Component&#32;const&#32;*&#32;owner()&#32;const&#32;override&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;return&#32;dynamic_cast&lt;jevois::Component&#32;const&#32;*&gt;(static_cast&lt;jevois::ParameterRegistry&#32;const&#32;*&gt;(this));&#32;}&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;};</emphasis>
+
+<emphasis role="comment">//&#32;Convenience&#32;macro&#32;to&#32;define&#32;a&#32;Parameter&#32;type&#32;with&#32;callback.&#32;All&#32;the&#32;...&#32;args&#32;are&#32;passed&#32;to&#32;ParameterDef</emphasis>
+<emphasis role="preprocessor">#define&#32;JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName,&#32;ParamType,&#32;...)&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;struct&#32;ParamName&#32;:&#32;public&#32;virtual&#32;jevois::ParameterRegistry,&#32;public&#32;jevois::ParameterCore&lt;ParamType&gt;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;typedef&#32;ParamType&#32;type;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;virtual&#32;void&#32;onParamChange(ParamName&#32;const&#32;&amp;&#32;param,&#32;ParamType&#32;const&#32;&amp;&#32;newval)&#32;=&#32;0;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;ParamName()&#32;:&#32;jevois::ParameterCore&lt;ParamType&gt;(jevois::ParameterDef&lt;ParamType&gt;(#ParamName,&#32;__VA_ARGS__))&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;setCallback([this](ParamType&#32;const&#32;&amp;&#32;newval)&#32;{&#32;this-&gt;onParamChange(*this,&#32;newval);&#32;});&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;jevois::ParameterRegistry::addParameter(this);&#32;}&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;virtual&#32;~ParamName()&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;jevois::ParameterRegistry::removeParameter(this);&#32;}&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;inline&#32;virtual&#32;jevois::Component&#32;const&#32;*&#32;owner()&#32;const&#32;override&#32;&#32;&#32;&#32;&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;&#32;&#32;{&#32;return&#32;dynamic_cast&lt;jevois::Component&#32;const&#32;*&gt;(static_cast&lt;jevois::ParameterRegistry&#32;const&#32;*&gt;(this));&#32;}&#32;\</emphasis>
+<emphasis role="preprocessor">&#32;&#32;};</emphasis>
+
+</computeroutput></literallayout></para>
+
+<para>另请参阅 Engine.H 或 jevoisbase 库中的许多组件。 </para>
+<para>
+Definition at line 361 of file Parameter.H.</para>
+Inheritance diagram for jevois::Parameter&lt; Param, Tail ... &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::Parameter&lt; Param, Tail ... &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_Parameter_8H">Parameter.H</link></section>
+</section>

@@ -1,0 +1,35 @@
+\hypertarget{CameraSensor_8H}{}\doxysubsection{include/jevois/\+Core/\+Camera\+Sensor.H File Reference}
+\label{CameraSensor_8H}\index{include/jevois/Core/CameraSensor.H@{include/jevois/Core/CameraSensor.H}}
+{\ttfamily \#include $<$jevois/\+Types/\+Enum.\+H$>$}\newline
+Include dependency graph for Camera\+Sensor.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{CameraSensor_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{CameraSensor_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__camerasensor_ga3bb4c5f1d277f41f06b4e689d9f3b1dd}{jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Sensor,(any)(imx290)(os08a10)(ar0234))
+\begin{DoxyCompactList}\small\item\em 不同传感器型号的枚举 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__camerasensor_ga07ea2c95fcfd090f0afa39305ba0720c}{jevois\+::\+J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Camera\+Lens,(standard)(custom1)(custom2)(custom3)(custom4)(custom5))
+\item 
+bool \mbox{\hyperlink{group__camerasensor_gaee01f42d6948f5d178890b28663806af}{jevois\+::sensor\+Supports\+Format}} (Camera\+Sensor s, Video\+Mapping const \&m)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否支持给定的分辨率和帧速率 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__camerasensor_ga6bc708204f2eb1175885c149ced0b4fd}{jevois\+::sensor\+Has\+I\+MU}} (Camera\+Sensor s)
+\begin{DoxyCompactList}\small\item\em 检查传感器是否有 I\+M\+U（惯性测量单元） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__camerasensor_ga241cf199fdeeac006a137918af9bab0b}{jevois\+::sensor\+Prepare\+Set\+Format}} (Camera\+Sensor s, Video\+Mapping const \&m, unsigned int \&capw, unsigned int \&caph, int \&preset)
+\begin{DoxyCompactList}\small\item\em 加载传感器预设（仅限 Je\+Vois-\/\+Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,0 +1,59 @@
+\hypertarget{classjevois_1_1timed__lock__guard}{}\doxysubsection{jevois\+::timed\+\_\+lock\+\_\+guard Class Reference}
+\label{classjevois_1_1timed__lock__guard}\index{jevois::timed\_lock\_guard@{jevois::timed\_lock\_guard}}
+
+
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+在 std\+::timed\+\_\+mutex 上获取锁对象，或在等待 1 秒后 L\+F\+A\+T\+AL 
+
+像使用 lock\+\_\+guard 一样使用它（但请确保您的互斥锁是 std\+::timed\+\_\+mutex）。 如果发生死锁，它将抛出，这对于调试很有用 。 用户通常会使用 \mbox{\hyperlink{group__debugging_ga36695a40a90d579eef600d90c82484f5}{J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+C\+K(mtx)}} 宏而不是直接使用此类。 
+
+Definition at line 290 of file Log.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1timed__lock__guard_ae23c13cee4eed3896361caa453d99c9b}{timed\+\_\+lock\+\_\+guard}} (std\+::timed\+\_\+mutex \&mtx, char const $\ast$file, char const $\ast$func)
+\begin{DoxyCompactList}\small\item\em 构造函数，锁定互斥锁或如果在超时之前无法锁定则抛出 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1timed__lock__guard_a082fcfee1f7a25a70295782e2b3c88d9}{$\sim$timed\+\_\+lock\+\_\+guard}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, unlocks the mutex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1timed__lock__guard_ae23c13cee4eed3896361caa453d99c9b}\label{classjevois_1_1timed__lock__guard_ae23c13cee4eed3896361caa453d99c9b}} 
+\index{jevois::timed\_lock\_guard@{jevois::timed\_lock\_guard}!timed\_lock\_guard@{timed\_lock\_guard}}
+\index{timed\_lock\_guard@{timed\_lock\_guard}!jevois::timed\_lock\_guard@{jevois::timed\_lock\_guard}}
+\doxyparagraph{\texorpdfstring{timed\_lock\_guard()}{timed\_lock\_guard()}}
+{\footnotesize\ttfamily jevois\+::timed\+\_\+lock\+\_\+guard\+::timed\+\_\+lock\+\_\+guard (\begin{DoxyParamCaption}\item[{std\+::timed\+\_\+mutex \&}]{mtx,  }\item[{char const $\ast$}]{file,  }\item[{char const $\ast$}]{func }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+构造函数，锁定互斥锁或如果在超时之前无法锁定则抛出 
+
+
+
+Definition at line 344 of file Log.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1timed__lock__guard_a082fcfee1f7a25a70295782e2b3c88d9}\label{classjevois_1_1timed__lock__guard_a082fcfee1f7a25a70295782e2b3c88d9}} 
+\index{jevois::timed\_lock\_guard@{jevois::timed\_lock\_guard}!````~timed\_lock\_guard@{$\sim$timed\_lock\_guard}}
+\index{````~timed\_lock\_guard@{$\sim$timed\_lock\_guard}!jevois::timed\_lock\_guard@{jevois::timed\_lock\_guard}}
+\doxyparagraph{\texorpdfstring{$\sim$timed\_lock\_guard()}{~timed\_lock\_guard()}}
+{\footnotesize\ttfamily jevois\+::timed\+\_\+lock\+\_\+guard\+::$\sim$timed\+\_\+lock\+\_\+guard (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, unlocks the mutex. 
+
+
+
+Definition at line 355 of file Log.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Debug/\mbox{\hyperlink{Log_8H}{Log.\+H}}\item 
+src/jevois/\+Debug/\mbox{\hyperlink{Log_8C}{Log.\+C}}\end{DoxyCompactItemize}

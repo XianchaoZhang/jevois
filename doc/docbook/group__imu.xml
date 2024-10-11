@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__imu">
+<title>惯性测量单元 (IMU) 类和函数</title>
+<indexterm><primary>惯性测量单元 (IMU) 类和函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>这些类和函数为某些可选 JeVois 成像传感器中可能存在的可选 <link linkend="_classjevois_1_1IMU">IMU</link> 芯片提供支持。例如，TDK InvenSense ICM20948：3 轴加速度计、3 轴陀螺仪、3 轴磁力计、集成数字运动处理器 (DMP)。 </para>
+Collaboration diagram for 惯性测量单元 (IMU) 类和函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__imu.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1ICM20948">jevois::ICM20948</link></para>
+
+<para>TDK InvenSense ICM-20948 9DOF <link linkend="_classjevois_1_1IMU">IMU</link> 高级驱动程序 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1IMU">jevois::IMU</link></para>
+
+<para><link linkend="_classjevois_1_1ICM20948">ICM20948</link> 惯性测量单元 (<link linkend="_classjevois_1_1IMU">IMU</link>) 的抽象接口 </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1IMUrawData">jevois::IMUrawData</link></para>
+
+<para>原始 <link linkend="_classjevois_1_1IMU">IMU</link> 数据 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__ICM-20948">DMP 计算头字段</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>size_t <link linkend="_group__imu_1ga43ee011cc956b9d2d7a5ae46aa268bff">jevois::DMPpacketSize</link> (unsigned short ctl1, unsigned short ctl2)</para>
+
+<para>辅助函数根据选项确定 DMP 数据包大小 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__imu_1ga43ee011cc956b9d2d7a5ae46aa268bff"/>    <section>
+    <title>DMPpacketSize()</title>
+<indexterm><primary>DMPpacketSize</primary><secondary>惯性测量单元 (IMU) 类和函数</secondary></indexterm>
+<indexterm><primary>惯性测量单元 (IMU) 类和函数</primary><secondary>DMPpacketSize</secondary></indexterm>
+<para><computeroutput>size_t jevois::DMPpacketSize (unsigned short ctl1, unsigned short ctl2)</computeroutput></para><para>
+
+<para>辅助函数根据选项确定 DMP 数据包大小 </para>
+</para>
+<para>
+Definition at line 52 of file IMUdata.C.</para>
+<para>
+References JEVOIS_DMP_ACCEL, JEVOIS_DMP_ACCEL_ACCURACY, JEVOIS_DMP_ACCEL_ACCURACY_SZ, JEVOIS_DMP_ACCEL_DATA_SZ, JEVOIS_DMP_ACT_RECOG, JEVOIS_DMP_ACT_RECOG_SZ, JEVOIS_DMP_ALS, JEVOIS_DMP_ALS_DATA_SZ, JEVOIS_DMP_BATCH_MODE_EN, JEVOIS_DMP_CPASS, JEVOIS_DMP_CPASS_ACCURACY, JEVOIS_DMP_CPASS_ACCURACY_SZ, JEVOIS_DMP_CPASS_CALIBR, JEVOIS_DMP_CPASS_CALIBR_DATA_SZ, JEVOIS_DMP_CPASS_DATA_SZ, JEVOIS_DMP_FLIP_PICKUP, JEVOIS_DMP_FLIP_PICKUP_SZ, JEVOIS_DMP_FOOTER_SZ, JEVOIS_DMP_FSYNC, JEVOIS_DMP_FSYNC_SZ, JEVOIS_DMP_GEOMAG, JEVOIS_DMP_GEOMAG_DATA_SZ, JEVOIS_DMP_GYRO, JEVOIS_DMP_GYRO_ACCURACY, JEVOIS_DMP_GYRO_ACCURACY_SZ, JEVOIS_DMP_GYRO_BIAS_DATA_SZ, JEVOIS_DMP_GYRO_CALIBR, JEVOIS_DMP_GYRO_DATA_SZ, JEVOIS_DMP_HEADER2, JEVOIS_DMP_HEADER2_SZ, JEVOIS_DMP_HEADER_SZ, JEVOIS_DMP_ODR_CNT_GYRO_SZ, JEVOIS_DMP_PED_STEPDET, JEVOIS_DMP_PED_STEPDET_TIMESTAMP_SZ, JEVOIS_DMP_PQUAT6, JEVOIS_DMP_PQUAT6_DATA_SZ, JEVOIS_DMP_PRESSURE, JEVOIS_DMP_PRESSURE_DATA_SZ, JEVOIS_DMP_QUAT6, JEVOIS_DMP_QUAT6_DATA_SZ, JEVOIS_DMP_QUAT9, and JEVOIS_DMP_QUAT9_DATA_SZ.</para>
+<para>
+Referenced by jevois::ICM20948::getDMP().</para>
+</section>
+</section>
+</section>

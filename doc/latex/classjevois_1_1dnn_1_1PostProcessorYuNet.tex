@@ -1,0 +1,177 @@
+\hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet}{}\doxysubsection{jevois\+::dnn\+::Post\+Processor\+Yu\+Net Class Reference}
+\label{classjevois_1_1dnn_1_1PostProcessorYuNet}\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Post\+Processor\+Yu\+Net.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Yu\+Net 人脸特征点检测器的后处理器 
+
+这是深度神经网络处理管道中的最后一步。代码源自 \href{https://github.com/khadas/OpenCV_NPU_Demo.git}{\texttt{ https\+://github.\+com/khadas/\+Open\+C\+V\+\_\+\+N\+P\+U\+\_\+\+Demo.\+git}} 
+
+Definition at line 56 of file Post\+Processor\+Yu\+Net.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Post\+Processor\+Yu\+Net\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorYuNet__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Post\+Processor\+Yu\+Net\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PostProcessorYuNet__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_a87b114ff22e134b64af7ef5706735c31}{$\sim$\+Post\+Processor\+Yu\+Net}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_acf6f0c764991ac2e53bf1542e21f4340}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&outs, \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$preproc) override
+\begin{DoxyCompactList}\small\item\em 处理输出并绘制/发送一些结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_acad85ce6e370180070df325547cfadbb}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false) override
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ yunet\+::\+Face $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_ac45d710c526abb1f6e33ccd7046751c2}{its\+Detections}}
+\item 
+cv\+::\+Size \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_a3e7c5f6098385279f30194a183794293}{its\+Image\+Size}}
+\item 
+std\+::shared\+\_\+ptr$<$ yunet\+::\+Prior\+Box $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_a6f88a8a8b5941bb65b834749e0e6cd44}{its\+Prior\+Box}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_a87b114ff22e134b64af7ef5706735c31}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_a87b114ff22e134b64af7ef5706735c31}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!````~PostProcessorYuNet@{$\sim$PostProcessorYuNet}}
+\index{````~PostProcessorYuNet@{$\sim$PostProcessorYuNet}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{$\sim$PostProcessorYuNet()}{~PostProcessorYuNet()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::$\sim$\+Post\+Processor\+Yu\+Net (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 169 of file Post\+Processor\+Yu\+Net.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_acf6f0c764991ac2e53bf1542e21f4340}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_acf6f0c764991ac2e53bf1542e21f4340}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a6e87ca847dc8c16445168b01a2fdedb7}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 173 of file Post\+Processor\+Yu\+Net.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!process@{process}}
+\index{process@{process}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{outs,  }\item[{\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $\ast$}]{preproc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+处理输出并绘制/发送一些结果 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_a26329a32271138357f7906c83e4856b1}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 177 of file Post\+Processor\+Yu\+Net.\+C.
+
+
+
+References jevois\+::dnn\+::\+Pre\+Processor\+::b2i(), jevois\+::dnn\+::\+Pre\+Processor\+::blobsize(), jevois\+::dnn\+::clamp(), jevois\+::dnn\+::\+Pre\+Processor\+::imagesize(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_acad85ce6e370180070df325547cfadbb}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_acad85ce6e370180070df325547cfadbb}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!report@{report}}
+\index{report@{report}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet_accc29b3c0fc4b9d26da8c67ec180f2f9}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor_ac7c507221e2f1c52715b9185beaebc42}{jevois\+::dnn\+::\+Post\+Processor}}.
+
+
+
+Definition at line 234 of file Post\+Processor\+Yu\+Net.\+C.
+
+
+
+References jevois\+::rawimage\+::draw\+Circle(), jevois\+::\+G\+U\+Ihelper\+::draw\+Circle(), jevois\+::rawimage\+::draw\+Line(), jevois\+::\+G\+U\+Ihelper\+::draw\+Line(), jevois\+::rawimage\+::draw\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Rect(), jevois\+::\+G\+U\+Ihelper\+::draw\+Text(), jevois\+::rawimage\+::\+Font10x20, jevois\+::yuyv\+::\+Light\+Green, jevois\+::sformat(), jevois\+::\+Raw\+Image\+::width, and jevois\+::rawimage\+::write\+Text().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_ac45d710c526abb1f6e33ccd7046751c2}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_ac45d710c526abb1f6e33ccd7046751c2}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!itsDetections@{itsDetections}}
+\index{itsDetections@{itsDetections}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{itsDetections}{itsDetections}}
+{\footnotesize\ttfamily std\+::vector$<$yunet\+::\+Face$>$ jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::its\+Detections\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 79 of file Post\+Processor\+Yu\+Net.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_a3e7c5f6098385279f30194a183794293}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_a3e7c5f6098385279f30194a183794293}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!itsImageSize@{itsImageSize}}
+\index{itsImageSize@{itsImageSize}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{itsImageSize}{itsImageSize}}
+{\footnotesize\ttfamily cv\+::\+Size jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::its\+Image\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 80 of file Post\+Processor\+Yu\+Net.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PostProcessorYuNet_a6f88a8a8b5941bb65b834749e0e6cd44}\label{classjevois_1_1dnn_1_1PostProcessorYuNet_a6f88a8a8b5941bb65b834749e0e6cd44}} 
+\index{jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}!itsPriorBox@{itsPriorBox}}
+\index{itsPriorBox@{itsPriorBox}!jevois::dnn::PostProcessorYuNet@{jevois::dnn::PostProcessorYuNet}}
+\doxyparagraph{\texorpdfstring{itsPriorBox}{itsPriorBox}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$yunet\+::\+Prior\+Box$>$ jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::its\+Prior\+Box\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 81 of file Post\+Processor\+Yu\+Net.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorYuNet_8H}{Post\+Processor\+Yu\+Net.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PostProcessorYuNet_8C}{Post\+Processor\+Yu\+Net.\+C}}\end{DoxyCompactItemize}

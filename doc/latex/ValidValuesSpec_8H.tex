@@ -1,0 +1,42 @@
+\hypertarget{ValidValuesSpec_8H}{}\doxysubsection{include/jevois/\+Component/\+Valid\+Values\+Spec.H File Reference}
+\label{ValidValuesSpec_8H}\index{include/jevois/Component/ValidValuesSpec.H@{include/jevois/Component/ValidValuesSpec.H}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Range.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Types/\+Step\+Range.\+H$>$}\newline
+{\ttfamily \#include $<$boost/regex.\+hpp$>$}\newline
+{\ttfamily \#include $<$jevois/\+Component/details/\+Valid\+Values\+Spec\+Impl.\+H$>$}\newline
+Include dependency graph for Valid\+Values\+Spec.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ValidValuesSpec_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{ValidValuesSpec_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 用于为类型指定一组有效值的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecNone}{jevois\+::\+Valid\+Values\+Spec\+None$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Open/\+None 有效值规范，T 可以采用的任何值都有效 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecList}{jevois\+::\+Valid\+Values\+Spec\+List$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 有限列表有效值规范，构造时列出的所有内容均有效，其他任何内容均无效 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 基于范围的有效值规范，包含边界 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 基于 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 的有效值规范，包含边界 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRegex}{jevois\+::\+Valid\+Values\+Spec\+Regex$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 基于正则表达式的有效值规范，与正则表达式匹配的所有内容均被视为有效 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}

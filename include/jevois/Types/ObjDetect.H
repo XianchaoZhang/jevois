@@ -22,10 +22,10 @@
 
 namespace jevois
 {
-  //! A trivial struct to store object detection results
+  //! 一个用于存储对象检测结果的简单结构
   struct ObjDetect
   {
       int tlx, tly, brx, bry; //!< The box
-      std::vector<ObjReco> reco; //!< The recognized classes with their scores
+      std::vector<ObjReco> reco; //!< 已识别的类别及其分数
   };
 }

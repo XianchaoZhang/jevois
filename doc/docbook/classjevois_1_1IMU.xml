@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1IMU">
+<title>jevois::IMU Class Reference</title>
+<indexterm><primary>jevois::IMU</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/IMU.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para><link linkend="_classjevois_1_1ICM20948">ICM20948</link> 惯性测量单元 (<link linkend="_classjevois_1_1IMU">IMU</link>) 的抽象接口 </para>
+
+
+
+<para>此类抽象低级通信接口（通过 JeVois-Pro 硬件上的 SPI 总线，或通过与摄像头传感器芯片共享的 I2C 总线以及通过 JeVois-A33 上的 自定义 ioctl() 调用。 </para>
+<para>
+Definition at line 27 of file IMU.H.</para>
+Inheritance diagram for jevois::IMU:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1IMU__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1IMU_1aa14e2e8ac1098eb344671f9c17d75070">IMU</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1IMU_1a5ebbe6167be8989cd812d011e0af21ef">~IMU</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1IMU_1a73e0a55b34109ae3f91a87c72ac810c3">isSPI</link> () const =0</para>
+
+<para>如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写时使用； </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>IMU 寄存器的访问函数</title>
+        <itemizedlist>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1IMU_1a95f5a6feafb3cf43ba5873bc3897027c">writeRegister</link> (unsigned short reg, unsigned char val)=0</para>
+
+<para>将值写入 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一 </para>
+</listitem>
+            <listitem><para>virtual unsigned char <link linkend="_classjevois_1_1IMU_1a1acc20be96d27b69cb9b8eaf00352a30">readRegister</link> (unsigned short reg)=0</para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一读取一个值 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1IMU_1a80c3dc139500b71acbca22752b8041c9">writeRegisterArray</link> (unsigned short reg, unsigned char const *vals, size_t num)=0</para>
+
+<para>将一个值数组写入相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器 </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1IMU_1abd15f4725196633a11363240e3681515">readRegisterArray</link> (unsigned short reg, unsigned char *vals, size_t num)=0</para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器读取一个值数组 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>DMP 寄存器的访问函数</title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1IMU_1a3f6a9ab547f7fc835a30b46f6ea7539d">loadDMPfirmware</link> (bool verify=false, bool errthrow=false)</para>
+
+<para>加载 DMP 固件 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMU_1aa1109d7e864d45b08ce3f723e9cf6fc8">writeDMPregister</link> (unsigned short reg, unsigned short val)</para>
+
+<para>将值写入 DMP 寄存器 </para>
+</listitem>
+            <listitem><para>unsigned short <link linkend="_classjevois_1_1IMU_1ae60c55e027cb61d663e9be06a5b43c34">readDMPregister</link> (unsigned short reg)</para>
+
+<para>从 DMP 寄存器读取值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMU_1a6705c75e05e1f07944828b6c4d73f9a3">writeDMPregisterArray</link> (unsigned short reg, unsigned char const *vals, size_t num)</para>
+
+<para>将值数组写入 DMP 寄存器 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMU_1a281d6b0ceefd867863b8c7754ad38e41">readDMPregisterArray</link> (unsigned short reg, unsigned char *vals, size_t num)</para>
+
+<para>从 DMP 寄存器读取值数组 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1IMU_1aa14e2e8ac1098eb344671f9c17d75070"/>    <section>
+    <title>IMU()</title>
+<indexterm><primary>IMU</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>IMU</secondary></indexterm>
+<para><computeroutput>jevois::IMU::IMU ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 29 of file IMU.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a5ebbe6167be8989cd812d011e0af21ef"/>    <section>
+    <title>~IMU()</title>
+<indexterm><primary>~IMU</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>~IMU</secondary></indexterm>
+<para><computeroutput>jevois::IMU::~IMU ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 33 of file IMU.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1IMU_1a73e0a55b34109ae3f91a87c72ac810c3"/>    <section>
+    <title>isSPI()</title>
+<indexterm><primary>isSPI</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>isSPI</secondary></indexterm>
+<para><computeroutput>virtual bool jevois::IMU::isSPI ( ) const<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写时使用； </para>
+</para>
+<para>
+Implemented in <link linkend="_classjevois_1_1IMUi2c_1a2d4196c7066f80697579843b95fcb0c2">jevois::IMUi2c</link>, and <link linkend="_classjevois_1_1IMUspi_1a7f0689c24ba1e0ae2c1a03d30e726d2a">jevois::IMUspi</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a3f6a9ab547f7fc835a30b46f6ea7539d"/>    <section>
+    <title>loadDMPfirmware()</title>
+<indexterm><primary>loadDMPfirmware</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>loadDMPfirmware</secondary></indexterm>
+<para><computeroutput>void jevois::IMU::loadDMPfirmware (bool verify = <computeroutput>false</computeroutput>
+, bool errthrow = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>加载 DMP 固件 </para>
+</para>
+
+<para>在 JeVois-A33 上，固件已由相机内核模块加载。因此，这仅在 JeVois-Pro 上通过 SPI 加载固件有用。如果 verify 为真， 我们将读回并检查。如果 errthrow 也为真，则在验证失败时抛出异常。 </para>
+<para>
+Definition at line 37 of file IMU.C.</para>
+<para>
+References DMP_LOAD_START, DMP_MEM_BANK_SIZE, and LINFO.</para>
+<para>
+Referenced by jevois::IMUspi::IMUspi().</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1ae60c55e027cb61d663e9be06a5b43c34"/>    <section>
+    <title>readDMPregister()</title>
+<indexterm><primary>readDMPregister</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>readDMPregister</secondary></indexterm>
+<para><computeroutput>unsigned short jevois::IMU::readDMPregister (unsigned short reg)</computeroutput></para><para>
+
+<para>从 DMP 寄存器读取值 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，否则可能会导致系统崩溃。请注意，该值将从 DMP 处理器的大端转换为 JeVois 处理器的小端。 </para>
+<para>
+Definition at line 138 of file IMU.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a281d6b0ceefd867863b8c7754ad38e41"/>    <section>
+    <title>readDMPregisterArray()</title>
+<indexterm><primary>readDMPregisterArray</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>readDMPregisterArray</secondary></indexterm>
+<para><computeroutput>void jevois::IMU::readDMPregisterArray (unsigned short reg, unsigned char * vals, size_t num)</computeroutput></para><para>
+
+<para>从 DMP 寄存器读取值数组 </para>
+</para>
+<para>
+Definition at line 149 of file IMU.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a1acc20be96d27b69cb9b8eaf00352a30"/>    <section>
+    <title>readRegister()</title>
+<indexterm><primary>readRegister</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>readRegister</secondary></indexterm>
+<para><computeroutput>virtual unsigned char jevois::IMU::readRegister (unsigned short reg)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一读取一个值 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 <link linkend="_classjevois_1_1IMU">IMU</link> 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1IMUi2c_1a627b9e1781328684bd7bf5955799ea08">jevois::IMUi2c</link>, and <link linkend="_classjevois_1_1IMUspi_1a829c91f77c78ead9bd98390002314dee">jevois::IMUspi</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1abd15f4725196633a11363240e3681515"/>    <section>
+    <title>readRegisterArray()</title>
+<indexterm><primary>readRegisterArray</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>readRegisterArray</secondary></indexterm>
+<para><computeroutput>virtual void jevois::IMU::readRegisterArray (unsigned short reg, unsigned char * vals, size_t num)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器读取一个值数组 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 <link linkend="_classjevois_1_1IMU">IMU</link> 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少 num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1IMUi2c_1a4ddc146d8d1246e6f8d05cf9964b4ff2">jevois::IMUi2c</link>, and <link linkend="_classjevois_1_1IMUspi_1ad29a0ae407351e2c0522495ecb5eeb85">jevois::IMUspi</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1aa1109d7e864d45b08ce3f723e9cf6fc8"/>    <section>
+    <title>writeDMPregister()</title>
+<indexterm><primary>writeDMPregister</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>writeDMPregister</secondary></indexterm>
+<para><computeroutput>void jevois::IMU::writeDMPregister (unsigned short reg, unsigned short val)</computeroutput></para><para>
+
+<para>将值写入 DMP 寄存器 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 DMP 设置，不应在正常操作中使用，它可能会导致系统崩溃。请注意，根据 DMP 处理器 的要求，该值将转换为大端字节序。 </para>
+<para>
+Definition at line 114 of file IMU.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a6705c75e05e1f07944828b6c4d73f9a3"/>    <section>
+    <title>writeDMPregisterArray()</title>
+<indexterm><primary>writeDMPregisterArray</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>writeDMPregisterArray</secondary></indexterm>
+<para><computeroutput>void jevois::IMU::writeDMPregisterArray (unsigned short reg, unsigned char const * vals, size_t num)</computeroutput></para><para>
+
+<para>将值数组写入 DMP 寄存器 </para>
+</para>
+<para>
+Definition at line 125 of file IMU.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a95f5a6feafb3cf43ba5873bc3897027c"/>    <section>
+    <title>writeRegister()</title>
+<indexterm><primary>writeRegister</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>writeRegister</secondary></indexterm>
+<para><computeroutput>virtual void jevois::IMU::writeRegister (unsigned short reg, unsigned char val)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>将值写入 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 <link linkend="_classjevois_1_1IMU">IMU</link> 设置，不应在正常操作中使用，否则可能会导致系统崩溃。此功能包括银行选择。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1IMUi2c_1aa281e1d63729d47d758dae3bbaaaf615">jevois::IMUi2c</link>, and <link linkend="_classjevois_1_1IMUspi_1a5c0192150901a6ac87a2bf2d3c073cd8">jevois::IMUspi</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1IMU_1a80c3dc139500b71acbca22752b8041c9"/>    <section>
+    <title>writeRegisterArray()</title>
+<indexterm><primary>writeRegisterArray</primary><secondary>jevois::IMU</secondary></indexterm>
+<indexterm><primary>jevois::IMU</primary><secondary>writeRegisterArray</secondary></indexterm>
+<para><computeroutput>virtual void jevois::IMU::writeRegisterArray (unsigned short reg, unsigned char const * vals, size_t num)<computeroutput>[pure virtual]</computeroutput></computeroutput></para><para>
+
+<para>将一个值数组写入相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器 </para>
+</para>
+
+<para>这种非常低级的访问仅用于开发最佳 <link linkend="_classjevois_1_1IMU">IMU</link> 设置，不应在正常操作中使用，否则可能会导致系统崩溃。调用者应该为 vals 分配至少 num 个字节的内存。num 必须小于 32。此函数中包含银行选择。 </para>
+<para>
+Implemented in <link linkend="_classjevois_1_1IMUi2c_1a8a5d3ff1f686edb4595ff204f4313764">jevois::IMUi2c</link>, and <link linkend="_classjevois_1_1IMUspi_1a16dfdbafeb959a9faba96d57d1bd3321">jevois::IMUspi</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_IMU_8H">IMU.H</link>src/jevois/Core/<link linkend="_IMU_8C">IMU.C</link></section>
+</section>

@@ -54,22 +54,20 @@
 
 namespace jevois
 {
-  //! A generic range class
-  /*! The Range class is used to represent a range from [min .. max]
+  //! 通用 Range 类 
+  /*! Range 类用于表示从 [min .. max] 的范围
 
-      Note that the operators of Range do not use type promotions. This is to minimize template burden and also possible
-      programmer confusion. For example, while in principle one could define Range<int> + float and return a
-      Range<float>, here we do not define such an operator. The same result can be achieved by first converting the
-      range and then adding the constant:
+      请注意，Range 的运算符不使用类型提升。这是为了最大限度地减少模板负担，也是为了减少程序员的困惑。例如，虽然原则上可以定义
+       Range<int> + float 并返回 Range<float>，但这里我们没有定义这样的运算符。通过首先转换范围然后添加常量可以实现相同的结
+       果：
 
       @code
       jevois::Range<int> r1(0, 100);
       // NOT ALLOWED: jevois::Range<float> r2 = r1 + 1.23F;
-      jevois::Range<float> r2 = jevois::Range<float>(r1) + 1.23F; // OK, no hidden conversions, easy to read, explicit
+      jevois::Range<float> r2 = jevois::Range<float>(r1) + 1.23F; // OK, 没有隐藏转换，易于阅读，明确
       @endcode
 
-      Operators on Range use range checking and clamping internally. Thus, be careful if using Range<byte>. For
-      example:
+      Range 上的运算符在内部使用范围检查和限制。因此，使用 Range<byte> 时要小心。例如：
       @code
       jevois::Range<jevois::byte> r(jevois::byte(0), jevois::byte(250));
       r += jevois::byte(100); // new range is 100-255
@@ -92,18 +90,16 @@ namespace jevois
       //! Move constructor
       Range(Range<T> && other) = default;
 
-      //! Copy-conversion constructor, uses jevois::clamped_convert<T,U> internally
-      /*! Note that this constructor is \e explicit, i.e., you need to explicitly mention it. This is to avoid
-          conversions to happen without a programmer being aware of it. For example:
+      //! 复制转换构造函数，内部使用 jevois::clamped_convert<T,U> 
+      /*！请注意，此构造函数是 \e explicit 的，即您需要显式提及它。这是为了避免在程序员不知情的情况下发生转换。例如：
           @code
           void myFunc(jevois::Range<float> const & rng) { ... }
           jevois::Range<int> r1(0, 100);
-          jevois::Range<float> r2(r1); // ok, explicit constructor call
+          jevois::Range<float> r2(r1); // ok, 显式构造函数调用
           myFunc(r2);  // ok, no conversion necessary
-          //myFunc(r1) // NO: passing Range<int> to function that takes a Range<float> arg fails to compile
-          myFunc(jevois::Range<float>(r1)); // ok, nice and explicit; and you can think about whether r1 should 
-                                         // have been a Range<float> in the first place so you don't waste CPU
-                                         // doing this conversion (as opposed to just not being aware of the wasting)
+          //myFunc(r1) // NO: 将 Range<int> 传递给接受 Range<float> 参数的函数会导致编译失败
+          myFunc(jevois::Range<float>(r1)); // ok, nice and explicit; 并且您可以首先考虑 r1 是否应该是一个 Range<float>，
+                                         // 这样您就不会浪费 CPU 进行这种转换（而不是只是没有意识到浪费）
           @endcode */
       template <typename U>
       explicit Range(Range<U> const & other);
@@ -153,42 +149,42 @@ namespace jevois
   template <typename T>
   std::istream & operator>>(std::istream & in, Range<T> & r);
 
-  //! Machine-readable output to a string, for use in jevois::Parameter: outputs \c min...max (e.g., 0...100)
+  //! 机器可读的输出为字符串，用于 jevois::Parameter：outputs \c min...max (e.g., 0...100)
   /*! \relates jevois::Range */
   template <class T>
   void paramValToString(Range<T> const & val, std::string & result);
 
-  //! Machine-readable input from a string, for use in jevois::Parameter: reads \c min...max (e.g., 0...100)
+  //! 来自字符串的机器可读输入， 用于 jevois::Parameter: reads \c min...max (e.g., 0...100)
   /*! \relates jevois::Range */
   template <class T>
   void paramStringToVal(std::string const & valstring, Range<T> & result);
 
-  //! Equality test: Range<T> == Range<T>
+  //! 相等性测试： Range<T> == Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   bool operator==(Range<T> const & range1, Range<T> const & range2);
 
-  //! Inequality test: Range<T> != Range<T>
+  //! 不等式测试： Range<T> != Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   bool operator!=(Range<T> const & range1, Range<T> const & range2);
 
-  //! Add constant to both ends of a range: Range<T> + T
+  //! 在范围的两端添加常数： Range<T> + T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator+(Range<T> const & range, T const & scalar);
 
-  //! Add constant to both ends of a range: T + Range<T>
+  //! 在范围的两端添加常数： T + Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator+(T const & scalar, Range<T> const & range);
 
-  //! Subtract constant from both ends of a range: Range<T> - T
+  //! 从范围的两端减去常数：Range<T> - T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator-(Range<T> const & range, T const & scalar);
 
-  //! Subtract constant from both ends of a range: T - Range<T>
+  //! 从范围的两端减去常数：T - Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator-(T const & scalar, Range<T> const & range);
@@ -198,37 +194,37 @@ namespace jevois
   template <typename T>
   Range<T> operator/(Range<T> const & range, T const & scalar);
 
-  //! Divide a factor by both ends of a range: T / Range<T>
+  //! 将范围的两端除以一个因子： T / Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator/(T const & scalar, Range<T> const & range);
 
-  //! Multiply both ends of a range by a factor: Range<T> * T
+  //! 将范围的两端乘以一个因子： Range<T> * T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator*(Range<T> const & range, T const & scalar);
 
-  //! Multiply a factor by both ends of a range: T * Range<T>
+  //! 将一个因子乘以范围的两端： T * Range<T>
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> operator*(T const & scalar, Range<T> const & range);
 
-  //! Add constant to both ends of a range: Range<T> += T
+  //! 在范围的两端添加常数：Range<T> += T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> & operator+=(Range<T> & range, T const & scalar);
 
-  //! Subtract constant from both ends of a range: Range<T> -= T
+  //! 从范围的两端减去常数：Range<T> -= T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> & operator-=(Range<T> & range, T const & scalar);
 
-  //! Multiply both ends of a range by a factor: Range<T> *= T
+  //! 将范围的两端乘以一个因子： Range<T> *= T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> & operator*=(Range<T> & range, T const & scalar);
 
-  //! Divide both ends of a range by a factor: Range<T> /= T
+  //! 将范围的两端除以一个因子：Range<T> /= T
   /*! \relates jevois::Range */
   template <typename T>
   Range<T> & operator/=(Range<T> & range, T const & scalar);

@@ -1,10 +1,10 @@
-/*! \page Change15log Changes and new features in JeVois 1.5
+/*! \page Change15log JeVois 1.5 中的变化和新功能
 
-JeVois 1.5 brings the following new features:
+JeVois 1.5 带来以下新功能：
 
-- Updated to OpenCV 3.3.0 including OpenCV-Contrib packages and python 3.6 support
+- 已更新至 OpenCV 3.3.0，包括 OpenCV-Contrib 包和 python 3.6 支持
 
-- Merged with buildroot 2017.08 which updates the JeVois operating system to:
+- 与 buildroot 2017.08 合并，将 JeVois 操作系统更新为：
   + gcc/g++-7.2.0
   + boost-1.64.0
   + python-3.6.1
@@ -78,8 +78,7 @@ JeVois 1.5 brings the following new features:
   + zbar-854a5d97059e395807091ac4d80c53f7968abb8f
   + zlib-1.2.11
 
-- NOTE: the platform (based on buildroot) is now a bit ahead of the host (assuming Ubuntu 17.04). Some of the
-  differences will likely disappear with future Ubuntu releases, but in the meantime be aware that:
+- NOTE：平台（基于 buildroot）现在比主机（假设为 Ubuntu 17.04）略有领先。随着 Ubuntu 未来的发布，部分差异可能会消失，但与此同时请注意：
   
   Software      | Platform   |  Ubuntu 17.04
   --------------|------------|---------------------------------
@@ -87,24 +86,18 @@ JeVois 1.5 brings the following new features:
   python        | 3.6        | 3.5
   boost         | 1.64       | 1.62
 
-  For most, this should make no difference. Because g++ 7.2 is a bit more strict than 6.3, you may get a few additional
-  warnings when compiling your code for platform compared to host. You should fix them anyway as the host setup will
-  move to g++7 soon.
-  
-- Updated tiny-dnn to latest version from GitHub (there has not been any release lately). This changes the API a bit,
-  see updated ObjectRecognition components in jevoisbase.
+对于大多数人来说，这应该没有什么区别。因为 g++ 7.2 比 6.3 更严格，所以在为平台编译代码时，与主机相比，您可能会收到一些额外的警告。无论如何，您都应该修复它们，因为主机设置将很快转移到 g++7。
+- 将 tiny-dnn 更新为 GitHub 的最新版本（最近没有任何版本）。这会稍微改变 API，请参阅 jevoisbase 中更新的 ObjectRecognition 组件。
 
-- Small improvements on jevois-flash-card to avoid mistakenly erasing large hard disks.
+- 对 jevois-flash-card 进行小改进，以避免错误地擦除大硬盘。
 
-- This releases changes the platform operating system (buildroot). You need to get the new JeVois Debian packages from
-  https://jevois.usc.edu
+- 此版本更改了平台操作系统 (buildroot)。您需要从 https://jevois.usc.edu 获取新的 JeVois Debian 软件包
 
-- Recommended upgrade workflow: see http://jevois.org/tutorials/ProgrammerSetup.html under Upgrading.
+- 推荐的升级工作流程：请参阅 http://jevois.org/tutorials/ProgrammerSetup.html 下的升级部分。
 
-- Added new `help2` command-line interface command to show a more compact help message about the current vision module
-  only.
+- 添加了新的 `help2` 命令行界面命令，仅显示有关当前视觉模块的更紧凑的帮助信息。
 
-- Added profiling to darknet, which will allow one to easily find out which deep neural network layers take a lot of
-  time to compute.
+- 增加了对 darknet 的分析，这将使人们能够轻松找出哪些深度神经网络层需要花费大量时间进行计算。
 
 */
+

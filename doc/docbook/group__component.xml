@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__component">
+<title>Model components, parameters, manager, and associated classes</title>
+<indexterm><primary>Model components, parameters, manager, and associated classes</primary></indexterm>
+<section>
+<title> </title>
+
+<para>这些类定义了如何从组件构建用户可调参数的复杂模型或视觉处理管道。 </para>
+
+<para>如何探索此文档模块：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>从查看 <link linkend="_classjevois_1_1Component">Component</link> 开始，它强调了如何在 JeVois 中组装复杂视觉处理管道的广泛概念框架，并大量重复使用共享算法元素。</para>
+</listitem><listitem>
+<para>然后查看 <link linkend="_group__parameter">Parameter-related classes and functions</link> ，它提供了有关如何在组件中实现和使用参数的详细信息。可以为任何有效的 C++ 类型创建参数，其目的是 允许算法的最终用户调整算法的某些行为。</para>
+</listitem><listitem>
+<para>最后看一下 Manager，它是一个特殊组件，是组件层次结构的根。</para>
+</listitem><listitem>
+<para>然后，您将通过查看文档模块中的其他元素来准备进入下一个级别。 </para>
+</listitem></itemizedlist>
+</para>
+Collaboration diagram for Model components, parameters, manager, and associated classes:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__component.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Component">jevois::Component</link></para>
+
+<para>模型层次结构的组成部分。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Manager">jevois::Manager</link></para>
+
+<para>组件对象层次结构的管理器 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__parameter">Parameter-related classes and functions</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+</section>

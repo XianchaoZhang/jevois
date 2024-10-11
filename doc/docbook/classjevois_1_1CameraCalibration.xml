@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1CameraCalibration">
+<title>jevois::CameraCalibration Class Reference</title>
+<indexterm><primary>jevois::CameraCalibration</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/CameraCalibration.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>用于相机校准的辅助类，允许某些模块计算物体的 3D 位置 </para>
+
+
+
+<para>此代码大量派生自 OpenCV 源代码树中的 calibrate_camera.cpp。随着 OpenCV 更新而保持更新。 </para>
+<para>
+Definition at line 27 of file CameraCalibration.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraCalibration_1ae8f67e788176d7496e13737d7662f4f9">load</link> (std::string const &amp;fname)</para>
+
+<para>Load from file. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1CameraCalibration_1a410313ca6a298e7fdd86054ee441085e">save</link> (std::string const &amp;fname) const</para>
+
+<para>Save to file. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>jevois::CameraSensor <link linkend="_classjevois_1_1CameraCalibration_1ad5fb67b6782ffb3c05dbd82f29a07624">sensor</link> = jevois::CameraSensor::any</para>
+
+<para><link linkend="_classjevois_1_1Camera">Camera</link> sensor. </para>
+</listitem>
+            <listitem><para>jevois::CameraLens <link linkend="_classjevois_1_1CameraCalibration_1a4d5553e5246eb3b83707b309b0a39e8c">lens</link> = jevois::CameraLens::standard</para>
+
+<para><link linkend="_classjevois_1_1Camera">Camera</link> lens. </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1CameraCalibration_1a99b33e43b6f434bc7176ef5c61ec28cc">w</link> = 0</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1CameraCalibration_1ad3d988e3a20ec599ff1b12780f7679e0">h</link> = 0</para>
+
+<para>Image width and height (camera resolution) </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1CameraCalibration_1a89e0eb0be6dcdd8d833034aab4c92c2a">camMatrix</link> = cv::Mat::eye(3, 3, CV_64F)</para>
+
+<para>3x3 camera matrix </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1CameraCalibration_1ab3b7fb5b8c5fb84bdaa17c3865bc3e87">distCoeffs</link> = cv::Mat::zeros(5, 1, CV_64F)</para>
+
+<para>5x1 distortion coefficients </para>
+</listitem>
+            <listitem><para>double <link linkend="_classjevois_1_1CameraCalibration_1ab6aa0b3f9ff514ae06782c85bd885471">avgReprojErr</link> = 0.0</para>
+
+<para>Average reprojection error. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1CameraCalibration_1ae8f67e788176d7496e13737d7662f4f9"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::CameraCalibration::load (std::string const &amp; fname)</computeroutput></para><para>
+
+<para>Load from file. </para>
+</para>
+
+<para>Throws std::runtime_error if file not found </para>
+<para>
+Definition at line 23 of file CameraCalibration.C.</para>
+<para>
+References avgReprojErr, camMatrix, distCoeffs, h, lens, sensor, and w.</para>
+<para>
+Referenced by jevois::Engine::loadCameraCalibration().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1a410313ca6a298e7fdd86054ee441085e"/>    <section>
+    <title>save()</title>
+<indexterm><primary>save</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>save</secondary></indexterm>
+<para><computeroutput>void jevois::CameraCalibration::save (std::string const &amp; fname) const</computeroutput></para><para>
+
+<para>Save to file. </para>
+</para>
+
+<para>Throws std::runtime_error if file cannot be written </para>
+<para>
+Definition at line 38 of file CameraCalibration.C.</para>
+<para>
+References h, and jevois::to_string().</para>
+<para>
+Referenced by jevois::Engine::saveCameraCalibration().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1CameraCalibration_1ab6aa0b3f9ff514ae06782c85bd885471"/>    <section>
+    <title>avgReprojErr</title>
+<indexterm><primary>avgReprojErr</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>avgReprojErr</secondary></indexterm>
+<para><computeroutput>double jevois::CameraCalibration::avgReprojErr = 0.0</computeroutput></para><para>
+
+<para>Average reprojection error. </para>
+</para>
+<para>
+Definition at line 35 of file CameraCalibration.H.</para>
+<para>
+Referenced by load().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1a89e0eb0be6dcdd8d833034aab4c92c2a"/>    <section>
+    <title>camMatrix</title>
+<indexterm><primary>camMatrix</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>camMatrix</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::CameraCalibration::camMatrix = cv::Mat::eye(3, 3, CV_64F)</computeroutput></para><para>
+
+<para>3x3 camera matrix </para>
+</para>
+<para>
+Definition at line 33 of file CameraCalibration.H.</para>
+<para>
+Referenced by load().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1ab3b7fb5b8c5fb84bdaa17c3865bc3e87"/>    <section>
+    <title>distCoeffs</title>
+<indexterm><primary>distCoeffs</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>distCoeffs</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::CameraCalibration::distCoeffs = cv::Mat::zeros(5, 1, CV_64F)</computeroutput></para><para>
+
+<para>5x1 distortion coefficients </para>
+</para>
+<para>
+Definition at line 34 of file CameraCalibration.H.</para>
+<para>
+Referenced by load().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1ad3d988e3a20ec599ff1b12780f7679e0"/>    <section>
+    <title>h</title>
+<indexterm><primary>h</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>h</secondary></indexterm>
+<para><computeroutput>int jevois::CameraCalibration::h = 0</computeroutput></para><para>
+
+<para>Image width and height (camera resolution) </para>
+</para>
+<para>
+Definition at line 32 of file CameraCalibration.H.</para>
+<para>
+Referenced by load(), jevois::Engine::loadCameraCalibration(), and jevois::Engine::saveCameraCalibration().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1a4d5553e5246eb3b83707b309b0a39e8c"/>    <section>
+    <title>lens</title>
+<indexterm><primary>lens</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>lens</secondary></indexterm>
+<para><computeroutput>jevois::CameraLens jevois::CameraCalibration::lens = jevois::CameraLens::standard</computeroutput></para><para>
+
+<para><link linkend="_classjevois_1_1Camera">Camera</link> lens. </para>
+</para>
+<para>
+Definition at line 31 of file CameraCalibration.H.</para>
+<para>
+Referenced by load(), jevois::Engine::loadCameraCalibration(), and jevois::Engine::saveCameraCalibration().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1ad5fb67b6782ffb3c05dbd82f29a07624"/>    <section>
+    <title>sensor</title>
+<indexterm><primary>sensor</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>sensor</secondary></indexterm>
+<para><computeroutput>jevois::CameraSensor jevois::CameraCalibration::sensor = jevois::CameraSensor::any</computeroutput></para><para>
+
+<para><link linkend="_classjevois_1_1Camera">Camera</link> sensor. </para>
+</para>
+<para>
+Definition at line 30 of file CameraCalibration.H.</para>
+<para>
+Referenced by load(), jevois::Engine::loadCameraCalibration(), and jevois::Engine::saveCameraCalibration().</para>
+    </section><anchor xml:id="_classjevois_1_1CameraCalibration_1a99b33e43b6f434bc7176ef5c61ec28cc"/>    <section>
+    <title>w</title>
+<indexterm><primary>w</primary><secondary>jevois::CameraCalibration</secondary></indexterm>
+<indexterm><primary>jevois::CameraCalibration</primary><secondary>w</secondary></indexterm>
+<para><computeroutput>int jevois::CameraCalibration::w = 0</computeroutput></para><para>
+Definition at line 32 of file CameraCalibration.H.</para>
+<para>
+Referenced by load(), jevois::Engine::loadCameraCalibration(), and jevois::Engine::saveCameraCalibration().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_CameraCalibration_8H">CameraCalibration.H</link>src/jevois/Core/<link linkend="_CameraCalibration_8C">CameraCalibration.C</link></section>
+</section>

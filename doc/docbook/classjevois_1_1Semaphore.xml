@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Semaphore">
+<title>jevois::Semaphore&lt; BB &gt; Class Template Reference</title>
+<indexterm><primary>jevois::Semaphore&lt; BB &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Types/Semaphore.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;BlockingBehavior BB&gt;
+class jevois::Semaphore&lt; BB &gt;</title></simplesect>
+
+
+<para>一个简单的信号量 </para>
+
+
+
+<para>信号量是一种线程安全机制，用于在多个执行线程之间共享资源。</para>
+
+<para>请参阅此维基百科页面了解基本信息：http://en.wikipedia.org/wiki/Semaphore_%28programming%29</para>
+
+<para>该代码源自神经形态机器人工具包 (NRT)。</para>
+
+<para>
+                <formalpara>
+                    <title>
+Template Parameters                    </title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+                                <entry>BB</entry>
+                                <entry>
+<para>定义阻塞行为，应该是来自 <link linkend="_group__types_1ga12724887bc7648f2f888edb9c3055e3d">jevois::BlockingBehavior</link> 的值 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+<para>
+Definition at line 70 of file Semaphore.H.</para>
+Inheritance diagram for jevois::Semaphore&lt; BB &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1Semaphore__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Semaphore_1a9f894c25099a738fa53ca63304e4fdd1">Semaphore</link> (size_t n=0)</para>
+
+<para>创建一个具有 n 个初始资源的信号量 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Semaphore_1a699fc7c323b955e73e5ba0804063bb01">increment</link> (size_t n)</para>
+
+<para>释放n个资源给信号量 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Semaphore_1ae21272a583b5fc0f20437019e9bed528">decrement</link> (size_t n)</para>
+
+<para>从信号量中移除 n 个资源，阻塞直到它们可用，如果不可用则抛出 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1Semaphore_1a0eb728acb634b486ef3fc46a6afd4e2f">count</link> () const</para>
+
+<para>获取当前计数 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Semaphore_1a9f894c25099a738fa53ca63304e4fdd1"/>    <section>
+    <title>Semaphore()</title>
+<indexterm><primary>Semaphore</primary><secondary>jevois::Semaphore&lt; BB &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Semaphore&lt; BB &gt;</primary><secondary>Semaphore</secondary></indexterm>
+<computeroutput>template&lt;BlockingBehavior BB&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Semaphore">jevois::Semaphore</link>&lt; BB &gt;::<link linkend="_classjevois_1_1Semaphore">Semaphore</link> (size_t n = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>创建一个具有 n 个初始资源的信号量 </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Semaphore_1a0eb728acb634b486ef3fc46a6afd4e2f"/>    <section>
+    <title>count()</title>
+<indexterm><primary>count</primary><secondary>jevois::Semaphore&lt; BB &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Semaphore&lt; BB &gt;</primary><secondary>count</secondary></indexterm>
+<computeroutput>template&lt;BlockingBehavior BB&gt; </computeroutput><para><computeroutput>size_t <link linkend="_classjevois_1_1Semaphore">jevois::Semaphore</link>&lt; BB &gt;::count ( ) const</computeroutput></para><para>
+
+<para>获取当前计数 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Semaphore_1ae21272a583b5fc0f20437019e9bed528"/>    <section>
+    <title>decrement()</title>
+<indexterm><primary>decrement</primary><secondary>jevois::Semaphore&lt; BB &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Semaphore&lt; BB &gt;</primary><secondary>decrement</secondary></indexterm>
+<computeroutput>template&lt;BlockingBehavior BB&gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1Semaphore">jevois::Semaphore</link>&lt; BB &gt;::decrement (size_t n)</computeroutput></para><para>
+
+<para>从信号量中移除 n 个资源，阻塞直到它们可用，如果不可用则抛出 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1Semaphore_1a699fc7c323b955e73e5ba0804063bb01"/>    <section>
+    <title>increment()</title>
+<indexterm><primary>increment</primary><secondary>jevois::Semaphore&lt; BB &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Semaphore&lt; BB &gt;</primary><secondary>increment</secondary></indexterm>
+<computeroutput>template&lt;BlockingBehavior BB&gt; </computeroutput><para><computeroutput>void <link linkend="_classjevois_1_1Semaphore">jevois::Semaphore</link>&lt; BB &gt;::increment (size_t n)</computeroutput></para><para>
+
+<para>释放n个资源给信号量 </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Types/<link linkend="_Semaphore_8H">Semaphore.H</link></section>
+</section>

@@ -1,0 +1,499 @@
+\hypertarget{classjevois_1_1ICM20948}{}\doxysubsection{jevois\+::I\+C\+M20948 Class Reference}
+\label{classjevois_1_1ICM20948}\index{jevois::ICM20948@{jevois::ICM20948}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+I\+C\+M20948.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+T\+DK Inven\+Sense I\+C\+M-\/20948 9D\+OF \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 高级驱动程序 
+
+此驱动程序与内核端驱动程序通信，该驱动程序仅与某些可选 Je\+Vois 传感器上的摄像头传感器驱动程序集成。目前，在 Je\+Vois-\/\+A33 上，只有 On\+Semi (Aptina) A\+R0135 全局快门可选摄像头传感器配备了 I\+M\+U。在 Je\+Vois-\/\+Pro 上，所有摄像头传感器 都配备了 I\+M\+U。
+
+该芯片的规格相当令人印象深刻：
+\begin{DoxyItemize}
+\item 3 轴 16 位加速度计，全范围灵敏度可选为 +/-\/2g、+/-\/4g、+/-\/8g 和 +/-\/16g。
+\item 加速度计数据速率从 4 Hz 到 1125 Hz。
+\item 3 轴 16 位陀螺仪，全范围灵敏度可选为 +/-\/250dps（度/秒）、+/-\/500dps、+/-\/1000dps 和 +/-\/2000dps。
+\item 陀螺仪数据速率从 4 Hz 到 1125 Hz。
+\item 3 轴 16 位磁力计（指南针），范围宽达 +/-\/4900u\+T（微特斯拉）。
+\item 磁力计数据速率为 10 Hz、20 Hz、50 Hz 或 100 Hz。
+\item 16 位温度传感器，读出速率高达 8 k\+Hz。
+\item R\+AW 数据模式（随时获取当前传感器值）、缓冲 (F\+I\+FO) 数据模式（传感器值以固定速率累积到 F\+I\+FO 中）和数字运动处理模式 (D\+M\+P；原始数据在芯片上处理)。
+\item 片上数字运动处理器 (D\+MP) 可以在 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片内部计算：
+\begin{DoxyItemize}
+\item 四元数 6（使用加速度计 + 陀螺仪），
+\item 四元数 9（使用加速度计 + 陀螺仪 + 指南针），
+\item geomag 四元数（使用加速度计 + 指南针），
+\item 翻转/拾取检测，
+\item 步数检测和计数，
+\item 基本活动识别：驾驶、步行、跑步、骑自行车、倾斜、静止。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+通过片上计算的四元数，采用以高精度、固定速率获取传感器数据的算法，并动态应用各种校准、漂移校正和补偿，可以对传感器 在 3D 世界中的姿态及其运动方式进行高精度实时估计。
+
+请注意，在 Je\+Vois-\/\+A33 上，与 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 的通信是通过 400k\+Hz I2C 总线进行的，这可能会限制数据读取速率，具体取决于从 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 请 求的数据。在 Je\+Vois-\/\+Pro 上，通信是通过 7M\+Hz 的 S\+PI 进行的。
+
+该 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 有 3 种基本工作模式（参数模式，只能在 params.\+cfg 中设置）：
+
+
+\begin{DoxyItemize}
+\item R\+A\+W：可以使用 \mbox{\hyperlink{classjevois_1_1ICM20948_abeceec15f2311d734a7f922355bdbc94}{get\+Raw()}} 或 \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get()}} 函数随时访问最新的原始传感器数据。这是最简单的操作模式。一个缺点是，如果您没有以 完全规则的间隔调用 \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get()}}，则读数中会出现一些时间抖动。\+I\+MU 不为其数据提供任何时间戳。
+\item F\+I\+F\+O：在此模式下，传感器的数据以精确、恒定的速率堆积到 1 kbyte F\+I\+FO 缓冲区中（当加速度计、陀螺仪和磁力计全部开启 时，陀螺仪速率决定 F\+I\+FO 缓冲速率）。主要优点是您可以读取数据，而不必担心以高精度间隔调用 \mbox{\hyperlink{classjevois_1_1ICM20948_abeceec15f2311d734a7f922355bdbc94}{get\+Raw()}} 或 \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get()}}。但您 需要注意，当使用高传感器数据速率时，\+F\+I\+FO 可能会很快填满并溢出。
+\item D\+M\+P：在此模式下，数据以精确、固定的速率从传感器捕获，并馈送到片上数字运动处理器 (D\+MP)。然后，\+D\+MP 计算四元数、活动 识别等，并在这些算法的结果可用时将数据包推送到 F\+I\+F\+O。
+\end{DoxyItemize}
+
+注意：此类具有状态且不可重入。也就是说，我们将 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片的当前寄存器组存储在类成员变量中。如果同时调用此类的多个成员 函数，则可能会不同步。由于我们假设在正常操作中不会出现这种情况，因此我们不使用互斥锁来保护芯片访问。如果以多线程方式 使用，用户应使用外部互斥锁来保护此类。 
+
+Definition at line 191 of file I\+C\+M20948.\+H.
+
+
+
+Inheritance diagram for jevois\+::I\+C\+M20948\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ICM20948__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::I\+C\+M20948\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ICM20948__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_ad3d8bad8bdf0689509e48211f79729e0}{I\+C\+M20948}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em 构造函数，低级通信驱动程序为空 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ICM20948_a497afd41a86414f6197fdb824316960d}{$\sim$\+I\+C\+M20948}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚析构函数 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1ICM20948_a5dbe44a38b3c88a2c37a8293eb6ec8ff}{ready}} ()
+\begin{DoxyCompactList}\small\item\em 如果此相机确实具有可正常工作的 \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 则返回 true； \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1ICM20948_af49cc2c1cff425cf2065e3d9307ca689}{data\+Ready}} ()
+\begin{DoxyCompactList}\small\item\em 返回以前未获得的新数据量 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1IMUrawData}{I\+M\+Uraw\+Data}} \mbox{\hyperlink{classjevois_1_1ICM20948_abeceec15f2311d734a7f922355bdbc94}{get\+Raw}} (bool blocking=true)
+\begin{DoxyCompactList}\small\item\em 获取一轮原始数据 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1IMUdata}{I\+M\+Udata}} \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}} (bool blocking=true)
+\begin{DoxyCompactList}\small\item\em 获取一轮缩放的原始数据 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structjevois_1_1DMPdata}{D\+M\+Pdata}} \mbox{\hyperlink{classjevois_1_1ICM20948_a09d20dc8ed590bffd4de96d2c23b2d9a}{get\+D\+MP}} (bool blocking=true)
+\begin{DoxyCompactList}\small\item\em 获取一包 D\+MP 数据 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_a8202f4edbc99ef5a71dc3465b9d0c2e7}{pre\+Init}} () override
+\begin{DoxyCompactList}\small\item\em 连接并初始化 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_a8a5ffa0fa699059985794186876f75b6}{post\+Init}} () override
+\begin{DoxyCompactList}\small\item\em 配置 R\+AW 与 D\+MP 模式： \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_ac0c87dce4c1cad9591e6ab4c87e04da2}{pre\+Uninit}} () override
+\begin{DoxyCompactList}\small\item\em 解冻任何先前冻结的参数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_a3dfe91b8cc41317af9e0a1da12478bb2}{reset}} ()
+\begin{DoxyCompactList}\small\item\em 重置 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片 -\/ 正常操作时不推荐使用 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_a086a18d296e388aaea3765122f1a32b5}{sleep}} (bool enable)
+\begin{DoxyCompactList}\small\item\em 打开/关闭睡眠模式 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ICM20948_a167779c6866f29dc6c430073a8beb990}{cycle}} (bool enable)
+\begin{DoxyCompactList}\small\item\em 打开/关闭加速度计、陀螺仪和指南针的循环模式与连续模式 \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classjevois_1_1ICM20948_ab47f6569ca17eb2f912f2b630a4a31bb}{devid}} ()
+\begin{DoxyCompactList}\small\item\em Read device ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a7ab7e5bfac503a5aab82344fae70f3ee}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Mode,(R\+AW)(F\+I\+FO)(D\+MP))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_aad9e6ed2ab353af824aa71a205f99f2b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (mode, Mode, \char`\"{}Data collection mode. R\+AW means that the latest available raw \char`\"{} \char`\"{}data is returned each time \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() is called, hence timing may not be very \char`\"{} \char`\"{}accurate depending on how regularly \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() is called. F\+I\+FO collects accel and gyro data \char`\"{} \char`\"{}at the exact rates specified by parameters arate, grate into a 1kb F\+I\+FO queue, and \char`\"{} \char`\"{}\mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() takes that data back from the F\+I\+F\+O. D\+MP runs the embedded \char`\"{} \char`\"{}digital motion processor on raw data, and accumulates resulting output \char`\"{} \char`\"{}data into the \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}}\textquotesingle{}s internal F\+I\+FO buffer at a precise, fixed rate. This \char`\"{} \char`\"{}parameter can only be set in a module\textquotesingle{}s params.\+cfg file.\char`\"{}, Mode\+::\+R\+AW, Mode\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a7e012c0766c2fe3851c14fb81a332a2e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (dmp, std\+::string, \char`\"{}Requested D\+MP data. Only valid when mode is D\+M\+P. \char`\"{} \char`\"{}Use any string of letters including\+:\char`\"{} \char`\"{}A=acceleration, \char`\"{} \char`\"{}\mbox{\hyperlink{GUIhelper_8C_a6624f4e052741ab64e953601b163d991}{G}}=gyro, \char`\"{} \char`\"{}M=magnetometer (compass), \char`\"{} \char`\"{}R=quaternion 6 (uses accel + gyro), \char`\"{} \char`\"{}\mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}}=quaternion 9 (uses accel + gyro + compass), \char`\"{} \char`\"{}E=geomag (uses accel + compass), \char`\"{} \char`\"{}P=flip/pickup detection, \char`\"{} \char`\"{}S=step detection, \char`\"{} \char`\"{}T=activity recognition, \char`\"{} \char`\"{}\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}=frame sync from video sensor, \char`\"{} \char`\"{}w=configure activity recognition for wearable, \char`\"{} \char`\"{}g=gyro calibration (always on when gyro used), \char`\"{} \char`\"{}m=compass calibration (always on when compass used), \char`\"{} \char`\"{}b=accel accuracy (always on when accel used), \char`\"{} \char`\"{}\mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}=gyro accuracy (always on when gyro used), \char`\"{} \char`\"{}n=compass accuracy (always on when compass used).\char`\"{}, \char`\"{}Q\+S\+PT\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_ad023ad9842888231ac301c14cf77e070}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (pktdbg, bool, \char`\"{}Send raw F\+I\+FO or D\+MP packets to console for debug/hacking purposes.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_af7976be313ba0e23e689d86a1afc4ada}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (arate, float, \char`\"{}Accelerometer sampling rate (Hz), or 0.\+0 to disable \char`\"{} \char`\"{}accelerometer. Actual sample rate may differ because of finite and \char`\"{} \char`\"{}discrete divider settings. In F\+I\+FO mode, grate controls the data rate.\char`\"{}, 30.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+0F, 1125.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a33040a19b436b769e338c31bfe342945}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (grate, float, \char`\"{}Gyroscope sampling rate (Hz), or 0.\+0 to disable \char`\"{} \char`\"{}gyroscope. Actual sample rate may differ because of finite and \char`\"{} \char`\"{}discrete divider settings. In F\+I\+FO mode, grate controls the data rate.\char`\"{}, 30.\+0F, \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$(0.\+0F, 1125.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a5363ef59970987a9812b8b9418d34e2c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Mag\+Rate,(Off)(Once)(M10\+Hz)(M20\+Hz)(M50\+Hz)(M100\+Hz))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_afe653a9be656631c2dca01e0f783110b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (mrate, Mag\+Rate, \char`\"{}Magnetometer sampling rate (Hz), or Off to disable \char`\"{} \char`\"{}magnetometer, or Once to only \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}} one measurement. You can repeatedly \char`\"{} \char`\"{}set this parameter to Once to obtain repeated measurements \char`\"{} \char`\"{}at your own pace. In Je\+Vois Inventor, you need to alternate between \char`\"{} \char`\"{}Off and Once. In F\+I\+FO mode, grate controls the data rate.\char`\"{}, Mag\+Rate\+::\+M50\+Hz, Mag\+Rate\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_adf08da6549cdd435b6fd80245a4f0fe3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (abw, unsigned int, \char`\"{}Accelerometer bandwidth rate (Hz), or 0 for no \char`\"{} \char`\"{}low-\/pass filter on accelerometer data.\char`\"{}, 50, \{ 0, 6, 12, 24, 50, 111, 246, 470, 1210 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a07fb273398ab6a7cbf4a20c406b43c8a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (gbw, unsigned int, \char`\"{}Gyroscope bandwidth rate (Hz), or 0 for no low-\/pass \char`\"{} \char`\"{}filter on gyroscope data.\char`\"{}, 51, \{ 0, 6, 12, 24, 51, 120, 150, 200, 360, 12100 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a0ec7414c81841c8e864dbe22e4f66035}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (tbw, unsigned int, \char`\"{}Temperature bandwidth rate (Hz), or 0 to turn off \char`\"{} \char`\"{}temperature sensor. Temperature sampling rate is always 1125Hz unless \char`\"{} \char`\"{}tbw is 7932, in which case sampling is at 9k\+Hz.\char`\"{}, 34, \{ 0, 9, 17, 34, 66, 123, 218, 7932 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a5be3e6b6c4d1a99b75cd0a8cbe7a98f1}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (arange, unsigned int, \char`\"{}Accelerometer full-\/scale range (+/-\/g for example, \char`\"{} \char`\"{}2 means +/-\/2g)).\char`\"{}, 4, \{ 2, 4, 8, 16 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ICM20948_a1b019969c5b16f0e65a7a071ba904c82}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (grange, unsigned int, \char`\"{}Gyroscope full-\/scale range (+/-\/dps for example, \char`\"{} \char`\"{}500 means +/-\/500 degrees per second)).\char`\"{}, 500, \{ 250, 500, 1000, 2000 \}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ICM20948_ad3d8bad8bdf0689509e48211f79729e0}\label{classjevois_1_1ICM20948_ad3d8bad8bdf0689509e48211f79729e0}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!ICM20948@{ICM20948}}
+\index{ICM20948@{ICM20948}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{ICM20948()}{ICM20948()}}
+{\footnotesize\ttfamily jevois\+::\+I\+C\+M20948\+::\+I\+C\+M20948 (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+构造函数，低级通信驱动程序为空 
+
+
+
+Definition at line 62 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a497afd41a86414f6197fdb824316960d}\label{classjevois_1_1ICM20948_a497afd41a86414f6197fdb824316960d}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!````~ICM20948@{$\sim$ICM20948}}
+\index{````~ICM20948@{$\sim$ICM20948}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{$\sim$ICM20948()}{~ICM20948()}}
+{\footnotesize\ttfamily jevois\+::\+I\+C\+M20948\+::$\sim$\+I\+C\+M20948 (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚析构函数 
+
+
+
+Definition at line 67 of file I\+C\+M20948.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a167779c6866f29dc6c430073a8beb990}\label{classjevois_1_1ICM20948_a167779c6866f29dc6c430073a8beb990}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!cycle@{cycle}}
+\index{cycle@{cycle}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{cycle()}{cycle()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::cycle (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+打开/关闭加速度计、陀螺仪和指南针的循环模式与连续模式 
+
+
+
+Definition at line 683 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_af49cc2c1cff425cf2065e3d9307ca689}\label{classjevois_1_1ICM20948_af49cc2c1cff425cf2065e3d9307ca689}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!dataReady@{dataReady}}
+\index{dataReady@{dataReady}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{dataReady()}{dataReady()}}
+{\footnotesize\ttfamily int jevois\+::\+I\+C\+M20948\+::data\+Ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+返回以前未获得的新数据量 
+
+
+
+Definition at line 257 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_ab47f6569ca17eb2f912f2b630a4a31bb}\label{classjevois_1_1ICM20948_ab47f6569ca17eb2f912f2b630a4a31bb}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!devid@{devid}}
+\index{devid@{devid}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{devid()}{devid()}}
+{\footnotesize\ttfamily uint32\+\_\+t jevois\+::\+I\+C\+M20948\+::devid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Read device ID. 
+
+
+
+Definition at line 694 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}\label{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!get@{get}}
+\index{get@{get}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1IMUdata}{jevois\+::\+I\+M\+Udata}} jevois\+::\+I\+C\+M20948\+::get (\begin{DoxyParamCaption}\item[{bool}]{blocking = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+获取一轮缩放的原始数据 
+
+
+
+Definition at line 374 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a09d20dc8ed590bffd4de96d2c23b2d9a}\label{classjevois_1_1ICM20948_a09d20dc8ed590bffd4de96d2c23b2d9a}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!getDMP@{getDMP}}
+\index{getDMP@{getDMP}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{getDMP()}{getDMP()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1DMPdata}{jevois\+::\+D\+M\+Pdata}} jevois\+::\+I\+C\+M20948\+::get\+D\+MP (\begin{DoxyParamCaption}\item[{bool}]{blocking = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+获取一包 D\+MP 数据 
+
+如果模式未设置为 D\+M\+P，则会抛出。如果阻止为真，则会阻止，直到 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 提供一个新数据包；否则，可能会返回内容设置 为零的 D\+M\+Pdata。 
+
+Definition at line 380 of file I\+C\+M20948.\+C.
+
+
+
+References jevois\+::\+D\+M\+Ppacket\+Size(), J\+E\+V\+O\+I\+S\+\_\+\+D\+M\+P\+\_\+\+H\+E\+A\+D\+E\+R2, L\+F\+A\+T\+AL, L\+I\+N\+FO, and jevois\+::\+D\+M\+Pdata\+::parse\+Packet().
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_abeceec15f2311d734a7f922355bdbc94}\label{classjevois_1_1ICM20948_abeceec15f2311d734a7f922355bdbc94}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!getRaw@{getRaw}}
+\index{getRaw@{getRaw}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{getRaw()}{getRaw()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structjevois_1_1IMUrawData}{jevois\+::\+I\+M\+Uraw\+Data}} jevois\+::\+I\+C\+M20948\+::get\+Raw (\begin{DoxyParamCaption}\item[{bool}]{blocking = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+获取一轮原始数据 
+
+
+
+Definition at line 279 of file I\+C\+M20948.\+C.
+
+
+
+References jevois\+::\+I\+M\+Uraw\+Data\+::ax(), jevois\+::\+I\+M\+Uraw\+Data\+::ay(), jevois\+::\+I\+M\+Uraw\+Data\+::az(), jevois\+::\+I\+M\+Uraw\+Data\+::gx(), jevois\+::\+I\+M\+Uraw\+Data\+::gy(), jevois\+::\+I\+M\+Uraw\+Data\+::gz(), L\+E\+R\+R\+OR, L\+I\+N\+FO, jevois\+::\+I\+M\+Uraw\+Data\+::mst2(), jevois\+::\+I\+M\+Uraw\+Data\+::mx(), jevois\+::\+I\+M\+Uraw\+Data\+::my(), jevois\+::\+I\+M\+Uraw\+Data\+::mz(), jevois\+::\+I\+M\+Uraw\+Data\+::temp(), and jevois\+::\+I\+M\+Uraw\+Data\+::v.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a8a5ffa0fa699059985794186876f75b6}\label{classjevois_1_1ICM20948_a8a5ffa0fa699059985794186876f75b6}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+配置 R\+AW 与 D\+MP 模式： 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{jevois\+::\+Component}}.
+
+
+
+Definition at line 164 of file I\+C\+M20948.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a8202f4edbc99ef5a71dc3465b9d0c2e7}\label{classjevois_1_1ICM20948_a8202f4edbc99ef5a71dc3465b9d0c2e7}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!preInit@{preInit}}
+\index{preInit@{preInit}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{preInit()}{preInit()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::pre\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+连接并初始化 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{jevois\+::\+Component}}.
+
+
+
+Definition at line 114 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_ac0c87dce4c1cad9591e6ab4c87e04da2}\label{classjevois_1_1ICM20948_ac0c87dce4c1cad9591e6ab4c87e04da2}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!preUninit@{preUninit}}
+\index{preUninit@{preUninit}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{preUninit()}{preUninit()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::pre\+Uninit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+解冻任何先前冻结的参数 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}{jevois\+::\+Component}}.
+
+
+
+Definition at line 245 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a5dbe44a38b3c88a2c37a8293eb6ec8ff}\label{classjevois_1_1ICM20948_a5dbe44a38b3c88a2c37a8293eb6ec8ff}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!ready@{ready}}
+\index{ready@{ready}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{ready()}{ready()}}
+{\footnotesize\ttfamily bool jevois\+::\+I\+C\+M20948\+::ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+如果此相机确实具有可正常工作的 \mbox{\hyperlink{classjevois_1_1ICM20948}{I\+C\+M20948}} 则返回 true； 
+
+
+
+Definition at line 251 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a3dfe91b8cc41317af9e0a1da12478bb2}\label{classjevois_1_1ICM20948_a3dfe91b8cc41317af9e0a1da12478bb2}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!reset@{reset}}
+\index{reset@{reset}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+重置 \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} 芯片 -\/ 正常操作时不推荐使用 
+
+
+
+Definition at line 461 of file I\+C\+M20948.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a086a18d296e388aaea3765122f1a32b5}\label{classjevois_1_1ICM20948_a086a18d296e388aaea3765122f1a32b5}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!sleep@{sleep}}
+\index{sleep@{sleep}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{sleep()}{sleep()}}
+{\footnotesize\ttfamily void jevois\+::\+I\+C\+M20948\+::sleep (\begin{DoxyParamCaption}\item[{bool}]{enable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+打开/关闭睡眠模式 
+
+
+
+Definition at line 668 of file I\+C\+M20948.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ICM20948_aad9e6ed2ab353af824aa71a205f99f2b}\label{classjevois_1_1ICM20948_aad9e6ed2ab353af824aa71a205f99f2b}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{mode}]{,  }\item[{Mode}]{,  }\item[{\char`\"{}Data collection mode. R\+AW means that the latest available raw \char`\"{} \char`\"{}data is returned each time \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() is}]{called,  }\item[{hence timing may not be very \char`\"{} \char`\"{}accurate depending on how regularly \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() is called. F\+I\+FO collects accel and gyro data \char`\"{} \char`\"{}at the exact rates specified by parameters}]{arate,  }\item[{grate into a 1kb F\+I\+FO}]{queue,  }\item[{and \char`\"{} \char`\"{}\mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}}() takes that data back from the F\+I\+F\+O. D\+MP runs the embedded \char`\"{} \char`\"{}digital motion processor on raw}]{data,  }\item[{and accumulates resulting output \char`\"{} \char`\"{}data into the \mbox{\hyperlink{classjevois_1_1IMU}{I\+MU}} \textquotesingle{}s internal F\+I\+FO buffer at a}]{precise,  }\item[{fixed rate. This \char`\"{} \char`\"{}parameter can only be set in a module \textquotesingle{}s params.\+cfg file.\char`\"{}}]{,  }\item[{Mode\+::\+R\+AW}]{,  }\item[{Mode\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_ad023ad9842888231ac301c14cf77e070}\label{classjevois_1_1ICM20948_ad023ad9842888231ac301c14cf77e070}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{pktdbg}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Send raw F\+I\+FO or D\+MP packets to console for debug/hacking purposes.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_adf08da6549cdd435b6fd80245a4f0fe3}\label{classjevois_1_1ICM20948_adf08da6549cdd435b6fd80245a4f0fe3}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{abw}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Accelerometer bandwidth rate }]{Hz,  }\item[{or 0 for no \char`\"{} \char`\"{}low-\/pass filter on accelerometer data.\char`\"{}}]{,  }\item[{50}]{,  }\item[{\{ 0, 6, 12, 24, 50, 111, 246, 470, 1210 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a5be3e6b6c4d1a99b75cd0a8cbe7a98f1}\label{classjevois_1_1ICM20948_a5be3e6b6c4d1a99b75cd0a8cbe7a98f1}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{arange}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Accelerometer full-\/scale range }]{+/-\/g for example, \char`\"{} \char`\"{}2 means +/-\/2g }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_af7976be313ba0e23e689d86a1afc4ada}\label{classjevois_1_1ICM20948_af7976be313ba0e23e689d86a1afc4ada}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{arate}]{,  }\item[{float}]{,  }\item[{\char`\"{}Accelerometer sampling rate }]{Hz,  }\item[{or 0.\+0 to disable \char`\"{} \char`\"{}accelerometer. Actual sample rate may differ because of finite and \char`\"{} \char`\"{}discrete divider settings. In F\+I\+FO}]{mode,  }\item[{grate controls the data rate.\char`\"{}}]{,  }\item[{30.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+0\+F, 1125.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a7e012c0766c2fe3851c14fb81a332a2e}\label{classjevois_1_1ICM20948_a7e012c0766c2fe3851c14fb81a332a2e}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{dmp}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Requested D\+MP data. Only valid when mode is D\+M\+P. \char`\"{} \char`\"{}Use any string of letters including\+:\char`\"{} \char`\"{}}]{A = {\ttfamily acceleration},  }\item[{\char`\"{} \char`\"{}}]{G = {\ttfamily gyro},  }\item[{\char`\"{} \char`\"{}}]{M = {\ttfamily magnetometer~(compass)},  }\item[{\char`\"{} \char`\"{}}]{R = {\ttfamily quaternion~6~(uses~accel~+~gyro)},  }\item[{\char`\"{} \char`\"{}}]{Q = {\ttfamily quaternion~9~(uses~accel~+~gyro~+~compass)},  }\item[{\char`\"{} \char`\"{}}]{E = {\ttfamily geomag~(uses~accel~+~compass)},  }\item[{\char`\"{} \char`\"{}}]{P = {\ttfamily flip/pickup~detection},  }\item[{\char`\"{} \char`\"{}}]{S = {\ttfamily step~detection},  }\item[{\char`\"{} \char`\"{}}]{T = {\ttfamily activity~recognition},  }\item[{\char`\"{} \char`\"{}}]{F = {\ttfamily frame~sync~from~video~sensor},  }\item[{\char`\"{} \char`\"{}}]{w = {\ttfamily configure~activity~recognition~for~wearable},  }\item[{\char`\"{} \char`\"{}}]{g = {\ttfamily gyro~calibration~(always~on~when~gyro~used)},  }\item[{\char`\"{} \char`\"{}}]{m = {\ttfamily compass~calibration~(always~on~when~compass~used)},  }\item[{\char`\"{} \char`\"{}}]{b = {\ttfamily accel~accuracy~(always~on~when~accel~used)},  }\item[{\char`\"{} \char`\"{}}]{h = {\ttfamily gyro~accuracy~(always~on~when~gyro~used)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a07fb273398ab6a7cbf4a20c406b43c8a}\label{classjevois_1_1ICM20948_a07fb273398ab6a7cbf4a20c406b43c8a}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{gbw}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Gyroscope bandwidth rate }]{Hz,  }\item[{or 0 for no low-\/pass \char`\"{} \char`\"{}filter on gyroscope data.\char`\"{}}]{,  }\item[{51}]{,  }\item[{\{ 0, 6, 12, 24, 51, 120, 150, 200, 360, 12100 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a1b019969c5b16f0e65a7a071ba904c82}\label{classjevois_1_1ICM20948_a1b019969c5b16f0e65a7a071ba904c82}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{grange}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Gyroscope full-\/scale range }]{+/-\/dps for example, \char`\"{} \char`\"{}500 means +/-\/500 degrees per second }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a33040a19b436b769e338c31bfe342945}\label{classjevois_1_1ICM20948_a33040a19b436b769e338c31bfe342945}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{grate}]{,  }\item[{float}]{,  }\item[{\char`\"{}Gyroscope sampling rate }]{Hz,  }\item[{or 0.\+0 to disable \char`\"{} \char`\"{}gyroscope. Actual sample rate may differ because of finite and \char`\"{} \char`\"{}discrete divider settings. In F\+I\+FO}]{mode,  }\item[{grate controls the data rate.\char`\"{}}]{,  }\item[{30.}]{0F,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ float $>$}]{0.\+0\+F, 1125.\+0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_afe653a9be656631c2dca01e0f783110b}\label{classjevois_1_1ICM20948_afe653a9be656631c2dca01e0f783110b}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{mrate}]{,  }\item[{Mag\+Rate}]{,  }\item[{\char`\"{}Magnetometer sampling rate }]{Hz,  }\item[{or Off to disable \char`\"{} \char`\"{}}]{magnetometer,  }\item[{or Once to only \mbox{\hyperlink{classjevois_1_1ICM20948_ab0818b82b4b68bbb84493cc27d56f793}{get}} one measurement. You can repeatedly \char`\"{} \char`\"{}set this parameter to Once to obtain repeated measurements \char`\"{} \char`\"{}at your own pace. In Je\+Vois}]{Inventor,  }\item[{you need to alternate between \char`\"{} \char`\"{}Off and Once. In F\+I\+FO}]{mode,  }\item[{grate controls the data rate.\char`\"{}}]{,  }\item[{Mag\+Rate\+::\+M50\+Hz}]{,  }\item[{Mag\+Rate\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a0ec7414c81841c8e864dbe22e4f66035}\label{classjevois_1_1ICM20948_a0ec7414c81841c8e864dbe22e4f66035}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{tbw}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Temperature bandwidth rate }]{Hz,  }\item[{or 0 to turn off \char`\"{} \char`\"{}temperature sensor. Temperature sampling rate is always 1125Hz unless \char`\"{} \char`\"{}tbw is}]{7932,  }\item[{in which case sampling is at 9k\+Hz.\char`\"{}}]{,  }\item[{34}]{,  }\item[{\{ 0, 9, 17, 34, 66, 123, 218, 7932 \}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a5363ef59970987a9812b8b9418d34e2c}\label{classjevois_1_1ICM20948_a5363ef59970987a9812b8b9418d34e2c}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Mag\+Rate}]{,  }\item[{(Off)(Once)(M10\+Hz)(M20\+Hz)(M50\+Hz)(M100\+Hz)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ICM20948_a7ab7e5bfac503a5aab82344fae70f3ee}\label{classjevois_1_1ICM20948_a7ab7e5bfac503a5aab82344fae70f3ee}} 
+\index{jevois::ICM20948@{jevois::ICM20948}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::ICM20948@{jevois::ICM20948}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Mode}]{,  }\item[{(R\+AW)(F\+I\+FO)(D\+MP)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{ICM20948_8H}{I\+C\+M20948.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{ICM20948_8C}{I\+C\+M20948.\+C}}\end{DoxyCompactItemize}

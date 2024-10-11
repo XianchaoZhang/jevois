@@ -1,41 +1,30 @@
-/*! \page Change114log Changes and new features in JeVois 1.14
+/*! \page Change114log JeVois 1.14 中的变化和新功能
 
 
-JeVois 1.14 brings the following new features:
+JeVois 1.14 带来以下新功能：
 
-- Bumped to OpenCV 4.1.1 with all contrib modules including deep neural networks (DNN) and non-free.
+- 升级到 OpenCV 4.1.1，包含所有贡献模块，包括深度神经网络（DNN）和非免费模块。
 
-- New automatic camera sensor detection. It is now optional to write a file \b BOOT:sensor with the name of the sensor
-  installed in your JeVois smart camera (ov9650, ov7725, ov2640, ar0135, etc). You will still speed-up your JeVois boot
-  time if you have the correct sensor in \b BOOT:sensor, but JeVois will now try all supported sensors in turn until one
-  that works is found. The Allwinner kernel video capture driver has been modified to allow proper unloading and
-  re-loading (unloading used to hang and crash with the manufacturer's code), and to detect the sensor synchronously at
-  load time (as opposed to delegating detection to a kernel thread).
+- 新的自动相机传感器检测。现在可以选择将文件 \b BOOT:sensor 写入安装在 JeVois 智能相机中的传感器名称（ov9650、ov7725、ov2640、ar0135 等）。如果 \b BOOT:sensor 中有正确的传感器，您仍将加快 JeVois 的启动时间，但 JeVois 现在将依次尝试所有支持的传感器，直到找到一个可用的传感器。Allwinner 内核视频捕获驱动程序已修改为允许正确卸载和重新加载（卸载用于挂起和崩溃制造商的代码），并在加载时同步检测传感器（而不是将检测委托给内核线程）。
 
-- Currently, the order of detection is: sensor specified in \b BOOT:sensor or ov9650 if there is no \b BOOT:sensor file,
-  ov7725, ov2640, ar0135, ov9650. You will see one orange LED flash for each sensor that the JeVois smart camera tries
-  to detect at boot up. Once the correct sensor is found, the LED will turn solid orange after a few seconds.
+- 目前，检测顺序为：\b BOOT:sensor 中指定的传感器或 ov9650（如果没有 \b BOOT:sensor 文件）、ov7725、ov2640、ar0135、ov9650。您将看到 JeVois 智能相机在启动时尝试检测的每个传感器都有一个橙色 LED 闪烁。一旦找到正确的传感器，LED 将在几秒钟后变为常亮橙色。
 
-- Global JeVois parameter \p camerasens allows one to know which sensor is installed. Just type:
+- 全局 JeVois 参数 \p camerasens 允许人们知道安装了哪个传感器。只需在 JeVois Inventor 控制台中输入：
 \verbatim
 getpar camerasens
 \endverbatim
-  in the JeVois Inventor console to get the value.
+  即可获取值。
 
-- New deep networks:
-  + MnasNet optimized autoML networks supported in \jvmod{TensorFlowEasy}
-  + inception_v1_224_quant_20181026 high accuracy (but slow) network supported in \jvmod{TensorFlowEasy}
-  + new parameter \p model in \jvmod{DetectionDNN} to allow one to select a network easily at runtime,
-    without needing to edit the module's \b params.cfg file.
+- 新的深度网络：
+  + \jvmod{TensorFlowEasy} 中支持 MnasNet 优化的 autoML 网络
+  + \jvmod{TensorFlowEasy} 中支持 inception_v1_224_quant_20181026 高精度（但速度较慢）网络
+  + \jvmod{DetectionDNN} 中的新参数 \p model 允许用户在运行时轻松选择网络，而无需编辑模块的 \b params.cfg 文件。
 
-- Improved ov2640 image capture for low resolutions (CIF and lower). The captured images at low-resolution previously
-  were very dark and zoomed-in compared to higher resolutions. This is now fixed. This is true hardware CIF (plus
-  DSP-based scaling down for even lower resolutions), so it supports the hardware-advertized max frame rate of 60fps (as
-  opposed to approaches used in other drivers found on the web which capture at VGA with max 30fps and then use the
-  on-board DSP to scale down).
+- 改进了 ov2640 低分辨率（CIF 及更低分辨率）图像捕获。以前，低分辨率下捕获的图像与高分辨率下的图像相比非常暗且放大。现在已修复此问题。这是真正的硬件 CIF（加上基于 DSP 的缩小功能，可实现更低的分辨率），因此它支持硬件宣传的最大帧速率 60fps（与网络上其他驱动程序中使用的方法相反，这些驱动程序以最大 30fps 的 VGA 捕获，然后使用板载 DSP 缩小）。
 
-- Minor improvement to color balance with AR0135 sensor.
+- 使用 AR0135 传感器对色彩平衡进行轻微改进。
 
-- For C++ programmers: new Parameter<T>::reset() resets a parameter to its default value.
+- 对于 C++ 程序员：new Parameter<T>::reset() 将参数重置为其默认值。
 
 */
+

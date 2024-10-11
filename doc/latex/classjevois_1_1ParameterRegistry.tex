@@ -1,0 +1,154 @@
+\hypertarget{classjevois_1_1ParameterRegistry}{}\doxysubsection{jevois\+::Parameter\+Registry Class Reference}
+\label{classjevois_1_1ParameterRegistry}\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter\+Registry.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+与组件相关的所有参数的简单注册表 
+
+此注册表允许循环或搜索组件中的给定参数。 
+
+Definition at line 33 of file Parameter\+Registry.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter\+Registry\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ParameterRegistry__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a02d5c9fa250dd8f30435dc0c1c056624}{$\sim$\+Parameter\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚析构函数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterRegistry_adf4ceddeff80e01f0b5834a07375bc79}{add\+Parameter}} (\mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}} $\ast$const param)
+\begin{DoxyCompactList}\small\item\em Parameter 类使用此方法在构造时向其所属的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 注册自身 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a7d94666529bf485a4842809b1700e777}{remove\+Parameter}} (\mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}} $\ast$const param)
+\begin{DoxyCompactList}\small\item\em Parameter 类使用此方法在其所属的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 销毁时取消注册 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a2821f71a96a7c2fd25a0c1cea65477cb}{callback\+Init\+Call}} ()
+\begin{DoxyCompactList}\small\item\em 对于所有具有从未调用过的回调的参数，使用默认参数值调用它； \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a90717717700965c100968cff0188e244}{Component}}
+\begin{DoxyCompactList}\small\item\em 允许 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 和 \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}} 访问我们的注册表数据，其他所有人都被锁定 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\class \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a50d041c305f4de6136af16e3a190215f}{Dynamic\+Parameter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_a02d5c9fa250dd8f30435dc0c1c056624}\label{classjevois_1_1ParameterRegistry_a02d5c9fa250dd8f30435dc0c1c056624}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!````~ParameterRegistry@{$\sim$ParameterRegistry}}
+\index{````~ParameterRegistry@{$\sim$ParameterRegistry}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{$\sim$ParameterRegistry()}{~ParameterRegistry()}}
+{\footnotesize\ttfamily jevois\+::\+Parameter\+Registry\+::$\sim$\+Parameter\+Registry (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚析构函数 
+
+
+
+Definition at line 25 of file Parameter\+Registry.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_adf4ceddeff80e01f0b5834a07375bc79}\label{classjevois_1_1ParameterRegistry_adf4ceddeff80e01f0b5834a07375bc79}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!addParameter@{addParameter}}
+\index{addParameter@{addParameter}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{addParameter()}{addParameter()}}
+{\footnotesize\ttfamily void jevois\+::\+Parameter\+Registry\+::add\+Parameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1ParameterBase}{jevois\+::\+Parameter\+Base}} $\ast$const}]{param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Parameter 类使用此方法在构造时向其所属的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 注册自身 
+
+
+
+Definition at line 29 of file Parameter\+Registry.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, L\+F\+A\+T\+AL, and jevois\+::\+Parameter\+Base\+::name().
+
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_a2821f71a96a7c2fd25a0c1cea65477cb}\label{classjevois_1_1ParameterRegistry_a2821f71a96a7c2fd25a0c1cea65477cb}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!callbackInitCall@{callbackInitCall}}
+\index{callbackInitCall@{callbackInitCall}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{callbackInitCall()}{callbackInitCall()}}
+{\footnotesize\ttfamily void jevois\+::\+Parameter\+Registry\+::callback\+Init\+Call (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+对于所有具有从未调用过的回调的参数，使用默认参数值调用它； 
+
+
+
+Definition at line 63 of file Parameter\+Registry.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_a7d94666529bf485a4842809b1700e777}\label{classjevois_1_1ParameterRegistry_a7d94666529bf485a4842809b1700e777}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!removeParameter@{removeParameter}}
+\index{removeParameter@{removeParameter}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{removeParameter()}{removeParameter()}}
+{\footnotesize\ttfamily void jevois\+::\+Parameter\+Registry\+::remove\+Parameter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1ParameterBase}{jevois\+::\+Parameter\+Base}} $\ast$const}]{param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Parameter 类使用此方法在其所属的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 销毁时取消注册 
+
+
+
+Definition at line 44 of file Parameter\+Registry.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, L\+E\+R\+R\+OR, and jevois\+::\+Parameter\+Base\+::name().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_a90717717700965c100968cff0188e244}\label{classjevois_1_1ParameterRegistry_a90717717700965c100968cff0188e244}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!Component@{Component}}
+\index{Component@{Component}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{Component}{Component}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Component}{Component}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+允许 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 和 \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}} 访问我们的注册表数据，其他所有人都被锁定 
+
+
+
+Definition at line 51 of file Parameter\+Registry.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterRegistry_a50d041c305f4de6136af16e3a190215f}\label{classjevois_1_1ParameterRegistry_a50d041c305f4de6136af16e3a190215f}} 
+\index{jevois::ParameterRegistry@{jevois::ParameterRegistry}!DynamicParameter@{DynamicParameter}}
+\index{DynamicParameter@{DynamicParameter}!jevois::ParameterRegistry@{jevois::ParameterRegistry}}
+\doxyparagraph{\texorpdfstring{DynamicParameter}{DynamicParameter}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+friend class \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 52 of file Parameter\+Registry.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ParameterRegistry_8H}{Parameter\+Registry.\+H}}\item 
+src/jevois/\+Component/\mbox{\hyperlink{ParameterRegistry_8C}{Parameter\+Registry.\+C}}\end{DoxyCompactItemize}

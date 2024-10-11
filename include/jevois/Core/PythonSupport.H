@@ -29,111 +29,110 @@ namespace jevois
 {
   class Engine;
 
-  //! Python-related helpers and functions
+  //! Python 相关的帮助程序和函数
   namespace python
   {
-   /*! \defgroup pysupport Python support functions
+   /*! \defgroup pysupport Python 支持函数
 
-       Helpers to facilitate data transfer to/from Python
+       帮助程序促进与 Python 之间的数据传输
         
        \ingroup python */
     
     /*! @{ */ // **********************************************************************
     
-    //! Initialize Python, numpy, and allow python modules to send serial outputs through the JeVois Engine
-    /*! This command is not for common use, only Engine should use it. */
+    //! 初始化 Python、numpy，并允许 python 模块通过 JeVois Engine 发送串行输出
+    /*! 此命令不适用于一般用途，只有 Engine 才应该使用它。 */
     void setEngine(jevois::Engine * e);
 
     //! Get the Engine
     jevois::Engine * engine();
 
-    //! Check whether a boost::python::object has an attribute
+    //! 检查 boost::python::object 是否具有属性
     bool hasattr(boost::python::object & o, char const * name);
 
-    //! Helper to convert std::vector<T> to python list
+    //! 将 std::vector<T> 转换为 python 列表的辅助程序
     template <class T>
     boost::python::list pyVecToList(std::vector<T> const & v);
     
-    //! Helper to convert python list (or any iterable) to std::vector<T>
+    //! 将 python 列表（或任何可迭代对象）转换为 std::vector<T> 的辅助程序
     template <class T>
     std::vector<T> pyListToVec(boost::python::object const & lst);
 
-    //! Helper to extract a tuple with elements of uniform type T into an std::array
+    //! 辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中
     template <typename T, size_t N>
     std::array<T, N> tupleToArray(boost::python::object const & o);
     
-    //! Helper to extract a tuple with elements of uniform type T into an std::array
-    /*! minN is the smallest number of tuple elements required, allowing for partial tuples. If minN<N, we assume that
-        the array has been initialized with default values, and we allow receiving a tuple that is smaller than N, in
-        which case we only assign the first elements of the array. Useful to exract things like cv::Scalar which can
-        contain 1 to 4 elements. */
+    //! 辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中
+    /*! minN 是所需的元组元素的最小数量，允许部分元组。如果 minN<N，我们假定数组已使用默认值初始化，并且我们允许接收
+	    小于 N 的元组，在这种情况下我们只分配数组的第一个元素。用于提取可以包含 1 到 4 个元素的 cv::Scalar 之类的东
+		西。 */
     template <typename T, size_t N>
     void tupleToArray(boost::python::object const & o, std::array<T, N> & arr, size_t minN = N);
 
-    //! Generic value extraction, pass-through to boost::python::extract() for types that python knows how to extract
+    //! 通用值提取，对于 python 知道如何提取的类型，传递给 boost::python::extract() 
     template <typename T>
     T pyextract(boost::python::object const & o);
 
-    //! Specialization for cv::Scalar_<float>, extract from tuple of 1..4 float values
+    //! cv::Scalar_<float> 的特化，从 1..4 个浮点值的元组中提取
     template <>
     cv::Scalar_<float> pyextract<cv::Scalar_<float>>(boost::python::object const & o);
   
-    //! Specialization for cv::Scalar_<int>, extract from tuple of 1..4 int values
+    //! cv::Scalar_<int> 的特化，从 1..4 个 int 值的元组中提取
     template <>
     cv::Scalar_<int> pyextract<cv::Scalar_<int>>(boost::python::object const & o);
   
-    //! Specialization for cv::Point_<float>, extract from tuple of 2 float values
+    //! cv::Point_<float> 的特化，从 2 个浮点值的元组中提取
     template <>
     cv::Point_<float> pyextract<cv::Point_<float>>(boost::python::object const & o);
   
-    //! Specialization for cv::Point_<int>, extract from tuple of 2 int values
+    //! cv::Point_<int> 的特化，从 2 个 int 值的元组中提取
     template <>
     cv::Point_<int> pyextract<cv::Point_<int>>(boost::python::object const & o);
   
-    //! Specialization for cv::Size_<float>, extract from tuple of 2 float values
+    //! cv::Size_<float> 的特化，从 2 个 float 值的元组中提取
     template <>
     cv::Size_<float> pyextract<cv::Size_<float>>(boost::python::object const & o);
   
-    //! Specialization for cv::Size_<int>, extract from tuple of 2 int values
+    //! cv::Size_<int> 的特化，从 2 个 int 值的元组中提取
     template <>
     cv::Size_<int> pyextract<cv::Size_<int>>(boost::python::object const & o);
 
 #ifdef JEVOIS_PRO  
-    //! Specialization for ImColor, extract from tuple of 3..4 int values (if 3 then, alpha=255)
+    //! ImColor 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255）
     template <>
     ImColor pyextract<ImColor>(boost::python::object const & o);
 #endif
     
-    //! Convert value to python, pass-through to python::object(val)
+    //! 将值转换为 python，传递到 python::object(val)
     template <typename T>
     boost::python::object topyobj(T const & val);
 
-    //! Specialization for cv::Scalar<float>, returns a tuple with 4 float elements
+    //! cv::Scalar<float> 的特化，返回一个有 4 个浮点元素的元组
     template <>
     boost::python::object topyobj(cv::Scalar_<float> const & val);
 
-    //! Specialization for cv::Scalar<int>, returns a tuple with 4 int elements
+    //! cv::Scalar<int> 的特化，返回一个包含 4 个 int 元素的元组
     template <>
     boost::python::object topyobj(cv::Scalar_<int> const & val);
     
-    //! Specialization for cv::Point<float>, returns a tuple with 2 float elements
+    //! cv::Point<float> 的特化，返回一个包含 2 个 float 元素的元组
     template <>
     boost::python::object topyobj(cv::Point_<float> const & val);
 
-    //! Specialization for cv::Point<int>, returns a tuple with 2 int elements
+    //! cv::Point<int> 的特化，返回一个包含 2 个 int 元素的元组
     template <>
     boost::python::object topyobj(cv::Point_<int> const & val);
     
-    //! Specialization for cv::Size<float>, returns a tuple with 2 float elements
+    //! cv::Size<float> 的特化，返回一个包含 2 个 float 元素的元组
     template <>
     boost::python::object topyobj(cv::Size_<float> const & val);
 
-    //! Specialization for cv::Size<int>, returns a tuple with 2 int elements
+    //! 对 cv::Size<int> 的特化，返回一个包含 2 个 int 元素的元组
     template <>
     boost::python::object topyobj(cv::Size_<int> const & val);
     
 #ifdef JEVOIS_PRO  
-    //! Specialization for ImColor, returns a tuple with 4 int elements
+    //! 对 ImColor 的特化，返回一个包含 4 个 int 元素的元组
     template <>
     boost::python::object topyobj(ImColor const & val);
 #endif

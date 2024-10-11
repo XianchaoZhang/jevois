@@ -1,0 +1,72 @@
+\hypertarget{Engine_8C}{}\doxysubsection{src/jevois/\+Core/\+Engine.C File Reference}
+\label{Engine_8C}\index{src/jevois/Core/Engine.C@{src/jevois/Core/Engine.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Camera.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Movie\+Input.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+U.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Uspi.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+I\+M\+Ui2c.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Gadget.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Output\+None.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Movie\+Output.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Display.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Display\+G\+L.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Display\+G\+U\+I.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ihelper.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iconsole.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Iserial.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Serial.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Stdio\+Interface.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Module.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Dynamic\+Loader.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Support.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Async.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Sys\+Info.\+H$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$imgui\+\_\+internal.\+h$>$}\newline
+Include dependency graph for Engine.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Engine_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Engine_8C_a6faebfa65da32e2886409cbd2aa06559}{V4\+L2\+\_\+\+C\+T\+R\+L\+\_\+\+C\+L\+A\+S\+S\+\_\+\+D\+E\+T\+E\+CT}}~0x00a30000
+\item 
+\#define \mbox{\hyperlink{Engine_8C_a5622d5359b0fd6e3fb816fc32c2df2bb}{V4\+L2\+\_\+\+C\+I\+D\+\_\+\+A\+U\+T\+O\+\_\+\+N\+\_\+\+P\+R\+E\+S\+E\+T\+\_\+\+W\+H\+I\+T\+E\+\_\+\+B\+A\+L\+A\+N\+CE}}~(V4\+L2\+\_\+\+C\+I\+D\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+C\+L\+A\+S\+S\+\_\+\+B\+A\+SE+20)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Engine_8C_a5622d5359b0fd6e3fb816fc32c2df2bb}\label{Engine_8C_a5622d5359b0fd6e3fb816fc32c2df2bb}} 
+\index{Engine.C@{Engine.C}!V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE@{V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE}}
+\index{V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE@{V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE}!Engine.C@{Engine.C}}
+\doxyparagraph{\texorpdfstring{V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE}{V4L2\_CID\_AUTO\_N\_PRESET\_WHITE\_BALANCE}}
+{\footnotesize\ttfamily \#define V4\+L2\+\_\+\+C\+I\+D\+\_\+\+A\+U\+T\+O\+\_\+\+N\+\_\+\+P\+R\+E\+S\+E\+T\+\_\+\+W\+H\+I\+T\+E\+\_\+\+B\+A\+L\+A\+N\+CE~(V4\+L2\+\_\+\+C\+I\+D\+\_\+\+C\+A\+M\+E\+R\+A\+\_\+\+C\+L\+A\+S\+S\+\_\+\+B\+A\+SE+20)}
+
+\mbox{\Hypertarget{Engine_8C_a6faebfa65da32e2886409cbd2aa06559}\label{Engine_8C_a6faebfa65da32e2886409cbd2aa06559}} 
+\index{Engine.C@{Engine.C}!V4L2\_CTRL\_CLASS\_DETECT@{V4L2\_CTRL\_CLASS\_DETECT}}
+\index{V4L2\_CTRL\_CLASS\_DETECT@{V4L2\_CTRL\_CLASS\_DETECT}!Engine.C@{Engine.C}}
+\doxyparagraph{\texorpdfstring{V4L2\_CTRL\_CLASS\_DETECT}{V4L2\_CTRL\_CLASS\_DETECT}}
+{\footnotesize\ttfamily \#define V4\+L2\+\_\+\+C\+T\+R\+L\+\_\+\+C\+L\+A\+S\+S\+\_\+\+D\+E\+T\+E\+CT~0x00a30000}
+
+
+
+Definition at line 63 of file Engine.\+C.
+

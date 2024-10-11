@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1DynamicLoader">
+<title>jevois::DynamicLoader Class Reference</title>
+<indexterm><primary>jevois::DynamicLoader</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/DynamicLoader.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>用于打开共享对象 (.so) 文件并加载其中包含的函数的类 </para>
+
+
+
+<para>此类允许打开共享库 (.so 文件) 并调用该库中的函数或类。</para>
+
+<para>每次用户选择新的 VideoMapping（即，更改主机上运行的 USB 网络摄像头程序中的图像分辨率，或通过串行端口调用 <computeroutput>setmapping</computeroutput> 命令）时，引擎都会使用 <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 加载适当的视觉处理模块。</para>
+
+<para>此类是从 Neuromorphic Robotics Toolkit (NRT) 中的 <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 修改而来的。 </para>
+<para>
+Definition at line 67 of file DynamicLoader.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1DynamicLoader_1aae3474f5e325741122411163812a8d4c">DynamicLoader</link> (std::string const &amp;filename, bool closeOnDestroy)</para>
+
+<para>打开位于 filename 的共享对象，如果失败则抛出 </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1DynamicLoader_1a9a0f6772a8a7408dc24ded39a386cebc">sopath</link> () const</para>
+
+<para>检索此加载器的 .so 文件的路径，有助于避免关闭并重新加载相同的 .so 文件 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1DynamicLoader_1a1b698e0ab1174d7667b9010e9165ecd3">~DynamicLoader</link> ()</para>
+
+<para>析构函数，可在销毁时关闭对象（参见构造函数参数） </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1DynamicLoader_1a4e78af49586061ff86c1c3d514c40f94">close</link> ()</para>
+
+<para>关闭共享对象文件 </para>
+</listitem>
+            <listitem><para>template&lt;class Signature &gt; </para><para>std::function&lt; Signature &gt; <link linkend="_classjevois_1_1DynamicLoader_1a5c166f862655823f933c3b1dcafbda6f">load</link> (std::string const &amp;functionName)</para>
+
+<para>加载名为 functionName 的符号 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1DynamicLoader_1aae3474f5e325741122411163812a8d4c"/>    <section>
+    <title>DynamicLoader()</title>
+<indexterm><primary>DynamicLoader</primary><secondary>jevois::DynamicLoader</secondary></indexterm>
+<indexterm><primary>jevois::DynamicLoader</primary><secondary>DynamicLoader</secondary></indexterm>
+<para><computeroutput>jevois::DynamicLoader::DynamicLoader (std::string const &amp; filename, bool closeOnDestroy)</computeroutput></para><para>
+
+<para>打开位于 filename 的共享对象，如果失败则抛出 </para>
+</para>
+
+<para>如果 closeOnDestroy 为 true，则在 <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 对象被销毁时将关闭 .so 文件。如果您想在加载器超出范围后仍能访 问 .so 文件中的函数和类，请将 closeOnDestroy 设置为 false（这样，在程序终止之前，您将无法卸载该 .so 文件）。 </para>
+    </section><anchor xml:id="_classjevois_1_1DynamicLoader_1a1b698e0ab1174d7667b9010e9165ecd3"/>    <section>
+    <title>~DynamicLoader()</title>
+<indexterm><primary>~DynamicLoader</primary><secondary>jevois::DynamicLoader</secondary></indexterm>
+<indexterm><primary>jevois::DynamicLoader</primary><secondary>~DynamicLoader</secondary></indexterm>
+<para><computeroutput>jevois::DynamicLoader::~DynamicLoader ( )</computeroutput></para><para>
+
+<para>析构函数，可在销毁时关闭对象（参见构造函数参数） </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1DynamicLoader_1a4e78af49586061ff86c1c3d514c40f94"/>    <section>
+    <title>close()</title>
+<indexterm><primary>close</primary><secondary>jevois::DynamicLoader</secondary></indexterm>
+<indexterm><primary>jevois::DynamicLoader</primary><secondary>close</secondary></indexterm>
+<para><computeroutput>void jevois::DynamicLoader::close ( )</computeroutput></para><para>
+
+<para>关闭共享对象文件 </para>
+</para>
+
+<para>请注意，关闭对象文件将删除从共享对象创建的任何对象/函数/等的所有链接。仅当您不想再处理从此对象文件创建的任何内 容时才使用此函数。 </para>
+    </section><anchor xml:id="_classjevois_1_1DynamicLoader_1a5c166f862655823f933c3b1dcafbda6f"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::DynamicLoader</secondary></indexterm>
+<indexterm><primary>jevois::DynamicLoader</primary><secondary>load</secondary></indexterm>
+<computeroutput>template&lt;class Signature &gt; </computeroutput><para><computeroutput>std::function&lt;Signature&gt; jevois::DynamicLoader::load (std::string const &amp; functionName)</computeroutput></para><para>
+
+<para>加载名为 functionName 的符号 </para>
+</para>
+
+<para>此方法返回一个 std::function，它指向此 <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 打开的共享对象中请求的名称。例如，要从文件 &quot;mySharedObject.so&quot; 加载函数 <computeroutput>int foo(double x, bool y)</computeroutput>，您应该这样写：</para>
+
+<para><literallayout><computeroutput>jevois::DynamicLoader&#32;loader(&quot;./mySharedObject.so&quot;);
+try&#32;
+{
+&#32;&#32;std::function&lt;int(double,bool)&gt;&#32;foo&#32;=&#32;loader.load&lt;int(double,bool)&gt;(&quot;foo&quot;);
+&#32;&#32;int&#32;result&#32;=&#32;foo(3.0,&#32;true);
+}
+catch&#32;(std::exception&#32;const&#32;&amp;&#32;e)
+{
+&#32;LFATAL(e.what());
+}
+</computeroutput></literallayout></para>
+
+<para>在 <link linkend="_classjevois_1_1DynamicLoader">DynamicLoader</link> 被 <link linkend="_classjevois_1_1DynamicLoader_1a4e78af49586061ff86c1c3d514c40f94">close()</link>（或销毁，参见构造函数参数）之后，您不应尝试使用 <link linkend="_classjevois_1_1DynamicLoader_1a5c166f862655823f933c3b1dcafbda6f">load()</link> 返回的任何内容。</para>
+
+<para>如果在打开的共享对象中找不到请求的符号，则抛出。 </para>
+    </section><anchor xml:id="_classjevois_1_1DynamicLoader_1a9a0f6772a8a7408dc24ded39a386cebc"/>    <section>
+    <title>sopath()</title>
+<indexterm><primary>sopath</primary><secondary>jevois::DynamicLoader</secondary></indexterm>
+<indexterm><primary>jevois::DynamicLoader</primary><secondary>sopath</secondary></indexterm>
+<para><computeroutput>const std::string&amp; jevois::DynamicLoader::sopath ( ) const</computeroutput></para><para>
+
+<para>检索此加载器的 .so 文件的路径，有助于避免关闭并重新加载相同的 .so 文件 </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Core/<link linkend="_DynamicLoader_8H">DynamicLoader.H</link></section>
+</section>

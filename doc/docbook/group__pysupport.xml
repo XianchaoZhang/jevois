@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__pysupport">
+<title>Python 支持函数</title>
+<indexterm><primary>Python 支持函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>帮助程序促进与 Python 之间的数据传输 </para>
+Collaboration diagram for Python 支持函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__pysupport.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__pysupport_1ga89fd3c8c027de53532b0ab63ba9bd84b">jevois::python::setEngine</link> (<link linkend="_classjevois_1_1Engine">jevois::Engine</link> *e)</para>
+
+<para>初始化 Python、numpy，并允许 python 模块通过 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 发送串行输出 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__pysupport_1gada9a987413579e077d37b2a1392fa328">jevois::python::hasattr</link> (boost::python::object &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>, char const *name)</para>
+
+<para>检查 boost::python::object 是否具有属性 </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>boost::python::list <link linkend="_group__pysupport_1ga851e553d8bb3ad854f6a72f2d21cacc6">jevois::python::pyVecToList</link> (std::vector&lt; T &gt; const &amp;v)</para>
+
+<para>将 std::vector&lt;T&gt; 转换为 python 列表的辅助程序 </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>std::vector&lt; T &gt; <link linkend="_group__pysupport_1gae59dd866134c4b7c754dab76465ca81b">jevois::python::pyListToVec</link> (boost::python::object const &amp;lst)</para>
+
+<para>将 python 列表（或任何可迭代对象）转换为 std::vector&lt;T&gt; 的辅助程序 </para>
+</listitem>
+            <listitem><para>template&lt;typename T , size_t N&gt; </para><para>std::array&lt; T, N &gt; <link linkend="_group__pysupport_1gaa0b5c0e59acd608244ab06a80f2d73cd">jevois::python::tupleToArray</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</listitem>
+            <listitem><para>template&lt;typename T , size_t N&gt; </para><para>void <link linkend="_group__pysupport_1gae325e307bbc6b533c57dd06f018b0e9e">jevois::python::tupleToArray</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>, std::array&lt; T, N &gt; &amp;arr, size_t minN=N)</para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>通用值提取，对于 python 知道如何提取的类型，传递给 boost::python::extract() </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Scalar_&lt; float &gt; <link linkend="_group__pysupport_1ga98cb1cfcea2fe6e33491692486c3cfef">jevois::python::pyextract&lt; cv::Scalar_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Scalar_&lt;float&gt; 的特化，从 1..4 个浮点值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Scalar_&lt; int &gt; <link linkend="_group__pysupport_1ga3339d8c469b02495305d50de4cc8de38">jevois::python::pyextract&lt; cv::Scalar_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Scalar_&lt;int&gt; 的特化，从 1..4 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Point_&lt; float &gt; <link linkend="_group__pysupport_1gaa2a4e4d9e6c4a9056cf609ee0d561dad">jevois::python::pyextract&lt; cv::Point_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Point_&lt;float&gt; 的特化，从 2 个浮点值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Point_&lt; int &gt; <link linkend="_group__pysupport_1ga395f9f89edce74dad823ce34b591bcd5">jevois::python::pyextract&lt; cv::Point_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Point_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Size_&lt; float &gt; <link linkend="_group__pysupport_1gaf092f9f8b5dc66da71794f4713126346">jevois::python::pyextract&lt; cv::Size_&lt; float &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Size_&lt;float&gt; 的特化，从 2 个 float 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>cv::Size_&lt; int &gt; <link linkend="_group__pysupport_1ga8b2cc1d6859055c9912c7bf34169e2b3">jevois::python::pyextract&lt; cv::Size_&lt; int &gt; &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>cv::Size_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>ImColor <link linkend="_group__pysupport_1ga417d94bbf152c547c3d67155f79e15fa">jevois::python::pyextract&lt; ImColor &gt;</link> (boost::python::object const &amp;<link linkend="_Font9x15bold_8C_1ac9ba2c61c69c381438f186315b5f2e9b">o</link>)</para>
+
+<para>ImColor 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga4f18ce4c0271e61810cb876a267e7e7e">jevois::python::topyobj</link> (T const &amp;val)</para>
+
+<para>将值转换为 python，传递到 python::object(val) </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gad7841f6fbaa2d636b7189c549e211ac3">jevois::python::topyobj</link> (cv::Scalar_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Scalar&lt;float&gt; 的特化，返回一个有 4 个浮点元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga76307bdb32c40ee62a394276641f4eb0">jevois::python::topyobj</link> (cv::Scalar_&lt; int &gt; const &amp;val)</para>
+
+<para>cv::Scalar&lt;int&gt; 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gaf422b158b87551344a609cf00d565419">jevois::python::topyobj</link> (cv::Point_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Point&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga93c8f7221a6bffe3fc183963e81e700b">jevois::python::topyobj</link> (cv::Point_&lt; int &gt; const &amp;val)</para>
+
+<para>cv::Point&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga0bdf6f519c8a68fb811ae707c3dd43dd">jevois::python::topyobj</link> (cv::Size_&lt; float &gt; const &amp;val)</para>
+
+<para>cv::Size&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1gacf2bb5c5469a2c97b0f0341cd8a71495">jevois::python::topyobj</link> (cv::Size_&lt; int &gt; const &amp;val)</para>
+
+<para>对 cv::Size&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</listitem>
+            <listitem><para>template&lt;&gt; </para><para>boost::python::object <link linkend="_group__pysupport_1ga75c60823494fe158f5663a0e2a090832">jevois::python::topyobj</link> (ImColor const &amp;val)</para>
+
+<para>对 ImColor 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__pysupport_1gada9a987413579e077d37b2a1392fa328"/>    <section>
+    <title>hasattr()</title>
+<indexterm><primary>hasattr</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>hasattr</secondary></indexterm>
+<para><computeroutput>bool jevois::python::hasattr (boost::python::object &amp; o, char const * name)</computeroutput></para><para>
+
+<para>检查 boost::python::object 是否具有属性 </para>
+</para>
+<para>
+Definition at line 116 of file PythonSupport.C.</para>
+<para>
+References o.</para>
+<para>
+Referenced by jevois::dnn::NetworkPythonImpl::freeze(), jevois::dnn::PreProcessorPythonImpl::freeze(), jevois::dnn::PostProcessorPythonImpl::freeze(), jevois::dnn::NetworkPythonImpl::loadpy(), jevois::dnn::PostProcessorPythonImpl::loadpy(), jevois::dnn::PreProcessorPythonImpl::loadpy(), jevois::PythonModule::parseSerial(), jevois::PythonModule::postUninit(), jevois::PythonModule::preInit(), and jevois::PythonModule::supportedCommands().</para>
+    </section><anchor xml:id="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4"/>    <section>
+    <title>pyextract()</title>
+<indexterm><primary>pyextract</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T jevois::python::pyextract (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>通用值提取，对于 python 知道如何提取的类型，传递给 boost::python::extract() </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gaa2a4e4d9e6c4a9056cf609ee0d561dad"/>    <section>
+    <title>pyextract&lt; cv::Point_&lt; float &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Point_&lt; float &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Point_&lt; float &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Point_&lt;float&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Point_&lt; float &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Point_&lt;float&gt; 的特化，从 2 个浮点值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga395f9f89edce74dad823ce34b591bcd5"/>    <section>
+    <title>pyextract&lt; cv::Point_&lt; int &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Point_&lt; int &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Point_&lt; int &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Point_&lt;int&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Point_&lt; int &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Point_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga98cb1cfcea2fe6e33491692486c3cfef"/>    <section>
+    <title>pyextract&lt; cv::Scalar_&lt; float &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Scalar_&lt; float &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Scalar_&lt; float &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Scalar_&lt;float&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Scalar_&lt; float &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Scalar_&lt;float&gt; 的特化，从 1..4 个浮点值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga3339d8c469b02495305d50de4cc8de38"/>    <section>
+    <title>pyextract&lt; cv::Scalar_&lt; int &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Scalar_&lt; int &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Scalar_&lt; int &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Scalar_&lt;int&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Scalar_&lt; int &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Scalar_&lt;int&gt; 的特化，从 1..4 个 int 值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gaf092f9f8b5dc66da71794f4713126346"/>    <section>
+    <title>pyextract&lt; cv::Size_&lt; float &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Size_&lt; float &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Size_&lt; float &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Size_&lt;float&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Size_&lt; float &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Size_&lt;float&gt; 的特化，从 2 个 float 值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga8b2cc1d6859055c9912c7bf34169e2b3"/>    <section>
+    <title>pyextract&lt; cv::Size_&lt; int &gt; &gt;()</title>
+<indexterm><primary>pyextract&lt; cv::Size_&lt; int &gt; &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; cv::Size_&lt; int &gt; &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>cv::Size_&lt;int&gt; <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; cv::Size_&lt; int &gt; &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>cv::Size_&lt;int&gt; 的特化，从 2 个 int 值的元组中提取 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga417d94bbf152c547c3d67155f79e15fa"/>    <section>
+    <title>pyextract&lt; ImColor &gt;()</title>
+<indexterm><primary>pyextract&lt; ImColor &gt;</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyextract&lt; ImColor &gt;</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>ImColor <link linkend="_group__pysupport_1ga1f2fcc7cf24b26618a728663e1e7d2d4">jevois::python::pyextract</link>&lt; ImColor &gt; (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>ImColor 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gae59dd866134c4b7c754dab76465ca81b"/>    <section>
+    <title>pyListToVec()</title>
+<indexterm><primary>pyListToVec</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyListToVec</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>std::vector&lt;T&gt; jevois::python::pyListToVec (boost::python::object const &amp; lst)</computeroutput></para><para>
+
+<para>将 python 列表（或任何可迭代对象）转换为 std::vector&lt;T&gt; 的辅助程序 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga851e553d8bb3ad854f6a72f2d21cacc6"/>    <section>
+    <title>pyVecToList()</title>
+<indexterm><primary>pyVecToList</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>pyVecToList</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>boost::python::list jevois::python::pyVecToList (std::vector&lt; T &gt; const &amp; v)</computeroutput></para><para>
+
+<para>将 std::vector&lt;T&gt; 转换为 python 列表的辅助程序 </para>
+</para>
+<para>
+Referenced by jevois::dnn::PreProcessorForPython::blobs(), jevois::dnn::NetworkPythonImpl::doprocess(), jevois::dnn::PostProcessorPythonImpl::process(), and jevois::dnn::PostProcessorDetectYOLOforPython::yolo().</para>
+    </section><anchor xml:id="_group__pysupport_1ga89fd3c8c027de53532b0ab63ba9bd84b"/>    <section>
+    <title>setEngine()</title>
+<indexterm><primary>setEngine</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>setEngine</secondary></indexterm>
+<para><computeroutput>void jevois::python::setEngine (<link linkend="_classjevois_1_1Engine">jevois::Engine</link> * e)</computeroutput></para><para>
+
+<para>初始化 Python、numpy，并允许 python 模块通过 JeVois <link linkend="_classjevois_1_1Engine">Engine</link> 发送串行输出 </para>
+</para>
+
+<para>此命令不适用于一般用途，只有 <link linkend="_classjevois_1_1Engine">Engine</link> 才应该使用它。 </para>
+<para>
+Definition at line 102 of file PythonSupport.C.</para>
+<para>
+References jevois::python::engineForPythonModule.</para>
+<para>
+Referenced by jevois::Engine::postInit().</para>
+    </section><anchor xml:id="_group__pysupport_1gaf422b158b87551344a609cf00d565419"/>    <section>
+    <title>topyobj()<computeroutput>[1/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Point_&lt; float &gt; const &amp; val)</computeroutput></para><para>
+
+<para>cv::Point&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga93c8f7221a6bffe3fc183963e81e700b"/>    <section>
+    <title>topyobj()<computeroutput>[2/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Point_&lt; int &gt; const &amp; val)</computeroutput></para><para>
+
+<para>cv::Point&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gad7841f6fbaa2d636b7189c549e211ac3"/>    <section>
+    <title>topyobj()<computeroutput>[3/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Scalar_&lt; float &gt; const &amp; val)</computeroutput></para><para>
+
+<para>cv::Scalar&lt;float&gt; 的特化，返回一个有 4 个浮点元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga76307bdb32c40ee62a394276641f4eb0"/>    <section>
+    <title>topyobj()<computeroutput>[4/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Scalar_&lt; int &gt; const &amp; val)</computeroutput></para><para>
+
+<para>cv::Scalar&lt;int&gt; 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga0bdf6f519c8a68fb811ae707c3dd43dd"/>    <section>
+    <title>topyobj()<computeroutput>[5/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Size_&lt; float &gt; const &amp; val)</computeroutput></para><para>
+
+<para>cv::Size&lt;float&gt; 的特化，返回一个包含 2 个 float 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gacf2bb5c5469a2c97b0f0341cd8a71495"/>    <section>
+    <title>topyobj()<computeroutput>[6/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (cv::Size_&lt; int &gt; const &amp; val)</computeroutput></para><para>
+
+<para>对 cv::Size&lt;int&gt; 的特化，返回一个包含 2 个 int 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga75c60823494fe158f5663a0e2a090832"/>    <section>
+    <title>topyobj()<computeroutput>[7/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;&gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (ImColor const &amp; val)</computeroutput></para><para>
+
+<para>对 ImColor 的特化，返回一个包含 4 个 int 元素的元组 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1ga4f18ce4c0271e61810cb876a267e7e7e"/>    <section>
+    <title>topyobj()<computeroutput>[8/8]</computeroutput></title>
+<indexterm><primary>topyobj</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>topyobj</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>boost::python::object jevois::python::topyobj (T const &amp; val)</computeroutput></para><para>
+
+<para>将值转换为 python，传递到 python::object(val) </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gaa0b5c0e59acd608244ab06a80f2d73cd"/>    <section>
+    <title>tupleToArray()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>tupleToArray</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>tupleToArray</secondary></indexterm>
+<computeroutput>template&lt;typename T , size_t N&gt; </computeroutput><para><computeroutput>std::array&lt;T, N&gt; jevois::python::tupleToArray (boost::python::object const &amp; o)</computeroutput></para><para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</para>
+    </section><anchor xml:id="_group__pysupport_1gae325e307bbc6b533c57dd06f018b0e9e"/>    <section>
+    <title>tupleToArray()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>tupleToArray</primary><secondary>Python 支持函数</secondary></indexterm>
+<indexterm><primary>Python 支持函数</primary><secondary>tupleToArray</secondary></indexterm>
+<computeroutput>template&lt;typename T , size_t N&gt; </computeroutput><para><computeroutput>void jevois::python::tupleToArray (boost::python::object const &amp; o, std::array&lt; T, N &gt; &amp; arr, size_t minN = <computeroutput>N</computeroutput>
+)</computeroutput></para><para>
+
+<para>辅助程序，将具有统一类型 T 元素的元组提取到 std::array 中 </para>
+</para>
+
+<para>minN 是所需的元组元素的最小数量，允许部分元组。如果 minN&lt;N，我们假定数组已使用默认值初始化，并且我们允许接收 小于 N 的元组，在这种情况下我们只分配数组的第一个元素。用于提取可以包含 1 到 4 个元素的 cv::Scalar 之类的东 西。 </para>
+</section>
+</section>
+</section>

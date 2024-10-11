@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_ICM20948_8C">
+<title>src/jevois/Core/ICM20948.C File Reference</title>
+<indexterm><primary>src/jevois/Core/ICM20948.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/Engine.H&gt;
+#include &lt;jevois/Core/ICM20948.H&gt;
+#include &lt;jevois/Core/ICM20948_regs.H&gt;
+</programlisting>Include dependency graph for ICM20948.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="ICM20948_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1accfc057055882bc5af49122d405e6ae7">JEVOIS_DMP_BAC_WEARABLE_EN</link>   0x8000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a08b69f99774561e72ac718ab564761ad">JEVOIS_DMP_PEDOMETER_EN</link>   0x4000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1adae03553c24c2479f238e7feadee23ff">JEVOIS_DMP_PEDOMETER_INT_EN</link>   0x2000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1acd3237eeddf0e9f59e947899702af7ec">JEVOIS_DMP_SMD_EN</link>   0x0800</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1aa552c2d0191c1ff4c956ef90ea7cce56">JEVOIS_DMP_BTS_EN</link>   0x0020</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a3e26911172141af04b4c71e270042351">JEVOIS_DMP_FLIP_PICKUP_EN</link>   0x0010</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a6fbc4ecce3734862dc48ae970dc1dc6c">JEVOIS_DMP_GEOMAG_EN</link>   0x0008</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a4a832953ac560eaf5a8bf58cc5a22a20">JEVOIS_DMP_ACCEL_CAL_EN</link>   0x0200</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1ac9e00f530a1f87429cca967b60cc0fff">JEVOIS_DMP_GYRO_CAL_EN</link>   0x0100</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1afea7f274ffd27bb38dbbc325a6d47447">JEVOIS_DMP_COMPASS_CAL_EN</link>   0x0080</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a29567699471e746c6398d7c30605480f">JEVOIS_DMP_NINE_AXIS_EN</link>   0x0040</para>
+</listitem>
+            <listitem><para>#define <link linkend="_ICM20948_8C_1a195ab9c505b30fab8c5f275f0991fa62">JEVOIS_DMP_BRING_AND_LOOK_T0_SEE_EN</link>   0x0004</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_ICM20948_8C_1a4a832953ac560eaf5a8bf58cc5a22a20"/>    <section>
+    <title>JEVOIS_DMP_ACCEL_CAL_EN</title>
+<indexterm><primary>JEVOIS_DMP_ACCEL_CAL_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_ACCEL_CAL_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_ACCEL_CAL_EN   0x0200</computeroutput></para><para>
+Definition at line 55 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1accfc057055882bc5af49122d405e6ae7"/>    <section>
+    <title>JEVOIS_DMP_BAC_WEARABLE_EN</title>
+<indexterm><primary>JEVOIS_DMP_BAC_WEARABLE_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_BAC_WEARABLE_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_BAC_WEARABLE_EN   0x8000</computeroutput></para><para>
+Definition at line 48 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1a195ab9c505b30fab8c5f275f0991fa62"/>    <section>
+    <title>JEVOIS_DMP_BRING_AND_LOOK_T0_SEE_EN</title>
+<indexterm><primary>JEVOIS_DMP_BRING_AND_LOOK_T0_SEE_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_BRING_AND_LOOK_T0_SEE_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_BRING_AND_LOOK_T0_SEE_EN   0x0004</computeroutput></para><para>
+Definition at line 59 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1aa552c2d0191c1ff4c956ef90ea7cce56"/>    <section>
+    <title>JEVOIS_DMP_BTS_EN</title>
+<indexterm><primary>JEVOIS_DMP_BTS_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_BTS_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_BTS_EN   0x0020</computeroutput></para><para>
+Definition at line 52 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1afea7f274ffd27bb38dbbc325a6d47447"/>    <section>
+    <title>JEVOIS_DMP_COMPASS_CAL_EN</title>
+<indexterm><primary>JEVOIS_DMP_COMPASS_CAL_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_COMPASS_CAL_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_COMPASS_CAL_EN   0x0080</computeroutput></para><para>
+Definition at line 57 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1a3e26911172141af04b4c71e270042351"/>    <section>
+    <title>JEVOIS_DMP_FLIP_PICKUP_EN</title>
+<indexterm><primary>JEVOIS_DMP_FLIP_PICKUP_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_FLIP_PICKUP_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_FLIP_PICKUP_EN   0x0010</computeroutput></para><para>
+Definition at line 53 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1a6fbc4ecce3734862dc48ae970dc1dc6c"/>    <section>
+    <title>JEVOIS_DMP_GEOMAG_EN</title>
+<indexterm><primary>JEVOIS_DMP_GEOMAG_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_GEOMAG_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GEOMAG_EN   0x0008</computeroutput></para><para>
+Definition at line 54 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1ac9e00f530a1f87429cca967b60cc0fff"/>    <section>
+    <title>JEVOIS_DMP_GYRO_CAL_EN</title>
+<indexterm><primary>JEVOIS_DMP_GYRO_CAL_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_GYRO_CAL_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_GYRO_CAL_EN   0x0100</computeroutput></para><para>
+Definition at line 56 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1a29567699471e746c6398d7c30605480f"/>    <section>
+    <title>JEVOIS_DMP_NINE_AXIS_EN</title>
+<indexterm><primary>JEVOIS_DMP_NINE_AXIS_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_NINE_AXIS_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_NINE_AXIS_EN   0x0040</computeroutput></para><para>
+Definition at line 58 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1a08b69f99774561e72ac718ab564761ad"/>    <section>
+    <title>JEVOIS_DMP_PEDOMETER_EN</title>
+<indexterm><primary>JEVOIS_DMP_PEDOMETER_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_PEDOMETER_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_PEDOMETER_EN   0x4000</computeroutput></para><para>
+Definition at line 49 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1adae03553c24c2479f238e7feadee23ff"/>    <section>
+    <title>JEVOIS_DMP_PEDOMETER_INT_EN</title>
+<indexterm><primary>JEVOIS_DMP_PEDOMETER_INT_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_PEDOMETER_INT_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_PEDOMETER_INT_EN   0x2000</computeroutput></para><para>
+Definition at line 50 of file ICM20948.C.</para>
+    </section><anchor xml:id="_ICM20948_8C_1acd3237eeddf0e9f59e947899702af7ec"/>    <section>
+    <title>JEVOIS_DMP_SMD_EN</title>
+<indexterm><primary>JEVOIS_DMP_SMD_EN</primary><secondary>ICM20948.C</secondary></indexterm>
+<indexterm><primary>ICM20948.C</primary><secondary>JEVOIS_DMP_SMD_EN</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_DMP_SMD_EN   0x0800</computeroutput></para><para>
+Definition at line 51 of file ICM20948.C.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,113 @@
+\hypertarget{classjevois_1_1DynamicLoader}{}\doxysubsection{jevois\+::Dynamic\+Loader Class Reference}
+\label{classjevois_1_1DynamicLoader}\index{jevois::DynamicLoader@{jevois::DynamicLoader}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Dynamic\+Loader.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+用于打开共享对象 (.so) 文件并加载其中包含的函数的类 
+
+此类允许打开共享库 (.so 文件) 并调用该库中的函数或类。
+
+每次用户选择新的 Video\+Mapping（即，更改主机上运行的 U\+SB 网络摄像头程序中的图像分辨率，或通过串行端口调用 {\ttfamily setmapping} 命令）时，引擎都会使用 \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 加载适当的视觉处理模块。
+
+此类是从 Neuromorphic Robotics Toolkit (N\+RT) 中的 \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 修改而来的。 
+
+Definition at line 67 of file Dynamic\+Loader.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1DynamicLoader_aae3474f5e325741122411163812a8d4c}{Dynamic\+Loader}} (std\+::string const \&filename, bool close\+On\+Destroy)
+\begin{DoxyCompactList}\small\item\em 打开位于 filename 的共享对象，如果失败则抛出 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1DynamicLoader_a9a0f6772a8a7408dc24ded39a386cebc}{sopath}} () const
+\begin{DoxyCompactList}\small\item\em 检索此加载器的 .so 文件的路径，有助于避免关闭并重新加载相同的 .so 文件 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1DynamicLoader_a1b698e0ab1174d7667b9010e9165ecd3}{$\sim$\+Dynamic\+Loader}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数，可在销毁时关闭对象（参见构造函数参数） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1DynamicLoader_a4e78af49586061ff86c1c3d514c40f94}{close}} ()
+\begin{DoxyCompactList}\small\item\em 关闭共享对象文件 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Signature $>$ }\\std\+::function$<$ Signature $>$ \mbox{\hyperlink{classjevois_1_1DynamicLoader_a5c166f862655823f933c3b1dcafbda6f}{load}} (std\+::string const \&function\+Name)
+\begin{DoxyCompactList}\small\item\em 加载名为 function\+Name 的符号 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1DynamicLoader_aae3474f5e325741122411163812a8d4c}\label{classjevois_1_1DynamicLoader_aae3474f5e325741122411163812a8d4c}} 
+\index{jevois::DynamicLoader@{jevois::DynamicLoader}!DynamicLoader@{DynamicLoader}}
+\index{DynamicLoader@{DynamicLoader}!jevois::DynamicLoader@{jevois::DynamicLoader}}
+\doxyparagraph{\texorpdfstring{DynamicLoader()}{DynamicLoader()}}
+{\footnotesize\ttfamily jevois\+::\+Dynamic\+Loader\+::\+Dynamic\+Loader (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename,  }\item[{bool}]{close\+On\+Destroy }\end{DoxyParamCaption})}
+
+
+
+打开位于 filename 的共享对象，如果失败则抛出 
+
+如果 close\+On\+Destroy 为 true，则在 \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 对象被销毁时将关闭 .so 文件。如果您想在加载器超出范围后仍能访 问 .so 文件中的函数和类，请将 close\+On\+Destroy 设置为 false（这样，在程序终止之前，您将无法卸载该 .so 文件）。 \mbox{\Hypertarget{classjevois_1_1DynamicLoader_a1b698e0ab1174d7667b9010e9165ecd3}\label{classjevois_1_1DynamicLoader_a1b698e0ab1174d7667b9010e9165ecd3}} 
+\index{jevois::DynamicLoader@{jevois::DynamicLoader}!````~DynamicLoader@{$\sim$DynamicLoader}}
+\index{````~DynamicLoader@{$\sim$DynamicLoader}!jevois::DynamicLoader@{jevois::DynamicLoader}}
+\doxyparagraph{\texorpdfstring{$\sim$DynamicLoader()}{~DynamicLoader()}}
+{\footnotesize\ttfamily jevois\+::\+Dynamic\+Loader\+::$\sim$\+Dynamic\+Loader (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数，可在销毁时关闭对象（参见构造函数参数） 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1DynamicLoader_a4e78af49586061ff86c1c3d514c40f94}\label{classjevois_1_1DynamicLoader_a4e78af49586061ff86c1c3d514c40f94}} 
+\index{jevois::DynamicLoader@{jevois::DynamicLoader}!close@{close}}
+\index{close@{close}!jevois::DynamicLoader@{jevois::DynamicLoader}}
+\doxyparagraph{\texorpdfstring{close()}{close()}}
+{\footnotesize\ttfamily void jevois\+::\+Dynamic\+Loader\+::close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+关闭共享对象文件 
+
+请注意，关闭对象文件将删除从共享对象创建的任何对象/函数/等的所有链接。仅当您不想再处理从此对象文件创建的任何内 容时才使用此函数。 \mbox{\Hypertarget{classjevois_1_1DynamicLoader_a5c166f862655823f933c3b1dcafbda6f}\label{classjevois_1_1DynamicLoader_a5c166f862655823f933c3b1dcafbda6f}} 
+\index{jevois::DynamicLoader@{jevois::DynamicLoader}!load@{load}}
+\index{load@{load}!jevois::DynamicLoader@{jevois::DynamicLoader}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily template$<$class Signature $>$ \\
+std\+::function$<$Signature$>$ jevois\+::\+Dynamic\+Loader\+::load (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{function\+Name }\end{DoxyParamCaption})}
+
+
+
+加载名为 function\+Name 的符号 
+
+此方法返回一个 std\+::function，它指向此 \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 打开的共享对象中请求的名称。例如，要从文件 \char`\"{}my\+Shared\+Object.\+so\char`\"{} 加载函数 {\ttfamily int foo(double x, bool y)}，您应该这样写：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1DynamicLoader}{jevois::DynamicLoader}} loader(\textcolor{stringliteral}{"./mySharedObject.so"});}
+\DoxyCodeLine{\textcolor{keywordflow}{try} }
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  std::function<int(\textcolor{keywordtype}{double},\textcolor{keywordtype}{bool})> foo = loader.load<int(\textcolor{keywordtype}{double},\textcolor{keywordtype}{bool})>(\textcolor{stringliteral}{"foo"});}
+\DoxyCodeLine{  \textcolor{keywordtype}{int} result = foo(3.0, \textcolor{keyword}{true});}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keywordflow}{catch} (std::exception \textcolor{keyword}{const} \& e)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{ \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(e.what());}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+在 \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 被 \mbox{\hyperlink{classjevois_1_1DynamicLoader_a4e78af49586061ff86c1c3d514c40f94}{close()}}（或销毁，参见构造函数参数）之后，您不应尝试使用 \mbox{\hyperlink{classjevois_1_1DynamicLoader_a5c166f862655823f933c3b1dcafbda6f}{load()}} 返回的任何内容。
+
+如果在打开的共享对象中找不到请求的符号，则抛出。 \mbox{\Hypertarget{classjevois_1_1DynamicLoader_a9a0f6772a8a7408dc24ded39a386cebc}\label{classjevois_1_1DynamicLoader_a9a0f6772a8a7408dc24ded39a386cebc}} 
+\index{jevois::DynamicLoader@{jevois::DynamicLoader}!sopath@{sopath}}
+\index{sopath@{sopath}!jevois::DynamicLoader@{jevois::DynamicLoader}}
+\doxyparagraph{\texorpdfstring{sopath()}{sopath()}}
+{\footnotesize\ttfamily const std\+::string\& jevois\+::\+Dynamic\+Loader\+::sopath (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+检索此加载器的 .so 文件的路径，有助于避免关闭并重新加载相同的 .so 文件 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{DynamicLoader_8H}{Dynamic\+Loader.\+H}}\end{DoxyCompactItemize}

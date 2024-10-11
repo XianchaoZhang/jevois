@@ -1,0 +1,702 @@
+\hypertarget{classjevois_1_1GUIhelperPython}{}\doxysubsection{jevois\+::G\+U\+Ihelper\+Python Class Reference}
+\label{classjevois_1_1GUIhelperPython}\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+包装 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 以供 Python 使用 
+
+此类不适用于一般用途，仅供 \mbox{\hyperlink{classjevois_1_1PythonModule}{Python\+Module}} 使用。此类的用户必须确保原始 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 将比任何和所有 \mbox{\hyperlink{classjevois_1_1GUIhelperPython}{G\+U\+Ihelper\+Python}} 实例存活的 时间更长，因为 \mbox{\hyperlink{classjevois_1_1GUIhelperPython}{G\+U\+Ihelper\+Python}} 只是通过不受保护的原始指针引用源 G\+U\+Ihelper。虽然 C++ 对象称为 G\+U\+Ihelper\+Python，但我们将以 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 的名称将其公开给 python（参见 Python\+Support.\+C）。 
+
+Definition at line 219 of file Python\+Module.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIhelperPython_a1792101e1056db0df1038a3027ff85e3}{G\+U\+Ihelper\+Python}} (\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $\ast$src)
+\begin{DoxyCompactList}\small\item\em Construct from a regular \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} that should be be coming from \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ae0756f869b61bf817d15e357f089da82}{start\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Start a new rendering frame. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ab94627365028b8d24fde46b999aa1535}{frame\+Started}} () const
+\begin{DoxyCompactList}\small\item\em Helper to indicate that \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ae0756f869b61bf817d15e357f089da82}{start\+Frame()}} was called, and thus \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a7c071457d71d6d06f975d366b51941be}{end\+Frame()}} should be called. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a9861a056bdf1368e4d83ee51db47ab75}{draw\+Image}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw a \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aaff1dadae8b8ca6013b08e40cb9570c3}{draw\+Image1}} (char const $\ast$name, cv\+::\+Mat const \&img, bool rgb, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw an Open\+CV image, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_afaa211d8bcb69d9c6f1f9adfa4cc43a9}{draw\+Image2}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&img, int x, int y, int w, int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw an Open\+CV image, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aa356c44d428c47ee0a9c6fcb14deef03}{draw\+Image3}} (char const $\ast$name, cv\+::\+Mat const \&img, bool rgb, int x, int y, int w, int \mbox{\hyperlink{GUIhelper_8C_a16611451551e3d15916bae723c3f59f7}{h}}, bool noalias=false, bool isoverlay=false)
+\begin{DoxyCompactList}\small\item\em Draw an Open\+CV image, copying pixel data to an Open\+GL texture. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_afd649c2a46496d50407edcd1fdddffc1}{draw\+Input\+Frame}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} const \&frame, bool noalias=false, bool casync=false)
+\begin{DoxyCompactList}\small\item\em Draw the input video frame from the camera using zero-\/copy. \end{DoxyCompactList}\item 
+boost\+::python\+::tuple \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a61b3ba655387f7e3c86d7ef2ab3ac224}{draw\+Input\+Frame2}} (char const $\ast$name, \mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} const \&frame, bool noalias=false, bool casync=false)
+\begin{DoxyCompactList}\small\item\em Draw the second (scaled) input video frame from the camera using zero-\/copy. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aa7f3730e03896b43277b1ee3918b7e5b}{i2d}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a7879a81ec2b2126a9664f886f743050d}{i2d1}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_abf8120d5f4dc9c1674cb065966d76d5a}{i2ds}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ab5893e0b30d9700d1deb29701b2bcad9}{i2ds1}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from within a rendered image to on-\/screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aed265181993ae9f941b44bf5b88aab11}{draw\+Line}} (float x1, float y1, float x2, float y2, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255))
+\begin{DoxyCompactList}\small\item\em Draw line over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ad8d35e072774a4e4fa965a977224a479}{draw\+Rect}} (float x1, float y1, float x2, float y2, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw rectangular box over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a79b24b7439d72067f82ab2b05badfb35}{draw\+Poly}} (std\+::vector$<$ cv\+::\+Point $>$ const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a76320e1f34a193c4920a183cfbe06ff9}{draw\+Poly1}} (std\+::vector$<$ cv\+::\+Point2f $>$ const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a6ec14a3eec3fdfd22f7654d8b63f15f0}{draw\+Poly2}} (cv\+::\+Mat const \&pts, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw polygon over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a4c4abee2f2ebd781ed796fd3bf5b2309}{draw\+Circle}} (float x, float y, float r, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255), bool filled=true)
+\begin{DoxyCompactList}\small\item\em Draw circle over an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a979a1ffe795ddb41790ad63d3db5911b}{draw\+Text}} (float x, float y, char const $\ast$txt, Im\+U32 col=I\+M\+\_\+\+C\+O\+L32(128, 255, 128, 255))
+\begin{DoxyCompactList}\small\item\em Draw text over an image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a8c11116ed9e497bde5617d1354180852}{iline}} (int line=-\/1, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ac11b90d3c9b28f394133d4ac3452c1ab}{itext}} (char const $\ast$txt, Im\+U32 const \&col=I\+M\+\_\+\+C\+O\+L32\+\_\+\+B\+L\+A\+C\+K\+\_\+\+T\+R\+A\+NS, int line=-\/1)
+\begin{DoxyCompactList}\small\item\em Draw some overlay text on top of an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a07b1e06dfdc592ac81897f5c9830bf63}{itext2}} (char const $\ast$txt)
+\begin{DoxyCompactList}\small\item\em Draw some overlay text on top of an image, default color and line. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a091c7d1e1bebcff3499841a017fc8ccd}{iinfo}} (\mbox{\hyperlink{classjevois_1_1InputFramePython}{jevois\+::\+Input\+Frame\+Python}} const \&inframe, std\+::string const \&fpscpu, unsigned short winw=0, unsigned short winh=0)
+\begin{DoxyCompactList}\small\item\em Display processing and video info at bottom of screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a30dae9b3189ba1b58773d61a28ceb98b}{release\+Image}} (char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Release an image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aa9033960c8e86a0e8f1a18f2b6dbc41c}{release\+Image2}} (char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em Release an image, second video stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a7c071457d71d6d06f975d366b51941be}{end\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em Finish current frame and render it. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a4010eb713df8b15b3b7797fdabe64369}{d2i}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a55f8df4a55f3caf772671360de947ab4}{d2i1}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert coordinates of a point from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a3b026cc56a5c98b2ac4abb3da322e0dd}{d2is}} (Im\+Vec2 p, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a31fcbcd8827d12f8ad9e4968d8c878b4}{d2is1}} (float x, float y, char const $\ast$name=nullptr)
+\begin{DoxyCompactList}\small\item\em Convert a 2D size from on-\/screen to within a rendered image. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a115115ee17963f1cce174ff2a133aaef}{report\+Error}} (std\+::string const \&err)
+\begin{DoxyCompactList}\small\item\em Report an error in an overlay window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a455d3eadc54f539f989a941554a28f82}{report\+And\+Ignore\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Report current exception in a modal dialog, then ignore it. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a3881316b1f54b7fec190937fdc6be609}{report\+And\+Rethrow\+Exception}} (std\+::string const \&prefix=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Report current exception in a modal dialog, then re-\/throw it. \end{DoxyCompactList}\item 
+Im\+Vec2 \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a0bcf027083949ebbf4f35abdb6fe47ae}{get\+Mouse\+Pos}} ()
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: get mouse position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aca81d3bba1f2ffaca0f2712babdd7568}{is\+Mouse\+Clicked}} (int button\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: check if mouse button clicked. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_affa143ceaf6159c64d31931d477251d1}{is\+Mouse\+Double\+Clicked}} (int button\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: check if mouse button double-\/clicked. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ac81dc2f11210ea3d347ff7cc9db1a423}{is\+Mouse\+Dragging}} (int button\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: check if mouse button dragged. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a7e6a664f72383795bc685d7dc8c40c7f}{is\+Mouse\+Down}} (int button\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: check if mouse button pressed. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1GUIhelperPython_aad3f8366d9d04b742fd272a2e1b6e362}{is\+Mouse\+Released}} (int button\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Im\+Gui helper\+: check if mouse button released. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a1792101e1056db0df1038a3027ff85e3}\label{classjevois_1_1GUIhelperPython_a1792101e1056db0df1038a3027ff85e3}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!GUIhelperPython@{GUIhelperPython}}
+\index{GUIhelperPython@{GUIhelperPython}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{GUIhelperPython()}{GUIhelperPython()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Ihelper\+Python\+::\+G\+U\+Ihelper\+Python (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $\ast$}]{src }\end{DoxyParamCaption})}
+
+
+
+Construct from a regular \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} that should be be coming from \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}. 
+
+
+
+Definition at line 249 of file Python\+Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a4010eb713df8b15b3b7797fdabe64369}\label{classjevois_1_1GUIhelperPython_a4010eb713df8b15b3b7797fdabe64369}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!d2i@{d2i}}
+\index{d2i@{d2i}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{d2i()}{d2i()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::d2i (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from on-\/screen to within a rendered image. 
+
+
+
+Definition at line 349 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a55f8df4a55f3caf772671360de947ab4}\label{classjevois_1_1GUIhelperPython_a55f8df4a55f3caf772671360de947ab4}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!d2i1@{d2i1}}
+\index{d2i1@{d2i1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{d2i1()}{d2i1()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::d2i1 (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from on-\/screen to within a rendered image. 
+
+
+
+Definition at line 355 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a3b026cc56a5c98b2ac4abb3da322e0dd}\label{classjevois_1_1GUIhelperPython_a3b026cc56a5c98b2ac4abb3da322e0dd}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!d2is@{d2is}}
+\index{d2is@{d2is}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{d2is()}{d2is()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::d2is (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from on-\/screen to within a rendered image. 
+
+
+
+Definition at line 361 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a31fcbcd8827d12f8ad9e4968d8c878b4}\label{classjevois_1_1GUIhelperPython_a31fcbcd8827d12f8ad9e4968d8c878b4}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!d2is1@{d2is1}}
+\index{d2is1@{d2is1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{d2is1()}{d2is1()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::d2is1 (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from on-\/screen to within a rendered image. 
+
+
+
+Definition at line 367 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a4c4abee2f2ebd781ed796fd3bf5b2309}\label{classjevois_1_1GUIhelperPython_a4c4abee2f2ebd781ed796fd3bf5b2309}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawCircle@{drawCircle}}
+\index{drawCircle@{drawCircle}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawCircle()}{drawCircle()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Circle (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{r,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw circle over an image. 
+
+
+
+Definition at line 403 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a9861a056bdf1368e4d83ee51db47ab75}\label{classjevois_1_1GUIhelperPython_a9861a056bdf1368e4d83ee51db47ab75}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawImage@{drawImage}}
+\index{drawImage@{drawImage}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawImage()}{drawImage()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{img,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw a \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}}, copying pixel data to an Open\+GL texture. 
+
+
+
+Definition at line 267 of file Python\+Module.\+C.
+
+
+
+References h.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aaff1dadae8b8ca6013b08e40cb9570c3}\label{classjevois_1_1GUIhelperPython_aaff1dadae8b8ca6013b08e40cb9570c3}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawImage1@{drawImage1}}
+\index{drawImage1@{drawImage1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawImage1()}{drawImage1()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image1 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{rgb,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw an Open\+CV image, copying pixel data to an Open\+GL texture. 
+
+
+
+Definition at line 276 of file Python\+Module.\+C.
+
+
+
+References h.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_afaa211d8bcb69d9c6f1f9adfa4cc43a9}\label{classjevois_1_1GUIhelperPython_afaa211d8bcb69d9c6f1f9adfa4cc43a9}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawImage2@{drawImage2}}
+\index{drawImage2@{drawImage2}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawImage2()}{drawImage2()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} const \&}]{img,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw an Open\+CV image, copying pixel data to an Open\+GL texture. 
+
+
+
+Definition at line 285 of file Python\+Module.\+C.
+
+
+
+References h, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aa356c44d428c47ee0a9c6fcb14deef03}\label{classjevois_1_1GUIhelperPython_aa356c44d428c47ee0a9c6fcb14deef03}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawImage3@{drawImage3}}
+\index{drawImage3@{drawImage3}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawImage3()}{drawImage3()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Image3 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{rgb,  }\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{isoverlay = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw an Open\+CV image, copying pixel data to an Open\+GL texture. 
+
+
+
+Definition at line 296 of file Python\+Module.\+C.
+
+
+
+References h, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_afd649c2a46496d50407edcd1fdddffc1}\label{classjevois_1_1GUIhelperPython_afd649c2a46496d50407edcd1fdddffc1}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawInputFrame@{drawInputFrame}}
+\index{drawInputFrame@{drawInputFrame}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawInputFrame()}{drawInputFrame()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Input\+Frame (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} const \&}]{frame,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw the input video frame from the camera using zero-\/copy. 
+
+
+
+Definition at line 307 of file Python\+Module.\+C.
+
+
+
+References h.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a61b3ba655387f7e3c86d7ef2ab3ac224}\label{classjevois_1_1GUIhelperPython_a61b3ba655387f7e3c86d7ef2ab3ac224}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawInputFrame2@{drawInputFrame2}}
+\index{drawInputFrame2@{drawInputFrame2}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawInputFrame2()}{drawInputFrame2()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Input\+Frame2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name,  }\item[{\mbox{\hyperlink{classjevois_1_1InputFramePython}{Input\+Frame\+Python}} const \&}]{frame,  }\item[{bool}]{noalias = {\ttfamily false},  }\item[{bool}]{casync = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Draw the second (scaled) input video frame from the camera using zero-\/copy. 
+
+
+
+Definition at line 316 of file Python\+Module.\+C.
+
+
+
+References h.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aed265181993ae9f941b44bf5b88aab11}\label{classjevois_1_1GUIhelperPython_aed265181993ae9f941b44bf5b88aab11}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Line (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)} }\end{DoxyParamCaption})}
+
+
+
+Draw line over an image. 
+
+
+
+Definition at line 373 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a79b24b7439d72067f82ab2b05badfb35}\label{classjevois_1_1GUIhelperPython_a79b24b7439d72067f82ab2b05badfb35}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawPoly@{drawPoly}}
+\index{drawPoly@{drawPoly}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawPoly()}{drawPoly()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Poly (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point $>$ const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+
+
+Definition at line 385 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a76320e1f34a193c4920a183cfbe06ff9}\label{classjevois_1_1GUIhelperPython_a76320e1f34a193c4920a183cfbe06ff9}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawPoly1@{drawPoly1}}
+\index{drawPoly1@{drawPoly1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawPoly1()}{drawPoly1()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Poly1 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Point2f $>$ const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+
+
+Definition at line 391 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a6ec14a3eec3fdfd22f7654d8b63f15f0}\label{classjevois_1_1GUIhelperPython_a6ec14a3eec3fdfd22f7654d8b63f15f0}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawPoly2@{drawPoly2}}
+\index{drawPoly2@{drawPoly2}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawPoly2()}{drawPoly2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Poly2 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{pts,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw polygon over an image. 
+
+
+
+Definition at line 397 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ad8d35e072774a4e4fa965a977224a479}\label{classjevois_1_1GUIhelperPython_ad8d35e072774a4e4fa965a977224a479}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawRect@{drawRect}}
+\index{drawRect@{drawRect}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawRect()}{drawRect()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Rect (\begin{DoxyParamCaption}\item[{float}]{x1,  }\item[{float}]{y1,  }\item[{float}]{x2,  }\item[{float}]{y2,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)},  }\item[{bool}]{filled = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Draw rectangular box over an image. 
+
+
+
+Definition at line 379 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a979a1ffe795ddb41790ad63d3db5911b}\label{classjevois_1_1GUIhelperPython_a979a1ffe795ddb41790ad63d3db5911b}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!drawText@{drawText}}
+\index{drawText@{drawText}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{drawText()}{drawText()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::draw\+Text (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{txt,  }\item[{Im\+U32}]{col = {\ttfamily IM\+\_\+COL32(128,255,128,255)} }\end{DoxyParamCaption})}
+
+
+
+Draw text over an image. 
+
+
+
+Definition at line 409 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a7c071457d71d6d06f975d366b51941be}\label{classjevois_1_1GUIhelperPython_a7c071457d71d6d06f975d366b51941be}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!endFrame@{endFrame}}
+\index{endFrame@{endFrame}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{endFrame()}{endFrame()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::end\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finish current frame and render it. 
+
+
+
+Definition at line 452 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ab94627365028b8d24fde46b999aa1535}\label{classjevois_1_1GUIhelperPython_ab94627365028b8d24fde46b999aa1535}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!frameStarted@{frameStarted}}
+\index{frameStarted@{frameStarted}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{frameStarted()}{frameStarted()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::frame\+Started (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Helper to indicate that \mbox{\hyperlink{classjevois_1_1GUIhelperPython_ae0756f869b61bf817d15e357f089da82}{start\+Frame()}} was called, and thus \mbox{\hyperlink{classjevois_1_1GUIhelperPython_a7c071457d71d6d06f975d366b51941be}{end\+Frame()}} should be called. 
+
+
+
+Definition at line 261 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a0bcf027083949ebbf4f35abdb6fe47ae}\label{classjevois_1_1GUIhelperPython_a0bcf027083949ebbf4f35abdb6fe47ae}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!getMousePos@{getMousePos}}
+\index{getMousePos@{getMousePos}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{getMousePos()}{getMousePos()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::get\+Mouse\+Pos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: get mouse position. 
+
+
+
+Definition at line 476 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aa7f3730e03896b43277b1ee3918b7e5b}\label{classjevois_1_1GUIhelperPython_aa7f3730e03896b43277b1ee3918b7e5b}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!i2d@{i2d}}
+\index{i2d@{i2d}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{i2d()}{i2d()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::i2d (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from within a rendered image to on-\/screen. 
+
+
+
+Definition at line 325 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a7879a81ec2b2126a9664f886f743050d}\label{classjevois_1_1GUIhelperPython_a7879a81ec2b2126a9664f886f743050d}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!i2d1@{i2d1}}
+\index{i2d1@{i2d1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{i2d1()}{i2d1()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::i2d1 (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert coordinates of a point from within a rendered image to on-\/screen. 
+
+
+
+Definition at line 331 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_abf8120d5f4dc9c1674cb065966d76d5a}\label{classjevois_1_1GUIhelperPython_abf8120d5f4dc9c1674cb065966d76d5a}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!i2ds@{i2ds}}
+\index{i2ds@{i2ds}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{i2ds()}{i2ds()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::i2ds (\begin{DoxyParamCaption}\item[{Im\+Vec2}]{p,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from within a rendered image to on-\/screen. 
+
+
+
+Definition at line 337 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ab5893e0b30d9700d1deb29701b2bcad9}\label{classjevois_1_1GUIhelperPython_ab5893e0b30d9700d1deb29701b2bcad9}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!i2ds1@{i2ds1}}
+\index{i2ds1@{i2ds1}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{i2ds1()}{i2ds1()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::i2ds1 (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Convert a 2D size from within a rendered image to on-\/screen. 
+
+
+
+Definition at line 343 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a091c7d1e1bebcff3499841a017fc8ccd}\label{classjevois_1_1GUIhelperPython_a091c7d1e1bebcff3499841a017fc8ccd}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!iinfo@{iinfo}}
+\index{iinfo@{iinfo}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{iinfo()}{iinfo()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::iinfo (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFramePython}{jevois\+::\+Input\+Frame\+Python}} const \&}]{inframe,  }\item[{std\+::string const \&}]{fpscpu,  }\item[{unsigned short}]{winw = {\ttfamily 0},  }\item[{unsigned short}]{winh = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Display processing and video info at bottom of screen. 
+
+
+
+Definition at line 433 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a8c11116ed9e497bde5617d1354180852}\label{classjevois_1_1GUIhelperPython_a8c11116ed9e497bde5617d1354180852}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!iline@{iline}}
+\index{iline@{iline}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{iline()}{iline()}}
+{\footnotesize\ttfamily Im\+Vec2 jevois\+::\+G\+U\+Ihelper\+Python\+::iline (\begin{DoxyParamCaption}\item[{int}]{line = {\ttfamily -\/1},  }\item[{char const $\ast$}]{name = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. 
+
+
+
+Definition at line 415 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aca81d3bba1f2ffaca0f2712babdd7568}\label{classjevois_1_1GUIhelperPython_aca81d3bba1f2ffaca0f2712babdd7568}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!isMouseClicked@{isMouseClicked}}
+\index{isMouseClicked@{isMouseClicked}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{isMouseClicked()}{isMouseClicked()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::is\+Mouse\+Clicked (\begin{DoxyParamCaption}\item[{int}]{button\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: check if mouse button clicked. 
+
+
+
+Definition at line 480 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_affa143ceaf6159c64d31931d477251d1}\label{classjevois_1_1GUIhelperPython_affa143ceaf6159c64d31931d477251d1}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!isMouseDoubleClicked@{isMouseDoubleClicked}}
+\index{isMouseDoubleClicked@{isMouseDoubleClicked}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{isMouseDoubleClicked()}{isMouseDoubleClicked()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::is\+Mouse\+Double\+Clicked (\begin{DoxyParamCaption}\item[{int}]{button\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: check if mouse button double-\/clicked. 
+
+
+
+Definition at line 484 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a7e6a664f72383795bc685d7dc8c40c7f}\label{classjevois_1_1GUIhelperPython_a7e6a664f72383795bc685d7dc8c40c7f}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!isMouseDown@{isMouseDown}}
+\index{isMouseDown@{isMouseDown}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{isMouseDown()}{isMouseDown()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::is\+Mouse\+Down (\begin{DoxyParamCaption}\item[{int}]{button\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: check if mouse button pressed. 
+
+
+
+Definition at line 492 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ac81dc2f11210ea3d347ff7cc9db1a423}\label{classjevois_1_1GUIhelperPython_ac81dc2f11210ea3d347ff7cc9db1a423}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!isMouseDragging@{isMouseDragging}}
+\index{isMouseDragging@{isMouseDragging}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{isMouseDragging()}{isMouseDragging()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::is\+Mouse\+Dragging (\begin{DoxyParamCaption}\item[{int}]{button\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: check if mouse button dragged. 
+
+
+
+Definition at line 488 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aad3f8366d9d04b742fd272a2e1b6e362}\label{classjevois_1_1GUIhelperPython_aad3f8366d9d04b742fd272a2e1b6e362}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!isMouseReleased@{isMouseReleased}}
+\index{isMouseReleased@{isMouseReleased}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{isMouseReleased()}{isMouseReleased()}}
+{\footnotesize\ttfamily bool jevois\+::\+G\+U\+Ihelper\+Python\+::is\+Mouse\+Released (\begin{DoxyParamCaption}\item[{int}]{button\+\_\+num }\end{DoxyParamCaption})}
+
+
+
+Im\+Gui helper\+: check if mouse button released. 
+
+
+
+Definition at line 496 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ac11b90d3c9b28f394133d4ac3452c1ab}\label{classjevois_1_1GUIhelperPython_ac11b90d3c9b28f394133d4ac3452c1ab}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!itext@{itext}}
+\index{itext@{itext}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{itext()}{itext()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::itext (\begin{DoxyParamCaption}\item[{char const $\ast$}]{txt,  }\item[{Im\+U32 const \&}]{col = {\ttfamily IM\+\_\+COL32\+\_\+BLACK\+\_\+TRANS},  }\item[{int}]{line = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+Draw some overlay text on top of an image. 
+
+
+
+Definition at line 421 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a07b1e06dfdc592ac81897f5c9830bf63}\label{classjevois_1_1GUIhelperPython_a07b1e06dfdc592ac81897f5c9830bf63}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!itext2@{itext2}}
+\index{itext2@{itext2}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{itext2()}{itext2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::itext2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{txt }\end{DoxyParamCaption})}
+
+
+
+Draw some overlay text on top of an image, default color and line. 
+
+
+
+Definition at line 427 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a30dae9b3189ba1b58773d61a28ceb98b}\label{classjevois_1_1GUIhelperPython_a30dae9b3189ba1b58773d61a28ceb98b}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!releaseImage@{releaseImage}}
+\index{releaseImage@{releaseImage}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{releaseImage()}{releaseImage()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::release\+Image (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Release an image. 
+
+
+
+Definition at line 440 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_aa9033960c8e86a0e8f1a18f2b6dbc41c}\label{classjevois_1_1GUIhelperPython_aa9033960c8e86a0e8f1a18f2b6dbc41c}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!releaseImage2@{releaseImage2}}
+\index{releaseImage2@{releaseImage2}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{releaseImage2()}{releaseImage2()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::release\+Image2 (\begin{DoxyParamCaption}\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+Release an image, second video stream. 
+
+
+
+Definition at line 446 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a455d3eadc54f539f989a941554a28f82}\label{classjevois_1_1GUIhelperPython_a455d3eadc54f539f989a941554a28f82}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!reportAndIgnoreException@{reportAndIgnoreException}}
+\index{reportAndIgnoreException@{reportAndIgnoreException}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{reportAndIgnoreException()}{reportAndIgnoreException()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::report\+And\+Ignore\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Report current exception in a modal dialog, then ignore it. 
+
+
+
+Definition at line 464 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a3881316b1f54b7fec190937fdc6be609}\label{classjevois_1_1GUIhelperPython_a3881316b1f54b7fec190937fdc6be609}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!reportAndRethrowException@{reportAndRethrowException}}
+\index{reportAndRethrowException@{reportAndRethrowException}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{reportAndRethrowException()}{reportAndRethrowException()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::report\+And\+Rethrow\+Exception (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{prefix = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Report current exception in a modal dialog, then re-\/throw it. 
+
+
+
+Definition at line 470 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_a115115ee17963f1cce174ff2a133aaef}\label{classjevois_1_1GUIhelperPython_a115115ee17963f1cce174ff2a133aaef}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!reportError@{reportError}}
+\index{reportError@{reportError}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{reportError()}{reportError()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ihelper\+Python\+::report\+Error (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{err }\end{DoxyParamCaption})}
+
+
+
+Report an error in an overlay window. 
+
+
+
+Definition at line 458 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIhelperPython_ae0756f869b61bf817d15e357f089da82}\label{classjevois_1_1GUIhelperPython_ae0756f869b61bf817d15e357f089da82}} 
+\index{jevois::GUIhelperPython@{jevois::GUIhelperPython}!startFrame@{startFrame}}
+\index{startFrame@{startFrame}!jevois::GUIhelperPython@{jevois::GUIhelperPython}}
+\doxyparagraph{\texorpdfstring{startFrame()}{startFrame()}}
+{\footnotesize\ttfamily boost\+::python\+::tuple jevois\+::\+G\+U\+Ihelper\+Python\+::start\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start a new rendering frame. 
+
+
+
+Definition at line 253 of file Python\+Module.\+C.
+
+
+
+References h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonModule_8H}{Python\+Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonModule_8C}{Python\+Module.\+C}}\end{DoxyCompactItemize}

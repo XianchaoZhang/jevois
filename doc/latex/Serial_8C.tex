@@ -1,0 +1,64 @@
+\hypertarget{Serial_8C}{}\doxysubsection{src/jevois/\+Core/\+Serial.C File Reference}
+\label{Serial_8C}\index{src/jevois/Core/Serial.C@{src/jevois/Core/Serial.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Serial.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Core/\+Engine.\+H$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for Serial.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Serial_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{Serial_8C_afaf07f46c5de8f0e8d95ae19cb841fdd}{S\+E\+R\+F\+A\+T\+AL}}(msg)
+\item 
+\#define \mbox{\hyperlink{Serial_8C_aaddc5d4c1bf5487381952d2777787e8a}{S\+E\+R\+T\+H\+R\+OW}}(msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{Serial_8C_afaf07f46c5de8f0e8d95ae19cb841fdd}\label{Serial_8C_afaf07f46c5de8f0e8d95ae19cb841fdd}} 
+\index{Serial.C@{Serial.C}!SERFATAL@{SERFATAL}}
+\index{SERFATAL@{SERFATAL}!Serial.C@{Serial.C}}
+\doxyparagraph{\texorpdfstring{SERFATAL}{SERFATAL}}
+{\footnotesize\ttfamily \#define S\+E\+R\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{                                              \(\backslash\)}
+\DoxyCodeLine{    if (itsErrno.load() == 0) itsErrno = errno;                         \(\backslash\)}
+\DoxyCodeLine{    \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}('[' << instanceName() << "] " << msg << " (" << strerror(errno) << ')'); \(\backslash\)}
+\DoxyCodeLine{  \} while (0)}
+
+\end{DoxyCode}
+
+
+Definition at line 29 of file Serial.\+C.
+
+\mbox{\Hypertarget{Serial_8C_aaddc5d4c1bf5487381952d2777787e8a}\label{Serial_8C_aaddc5d4c1bf5487381952d2777787e8a}} 
+\index{Serial.C@{Serial.C}!SERTHROW@{SERTHROW}}
+\index{SERTHROW@{SERTHROW}!Serial.C@{Serial.C}}
+\doxyparagraph{\texorpdfstring{SERTHROW}{SERTHROW}}
+{\footnotesize\ttfamily \#define S\+E\+R\+T\+H\+R\+OW(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{                                              \(\backslash\)}
+\DoxyCodeLine{    if (itsErrno.load() == 0) itsErrno = errno;                         \(\backslash\)}
+\DoxyCodeLine{    std::ostringstream ostr;                                            \(\backslash\)}
+\DoxyCodeLine{    ostr << '[' << instanceName() << "] " << msg << " (" << strerror(errno) << ')'; \(\backslash\)}
+\DoxyCodeLine{    throw std::runtime\_error(ostr.str());                               \(\backslash\)}
+\DoxyCodeLine{  \} while (0)}
+
+\end{DoxyCode}
+
+
+Definition at line 34 of file Serial.\+C.
+

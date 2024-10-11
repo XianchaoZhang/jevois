@@ -27,10 +27,9 @@
 #include <jevois/Core/VideoMapping.H>
 #include <jevois/Image/RawImage.H>
 
-// for UVC gadget specific definitions; yes, this is only in the kernel tree, kernel maintainers should expose those
-// definitions in the standard headers instead:
+// 针对 UVC 小工具的特定定义；是的，这仅在内核树中，内核维护人员应改为在标准头文件中公开这些定义：
 //#include "../../../../lichee/linux-3.4/drivers/usb/gadget/uvc.h"
-// We now include this file in our tree in so our code can compile without requiring the kernel source tree:
+// 我们现在将此文件包含在我们的树中，以便我们的代码可以在不需要内核源代码树的情况下进行编译：
 #include "uvc.h"
 
 namespace jevois
@@ -39,59 +38,54 @@ namespace jevois
   class Engine;
   class VideoBuffers;
   
-  //! JeVois gadget driver - exposes a uvcvideo interface to host computer connected over USB
-  /*! Gadget is a user-space interface to the Linux kernel's gadget driver implemented by JeVois. A USB gadget driver is
-      a USB driver that runs on a device, as opposed to a USB driver that runs on a host computer. Gadget drivers
-      implement USB functions such as USB printers, USB modems, or USB cameras. In JeVois, the Gadget driver makes the
-      JeVois hardware platform appear as a UVC (USB Video Class) camera. Because UVC has been standardized, no special
-      driver is needed on the host computer to start using the UVC device, as virtually all modern operating systems
-      already provide a built-in driver for UVC-compliant cameras.
-
-      The internal operation of Gadget is quite complex, especially due to its tight interaction with the kernel-side
-      UVC gadget driver. Yet, for users, Gadget is just another VideoOutput device: One can set its format, obtain blank
-      image buffers from it using get(), paint results into those buffers, and send them to the host computer when
-      complete using send().
-
-      Gadget implements a zero-copy, zero-wait access to output video frames, that is:
-      - the pixel data of the image you obtain via get() is directly the memory-mapped pixel buffer that the silicon
-        hardware on the JeVois chip will use via direct-memory-access (DMA) to stream the data out over the USB link;
-      - as soon as you call send() that buffer will be queued for sending over USB (as opposed to having a fixed,
-        regular interval at which images may be streamed out). Gadget has several image buffers, allowing one to be
-        streamed out over USB while another is being handed over for filling by your application via get(). These
-        buffers are recycled, i.e., once send() is called, the underlying buffer is streamed over USB and then sent back
-        to the Gadget for future access by your code.
-
-      Most programmers will never use Gadget directly, instead using Engine and OutputFrame. \ingroup core */
+  //! JeVois 小工具驱动程序 - 向通过 USB 连接的主机计算机公开 uvcvideo 接口 
+  /*! Gadget 是 JeVois 实现的 Linux 内核小工具驱动程序的用户空间接口。USB 小工具驱动程序是在设备上运行的 USB 驱动程序，
+      而不是在主机计算机上运行的 USB 驱动程序。小工具驱动程序实现 USB 功能，例如 USB 打印机、USB 调制解调器或 USB 摄像
+	  头。在 JeVois 中，Gadget 驱动程序使 JeVois 硬件平台显示为 UVC（USB 视频类）摄像头。由于 UVC 已经标准化，因此主机
+	  计算机上不需要特殊驱动程序即可开始使用 UVC 设备，因为几乎所有现代操作系统都已为符合 UVC 标准的摄像头提供了内置驱
+	  动程序。
+	  
+	  Gadget 的内部操作相当复杂，尤其是由于它与内核端 UVC 小工具驱动程序的紧密交互。然而，对于用户来说，Gadget 只是另一
+	  个 VideoOutput 设备：可以设置其格式，使用 get() 从中获取空白图像缓冲区，将结果绘制到这些缓冲区中，并在完成后使用 
+	  send() 将它们发送到主机。
+	  
+	  Gadget 实现了对输出视频帧的零拷贝、零等待访问，即：
+	  - 您通过 get() 获取的图像的像素数据直接是内存映射像素缓冲区，JeVois 芯片上的硅硬件将通过直接内存访问 (DMA) 使用该
+	    缓冲区通过 USB 链路流出数据；
+	  - 只要您调用 send()，该缓冲区就会排队等待通过 USB 发送（而不是以固定的、有规律的间隔流出图像）。Gadget 有多个图像
+	    缓冲区，允许一个缓冲区通过 USB 流出，而另一个缓冲区则通过 get() 由您的应用程序填充。这些缓冲区是可回收的，即一旦
+		调用 send()，底层缓冲区就会通过 USB 流出，然后发送回 Gadget 以供您的代码将来访问。
+	  
+	  大多数程序员永远不会直接使用 Gadget，而是使用 Engine 和 OutputFrame。 \ingroup core */
   class Gadget : public VideoOutput
   {
     public:
-      //! Construct and open the device
-      /*! A vaid non-null camera is required for this gadget to work. To avoid testing for a non-null camera on each
-          operation of the gadget, we only test once at construction and then assume the camera will remain operational
-          for the lifetime of the gadget. Use 0 for nbufs to set it automatically. */
+      //! 构造并打开设备 
+	  /*! 此小工具需要有效的非空摄像头才能工作。 为了避免在小工具的每次操作中测试非空摄像头，我们只在构造时测试一次，然
+	    后假设摄像头将在小工具的整个生命周期内保持运行。 使用 0 作为 nbufs 以自动设置它。 */
       Gadget(std::string const & devname, VideoInput * camera, Engine * engine, size_t const nbufs = 0,
 	     bool multicam = false);
       
-      //! Close the device and free all resources
+      //! 关闭设备并释放所有资源 
       virtual ~Gadget();
 
-      //! Set the video format and frame rate
+      //! 设置视频格式和帧速率
       void setFormat(jevois::VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out over USB using send()
-      /*! May throw if not buffer is available, i.e., all have been queued to send to the host but have not yet been
-          sent. Application code must balance exactly one send() for each get(). */
+      //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 通过 USB 发送出去 
+	  /*！如果没有可用的缓冲区，则可能抛出异常，即，所有内容都已排队等待发送到主机但尚未发送。应用程序代码必须为每个 get() 
+	    平衡一个 send()。 */
       void get(RawImage & img) override;
       
-      //! Send an image out over USB to the host computer
-      /*! May throw if the format is incorrect or std::overflow_error if we have not yet consumed the previous image. */
+      //! 通过 USB 将图像发送到主机 
+	  /*！如果格式不正确，则可能抛出异常；如果我们尚未使用前一个图像，则可能抛出 std::overflow_error。 */
       void send(RawImage const & img) override;
 
       //! Start streaming
       void streamOn() override;
 
-      //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      //! 中止流式传输 
+	  /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       void abortStream() override;
 
       //! Stop streaming
@@ -105,7 +99,7 @@ namespace jevois
       VideoInput * itsCamera;
       Engine * itsEngine;
       
-      void run(); // Function to service requests, runs in a separate thread
+      void run(); // 服务请求函数，在单独的线程中运行
       std::future<void> itsRunFuture;
       std::atomic<bool> itsRunning;
 

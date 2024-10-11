@@ -1,0 +1,149 @@
+\hypertarget{NetworkNPU_8C}{}\doxysubsection{src/jevois/\+D\+N\+N/\+Network\+N\+PU.C File Reference}
+\label{NetworkNPU_8C}\index{src/jevois/DNN/NetworkNPU.C@{src/jevois/DNN/NetworkNPU.C}}
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+N\+P\+U.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$vsi\+\_\+nn\+\_\+version.\+h$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
+Include dependency graph for Network\+N\+P\+U.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{NetworkNPU_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_ac01b499b3f17ec72c191dfa7ac7705d7}{V\+N\+N\+\_\+\+A\+P\+P\+\_\+\+D\+E\+B\+UG}}~(F\+A\+L\+SE)
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_aa4e26198341e63628bd3c6f26e72c122}{N\+E\+W\+\_\+\+V\+X\+N\+O\+DE}}(\+\_\+node,  \+\_\+type,  \+\_\+in,  \+\_\+out,  \+\_\+uid)
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_acd32651c91b9fec17a157e7e1ce7fe3c}{N\+E\+W\+\_\+\+V\+I\+R\+T\+U\+A\+L\+\_\+\+T\+E\+N\+S\+OR}}(\+\_\+id,  \+\_\+attr,  \+\_\+dtype)
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_a45713f94a033ce1f3bfcf64bb99b2df1}{N\+E\+W\+\_\+\+C\+O\+N\+S\+T\+\_\+\+T\+E\+N\+S\+OR}}(\+\_\+id,  \+\_\+attr,  \+\_\+dtype,  \+\_\+ofst,  \+\_\+size)
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_a677822a5b02c848b6d8eefcc94e6ad74}{N\+E\+W\+\_\+\+N\+O\+R\+M\+\_\+\+T\+E\+N\+S\+OR}}(\+\_\+id,  \+\_\+attr,  \+\_\+dtype)
+\item 
+\#define \mbox{\hyperlink{NetworkNPU_8C_ae51b2ae8cc3879dceac516d658bad628}{N\+E\+W\+\_\+\+N\+O\+R\+M\+\_\+\+T\+E\+N\+S\+O\+R\+\_\+\+F\+R\+O\+M\+\_\+\+H\+A\+N\+D\+LE}}(\+\_\+id,  \+\_\+attr,  \+\_\+dtype)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{NetworkNPU_8C_a45713f94a033ce1f3bfcf64bb99b2df1}\label{NetworkNPU_8C_a45713f94a033ce1f3bfcf64bb99b2df1}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!NEW\_CONST\_TENSOR@{NEW\_CONST\_TENSOR}}
+\index{NEW\_CONST\_TENSOR@{NEW\_CONST\_TENSOR}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{NEW\_CONST\_TENSOR}{NEW\_CONST\_TENSOR}}
+{\footnotesize\ttfamily \#define N\+E\+W\+\_\+\+C\+O\+N\+S\+T\+\_\+\+T\+E\+N\+S\+OR(\begin{DoxyParamCaption}\item[{}]{\+\_\+id,  }\item[{}]{\+\_\+attr,  }\item[{}]{\+\_\+dtype,  }\item[{}]{\+\_\+ofst,  }\item[{}]{\+\_\+size }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{         \(\backslash\)}
+\DoxyCodeLine{    data = load\_data(fp, \_ofst, \_size);                                 \(\backslash\)}
+\DoxyCodeLine{    \_attr.vtl = FALSE;                                                  \(\backslash\)}
+\DoxyCodeLine{    \_attr.is\_const = TRUE;                                              \(\backslash\)}
+\DoxyCodeLine{    \_attr.dtype.vx\_type = \_dtype;                                       \(\backslash\)}
+\DoxyCodeLine{    \_id = vsi\_nn\_AddTensor(itsGraph, VSI\_NN\_TENSOR\_ID\_AUTO, \& \_attr, data); \(\backslash\)}
+\DoxyCodeLine{    free(data);                                                         \(\backslash\)}
+\DoxyCodeLine{    if (VSI\_NN\_TENSOR\_ID\_NA == \_id) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"NEW\_CONST\_TENSOR failed"});  \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Definition at line 49 of file Network\+N\+P\+U.\+C.
+
+\mbox{\Hypertarget{NetworkNPU_8C_a677822a5b02c848b6d8eefcc94e6ad74}\label{NetworkNPU_8C_a677822a5b02c848b6d8eefcc94e6ad74}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!NEW\_NORM\_TENSOR@{NEW\_NORM\_TENSOR}}
+\index{NEW\_NORM\_TENSOR@{NEW\_NORM\_TENSOR}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{NEW\_NORM\_TENSOR}{NEW\_NORM\_TENSOR}}
+{\footnotesize\ttfamily \#define N\+E\+W\+\_\+\+N\+O\+R\+M\+\_\+\+T\+E\+N\+S\+OR(\begin{DoxyParamCaption}\item[{}]{\+\_\+id,  }\item[{}]{\+\_\+attr,  }\item[{}]{\+\_\+dtype }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{                        \(\backslash\)}
+\DoxyCodeLine{    \_attr.vtl = FALSE;                                                  \(\backslash\)}
+\DoxyCodeLine{    \_attr.is\_const = FALSE;                                             \(\backslash\)}
+\DoxyCodeLine{    \_attr.dtype.vx\_type = \_dtype;                                       \(\backslash\)}
+\DoxyCodeLine{    \_id = vsi\_nn\_AddTensor(itsGraph, VSI\_NN\_TENSOR\_ID\_AUTO, \& \_attr, NULL); \(\backslash\)}
+\DoxyCodeLine{    if (VSI\_NN\_TENSOR\_ID\_NA == \_id) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"NEW\_NORM\_TENSOR failed"});   \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Definition at line 60 of file Network\+N\+P\+U.\+C.
+
+\mbox{\Hypertarget{NetworkNPU_8C_ae51b2ae8cc3879dceac516d658bad628}\label{NetworkNPU_8C_ae51b2ae8cc3879dceac516d658bad628}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!NEW\_NORM\_TENSOR\_FROM\_HANDLE@{NEW\_NORM\_TENSOR\_FROM\_HANDLE}}
+\index{NEW\_NORM\_TENSOR\_FROM\_HANDLE@{NEW\_NORM\_TENSOR\_FROM\_HANDLE}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{NEW\_NORM\_TENSOR\_FROM\_HANDLE}{NEW\_NORM\_TENSOR\_FROM\_HANDLE}}
+{\footnotesize\ttfamily \#define N\+E\+W\+\_\+\+N\+O\+R\+M\+\_\+\+T\+E\+N\+S\+O\+R\+\_\+\+F\+R\+O\+M\+\_\+\+H\+A\+N\+D\+LE(\begin{DoxyParamCaption}\item[{}]{\+\_\+id,  }\item[{}]{\+\_\+attr,  }\item[{}]{\+\_\+dtype }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{            \(\backslash\)}
+\DoxyCodeLine{    \_attr.vtl = FALSE;                                                  \(\backslash\)}
+\DoxyCodeLine{    \_attr.is\_const = FALSE;                                             \(\backslash\)}
+\DoxyCodeLine{    \_attr.dtype.vx\_type = \_dtype;                                       \(\backslash\)}
+\DoxyCodeLine{    \_id = vsi\_nn\_AddTensorFromHandle(itsGraph, VSI\_NN\_TENSOR\_ID\_AUTO, \& \_attr, NULL); \(\backslash\)}
+\DoxyCodeLine{    if (VSI\_NN\_TENSOR\_ID\_NA == \_id) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"NEW\_NORM\_TENSOR\_FROM\_HANDLE failed"}); \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Definition at line 69 of file Network\+N\+P\+U.\+C.
+
+\mbox{\Hypertarget{NetworkNPU_8C_acd32651c91b9fec17a157e7e1ce7fe3c}\label{NetworkNPU_8C_acd32651c91b9fec17a157e7e1ce7fe3c}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!NEW\_VIRTUAL\_TENSOR@{NEW\_VIRTUAL\_TENSOR}}
+\index{NEW\_VIRTUAL\_TENSOR@{NEW\_VIRTUAL\_TENSOR}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{NEW\_VIRTUAL\_TENSOR}{NEW\_VIRTUAL\_TENSOR}}
+{\footnotesize\ttfamily \#define N\+E\+W\+\_\+\+V\+I\+R\+T\+U\+A\+L\+\_\+\+T\+E\+N\+S\+OR(\begin{DoxyParamCaption}\item[{}]{\+\_\+id,  }\item[{}]{\+\_\+attr,  }\item[{}]{\+\_\+dtype }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{                     \(\backslash\)}
+\DoxyCodeLine{    memset(\_attr.size, 0, VSI\_NN\_MAX\_DIM\_NUM * \textcolor{keyword}{sizeof}(vsi\_size\_t));     \(\backslash\)}
+\DoxyCodeLine{    \_attr.dim\_num = VSI\_NN\_DIM\_AUTO;                                    \(\backslash\)}
+\DoxyCodeLine{    \_attr.vtl = !\mbox{\hyperlink{NetworkNPU_8C_ac01b499b3f17ec72c191dfa7ac7705d7}{VNN\_APP\_DEBUG}};                                         \(\backslash\)}
+\DoxyCodeLine{    \_attr.is\_const = FALSE;                                             \(\backslash\)}
+\DoxyCodeLine{    \_attr.dtype.vx\_type = \_dtype;                                       \(\backslash\)}
+\DoxyCodeLine{    \_id = vsi\_nn\_AddTensor(itsGraph, VSI\_NN\_TENSOR\_ID\_AUTO, \& \_attr, NULL); \(\backslash\)}
+\DoxyCodeLine{    if (VSI\_NN\_TENSOR\_ID\_NA == \_id) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"NEW\_VIRTUAL\_TENSOR failed"}); \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Definition at line 38 of file Network\+N\+P\+U.\+C.
+
+\mbox{\Hypertarget{NetworkNPU_8C_aa4e26198341e63628bd3c6f26e72c122}\label{NetworkNPU_8C_aa4e26198341e63628bd3c6f26e72c122}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!NEW\_VXNODE@{NEW\_VXNODE}}
+\index{NEW\_VXNODE@{NEW\_VXNODE}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{NEW\_VXNODE}{NEW\_VXNODE}}
+{\footnotesize\ttfamily \#define N\+E\+W\+\_\+\+V\+X\+N\+O\+DE(\begin{DoxyParamCaption}\item[{}]{\+\_\+node,  }\item[{}]{\+\_\+type,  }\item[{}]{\+\_\+in,  }\item[{}]{\+\_\+out,  }\item[{}]{\+\_\+uid }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    \textcolor{keywordflow}{do} \{          \(\backslash\)}
+\DoxyCodeLine{    \_node = vsi\_nn\_AddNode(itsGraph, \_type, \_in, \_out, NULL);   \(\backslash\)}
+\DoxyCodeLine{    \_node-\/>uid = (uint32\_t)\_uid;                                \(\backslash\)}
+\DoxyCodeLine{    if (NULL == \_node) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(\textcolor{stringliteral}{"NEW\_VXNODE failed"});             \(\backslash\)}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{while}(0)}
+
+\end{DoxyCode}
+
+
+Definition at line 32 of file Network\+N\+P\+U.\+C.
+
+\mbox{\Hypertarget{NetworkNPU_8C_ac01b499b3f17ec72c191dfa7ac7705d7}\label{NetworkNPU_8C_ac01b499b3f17ec72c191dfa7ac7705d7}} 
+\index{NetworkNPU.C@{NetworkNPU.C}!VNN\_APP\_DEBUG@{VNN\_APP\_DEBUG}}
+\index{VNN\_APP\_DEBUG@{VNN\_APP\_DEBUG}!NetworkNPU.C@{NetworkNPU.C}}
+\doxyparagraph{\texorpdfstring{VNN\_APP\_DEBUG}{VNN\_APP\_DEBUG}}
+{\footnotesize\ttfamily \#define V\+N\+N\+\_\+\+A\+P\+P\+\_\+\+D\+E\+B\+UG~(F\+A\+L\+SE)}
+
+
+
+Definition at line 26 of file Network\+N\+P\+U.\+C.
+

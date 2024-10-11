@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GUIserial">
+<title>jevois::GUIserial Class Reference</title>
+<indexterm><primary>jevois::GUIserial</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GUIserial.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Simple class to monitor a serial port in the JeVois-Pro GUI. </para>
+
+
+
+<para>This class opens a window and displays traffic on a given serial port. Its interface is the same as a regular <link linkend="_classjevois_1_1Serial">Serial</link> (or its parent, <link linkend="_classjevois_1_1UserInterface">UserInterface</link>), with the addition of a <link linkend="_classjevois_1_1GUIserial_1a6fdfd59976c1605f3c5ad0dda4a19629">draw()</link> function to render into a window managed by the caller. </para>
+<para>
+Definition at line 33 of file GUIserial.H.</para>
+Inheritance diagram for jevois::GUIserial:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIserial__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::GUIserial:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIserial__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1GUIserial_1a84368716ee417704e09f9edfeb5f7c32">~GUIserial</link> ()</para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIserial_1a743adac54253b9e078bee56b9b6697f1">readSome</link> (std::string &amp;str) override</para>
+
+<para>Read some bytes if available, and return true and a string when one is complete. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIserial_1aa8e430f5527ba55f21468c99cd007587">writeString</link> (std::string const &amp;str) override</para>
+
+<para>Write a string, using the line termination convention of serial::linestyle. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIserial_1a6fdfd59976c1605f3c5ad0dda4a19629">draw</link> ()</para>
+
+<para>Render into ImGui. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIserial_1aa3264cd7d39230ec9a1800baccef7bc1">Serial</link> (std::string const &amp;instance, <link linkend="_classjevois_1_1UserInterface_1a22393038109a677827db1d2728404d88">UserInterface::Type</link> <link linkend="_classjevois_1_1Serial_1ab7dcc08de36dac64332e1f9f6a671d96">type</link>)</para>
+
+<para>Inherited constructor ok. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIserial_1a5bf133693c44d48a911ca147bf5f4aac">clear</link> ()</para>
+
+<para>Clear the contents of the window. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIserial_1a84368716ee417704e09f9edfeb5f7c32"/>    <section>
+    <title>~GUIserial()</title>
+<indexterm><primary>~GUIserial</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>~GUIserial</secondary></indexterm>
+<para><computeroutput>jevois::GUIserial::~GUIserial ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Virtual destructor for safe inheritance. </para>
+</para>
+<para>
+Definition at line 23 of file GUIserial.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIserial_1a5bf133693c44d48a911ca147bf5f4aac"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void jevois::GUIserial::clear ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Clear the contents of the window. </para>
+</para>
+<para>
+Definition at line 126 of file GUIserial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIserial_1a6fdfd59976c1605f3c5ad0dda4a19629"/>    <section>
+    <title>draw()</title>
+<indexterm><primary>draw</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>draw</secondary></indexterm>
+<para><computeroutput>void jevois::GUIserial::draw ( )</computeroutput></para><para>
+
+<para>Render into ImGui. </para>
+</para>
+
+<para>Render into a window that was already opened and will be closed by the caller. </para>
+<para>
+Definition at line 56 of file GUIserial.C.</para>
+<para>
+References jevois::stringStartsWith().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIserial_1a743adac54253b9e078bee56b9b6697f1"/>    <section>
+    <title>readSome()</title>
+<indexterm><primary>readSome</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>readSome</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIserial::readSome (std::string &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Read some bytes if available, and return true and a string when one is complete. </para>
+</para>
+
+<para>If the monitor window is open, anything read will also be displayed in the window. </para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Serial_1a50f7553bdbf0fdfe4e5d2d06689317df">jevois::Serial</link>.</para>
+<para>
+Definition at line 27 of file GUIserial.C.</para>
+<para>
+References jevois::Serial::readSome().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIserial_1aa3264cd7d39230ec9a1800baccef7bc1"/>    <section>
+    <title>Serial()</title>
+<indexterm><primary>Serial</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>Serial</secondary></indexterm>
+<para><computeroutput>jevois::Serial::Serial</computeroutput></para><para>
+
+<para>Inherited constructor ok. </para>
+</para>
+<para>
+Definition at line 61 of file Serial.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIserial_1aa8e430f5527ba55f21468c99cd007587"/>    <section>
+    <title>writeString()</title>
+<indexterm><primary>writeString</primary><secondary>jevois::GUIserial</secondary></indexterm>
+<indexterm><primary>jevois::GUIserial</primary><secondary>writeString</secondary></indexterm>
+<para><computeroutput>void jevois::GUIserial::writeString (std::string const &amp; str)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Write a string, using the line termination convention of serial::linestyle. </para>
+</para>
+
+<para>No line terminator should be included in the string, <link linkend="_classjevois_1_1GUIserial_1aa8e430f5527ba55f21468c99cd007587">writeString()</link> will add one. If the monitor window is open, anything written will also be displayed in the window. </para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1Serial_1a06bd87b9e59a6aad3c8c184b2406edb5">jevois::Serial</link>.</para>
+<para>
+Definition at line 42 of file GUIserial.C.</para>
+<para>
+References jevois::Serial::writeString().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GUIserial_8H">GUIserial.H</link>src/jevois/GPU/<link linkend="_GUIserial_8C">GUIserial.C</link></section>
+</section>

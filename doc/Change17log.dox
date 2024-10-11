@@ -1,18 +1,16 @@
-/*! \page Change17log Changes and new features in JeVois 1.7
+/*! \page Change17log JeVois 1.7 中的变化和新功能
 
-JeVois 1.7 brings the following new features:
+JeVois 1.7 带来以下新功能：
 
-- Updated to latest OpenCV version 3.4.0
+- 已更新至最新 OpenCV 版本 3.4.0
 
-- New sample object detection and pose estimation modules to inspire FIRST Robotics students (and others):
-  \jvmod{FirstVision} in C++, and \jvmod{FirstPython} and \jvmod{PythonObject6D} in Python.
+- 新的样本目标检测（sample object detection）和姿势估计模块，以启发 FIRST 机器人学生（及其他人）：\jvmod{FirstVision}（C++ 版）和 \jvmod{FirstPython} 和 \jvmod{PythonObject6D}（Python 版）。
 
-- Small bugfix on Python error reporting when no USB output is used.
+- 当不使用 USB 输出时，Python 错误报告的小错误得到修复。
 
-- Bugfix of non-working overloads of process() in Python modules. Two entry points are now used, process() for when the
-  video mapping has USB output, and processNoUSB() when it does not.
+- 修复 Python 模块中 process() 无效重载（overloads）的错误。现在使用两个入口点，当视频映射具有 USB 输出时使用 process()，而当视频映射没有 USB 输出时使用 processNoUSB()。
 
-- Added line clipping function to avoid wasting time drawing possibly very long lines (though mostly outside the
-  viewport) when doing nearly singular 3D projections.
+- 添加了线条剪辑（line clipping）功能，以避免在进行近乎单一的 3D 投影时浪费时间绘制可能非常长的线条（尽管大部分在视口之外）。
 
 */
+

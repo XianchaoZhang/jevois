@@ -58,19 +58,19 @@
 #include <imgui_internal.h>
 #endif
 
-// On the older JeVois-A33 platform kernel, detect class is not defined:
+// 在较旧的 JeVois-A33 平台内核上，检测类未定义：
 #ifndef V4L2_CTRL_CLASS_DETECT
 #define V4L2_CTRL_CLASS_DETECT          0x00a30000
 #endif
 
 namespace
 {
-  // Assign a short name to every V4L2 control, for use by getcam and setcam commands
+  // 为每个 V4L2 控制分配一个短名称，以供 getcam 和 setcam 命令使用
   struct shortcontrol { unsigned int id; char const * const shortname; };
 
-  // All V4L2 controls
-  // From this: grep V4L2_CID v4l2-controls.h | awk '{ print "    { " $2 ", \"\" }," }'
-  // then fill-in the short names.
+  // 所有 V4L2 控件 
+  // 来自：grep V4L2_CID v4l2-controls.h | awk '{ print "    { " $2 ", \"\" }," }'
+  // 然后填写简称。
   static shortcontrol camcontrols[] = {
     // In V4L2_CID_BASE class:
     { V4L2_CID_BRIGHTNESS, "brightness" },
@@ -226,7 +226,7 @@ jevois::Engine::Engine(std::string const & instance) :
   JEVOIS_TRACE(1);
 
 #ifdef JEVOIS_PLATFORM_A33
-  // Start mass storage thread:
+  // 启动大容量存储线程：
   itsCheckingMassStorage.store(false); itsMassStorageMode.store(false);
   itsCheckMassStorageFut = jevois::async_little(&jevois::Engine::checkMassStorage, this);
   while (itsCheckingMassStorage.load() == false) std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -244,7 +244,7 @@ jevois::Engine::Engine(int argc, char const* argv[], std::string const & instanc
   JEVOIS_TRACE(1);
   
 #ifdef JEVOIS_PLATFORM_A33
-  // Start mass storage thread:
+  // 启动大容量存储线程：
   itsCheckingMassStorage.store(false); itsMassStorageMode.store(false);
   itsCheckMassStorageFut = jevois::async_little(&jevois::Engine::checkMassStorage, this);
   while (itsCheckingMassStorage.load() == false) std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -258,12 +258,12 @@ void jevois::Engine::onParamChange(jevois::engine::serialdev const &, std::strin
 {
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // If we have a serial already, nuke it:
+  // 如果我们已经有 serial，则将其删除：
   for (std::list<std::shared_ptr<UserInterface> >::iterator itr = itsSerials.begin(); itr != itsSerials.end(); ++itr)
     if ((*itr)->instanceName() == "serial") itr = itsSerials.erase(itr);
   removeComponent("serial", false);
   
-  // Open the hardware (4-pin connector) serial port, if any:
+  // 打开硬件（4 针连接器）串行端口（如果有）：
   if (newval.empty() == false)
     try
     {
@@ -273,9 +273,9 @@ void jevois::Engine::onParamChange(jevois::engine::serialdev const &, std::strin
       else
       {
 #ifdef JEVOIS_PRO
-        // Typically, it is too early here to know whether we will use a GUI or not. On JeVois-Pro, always instantiate a
-        // GUIserial if serialmonitors allows it. Later, if the GUIhelper is activated, we will invoke
-        // GUIserial::draw(); otherwise, GUIserial will just behave as a regular serial except that it caches all data:
+        // 通常，现在还不知道我们是否会使用 GUI。在 JeVois-Pro 上，如果 serialmonitors 允许，则始终实例化 GUIserial。
+		// 稍后，如果 GUIhelper 被激活，我们将调用 // GUIserial::draw(); 否则，GUISerial 将表现得像常规串行，只是它会
+		// 缓存所有数据：
         if (serialmonitors::get())
           s = addComponent<jevois::GUIserial>("serial", jevois::UserInterface::Type::Hard);
         else
@@ -298,19 +298,19 @@ void jevois::Engine::onParamChange(jevois::engine::usbserialdev const &, std::st
 {
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // If we have a usbserial already, nuke it:
+  // 如果我们已经有一个 usbserial，则将其删除：
   for (std::list<std::shared_ptr<UserInterface> >::iterator itr = itsSerials.begin(); itr != itsSerials.end(); ++itr)
     if ((*itr)->instanceName() == "usbserial") itr = itsSerials.erase(itr);
   removeComponent("usbserial", false);
   
-  // Open the USB serial port, if any:
+  // 打开 USB 串行端口（如果有）：
   if (newval.empty() == false)
     try
     {
 #ifdef JEVOIS_PRO
-      // Typically, it is too early here to know whether we will use a GUI or not. On JeVois-Pro, always instantiate a
-      // GUIserial if serialmonitors allows it. Later, if the GUIhelper is activated, we will invoke GUIserial::draw();
-      // otherwise, GUIserial will just behave as a regular serial except that it caches all data:
+      // 通常，现在还不知道我们是否会使用 GUI。在 JeVois-Pro 上，如果 serialmonitors 允许，则始终实例化 GUIserial。
+	  // 稍后，如果 GUIhelper 被激活，我们将调用 GUIserial::draw(); 否则，GUISerial 将表现得像常规串行，只是它会缓存
+	  // 所有数据：
       std::shared_ptr<jevois::UserInterface> s;
       if (serialmonitors::get())
         s = addComponent<jevois::GUIserial>("usbserial", jevois::UserInterface::Type::USB);
@@ -456,18 +456,18 @@ void jevois::Engine::onParamChange(jevois::engine::demomode const &, float const
 // ####################################################################################################
 void jevois::Engine::runDemoStep()
 {
-  if (! itsGUIhelper) return; // silently ignore if not running the GUI
+  if (! itsGUIhelper) return; // 如果没有运行 GUI，则静默忽略
 
-  int constexpr fade = 30; // number of frames for fade in/out
-  int constexpr msg = 90; // number of frames to show message
-  int constexpr tmax = 15; // max amount of twirl
+  int constexpr fade = 30; // 淡入/淡出的帧数 
+  int constexpr msg = 90; // 显示消息的帧数 
+  int constexpr tmax = 15; // 最大旋转量
   
-  // Basic flow is loop over bunch of modules, and for each:
-  // - fade out (i.e., apply increasing twirl, decreasing overlay alpha) over fade_out frames
-  // - display demo message for show_msg frames
-  // - stream off, setmapping, apply params, stream on
-  // - fade in (untwirl, restore overlay alpha) over fade_in frames
-  // - let the module run for itsDemoMode seconds
+  // 基本流程是循环遍历一组模块，对于每个模块： 
+  // - 在 fade_out 帧上淡出（即应用增加的旋转，减少覆盖 alpha） 
+  // - 显示 show_msg 帧的演示消息 
+  // - 关闭流，设置映射，应用参数，打开流 
+  // - 在 fade_in 帧上淡入（取消旋转，恢复覆盖 alpha） 
+  // - 让模块运行 itsDemoMode 秒 
   
   static size_t modidx = 0;
   static int fade_out = 0, show_msg = 0, fade_in = 0;
@@ -476,7 +476,7 @@ void jevois::Engine::runDemoStep()
 
   if (itsDemoReset)
   {
-    // Load the demo data from YAML:
+    // 从 YAML 加载演示数据：
     itsDemoData.clear();
     cv::FileStorage fs(JEVOISPRO_DEMO_DATA_FILE, cv::FileStorage::READ);
     if (fs.isOpened() == false)
@@ -529,14 +529,14 @@ void jevois::Engine::runDemoStep()
     { LERROR("No demos in " << JEVOISPRO_DEMO_DATA_FILE << " -- DEMO MODE ABORTED"); demomode::set(0.0F); return; }
     else LINFO("Loaded demo information with " << itsDemoData.size() << " demo modules.");
       
-    // Start demo from the beginning:
+    // 从头开始​​演示：
     fade_out = 0; show_msg = msg * 3; fade_in = 0; mod_load_time = now; modidx = 0;
     itsGUIhelper->demoBanner("Welcome to JeVois-Pro!", "This demo will cycle through a few machine vision algorithms.");
     itsDemoReset = false;
-    return; // skip one frame to allow the GUI to be all ready to go
+    return; // 跳过一帧以使 GUI 准备就绪
   }
 
-  // Did user request to switch to next demo?
+  // 用户是否请求切换到下一个演示？
   if (itsNextDemoRequested)
   {
     ++modidx; if (modidx >= itsDemoData.size()) modidx = 0;
@@ -544,7 +544,7 @@ void jevois::Engine::runDemoStep()
     itsNextDemoRequested = false;
   }
 
-  // Show message then load module:
+  // 显示消息然后加载模块：
   if (show_msg == msg || itsGUIhelper->idle() == false)
     itsGUIhelper->demoBanner(itsDemoData[modidx].title, itsDemoData[modidx].msg);
 
@@ -565,7 +565,7 @@ void jevois::Engine::runDemoStep()
     return;
   }
 
-  // Before we fade in and after the module is loaded, set the parameters:
+  // 在淡入之前和模块加载之后，设置参数：
   if (fade_in == fade)
     for (auto const & pp : itsDemoData[modidx].params)
       try { setParamString(pp.first, pp.second); }
@@ -587,7 +587,7 @@ void jevois::Engine::runDemoStep()
     return;
   }
 
-  // Let the module run for a while, then initiate fade out:
+  // 让模块运行一段时间，然后启动淡出：
   std::chrono::duration<float> const elapsed = now - mod_load_time;
   if (elapsed.count() > demomode::get())
   {
@@ -616,18 +616,18 @@ void jevois::Engine::abortDemo()
 // ####################################################################################################
 void jevois::Engine::preInit()
 {
-  // Set any initial parameters from global config file:
+  // 从全局配置文件设置任何初始参数：
   std::string const paramcfg = std::string(JEVOIS_CONFIG_PATH) + '/' + JEVOIS_MODULE_PARAMS_FILENAME;
   std::ifstream ifs(paramcfg); if (ifs.is_open()) setParamsFromStream(ifs, paramcfg);
   
-  // Run the Manager version. This parses the command line:
+  // 运行 Manager 版本。这将解析命令行：
   jevois::Manager::preInit();
 }
 
 // ####################################################################################################
 void jevois::Engine::reloadVideoMappings()
 {
-  // Check iw we want to use GUI mode:
+  // 检查我们是否想要使用 GUI 模式：
   bool usegui = false;
 #ifdef JEVOIS_PRO
   usegui = gui::get();
@@ -640,14 +640,13 @@ void jevois::Engine::reloadVideoMappings()
 // ####################################################################################################
 void jevois::Engine::postInit()
 {
-  // First make sure the manager gets to run this:
+  // 首先确保管理器能够运行此命令：
   jevois::Manager::postInit();
 
-  // Prevent any setFormat() that may be requested, e.g., by the Inventor, as soon as it detects our gadget, until after
-  // we have completed running the initscript:
+  // 一旦检测到我们的小工具，就阻止任何可能请求的 setFormat()，例如，由 Inventor 请求，直到我们完成运行 initscript:
   JEVOIS_TIMED_LOCK(itsMtx);
   
-  // Freeze the serial port device names, their params, and camera and gadget too:
+  // 冻结串行端口设备名称、其参数以及摄像头和小工具：
 #ifdef JEVOIS_PRO
   serialmonitors::freeze(true);
 #endif
@@ -665,13 +664,12 @@ void jevois::Engine::postInit()
   quietcmd::freeze(true);
   python::freeze(true);
   
-  // On JeVois-Pro platform, we may get the camera sensor automatically from the device tree. Users should still load
-  // the correct overlay in /boot/env.txt to match the installed sensor:
+  // 在 JeVois-Pro 平台上，我们可以从设备树中自动获取摄像头传感器。用户仍应在 /boot/env.txt 中加载正确的覆盖以匹配已安装的传感器：
   jevois::CameraSensor camsens = camerasens::get();
 #ifdef JEVOIS_PLATFORM_PRO
   if (camsens == jevois::CameraSensor::any)
   {
-    std::string str = jevois::getFileString("/proc/device-tree/sensor/sensor-name"); // that name has trailing garbage
+    std::string str = jevois::getFileString("/proc/device-tree/sensor/sensor-name"); // 该名称有尾随垃圾
     size_t idx = 0; while (idx < str.length() && std::isalnum(str[idx])) ++idx;
     str = str.substr(0, idx);
     camerasens::strset(str);
@@ -691,30 +689,29 @@ void jevois::Engine::postInit()
   watchdog::freeze(true);
 #endif
   
-  // Grab the log messages, itsSerials is not going to change anymore now that the serial params are frozen:
+  // 抓取日志消息，现在串行参数已冻结，itsSerials 不会再改变：
   jevois::logSetEngine(this);
 
   // Load our video mappings:
   reloadVideoMappings();
 
-  // Get python going, we need to do this here to avoid segfaults on platform when instantiating our first python
-  // module. This likely has to do with the fact that the python core is not very thread-safe, and setFormatInternal()
-  // in Engine, which instantiates python modules, will indeed be invoked from a different thread (the one that receives
-  // USB UVC events). Have a look at Python Thread State, Python Gobal Interpreter Lock, etc if interested:
+  // 启动 python，我们需要在这里执行此操作以避免在实例化我们的第一个 python 模块时在平台上出现段错误。这可能与 python 核心不是
+  // 很线程安全有关，并且实例化 python 模块的 Engine 中的 setFormatInternal() 确实会从不同的线程（接收 USB UVC 事件的线程）
+  // 调用。如果感兴趣，请查看 Python 线程状态、Python 全局解释器锁等：
   if (python::get())
   {
     LINFO("Initalizing Python...");
     jevois::python::setEngine(this);
   }
   
-  // Instantiate a camera: If device names starts with "/dev/v", assume a hardware camera, otherwise a movie file:
+  // 实例化一个相机：如果设备名称以 "/dev/v" 开头，则假设是硬件相机，否则是电影文件：
   std::string const camdev = cameradev::get();
   if (jevois::stringStartsWith(camdev, "/dev/v"))
   {
     LINFO("Starting camera device " << camdev);
     
 #ifdef JEVOIS_PLATFORM_A33
-    // Set turbo mode or not:
+    // 是否设置 turbo 模式：
     std::ofstream ofs("/sys/module/vfe_v4l2/parameters/turbo");
     if (ofs.is_open())
     {
@@ -728,20 +725,20 @@ void jevois::Engine::postInit()
     itsCamera.reset(new jevois::Camera(camdev, camsens, cameranbuf::get()));
     
 #ifndef JEVOIS_PLATFORM
-    // No need to confuse people with a non-working camreg and imureg params:
+    // 不需要用不起作用的 camreg 和 imureg 参数来混淆人们：
     camreg::set(false); camreg::freeze(true);
     imureg::set(false); imureg::freeze(true);
 #endif
 
     try
     {
-      // On JeVois-A33 platform, hook up an I2C-based IMU to the camera sensor, if supported:
+      // 在 JeVois-A33 平台上，将基于 I2C 的 IMU 连接到相机传感器（如果支持）：
 #ifdef JEVOIS_PLATFORM_A33
       if (jevois::sensorHasIMU(camsens))
         itsIMU.reset(new jevois::IMUi2c(std::dynamic_pointer_cast<jevois::Camera>(itsCamera)));
 #endif
     
-      // On JeVois-Pro platform, instantiate an SPI-based IMU, if supported:
+      // 在 JeVois-Pro 平台上，实例化基于 SPI 的 IMU（如果支持）：
 #ifdef JEVOIS_PLATFORM_PRO
       if (jevois::sensorHasIMU(camsens))
         itsIMU.reset(new jevois::IMUspi(imudev::get()));
@@ -753,16 +750,15 @@ void jevois::Engine::postInit()
     LINFO("Using movie input " << camdev << " -- issue a 'streamon' to start processing.");
     itsCamera.reset(new jevois::MovieInput(camdev, cameranbuf::get()));
     
-    // No need to confuse people with a non-working camreg param:
+    // 无需用不起作用的 camreg 参数混淆人们：
     camreg::set(false);
     camreg::freeze(true);
   }
   
-  // Instantiate a USB gadget: Note: it will want to access the mappings. If the user-selected video mapping has no usb
-  // out, do not instantiate a gadget:
+  // 实例化 USB 小工具：注意：它将想要访问映射。如果用户选择的视频映射没有 usb 输出，请不要实例化小工具：
   int midx = videomapping::get();
   
-  // The videomapping parameter is now disabled, users should use the 'setmapping' command once running:
+  // videomapping 参数现已禁用，用户应在运行时使用 'setmapping' 命令：
   videomapping::freeze(true);
   
   if (midx >= int(itsMappings.size()))
@@ -770,12 +766,12 @@ void jevois::Engine::postInit()
   
   if (midx < 0) midx = itsDefaultMappingIdx;
 
-  // Always instantiate a gadget even if not used right now, may be used later:
+  // 即使现在不使用，也始终实例化一个小工具，以后可能会使用：
   std::string const gd = gadgetdev::get();
   if (gd == "None")
   {
     LINFO("Using no USB video output.");
-    // No USB output and no display, useful for benchmarking only:
+    // 没有 USB 输出也没有显示，仅用于基准测试：
     itsGadget.reset(new jevois::VideoOutputNone());
     itsManualStreamon = true;
   }
@@ -788,15 +784,15 @@ void jevois::Engine::postInit()
   else if (gd.empty() == false)
   {
     LINFO("Saving output video to file " << gd);
-    // Non-empty filename, save to file:
+    // 非空文件名，保存到文件：
     itsGadget.reset(new jevois::MovieOutput(gd));
     itsManualStreamon = true;
   }
   else
   {
-    // Local video display, for use on a host desktop or on JeVois-Pro HDMI output:
+    // 本地视频显示，用于主机桌面或 JeVois-Pro HDMI 输出：
 #ifdef JEVOIS_PRO
-    // On JevoisPro, use OpenGL or ImGui display:
+    // 在 JevoisPro 上，使用 OpenGL 或 ImGui 显示：
     if (usegui)
     {
       LINFO("Using OpenGL + ImGui display for video output");
@@ -808,7 +804,7 @@ void jevois::Engine::postInit()
       itsGadget.reset(new jevois::VideoDisplayGL(gadgetnbuf::get()));
     }
 #else
-    // On JeVois-A33, use an OpenCV display:
+    // 在 JeVois-A33 上，使用 OpenCV 显示：
     LINFO("Using OpenCV display for video output");
     itsGadget.reset(new jevois::VideoDisplay("JeVois", gadgetnbuf::get()));
     (void)usegui; // keep compiler happy
@@ -831,7 +827,7 @@ jevois::Engine::~Engine()
 {
   JEVOIS_TRACE(1);
 
-  // Turn off stream if it is on:
+  // 如果流已打开，则关闭它：
   streamOff();  
 
   // Tell our run() thread to finish up:
@@ -842,27 +838,27 @@ jevois::Engine::~Engine()
   itsCheckingMassStorage.store(false);
 #endif
   
-  // Nuke our module as soon as we can, hopefully soon now that we turned off streaming and running:
+  // 尽快核对我们的模块，希望现在我们关闭了流式传输和运行：
   {
     JEVOIS_TIMED_LOCK(itsMtx);
     if (itsModule) removeComponent(itsModule);
     itsModule.reset();
 
-    // Gone, nuke the loader now:
+    // 消失了，现在核实加载器：
     itsLoader.reset();
   }
   
-  // Because we passed the camera as a raw pointer to the gadget, nuke the gadget first and then the camera:
+  // 因为我们将相机作为原始指针传递给了小工具，所以先核实小工具，然后再核实相机：
   itsGadget.reset();
   itsCamera.reset();
 
 #ifdef JEVOIS_PLATFORM_A33
-  // Will block until the checkMassStorage() thread completes:
+  // 将阻塞直到 checkMassStorage() 线程完成：
   if (itsCheckMassStorageFut.valid())
     try { itsCheckMassStorageFut.get(); } catch (...) { jevois::warnAndIgnoreException(); }
 #endif
   
-  // Things should be quiet now, unhook from the logger (this call is not strictly thread safe):
+  // 现在应该安静了，从记录器中解脱出来（此调用不是严格的线程安全的）：
   jevois::logSetEngine(nullptr);
 }
 
@@ -874,10 +870,9 @@ void jevois::Engine::checkMassStorage()
 
   while (itsCheckingMassStorage.load())
   {
-    // Check from the mass storage gadget (with JeVois extension) whether the virtual USB drive is mounted by the
-    // host. If currently in mass storage mode and the host just ejected the virtual flash drive, resume normal
-    // operation. If not in mass-storage mode and the host mounted it, enter mass-storage mode (may happen if
-    // /boot/usbsdauto was selected):
+    // 从大容量存储小工具（带有 JeVois 扩展）检查虚拟 USB 驱动器是否由主机安装。 如果当前处于大容量存储模式并且主机刚刚
+    // 弹出虚拟闪存驱动器，则恢复正常操作。 如果不处于大容量存储模式并且主机已安装它，则进入大容量存储模式（如果选择了 
+    // /boot/usbsdauto，则可能会发生）：
     std::ifstream ifs("/sys/devices/platform/sunxi_usb_udc/gadget/lun0/mass_storage_in_use");
     if (ifs.is_open())
     {
@@ -912,11 +907,11 @@ void jevois::Engine::streamOff()
 {
   JEVOIS_TRACE(2);
 
-  // First, tell both the camera and gadget to abort streaming, this will make get()/done()/send() throw:
+  // 首先，告诉相机和小工具中止流式传输，这将使 get()/done()/send() 抛出：
   if (itsGadget) itsGadget->abortStream();
   if (itsCamera) itsCamera->abortStream();
 
-  // Stop the main loop, which will flip itsStreaming to false and will make it easier for us to lock itsMtx:
+  // 停止主循环，这将使 itsStreaming 变为 false，并使我们更容易锁定 itsMtx：
   LDEBUG("Stopping main loop...");
   itsStopMainLoop.store(true);
   while (itsStopMainLoop.load() && itsRunning.load()) std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -953,7 +948,7 @@ void jevois::Engine::setFormat(size_t idx)
 // ####################################################################################################
 void jevois::Engine::setFormatInternal(size_t idx)
 {
-  // itsMtx should be locked by caller, idx should be valid:
+  // itsMtx 应该被调用者锁定，idx 应该有效：
   JEVOIS_TRACE(2);
 
   jevois::VideoMapping const & m = itsMappings[idx];
@@ -963,7 +958,7 @@ void jevois::Engine::setFormatInternal(size_t idx)
 // ####################################################################################################
 void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool reload)
 {
-  // itsMtx should be locked by caller, idx should be valid:
+  // itsMtx 应该被调用者锁定，idx 应该有效：
   JEVOIS_TRACE(2);
 
   LINFO(m.str());
@@ -974,9 +969,8 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
     LFATAL("Cannot setup video streaming while in mass-storage mode. Eject the USB drive on your host computer first.");
 #endif
 
-  // Nuke the processing module, if any, so we can also safely nuke the loader. We always nuke the module instance so we
-  // won't have any issues with latent state even if we re-use the same module but possibly with different input
-  // image resolution, etc:
+  // 如果有处理模块，则将其删除，这样我们也可以安全地删除加载器。我们总是删除模块实例，这样即使我们重新使用相同的模块但可
+  // 能使用不同的输入图像分辨率等，也不会出现任何潜在状态问题：
   if (itsModule)
   {
     LDEBUG("Removing current module " << itsModule->className() << ": " << itsModule->descriptor());
@@ -984,7 +978,7 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
     catch (...) { jevois::warnAndIgnoreException(); }
   }
   
-  // Set the format at the camera and gadget levels, unless we are just reloading:
+  // 在相机和小工具级别设置格式，除非我们只是重新加载：
   if (reload == false)
   {
     LDEBUG("Setting camera format: " << m.cstrall());
@@ -1008,18 +1002,17 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
     }
   }
   
-  // Keep track of our current mapping:
+  // 跟踪我们当前的映射：
   itsCurrentMapping = m;
   
-  // Reset our master frame counter on each module load:
+  // 在每个模块加载时重置我们的主帧计数器：
   jevois::engine::frameNumber.store(0);
   
-  // Instantiate the module. If the constructor throws, code is bogus, for example some syntax error in a python module
-  // that is detected at load time. We get the exception's error message for later display into video frames in the main
-  // loop, and mark itsModuleConstructionError:
+  // 实例化模块。如果构造函数抛出异常，则代码是伪造的，例如在加载时检测到的 python 模块中存在一些语法错误。我们获取异常的错误消息，
+  // 以便稍后在主循环中显示到视频帧中，并标记 itsModuleConstructionError：
   try
   {
-    // For python modules, we do not need a loader, we just instantiate our special python wrapper module instead:
+    // 对于 python 模块，我们不需要加载器，我们只需实例化我们的特殊 python 包装器模块：
     std::string const sopath = m.sopath(true); // true here to delete any old .so.x versions compiled on platform
     if (m.ispython)
     {
@@ -1031,9 +1024,8 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
     }
     else
     {
-      // C++ compiled module. We can re-use the same loader and avoid closing the .so if we will use the same module,
-      // but only for immutable jevois modules, not for user modules that may just have been recompiled (in which case a
-      // new version number will have been generated):
+      // C++ 编译模块。如果我们使用相同的模块，我们可以重新使用相同的加载器并避免关闭 .so，但仅适用于不可变的 jevois 模块，而不
+      // 适用于可能刚刚重新编译的用户模块（在这种情况下将生成新的版本号）：
       if (itsLoader.get() == nullptr || itsLoader->sopath() != sopath)
       {
         LINFO("Instantiating dynamic loader for " << sopath);
@@ -1050,21 +1042,21 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
       
       // Instantiate the new module:
       auto create = itsLoader->load<std::shared_ptr<jevois::Module>(std::string const &)>(m.modulename + "_create");
-      itsModule = create(m.modulename); // Here we just use the class name as instance name
+      itsModule = create(m.modulename); // 这里我们只使用类名作为实例名
     }
     
-    // Add the module as a component to us. Keep this code in sync with Manager::addComponent():
+    // 将模块作为组件添加到我们这里。使此代码与 Manager::addComponent() 保持同步：
     {
-      // Lock up so we guarantee the instance name does not get robbed as we add the sub:
+      // 锁定，以便我们保证在添加子组件时实例名称不会被抢劫：
       boost::unique_lock<boost::shared_mutex> ulck(itsSubMtx);
       
-      // Then add it as a sub-component to us:
+      // 然后将其作为子组件添加到我们这里：
       itsSubComponents.push_back(itsModule);
       itsModule->itsParent = this;
       itsModule->setPath(sopath.substr(0, sopath.rfind('/')));
     }
     
-    // Bring it to our runstate and load any extra params. NOTE: Keep this in sync with Component::init():
+    // 将其带入我们的运行状态并加载任何额外的参数。 注意：使此代码与 Component::init() 保持同步：
     if (itsInitialized) itsModule->runPreInit();
     
     std::string const paramcfg = itsModule->absolutePath(JEVOIS_MODULE_PARAMS_FILENAME);
@@ -1072,7 +1064,7 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
     
     if (itsInitialized) { itsModule->setInitialized(); itsModule->runPostInit(); }
 
-    // And finally run any config script, sending any errors to USB (likely JeVois Inventor) and GUI:
+    // 最后运行任何配置脚本，将任何错误发送到 USB（可能是 JeVois Inventor）和 GUI：
     std::shared_ptr<jevois::UserInterface> ser;
     for (auto & s : itsSerials)
       if (s->type() == jevois::UserInterface::Type::USB || s->type() == jevois::UserInterface::Type::GUI)
@@ -1085,7 +1077,7 @@ void jevois::Engine::setFormatInternal(jevois::VideoMapping const & m, bool relo
   }
   catch (...)
   {
-    // Note: we do not nuke the module here, as the Inventor may need its path to fix some config files.
+    // 注意：我们不会在这里删除模块，因为 Inventor 可能需要它的路径来修复一些配置文件。
     itsModuleConstructionError = jevois::warnAndIgnoreException();
     LERROR("Module [" << m.modulename << "] startup error and not operational.");
   }
@@ -1104,8 +1096,7 @@ int jevois::Engine::mainLoop()
   std::string pfx; // optional command prefix
   int ret = 0; // our return value
   
-  // Announce that we are ready to the hardware serial port, if any. Do not use sendSerial() here so we always issue
-  // this message irrespectively of the user serial preferences:
+  // 宣布我们已准备好使用硬件串行端口（如果有）。这里不要使用 sendSerial()，因此我们始终发出此消息，而不管用户串行首选项如何：
   for (auto & s : itsSerials)
     if (s->type() == jevois::UserInterface::Type::Hard)
       try { s->writeString("INF READY JEVOIS " JEVOIS_VERSION_STRING); }
@@ -1120,20 +1111,20 @@ int jevois::Engine::mainLoop()
     itsWatchdog->reset();
 #endif
     
-    // If we got a format change request through requestSetFormat(), honor it now while we are unlocked:
-    // -2 means no change requested; -1 means reload requested (we do not need to change camera or gadget)
+    // 如果我们通过 requestSetFormat() 收到格式更改请求，则在解锁时立即遵守该请求： 
+    // -2 表示未请求更改；-1 表示请求重新加载（我们不需要更改相机或 gadget）
     int rf = itsRequestedFormat.load();
     if (rf != -2)
     {
-      // This format change request is now marked as handled:
+      // 此格式更改请求现在标记为已处理：
       itsRequestedFormat.store(-2);
       
       try
       {
-        // Stop camera and gadget unless we are just reloading:
+        // 停止相机和小工具，除非我们只是重新加载：
         if (rf != -1 && itsStreaming.load())
         {
-          // Keep this code in sync with streamOff():
+          // 使此代码与 streamOff() 保持同步：
           if (itsGadget) itsGadget->abortStream();
           if (itsCamera) itsCamera->abortStream();
           JEVOIS_TIMED_LOCK(itsMtx);
@@ -1142,36 +1133,36 @@ int jevois::Engine::mainLoop()
           itsStreaming.store(false);
         }
         
-        // Set new format or reload current module:
+        // 设置新格式或重新加载当前模块：
         if (rf == -1)
         {
-          // Reload the current format, eg, after editing code:
+          // 重新加载当前格式，例如，在编辑代码后：
           JEVOIS_TIMED_LOCK(itsMtx);
           setFormatInternal(itsCurrentMapping, true);
         }
         else setFormat(rf);
         
 #ifdef JEVOIS_PRO
-        // Reset the GUI to clear various texture caches and such:
+        // 重置 GUI 以清除各种纹理缓存等：
         if (itsGUIhelper) itsGUIhelper->resetstate( (rf != -1) );
 #endif
 
-        // Restart camera and gadget if we stopped them:
+        // 如果我们停止了相机和小工具，则重新启动它们：
         if (rf != -1 && itsCurrentMapping.ofmt != 0)
         {
-          // Keep this code in sync with streamOn();
+          // 使此代码与 streamOn() 保持同步；
           JEVOIS_TIMED_LOCK(itsMtx);
           if (itsCamera) itsCamera->streamOn();
           if (itsGadget) itsGadget->streamOn();
           itsStreaming.store(true);
         }
         
-        // On JeVois Pro running the GUI we need to get the camera and gadget streaming at all times for the GUI to
-        // refresh, so restart them. When not using the GUI, users will have to issue a "streamon" to get going:
+        // 在运行 GUI 的 JeVois Pro 上，我们需要始终让相机和小工具流式传输，以便 GUI 刷新，因此请重新启动它们。 当不使
+        // 用 GUI 时，用户必须发出 "streamon" 才能开始：
 #ifdef JEVOIS_PRO
         if (itsGUIhelper && itsStreaming.load() == false)
         {
-          // Keep this code in sync with streamOn();
+          // 使此代码与 streamOn() 保持同步；
           JEVOIS_TIMED_LOCK(itsMtx);
           if (itsCamera) itsCamera->streamOn();
           if (itsGadget) itsGadget->streamOn();
@@ -1205,25 +1196,25 @@ int jevois::Engine::mainLoop()
     // Run the current module:
     if (itsStreaming.load())
     {
-      // Lock up while we use the module:
+      // 在使用模块时锁定：
       JEVOIS_TIMED_LOCK(itsMtx);
 
       if (itsModuleConstructionError.empty() == false)
       {
-        // If we have a module construction error, report it now to GUI/USB/console:
+        // 如果我们有模块构造错误，立即将其报告给 GUI/USB/console：
         reportErrorInternal(itsModuleConstructionError);
 
-        // Also get one camera frame to avoid accumulation of stale buffers:
+        // 还要获取一个相机帧以避免陈旧缓冲区的积累：
         //try { (void)jevois::InputFrame(itsCamera, itsTurbo).get(); }
         //catch (...) { jevois::warnAndIgnoreException(); }
       }
       else if (itsModule)
       {
-        // For standard modules, indicate frame start mark if user wants it:
+        // 对于标准模块，如果用户需要，请指示帧开始标记：
         jevois::StdModule * stdmod = dynamic_cast<jevois::StdModule *>(itsModule.get());
         if (stdmod) stdmod->sendSerialMarkStart();
     
-        // We have a module ready for action. Call its process function and handle any exceptions:
+        // 我们有一个准备好操作的模块。调用其处理函数并处理任何异常：
         try
         {
           switch (itsCurrentMapping.ofmt)
@@ -1234,7 +1225,7 @@ int jevois::Engine::mainLoop()
             itsModule->process(jevois::InputFrame(itsCamera, itsTurbo));
 
 #ifdef JEVOIS_PRO
-            // We always need startFrame()/endFrame() when using the GUI:
+            // 使用 GUI 时，我们总是需要 startFrame()/endFrame()：
             if (itsGUIhelper) itsGUIhelper->headlessDisplay();
 #endif
             break;
@@ -1261,10 +1252,10 @@ int jevois::Engine::mainLoop()
         }
         catch (...) { reportErrorInternal(); }
 
-        // For standard modules, indicate frame stop if user wants it:
+        // 对于标准模块，如果用户需要，则指示帧停止：
         if (stdmod) stdmod->sendSerialMarkStop();
 
-        // Increment our master frame counter
+        // 增加我们的主帧计数器
         ++ jevois::engine::frameNumber;
         itsNumSerialSent.store(0);
       }
@@ -1283,8 +1274,8 @@ int jevois::Engine::mainLoop()
       std::this_thread::sleep_for(std::chrono::milliseconds(25));
     }
 
-    // Serial input handling. Note that readSome() and writeString() on the serial could throw. The code below is
-    // organized to catch all other exceptions, except for those, which are caught here at the first try level:
+    // 串行输入处理。请注意，串行上的 readSome() 和 writeString() 可能会抛出异常。下面的代码是为了捕获除在第一个尝试级
+    // 别捕获的异常之外的所有其他异常而组织的：
     for (auto & s : itsSerials)
     {
       try
@@ -1295,7 +1286,7 @@ int jevois::Engine::mainLoop()
         {
           bool parsed = false; bool success = false;
 
-          // Issue a warning if getting a lot of serial inputs:
+          // 如果获得大量串行输入，则发出警告：
           if ((++received % 10) == 0)
             reportError("Warning: high rate of serial inputs on port: " + s->instanceName() + ". \n\n"
                         "This may adversely affect JeVois framerate.");
@@ -1303,7 +1294,7 @@ int jevois::Engine::mainLoop()
           // Lock up for thread safety:
           JEVOIS_TIMED_LOCK(itsMtx);
 
-          // If the command starts with our hidden command prefix, set the prefix, otherwise clear it:
+          // 如果命令以我们隐藏的命令前缀开头，则设置前缀，否则清除它：
           if (jevois::stringStartsWith(str, JEVOIS_JVINV_PREFIX))
           {
             pfx = JEVOIS_JVINV_PREFIX;
@@ -1311,9 +1302,8 @@ int jevois::Engine::mainLoop()
           }
           else pfx.clear();
       
-          // Try to execute this command. If the command is for us (e.g., set a parameter) and is correct,
-          // parseCommand() will return true; if it is for us but buggy, it will throw. If it is not recognized by us,
-          // it will return false and we should try sending it to the Module:
+          // 尝试执行此命令。如果该命令是给我们的（例如，设置一个参数）并且正确，parseCommand() 将返回 true；如果它是给
+          // 我们的但是有缺陷，它就会抛出。如果我们无法识别它，它将返回 false ，我们应该尝试将其发送到 Module：
           try { parsed = parseCommand(str, s, pfx); success = parsed; }
           catch (std::exception const & e)
           { s->writeString(pfx, std::string("ERR ") + e.what()); parsed = true; }
@@ -1324,7 +1314,7 @@ int jevois::Engine::mainLoop()
           {
             if (itsModule)
             {
-              // Note: prefixing is currently not supported for modules, it is for the Engine only
+              // 注意：目前模块不支持前缀，它仅适用于 Engine
               try { itsModule->parseSerial(str, s); success = true; }
               catch (std::exception const & me) { s->writeString(pfx, std::string("ERR ") + me.what()); }
               catch (...) { s->writeString(pfx, "ERR Command [" + str + "] not recognized by Engine or Module"); }
@@ -1345,15 +1335,15 @@ int jevois::Engine::mainLoop()
 // ####################################################################################################
 void jevois::Engine::sendSerial(std::string const & str, bool islog)
 {
-  // If not a log message, we may want to limit the number of serout messages that a module sends on each frame:
+  // 如果不是日志消息，我们可能希望限制模块在每帧上发送的 serout 消息数量：
   size_t slim = serlimit::get();
   if (islog == false && slim)
   {
-    if (itsNumSerialSent.load() >= slim) return; // limit reached, message dropped
-    ++itsNumSerialSent; // increment number of messages sent. It is reset in the main loop on each new frame.
+    if (itsNumSerialSent.load() >= slim) return; // 达到限制，消息被丢弃
+    ++itsNumSerialSent; // 增加发送的消息数量。它会在每个新帧的主循环中重置。
   }
 
-  // Decide where to send this message based on the value of islog:
+  // 根据 islog 的值决定将此消息发送到何处：
   jevois::engine::SerPort p = islog ? serlog::get() : serout::get();
   switch (p)
   {
@@ -1379,7 +1369,7 @@ void jevois::Engine::sendSerial(std::string const & str, bool islog)
   }
 
 #ifdef JEVOIS_PRO
-  // If we did not send to All (which includes the GUI), check whether the GUI wants it too:
+  // 如果我们没有发送到所有（包括 GUI），请检查 GUI 是否也需要它：
   if (itsGUIhelper && ((islog && itsGUIhelper->serlogEnabled()) || (!islog && itsGUIhelper->seroutEnabled())))
     for (auto & s : itsSerials)
       if (s->type() == jevois::UserInterface::Type::GUI)
@@ -1400,17 +1390,17 @@ void jevois::Engine::reportError(std::string const & err)
 void jevois::Engine::clearErrors()
 {
 #ifdef JEVOIS_PRO
-  // If using a GUI, clear errors in the GUI:
+  // 如果使用 GUI，则清除 GUI 中的错误：
   if (itsGUIhelper) itsGUIhelper->clearErrors();
 #endif
-  // Otherwise, no need to clear anything, other errors are not persistently displayed.
+  // 否则，无需清除任何内容，其他错误不会持续显示。
 }
 
 // ####################################################################################################
 void jevois::Engine::reportErrorInternal(std::string const & err)
 {
 #ifdef JEVOIS_PRO
-  // If using a GUI, report error to GUI:
+  // 如果使用 GUI，则向 GUI 报告错误：
   if (itsGUIhelper && itsCurrentMapping.ofmt == JEVOISPRO_FMT_GUI)
   {
     if (itsGUIhelper->frameStarted() == false) { unsigned short w, h; itsGUIhelper->startFrame(w, h); }
@@ -1420,17 +1410,16 @@ void jevois::Engine::reportErrorInternal(std::string const & err)
   }
   else
 #endif
-  // Report exceptions to video if desired: We have to be extra careful here because the exception might have
-  // been called by the input frame (camera not streaming) or the output frame (gadget not streaming), in
-  // addition to exceptions thrown by the module:
+  // 如果需要，向视频报告异常：我们必须格外小心，因为除了模块抛出的异常之外，异常可能由输入帧（摄像头未流
+  // 式传输）或输出帧（小工具未流式传输）调用：
   if (itsCurrentMapping.ofmt != 0 && itsCurrentMapping.ofmt != JEVOISPRO_FMT_GUI && itsVideoErrors.load())
   {
     try
     {
-      // If the module threw before get() or after send() on the output frame, get a buffer from the gadget:
-      if (itsVideoErrorImage.valid() == false) itsGadget->get(itsVideoErrorImage); // could throw if streamoff
+      // 如果模块在输出帧上的 get() 之前或 send() 之后抛出，则从小工具中获取缓冲区：
+      if (itsVideoErrorImage.valid() == false) itsGadget->get(itsVideoErrorImage); // 如果 streamoff 则可能抛出
       
-      // Draw the error message into our video frame:
+      // 将错误消息绘制到我们的视频帧中：
       if (err.empty()) jevois::drawErrorImage(jevois::warnAndIgnoreException(), itsVideoErrorImage);
       else jevois::drawErrorImage(err, itsVideoErrorImage);
     }
@@ -1438,17 +1427,17 @@ void jevois::Engine::reportErrorInternal(std::string const & err)
     
     try
     {
-      // Send the error image over USB:
-      if (itsVideoErrorImage.valid()) itsGadget->send(itsVideoErrorImage); // could throw if gadget stream off
+      // 通过 USB 发送错误图像：
+      if (itsVideoErrorImage.valid()) itsGadget->send(itsVideoErrorImage); // 如果 gadget stream off，则可能抛出
     }
     catch (...) { jevois::warnAndIgnoreException(); }
     
-    // Invalidate the error image so it is clean for the next frame:
+    // 使错误图像无效，以便下一帧干净：
     itsVideoErrorImage.invalidate();
   }
   else
   {
-    // Report module exception to serlog, and ignore:
+    // 向 serlog 报告模块异常并忽略：
     if (err.empty()) jevois::warnAndIgnoreException();
     else LERROR(err);
   }
@@ -1469,9 +1458,9 @@ std::shared_ptr<jevois::Camera> jevois::Engine::camera() const
 // ####################################################################################################
 jevois::CameraCalibration jevois::Engine::loadCameraCalibration(std::string const & stem, bool do_throw)
 {
-  // itsMtx should be locked
-    
-  // If Current mapping is using dual-stream, use the resolution of the processing stream:
+  // itsMtx 应该被锁定 
+  
+  // 如果 Current map 使用双流，则使用处理流的分辨率：
   int w, h;
   if (itsCurrentMapping.c2fmt) { w = itsCurrentMapping.c2w; h = itsCurrentMapping.c2h; }
   else { w = itsCurrentMapping.cw; h = itsCurrentMapping.ch; }
@@ -1538,11 +1527,11 @@ jevois::VideoMapping const & jevois::Engine::getVideoMapping(size_t idx) const
 // ####################################################################################################
 size_t jevois::Engine::getVideoMappingIdx(unsigned int iformat, unsigned int iframe, unsigned int interval) const
 {
-  // If the iformat or iframe is zero, that's probably a probe for the default mode, so return it:
+  // 如果 iformat 或 iframe 为零，则可能是默认模式的探测，因此返回它：
   if (iformat == 0 || iframe == 0) return itsDefaultMappingIdx;
   
-  // If interval is zero, probably a driver trying to probe for our default interval, so return the first available one;
-  // otherwise try to find the desired interval and return the corresponding mapping:
+  // 如果 interval 为零，则可能是驱动程序试图探测我们的默认间隔，因此返回第一个可用的间隔； 
+  // 否则尝试找到所需的间隔并返回相应的映射：
   if (interval)
   {
     float const fps = jevois::VideoMapping::uvcToFps(interval);
@@ -1599,17 +1588,16 @@ void jevois::Engine::foreachCamCtrl(std::function<void(struct v4l2_queryctrl & q
   struct v4l2_queryctrl qc = { }; std::set<int> doneids;
   for (int cls = V4L2_CTRL_CLASS_USER; cls <= V4L2_CTRL_CLASS_DETECT; cls += 0x10000)
   {
-    // Enumerate all controls in this class. Looks like there is some spillover between V4L2 classes in the V4L2
-    // enumeration process, we end up with duplicate controls if we try to enumerate all the classes. Hence the
-    // doneids set to keep track of the ones already reported:
+    // 枚举此类中的所有控件。看起来在 V4L2 枚举过程中，V4L2 类之间存在一些溢出，如果我们尝试枚举所有类，最终会
+	// 得到重复的控件。因此，doneids 设置用于跟踪已经报告的：
     qc.id = cls | 0x900; unsigned int old_id;
     while (true)
     {
       qc.id |= V4L2_CTRL_FLAG_NEXT_CTRL; old_id = qc.id; bool failed = false;
       try { func(qc, doneids); } catch (...) { failed = true; }
       
-      // The camera kernel driver is supposed to pass down the next valid control if the requested one is not
-      // found, but some drivers do not honor that, so let's move on to the next control manually if needed:
+      // 如果未找到请求的控制，则相机内核驱动程序应该传递下一个有效的控制，但有些驱动程序不遵守这一点，因此
+	  // 如果需要，让我们手动转到下一个控制：
       qc.id |= V4L2_CTRL_FLAG_NEXT_CTRL;
       if (qc.id == old_id) { ++qc.id; if (qc.id > 100 + (cls | 0x900 | V4L2_CTRL_FLAG_NEXT_CTRL)) break; }
       else if (failed) break;
@@ -1623,7 +1611,7 @@ std::string jevois::Engine::camctrlname(unsigned int id, char const * longname) 
   for (size_t i = 0; i < sizeof camcontrols / sizeof camcontrols[0]; ++i)
     if (camcontrols[i].id == id) return camcontrols[i].shortname;
   
-  // Darn, this control is not in our list, probably something exotic. Compute a name from the control's long name:
+  // 该死，这个控件不在我们的列表中，可能是一些奇怪的东西。根据控件的长名称计算一个名称：
   return abbreviate(longname);
 }
 
@@ -1633,13 +1621,12 @@ unsigned int jevois::Engine::camctrlid(std::string const & shortname)
   for (size_t i = 0; i < sizeof camcontrols / sizeof camcontrols[0]; ++i)
     if (shortname.compare(camcontrols[i].shortname) == 0) return camcontrols[i].id;
 
-  // Not in our list, all right, let's find it then in the camera:
+  // 不在我们的列表中，好吧，让我们在相机中找到它：
   struct v4l2_queryctrl qc = { };
   for (int cls = V4L2_CTRL_CLASS_USER; cls <= V4L2_CTRL_CLASS_DETECT; cls += 0x10000)
   {
-    // Enumerate all controls in this class. Looks like there is some spillover between V4L2 classes in the V4L2
-    // enumeration process, we end up with duplicate controls if we try to enumerate all the classes. Hence the
-    // doneids set to keep track of the ones already reported:
+    // 枚举此类中的所有控件。看起来在 V4L2 枚举过程中，V4L2 类之间存在一些溢出，如果我们尝试枚举所有类，我们最
+	// 终会得到重复的控件。因此，设置 doneids 以跟踪已经报告的控件：
     qc.id = cls | 0x900;
     while (true)
     {
@@ -1651,9 +1638,8 @@ unsigned int jevois::Engine::camctrlid(std::string const & shortname)
       }
       catch (...) { failed = true; }
 
-      // With V4L2_CTRL_FLAG_NEXT_CTRL, the camera kernel driver is supposed to pass down the next valid control if
-      // the requested one is not found, but some drivers do not honor that, so let's move on to the next control
-      // manually if needed:
+      // 使用 V4L2_CTRL_FLAG_NEXT_CTRL，如果未找到所请求的控制，则相机内核驱动程序应该传递下一个有效的控制，但是
+	  // 某些驱动程序不遵守这一点，因此如果需要，让我们转到下一个控制：
       qc.id |= V4L2_CTRL_FLAG_NEXT_CTRL;
       if (qc.id == old_id) { ++qc.id; if (qc.id > 100 + (cls | 0x900 | V4L2_CTRL_FLAG_NEXT_CTRL)) break; }
       else if (failed) break;
@@ -1666,18 +1652,18 @@ unsigned int jevois::Engine::camctrlid(std::string const & shortname)
 // ####################################################################################################
 std::string jevois::Engine::camCtrlHelp(struct v4l2_queryctrl & qc, std::set<int> & doneids)
 {
-  // See if we have this control:
+  // 看看我们是否有这个控制：
   itsCamera->queryControl(qc);
   qc.id &= ~V4L2_CTRL_FLAG_NEXT_CTRL;
 
-  // If we have already done this control, just return an empty string:
+  // 如果我们已经完成这个控制，只需返回一个空字符串：
   if (doneids.find(qc.id) != doneids.end()) return std::string(); else doneids.insert(qc.id);
   
-  // Control exists, let's also get its current value:
+  // 控制存在，让我们也获取它的当前值：
   struct v4l2_control ctrl = { }; ctrl.id = qc.id;
   itsCamera->getControl(ctrl);
 
-  // Print out some description depending on control type:
+  // 根据控制类型打印出一些描述：
   std::ostringstream ss;
   ss << "- " << camctrlname(qc.id, reinterpret_cast<char const *>(qc.name));
 
@@ -1741,18 +1727,18 @@ std::string jevois::Engine::camCtrlHelp(struct v4l2_queryctrl & qc, std::set<int
 // ####################################################################################################
 std::string jevois::Engine::camCtrlInfo(struct v4l2_queryctrl & qc, std::set<int> & doneids)
 {
-  // See if we have this control:
+  // 看看我们是否有这个控制：
   itsCamera->queryControl(qc);
   qc.id &= ~V4L2_CTRL_FLAG_NEXT_CTRL;
 
-  // If we have already done this control, just return an empty string:
+  // 如果我们已经完成这个控制，只需返回一个空字符串：
   if (doneids.find(qc.id) != doneids.end()) return std::string(); else doneids.insert(qc.id);
   
-  // Control exists, let's also get its current value:
+  //  控制存在，让我们也获取它的当前值：
   struct v4l2_control ctrl = { }; ctrl.id = qc.id;
   itsCamera->getControl(ctrl);
 
-  // Print out some description depending on control type:
+  // 根据控制类型打印出一些描述：
   std::ostringstream ss;
   ss << camctrlname(qc.id, reinterpret_cast<char const *>(qc.name));
 
@@ -1814,11 +1800,11 @@ std::string jevois::Engine::camCtrlInfo(struct v4l2_queryctrl & qc, std::set<int
 // ####################################################################################################
 void jevois::Engine::startMassStorageMode()
 {
-  // itsMtx must be locked by caller
+  // itsMtx 必须由调用者锁定
 
   if (itsMassStorageMode.load()) { LERROR("Already in mass-storage mode -- IGNORED"); return; }
 
-  // Nuke any module and loader so we have nothing loaded that uses /jevois:
+  // 删除任何模块和加载器，这样我们就不会加载使用/jevois 的东西：
   if (itsModule) { removeComponent(itsModule); itsModule.reset(); }
   if (itsLoader) itsLoader.reset();
 
@@ -1826,7 +1812,7 @@ void jevois::Engine::startMassStorageMode()
   if (std::system("sync")) LERROR("Disk sync failed -- IGNORED");
   if (std::system("mount -o remount,ro /jevois")) LERROR("Failed to remount /jevois read-only -- IGNORED");
 
-  // Now set the backing partition in mass-storage gadget:
+  // 现在在大容量存储小工具中设置备用分区：
   std::ofstream ofs(JEVOIS_USBSD_SYS);
   if (ofs.is_open() == false) LFATAL("Cannot setup mass-storage backing file to " << JEVOIS_USBSD_SYS);
   ofs << JEVOIS_USBSD_FILE << std::endl;
@@ -1855,7 +1841,7 @@ void jevois::Engine::reboot()
   itsRunning.store(false);
 
 #ifdef JEVOIS_PLATFORM_A33
-  // Hard reset to avoid possible hanging during module unload, etc:
+  // 硬重置以避免在模块卸载等过程中可能挂起：
   if ( ! std::ofstream("/proc/sys/kernel/sysrq").put('1')) LERROR("Cannot trigger hard reset -- please unplug me!");
   if ( ! std::ofstream("/proc/sysrq-trigger").put('s')) LERROR("Cannot trigger hard reset -- please unplug me!");
   if ( ! std::ofstream("/proc/sysrq-trigger").put('b')) LERROR("Cannot trigger hard reset -- please unplug me!");
@@ -1868,7 +1854,7 @@ void jevois::Engine::reboot()
 // ####################################################################################################
 void jevois::Engine::quit()
 {
-  // must be locked, camera and gadget must exist:
+  // 必须锁定，相机和小工具必须存在：
   itsGadget->abortStream();
   itsCamera->abortStream();
   itsStreaming.store(false);
@@ -1974,7 +1960,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
 
   std::string errmsg;
 
-  // If we are in shell mode, pass any command to the shell except for 'shellstop':
+  // 如果我们处于 shell 模式，请将除 'shellstop' 之外的任何命令传递给 shell：
   if (itsShellMode)
   {
     if (str == "shellstop") { itsShellMode = false; return true; }
@@ -1985,7 +1971,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
     return true;
   }
   
-  // Note: ModemManager on Ubuntu sends this on startup, kill ModemManager to avoid:
+  // 注意：Ubuntu 上的 ModemManager 会在启动时发送此信息，请终止 ModemManager 以避免出现以下情况：
   // 41 54 5e 53 51 50 4f 52 54 3f 0d 41 54 0d 41 54 0d 41 54 0d 7e 00 78 f0 7e 7e 00 78 f0 7e
   //
   // AT^SQPORT?
@@ -1994,7 +1980,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
   // AT
   // ~
   //
-  // then later on it insists on trying to mess with us, issuing things like AT, AT+CGMI, AT+GMI, AT+CGMM, AT+GMM,
+  // 然后它又坚持要来找我们麻烦，发出类似 AT, AT+CGMI, AT+GMI, AT+CGMM, AT+GMM,
   // AT%IPSYS?, ATE0, ATV1, etc etc
   
   switch (str.length())
@@ -2006,8 +1992,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
   case 1:
     if (str[0] == '~') { LDEBUG("Ignoring modem config command [~]"); return true; }
 
-    // If the string starts with "#", then just print it out on the serlog port(s). We use this to allow debug messages
-    // from the arduino to be printed out to the user:
+    // 如果字符串以 "#" 开头，则只需将其打印在 serlog 端口上即可。我们使用它来允许将 arduino 中的调试消息打印给用户：
     if (str[0] == '#') { sendSerial(str, true); return true; }
     break;
 
@@ -2019,11 +2004,10 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
     // Ignore any command that starts with "AT":
     if (str[0] == 'A' && str[1] == 'T') { LDEBUG("Ignoring AT command [" << str <<']'); return true; }
 
-    // If the string starts with "#", then just print it out on the serlog port(s). We use this to allow debug messages
-    // in the arduino to be printed out to the user:
+    // 如果字符串以 "#" 开头，则只需将其打印在 serlog 端口上即可。我们使用它来允许将 arduino 中的调试消息打印给用户：
     if (str[0] == '#') { sendSerial(str, true); return true; }
 
-    // If the string starts with "!", this is like the "shell" command, but parsed differently:
+    // 如果字符串以 "!" 开头，这就像 "shell" 命令，但解析方式不同：
     std::string cmd, rem;
     if (str[0] == '!')
     {
@@ -2055,7 +2039,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
         s->writeString(pfx, "");
       }
       
-      // Get the help message for our parameters and write it out line by line so the serial fixes the line endings:
+      // 获取我们参数的帮助消息并逐行写出，以便序列修复行尾：
       std::stringstream pss; constructHelpMessage(pss);
       for (std::string line; std::getline(pss, line); /* */) s->writeString(pfx, line);
 
@@ -2150,7 +2134,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
         for (std::string line; std::getline(css, line); /* */) s->writeString(pfx, line);
         s->writeString(pfx, "");
 
-        // Now the parameters for that module (and its subs) only:
+        // 现在仅针对该模块（及其子模块）的参数：
         s->writeString(pfx, "MODULE PARAMETERS:");
         s->writeString(pfx, "");
         
@@ -2178,7 +2162,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
               bool first = true;
               for (auto const & t : tok)
               {
-                // Add current value info to the first thing we write (which is name, default, etc)
+                // 将当前值信息添加到我们写入的第一件事（即名称、默认值等）
                 if (first)
                 {
                   auto const & v = n.second;
@@ -2189,7 +2173,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
                     else
                       s->writeString(pfx, t + " current=[" + v[0].second + ']'); // using non-default val
                   }
-                  else if (v.size() > 1) // several components using this param with possibly different values
+                  else if (v.size() > 1) // 多个组件使用此参数，其值可能不同
                   {
                     std::string sss = t + " current=";
                     for (auto const & pp : v)
@@ -2201,7 +2185,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
                   first = false;
                 }
                 
-                else // just write out the other lines (param description)
+                else // 只需写出其他行（参数描述）
                   s->writeString(pfx, t);
               }
             }
@@ -2258,7 +2242,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       std::istringstream ss(rem); std::string ctrl; int val; ss >> ctrl >> val;
       struct v4l2_control c = { }; c.id = camctrlid(ctrl); c.value = val;
 
-      // For ispsensorpreset, need first to set it to non-zero before we set it to zero, otherwise ignored...
+      // 对于 ispsensorpreset，在将其设置为零之前，首先需要将其设置为非零，否则忽略...
       if (val == 0 && ctrl == "ispsensorpreset")
       {
         c.value = 1; itsCamera->setControl(c);
@@ -2286,7 +2270,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
         auto cam = std::dynamic_pointer_cast<jevois::Camera>(itsCamera);
         if (cam)
         {
-          // Read register and value as strings, then std::stoi to int, supports 0x (and 0 for octal, caution)
+          // 将寄存器和值读取为字符串，然后将 std::stoi 转换为 int，支持 0x（八进制为 0，注意）
           std::istringstream ss(rem); std::string reg, val; ss >> reg >> val;
           cam->writeRegister(std::stoi(reg, nullptr, 0), std::stoi(val, nullptr, 0));
           return true;
@@ -2321,7 +2305,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       {
         if (itsIMU)
         {
-          // Read register and value as strings, then std::stoi to int, supports 0x (and 0 for octal, caution)
+          // 将寄存器和值读取为字符串，然后将 std::stoi 转换为 int，支持 0x（八进制为 0，注意）
           std::istringstream ss(rem); std::string reg, val; ss >> reg >> val;
           itsIMU->writeRegister(std::stoi(reg, nullptr, 0), std::stoi(val, nullptr, 0));
           return true;
@@ -2355,7 +2339,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       {
         if (itsIMU)
         {
-          // Read register and value as strings, then std::stoi to int, supports 0x (and 0 for octal, caution)
+          // 将寄存器和值读取为字符串，然后将 std::stoi 转换为 int，支持 0x（八进制为 0，注意）
           std::vector<std::string> v = jevois::split(rem);
           if (v.size() < 3) errmsg = "Malformed arguments, need at least 3"; 
           else
@@ -2413,7 +2397,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       {
         if (itsIMU)
         {
-          // Read register and value as strings, then std::stoi to int, supports 0x (and 0 for octal, caution)
+          // 将寄存器和值读取为字符串，然后将 std::stoi 转换为 int，支持 0x（八进制为 0，注意）
           std::istringstream ss(rem); std::string reg, val; ss >> reg >> val;
           itsIMU->writeDMPregister(std::stoi(reg, nullptr, 0), std::stoi(val, nullptr, 0));
           return true;
@@ -2447,7 +2431,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       {
         if (itsIMU)
         {
-          // Read register and value as strings, then std::stoi to int, supports 0x (and 0 for octal, caution)
+          // 将寄存器和值读取为字符串，然后将 std::stoi 转换为 int，支持 0x（八进制为 0，注意）
           std::vector<std::string> v = jevois::split(rem);
           if (v.size() < 3) errmsg = "Malformed arguments, need at least 3"; 
           else
@@ -2564,7 +2548,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
     {
       if (cmd == "streamon")
       {
-        // keep this in sync with streamOn(), modulo the fact that here we are already locked:
+        // 使其与 streamOff() 保持同步，模数这里我们已经锁定的事实：
         itsCamera->streamOn();
         itsGadget->streamOn();
         itsStreaming.store(true);
@@ -2573,7 +2557,7 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
       
       if (cmd == "streamoff")
       {
-        // keep this in sync with streamOff(), modulo the fact that here we are already locked:
+        // 使其与 streamOff() 保持同步，模数这里我们已经锁定的事实：
         itsGadget->abortStream();
         itsCamera->abortStream();
 
@@ -2770,9 +2754,8 @@ bool jevois::Engine::parseCommand(std::string const & str, std::shared_ptr<UserI
 #endif
   }
   
-  // If we make it here, we did not parse the command. If we have an error message, that means we had started parsing
-  // the command but it was buggy, so let's throw. Otherwise, we just return false to indicate that we did not parse
-  // this command and maybe it is for the Module:
+  // 如果我们在这里这样做，则我们没有解析命令。如果我们收到错误消息，则意味着我们已经开始解析命令，但它有错误，所以
+  // 让我们抛出。否则，我们只是返回 false 来表示我们没有解析此命令，也许它是针对模块的：
   if (errmsg.size()) throw std::runtime_error("Command error [" + str + "]: " + errmsg);
   return false;
 }
@@ -2787,8 +2770,8 @@ void jevois::Engine::runScriptFromFile(std::string const & filename, std::shared
   std::ifstream ifs(filename);
   if (!ifs) { if (throw_no_file) LFATAL("Could not open file " << filename); else return; }
 
-  // We need to identify a serial to send any errors to, if none was given to us. Let's use the GUI console, or the
-  // serial in serlog, or, if none is specified there, the first available serial:
+  // 如果没有提供任何 serial，我们需要确定一个 serial 来发送任何错误。让我们使用 GUI 控制台，或者 serlog 
+  // 中的 serial，或者，如果那里没有指定，则使用第一个可用的 serial：
   if (!ser)
   {
     if (itsSerials.empty()) LFATAL("Need at least one active serial to run script");
@@ -2820,7 +2803,7 @@ void jevois::Engine::runScriptFromFile(std::string const & filename, std::shared
   {
     ++linenum;
 
-    // Strip any extra whitespace at end, which could be a CR if the file was edited in Windows:
+    // 删除末尾的任何多余空格，如果文件是在 Windows 中编辑的，则这些空格可能是 CR：
     line = jevois::strip(line);
     
     // Skip comments and empty lines:
@@ -2894,7 +2877,7 @@ void jevois::Engine::camCtrlGUI(struct v4l2_queryctrl & qc, std::set<int> & done
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
   }
 
-  // We need a unique ID for each ImGui widget, and we will use no visible widget name:
+  //我们需要为每个 ImGui 小部件提供一个唯一的 ID，并且我们不会使用可见的小部件名称：
   static char wname[16]; snprintf(wname, 16, "##c%d", ctrl.id);
   bool reset = false; // will set to true if we want a reset button
   
@@ -2903,7 +2886,7 @@ void jevois::Engine::camCtrlGUI(struct v4l2_queryctrl & qc, std::set<int> & done
   case V4L2_CTRL_TYPE_INTEGER:
   case V4L2_CTRL_TYPE_INTEGER_MENU:
   {
-    // Do a slider if range is reasonable, otherwise typein:
+    // 如果范围合理，则执行滑块，否则输入：
     long range = long(qc.maximum) - long(qc.minimum);
     if (range > 1 && range < 5000)
     {

@@ -10,10 +10,8 @@
  *	(at your option) any later version.
  */
 
-// JEVOIS NOTE: This file is from the linux kernel.  But it defines form data structures and definition values that used
-// in the userland portions of the gadget code.  Thus, we need it when compiling userland code. We include this file in
-// the JeVois source tree to avoid a complex dependency onto the kernel. Make sure you keep this version in sync with
-// the version in the kernel.
+// JEVOIS 注意：此文件来自 Linux 内核。但它定义了小工具代码的用户空间部分中使用的表单数据结构和定义值。因此，我们在编译用户空间代
+// 码时需要它。我们将此文件包含在 JeVois 源代码树中，以避免对内核产生复杂的依赖。请确保此版本与内核中的版本保持同步。
 
 #ifndef _UVC_GADGET_H_
 #define _UVC_GADGET_H_
@@ -31,7 +29,7 @@
 #define UVC_EVENT_DATA			(V4L2_EVENT_PRIVATE_START + 5)
 #define UVC_EVENT_LAST			(V4L2_EVENT_PRIVATE_START + 5)
 
-// JEVOIS: when we have lots of video modes, the original value of 64 here was too small:
+// JEVOIS: 当我们有很多视频模式时，这里原来的 64 值太小了：
 #define UVC_MAX_REQUEST_SIZE 512
 struct uvc_request_data
 {

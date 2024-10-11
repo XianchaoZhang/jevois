@@ -145,7 +145,7 @@ void jevois::ICM20948::preInit()
   itsIMU->writeRegister(ICM20948_REG_USER_CTRL, v);
   std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-  // Check the who-am-I of the magnetometer, to make sure I2C master is working:
+  // 检查磁力计的 who-am-I，以确保 I2C 主机正常工作：
   unsigned char wia2 = readMagRegister(REG_AK09916_WIA);
   if (wia2 != VAL_AK09916_WIA) LFATAL("Cannot communicate with magnetometer");
   LINFO("AK09916 magnetometer ok.");
@@ -169,8 +169,7 @@ void jevois::ICM20948::postInit()
   {
   case jevois::imu::Mode::DMP:
   {
-    // The DMP code was loaded by the kernel driver, which also has set the start address. So here we just need to
-    // launch the DMP. First, disable FIFO and DMP:
+    // DMP 代码由内核驱动程序加载，它还设置了起始地址。所以这里我们只需要启动 DMP。首先，禁用 FIFO 和 DMP：
     unsigned char v = itsIMU->readRegister(ICM20948_REG_USER_CTRL);
     v &= ~(ICM20948_BIT_DMP_EN | ICM20948_BIT_FIFO_EN); v |= ICM20948_BIT_DMP_RST;
     if (itsIMU->isSPI()) v |= ICM20948_BIT_I2C_IF_DIS;
@@ -214,7 +213,7 @@ void jevois::ICM20948::postInit()
     if (itsIMU->isSPI()) v |= ICM20948_BIT_I2C_IF_DIS;
     itsIMU->writeRegister(ICM20948_REG_USER_CTRL, v);
 
-    // Enable FIFO, set packet size, nuke any old FIFO data:
+    // 启用 FIFO，设置数据包大小，删除任何旧的 FIFO 数据：
     computeFIFOpktSize(-1.0F, -1.0F, -1);
 
     // DMP is not available:
@@ -288,7 +287,7 @@ jevois::IMUrawData jevois::ICM20948::getRaw(bool blocking)
   {
     int siz = dataReady();
 
-    // Gobble up the FIFO if it is getting full, so that we never get out of sync:
+    // 如果 FIFO 已满，则将其吞噬，这样我们就永远不会失去同步：
     if (siz > 500)
     {
       LERROR("IMU FIFO filling up. You need to call get() more often or reduce rate. Data will be lost.");
@@ -362,7 +361,7 @@ jevois::IMUrawData jevois::ICM20948::getRaw(bool blocking)
     // Grab the raw data register contents:
     itsIMU->readRegisterArray(ICM20948_REG_ACCEL_XOUT_H_SH, reinterpret_cast<unsigned char *>(&d.v[0]), 11*2);
 
-    // The data from the sensor is in big endian, convert to little endian:
+    // 来自传感器的数据是大端字节序，转换为小端字节序：
     for (short & s : d.v) { short hi = (s & 0xff00) >> 8; short lo = s & 0x00ff; s = (lo << 8) | hi; }
   }
   break;
@@ -386,19 +385,19 @@ jevois::DMPdata jevois::ICM20948::getDMP(bool blocking)
   // Start parsing a new packet?
   if (itsDMPsz < 4)
   {
-    // We need at least 4 bytes in the FIFO to get going. Could be either two empty packets (may not exist), or the
-    // start of a non-empty packet, possibly with a header2 (which is why we want 4):
+    // 我们需要 FIFO 中至少有 4 个字节才能开始。可能是两个空数据包（可能不存在），或者非空数据包的开头，
+	// 可能带有 header2（这就是我们想要 4 的原因）：
     size_t got = getDMPsome(blocking, 4);
     if (got < 4) return d;
   }
   
   // Parse the headers:
   unsigned short ctl1 = (itsDMPpacket[0] << 8) | itsDMPpacket[1];
-  int off = 2; // offset to where we are in parsing the packet so far
+  int off = 2; // 到目前为止我们解析数据包的偏移量
   unsigned short ctl2 = 0;
   if (ctl1 & JEVOIS_DMP_HEADER2) { ctl2 = (itsDMPpacket[off] << 8) | itsDMPpacket[off + 1]; off += 2; }
   
-  // Compute how much data remains to be grabbed for this packet:
+  // 计算此数据包还剩下多少数据需要抓取：
   size_t need = jevois::DMPpacketSize(ctl1, ctl2) - itsDMPsz;
 
   // Read the rest of the packet if needed:
@@ -450,7 +449,7 @@ size_t jevois::ICM20948::getDMPsome(bool blocking, size_t desired)
     while (siz < desired);
   }
 
-  // We have enough data in the FIFO, read out what we wanted:
+  // 我们在 FIFO 中有足够的数据，读出我们想要的数据：
   itsIMU->readRegisterArray(ICM20948_REG_FIFO_R_W, &itsDMPpacket[itsDMPsz], desired);
   itsDMPsz += desired;
   
@@ -489,7 +488,7 @@ void jevois::ICM20948::onParamChange(jevois::imu::arate const &, float const & n
     itsIMU->writeRegister(ICM20948_REG_ACCEL_SMPLRT_DIV_1, uint8_t(accelDiv >> 8) );
     itsIMU->writeRegister(ICM20948_REG_ACCEL_SMPLRT_DIV_2, uint8_t(accelDiv & 0xFF) );
  
-    // Calculate the actual sample rate from the divider value:
+    // 根据分频器值计算实际采样率：
     LINFO("Accelerometer sampling rate set to " << 1125.0F / (accelDiv + 1.0F) << " Hz");
   }
   
@@ -557,7 +556,7 @@ void jevois::ICM20948::onParamChange(jevois::imu::mrate const &, jevois::imu::Ma
 
   computeFIFOpktSize(-1.0F, -1.0F, mod);
 
-  // Setup to transfer 8 bytes (RAW, FIFO) or 6 bytes (DMP) of data from magnetometer to ICM20948 main:
+  // 设置从磁力计向 ICM20948 传输 8 字节（RAW、FIFO）或 6 字节（DMP）数据：
   itsIMU->writeRegister(ICM20948_REG_I2C_SLV0_ADDR, ICM20948_BIT_I2C_READ | COMPASS_SLAVEADDR);
   itsIMU->writeRegister(ICM20948_REG_I2C_SLV0_REG, REG_AK09916_HXL);
   int siz = (mode::get() == jevois::imu::Mode::DMP) ? 6 : 8;
@@ -750,15 +749,15 @@ void jevois::ICM20948::computeFIFOpktSize(float ar, float gr, int mm)
 {
   itsFIFOpktSiz = 0;
 
-  // If we are in FIFO mode, make sure we send that data to the FIFO:
+  // 如果我们处于 FIFO 模式，请确保将数据发送到 FIFO：
   if (mode::get() == jevois::imu::Mode::FIFO)
   {
-    // Since this is called from within parameter callbacks, we need a bit of trickery to get the new rate:
+    // 由于这是从参数回调中调用的，我们需要一些技巧来获取新的速率：
     float acc; if (ar < 0.0F) acc = arate::get(); else acc = ar;
     float gyr; if (gr < 0.0F) gyr = grate::get(); else gyr = gr;
     jevois::imu::MagRate mag; if (mm == -1) mag = mrate::get(); else mag = jevois::imu::MagRate::M100Hz; // any value ok
     
-    // Packet size may change. We need to nuke the FIFO to avoid mixed packets:
+    // 数据包大小可能会发生变化。我们需要删除 FIFO 以避免混合数据包：
     unsigned char ctl = itsIMU->readRegister(ICM20948_REG_USER_CTRL);
     ctl &= ~ICM20948_BIT_FIFO_EN;
     if (itsIMU->isSPI()) ctl |= ICM20948_BIT_I2C_IF_DIS;

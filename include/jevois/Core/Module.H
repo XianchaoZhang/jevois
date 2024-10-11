@@ -21,7 +21,7 @@
 #include <jevois/Core/InputFrame.H>
 #include <jevois/Core/OutputFrame.H>
 #include <jevois/Core/VideoBuf.H>
-#include <jevois/Core/UserInterface.H> // not strictly needed but derived classes will want to use it
+#include <jevois/Core/UserInterface.H> // 不是严格需要但派生类会想要使用它
 #include <jevois/Component/Component.H>
 #include <jevois/Types/ObjReco.H>
 #include <jevois/Types/ObjDetect.H>
@@ -31,7 +31,7 @@
 #include <ostream>
 
 #ifdef JEVOIS_PRO
-#include <jevois/GPU/GUIhelper.H> // not strictly required but derived classes may want to use it
+#include <jevois/GPU/GUIhelper.H> // 不是严格要求但派生类可能想要使用它
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #endif
 
@@ -40,149 +40,116 @@ namespace jevois
   class VideoOutput;
   class Engine;
   
-  //! Virtual base class for a vision processing module
-  /*! Module is the base class to implement camera-to-USB frame-by-frame video processing. The Engine instantiates one
-      class derived from Module, according to the current VideoMapping selected by the end user (e.g., current image
-      resolution, format, and frame rate setected by a webcam viewing program on a host computer). The Module is loaded
-      as shared object (.so) file according to the VideoMapping definitions in videomappings.cfg and the current
-      VideoMapping selected by the user.
-
-      Module derives from Component and as such can contain:
-
-      - any number of Parameter settings
-
-      - any arbitrarily complex sub-hierarchy of Component objects to implement various functionality. Parameter
-        settings from all the sub-components are available to the Module and to users connected over Serial ports of the
-        Engine.
-
-      This allows one to implement complex vision processing pipelines efficiently and with substantial code re-use. For
-      example, one may first want to implement an EdgeDetector or Saliency component, with Parameter settings for
-      various thresholds, features, etc. One can then create any number of top-level objects that derive from Module and
-      that may contain one or more EdgeDetector, Saliency, etc components in their hierarchy of sub-components, with the
-      implementation in the module simply routing images from one Component to another to create a processing pipeline.
-
-      Classes that derive from Module should implement up to four functions:
-
-      - process(InputFrame && inframe, OutputFrame && outframe) is called once per iteration of the Engine main loop
-        when the current VideoMapping specifies both a particular Camera resolution and format, and a USB resolution and
-        format. This function should process the received input frame and fill the pixel buffer of the output frame with
-        results. Memory has already been allocated for both the input and output images before process() is
-        called. Because the output image is actually allocated by the USB Gadget driver (and, ultimately, by the Linux
-        kernel), its pixel memory location cannot be moved (hence, do not attempt to copy the output image or replace it
-        by another image, etc; just write pixel data into the output image's pixel array). There is no restriction on
-        video modes or frame rates, except as suported by the Camera hardware, and as limited by USB bandwidth. For most
-        implementations, matching the input and output frame rate is easiest, and means that each invocation of
-        process() would access and use both of the provided InputFrame and OutputFrame (one-input-to-one-output
-        processing pipeline). But this is not mandatory. For example, a motion flow computation Module for use in a
-        flying drone may have 320x240 YUYV 53.0fps inputs and 100x142 GREY 10.6fps output (since output frame rate is 5x
-        lower than input in this example, the process() function would here get, fill, and send the OutputFrame only
-        once every 5 times it is called; implementation of the process() function should keep track of that, e.g.,
-        through a member variable that gets incremented each time process() is called). In addition to filling the pixel
-        data of the OutputFrame, process() may also send results over the serial ports (e.g., for use by an Arduino
-        connected to the JeVois platform hardware) using sendSerial().
-
-      - process(InputFrame && inframe) is called once per Camera frame when the current VideoMapping specifies a
-        particular Camera resolution and format, and NONE as USB output format. This function should process the
-        received input frame and would typicaly then send results to serial ports (e.g., for use by an Arduino connected
-        to the JeVois platform hardware) using sendSerial(). There is no restriction on video modes or frame rates,
-        except as suported by the Camera hardware.
-
-      - parseSerial(std::string const & str, std::shared_ptr<UserInterface> s) allows the Module to support custom user
-        commands. Engine will forward to this function any command received over Serial or other UserInterface that it
-        does not understand. You should use this for things that go beyond Parameter settings (which is already natively
-        supported by Engine) or built-in commands of Engine (see \ref UserCli). For example, one could implement here a
-        command called "start" to allow users to start some specific thing.
-
-      - supportedCommands(std::ostream & os) should stream out a human-readable description of any custom commands
-        supported by parseSerial(). These will be shown to users when they type "help" over a Serial port.
-
-      \note Every module implementation file should contain a call to #JEVOIS_REGISTER_MODULE(MODULENAME) for the
-      module's class. This creates some plain-C entry points that will be used when the module is loaded from a dynamic
-      library (.so) file to instantiate the module. See \ref ModuleTutorial for examples.
+  //! 视觉处理模块的虚基类
+  /*! Module 是实现摄像头到 USB 逐帧视频处理的基类。 Engine 根据最终用户选择的当前 VideoMapping（例如，主机上的网络摄像
+      头查看程序设置的当前图像分辨率、格式和帧速率）实例化一个从 Module 派生的类。 根据 videomappings.cfg 中的 
+	  VideoMapping 定义和用户选择的当前 VideoMapping，Module 被加载为共享对象 (.so) 文件。
+	  
+	  Module 自 Component，因此可以包含：
+	  
+	  - 任意数量的 Parameter 设置
+	  
+	  - 任意复杂的 Component 对象子层次结构，用于实现各种功能。所有子组件的 Parameter 设置均可供 Module 和 Engine 使用。
+	  
+	  这样，人们就可以高效地实现复杂的视觉处理管道，并大量重复使用代码。例如，人们可能首先想要实现一个 EdgeDetector 或 
+	  Saliency 组件，并为各种阈值、特征等设置 Parameter。然后，人们可以创建任意数量的顶级对象，这些对象派生自 Module，
+	  并且可能在子组件层次结构中包含一个或多个 EdgeDetector、Saliency 等组件，模块中的实现只是将图像从一个 Component 
+	  路由到另一个，以创建处理管道。
+	  
+	  从 Module 派生的类应该实现最多四个函数：
+	  
+	  - 当当前 VideoMapping 同时指定特定的相机分辨率和格式以及 USB 分辨率和格式时，Engine 主循环每次迭代都会调用一次 
+	    process(InputFrame && inframe, OutputFrame && outframe)。此函数应处理接收到的输入帧并用结果填充输出帧的像素缓冲
+		区。在调用 process() 之前，已经为输入和输出图像分配了内存。由于输出图像实际上是由 USB Gadget 驱动程序（最终由 
+		Linux 内核）分配的，因此其像素内存位置无法移动（因此，不要尝试复制输出图像或用另一个图像替换它等；只需将像素数
+		据写入输出图像的像素阵列）。视频模式或帧速率没有限制，除非 Camera 硬件支持，并且受 USB 带宽限制。对于大多数实现
+		，匹配输入和输出帧速率是最简单的，这意味着每次调用 process() 都会访问和使用提供的 InputFrame 和 OutputFrame（一
+		输入一输出处理管道）。但这不是强制性的。例如，用于飞行无人机的运动流计算 Module 可能具有 320x240 YUYV 53.0fps 
+		输入和 100x142 GREY 10.6fps 输出（由于此示例中的输出帧速率比输入低 5 倍，因此 process() 函数每调用 5 次才会获取
+		、填充和发送一次 OutputFrame；process() 函数的实现应该跟踪这一点，例如，通过每次调用 process() 时递增的成员变量
+		）。除了填充 OutputFrame 的像素数据之外，process() 还可以使用 sendSerial() 通过串行端口发送结果（例如，供连接到
+		 JeVois 平台硬件的 Arduino 使用）。
+	  
+	  - 当当前 VideoMapping 指定特定的相机分辨率和格式，并且 USB 输出格式为 NONE 时，每个 Camera 帧调用一次 
+	     process(InputFrame && inframe)。此函数应处理接收到的输入帧，然后通常使用 sendSerial() 将结果发送到串行端口（例
+		 如，供连接到 JeVois 平台硬件的 Arduino 使用）。对视频模式或帧速率没有限制，除非 Camera 硬件支持。
+	  
+	  - parseSerial(std::string const & str, std::shared_ptr<UserInterface> s) 允许 Module 支持自定义用户命令。Engine 
+	    会将串行或其他它 UserInterface 收到的不理解的任何命令转发给此函数。您应该将其用于超出 Parameter 设置（
+		Engine 本身已经支持）或 Engine 内置命令（参见 \ref UserCli ）的范围。例如，可以在此处实现一个名为 "start" 的命令
+		，以允许用户启动某些特定的东西。
+	  
+	  - supportsCommands(std::ostream & os) 应输出 parseSerial() 支持的任何自定义命令的可读描述。当用户通过 Serial 端口
+	    输入 "help" 时，将显示这些描述。
+	  
+	  \note 每个模块实现文件都应包含对模块类的 #JEVOIS_REGISTER_MODULE(MODULENAME) 的调用。这会创建一些纯 C 入口点，当
+	  从动态库 (.so) 文件加载模块以实例化模块时，将使用这些入口点。有关示例，请参阅 \ref ModuleTutorial 。
 
       \ingroup core */
   class Module : public Component
   {
     public:
       //! Constructor
-      /*! the instance is a user-defined string that may be used to differentiate between several instances of the
-          same module. */
+      /*! instance 是一个用户定义的字符串，可用于区分同一模块的多个实例。 */
       Module(std::string const & instance);
 
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~Module();
 
-      //! Processing function, version that receives a frame from camera and sends a frame out over USB
-      /*! This function is called once for each grabbed video frame from the camera, and it should complete within the
-          camera's frame period in order to avoid dropping frames. The InputFrame and OutputFrame objects are simple
-          wrappers to ensure that the low-level video buffers will always be returned to the low-level camera and USB
-          drivers even if the process function throws at any point during the processing. If any error occurs, it is
-          hence ok to throw from within process() at any time, just make sure your locally allocated resources will be
-          freed, which is usually best achieved by using shared_ptr and similar wrappers around them. The Engine (which
-          calls process() on your module for every frame) will catch any exception an proceed to the next frame. 
+      //! 处理函数，从相机接收帧并通过 USB 发送帧的版本 
+      /*! 此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 和 OutputFrame 对象是简单的
+          包装器，以确保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机和 USB 驱动程序。如果发生
+          任何错误，可以随时从 process() 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器
+          来实现。 Engine （它为您的模块调用每个帧的 process()）将捕获任何异常并继续下一帧。
 
-          Default implementation in the base class just throws. Derived classes should override it. */
+          基类中的默认实现只是抛出。派生类应该覆盖它。 */
       virtual void process(InputFrame && inframe, OutputFrame && outframe);
 
-      //! Processing function, version that receives a frame from camera and does not use USB
-      /*! This function is called once for each grabbed video frame from the camera, and it should complete within the
-          camera's frame period in order to avoid dropping frames. The InputFrame object is a simple wrapper to ensure
-          that the low-level video buffers will always be returned to the low-level camera driver even if the process
-          function throws at any point during the processing. If any error occurs, it is hence ok to throw from within
-          process() at any time, just make sure your locally allocated resources will be freed, which is usually best
-          achieved by using shared_ptr and similar wrappers around them. The Engine (which calls process() on your
-          module for every frame) will catch any exception an proceed to the next frame.
+      //! 处理函数，从相机接收帧但不使用 USB 的版本 
+      /*! 此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 对象是一个简单的包装器，以确
+          保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随
+          时从 process() 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器来实现。 Engine 
+          （它为您的模块调用每个帧的 process()）将捕获任何异常并继续下一帧。
 
-          Default implementation in the base class just throws. Derived classes should override it. */
+          基类中的默认实现只是抛出。派生类应该覆盖它。 */
       virtual void process(InputFrame && inframe);
 
 #ifdef JEVOIS_PRO
-      //! Processing function, version that receives a frame from camera, no USB, but GUI output on JeVois-Pro
-      /*! This function is called once for each grabbed video frame from the camera, and it should complete within the
-          camera's frame period in order to avoid dropping frames. The InputFrame object is a simple wrapper to ensure
-          that the low-level video buffers will always be returned to the low-level camera driver even if the process
-          function throws at any point during the processing. If any error occurs, it is hence ok to throw from within
-          process() at any time, just make sure your locally allocated resources will be freed, which is usually best
-          achieved by using shared_ptr and similar wrappers around them. The Engine (which calls process() on your
-          module for every frame) will catch any exception an proceed to the next frame.
+      //! 处理函数，从相机接收帧的版本，没有 USB，但在 JeVois-Pro 上有 GUI 输出 
+      /*! 此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。InputFrame 对象是一个简单的包装器，以确保
+          即使处理函数在处理过程中的任何时候抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随时从 
+          process() 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared_ptr 和类似的包装器来实现。 Engine （
+          它为您的模块的每一帧调用 process()）将捕获任何异常并继续下一帧。
 
-          Default implementation in the base class just throws. Derived classes should override it. */
+          基类中的默认实现只是抛出。派生类应该覆盖它。 */
       virtual void process(InputFrame && inframe, GUIhelper & helper);
 #endif
       
-      //! Send a string over the 'serout' serial port
-      /*! The default implementation just sends the string to the serial port specified by the 'serout' Parameter in
-          Engine (which could be the hardware serial port, the serial-over-USB port, both, or none; see \ref UserCli for
-          information about \c serout). No need to override in most cases. Typically, you would use this function from
-          within process() to send out some results of your processing.
+      //! 通过 'serout' 串行端口发送字符串 
+      /*! 默认实现只是将字符串发送到 Engine 中 'serout' Parameter 指定的串行端口（可以是硬件串行端口、USB 串行端口、两者或都不是
+          ；有关 \c serout 的信息，请参阅 \ref UserCli ）。大多数情况下无需覆盖。通常，您会在 process() 中使用此函数来发送一些处
+          理结果。
 
-          Note that the default 'serout' Parameter setting in Engine is None. This is to allow users to configure
-          parameters, get parameter values, possibly read the help message, etc before the flow of serial outputs from
-          vision processing starts. Once ready to receive serial outputs, one would typically issue a command 'setpar
-          serout Hard' over the JeVois command line to enable serial outputs to the hardware serial port. An Arduino
-          would issue that setpar commands when it is ready to work. See ArduinoTutorial for an example. */
+          请注意，Engine 中默认的 'serout' Parameter 设置为 None。这是为了让用户在视觉处理的串行输出流开始之前配置参数、获取参数
+          值、可能阅读帮助消息等。一旦准备好接收串行输出，通常会通过 JeVois 命令行发出命令 'setpar serout Hard '以启用到硬件串行
+          端口的串行输出。Arduino 会在准备好工作时发出该 setpar 命令。有关示例，请参阅 ArduinoTutorial。 */
       virtual void sendSerial(std::string const & str);
 
-      //! Receive a string from a serial port which contains a user command
-      /*! This function may be called in between calls to process() with any received string from any of the serial
-          ports. Some commands are parsed upstream already (like "help", set param value, set camera control, etc; see
-          the Engine class) and will not be received here. Only the ones not recognized by the Engine will be received
-          (i.e., custom commands specific to your module).
+      //! 从串行端口接收包含用户命令的字符串 
+      /*！此函数可以在对 process() 的调用之间使用从任何串行端口接收到的任何字符串进行调用。一些命令已在上游解析（如 "help"、设置
+          参数值、设置摄像头控制等；请参阅 Engine 类），不会在此处接收。只有 Engine 无法识别的命令才会被接收（即特定于您的模块的
+          自定义命令）。
 
-          The default implementation just throws std::runtime_error("Unsupported command"), but some modules may want to
-          override this function to handle custom commands. If you successfully process the command, just return;
-          otherwise, throw, and if your exception derives from std::exception, the Engine will append its what() to the
-          error message issued to the user. When you support commands here, you should update the implementation of
-          supportedCommands() to provide some description of those commands to the users.
+          默认实现只会抛出 std::runtime_error("Unsupported command")，但有​​些模块可能希望重写此函数来处理自定义命令。如果您成功
+          处理了命令，则只需返回；否则，抛出，并且如果您的异常源自 std::exception，则引擎会将其 what() 附加到发送给用户的错误消
+          息中。当您在此处支持命令时，您应该更新 supportsCommands() 的实现，以向用户提供这些命令的一些描述。
 
-          The \c s parameter is the serial port that received the command. You can send any results back to that port
-          using writeString() on it. Note that the Engine will automatically add the 'OK' message upon success, so you
-          do not have to send that here. */
+          \c s 参数是接收命令的串行端口。您可以使用 writeString() 将任何结果发送回该端口。请注意，引擎将在成功时自动添加 'OK' 
+          消息，因此您不必在此处发送该消息。 */
       virtual void parseSerial(std::string const & str, std::shared_ptr<UserInterface> s);
 
-      //! Human-readable description of this Module's supported custom commands
-      /*! The format here is free. Just use std::endl to demarcate lines, these will be converted to the appropriate
-          line endings by the serial ports. Default implementation writes "None" to os. */
+      //! 此模块支持的自定义命令的可读描述
+      /*! 此处的格式是免费的。只需使用 std::endl 来划分行，这些行将由串行端口转换为适当的行尾。默认实现将 "None" 写入 os。 */
       virtual void supportedCommands(std::ostream & os);
   };
 
@@ -223,145 +190,128 @@ namespace jevois
                              SerMark::None, SerMark_Values, ParamCateg);
   }
   
-  //! Base class for a module that supports standardized serial messages
-  /*! Modules that can output standardized serial messages should derive from StdModule instead of Module. StdModule
-      brings in extra parameters to set serial message style and precision, and extra member functions to assemble,
-      format, and send standardized serial messages. The process(), sendSerial(), parseSerial(), supportedCommands(),
-      etc of StdModule functions are directly inherited from Module. See \ref UserSerialStyle for standardized serial
-      messages. \ingroup core */
+  //! 支持标准化串行消息的模块的基类
+  /*! 可以输出标准化串行消息的模块应该从 StdModule 而不是 Module 派生。StdModule 引入了额外的参数来设置串行消息样式和精度，
+      以及额外的成员函数来组装、格式化和发送标准化串行消息。StdModule 函数的 process()、sendSerial()、parseSerial()、
+      supportedCommands() 等直接从 Module 继承。有关标准化串行消息，请参阅 \ref UserSerialStyle 。 \ingroup core */
   class StdModule : public Module,
 		    public Parameter<modul::serprec, modul::serstyle, modul::serstamp, modul::sermark>
   {
     public:
       //! Constructor
-      /*! the instance is a user-defined string that may be used to differentiate between several instances of the
-          same module. */
+      /*! instance 是用户定义的字符串，可用于区分同一模块的多个实例。 */
       StdModule(std::string const & instance);
 
-      //! Virtual destructor for safe inheritance
+      //! 用于安全继承的虚拟析构函数
       virtual ~StdModule();
 
-      //! Send standardized 1D message for an X image coordinate
-      /*! See \ref UserSerialStyle for more info. Coordinates should be in camera image pixels, this function will
-          convert them to standardized coordinates as per \ref coordhelpers. */
+      //! 发送标准化 1D 消息以获取图像 X 坐标 
+      /*! 有关更多信息，请参阅 \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转
+          换为标准化坐标。 */
       void sendSerialImg1Dx(unsigned int camw, float x, float size = 0.0F, std::string const & id = "",
                             std::string const & extra = "");
 
-      //! Send standardized 1D message for a standardized X coordinate
-      /*! See \ref UserSerialStyle for more info. Coordinates should be in camera image pixels, this function will
-          convert them to standardized coordinates as per \ref coordhelpers. */
+      //! 发送标准化 1D 消息以获取标准化 X 坐标 
+      /*! 有关更多信息，请参阅 \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转
+          换为标准化坐标。 */
       void sendSerialStd1Dx(float x, float size = 0.0F, std::string const & id = "", std::string const & extra = "");
 
-      //! Send standardized 1D message for an Y image coordinate
-      /*! See \ref UserSerialStyle for more info. Coordinates should be in camera image pixels, this function will
-          convert them to standardized coordinates as per \ref coordhelpers. */
+      //! 发送 Y 图像坐标的标准化 1D 消息 
+	  /*! 有关更多信息，请参阅 \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转
+	      换为标准化坐标。 */
       void sendSerialImg1Dy(unsigned int camh, float y, float size = 0.0F, std::string const & id = "",
                             std::string const & extra = "");
 
-      //! Send standardized 1D message for a standardized Y coordinate
-      /*! See \ref UserSerialStyle for more info. Coordinates should be in camera image pixels, this function will
-          convert them to standardized coordinates as per \ref coordhelpers. */
+      //! 发送标准化 1D 消息以获取标准化 Y 坐标 
+	  /*! 有关更多信息，请参阅 \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转
+	      换为标准化坐标。 */
       void sendSerialStd1Dy(float y, float size = 0.0F, std::string const & id = "", std::string const & extra = "");
 
-      //! Send standardized 2D message for image coordinates
-      /*! Use this function if you only know location and optionally size. Use the other variants if you have the
-          corners. An upright rectangular shape will be assumed here. See \ref UserSerialStyle for more
-          info. Coordinates should be in camera image pixels, this function will convert them to standardized
-          coordinates as per \ref coordhelpers. */
+      //! 发送标准化的 2D 图像坐标消息 
+	  /*! 如果您只知道位置和可选大小，请使用此功能。如果您有角，请使用其他变体。这里将假定为直立的矩形。有关更多信息，请参阅
+	       \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转换为标准化坐标。 */
       void sendSerialImg2D(unsigned int camw, unsigned int camh, float x, float y, float w = 0.0F, float h = 0.0F,
                            std::string const & id = "", std::string const & extra = "");
       
-      //! Send standardized 2D message for standardized coordinates
-      /*! Use this function if you only know location and optionally size. Use the other variants if you have the
-          corners. An upright rectangular shape will be assumed here. See \ref UserSerialStyle for more
-          info. Coordinates should be in camera image pixels, this function will convert them to standardized
-          coordinates as per \ref coordhelpers. */
+      //! 发送标准化的 2D 标准化坐标消息 
+	  /*! 如果您只知道位置和可选大小，请使用此功能。如果您有角，请使用其他变体。这里将假定为直立的矩形。有关更多信息，请参阅 
+	      \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转换为标准化坐标。 */
       void sendSerialStd2D(float x, float y, float w = 0.0F, float h = 0.0F,
                            std::string const & id = "", std::string const & extra = "");
 
-      //! Send standardized 2D message for polygons in image coordinates
-      /*! Use this function if you have a polygon around your object, for example, one of the contours found with
-          cv::findContours(), or if you have the 4 corners of a rectangular object. See \ref UserSerialStyle for more
-          info. Coordinates should be in camera image pixels, this function will convert them to standardized
-          coordinates as per \ref coordhelpers. For \b Terse serial style, the center of gravity of the points will be
-          computed and output; for \b Normal, an upright bounding rectangle will be computed and output; for \b
-          Detailed, a rotated bounding rectangle will be computed and output; for \b Fine, all the given points will
-          be output. Make sure you try to reduce the number of points so the message is not too long; for example see
-          OpenCV approxPolyDP() or similar. */
+      //! 发送图像坐标中多边形的标准化 2D 消息 
+	  /*! 如果您的物体周围有多边形，请使用此函数，例如，使用 cv::findContours() 找到的轮廓之一，或者如果您有矩形物体的 4 个角。
+	      有关更多信息，请参阅 \ref UserSerialStyle 。坐标应以相机图像像素为单位，此函数将根据 \ref coordhelpers 将它们转换为
+		  标准化坐标。对于 \b Terse 串行样式，将计算并输出点的重心；对于 \b Normal ，将计算并输出直立边界矩形；对于
+		   \b Detailed ，将计算并输出旋转的边界矩形；对于 \b Fine ，将输出所有给定的点。请确保尝试减少点数，以使消息不会太长；
+		   例如，请参阅 OpenCV approxPolyDP() 或类似函数。 */
       template <typename T = int>
       void sendSerialContour2D(unsigned int camw, unsigned int camh, std::vector<cv::Point_<T> > points,
                                 std::string const & id = "", std::string const & extra = "");
 
-      //! Send standardized 3D message
-      /*! Use this function if you only know location and optionally size and an orientation quaternion. Use the other
-          variants if you have a bunch of vertices. See \ref UserSerialStyle for more info. Coordinates should be in
-          millimeters. */
+      //! 发送标准化 3D 消息 
+	  /*! 如果您只知道位置和可选的大小以及方向四元数，请使用此函数。如果您有一堆顶点，请使用其他变体。有关更多信息，请参阅 
+	      \ref UserSerialStyle。坐标应以毫米为单位。 */
       void sendSerialStd3D(float x, float y, float z, float w = 0.0F, float h = 0.0F, float d = 0.0F,
                            float q1 = 0.0F, float q2 = 0.0F, float q3 = 0.0f, float q4 = 0.0F,
                            std::string const & id = "", std::string const & extra = "");
 
-      //! Send standardized 3D message
-      /*! Use this function if you only know location and optionally size and an orientation quaternion. Use the other
-          variants if you have a bunch of vertices. See \ref UserSerialStyle for more info. Coordinates should be in
-          millimeters. */
+      //! 发送标准化 3D 消息 
+	  /*! 如果您只知道位置和可选的大小以及方向四元数，请使用此函数。如果您有一堆顶点，请使用其他变体。有关更多信息，请参阅 
+	      \ref UserSerialStyle。坐标应以毫米为单位。 */
       void sendSerialStd3D(std::vector<cv::Point3f> points, std::string const & id = "",
                            std::string const & extra = "");
 
-      //! Send a standardized object recognition message
-      /*! res should be a list of scores and category names, in descending order of scores. Note that no message
-          is sent if the vector is empty. */
+      //! 发送标准化对象识别消息 
+	  /*! res 应为分数和类别名称的列表，按分数降序排列。请注意，如果向量为空，则不会发送任何消息。 */
       void sendSerialObjReco(std::vector<ObjReco> const & res);
 
-      //! Send a standardized object detection + recognition message
-      /*! res should be a list of scores and category names, in descending order of scores. Note that no message
-          is sent if the vector is empty. See sendSerialImg2D() for info about the object box. */
+      //! 发送标准化对象检测 + 识别消息 
+	  /*! res 应为分数和类别名称的列表，按分数降序排列。请注意，如果向量为空，则不会发送任何消息。有关对象框的信息，请参阅 
+	      sendSerialImg2D()。 */
       void sendSerialObjDetImg2D(unsigned int camw, unsigned int camh, float x, float y, float w, float h,
 				 std::vector<ObjReco> const & res);
 
-      //! Send a standardized object detection + recognition message
-      /*! res should be a list of scores and category names, in descending order of scores. Note that no message
-          is sent if the vector is empty. See sendSerialImg2D() for info about the object box. */
+      //! 发送标准化的对象检测 + 识别消息 
+	  /*! res 应为分数和类别名称的列表，按分数的降序排列。请注意，如果向量为空，则不会发送任何消息。有关对象框的信息，请参阅 
+	      sendSerialImg2D()。 */
       void sendSerialObjDetImg2D(unsigned int camw, unsigned int camh, ObjDetect const & det);
      
     protected:
       friend class jevois::Engine;
       
-      //! Send a message <b>MARK START</b> to indicate the beginning of processing
-      /*! A stamp may be prepended depending on param \p serstamp. Engine calls this automatically so users would
-	  normally not use this function. Note that this function may not send anything depending on the current
-	  value of parameter \p sermark. */
+      //! 发送消息 <b>MARK START</b> 以指示处理的开始 
+	  /*! 可能会根据参数 \p serstamp 预先添加一个戳记。引擎会自动调用此功能，因此用户通常不会使用此函数。请注意，根据参数 
+	      \p sermark 的当前值，此函数可能不会发送任何内容。 */
       void sendSerialMarkStart();
 
-      //! Send a message <b>MARK STOP</b> to indicate the end of processing
-      /*! A stamp may be prepended depending on param \p serstamp. Engine calls this automatically so users would
-	  normally not use this function. Note that this function may not send anything depending on the current
-	  value of parameter \p sermark. */
+      //! 发送消息 <b>MARK STOP</b> 以指示处理结束 
+	  /*! 可能会根据参数 \p serstamp 添加标记。引擎会自动调用此功能，因此用户通常不会使用此函数。请注意，根据参数 \p sermark 
+	      的当前值，此函数可能不会发送任何内容。 */
       void sendSerialMarkStop();
       
-      //! Get a string with the frame/date/time stamp in it, depending on serstamp parameter
+      //! 获取包含帧/日期/时间戳的字符串，具体取决于 serstamp 参数
       std::string getStamp() const;
   };
 }
 
-//! Register a module, allowing it to be dynamically loaded from a .so file
+//! 注册一个模块，允许它从 .so 文件动态加载
 /* \def JEVOIS_REGISTER_MODULE(MODULENAME)
    \hideinitializer 
 
-   Every module implementation file should contain a call to JEVOIS_REGISTER_MODULE for the module's class. This creates
-   some plain-C entry points that will be used when the module is loaded from a dynamic library (.so) file to
-   instantiate the module.  \relates Module */
+   每个模块实现文件都应包含对模块类的 JEVOIS_REGISTER_MODULE 的调用。这会创建一些纯 C 入口点，当从动态库 (.so) 文件加载模块以
+   实例化模块时，将使用这些入口点。 \relates Module */
 #define JEVOIS_REGISTER_MODULE(MODULENAME)                              \
   extern "C" std::shared_ptr<jevois::Module> MODULENAME##_create(std::string const & instanceid) \
   { return std::shared_ptr<jevois::Module>(new MODULENAME(instanceid)); } \
   extern "C" int MODULENAME##_version_major() { return JEVOIS_VERSION_MAJOR; } \
   extern "C" int MODULENAME##_version_minor() { return JEVOIS_VERSION_MINOR; } \
 
-//! Create and register a disabled module, allowing it to be dynamically loaded from a .so file
+//! 创建并注册一个已禁用的模块，允许它从 .so 文件动态加载
 /* \def JEVOIS_DISABLED_MODULE(MODULENAME)
    \hideinitializer 
 
-   Use this macro when creating modules that only work on a given host/platform A33/Pro configuration. For example,
-   modules using the A311D NPU can only be compiled on jevois-pro platform. Typically, you would then do:
+   创建仅在给定主机/平台 A33/Pro 配置上运行的模块时使用此宏。例如，使用 A311D NPU 的模块只能在 jevois-pro 平台上编译。通常，您会执行：
    \code
 #include <jevois/Core/Module.H>
 

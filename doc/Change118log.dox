@@ -1,68 +1,45 @@
-/*! \page Change118log Changes and new features in JeVois 1.18
+/*! \page Change118log JeVois 1.18 中的变化和新功能
 
-JeVois 1.18 brings the following new features:
+JeVois 1.18 带来以下新功能：
 
-- New support for Hailo-8 neural accelerator, up to 26-TOPS in a small M.2 A+E 2230 board that can fit inside
-  JeVois-Pro! This is by far the fastest neural accelerator available to date, and it can run larger models like YOLOv5m
-  or YOLOv7 are very nice framerates. See SPU entries in \ref JeVoisProBenchmarks
+- 新增对 Hailo-8 神经加速器的支持，在可装入 JeVois-Pro 的小型 M.2 A+E 2230 板上最高可达 26-TOPS！这是迄今为止最快的神经加速器，它可以运行更大的模型，如 YOLOv5m 或 YOLOv7，帧速率非常不错。请参阅 \ref JeVoisProBenchmarks 中的 SPU 条目
 
-- Updated to OpenCV 4.6.0, OpenVino 2022.1
+- 已更新至 OpenCV 4.6.0、OpenVino 2022.1
 
-- Support for TIM-VX library to execute models on the JeVois-Pro integrated NPU directly via OpenCV (no conversion to
-  NPU blob format needed, load model directly from ONNX, etc; model still should be quantized to int8). See
-  [TIM-VX](https://github.com/VeriSilicon/TIM-VX) and
-  [OpenCV+TIM-VX](https://github.com/opencv/opencv/wiki/TIM-VX-Backend-For-Running-OpenCV-On-NPU).
+- 支持 TIM-VX 库直接通过 OpenCV 在 JeVois-Pro 集成 NPU 上执行模型（无需转换为 NPU blob 格式，直接从 ONNX 加载模型等；模型仍应量化为 int8）。请参阅 [TIM-VX](https://github.com/VeriSilicon/TIM-VX) 和 [OpenCV+TIM-VX](https://github.com/opencv/opencv/wiki/TIM-VX-Backend-For-Running-OpenCV-On-NPU)。
 
-- Support for Intel Myriad-X emulation on ARM CPU through the ARM Compute Backend to OpenCV. See [ARM CPU
-  Plugin](https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_ARM_CPU.html) and [github
-  repo](https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md). Load any OpenVino
-  model for VPU and try them out using CPU-based emulation even if you do not have a VPU hardware dongle. Emulation is
-  quite slow compared to the actual VPU chip, though. See VPU vs VPUX in \ref JeVoisProBenchmarks
+- 通过 ARM Compute Backend 到 OpenCV 支持 ARM CPU 上的 Intel Myriad-X 仿真。请参阅 [ARM CPU 插件](https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_ARM_CPU.html) 和 [github repo](https://github.com/openvinotoolkit/openvino_contrib/blob/master/modules/arm_plugin/README.md)。即使您没有 VPU 硬件加密狗，也可以为 VPU 加载任何 OpenVino 模型并使用基于 CPU 的仿真进行尝试。不过，与实际的 VPU 芯片相比，仿真速度相当慢。请参阅 \ref JeVoisProBenchmarks 中的 VPU 与 VPUX
 
-- Core JeVois: new support for dynamic JeVois parameters. These are strongly typed parameters that a can be accessed via
-  command-line, console, or GUI.
+- 核心 JeVois：新增对动态 JeVois 参数的支持。这些是强类型参数，可通过命令行、控制台或 GUI 访问。
 
-- Python: Allow creation of and access to JeVois parameters in Python modules. Have a look at \jvmod{PythonTest} for an
-  example. Python modules can now have tunable parameters that users can adjust in the GUI, just like C++ modules.
+- Python：允许在 Python 模块中创建和访问 JeVois 参数。请查看 \jvmod{PythonTest} 作为示例。Python 模块现在可以具有可调参数，用户可以在 GUI 中调整这些参数，就像 C++ 模块一样。
 
-- Python: Added support for Python Components. These are JeVois Component objects that can be assembled into component
-  hierarchies just like C++ components, but they are written in python. Python components can hold JeVois parameters
-  created from Python.
+- Python：添加了对 Python 组件的支持。这些是 JeVois 组件对象，可以像 C++ 组件一样组装成组件层次结构，但它们是用 Python 编写的。Python 组件可以保存从 Python 创建的 JeVois 参数。
 
-- Core JeVois: moving towards using std::filesystem for file and paths operations
+- Core JeVois：转向使用 std::filesystem 进行文件和路径操作
 
-- DNN: support for pre-processor, network, and post-processor written in python. This will make it much easier to add
-  new network types, as often pre-processing and post-processing code in Python is provided by the network
-  designer. These can now be easily ported to JeVois. Check out:
-  + \ref PyPreBlob.py - sample pre-processor in Python
-  + \ref PyNetOpenCV.py - load network and run inference using the OpenCV API
-  + \ref PyPostClassify.py - report top-scoring classes
+- DNN：支持用 Python 编写的预处理器、网络和后处理器。这将使添加新网络类型变得更加容易，因为网络设计者通常会提供 Python 中的预处理和后处理代码。现在可以轻松将这些代码移植到 JeVois。请查看：
+  + \ref PyPreBlob.py - Python 中的示例预处理器
+  + \ref PyNetOpenCV.py - 使用 OpenCV API 加载网络并运行推理
+  + \ref PyPostClassify.py - 报告得分最高的类别
 
-- DNN: better error messages when expected network inputs/outputs differ from what is received.
+- DNN：当预期的网络输入/输出与收到的输入/输出不同时，会出现更好的错误消息。
 
-- DNN: better and more general pre-processing. Ability to show lots of details when PreProcessor::details is checked in
-  the GUI.
+- DNN：更好、更通用的预处理。在 GUI 中检查 PreProcessor::details 时能够显示大量详细信息。
 
-- DNN: much improved RAW YOLO preprocessing, about 4x faster, supports various yolo shapes and both old/new
-  coordinate styles. Better handling of YOLO anchors.
+- DNN：RAW YOLO 预处理得到极大改进，速度提高了约 4 倍，支持各种 yolo 形状以及新旧坐标样式。更好地处理 YOLO 锚点。
 
-- JeVois-Pro GUI: Improved text editor, new jevois::GUIeditor class. Added file browser and support for keyboard
-  shortcuts. Can now edit any file on disk and create new files if needed.
+- JeVois-Pro GUI：改进的文本编辑器，新的 jevois::GUIeditor 类。添加了文件浏览器和键盘快捷键支持。现在可以编辑磁盘上的任何文件，并在需要时创建新文件。
 
-- OpenGL GUI: added d2i() to convert coordinates from screen to displayed image. See example of use in new GUI version
-  of \jvmod{ColorFiltering}
+- OpenGL GUI：添加了 d2i() 以将屏幕坐标转换为显示的图像。请参阅 \jvmod{ColorFiltering} 新 GUI 版本中的使用示例
 
-- JeVois-Pro: support for 4K display. Can be enabled by editing /boot/env.txt, not enabled by default as it slows down
-  the overall operation a bit, likely because of higher traffic on the memory bus.
+- JeVois-Pro：支持 4K 显示器。可以通过编辑 /boot/env.txt 启用，默认情况下不启用，因为它会稍微减慢整体操作速度，可能是因为内存总线上的流量较高。
 
-- JeVois-Pro: More deep learning models in models.yml model zoo. Split off model.yml into separate child files for npu,
-  tpu, vpu, etc. Added support for global paremeters that can be set and unset. New zoo files are much easier to read
-  and edit now. Zoo files are directly accessible undr the Config tab of the JeVois-Pro GUI.
+- JeVois-Pro：models.yml model zoo 中提供了更多深度学习模型。将 model.yml 拆分为 npu、tpu、vpu 等单独的子文件。添加了对可以设置和取消设置的全局参数的支持。现在，新的 zoo 文件更易于阅读和编辑。可以通过 JeVois-Pro GUI 的 Config 选项卡直接访问 zoo 文件。
 
-- JeVois-Pro: Better fan control. Note: as there currenty is no Hailo temp available in /sys/, we always turn on the fan
-  to 100% speed if a Hailo-8 accelerator is installed in JeVois-Pro.
+- JeVois-Pro：更好的风扇控制。注意：由于 /sys/ 中当前没有可用的 Hailo 温度，如果 JeVois-Pro 中安装了 Hailo-8 加速器，我们始终将风扇速度调至 100%。
 
-- New docs and tutorials on how to convert deep networks for the various accelerators available on JeVois-Pro:
+- 关于如何将深度网络转换为 JeVois-Pro 上各种加速器的新文档和教程：
   + \ref UserDNNoverview
   + \ref UserDNNconv
   + \ref UserDNNopencv
@@ -71,16 +48,14 @@ JeVois 1.18 brings the following new features:
   + \ref UserDNNtpu
   + \ref UserDNNvpu
 
-- replaced frameNum() in JeVois Module by a more widely accessible jevois::frameNum() free function. Reports the current
-  video frame number. Reset to 0 when a new machine vision module is loaded.
 
-- added new usilities such as jevois::joinall(), jevois::num2str(), jevois::secs2str(), Hailo-related helpers,
-  quantization-related, etc
+- 用更广泛使用的 jevois::frameNum() 自由函数替换 JeVois 模块中的 frameNum()。报告当前视频帧数。加载新的机器视觉模块时重置为 0。
 
-- New LTHROW() macro is like LFATAL() but does not show the error in the console, just throw it. Useful in sub-routines
-  where the caller will catch any exception and possibly reformat it to provide unified error messages. Just like a
-  plain throw, except that the same JeVois streaming syntax as in LDEBUG(), LINFO(), etc can be used.
+- 添加了新的用途，例如 jevois::joinall()、jevois::num2str()、jevois::secs2str()、Hailo 相关助手、量化相关等
 
-- Miscellaneous bug fixes and performance improvements.
+- 新的 LTHROW() 宏类似于 LFATAL()，但不会在控制台中显示错误，而只是将其抛出。在子例程中很有用，调用者将捕获任何异常并可能重新格式化它以提供统一的错误消息。就像普通的抛出一样，除了可以使用与 LDEBUG()、LINFO() 等相同的 JeVois 流语法。
+
+- 修复了各种错误并改进了性能。
 
 */
+

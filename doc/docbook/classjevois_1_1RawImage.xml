@@ -1,0 +1,358 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1RawImage">
+<title>jevois::RawImage Class Reference</title>
+<indexterm><primary>jevois::RawImage</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Image/RawImage.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>来自 V4L2 <link linkend="_classjevois_1_1Camera">Camera</link> 和/或发送到 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 的原始图像 </para>
+
+
+
+<para>像素数据由相应的摄像头或小工具驱动程序分配和内存映射。由于像素缓冲区由硬件驱动程序分配和管理，我们无法对 <link linkend="_classjevois_1_1RawImage">RawImage</link> 进行深度复 制，因此复制构造函数和赋值运算符将产生共享相同像素数据的图像。要将像素从一个 <link linkend="_classjevois_1_1RawImage">RawImage</link> 复制到另一个（例如，从摄像头图像复制到 USB 图像），请参阅 <link linkend="_group__image_1ga05c4650464e447a89a2a2c60d1956748">jevois::rawimage::paste()</link> 和其他 <link linkend="_classjevois_1_1RawImage">RawImage</link> 函数。 </para>
+<para>
+Definition at line 102 of file RawImage.H.</para>
+Collaboration diagram for jevois::RawImage:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1RawImage__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1RawImage_1a392684e4a86e2f20533c43faf12f2c37">RawImage</link> ()</para>
+
+<para>Default constructor, uninitialized. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1RawImage_1ab29d9b4d1008c433d3f01132c76bef99">RawImage</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;&amp;other)=default</para>
+
+<para>Default move constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1RawImage_1ae52974a31aac45dddbd10a63586a3457">RawImage</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;other)=default</para>
+
+<para>Default copy constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1RawImage_1a602e7448d4295044571dd5dbca36855d">operator=</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;other)=default</para>
+
+<para>Default assignment. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1RawImage_1abb8fe951e99797ed831c597821b61fc0">RawImage</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int f, float fs, std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; b, size_t bindex)</para>
+
+<para>从现有 <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> 和相关参数构造 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1RawImage_1a489f656b900de8b0024eea238b7c4c72">invalidate</link> ()</para>
+
+<para>通过将指向像素缓冲区的指针和 dims 和 format 清零来使图像无效 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1RawImage_1ad516e725fe8c5fcb8e61d5088c27c2bd">valid</link> () const</para>
+
+<para>检查图像是否具有有效的像素缓冲区 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1RawImage_1ad336d8a22afa7bd37bcab69b3b64082a">clear</link> ()</para>
+
+<para>将像素清除为全黑 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1RawImage_1aacde26c84586c08d1e913694670d2d8e">require</link> (char const *info, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int f) const</para>
+
+<para>需要特定的图像大小和格式，发出致命错误消息，如果不匹配，则抛出异常 </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_classjevois_1_1RawImage_1a912b450d9ecc2163b4facbdf5745770d">bytesperpix</link> () const</para>
+
+<para>辅助函数，根据 <link linkend="_classjevois_1_1RawImage">RawImage</link> 像素格式获取 bytes/pixel </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_classjevois_1_1RawImage_1a454ebfb26b63a7601ff66bf0ec96497e">bytesize</link> () const</para>
+
+<para>辅助函数用于获取 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中的总字节数，即 width * height * <link linkend="_classjevois_1_1RawImage_1a912b450d9ecc2163b4facbdf5745770d">bytesperpix()</link> </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1RawImage_1a0ce2d4ab4cb9f322433ef1b3c41d131e">coordsOk</link> (int x, int y) const</para>
+
+<para>辅助函数用于检查坐标是否在图像范围内 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>T * <link linkend="_classjevois_1_1RawImage_1ac2202ecd3324959d17c06a191624d2a6">pixelsw</link> ()</para>
+
+<para>快捷访问像素，读写 </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>const T * <link linkend="_classjevois_1_1RawImage_1a0afe5d7d00f4048ecbf6d5c908d98638">pixels</link> () const</para>
+
+<para>快捷访问像素，只读 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>unsigned int <link linkend="_classjevois_1_1RawImage_1a8b04939022b754b9e375772d3f3ee85f">width</link></para>
+
+<para>Image width in pixels. </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_classjevois_1_1RawImage_1aaa1eeb6405c5c5fceea6d772b52474b5">height</link></para>
+
+<para>Image height in pixels. </para>
+</listitem>
+            <listitem><para>unsigned int <link linkend="_classjevois_1_1RawImage_1a0f74c21f145dd4ff5e3140b5632d67a2">fmt</link></para>
+
+<para>Pixel format as a V4L2_PIX_FMT_XXX. </para>
+</listitem>
+            <listitem><para>float <link linkend="_classjevois_1_1RawImage_1a055758eea6dcbe3e527d207f67eefaf1">fps</link></para>
+
+<para>Programmed frames/s as given by current video mapping, may not be actual. </para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1RawImage_1ace0784d1cfcf710761f6e93146683244">buf</link></para>
+
+<para>像素数据缓冲区 </para>
+</listitem>
+            <listitem><para>size_t <link linkend="_classjevois_1_1RawImage_1a14b2841e45ad4269adf0db297ad6af37">bufindex</link></para>
+
+<para>内核驱动程序中数据缓冲区的索引 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1RawImage_1a392684e4a86e2f20533c43faf12f2c37"/>    <section>
+    <title>RawImage()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>RawImage</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>RawImage</secondary></indexterm>
+<para><computeroutput>jevois::RawImage::RawImage ( )</computeroutput></para><para>
+
+<para>Default constructor, uninitialized. </para>
+</para>
+<para>
+Definition at line 24 of file RawImage.C.</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1ab29d9b4d1008c433d3f01132c76bef99"/>    <section>
+    <title>RawImage()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>RawImage</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>RawImage</secondary></indexterm>
+<para><computeroutput>jevois::RawImage::RawImage (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Default move constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1ae52974a31aac45dddbd10a63586a3457"/>    <section>
+    <title>RawImage()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>RawImage</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>RawImage</secondary></indexterm>
+<para><computeroutput>jevois::RawImage::RawImage (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Default copy constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1abb8fe951e99797ed831c597821b61fc0"/>    <section>
+    <title>RawImage()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>RawImage</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>RawImage</secondary></indexterm>
+<para><computeroutput>jevois::RawImage::RawImage (unsigned int w, unsigned int h, unsigned int f, float fs, std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; b, size_t bindex)</computeroutput></para><para>
+
+<para>从现有 <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> 和相关参数构造 </para>
+</para>
+<para>
+Definition at line 28 of file RawImage.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1RawImage_1a454ebfb26b63a7601ff66bf0ec96497e"/>    <section>
+    <title>bytesize()</title>
+<indexterm><primary>bytesize</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>bytesize</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::RawImage::bytesize ( ) const</computeroutput></para><para>
+
+<para>辅助函数用于获取 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中的总字节数，即 width * height * <link linkend="_classjevois_1_1RawImage_1a912b450d9ecc2163b4facbdf5745770d">bytesperpix()</link> </para>
+</para>
+<para>
+Definition at line 38 of file RawImage.C.</para>
+<para>
+References jevois::v4l2BytesPerPix().</para>
+<para>
+Referenced by jevois::rawimage::byteSwap().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a912b450d9ecc2163b4facbdf5745770d"/>    <section>
+    <title>bytesperpix()</title>
+<indexterm><primary>bytesperpix</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>bytesperpix</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::RawImage::bytesperpix ( ) const</computeroutput></para><para>
+
+<para>辅助函数，根据 <link linkend="_classjevois_1_1RawImage">RawImage</link> 像素格式获取 bytes/pixel </para>
+</para>
+<para>
+Definition at line 34 of file RawImage.C.</para>
+<para>
+References jevois::v4l2BytesPerPix().</para>
+<para>
+Referenced by jevois::rawimage::byteSwap(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::paste(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteGreyToYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::rawimage::roipaste(), and jevois::rawimage::writeText().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1ad336d8a22afa7bd37bcab69b3b64082a"/>    <section>
+    <title>clear()</title>
+<indexterm><primary>clear</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>clear</secondary></indexterm>
+<para><computeroutput>void jevois::RawImage::clear ( )</computeroutput></para><para>
+
+<para>将像素清除为全黑 </para>
+</para>
+<para>
+Definition at line 50 of file RawImage.C.</para>
+<para>
+References jevois::yuyv::Black, jevois::fccstr(), and LFATAL.</para>
+<para>
+Referenced by jevois::drawErrorImage().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a0ce2d4ab4cb9f322433ef1b3c41d131e"/>    <section>
+    <title>coordsOk()</title>
+<indexterm><primary>coordsOk</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>coordsOk</secondary></indexterm>
+<para><computeroutput>bool jevois::RawImage::coordsOk (int x, int y) const</computeroutput></para><para>
+
+<para>辅助函数用于检查坐标是否在图像范围内 </para>
+</para>
+<para>
+Definition at line 88 of file RawImage.C.</para>
+<para>
+Referenced by jevois::rawimage::drawDisk().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a489f656b900de8b0024eea238b7c4c72"/>    <section>
+    <title>invalidate()</title>
+<indexterm><primary>invalidate</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>invalidate</secondary></indexterm>
+<para><computeroutput>void jevois::RawImage::invalidate ( )</computeroutput></para><para>
+
+<para>通过将指向像素缓冲区的指针和 dims 和 format 清零来使图像无效 </para>
+</para>
+<para>
+Definition at line 42 of file RawImage.C.</para>
+<para>
+Referenced by jevois::CameraDevice::get().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a602e7448d4295044571dd5dbca36855d"/>    <section>
+    <title>operator=()</title>
+<indexterm><primary>operator=</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>operator=</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1RawImage">RawImage</link>&amp; jevois::RawImage::operator= (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Default assignment. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a0afe5d7d00f4048ecbf6d5c908d98638"/>    <section>
+    <title>pixels()</title>
+<indexterm><primary>pixels</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>pixels</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T* jevois::RawImage::pixels ( ) const</computeroutput></para><para>
+
+<para>快捷访问像素，只读 </para>
+</para>
+<para>
+Referenced by jevois::rawimage::paste(), and jevois::rawimage::roipaste().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1ac2202ecd3324959d17c06a191624d2a6"/>    <section>
+    <title>pixelsw()</title>
+<indexterm><primary>pixelsw</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>pixelsw</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>T* jevois::RawImage::pixelsw ( )</computeroutput></para><para>
+
+<para>快捷访问像素，读写 </para>
+</para>
+<para>
+Referenced by jevois::rawimage::byteSwap(), jevois::compressBGRtoJpeg(), jevois::compressGRAYtoJpeg(), jevois::compressRGBAtoJpeg(), jevois::compressRGBtoJpeg(), jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::drawDisk(), jevois::rawimage::drawFilledRect(), jevois::rawimage::drawRect(), jevois::rawimage::hFlipYUYV(), jevois::rawimage::paste(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteGreyToYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::rawimage::roipaste(), jevois::rawimage::unpackCvRGBAtoGrayRawImage(), and jevois::rawimage::writeText().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1aacde26c84586c08d1e913694670d2d8e"/>    <section>
+    <title>require()</title>
+<indexterm><primary>require</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>require</secondary></indexterm>
+<para><computeroutput>void jevois::RawImage::require (char const * info, unsigned int w, unsigned int h, unsigned int f) const</computeroutput></para><para>
+
+<para>需要特定的图像大小和格式，发出致命错误消息，如果不匹配，则抛出异常 </para>
+</para>
+<para>
+Definition at line 80 of file RawImage.C.</para>
+<para>
+References jevois::fccstr(), h, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1ad516e725fe8c5fcb8e61d5088c27c2bd"/>    <section>
+    <title>valid()</title>
+<indexterm><primary>valid</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>valid</secondary></indexterm>
+<para><computeroutput>bool jevois::RawImage::valid ( ) const</computeroutput></para><para>
+
+<para>检查图像是否具有有效的像素缓冲区 </para>
+</para>
+<para>
+Definition at line 46 of file RawImage.C.</para>
+<para>
+Referenced by jevois::drawErrorImage().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1RawImage_1ace0784d1cfcf710761f6e93146683244"/>    <section>
+    <title>buf</title>
+<indexterm><primary>buf</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>buf</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoBuf">VideoBuf</link>&gt; jevois::RawImage::buf</computeroutput></para><para>
+
+<para>像素数据缓冲区 </para>
+</para>
+<para>
+Definition at line 139 of file RawImage.H.</para>
+<para>
+Referenced by jevois::compressBGRtoJpeg(), jevois::compressGRAYtoJpeg(), jevois::compressRGBAtoJpeg(), jevois::compressRGBtoJpeg(), jevois::rawimage::cvImage(), jevois::MovieOutput::get(), jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::InputFrame::get2(), main(), jevois::GPUimage::set(), jevois::GPUimage::set2(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::streamOn().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a14b2841e45ad4269adf0db297ad6af37"/>    <section>
+    <title>bufindex</title>
+<indexterm><primary>bufindex</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>bufindex</secondary></indexterm>
+<para><computeroutput>size_t jevois::RawImage::bufindex</computeroutput></para><para>
+
+<para>内核驱动程序中数据缓冲区的索引 </para>
+</para>
+<para>
+Definition at line 140 of file RawImage.H.</para>
+<para>
+Referenced by jevois::CameraDevice::done(), jevois::GUIhelper::drawImage(), jevois::GUIhelper::drawInputFrame(), jevois::GUIhelper::drawInputFrame2(), jevois::MovieOutput::get(), jevois::VideoDisplayGUI::get(), jevois::MovieInput::get(), jevois::CameraDevice::get(), jevois::VideoDisplayGL::get(), jevois::Gadget::get(), jevois::MovieInput::get2(), jevois::VideoDisplayGUI::send(), jevois::VideoDisplayGL::send(), jevois::Gadget::send(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::streamOn().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a0f74c21f145dd4ff5e3140b5632d67a2"/>    <section>
+    <title>fmt</title>
+<indexterm><primary>fmt</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>fmt</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::RawImage::fmt</computeroutput></para><para>
+
+<para>Pixel format as a V4L2_PIX_FMT_XXX. </para>
+</para>
+<para>
+Definition at line 137 of file RawImage.H.</para>
+<para>
+Referenced by jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::convertGreyToYUYV(), jevois::rawimage::convertToCvBGR(), jevois::rawimage::convertToCvGray(), jevois::rawimage::convertToCvRGB(), jevois::rawimage::convertToCvRGBA(), jevois::rawimage::cvImage(), jevois::drawErrorImage(), jevois::MovieOutput::get(), jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::rawimage::hFlipYUYV(), jevois::GUIhelper::iinfo(), jevois::rawimage::paste(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::dnn::PreProcessor::process(), jevois::rawimage::roipaste(), jevois::Gadget::send(), jevois::GPUimage::set(), jevois::GPUimage::set2(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), jevois::GPUimage::setWithDmaBuf(), jevois::Gadget::streamOn(), and jevois::rawimage::unpackCvRGBAtoGrayRawImage().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a055758eea6dcbe3e527d207f67eefaf1"/>    <section>
+    <title>fps</title>
+<indexterm><primary>fps</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>fps</secondary></indexterm>
+<para><computeroutput>float jevois::RawImage::fps</computeroutput></para><para>
+
+<para>Programmed frames/s as given by current video mapping, may not be actual. </para>
+</para>
+<para>
+Definition at line 138 of file RawImage.H.</para>
+<para>
+Referenced by jevois::MovieOutput::get(), jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), and jevois::Gadget::streamOn().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1aaa1eeb6405c5c5fceea6d772b52474b5"/>    <section>
+    <title>height</title>
+<indexterm><primary>height</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>height</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::RawImage::height</computeroutput></para><para>
+
+<para>Image height in pixels. </para>
+</para>
+<para>
+Definition at line 136 of file RawImage.H.</para>
+<para>
+Referenced by jevois::rawimage::byteSwap(), jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::convertGreyToYUYV(), jevois::rawimage::convertToCvBGR(), jevois::rawimage::convertToCvGray(), jevois::rawimage::convertToCvRGB(), jevois::rawimage::convertToCvRGBA(), jevois::rawimage::cvImage(), jevois::drawErrorImage(), jevois::rawimage::drawFilledRect(), jevois::GUIhelper::drawInputFrame(), jevois::rawimage::drawLine(), jevois::rawimage::drawRect(), jevois::MovieOutput::get(), jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::rawimage::hFlipYUYV(), jevois::GUIhelper::iinfo(), jevois::coords::imgToStd(), main(), jevois::rawimage::paste(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteGreyToYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::dnn::PreProcessor::process(), jevois::rawimage::roipaste(), jevois::Gadget::send(), jevois::OutputFrame::sendScaledCvBGR(), jevois::OutputFrame::sendScaledCvGRAY(), jevois::OutputFrame::sendScaledCvRGB(), jevois::OutputFrame::sendScaledCvRGBA(), jevois::GPUimage::set(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), jevois::GPUimage::setWithDmaBuf(), jevois::coords::stdToImg(), jevois::Gadget::streamOn(), jevois::rawimage::unpackCvRGBAtoGrayRawImage(), and jevois::rawimage::writeText().</para>
+    </section><anchor xml:id="_classjevois_1_1RawImage_1a8b04939022b754b9e375772d3f3ee85f"/>    <section>
+    <title>width</title>
+<indexterm><primary>width</primary><secondary>jevois::RawImage</secondary></indexterm>
+<indexterm><primary>jevois::RawImage</primary><secondary>width</secondary></indexterm>
+<para><computeroutput>unsigned int jevois::RawImage::width</computeroutput></para><para>
+
+<para>Image width in pixels. </para>
+</para>
+<para>
+Definition at line 135 of file RawImage.H.</para>
+<para>
+Referenced by jevois::rawimage::byteSwap(), jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::convertGreyToYUYV(), jevois::rawimage::convertToCvBGR(), jevois::rawimage::convertToCvGray(), jevois::rawimage::convertToCvRGB(), jevois::rawimage::convertToCvRGBA(), jevois::rawimage::cvImage(), jevois::rawimage::drawDisk(), jevois::drawErrorImage(), jevois::rawimage::drawFilledRect(), jevois::GUIhelper::drawInputFrame(), jevois::rawimage::drawLine(), jevois::rawimage::drawRect(), jevois::MovieOutput::get(), jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::rawimage::hFlipYUYV(), jevois::GUIhelper::iinfo(), jevois::coords::imgToStd(), main(), jevois::rawimage::paste(), jevois::rawimage::pasteBGRtoYUYV(), jevois::rawimage::pasteGreyToYUYV(), jevois::rawimage::pasteRGBtoYUYV(), jevois::dnn::PreProcessor::process(), jevois::dnn::PostProcessorYuNet::report(), jevois::rawimage::roipaste(), jevois::Gadget::send(), jevois::dnn::PreProcessor::sendreport(), jevois::OutputFrame::sendScaledCvBGR(), jevois::OutputFrame::sendScaledCvGRAY(), jevois::OutputFrame::sendScaledCvRGB(), jevois::OutputFrame::sendScaledCvRGBA(), jevois::GPUimage::set(), jevois::GPUimage::set2(), jevois::VideoDisplayGUI::setFormat(), jevois::VideoDisplayGL::setFormat(), jevois::GPUimage::setWithDmaBuf(), jevois::coords::stdToImg(), jevois::Gadget::streamOn(), jevois::rawimage::unpackCvRGBAtoGrayRawImage(), and jevois::rawimage::writeText().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Image/<link linkend="_RawImage_8H">RawImage.H</link>src/jevois/Image/<link linkend="_RawImage_8C">RawImage.C</link></section>
+</section>

@@ -18,32 +18,32 @@
 #include <jevois/Core/Engine.H>
 #include <exception>
 
-//! Main daemon that grabs video frames from the camera, sends them to processing, and sends the results out over USB
+//! 主要守护进程从摄像头抓取视频帧，将其发送到处理，并通过 USB 发送结果
 int main(int argc, char const* argv[])
 {
   int ret = 127;
 
   try
   {
-    // Get an engine going, using the platform camera and platform USB gadget driver:
+    // 使用平台相机和平台 USB gadget 驱动程序启动引擎：
     std::shared_ptr<jevois::Engine> engine(new jevois::Engine(argc, argv, "engine"));
     
     engine->init();
     
 #ifndef JEVOIS_PLATFORM_A33
-    // Start streaming now when running on host or JeVois-Pro (since in desktop mode we have no USB host that will
-    // initiate streaming). Note that streamOn() could throw if the default module is buggy or uses an unsupported
-    // camera format, so just ignore any streamOn() exception so we can start the engine's main loop below:
+    // 在 host 或 JeVois-Pro 上运行时立即开始流式传输（因为在桌面模式下，我们没有可以启动流式传输的 USB host）。请注意，如
+    // 果默认模块有缺陷或使用不受支持的相机格式，streamOn() 可能会抛出异常，因此只需忽略任何 streamOn() 异常，这样我们就可
+    // 以启动下面的 engine 主循环：
     try { engine->streamOn(); } catch (...) { }
 #endif
     
-    // Enter main loop, if it exits normally, it will give us a return value; or it could throw:
+    // 进入主循环，如果正常退出，就会给我们一个返回值；或者它可能会抛出：
     ret = engine->mainLoop();
   }
   catch (std::exception const & e) { std::cerr << "Exiting on exception: " << e.what(); }
   catch (...) { std::cerr << "Exiting on unknown exception"; }
 
-  // Terminate logger:
+  // 终止 logger:
   jevois::logEnd();
   
   return ret;

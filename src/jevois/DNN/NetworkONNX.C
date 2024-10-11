@@ -59,7 +59,7 @@ std::vector<vsi_nn_tensor_attr_t> jevois::dnn::NetworkONNX::outputShapes()
 // ####################################################################################################
 void jevois::dnn::NetworkONNX::load()
 {
-  // Need to nuke the network first if it exists or we could run out of RAM:
+  // 如果网络存在，则需要先将其清除，否则我们可能会耗尽 RAM：
   if (! itsSession) itsSession.reset();
 
   std::string const m = jevois::absolutePath(dataroot::get(), model::get());
@@ -114,7 +114,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkONNX::doprocess(std::vector<cv::Mat> co
   if (blobs.size() != itsInAttrs.size())
     LFATAL("Received " << blobs.size() << " inputs but network wants " << itsInAttrs.size());
 
-  // Create input tensor objects from input blobs:
+  // 从输入 blob 创建输入张量对象：
   std::vector<Ort::Value> inputs;
   std::vector<char const *> input_node_names;
   for (size_t i = 0; i < itsInAttrs.size(); ++i)
@@ -178,7 +178,7 @@ std::vector<cv::Mat> jevois::dnn::NetworkONNX::doprocess(std::vector<cv::Mat> co
   if (itsOutputs.size() != itsOutNames.size())
     LFATAL("Received " << itsOutputs.size() << " outputs but network should produce " << itsOutNames.size());
   
-  // Convert output tensors to cv::Mat with zero-copy:
+  // 将输出张量转换为具有零拷贝的 cv::Mat：
   std::vector<cv::Mat> outs;
   for (size_t i = 0; i < itsOutputs.size(); ++i)
   {

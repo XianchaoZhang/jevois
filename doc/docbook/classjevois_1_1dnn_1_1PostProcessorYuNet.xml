@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet">
+<title>jevois::dnn::PostProcessorYuNet Class Reference</title>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PostProcessorYuNet.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>YuNet 人脸特征点检测器的后处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道中的最后一步。代码源自 <link xlink:href="https://github.com/khadas/OpenCV_NPU_Demo.git">https://github.com/khadas/OpenCV_NPU_Demo.git</link> </para>
+<para>
+Definition at line 56 of file PostProcessorYuNet.H.</para>
+Inheritance diagram for jevois::dnn::PostProcessorYuNet:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorYuNet__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PostProcessorYuNet:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PostProcessorYuNet__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a87b114ff22e134b64af7ef5706735c31">~PostProcessorYuNet</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual void <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1acf6f0c764991ac2e53bf1542e21f4340">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1accc29b3c0fc4b9d26da8c67ec180f2f9">process</link> (std::vector&lt; cv::Mat &gt; const &amp;outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> *preproc) override</para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1acad85ce6e370180070df325547cfadbb">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1accc29b3c0fc4b9d26da8c67ec180f2f9">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; yunet::Face &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1ac45d710c526abb1f6e33ccd7046751c2">itsDetections</link></para>
+</listitem>
+            <listitem><para>cv::Size <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a3e7c5f6098385279f30194a183794293">itsImageSize</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; yunet::PriorBox &gt; <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a6f88a8a8b5941bb65b834749e0e6cd44">itsPriorBox</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a87b114ff22e134b64af7ef5706735c31"/>    <section>
+    <title>~PostProcessorYuNet()</title>
+<indexterm><primary>~PostProcessorYuNet</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>~PostProcessorYuNet</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PostProcessorYuNet::~PostProcessorYuNet ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 169 of file PostProcessorYuNet.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1acf6f0c764991ac2e53bf1542e21f4340"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorYuNet::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻用户在运行时不应更改的参数 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a6e87ca847dc8c16445168b01a2fdedb7">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 173 of file PostProcessorYuNet.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1accc29b3c0fc4b9d26da8c67ec180f2f9"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorYuNet::process (std::vector&lt; cv::Mat &gt; const &amp; outs, <link linkend="_classjevois_1_1dnn_1_1PreProcessor">PreProcessor</link> * preproc)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>处理输出并绘制/发送一些结果 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1a26329a32271138357f7906c83e4856b1">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 177 of file PostProcessorYuNet.C.</para>
+<para>
+References jevois::dnn::PreProcessor::b2i(), jevois::dnn::PreProcessor::blobsize(), jevois::dnn::clamp(), jevois::dnn::PreProcessor::imagesize(), and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1acad85ce6e370180070df325547cfadbb"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PostProcessorYuNet::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PostProcessorYuNet_1accc29b3c0fc4b9d26da8c67ec180f2f9">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PostProcessor_1ac7c507221e2f1c52715b9185beaebc42">jevois::dnn::PostProcessor</link>.</para>
+<para>
+Definition at line 234 of file PostProcessorYuNet.C.</para>
+<para>
+References jevois::rawimage::drawCircle(), jevois::GUIhelper::drawCircle(), jevois::rawimage::drawLine(), jevois::GUIhelper::drawLine(), jevois::rawimage::drawRect(), jevois::GUIhelper::drawRect(), jevois::GUIhelper::drawText(), jevois::rawimage::Font10x20, jevois::yuyv::LightGreen, jevois::sformat(), jevois::RawImage::width, and jevois::rawimage::writeText().</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1ac45d710c526abb1f6e33ccd7046751c2"/>    <section>
+    <title>itsDetections</title>
+<indexterm><primary>itsDetections</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>itsDetections</secondary></indexterm>
+<para><computeroutput>std::vector&lt;yunet::Face&gt; jevois::dnn::PostProcessorYuNet::itsDetections<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 79 of file PostProcessorYuNet.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a3e7c5f6098385279f30194a183794293"/>    <section>
+    <title>itsImageSize</title>
+<indexterm><primary>itsImageSize</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>itsImageSize</secondary></indexterm>
+<para><computeroutput>cv::Size jevois::dnn::PostProcessorYuNet::itsImageSize<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 80 of file PostProcessorYuNet.H.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PostProcessorYuNet_1a6f88a8a8b5941bb65b834749e0e6cd44"/>    <section>
+    <title>itsPriorBox</title>
+<indexterm><primary>itsPriorBox</primary><secondary>jevois::dnn::PostProcessorYuNet</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PostProcessorYuNet</primary><secondary>itsPriorBox</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;yunet::PriorBox&gt; jevois::dnn::PostProcessorYuNet::itsPriorBox<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 81 of file PostProcessorYuNet.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PostProcessorYuNet_8H">PostProcessorYuNet.H</link>src/jevois/DNN/<link linkend="_PostProcessorYuNet_8C">PostProcessorYuNet.C</link></section>
+</section>

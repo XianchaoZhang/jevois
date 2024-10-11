@@ -26,7 +26,7 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Wrapper around a Coral TPU neural network
+    //! 围绕 Coral TPU 神经网络的包装器
     /*! \ingroup dnn */
     class NetworkTPU : public jevois::dnn::Network,
                        public jevois::Parameter<network::intensors, network::outtensors, network::dataroot,
@@ -39,7 +39,7 @@ namespace jevois
         //! Destructor
         virtual ~NetworkTPU();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻参数，用户在运行时不应更改
         void freeze(bool doit) override;
 
         //! Get shapes of all input tensors

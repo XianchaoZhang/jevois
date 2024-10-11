@@ -27,10 +27,9 @@
 
 namespace jevois
 {
-  //! Video output to local screen
-  /*! This class is useful for debugging machine vision code on a desktop computer as opposed to the JeVois
-      hardware. Images are simply displayed on the local screen. Engine instantiates a VideoDisplay in place of Gadget
-      if the provided Gadget device name is empty. \ingroup core */
+  //! 视频输出到本地屏幕
+  /*! 此类对于在桌面计算机上（而不是 JeVois 硬件上）调试机器视觉代码很有用。图像仅显示在本地屏幕上。如果提供的 Gadget 
+      设备名称为空，则 Engine 实例化 VideoDisplay 来代替 Gadget \ingroup core */
   class VideoDisplay : public VideoOutput
   {
     public:
@@ -40,10 +39,10 @@ namespace jevois
       //! Virtual destructor for safe inheritance
       virtual ~VideoDisplay();
 
-      //! Set the video format and frame rate, allocate the buffers
+      //! 设置视频格式和帧速率，分配缓冲区
       void setFormat(VideoMapping const & m) override;
 
-      //! Get a pre-allocated image so that we can fill the pixel data and later send out using send()
+      //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去
       void get(RawImage & img) override;
       
       //! Send an image out to display
@@ -53,7 +52,7 @@ namespace jevois
       void streamOn() override;
 
       //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。
       void abortStream() override;
       
       //! Stop streaming

@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1StepRange">
+<title>jevois::StepRange&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Types/StepRange.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::StepRange&lt; T &gt;</title></simplesect>
+
+
+<para>具有 step 的通用 range 类 </para>
+
+
+
+<para><link linkend="_classjevois_1_1StepRange">StepRange</link> 类用于表示从 [min .. (step) .. max] 的范围</para>
+
+<para>有效值为 min、min+step、min+2*step、min+3*step、...max。请注意，即使 max 不等于某个整数 N 的 min+N*step，它也是有效值。 请注意，T 必须是数字类型（可以转换为双精度）。如果 step 不是正数或零，则抛出异常。</para>
+
+<para>因为 <link linkend="_classjevois_1_1StepRange">StepRange</link> 通常仅用于有限的特定目的（例如，定义 video4linux 帧抓取器中的控件的参数），所以提供的接口很少（比 <link linkend="_classjevois_1_1Range">jevois::Range</link> 的接口有限得多）。 </para>
+<para>
+Definition at line 68 of file StepRange.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1StepRange_1aaf72c1fdf210cac5bd34a2295f1e6c46">StepRange</link> ()</para>
+
+<para>Default constructor, range is [0 .. (0) .. 0]. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1StepRange_1a02fa0d9fd399445cbf5616454ba15f3e">StepRange</link> (T const mini, T const stepi, T const maxi)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1StepRange_1a2370823cc7c84165afb49a31bfb21edf">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;other)=default</para>
+
+<para>Copy constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1StepRange_1a398a90d5597eba6e5953437fe63f8282">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;&amp;other)=default</para>
+
+<para>Move constructor. </para>
+</listitem>
+            <listitem><para>template&lt;typename U &gt; </para><para><link linkend="_classjevois_1_1StepRange_1aaa7b5a3ed72f4df16ded3be928b5977e">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; U &gt; const &amp;other)</para>
+
+<para>复制转换构造函数，内部使用 <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert&lt;T,U&gt;</link> </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1StepRange_1aad33ee13355a2369f9534f970b095020">operator=</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;other)=default</para>
+
+<para>Assignment. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp; <link linkend="_classjevois_1_1StepRange_1a89bd63e3a1f702525b0e30a6bdf0c43a">operator=</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;&amp;other)=default</para>
+
+<para>Move assignment. </para>
+</listitem>
+            <listitem><para>const T &amp; <link linkend="_classjevois_1_1StepRange_1aa9ca8925eab812bbbfe4f1d72454bdfc">min</link> () const</para>
+
+<para>Return the minimum value. </para>
+</listitem>
+            <listitem><para>const T &amp; <link linkend="_classjevois_1_1StepRange_1a24603a420c864bba6063d65cdd9d8d76">step</link> () const</para>
+
+<para>Return the step value. </para>
+</listitem>
+            <listitem><para>const T &amp; <link linkend="_classjevois_1_1StepRange_1ab61fcb26f30742a0af5b1855dd9ff5b4">max</link> () const</para>
+
+<para>Return the maximum value. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1StepRange_1a83587ed8cfd0dd795a3f61f3a4fbd52c">empty</link> () const</para>
+
+<para>Return whether <link linkend="_classjevois_1_1StepRange_1aa9ca8925eab812bbbfe4f1d72454bdfc">min()</link> == <link linkend="_classjevois_1_1StepRange_1ab61fcb26f30742a0af5b1855dd9ff5b4">max()</link> </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1StepRange_1a56b84f46c8f0bf3a8863ef0ddfb4f789">isValueValid</link> (T const val) const</para>
+
+<para>如果值有效则返回 true (i.e., it is min, min+step, min+step*2, ... or max) </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::ostream &amp; <link linkend="_classjevois_1_1StepRange_1a1a0eecc2c5d19573abced21e6c4ede5d">operator&lt;&lt;</link> (std::ostream &amp;out, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;r)</para>
+
+<para>Stream out as &quot;min...(step)...max&quot;. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>std::istream &amp; <link linkend="_classjevois_1_1StepRange_1abaad3c4bc2cb1b136f1c0e98c6b48309">operator&gt;&gt;</link> (std::istream &amp;in, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;r)</para>
+
+<para>Stream in as &quot;min...(step)...max&quot;. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_classjevois_1_1StepRange_1a6c1f30523aae30079083d974e8013600">paramValToString</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;val, std::string &amp;result)</para>
+
+<para>Machine-readable output to a string, for use in jevois::Parameter: outputs <computeroutput>min</computeroutput>...step...max. </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_classjevois_1_1StepRange_1a4ec79d67cb36a2611b5d529b9ea34f5a">paramStringToVal</link> (std::string const &amp;valstring, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;result)</para>
+
+<para>Machine-readable input from a string, for use in jevois::Parameter: reads <computeroutput>min</computeroutput>...step...max. </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_classjevois_1_1StepRange_1a2ce71b97c1e3e05e86d4beb5df0f0892">operator==</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;range1, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;range2)</para>
+
+<para>Equality test: StepRange&lt;T&gt; == StepRange&lt;T&gt; </para>
+</listitem>
+            <listitem><para>template&lt;typename T &gt; </para><para>bool <link linkend="_classjevois_1_1StepRange_1a36e43c77bb93699fd3393dad4a3cfc17">operator!=</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;range1, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp;range2)</para>
+
+<para>Inequality test: StepRange&lt;T&gt; != StepRange&lt;T&gt; </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1StepRange_1aaf72c1fdf210cac5bd34a2295f1e6c46"/>    <section>
+    <title>StepRange()<computeroutput>[1/5]</computeroutput></title>
+<indexterm><primary>StepRange</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>StepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1StepRange">StepRange</link> ( )<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>Default constructor, range is [0 .. (0) .. 0]. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a02fa0d9fd399445cbf5616454ba15f3e"/>    <section>
+    <title>StepRange()<computeroutput>[2/5]</computeroutput></title>
+<indexterm><primary>StepRange</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>StepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1StepRange">StepRange</link> (T const mini, T const stepi, T const maxi)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a2370823cc7c84165afb49a31bfb21edf"/>    <section>
+    <title>StepRange()<computeroutput>[3/5]</computeroutput></title>
+<indexterm><primary>StepRange</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>StepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1StepRange">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Copy constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a398a90d5597eba6e5953437fe63f8282"/>    <section>
+    <title>StepRange()<computeroutput>[4/5]</computeroutput></title>
+<indexterm><primary>StepRange</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>StepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1StepRange">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Move constructor. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1aaa7b5a3ed72f4df16ded3be928b5977e"/>    <section>
+    <title>StepRange()<computeroutput>[5/5]</computeroutput></title>
+<indexterm><primary>StepRange</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>StepRange</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><computeroutput>template&lt;typename U &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::<link linkend="_classjevois_1_1StepRange">StepRange</link> (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; U &gt; const &amp; other)<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>复制转换构造函数，内部使用 <link linkend="_group__utils_1gaaab187d6c9387a19cc8a4efb6053f6a6">jevois::clamped_convert&lt;T,U&gt;</link> </para>
+</para>
+
+<para>请注意，此构造函数是 <emphasis>explicit</emphasis> 的，即您需要显式提及它。这是为了避免在程序员不知情的情况下发生转换。例如： <literallayout><computeroutput>void&#32;myFunc(jevois::StepRange&lt;float&gt;&#32;const&#32;&amp;&#32;rng)&#32;{&#32;...&#32;}
+jevois::StepRange&lt;int&gt;&#32;r1(0,&#32;5,&#32;100);
+jevois::StepRange&lt;float&gt;&#32;r2(r1);&#32;//&#32;ok,&#32;explicit&#32;constructor&#32;call
+myFunc(r2);&#32;&#32;//&#32;ok,&#32;no&#32;conversion&#32;necessary
+//myFunc(r1)&#32;//&#32;NO:&#32;将&#32;StepRange&lt;int&gt;&#32;传递给接受&#32;StepRange&lt;float&gt;&#32;参数的函数编译失败
+myFunc(jevois::StepRange&lt;float&gt;(r1));&#32;//&#32;ok,&#32;nice&#32;and&#32;explicit;&#32;并且您可以首先考虑&#32;r1&#32;是否应该是一个&#32;
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;//&#32;StepRange&lt;float&gt;，这样您就不会浪费&#32;CPU&#32;进行这种转换（而不是只是没有意识到浪费）
+</computeroutput></literallayout> </para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1StepRange_1a83587ed8cfd0dd795a3f61f3a4fbd52c"/>    <section>
+    <title>empty()</title>
+<indexterm><primary>empty</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>empty</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::empty ( ) const</computeroutput></para><para>
+
+<para>Return whether <link linkend="_classjevois_1_1StepRange_1aa9ca8925eab812bbbfe4f1d72454bdfc">min()</link> == <link linkend="_classjevois_1_1StepRange_1ab61fcb26f30742a0af5b1855dd9ff5b4">max()</link> </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a56b84f46c8f0bf3a8863ef0ddfb4f789"/>    <section>
+    <title>isValueValid()</title>
+<indexterm><primary>isValueValid</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>isValueValid</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::isValueValid (T const val) const</computeroutput></para><para>
+
+<para>如果值有效则返回 true (i.e., it is min, min+step, min+step*2, ... or max) </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1ab61fcb26f30742a0af5b1855dd9ff5b4"/>    <section>
+    <title>max()</title>
+<indexterm><primary>max</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>max</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T&amp; <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::max ( ) const</computeroutput></para><para>
+
+<para>Return the maximum value. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1aa9ca8925eab812bbbfe4f1d72454bdfc"/>    <section>
+    <title>min()</title>
+<indexterm><primary>min</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>min</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T&amp; <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::min ( ) const</computeroutput></para><para>
+
+<para>Return the minimum value. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a89bd63e3a1f702525b0e30a6bdf0c43a"/>    <section>
+    <title>operator=()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">StepRange</link>&lt;T&gt;&amp; <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::operator= (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp;&amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Move assignment. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1aad33ee13355a2369f9534f970b095020"/>    <section>
+    <title>operator=()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>operator=</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1StepRange">StepRange</link>&lt;T&gt;&amp; <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::operator= (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; other)<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>Assignment. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a24603a420c864bba6063d65cdd9d8d76"/>    <section>
+    <title>step()</title>
+<indexterm><primary>step</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>step</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>const T&amp; <link linkend="_classjevois_1_1StepRange">jevois::StepRange</link>&lt; T &gt;::step ( ) const</computeroutput></para><para>
+
+<para>Return the step value. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1StepRange_1a36e43c77bb93699fd3393dad4a3cfc17"/>    <section>
+    <title>operator!=()</title>
+<indexterm><primary>operator!=</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator!=</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool operator!= (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; range1, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; range2)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Inequality test: StepRange&lt;T&gt; != StepRange&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a1a0eecc2c5d19573abced21e6c4ede5d"/>    <section>
+    <title>operator&lt;&lt;()</title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::ostream &amp; operator&lt;&lt; (std::ostream &amp; out, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; r)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Stream out as &quot;min...(step)...max&quot;. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a2ce71b97c1e3e05e86d4beb5df0f0892"/>    <section>
+    <title>operator==()</title>
+<indexterm><primary>operator==</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator==</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>bool operator== (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; range1, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; range2)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Equality test: StepRange&lt;T&gt; == StepRange&lt;T&gt; </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1abaad3c4bc2cb1b136f1c0e98c6b48309"/>    <section>
+    <title>operator&gt;&gt;()</title>
+<indexterm><primary>operator&gt;&gt;</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>operator&gt;&gt;</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>std::istream &amp; operator&gt;&gt; (std::istream &amp; in, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp; r)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Stream in as &quot;min...(step)...max&quot;. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a4ec79d67cb36a2611b5d529b9ea34f5a"/>    <section>
+    <title>paramStringToVal()</title>
+<indexterm><primary>paramStringToVal</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>paramStringToVal</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void paramStringToVal (std::string const &amp; valstring, <link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; &amp; result)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Machine-readable input from a string, for use in jevois::Parameter: reads <computeroutput>min</computeroutput>...step...max. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1StepRange_1a6c1f30523aae30079083d974e8013600"/>    <section>
+    <title>paramValToString()</title>
+<indexterm><primary>paramValToString</primary><secondary>jevois::StepRange&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::StepRange&lt; T &gt;</primary><secondary>paramValToString</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void paramValToString (<link linkend="_classjevois_1_1StepRange">StepRange</link>&lt; T &gt; const &amp; val, std::string &amp; result)<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Machine-readable output to a string, for use in jevois::Parameter: outputs <computeroutput>min</computeroutput>...step...max. </para>
+</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Types/<link linkend="_StepRange_8H">StepRange.H</link></section>
+</section>

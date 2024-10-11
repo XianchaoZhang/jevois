@@ -26,159 +26,132 @@ namespace jevois
   class VideoInput;
   class Engine;
 
-  //! Exception-safe wrapper around a raw camera input frame
-  /*! This wrapper operates much like std:future in standard C++11. Users can get the next image captured by the camera
-      by calling get(), which may block if the capture is not complete yet, or may throw if the capture fails for some
-      reason (e.g., the camera is not streaming). The image size and pixel type are as defined by the current
-      VideoMapping, camera section. In addition, a done() function is provided which users may use as soon as they are
-      finished with the pixel data in the image obtained via get(), to allow the camera driver to setup the underlying
-      memory buffer again for capture. If done() has not been called by the time the InputFrame is destroyed, it will be
-      called automatically, if get() had been called. It may in some cases improve your frame rate to call done()
-      manually as early as possible instead of letting the InputFrame destructor do it.
+  //! 原始相机输入帧周围的异常安全包装器
+  /*! 此包装器的操作与标准 C++11 中的 std:future 非常相似。用户可以通过调用 get() 获取相机捕获的下一张图像，如果捕获尚
+      未完成，则可能会阻塞，如果捕获由于某种原因（例如，相机未流式传输）失败，则可能会抛出异常。图像大小和像素类型由当
+	  前 VideoMapping、相机部分定义。此外，还提供了一个 done() 函数，用户可以在完成通过 get() 获取的图像中的像素数据后
+	  立即使用该函数，以允许相机驱动程序再次设置底层内存缓冲区以进行捕获。如果在 InputFrame 被销毁时尚未调用 done()，
+	  则如果已调用 get()，它将被自动调用。在某些情况下，尽早手动调用 done() 可能会提高帧速率，而不是让 InputFrame 析构
+	  函数执行此操作。
+	  
+	  InputFrame 实现对输入视频帧的零拷贝、零等待访问，即：
+	  
+	  1. 您通过 get() 获取的图像的像素数据直接是内存映射的像素缓冲区，JeVois 芯片上的硅硬件通过直接内存访问 (DMA) 使用
+	     该缓冲区将像素数据从相机芯片传输到处理器内存；
+	  2. 一旦相机硬件捕获图像，get() 就会解除阻塞并返回该图像（而不是以固定的、有规律的间隔来获取图像）。相机有多个图
+	     像缓冲区，允许捕获一个图像缓冲区，同时将另一个图像缓冲区通过 get() 交由处理。这些缓冲区会被回收，即一旦调用 
+		 done()，底层缓冲区就会被发送回相机硬件以供将来捕获。
+	  
+	  \ingroup core */
 
-      InputFrame implements a zero-copy, zero-wait access to input video frames, that is:
-
-      1. the pixel data of the image you obtain via get() is directly the memory-mapped pixel buffer that the silicon
-         hardware on the JeVois chip uses via direct-memory-access (DMA) to stream the pixel data from the camera chip
-         to processor memory;
-      2. as soon as an image is captured by the camera hardware, get() unblocks and returns it (as opposed to having a
-         fixed, regular interval at which images may be available). Camera has several image buffers, allowing one to be
-         captured while another is being handed over for processing via get(). These buffers are recycled, i.e., once
-         done() is called, the underlying buffer is sent back to the camera hardware for future capture.
-
-      \ingroup core */
   class InputFrame
   {
     public:
-      //! Move constructor
+      //! 移动构造函数
       InputFrame(InputFrame && other) = default;
       
-      //! Get the next captured camera image
-      /*! Throws if we the camera is not streaming or blocks until an image is available (has been captured). It is ok
-          to call get() several times, but the same image will always be returned. To obtain successive frames from the
-          camera, you must be fed successive InputFrame wrappers by the JeVois Engine. */
+      /! 获取下一个捕获的相机图像 
+	  /*! 如果相机未流式传输或阻塞直到图像可用（已捕获），则抛出。 可以多次调用 get()，但始终会返回相同的图像。 要从相
+	      机获取连续的帧，必须由 JeVois Engine 向您提供连续的 InputFrame 包装器。 */ 
       RawImage const & get(bool casync = false) const;
 
-      //! Check whether a second input image scaled by the JeVoisPro Platform ISP is available
-      /*! Returns false unless we are on JeVois-Pro Platform and the camera format modifier jevois::CropType::CropScale
-          is currently in use. */
+      //! 检查是否有 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 
+	  /*! 除非我们在 JeVois-Pro 平台上并且相机格式修饰符 jevois::CropType::CropScale 当前正在使用中，否则返回 false。 */
       bool hasScaledImage() const;
       
-      //! Get the next captured camera image, ISP-scaled second frame
-      /*! On JeVois-Pro Platform only, the camera ISP can output 2 frames: 1) raw from sensor, 2) scaled by ISP. This
-          function is to access the ISP scaled frame. Throws if not JeVois-Pro Platform or the camera stream type is not
-          jevois::StreamType::RawAndScaled. Throws if we the camera is not streaming or blocks until an image is
-          available (has been captured). It is ok to call get2() several times, but the same image will always be
-          returned. To obtain successive frames from the camera, you must be fed successive InputFrame wrappers by the
-          JeVois Engine. */
+	  //! 获取下一个捕获的相机图像，ISP 缩放的第二帧 
+	  /*! 仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此函数用于访问 ISP 缩放
+	      的帧。如果不是 JeVois-Pro 平台或相机流类型不是 jevois::StreamType::RawAndScaled，则抛出。如果相机没有流式传输
+		  或阻塞直到图像可用（已捕获），则抛出。可以多次调用 get2()，但始终会返回相同的图像。要从相机获取连续的帧，
+		  JeVois Engine 必须向您提供连续的 InputFrame 包装器。 */
       RawImage const & get2(bool casync = false) const;
 
-      //! Get the next captured camera image that is intended for processing
-      /*! Same as get() if hasScaledImage() is false, or as get2() if hasScaledImage() is true. */
-      RawImage const & getp(bool casync = false) const;
+      //! 获取下一个要处理的捕获的相机图像 
+	  /*! 如果 hasScaledImage() 为 false，则与 get() 相同，如果 hasScaledImage() 为 true，则与 get2() 相同。 */ 
+	  RawImage const & getp(bool casync = false) const;
 
-      //! Get the DMA-BUF file descriptor of the camera frame
-      /*! This file descriptor can be used to share the pixel buffer across interfaces that support DMA-BUF. The JeVois
-          core uses this to create a zero-copy pipeline from the camera sensor to the hardware-accelerated OpenGL
-          display on JeVois-Pro. Returns -1 if DMA-BUF is not supported (on host, and on JeVois-A33 platform). If get()
-          has not previously been called, it will be called, which blocks until the next camera frame is available. It
-          is ok to call getDmaFd() several times but always the same fd is returned (see get()). */
-      int getDmaFd(bool casync = false) const;
+      //！获取相机帧的 DMA-BUF 文件描述符 
+	  /*！此文件描述符可用于在支持 DMA-BUF 的接口之间共享像素缓冲区。JeVois 核心使用它来创建从相机传感器到 JeVois-Pro 上
+	      的硬件加速 OpenGL 显示器的零拷贝管道。如果不支持 DMA-BUF（在主机和 JeVois-A33 平台上），则返回 -1。如果之前未
+		  调用 get()，则会调用它，它会阻塞直到下一个相机帧可用。可以多次调用 getDmaFd()，但总是返回相同的 fd（参见 get()
+		  ）。*/ 
+	  int getDmaFd(bool casync = false) const;
 
-      //! Get the DMA-BUF file descriptor of the ISP-scaled second camera frame
-      /*! On JeVois-Pro Platform only, the camera ISP can output 2 frames: 1) raw from sensor, 2) scaled by ISP. This
-          function is to access the ISP scaled frame. Throws if not JeVois-Pro Platform or the camera stream type is not
-          jevois::StreamType::RawAndScaled. This file descriptor can be used to share the pixel buffer across interfaces
-          that support DMA-BUF. The JeVois core uses this to create a zero-copy pipeline from the camera sensor to the
-          hardware-accelerated OpenGL display on JeVois-Pro. Returns -1 if DMA-BUF is not supported (on host, and on
-          JeVois-A33 platform). If get() has not previously been called, it will be called, which blocks until the next
-          camera frame is available. It is ok to call getDmaFd() several times but always the same fd is returned (see
-          get2()). */
-      int getDmaFd2(bool casync = false) const;
-      
-      //! Indicate that user processing is done with the image previously obtained via get()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled and sent back to the camera driver for video capture. */
-      void done() const;
+      //! 获取 ISP 缩放的第二个摄像头帧的 DMA-BUF 文件描述符 /*! 仅在 JeVois-Pro 平台上，摄像头 ISP 可以输出 2 个帧：1) 
+	      来自传感器的原始帧，2) 由 ISP 缩放。此函数用于访问 ISP 缩放的帧。如果不是 JeVois-Pro 平台或摄像头流类型不是 
+		  jevois::StreamType::RawAndScaled，则抛出。此文件描述符可用于在支持 DMA-BUF 的接口之间共享像素缓冲区。JeVois 核
+		  心使用它来创建从摄像头传感器到 JeVois-Pro 上的硬件加速 OpenGL 显示器的零拷贝管道。如果不支持 DMA-BUF（在主机上
+		  和 JeVois-A33 平台上），则返回 -1。如果之前未调用 get()，则会调用它，它会阻塞直到下一个摄像头帧可用。可以多次
+		  调用 getDmaFd()，但总是返回相同的 fd（参见 get2()）。 */ 
+	  int getDmaFd2(bool casync = false) const; 
+	  
+	  //! 指示用户处理已完成，先前已通过 get() 获取的图像 
+	  /*! 处理完 RawImage 数据后，应尽快在 get() 之后调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获
+	      。 */ 
+	  void done() const;
 
-      //! Indicate that user processing is done with the ISP-scaled image previously obtained via get2()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled and sent back to the camera driver for video capture. */
-      void done2() const;
+      //! 表示用户处理已完成，并且已通过 get2() 先前获取了 ISP 缩放图像 
+	  /*! 处理完 RawImage 数据后，应在 get() 之后尽快调用此函数，以便可以回收该数据并将其发送回相机驱动程序进行视频捕获
+	      。 */ 
+	  void done2() const;
 
-      //! Shorthand to get the input image as a GRAY cv::Mat and release the raw buffer
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. C++ module writers should stick to the get()/done() pair as this provides better fine-grained
-          control. Note that the raw image from the camera will always be copied or converted to cv::Mat and will then
-          be released by calling done(), so users should not call done() after using this function. This function is
-          basically equivalent to calling get(), converting to cv::Mat, and calling done(). */
-      cv::Mat getCvGRAY(bool casync = false) const;
+      //！以 GRAY cv::Mat 形式获取输入图像并释放原始缓冲区的简写
+	  /*！这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 
+	      get()/done() 对，因为这可以提供更好的细粒度控制。请注意，来自相机的原始图像将始终被复制或转换为 cv::Mat，然后
+		  通过调用 done() 进行释放，因此用户在使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 cv::Mat
+		  ，然后调用 done()。*/ 
+	  cv::Mat getCvGRAY(bool casync = false) const;
 
-      //! Shorthand to get the input image as a BGR cv::Mat and release the raw buffer
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. C++ module writers should stick to the get()/done() pair as this provides better fine-grained
-          control. Note that the raw image from the camera will always be copied or converted to cv::Mat and will then
-          be released by calling done(), so users should not call done() after using this function. This function is
-          basically equivalent to calling get(), converting to cv::Mat, and calling done(). */
-      cv::Mat getCvBGR(bool casync = false) const;
+      //！以 BGR cv::Mat 形式获取输入图像并释放原始缓冲区的简写
+	  /*！这主要针对 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用
+	       get()/done() 对，因为这可以提供更好的细粒度控制。请注意，来自相机的原始图像将始终被复制或转换为 cv::Mat，然
+		   后通过调用 done() 进行释放，因此用户在使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 
+		   cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvBGR(bool casync = false) const;
 
-      //! Shorthand to get the input image as a RGB cv::Mat and release the raw buffer
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. C++ module writers should stick to the get()/done() pair as this provides better fine-grained
-          control. Note that the raw image from the camera will always be copied or converted to cv::Mat and will then
-          be released by calling done(), so users should not call done() after using this function. This function is
-          basically equivalent to calling get(), converting to cv::Mat, and calling done(). */
-      cv::Mat getCvRGB(bool casync = false) const;
+      //！以 RGB cv::Mat 形式获取输入图像并释放原始缓冲区的简写
+	  /*！这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 
+	      get()/done() 对，因为这可以提供更好的细粒度控制。请注意，来自相机的原始图像将始终被复制或转换为 cv::Mat，然
+		  后通过调用 done() 进行释放，因此用户在使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 
+		  cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvRGB(bool casync = false) const;
 
-      //! Shorthand to get the input image as a RGBA cv::Mat and release the raw buffer
-      /*! This is mostly intended for Python module writers, as they will likely use OpenCV for all their image
-          processing. C++ module writers should stick to the get()/done() pair as this provides better fine-grained
-          control. Note that the raw image from the camera will always be copied or converted to cv::Mat and will then
-          be released by calling done(), so users should not call done() after using this function. This function is
-          basically equivalent to calling get(), converting to cv::Mat, and calling done(). */
-      cv::Mat getCvRGBA(bool casync = false) const;
+      //！以 RGBA cv::Mat 形式获取输入图像并释放原始缓冲区的简写
+	  /*！这主要适用于 Python 模块编写者，因为他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 
+	      get()/done() 对，因为这可以提供更好的细粒度控制。请注意，来自相机的原始图像将始终被复制或转换为 cv::Mat，然
+		  后通过调用 done() 进行释放，因此用户在使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 
+		  cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvRGBA(bool casync = false) const;
 
-      //! Shorthand to get the input image for processing as a GRAY cv::Mat and release the raw buffer
-      /*! Returns the frame intended for processing, i.e., either the single camera frame when using single-stream
-          capture, or the second frame when using dual stream capture. This is mostly intended for Python module
-          writers, as they will likely use OpenCV for all their image processing. C++ module writers should stick to the
-          get()/done() pair as this provides better fine-grained control. Note that the raw image from the camera will
-          always be copied or converted to cv::Mat and will then be released by calling done(), so users should not call
-          done() after using this function. This function is basically equivalent to calling get(), converting to
-          cv::Mat, and calling done(). */
-      cv::Mat getCvGRAYp(bool casync = false) const;
+      //！获取输入图像作为 GRAY cv::Mat 进行处理的简写并释放原始缓冲区
+	  /*！返回要处理的帧，即使用单流捕获时的单个摄像机帧或使用双流捕获时的第二帧。这主要面向 Python 模块编写者，因为
+	      他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 get()/done() 对，因为这可以提供更好的细粒
+		  度控制。请注意，来自摄像机的原始图像将始终被复制或转换为 cv::Mat，然后通过调用 done() 进行释放，因此用户在
+		  使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvGRAYp(bool casync = false) const;
 
-      //! Shorthand to get the input image for processing as a BGR cv::Mat and release the raw buffer
-      /*! Returns the frame intended for processing, i.e., either the single camera frame when using single-stream
-          capture, or the second frame when using dual stream capture. This is mostly intended for Python module
-          writers, as they will likely use OpenCV for all their image processing. C++ module writers should stick to the
-          get()/done() pair as this provides better fine-grained control. Note that the raw image from the camera will
-          always be copied or converted to cv::Mat and will then be released by calling done(), so users should not call
-          done() after using this function. This function is basically equivalent to calling get(), converting to
-          cv::Mat, and calling done(). */
-      cv::Mat getCvBGRp(bool casync = false) const;
+      //！获取输入图像以作为 BGR cv::Mat 进行处理的简写并释放原始缓冲区
+	  /*！返回要处理的帧，即使用单流捕获时的单个摄像机帧或使用双流捕获时的第二帧。这主要面向 Python 模块编写者，因为
+	      他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 get()/done() 对，因为这可以提供更好的细粒
+		  度控制。请注意，来自摄像机的原始图像将始终被复制或转换为 cv::Mat，然后通过调用 done() 进行释放，因此用户在
+		  使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvBGRp(bool casync = false) const;
 
-      //! Shorthand to get the input image for processing as a RGB cv::Mat and release the raw buffer
-      /*! Returns the frame intended for processing, i.e., either the single camera frame when using single-stream
-          capture, or the second frame when using dual stream capture. This is mostly intended for Python module
-          writers, as they will likely use OpenCV for all their image processing. C++ module writers should stick to the
-          get()/done() pair as this provides better fine-grained control. Note that the raw image from the camera will
-          always be copied or converted to cv::Mat and will then be released by calling done(), so users should not call
-          done() after using this function. This function is basically equivalent to calling get(), converting to
-          cv::Mat, and calling done(). */
-      cv::Mat getCvRGBp(bool casync = false) const;
+      //！获取输入图像作为 RGB cv::Mat 进行处理的简写并释放原始缓冲区
+	  /*！返回要处理的帧，即使用单流捕获时的单个摄像机帧或使用双流捕获时的第二帧。这主要面向 Python 模块编写者，因为
+	      他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 get()/done() 对，因为这可以提供更好的细粒
+		  度控制。请注意，来自摄像机的原始图像将始终被复制或转换为 cv::Mat，然后通过调用 done() 进行释放，因此用户在
+		  使用此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvRGBp(bool casync = false) const;
 
-      //! Shorthand to get the input image for processing as a RGBA cv::Mat and release the raw buffer
-      /*! Returns the frame intended for processing, i.e., either the single camera frame when using single-stream
-          capture, or the second frame when using dual stream capture. This is mostly intended for Python module
-          writers, as they will likely use OpenCV for all their image processing. C++ module writers should stick to the
-          get()/done() pair as this provides better fine-grained control. Note that the raw image from the camera will
-          always be copied or converted to cv::Mat and will then be released by calling done(), so users should not call
-          done() after using this function. This function is basically equivalent to calling get(), converting to
-          cv::Mat, and calling done(). */
-      cv::Mat getCvRGBAp(bool casync = false) const;
+      //！获取输入图像以 RGBA cv::Mat 进行处理的简写并释放原始缓冲区
+	  /*！返回要处理的帧，即使用单流捕获时的单个摄像机帧或使用双流捕获时的第二帧。这主要面向 Python 模块编写者，因为
+	      他们可能会使用 OpenCV 进行所有图像处理。C++ 模块编写者应坚持使用 get()/done() 对，因为这可以提供更好的细粒
+		  度控制。请注意，来自摄像机的原始图像将始终被复制或转换为 cv::Mat，然后通过调用 done() 释放，因此用户在使用
+		  此函数后不应调用 done()。此函数基本上等同于调用 get()、转换为 cv::Mat，然后调用 done()。*/ 
+	  cv::Mat getCvRGBAp(bool casync = false) const;
 
-      //! Destructor, returns the buffers to the driver as needed
+      //! 析构函数，根据需要将缓冲区返回给驱动程序
       ~InputFrame();
       
     private:
@@ -187,7 +160,7 @@ namespace jevois
       InputFrame & operator=(InputFrame const & other) = delete;
 
       friend class Engine;
-      InputFrame(std::shared_ptr<VideoInput> const & cam, bool turbo); // Only our friends can construct us
+      InputFrame(std::shared_ptr<VideoInput> const & cam, bool turbo); // 只有我们的 friends 才能构建我们
 
       std::shared_ptr<VideoInput> itsCamera;
       mutable bool itsDidGet = false, itsDidGet2 = false;

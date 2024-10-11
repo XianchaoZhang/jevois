@@ -19,12 +19,12 @@
 
 namespace jevois
 { 
-  //! Behavior when attemting an operation that cannot be completed immediately
-  /*! Defines the behavior of Semaphore, BoundedBuffer, etc.
+  //! 尝试无法立即完成的操作时的行为 
+  /*! 定义 Semaphore、BoundedBuffer 等的行为。
       \ingroup types */
   enum class BlockingBehavior
   {
-      Block, //!< Block until operation can be completed
-      Throw  //!< Throw std::runtime_error if operation cannot be completed immediately
+      Block, //!< 阻塞直到操作可以完成 
+      Throw  //!< 如果操作无法立即完成，则抛出 std::runtime_error
   };
 } // namespace jevois

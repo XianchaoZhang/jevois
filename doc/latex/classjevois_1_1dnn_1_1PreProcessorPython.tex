@@ -1,0 +1,202 @@
+\hypertarget{classjevois_1_1dnn_1_1PreProcessorPython}{}\doxysubsection{jevois\+::dnn\+::Pre\+Processor\+Python Class Reference}
+\label{classjevois_1_1dnn_1_1PreProcessorPython}\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Pre\+Processor\+Python.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+用 python 编写的神经网络管道预处理器 
+
+这是深度神经网络处理管道的第一步。 
+
+Definition at line 32 of file Pre\+Processor\+Python.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Pre\+Processor\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PreProcessorPython__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Pre\+Processor\+Python\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PreProcessorPython__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a98e5f27560c00e9e262d2c4a6a47f918}{Pre\+Processor\+Python}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a47dae30fcc0679ae2af3faa65436f977}{$\sim$\+Pre\+Processor\+Python}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a511d2fa7d4bf242e4116e0b021729f79}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em Freeze/unfreeze parameters that users should not change while running. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}{process}} (cv\+::\+Mat const \&img, bool swaprb, std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&attrs, std\+::vector$<$ cv\+::\+Rect $>$ \&crops) override
+\begin{DoxyCompactList}\small\item\em 从输入图像中提取 blob \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a035eb07051345a634219486127a7e916}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false) override
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_ae42711d8642e9a42af0fefa876e72120}{on\+Param\+Change}} (preprocessor\+::pypre const \&param, std\+::string const \&newval) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPythonImpl}{Pre\+Processor\+Python\+Impl}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a3971a46f454a70bf6a3b485cdf051888}{its\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a28d5ef30e2995d4eb55aaa15cbf73a07}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (pypre, std\+::string, \char`\"{}Full path of the python pre-\/processor file. Name of \char`\"{} \char`\"{}class defined in the file must match the file name without the \char`\"{} \char`\"{}trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a98e5f27560c00e9e262d2c4a6a47f918}\label{classjevois_1_1dnn_1_1PreProcessorPython_a98e5f27560c00e9e262d2c4a6a47f918}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!PreProcessorPython@{PreProcessorPython}}
+\index{PreProcessorPython@{PreProcessorPython}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{PreProcessorPython()}{PreProcessorPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pre\+Processor\+Python\+::\+Pre\+Processor\+Python (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 145 of file Pre\+Processor\+Python.\+C.
+
+
+
+References its\+Impl.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a47dae30fcc0679ae2af3faa65436f977}\label{classjevois_1_1dnn_1_1PreProcessorPython_a47dae30fcc0679ae2af3faa65436f977}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!````~PreProcessorPython@{$\sim$PreProcessorPython}}
+\index{````~PreProcessorPython@{$\sim$PreProcessorPython}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{$\sim$PreProcessorPython()}{~PreProcessorPython()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pre\+Processor\+Python\+::$\sim$\+Pre\+Processor\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 152 of file Pre\+Processor\+Python.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a511d2fa7d4bf242e4116e0b021729f79}\label{classjevois_1_1dnn_1_1PreProcessorPython_a511d2fa7d4bf242e4116e0b021729f79}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+Python\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Freeze/unfreeze parameters that users should not change while running. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a72917bb3bcf01737deaa85e545bcf215}{jevois\+::dnn\+::\+Pre\+Processor}}.
+
+
+
+Definition at line 156 of file Pre\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_ae42711d8642e9a42af0fefa876e72120}\label{classjevois_1_1dnn_1_1PreProcessorPython_ae42711d8642e9a42af0fefa876e72120}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+Python\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{preprocessor\+::pypre const \&}]{param,  }\item[{std\+::string const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 166 of file Pre\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}\label{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!process@{process}}
+\index{process@{process}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Pre\+Processor\+Python\+::process (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{swaprb,  }\item[{std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&}]{attrs,  }\item[{std\+::vector$<$ cv\+::\+Rect $>$ \&}]{crops }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+从输入图像中提取 blob 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a0f9703abfd50ab9a363ad9d44ec8224a}{jevois\+::dnn\+::\+Pre\+Processor}}.
+
+
+
+Definition at line 173 of file Pre\+Processor\+Python.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a035eb07051345a634219486127a7e916}\label{classjevois_1_1dnn_1_1PreProcessorPython_a035eb07051345a634219486127a7e916}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!report@{report}}
+\index{report@{report}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+Python\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}{jevois\+::dnn\+::\+Pre\+Processor}}.
+
+
+
+Definition at line 179 of file Pre\+Processor\+Python.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a28d5ef30e2995d4eb55aaa15cbf73a07}\label{classjevois_1_1dnn_1_1PreProcessorPython_a28d5ef30e2995d4eb55aaa15cbf73a07}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{pypre}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Full path of the python pre-\/processor file. Name of \char`\"{} \char`\"{}class defined in the file must match the file name without the \char`\"{} \char`\"{}trailing \textquotesingle{}.py\textquotesingle{}\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessorPython_a3971a46f454a70bf6a3b485cdf051888}\label{classjevois_1_1dnn_1_1PreProcessorPython_a3971a46f454a70bf6a3b485cdf051888}} 
+\index{jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}!itsImpl@{itsImpl}}
+\index{itsImpl@{itsImpl}!jevois::dnn::PreProcessorPython@{jevois::dnn::PreProcessorPython}}
+\doxyparagraph{\texorpdfstring{itsImpl}{itsImpl}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPythonImpl}{Pre\+Processor\+Python\+Impl}}$>$ jevois\+::dnn\+::\+Pre\+Processor\+Python\+::its\+Impl\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 58 of file Pre\+Processor\+Python.\+H.
+
+
+
+Referenced by Pre\+Processor\+Python().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PreProcessorPython_8H}{Pre\+Processor\+Python.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PreProcessor_8H}{Pre\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PreProcessorPython_8C}{Pre\+Processor\+Python.\+C}}\end{DoxyCompactItemize}

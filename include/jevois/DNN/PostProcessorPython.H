@@ -26,9 +26,8 @@ namespace jevois
   {
     class PostProcessorPythonImpl;
     
-    //! Post-Processor for neural network pipeline
-    /*! This is the last step in a deep neural network processing Pipeline. This post-processor calls a python
-        implementation to do the actual post-processing work. \ingroup dnn */
+    //! 神经网络管道的后处理器 
+    /*! 这是深度神经网络处理管道的最后一步。该后处理器调用 python 实现来执行实际的后处理工作。 \ingroup dnn */
     class PostProcessorPython : public PostProcessor, public Parameter<postprocessor::pypost>
     {
       public:
@@ -38,25 +37,24 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorPython();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         void freeze(bool doit) override;
         
-        //! Process outputs and draw/send some results
-        /*! Forwards to the python code, with a simplified signature */
+        //! 处理输出并绘制/发送一些结果
+        /*! 转发到 python 代码，带有简化的签名 */
         void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) override;
 
-        //! Report what happened in last process() to console/output video/GUI
-        /*! Forwards to the python code, with a simplified signature */
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
+        /*! 转发到 python 代码，带有简化的签名 */
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 
       protected:
-        // Load the python code as soon as the file is set, and call init() on it if defined
+        // 设置文件后立即加载 python 代码，如果定义了，则调用 init()；
         void onParamChange(postprocessor::pypost const & param, std::string const & newval) override;
 
-        // Python init() may create new dynamic parameters, but in onParamChange() we are locked up, so we need to use a
-        // sub-Component for our actual implementation, and the sub can get its dynamic parameters created while our own
-        // params are locked up...
+        // Python init() 可能会创建新的动态参数，但在 onParamChange() 中我们被锁定，因此我们需要使用子组件进行实际实现，
+		// 并且子组件可以在我们自己的参数被锁定时获取其创建的动态参数……
         std::shared_ptr<PostProcessorPythonImpl> itsImpl;
     };
     

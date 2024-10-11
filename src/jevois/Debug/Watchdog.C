@@ -60,7 +60,7 @@ void jevois::Watchdog::run(double timeout)
     itsReset.store(false);
     std::this_thread::sleep_for(dur);
 
-    // If reset() was not called, kill our process:
+    // 如果没有调用 reset()，则终止我们的进程：
     if (itsReset.load() == false)
     {
       LERROR("Watchdog timed out -- KILLING PROCESS");

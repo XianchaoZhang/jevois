@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1VideoOutputNone">
+<title>jevois::VideoOutputNone Class Reference</title>
+<indexterm><primary>jevois::VideoOutputNone</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/VideoOutputNone.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>No-op <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> derivative for when there is no video output 当没有视频输出时，无操作 <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> 派生类 
+<literallayout>&#160;&#xa;</literallayout>
+</para>
+
+<para>这个从 <link linkend="_classjevois_1_1VideoOutput">VideoOutput</link> 派生的类几乎不执行任何操作，可以在不需要视频输出时由 <link linkend="_classjevois_1_1Engine">Engine</link> 使用它。 </para>
+<para>
+Definition at line 28 of file VideoOutputNone.H.</para>
+Inheritance diagram for jevois::VideoOutputNone:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoOutputNone__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::VideoOutputNone:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1VideoOutputNone__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1VideoOutputNone_1afbe41385f9bbcf3fcfa426f6830d91f3">~VideoOutputNone</link> ()</para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1a97a8762ecc4858e32a492e786080939b">setFormat</link> (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp;m) override</para>
+
+<para>设置视频格式和帧速率 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1abbcffaff5cc4f8598b699839a4e6bfc8">get</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1a5098384ddb2b6a98be345d60a5929804">send</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img) override</para>
+
+<para>Send an image out. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1ae045404603f6a560085cb4102e1e2bcf">streamOn</link> () override</para>
+
+<para>Start streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1a43d7042bdaebcf90fa03f6f527c20deb">abortStream</link> () override</para>
+
+<para>Abort streaming. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1VideoOutputNone_1a0b81122d31d106cda61d3ae1f195012a">streamOff</link> () override</para>
+
+<para>Stop streaming. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1VideoBuf">VideoBuf</link> &gt; <link linkend="_classjevois_1_1VideoOutputNone_1a2ca37c0f77d07c5a74bfb6c9357ca93e">itsBuffer</link></para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> <link linkend="_classjevois_1_1VideoOutputNone_1a3ce9dc6b8aafd1980249f15edb0fe098">itsImage</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoOutputNone_1afbe41385f9bbcf3fcfa426f6830d91f3"/>    <section>
+    <title>~VideoOutputNone()</title>
+<indexterm><primary>~VideoOutputNone</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>~VideoOutputNone</secondary></indexterm>
+<para><computeroutput>jevois::VideoOutputNone::~VideoOutputNone ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>用于安全继承的虚拟析构函数 </para>
+</para>
+<para>
+Definition at line 22 of file VideoOutputNone.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoOutputNone_1a43d7042bdaebcf90fa03f6f527c20deb"/>    <section>
+    <title>abortStream()</title>
+<indexterm><primary>abortStream</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>abortStream</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::abortStream ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Abort streaming. </para>
+</para>
+
+<para>In <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link>, this is a no-op. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a43746f01cfb2b9a1ace149dc7a10498a">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 53 of file VideoOutputNone.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1abbcffaff5cc4f8598b699839a4e6bfc8"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::get (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a2df0375b2f2353aa1d1bc28db1a72ff9">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 41 of file VideoOutputNone.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1a5098384ddb2b6a98be345d60a5929804"/>    <section>
+    <title>send()</title>
+<indexterm><primary>send</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>send</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::send (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp; img)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Send an image out. </para>
+</para>
+
+<para>In <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link>, this is a no-op. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3098503da63b44104ba95d46ab620322">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 45 of file VideoOutputNone.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1a97a8762ecc4858e32a492e786080939b"/>    <section>
+    <title>setFormat()</title>
+<indexterm><primary>setFormat</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>setFormat</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::setFormat (<link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> const &amp; m)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>设置视频格式和帧速率 </para>
+</para>
+
+<para>在 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> 中，这是一个无操作。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1aa65384cf09377d6ced5449debd20f1fb">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 26 of file VideoOutputNone.C.</para>
+<para>
+References jevois::VideoMapping::ofmt, jevois::VideoMapping::ofps, jevois::VideoMapping::oh, jevois::VideoMapping::osize(), and jevois::VideoMapping::ow.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1a0b81122d31d106cda61d3ae1f195012a"/>    <section>
+    <title>streamOff()</title>
+<indexterm><primary>streamOff</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>streamOff</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::streamOff ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Stop streaming. </para>
+</para>
+
+<para>In <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link>, this is a no-op. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a3a6cc3865116dc74cd065237dc170387">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 57 of file VideoOutputNone.C.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1ae045404603f6a560085cb4102e1e2bcf"/>    <section>
+    <title>streamOn()</title>
+<indexterm><primary>streamOn</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>streamOn</secondary></indexterm>
+<para><computeroutput>void jevois::VideoOutputNone::streamOn ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Start streaming. </para>
+</para>
+
+<para>In <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link>, this is a no-op. </para>
+<para>
+Implements <link linkend="_classjevois_1_1VideoOutput_1a60065f4341aa2d533e6f457d296d6120">jevois::VideoOutput</link>.</para>
+<para>
+Definition at line 49 of file VideoOutputNone.C.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1VideoOutputNone_1a2ca37c0f77d07c5a74bfb6c9357ca93e"/>    <section>
+    <title>itsBuffer</title>
+<indexterm><primary>itsBuffer</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>itsBuffer</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1VideoBuf">VideoBuf</link>&gt; jevois::VideoOutputNone::itsBuffer<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 60 of file VideoOutputNone.H.</para>
+    </section><anchor xml:id="_classjevois_1_1VideoOutputNone_1a3ce9dc6b8aafd1980249f15edb0fe098"/>    <section>
+    <title>itsImage</title>
+<indexterm><primary>itsImage</primary><secondary>jevois::VideoOutputNone</secondary></indexterm>
+<indexterm><primary>jevois::VideoOutputNone</primary><secondary>itsImage</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> jevois::VideoOutputNone::itsImage<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 61 of file VideoOutputNone.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_VideoOutputNone_8H">VideoOutputNone.H</link>src/jevois/Core/<link linkend="_VideoOutputNone_8C">VideoOutputNone.C</link></section>
+</section>

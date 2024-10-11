@@ -1,31 +1,22 @@
-/*! \page Change120log Changes and new features in JeVois 1.20
+/*! \page Change120log JeVois 1.20 中的变化和新功能
 
-JeVois 1.20 brings the following new features:
+JeVois 1.20 带来以下新功能：
 
-- JeVois-Pro: New ability to clone and compile C++ modules directly on a running JeVois-Pro camera. It is a bit slow but
-  runs well! The procedure to modify and recompile one of our bundled C++ modules is: 1) clone the module by using the
-  clone option in the pop-up that comes up when you click "Create new machine vision module..." in the System tab of the
-  GUI. This will clone the module into its own separate directory and compile it and run it. 2) Then you can edit its
-  source code, and when you save your changes, the module will recompile and run.
+- JeVois-Pro：新功能可直接在正在运行的 JeVois-Pro 相机上克隆和编译 C++ 模块。速度有点慢，但运行良好！修改和重新编译我们捆绑的 C++ 模块之一的步骤是：1) 使用单击 GUI 系统选项卡中的 "Create new machine vision module..." 时弹出的弹出窗口中的克隆选项克隆模块。这会将模块克隆到其自己的单独目录中，然后对其进行编译和运行。2) 然后您可以编辑其源代码，当您保存更改时，模块将重新编译并运行。
 
-- JeVois-Pro: New demo mode that cycles through a variety of modules (defined in /jevoispro/config/demodata.yml). To
-  enable, set a non-zero time in seconds (will be used for each demo) in parameter "demomode" of Engine (in the GUI,
-  enable "Show systems parameters" to see the parameters of Engine).
+- JeVois-Pro：新的演示模式，循环遍历各种模块（在 /jevoispro/config/demodata.yml 中定义）。要启用，请在 Engine 的参数 "demomode" 中设置一个非零时间（以秒为单位）（在 GUI 中，启用 "Show systems parameters" 以查看 Engine 的参数）。
 
-- Improved support for ONNX Runtime framework on CPU, both in C++ and in Python.
+- 改进了对 CPU 上 ONNX 运行时框架的支持，包括 C++ 和 Python。
 
-- Fixed a bunch of warnings in some jevoisbase modules that we had not seen as some warnings are turned off because they
-  trip various third party libraries.
+- 修复了一些 jevoisbase 模块中的一系列我们没有看到的警告，因为它们触发了各种第三方库，所以某些警告被关闭了。
 
-- Updated to OpenCV 4.8.0.
+- 更新至 OpenCV 4.8.0。
 
-- JeVois-Pro: added a button in the System tab to allow easy editing of fan config, which can allow you to find tune the
-  threshold at which the fan will turn to full speed. Now detecting the presence of a Hailo chip and getting temperature
-  from it if present.
+- JeVois-Pro：在系统选项卡中添加了一个按钮，以便轻松编辑风扇配置，这可以让您找到调整风扇全速的阈值。现在检测 Hailo 芯片的存在并从中获取温度（如果存在）。
 
-- JeVois-Pro: major reorganization of the CMake process and of contribs, they get installed to /jevoispro now to allow
-  on-device compilation.
+- JeVois-Pro：对 CMake 流程和贡献进行了重大重组，它们现在安装到 /jevoispro 以允许在设备上进行编译。
 
-- Miscellaneous bug fixes and performance improvements.
+- 修复了各种错误并改进了性能。
 
 */
+

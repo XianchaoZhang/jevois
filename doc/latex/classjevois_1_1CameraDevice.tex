@@ -1,0 +1,206 @@
+\hypertarget{classjevois_1_1CameraDevice}{}\doxysubsection{jevois\+::Camera\+Device Class Reference}
+\label{classjevois_1_1CameraDevice}\index{jevois::CameraDevice@{jevois::CameraDevice}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Camera\+Device.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+附件类，用于保存与 V4\+L2 相机设备相关的所有数据 
+
+此类由 \mbox{\hyperlink{classjevois_1_1Camera}{jevois\+::\+Camera}} 内部使用，对最终用户用处不大。 
+
+Definition at line 32 of file Camera\+Device.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1CameraDevice_a33f9c23d7db8e7755f87a7df6807b64e}{Camera\+Device}} (std\+::string const \&devname, unsigned int const nbufs, bool dummy)
+\begin{DoxyCompactList}\small\item\em 构造函数打开设备，检查其功能，启动运行线程 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1CameraDevice_aa0587eda00eb84ccf5b09977b3c3b411}{$\sim$\+Camera\+Device}} ()
+\begin{DoxyCompactList}\small\item\em 析构函数释放所有缓冲区并关闭设备 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1CameraDevice_a757a8be12d288524eebee9399d06985b}{get\+Fd}} () const
+\begin{DoxyCompactList}\small\item\em 获取我们的 fd；由 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 用来访问 controls \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_adaf8747b649d26ba7e5ad497adc0e010}{stream\+On}} ()
+\begin{DoxyCompactList}\small\item\em Start streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_ae78ce53d2f06d5b266b309804b677079}{abort\+Stream}} ()
+\begin{DoxyCompactList}\small\item\em Abort streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_a9d40a031fb6834b93523b949aa877e0e}{stream\+Off}} ()
+\begin{DoxyCompactList}\small\item\em Stop streaming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_a23d56b2732ceff9a5464f60405f2c038}{get}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img)
+\begin{DoxyCompactList}\small\item\em 获取下一个捕获的缓冲区 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_acb42f7fbe88c12dfe5cacffbd8500662}{done}} (\mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \&img)
+\begin{DoxyCompactList}\small\item\em 表示用户已完成先前通过 \mbox{\hyperlink{classjevois_1_1CameraDevice_a23d56b2732ceff9a5464f60405f2c038}{get()}} 获取的图像处理 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1CameraDevice_a1935788736cfab2131b34127ee5ff21b}{set\+Format}} (unsigned int const fmt, unsigned int const capw, unsigned int const caph, float const fps, unsigned int const cropw, unsigned int const croph, int preset=-\/1)
+\begin{DoxyCompactList}\small\item\em 设置视频格式和帧率 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_a33f9c23d7db8e7755f87a7df6807b64e}\label{classjevois_1_1CameraDevice_a33f9c23d7db8e7755f87a7df6807b64e}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!CameraDevice@{CameraDevice}}
+\index{CameraDevice@{CameraDevice}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{CameraDevice()}{CameraDevice()}}
+{\footnotesize\ttfamily jevois\+::\+Camera\+Device\+::\+Camera\+Device (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{devname,  }\item[{unsigned int const}]{nbufs,  }\item[{bool}]{dummy }\end{DoxyParamCaption})}
+
+
+
+构造函数打开设备，检查其功能，启动运行线程 
+
+当 dummy 为 true 时，我们将仅出队并重新排队缓冲区而不进行任何处理。 
+
+Definition at line 76 of file Camera\+Device.\+C.
+
+
+
+References jevois\+::async\+\_\+little(), jevois\+::fccstr(), F\+D\+L\+D\+E\+B\+UG, F\+D\+L\+F\+A\+T\+AL, F\+D\+L\+I\+N\+FO, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+F\+A\+T\+AL, jevois\+::to\+\_\+string(), X\+I\+O\+C\+TL, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_aa0587eda00eb84ccf5b09977b3c3b411}\label{classjevois_1_1CameraDevice_aa0587eda00eb84ccf5b09977b3c3b411}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!````~CameraDevice@{$\sim$CameraDevice}}
+\index{````~CameraDevice@{$\sim$CameraDevice}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{$\sim$CameraDevice()}{~CameraDevice()}}
+{\footnotesize\ttfamily jevois\+::\+Camera\+Device\+::$\sim$\+Camera\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+析构函数释放所有缓冲区并关闭设备 
+
+
+
+Definition at line 172 of file Camera\+Device.\+C.
+
+
+
+References F\+D\+L\+E\+R\+R\+OR, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+G\+E\+T\+\_\+\+F\+U\+T\+U\+RE, and jevois\+::warn\+And\+Ignore\+Exception().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_ae78ce53d2f06d5b266b309804b677079}\label{classjevois_1_1CameraDevice_ae78ce53d2f06d5b266b309804b677079}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!abortStream@{abortStream}}
+\index{abortStream@{abortStream}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{abortStream()}{abortStream()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::abort\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Abort streaming. 
+
+
+
+Definition at line 365 of file Camera\+Device.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_acb42f7fbe88c12dfe5cacffbd8500662}\label{classjevois_1_1CameraDevice_acb42f7fbe88c12dfe5cacffbd8500662}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!done@{done}}
+\index{done@{done}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{done()}{done()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::done (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})}
+
+
+
+表示用户已完成先前通过 \mbox{\hyperlink{classjevois_1_1CameraDevice_a23d56b2732ceff9a5464f60405f2c038}{get()}} 获取的图像处理 
+
+
+
+Definition at line 471 of file Camera\+Device.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and L\+D\+E\+B\+UG.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_a23d56b2732ceff9a5464f60405f2c038}\label{classjevois_1_1CameraDevice_a23d56b2732ceff9a5464f60405f2c038}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!get@{get}}
+\index{get@{get}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \&}]{img }\end{DoxyParamCaption})}
+
+
+
+获取下一个捕获的缓冲区 
+
+
+
+Definition at line 418 of file Camera\+Device.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::bufindex, jevois\+::rawimage\+::convert\+Bayer\+To\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Grey\+To\+Y\+U\+Y\+V(), F\+D\+L\+F\+A\+T\+AL, jevois\+::\+Raw\+Image\+::invalidate(), J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and L\+D\+E\+B\+UG.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_a757a8be12d288524eebee9399d06985b}\label{classjevois_1_1CameraDevice_a757a8be12d288524eebee9399d06985b}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!getFd@{getFd}}
+\index{getFd@{getFd}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{getFd()}{getFd()}}
+{\footnotesize\ttfamily int jevois\+::\+Camera\+Device\+::get\+Fd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取我们的 fd；由 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 用来访问 controls 
+
+
+
+Definition at line 195 of file Camera\+Device.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_a1935788736cfab2131b34127ee5ff21b}\label{classjevois_1_1CameraDevice_a1935788736cfab2131b34127ee5ff21b}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!setFormat@{setFormat}}
+\index{setFormat@{setFormat}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{setFormat()}{setFormat()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::set\+Format (\begin{DoxyParamCaption}\item[{unsigned int const}]{fmt,  }\item[{unsigned int const}]{capw,  }\item[{unsigned int const}]{caph,  }\item[{float const}]{fps,  }\item[{unsigned int const}]{cropw,  }\item[{unsigned int const}]{croph,  }\item[{int}]{preset = {\ttfamily -\/1} }\end{DoxyParamCaption})}
+
+
+
+设置视频格式和帧率 
+
+
+
+Definition at line 486 of file Camera\+Device.\+C.
+
+
+
+References jevois\+::fccstr(), F\+D\+L\+D\+E\+B\+UG, F\+D\+L\+E\+R\+R\+OR, F\+D\+L\+F\+A\+T\+AL, F\+D\+L\+I\+N\+FO, jevois\+::\+Video\+Mapping\+::fps\+To\+V4l2(), J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, V4\+L2\+\_\+\+C\+O\+L\+O\+R\+S\+P\+A\+C\+E\+\_\+\+D\+E\+F\+A\+U\+LT, V4\+L2\+\_\+\+M\+O\+D\+E\+\_\+\+V\+I\+D\+EO, X\+I\+O\+C\+TL, and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_a9d40a031fb6834b93523b949aa877e0e}\label{classjevois_1_1CameraDevice_a9d40a031fb6834b93523b949aa877e0e}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!streamOff@{streamOff}}
+\index{streamOff@{streamOff}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{streamOff()}{streamOff()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::stream\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stop streaming. 
+
+
+
+Definition at line 377 of file Camera\+Device.\+C.
+
+
+
+References F\+D\+L\+D\+E\+B\+UG, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, jevois\+::warn\+And\+Ignore\+Exception(), and X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET.
+
+\mbox{\Hypertarget{classjevois_1_1CameraDevice_adaf8747b649d26ba7e5ad497adc0e010}\label{classjevois_1_1CameraDevice_adaf8747b649d26ba7e5ad497adc0e010}} 
+\index{jevois::CameraDevice@{jevois::CameraDevice}!streamOn@{streamOn}}
+\index{streamOn@{streamOn}!jevois::CameraDevice@{jevois::CameraDevice}}
+\doxyparagraph{\texorpdfstring{streamOn()}{streamOn()}}
+{\footnotesize\ttfamily void jevois\+::\+Camera\+Device\+::stream\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start streaming. 
+
+
+
+Definition at line 314 of file Camera\+Device.\+C.
+
+
+
+References F\+D\+L\+D\+E\+B\+UG, F\+D\+L\+E\+R\+R\+OR, F\+D\+L\+F\+A\+T\+AL, F\+D\+L\+I\+N\+FO, J\+E\+V\+O\+I\+S\+\_\+\+T\+I\+M\+E\+D\+\_\+\+L\+O\+CK, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, L\+D\+E\+B\+UG, jevois\+::v4l2\+Image\+Size(), and X\+I\+O\+C\+TL.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{CameraDevice_8H}{Camera\+Device.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{CameraDevice_8C}{Camera\+Device.\+C}}\end{DoxyCompactItemize}

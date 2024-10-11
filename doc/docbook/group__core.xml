@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__core">
+<title>核心类和定义</title>
+<indexterm><primary>核心类和定义</primary></indexterm>
+<section>
+<title> </title>
+
+<para>核心类型、组件、硬件驱动程序、调试工具等 </para>
+Collaboration diagram for 核心类和定义:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__core.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1Camera">jevois::Camera</link></para>
+
+<para>JeVois camera driver class - 从 Video4Linux 相机传感器抓取帧 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1CameraCalibration">jevois::CameraCalibration</link></para>
+
+<para>用于相机校准的辅助类，允许某些模块计算物体的 3D 位置 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1CameraDevice">jevois::CameraDevice</link></para>
+
+<para>附件类，用于保存与 V4L2 相机设备相关的所有数据 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1DynamicLoader">jevois::DynamicLoader</link></para>
+
+<para>用于打开共享对象 (.so) 文件并加载其中包含的函数的类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Engine">jevois::Engine</link></para>
+
+<para>JeVois processing engine - 从相机传感器获取图像，对其进行处理，并通过 USB 发送结果。 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Gadget">jevois::Gadget</link></para>
+
+<para>JeVois 小工具驱动程序 - 向通过 USB 连接的主机计算机公开 uvcvideo 接口 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFrame">jevois::InputFrame</link></para>
+
+<para>原始相机输入帧周围的异常安全包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Module">jevois::Module</link></para>
+
+<para>视觉处理模块的虚基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StdModule">jevois::StdModule</link></para>
+
+<para>支持标准化串行消息的模块的基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1MovieInput">jevois::MovieInput</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1MovieOutput">jevois::MovieOutput</link></para>
+
+<para>使用 OpenCV 视频编码将视频输出到电影文件 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1OutputFrame">jevois::OutputFrame</link></para>
+
+<para>围绕要通过 USB 发送的原始图像的异常安全包装器 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1Serial">jevois::Serial</link></para>
+
+<para>串行端口接口 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1StdioInterface">jevois::StdioInterface</link></para>
+
+<para>基于字符串的用户界面，在主机上使用的简单终端输入/输出 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1UserInterface">jevois::UserInterface</link></para>
+
+<para>基于字符串的用户界面的抽象基类 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoBuf">jevois::VideoBuf</link></para>
+
+<para>V4L2 视频缓冲区，保存在 shared_ptr 中 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoBuffers">jevois::VideoBuffers</link></para>
+
+<para>V4L2 视频帧（相机或小工具）的缓冲区集合，带有与 MMAP 区域挂钩的钩子 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayGL">jevois::VideoDisplayGL</link></para>
+
+<para>视频输出到本地屏幕 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayGUI">jevois::VideoDisplayGUI</link></para>
+
+<para>使用基本 GUI 将视频输出到本地屏幕 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoInput">jevois::VideoInput</link></para>
+
+<para>视频输入的基类，将派生为 <link linkend="_classjevois_1_1Camera">Camera</link> 和 <link linkend="_classjevois_1_1MovieInput">MovieInput</link> </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structjevois_1_1VideoMapping">jevois::VideoMapping</link></para>
+
+<para>用于保存处理 <link linkend="_classjevois_1_1Engine">Engine</link> 的视频映射定义的简单结构 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoOutput">jevois::VideoOutput</link></para>
+
+<para>视频输出的基类。Gadget、MovieOutput、VideoDisplay 和 <link linkend="_classjevois_1_1VideoOutputNone">VideoOutputNone</link> 均从其派生 </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoOutputNone">jevois::VideoOutputNone</link></para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ChatBox">jevois::ChatBox</link></para>
+
+<para>A simple helper class for a chat box rendered in ImGui. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ImGuiBackend">jevois::ImGuiBackend</link></para>
+
+<para>Backend for ImGui on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1ImGuiBackendMALI">jevois::ImGuiBackendMALI</link></para>
+
+<para>BackendMALI for ImGui on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayBackend">jevois::VideoDisplayBackend</link></para>
+
+<para>Backend for VideoDisplay on JeVois-Pro. </para>
+</listitem>
+            <listitem><para>class <link linkend="_classjevois_1_1VideoDisplayBackendMALI">jevois::VideoDisplayBackendMALI</link></para>
+
+<para>Backend for VideoDisplay on JeVois-Pro host using MALI. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__component">Model components, parameters, manager, and associated classes</link></para>
+
+<para>这些类定义了如何从组件构建用户可调参数的复杂模型或视觉处理管道。 </para>
+</listitem>
+            <listitem><para><link linkend="_group__camerasensor">不同相机传感器的辅助定义</link></para>
+</listitem>
+            <listitem><para><link linkend="_group__python">支持用 Python 编写的 JeVois 模块</link></para>
+
+<para>除了用 C++ 编写模块外，JeVois 还支持用 Python 编写模块。JeVois 提供双向映射： </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+</section>

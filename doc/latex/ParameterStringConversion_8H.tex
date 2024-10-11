@@ -1,0 +1,73 @@
+\hypertarget{ParameterStringConversion_8H}{}\doxysubsection{include/jevois/\+Component/\+Parameter\+String\+Conversion.H File Reference}
+\label{ParameterStringConversion_8H}\index{include/jevois/Component/ParameterStringConversion.H@{include/jevois/Component/ParameterStringConversion.H}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$imgui.\+h$>$}\newline
+{\ttfamily \#include $<$jevois/\+Component/details/\+Parameter\+String\+Conversion\+Impl.\+H$>$}\newline
+Include dependency graph for Parameter\+String\+Conversion.\+H\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ParameterStringConversion_8H__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=253pt]{ParameterStringConversion_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga8775d20a2bef3f1548e85360e9608656}{jevois\+::param\+Val\+To\+String}} (T const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 T 转换为字符串，供 jevois\+::\+Parameter 使用 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga828ed097b767a329b9ef81b25671af91}{jevois\+::param\+Val\+To\+String$<$ unsigned char $>$}} (unsigned char const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 T 转换为机器可读的字符串，专门将无符号字符转换为数字，而不是字符 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga9181607df247a37a9f6f3048fc5274f9}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, T \&result)
+\begin{DoxyCompactList}\small\item\em 从字符串到 T 的机器可读转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Q $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gab2ed13d224cb5afce6b018c5750bd376}{jevois\+::param\+Val\+To\+String}} (std\+::vector$<$ \mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}} $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串输出，用于 ​​jevois\+::\+Parameter：输出 \mbox{[}{\ttfamily Element1}, {\ttfamily Element2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Q $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga231b033ee2dd96aea6c349a50d81f28b}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::vector$<$ \mbox{\hyperlink{GUIhelper_8C_ad49b2456b1c91fc075a3290010ac23dd}{Q}} $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 \mbox{[}{\ttfamily Element1}, {\ttfamily Element2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F , typename S $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gaf8c330b3092d43e1b51a4726c2c37490}{jevois\+::param\+Val\+To\+String}} (std\+::pair$<$ \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, S $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily first} {\ttfamily second} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename F , typename S $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gaa4d379683d33f681a73fd3dd7326cb24}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::pair$<$ \mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, S $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily first} {\ttfamily second} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gad80d460be599086f5446ca420ec8c7e2}{jevois\+::param\+Val\+To\+String}} (cv\+::\+Point\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily x} {\ttfamily y} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga0401340fc2f5faba4060a8919e9f90b1}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Point\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily x} {\ttfamily y} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_gae1463dc259923946a4b432c86cc36ffc}{jevois\+::param\+Val\+To\+String}} (cv\+::\+Size\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily width} {\ttfamily height} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga6e9f701bba18de827137f2569b6136bd}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Size\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily width} {\ttfamily height} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga050076c5ac771a52a203c08b0fe21963}{jevois\+::param\+Val\+To\+String}} (cv\+::\+Scalar\+\_\+$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily r} {\ttfamily g} {\ttfamily b} {\ttfamily a} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga645ebe139c475a906c9d0ba3a3a2700e}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, cv\+::\+Scalar\+\_\+$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily r} {\ttfamily g} {\ttfamily b} {\ttfamily a} 或子集模板 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8677d178b2ca79ef97fb448064cab026}{jevois\+::param\+Val\+To\+String$<$ Im\+Color $>$}} (Im\+Color const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读输出为字符串，用于 jevois\+::\+Parameter\+: 输出 {\ttfamily R} {\ttfamily G} {\ttfamily B} {\ttfamily A，每个} 0..255 \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga3b97261e1b34103c923492b251b16ade}{jevois\+::param\+String\+To\+Val$<$ Im\+Color $>$}} (std\+::string const \&valstring, Im\+Color \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 {\ttfamily R} {\ttfamily G} {\ttfamily B} {\ttfamily A，每个} 0..255 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga4f532edee49623462389446878802425}{jevois\+::param\+Val\+To\+String}} (std\+::map$<$ K, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读输出到字符串，用于 jevois\+::\+Parameter：输出 \mbox{[}{\ttfamily Key1\+:Value1}, {\ttfamily Key2\+:Value2}, ...\mbox{]} \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename K , typename V $>$ }\\void \mbox{\hyperlink{group__parameterstrconv_ga0589bb4a03f4ab3644ca150930a98e20}{jevois\+::param\+String\+To\+Val}} (std\+::string const \&valstring, std\+::map$<$ K, \mbox{\hyperlink{GUIhelper_8C_ae2f8ce1b9df9c1f556ba34db7c140c5e}{V}} $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入，用于 jevois\+::\+Parameter：读取 \mbox{[}{\ttfamily Key1\+:Value1}, {\ttfamily Key2\+:Value2}, ...\mbox{]} \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8434bf9159dcbaab41546816f39d3816}{jevois\+::param\+Val\+To\+String$<$ bool $>$}} (bool const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 将 bool 转换为机器可读的字符串，以便在 jevois\+::\+Parameter 中使用； \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga8500220c721730cb23bd49ba8f9b1a91}{jevois\+::param\+String\+To\+Val$<$ bool $>$}} (std\+::string const \&valstring, bool \&result)
+\begin{DoxyCompactList}\small\item\em 从字符串到布尔值的机器可读转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga391a3919aabdde5c2f6c0a2ff92c201f}{jevois\+::param\+Val\+To\+String$<$ std\+::string $>$}} (std\+::string const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串到字符串的转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\item 
+template$<$$>$ void \mbox{\hyperlink{group__parameterstrconv_ga98169733c0aaff712d9484cd1f20a3e8}{jevois\+::param\+String\+To\+Val$<$ std\+::string $>$}} (std\+::string const \&valstring, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的字符串到字符串的转换，用于 jevois\+::\+Parameter \end{DoxyCompactList}\end{DoxyCompactItemize}

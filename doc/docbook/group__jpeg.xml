@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__jpeg">
+<title>Jpeg 相关的类和函数</title>
+<indexterm><primary>Jpeg 相关的类和函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>Jpeg 类和函数，主要用于支持从相机捕获的原始未压缩图像通过 USB 发送 MJPEG 视频输出。 </para>
+Collaboration diagram for Jpeg 相关的类和函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__jpeg.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1JpegCompressor">jevois::JpegCompressor</link></para>
+
+<para>turbojpeg 压缩器的简单单例包装器 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__jpeg_1gaf446f726ba6d8e2d87aa87e5cd041518">jevois::convertYUYVtoYUV422</link> (unsigned char const *src, int width, int height, unsigned char *dst)</para>
+
+<para>辅助从打包的 YUYV 转换为平面 YUV422 </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gac8019b137a50caf3afe8f93b8041d815">jevois::compressBGRtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga055d9848dc85723e4429ac6b4f98812e">jevois::compressBGRtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 BGR cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gaf968b68fd408477de51a6fcf41be48d9">jevois::compressRGBtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1ga8a53f108718df36751b7b2b4fd16fbce">jevois::compressRGBtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 RGB cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gad721785df8a36bbc0081acf691b84cfc">jevois::compressRGBAtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gadd51281893168dd79429e9777eabe0e0">jevois::compressRGBAtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 RGBA cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+            <listitem><para>unsigned long <link linkend="_group__jpeg_1gab4e9f0c744d97117a37eae05da2c2a6d">jevois::compressGRAYtoJpeg</link> (unsigned char const *src, int width, int height, unsigned char *dst, int quality=75)</para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__jpeg_1gab4829fbfa937795d50f95b3d60596a31">jevois::compressGRAYtoJpeg</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality=75)</para>
+
+<para>将 Gray cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__jpeg_1ga055d9848dc85723e4429ac6b4f98812e"/>    <section>
+    <title>compressBGRtoJpeg()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>compressBGRtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressBGRtoJpeg</secondary></indexterm>
+<para><computeroutput>void jevois::compressBGRtoJpeg (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将 BGR cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</para>
+
+<para>dst <link linkend="_classjevois_1_1RawImage">RawImage</link> 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 </para>
+<para>
+Definition at line 108 of file Jpeg.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::compressBGRtoJpeg(), and jevois::RawImage::pixelsw().</para>
+    </section><anchor xml:id="_group__jpeg_1gac8019b137a50caf3afe8f93b8041d815"/>    <section>
+    <title>compressBGRtoJpeg()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>compressBGRtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressBGRtoJpeg</secondary></indexterm>
+<para><computeroutput>unsigned long jevois::compressBGRtoJpeg (unsigned char const * src, int width, int height, unsigned char * dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</para>
+<para>
+Definition at line 52 of file Jpeg.C.</para>
+<para>
+References jevois::JpegCompressor::compressor(), and jevois::Singleton&lt; JpegCompressor &gt;::instance().</para>
+<para>
+Referenced by jevois::compressBGRtoJpeg(), and jevois::rawimage::convertCvBGRtoRawImage().</para>
+    </section><anchor xml:id="_group__jpeg_1gab4829fbfa937795d50f95b3d60596a31"/>    <section>
+    <title>compressGRAYtoJpeg()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>compressGRAYtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressGRAYtoJpeg</secondary></indexterm>
+<para><computeroutput>void jevois::compressGRAYtoJpeg (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将 Gray cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</para>
+<para>
+Definition at line 126 of file Jpeg.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::compressGRAYtoJpeg(), and jevois::RawImage::pixelsw().</para>
+    </section><anchor xml:id="_group__jpeg_1gab4e9f0c744d97117a37eae05da2c2a6d"/>    <section>
+    <title>compressGRAYtoJpeg()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>compressGRAYtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressGRAYtoJpeg</secondary></indexterm>
+<para><computeroutput>unsigned long jevois::compressGRAYtoJpeg (unsigned char const * src, int width, int height, unsigned char * dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</para>
+<para>
+Definition at line 94 of file Jpeg.C.</para>
+<para>
+References jevois::JpegCompressor::compressor(), and jevois::Singleton&lt; JpegCompressor &gt;::instance().</para>
+<para>
+Referenced by jevois::compressGRAYtoJpeg(), and jevois::rawimage::convertCvGRAYtoRawImage().</para>
+    </section><anchor xml:id="_group__jpeg_1gadd51281893168dd79429e9777eabe0e0"/>    <section>
+    <title>compressRGBAtoJpeg()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>compressRGBAtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressRGBAtoJpeg</secondary></indexterm>
+<para><computeroutput>void jevois::compressRGBAtoJpeg (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将 RGBA cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</para>
+
+<para>dst <link linkend="_classjevois_1_1RawImage">RawImage</link> 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 </para>
+<para>
+Definition at line 120 of file Jpeg.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::compressRGBAtoJpeg(), and jevois::RawImage::pixelsw().</para>
+    </section><anchor xml:id="_group__jpeg_1gad721785df8a36bbc0081acf691b84cfc"/>    <section>
+    <title>compressRGBAtoJpeg()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>compressRGBAtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressRGBAtoJpeg</secondary></indexterm>
+<para><computeroutput>unsigned long jevois::compressRGBAtoJpeg (unsigned char const * src, int width, int height, unsigned char * dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</para>
+
+<para>返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 个字节。质量应该介于 1（最差）和 100（最好） 之间。 </para>
+<para>
+Definition at line 80 of file Jpeg.C.</para>
+<para>
+References jevois::JpegCompressor::compressor(), and jevois::Singleton&lt; JpegCompressor &gt;::instance().</para>
+<para>
+Referenced by jevois::compressRGBAtoJpeg(), and jevois::rawimage::convertCvRGBAtoRawImage().</para>
+    </section><anchor xml:id="_group__jpeg_1ga8a53f108718df36751b7b2b4fd16fbce"/>    <section>
+    <title>compressRGBtoJpeg()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>compressRGBtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressRGBtoJpeg</secondary></indexterm>
+<para><computeroutput>void jevois::compressRGBtoJpeg (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将 RGB cv::Mat 压缩为输出 JPEG <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> </para>
+</para>
+
+<para>dst <link linkend="_classjevois_1_1RawImage">RawImage</link> 应该有一个分配的缓冲区，通常用于从 UVC gadget 获取的 RawImage。 </para>
+<para>
+Definition at line 114 of file Jpeg.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::compressRGBtoJpeg(), and jevois::RawImage::pixelsw().</para>
+    </section><anchor xml:id="_group__jpeg_1gaf968b68fd408477de51a6fcf41be48d9"/>    <section>
+    <title>compressRGBtoJpeg()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>compressRGBtoJpeg</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>compressRGBtoJpeg</secondary></indexterm>
+<para><computeroutput>unsigned long jevois::compressRGBtoJpeg (unsigned char const * src, int width, int height, unsigned char * dst, int quality = <computeroutput>75</computeroutput>
+)</computeroutput></para><para>
+
+<para>将原始像素缓冲区压缩为 jpeg </para>
+</para>
+
+<para>返回压缩后的大小。dst 缓冲区应该由调用者分配，大小至少为 width * height * 2 个字节。质量应介于 1（最差）和 100（最好） 之间。 </para>
+<para>
+Definition at line 66 of file Jpeg.C.</para>
+<para>
+References jevois::JpegCompressor::compressor(), and jevois::Singleton&lt; JpegCompressor &gt;::instance().</para>
+<para>
+Referenced by jevois::compressRGBtoJpeg(), and jevois::rawimage::convertCvRGBtoRawImage().</para>
+    </section><anchor xml:id="_group__jpeg_1gaf446f726ba6d8e2d87aa87e5cd041518"/>    <section>
+    <title>convertYUYVtoYUV422()</title>
+<indexterm><primary>convertYUYVtoYUV422</primary><secondary>Jpeg 相关的类和函数</secondary></indexterm>
+<indexterm><primary>Jpeg 相关的类和函数</primary><secondary>convertYUYVtoYUV422</secondary></indexterm>
+<para><computeroutput>void jevois::convertYUYVtoYUV422 (unsigned char const * src, int width, int height, unsigned char * dst)</computeroutput></para><para>
+
+<para>辅助从打包的 YUYV 转换为平面 YUV422 </para>
+</para>
+<para>
+Definition at line 35 of file Jpeg.C.</para>
+</section>
+</section>
+</section>

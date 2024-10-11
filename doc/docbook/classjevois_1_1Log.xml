@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Log">
+<title>jevois::Log&lt; Level &gt; Class Template Reference</title>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Log.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;int Level&gt;
+class jevois::Log&lt; Level &gt;</title></simplesect>
+
+
+<para>Logger 类 </para>
+
+
+
+<para>用户通常不会直接使用此类，而是调用 <link linkend="_group__debugging_1ga136d9d772791ddd40a7781b0f6b01dd6">LDEBUG(msg)</link>、LINFO(msg) 等宏之一。请注意，默认情况下，日志记录是异步的，即， 在发出日志消息时，它会被组装然后推入队列，然后另一个线程将其从队列中弹出并显示。在编译时定义 JEVOIS_USE_SYNC_LOG 以立即显示消息，但请注意，这可能会破坏 USB 严格的时间要求。 </para>
+<para>
+Definition at line 52 of file Log.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Log_1ae91245519027f922cfad05ad76ffcdd4">Log</link> (char const *fullFileName, char const *functionName, std::string *outstr=nullptr)</para>
+
+<para>构造一个新的 Log，为日志流添加前缀 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Log_1ab6e15d85aa9d6cd49a7f202ea1a48e32">~Log</link> ()</para>
+
+<para>关闭日志，输出聚合消息 </para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para><link linkend="_classjevois_1_1Log">Log</link>&lt; Level &gt; &amp; <link linkend="_classjevois_1_1Log_1ab4cb33e1a351a1b8549fb3480127487a">operator&lt;&lt;</link> (T const &amp;out_item)</para>
+
+<para>为任何具有为 ostream 定义的 operator&lt;&lt; 的类型重载流输入运算符。 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Log">Log</link>&lt; Level &gt; &amp; <link linkend="_classjevois_1_1Log_1acd901f0c564df04b431ef78f9e95a897">operator&lt;&lt;</link> (uint8_t const &amp;out_item)</para>
+
+<para>uint8 的 operator&lt;&lt; 重载（将其显示为 int 而不是 char） </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Log">Log</link>&lt; Level &gt; &amp; <link linkend="_classjevois_1_1Log_1aca97686c2c47fce74d2149a33a5f88b9">operator&lt;&lt;</link> (int8_t const &amp;out_item)</para>
+
+<para>int8 的 operator&lt;&lt; 重载（将其显示为 int 而不是 char） </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1Log_1a319d8a0b2172cb220899cc59a71c7143">Log</link> (char const *, char const *, std::string *outstr)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Log_1ae91245519027f922cfad05ad76ffcdd4"/>    <section>
+    <title>Log()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>Log</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>Log</secondary></indexterm>
+<computeroutput>template&lt;int Level&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt;::<link linkend="_classjevois_1_1Log">Log</link> (char const * fullFileName, char const * functionName, std::string * outstr = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>构造一个新的 Log，为日志流添加前缀 </para>
+</para>
+
+<para>如果 outstr 非空，则在销毁时将日志消息复制到其中。 </para>
+<para>
+Definition at line 149 of file Log.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Log_1ab6e15d85aa9d6cd49a7f202ea1a48e32"/>    <section>
+    <title>~Log()</title>
+<indexterm><primary>~Log</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>~Log</secondary></indexterm>
+<computeroutput>template&lt;int Level&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt;::~<link linkend="_classjevois_1_1Log">Log</link></computeroutput></para><para>
+
+<para>关闭日志，输出聚合消息 </para>
+</para>
+<para>
+Definition at line 177 of file Log.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Log_1a319d8a0b2172cb220899cc59a71c7143"/>    <section>
+    <title>Log()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>Log</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>Log</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; LOG_ALERT &gt;::<link linkend="_classjevois_1_1Log">Log</link> (char const * , char const * , std::string * outstr)</computeroutput></para><para>
+Definition at line 44 of file Log.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Log_1aca97686c2c47fce74d2149a33a5f88b9"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;int Level&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt; &amp; <link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt;::operator&lt;&lt; (int8_t const &amp; out_item)</computeroutput></para><para>
+
+<para>int8 的 operator&lt;&lt; 重载（将其显示为 int 而不是 char） </para>
+</para>
+<para>
+Definition at line 195 of file Log.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Log_1ab4cb33e1a351a1b8549fb3480127487a"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;int Level&gt; </computeroutput><computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Log">Log</link>&lt;Level&gt;&amp; <link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt;::operator&lt;&lt; (T const &amp; out_item)<computeroutput>[inline]</computeroutput></computeroutput></para><para>
+
+<para>为任何具有为 ostream 定义的 operator&lt;&lt; 的类型重载流输入运算符。 </para>
+</para>
+<para>
+Definition at line 64 of file Log.H.</para>
+    </section><anchor xml:id="_classjevois_1_1Log_1acd901f0c564df04b431ef78f9e95a897"/>    <section>
+    <title>operator&lt;&lt;()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>operator&lt;&lt;</primary><secondary>jevois::Log&lt; Level &gt;</secondary></indexterm>
+<indexterm><primary>jevois::Log&lt; Level &gt;</primary><secondary>operator&lt;&lt;</secondary></indexterm>
+<computeroutput>template&lt;int Level&gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt; &amp; <link linkend="_classjevois_1_1Log">jevois::Log</link>&lt; Level &gt;::operator&lt;&lt; (uint8_t const &amp; out_item)</computeroutput></para><para>
+
+<para>uint8 的 operator&lt;&lt; 重载（将其显示为 int 而不是 char） </para>
+</para>
+<para>
+Definition at line 187 of file Log.C.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Log_8H">Log.H</link>src/jevois/Debug/<link linkend="_Log_8C">Log.C</link></section>
+</section>

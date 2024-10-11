@@ -1,0 +1,276 @@
+\hypertarget{classjevois_1_1ParameterCore}{}\doxysubsection{jevois\+::Parameter\+Core$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ParameterCore}\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Parameter.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Parameter\+Core$<$ T $>$}
+
+\mbox{\hyperlink{classjevois_1_1Component}{Component}} 的可变参数，核心类 
+
+用于公开 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的用户可配置设置的 Parameter。它们可以从命令行指定，并在拥有 Parameter 的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 上调用 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{Component\+::post\+Init()}} 时设置。\+Parameter 可能有一个回调函数，每次尝试更改参数值时都会调用该函数。 
+
+Definition at line 181 of file Parameter.\+H.
+
+
+
+Inheritance diagram for jevois\+::Parameter\+Core$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classjevois_1_1ParameterCore__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Parameter\+Core$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=233pt]{classjevois_1_1ParameterCore__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ParameterCore_a52c0cff720a747ecfdd008f4f7f3d672}{Parameter\+Core}} (\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&\mbox{\hyperlink{classjevois_1_1ParameterCore_a53c50e9682bb07bd56e82fe61c64fdf0}{def}})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ParameterCore_aa81e72fb97e1a3eb7d267344b9a6b15b}{$\sim$\+Parameter\+Core}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual const std\+::string \& \mbox{\hyperlink{classjevois_1_1ParameterCore_a2f72b49144d03843dad2e84b0eade908}{name}} () const override
+\begin{DoxyCompactList}\small\item\em Get the parameter name. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classjevois_1_1ParameterCore_ace71e5059c62014c4e4498c4515360c4}{descriptor}} () const override
+\begin{DoxyCompactList}\small\item\em Get the parameter fully-\/qualified name, aka descriptor. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{classjevois_1_1ParameterCore_ae1ed414cc3b8000f965502aca49c6d04}{get}} () const
+\begin{DoxyCompactList}\small\item\em Get the value of this Parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterCore_a95e33594381861776518d868268cbb1c}{set}} (T const \&new\+Val)
+\begin{DoxyCompactList}\small\item\em 设置此参数的值 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterCore_a1121687474dc9e676217545de1ac3040}{strset}} (std\+::string const \&valstring) override
+\begin{DoxyCompactList}\small\item\em Set the value from a string representation of it. \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterCore_a127d83697e47a6ec36fee2dee9bb77dc}{strget}} () const override
+\begin{DoxyCompactList}\small\item\em Get the value as a string representation of it. \end{DoxyCompactList}\item 
+virtual const \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} \mbox{\hyperlink{classjevois_1_1ParameterCore_a14f89b6c9cec27634da16afa912289c4}{summary}} () const override
+\begin{DoxyCompactList}\small\item\em Get summary info about this parameter. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterCore_ad4816cae3f11bb5acb7a154a8de6385f}{reset}} () override
+\begin{DoxyCompactList}\small\item\em Reset this parameter to its default value. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1ParameterCore_a53c50e9682bb07bd56e82fe61c64fdf0}{def}} () const
+\begin{DoxyCompactList}\small\item\em Access to our parameter def. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterCore_aab7d6676f5f0027c93fd0c33e12fe76c}{change\+Parameter\+Def}} (\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&\mbox{\hyperlink{classjevois_1_1ParameterCore_a53c50e9682bb07bd56e82fe61c64fdf0}{def}})
+\begin{DoxyCompactList}\small\item\em 更改此参数的 \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ParameterCore_af763094cebad1c842566a628f71837b6}{set\+Callback}} (std\+::function$<$ void(T const \&)$>$ cb)
+\begin{DoxyCompactList}\small\item\em Set the parameter\textquotesingle{}s callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual const \mbox{\hyperlink{classjevois_1_1Component}{Component}} $\ast$ \mbox{\hyperlink{classjevois_1_1ParameterCore_a5d03b30408f72e7bfd272c6ddffe98c8}{owner}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取此参数所附加到的组件，或者 nullptr（单个参数必须覆盖） \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a52c0cff720a747ecfdd008f4f7f3d672}\label{classjevois_1_1ParameterCore_a52c0cff720a747ecfdd008f4f7f3d672}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!ParameterCore@{ParameterCore}}
+\index{ParameterCore@{ParameterCore}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ParameterCore()}{ParameterCore()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&}]{def }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em def} & 指向此参数定义的指针（由 \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 提供）。 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_aa81e72fb97e1a3eb7d267344b9a6b15b}\label{classjevois_1_1ParameterCore_aa81e72fb97e1a3eb7d267344b9a6b15b}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!````~ParameterCore@{$\sim$ParameterCore}}
+\index{````~ParameterCore@{$\sim$ParameterCore}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ParameterCore()}{~ParameterCore()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_aab7d6676f5f0027c93fd0c33e12fe76c}\label{classjevois_1_1ParameterCore_aab7d6676f5f0027c93fd0c33e12fe76c}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!changeParameterDef@{changeParameterDef}}
+\index{changeParameterDef@{changeParameterDef}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{changeParameterDef()}{changeParameterDef()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::change\+Parameter\+Def (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$ T $>$ const \&}]{def }\end{DoxyParamCaption})}
+
+
+
+更改此参数的 \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}} 
+
+请谨慎使用，只有知道自己在做什么的人才能使用此函数。它的线程安全性和可能的​​副作用值得怀疑。 \mbox{\Hypertarget{classjevois_1_1ParameterCore_a53c50e9682bb07bd56e82fe61c64fdf0}\label{classjevois_1_1ParameterCore_a53c50e9682bb07bd56e82fe61c64fdf0}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!def@{def}}
+\index{def@{def}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{def()}{def()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{classjevois_1_1ParameterDef}{Parameter\+Def}}$<$T$>$\& \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::def (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Access to our parameter def. 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_ace71e5059c62014c4e4498c4515360c4}\label{classjevois_1_1ParameterCore_ace71e5059c62014c4e4498c4515360c4}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual std\+::string \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the parameter fully-\/qualified name, aka descriptor. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_a6cee45eb55e639246f471ccac72e95ea}{jevois\+::\+Parameter\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_ae1ed414cc3b8000f965502aca49c6d04}\label{classjevois_1_1ParameterCore_ae1ed414cc3b8000f965502aca49c6d04}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!get@{get}}
+\index{get@{get}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the value of this Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a2f72b49144d03843dad2e84b0eade908}\label{classjevois_1_1ParameterCore_a2f72b49144d03843dad2e84b0eade908}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!name@{name}}
+\index{name@{name}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string\& \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the parameter name. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_a8117ea414837acfaa3c194406ab3b6dd}{jevois\+::\+Parameter\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a5d03b30408f72e7bfd272c6ddffe98c8}\label{classjevois_1_1ParameterCore_a5d03b30408f72e7bfd272c6ddffe98c8}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!owner@{owner}}
+\index{owner@{owner}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{owner()}{owner()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const \mbox{\hyperlink{classjevois_1_1Component}{Component}}$\ast$ \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::owner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+获取此参数所附加到的组件，或者 nullptr（单个参数必须覆盖） 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1DynamicParameter_abb08737ebce48cc962e100318e8f7086}{jevois\+::\+Dynamic\+Parameter$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_ad4816cae3f11bb5acb7a154a8de6385f}\label{classjevois_1_1ParameterCore_ad4816cae3f11bb5acb7a154a8de6385f}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!reset@{reset}}
+\index{reset@{reset}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reset this parameter to its default value. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_a6460f1a7cecaa8e651f8d77c4721358d}{jevois\+::\+Parameter\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a95e33594381861776518d868268cbb1c}\label{classjevois_1_1ParameterCore_a95e33594381861776518d868268cbb1c}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!set@{set}}
+\index{set@{set}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::set (\begin{DoxyParamCaption}\item[{T const \&}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+设置此参数的值 
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_af763094cebad1c842566a628f71837b6}\label{classjevois_1_1ParameterCore_af763094cebad1c842566a628f71837b6}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!setCallback@{setCallback}}
+\index{setCallback@{setCallback}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{setCallback()}{setCallback()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::set\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(T const \&)$>$}]{cb }\end{DoxyParamCaption})}
+
+
+
+Set the parameter\textquotesingle{}s callback. 
+
+每次尝试更改参数值时都会调用回调函数。尽量避免使用 \mbox{\hyperlink{classjevois_1_1ParameterCore_af763094cebad1c842566a628f71837b6}{set\+Callback()}}，以免让类的用户感到困惑。在大多数情况下， 只需使用便捷的 \mbox{\hyperlink{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+C\+K()}} 宏即可。
+
+回调应该检查候选值 newval，并且 (1) 如果不喜欢，则抛出一个 std\+::range\+\_\+error，并附上拒绝该值的原因描述性消息，(2) 否则，假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（参数对象的实际修改在上游处理，回调无需担心：如果 它返回而没有抛出，则提议的值将成为参数的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免破坏参数和/或多 个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调用 \mbox{\hyperlink{classjevois_1_1ParameterCore_a95e33594381861776518d868268cbb1c}{set()}} 等，因为这将始终导致死锁（如果您 的回调需要知道参数的当前值，则允许使用 \mbox{\hyperlink{classjevois_1_1ParameterCore_ae1ed414cc3b8000f965502aca49c6d04}{get()}}）。 \mbox{\Hypertarget{classjevois_1_1ParameterCore_a127d83697e47a6ec36fee2dee9bb77dc}\label{classjevois_1_1ParameterCore_a127d83697e47a6ec36fee2dee9bb77dc}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!strget@{strget}}
+\index{strget@{strget}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{strget()}{strget()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::strget (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get the value as a string representation of it. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_a3ae3dc26472435191e90b9f4db1951aa}{jevois\+::\+Parameter\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a1121687474dc9e676217545de1ac3040}\label{classjevois_1_1ParameterCore_a1121687474dc9e676217545de1ac3040}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!strset@{strset}}
+\index{strset@{strset}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{strset()}{strset()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual void \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::strset (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{valstring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Set the value from a string representation of it. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the given string cannot be converted to a valid Parameter value. \\
+\hline
+\end{DoxyExceptions}
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_a73b52118989ca2cae2632f5c710035f4}{jevois\+::\+Parameter\+Base}}.
+
+\mbox{\Hypertarget{classjevois_1_1ParameterCore_a14f89b6c9cec27634da16afa912289c4}\label{classjevois_1_1ParameterCore_a14f89b6c9cec27634da16afa912289c4}} 
+\index{jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}!summary@{summary}}
+\index{summary@{summary}!jevois::ParameterCore$<$ T $>$@{jevois::ParameterCore$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{summary()}{summary()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const \mbox{\hyperlink{classjevois_1_1ParameterSummary}{Parameter\+Summary}} \mbox{\hyperlink{classjevois_1_1ParameterCore}{jevois\+::\+Parameter\+Core}}$<$ T $>$\+::summary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get summary info about this parameter. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ParameterBase_ac3654762a1c846ada35e56bf2fdafe64}{jevois\+::\+Parameter\+Base}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Parameter_8H}{Parameter.\+H}}\end{DoxyCompactItemize}

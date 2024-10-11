@@ -1,0 +1,260 @@
+Je\+Vois Inventor 是 Je\+Vois-\/\+A33 智能相机的图形前端，可在主机（\+P\+C、\+Mac、\+Linux）上运行。它使用完整的 Python + Open\+CV 轻松编写在 Je\+Vois 上运行的新计算机视觉管道。
+
+Je\+Vois Inventor 不与 Je\+Vois-\/\+Pro 一起使用。相反，\+Je\+Vois-\/\+Pro 直接在相机中提供相同的功能。如果您正在使用 Je\+Vois-\/\+Pro，则可以跳过此页面。
+
+此前端是为不阅读用户手册的人创建的，因此请随意探索！
+
+
+
+尽管如此，这里还是有几点建议。
+
+\begin{DoxyNote}{Note}
+Je\+Vois Inventor 目前处于测试阶段。请通过电子邮件将评论和错误报告发送至 \href{mailto:jevois.org@gmail.com}{\texttt{ jevois.\+org@gmail.\+com}} 帮助我们改进此软件
+\end{DoxyNote}
+\hypertarget{JeVoisInventor_autotoc_md44}{}\doxysubsubsection{安装 Je\+Vois Inventor}\label{JeVoisInventor_autotoc_md44}
+
+\begin{DoxyItemize}
+\item Windows\+:
+\begin{DoxyItemize}
+\item 在 Windows 7 和 Windows 10 上测试。
+\item 从 \href{http://jevois.org/start}{\texttt{ http\+://jevois.\+org/start}} 下载 {\bfseries{jevois-\/inventor\+\_\+\+X\+X\+X.\+zip}}（\+X\+XX 会因版本而异）
+\item Windows 7（不是 8 或 10）用户需要安装驱动程序，请参阅 \href{http://jevois.org/doc/USBserialWindows.html}{\texttt{ http\+://jevois.\+org/doc/\+U\+S\+Bserial\+Windows.\+html}}
+\item 解压缩 zip 内容
+\item 双击 {\ttfamily jevois-\/inventor.\+exe}
+\item 如果未检测到 Je\+Vois 相机，请参阅下面的 \char`\"{}\+Troubleshooting\char`\"{}
+\end{DoxyItemize}
+\item Linux\+:
+\begin{DoxyItemize}
+\item 适用于 20.\+04（focal）、18.04 amd64（bionic）和（仅限旧版本）16.04 amd64（xenial）并经过测试
+\item 从 \href{http://jevois.org/start}{\texttt{ http\+://jevois.\+org/start}} 下载 {\bfseries{jevois-\/inventor\+\_\+\+X\+X\+X.\+deb}}（\+X\+XX 会因版本而异）
+\item {\ttfamily sudo dpkg -\/i jevois-\/inventor\+\_\+\+X\+X\+X.\+deb} \#（\+X\+XX 会根据版本而变化）
+\item {\ttfamily sudo killall Modem\+Manager} \#（\+Modem\+Manager 会干扰 Je\+Vois）
+\item {\ttfamily jevois-\/inventor}
+\item 如果您希望避免每次连接 Je\+Vois 时都必须更改其视频和串行端口的权限，则需要将您的用户添加到 {\bfseries{video}} 和 {\bfseries{dialout}} 组，如下所示：\begin{DoxyVerb}sudo apt purge modemmanager sudo usermod -aG dialout $USER sudo usermod -aG video $USER \end{DoxyVerb}
+ 并重新启动计算机以使设置生效。
+\end{DoxyItemize}
+\item Mac\+OS\+:
+\begin{DoxyItemize}
+\item 已在 Catalina、\+Mojave、\+High Sierra 上测试。无法在 Snow Leopard 上运行，因为版本太旧。抱歉，我们没有中间版本可供测试...
+\item 从 \href{http://jevois.org/start}{\texttt{ http\+://jevois.\+org/start}} 下载 {\bfseries{jevois-\/inventor\+\_\+\+X\+X\+X.\+dmg}}（\+X\+XX 会因版本而异）
+\item 双击 D\+MG 文件以将其打开
+\item 将 jevois-\/inventor 拖到桌面或应用程序文件夹
+\item 双击 jevois-\/inventor。如果您的 Mac 拒绝打开它，请按住 {\ttfamily C\+T\+RL} 并单击 Je\+Vois Inventor 图标，然后从下拉菜单中选择 {\bfseries{打开。现在应该可以打开它了。}} 
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md45}{}\doxysubsubsection{您的 Je\+Vois 智能相机}\label{JeVoisInventor_autotoc_md45}
+  
+
+另请参阅：
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{Hardware}{Je\+Vois-\/\+A33 硬件平台概述}}
+\item \mbox{\hyperlink{Handling}{Je\+Vois 智能相机处理和注意事项}}
+\item \mbox{\hyperlink{UserConnect}{将 Je\+Vois-\/\+A33 连接到电源和数据}}
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md46}{}\doxysubsubsection{检测您的 Je\+Vois 智能相机}\label{JeVoisInventor_autotoc_md46}
+检测是全自动的。无需指定设备，无需查找端口。
+
+只需启动 Je\+Vois Inventor，将装有最新 Je\+Vois 软件的 micro\+SD 卡插入相机，然后将相机连接到主机。
+
+一旦检测到摄像头， 机器视觉模块将自动启动。
+
+  
+
+您可以随时断开 Je\+Vois，\+Je\+Vois Inventor 应该会检测到。下次连接 Je\+Vois 时，\+Je\+Vois Inventor 也应该会再次检测到它。
+
+Troubleshooting\+:
+
+
+\begin{DoxyItemize}
+\item Linux：您可能有权限问题。每次 Je\+Vois 启动后（橙色 L\+ED 常亮），请尝试“sudo chmod 777 /dev/video0 /dev/tty\+A\+C\+M0”。
+\item 有关如何使用普通视频捕获设备开始使用 Je\+Vois 的更多详细说明：
+\item \mbox{\hyperlink{UserStartWindows}{Je\+Vois-\/\+A33：开始使用 Windows 主机}}
+\item \mbox{\hyperlink{UserStartLinux}{Je\+Vois-\/\+A33：\+Linux 主机入门}}
+\item \mbox{\hyperlink{UserStartMac}{Je\+Vois-\/\+A33：\+Mac 主机入门 \textbackslash{}tableofcontents}}
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md47}{}\doxysubsubsection{尝试各种机器视觉模块}\label{JeVoisInventor_autotoc_md47}
+使用{\bfseries{视觉模块}}菜单选择给定的机器视觉模块。
+
+  
+
+用 Python 编写的模块以粗体突出显示。您可以直接在 Je\+Vois Inventor 中编辑这些模块的代码（见下文）。
+
+在 {\bfseries{Info}} 选项卡下，您可以浏览模块的文档。您可以按 {\ttfamily C\+T\+RL} + 鼠标滚轮来放大/缩小。
+
+\begin{DoxyNote}{Note}
+目前，\+Je\+Vois Inventor 仅支持 Y\+U\+YV 捕获，我们认为这是 Qt（我们用于开发 Je\+Vois Inventor 的小部件工具包）的 Q\+Camera 类的限制。我们正在研究修复此问题，可能通过修复 Qt 的核心。
+\end{DoxyNote}
+更多信息：现在可能是熟悉几个关键概念的好时机：概念\hypertarget{JeVoisInventor_autotoc_md48}{}\doxysubsubsection{调整参数}\label{JeVoisInventor_autotoc_md48}
+许多机器视觉模块公开了可由用户调整的参数。
+
+点击{\bfseries{}} 参数选项卡，查看当前模块的参数。
+
+  
+
+
+\begin{DoxyItemize}
+\item 将鼠标悬停在参数的小部件上可以查看此参数功能的描述
+\item 将鼠标悬停在参数名称上可查看其完整的机器导向名称和数据类型
+\item 单击 {\bfseries{重置按钮可将参数重置为其默认值}} 
+\item 切换{\bfseries{显示冻结参数}}以显示在运行时无法更改的参数（这些参数通常只能在加载模块时通过配置文件设置一次）。
+\item 切换{\bfseries{显示系统参数}}以显示与 Je\+Vois 核心系统相关的参数，而不是当前的机器视觉模块。
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md49}{}\doxysubsubsection{通过命令行控制台与 Je\+Vois 通信}\label{JeVoisInventor_autotoc_md49}
+Je\+Vois 提供了一个简单的命令行界面，允许人们通过 Je\+Vois 的 4 针串行端口或通过 Serial-\/over-\/\+U\+SB 端口（\+Je\+Vois Inventor 使用）运行命令、设置参数等。
+
+该接口主要用来让微控制器或主机配置 Je\+Vois。实际上，每次单击 Je\+Vois Inventor 中的按钮时，都会使用此命令行接口向 Je\+Vois 发送命令。
+
+  
+
+
+\begin{DoxyItemize}
+\item 单击底部的输入行即可输入命令。命令输入行具有完整的历史记录，因此您可以使用向上/向下光标键重新输入先前输入的命令。
+\item 将鼠标悬停在 {\bfseries{Enter}} 按钮旁边的“？”上，即可查看当前可用命令的列表。
+\item 在左上角，选择发送日志消息的位置（无处、发送到 U\+S\+B、发送到 4 针串行端口或两者）。某些模块会发出日志消息，以便让您了解其运行的详细信息，或让您了解任何错误情况。
+\item 在右上角，选择将模块输出消息发送到何处（无处、发送到 U\+S\+B、发送到 4 针串行端口或两者）。模块输出消息包含当前机器视觉管道在输入视频中发现的结果。例如，它可以流式传输已识别对象的名称，或检测到的标记标签或颜色斑点的坐标和大小。
+\end{DoxyItemize}
+
+  
+
+在上面的示例中，\+Je\+Vois 检测到了 Ar\+Uco 标记标签（\+ID 为 U42、\+U27、\+U18 和 U43）、两个蓝色斑点（由名为 {\bfseries{blob0}} 的颜色检测器检测）和一个黄色斑点（由 {\bfseries{blob1}} 检测）。对于每个检测到的对象，\+Je\+Vois 还会发送其 4 个角的 4 个标准化（介于 -\/1000 和 1000 之间，以 0 为中心）2D 坐标（详细消息格式）。
+
+有关这些消息及其详细程度（简洁、正常、详细或精细）的更多信息，请参阅 \mbox{\hyperlink{UserSerialStyle}{标准化串行消息格式}}
+
+有关 Je\+Vois 命令行界面的更多信息，请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}}\hypertarget{JeVoisInventor_autotoc_md50}{}\doxysubsubsection{更改相机设置}\label{JeVoisInventor_autotoc_md50}
+有时使用低级相机传感器控件（例如白平衡、增益和曝光）来优化机器视觉算法的性能很有用。选择 {\bfseries{相机选项卡可访问这些传感器控件。}} 
+
+  
+
+
+\begin{DoxyItemize}
+\item 请注意某些控制如何依赖于其他控制（例如，当自动增益处于活动状态时，增益被禁用并且无法更改）。
+\item 单击每个控件旁边的 {\bfseries{Reset}} 即可恢复为其默认值。
+\item 关于绝对曝光控制的特别说明：要启用绝对曝光，请先为 {\bfseries{autoexp}} 参数选择 {\bfseries{manual。这将激活}} {\bfseries{absexp}} 和 {\bfseries{gain}} 滑块，同时关闭 {\bfseries{autogain。请注意，{\bfseries{absexp}} 的可用范围取决于当前相机传感器分辨率和帧速率，因为我们无法将图像曝光超过大约一个帧周期（帧速率的倒数）。因此，在大多数情况下，当您将滑块一直拖到最大值时，它会迅速回到当前视频分辨率和帧速率允许的最大值，这是正常的。}} 
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md51}{}\doxysubsubsection{配置文件}\label{JeVoisInventor_autotoc_md51}
+配置文件允许为 Je\+Vois 或给定模块设置一些参数，这些参数将在每次启动 Je\+Vois 或调用该模块时使用。您可以将其视为为 Je\+Vois 或给定模块设置默认首选项。
+
+单击 {\bfseries{Config}} 选项卡，然后您可以选择 4 个配置文件之一：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Je\+Vois initscript.\+cfg：}}Je\+Vois 启动时运行一次的全局配置文件。如果您希望 Je\+Vois 自动启动一个特定的机器视觉模块而无需任何用户干预（无头模式），则此文件很有用，例如当 Je\+Vois 用于只有 Arduino 控制器且没有主机计算机来运行 Je\+Vois Inventor 的机器人时。
+\item {\bfseries{Je\+Vois videomappings.\+cfg：}}这是 Je\+Vois 通过 U\+SB 传输的视频分辨率与相应的相机传感器分辨率之间的映射列表，以及要运行的机器视觉模块。当主机计算机向 Je\+Vois 请求给定的视频格式时，此文件用于决定在 Je\+Vois 上运行哪个机器视觉模块。
+\end{DoxyItemize}
+
+有关详细信息，请参阅 \mbox{\hyperlink{UserModes}{视频模式和映射用户指南}}
+
+
+\begin{DoxyItemize}
+\item {\bfseries{模块的 params.\+cfg：}}其中包含当前模块的参数，每次加载模块时以及启动模块之前都应设置这些参数。例如， 等深度神经网络模块使用此文件来配置将使用哪个神经网络。
+\item {\bfseries{模块的 script.\+cfg：}}这是当前模块的脚本文件，在模块加载和初始化后运行。可以将其他参数或相机控制设置放入此文件中。例如， 使用此文件配置并行运行的四个颜色 blob 检测器的四种颜色。
+\end{DoxyItemize}
+
+  
+
+请注意底部的两个中间按钮：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{C：将当前相机控制（使用}} {\bfseries{相机选项卡手动调整）粘贴到当前显示的文件（只有脚本文件可以接受此功能）}} 
+\item {\bfseries{P：将当前模块参数（使用}} {\bfseries{参数选项卡手动调整）粘贴到当前显示的文件（参数和脚本文件都可以接受此功能）}} 
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md52}{}\doxysubsubsection{编辑机器视觉代码}\label{JeVoisInventor_autotoc_md52}
+\begin{DoxyNote}{Note}
+目前，此功能仅支持 Python 模块。目前尚不清楚我们是否也能支持 C++ 模块。因此，您应该选择一个 Python 模块（在 {\bfseries{Vision Module}} 下拉菜单中以粗体显示）。可以看到 C++ 模块的源代码，但目前在 Je\+Vois Inventor 中是只读的。
+\end{DoxyNote}
+选择 {\bfseries{代码选项卡可以访问编辑器来查看当前正在运行的模块的源代码。}} 
+
+  
+
+编辑代码，按 {\ttfamily C\+T\+RL}-\/S 保存到 Je\+Vois，您将立即看到结果。
+
+不要害羞，只需尝试一些 Open\+CV 代码，看看会发生什么。基本思路是，您从相机传感器获得一个图像 {\bfseries{inimg，您的任务是创建一个输出图像}} {\bfseries{outimg，该图像将通过}} U\+SB 发送到主机。
+
+关于编辑器的一些说明：
+
+
+\begin{DoxyItemize}
+\item 它具有语法高亮功能（关键字、注释等使用不同颜色）
+\item 自动缩进（如果在 {\ttfamily \+:} 后按 {\ttfamily R\+E\+T\+U\+RN}，缩进会增加）
+\item 使用 {\ttfamily T\+AB} 添加缩进，使用 {\ttfamily Shift+\+T\+AB} 减少缩进
+\item 缩进（前导空格）以灰点显示
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md53}{}\doxysubsubsection{创建一个新的机器视觉模块}\label{JeVoisInventor_autotoc_md53}
+从{\bfseries{Vision Module}}下拉菜单中选择{\bfseries{New Python Module...}}。
+
+  
+
+输入数据。{\bfseries{所有字段均为必填项。}} {\bfseries{完成按钮只有在您输入可接受的数据后才会启用。将鼠标悬停在每个字段上即可查看提示。}} 
+
+\begin{DoxyNote}{Note}
+模块名称和模块供应商必须以大写字母开头。除非您输入至少一个大写字母，否则您将无法在这些框中输入任何内容。请务必将鼠标悬停在每个字段上并阅读工具提示以获取更多信息。
+\end{DoxyNote}
+对于简单模块，您通常会为 U\+SB 输出和相机传感器选择相同的分辨率。对于更复杂的模块，例如并排显示输出，左侧显示原始视频帧，右侧显示机器视觉结果，它们可能会有所不同（例如，在并排示例中，相机传感器分辨率可能是 320x240，而 U\+SB 输出将是 640x240）。模块编写者有责任创建具有正确分辨率的输出图像，然后 Je\+Vois 核心会通过 U\+SB 将其发送到主机。
+
+要开始编写新模块，请查看 Module\+Python\+Tutorial、\textbackslash{}​​ref Programmer\+Python 和 \mbox{\hyperlink{ProgrammerTutos}{程序员教程}}\hypertarget{JeVoisInventor_autotoc_md54}{}\doxysubsubsection{系统设置}\label{JeVoisInventor_autotoc_md54}
+如果您想停止视频流，请使用 {\bfseries{系统选项卡。在使用}} {\ttfamily setmapping2} 命令以无头模式启动模块之前，需要执行此操作。例如，请参阅\href{http://jevois.org/tutorials/UserPanTilt.html}{\texttt{ 关于为 Je\+Vois 制作摇摄/倾斜云台的教程}}，无 U\+SB 输出运行部分。
+
+  
+
+您还可以将 Je\+Vois 中的 micro\+SD 作为虚拟闪存驱动器导出到主机。启用后，桌面上会出现一个新的闪存驱动器，您可以浏览 Je\+Vois 的 micro\+SD 上的文件。这对于备份您的自定义模块或加载新训练的深度神经网络非常有用。
+
+  
+
+当您在 Je\+Vois 内浏览 micro\+SD 时，您无法更改或使用机器视觉模块。完成后，请从主机中正确弹出虚拟 U\+SB 驱动器（安全移除、拖到垃圾箱、弹出按钮等），\+Je\+Vois 将重新启动以考虑您对其 micro\+SD 卡所做的更改。\hypertarget{JeVoisInventor_autotoc_md55}{}\doxysubsubsection{深入了解}\label{JeVoisInventor_autotoc_md55}
+Je\+Vois Inventor 只是 Je\+Vois 核心的简单前端。除了 Je\+Vois Inventor 支持的功能外，您还可以使用 Je\+Vois 完成更多任务。请参阅 \href{http://jevois.org/doc/}{\texttt{ http\+://jevois.\+org/doc/}} 以获取更全面的文档。
+
+特别要注意的是：
+
+
+\begin{DoxyItemize}
+\item \href{/tutorials}{\texttt{ 用户教程}}
+\item \href{/tutorials}{\texttt{ 程序员教程}} 向您展示使用 Inventor 在 Je\+Vois 上进行 Python + Open\+Cv 编程的简单示例。
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md56}{}\doxysubsubsection{发行说明}\label{JeVoisInventor_autotoc_md56}
+Je\+Vois Inventor 0.\+1.\+0
+\begin{DoxyItemize}
+\item 初始版本
+\end{DoxyItemize}
+
+Je\+Vois Inventor 0.\+2.\+0
+\begin{DoxyItemize}
+\item 在 Windows 平台上更好地检测设备
+\item 将旋转框附加到所有滑块
+\item 为所有编辑器添加行号并突出显示当前行
+\item 从文件菜单添加了指向各种文档页面的链接。
+\end{DoxyItemize}\hypertarget{JeVoisInventor_autotoc_md57}{}\doxysubsubsection{Windows 故障排除}\label{JeVoisInventor_autotoc_md57}
+Je\+Vois Inventor 会尝试自动检测 Je\+Vois 相机，这样您不必在每次启动 Inventor 或重新启动相机时选择其设备。
+
+Je\+Vois 智能相机是一个复合 U\+SB 设备，包含三个子设备：
+\begin{DoxyItemize}
+\item U\+SB 视频类 (U\+VC) 视频相机，用于通过 U\+SB 传输视频；
+\item C\+D\+C-\/\+A\+CM 串行 U\+SB 端口，用于向 Je\+Vois 发送命令；
+\item 大容量存储设备，用于将 Je\+Vois 内部的 micro\+SD 卡作为虚拟闪存驱动器进行访问。
+\end{DoxyItemize}
+
+要工作，\+Je\+Vois Inventor 需要检测至少前两个子设备。在 Linux 和 Mac\+OS 上，通过枚举所有连接的摄像头和串行端口，并找到制造商或产品描述中包含单词 {\itshape Je\+Vois} 的设备，此方法效果很好。
+
+但是，此功能（由 Je\+Vois Inventor 所用的 \href{http://qt.io}{\texttt{ Qt}} 小部件工具包提供）似乎在 Windows 平台上无法很好地工作。尽管 Je\+Vois 相机在连接时会向主机发送制造商和产品描述，但 Windows 似乎会忽略这些内容。相反，\+Windows 会为 Je\+Vois 分配名称，而这些名称似乎是您计算机上先前加载的驱动程序 (.inf) 文件中存在的任何名称。
+
+如果 Inventor 无法检测到您的 Je\+Vois 相机，请尝试以下操作：
+
+
+\begin{DoxyItemize}
+\item 断开相机连接并打开{\bfseries{控制面板}}，然后打开{\bfseries{设备管理器}}。
+\item 展开{\bfseries{成像设备}}（或 Windows 10 上的{\bfseries{相机}}）和{\bfseries{端口（\+C\+OM 和 L\+P\+T）}}的条目。
+\item 连接 Je\+Vois 并等待 Windows 检测到它。
+\item 应出现一个新的成像设备和一个新的端口；记下它们的名称。在下面的示例中，\+Je\+Vois 被分配了 {\itshape U\+VC Camera} 作为相机子设备的名称，{\itshape Gadget Serial} 作为串行 U\+SB 子设备的名称。在 Windows 7 上，您可能需要使用 {\ttfamily jevois-\/serial.\+inf}（如 \mbox{\hyperlink{USBserialWindows}{使用 U\+SB 串行连接到 Je\+Vois：\+Windows 主机}} 中所述）来安装正确的 U\+SB 串行驱动程序。根据您的 Windows 版本和已安装驱动程序的历史记录，这些名称会有很大差异。如果您以前没有在计算机上使用过 U\+SB 相机或串行 U\+SB 适配器，它们将正确包含单词 {\itshape Je\+Vois（即，\+Je\+Vois} 是第一个检测到的此类设备，然后 Windows 将获取并使用该设备宣传的正确名称）。
+
+
+\item 从 Je\+Vois Inventor 0.\+2.\+0 开始，如果 Je\+Vois 无法自动检测到，您将被邀请手动选择相机、\+U\+SB 串行或两个子设备。使用您首次连接 Je\+Vois 相机时在{\bfseries{设备管理器}}中记下的名称：
+
+
+\item 为了避免每次重新启动 Inventor 时都需要选择设备名称，您可以尝试卸载现有驱动程序，以便下次 Windows 检测到 Je\+Vois 并重新安装驱动程序时会提取正确的名称：
+\begin{DoxyItemize}
+\item 连接 Je\+Vois 并等待 Windows 检测到它。
+\item 在 {\bfseries{设备管理器}} 中，右键单击设备并选择 {\bfseries{卸载}}。接受卸载。对相机设备和（仅限 Windows 7）串行端口设备执行此操作（您无法在 Windows 10 上卸载 Microsoft 串行端口设备）。
+\item 断开 Je\+Vois。
+\item 一分钟后，再次连接 Je\+Vois。您应该会看到一些有关检测到新设备的消息。不要触摸任何东西，让 Windows 安装驱动程序。一两分钟后，驱动程序应该已经安装并可以使用。
+\item 对于串行 U\+SB 端口，在 Windows 10 上它是内置的，您无法更改它，它的名称固定为“\+U\+SB 串行设备”。因此，\+Je\+Vois Inventor 除了接受包含单词 Je\+Vois 的名称外，还接受此名称。在 Windows 7 上，使用 {\ttfamily jevois-\/serial.\+inf}（如 \mbox{\hyperlink{USBserialWindows}{使用 U\+SB 串行连接到 Je\+Vois：\+Windows 主机}} 中所述）安装正确的驱动程序。
+\item 在{\bfseries{设备管理器}}中的{\bfseries{成像设备}}（或{\bfseries{相机}}）下，确认 Je\+Vois 相机子设备的名称现在为“\+Je\+Vois-\/\+A33 摄像机”。
+\item 在{\bfseries{端口（\+C\+OM 和 L\+P\+T）}}下，名称现在应为“\+Je\+Vois-\/\+A33 Serial-\/over-\/\+U\+S\+B”（\+Windows 7）或“\+U\+SB 串行端口”（\+Windows 10）。
+\item Inventor 现在应该会自动检测您的相机，无需手动选择设备。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+
+
+ 

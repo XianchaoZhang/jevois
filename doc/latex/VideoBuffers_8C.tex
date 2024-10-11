@@ -1,0 +1,68 @@
+\hypertarget{VideoBuffers_8C}{}\doxysubsection{src/jevois/\+Core/\+Video\+Buffers.C File Reference}
+\label{VideoBuffers_8C}\index{src/jevois/Core/VideoBuffers.C@{src/jevois/Core/VideoBuffers.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Video\+Buffers.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$sys/ioctl.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+Include dependency graph for Video\+Buffers.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{VideoBuffers_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{VideoBuffers_8C_aec794ed344cbed89f6859526071ce4b2}{F\+D\+L\+D\+E\+B\+UG}}(msg)~\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{VideoBuffers_8C_ad974e026cd678b223877059cbfb7c55a}{F\+D\+L\+I\+N\+FO}}(msg)~\mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{VideoBuffers_8C_a73fca3d993165a5875ebe979ac90f6c3}{F\+D\+L\+E\+R\+R\+OR}}(msg)~\mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\item 
+\#define \mbox{\hyperlink{VideoBuffers_8C_aaf8913a1ae88e40edd0c458745d7d6d5}{F\+D\+L\+F\+A\+T\+AL}}(msg)~\mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{VideoBuffers_8C_aec794ed344cbed89f6859526071ce4b2}\label{VideoBuffers_8C_aec794ed344cbed89f6859526071ce4b2}} 
+\index{VideoBuffers.C@{VideoBuffers.C}!FDLDEBUG@{FDLDEBUG}}
+\index{FDLDEBUG@{FDLDEBUG}!VideoBuffers.C@{VideoBuffers.C}}
+\doxyparagraph{\texorpdfstring{FDLDEBUG}{FDLDEBUG}}
+{\footnotesize\ttfamily \#define F\+D\+L\+D\+E\+B\+UG(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_ga136d9d772791ddd40a7781b0f6b01dd6}{L\+D\+E\+B\+UG}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 24 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{VideoBuffers_8C_a73fca3d993165a5875ebe979ac90f6c3}\label{VideoBuffers_8C_a73fca3d993165a5875ebe979ac90f6c3}} 
+\index{VideoBuffers.C@{VideoBuffers.C}!FDLERROR@{FDLERROR}}
+\index{FDLERROR@{FDLERROR}!VideoBuffers.C@{VideoBuffers.C}}
+\doxyparagraph{\texorpdfstring{FDLERROR}{FDLERROR}}
+{\footnotesize\ttfamily \#define F\+D\+L\+E\+R\+R\+OR(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_gad364e6e39b7970e4548d99dc3c0c68cc}{L\+E\+R\+R\+OR}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 26 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{VideoBuffers_8C_aaf8913a1ae88e40edd0c458745d7d6d5}\label{VideoBuffers_8C_aaf8913a1ae88e40edd0c458745d7d6d5}} 
+\index{VideoBuffers.C@{VideoBuffers.C}!FDLFATAL@{FDLFATAL}}
+\index{FDLFATAL@{FDLFATAL}!VideoBuffers.C@{VideoBuffers.C}}
+\doxyparagraph{\texorpdfstring{FDLFATAL}{FDLFATAL}}
+{\footnotesize\ttfamily \#define F\+D\+L\+F\+A\+T\+AL(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{L\+F\+A\+T\+AL}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 27 of file Video\+Buffers.\+C.
+
+\mbox{\Hypertarget{VideoBuffers_8C_ad974e026cd678b223877059cbfb7c55a}\label{VideoBuffers_8C_ad974e026cd678b223877059cbfb7c55a}} 
+\index{VideoBuffers.C@{VideoBuffers.C}!FDLINFO@{FDLINFO}}
+\index{FDLINFO@{FDLINFO}!VideoBuffers.C@{VideoBuffers.C}}
+\doxyparagraph{\texorpdfstring{FDLINFO}{FDLINFO}}
+{\footnotesize\ttfamily \#define F\+D\+L\+I\+N\+FO(\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})~\mbox{\hyperlink{group__debugging_gadf127ca2262cc160830da49c37d04e85}{L\+I\+N\+FO}}(\textquotesingle{}\mbox{[}\textquotesingle{} $<$$<$ its\+Fd $<$$<$ \textquotesingle{}\+:\textquotesingle{} $<$$<$ its\+Name $<$$<$ \char`\"{}\mbox{]} \char`\"{} $<$$<$ msg)}
+
+
+
+Definition at line 25 of file Video\+Buffers.\+C.
+

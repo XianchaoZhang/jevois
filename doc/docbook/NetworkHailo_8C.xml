@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_NetworkHailo_8C">
+<title>src/jevois/DNN/NetworkHailo.C File Reference</title>
+<indexterm><primary>src/jevois/DNN/NetworkHailo.C</primary></indexterm>
+<programlisting>#include &lt;jevois/DNN/NetworkHailo.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/DNN/Utils.H&gt;
+#include &lt;hailo/hailort.h&gt;
+#include &lt;hailo/hailort.hpp&gt;
+</programlisting>Include dependency graph for NetworkHailo.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="NetworkHailo_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_NetworkHailo_8C_1ace4e444f6c83fdaf3b940cabdbcd382e">HAILO_CHECK</link>(obj,  msg)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_NetworkHailo_8C_1ace4e444f6c83fdaf3b940cabdbcd382e"/>    <section>
+    <title>HAILO_CHECK</title>
+<indexterm><primary>HAILO_CHECK</primary><secondary>NetworkHailo.C</secondary></indexterm>
+<indexterm><primary>NetworkHailo.C</primary><secondary>HAILO_CHECK</secondary></indexterm>
+<para><computeroutput>#define HAILO_CHECK( obj,  msg)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;<emphasis role="keywordflow">if</emphasis>&#32;(!obj)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(msg&#32;&lt;&lt;&#32;<emphasis role="stringliteral">&quot;:&#32;&quot;</emphasis>&#32;&lt;&lt;&#32;obj.status()&#32;&lt;&lt;&#32;<emphasis role="stringliteral">&quot;&#32;[&quot;</emphasis>&#32;&lt;&lt;&#32;\
+&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;hailo_get_status_message(obj.status())&#32;&lt;&lt;&#32;<emphasis role="charliteral">&apos;]&apos;</emphasis>);&#32;}&#32;<emphasis role="keywordflow">while</emphasis>&#32;(0)
+</programlisting><para>
+Definition at line 31 of file NetworkHailo.C.</para>
+</section>
+</section>
+</section>

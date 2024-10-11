@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl">
+<title>jevois::dnn::PreProcessorPythonImpl Class Reference</title>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary></indexterm>
+<section>
+<title> </title>
+<para>
+Definition at line 28 of file PreProcessorPython.C.</para>
+Inheritance diagram for jevois::dnn::PreProcessorPythonImpl:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessorPythonImpl__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PreProcessorPythonImpl:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessorPythonImpl__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a9e984f8a49a0c586352fce576fcda017">loadpy</link> (std::string const &amp;pypath)</para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a846ae79420beebca91e4bec9d6e3cb48">~PreProcessorPythonImpl</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a72a36894a29e927a6aa2e2fc26927005">freeze</link> (bool doit)</para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a3818a27920b8fd14515175f1c4270525">process</link> (cv::Mat const &amp;img, bool swaprb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp;attrs, std::vector&lt; cv::Rect &gt; &amp;crops)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a1cf58cfe2bdcc0a5e03070c9a2b38610">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false)</para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a70906f6c599ad75ab6ed79dff19f68d2">Component</link> (std::string const &amp;instance)</para>
+
+<para>Constructor. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a846ae79420beebca91e4bec9d6e3cb48"/>    <section>
+    <title>~PreProcessorPythonImpl()</title>
+<indexterm><primary>~PreProcessorPythonImpl</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>~PreProcessorPythonImpl</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessorPythonImpl::~PreProcessorPythonImpl ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+Definition at line 45 of file PreProcessorPython.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a70906f6c599ad75ab6ed79dff19f68d2"/>    <section>
+    <title>Component()</title>
+<indexterm><primary>Component</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>Component</secondary></indexterm>
+<para><computeroutput>jevois::Component::Component</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>创建组件的标准方法是通过 <link linkend="_classjevois_1_1Component_1a8348eba2c31efd4244afc97b25ea6fcc">Component::addSubComponent()</link> 或 <link linkend="_classjevois_1_1Manager_1ac5e322bf63b28a786e73812541bc4508">Manager::addComponent()</link>，而不是手动构建。通过构造函数构造的组件 （例如，调用 new 操作符）将不会附加到 <link linkend="_classjevois_1_1Component">Component</link> 层次结构。建议派生组件也有一个实例构造函数参数并将其传递给 base <link linkend="_classjevois_1_1Component">Component</link> 类， 以允许复杂系统包含同一 <link linkend="_classjevois_1_1Component">Component</link> 的多个实例。事实上，对于大多数组件来说，继承的构造函数是合适的：</para>
+
+<para><literallayout><computeroutput>class&#32;MyComp&#32;:&#32;public&#32;jevois::Component
+{
+public:
+&#32;&#32;//&#32;继承的构造函数
+&#32;&#32;using&#32;jevois::Component::Component;
+
+&#32;&#32;//&#32;用于安全继承的虚拟析构函数
+&#32;&#32;virtual&#32;~MyComp();
+};
+</computeroutput></literallayout> </para>
+<para>
+Definition at line 32 of file Component.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a72a36894a29e927a6aa2e2fc26927005"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessorPythonImpl::freeze (bool doit)</computeroutput></para><para>
+Definition at line 49 of file PreProcessorPython.C.</para>
+<para>
+References jevois::python::hasattr(), and jevois::PythonWrapper::pyinst().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a9e984f8a49a0c586352fce576fcda017"/>    <section>
+    <title>loadpy()</title>
+<indexterm><primary>loadpy</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>loadpy</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessorPythonImpl::loadpy (std::string const &amp; pypath)</computeroutput></para><para>
+Definition at line 55 of file PreProcessorPython.C.</para>
+<para>
+References jevois::python::hasattr(), JEVOIS_SHARE_PATH, LINFO, jevois::PythonWrapper::pyinst(), and jevois::PythonWrapper::pythonload().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a3818a27920b8fd14515175f1c4270525"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::PreProcessorPythonImpl::process (cv::Mat const &amp; img, bool swaprb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp; attrs, std::vector&lt; cv::Rect &gt; &amp; crops)</computeroutput></para><para>
+Definition at line 66 of file PreProcessorPython.C.</para>
+<para>
+References jevois::dnn::attrstr(), CROPERR, h, jevois::PythonWrapper::pyinst(), and jevois::to_string().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorPythonImpl_1a1cf58cfe2bdcc0a5e03070c9a2b38610"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PreProcessorPythonImpl</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorPythonImpl</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessorPythonImpl::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+Definition at line 109 of file PreProcessorPython.C.</para>
+<para>
+References jevois::PythonWrapper::pyinst().</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+src/jevois/DNN/<link linkend="_PreProcessorPython_8C">PreProcessorPython.C</link></section>
+</section>

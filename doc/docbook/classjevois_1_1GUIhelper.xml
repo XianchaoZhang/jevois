@@ -1,0 +1,1725 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GUIhelper">
+<title>jevois::GUIhelper Class Reference</title>
+<indexterm><primary>jevois::GUIhelper</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GUIhelper.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Helper class to assist modules in creating graphical and GUI elements. </para>
+
+
+
+<para>This class only works on JeVois-Pro. </para>
+<para>
+Definition at line 129 of file GUIhelper.H.</para>
+Inheritance diagram for jevois::GUIhelper:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIhelper__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::GUIhelper:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1GUIhelper__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structjevois_1_1GUIhelper_1_1ErrorData">ErrorData</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1ae6cc75834fffd5770e781cb293eac35a">GUIhelper</link> (std::string const &amp;instance, bool conslock=false)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1GUIhelper_1a49a2d5011402c214900130880c38d112">~GUIhelper</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame</link> (unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>)</para>
+
+<para>Start a new rendering frame. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a9ae2499fccb03d29f46ba38be1b9a9cd">idle</link> () const</para>
+
+<para>Check for idle in case <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link> was called elsewhere. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a5f722e2382bd77233fc25b4f26c682db">frameStarted</link> () const</para>
+
+<para>Helper to indicate that <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link> was called, and thus <link linkend="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a">endFrame()</link> should be called. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage</link> (char const *name, <link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;img, int &amp;x, int &amp;y, unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw a <link linkend="_classjevois_1_1RawImage">RawImage</link>, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a458520fd42c6dcc1f9ff0e1b190c04ff">drawImage</link> (char const *name, cv::Mat const &amp;img, bool rgb, int &amp;x, int &amp;y, unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool isoverlay=false)</para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame</link> (char const *name, <link linkend="_classjevois_1_1InputFrame">InputFrame</link> const &amp;frame, int &amp;x, int &amp;y, unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool casync=false)</para>
+
+<para>Draw the input video frame from the camera using zero-copy. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a60be540ca92cb56bcdd5f788d708b208">drawInputFrame2</link> (char const *name, <link linkend="_classjevois_1_1InputFrame">InputFrame</link> const &amp;frame, int &amp;x, int &amp;y, unsigned short &amp;w, unsigned short &amp;<link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, bool noalias=false, bool casync=false)</para>
+
+<para>Draw the second (scaled) input video frame from the camera using zero-copy. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1af5ecf87b9f9622e61561da0a5e1a4891">i2d</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a28627de127c08380c451b42bf8393fe2">i2ds</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a404c3f9738e399dae41bc3a344af0efe">i2ds</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a9da38e1cfcc419f2b495d990a23ff81d">drawLine</link> (float x1, float y1, float x2, float y2, ImU32 col=IM_COL32(128, 255, 128, 255))</para>
+
+<para>Draw line over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a5bbeebcca24b35f664129ca3eb0b64f4">drawRect</link> (float x1, float y1, float x2, float y2, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw rectangular box over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ac9e13d0ed1de8d45e3cd8093044fda39">drawPoly</link> (std::vector&lt; cv::Point &gt; const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a8077c25f21faccbbd22a25c64e553c0f">drawPoly</link> (std::vector&lt; cv::Point2f &gt; const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a7116feea7c9ee3ac3a6642a4a423ba9a">drawPoly</link> (cv::Mat const &amp;pts, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw polygon over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a031ae5b8e5fe4040764cbd0cf0d1155d">drawCircle</link> (float x, float y, float r, ImU32 col=IM_COL32(128, 255, 128, 255), bool filled=true)</para>
+
+<para>Draw circle over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a2be09b291ea743b4998af64fcf6cd79f">drawText</link> (float x, float y, char const *txt, ImU32 col=IM_COL32(128, 255, 128, 255))</para>
+
+<para>Draw text over an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a5223cd41a5a912756f57408f0c82c5cd">drawText</link> (float x, float y, std::string const &amp;txt, ImU32 col=IM_COL32(128, 255, 128, 255))</para>
+
+<para>Draw text over an image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a1b4f96316e741cd202adef08b77a9c3a">iline</link> (int line=-1, char const *name=nullptr)</para>
+
+<para>Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1aa7cfc58cc38d29e2d143b7ec3644e18e">itext</link> (char const *txt, ImU32 const &amp;col=IM_COL32_BLACK_TRANS, int line=-1)</para>
+
+<para>Draw some overlay text on top of an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a28640fee386035f430ce617a03c68c6d">itext</link> (std::string const &amp;txt, ImU32 const &amp;col=IM_COL32_BLACK_TRANS, int line=-1)</para>
+
+<para>Draw some overlay text on top of an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a6fdcfed83643d274768d5675f389a863">iinfo</link> (<link linkend="_classjevois_1_1InputFrame">jevois::InputFrame</link> const &amp;inframe, std::string const &amp;fpscpu, unsigned short winw=0, unsigned short winh=0)</para>
+
+<para>Display processing and video info at bottom of screen. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a6c22f4d68231c60106afaaa381f4759c">releaseImage</link> (char const *name)</para>
+
+<para>Release an image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ab0f9caccb8af5a60dfb5d4707ab8c8ef">releaseImage2</link> (char const *name)</para>
+
+<para>Release an image, second video stream. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a">endFrame</link> ()</para>
+
+<para>Finish current frame and render it. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a14e2fa1ffb7442940828d1bfeee7d6ff">resetstate</link> (bool modulechanged=true)</para>
+
+<para>Reset to default state, typically called on <link linkend="_classjevois_1_1Module">Module</link> or video format change. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a7d3891ff73bc0624b34a8ebdc6ca9090">reportError</link> (std::string const &amp;err)</para>
+
+<para>Report an error in an overlay window. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a1e702a6d3bac26c77e29ce8c02bf2707">reportAndIgnoreException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>Report current exception in a modal dialog, then ignore it. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a8803956ef75d11c59576da09673e63ac">reportAndRethrowException</link> (std::string const &amp;prefix=&quot;&quot;)</para>
+
+<para>Report current exception in a modal dialog, then re-throw it. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a687ee97232b87606cab86b8564bbed5c">clearErrors</link> ()</para>
+
+<para>Clear all errors currently displayed in the JeVois-Pro GUI. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a734afb6c5da1691848ed08b7ae382bf9">helpMarker</link> (char const *msg, char const *msg2=nullptr, char const *msg3=nullptr)</para>
+
+<para>Display a (?) label and show tooltip when it is hovered. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1aefb4c91dc93c800dd30273c5b4829ce5">toggleButton</link> (char const *name, bool *val)</para>
+
+<para>Helper to draw a toggle button. </para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1GUIhelper_1ac6538d23c3041223d430baf0cfc40b19">modal</link> (std::string const &amp;title, char const *text, int *default_val=nullptr, char const *b1txt=&quot;Ok&quot;, char const *b2txt=&quot;Cancel&quot;)</para>
+
+<para>Helper to draw a modal with 2 choices. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a146f970f5a8fbde06b2214f413770dfe">combo</link> (std::string const &amp;name, std::vector&lt; std::string &gt; const &amp;items, int &amp;selected_index)</para>
+
+<para>Helper to draw a combobox from a vector of strings. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a83935ec7a6221b2c9401a812f70efce8">headlessDisplay</link> ()</para>
+
+<para>Show a message that we are running headless. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1afe463d138ed7a8ca248f6fcaf45709ca">serlogEnabled</link> () const</para>
+
+<para>Tell whether user enabled serlog messages to GUI console. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a10f9f27571b8e266f59d3c259bd81bb2">seroutEnabled</link> () const</para>
+
+<para>Tell whether user enabled serout messages to GUI console. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1aee381445b4043ba33d414c9abb566046">d2i</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a873b8f3be61cce52aa2a68de750f3ef1">d2i</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a9c4a258452a66671c430066f50cfdc6f">d2is</link> (ImVec2 p, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>ImVec2 <link linkend="_classjevois_1_1GUIhelper_1a6757cf5c49817f3289e0969da9e541ea">d2is</link> (float x, float y, char const *name=nullptr)</para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a5fdb8ecec8ca13927fa1efc9ff89efe6">startCompilation</link> ()</para>
+
+<para>Compile a newly created module. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a761a362c8094f562636d8860ee5e7bf7">highlightText</link> (std::string const &amp;str)</para>
+
+<para>Like ImGui::Textunformatted but in a highlight color (typically, red) </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a74ad503e0d3fd0000c8d00cc820bb820">demoBanner</link> (std::string const &amp;title=&quot;&quot;, std::string const &amp;msg=&quot;&quot;)</para>
+
+<para>Display some text in a big banner, used by demo mode. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const float <link linkend="_classjevois_1_1GUIhelper_1a5c058d6b1e48c4e61a8c665659ff8677">pixel_perfect_z</link> = 0.0F</para>
+
+<para>Z distance from camera to image plane to achieve pixel-perfect rendering. </para>
+</listitem>
+            <listitem><para>glm::mat4 <link linkend="_classjevois_1_1GUIhelper_1a02efd286259d430012d42daa6571a0a4">proj</link></para>
+
+<para>Our projection matrix. </para>
+</listitem>
+            <listitem><para>glm::mat4 <link linkend="_classjevois_1_1GUIhelper_1a71c06d165e7eb5167cb585418798aa07">view</link></para>
+
+<para>Our view matrix. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Types    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8">CompilationState</link> { 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ab7b89fd31a95e8a9d0764c3151ed6c11">Idle</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8aced47fb796868c95e620489b128c90d0">Start</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a5ab40616777af96cc1e8a0e42ec21326">Cmake</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ac77f2655641f258ce7acd7364e6a116f">Make</link>, 
+
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8aca22b63a6564a4dbb04a5c7560d42ce3">Install</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ad4fe7f5979c2a91374fc9a46bd5bfbd9">CPack</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a614f505d8fb8695cb2d8ba7c201eeba8">Success</link>, 
+<link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a2a8831288056e9935a14d867ba911b2e">Error</link>
+ }</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ace355e4d6a0badfdc8be2c7a6c921855">drawPolyInternal</link> (ImVec2 const *pts, size_t npts, ImU32 col, bool filled)</para>
+</listitem>
+            <listitem><para>ImU32 <link linkend="_classjevois_1_1GUIhelper_1abdfd01a28cdc536948502d4ddd7f8391">applyFillAlpha</link> (ImU32 col) const</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1afdef4b16d59ec3b12e9f69d971ae1ef5">drawJeVoisGUI</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1aa97aaf68c6cff9ee371fbce5d8696d33">drawInfo</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ae1e1893737507e26794b232e93945c49">drawParameters</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a79ca8d2fcf084dd7197c4b1de7b4dd05">drawConsole</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a105033c6e34881e1e4efec8f070e13b3">drawCamCtrls</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a4a556f092792145786f6bdb2690c1e4f">drawTweaks</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ac95682ecf0c35233df7c44f46bfe4e95">drawSystem</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a65f71185fe0c2fc8c908670160c7c4f1">drawMenuBar</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a8e65eb0c9afc3e589e5427eb532b6369">drawModuleSelect</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a58274fb23d1a514a755ef9b2d625a9c1">drawErrorPopup</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a6750475ba40fa0784d530e35b0291cc6">drawNewModuleForm</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ab54e4a57eaefbee594b2be58ef3c50f8">compileModule</link> ()</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a6a6d75f55fa3518ca37e756e403afe14">newModEntry</link> (char const *wname, std::string &amp;str, char const *desc, char const *hint, char const *hlp)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1acf79dece1197c898825f5753b816e10f">setparstr</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a160d084b123b5abb6388905498349d74">descriptor</link>, std::string const &amp;val)</para>
+</listitem>
+            <listitem><para>template&lt;class T &gt; </para><para>void <link linkend="_classjevois_1_1GUIhelper_1a01e1168a4cdf67d5dcca86860056f4a3">setparval</link> (std::string const &amp;<link linkend="_classjevois_1_1Component_1a160d084b123b5abb6388905498349d74">descriptor</link>, T const &amp;val)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a5db396b381f5d981f164a377c0e268d5">onParamChange</link> (gui::scale const &amp;param, float const &amp;newval) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1aca9cb306829da995d0021a77079ca5a8">onParamChange</link> (gui::rounding const &amp;param, int const &amp;newval) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a0637c38af3459702ad9241441f597ad3">onParamChange</link> (gui::style const &amp;param, gui::GuiStyle const &amp;newval) override</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1a48a9987b67ed011feac2c29533e197e6">onParamChange</link> (gui::twirl const &amp;param, float const &amp;newval) override</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1ade830d05035437dd04bc5aba6483f945">compileCommand</link> (std::string const &amp;cmd, std::string &amp;msg)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GUIhelper_1ae448f6f9ad79fd1ffbe15c3982ce4a81">runNewModule</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::map&lt; std::string, <link linkend="_classjevois_1_1GPUimage">GPUimage</link> &gt; <link linkend="_classjevois_1_1GUIhelper_1ae99e433c45e733f75e8746cf642d8595">itsImages</link></para>
+</listitem>
+            <listitem><para>std::map&lt; std::string, <link linkend="_classjevois_1_1GPUimage">GPUimage</link> &gt; <link linkend="_classjevois_1_1GUIhelper_1a09c0afe6667a15deb5fe854b6c8a834d">itsImages2</link></para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GPUimage">GPUimage</link> * <link linkend="_classjevois_1_1GUIhelper_1a2731215077fd852337ff1482af279fd7">itsLastDrawnImage</link> = nullptr</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1GUIhelper_1a8f6fe2002f3635a872a677f3ab44c638">itsLastDrawnTextLine</link> = -1</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a1d9fcedc8888b608f5601239dc6d3ada">itsUsingScaledImage</link> = false</para>
+</listitem>
+            <listitem><para>float <link linkend="_classjevois_1_1GUIhelper_1aeea81945ef46517a3ea8ce8b7cc5504a">itsScaledImageFacX</link> = 1.0F</para>
+</listitem>
+            <listitem><para>float <link linkend="_classjevois_1_1GUIhelper_1ab9afa7b184aa0f7d8ab478cf4177fc4e">itsScaledImageFacY</link> = 1.0F</para>
+</listitem>
+            <listitem><para>std::chrono::time_point&lt; std::chrono::steady_clock &gt; <link linkend="_classjevois_1_1GUIhelper_1ac18a4b63aca8172dade9e623c3232a71">itsLastEventTime</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1aeb60252372fede27d9db7fe9e0846e04">itsIdle</link> = true</para>
+
+<para>Idle state, updated by <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link>, used by <link linkend="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a">endFrame()</link> to decide whether to draw GUI. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a2156a698e3d6ae27f904f8d38423690b">itsIdleBlocked</link> = false</para>
+
+<para>While creating/compiling new modules, prevent idle. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a84bd1cce9ca0814a9f66272fabf05b45">itsEndFrameCalled</link> = true</para>
+</listitem>
+            <listitem><para>std::mutex <link linkend="_classjevois_1_1GUIhelper_1a4485aa552c6fd57272515515964d2627">itsErrorMtx</link></para>
+</listitem>
+            <listitem><para>std::list&lt; <link linkend="_structjevois_1_1GUIhelper_1_1ErrorData">ErrorData</link> &gt; <link linkend="_classjevois_1_1GUIhelper_1a0749de9b605113aa24c92f7f6398fc78">itsErrors</link></para>
+</listitem>
+            <listitem><para>std::set&lt; std::string &gt; <link linkend="_classjevois_1_1GUIhelper_1a48e356fef1b18d7f6a730fb167a17ace">itsOpenModals</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1aaa61c34880287198df1ebcc699345dc8">itsConsLock</link></para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiBackendMALI">ImGuiBackendMALI</link> <link linkend="_classjevois_1_1GUIhelper_1addab621fc1b37165138ce302c7e0f3b2">itsBackend</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1ad22c937cee5893aca65e8e821ae107f8">itsWindowTitle</link></para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiImage">ImGuiImage</link> <link linkend="_classjevois_1_1GUIhelper_1a9d0a7ee05b963c891418a895bd3d8a34">itsIcon</link></para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1ImGuiImage">ImGuiImage</link> <link linkend="_classjevois_1_1GUIhelper_1a60a80a7f26a07c0afba060a5f338f7d3">itsHeadless</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1a4d0525b156ad3c4fdf6523c653889bdb">itsModName</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1ad400a5ef1213620bd879784e586d3208">itsModDesc</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1a694a1895dc8ffb885357542338664297">itsModAuth</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1af0549e577c8eb505a58a50c743c5bc5c">itsModLang</link></para>
+</listitem>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_classjevois_1_1GUIhelper_1ae02e4a2c7133692a14d1b81b2258aced">itsModDoc</link></para>
+</listitem>
+            <listitem><para>gui::GuiStyle <link linkend="_classjevois_1_1GUIhelper_1ad01b295ed4c139c9b0831e739c5e56d8">itsCurrentStyle</link> = gui::GuiStyle::Dark</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1adbc97729e068f87607c2910358d37ce6">itsShowStyleEditor</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a1c15575f27d2e92067dc3d370814f1e7">itsShowAppMetrics</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1ac74ae7ac2701da1f556042505e097524">itsShowImGuiDemo</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a72c124d0e9cfdb86f7159d8f42b2d2d0">itsSerLogEnabled</link> = true</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a6135eb46d08b40917526154e428b55b1">itsSerOutEnabled</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a28d193f37e420440e3b5e476e6bd1a2a">itsShowHardSerialWin</link> = false</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1ad549f8bc8b32cc66262c82d99236333a">itsShowUsbSerialWin</link> = false</para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1GUIeditor">GUIeditor</link> &gt; <link linkend="_classjevois_1_1GUIhelper_1a198d66bd59d5076a9c3c9de1074c8fe8">itsCfgEditor</link></para>
+</listitem>
+            <listitem><para>std::shared_ptr&lt; <link linkend="_classjevois_1_1GUIeditor">GUIeditor</link> &gt; <link linkend="_classjevois_1_1GUIhelper_1a63acaded32df5d9e2f704c4e2ee3507f">itsCodeEditor</link></para>
+</listitem>
+            <listitem><para>std::future&lt; std::string &gt; <link linkend="_classjevois_1_1GUIhelper_1accab7627abdde78781b82fa1db671c21">itsDnnGetFut</link></para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1acacd5af912e67fe8427d89361fc80f35">itsRefreshVideoMappings</link> = false</para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1GUIhelper_1ad5244574b47ec429144004e7e01ed8f4">itsVideoMappingListType</link> = 0</para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1GUIhelper_1a1db65c34f22a2a7acb4e019a7bd5988c">itsUSBserial</link> = false</para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8">CompilationState</link> <link linkend="_classjevois_1_1GUIhelper_1a9193adce0fa323793b5b89a03b2a677c">itsCompileState</link> = CompilationState::Idle</para>
+</listitem>
+            <listitem><para><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> <link linkend="_classjevois_1_1GUIhelper_1a17da31d02293a20dcd4e9d89caeceaa7">itsNewMapping</link></para>
+</listitem>
+            <listitem><para>std::future&lt; std::string &gt; <link linkend="_classjevois_1_1GUIhelper_1adcaf875504e7a5ad7ba62e2d7cfe1b88">itsCompileFut</link></para>
+</listitem>
+            <listitem><para>std::array&lt; std::string, 4 &gt; <link linkend="_classjevois_1_1GUIhelper_1ac692a07090cbfe03ab3a010f77992ee1">itsCompileMessages</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1a0fdcf134be9b51964dbb4e4c96ade625">itsBannerTitle</link></para>
+</listitem>
+            <listitem><para>std::string <link linkend="_classjevois_1_1GUIhelper_1a0f3bef97e98cd464ad129400c43daca8">itsBannerMsg</link></para>
+</listitem>
+            <listitem><para>float <link linkend="_classjevois_1_1GUIhelper_1a64b4304588615685f1dd6e4b57c19c74">itsGlobalAlpha</link> = 1.0F</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1aa1adc902e3625f1447181607f19d778f">JEVOIS_DECLARE_PARAMETER</link> (fullscreen, bool, &quot;Use a fullscreen display when true, only has effect on host. &quot; &quot;Platform always is fullscreen as the MALI OpenGL driver do not support windowing.&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1afe474f931505b732e33eed1e4046054a">JEVOIS_DECLARE_PARAMETER</link> (winsize, cv::Size, &quot;Initial window size to use on host. On platform, size is determined &quot; &quot;by hardware and the value of this parameter will be overwritten on init. The &quot; &quot;parameter can still be used to query display size.&quot;, cv::Size(0, 0), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1af3350dd0f345512e302f91e3c2f49a62">JEVOIS_DECLARE_PARAMETER</link> (hidesecs, float, &quot;Number of seconds of inactivity from keyboard/mouse/joystick/etc after &quot; &quot;which we hide the GUI, or 0.0 to never hide it. Note: The GUI starts hidden until the &quot; &quot;first input event from a keyboard, mouse, etc.&quot;, 30.0F, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1a1e2372f51ec3495afd190f2fe0d69ce3">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (scale, float, &quot;Scale factor applied to the GUI&quot;, 2.0f, { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f, 2.6f, 2.7f, 2.8f, 2.9f, 3.0f }, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1aecbd6c5069a91c23a155ecd6741a654a">JEVOIS_DEFINE_ENUM_CLASS</link> (GuiStyle,(Light)(Dark)(Classic))</para>
+
+<para>Enum for Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1adb8d5ece752a1aa4b5017df47a07061c">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (style, GuiStyle, &quot;Color style for the JeVois GUI&quot;, GuiStyle::Light, GuiStyle_Values, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1a2b5c9cc80c4f0127f72ff889fba0ba64">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (rounding, int, &quot;Window and widget corner rounding for the JeVois GUI. &quot; &quot;Note than changing GUI scale will update this parameter as well.&quot;, 4, jevois::Range&lt; int &gt;(0, 24), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1afe8df453ba962a11536d403ac421161c">JEVOIS_DECLARE_PARAMETER</link> (overlaycolor, ImColor, &quot;Default color to use for overlay text&quot;, ImColor(255, 255, 255, 255), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1ac63922e4131a5721c22ad2b9664da3a2">JEVOIS_DECLARE_PARAMETER</link> (linethick, float, &quot;Line thickness for overlay drawings&quot;, 5.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.1<link linkend="_GUIhelper_8C_1a7cdc542a5f48cf4bed4e6a3e4282182f">F</link>, 20.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1a28313781a0e81cb42e275e393e05b7a7">JEVOIS_DECLARE_PARAMETER</link> (fillalpha, float, &quot;Alpha multiplier for overlay fills&quot;, 0.25F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(0.0F, 1.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1add0727e144c4096a3f3cc4a261a125b3">JEVOIS_DECLARE_PARAMETER</link> (allowquit, bool, &quot;Quit application on ESC key (platform) or window close (host)&quot;, false, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GUIhelper_1a5741a72cab4867fc00d89577335b273a">JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</link> (twirl, float, &quot;Apply twirl effect to displayed video and images, useful &quot; &quot;mainly for demo mode&quot;, 0.0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt;(-15.0F, 15.0F), ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Member Enumeration Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8"/>    <section>
+    <title>CompilationState</title>
+<indexterm><primary>CompilationState</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>CompilationState</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8">jevois::GUIhelper::CompilationState</link><computeroutput>[protected]</computeroutput></computeroutput></para><informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Idle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Idle</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ab7b89fd31a95e8a9d0764c3151ed6c11"/>Idle</entry><entry></entry></row><row><entry><indexterm><primary>Start</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Start</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8aced47fb796868c95e620489b128c90d0"/>Start</entry><entry></entry></row><row><entry><indexterm><primary>Cmake</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Cmake</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a5ab40616777af96cc1e8a0e42ec21326"/>Cmake</entry><entry></entry></row><row><entry><indexterm><primary>Make</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Make</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ac77f2655641f258ce7acd7364e6a116f"/>Make</entry><entry></entry></row><row><entry><indexterm><primary>Install</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Install</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8aca22b63a6564a4dbb04a5c7560d42ce3"/>Install</entry><entry></entry></row><row><entry><indexterm><primary>CPack</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>CPack</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8ad4fe7f5979c2a91374fc9a46bd5bfbd9"/>CPack</entry><entry></entry></row><row><entry><indexterm><primary>Success</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Success</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a614f505d8fb8695cb2d8ba7c201eeba8"/>Success</entry><entry></entry></row><row><entry><indexterm><primary>Error</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>Error</secondary></indexterm>
+<anchor xml:id="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8a2a8831288056e9935a14d867ba911b2e"/>Error</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 496 of file GUIhelper.H.</para>
+</section>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelper_1ae6cc75834fffd5770e781cb293eac35a"/>    <section>
+    <title>GUIhelper()</title>
+<indexterm><primary>GUIhelper</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>GUIhelper</secondary></indexterm>
+<para><computeroutput>jevois::GUIhelper::GUIhelper (std::string const &amp; instance, bool conslock = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 45 of file GUIhelper.C.</para>
+<para>
+References jevois::getFileString(), h, itsCfgEditor, itsCodeEditor, itsWindowTitle, JEVOIS_CUSTOM_DNN_PATH, JEVOIS_PYDNN_PATH, JEVOIS_ROOT_PATH, JEVOIS_VERSION_STRING, LINFO, and jevois::split().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a49a2d5011402c214900130880c38d112"/>    <section>
+    <title>~GUIhelper()</title>
+<indexterm><primary>~GUIhelper</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>~GUIhelper</secondary></indexterm>
+<para><computeroutput>jevois::GUIhelper::~GUIhelper ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 109 of file GUIhelper.C.</para>
+<para>
+References JEVOIS_WAIT_GET_FUTURE.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelper_1abdfd01a28cdc536948502d4ddd7f8391"/>    <section>
+    <title>applyFillAlpha()</title>
+<indexterm><primary>applyFillAlpha</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>applyFillAlpha</secondary></indexterm>
+<para><computeroutput>ImU32 jevois::GUIhelper::applyFillAlpha (ImU32 col) const<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 623 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a687ee97232b87606cab86b8564bbed5c"/>    <section>
+    <title>clearErrors()</title>
+<indexterm><primary>clearErrors</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>clearErrors</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::clearErrors ( )</computeroutput></para><para>
+
+<para>Clear all errors currently displayed in the JeVois-Pro GUI. </para>
+</para>
+
+<para>In the JevoisPro GUI, errors reported via <link linkend="_classjevois_1_1GUIhelper_1a7d3891ff73bc0624b34a8ebdc6ca9090">reportError()</link> remain displayed for a few seconds, but sometimes we want to clear them right away, e.g., after DNN pipeline threw, if the user selects another one, we want the previous error to disappear immediately since it is not applicable anymore. </para>
+<para>
+Definition at line 2602 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a146f970f5a8fbde06b2214f413770dfe"/>    <section>
+    <title>combo()</title>
+<indexterm><primary>combo</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>combo</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::combo (std::string const &amp; name, std::vector&lt; std::string &gt; const &amp; items, int &amp; selected_index)</computeroutput></para><para>
+
+<para>Helper to draw a combobox from a vector of strings. </para>
+</para>
+
+<para>Note that selected_index is read-write: the passed value is used to display the current item in the combobox, and, when a new item is selected, its index is returned in selected_index and true is returned. </para>
+<para>
+Definition at line 1681 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::showDataPeekWindow().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ade830d05035437dd04bc5aba6483f945"/>    <section>
+    <title>compileCommand()</title>
+<indexterm><primary>compileCommand</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>compileCommand</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::compileCommand (std::string const &amp; cmd, std::string &amp; msg)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2973 of file GUIhelper.C.</para>
+<para>
+References jevois::async(), LERROR, LINFO, jevois::system(), and jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ab54e4a57eaefbee594b2be58ef3c50f8"/>    <section>
+    <title>compileModule()</title>
+<indexterm><primary>compileModule</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>compileModule</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::compileModule ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2787 of file GUIhelper.C.</para>
+<para>
+References LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a873b8f3be61cce52aa2a68de750f3ef1"/>    <section>
+    <title>d2i()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>d2i</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>d2i</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::d2i (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 722 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aee381445b4043ba33d414c9abb566046"/>    <section>
+    <title>d2i()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>d2i</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>d2i</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::d2i (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from on-screen to within a rendered image. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 689 of file GUIhelper.C.</para>
+<para>
+References jevois::GPUimage::d2i().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6757cf5c49817f3289e0969da9e541ea"/>    <section>
+    <title>d2is()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>d2is</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>d2is</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::d2is (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 759 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a9c4a258452a66671c430066f50cfdc6f"/>    <section>
+    <title>d2is()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>d2is</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>d2is</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::d2is (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from on-screen to within a rendered image. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 726 of file GUIhelper.C.</para>
+<para>
+References jevois::GPUimage::d2is().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a74ad503e0d3fd0000c8d00cc820bb820"/>    <section>
+    <title>demoBanner()</title>
+<indexterm><primary>demoBanner</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>demoBanner</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::demoBanner (std::string const &amp; title = <computeroutput>&quot;&quot;</computeroutput>
+, std::string const &amp; msg = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Display some text in a big banner, used by demo mode. </para>
+</para>
+
+<para>Any non-empty banner remains on screen until <link linkend="_classjevois_1_1GUIhelper_1a74ad503e0d3fd0000c8d00cc820bb820">demoBanner()</link> called again with empty title (default args). </para>
+<para>
+Definition at line 2747 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a105033c6e34881e1e4efec8f070e13b3"/>    <section>
+    <title>drawCamCtrls()</title>
+<indexterm><primary>drawCamCtrls</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawCamCtrls</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawCamCtrls ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1622 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a031ae5b8e5fe4040764cbd0cf0d1155d"/>    <section>
+    <title>drawCircle()</title>
+<indexterm><primary>drawCircle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawCircle</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawCircle (float x, float y, float r, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw circle over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 598 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a79ca8d2fcf084dd7197c4b1de7b4dd05"/>    <section>
+    <title>drawConsole()</title>
+<indexterm><primary>drawConsole</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawConsole</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawConsole ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1503 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a58274fb23d1a514a755ef9b2d625a9c1"/>    <section>
+    <title>drawErrorPopup()</title>
+<indexterm><primary>drawErrorPopup</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawErrorPopup</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawErrorPopup ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2641 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a458520fd42c6dcc1f9ff0e1b190c04ff"/>    <section>
+    <title>drawImage()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>drawImage</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawImage</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawImage (char const * name, cv::Mat const &amp; img, bool rgb, int &amp; x, int &amp; y, unsigned short &amp; w, unsigned short &amp; h, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw an OpenCV image, copying pixel data to an OpenGL texture. </para>
+</para>
+
+<para>Name should be a unique name, and should typically remain constant across successive video frames. This name is used as an index to OpenGL textures, shaders, and programs created to render the images. Note that OpenGL will slow down and eventually run out of resources if you create too many textures, thus <link linkend="_classjevois_1_1Module">Module</link> writers should try to minimize the number of different names that are used. If image has three or four 8-bit channels, interpret as RGB[A] if rgb is true, otherwise BGR[A]. If two 8-bit channels, interpret as YUYV. If one, interpret as GRAY. If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. If isoverlay is true, then the image is assumed to be a semi-transparent overlay to be drawn on top of a previously drawn image, and we preserve the drawing parameters of that previous image. </para>
+<para>
+Definition at line 314 of file GUIhelper.C.</para>
+<para>
+References h.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e"/>    <section>
+    <title>drawImage()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>drawImage</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawImage</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawImage (char const * name, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; img, int &amp; x, int &amp; y, unsigned short &amp; w, unsigned short &amp; h, bool noalias = <computeroutput>false</computeroutput>
+, bool isoverlay = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw a <link linkend="_classjevois_1_1RawImage">RawImage</link>, copying pixel data to an OpenGL texture. </para>
+</para>
+
+<para>Name should be a unique name, and should typically remain constant across successive video frames. This name is used as an index to OpenGL textures, shaders, and programs created to render the images. Note that OpenGL will slow down and eventually run out of resources if you create too many textures, thus <link linkend="_classjevois_1_1Module">Module</link> writers should try to minimize the number of different names that are used. Note that we will add a suffix to the name, corresponding to the bufindex of the <link linkend="_classjevois_1_1RawImage">RawImage</link>. If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Otherwise, x,y,w,h are not modified. If noalias is specified, the scaling factor will be rounded down to the nearest integer to prevent aliasing in the display. This may reduce the displayed image size. For example, with a 1920x1080 window, a 640x480 image would be letterboxed to 1440x1080 when noalias is false. But that is a scaling factor of 2.25 which may create rendering aliasing. When noalias is true, the letterboxed image size will be 1280x960 (scale factor of 2.0). If isoverlay is true, then the image is assumed to be a semi-transparent overlay to be drawn on top of a previously drawn image, and we preserve the drawing parameters of that previous image. </para>
+<para>
+Definition at line 289 of file GUIhelper.C.</para>
+<para>
+References jevois::RawImage::bufindex, h, and jevois::to_string().</para>
+<para>
+Referenced by jevois::dnn::PostProcessorSegment::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aa97aaf68c6cff9ee371fbce5d8696d33"/>    <section>
+    <title>drawInfo()</title>
+<indexterm><primary>drawInfo</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawInfo</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawInfo ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1087 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2"/>    <section>
+    <title>drawInputFrame()</title>
+<indexterm><primary>drawInputFrame</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawInputFrame</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawInputFrame (char const * name, <link linkend="_classjevois_1_1InputFrame">jevois::InputFrame</link> const &amp; frame, int &amp; x, int &amp; y, unsigned short &amp; w, unsigned short &amp; h, bool noalias = <computeroutput>false</computeroutput>
+, bool casync = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw the input video frame from the camera using zero-copy. </para>
+</para>
+
+<para>If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. </para>
+<para>
+Definition at line 336 of file GUIhelper.C.</para>
+<para>
+References jevois::RawImage::bufindex, jevois::InputFrame::get(), jevois::InputFrame::get2(), h, jevois::InputFrame::hasScaledImage(), jevois::RawImage::height, jevois::to_string(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a60be540ca92cb56bcdd5f788d708b208"/>    <section>
+    <title>drawInputFrame2()</title>
+<indexterm><primary>drawInputFrame2</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawInputFrame2</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawInputFrame2 (char const * name, <link linkend="_classjevois_1_1InputFrame">jevois::InputFrame</link> const &amp; frame, int &amp; x, int &amp; y, unsigned short &amp; w, unsigned short &amp; h, bool noalias = <computeroutput>false</computeroutput>
+, bool casync = <computeroutput>false</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw the second (scaled) input video frame from the camera using zero-copy. </para>
+</para>
+
+<para>If you pass w=0 or h=0 then the image will be rescaled to fill the display as much as possible without changing the aspect ratio, and the actually used x,y,w,h will be returned. Further, if noalias is true, that rescaling will ensure an integer scaling factor. Otherwise, x,y,w,h are not modified. Throws unless we are JeVois-Pro Platform and the camera is set to CropScale mode. </para>
+<para>
+Definition at line 366 of file GUIhelper.C.</para>
+<para>
+References jevois::RawImage::bufindex, jevois::InputFrame::get2(), h, and jevois::to_string().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1afdef4b16d59ec3b12e9f69d971ae1ef5"/>    <section>
+    <title>drawJeVoisGUI()</title>
+<indexterm><primary>drawJeVoisGUI</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawJeVoisGUI</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawJeVoisGUI ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 828 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a9da38e1cfcc419f2b495d990a23ff81d"/>    <section>
+    <title>drawLine()</title>
+<indexterm><primary>drawLine</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawLine</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawLine (float x1, float y1, float x2, float y2, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw line over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 474 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a65f71185fe0c2fc8c908670160c7c4f1"/>    <section>
+    <title>drawMenuBar()</title>
+<indexterm><primary>drawMenuBar</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawMenuBar</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawMenuBar ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 951 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a8e65eb0c9afc3e589e5427eb532b6369"/>    <section>
+    <title>drawModuleSelect()</title>
+<indexterm><primary>drawModuleSelect</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawModuleSelect</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawModuleSelect ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1007 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6750475ba40fa0784d530e35b0291cc6"/>    <section>
+    <title>drawNewModuleForm()</title>
+<indexterm><primary>drawNewModuleForm</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawNewModuleForm</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawNewModuleForm ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2031 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ae1e1893737507e26794b232e93945c49"/>    <section>
+    <title>drawParameters()</title>
+<indexterm><primary>drawParameters</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawParameters</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawParameters ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1269 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a7116feea7c9ee3ac3a6642a4a423ba9a"/>    <section>
+    <title>drawPoly()<computeroutput>[1/3]</computeroutput></title>
+<indexterm><primary>drawPoly</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawPoly</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawPoly (cv::Mat const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+
+<para>For N vertices, pts should be either CV_32F and 2xN or Nx2 for x,x,x,x,... y,y,y,y,..., or 1x2N or 2Nx1 for x,y,x,y,x,y...; or CV_32FC2 and 1xN or Nx1. If N &lt; 2, nothing is drawn. Other shapes are illegal. </para>
+<para>
+Definition at line 538 of file GUIhelper.C.</para>
+<para>
+References LFATAL, and jevois::dnn::shapestr().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac9e13d0ed1de8d45e3cd8093044fda39"/>    <section>
+    <title>drawPoly()<computeroutput>[2/3]</computeroutput></title>
+<indexterm><primary>drawPoly</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawPoly</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawPoly (std::vector&lt; cv::Point &gt; const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 514 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a8077c25f21faccbbd22a25c64e553c0f"/>    <section>
+    <title>drawPoly()<computeroutput>[3/3]</computeroutput></title>
+<indexterm><primary>drawPoly</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawPoly</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawPoly (std::vector&lt; cv::Point2f &gt; const &amp; pts, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw polygon over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 526 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ace355e4d6a0badfdc8be2c7a6c921855"/>    <section>
+    <title>drawPolyInternal()</title>
+<indexterm><primary>drawPolyInternal</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawPolyInternal</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawPolyInternal (ImVec2 const * pts, size_t npts, ImU32 col, bool filled)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 492 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5bbeebcca24b35f664129ca3eb0b64f4"/>    <section>
+    <title>drawRect()</title>
+<indexterm><primary>drawRect</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawRect</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawRect (float x1, float y1, float x2, float y2, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+, bool filled = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw rectangular box over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 480 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::report(), and jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac95682ecf0c35233df7c44f46bfe4e95"/>    <section>
+    <title>drawSystem()</title>
+<indexterm><primary>drawSystem</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawSystem</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawSystem ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1710 of file GUIhelper.C.</para>
+<para>
+References jevois::async_little(), jevois::getFanSpeed(), jevois::getFileString(), jevois::getNumInstalledNPUs(), jevois::getNumInstalledSPUs(), jevois::getNumInstalledTPUs(), jevois::getNumInstalledVPUs(), jevois::getSysInfoCPU(), jevois::getSysInfoMem(), jevois::getSysInfoVersion(), JEVOIS_CUSTOM_DNN_PATH, JEVOIS_CUSTOM_DNN_URL, JEVOIS_VERSION_STRING, JEVOISPRO_GSERIAL_FILE, jevois::split(), jevois::stringStartsWith(), and jevois::system().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a2be09b291ea743b4998af64fcf6cd79f"/>    <section>
+    <title>drawText()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>drawText</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawText</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawText (float x, float y, char const * txt, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw text over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 611 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::report(), and jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5223cd41a5a912756f57408f0c82c5cd"/>    <section>
+    <title>drawText()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>drawText</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawText</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawText (float x, float y, std::string const &amp; txt, ImU32 col = <computeroutput>IM_COL32(128,255,128,255)</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw text over an image. </para>
+</para>
+
+<para>Coordinates used should be image coordinates, as this function internally calls <link linkend="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9">i2d()</link>. </para>
+<para>
+Definition at line 617 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a4a556f092792145786f6bdb2690c1e4f"/>    <section>
+    <title>drawTweaks()</title>
+<indexterm><primary>drawTweaks</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>drawTweaks</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::drawTweaks ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2503 of file GUIhelper.C.</para>
+<para>
+References drawTinyImGUIdemo().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a"/>    <section>
+    <title>endFrame()</title>
+<indexterm><primary>endFrame</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>endFrame</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::endFrame ( )</computeroutput></para><para>
+
+<para>Finish current frame and render it. </para>
+</para>
+
+<para>This should be called once for every call to <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link>. </para>
+<para>
+Definition at line 763 of file GUIhelper.C.</para>
+<para>
+References LERROR.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5f722e2382bd77233fc25b4f26c682db"/>    <section>
+    <title>frameStarted()</title>
+<indexterm><primary>frameStarted</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>frameStarted</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::frameStarted ( ) const</computeroutput></para><para>
+
+<para>Helper to indicate that <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link> was called, and thus <link linkend="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a">endFrame()</link> should be called. </para>
+</para>
+
+<para>Mostly useful during exception handling inside <link linkend="_classjevois_1_1Engine">Engine</link>. </para>
+<para>
+Definition at line 285 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a83935ec7a6221b2c9401a812f70efce8"/>    <section>
+    <title>headlessDisplay()</title>
+<indexterm><primary>headlessDisplay</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>headlessDisplay</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::headlessDisplay ( )</computeroutput></para><para>
+
+<para>Show a message that we are running headless. </para>
+</para>
+<para>
+Definition at line 2719 of file GUIhelper.C.</para>
+<para>
+References JEVOIS_SHARE_PATH, and jevois::warnAndIgnoreException().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a734afb6c5da1691848ed08b7ae382bf9"/>    <section>
+    <title>helpMarker()</title>
+<indexterm><primary>helpMarker</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>helpMarker</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::helpMarker (char const * msg, char const * msg2 = <computeroutput>nullptr</computeroutput>
+, char const * msg3 = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Display a (?) label and show tooltip when it is hovered. </para>
+</para>
+
+<para>If 2 or more messages are provided, they will be separated by a separator. </para>
+<para>
+Definition at line 2683 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a761a362c8094f562636d8860ee5e7bf7"/>    <section>
+    <title>highlightText()</title>
+<indexterm><primary>highlightText</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>highlightText</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::highlightText (std::string const &amp; str)</computeroutput></para><para>
+
+<para>Like ImGui::Textunformatted but in a highlight color (typically, red) </para>
+</para>
+<para>
+Definition at line 2739 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1af5ecf87b9f9622e61561da0a5e1a4891"/>    <section>
+    <title>i2d()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>i2d</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>i2d</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::i2d (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 434 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a861122ce420cf463d8e7164e8dba0aa9"/>    <section>
+    <title>i2d()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>i2d</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>i2d</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::i2d (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert coordinates of a point from within a rendered image to on-screen. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 402 of file GUIhelper.C.</para>
+<para>
+References jevois::GPUimage::i2d().</para>
+<para>
+Referenced by jevois::dnn::PostProcessorSegment::report(), and jevois::dnn::PreProcessor::sendreport().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a404c3f9738e399dae41bc3a344af0efe"/>    <section>
+    <title>i2ds()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>i2ds</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>i2ds</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::i2ds (float x, float y, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 470 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a28627de127c08380c451b42bf8393fe2"/>    <section>
+    <title>i2ds()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>i2ds</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>i2ds</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::i2ds (ImVec2 p, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Convert a 2D size from within a rendered image to on-screen. </para>
+</para>
+
+<para>If name is nullptr, the last image used by <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> is used. In such case, if <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link> was called on a frame that also had a second, scaled image, assume that we have displayed the full-resolution input frame but sent the scaled image to processing, and that hence we also need to scale from second to first frame. </para>
+<para>
+Definition at line 438 of file GUIhelper.C.</para>
+<para>
+References jevois::GPUimage::i2ds().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a9ae2499fccb03d29f46ba38be1b9a9cd"/>    <section>
+    <title>idle()</title>
+<indexterm><primary>idle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>idle</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::idle ( ) const</computeroutput></para><para>
+
+<para>Check for idle in case <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link> was called elsewhere. </para>
+</para>
+<para>
+Definition at line 229 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6fdcfed83643d274768d5675f389a863"/>    <section>
+    <title>iinfo()</title>
+<indexterm><primary>iinfo</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>iinfo</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::iinfo (<link linkend="_classjevois_1_1InputFrame">jevois::InputFrame</link> const &amp; inframe, std::string const &amp; fpscpu, unsigned short winw = <computeroutput>0</computeroutput>
+, unsigned short winh = <computeroutput>0</computeroutput>
+)</computeroutput></para><para>
+
+<para>Display processing and video info at bottom of screen. </para>
+</para>
+
+<para>This helper is to be used by modules to provide a consistent info display at the bottom of the screen. fpscpu should be the string returned by <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">Timer::stop()</link>. If winw and winh are not given, will query from display backend, which will cost a few CPU cycles; so pass it on if you already have it, e.g, from running <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link> previously. </para>
+<para>
+Definition at line 654 of file GUIhelper.C.</para>
+<para>
+References jevois::fccstr(), jevois::RawImage::fmt, jevois::InputFrame::get(), jevois::InputFrame::get2(), jevois::InputFrame::hasScaledImage(), jevois::RawImage::height, jevois::sformat(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1b4f96316e741cd202adef08b77a9c3a"/>    <section>
+    <title>iline()</title>
+<indexterm><primary>iline</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>iline</secondary></indexterm>
+<para><computeroutput>ImVec2 jevois::GUIhelper::iline (int line = <computeroutput>-1</computeroutput>
+, char const * name = <computeroutput>nullptr</computeroutput>
+)</computeroutput></para><para>
+
+<para>Get coordinates of the start of a given line of text to be drawn as overlay on top of an image. </para>
+</para>
+
+<para>Use this to draw overlay text on top of a previously drawn image, it will scale by font size for you. If line is -1, we will increment over the last time this function was called (use with caution). Line number is reset to 0 when <link linkend="_classjevois_1_1GUIhelper_1af22c75a3177cb40616b5af89ad90733e">drawImage()</link> or <link linkend="_classjevois_1_1GUIhelper_1a22b55a0ca5d62a9d09eb1a3b356c35c2">drawInputFrame()</link>, etc are called. </para>
+<para>
+Definition at line 631 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aa7cfc58cc38d29e2d143b7ec3644e18e"/>    <section>
+    <title>itext()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>itext</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itext</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::itext (char const * txt, ImU32 const &amp; col = <computeroutput>IM_COL32_BLACK_TRANS</computeroutput>
+, int line = <computeroutput>-1</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw some overlay text on top of an image. </para>
+</para>
+<para>
+Definition at line 641 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process(), and jevois::dnn::PostProcessorClassify::report().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a28640fee386035f430ce617a03c68c6d"/>    <section>
+    <title>itext()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>itext</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itext</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::itext (std::string const &amp; txt, ImU32 const &amp; col = <computeroutput>IM_COL32_BLACK_TRANS</computeroutput>
+, int line = <computeroutput>-1</computeroutput>
+)</computeroutput></para><para>
+
+<para>Draw some overlay text on top of an image. </para>
+</para>
+<para>
+Definition at line 648 of file GUIhelper.C.</para>
+<para>
+References jevois::rawimage::itext().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac6538d23c3041223d430baf0cfc40b19"/>    <section>
+    <title>modal()</title>
+<indexterm><primary>modal</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>modal</secondary></indexterm>
+<para><computeroutput>int jevois::GUIhelper::modal (std::string const &amp; title, char const * text, int * default_val = <computeroutput>nullptr</computeroutput>
+, char const * b1txt = <computeroutput>&quot;Ok&quot;</computeroutput>
+, char const * b2txt = <computeroutput>&quot;Cancel&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Helper to draw a modal with 2 choices. </para>
+</para>
+
+<para>Returns 1 if the first button was clicked, 2 if the second was, or some other value if no button was clicked (caller should just wait and try again at the next frame if not 1 or 2, passing again that returned value). By default, the first button is in focus. If default_val is not nullptr, add a &quot;don&apos;t ask again&quot; checkbox. If default_val is 1 or 2, just return that without even showing the modal. </para>
+<para>
+Definition at line 1628 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6a6d75f55fa3518ca37e756e403afe14"/>    <section>
+    <title>newModEntry()</title>
+<indexterm><primary>newModEntry</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>newModEntry</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::newModEntry (char const * wname, std::string &amp; str, char const * desc, char const * hint, char const * hlp)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1695 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aca9cb306829da995d0021a77079ca5a8"/>    <section>
+    <title>onParamChange()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::onParamChange (gui::rounding const &amp; param, int const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5db396b381f5d981f164a377c0e268d5"/>    <section>
+    <title>onParamChange()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::onParamChange (gui::scale const &amp; param, float const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a0637c38af3459702ad9241441f597ad3"/>    <section>
+    <title>onParamChange()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::onParamChange (gui::style const &amp; param, gui::GuiStyle const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a48a9987b67ed011feac2c29533e197e6"/>    <section>
+    <title>onParamChange()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>onParamChange</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>onParamChange</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::onParamChange (gui::twirl const &amp; param, float const &amp; newval)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 390 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6c22f4d68231c60106afaaa381f4759c"/>    <section>
+    <title>releaseImage()</title>
+<indexterm><primary>releaseImage</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>releaseImage</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::releaseImage (char const * name)</computeroutput></para><para>
+
+<para>Release an image. </para>
+</para>
+
+<para>Call this if you plan on re-using the same image name later for an image of different size or format. Otherwise, once an image has been used once, its OpenGL texture (including its dims) will remain the same and only the pixel values will be updated when the image is drawn again. Silently ignores if the image is not found, i.e., has not been drawn before. </para>
+<para>
+Definition at line 675 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorSegment::~PostProcessorSegment().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ab0f9caccb8af5a60dfb5d4707ab8c8ef"/>    <section>
+    <title>releaseImage2()</title>
+<indexterm><primary>releaseImage2</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>releaseImage2</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::releaseImage2 (char const * name)</computeroutput></para><para>
+
+<para>Release an image, second video stream. </para>
+</para>
+
+<para>Call this if you plan on re-using the same image name later for an image of different size or format. Otherwise, once an image has been used once, its OpenGL texture (including its dims) will remain the same and only the pixel values will be updated when the image is drawn again. Silently ignores if the image is not found, i.e., has not been drawn before. </para>
+<para>
+Definition at line 682 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1e702a6d3bac26c77e29ce8c02bf2707"/>    <section>
+    <title>reportAndIgnoreException()</title>
+<indexterm><primary>reportAndIgnoreException</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>reportAndIgnoreException</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::reportAndIgnoreException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Report current exception in a modal dialog, then ignore it. </para>
+</para>
+<para>
+Definition at line 2609 of file GUIhelper.C.</para>
+<para>
+References jevois::getPythonExceptionString().</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a8803956ef75d11c59576da09673e63ac"/>    <section>
+    <title>reportAndRethrowException()</title>
+<indexterm><primary>reportAndRethrowException</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>reportAndRethrowException</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::reportAndRethrowException (std::string const &amp; prefix = <computeroutput>&quot;&quot;</computeroutput>
+)</computeroutput></para><para>
+
+<para>Report current exception in a modal dialog, then re-throw it. </para>
+</para>
+<para>
+Definition at line 2634 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a7d3891ff73bc0624b34a8ebdc6ca9090"/>    <section>
+    <title>reportError()</title>
+<indexterm><primary>reportError</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>reportError</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::reportError (std::string const &amp; err)</computeroutput></para><para>
+
+<para>Report an error in an overlay window. </para>
+</para>
+<para>
+Definition at line 2576 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::process(), and jevois::dnn::Pipeline::showDataPeekWindow().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a14e2fa1ffb7442940828d1bfeee7d6ff"/>    <section>
+    <title>resetstate()</title>
+<indexterm><primary>resetstate</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>resetstate</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::resetstate (bool modulechanged = <computeroutput>true</computeroutput>
+)</computeroutput></para><para>
+
+<para>Reset to default state, typically called on <link linkend="_classjevois_1_1Module">Module</link> or video format change. </para>
+</para>
+
+<para>Free images, reset matrices, etc. </para>
+<para>
+Definition at line 116 of file GUIhelper.C.</para>
+<para>
+References h, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ae448f6f9ad79fd1ffbe15c3982ce4a81"/>    <section>
+    <title>runNewModule()</title>
+<indexterm><primary>runNewModule</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>runNewModule</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::runNewModule ( )<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 2469 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1afe463d138ed7a8ca248f6fcaf45709ca"/>    <section>
+    <title>serlogEnabled()</title>
+<indexterm><primary>serlogEnabled</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>serlogEnabled</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::serlogEnabled ( ) const</computeroutput></para><para>
+
+<para>Tell whether user enabled serlog messages to GUI console. </para>
+</para>
+<para>
+Definition at line 1614 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a10f9f27571b8e266f59d3c259bd81bb2"/>    <section>
+    <title>seroutEnabled()</title>
+<indexterm><primary>seroutEnabled</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>seroutEnabled</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::seroutEnabled ( ) const</computeroutput></para><para>
+
+<para>Tell whether user enabled serout messages to GUI console. </para>
+</para>
+<para>
+Definition at line 1618 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1acf79dece1197c898825f5753b816e10f"/>    <section>
+    <title>setparstr()</title>
+<indexterm><primary>setparstr</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>setparstr</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::setparstr (std::string const &amp; descriptor, std::string const &amp; val)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 1261 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a01e1168a4cdf67d5dcca86860056f4a3"/>    <section>
+    <title>setparval()</title>
+<indexterm><primary>setparval</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>setparval</secondary></indexterm>
+<computeroutput>template&lt;class T &gt; </computeroutput><para><computeroutput>void jevois::GUIhelper::setparval (std::string const &amp; descriptor, T const &amp; val)<computeroutput>[protected]</computeroutput></computeroutput></para>    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5fdb8ecec8ca13927fa1efc9ff89efe6"/>    <section>
+    <title>startCompilation()</title>
+<indexterm><primary>startCompilation</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>startCompilation</secondary></indexterm>
+<para><computeroutput>void jevois::GUIhelper::startCompilation ( )</computeroutput></para><para>
+
+<para>Compile a newly created module. </para>
+</para>
+
+<para>This is mainly for internal use. Called by the code editor when saving C++ code to let us know to start the compilation process again. itsNewMapping should contain the new module&apos;s data. </para>
+<para>
+Definition at line 2755 of file GUIhelper.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520"/>    <section>
+    <title>startFrame()</title>
+<indexterm><primary>startFrame</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>startFrame</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::startFrame (unsigned short &amp; w, unsigned short &amp; h)</computeroutput></para><para>
+
+<para>Start a new rendering frame. </para>
+</para>
+
+<para>This should be called on every new video frame to be rendered. Will initialize OpenGL and open the window or screen if needed. Sets the current window size into w and h, returns true if idle (no keyboard/mouse/etc events received in more than hidesecs seconds). </para>
+<para>
+Definition at line 171 of file GUIhelper.C.</para>
+<para>
+References h, LFATAL, and LINFO.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aefb4c91dc93c800dd30273c5b4829ce5"/>    <section>
+    <title>toggleButton()</title>
+<indexterm><primary>toggleButton</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>toggleButton</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::toggleButton (char const * name, bool * val)</computeroutput></para><para>
+
+<para>Helper to draw a toggle button. </para>
+</para>
+<para>
+Definition at line 2700 of file GUIhelper.C.</para>
+<para>
+Referenced by jevois::dnn::Pipeline::showDataPeekWindow().</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelper_1add0727e144c4096a3f3cc4a261a125b3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[1/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (allowquit , bool , &quot;Quit application on ESC key (platform) or window close (host)&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a28313781a0e81cb42e275e393e05b7a7"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[2/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (fillalpha , float , &quot;Alpha multiplier for overlay fills&quot; , 0. 25F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.0F, 1.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aa1adc902e3625f1447181607f19d778f"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[3/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (fullscreen , bool , &quot;Use a fullscreen display when true, only has effect on host. &quot; &quot;Platform always is fullscreen as the MALI OpenGL driver do not support windowing.&quot; , false , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1af3350dd0f345512e302f91e3c2f49a62"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[4/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (hidesecs , float , &quot;Number of seconds of inactivity from keyboard/mouse/joystick/etc after &quot; &quot;which we hide the GUI, or 0.0 to never hide it. Note:The GUI starts hidden until the &quot; &quot;first input event from a keyboard, mouse , etc.&quot; , 30. 0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac63922e4131a5721c22ad2b9664da3a2"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[5/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (linethick , float , &quot;Line thickness for overlay drawings&quot; , 5. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; 0.1F, 20.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1afe8df453ba962a11536d403ac421161c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[6/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (overlaycolor , ImColor , &quot;Default color to use for overlay text&quot; , ImColor(255, 255, 255, 255) , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1afe474f931505b732e33eed1e4046054a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()<computeroutput>[7/7]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (winsize , cv::Size , &quot;Initial window size to use on host. On platform, size is determined &quot; &quot;by hardware and the value of this parameter will be overwritten on init. The &quot; &quot;parameter can still be used to query display size.&quot; , cv::Size(0, 0) , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a2b5c9cc80c4f0127f72ff889fba0ba64"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[1/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (rounding , int , &quot;Window and widget corner rounding for the JeVois GUI. &quot; &quot;Note than changing GUI scale will update this parameter as well.&quot; , 4 , <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; int &gt; 0, 24, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1e2372f51ec3495afd190f2fe0d69ce3"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[2/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (scale , float , &quot;Scale factor applied to the GUI&quot; , 2. 0f, { 1.0f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f, 2.1f, 2.2f, 2.3f, 2.4f, 2.5f, 2.6f, 2.7f, 2.8f, 2.9f, 3.0f } , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1adb8d5ece752a1aa4b5017df47a07061c"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[3/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (style , GuiStyle , &quot;Color style for the JeVois GUI&quot; , GuiStyle::Light , GuiStyle_Values , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5741a72cab4867fc00d89577335b273a"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK()<computeroutput>[4/4]</computeroutput></title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK (twirl , float , &quot;Apply twirl effect to displayed video and images, useful &quot; &quot;mainly for demo mode&quot; , 0. 0F, <link linkend="_classjevois_1_1Range">jevois::Range</link>&lt; float &gt; -15.0F, 15.0F, ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aecbd6c5069a91c23a155ecd6741a654a"/>    <section>
+    <title>JEVOIS_DEFINE_ENUM_CLASS()</title>
+<indexterm><primary>JEVOIS_DEFINE_ENUM_CLASS</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>JEVOIS_DEFINE_ENUM_CLASS</secondary></indexterm>
+<para><computeroutput>JEVOIS_DEFINE_ENUM_CLASS (GuiStyle , (Light)(Dark)(Classic) )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Enum for Parameter. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1GUIhelper_1addab621fc1b37165138ce302c7e0f3b2"/>    <section>
+    <title>itsBackend</title>
+<indexterm><primary>itsBackend</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsBackend</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1ImGuiBackendMALI">ImGuiBackendMALI</link> jevois::GUIhelper::itsBackend<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 431 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a0f3bef97e98cd464ad129400c43daca8"/>    <section>
+    <title>itsBannerMsg</title>
+<indexterm><primary>itsBannerMsg</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsBannerMsg</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsBannerMsg<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 505 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a0fdcf134be9b51964dbb4e4c96ade625"/>    <section>
+    <title>itsBannerTitle</title>
+<indexterm><primary>itsBannerTitle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsBannerTitle</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsBannerTitle<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 505 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a198d66bd59d5076a9c3c9de1074c8fe8"/>    <section>
+    <title>itsCfgEditor</title>
+<indexterm><primary>itsCfgEditor</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCfgEditor</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1GUIeditor">GUIeditor</link>&gt; jevois::GUIhelper::itsCfgEditor<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 480 of file GUIhelper.H.</para>
+<para>
+Referenced by GUIhelper().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a63acaded32df5d9e2f704c4e2ee3507f"/>    <section>
+    <title>itsCodeEditor</title>
+<indexterm><primary>itsCodeEditor</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCodeEditor</secondary></indexterm>
+<para><computeroutput>std::shared_ptr&lt;<link linkend="_classjevois_1_1GUIeditor">GUIeditor</link>&gt; jevois::GUIhelper::itsCodeEditor<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 483 of file GUIhelper.H.</para>
+<para>
+Referenced by GUIhelper().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1adcaf875504e7a5ad7ba62e2d7cfe1b88"/>    <section>
+    <title>itsCompileFut</title>
+<indexterm><primary>itsCompileFut</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCompileFut</secondary></indexterm>
+<para><computeroutput>std::future&lt;std::string&gt; jevois::GUIhelper::itsCompileFut<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 499 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac692a07090cbfe03ab3a010f77992ee1"/>    <section>
+    <title>itsCompileMessages</title>
+<indexterm><primary>itsCompileMessages</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCompileMessages</secondary></indexterm>
+<para><computeroutput>std::array&lt;std::string, 4&gt; jevois::GUIhelper::itsCompileMessages<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 501 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a9193adce0fa323793b5b89a03b2a677c"/>    <section>
+    <title>itsCompileState</title>
+<indexterm><primary>itsCompileState</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCompileState</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1GUIhelper_1a4bc256979069fe78e0de8743fa1726c8">CompilationState</link> jevois::GUIhelper::itsCompileState = CompilationState::Idle<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 497 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aaa61c34880287198df1ebcc699345dc8"/>    <section>
+    <title>itsConsLock</title>
+<indexterm><primary>itsConsLock</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsConsLock</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsConsLock<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 429 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ad01b295ed4c139c9b0831e739c5e56d8"/>    <section>
+    <title>itsCurrentStyle</title>
+<indexterm><primary>itsCurrentStyle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsCurrentStyle</secondary></indexterm>
+<para><computeroutput>gui::GuiStyle jevois::GUIhelper::itsCurrentStyle = gui::GuiStyle::Dark<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 443 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1accab7627abdde78781b82fa1db671c21"/>    <section>
+    <title>itsDnnGetFut</title>
+<indexterm><primary>itsDnnGetFut</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsDnnGetFut</secondary></indexterm>
+<para><computeroutput>std::future&lt;std::string&gt; jevois::GUIhelper::itsDnnGetFut<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 486 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a84bd1cce9ca0814a9f66272fabf05b45"/>    <section>
+    <title>itsEndFrameCalled</title>
+<indexterm><primary>itsEndFrameCalled</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsEndFrameCalled</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsEndFrameCalled = true<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 413 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a4485aa552c6fd57272515515964d2627"/>    <section>
+    <title>itsErrorMtx</title>
+<indexterm><primary>itsErrorMtx</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsErrorMtx</secondary></indexterm>
+<para><computeroutput>std::mutex jevois::GUIhelper::itsErrorMtx<computeroutput>[mutable]</computeroutput>, <computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 415 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a0749de9b605113aa24c92f7f6398fc78"/>    <section>
+    <title>itsErrors</title>
+<indexterm><primary>itsErrors</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsErrors</secondary></indexterm>
+<para><computeroutput>std::list&lt;<link linkend="_structjevois_1_1GUIhelper_1_1ErrorData">ErrorData</link>&gt; jevois::GUIhelper::itsErrors<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 422 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a64b4304588615685f1dd6e4b57c19c74"/>    <section>
+    <title>itsGlobalAlpha</title>
+<indexterm><primary>itsGlobalAlpha</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsGlobalAlpha</secondary></indexterm>
+<para><computeroutput>float jevois::GUIhelper::itsGlobalAlpha = 1.0F<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 506 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a60a80a7f26a07c0afba060a5f338f7d3"/>    <section>
+    <title>itsHeadless</title>
+<indexterm><primary>itsHeadless</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsHeadless</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1ImGuiImage">ImGuiImage</link> jevois::GUIhelper::itsHeadless<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 437 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a9d0a7ee05b963c891418a895bd3d8a34"/>    <section>
+    <title>itsIcon</title>
+<indexterm><primary>itsIcon</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsIcon</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1ImGuiImage">ImGuiImage</link> jevois::GUIhelper::itsIcon<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 436 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aeb60252372fede27d9db7fe9e0846e04"/>    <section>
+    <title>itsIdle</title>
+<indexterm><primary>itsIdle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsIdle</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsIdle = true<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>Idle state, updated by <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link>, used by <link linkend="_classjevois_1_1GUIhelper_1a109563555b4ae6a784aa94220224c55a">endFrame()</link> to decide whether to draw GUI. </para>
+</para>
+<para>
+Definition at line 411 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a2156a698e3d6ae27f904f8d38423690b"/>    <section>
+    <title>itsIdleBlocked</title>
+<indexterm><primary>itsIdleBlocked</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsIdleBlocked</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsIdleBlocked = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+
+<para>While creating/compiling new modules, prevent idle. </para>
+</para>
+<para>
+Definition at line 412 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ae99e433c45e733f75e8746cf642d8595"/>    <section>
+    <title>itsImages</title>
+<indexterm><primary>itsImages</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsImages</secondary></indexterm>
+<para><computeroutput>std::map&lt;std::string , <link linkend="_classjevois_1_1GPUimage">GPUimage</link>&gt; jevois::GUIhelper::itsImages<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 404 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a09c0afe6667a15deb5fe854b6c8a834d"/>    <section>
+    <title>itsImages2</title>
+<indexterm><primary>itsImages2</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsImages2</secondary></indexterm>
+<para><computeroutput>std::map&lt;std::string , <link linkend="_classjevois_1_1GPUimage">GPUimage</link>&gt; jevois::GUIhelper::itsImages2<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 404 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a2731215077fd852337ff1482af279fd7"/>    <section>
+    <title>itsLastDrawnImage</title>
+<indexterm><primary>itsLastDrawnImage</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsLastDrawnImage</secondary></indexterm>
+<para><computeroutput><link linkend="_classjevois_1_1GPUimage">GPUimage</link>* jevois::GUIhelper::itsLastDrawnImage = nullptr<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 405 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a8f6fe2002f3635a872a677f3ab44c638"/>    <section>
+    <title>itsLastDrawnTextLine</title>
+<indexterm><primary>itsLastDrawnTextLine</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsLastDrawnTextLine</secondary></indexterm>
+<para><computeroutput>int jevois::GUIhelper::itsLastDrawnTextLine = -1<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 406 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac18a4b63aca8172dade9e623c3232a71"/>    <section>
+    <title>itsLastEventTime</title>
+<indexterm><primary>itsLastEventTime</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsLastEventTime</secondary></indexterm>
+<para><computeroutput>std::chrono::time_point&lt;std::chrono::steady_clock&gt; jevois::GUIhelper::itsLastEventTime<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 410 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a694a1895dc8ffb885357542338664297"/>    <section>
+    <title>itsModAuth</title>
+<indexterm><primary>itsModAuth</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsModAuth</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsModAuth<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 440 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ad400a5ef1213620bd879784e586d3208"/>    <section>
+    <title>itsModDesc</title>
+<indexterm><primary>itsModDesc</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsModDesc</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsModDesc<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 439 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ae02e4a2c7133692a14d1b81b2258aced"/>    <section>
+    <title>itsModDoc</title>
+<indexterm><primary>itsModDoc</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsModDoc</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; jevois::GUIhelper::itsModDoc<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 442 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1af0549e577c8eb505a58a50c743c5bc5c"/>    <section>
+    <title>itsModLang</title>
+<indexterm><primary>itsModLang</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsModLang</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsModLang<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 441 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a4d0525b156ad3c4fdf6523c653889bdb"/>    <section>
+    <title>itsModName</title>
+<indexterm><primary>itsModName</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsModName</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsModName<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 438 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a17da31d02293a20dcd4e9d89caeceaa7"/>    <section>
+    <title>itsNewMapping</title>
+<indexterm><primary>itsNewMapping</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsNewMapping</secondary></indexterm>
+<para><computeroutput><link linkend="_structjevois_1_1VideoMapping">VideoMapping</link> jevois::GUIhelper::itsNewMapping<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 498 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a48e356fef1b18d7f6a730fb167a17ace"/>    <section>
+    <title>itsOpenModals</title>
+<indexterm><primary>itsOpenModals</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsOpenModals</secondary></indexterm>
+<para><computeroutput>std::set&lt;std::string&gt; jevois::GUIhelper::itsOpenModals<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 424 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1acacd5af912e67fe8427d89361fc80f35"/>    <section>
+    <title>itsRefreshVideoMappings</title>
+<indexterm><primary>itsRefreshVideoMappings</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsRefreshVideoMappings</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsRefreshVideoMappings = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 489 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1aeea81945ef46517a3ea8ce8b7cc5504a"/>    <section>
+    <title>itsScaledImageFacX</title>
+<indexterm><primary>itsScaledImageFacX</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsScaledImageFacX</secondary></indexterm>
+<para><computeroutput>float jevois::GUIhelper::itsScaledImageFacX = 1.0F<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 408 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ab9afa7b184aa0f7d8ab478cf4177fc4e"/>    <section>
+    <title>itsScaledImageFacY</title>
+<indexterm><primary>itsScaledImageFacY</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsScaledImageFacY</secondary></indexterm>
+<para><computeroutput>float jevois::GUIhelper::itsScaledImageFacY = 1.0F<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 408 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a72c124d0e9cfdb86f7159d8f42b2d2d0"/>    <section>
+    <title>itsSerLogEnabled</title>
+<indexterm><primary>itsSerLogEnabled</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsSerLogEnabled</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsSerLogEnabled = true<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 447 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a6135eb46d08b40917526154e428b55b1"/>    <section>
+    <title>itsSerOutEnabled</title>
+<indexterm><primary>itsSerOutEnabled</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsSerOutEnabled</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsSerOutEnabled = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 448 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1c15575f27d2e92067dc3d370814f1e7"/>    <section>
+    <title>itsShowAppMetrics</title>
+<indexterm><primary>itsShowAppMetrics</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsShowAppMetrics</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsShowAppMetrics = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 445 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a28d193f37e420440e3b5e476e6bd1a2a"/>    <section>
+    <title>itsShowHardSerialWin</title>
+<indexterm><primary>itsShowHardSerialWin</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsShowHardSerialWin</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsShowHardSerialWin = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 449 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ac74ae7ac2701da1f556042505e097524"/>    <section>
+    <title>itsShowImGuiDemo</title>
+<indexterm><primary>itsShowImGuiDemo</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsShowImGuiDemo</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsShowImGuiDemo = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 446 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1adbc97729e068f87607c2910358d37ce6"/>    <section>
+    <title>itsShowStyleEditor</title>
+<indexterm><primary>itsShowStyleEditor</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsShowStyleEditor</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsShowStyleEditor = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 444 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ad549f8bc8b32cc66262c82d99236333a"/>    <section>
+    <title>itsShowUsbSerialWin</title>
+<indexterm><primary>itsShowUsbSerialWin</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsShowUsbSerialWin</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsShowUsbSerialWin = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 450 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1db65c34f22a2a7acb4e019a7bd5988c"/>    <section>
+    <title>itsUSBserial</title>
+<indexterm><primary>itsUSBserial</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsUSBserial</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsUSBserial = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 493 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a1d9fcedc8888b608f5601239dc6d3ada"/>    <section>
+    <title>itsUsingScaledImage</title>
+<indexterm><primary>itsUsingScaledImage</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsUsingScaledImage</secondary></indexterm>
+<para><computeroutput>bool jevois::GUIhelper::itsUsingScaledImage = false<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 407 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ad5244574b47ec429144004e7e01ed8f4"/>    <section>
+    <title>itsVideoMappingListType</title>
+<indexterm><primary>itsVideoMappingListType</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsVideoMappingListType</secondary></indexterm>
+<para><computeroutput>int jevois::GUIhelper::itsVideoMappingListType = 0<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 490 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1ad22c937cee5893aca65e8e821ae107f8"/>    <section>
+    <title>itsWindowTitle</title>
+<indexterm><primary>itsWindowTitle</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>itsWindowTitle</secondary></indexterm>
+<para><computeroutput>std::string jevois::GUIhelper::itsWindowTitle<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 435 of file GUIhelper.H.</para>
+<para>
+Referenced by GUIhelper().</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a5c058d6b1e48c4e61a8c665659ff8677"/>    <section>
+    <title>pixel_perfect_z</title>
+<indexterm><primary>pixel_perfect_z</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>pixel_perfect_z</secondary></indexterm>
+<para><computeroutput>const float jevois::GUIhelper::pixel_perfect_z = 0.0F</computeroutput></para><para>
+
+<para>Z distance from camera to image plane to achieve pixel-perfect rendering. </para>
+</para>
+<para>
+Definition at line 323 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a02efd286259d430012d42daa6571a0a4"/>    <section>
+    <title>proj</title>
+<indexterm><primary>proj</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>proj</secondary></indexterm>
+<para><computeroutput>glm::mat4 jevois::GUIhelper::proj</computeroutput></para><para>
+
+<para>Our projection matrix. </para>
+</para>
+<para>
+Definition at line 326 of file GUIhelper.H.</para>
+    </section><anchor xml:id="_classjevois_1_1GUIhelper_1a71c06d165e7eb5167cb585418798aa07"/>    <section>
+    <title>view</title>
+<indexterm><primary>view</primary><secondary>jevois::GUIhelper</secondary></indexterm>
+<indexterm><primary>jevois::GUIhelper</primary><secondary>view</secondary></indexterm>
+<para><computeroutput>glm::mat4 jevois::GUIhelper::view</computeroutput></para><para>
+
+<para>Our view matrix. </para>
+</para>
+
+<para>On the first call to <link linkend="_classjevois_1_1GUIhelper_1a255ddb960a7619f8e96484d03d797520">startFrame()</link>, the whole OpenGL engine is initialized and the view matrix is set so that the pixel perfect image plane is vertical and centered on the origin, while the camera is translated in negative Z to achieve pixel perfect rendering. </para>
+<para>
+Definition at line 332 of file GUIhelper.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GUIhelper_8H">GUIhelper.H</link>src/jevois/GPU/<link linkend="_GUIhelper_8C">GUIhelper.C</link></section>
+</section>

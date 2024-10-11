@@ -30,7 +30,7 @@ jevois::GPUtextureDmaBuf::GPUtextureDmaBuf(EGLDisplay display, GLsizei width, GL
 {
   GL_CHECK(glGenTextures(1, &Id));
 
-  // Convert V4L2 format to DRM format:
+  // 将 V4L2 格式转换为 DRM 格式：
   EGLint drm_fmt;
   switch (fmt)
   {

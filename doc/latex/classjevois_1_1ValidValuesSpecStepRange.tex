@@ -1,0 +1,146 @@
+\hypertarget{classjevois_1_1ValidValuesSpecStepRange}{}\doxysubsection{jevois\+::Valid\+Values\+Spec\+Step\+Range$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ValidValuesSpecStepRange}\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Valid\+Values\+Spec.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Valid\+Values\+Spec\+Step\+Range$<$ T $>$}
+
+基于 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 的有效值规范，包含边界 
+
+Definition at line 136 of file Valid\+Values\+Spec.\+H.
+
+
+
+Inheritance diagram for jevois\+::Valid\+Values\+Spec\+Step\+Range$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classjevois_1_1ValidValuesSpecStepRange__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Valid\+Values\+Spec\+Step\+Range$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classjevois_1_1ValidValuesSpecStepRange__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a3ba16dcfbce1ea4b33a99888a28fbbd6}{Valid\+Values\+Spec\+Step\+Range}} ()=delete
+\begin{DoxyCompactList}\small\item\em 没有默认构造函数，总是需要提供一个范围 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_ad8040bf55a68f5475029201a664cc289}{Valid\+Values\+Spec\+Step\+Range}} (\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&valid\+\_\+range)
+\begin{DoxyCompactList}\small\item\em 从有效值的 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 构造（约定：边界包含在内） \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a1ec8e4cfac1ead1b499cd4f1a8ce70a2}{$\sim$\+Valid\+Values\+Spec\+Step\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a55dad4d0f53eb5cfc9e41e5ebf79715f}{check\+Value\+Validity}} (T const \&val) const
+\begin{DoxyCompactList}\small\item\em 检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_a8ea21d22b160b7855e3b87cb1f318234}{str}} () const
+\begin{DoxyCompactList}\small\item\em 转换为可读字符串：\+Step\+Range\+:\mbox{[}M\+I\+N-\/\+S\+T\+E\+P-\/\+M\+AX\mbox{]} 其中 M\+I\+N、\+S\+T\+EP 和 M\+AX 由实际值替换。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange_ad0772a35caf23bd9deabde58decc454a}{its\+Valid\+Step\+Range}}
+\begin{DoxyCompactList}\small\item\em 我们的有效值步长范围 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_a3ba16dcfbce1ea4b33a99888a28fbbd6}\label{classjevois_1_1ValidValuesSpecStepRange_a3ba16dcfbce1ea4b33a99888a28fbbd6}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!ValidValuesSpecStepRange@{ValidValuesSpecStepRange}}
+\index{ValidValuesSpecStepRange@{ValidValuesSpecStepRange}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecStepRange()}{ValidValuesSpecStepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{Valid\+Values\+Spec\+Step\+Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+没有默认构造函数，总是需要提供一个范围 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_ad8040bf55a68f5475029201a664cc289}\label{classjevois_1_1ValidValuesSpecStepRange_ad8040bf55a68f5475029201a664cc289}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!ValidValuesSpecStepRange@{ValidValuesSpecStepRange}}
+\index{ValidValuesSpecStepRange@{ValidValuesSpecStepRange}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecStepRange()}{ValidValuesSpecStepRange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{Valid\+Values\+Spec\+Step\+Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$ T $>$ const \&}]{valid\+\_\+range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+从有效值的 \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}} 构造（约定：边界包含在内） 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_a1ec8e4cfac1ead1b499cd4f1a8ce70a2}\label{classjevois_1_1ValidValuesSpecStepRange_a1ec8e4cfac1ead1b499cd4f1a8ce70a2}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!````~ValidValuesSpecStepRange@{$\sim$ValidValuesSpecStepRange}}
+\index{````~ValidValuesSpecStepRange@{$\sim$ValidValuesSpecStepRange}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ValidValuesSpecStepRange()}{~ValidValuesSpecStepRange()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{Valid\+Values\+Spec\+Step\+Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_a55dad4d0f53eb5cfc9e41e5ebf79715f}\label{classjevois_1_1ValidValuesSpecStepRange_a55dad4d0f53eb5cfc9e41e5ebf79715f}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!checkValueValidity@{checkValueValidity}}
+\index{checkValueValidity@{checkValueValidity}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{checkValueValidity()}{checkValueValidity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::check\+Value\+Validity (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_a8ea21d22b160b7855e3b87cb1f318234}\label{classjevois_1_1ValidValuesSpecStepRange_a8ea21d22b160b7855e3b87cb1f318234}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!str@{str}}
+\index{str@{str}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+转换为可读字符串：\+Step\+Range\+:\mbox{[}M\+I\+N-\/\+S\+T\+E\+P-\/\+M\+AX\mbox{]} 其中 M\+I\+N、\+S\+T\+EP 和 M\+AX 由实际值替换。 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecStepRange_ad0772a35caf23bd9deabde58decc454a}\label{classjevois_1_1ValidValuesSpecStepRange_ad0772a35caf23bd9deabde58decc454a}} 
+\index{jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}!itsValidStepRange@{itsValidStepRange}}
+\index{itsValidStepRange@{itsValidStepRange}!jevois::ValidValuesSpecStepRange$<$ T $>$@{jevois::ValidValuesSpecStepRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsValidStepRange}{itsValidStepRange}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{classjevois_1_1StepRange}{Step\+Range}}$<$T$>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecStepRange}{jevois\+::\+Valid\+Values\+Spec\+Step\+Range}}$<$ T $>$\+::its\+Valid\+Step\+Range\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们的有效值步长范围 
+
+
+
+Definition at line 155 of file Valid\+Values\+Spec.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ValidValuesSpec_8H}{Valid\+Values\+Spec.\+H}}\end{DoxyCompactItemize}

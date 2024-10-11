@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob">
+<title>jevois::dnn::PreProcessorBlob Class Reference</title>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/PreProcessorBlob.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>神经网络管道的预处理器 </para>
+
+
+
+<para>这是深度神经网络处理管道的第一步。</para>
+
+<para>此预处理器的工作原理如下。例如，假设一个 1024x576 的相机输入帧和一个 224x224 的神经网络输入：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>如果相机帧不是 RGB 或 BGR，则转换为该格式（例如，将 YUYV 转换为 RGB 或 BGR）</para>
+</listitem><listitem>
+<para>如果指定了 <computeroutput>letterbox</computeroutput> ，则在相机框架内使用网络输入的纵横比来适应最大的矩形。例如，224x224 是正方形，因此将 计算出一个围绕相机框架中心的 576x576 正方形框。否则，使用整个相机框架。</para>
+</listitem><listitem>
+<para>裁剪该矩形并将其调整为网络输入大小（如果 <computeroutput>letterbox</computeroutput> 关闭，则可能会拉伸）</para>
+</listitem><listitem>
+<para>如果需要，交换 BGR/RGB（<computeroutput>rgb</computeroutput> 参数和接收到的相机帧中的颜色顺序的组合）</para>
+</listitem><listitem>
+<para>最准确但也最慢的路径（可以用下面的优化路径替换）：<itemizedlist>
+<listitem>
+<para>将像素数据转换为 float32</para>
+</listitem><listitem>
+<para>如果不是零，则减去 <computeroutput>mean</computeroutput> </para>
+</listitem><listitem>
+<para>如果不是 1，则除以 <computeroutput>stdev</computeroutput> </para>
+</listitem><listitem>
+<para>如果不是 1，则乘以 <computeroutput>scale</computeroutput> 。此时，值通常为 [0..1] 或 [-1..1]</para>
+</listitem><listitem>
+<para>如果需要，则量化。例如，如果网络需要具有非对称仿射量化 NHWC:8U:1x224x224x3:AA:0.0078125:128 的 uint8，则除 以量化器比例（此处为 0.0078125，因此将像素值乘以 128），然后添加零点（此处为 128）。这里的目标是尽可能多地 使用 8 位动态范围。网络想要什么（由其 intensors 参数指定）是在网络量化过程中确定的。</para>
+</listitem><listitem>
+<para>转换为网络所需的数据类型（例如，uint8）</para>
+</listitem><listitem>
+<para>可能将来自相机的打包 RGB（NHWC）转换为平面（NCHW）</para>
+</listitem><listitem>
+<para>将形状转换为 4D，批量大小（N）始终为 1</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem>
+<para>因为对于 uint8（以及有符号 int8 和动态定点）这几乎会导致无操作（首先从原生相机范围 [0..255] 转换为 [0..1]，然 后在量化过程中拉伸回 [0..255]），所以针对这些特殊情况（例如，uint8 相机输入到量化的非对称仿射 uint8 网络输入） 实现了快速路径。对于动态定点，快速路径使用快速位移操作；对于 uint8 非对称仿射，有时它是无操作。</para>
+
+<para>您可以通过启用预处理器参数 <computeroutput>details</computeroutput> 在 JeVois-Pro GUI（在显示网络处理详细信息的窗口中）中查看这些步骤 </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line 60 of file PreProcessorBlob.H.</para>
+Inheritance diagram for jevois::dnn::PreProcessorBlob:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessorBlob__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::PreProcessorBlob:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1PreProcessorBlob__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1a65eb37135c0723f35382e1b7ae5e4db7">~PreProcessorBlob</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1ab7e8c771814ccefdfabdad7069f9c11d">freeze</link> (bool doit) override</para>
+
+<para>Freeze/unfreeze parameters that users should not change while running. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1a31269c81e3f1ecc1bc98482cf135f3df">PreProcessor</link> (std::string const &amp;instance)</para>
+
+<para>Inherited constructor ok. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1aa9783db0f5b8c8be3fdfa230b4353a1a">process</link> (cv::Mat const &amp;img, bool swaprb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp;attrs, std::vector&lt; cv::Rect &gt; &amp;crops) override</para>
+
+<para>从输入图像中提取 blob </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1a8bbc88440016a12ddbdef6d680414684">report</link> (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> *mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> *outimg=nullptr, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> *helper=nullptr, bool overlay=true, bool idle=false) override</para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1aa9783db0f5b8c8be3fdfa230b4353a1a">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>std::vector&lt; std::string &gt; <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1a0095ebe0e37bf8bb22628381710c0455">itsInfo</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Related Functions    </title>
+
+<para>(Note that these are not member functions.) </para>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1adc62c2bf63e3f153f0d92fb6489fc8ce">JEVOIS_DECLARE_PARAMETER</link> (numin, size_t, &quot;Number of input <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a3ead2199062666efc8e1815dc2d19a0d">blobs</link> to generate from the received video image. &quot; &quot;Any additional inputs required by the network would have to be specified using &quot; &quot;<link linkend="_classjevois_1_1dnn_1_1Network">Network</link> parameter extraintensors&quot;, 1, ParamCateg)</para>
+
+<para>Parameter. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1a65eb37135c0723f35382e1b7ae5e4db7"/>    <section>
+    <title>~PreProcessorBlob()</title>
+<indexterm><primary>~PreProcessorBlob</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>~PreProcessorBlob</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessorBlob::~PreProcessorBlob ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 32 of file PreProcessorBlob.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1ab7e8c771814ccefdfabdad7069f9c11d"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessorBlob::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Freeze/unfreeze parameters that users should not change while running. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a72917bb3bcf01737deaa85e545bcf215">jevois::dnn::PreProcessor</link>.</para>
+<para>
+Definition at line 36 of file PreProcessorBlob.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1a31269c81e3f1ecc1bc98482cf135f3df"/>    <section>
+    <title>PreProcessor()</title>
+<indexterm><primary>PreProcessor</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>PreProcessor</secondary></indexterm>
+<para><computeroutput>jevois::dnn::PreProcessor::PreProcessor</computeroutput></para><para>
+
+<para>Inherited constructor ok. </para>
+</para>
+<para>
+Definition at line 26 of file PreProcessor.C.</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1aa9783db0f5b8c8be3fdfa230b4353a1a"/>    <section>
+    <title>process()</title>
+<indexterm><primary>process</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>process</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::PreProcessorBlob::process (cv::Mat const &amp; img, bool swaprb, std::vector&lt; vsi_nn_tensor_attr_t &gt; const &amp; attrs, std::vector&lt; cv::Rect &gt; &amp; crops)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从输入图像中提取 blob </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a0f9703abfd50ab9a363ad9d44ec8224a">jevois::dnn::PreProcessor</link>.</para>
+<para>
+Definition at line 42 of file PreProcessorBlob.C.</para>
+<para>
+References jevois::applyLetterBox(), jevois::dnn::attrsize(), jevois::dnn::attrstr(), jevois::cvtypestr(), DETAILS, DETAILS2, LFATAL, jevois::dnn::quantize(), jevois::dnn::shapestr(), jevois::split(), jevois::to_string(), and jevois::dnn::vsi2cv().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1a8bbc88440016a12ddbdef6d680414684"/>    <section>
+    <title>report()</title>
+<indexterm><primary>report</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>report</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::PreProcessorBlob::report (<link linkend="_classjevois_1_1StdModule">jevois::StdModule</link> * mod, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> * outimg = <computeroutput>nullptr</computeroutput>
+, <link linkend="_namespacejevois_1a3cecc6a65147ea01f0f710f5b54b45ce">jevois::OptGUIhelper</link> * helper = <computeroutput>nullptr</computeroutput>
+, bool overlay = <computeroutput>true</computeroutput>
+, bool idle = <computeroutput>false</computeroutput>
+)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将上一个 <link linkend="_classjevois_1_1dnn_1_1PreProcessorBlob_1aa9783db0f5b8c8be3fdfa230b4353a1a">process()</link> 中发生的事情报告给控制台/输出视频/GUI </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a7f6bb6482d8bd5b22be49185aed3c2a4">jevois::dnn::PreProcessor</link>.</para>
+<para>
+Definition at line 377 of file PreProcessorBlob.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1adc62c2bf63e3f153f0d92fb6489fc8ce"/>    <section>
+    <title>JEVOIS_DECLARE_PARAMETER()</title>
+<indexterm><primary>JEVOIS_DECLARE_PARAMETER</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>JEVOIS_DECLARE_PARAMETER</secondary></indexterm>
+<para><computeroutput>JEVOIS_DECLARE_PARAMETER (numin , size_t , &quot;Number of input <link linkend="_classjevois_1_1dnn_1_1PreProcessor_1a3ead2199062666efc8e1815dc2d19a0d">blobs</link> to generate from the received video image. &quot; &quot;Any additional inputs required by the network would have to be specified using &quot; &quot;<link linkend="_classjevois_1_1dnn_1_1Network">Network</link> parameter extraintensors&quot; , 1 , ParamCateg )<computeroutput>[related]</computeroutput></computeroutput></para><para>
+
+<para>Parameter. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1PreProcessorBlob_1a0095ebe0e37bf8bb22628381710c0455"/>    <section>
+    <title>itsInfo</title>
+<indexterm><primary>itsInfo</primary><secondary>jevois::dnn::PreProcessorBlob</secondary></indexterm>
+<indexterm><primary>jevois::dnn::PreProcessorBlob</primary><secondary>itsInfo</secondary></indexterm>
+<para><computeroutput>std::vector&lt;std::string&gt; jevois::dnn::PreProcessorBlob::itsInfo<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 83 of file PreProcessorBlob.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_PreProcessorBlob_8H">PreProcessorBlob.H</link>include/jevois/DNN/<link linkend="_PreProcessor_8H">PreProcessor.H</link>src/jevois/DNN/<link linkend="_PreProcessorBlob_8C">PreProcessorBlob.C</link></section>
+</section>

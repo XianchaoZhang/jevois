@@ -1,0 +1,27 @@
+\hypertarget{Console_8H}{}\doxysubsection{include/jevois/\+Util/\+Console.H File Reference}
+\label{Console_8H}\index{include/jevois/Util/Console.H@{include/jevois/Util/Console.H}}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Console_8H__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacejevois}{jevois}}
+\begin{DoxyCompactList}\small\item\em 所有 Je\+Vois 类和函数的主命名空间 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__console_gadb6b6c4de8c91afbd75b26fd21e1267c}{jevois\+::is\+Input\+Device}} (int fd)
+\begin{DoxyCompactList}\small\item\em 指示此 fd（应来自 /dev/input/event\+X）是否是键盘、鼠标等 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gac71712656cfebf518ed5700bf3e9e3ed}{jevois\+::get\+Console\+Fd}} ()
+\begin{DoxyCompactList}\small\item\em 获取控制台的文件描述符 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gab9a802bcfa42386853cc58f86c5d023f}{jevois\+::get\+Active\+T\+TY}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前活动 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga4a8b4e6208cca24fc399107e48eb133c}{jevois\+::mute\+Keyboard}} (int tty, int \&kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 防止 keystrokes 到达 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga5fffa3f01add1a9dab7f031361a01282}{jevois\+::un\+Mute\+Keyboard}} (int tty, int kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 恢复给定 tty 的键盘模式 \end{DoxyCompactList}\end{DoxyCompactItemize}

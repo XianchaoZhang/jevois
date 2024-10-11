@@ -1,0 +1,59 @@
+\hypertarget{group__compilerutil}{}\doxysubsection{其他与控制编译相关的预处理器实用程序}
+\label{group__compilerutil}\index{其他与控制编译相关的预处理器实用程序@{其他与控制编译相关的预处理器实用程序}}
+
+
+\doxysubsubsection{ }
+Collaboration diagram for 其他与控制编译相关的预处理器实用程序\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__compilerutil}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__compilerutil_ga63d1052bb64ba1d6d28317fc52c4a8f7}{J\+E\+V\+O\+I\+S\+\_\+\+B\+E\+G\+I\+N\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES}}
+\item 
+\#define \mbox{\hyperlink{group__compilerutil_ga03b352fa0cf830470c4b8fdbf810f81e}{J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+D\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES}}~\mbox{\hyperlink{CompilerUtil_8H_aa7cebf172bd2a8571a05d99ea258b367}{J\+E\+V\+O\+I\+S\+\_\+\+P\+R\+A\+G\+MA}}(diagnostic pop)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__compilerutil_ga63d1052bb64ba1d6d28317fc52c4a8f7}\label{group__compilerutil_ga63d1052bb64ba1d6d28317fc52c4a8f7}} 
+\index{其他与控制编译相关的预处理器实用程序@{其他与控制编译相关的预处理器实用程序}!JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES@{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES}}
+\index{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES@{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES}!其他与控制编译相关的预处理器实用程序@{其他与控制编译相关的预处理器实用程序}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES}{JEVOIS\_BEGIN\_UNCHECKED\_INCLUDES}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+B\+E\+G\+I\+N\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{  \mbox{\hyperlink{CompilerUtil_8H_aa7cebf172bd2a8571a05d99ea258b367}{JEVOIS\_PRAGMA}}(diagnostic push) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wpragmas"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wunknown-\/pragmas"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wunused-\/local-\/typedefs"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wattributes"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wconstant-\/conversion"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wenum-\/compare"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wunknown-\/attributes"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wunused-\/but-\/set-\/variable"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wreorder"}) \(\backslash\)}
+\DoxyCodeLine{  JEVOIS\_PRAGMA(diagnostic ignored \textcolor{stringliteral}{"-\/Wall"})}
+
+\end{DoxyCode}
+一系列预处理器指令，将特定警告关闭为错误，直到匹配 J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+D\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+E\+S。 这对于使用在 -\/Wall 下无法编译的代码编写的库很有用。
+
+必须跟随着匹配的 J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+D\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES 
+
+Definition at line 82 of file Compiler\+Util.\+H.
+
+\mbox{\Hypertarget{group__compilerutil_ga03b352fa0cf830470c4b8fdbf810f81e}\label{group__compilerutil_ga03b352fa0cf830470c4b8fdbf810f81e}} 
+\index{其他与控制编译相关的预处理器实用程序@{其他与控制编译相关的预处理器实用程序}!JEVOIS\_END\_UNCHECKED\_INCLUDES@{JEVOIS\_END\_UNCHECKED\_INCLUDES}}
+\index{JEVOIS\_END\_UNCHECKED\_INCLUDES@{JEVOIS\_END\_UNCHECKED\_INCLUDES}!其他与控制编译相关的预处理器实用程序@{其他与控制编译相关的预处理器实用程序}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_END\_UNCHECKED\_INCLUDES}{JEVOIS\_END\_UNCHECKED\_INCLUDES}}
+{\footnotesize\ttfamily \#define J\+E\+V\+O\+I\+S\+\_\+\+E\+N\+D\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES~\mbox{\hyperlink{CompilerUtil_8H_aa7cebf172bd2a8571a05d99ea258b367}{J\+E\+V\+O\+I\+S\+\_\+\+P\+R\+A\+G\+MA}}(diagnostic pop)}
+
+重新打开 J\+E\+V\+O\+I\+S\+\_\+\+B\+E\+G\+I\+N\+\_\+\+U\+N\+C\+H\+E\+C\+K\+E\+D\+\_\+\+I\+N\+C\+L\+U\+D\+ES 之前有效的所有警告。 
+
+Definition at line 97 of file Compiler\+Util.\+H.
+

@@ -1,165 +1,121 @@
-/*! \page UserStartMac JeVois-A33: Getting started with Mac host computer
-\tableofcontents
+/*! \page UserStartMac JeVois-A33：Mac 主机入门 \tableofcontents
 
 
-The easiest to get started is to use \ref JeVoisInventor
+最简单的入门方法是使用 \ref JeVoisInventor
 
-Below are alternative approaches.
+以下是替代方法。
 
-// ####################################################################################################
-\section userstartmac Getting started with Mac - basic PhotoBooth
+// #################################################################################################### \section userstartmac 开始使用 Mac - 基本 PhotoBooth
 
-The JeVois smart camera is used like a regular USB camera. To get started with a Mac host computer:
+JeVois 智能相机的使用方式与普通 USB 相机相同。要开始使用 Mac 主机：
 
-<ul>
-<li>Download a disk image from http://jevois.org and flash it to a MicroSD card.
+<ul> <li>从 http://jevois.org 下载磁盘映像并将其刷入 MicroSD 卡。
 
-<li>Insert MicroSD card into JeVois smart camera, with the MicroSD contacts pointing up as shown below.
+<li>将 MicroSD 卡插入 JeVois 智能相机，MicroSD 触点朝上，如下所示。
 
 \jvimg{sd-insert.png, 40%}
 
 \jvimg{microsd-fully-inserted.jpg, 60%}
 
-<li>Connect camera to a host computer. The smart camera requires up to 3.5 Watts of power, which is above the limit of
-what a single USB 2.0 port is designed to supply, but is within the limits of a single USB 3.0 port. It is important to
-use a high-quality USB-to-miniUSB cable that can carry that full power without loss. Look for a cable with 24awg power
-wires. It is recommended that you use a USB 3.0 port on your host computer, as those provide more power. If that is not
-available, you can use a USB Y-cable to connect to two USB 2.0 ports on your host computer, or to one USB 2.0 port and
-one external USB power supply (e.g., phone charger). Make sure that you do not use a USB hub, unless that hub has a
-strong external power supply (transformer, wall adapter).
+<li>将相机连接到主机。智能相机需要高达 3.5 瓦的功率，这超出了单个 USB 2.0 端口的设计供电限制，但在单个 USB 3.0 端口的限制范围内。使用能够无损传输全部功率的高质量 USB-miniUSB 电缆非常重要。寻找带有 24awg 电源线的电缆。建议您在主机上使用 USB 3.0 端口，因为它们可以提供更多功率。如果没有，您可以使用 USB Y 型电缆连接到主机上的两个 USB 2.0 端口，或者连接到一个 USB 2.0 端口和一个外部 USB 电源（例如，手机充电器）。请确保不要使用 USB 集线器，除非该集线器具有强大的外部电源（变压器、壁式适配器）。
 
-<li>Observe the LED on the smart camera next to the USB connector:
-  - Green: Power is on and is strong enough.
-  - After about 3 seconds: Flash orange: The camera sensor chip has been detected and initialized.
-  - After about 5 seconds: Solid orange: The smart camera is ready for use.
-  - Wait a few more seconds for your host computer to detect the camera and prepare itself for video capture.
+<li>观察 USB 连接器旁边的智能相机上的 LED：
+- 绿色：电源已打开且足够强。
+- 约 3 秒后：橙色闪烁：相机传感器芯片已被检测到并初始化。
+- 约 5 秒后：橙色常亮：智能相机已准备就绪。
+- 再等待几秒钟，让主机检测到相机并准备好进行视频捕获。
 
-<li>Start a video capture software. Here we will use the bundled-in PhotoBooth app that is in your Applications
-directory.
+<li>启动视频捕捉软件。这里我们将使用应用程序目录中捆绑的 PhotoBooth 应用程序。
 
-Launch PhotoBooth from your Applications folder. You should see this:
+从“应用程序”文件夹启动 PhotoBooth。您应该看到以下内容：
 
-\image html photobooth1.png
+\图片 html photobooth1.png
 
-Photobooth does not give you access to contrast, exposure, etc controls. But you can get third-party apps from the App
-Store to do that. Here is for example using Webcam Settings after getting it from the App Store (free):
+Photobooth 不允许您访问对比度、曝光等控件。但您可以从 App Store 获取第三方应用程序来执行这些操作。以下是从 App Store 获取（免费）后使用网络摄像头设置的示例：
 
-\image html mac-webcam-settings.png
+\image html mac-网络摄像头设置.png
 
-You can also try VLC, Skype, Facetime, etc. The built-in Photobooth app is very picky and will refuse to use the camera
-if the camera exposes BAYER or RGB565 video modes, too many modes, etc. It also does not allow you to select video
-resolution. To use the JeVois camera on a mac it is recommended that you configure it with only one available video
-resolution (one entry in your \c videomappings.cfg file). See UserModes for more info.
+您还可以尝试 VLC、Skype、Facetime 等。内置的 Photobooth 应用程序非常挑剔，如果相机显示 BAYER 或 RGB565 视频模式、太多模式等，它将拒绝使用相机。它也不允许您选择视频分辨率。要在 Mac 上使用 JeVois 相机，建议您仅使用一种可用的视频分辨率对其进行配置（\c videomappings.cfg 文件中的一个条目）。有关更多信息，请参阅 UserModes。
 
-// ##############################################################################################################
-\section obsmac  Getting started with Mac - Open Broadcaster Studio
+// ############################################################################################################# \section obsmac Mac 入门 - Open Broadcaster Studio
 
-Open Broadcaster Studio is a great free program that allows you to select different video resolutions, as needed by
-JeVois.
+Open Broadcaster Studio 是一款出色的免费程序，允许您根据 JeVois 的需要选择不同的视频分辨率。
 
-- Download OBS Studio from https://obsproject.com
+- 从 https://obsproject.com 下载 OBS Studio
 
-- Install it, during installation, just say that you will not be streaming video.
+- 安装它，在安装过程中，只需说您不会流式传输视频。
 
-- Connect JeVois to your computer and allow it to start up.
+- 将 JeVois 连接到您的计算机并允许其启动。
 
-- Open OBS Studio, towards the bottom left of the screen, click the `+` icon under \b Sources to add a new <b>video
-  capture device</b>.
-  \image html mobs1.png
+- 打开 OBS Studio，在屏幕左下方，单击 \b 来源下的 `+` 图标以添加新的<b>视频捕获设备</b>。\image html mobs1.png
 
-- Create a new source
-  \image html mobs2.png
+- 创建一个新的源 \image html mobs2.png
 
-- Select the Jevois-A33 Smart camera as its device, uncheck <b>Use Preset</b> to enable all JeVois resolutions, pick a
-  resolution that you want to try out, select <b>Simple FPS Values</b>, and pick one of the available FPS values.
+- 选择 Jevois-A33 智能相机作为其设备，取消选中<b>使用预设</b>以启用所有 JeVois 分辨率，选择您想要尝试的分辨率，选择<b>简单 FPS 值</b>，然后选择其中一个可用的 FPS 值。
 
-- When you double-click on that source, a dialog comes up. In there, you can select:
-  + Device: JeVois-A33 Smart Camera
-  + Make sure you keep <b>Use preset</b> unchecked
-  + Resolution: pick any that you want to try out
-  + FPS: when you change resolution, sometimes you will be offered some <b>Rational FPS values</b>, but it is simpler to
-    just switch back to <b>Simple FPS values</b> and pick one that JeVois is offering.
-  \image html mobs4.png
+- 双击该源时，会出现一个对话框。在其中，您可以选择：
++ 设备：JeVois-A33 智能相机
++ 确保未选中 <b>使用预设</b>
++ 分辨率：选择您想要尝试的任何分辨率
++ FPS：当您更改分辨率时，有时会为您提供一些 <b>合理的 FPS 值</b>，但更简单的方法是切换回 <b>简单的 FPS 值</b>，然后选择 JeVois 提供的值。\image html mobs4.png
 
-- Enjoy! You can drag and resize the video preview for best viewing experience.
-  \image html mobs5.png
+- 尽情享受吧！您可以拖动并调整视频预览的大小以获得最佳观看体验。 \image html mobs5.png
 
 
-// ####################################################################################################
-\section userstartmaccamtwist Getting started with Mac - CamTwist Studio
+// #################################################################################################### \section userstartmaccamtwist 开始使用 Mac - CamTwist Studio
 
-Selection of different machine vision algorithms is achieved by selecting different video resolutions in your video
-capture software. On Macs, most webcam apps do not allow you to select video resolution. But a few do. One example is
-CamTwist Studio.
+通过在视频捕获软件中选择不同的视频分辨率，可以选择不同的机器视觉算法。在 Mac 上，大多数网络摄像头应用程序不允许您选择视频分辨率。但有一些允许。其中一个例子是 CamTwist Studio。
 
-To make it work:
+为了使其工作：
 
 <ul>
 
-<li>Download [CamTwist Studio](http://camtwiststudio.com/download/). We used the latest (development) version and
-it worked great on our El Capitan Mac.
+<li>下载 [CamTwist Studio](http://camtwiststudio.com/download/)。我们使用了最新（开发）版本，它在我们的 El Capitan Mac 上运行良好。
 
-<li>Install it on your Mac.
+<li>将其安装到您的 Mac 上。
 
-<li>Plug in your JeVois camera, wait for orange LED flash and then solid orange LED.
+<li>插入您的 JeVois 相机，等待橙色 LED 闪光，然后等待橙色 LED 常亮。
 
-<li>Launch CamTwist Studio.
+<li>启动 CamTwist Studio。
 
-<li>In the CamTwist window, double-click on \c Webcam under 'Step 1: Select a video source'.
+<li>在 CamTwist 窗口中，双击“步骤 1：选择视频源”下的 \c Webcam。
 
-<li>Then under \c Settings at the right of the CamTwist window, select the 'JeVois A33 Smart Camera'.
+<li>然后在 CamTwist 窗口右侧的 \c 设置下，选择“JeVois A33 智能相机”。
 
-\image html camtwist-setcam.png
+\图像 html camtwist-setcam.png
 
-<li>On the menu bar at the top of the screen, select \c View \c -> \c Preview. This should show live video from your
-JeVois smart camera. The frame rate is not great, but that will be fixed below.By default, the resolution is 320x240 in
-MJPEG with no processing on the JeVois smart camera (i.e., it behaves like a regular camera).
+<li>在屏幕顶部的菜单栏上，选择 \c 查看 \c -> \c 预览。这将显示来自 JeVois 智能相机的实时视频。帧速率不是很高，但下面将修复。默认情况下，分辨率为 320x240（MJPEG），JeVois 智能相机不进行任何处理（即，它的行为与普通相机一样）。
 
-\image html camtwist-prefs.png
+\图像 html camtwist-prefs.png
 
-<li>On the menu bar at the top of the screen, go to \c CamTwist \c -> \c Preferences. Click on 'Video Devices' towards
-the top of the preferences window. Then select the JeVois-A33 Smart Camera. Finally, use the \c Format pull-down menu to
-select various resolutions. Each time you select a new resolution, it will also select a different machine vision
-algorithm on your smart camera. See [JeVois Start, under 'Demos'](http://jevois.org/start/start.html#demos-section) for
-a list of the default video mappings (which algorithm runs on JeVois depending on which resolution you select in
-CamTwist).
+<li>在屏幕顶部的菜单栏上，转到 \c CamTwist \c -> \c 首选项。单击首选项窗口顶部的“视频设备”。然后选择 JeVois-A33 智能相机。最后，使用 \c 格式下拉菜单选择各种分辨率。每次选择新分辨率时，它还会在智能相机上选择不同的机器视觉算法。请参阅 [JeVois Start，在“演示”下](http://jevois.org/start/start.html#demos-section) 以获取默认视频映射列表（在 JeVois 上运行的算法取决于您在 CamTwist 中选择的分辨率）。
 
-<li>Under \c General in the \c Preferences window, you can change frame rate and resolution of the preview box. You need
-to restart CamTwist after the change. You will also need to manually drag the corner of the preview window to its full
-new size.
+<li>在 \c 首选项窗口的 \c 常规下，您可以更改预览框的帧速率和分辨率。更改后您需要重新启动 CamTwist。您还需要手动将预览窗口的角落拖动到其新大小。
 
-\image html camtwist-saliency.png Saliency Demo (640x300 YUYV) using CamTwist on Mac
+\image html camtwist-saliency.png 在 Mac 上使用 CamTwist 的显著性演示 (640x300 YUYV)
 
-\image html camtwist-qrcode.png QR-code Demo (320x286 YUYV) using CamTwist on Mac
+\image html camtwist-qrcode.png 在 Mac 上使用 CamTwist 的二维码演示（320x286 YUYV）
 
-<li>Make sure you quit your camera viewing software before you unplug your JeVois smart camera. Otherwise your host
-computer may become awfully confused trying to use a camera that does not exist anymore.
+<li>拔下 JeVois 智能相机之前，请确保退出相机查看软件。否则，您的主机可能会在尝试使用不再存在的相机时变得非常困惑。
 
-<li>No shutdown procedure is needed before powering off your JeVois camera. Just close your video capture software and
-unplug the camera.
+<li>关闭 JeVois 相机前无需执行关机程序。只需关闭视频捕捉软件并拔下相机电源即可。
 
 </ul>
 
 
-// ####################################################################################################
-\section userstartmacother Getting started with Mac - ffplay
+// #################################################################################################### \section userstartmacother 开始使用 Mac - ffplay
 
-Download the pre-compiled ffplay binary from the ffmpeg web site at https://ffmpeg.org/download.html#build-mac (it is
-free), and then open a Terminal (in Applications, under Utilities) and run:
+从 ffmpeg 网站 https://ffmpeg.org/download.html#build-mac 下载预编译的 ffplay 二进制文件（免费），然后打开终端（在应用程序中，实用程序下）并运行：
 
-\verbatim
-~/bin/ffplay -f avfoundation -i "JeVois" -video_size 640x300 -framerate 60 -pixel_format yuyv422
-\endverbatim
-(assuming you saved ffplay into your ~/bin/ directory).
+\verbatim ~/bin/ffplay -f avfoundation -i "JeVois" -video_size 640x300 -framerate 60 -pixel_format yuyv422 \endverbatim（假设您将 ffplay 保存到您的 ~/bin/ 目录中）。
 
-Note that on Mac, the latency (delay or lag between capture and display) is horrible with many video capture apps,
-including ffplay. This is not a limitation of JeVois. When used with a Linux host, there is no lag.
+请注意，在 Mac 上，许多视频捕获应用程序（包括 ffplay）的延迟（捕获和显示之间的延迟或滞后）非常严重。这不是 JeVois 的限制。与 Linux 主机一起使用时，不会出现延迟。
 
-// ####################################################################################################
+// ################################################## #################################################### ##
 
-// ##############################################################################################################
-\section troubleshootmac Troubleshooting
+// ############################################################################################################# \section troubleshootmac 故障排除
 
-Nothing here so far.
+到目前为止这里还没有任何物品。
 
 */
+

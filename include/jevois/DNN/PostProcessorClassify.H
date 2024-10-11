@@ -24,8 +24,8 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Post-Processor for neural network pipeline
-    /*! This is the last step in a deep neural network processing Pipeline. \ingroup dnn */
+    //! 神经网络管道的后处理器 
+    /*! 这是深度神经网络处理管道的最后一步。 \ingroup dnn */
     class PostProcessorClassify : public PostProcessor,
                                   public Parameter<postprocessor::classoffset, postprocessor::classes,
                                                    postprocessor::top, postprocessor::cthresh, postprocessor::softmax,
@@ -39,19 +39,19 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorClassify();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         void freeze(bool doit) override;
         
-        //! Process outputs and draw/send some results
+        //! 处理输出并绘制/发送一些结果
         void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 
       protected:
         void onParamChange(postprocessor::classes const & param, std::string const & val) override;
-        std::map<int, std::string> itsLabels; //!< Mapping from object ID to class name
+        std::map<int, std::string> itsLabels; //!< 从对象 ID 映射到类名
 
       private:
         std::vector<jevois::ObjReco> itsObjRec;

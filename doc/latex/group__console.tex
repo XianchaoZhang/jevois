@@ -1,0 +1,140 @@
+\hypertarget{group__console}{}\doxysubsection{控制台访问实用程序}
+\label{group__console}\index{控制台访问实用程序@{控制台访问实用程序}}
+
+
+\doxysubsubsection{ }
+控制台相关的实用程序和帮助函数。 
+
+Collaboration diagram for 控制台访问实用程序\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=299pt]{group__console}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{group__console_gadb6b6c4de8c91afbd75b26fd21e1267c}{jevois\+::is\+Input\+Device}} (int fd)
+\begin{DoxyCompactList}\small\item\em 指示此 fd（应来自 /dev/input/event\+X）是否是键盘、鼠标等 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gac71712656cfebf518ed5700bf3e9e3ed}{jevois\+::get\+Console\+Fd}} ()
+\begin{DoxyCompactList}\small\item\em 获取控制台的文件描述符 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__console_gab9a802bcfa42386853cc58f86c5d023f}{jevois\+::get\+Active\+T\+TY}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前活动 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga4a8b4e6208cca24fc399107e48eb133c}{jevois\+::mute\+Keyboard}} (int tty, int \&kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 防止 keystrokes 到达 tty \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__console_ga5fffa3f01add1a9dab7f031361a01282}{jevois\+::un\+Mute\+Keyboard}} (int tty, int kb\+\_\+mode)
+\begin{DoxyCompactList}\small\item\em 恢复给定 tty 的键盘模式 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__console_gab9a802bcfa42386853cc58f86c5d023f}\label{group__console_gab9a802bcfa42386853cc58f86c5d023f}} 
+\index{控制台访问实用程序@{控制台访问实用程序}!getActiveTTY@{getActiveTTY}}
+\index{getActiveTTY@{getActiveTTY}!控制台访问实用程序@{控制台访问实用程序}}
+\doxyparagraph{\texorpdfstring{getActiveTTY()}{getActiveTTY()}}
+{\footnotesize\ttfamily int jevois\+::get\+Active\+T\+TY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取当前活动 tty 
+
+
+
+Definition at line 121 of file Console.\+C.
+
+
+
+References I\+S\+\_\+\+C\+O\+N\+S\+O\+LE.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init(), and main().
+
+\mbox{\Hypertarget{group__console_gac71712656cfebf518ed5700bf3e9e3ed}\label{group__console_gac71712656cfebf518ed5700bf3e9e3ed}} 
+\index{控制台访问实用程序@{控制台访问实用程序}!getConsoleFd@{getConsoleFd}}
+\index{getConsoleFd@{getConsoleFd}!控制台访问实用程序@{控制台访问实用程序}}
+\doxyparagraph{\texorpdfstring{getConsoleFd()}{getConsoleFd()}}
+{\footnotesize\ttfamily int jevois\+::get\+Console\+Fd (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+获取控制台的文件描述符 
+
+
+
+Definition at line 85 of file Console.\+C.
+
+
+
+References N\+E\+L\+E\+MS.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init(), and main().
+
+\mbox{\Hypertarget{group__console_gadb6b6c4de8c91afbd75b26fd21e1267c}\label{group__console_gadb6b6c4de8c91afbd75b26fd21e1267c}} 
+\index{控制台访问实用程序@{控制台访问实用程序}!isInputDevice@{isInputDevice}}
+\index{isInputDevice@{isInputDevice}!控制台访问实用程序@{控制台访问实用程序}}
+\doxyparagraph{\texorpdfstring{isInputDevice()}{isInputDevice()}}
+{\footnotesize\ttfamily bool jevois\+::is\+Input\+Device (\begin{DoxyParamCaption}\item[{int}]{fd }\end{DoxyParamCaption})}
+
+
+
+指示此 fd（应来自 /dev/input/event\+X）是否是键盘、鼠标等 
+
+受 S\+F\+M\+L-\/rpi 启发 
+
+Definition at line 36 of file Console.\+C.
+
+
+
+References N\+B\+I\+TS, and test\+\_\+bit.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::scan\+Devices().
+
+\mbox{\Hypertarget{group__console_ga4a8b4e6208cca24fc399107e48eb133c}\label{group__console_ga4a8b4e6208cca24fc399107e48eb133c}} 
+\index{控制台访问实用程序@{控制台访问实用程序}!muteKeyboard@{muteKeyboard}}
+\index{muteKeyboard@{muteKeyboard}!控制台访问实用程序@{控制台访问实用程序}}
+\doxyparagraph{\texorpdfstring{muteKeyboard()}{muteKeyboard()}}
+{\footnotesize\ttfamily void jevois\+::mute\+Keyboard (\begin{DoxyParamCaption}\item[{int}]{tty,  }\item[{int \&}]{kb\+\_\+mode }\end{DoxyParamCaption})}
+
+
+
+防止 keystrokes 到达 tty 
+
+
+
+Definition at line 103 of file Console.\+C.
+
+
+
+References I\+S\+\_\+\+C\+O\+N\+S\+O\+LE, K\+\_\+\+O\+FF, K\+D\+S\+K\+B\+M\+O\+DE, and K\+D\+S\+K\+B\+M\+U\+TE.
+
+
+
+Referenced by jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::init().
+
+\mbox{\Hypertarget{group__console_ga5fffa3f01add1a9dab7f031361a01282}\label{group__console_ga5fffa3f01add1a9dab7f031361a01282}} 
+\index{控制台访问实用程序@{控制台访问实用程序}!unMuteKeyboard@{unMuteKeyboard}}
+\index{unMuteKeyboard@{unMuteKeyboard}!控制台访问实用程序@{控制台访问实用程序}}
+\doxyparagraph{\texorpdfstring{unMuteKeyboard()}{unMuteKeyboard()}}
+{\footnotesize\ttfamily void jevois\+::un\+Mute\+Keyboard (\begin{DoxyParamCaption}\item[{int}]{tty,  }\item[{int}]{kb\+\_\+mode }\end{DoxyParamCaption})}
+
+
+
+恢复给定 tty 的键盘模式 
+
+使用 \mbox{\hyperlink{group__console_ga4a8b4e6208cca24fc399107e48eb133c}{mute\+Keyboard()}} 返回的 kd\+\_\+mode。 
+
+Definition at line 114 of file Console.\+C.
+
+
+
+References K\+D\+S\+K\+B\+M\+O\+DE, and K\+D\+S\+K\+B\+M\+U\+TE.
+
+
+
+Referenced by main(), and jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::$\sim$\+Im\+Gui\+Backend\+M\+A\+L\+I().
+

@@ -1,0 +1,80 @@
+\hypertarget{classjevois_1_1GPUprogram}{}\doxysubsection{jevois\+::G\+P\+Uprogram Class Reference}
+\label{classjevois_1_1GPUprogram}\index{jevois::GPUprogram@{jevois::GPUprogram}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+P\+Uprogram.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Simple class to load and compile some Open\+G\+L-\/\+ES program. 
+
+Definition at line 25 of file G\+P\+Uprogram.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GPUprogram_a3290d2cd9d28e67b47adfa28a76123a9}{G\+P\+Uprogram}} (char const $\ast$vertex\+\_\+shader, char const $\ast$fragment\+\_\+shader)
+\begin{DoxyCompactList}\small\item\em Constructor, loads and compiles the program, assigns it a program ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1GPUprogram_aeddd8fc9243d2ffed044656df98db179}{$\sim$\+G\+P\+Uprogram}} ()
+\begin{DoxyCompactList}\small\item\em Destructor, deletes the program from Open\+GL and frees up the ID. \end{DoxyCompactList}\item 
+G\+Luint \mbox{\hyperlink{classjevois_1_1GPUprogram_a5366a4733bdc9a4b8e982218e4ff41f1}{id}} () const
+\begin{DoxyCompactList}\small\item\em Get the program ID so we can tell Open\+GL to use this program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUprogram_a3290d2cd9d28e67b47adfa28a76123a9}\label{classjevois_1_1GPUprogram_a3290d2cd9d28e67b47adfa28a76123a9}} 
+\index{jevois::GPUprogram@{jevois::GPUprogram}!GPUprogram@{GPUprogram}}
+\index{GPUprogram@{GPUprogram}!jevois::GPUprogram@{jevois::GPUprogram}}
+\doxyparagraph{\texorpdfstring{GPUprogram()}{GPUprogram()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Uprogram\+::\+G\+P\+Uprogram (\begin{DoxyParamCaption}\item[{char const $\ast$}]{vertex\+\_\+shader,  }\item[{char const $\ast$}]{fragment\+\_\+shader }\end{DoxyParamCaption})}
+
+
+
+Constructor, loads and compiles the program, assigns it a program ID. 
+
+If shader names start with a \#, assume they are code, otherwise filenames. 
+
+Definition at line 21 of file G\+P\+Uprogram.\+C.
+
+
+
+References G\+L\+\_\+\+C\+H\+E\+CK, jevois\+::\+G\+P\+Ushader\+::id(), L\+D\+E\+B\+UG, jevois\+::\+G\+P\+Ushader\+::load(), and jevois\+::\+G\+P\+Ushader\+::set().
+
+\mbox{\Hypertarget{classjevois_1_1GPUprogram_aeddd8fc9243d2ffed044656df98db179}\label{classjevois_1_1GPUprogram_aeddd8fc9243d2ffed044656df98db179}} 
+\index{jevois::GPUprogram@{jevois::GPUprogram}!````~GPUprogram@{$\sim$GPUprogram}}
+\index{````~GPUprogram@{$\sim$GPUprogram}!jevois::GPUprogram@{jevois::GPUprogram}}
+\doxyparagraph{\texorpdfstring{$\sim$GPUprogram()}{~GPUprogram()}}
+{\footnotesize\ttfamily jevois\+::\+G\+P\+Uprogram\+::$\sim$\+G\+P\+Uprogram (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructor, deletes the program from Open\+GL and frees up the ID. 
+
+
+
+Definition at line 45 of file G\+P\+Uprogram.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GPUprogram_a5366a4733bdc9a4b8e982218e4ff41f1}\label{classjevois_1_1GPUprogram_a5366a4733bdc9a4b8e982218e4ff41f1}} 
+\index{jevois::GPUprogram@{jevois::GPUprogram}!id@{id}}
+\index{id@{id}!jevois::GPUprogram@{jevois::GPUprogram}}
+\doxyparagraph{\texorpdfstring{id()}{id()}}
+{\footnotesize\ttfamily G\+Luint jevois\+::\+G\+P\+Uprogram\+::id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the program ID so we can tell Open\+GL to use this program. 
+
+
+
+Definition at line 57 of file G\+P\+Uprogram.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUprogram_8H}{G\+P\+Uprogram.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GPUprogram_8C}{G\+P\+Uprogram.\+C}}\end{DoxyCompactItemize}

@@ -1,37 +1,31 @@
-/*! \page ProgrammerSDK Programmer SDK and writing new modules
+/*! \page ProgrammerSDK 程序员 SDK 和编写新模块
 
-The JeVois programmer software development kit (SDK) allows you to create your own machine vision modules for
-JeVois. The SDK is a complex beast as it not only comprises the JeVois core software, but also a custom Linux kernel for
-your JeVois camera, and the full Linux operating system and set of utilities that run inside the JeVois camera.
+JeVois 程序员软件开发工具包 (SDK) 允许您为 JeVois 创建自己的机器视觉模块。SDK 非常复杂，因为它不仅包含 JeVois 核心软件，还包含 JeVois 相机的自定义 Linux 内核，以及 JeVois 相机内运行的完整 Linux 操作系统和实用程序集。
 
-Getting started with the JeVois Programmer SDK
-==============================================
+开始使用 JeVois 程序员 SDK 
+==================================================
 
-To get started with the programmer SDK, either install a pre-compiled deb package for it, or build it from source, as
-detailed in \ref ProgrammerSource
+要开始使用程序员 SDK，可以安装预编译的 deb 包，也可以从源代码构建，详情请参阅 \ref ProgrammerSource
 
-Writing new modules: A single standalone module
-===============================================
+编写新模块：单个独立模块 
+===================================================
 
-A script \c jevois-create-module has been created in \b /usr/bin (source in \b ~/jevois/scripts/) to automate the
-process of creating a new module. It basically clones https://github.com/jevois/samplemodule and changes some names in
-there to new names you provide:
+已在 \b /usr/bin 中创建脚本 \c jevois-create-module （源位于 \b ~/jevois/scripts/ ）以自动执行创建新模块的过程。它基本上克隆了 https://github.com/jevois/samplemodule 并将其中的一些名称更改为您提供的新名称：
 
 \verbatim
 # USAGE: jevois-create-module <VendorName> <ModuleName>
-# Creates a project directory with name tolower(ModuleName) and populates it:
+# 创建一个名为 tolower（ModuleName）的项目目录并填充它：
 
 jevois-create-module MyVendor MyAlgo
 
 # Module is setup in myalgo/
 \endverbatim
 
-Now edit your module to actually do something interesting, and update all the custom doxygen tags in the inline doc of
-the module, such as @@videomapping, and so on (see below for more info on custom doxygen tags).
+现在编辑您的模块以实际做一些有趣的事情，并更新模块内联文档中的所有自定义 doxygen 标签，例如 @@videomapping 等等（有关自定义 doxygen 标签的更多信息请参阅下文）。
 
-Also check out \b icon.png and other files in the directory where the source code is, and update them as appropriate.
+还请检查 \b icon.png 和源代码所在目录中的其他文件，并根据需要更新它们。
 
-You can then compile using
+然后你可以使用
 
 \verbatim
 ./rebuild-host.sh
@@ -40,111 +34,95 @@ You can then compile using
 ./rebuild-pro-platform-pdeb.sh
 \endverbatim
 
-as you did with jevois and jevoisbase.
+就像你对 jevois 和 jevoisbase 所做的那样。
 
-\note If you get an error <b>cc1plus: fatal error: jevois/Config/Config.H: No such file or directory</b>, just run
-\c rebuild-platform.sh in your \b jevois repository. See \ref CompilingJeVois
+\note 如果您收到错误  <b>cc1plus: fatal error: jevois/Config/Config.H: No such file or directory</b>，只需在您的 \b jevois 存储库中运行 \c rebuild-platform.sh 。请参阅 \ref CompilingJeVois
 
-JeVois-Pro: Installing your module on the camera
+JeVois-Pro：在相机上安装模块 
 ------------------------------------------------
 
-After running `./rebuild-pro-platform-pdeb.sh` a .deb file is created in ppdbuild/
+运行 `./rebuild-pro-platform-pdeb.sh` 后，将在 ppdbuild/ 中创建一个 .deb 文件
 
-- Copy it to your microSD.
+- 将其复制到您的 microSD。
 
-- Start your camera with that microSD in it.
+- 使用其中的 microSD 启动相机。
 
-- In the JeVois-Pro console, type `shell dpkg -i /path/to/your-module-package.deb`. If you already had a previous
-  version installed, run `shell dpkg -r your-module-package` first to remove it.
+- 在 JeVois-Pro 控制台中，输入 `shell dpkg -i /path/to/your-module-package.deb`。如果您已经安装了以前的版本，请先运行 `shell dpkg -r your-module-package` 以将其删除。
 
-- In the Config tab, edit videomappings.cfg to add a new mapping for your module. Save the file.
+- 在 Config 选项卡中，编辑 videomappings.cfg 以添加模块的新映射。保存文件。
 
-- Your module should now appear under the menu of available modules and you can select it and run it.
+- 您的模块现在应该出现在可用模块菜单下，您可以选择它并运行它。
 
-JeVois-A33: Adding your module to a microSD card: jvpkg
+JeVois-A33：将您的模块添加到 microSD 卡：jvpkg 
 -------------------------------------------------------
 
-\c rebuild-platform.sh created a JeVois package file (it's just a zip):
+\c rebuild-platform.sh 创建了一个 JeVois 包文件（它只是一个 zip）：
 
 \verbatim
 myalgo/MyVendor_MyAlgo.jvpkg
 \endverbatim
 
-Insert a properly installed JeVois MicroSD (follow the steps at [JeVois Start](http://jevois.org/start) to make one from
-a disk image) into your computer, and copy the .jvpkg file into the JEVOIS:/packages/ directory of your microSD.
+将正确安装的 JeVois MicroSD（按照 [JeVois Start](http://jevois.org/start) 中的步骤从磁盘映像制作一个）插入您的计算机，然后将 .jvpkg 文件复制到您的 microSD 的 JEVOIS:/packages/ 目录中。
 
-Your smart camera will unpack, configure, and delete the .jvpkg file next time it starts up.
+您的智能相机将在下次启动时解压、配置并删除.jvpkg 文件。
 
-Make sure you allow enough time for it to do that work. It may take several minutes (depending on your module's file
-size, microSD card speed, etc).
+确保留出足够的时间来完成这项工作。这可能需要几分钟（取决于模块的文件大小、microSD 卡速度等）。
 
-Remember to also edit config/videomappings.cfg in the JEVOIS partition of your microSD to add a new mapping that will
-use your module.
+还要记住编辑 microSD 的 JEVOIS 分区中的 config/videomappings.cfg，以添加将使用您的模块的新映射。
 
-For more information:
+了解更多信息：
 
-- jvpkg packages are created by `/usr/bin/jevois-jvpkg` (source in `~/jevois/scripts/jevois-jvpkg)`, which is
-  invoked by `make jvpkg`
-- and they are unpacked by `/usr/bin/jevois.sh` (source `~/jevois/bin/jevois.sh`) running on the
-  platform when it boots up.
+- jvpkg 软件包由 `/usr/bin/jevois-jvpkg`（源在 `~/jevois/scripts/jevois-jvpkg`）创建，由 `make jvpkg` 调用
+- 并在平台启动时由运行的 `/usr/bin/jevois.sh`（源在 `~/jevois/bin/jevois.sh`）解压。
 
-Module documentation and metadata
-=================================
+模块文档和元数据 
+=====================================
 
-A really nasty perl script, \c /usr/bin/jevois-modinfo (source in \c ~/jevois/scripts/jevois-modinfo), will parse your
-module to generate a single-page documentation for it. This script is a mess and its operation is quite brittle. It is
-invoked automatically when you compile your module (see rules in \b ~/jevois/CMakeModules/JeVois.cmake).
+一个非常讨厌的 perl 脚本 \c /usr/bin/jevois-modinfo （源代码位于 \c ~/jevois/scripts/jevois-modinfo ）将解析您的模块并为其生成单页文档。这个脚本很乱，而且操作相当脆弱。它会在您编译模块时自动调用（请参阅 \b ~/jevois/CMakeModules/JeVois.cmake 中的规则）。
 
-The script creates modinfo.html (and modinfo.yaml, currently not used) by parsing your modules and other files in its
-directory.
+该脚本通过解析其目录中的模块和其他文件来创建 modinfo.html（和 modinfo.yaml，当前未使用）。
 
-Special doxygen tags in your module's doc will be parsed, here are some examples:
+模块文档中的特殊 doxygen 标签将被解析，以下是一些示例：
 
-- @@author Sample Author
-- @@displayname My Algo (only needed if you want to display a different name than the class name)
+- @@author 示例作者
+- @@displayname My Algo（仅当您想显示与类名不同的名称时才需要）
 - @@videomapping YUYV 640 480 28.5 YUYV 640 480 28.5 SampleVendor SampleModule
-- @@modulecommand mycommand - description of the module-specific command
-- @@youtubevideo AbcDe567 - link to a youtube video, will be shown in the doc along with the screenshots
+- @@modulecommand mycommand - 模块特定命令的描述
+- @@youtubevideo AbcDe567 - 指向 YouTube 视频的链接，将与屏幕截图一起显示在文档中
 - @@email sampleemail\@samplecompany.com
 - @@address 123 First Street, Los Angeles, CA 90012
-- @@copyright Copyright (C) 2017 by Sample Author
+- @@copyright 版权所有 (C) 2017 by Sample Author
 - @@mainurl http://samplecompany.com
 - @@supporturl http://samplecompany.com/support
 - @@otherurl http://samplecompany.com/about
 - @@license GPL v3
-- @@distribution Unrestricted
-- @@restrictions None
+- @@distribution 不受限制
+- @@restrictions 无
 
-Specially named files will also be used if present:
+如果存在特殊命名的文件，也将使用它：
 
-- \b icon.png (or any other extension, like .jpg, etc): an icon for your module.
+- \b icon.png （或任何其他扩展名，如 .jpg 等）：模块的图标。
 
-- \b screenshot*.*: screenshots, will appear in the doc in the same order as \c ls lists them.
+- \b screenshot*.* ：屏幕截图，将按照 \c ls 列出的顺序出现在文档中。
 
-- \b video*.*: demo videos, will appear in the doc in the same order as \c ls lists them.
+- \b video*.* ：演示视频，将按照 \c ls 列出的顺序出现在文档中。
 
-- \b postinstall: a script that will be executed after your module is unpacked. You may use command
-  `jevois-add-videomapping` (installed in <b>/usr/bin/</b>, source in <b>~/jevois/src/Apps/</b>) in this script to add
-  to the \b videomappings.cfg file any videomappings that should be installed when your module is installed.  This
-  usually is a subset of all the mappings listed in the doc using the doxygen tags.
+- \b postinstall ：模块解压后将执行的脚本。您可以在此脚本中使用该命令`jevois-add-videomapping` （安装在 <b>/usr/bin/</b> 中，源位于 <b>~/jevois/src/Apps/</b> 中）将模块安装时应安装的任何视频映射添加到 \b videomappings.cfg 文件中。这通常是使用 doxygen 标签在文档中列出的所有映射的子集。
 
-- \b params.cfg: parameters values that should get set when the module is loaded. These are set before the
-  module is initialized.
+- \b params.cfg ：模块加载时应设置的参数值。这些是在模块初始化之前设置的。
 
-- \b script.cfg: script of jevois comand-line interface commands that should be run when the module is loaded. This is
-  run after the module is initialized.
+- \b script.cfg ：jevois 命令行界面命令脚本，应在模块加载时运行。此脚本在模块初始化后运行。
 
-- \b jvpkg-exclude.cfg: list of files that should not be included into the jvpkg package. Same format as in
-  `tar --exclude-from`
+- \b jvpkg-exclude.cfg ：不应包含在 jvpkg 包中的文件列表。格式与 `tar --exclude-from` 相同
 
-Partial compilation
-===================
+部分编译 
+=====================
 
-The scripts \c rebuild-host.sh and \c rebuild-platform.sh clear and recompile everything.
+脚本 \c rebuild-host.sh 和 \c rebuild-platform.sh 清除并重新编译所有内容。
 
-You should run them at least once.
+您应该至少运行它们一次。
 
-Then, if you are just changing a few files, you can only recompile what is needed, as follows:
+然后，如果您只是更改几个文件，那么您只需重新编译所需的文件即可，如下所示：
 
 - \jva33: for host
 \verbatim
@@ -177,27 +155,23 @@ sudo make install
 sudo cpack # will re-generate the deb package into ppdbuild/
 \endverbatim
 
-Writing new modules: A collection with shared components
-========================================================
 
-In this more complex scenario, you wish to create a collection of modules, and some component algorithms will be shared
-by several modules.
+编写新模块：具有共享组件的集合
+==========================================================
 
-The preferred approach is then to write the shared algorithms as jevois Component objects, and to compile them all
-into a shared library (.so). Each module that uses some of the components will then automatically trigger the loading of
-the shared library. This is the approach taken in \b jevoisbase
+在这种更复杂的场景中，您希望创建一个模块集合，并且一些组件算法将由几个模块共享。
 
-For guidance on this, inspect the \b CMakeLists.txt in \b jevoisbase.
+然后，首选方法是将共享算法编写为 jevois 组件对象，并将它们全部编译成共享库 (.so)。然后，使用某些组件的每个模块都会自动触发共享库的加载。这是 \b jevoisbase 中采用的方法
 
-Note how several CMake macros have been defined to assist you; those are in \b jevois/CMakeModules/JeVois.cmake
+有关这方面的指导，请检查 \b jevoisbase 中的 \b CMakeLists.txt。
 
-In jevoisbase, we compile everything that is under \b src/Components into \b libjevoisbase.so
+请注意，已定义了几个 CMake 宏来帮助您；它们位于 \b jevois/CMakeModules/JeVois.cmake 中
 
-Then, we compile each module under \b src/Modules into one \b .so file each, which is marked as depending upon
-\b libjevoisbase.so
+在 jevoisbase 中，我们将 \b src/Components 下的所有内容编译为 \b libjevoisbase.so
 
-To create your own, roughly the first 50 lines of the \b jevoisbase \b CMakeLists.txt should be preserved and modified
-for your project. The rest of the \b jevoisbase \b CMakeLists.txt is basically to add required dependencies, such as on
-the ZBar library, the OpenCV library, etc and those will vary with your specific project.
+然后，我们将 \b src/Modules 下的每个模块编译成一个 \b .so 文件，该文件被标记为依赖于 \b libjevoisbase.so
+
+要创建自己的 \b jevoisbase \b CMakeLists.txt ，大约需要保留并修改 \b jevoisbase \b CMakeLists.txt 的前 50 行以适应您的项目。\b jevoisbase \b CMakeLists.txt 的其余部分基本上是添加所需的依赖项，例如 ZBar 库、OpenCV 库等，这些将因您的特定项目而异。
 
 */
+

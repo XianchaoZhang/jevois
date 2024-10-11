@@ -1,0 +1,382 @@
+\hypertarget{classjevois_1_1OutputFramePython}{}\doxysubsection{jevois\+::Output\+Frame\+Python Class Reference}
+\label{classjevois_1_1OutputFramePython}\index{jevois::OutputFramePython@{jevois::OutputFramePython}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Python\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Python 使用的 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包装器 
+
+此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，而仅供 \mbox{\hyperlink{classjevois_1_1PythonModule}{Python\+Module}} 使用。此类的用户必须确保 原始 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 将比任何和所有 \mbox{\hyperlink{classjevois_1_1OutputFramePython}{Output\+Frame\+Python}} 实例都存活得更久，因为 \mbox{\hyperlink{classjevois_1_1OutputFramePython}{Output\+Frame\+Python}} 只是通过不受保护的原始指针引用 源 Output\+Frame。虽然 C++ 对象称为 Output\+Frame\+Python，但我们将以名称 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 将其公开给 python（参见 Python\+Support.\+C）。 
+
+Definition at line 125 of file Python\+Module.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1OutputFramePython_a8752b615d5f195f2c2b167eee885ec07}{Output\+Frame\+Python}} ()=default
+\begin{DoxyCompactList}\small\item\em 默认构造函数使 boost\+::python 正常运行，对象不可操作 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1OutputFramePython_ae32e89356fe1329331a6286cd329b92e}{Output\+Frame\+Python}} (\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} $\ast$src)
+\begin{DoxyCompactList}\small\item\em 从应该来自引擎的常规（仅移动）\+Output\+Frame 构造 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classjevois_1_1RawImage}{Raw\+Image}} \& \mbox{\hyperlink{classjevois_1_1OutputFramePython_a4a62284c2a39d38dd4c374918b371346}{get}} () const
+\begin{DoxyCompactList}\small\item\em 获取下一个捕获的相机图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a75ec46de34b0de442d9bc595d87c55e3}{send}} () const
+\begin{DoxyCompactList}\small\item\em Indicate that user processing is done with the image previously obtained via \mbox{\hyperlink{classjevois_1_1OutputFramePython_a4a62284c2a39d38dd4c374918b371346}{get()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_aa2da45571f40ec8e9f38f16014a508e9}{send\+Cv1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_ac63fab09e88be10cf8e9211884e703be}{send\+Cv}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a7f167e6caa8507caae3a8447c00c97e4}{send\+Cv\+G\+R\+A\+Y1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a G\+R\+AY cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_aff1164328effbd591ab60b3e625a8753}{send\+Cv\+G\+R\+AY}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a G\+R\+AY cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a82d78f6cbd50f259fa62645e9dc53687}{send\+Cv\+B\+G\+R1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a B\+GR cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a879c787d19686d3c933ca3789a6a1818}{send\+Cv\+B\+GR}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a B\+GR cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a58537e4f4723368170c3ef63fd90ce8b}{send\+Cv\+R\+G\+B1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+GB cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_aa9dd796eea2910df805e250b94d5622f}{send\+Cv\+R\+GB}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+GB cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_ae55f74e67c8aa79e97073081b9e2d871}{send\+Cv\+R\+G\+B\+A1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+G\+BA cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_ab7aa6f677eff5b1c04529210fb976bcd}{send\+Cv\+R\+G\+BA}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+G\+BA cv\+::\+Mat after converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a3b52ab0abc95ad0425d64dcd6b63a00d}{send\+Scaled\+Cv\+G\+R\+A\+Y1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a G\+R\+AY cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_aad85f9891b62ab3fc580f9d2f58cff87}{send\+Scaled\+Cv\+G\+R\+AY}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a G\+R\+AY cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a18b5fc14c782c87152a37dfae2c210b5}{send\+Scaled\+Cv\+B\+G\+R1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a B\+GR cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a7daa5f0cd971d610cd6fb2aeec50b4c5}{send\+Scaled\+Cv\+B\+GR}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a B\+GR cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a71ad549f8026a7bde6904cc165cfdd4a}{send\+Scaled\+Cv\+R\+G\+B1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+GB cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a89debe1558ece7444d356150de58793c}{send\+Scaled\+Cv\+R\+GB}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+GB cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_a05f15bcaf0006a6d2354cbc214dd229a}{send\+Scaled\+Cv\+R\+G\+B\+A1}} (cv\+::\+Mat const \&img, int quality) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+G\+BA cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1OutputFramePython_aa226a5b410d32251598acbcac99f2a6b}{send\+Scaled\+Cv\+R\+G\+BA}} (cv\+::\+Mat const \&img) const
+\begin{DoxyCompactList}\small\item\em Shorthand to send a R\+G\+BA cv\+::\+Mat after scaling/converting it to the current output format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a8752b615d5f195f2c2b167eee885ec07}\label{classjevois_1_1OutputFramePython_a8752b615d5f195f2c2b167eee885ec07}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!OutputFramePython@{OutputFramePython}}
+\index{OutputFramePython@{OutputFramePython}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{OutputFramePython()}{OutputFramePython()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+Output\+Frame\+Python\+::\+Output\+Frame\+Python (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+默认构造函数使 boost\+::python 正常运行，对象不可操作 
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_ae32e89356fe1329331a6286cd329b92e}\label{classjevois_1_1OutputFramePython_ae32e89356fe1329331a6286cd329b92e}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!OutputFramePython@{OutputFramePython}}
+\index{OutputFramePython@{OutputFramePython}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{OutputFramePython()}{OutputFramePython()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+Output\+Frame\+Python\+::\+Output\+Frame\+Python (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} $\ast$}]{src }\end{DoxyParamCaption})}
+
+
+
+从应该来自引擎的常规（仅移动）\+Output\+Frame 构造 
+
+
+
+Definition at line 142 of file Python\+Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a4a62284c2a39d38dd4c374918b371346}\label{classjevois_1_1OutputFramePython_a4a62284c2a39d38dd4c374918b371346}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!get@{get}}
+\index{get@{get}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} \& jevois\+::\+Output\+Frame\+Python\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取下一个捕获的相机图像 
+
+
+
+Definition at line 145 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a75ec46de34b0de442d9bc595d87c55e3}\label{classjevois_1_1OutputFramePython_a75ec46de34b0de442d9bc595d87c55e3}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!send@{send}}
+\index{send@{send}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Indicate that user processing is done with the image previously obtained via \mbox{\hyperlink{classjevois_1_1OutputFramePython_a4a62284c2a39d38dd4c374918b371346}{get()}} 
+
+
+
+Definition at line 150 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_ac63fab09e88be10cf8e9211884e703be}\label{classjevois_1_1OutputFramePython_ac63fab09e88be10cf8e9211884e703be}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCv@{sendCv}}
+\index{sendCv@{sendCv}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCv()}{sendCv()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 160 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_aa2da45571f40ec8e9f38f16014a508e9}\label{classjevois_1_1OutputFramePython_aa2da45571f40ec8e9f38f16014a508e9}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCv1@{sendCv1}}
+\index{sendCv1@{sendCv1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCv1()}{sendCv1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 155 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a879c787d19686d3c933ca3789a6a1818}\label{classjevois_1_1OutputFramePython_a879c787d19686d3c933ca3789a6a1818}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvBGR@{sendCvBGR}}
+\index{sendCvBGR@{sendCvBGR}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvBGR()}{sendCvBGR()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a B\+GR cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 180 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a82d78f6cbd50f259fa62645e9dc53687}\label{classjevois_1_1OutputFramePython_a82d78f6cbd50f259fa62645e9dc53687}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvBGR1@{sendCvBGR1}}
+\index{sendCvBGR1@{sendCvBGR1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvBGR1()}{sendCvBGR1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+B\+G\+R1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a B\+GR cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 175 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_aff1164328effbd591ab60b3e625a8753}\label{classjevois_1_1OutputFramePython_aff1164328effbd591ab60b3e625a8753}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvGRAY@{sendCvGRAY}}
+\index{sendCvGRAY@{sendCvGRAY}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvGRAY()}{sendCvGRAY()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a G\+R\+AY cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 170 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a7f167e6caa8507caae3a8447c00c97e4}\label{classjevois_1_1OutputFramePython_a7f167e6caa8507caae3a8447c00c97e4}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvGRAY1@{sendCvGRAY1}}
+\index{sendCvGRAY1@{sendCvGRAY1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvGRAY1()}{sendCvGRAY1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+G\+R\+A\+Y1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a G\+R\+AY cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 165 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_aa9dd796eea2910df805e250b94d5622f}\label{classjevois_1_1OutputFramePython_aa9dd796eea2910df805e250b94d5622f}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvRGB@{sendCvRGB}}
+\index{sendCvRGB@{sendCvRGB}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvRGB()}{sendCvRGB()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+GB cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 190 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a58537e4f4723368170c3ef63fd90ce8b}\label{classjevois_1_1OutputFramePython_a58537e4f4723368170c3ef63fd90ce8b}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvRGB1@{sendCvRGB1}}
+\index{sendCvRGB1@{sendCvRGB1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvRGB1()}{sendCvRGB1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+R\+G\+B1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+GB cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 185 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_ab7aa6f677eff5b1c04529210fb976bcd}\label{classjevois_1_1OutputFramePython_ab7aa6f677eff5b1c04529210fb976bcd}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvRGBA@{sendCvRGBA}}
+\index{sendCvRGBA@{sendCvRGBA}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvRGBA()}{sendCvRGBA()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+G\+BA cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 200 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_ae55f74e67c8aa79e97073081b9e2d871}\label{classjevois_1_1OutputFramePython_ae55f74e67c8aa79e97073081b9e2d871}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendCvRGBA1@{sendCvRGBA1}}
+\index{sendCvRGBA1@{sendCvRGBA1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendCvRGBA1()}{sendCvRGBA1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Cv\+R\+G\+B\+A1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+G\+BA cv\+::\+Mat after converting it to the current output format. 
+
+
+
+Definition at line 195 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a7daa5f0cd971d610cd6fb2aeec50b4c5}\label{classjevois_1_1OutputFramePython_a7daa5f0cd971d610cd6fb2aeec50b4c5}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvBGR@{sendScaledCvBGR}}
+\index{sendScaledCvBGR@{sendScaledCvBGR}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvBGR()}{sendScaledCvBGR()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+B\+GR (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a B\+GR cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 220 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a18b5fc14c782c87152a37dfae2c210b5}\label{classjevois_1_1OutputFramePython_a18b5fc14c782c87152a37dfae2c210b5}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvBGR1@{sendScaledCvBGR1}}
+\index{sendScaledCvBGR1@{sendScaledCvBGR1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvBGR1()}{sendScaledCvBGR1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+B\+G\+R1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a B\+GR cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 215 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_aad85f9891b62ab3fc580f9d2f58cff87}\label{classjevois_1_1OutputFramePython_aad85f9891b62ab3fc580f9d2f58cff87}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvGRAY@{sendScaledCvGRAY}}
+\index{sendScaledCvGRAY@{sendScaledCvGRAY}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvGRAY()}{sendScaledCvGRAY()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+G\+R\+AY (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a G\+R\+AY cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 210 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a3b52ab0abc95ad0425d64dcd6b63a00d}\label{classjevois_1_1OutputFramePython_a3b52ab0abc95ad0425d64dcd6b63a00d}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvGRAY1@{sendScaledCvGRAY1}}
+\index{sendScaledCvGRAY1@{sendScaledCvGRAY1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvGRAY1()}{sendScaledCvGRAY1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+G\+R\+A\+Y1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a G\+R\+AY cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 205 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a89debe1558ece7444d356150de58793c}\label{classjevois_1_1OutputFramePython_a89debe1558ece7444d356150de58793c}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvRGB@{sendScaledCvRGB}}
+\index{sendScaledCvRGB@{sendScaledCvRGB}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGB()}{sendScaledCvRGB()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+R\+GB (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+GB cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 230 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a71ad549f8026a7bde6904cc165cfdd4a}\label{classjevois_1_1OutputFramePython_a71ad549f8026a7bde6904cc165cfdd4a}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvRGB1@{sendScaledCvRGB1}}
+\index{sendScaledCvRGB1@{sendScaledCvRGB1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGB1()}{sendScaledCvRGB1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+R\+G\+B1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+GB cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 225 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_aa226a5b410d32251598acbcac99f2a6b}\label{classjevois_1_1OutputFramePython_aa226a5b410d32251598acbcac99f2a6b}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvRGBA@{sendScaledCvRGBA}}
+\index{sendScaledCvRGBA@{sendScaledCvRGBA}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGBA()}{sendScaledCvRGBA()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+R\+G\+BA (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+G\+BA cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 240 of file Python\+Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1OutputFramePython_a05f15bcaf0006a6d2354cbc214dd229a}\label{classjevois_1_1OutputFramePython_a05f15bcaf0006a6d2354cbc214dd229a}} 
+\index{jevois::OutputFramePython@{jevois::OutputFramePython}!sendScaledCvRGBA1@{sendScaledCvRGBA1}}
+\index{sendScaledCvRGBA1@{sendScaledCvRGBA1}!jevois::OutputFramePython@{jevois::OutputFramePython}}
+\doxyparagraph{\texorpdfstring{sendScaledCvRGBA1()}{sendScaledCvRGBA1()}}
+{\footnotesize\ttfamily void jevois\+::\+Output\+Frame\+Python\+::send\+Scaled\+Cv\+R\+G\+B\+A1 (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{int}]{quality }\end{DoxyParamCaption}) const}
+
+
+
+Shorthand to send a R\+G\+BA cv\+::\+Mat after scaling/converting it to the current output format. 
+
+
+
+Definition at line 235 of file Python\+Module.\+C.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{PythonModule_8H}{Python\+Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{PythonModule_8C}{Python\+Module.\+C}}\end{DoxyCompactItemize}

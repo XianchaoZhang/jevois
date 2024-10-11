@@ -1,30 +1,16 @@
-/*! \page Multicam JeVois-A33 streaming video from multiple JeVois cameras connected to one USB bus
+/*! \page Multicam JeVois-A33 通过连接到一个 USB 总线的多个 JeVois 摄像机流式传输视频
 
-By default, \jva33 is configured to use all of the USB isochronous bandwidth, so as to minimize latency.
+默认情况下，\jva33 配置为使用所有 USB 等时带宽（isochronous bandwidth），以最大限度地减少延迟。
 
-In a nutshell, isochronous transfers are the ones that guarantee real time data delivery, and hence are desirable for
-audio and video. On a 8kHz clock (125us period), each connected device can request some time slots, for example, a
-device may request to transmit 1 kbyte every 8 clock cycles (microframe), another may request 128 bytes every
-microframe, etc. The host then finds a way to accommodate the various requests of all connected devices. JeVois by
-default requests the max, which is 3 kbyte per microframe, with the goal of pushing all the video data as fast as
-possible to the host to minimize delay.
+简而言之，等时传输可以保证实时数据传输，因此非常适合音频和视频。在 8kHz 时钟（125us 周期）上，每个连接设备都可以请求一些时隙（time slots），例如，一个设备可能请求每 8 个时钟周期（微帧 microframe）传输 1 KB，另一个设备可能请求每微帧传输 128 字节，等等。然后主机找到一种方法来满足所有连接设备的各种请求。JeVois 默认请求最大值，即每微帧 3 KB，目的是尽快将所有视频数据推送到主机以最大限度地减少延迟。
 
-Starting with \jvversion{1.7.2}, a new boot switch is provided: by writing an empty file called \b multicam into the
-<b>BOOT:</b> partition of the microSD card, one can lower the bandwidth request of a JeVois camera to 1 kbyte/microframe
-(8 MByte/s). See \ref Debugging and \ref MicroSD for more information about this special file. Using this new option,
-one can stream from 3 JeVois cameras connected to a same USB bus. Note that all 3 cameras must have the \b multicam boot
-mode enabled for this to work.
+从 \jvversion{1.7.2} 开始，提供了一个新的启动开关：通过将一个名为 \b multicam 的空文件写入 microSD 卡的 <b>BOOT:</b> 分区，可以将 JeVois 相机的带宽请求降低到 1 kbyte/microframe (8 MByte/s)。有关此特殊文件的更多信息，请参阅 \ref Debugging 和 \ref MicroSD。使用此新选项，可以从连接到同一 USB 总线的 3 个 JeVois 相机进行流式传输。请注意，所有 3 个相机都必须启用 \b multicam 启动模式才能正常工作。
 
-\image html multicam.png Above: streaming video from 3 JeVois cameras connected to one USB hub
+\image html multicam.png 上图：连接到一个 USB 集线器的 3 个 JeVois 摄像机的流媒体视频
 
-Because this limits the USB bandwidth to 8 MByte/s for each JeVois camera, it is not enabled by default. Note that it
-may also limit the framerate at which some modules can run. In YUYV, that means only low-resolution will go through at
-full frame rate. Indeed, just 640 x 480 x 2(bytes/pixel) x 30(fps) already is 18 Mbytes/s.
+由于这会将每个 JeVois 相机的 USB 带宽限制为 8 MByte/s，因此默认情况下不启用此功能。请注意，它还可能限制某些模块可以运行的帧速率。在 YUYV 中，这意味着只有低分辨率才能以全帧速率通过。事实上，仅 640 x 480 x 2（bytes/pixel）x 30（fps）就已经是 18 Mbytes/s。
 
-When using PC host hardware, expansion cards are available that provide a dedicated USB controller to each port. For
-example the StarTech PEXUSB400 (4 independent USB 2.0 ports, discontinued but may find on eBay) or PEXUSB3S44V (4
-independent USB 3.0 ports). With such a card, one could stream from 4 JeVois cameras at full frame rate
-(3kb/microframe), or from 12 JeVois cameras at the multicam rate (1kb/microframe; one would need to connect a powered
-3-port USB hub to each of the 4 ports on the expansion card).
+使用 PC 主机硬件时，可以使用扩展卡为每个端口提供专用的 USB 控制器。例如 StarTech PEXUSB400（4 个独立的 USB 2.0 端口，已停产，但可以在 eBay 上找到）或 PEXUSB3S44V（4 个独立的 USB 3.0 端口）。使用这样的卡，可以从 4 个 JeVois 摄像机以全帧速率（3kb/微帧）进行流式传输，或者从 12 个 JeVois 摄像机以多摄像机速率（1kb/微帧；需要将一个有源 3 端口 USB 集线器连接到扩展卡上的 4 个端口中的每一个）。
 
 */
+

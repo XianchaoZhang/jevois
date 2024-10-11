@@ -25,7 +25,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-// On first error, store the errno so we remember that we are in error:
+// 第一次错误时，存储 errno 以便我们记住我们犯了错误：
 #define SERFATAL(msg) do {                                              \
     if (itsErrno.load() == 0) itsErrno = errno;                         \
     LFATAL('[' << instanceName() << "] " << msg << " (" << strerror(errno) << ')'); \
@@ -88,26 +88,26 @@ void jevois::Serial::openPort()
   if (tcgetattr(itsDev, &options) == -1) SERTHROW("Failed to get options");
 
   // get raw input from the port
-  options.c_cflag |= ( CLOCAL     // ignore modem control lines
+  options.c_cflag |= ( CLOCAL     // 忽略调制解调器控制线
                        | CREAD ); // enable the receiver
 
-  options.c_iflag &= ~(  IGNBRK    // ignore BREAK condition on input
-                         | BRKINT  // If IGNBRK is not set, generate SIGINT on BREAK condition, else read BREAK as \0
+  options.c_iflag &= ~(  IGNBRK    // 忽略输入上的 BREAK 条件
+                         | BRKINT  // 如果未设置 IGNBRK，则在 BREAK 条件下生成 SIGINT，否则将 BREAK 读为 \0
                          | PARMRK
-                         | ISTRIP  // strip off eighth bit
-                         | INLCR   // donot translate NL to CR on input
+                         | ISTRIP  // 剥离第八位
+                         | INLCR   // 在输入上不将 NL 转换为 CR
                          | IGNCR   // ignore CR
-                         | ICRNL   // translate CR to newline on input
-                         | IXON    // disable XON/XOFF flow control on output
+                         | ICRNL   // 在输入上将 CR 转换为换行符
+                         | IXON    // 在输出上禁用 XON/XOFF 流控制
                          );
 
-  // disable implementation-defined output processing
+  // 禁用实现定义的输出处理
   options.c_oflag &= ~OPOST;
-  options.c_lflag &= ~(ECHO  // dont echo i/p chars
-                       | ECHONL // do not echo NL under any circumstance
-                       | ICANON // disable canonical mode
-                       | ISIG   // do not signal for INTR, QUIT, SUSP etc
-                       | IEXTEN // disable platform dependent i/p processing
+  options.c_lflag &= ~(ECHO  // 不回显 i/p 字符
+                       | ECHONL // 在任何情况下都不回显 NL
+                       | ICANON // 禁用规范模式
+                       | ISIG   // 不发出 INTR、QUIT、SUSP 等信号
+                       | IEXTEN // 禁用依赖于平台的 i/p 处理
                        );
 
   // Set the baudrate:
@@ -145,7 +145,7 @@ void jevois::Serial::openPort()
   cfsetispeed(&options, rate);
   cfsetospeed(&options, rate);
 
-  // Parse the serial format string:
+  // 解析串行格式字符串：
   std::string const format = jevois::serial::format::get();
   if (format.length() != 3) SERTHROW("Incorrect format string: " << format);
 
@@ -161,7 +161,7 @@ void jevois::Serial::openPort()
   default: SERTHROW("Invalid charbits: " << format[0] << " (should be 5..8)");
   }
 
-  // Set parity option:
+  // 设置奇偶校验选项：
   options.c_cflag &= ~(PARENB | PARODD);
 
   switch(format[1])
@@ -172,7 +172,7 @@ void jevois::Serial::openPort()
   default: SERTHROW("Invalid parity: " << format[1] << " (should be N,E,O)");
   }
 
-  // Set the stop bits option:
+  // 设置停止位选项：
   options.c_cflag &= ~CSTOPB;
   switch(format[2])
   {
@@ -181,14 +181,14 @@ void jevois::Serial::openPort()
   default: SERTHROW("Invalid stopbits: " << format[2] << " (should be 1..2)");
   }
 
-  // Set the flow control:
+  // 设置流量控制：
   options.c_cflag &= ~CRTSCTS;
   options.c_iflag &= ~(IXON | IXANY | IXOFF);
 
   if (jevois::serial::flowsoft::get()) options.c_iflag |= (IXON | IXANY | IXOFF);
   if (jevois::serial::flowhard::get()) options.c_cflag |= CRTSCTS;
 
-  // Set all the options now:
+  // 现在设置所有选项：
   if (tcsetattr(itsDev, TCSANOW, &options) == -1) SERTHROW("Failed to set port options");
 
   // We are operational:
@@ -219,13 +219,13 @@ void jevois::Serial::setBlocking(bool blocking, std::chrono::milliseconds const 
   if (blocking) flags &= (~O_NONBLOCK); else flags |= O_NONBLOCK;
   if (fcntl(itsDev, F_SETFL, flags) == -1) SERFATAL("Cannot set flags");
 
-  // If blocking, set a timeout on the descriptor:
+  // 如果阻塞，则在描述符上设置超时：
   if (blocking)
   {
     termios options;
     if (tcgetattr(itsDev, &options) == -1) SERFATAL("Failed to get options");
     options.c_cc[VMIN] = 0;
-    options.c_cc[VTIME] = timeout.count() / 100; // vtime is in tenths of second
+    options.c_cc[VTIME] = timeout.count() / 100; // vtime 以十分之一秒为单位
     if (tcsetattr(itsDev, TCSANOW, &options) == -1) SERFATAL("Failed to set port options");
   }
 }
@@ -300,7 +300,7 @@ bool jevois::Serial::readSome(std::string & str)
       else itsPartialString += c;
       break;
 
-    case jevois::serial::LineStyle::Sloppy: // Return when we receive first separator, ignore others
+    case jevois::serial::LineStyle::Sloppy: // 当我们收到第一个分隔符时返回，忽略其他分隔符
       if (c == '\r' || c == '\n' || c == 0x00 || c == 0xd0)
       {
         if (itsPartialString.empty() == false)
@@ -315,7 +315,7 @@ bool jevois::Serial::readSome(std::string & str)
 // ######################################################################
 void jevois::Serial::writeString(std::string const & str)
 {
-  // If in error, silently drop all data until we successfully reconnect:
+  // 如果出现错误，则静默删除所有数据，直到我们成功重新连接：
   if (itsErrno.load()) { tryReconnect(); if (itsErrno.load()) return; }
   
   std::string fullstr(str);
@@ -336,31 +336,31 @@ void jevois::Serial::writeString(std::string const & str)
 // ######################################################################
 void jevois::Serial::writeInternal(void const * buffer, const int nbytes, bool nodrop)
 {
-  // Nodrop is used to prevent dropping even if the user wants it, e.g., during fileGet().
+  // Nodrop 用于防止丢弃，即使用户想要丢弃，例如在 fileGet() 期间。
   if (nodrop)
   {
-    // Just write it all, never quit, never drop:
+    // 只写入所有内容，永不退出，永不丢弃：
     int ndone = 0; char const * b = reinterpret_cast<char const *>(buffer);
     while (ndone < nbytes)
     {
       int n = ::write(itsDev, b + ndone, nbytes - ndone);
       if (n == -1 && errno != EAGAIN) SERFATAL("Write error");
       
-      // If we did not write the whole thing, the serial port is saturated, we need to wait a bit:
+      // 如果我们没有写入整个内容，则串行端口已饱和，我们需要等待一段时间：
       if (n > 0) ndone += n;
-      if (ndone < nbytes) tcdrain(itsDev); // on USB disconnect, this will hang forever...
+      if (ndone < nbytes) tcdrain(itsDev); // 当 USB 断开连接时，这将永远挂起…… 
     }
   }
   else if (drop::get())
   {
-    // Just write and silently drop (after a few attempts) if we could not write everything:
+    // 如果无法写入所有内容，则只需写入并静默丢弃（几次尝试后）： 
     int ndone = 0; char const * b = reinterpret_cast<char const *>(buffer); int iter = 0;
     while (ndone < nbytes && iter++ < 10)
     {
       int n = ::write(itsDev, b + ndone, nbytes - ndone);
       if (n == -1 && errno != EAGAIN) SERFATAL("Write error");
       
-      // If we did not write the whole thing, the serial port is saturated, we need to wait a bit:
+      // 如果我们没有写入整个内容，则串行端口已饱和，我们需要等待一段时间：
       if (n > 0) { ndone += n; iter = 0; }
       if (ndone < nbytes) std::this_thread::sleep_for(std::chrono::milliseconds(5));
     }
@@ -368,22 +368,21 @@ void jevois::Serial::writeInternal(void const * buffer, const int nbytes, bool n
   }
   else
   {
-    // Try to write a few times, then, if not done, report overflow and drop what remains:
+    // 尝试写入几次，如果没有完成，则报告溢出并丢弃剩余数据：
     int ndone = 0; char const * b = reinterpret_cast<char const *>(buffer); int iter = 0;
     while (ndone < nbytes && iter++ < 50)
     {
       int n = ::write(itsDev, b + ndone, nbytes - ndone);
       if (n == -1 && errno != EAGAIN) SERFATAL("Write error");
       
-      // If we did not write the whole thing, the serial port is saturated, we need to wait a bit:
+      // 如果我们没有写入整个内容，则串行端口已饱和，我们需要等待一会儿：
       if (n > 0) ndone += n;
       if (ndone < nbytes) std::this_thread::sleep_for(std::chrono::milliseconds(2));
     }
     
     if (ndone < nbytes)
     {
-      // If we had a serial overflow, we need to let the user know, but how, since the serial is overflowed already?
-      // Let's first throttle down big time, and then we throw:
+      // 如果发生串行溢出，我们需要让用户知道，但是由于串行已经溢出，该怎么办？让我们先大幅降低速度，然后抛出：
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
       
       // Report the overflow once in a while:
@@ -391,7 +390,7 @@ void jevois::Serial::writeInternal(void const * buffer, const int nbytes, bool n
       if (itsWriteOverflowCounter == 1)
         throw std::overflow_error("Serial write overflow: need to reduce amount ot serial writing");
       
-      // Note how we are otherwise just ignoring the overflow and hence dropping data.
+      // 请注意，否则我们将忽略溢出并因此丢弃数据。
     }
     else itsWriteOverflowCounter = 0;
   }
@@ -423,13 +422,13 @@ void jevois::Serial::fileGet(std::string const & abspath)
   std::ifstream fil(abspath, std::ios::in | std::ios::binary);
   if (fil.is_open() == false) throw std::runtime_error("Could not read file " + abspath);
 
-  // Get file length and send it out in ASCII:
+  // 获取文件长度并以 ASCII 格式发送出去：
   fil.seekg(0, fil.end); size_t num = fil.tellg(); fil.seekg(0, fil.beg);
 
   std::string startstr = "JEVOIS_FILEGET " + std::to_string(num) + '\n';
   writeInternal(startstr.c_str(), startstr.length(), true);
   
-  // Read blocks and send them to serial:
+  // 读取块并将其发送到串行：
   size_t const bufsiz = std::min(num, size_t(1024 * 1024)); char buffer[1024 * 1024];
   while (num)
   {
@@ -462,7 +461,7 @@ void jevois::Serial::filePut(std::string const & abspath)
 
   size_t num = std::stoul(vec[1]);
     
-  // Read blocks from serial and write them to file:
+  // 从串行读取块并将其写入文件：
   std::lock_guard<std::mutex> _(itsMtx);
   size_t const bufsiz = std::min(num, size_t(1024 * 1024)); char buffer[1024 * 1024];
   while (num)

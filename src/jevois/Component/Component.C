@@ -40,7 +40,7 @@ std::string const & jevois::Component::className() const
 {
   boost::shared_lock<boost::shared_mutex> lck(itsMetaMtx);
 
-  // We need the (derived!) component to be fully constructed for demangle to work, hence the const_cast here:
+  // 我们需要完全构造（派生！）组件以使 demangle 正常工作，因此这里有 const_cast：
   if (itsClassName.empty()) *(const_cast<std::string *>(&itsClassName)) = jevois::demangle(typeid(*this).name());
 
   return itsClassName;
@@ -57,11 +57,10 @@ jevois::Component::~Component()
 
   LDEBUG("Deleting Component");
 
-  // Recursively un-init us and our subs; call base class version as derived classes are destroyed:
+  // 递归地取消初始化我们和我们的子类；当派生类被销毁时调用基类版本：
   if (itsInitialized) jevois::Component::uninit();
 
-  // All right, we need to nuke our subs BEFORE we get destroyed, since they will backflow to us (for param
-  // notices, recursive descriptor access, etc):
+  // 好的，我们需要在被销毁之前销毁我们的子进程，因为它们会回流给我们（对于参数通知、递归描述符访问等）：
   boost::upgrade_lock<boost::shared_mutex> uplck(itsSubMtx);
 
   while (itsSubComponents.empty() == false)
@@ -104,7 +103,7 @@ void jevois::Component::doRemoveSubComponent(std::vector<std::shared_ptr<jevois:
   // Un-init the component:
   if (component->initialized()) component->uninit();
 
-  // Remove it from our list of subs:
+  // 将其从我们的子列表中删除：
   boost::upgrade_to_unique_lock<boost::shared_mutex> ulck(uplck);
   itsSubComponents.erase(itr);
 
@@ -112,7 +111,7 @@ void jevois::Component::doRemoveSubComponent(std::vector<std::shared_ptr<jevois:
     LERROR(component.use_count() - 1 << " additional external shared_ptr reference(s) exist to "
                 << displayname << " [" << component->descriptor() << "]. It was removed but NOT deleted.");
 
-  component.reset(); // nuke the shared_ptr, this should yield a delete unless use_count was > 1
+  component.reset(); // 删除 shared_ptr，除非 use_count > 1，否则这会产生删除
 }
 
 // ######################################################################
@@ -164,11 +163,10 @@ void jevois::Component::runPreInit()
     for (std::shared_ptr<jevois::Component> c : itsSubComponents) c->runPreInit();
   }
   
-  // Then us. So the last one here will be the manager, and its preInit() will parse the command line:
+  // Then us. 所以这里的最后一个将是管理器，它的 preInit() 将解析命令行：
   preInit();
 
-  // If we have some parameters with callbacks that have not been set expicitly by the command-line, call the callback a
-  // first time here. This may add some new parameters
+  // 如果我们有一些带回调的参数，而这些参数尚未通过命令行明确设置，则在此首次调用回调。这可能会添加一些新参数
   ParameterRegistry::callbackInitCall();
 }
 
@@ -277,8 +275,7 @@ std::string jevois::Component::descriptor() const
 {
   JEVOIS_TRACE(8);
 
-  // Top-level components or those with no parent just return their instance name. Sub-components return a chain of
-  // component instance names up to the top level:
+  // 顶级组件或没有父级的组件只返回其实例名称。子组件返回一串组件实例名称，直至顶级：
 
   boost::shared_lock<boost::shared_mutex> lck(itsMtx);
 
@@ -295,12 +292,12 @@ void jevois::Component::findParamAndActOnIt(std::string const & descrip,
 {
   JEVOIS_TRACE(9);
 
-  // Split this parameter descriptor by single ":" (skipping over all "::")
+  // 用单个 ":" 分割此参数描述符（跳过所有 "::"）
   std::vector<std::string> desc = jevois::split(descrip, ":" /*"FIXME "(?<!:):(?!:)" */);
 
   if (desc.empty()) throw std::range_error(descriptor() + ": Cannot parse empty parameter name");
 
-  // Recursive call with the vector of tokens:
+  // 使用标记向量进行递归调用：
   findParamAndActOnIt(desc, true, 0, "", doit);
 
   if (empty()) throw std::range_error(descriptor() + ": No Parameter named [" + descrip + ']');
@@ -313,36 +310,35 @@ void jevois::Component::findParamAndActOnIt(std::vector<std::string> const & des
 {
   JEVOIS_TRACE(9);
 
-  // Have we not yet reached the bottom (still have some component names before the param)?
+  // 我们还没有到达底部吗（参数前仍然有一些组件名称）？
   if (descrip.size() > idx + 1)
   {
-    // We have some token before the param, is it a '*', in which case we turn on recursion?
+    // 参数前有一些标记，它是 '*'，在这种情况下我们打开递归？
     if (descrip[idx] == "*") { recur = true; ++idx; }
     else {
-      // We have some Instance specification(s) of component(s) before the param. Let's see if we match against the
-      // first one.  If it's a match, eat up the first token and send the rest of the tokens to our subcomponents,
-      // otherwise keep the token and recurse the entire list to the subs:
+      // 参数前有一些组件实例规范。让我们看看是否与第一个匹配。如果匹配，则吃掉第一个标记并将其余标记发送给我们的
+	  // 子组件，否则保留标记并将整个列表递归到子组件：
       if (itsInstanceName == descrip[idx]) { recur = false; ++idx; }
     }
   }
 
-  // Have we reached the end of the list (the param name)?
+  // 我们是否已经到达列表末尾 (参数名称)？
   if (descrip.size() == idx + 1)
   {
-    // We have just a paramname, let's see if we have that param:
+    // 我们只有一个参数名称，让我们看看我们是否有该参数：
     boost::shared_lock<boost::shared_mutex> lck(itsParamMtx);
 
     for (auto const & p : itsParameterList)
       if (p.second->name() == descrip[idx])
       {
-        // param name is a match, act on it:
+        // 参数名称匹配，对其执行操作：
         std::string ur = itsInstanceName + ':' + p.second->name();
         if (unrolled.empty() == false) ur = unrolled + ':' + ur;
         doit(p.second, ur);
       }
   }
 
-  // Recurse through our subcomponents if recur is on or we have not yet reached the bottom:  
+  // 如果 recur 已打开或者我们尚未到达底部，则递归我们的子组件：
   if (recur || descrip.size() > idx + 1)
   {
     boost::shared_lock<boost::shared_mutex> lck(itsSubMtx);
@@ -375,11 +371,11 @@ void jevois::Component::setParamStringUnique(std::string const & descriptor, std
 {
   JEVOIS_TRACE(7);
 
-  // Try a get before we set to make sure we only have one hit:
+  // 在设置之前尝试获取以确保我们只有一个命中：
   std::vector<std::pair<std::string, std::string> > test = getParamString(descriptor);
   if (test.size() > 1) throw std::range_error("Ambiguous multiple matches for descriptor [" + descriptor + ']');
 
-  // Ok, set it, ret should always have size 1:
+  // 好的，设置它，ret 的大小应始终为 1：
   std::vector<std::string> ret = setParamString(descriptor, val);
   if (ret.size() > 1) throw std::range_error("Ambiguous multiple matches for descriptor [" + descriptor + ']');
 }
@@ -409,7 +405,7 @@ std::string jevois::Component::getParamStringUnique(std::string const & descript
   std::vector<std::pair<std::string, std::string> > ret = getParamString(descriptor);
   if (ret.size() > 1) throw std::range_error("Ambiguous multiple matches for descriptor [" + descriptor + ']');
 
-  // We know that ret is not empty because getParamString() throws if the param is not found:
+  // 我们知道 ret 不为空，因为如果找不到参数，getParamString() 会抛出异常：
   return ret[0].second;
 }
 
@@ -448,10 +444,10 @@ std::istream & jevois::Component::setParamsFromStream(std::istream & is,std::str
   size_t linenum = 1;
   for (std::string line; std::getline(is, line); /* */)
   {
-    // Skip over comments:
+    // 跳过注释：
     if (line.length() && line[0] == '#') { ++linenum; continue; }
     
-    // Skip over empty lines:
+    // 跳过空行：
     if (std::all_of(line.begin(), line.end(), [](unsigned char c) { return std::isspace(c); })) { ++linenum; continue; }
     
     // Parse descriptor=value:
@@ -463,7 +459,7 @@ std::istream & jevois::Component::setParamsFromStream(std::istream & is,std::str
     std::string desc = line.substr(0, idx);
     std::string val = line.substr(idx + 1);
 
-    // Be nice and clean whitespace at start and end (not in the middle):
+    // 在开始和结束时（而不是中间）保持干净的空格：
     while (desc.length() > 0 && std::isspace(desc[0])) desc.erase(0, 1);
     while (desc.length() > 0 && std::isspace(desc[desc.length()-1])) desc.erase(desc.length()-1, 1);
     if (desc.empty()) LFATAL("Invalid blank parameter descriptor at line " << linenum << " in " << absfile);
@@ -506,7 +502,7 @@ void jevois::Component::removeDynamicParameter(std::string const & name, bool th
     return;
   }
   
-  // Upon erase, DynamicParameter destructor will remove the param from the registry:
+  // 擦除后，DynamicParameter 析构函数将从注册表中删除该参数：
   itsDynParams.erase(itr);
 }
 
@@ -548,11 +544,11 @@ void jevois::Component::paramInfo(std::shared_ptr<UserInterface> s, std::map<std
     }
   }
 
-  // Then recurse through our subcomponents:
+  // 然后递归遍历我们的子组件：
   boost::shared_lock<boost::shared_mutex> lck(itsSubMtx);
   for (std::shared_ptr<jevois::Component> c : itsSubComponents) c->paramInfo(s, categs, skipFrozen, compname, pfx);
 
-  // At the root only, dump the list of categories:
+  //  仅在根目录下，转储类别列表：
   if (cname.empty())
   {
     s->writeString(pfx, "C");
@@ -627,7 +623,7 @@ std::string jevois::Component::computeInstanceName(std::string const & instance,
 
   std::string inst = instance;
 
-  // If empty instance, replace it by the classname:
+  // 如果为空实例，则用类名替换它：
   if (inst.empty())
   {
     // Use the class name:
@@ -637,18 +633,18 @@ std::string jevois::Component::computeInstanceName(std::string const & instance,
     size_t const idxx = inst.rfind(':'); if (idxx != inst.npos) inst = inst.substr(idxx + 1);
   }
 
-  // Replace all # characters by some number, if necessary:
+  // 如果需要，将所有 # 字符替换为某个数字：
   std::vector<std::string> vec = jevois::split(inst, "#");
   if (vec.size() > 1)
   {
-    // First try to have no numbers in there:
+    // 首先尝试其中不包含数字：
     inst = jevois::join(vec, ""); bool found = false;
     for (std::shared_ptr<Component> const & c : itsSubComponents)
       if (c->instanceName() == inst) { found = true; break; }
 
     if (found)
     {
-      // Ok, we have some conflict, so let's add some numbers where the # signs were:
+      // 好的，我们有一些冲突，所以让我们在 # 符号所在的位置添加一些数字：
       inst = "";
       for (std::string const & v : vec)
       {
@@ -676,7 +672,7 @@ std::string jevois::Component::computeInstanceName(std::string const & instance,
     return inst;
   }
 
-  // If we have not returned yet, no # was given. Throw if there is a conflict:
+  // 如果我们尚未返回，则没有给出 #。如果存在冲突，则抛出：
   for (std::shared_ptr<Component> const & c : itsSubComponents)
     if (c->instanceName() == inst)
       throw std::runtime_error("Provided instance name [" + instance + "] clashes with existing sub-components.");

@@ -30,19 +30,19 @@ jevois::InputFrame::InputFrame(std::shared_ptr<jevois::VideoInput> const & cam, 
 // ####################################################################################################
 jevois::InputFrame::~InputFrame()
 {
-  // If itsCamera is invalidated, we have been moved to another object, so do not do anything here:
+  // 如果 itsCamera 无效，我们已经移动到另一个对象，所以这里不要做任何事情：
   if (itsCamera.get() == nullptr) return;
 
-  // If we did not get(), do it now to avoid choking the camera:
+  // 如果我们没有 get()，现在就执行它以避免阻塞相机：
   if (itsDidGet == false) try { get(); } catch (...) { }
 
-  // If we did get() but not done(), signal done now:
+  // 如果我们确实 get() 了但没有 done()，现在发出完成信号：
   if (itsDidGet && itsDidDone == false) try { itsCamera->done(itsImage); } catch (...) { }
 
-  // If we did not get2() and we are CropScale, do a get2() now:
+  // 如果我们没有 get2() 并且我们是 CropScale，现在执行 get2()：
   if (itsCamera->hasScaledImage() && itsDidGet2 == false) try { get2(); } catch (...) { }
   
-  // If we did get2() but not done2(), signal done now:
+  // 如果我们做了 get2() 但没有 done2()，现在发出完成信号：
   if (itsDidGet2 && itsDidDone2 == false) try { itsCamera->done2(itsImage2); } catch (...) { }
 }
 

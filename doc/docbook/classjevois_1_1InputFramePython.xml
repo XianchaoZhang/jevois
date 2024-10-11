@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1InputFramePython">
+<title>jevois::InputFramePython Class Reference</title>
+<indexterm><primary>jevois::InputFramePython</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/PythonModule.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>包装 Python 使用的 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> </para>
+
+
+
+<para>此包装器是为了解决我们的 Python 支持中缺少移动语义的问题。此类不适用于一般用途，仅供 <link linkend="_classjevois_1_1PythonModule">PythonModule</link> 使用。此类的用户必须确保原 始 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 将比任何和所有 <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> 实例都存活得更久，因为 <link linkend="_classjevois_1_1InputFramePython">InputFramePython</link> 只是通过不受保护的原始指针引用源 InputFrame。虽然 C++ 对象称为 InputFramePython，但我们将以 <link linkend="_classjevois_1_1InputFrame">InputFrame</link> 的名称将其公开给 python（请参阅 PythonSupport.C）。 </para>
+<para>
+Definition at line 43 of file PythonModule.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1InputFramePython_1a4c69807b9e27b5e8c4ba31c232f2ef7b">InputFramePython</link> ()=default</para>
+
+<para>默认构造函数使 boost::python 正常运行，对象不可操作 </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1InputFramePython_1a45d7e3214832f4becb498a6feb9a9352">InputFramePython</link> (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> *src)</para>
+
+<para>从来自引擎的常规（仅移动）InputFrame 构造 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1a51b9198e19438744a15047cc7546da16">get1</link> (bool casync) const</para>
+
+<para>获取下一个捕获的相机图像，默认参数值的薄包装器 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1a10c441d43a0a81fa0e3bef06c7ba7964">get</link> () const</para>
+
+<para>获取下一个捕获的相机图像，默认参数值的薄包装器 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_classjevois_1_1InputFramePython_1af89b58b0e6dd18193f5f02120a83b802">hasScaledImage</link> () const</para>
+
+<para>检查 JeVoisPro 平台 ISP 缩放的第二个输入图像是否可用 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1InputFramePython_1add8c1241ee775035b6117e0e59808dff">done</link> () const</para>
+
+<para>表明用户处理已完成，且已通过 <link linkend="_classjevois_1_1InputFramePython_1a10c441d43a0a81fa0e3bef06c7ba7964">get()</link> 获得先前的图像; </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1InputFramePython_1af52d1c2b252f955275b1a30dfe507fef">done2</link> () const</para>
+
+<para>表明用户处理已完成，且已通过 <link linkend="_classjevois_1_1InputFramePython_1a174de47269fce02f95e092d1360c2885">get2()</link> 获得 ISP 缩放图像; </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1a4d0e38254189121e348025fb61521b88">get21</link> (bool casync) const</para>
+
+<para>获取接下来捕获的摄像头图像，ISP 缩放的第二帧 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1a174de47269fce02f95e092d1360c2885">get2</link> () const</para>
+
+<para>获取接下来捕获的摄像头图像，ISP 缩放的第二帧 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1a62427dbabe506e5fb4e994426c4cd0e3">getp1</link> (bool casync) const</para>
+
+<para>获取下一个用于处理 <link linkend="_classjevois_1_1RawImage">RawImage</link> 的捕获相机图像 </para>
+</listitem>
+            <listitem><para>const <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; <link linkend="_classjevois_1_1InputFramePython_1aecb80b0817cae14d3388e96d0178bea4">getp</link> () const</para>
+
+<para>获取下一个用于处理 <link linkend="_classjevois_1_1RawImage">RawImage</link> 的捕获相机图像 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1ae3e325ecdd2ee84618a84793ea803a21">getCvGRAY1</link> (bool casync) const</para>
+
+<para>简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1af9906b9d9538797938def8efe7ce3c5b">getCvGRAY</link> () const</para>
+
+<para>简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a9b4a1903001e19a7b552ff296175c30a">getCvBGR1</link> (bool casync) const</para>
+
+<para>简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a6e912adb9160832b67143bd47150f7f1">getCvBGR</link> () const</para>
+
+<para>简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1af21f5927899180a417280f52b2937c6d">getCvRGB1</link> (bool casync) const</para>
+
+<para>简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1ac985bd296e01cb132602fc300dfea068">getCvRGB</link> () const</para>
+
+<para>简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a2eebc37873c90fa459fb3e81bdd51df3">getCvRGBA1</link> (bool casync) const</para>
+
+<para>简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a135f75ed03e9abade03e717b9d7161fb">getCvRGBA</link> () const</para>
+
+<para>简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a0f6de3653cb29ce77cfda27fd65b2958">getCvGRAYp</link> () const</para>
+
+<para>简写为 GRAY cv::Mat 获取输入图像进行处理并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1abe778e3633781191e35046f4e018833f">getCvBGRp</link> () const</para>
+
+<para>简写为获取输入图像以作为 BGR cv::Mat 进行处理并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a3199342339b3c850ffa62bf6169f4190">getCvRGBp</link> () const</para>
+
+<para>简写为 RGB cv::Mat 获取输入图像进行处理并释放原始缓冲区 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_classjevois_1_1InputFramePython_1a6b4fb29e4cc941dbd088168a8892a0af">getCvRGBAp</link> () const</para>
+
+<para>简写以获取输入图像以将其作为 RGBA cv::Mat 进行处理并释放原始缓冲区 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Friends    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1InputFramePython_1a8881a5bdcf66f1f2e3683ea6b8eab741">GUIhelperPython</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFramePython_1a4c69807b9e27b5e8c4ba31c232f2ef7b"/>    <section>
+    <title>InputFramePython()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>InputFramePython</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>InputFramePython</secondary></indexterm>
+<para><computeroutput>jevois::InputFramePython::InputFramePython ( )<computeroutput>[default]</computeroutput></computeroutput></para><para>
+
+<para>默认构造函数使 boost::python 正常运行，对象不可操作 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a45d7e3214832f4becb498a6feb9a9352"/>    <section>
+    <title>InputFramePython()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>InputFramePython</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>InputFramePython</secondary></indexterm>
+<para><computeroutput>jevois::InputFramePython::InputFramePython (<link linkend="_classjevois_1_1InputFrame">InputFrame</link> * src)</computeroutput></para><para>
+
+<para>从来自引擎的常规（仅移动）InputFrame 构造 </para>
+</para>
+<para>
+Definition at line 31 of file PythonModule.C.</para>
+<para>
+References LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFramePython_1add8c1241ee775035b6117e0e59808dff"/>    <section>
+    <title>done()</title>
+<indexterm><primary>done</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>done</secondary></indexterm>
+<para><computeroutput>void jevois::InputFramePython::done ( ) const</computeroutput></para><para>
+
+<para>表明用户处理已完成，且已通过 <link linkend="_classjevois_1_1InputFramePython_1a10c441d43a0a81fa0e3bef06c7ba7964">get()</link> 获得先前的图像; </para>
+</para>
+<para>
+Definition at line 69 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1af52d1c2b252f955275b1a30dfe507fef"/>    <section>
+    <title>done2()</title>
+<indexterm><primary>done2</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>done2</secondary></indexterm>
+<para><computeroutput>void jevois::InputFramePython::done2 ( ) const</computeroutput></para><para>
+
+<para>表明用户处理已完成，且已通过 <link linkend="_classjevois_1_1InputFramePython_1a174de47269fce02f95e092d1360c2885">get2()</link> 获得 ISP 缩放图像; </para>
+</para>
+<para>
+Definition at line 74 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a10c441d43a0a81fa0e3bef06c7ba7964"/>    <section>
+    <title>get()</title>
+<indexterm><primary>get</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>get</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::get ( ) const</computeroutput></para><para>
+
+<para>获取下一个捕获的相机图像，默认参数值的薄包装器 </para>
+</para>
+<para>
+Definition at line 39 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a51b9198e19438744a15047cc7546da16"/>    <section>
+    <title>get1()</title>
+<indexterm><primary>get1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>get1</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::get1 (bool casync) const</computeroutput></para><para>
+
+<para>获取下一个捕获的相机图像，默认参数值的薄包装器 </para>
+</para>
+<para>
+Definition at line 34 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a174de47269fce02f95e092d1360c2885"/>    <section>
+    <title>get2()</title>
+<indexterm><primary>get2</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>get2</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::get2 ( ) const</computeroutput></para><para>
+
+<para>获取接下来捕获的摄像头图像，ISP 缩放的第二帧 </para>
+</para>
+<para>
+Definition at line 54 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a4d0e38254189121e348025fb61521b88"/>    <section>
+    <title>get21()</title>
+<indexterm><primary>get21</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>get21</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::get21 (bool casync) const</computeroutput></para><para>
+
+<para>获取接下来捕获的摄像头图像，ISP 缩放的第二帧 </para>
+</para>
+<para>
+Definition at line 49 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a6e912adb9160832b67143bd47150f7f1"/>    <section>
+    <title>getCvBGR()</title>
+<indexterm><primary>getCvBGR</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvBGR</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvBGR ( ) const</computeroutput></para><para>
+
+<para>简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 94 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a9b4a1903001e19a7b552ff296175c30a"/>    <section>
+    <title>getCvBGR1()</title>
+<indexterm><primary>getCvBGR1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvBGR1</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvBGR1 (bool casync) const</computeroutput></para><para>
+
+<para>简写以将输入图像作为 BGR cv::Mat 获取并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 89 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1abe778e3633781191e35046f4e018833f"/>    <section>
+    <title>getCvBGRp()</title>
+<indexterm><primary>getCvBGRp</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvBGRp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvBGRp ( ) const</computeroutput></para><para>
+
+<para>简写为获取输入图像以作为 BGR cv::Mat 进行处理并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 124 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1af9906b9d9538797938def8efe7ce3c5b"/>    <section>
+    <title>getCvGRAY()</title>
+<indexterm><primary>getCvGRAY</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvGRAY</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvGRAY ( ) const</computeroutput></para><para>
+
+<para>简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 84 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1ae3e325ecdd2ee84618a84793ea803a21"/>    <section>
+    <title>getCvGRAY1()</title>
+<indexterm><primary>getCvGRAY1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvGRAY1</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvGRAY1 (bool casync) const</computeroutput></para><para>
+
+<para>简写以将输入图像作为 GRAY cv::Mat 获取并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 79 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a0f6de3653cb29ce77cfda27fd65b2958"/>    <section>
+    <title>getCvGRAYp()</title>
+<indexterm><primary>getCvGRAYp</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvGRAYp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvGRAYp ( ) const</computeroutput></para><para>
+
+<para>简写为 GRAY cv::Mat 获取输入图像进行处理并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 119 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1ac985bd296e01cb132602fc300dfea068"/>    <section>
+    <title>getCvRGB()</title>
+<indexterm><primary>getCvRGB</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGB</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGB ( ) const</computeroutput></para><para>
+
+<para>简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 104 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1af21f5927899180a417280f52b2937c6d"/>    <section>
+    <title>getCvRGB1()</title>
+<indexterm><primary>getCvRGB1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGB1</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGB1 (bool casync) const</computeroutput></para><para>
+
+<para>简写以 RGB cv::Mat 获取输入图像并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 99 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a135f75ed03e9abade03e717b9d7161fb"/>    <section>
+    <title>getCvRGBA()</title>
+<indexterm><primary>getCvRGBA</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGBA</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGBA ( ) const</computeroutput></para><para>
+
+<para>简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 114 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a2eebc37873c90fa459fb3e81bdd51df3"/>    <section>
+    <title>getCvRGBA1()</title>
+<indexterm><primary>getCvRGBA1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGBA1</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGBA1 (bool casync) const</computeroutput></para><para>
+
+<para>简写以将输入图像获取为 RGBA cv::Mat 并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 109 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a6b4fb29e4cc941dbd088168a8892a0af"/>    <section>
+    <title>getCvRGBAp()</title>
+<indexterm><primary>getCvRGBAp</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGBAp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGBAp ( ) const</computeroutput></para><para>
+
+<para>简写以获取输入图像以将其作为 RGBA cv::Mat 进行处理并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 134 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a3199342339b3c850ffa62bf6169f4190"/>    <section>
+    <title>getCvRGBp()</title>
+<indexterm><primary>getCvRGBp</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getCvRGBp</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::InputFramePython::getCvRGBp ( ) const</computeroutput></para><para>
+
+<para>简写为 RGB cv::Mat 获取输入图像进行处理并释放原始缓冲区 </para>
+</para>
+<para>
+Definition at line 129 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1aecb80b0817cae14d3388e96d0178bea4"/>    <section>
+    <title>getp()</title>
+<indexterm><primary>getp</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getp</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::getp ( ) const</computeroutput></para><para>
+
+<para>获取下一个用于处理 <link linkend="_classjevois_1_1RawImage">RawImage</link> 的捕获相机图像 </para>
+</para>
+<para>
+Definition at line 64 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1a62427dbabe506e5fb4e994426c4cd0e3"/>    <section>
+    <title>getp1()</title>
+<indexterm><primary>getp1</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>getp1</secondary></indexterm>
+<para><computeroutput>const <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; jevois::InputFramePython::getp1 (bool casync) const</computeroutput></para><para>
+
+<para>获取下一个用于处理 <link linkend="_classjevois_1_1RawImage">RawImage</link> 的捕获相机图像 </para>
+</para>
+<para>
+Definition at line 59 of file PythonModule.C.</para>
+    </section><anchor xml:id="_classjevois_1_1InputFramePython_1af89b58b0e6dd18193f5f02120a83b802"/>    <section>
+    <title>hasScaledImage()</title>
+<indexterm><primary>hasScaledImage</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>hasScaledImage</secondary></indexterm>
+<para><computeroutput>bool jevois::InputFramePython::hasScaledImage ( ) const</computeroutput></para><para>
+
+<para>检查 JeVoisPro 平台 ISP 缩放的第二个输入图像是否可用 </para>
+</para>
+<para>
+Definition at line 44 of file PythonModule.C.</para>
+</section>
+</section>
+<section>
+<title>Friends And Related Function Documentation</title>
+<anchor xml:id="_classjevois_1_1InputFramePython_1a8881a5bdcf66f1f2e3683ea6b8eab741"/>    <section>
+    <title>GUIhelperPython</title>
+<indexterm><primary>GUIhelperPython</primary><secondary>jevois::InputFramePython</secondary></indexterm>
+<indexterm><primary>jevois::InputFramePython</primary><secondary>GUIhelperPython</secondary></indexterm>
+<para><computeroutput>friend class <link linkend="_classjevois_1_1GUIhelperPython">GUIhelperPython</link><computeroutput>[friend]</computeroutput></computeroutput></para><para>
+Definition at line 116 of file PythonModule.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_PythonModule_8H">PythonModule.H</link>src/jevois/Core/<link linkend="_PythonModule_8C">PythonModule.C</link></section>
+</section>

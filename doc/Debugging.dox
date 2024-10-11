@@ -1,123 +1,91 @@
-/*! \page Debugging Debugging JeVois software
+/*! \page Debugging 调试 JeVois 软件
 
 
-Debugging on host
-=================
+在主机上调试 
+==================
 
-The easiest way to debug new machine vision modules on JeVois is to first compile and run them on your desktop (host)
-computer (see \ref CompilingJeVois and \ref CompilingJeVoisBase).
+在 JeVois 上调试新的机器视觉模块的最简单方法是首先在您的桌面（主机）计算机上编译并运行它们（参见 \ref CompilingJeVois 和 \ref CompilingJeVoisBase ）。
 
-When you run \b jevois-daemon on host (see \ref JeVoisDaemon), error messages will be printed in the terminal window
-from which you started it.
+当您在主机上运行 \b jevois-daemon （参见 \ref JeVoisDaemon ）时，错误消息将打印在您启动它的终端窗口中。
 
-You can also run \b jevois-daemon in \b gdb (the GNU debugger) and see where it might crash.
+您还可以在 \b gdb （GNU 调试器）中运行 \b jevois-daemon 并查看它可能在哪里崩溃。
 
-Sometimes that does not run well as we use lots of threads in JeVois. You can instead debug offline by enabling core
-dumps, running jevois-daemon until it crashes, and then using gdb to inspect the core file. See \ref JeVoisDaemon for
-details.
+有时，由于我们在 JeVois 中使用了大量线程，因此运行效果不佳。您可以改为通过启用 coredump、运行 jevois-daemon 直到其崩溃，然后使用 gdb 检查 core 文件来进行离线调试。有关详细信息，请参阅 \ref JeVoisDaemon 。
 
-Debugging compiler and linker errors
+调试编译器和链接器错误 
 ------------------------------------
 
-Compilation errors are reported in quite a verbose way. But linker errors are harder to debug. If you end up with an
-error message about a missing library, it is useful to see which linker command was exactly called with all paths
-specified in there to check why your library is missing.
+编译错误报告得相当详细。但链接器错误更难调试。如果您最终收到有关缺少库的错误消息，则查看哪个链接器命令被准确调用以及其中指定的所有路径很有用，以检查库丢失的原因。
 
-CMake allows you to switch to verbose mode by specifying `VERBOSE=1` as an option to make. So, if you get a missing
-library error, then
+CMake 允许您通过指定 `VERBOSE=1` 作为 make 选项切换到详细模式。因此，如果您收到缺少库的错误，那么
 
 \verbatim
 cd hbuild/ # or pbuild/, phbuild/, etc
 make VERBOSE=1
 \endverbatim
 
-This will show you the linker command that was run. You can then look at all the `-L...` arguments and check your
-CMakeList.txt to understand why your library was not found.
+这将向您显示已运行的链接器命令。然后您可以查看所有 `-L...` 参数并检查 CMakeList.txt 以了解未找到库的原因。
 
-Enabling debug-level messages
+启用调试级别消息 
 -----------------------------
 
-You can turn on CMake flags \c JEVOIS_LDEBUG_ENABLE and \c JEVOIS_TRACE_ENABLE when compiling jevois to enable
-extra-verbose debugging messages (see \ref CompilingJeVois). Note that these flags only enable those messages to be
-compiled in. To see them, you also need to set the parameter \c loglevel to \c debug at runtime (see \ref UserCli).
+您可以在编译 jevois 时打开 CMake 标志 \c JEVOIS_LDEBUG_ENABLE 和 \c JEVOIS_TRACE_ENABLE 以启用超详细调试消息（请参阅 \ref CompilingJeVois ）。请注意，这些标志仅允许编译这些消息。要查看它们，您还需要在运行时将参数 \c loglevel 设置为 \c debug （请参阅 \ref UserCli ）。
 
-If you change those flags, you must recompile everything from scratch (recompile jevois, jevoisbase, your modules,
-etc).
+如果您更改这些标志，则必须重新编译所有内容（重新编译 jevois、jevoisbase、您的模块等）。
 
-JeVois-Pro: Debugging on the platform hardware
+JeVois-Pro：在平台硬件上调试
 ==============================================
 
-Perhaps the easiest debugging workflow for \jvpro is:
+\jvpro 最简单的调试工作流程可能是：
 
-- switch to console boot as described in \ref ProUserQuick
-- enable core dumps and run `jevoispro.sh`, then use `gdb` to find the error, as described in \ref JeVoisDaemon
+- 按照 \ref ProUserQuick 中的说明切换到控制台启动
+- 启用核心转储并运行 `jevoispro.sh`，然后使用 `gdb` 查找错误，按照 \ref JeVoisDaemon 中的说明
 
-JeVois-A33: Debugging the boot process on platform hardware
-===========================================================
+JeVois-A33：调试平台硬件上的启动过程
+=============================================================
 
-If you are tinkering with low-level software on your JeVois smart camera hardware and are experiencing difficulties with
-booting up, you can enable boot messages. This requires that you connect to the JeVois 4-pin hardware serial port during
-boot, as the boot messages will be sent to that serial port. This is very useful to troubleshoot any boot issues, or
-even to drop to a login prompt instead of starting up \b jevois-daemon automatically when the smart camera starts.
+如果您正在修改 JeVois 智能相机硬件上的低级软件，并且在启动时遇到困难，您可以启用启动消息。这要求您在启动期间连接到 JeVois 4 针硬件串行端口，因为启动消息将发送到该串行端口。这对于解决任何启动问题非常有用，甚至可以在智能相机启动时进入登录提示符而不是自动启动 \b jevois-daemon。
 
 
-This requires that you connect the 4-pin serial port of your JeVois camera to a terminal. You can use:
+这需要您将 JeVois 相机的 4 针串行端口连接到终端。您可以使用：
 
-- a USB-to-serial cable or dongle (also known as FTDI cable, or USBISP dongle, etc). Then connect it as shown in the
-  \ref UserSerial, and communicate to it using \b screen, \b HyperTerminal, etc (see \ref UserCli but replace \b ttyACM0
-  in there by \b ttyUSB0 or whichever device is created and reported by the \b dmesg command when you plug your
-  USB-to-serial adapter into your host computer).
+- USB 转串口电缆或 dongle（也称为 FTDI 电缆或 USBISP dongle 等）。然后按照 \ref UserSerial 中所示进行连接，并使用 \b screen 、\b HyperTerminal 等与其通信（请参阅 \ref UserCli ，但将其中的 \b ttyACM0 替换为 \b ttyUSB0 或将 USB 转串口适配器插入主机时由 \b dmesg 命令创建和报告的任何设备）。
 
-- an Arduino or other micro-controller
+- Arduino 或其他微控制器
 
-- anything else that provides a TTL-level serial terminal
+- 任何其他提供 TTL 级串行终端的设备
 
 
-Then, you can:
+然后你可以：
 
-- edit \b BOOT:uEnv.txt on your microSD to enable verbose boot messages to the serial port
+- 编辑 microSD 上的 \b BOOT:uEnv.txt ，以启用向串行端口发送详细启动消息
 
-- create an empty file \b BOOT:login, which will be detected by the JeVois camera when it boots up. If that file is
-  present, \b jevois-daemon will not automatically start, and instead you will get a login prompt on the serial
-  console. Username is \b root with no password. After you login, you can start JeVois software maunally as it would
-  have started automatically, by running <b>/usr/bin/jevois.sh</b>.
+- 创建一个空文件 \b BOOT:login ，JeVois 相机启动时会检测到该文件。如果该文件存在，\b jevois-daemon 将不会自动启动，而是会在串行控制台上收到登录提示。用户名是 \b root ，没有密码。登录后，您可以通过运行 <b>/usr/bin/jevois.sh</b> 手动启动 JeVois 软件，就像它会自动启动一样。
 
-- create an empty file \b BOOT:nousbserial if you wish to not start the serial-over-USB feature for some reason.
+- 如果您出于某种原因不想启动 USB 串行功能，请创建一个空文件 \b BOOT:nousbserial 。
 
-- \jvversion{1.1} create an empty file \b BOOT:serialtty if you wish to get a login prompt on the 4-pin hardware serial
-  port instead of the JeVois console.
+- 如果您希望在 4 针硬件串行端口而不是 JeVois 控制台上获取登录提示，请 \jvversion{1.1} 创建一个空文件 \b BOOT:serialtty 。
 
-- \jvversion{1.1} create an empty file \b BOOT:usbserialtty if you wish to get a login prompt on the serial-over-USB
-  port instead of the JeVois console. Has no effect if \b BOOT:nousbserial is also present.
+- 如果您希望在串行 USB 端口而不是 JeVois 控制台上获取登录提示，请创建一个空文件 \b BOOT:usbserialtty 。如果 \b BOOT:nousbserial 也存在，则无效。
 
-- \jvversion{1.1} create an empty file \b BOOT:nousbsd if you wish to not enable the microSD-over-USB feature for some
-  reason.
+- 如果您出于某种原因不想启用 microSD-over-USB 功能，请 \jvversion{1.1} 创建一个空文件 \b BOOT:nousbsd 。
 
-- \jvversion{1.1} create an empty file \b BOOT:usbsdauto if you wish to automatically export the microSD JEVOIS
-  partition over USB upon startup. Note that this will force the JEVOIS partition to be read-only on the device side
-  (and it will be read-write from the host computer), i.e., the JeVois processor will not be able to 1) compile python
-  modules, 2) write out any video files or other data to microSD.
+- \jvversion{1.1} 如果您希望在启动时自动通过 USB 导出 microSD JEVOIS 分区，请创建一个空文件 \b BOOT:usbsdauto 。请注意，这将强制 JEVOIS 分区在设备端为只读（并且它将在主机上可读写），即 JeVois 处理器将无法 1) 编译 python 模块，2) 将任何视频文件或其他数据写入 microSD。
 
-- \jvversion{1.7.2} create an empty file \b BOOT:multicam to lower the USB bandwidth requested by JeVois. This will
-  allow you to connect up to 3 JeVois cameras to a single USB port (through a hub). By default, JeVois requests all of
-  the available USB isochronous bandwidth, so as to minimize the latency between image capture and image reception at
-  the host. See \ref Multicam for more details.
+- \jvversion{1.7.2} 创建一个空文件 \b BOOT:multicam 以降低 JeVois 请求的 USB 带宽。这将允许您将最多 3 个 JeVois 相机连接到单个 USB 端口（通过集线器）。默认情况下，JeVois 请求所有可用的 USB 同步带宽，以最大限度地减少主机图像捕获和图像接收之间的延迟。有关更多详细信息，请参阅 \ref Multicam 。
 
-- \jvversion{1.8.0} create an empty file \b BOOT:quietcmd to suppress sending 'OK' back to the user after every
-  successful command received at the command line. Recommended for advanced users only.
+- \jvversion{1.8.0} 创建一个空文件 \b BOOT:quietcmd ，以禁止在命令行上收到每个成功命令后向用户发送 'OK'。仅推荐高级用户使用。
 
-- \jvversion{1.8.0} create an empty file \b BOOT:nopython to disable support for modules written in python. When
-  activated, attempting to load a python module will throw an exception. Disabling python saves a lot of memory and may
-  be useful when using C++ modules that run large deep neural networks.
+- \jvversion{1.8.0} 创建一个空文件 \b BOOT:nopython 禁用对用 python 编写的模块的支持。激活后，尝试加载 python 模块将引发异常。禁用 python 可节省大量内存，在使用运行大型深度神经网络的 C++ 模块时可能很有用。
 
-- edit the file <b>~/jevois/bin/jevois.sh</b>, which gets installed to microSD as <b>LINUX:/usr/bin/jevois.sh</b>, for
-  example to start \b jevois-daemon in \b gdb (see \ref JeVoisDaemon).
+- 编辑文件 <b>~/jevois/bin/jevois.sh</b>，该文件将作为 <b>LINUX:/usr/bin/jevois.sh</b> 安装到 microSD，例如在 \b gdb 中启动 \b jevois-daemon （参见 \ref JeVoisDaemon ）。
 
-\image html jevois-boot.png Verbose boot messages and login prompt over the 4-pin serial port
+\image html jevois-boot.png 通过 4 针串行端口显示详细的启动消息和登录提示
 
 
-Also check out this video (somewhat old, things may look a bit different now):
+另请查看此视频（有些旧了，现在看起来可能有点不同）：
 
 \youtube{ul_IsomUJ4I}
 
 */
+

@@ -23,7 +23,7 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Post-Processor sub-component for raw YOLO decoding
+    //! 用于原始 YOLO 解码的后处理器子组件
     class PostProcessorDetectYOLO : public Component,
                                     public Parameter<postprocessor::anchors, postprocessor::scalexy,
                                                      postprocessor::sigmoid>
@@ -35,7 +35,7 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorDetectYOLO();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         void freeze(bool doit);
 
         //! Generic raw YOLO processing

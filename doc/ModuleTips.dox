@@ -1,23 +1,17 @@
-/*! \page ModuleTips Tips for writing machine vision modules
+/*! \page ModuleTips 编写机器视觉模块的技巧
 
-// ####################################################################################################
-\section moduletipsexceptions Handling exceptions
+// #################################################################################################### 
+\section moduletipsexceptions 处理异常
 
-The JeVois framework fully embraces the use of exceptions. We believe that this provides for much more readable code,
-where the main flow is the one that is expected to work. This is in contrast to, for example, the Linux kernel, which is
-just a big pile of \c if statements to check whether some action succeeded or not.
+JeVois 框架完全支持使用异常。我们相信这提供了更易读的代码，其中主要流程是预期可以工作的流程。这与 Linux 内核等形成了鲜明对比，后者只是一大堆 \c if 语句来检查某些操作是否成功。
 
-In a Module process() function, the right thing to do if anything goes wrong is hence to throw and exception. The Engine
-will catch the exception and will cleanup and proceed to the next video frame, hopefully with better luck.
+因此，在 Module process() 函数中，如果出现任何问题，正确的做法是抛出异常。Engine 将捕获异常，进行清理并继续处理下一个视频帧，希望能够取得更好的结果。
 
-We recommend throwing \c std::runtime_error, as this will give more verbose messages to users (the error message will
-show the exception's \c what() string).
+我们建议抛出 \c std::runtime_error ，因为这将向用户提供更详细的消息（错误消息将显示异常的 \c what() 字符串）。
 
-To be exception-safe and to avoid memory leaks, the easiest (and possibly best) is to always use exception-safe wrappers
-around dynamically-allocated memory. The most common is \c std::shared_ptr, which will automatically free the allocated
-memory when nobody is referencing it anymore.
+为了实现异常安全并避免内存泄漏，最简单（也可能是最好的）的方法是始终使用动态分配内存的异常安全包装器。最常见的是 \c std::shared_ptr ，当没有人再引用它时，它将自动释放分配的内存。
 
-Thus, instead of:
+因此，而不是：
 
 \code
 void process(jevois::InputFrame && inframe)
@@ -30,7 +24,8 @@ void process(jevois::InputFrame && inframe)
 }
 \endcode
 
-which would leak the \c tmpdata memory in case of an exception, just use:
+
+如果发生异常，则会泄漏 \c tmpdata 内存，只需使用：
 
 \code
 void process(jevois::InputFrame && inframe)
@@ -41,32 +36,24 @@ void process(jevois::InputFrame && inframe)
 }
 \endcode
 
-The \c shared_ptr will automatically free the memory when it runs out of scope (either because the \c process() function
-ends normally, or because of an exception). You can also just use an \c std::string or \c std::vector for \c tmpdata as
-those will free their memory when they run out of scope (including because an exception was thrown). \c std::unique_ptr
-would work here too.
+
+\c shared_ptr 会在超出范围时自动释放内存（因为 \c process() 函数正常结束，或者因为发生异常）。您也可以只使用 \c std::string 或 \c std::vector 作为 \c tmpdata ，因为它们会在超出范围时释放内存（包括因为引发异常）。\c std::unique_ptr 也适用于此。
 
 
-// ####################################################################################################
-\section moduletipscoords Coordinates
+// #################################################################################################### 
+\section moduletipscoords 坐标
 
-JeVois may process images as various video resolutions. If it detects something in a frame and wants to communicate its
-coordinates to an Arduino, the problem arises of which resolution was being used and how to let the Arduino
-know.
+JeVois 可以处理各种视频分辨率的图像。如果它检测到帧中的某个物体并想将其坐标传达给 Arduino，那么就会出现使用哪种分辨率以及如何让 Arduino 知道的问题。
 
-For example, if an algorithm was processing video at 640x480, then an object detected at coordinates 320,240 is at the
-center of the field of view. But if the camera was grabbing at 320x240, now coordinates 320,240 are just past the
-bottom-right corner of the field of view. Just letting an Arduino know that something was detected at 320,240 could
-possibly be confusing.
+例如，如果算法处理 640x480 的视频，那么在坐标 320,240 处检测到的物体位于视野的中心。但如果相机在 320x240 处抓取，那么坐标 320,240 就在视野的右下角。仅仅让 Arduino 知道在 320,240 处检测到了某物可能会造成混淆。
 
-Instead of having the Arduino do the work of supporting multiple camera resolutions, we provide in JeVois a
-standardized coordinate system:
+我们不需要让 Arduino 来支持多种摄像头分辨率，而是在 JeVois 中提供一个标准化的坐标系：
 
-See \ref coordhelpers
+参见 \ref coordhelpers
 
-Use imgToStd() to convert from image coordinates to the standardized coordinates.
+使用 imgToStd() 将图像坐标转换为标准坐标。
 
-Use stdToImg() for the converse.
+相反地​​使用 stdToImg()。
 
 */
 

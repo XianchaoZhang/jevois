@@ -1,0 +1,446 @@
+\hypertarget{classjevois_1_1Manager}{}\doxysubsection{jevois\+::Manager Class Reference}
+\label{classjevois_1_1Manager}\index{jevois::Manager@{jevois::Manager}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Manager.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+组件对象层次结构的管理器 
+
+管理器应为任何组件层次结构的顶级组件。它主要负责通过命令行或其他方式处理参数值的设置。
+
+用户只需构建一个管理器（包括从管理器派生的引擎），向其中添加任何组件，然后在管理器上调用 init()，它将解析所有命令 行选项，将它们绑定到相关参数，并在所有子组件上调用 init()（反过来，它又在所有子组件上调用 init()，等等）。有关 init() 流程的更多信息，请参阅组件的文档。
+
+参数 {\ttfamily nickname} 不由管理器内部使用。例如，在使用连接到单个 U\+SB 总线的多个 Je\+Vois 摄像头的系统中，可以在 {\bfseries{initscript.\+cfg}} 中为每个摄像头设置不同的值。 
+
+Definition at line 70 of file Manager.\+H.
+
+
+
+Inheritance diagram for jevois\+::Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Manager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Manager__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{Indent}\textbf{ Manager 构造、销毁、解析命令行参数}\par
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a02faa246d30d4a0a1fe5a2ee9c3f92e9}{Manager}} (std\+::string const \&instance=\char`\"{}The\+Manager\char`\"{})
+\begin{DoxyCompactList}\small\item\em 没有命令行参数的构造函数 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a86fa43b347c82254561d8348a0d0009f}{Manager}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]}, std\+::string const \&instance=\char`\"{}The\+Manager\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_a3f87572d05e781b5cf5ac7abd5270351}{set\+Command\+Line\+Args}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em 设置命令行参数，如果在构造时未传递参数，则在 start() 之前调用此方法 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1Manager_a90248c66250d7e2731702e9ffca78a82}{$\sim$\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ 管理器下的组件层次结构}\par
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Comp , typename... Args$>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{add\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}, Args \&\&...args)
+\begin{DoxyCompactList}\small\item\em Pseudo-\/constructor\+: 构造一个顶级组件 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp , typename... Args$>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Manager_af19547e42024de8526d32198915b5e4e}{add\+Sub\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}, Args \&\&...args)=delete
+\begin{DoxyCompactList}\small\item\em 在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{add\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{jevois\+::\+Component\+::add\+Sub\+Component()}} \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp $>$ }\\void \mbox{\hyperlink{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}{remove\+Component}} (std\+::shared\+\_\+ptr$<$ Comp $>$ \&component)
+\begin{DoxyCompactList}\small\item\em 通过 shared\+\_\+ptr 从管理器中删除顶级组件 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp $>$ }\\void \mbox{\hyperlink{classjevois_1_1Manager_aff76fa1586d88b7ade0b4306a1c568a1}{remove\+Sub\+Component}} (std\+::shared\+\_\+ptr$<$ Comp $>$ \&component)=delete
+\begin{DoxyCompactList}\small\item\em 在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}{remove\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{jevois\+::\+Component\+::remove\+Sub\+Component()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_a28a49248d31fc56dc5212a51c06ca65d}{remove\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}, bool warn\+If\+Not\+Found=true)
+\begin{DoxyCompactList}\small\item\em 通过实例名称从管理器中删除顶级组件 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_a1ea1ceb5b9bf88808830717f6761e740}{remove\+Sub\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}, bool warn\+If\+Not\+Found)=delete
+\begin{DoxyCompactList}\small\item\em 在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}{remove\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{jevois\+::\+Component\+::remove\+Sub\+Component()}} \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp  = jevois\+::\+Component$>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Manager_a152d95af84099da4c84388ec971b7355}{get\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}) const
+\begin{DoxyCompactList}\small\item\em 通过实例名称获取顶级组件 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp $>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Manager_a51c92b839d4b0f0b6ae79060ab4854af}{get\+Sub\+Component}} (std\+::string const \&\mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}}) const =delete
+\begin{DoxyCompactList}\small\item\em 在管理器上使用 \mbox{\hyperlink{classjevois_1_1Manager_a152d95af84099da4c84388ec971b7355}{get\+Component()}}，而不是 \mbox{\hyperlink{classjevois_1_1Component_a6fa8c112c371226dc469be3c66aa9f76}{jevois\+::\+Component\+::get\+Sub\+Component()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Manager runtime}\par
+\begin{DoxyCompactItemize}
+\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classjevois_1_1Manager_a6bc3d46769ffc9b6354c8c0428b8812a}{remaining\+Args}} () const
+\begin{DoxyCompactList}\small\item\em 获取命令行未解析的剩余参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_a573cbb9b833be4c968e52f85990ba0af}{on\+Param\+Change}} (manager\+::loglevel const \&param, manager\+::\+Log\+Level const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_ab0bb8b857428ed713abb158950d13c60}{on\+Param\+Change}} (manager\+::tracelevel const \&param, unsigned int const \&newval) override
+\begin{DoxyCompactList}\small\item\em Parameter callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}{pre\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Calls parse\+Command\+Line() \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{post\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Checks for the --help flag. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_ab1aff44bcdccc0b46ee442d8358265b6}{construct\+Help\+Message}} (std\+::ostream \&out) const
+\begin{DoxyCompactList}\small\item\em 根据模型中的所有参数构造一个帮助消息，并将其输出到 \textquotesingle{}out\textquotesingle{} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Manager_ae3fc79e4c791d304e9b0c9051846b0af}{print\+Help\+Message}} () const
+\begin{DoxyCompactList}\small\item\em 构造一个帮助消息并尝试将其发送到 /usr/bin/less \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (help, bool, \char`\"{}Print this help message\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a0607298fa873ec7cce4a69261787cd16}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Log\+Level,(fatal)(error)(info)(debug))
+\begin{DoxyCompactList}\small\item\em Enum for Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (loglevel, Log\+Level, \char`\"{}Set the minimum log level to display\char`\"{}, Log\+Level\+::info, Log\+Level\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a7b200babd8c475f3bcf2c53e4bd18083}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (tracelevel, unsigned int, \char`\"{}Set the minimum trace level to display\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Manager_a9344fea15ddec1a5f9436a9e31dfc801}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (nickname, std\+::string, \char`\"{}Nickname associated with this camera, useful when multiple \char`\"{} \char`\"{}Je\+Vois cameras are connected to a same U\+SB bus\char`\"{}, \char`\"{}jevois\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Manager_a02faa246d30d4a0a1fe5a2ee9c3f92e9}\label{classjevois_1_1Manager_a02faa246d30d4a0a1fe5a2ee9c3f92e9}} 
+\index{jevois::Manager@{jevois::Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{Manager()}{Manager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily jevois\+::\+Manager\+::\+Manager (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance = {\ttfamily \char`\"{}TheManager\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+没有命令行参数的构造函数 
+
+
+
+Definition at line 27 of file Manager.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a86fa43b347c82254561d8348a0d0009f}\label{classjevois_1_1Manager_a86fa43b347c82254561d8348a0d0009f}} 
+\index{jevois::Manager@{jevois::Manager}!Manager@{Manager}}
+\index{Manager@{Manager}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{Manager()}{Manager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily jevois\+::\+Manager\+::\+Manager (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]},  }\item[{std\+::string const \&}]{instance = {\ttfamily \char`\"{}TheManager\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+创建管理器，并可选择接受命令行参数。 
+
+Definition at line 32 of file Manager.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a90248c66250d7e2731702e9ffca78a82}\label{classjevois_1_1Manager_a90248c66250d7e2731702e9ffca78a82}} 
+\index{jevois::Manager@{jevois::Manager}!````~Manager@{$\sim$Manager}}
+\index{````~Manager@{$\sim$Manager}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{$\sim$Manager()}{~Manager()}}
+{\footnotesize\ttfamily jevois\+::\+Manager\+::$\sim$\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 45 of file Manager.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}\label{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}} 
+\index{jevois::Manager@{jevois::Manager}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily template$<$class Comp , typename... Args$>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Manager\+::add\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Pseudo-\/constructor\+: 构造一个顶级组件 
+
+将创建一个 Comp 类型的组件（必须从 \mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} 派生），并将其添加为管理器的子组件（使其成为所谓的顶级组件 ）。子组件在逻辑上 \char`\"{}属于\char`\"{} 管理器，并将在管理器被删除时自动被删除。除了构造之外，组件还将进入与管理器相同的初始 化状态。 \mbox{\Hypertarget{classjevois_1_1Manager_af19547e42024de8526d32198915b5e4e}\label{classjevois_1_1Manager_af19547e42024de8526d32198915b5e4e}} 
+\index{jevois::Manager@{jevois::Manager}!addSubComponent@{addSubComponent}}
+\index{addSubComponent@{addSubComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{addSubComponent()}{addSubComponent()}}
+{\footnotesize\ttfamily template$<$class Comp , typename... Args$>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Manager\+::add\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{add\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{jevois\+::\+Component\+::add\+Sub\+Component()}} 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_ab1aff44bcdccc0b46ee442d8358265b6}\label{classjevois_1_1Manager_ab1aff44bcdccc0b46ee442d8358265b6}} 
+\index{jevois::Manager@{jevois::Manager}!constructHelpMessage@{constructHelpMessage}}
+\index{constructHelpMessage@{constructHelpMessage}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{constructHelpMessage()}{constructHelpMessage()}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::construct\+Help\+Message (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+根据模型中的所有参数构造一个帮助消息，并将其输出到 \textquotesingle{}out\textquotesingle{} 
+
+
+
+Definition at line 81 of file Manager.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a152d95af84099da4c84388ec971b7355}\label{classjevois_1_1Manager_a152d95af84099da4c84388ec971b7355}} 
+\index{jevois::Manager@{jevois::Manager}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{getComponent()}{getComponent()}}
+{\footnotesize\ttfamily template$<$class Comp  = jevois\+::\+Component$>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Manager\+::get\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name }\end{DoxyParamCaption}) const}
+
+
+
+通过实例名称获取顶级组件 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a51c92b839d4b0f0b6ae79060ab4854af}\label{classjevois_1_1Manager_a51c92b839d4b0f0b6ae79060ab4854af}} 
+\index{jevois::Manager@{jevois::Manager}!getSubComponent@{getSubComponent}}
+\index{getSubComponent@{getSubComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{getSubComponent()}{getSubComponent()}}
+{\footnotesize\ttfamily template$<$class Comp $>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Manager\+::get\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+在管理器上使用 \mbox{\hyperlink{classjevois_1_1Manager_a152d95af84099da4c84388ec971b7355}{get\+Component()}}，而不是 \mbox{\hyperlink{classjevois_1_1Component_a6fa8c112c371226dc469be3c66aa9f76}{jevois\+::\+Component\+::get\+Sub\+Component()}} 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a573cbb9b833be4c968e52f85990ba0af}\label{classjevois_1_1Manager_a573cbb9b833be4c968e52f85990ba0af}} 
+\index{jevois::Manager@{jevois::Manager}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{manager\+::loglevel const \&}]{param,  }\item[{manager\+::\+Log\+Level const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_ab0bb8b857428ed713abb158950d13c60}\label{classjevois_1_1Manager_ab0bb8b857428ed713abb158950d13c60}} 
+\index{jevois::Manager@{jevois::Manager}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{manager\+::tracelevel const \&}]{param,  }\item[{unsigned int const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Parameter callback. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}\label{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}} 
+\index{jevois::Manager@{jevois::Manager}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Checks for the --help flag. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{jevois\+::\+Component}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1Engine_ad7b8927d246b350cf0be396291f79f3c}{jevois\+::\+Engine}}.
+
+
+
+Definition at line 59 of file Manager.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+
+
+Referenced by jevois\+::\+Engine\+::post\+Init().
+
+\mbox{\Hypertarget{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}\label{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}} 
+\index{jevois::Manager@{jevois::Manager}!preInit@{preInit}}
+\index{preInit@{preInit}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{preInit()}{preInit()}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::pre\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Calls parse\+Command\+Line() 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{jevois\+::\+Component}}.
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1Engine_a25d2fd8ab270cbdf4a26cc4bf9d5bac7}{jevois\+::\+Engine}}.
+
+
+
+Definition at line 49 of file Manager.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+
+
+Referenced by jevois\+::\+Engine\+::pre\+Init().
+
+\mbox{\Hypertarget{classjevois_1_1Manager_ae3fc79e4c791d304e9b0c9051846b0af}\label{classjevois_1_1Manager_ae3fc79e4c791d304e9b0c9051846b0af}} 
+\index{jevois::Manager@{jevois::Manager}!printHelpMessage@{printHelpMessage}}
+\index{printHelpMessage@{printHelpMessage}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{printHelpMessage()}{printHelpMessage()}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::print\+Help\+Message (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+构造一个帮助消息并尝试将其发送到 /usr/bin/less 
+
+
+
+Definition at line 75 of file Manager.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a6bc3d46769ffc9b6354c8c0428b8812a}\label{classjevois_1_1Manager_a6bc3d46769ffc9b6354c8c0428b8812a}} 
+\index{jevois::Manager@{jevois::Manager}!remainingArgs@{remainingArgs}}
+\index{remainingArgs@{remainingArgs}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{remainingArgs()}{remainingArgs()}}
+{\footnotesize\ttfamily const std\+::vector$<$ std\+::string $>$ \& jevois\+::\+Manager\+::remaining\+Args (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取命令行未解析的剩余参数 
+
+任何单独 \textquotesingle{}--\textquotesingle{} 后面的命令行参数都可以在 \mbox{\hyperlink{classjevois_1_1Manager_a6bc3d46769ffc9b6354c8c0428b8812a}{remaining\+Args()}} 中使用 
+
+Definition at line 164 of file Manager.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}\label{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}} 
+\index{jevois::Manager@{jevois::Manager}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{removeComponent()}{removeComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Comp $>$ \\
+void jevois\+::\+Manager\+::remove\+Component (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Comp $>$ \&}]{component }\end{DoxyParamCaption})}
+
+
+
+通过 shared\+\_\+ptr 从管理器中删除顶级组件 
+
+\begin{DoxyNote}{Note}
+请注意，传递的 shared\+\_\+ptr 在此过程中无效。如果 use\+\_\+count 此后未降至零，则会发出警告（即，有其他 shared\+\_\+ptr 指针指向此组件，这会阻止它被实际删除。 
+\end{DoxyNote}
+\mbox{\Hypertarget{classjevois_1_1Manager_a28a49248d31fc56dc5212a51c06ca65d}\label{classjevois_1_1Manager_a28a49248d31fc56dc5212a51c06ca65d}} 
+\index{jevois::Manager@{jevois::Manager}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{removeComponent()}{removeComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::remove\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name,  }\item[{bool}]{warn\+If\+Not\+Found = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+通过实例名称从管理器中删除顶级组件 
+
+
+
+Definition at line 168 of file Manager.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1Manager_aff76fa1586d88b7ade0b4306a1c568a1}\label{classjevois_1_1Manager_aff76fa1586d88b7ade0b4306a1c568a1}} 
+\index{jevois::Manager@{jevois::Manager}!removeSubComponent@{removeSubComponent}}
+\index{removeSubComponent@{removeSubComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{removeSubComponent()}{removeSubComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Comp $>$ \\
+void jevois\+::\+Manager\+::remove\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Comp $>$ \&}]{component }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}{remove\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{jevois\+::\+Component\+::remove\+Sub\+Component()}} 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a1ea1ceb5b9bf88808830717f6761e740}\label{classjevois_1_1Manager_a1ea1ceb5b9bf88808830717f6761e740}} 
+\index{jevois::Manager@{jevois::Manager}!removeSubComponent@{removeSubComponent}}
+\index{removeSubComponent@{removeSubComponent}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{removeSubComponent()}{removeSubComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::remove\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance\+Name,  }\item[{bool}]{warn\+If\+Not\+Found }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+在 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上使用 \mbox{\hyperlink{classjevois_1_1Manager_a4aaa8fbdfe198ab6f7ca4e00766ec2a7}{remove\+Component()}} 而不是 \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{jevois\+::\+Component\+::remove\+Sub\+Component()}} 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a3f87572d05e781b5cf5ac7abd5270351}\label{classjevois_1_1Manager_a3f87572d05e781b5cf5ac7abd5270351}} 
+\index{jevois::Manager@{jevois::Manager}!setCommandLineArgs@{setCommandLineArgs}}
+\index{setCommandLineArgs@{setCommandLineArgs}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{setCommandLineArgs()}{setCommandLineArgs()}}
+{\footnotesize\ttfamily void jevois\+::\+Manager\+::set\+Command\+Line\+Args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+设置命令行参数，如果在构造时未传递参数，则在 start() 之前调用此方法 
+
+
+
+Definition at line 38 of file Manager.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}\label{classjevois_1_1Manager_a9f8a184d5e5e3d41fe75b702607e7cf0}} 
+\index{jevois::Manager@{jevois::Manager}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{help}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Print this help message\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a9344fea15ddec1a5f9436a9e31dfc801}\label{classjevois_1_1Manager_a9344fea15ddec1a5f9436a9e31dfc801}} 
+\index{jevois::Manager@{jevois::Manager}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{nickname}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Nickname associated with this}]{camera,  }\item[{useful when multiple \char`\"{} \char`\"{}Je\+Vois cameras are connected to a same U\+SB bus\char`\"{}}]{,  }\item[{\char`\"{}jevois\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}\label{classjevois_1_1Manager_ac2decd6e1f0a9a1366b783e59b440d7f}} 
+\index{jevois::Manager@{jevois::Manager}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{loglevel}]{,  }\item[{Log\+Level}]{,  }\item[{\char`\"{}Set the minimum log level to display\char`\"{}}]{,  }\item[{Log\+Level\+::info}]{,  }\item[{Log\+Level\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a7b200babd8c475f3bcf2c53e4bd18083}\label{classjevois_1_1Manager_a7b200babd8c475f3bcf2c53e4bd18083}} 
+\index{jevois::Manager@{jevois::Manager}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{tracelevel}]{,  }\item[{unsigned int}]{,  }\item[{\char`\"{}Set the minimum trace level to display\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1Manager_a0607298fa873ec7cce4a69261787cd16}\label{classjevois_1_1Manager_a0607298fa873ec7cce4a69261787cd16}} 
+\index{jevois::Manager@{jevois::Manager}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::Manager@{jevois::Manager}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Log\+Level}]{,  }\item[{(fatal)(error)(info)(debug)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Manager_8H}{Manager.\+H}}\item 
+src/jevois/\+Component/\mbox{\hyperlink{Manager_8C}{Manager.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,953 @@
+\hypertarget{classjevois_1_1Component}{}\doxysubsection{jevois\+::Component Class Reference}
+\label{classjevois_1_1Component}\index{jevois::Component@{jevois::Component}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Component.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+模型层次结构的组成部分。 
+
+模型 Components 构成了每个 Je\+Vois 应用程序的核心，因为它们的主要目的是 1) 从共享的、可重用的处理元素构建复杂的视觉处理管道； 2) 这些处理元件可能有可调参数的统一接口。事实上，每个需要向用户公开参数的类都应该直接或间接继承自 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 。参数是任何有效 C++ 类型的简单包装，以及一些描述、默认值、可能的有效值规范等。参数用于通过更改参数值来调整处理元素的行为（例如，某些图像处理 算法中的阈值）。
+
+Components 通常形成一个组件层次结构，其中 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} （包括 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} ）位于根，下面是子组件树。要形成这棵树，只需使用 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{Manager\+::add\+Component()}} 和 \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{Component\+::add\+Sub\+Component()}} 方法添加一些子项，然后向这些子项添加一些子项，等等...
+
+\mbox{\hyperlink{classjevois_1_1Component}{Component}} 背后的目的之一是在实现复杂的视觉处理框架时实现大量代码重用，并减轻在调用处理元素时将许多参数传递给函数调用的负担。这 与 Open\+CV 等许多其他框架有很大的不同，后者基本上依赖于有许多参数的函数（尽管后来的版本也使用了类）。例如，在 Open\+CV 中调用 Canny 边缘检测器的方法是调用以下函数：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void} Canny(InputArray image, OutputArray edges, \textcolor{keywordtype}{double} threshold1, \textcolor{keywordtype}{double} threshold2,}
+\DoxyCodeLine{           \textcolor{keywordtype}{int} apertureSize = 3, \textcolor{keywordtype}{bool} L2gradient = \textcolor{keyword}{false})}
+\end{DoxyCode}
+
+
+除了可能会混淆哪个值属于长列表中的哪个参数（\+Python 等语言通过允许按名称访问参数来解决）之外，这种方法的一个主要问题是每个使用 Canny 的函数都必须为用户提供一种机制设置参数（threshold1, threshold2 等），或者在大多数情况下，这些参数最终会被硬连线，限制最终应 用程序对不同图像尺寸、环境类型等的适用性。
+
+相比之下，在 Je\+Vois 框架中，我们将创建一个 Canny \mbox{\hyperlink{classjevois_1_1Component}{Component}} ，其中包含阈值等参数设置以及一个成员函数
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{OutputArray process(InputArray in)}
+\end{DoxyCode}
+
+
+通常首先设置参数值，然后调用该函数。设置参数可以通过使用该函数的代码来完成，但更常见的是由用户完成。在特定的视觉管道中，可以在开始 时为参数提供合理的默认值，然后让那些可能想要修改它们的最终用户可以访问这些参数。\+Je\+Vois 中参数的修改可以在应用程序启动时通过解析命 令行参数、实例化新的处理 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 时进行处理，也可以在其运行时通过 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 端口与管理系统的 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 交互来处理。
+
+任何在其层次结构中包含 Canny 组件的复杂视觉处理管道都会公开其参数，以便可以由用户（通过命令行参数、通过串行端口发出的命令等）或层次结构 中的其他组件来设置它们。如果层次结构中存在 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的多个实例，则它们的参数可以一次全部设置为单个（共享）值，也可以单独访问它们并将其 设置为不同的值（每个 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 都有唯一的实例名称，并且所谓的描述符是通过连接组件的实例名称和特定 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 实例的所有父参数来创建的； 可以通过将该实例的描述符添加到参数名称来访问。参数提供了用于设置/获取参数值的统一接口，因此程序员不必在每个组件中为每个参数编写访问器函数 （例如，添加 threshold1 Parameter$<$int$>$，会自动将 set()、get() 等函数添加到你的组件中）。
+
+此外，\+Component 还提供某种程度的内省（introspection）或反射（reflection）：可以访问组件实例名称、类名称、描述符（包括层次结构中所有父 组件的名称），并迭代其参数、子组件等。
+
+\mbox{\hyperlink{classjevois_1_1Component}{Component}} 本质上是线程安全的，组件接口的编写是为了鼓励线程安全的使用；例如，没有提供返回组件父组件的函数，因为另一个线程可能会在返回 父组件的时间和使用它的时间之间更改该组件。相反，提供的函数可以以线程安全的方式向上或向下遍历层次结构，并对遍历期间遇到的组件执行某些 操作。
+
+组件分几个阶段使用：
+
+
+\begin{DoxyItemize}
+\item Construction\+: 在构造函数中，参数值尚未设置，因此依赖于它们的任何内容都不应初始化。通常，构造函数应该只初始化独立于参数值的固定组件 资源，或者它们也可以设置参数的默认值，这些默认值稍后可能会被命令行参数覆盖。在许多情况下，构造函数不会执行任何操作，并且大部分初始化 将延迟到组件的 init() 阶段设置参数值。
+\item Initialization\+: 当在管理器（包括 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} ）上调用 init() 时，它会向下传播整个 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 层次结构，如下所示：
+\begin{DoxyItemize}
+\item 在所有子组件上递归调用 \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{pre\+Init()}}。
+\item 在当前组件上运行 \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{pre\+Init()}}，pre\+Init()函数可以由派生类重写以实现一些自定义初始化；请注意，参数值此时尚未最终确定，不应使用）。
+\item 然后，\+Manager 解析命令行并可能设置参数。从此时起，认为参数可以使用。
+\item 对于有回调但命令行中没有显式设置的参数，请使用默认参数值第一次调用回调。这样，创建资源的回调（例如，设备的设备名称参数的回调， 在调用时打开设备）在 init() 完成之前至少调用一次。
+\item 递归地将所有子组件的状态翻转为已初始化，然后将组件状态翻转为已初始化。
+\item 在所有子组件上递归运行 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init()}} （派生类可能会重写 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init()}} ，并且通常会根据重写 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init()}} 中的参数值来分配资源）， 然后在当前组件上运行。
+\end{DoxyItemize}
+
+初始化流程是固定的。从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 派生的类可以重写 \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{pre\+Init()}} 来实现不依赖于参数值的初始化，并重写 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init()}} 来实现依赖于 参数值的初始化。一旦 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 上的 init() 完成，层次结构中的所有组件都被视为准备好运行。
+
+如果将组件添加到已初始化的层次结构中，则在添加时它将进入与其父组件相同的初始化状态。当从已经运行并流式传输视频的 Je\+Vois 系统 上的 U\+SB 主机选择新的视频格式时，通常会出现这种情况。处理旧格式的 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 首先由 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 去初始化，然后将其销毁，为新格式实例化 新模块，并在视频帧流定向到它之前对其进行初始化。
+\item uninit\+: 这是 init() 的对偶， \mbox{\hyperlink{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}{pre\+Uninit()}} 和 \mbox{\hyperlink{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}{post\+Uninit()}} 遵循与 \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{pre\+Init()}} 和 \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init()}} 相同的逻辑。具体顺序是：
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}{pre\+Uninit()}} 在所有子组件上递归调用，然后在组件上调用（请注意，此时 \mbox{\hyperlink{classjevois_1_1Component_a465314997843a6364a18abce2d307be9}{initialized()}} 仍然为 true）；
+\item 组件翻转为未初始化，然后递归其所有子组件
+\item \mbox{\hyperlink{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}{post\+Uninit()}} 在组件上调用，然后在其所有子组件上递归调用。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+请注意 init() 和 uninit() 在 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 中都是私有的，因此不能直接调用。\+Manager（以及从 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 派生的 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} ）将它们公开， 以便您可以在管理器上调用它们。也就是说，您的整个层次结构要么已初始化，要么未初始化。
+
+由于 Je\+Vois 硬件平台上电时会自动构建并初始化默认处理管道，并且当用户更改视频格式时 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 会实例化并初始化处理模块，因此大多数 组件只是假设在组件未初始化时它们的视觉处理函数永远不会被调用。因此完全跳过对 \mbox{\hyperlink{classjevois_1_1Component_a465314997843a6364a18abce2d307be9}{initialized()}} 的测试（以节省 C\+PU 周期）。 
+
+Definition at line 139 of file Component.\+H.
+
+
+
+Inheritance diagram for jevois\+::Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1Component__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Component\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classjevois_1_1Component__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Component_a70906f6c599ad75ab6ed79dff19f68d2}{Component}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1Component_ab6ece3033df061a3dbbc5c7b3da3283c}{$\sim$\+Component}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Component hierarchies}\par
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Comp , typename... Args$>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{add\+Sub\+Component}} (std\+::string const \&instance, Args \&\&...args)
+\begin{DoxyCompactList}\small\item\em Pseudo-\/constructor\+: 构造并添加另一个组件作为该组件的子组件。 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp $>$ }\\void \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{remove\+Sub\+Component}} (std\+::shared\+\_\+ptr$<$ Comp $>$ \&component)
+\begin{DoxyCompactList}\small\item\em 通过 shared\+\_\+ptr 从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 中删除子组件。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_a58233c8e715da1975f5dd20445c32cc4}{remove\+Sub\+Component}} (std\+::string const \&instance, bool warn\+If\+Not\+Found=true)
+\begin{DoxyCompactList}\small\item\em 按实例名称从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 中删除子组件。 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Comp  = jevois\+::\+Component$>$ }\\std\+::shared\+\_\+ptr$<$ Comp $>$ \mbox{\hyperlink{classjevois_1_1Component_a6fa8c112c371226dc469be3c66aa9f76}{get\+Sub\+Component}} (std\+::string const \&instance) const
+\begin{DoxyCompactList}\small\item\em 通过实例名称获取子组件。 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1Component_a7e5a8b8e26f37c82a7c67a3b2d9c488b}{is\+Top\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Returns true if this component is top-\/level, i.\+e., its parent is \mbox{\hyperlink{classjevois_1_1Manager}{jevois\+::\+Manager}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Component runtime}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1Component_a465314997843a6364a18abce2d307be9}{initialized}} () const
+\begin{DoxyCompactList}\small\item\em Has this component been initialized yet? \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Component metainfo-\/related functions}\par
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1Component_a94393bebf75e11ddb4287b2f23489dc8}{class\+Name}} () const
+\begin{DoxyCompactList}\small\item\em The class name of this component. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name}} () const
+\begin{DoxyCompactList}\small\item\em The instance name of this component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Component Parameter-\/related functions}\par
+{\em 每个 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 都可以保存 Parameter 对象（通过继承），这些对象可以通过修改 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 由用户在外部设置，并且可以由 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 本身访问或设置。
+
+请注意 Je\+Vois 框架如何对参数使用继承，而不是使它们成为所属 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的类数据成员。详细说明请参见 \mbox{\hyperlink{group__parameter}{Parameter-\/related classes and functions}} for detailed explanations. }\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val}} (std\+::string const \&paramdescriptor, T const \&val)
+\begin{DoxyCompactList}\small\item\em Set a parameter value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classjevois_1_1Component_a1a88e8efd0957c4d2211269ecbb5618b}{set\+Param\+Val\+Unique}} (std\+::string const \&paramdescriptor, T const \&val)
+\begin{DoxyCompactList}\small\item\em 设置一个参数值，简单版本假设只有一个参数匹配。 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ std\+::pair$<$ std\+::string, T $>$ $>$ \mbox{\hyperlink{classjevois_1_1Component_af7841287aa195aa67a6c2b5acf4d5d5b}{get\+Param\+Val}} (std\+::string const \&paramdescriptor) const
+\begin{DoxyCompactList}\small\item\em 通过描述符获取参数值 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{classjevois_1_1Component_afbf453dae93298b1dbd186cdbfde848a}{get\+Param\+Val\+Unique}} (std\+::string const \&paramdescriptor) const
+\begin{DoxyCompactList}\small\item\em 获取参数值，简单版本假设只有一个参数匹配 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1Component_a0e51e39f529f8eb2b6fd5068407a5a9f}{set\+Param\+String}} (std\+::string const \&paramdescriptor, std\+::string const \&val)
+\begin{DoxyCompactList}\small\item\em 通过字符串设置参数值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_af733b4d22345a6f56bc7b0e6e7be4ddc}{set\+Param\+String\+Unique}} (std\+::string const \&paramdescriptor, std\+::string const \&val)
+\begin{DoxyCompactList}\small\item\em 通过字符串设置参数值，简单版本假设只有一个参数匹配 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ \mbox{\hyperlink{classjevois_1_1Component_a1ea17fa2f1960d4476a01e6f2c5c02d5}{get\+Param\+String}} (std\+::string const \&paramdescriptor) const
+\begin{DoxyCompactList}\small\item\em 通过字符串获取参数值 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1Component_ae1ba3752e44d529cf41c8b5f38457945}{get\+Param\+String\+Unique}} (std\+::string const \&paramdescriptor) const
+\begin{DoxyCompactList}\small\item\em 通过字符串获取参数值，简单版本假设只有一个参数匹配 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_a406a6bdc2a6b94308ee6f630aa0cb09c}{freeze\+Param}} (std\+::string const \&paramdescriptor, bool doit)
+\begin{DoxyCompactList}\small\item\em 按名称冻结/解冻参数，参见 \mbox{\hyperlink{classjevois_1_1ParameterBase_aeb82f8d408f72e7490f5a25cf41e48c5}{Parameter\+Base\+::freeze()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_a5d2e9887f9e8f485676178c82555048c}{freeze\+All\+Params}} (bool doit)
+\begin{DoxyCompactList}\small\item\em Freeze all parameters. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1Component_a160d084b123b5abb6388905498349d74}{descriptor}} () const
+\begin{DoxyCompactList}\small\item\em 获取我们的完整描述符（包括所有父级）作为 \mbox{[}Instancename\mbox{]}\+:\mbox{[}...\mbox{]}\+:\mbox{[}...\mbox{]} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_ae586131c86793919a1208faa10d1f40f}{set\+Params\+From\+File}} (std\+::string const \&filename)
+\begin{DoxyCompactList}\small\item\em 从文件设置一些参数 \end{DoxyCompactList}\item 
+std\+::istream \& \mbox{\hyperlink{classjevois_1_1Component_a598608043902a81fff7be9a4dfdef383}{set\+Params\+From\+Stream}} (std\+::istream \&is, std\+::string const \&absfile)
+\begin{DoxyCompactList}\small\item\em 从打开的流中设置一些参数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Component_ad4a8b3ab4c1e17a8353478c9edb7102f}{param\+Info}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$ s, std\+::map$<$ std\+::string, std\+::string $>$ \&categs, bool skip\+Frozen, std\+::string const \&cname=\char`\"{}\char`\"{}, std\+::string const \&pfx=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 获取所有参数的面向机器的描述 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_a53f1a96de78606da022ab1e9fddcd130}{foreach\+Param}} (std\+::function$<$ void(std\+::string const \&compname, \mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}} $\ast$p)$>$ func, std\+::string const \&cname=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 对我们持有的每个参数运行一个函数 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$ T $>$ $>$ \mbox{\hyperlink{classjevois_1_1Component_ad9929e687e28e6aeeffa9df69bc39e53}{add\+Dynamic\+Parameter}} (std\+::string const \&name, std\+::string const \&description, T const \&default\+Value, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&category)
+\begin{DoxyCompactList}\small\item\em 在组件已经构造后添加新参数 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , template$<$ typename $>$ class Valid\+Values\+Spec$>$ }\\std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$ T $>$ $>$ \mbox{\hyperlink{classjevois_1_1Component_a80ad7290096e62ac3ad8d1c7432d97d3}{add\+Dynamic\+Parameter}} (std\+::string const \&name, std\+::string const \&description, T const \&default\+Value, Valid\+Values\+Spec$<$ T $>$ const \&valid\+Values\+Spec, \mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&category)
+\begin{DoxyCompactList}\small\item\em 在组件构造完成后添加新参数 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{classjevois_1_1Component_ab8e576ff72ca69e7e8bf293e5529aec4}{set\+Dynamic\+Parameter\+Callback}} (std\+::string const \&name, std\+::function$<$ void(T const \&)$>$ cb, bool callnow=true)
+\begin{DoxyCompactList}\small\item\em 使用先前创建的动态参数注册回调 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Component_af56af29b92df74f8aca6fbfabb147d92}{remove\+Dynamic\+Parameter}} (std\+::string const \&name, bool throw\+\_\+if\+\_\+not\+\_\+found=true)
+\begin{DoxyCompactList}\small\item\em 删除先前添加的动态参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ 组件路径相关函数}\par
+{\em 每个组件都可以跟踪首选文件系统路径。通常，用户不应篡改此路径，但动态加载的模块对象（从组件派生）会将该路径设 置为找到模块共享对象文件 (.so) 的路径。这允许这些模块访问其部分本地配置数据，例如，这些数据可能存储在模块路 径下的 {\ttfamily etc/} 目录中。 }\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1Component_ab19561ca99b94e58b37875ceb5e7f566}{set\+Path}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em 为该组件分配一个文件系统路径 \end{DoxyCompactList}\item 
+std\+::filesystem\+::path \mbox{\hyperlink{classjevois_1_1Component_a107130a245353bd22fc65a248a8b9baa}{absolute\+Path}} (std\+::filesystem\+::path const \&path=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em 如果给定路径是相对的（不以 / 开头），则将组件路径添加到它前面 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Protected Member Functions}
+\begin{Indent}\textbf{ 组件设置函数可由派生类重载}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}{pre\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Called before all sub-\/\+Components are init()ed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{post\+Init}} ()
+\begin{DoxyCompactList}\small\item\em Called after all sub-\/\+Components are init()ed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}{pre\+Uninit}} ()
+\begin{DoxyCompactList}\small\item\em Called before all sub-\/\+Components are uninit()ed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}{post\+Uninit}} ()
+\begin{DoxyCompactList}\small\item\em Called after all sub-\/\+Components are uninit()ed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\class \mbox{\hyperlink{classjevois_1_1Component_a4fc95c9b928bda9fd1891c63a6895ec7}{Parameter\+Core}}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Component_adddd5c43ff870a047aa66db4edf82a7e}{Manager}}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Component_a3e1914489e4bed4f9f23cdeab34a43dc}{Engine}}
+\item 
+class \mbox{\hyperlink{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}{Module}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Component_a70906f6c599ad75ab6ed79dff19f68d2}\label{classjevois_1_1Component_a70906f6c599ad75ab6ed79dff19f68d2}} 
+\index{jevois::Component@{jevois::Component}!Component@{Component}}
+\index{Component@{Component}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{Component()}{Component()}}
+{\footnotesize\ttfamily jevois\+::\+Component\+::\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+创建组件的标准方法是通过 \mbox{\hyperlink{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}{Component\+::add\+Sub\+Component()}} 或 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{Manager\+::add\+Component()}}，而不是手动构建。通过构造函数构造的组件 （例如，调用 new 操作符）将不会附加到 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 层次结构。建议派生组件也有一个实例构造函数参数并将其传递给 base \mbox{\hyperlink{classjevois_1_1Component}{Component}} 类， 以允许复杂系统包含同一 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的多个实例。事实上，对于大多数组件来说，继承的构造函数是合适的：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }MyComp : \textcolor{keyword}{public} \mbox{\hyperlink{classjevois_1_1Component}{jevois::Component}}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{  \textcolor{comment}{// 继承的构造函数}}
+\DoxyCodeLine{  \textcolor{keyword}{using} \mbox{\hyperlink{classjevois_1_1ParameterRegistry_a90717717700965c100968cff0188e244}{jevois::Component::Component}};}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{comment}{// 用于安全继承的虚拟析构函数}}
+\DoxyCodeLine{  \textcolor{keyword}{virtual} \string~MyComp();}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+ 
+
+Definition at line 32 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_ab6ece3033df061a3dbbc5c7b3da3283c}\label{classjevois_1_1Component_ab6ece3033df061a3dbbc5c7b3da3283c}} 
+\index{jevois::Component@{jevois::Component}!````~Component@{$\sim$Component}}
+\index{````~Component@{$\sim$Component}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{$\sim$Component()}{~Component()}}
+{\footnotesize\ttfamily jevois\+::\+Component\+::$\sim$\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数。 
+
+如果组件已初始化，则调用 uninit()。 
+
+Definition at line 54 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and L\+D\+E\+B\+UG.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Component_a107130a245353bd22fc65a248a8b9baa}\label{classjevois_1_1Component_a107130a245353bd22fc65a248a8b9baa}} 
+\index{jevois::Component@{jevois::Component}!absolutePath@{absolutePath}}
+\index{absolutePath@{absolutePath}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{absolutePath()}{absolutePath()}}
+{\footnotesize\ttfamily std\+::filesystem\+::path jevois\+::\+Component\+::absolute\+Path (\begin{DoxyParamCaption}\item[{std\+::filesystem\+::path const \&}]{path = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+如果给定路径是相对的（不以 / 开头），则将组件路径添加到它前面 
+
+如果路径是绝对的，则无操作。如果路径为空，则返回使用 \mbox{\hyperlink{classjevois_1_1Component_ab19561ca99b94e58b37875ceb5e7f566}{set\+Path()}} 设置的组件路径。 
+
+Definition at line 510 of file Component.\+C.
+
+
+
+References jevois\+::absolute\+Path(), and J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_ad9929e687e28e6aeeffa9df69bc39e53}\label{classjevois_1_1Component_ad9929e687e28e6aeeffa9df69bc39e53}} 
+\index{jevois::Component@{jevois::Component}!addDynamicParameter@{addDynamicParameter}}
+\index{addDynamicParameter@{addDynamicParameter}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{addDynamicParameter()}{addDynamicParameter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$T$>$ $>$ jevois\+::\+Component\+::add\+Dynamic\+Parameter (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+在组件已经构造后添加新参数 
+
+动态参数只能通过描述符使用 \mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{Component\+::set\+Param\+Val()}}、\+Component\+::get\+Param\+Val() 等进行访问，因为拥有的组件不会 像标准参数那样从它们继承。创建后可以使用 \mbox{\hyperlink{classjevois_1_1Component_ab8e576ff72ca69e7e8bf293e5529aec4}{Component\+::set\+Dynamic\+Parameter\+Callback()}} 手动添加回调。此版本创建一 个没有给定有效值的参数，有效值是 T 可以采用的任何值。 \mbox{\Hypertarget{classjevois_1_1Component_a80ad7290096e62ac3ad8d1c7432d97d3}\label{classjevois_1_1Component_a80ad7290096e62ac3ad8d1c7432d97d3}} 
+\index{jevois::Component@{jevois::Component}!addDynamicParameter@{addDynamicParameter}}
+\index{addDynamicParameter@{addDynamicParameter}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{addDynamicParameter()}{addDynamicParameter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , template$<$ typename $>$ class Valid\+Values\+Spec$>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1DynamicParameter}{Dynamic\+Parameter}}$<$T$>$ $>$ jevois\+::\+Component\+::add\+Dynamic\+Parameter (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{description,  }\item[{T const \&}]{default\+Value,  }\item[{Valid\+Values\+Spec$<$ T $>$ const \&}]{valid\+Values\+Spec,  }\item[{\mbox{\hyperlink{structjevois_1_1ParameterCategory}{Parameter\+Category}} const \&}]{category }\end{DoxyParamCaption})}
+
+
+
+在组件构造完成后添加新参数 
+
+动态参数只能通过描述符访问，因为拥有该参数的组件不会像标准参数那样从它们继承。创建后可以使用 \mbox{\hyperlink{classjevois_1_1Component_ab8e576ff72ca69e7e8bf293e5529aec4}{Component\+::set\+Dynamic\+Parameter\+Callback()}} 手动添加回调。此版本从 Valid\+Value\+Spec 创建具有指定有效值的参数 \mbox{\Hypertarget{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}\label{classjevois_1_1Component_a8348eba2c31efd4244afc97b25ea6fcc}} 
+\index{jevois::Component@{jevois::Component}!addSubComponent@{addSubComponent}}
+\index{addSubComponent@{addSubComponent}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{addSubComponent()}{addSubComponent()}}
+{\footnotesize\ttfamily template$<$class Comp , typename... Args$>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Component\+::add\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+Pseudo-\/constructor\+: 构造并添加另一个组件作为该组件的子组件。 
+
+将创建 Comp 类型的子组件（必须从 \mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} 派生）并将其添加为该组件的子组件。子组件在逻辑上 \char`\"{}属于\char`\"{} 该组件，并且 会随着父组件自动初始化、去初始化和删除。除了构造之外，添加子组件还将使其达到与所有者组件相同的 init() 状态。
+
+设置参数时，可以将子组件作为该组件的 child 来引用。例如，如果我们有一个 Component\+Parent，其中 Component\+Child 作为子组件， 并且 Component\+Child 有名为 Cool\+Child\+Param 的参数，则可以通过以下方式在命令行上指定该参数
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{-\/-\/ComponentParentInstanceName:ComponentChildInstanceName:coolChildParamName=\textcolor{stringliteral}{"whatever"}}
+\end{DoxyCode}
+
+
+通过 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 端口
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{setpar ComponentParentInstanceName:ComponentChildInstanceName:coolChildParamName whatever}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & 标识 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的特定实例的字符串，两个子组件不能有相同的实例名称。实例名称应通过派生的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的构造函数传入，从而允许用户消除 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 的多个实例之间的歧义。如果实例名称为空，则实际实例将被命名为 Component\+Classname\+::， 并将 \# 替换为唯一编号（如有必要）。如果实例名称不为空但包含 \#，则仅将 \# 替换为数字（如有必要），以使实例名称唯一。组件构建完成 后，可以通过 \mbox{\hyperlink{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}{instance\+Name()}} 访问最终名称。基类中的实例没有默认值来捕获忘记将其传递给基类的派生类，但在派生类中为实例设置一个 空字符串默认值可能是一个好主意。\\
+\hline
+{\em args} & 用于实例化子组件的构造函数参数\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+子组件始终继承其顶级父组件的路径（顶级组件是通过 \mbox{\hyperlink{classjevois_1_1Manager_ac5e322bf63b28a786e73812541bc4508}{Manager\+::add\+Component()}} 直接添加到 \mbox{\hyperlink{classjevois_1_1Manager}{Manager}} 的组件）。请参见 \mbox{\hyperlink{classjevois_1_1Component_a107130a245353bd22fc65a248a8b9baa}{absolute\+Path()}} 。 这样不同的模块可以为其组件提供不同的数据；例如，\+Face\+Detector 组件可能需要一些人脸模板数据文件才能运行；如果使用相对路径名加载这些文件， 则使用 Face\+Detector 的不同模块可能会使用不同的人脸模板数据文件。 
+\end{DoxyNote}
+\mbox{\Hypertarget{classjevois_1_1Component_a94393bebf75e11ddb4287b2f23489dc8}\label{classjevois_1_1Component_a94393bebf75e11ddb4287b2f23489dc8}} 
+\index{jevois::Component@{jevois::Component}!className@{className}}
+\index{className@{className}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{className()}{className()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Component\+::class\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The class name of this component. 
+
+
+
+Definition at line 39 of file Component.\+C.
+
+
+
+References jevois\+::demangle().
+
+\mbox{\Hypertarget{classjevois_1_1Component_a160d084b123b5abb6388905498349d74}\label{classjevois_1_1Component_a160d084b123b5abb6388905498349d74}} 
+\index{jevois::Component@{jevois::Component}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Component\+::descriptor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取我们的完整描述符（包括所有父级）作为 \mbox{[}Instancename\mbox{]}\+:\mbox{[}...\mbox{]}\+:\mbox{[}...\mbox{]} 
+
+
+
+Definition at line 274 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Classify\+::on\+Param\+Change(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+::on\+Param\+Change().
+
+\mbox{\Hypertarget{classjevois_1_1Component_a53f1a96de78606da022ab1e9fddcd130}\label{classjevois_1_1Component_a53f1a96de78606da022ab1e9fddcd130}} 
+\index{jevois::Component@{jevois::Component}!foreachParam@{foreachParam}}
+\index{foreachParam@{foreachParam}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{foreachParam()}{foreachParam()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::foreach\+Param (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::string const \&compname, \mbox{\hyperlink{classjevois_1_1ParameterBase}{Parameter\+Base}} $\ast$p)$>$}]{func,  }\item[{std\+::string const \&}]{cname = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+对我们持有的每个参数运行一个函数 
+
+
+
+Definition at line 564 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a5d2e9887f9e8f485676178c82555048c}\label{classjevois_1_1Component_a5d2e9887f9e8f485676178c82555048c}} 
+\index{jevois::Component@{jevois::Component}!freezeAllParams@{freezeAllParams}}
+\index{freezeAllParams@{freezeAllParams}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{freezeAllParams()}{freezeAllParams()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::freeze\+All\+Params (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+Freeze all parameters. 
+
+
+
+Definition at line 425 of file Component.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::post\+Init().
+
+\mbox{\Hypertarget{classjevois_1_1Component_a406a6bdc2a6b94308ee6f630aa0cb09c}\label{classjevois_1_1Component_a406a6bdc2a6b94308ee6f630aa0cb09c}} 
+\index{jevois::Component@{jevois::Component}!freezeParam@{freezeParam}}
+\index{freezeParam@{freezeParam}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{freezeParam()}{freezeParam()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::freeze\+Param (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor,  }\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+按名称冻结/解冻参数，参见 \mbox{\hyperlink{classjevois_1_1ParameterBase_aeb82f8d408f72e7490f5a25cf41e48c5}{Parameter\+Base\+::freeze()}} 
+
+
+
+Definition at line 413 of file Component.\+C.
+
+
+
+References jevois\+::\+Parameter\+Base\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1Component_a1ea17fa2f1960d4476a01e6f2c5c02d5}\label{classjevois_1_1Component_a1ea17fa2f1960d4476a01e6f2c5c02d5}} 
+\index{jevois::Component@{jevois::Component}!getParamString@{getParamString}}
+\index{getParamString@{getParamString}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{getParamString()}{getParamString()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::pair$<$ std\+::string, std\+::string $>$ $>$ jevois\+::\+Component\+::get\+Param\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor }\end{DoxyParamCaption}) const}
+
+
+
+通过字符串获取参数值 
+
+有关 paramdescriptor 的详细说明，\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val}} 使用此方法从字符串描述符中获取组件参数的当前值。将返回与描述 符匹配的所有参数的值（以字符串形式）。 
+\end{DoxySeeAlso}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em jevois\+::exception\+::\+Parameter\+Exception（如果没有参数与给定的描述符匹配）。} & \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+所有与给定描述符匹配的参数的 $<$paramdescriptor, valuestring$>$ 列表。列表保证至少有一个元素，因为如果没有 找到匹配的参数，我们会抛出异常。 
+\end{DoxyReturn}
+
+
+Definition at line 385 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and jevois\+::\+Parameter\+Base\+::strget().
+
+\mbox{\Hypertarget{classjevois_1_1Component_ae1ba3752e44d529cf41c8b5f38457945}\label{classjevois_1_1Component_ae1ba3752e44d529cf41c8b5f38457945}} 
+\index{jevois::Component@{jevois::Component}!getParamStringUnique@{getParamStringUnique}}
+\index{getParamStringUnique@{getParamStringUnique}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{getParamStringUnique()}{getParamStringUnique()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Component\+::get\+Param\+String\+Unique (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor }\end{DoxyParamCaption}) const}
+
+
+
+通过字符串获取参数值，简单版本假设只有一个参数匹配 
+
+这会调用 \mbox{\hyperlink{classjevois_1_1Component_af7841287aa195aa67a6c2b5acf4d5d5b}{get\+Param\+Val()}}，检查是否找到一个匹配项，并将其值作为字符串返回。 
+\begin{DoxyExceptions}{Exceptions}
+{\em jevois\+::exception\+::\+Parameter\+Exception} & 如果没有一个参数与给定的描述符完全匹配。 \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 401 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_af7841287aa195aa67a6c2b5acf4d5d5b}\label{classjevois_1_1Component_af7841287aa195aa67a6c2b5acf4d5d5b}} 
+\index{jevois::Component@{jevois::Component}!getParamVal@{getParamVal}}
+\index{getParamVal@{getParamVal}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{getParamVal()}{getParamVal()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$std\+::pair$<$std\+::string, T$>$ $>$ jevois\+::\+Component\+::get\+Param\+Val (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor }\end{DoxyParamCaption}) const}
+
+
+
+通过描述符获取参数值 
+
+\mbox{\Hypertarget{classjevois_1_1Component_afbf453dae93298b1dbd186cdbfde848a}\label{classjevois_1_1Component_afbf453dae93298b1dbd186cdbfde848a}} 
+\index{jevois::Component@{jevois::Component}!getParamValUnique@{getParamValUnique}}
+\index{getParamValUnique@{getParamValUnique}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{getParamValUnique()}{getParamValUnique()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T jevois\+::\+Component\+::get\+Param\+Val\+Unique (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor }\end{DoxyParamCaption}) const}
+
+
+
+获取参数值，简单版本假设只有一个参数匹配 
+
+这会调用 \mbox{\hyperlink{classjevois_1_1Component_af7841287aa195aa67a6c2b5acf4d5d5b}{get\+Param\+Val()}}，检查是否找到一个匹配项，并返回其值。例如，如果 My\+Component 类有一个名为“myparam”的整 数参数，您可以像这样获取该值：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::shared\_ptr<MyComponent> comp(\textcolor{keyword}{new} MyComponent);}
+\DoxyCodeLine{\textcolor{keywordtype}{int} paramValue = comp-\/>getParamValUnique<\textcolor{keywordtype}{int}>(\textcolor{stringliteral}{"myparam"});}
+\end{DoxyCode}
+
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & 如果没有一个参数与给定的描述符匹配。 \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classjevois_1_1Component_a6fa8c112c371226dc469be3c66aa9f76}\label{classjevois_1_1Component_a6fa8c112c371226dc469be3c66aa9f76}} 
+\index{jevois::Component@{jevois::Component}!getSubComponent@{getSubComponent}}
+\index{getSubComponent@{getSubComponent}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{getSubComponent()}{getSubComponent()}}
+{\footnotesize\ttfamily template$<$class Comp  = jevois\+::\+Component$>$ \\
+std\+::shared\+\_\+ptr$<$Comp$>$ jevois\+::\+Component\+::get\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption}) const}
+
+
+
+通过实例名称获取子组件。 
+
+如果它不是默认值 ( \mbox{\hyperlink{classjevois_1_1Component}{jevois\+::\+Component}} )，则此方法会对 Comp 进行动态指针转换。如果未通过实例名称找到组件，或者找到组件但 不是 Comp 类型（如果指定了 Comp），则抛出该错误。请注意，一旦您将 shared\+\_\+ptr 保存到某个 Component，就可以保证该组件不会 被销毁，直到该 shared\+\_\+ptr 被释放。如果 Je\+Vois 系统尝试销毁该组件（例如，调用 \mbox{\hyperlink{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}{remove\+Sub\+Component()}} ），该组件将被去初始化， 并且其父组件将被取消设置，因此它不会完全可操作，当最后一个指向它的 shared\+\_\+ptr 超出范围时将删除它。 \mbox{\Hypertarget{classjevois_1_1Component_a465314997843a6364a18abce2d307be9}\label{classjevois_1_1Component_a465314997843a6364a18abce2d307be9}} 
+\index{jevois::Component@{jevois::Component}!initialized@{initialized}}
+\index{initialized@{initialized}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{initialized()}{initialized()}}
+{\footnotesize\ttfamily bool jevois\+::\+Component\+::initialized (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Has this component been initialized yet? 
+
+
+
+Definition at line 204 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}\label{classjevois_1_1Component_a35393e379e00e894db6a9c12f90aa843}} 
+\index{jevois::Component@{jevois::Component}!instanceName@{instanceName}}
+\index{instanceName@{instanceName}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{instanceName()}{instanceName()}}
+{\footnotesize\ttfamily const std\+::string \& jevois\+::\+Component\+::instance\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The instance name of this component. 
+
+
+
+Definition at line 50 of file Component.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::register\+Python\+Component(), and jevois\+::\+Engine\+::un\+Register\+Python\+Component().
+
+\mbox{\Hypertarget{classjevois_1_1Component_a7e5a8b8e26f37c82a7c67a3b2d9c488b}\label{classjevois_1_1Component_a7e5a8b8e26f37c82a7c67a3b2d9c488b}} 
+\index{jevois::Component@{jevois::Component}!isTopLevel@{isTopLevel}}
+\index{isTopLevel@{isTopLevel}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{isTopLevel()}{isTopLevel()}}
+{\footnotesize\ttfamily bool jevois\+::\+Component\+::is\+Top\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Returns true if this component is top-\/level, i.\+e., its parent is \mbox{\hyperlink{classjevois_1_1Manager}{jevois\+::\+Manager}}. 
+
+The \mbox{\hyperlink{classjevois_1_1Module}{Module}} of \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} is top-\/level. 
+
+Definition at line 118 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_ad4a8b3ab4c1e17a8353478c9edb7102f}\label{classjevois_1_1Component_ad4a8b3ab4c1e17a8353478c9edb7102f}} 
+\index{jevois::Component@{jevois::Component}!paramInfo@{paramInfo}}
+\index{paramInfo@{paramInfo}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{paramInfo()}{paramInfo()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::param\+Info (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$}]{s,  }\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{categs,  }\item[{bool}]{skip\+Frozen,  }\item[{std\+::string const \&}]{cname = {\ttfamily \char`\"{}\char`\"{}},  }\item[{std\+::string const \&}]{pfx = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+获取所有参数的面向机器的描述 
+
+
+
+Definition at line 517 of file Component.\+C.
+
+
+
+References jevois\+::\+Parameter\+Summary\+::category, jevois\+::\+Parameter\+Summary\+::categorydescription, jevois\+::\+Parameter\+Summary\+::defaultvalue, jevois\+::\+Parameter\+Summary\+::description, jevois\+::\+Parameter\+Summary\+::frozen, J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, jevois\+::\+Parameter\+Summary\+::name, jevois\+::\+Parameter\+Summary\+::validvalues, jevois\+::\+Parameter\+Summary\+::value, jevois\+::\+Parameter\+Summary\+::valuetype, and jevois\+::\+User\+Interface\+::write\+String().
+
+\mbox{\Hypertarget{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}\label{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}} 
+\index{jevois::Component@{jevois::Component}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Component\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after all sub-\/\+Components are init()ed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1Engine_ad7b8927d246b350cf0be396291f79f3c}{jevois\+::\+Engine}}, \mbox{\hyperlink{classjevois_1_1ICM20948_a8a5ffa0fa699059985794186876f75b6}{jevois\+::\+I\+C\+M20948}}, \mbox{\hyperlink{classjevois_1_1Manager_a5b640dec7af4a35e140462db23c94db6}{jevois\+::\+Manager}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ae13fed0f9c31f30edcf07e9a5abeed81}{jevois\+::dnn\+::\+Pipeline}}, \mbox{\hyperlink{classjevois_1_1Serial_a159fa2d1b226adc859e874aa771820c8}{jevois\+::\+Serial}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorSegment_af1ad908e21e661c8b454e46720b38e2e}{jevois\+::dnn\+::\+Post\+Processor\+Segment}}.
+
+
+
+Definition at line 428 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}\label{classjevois_1_1Component_abd9cafdcc5e9981b72130aeb3d9ae83f}} 
+\index{jevois::Component@{jevois::Component}!postUninit@{postUninit}}
+\index{postUninit@{postUninit}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{postUninit()}{postUninit()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Component\+::post\+Uninit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after all sub-\/\+Components are uninit()ed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_abbda1a108de1cb63223b1fa7e9fd76df}{jevois\+::\+Python\+Module}}, and \mbox{\hyperlink{classjevois_1_1Serial_afe39197a374d85599ac823e60e3d263a}{jevois\+::\+Serial}}.
+
+
+
+Definition at line 434 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}\label{classjevois_1_1Component_ace4f9ea2f56c740d429de7ac0b89e7e6}} 
+\index{jevois::Component@{jevois::Component}!preInit@{preInit}}
+\index{preInit@{preInit}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{preInit()}{preInit()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Component\+::pre\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called before all sub-\/\+Components are init()ed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1Engine_a25d2fd8ab270cbdf4a26cc4bf9d5bac7}{jevois\+::\+Engine}}, \mbox{\hyperlink{classjevois_1_1PythonModule_ac1d5345e0543d5b5646ba08ee799f274}{jevois\+::\+Python\+Module}}, \mbox{\hyperlink{classjevois_1_1ICM20948_a8202f4edbc99ef5a71dc3465b9d0c2e7}{jevois\+::\+I\+C\+M20948}}, and \mbox{\hyperlink{classjevois_1_1Manager_ae8972fd61edf4f6589c6338b64f0b4be}{jevois\+::\+Manager}}.
+
+
+
+Definition at line 425 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}\label{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}} 
+\index{jevois::Component@{jevois::Component}!preUninit@{preUninit}}
+\index{preUninit@{preUninit}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{preUninit()}{preUninit()}}
+{\footnotesize\ttfamily virtual void jevois\+::\+Component\+::pre\+Uninit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called before all sub-\/\+Components are uninit()ed. 
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1ICM20948_ac0c87dce4c1cad9591e6ab4c87e04da2}{jevois\+::\+I\+C\+M20948}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a2afcca8091eba25f532cdaac0916c55e}{jevois\+::dnn\+::\+Pipeline}}.
+
+
+
+Definition at line 431 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_af56af29b92df74f8aca6fbfabb147d92}\label{classjevois_1_1Component_af56af29b92df74f8aca6fbfabb147d92}} 
+\index{jevois::Component@{jevois::Component}!removeDynamicParameter@{removeDynamicParameter}}
+\index{removeDynamicParameter@{removeDynamicParameter}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{removeDynamicParameter()}{removeDynamicParameter()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::remove\+Dynamic\+Parameter (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{bool}]{throw\+\_\+if\+\_\+not\+\_\+found = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+删除先前添加的动态参数 
+
+
+
+Definition at line 494 of file Component.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}\label{classjevois_1_1Component_a7737eea4256b8213662ea2a7b64ae362}} 
+\index{jevois::Component@{jevois::Component}!removeSubComponent@{removeSubComponent}}
+\index{removeSubComponent@{removeSubComponent}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{removeSubComponent()}{removeSubComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Comp $>$ \\
+void jevois\+::\+Component\+::remove\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Comp $>$ \&}]{component }\end{DoxyParamCaption})}
+
+
+
+通过 shared\+\_\+ptr 从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 中删除子组件。 
+
+\begin{DoxyNote}{Note}
+注意传递的 shared\+\_\+ptr 在此过程中会失效。如果此后 use\+\_\+count 未降至零（即，存在指向该组件的附加共享指针，这会阻止其实际被删除）， 则会发出警告。 
+\end{DoxyNote}
+\mbox{\Hypertarget{classjevois_1_1Component_a58233c8e715da1975f5dd20445c32cc4}\label{classjevois_1_1Component_a58233c8e715da1975f5dd20445c32cc4}} 
+\index{jevois::Component@{jevois::Component}!removeSubComponent@{removeSubComponent}}
+\index{removeSubComponent@{removeSubComponent}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{removeSubComponent()}{removeSubComponent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::remove\+Sub\+Component (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance,  }\item[{bool}]{warn\+If\+Not\+Found = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+按实例名称从 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 中删除子组件。 
+
+
+
+Definition at line 74 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1Component_ab8e576ff72ca69e7e8bf293e5529aec4}\label{classjevois_1_1Component_ab8e576ff72ca69e7e8bf293e5529aec4}} 
+\index{jevois::Component@{jevois::Component}!setDynamicParameterCallback@{setDynamicParameterCallback}}
+\index{setDynamicParameterCallback@{setDynamicParameterCallback}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setDynamicParameterCallback()}{setDynamicParameterCallback()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void jevois\+::\+Component\+::set\+Dynamic\+Parameter\+Callback (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::function$<$ void(T const \&)$>$}]{cb,  }\item[{bool}]{callnow = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+使用先前创建的动态参数注册回调 
+
+如果 callnow 为 true，则回调将在注册后立即使用参数的当前值调用。这是为了模仿标准参数，其中回调在初始化期间 至少被调用一次。 \mbox{\Hypertarget{classjevois_1_1Component_ae586131c86793919a1208faa10d1f40f}\label{classjevois_1_1Component_ae586131c86793919a1208faa10d1f40f}} 
+\index{jevois::Component@{jevois::Component}!setParamsFromFile@{setParamsFromFile}}
+\index{setParamsFromFile@{setParamsFromFile}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamsFromFile()}{setParamsFromFile()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::set\+Params\+From\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{filename }\end{DoxyParamCaption})}
+
+
+
+从文件设置一些参数 
+
+该文件应包含 \char`\"{}descriptor=value\char`\"{} 条目，每行一个，其中参数描述符应相对于此组件。如果文件名是相对的，则我们 的组件路径将使用 \mbox{\hyperlink{classjevois_1_1Component_a107130a245353bd22fc65a248a8b9baa}{absolute\+Path()}} 作为前缀。 
+
+Definition at line 433 of file Component.\+C.
+
+
+
+References jevois\+::absolute\+Path(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a598608043902a81fff7be9a4dfdef383}\label{classjevois_1_1Component_a598608043902a81fff7be9a4dfdef383}} 
+\index{jevois::Component@{jevois::Component}!setParamsFromStream@{setParamsFromStream}}
+\index{setParamsFromStream@{setParamsFromStream}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamsFromStream()}{setParamsFromStream()}}
+{\footnotesize\ttfamily std\+::istream \& jevois\+::\+Component\+::set\+Params\+From\+Stream (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{is,  }\item[{std\+::string const \&}]{absfile }\end{DoxyParamCaption})}
+
+
+
+从打开的流中设置一些参数 
+
+
+
+Definition at line 442 of file Component.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a0e51e39f529f8eb2b6fd5068407a5a9f}\label{classjevois_1_1Component_a0e51e39f529f8eb2b6fd5068407a5a9f}} 
+\index{jevois::Component@{jevois::Component}!setParamString@{setParamString}}
+\index{setParamString@{setParamString}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamString()}{setParamString()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ jevois\+::\+Component\+::set\+Param\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+通过字符串设置参数值 
+
+有关 paramdescriptor 的详细说明，\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val}} 
+\end{DoxySeeAlso}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em jevois\+::exception\+::\+Parameter\+Exception，如果没有参数与给定的描述符匹配，或者给定的字符串无法转换为参数} & 的本机类型。 \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+匹配和设置的参数的完全展开（无 \textquotesingle{}$\ast$\textquotesingle{}）描述符列表。该列表保证至少有一个元素，因为如果没有找到匹配的参数， 我们会抛出异常。 
+\end{DoxyReturn}
+
+
+Definition at line 354 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE, and jevois\+::\+Parameter\+Base\+::strset().
+
+\mbox{\Hypertarget{classjevois_1_1Component_af733b4d22345a6f56bc7b0e6e7be4ddc}\label{classjevois_1_1Component_af733b4d22345a6f56bc7b0e6e7be4ddc}} 
+\index{jevois::Component@{jevois::Component}!setParamStringUnique@{setParamStringUnique}}
+\index{setParamStringUnique@{setParamStringUnique}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamStringUnique()}{setParamStringUnique()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::set\+Param\+String\+Unique (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+通过字符串设置参数值，简单版本假设只有一个参数匹配 
+
+这会调用 \mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val()}}，并检查是否找到一个匹配项。 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error。如果没有一个参数与给定的描述符完全匹配} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 370 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}\label{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}} 
+\index{jevois::Component@{jevois::Component}!setParamVal@{setParamVal}}
+\index{setParamVal@{setParamVal}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamVal()}{setParamVal()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$std\+::string$>$ jevois\+::\+Component\+::set\+Param\+Val (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor,  }\item[{T const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+Set a parameter value. 
+
+如果我们没有该名称的参数或者该值不起作用，则会抛出异常。以下是描述符的工作原理：
+
+基本格式是
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[ComponentInstanceName]:[...]:[paramname]}
+\end{DoxyCode}
+
+
+请注意，{\ttfamily \mbox{[}Component\+Instance\+Name\mbox{]}} 标记也可以替换为 $\ast$，这相当于任意数量的任何 Component\+Instance\+Name 规范。 因此，当您不知道参数有多深时，请使用 $\ast$ 来获取参数。如果 $\ast$ 和最终参数名称之间存在其他 Component\+Instance\+Name，则递归将关闭， 并且 $\ast$ 和参数名称之间的任何内容都必须与介入的组件/实例相匹配。
+
+For example,
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{MyInst:*:CoolComp:MyParam}
+\end{DoxyCode}
+
+
+将匹配 My\+Inst 与顶级组件（您调用 \mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val()}} 的组件）匹配的参数，然后将递归遍历任意数量的子组件，直到其中一个与 Cool\+Comp 匹配，然后我们将在该子组件中查找 My\+Param 参数，我们不会再深入查找。
+
+最后请注意，有一个隐式的第一个 $\ast$\+: 会自动添加到您的描述中，因此，如果您只指定一个参数名称，而在它之前没有其他内容，我们将在 所有子组件中按该名称设置所有参数，无论它们有多深（比如您指定了 $\ast$\+:paramname)。
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & 如果没有参数与给定的描述符匹配。 \\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+匹配和设置的参数（no \textquotesingle{}$\ast$\textquotesingle{}）描述符列表。该列表保证至少有一个元素，因为如果没有找到匹配的参数，我们就会抛出异常。 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classjevois_1_1Component_a1a88e8efd0957c4d2211269ecbb5618b}\label{classjevois_1_1Component_a1a88e8efd0957c4d2211269ecbb5618b}} 
+\index{jevois::Component@{jevois::Component}!setParamValUnique@{setParamValUnique}}
+\index{setParamValUnique@{setParamValUnique}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setParamValUnique()}{setParamValUnique()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void jevois\+::\+Component\+::set\+Param\+Val\+Unique (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{paramdescriptor,  }\item[{T const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+设置一个参数值，简单版本假设只有一个参数匹配。 
+
+这会调用 \mbox{\hyperlink{classjevois_1_1Component_a158c6073e8417061e2797b49899f1640}{set\+Param\+Val()}} ，并检查是否找到了恰好一个匹配项。 
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::exception} & 如果没有一个参数完全匹配给定的描述符。 \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classjevois_1_1Component_ab19561ca99b94e58b37875ceb5e7f566}\label{classjevois_1_1Component_ab19561ca99b94e58b37875ceb5e7f566}} 
+\index{jevois::Component@{jevois::Component}!setPath@{setPath}}
+\index{setPath@{setPath}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void jevois\+::\+Component\+::set\+Path (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+为该组件分配一个文件系统路径 
+
+
+
+Definition at line 480 of file Component.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+T\+R\+A\+CE.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Component_a3e1914489e4bed4f9f23cdeab34a43dc}\label{classjevois_1_1Component_a3e1914489e4bed4f9f23cdeab34a43dc}} 
+\index{jevois::Component@{jevois::Component}!Engine@{Engine}}
+\index{Engine@{Engine}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{Engine}{Engine}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Engine}{Engine}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 441 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_adddd5c43ff870a047aa66db4edf82a7e}\label{classjevois_1_1Component_adddd5c43ff870a047aa66db4edf82a7e}} 
+\index{jevois::Component@{jevois::Component}!Manager@{Manager}}
+\index{Manager@{Manager}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{Manager}{Manager}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Manager}{Manager}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 440 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}\label{classjevois_1_1Component_a21f639900c480510650969df9c74d17d}} 
+\index{jevois::Component@{jevois::Component}!Module@{Module}}
+\index{Module@{Module}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{Module}{Module}}
+{\footnotesize\ttfamily friend class \mbox{\hyperlink{classjevois_1_1Module}{Module}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 442 of file Component.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Component_a4fc95c9b928bda9fd1891c63a6895ec7}\label{classjevois_1_1Component_a4fc95c9b928bda9fd1891c63a6895ec7}} 
+\index{jevois::Component@{jevois::Component}!ParameterCore@{ParameterCore}}
+\index{ParameterCore@{ParameterCore}!jevois::Component@{jevois::Component}}
+\doxyparagraph{\texorpdfstring{ParameterCore}{ParameterCore}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+friend class \mbox{\hyperlink{classjevois_1_1ParameterCore}{Parameter\+Core}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line 439 of file Component.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{Component_8H}{Component.\+H}}\item 
+src/jevois/\+Component/\mbox{\hyperlink{Component_8C}{Component.\+C}}\end{DoxyCompactItemize}

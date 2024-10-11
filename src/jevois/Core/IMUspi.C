@@ -33,9 +33,8 @@
 jevois::IMUspi::IMUspi(std::string const & devname) :
     jevois::IMU(), itsDevName(devname), itsFd(-1), itsIMUbank(0)
 {
-  // FIXME: clock speed seems to have no effect on whether we can load the DMP data or not.
-  // So setting retry to 1 for now, trying 7MHz only.
-  int retry = 1; // number of tries, halving the speed each time
+  // FIXME: 时钟速度似乎对我们是否可以加载 DMP 数据没有影响。因此暂时将重试设置为 1，仅尝试 7MHz。
+  int retry = 1; // 尝试次数，每次将速度减半
   unsigned int speed = 7000000;
 
   while (retry)
@@ -53,10 +52,10 @@ jevois::IMUspi::IMUspi(std::string const & devname) :
 
       XIOCTL(itsFd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
 
-      // At the beginning, we need to read at least once to get the clock polarity in order:
+      // 一开始，我们需要至少读取一次才能按顺序获取时钟极性：
       readRegister(ICM20948_REG_WHO_AM_I);
       
-      // Force a reset. Reset bit will auto-clear:
+      // 强制复位。复位位将自动清除：
       writeRegister(ICM20948_REG_PWR_MGMT_1, ICM20948_BIT_H_RESET);
       
       // Disable I2C as we use SPI, reset DMP:

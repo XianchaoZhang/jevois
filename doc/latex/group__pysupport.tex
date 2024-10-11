@@ -1,0 +1,334 @@
+\hypertarget{group__pysupport}{}\doxysubsection{Python 支持函数}
+\label{group__pysupport}\index{Python 支持函数@{Python 支持函数}}
+
+
+\doxysubsubsection{ }
+帮助程序促进与 Python 之间的数据传输 
+
+Collaboration diagram for Python 支持函数\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=323pt]{group__pysupport}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{group__pysupport_ga89fd3c8c027de53532b0ab63ba9bd84b}{jevois\+::python\+::set\+Engine}} (\mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}} $\ast$e)
+\begin{DoxyCompactList}\small\item\em 初始化 Python、numpy，并允许 python 模块通过 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 发送串行输出 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__pysupport_gada9a987413579e077d37b2a1392fa328}{jevois\+::python\+::hasattr}} (boost\+::python\+::object \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}, char const $\ast$name)
+\begin{DoxyCompactList}\small\item\em 检查 boost\+::python\+::object 是否具有属性 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\boost\+::python\+::list \mbox{\hyperlink{group__pysupport_ga851e553d8bb3ad854f6a72f2d21cacc6}{jevois\+::python\+::py\+Vec\+To\+List}} (std\+::vector$<$ T $>$ const \&v)
+\begin{DoxyCompactList}\small\item\em 将 std\+::vector$<$\+T$>$ 转换为 python 列表的辅助程序 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{group__pysupport_gae59dd866134c4b7c754dab76465ca81b}{jevois\+::python\+::py\+List\+To\+Vec}} (boost\+::python\+::object const \&lst)
+\begin{DoxyCompactList}\small\item\em 将 python 列表（或任何可迭代对象）转换为 std\+::vector$<$\+T$>$ 的辅助程序 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , size\+\_\+t N$>$ }\\std\+::array$<$ T, N $>$ \mbox{\hyperlink{group__pysupport_gaa0b5c0e59acd608244ab06a80f2d73cd}{jevois\+::python\+::tuple\+To\+Array}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em 辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T , size\+\_\+t N$>$ }\\void \mbox{\hyperlink{group__pysupport_gae325e307bbc6b533c57dd06f018b0e9e}{jevois\+::python\+::tuple\+To\+Array}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}}, std\+::array$<$ T, N $>$ \&arr, size\+\_\+t minN=N)
+\begin{DoxyCompactList}\small\item\em 辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\T \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em 通用值提取，对于 python 知道如何提取的类型，传递给 boost\+::python\+::extract() \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Scalar\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_ga98cb1cfcea2fe6e33491692486c3cfef}{jevois\+::python\+::pyextract$<$ cv\+::\+Scalar\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar\+\_\+$<$float$>$ 的特化，从 1..4 个浮点值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Scalar\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga3339d8c469b02495305d50de4cc8de38}{jevois\+::python\+::pyextract$<$ cv\+::\+Scalar\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar\+\_\+$<$int$>$ 的特化，从 1..4 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Point\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_gaa2a4e4d9e6c4a9056cf609ee0d561dad}{jevois\+::python\+::pyextract$<$ cv\+::\+Point\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point\+\_\+$<$float$>$ 的特化，从 2 个浮点值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Point\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga395f9f89edce74dad823ce34b591bcd5}{jevois\+::python\+::pyextract$<$ cv\+::\+Point\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Size\+\_\+$<$ float $>$ \mbox{\hyperlink{group__pysupport_gaf092f9f8b5dc66da71794f4713126346}{jevois\+::python\+::pyextract$<$ cv\+::\+Size\+\_\+$<$ float $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size\+\_\+$<$float$>$ 的特化，从 2 个 float 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ cv\+::\+Size\+\_\+$<$ int $>$ \mbox{\hyperlink{group__pysupport_ga8b2cc1d6859055c9912c7bf34169e2b3}{jevois\+::python\+::pyextract$<$ cv\+::\+Size\+\_\+$<$ int $>$ $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 \end{DoxyCompactList}\item 
+template$<$$>$ Im\+Color \mbox{\hyperlink{group__pysupport_ga417d94bbf152c547c3d67155f79e15fa}{jevois\+::python\+::pyextract$<$ Im\+Color $>$}} (boost\+::python\+::object const \&\mbox{\hyperlink{Font9x15bold_8C_ac9ba2c61c69c381438f186315b5f2e9b}{o}})
+\begin{DoxyCompactList}\small\item\em Im\+Color 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga4f18ce4c0271e61810cb876a267e7e7e}{jevois\+::python\+::topyobj}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 将值转换为 python，传递到 python\+::object(val) \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gad7841f6fbaa2d636b7189c549e211ac3}{jevois\+::python\+::topyobj}} (cv\+::\+Scalar\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar$<$float$>$ 的特化，返回一个有 4 个浮点元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga76307bdb32c40ee62a394276641f4eb0}{jevois\+::python\+::topyobj}} (cv\+::\+Scalar\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Scalar$<$int$>$ 的特化，返回一个包含 4 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gaf422b158b87551344a609cf00d565419}{jevois\+::python\+::topyobj}} (cv\+::\+Point\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga93c8f7221a6bffe3fc183963e81e700b}{jevois\+::python\+::topyobj}} (cv\+::\+Point\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Point$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga0bdf6f519c8a68fb811ae707c3dd43dd}{jevois\+::python\+::topyobj}} (cv\+::\+Size\+\_\+$<$ float $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em cv\+::\+Size$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_gacf2bb5c5469a2c97b0f0341cd8a71495}{jevois\+::python\+::topyobj}} (cv\+::\+Size\+\_\+$<$ int $>$ const \&val)
+\begin{DoxyCompactList}\small\item\em 对 cv\+::\+Size$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 \end{DoxyCompactList}\item 
+template$<$$>$ boost\+::python\+::object \mbox{\hyperlink{group__pysupport_ga75c60823494fe158f5663a0e2a090832}{jevois\+::python\+::topyobj}} (Im\+Color const \&val)
+\begin{DoxyCompactList}\small\item\em 对 Im\+Color 的特化，返回一个包含 4 个 int 元素的元组 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__pysupport_gada9a987413579e077d37b2a1392fa328}\label{group__pysupport_gada9a987413579e077d37b2a1392fa328}} 
+\index{Python 支持函数@{Python 支持函数}!hasattr@{hasattr}}
+\index{hasattr@{hasattr}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{hasattr()}{hasattr()}}
+{\footnotesize\ttfamily bool jevois\+::python\+::hasattr (\begin{DoxyParamCaption}\item[{boost\+::python\+::object \&}]{o,  }\item[{char const $\ast$}]{name }\end{DoxyParamCaption})}
+
+
+
+检查 boost\+::python\+::object 是否具有属性 
+
+
+
+Definition at line 116 of file Python\+Support.\+C.
+
+
+
+References o.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::freeze(), jevois\+::dnn\+::\+Network\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::loadpy(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::loadpy(), jevois\+::\+Python\+Module\+::parse\+Serial(), jevois\+::\+Python\+Module\+::post\+Uninit(), jevois\+::\+Python\+Module\+::pre\+Init(), and jevois\+::\+Python\+Module\+::supported\+Commands().
+
+\mbox{\Hypertarget{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}\label{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract@{pyextract}}
+\index{pyextract@{pyextract}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract()}{pyextract()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+T jevois\+::python\+::pyextract (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+通用值提取，对于 python 知道如何提取的类型，传递给 boost\+::python\+::extract() 
+
+\mbox{\Hypertarget{group__pysupport_gaa2a4e4d9e6c4a9056cf609ee0d561dad}\label{group__pysupport_gaa2a4e4d9e6c4a9056cf609ee0d561dad}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Point\_$<$ float $>$ $>$@{pyextract$<$ cv::Point\_$<$ float $>$ $>$}}
+\index{pyextract$<$ cv::Point\_$<$ float $>$ $>$@{pyextract$<$ cv::Point\_$<$ float $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Point\_$<$ float $>$ $>$()}{pyextract< cv::Point\_< float > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Point\+\_\+$<$float$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Point\+\_\+$<$ float $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Point\+\_\+$<$float$>$ 的特化，从 2 个浮点值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_ga395f9f89edce74dad823ce34b591bcd5}\label{group__pysupport_ga395f9f89edce74dad823ce34b591bcd5}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Point\_$<$ int $>$ $>$@{pyextract$<$ cv::Point\_$<$ int $>$ $>$}}
+\index{pyextract$<$ cv::Point\_$<$ int $>$ $>$@{pyextract$<$ cv::Point\_$<$ int $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Point\_$<$ int $>$ $>$()}{pyextract< cv::Point\_< int > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Point\+\_\+$<$int$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Point\+\_\+$<$ int $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Point\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_ga98cb1cfcea2fe6e33491692486c3cfef}\label{group__pysupport_ga98cb1cfcea2fe6e33491692486c3cfef}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Scalar\_$<$ float $>$ $>$@{pyextract$<$ cv::Scalar\_$<$ float $>$ $>$}}
+\index{pyextract$<$ cv::Scalar\_$<$ float $>$ $>$@{pyextract$<$ cv::Scalar\_$<$ float $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Scalar\_$<$ float $>$ $>$()}{pyextract< cv::Scalar\_< float > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Scalar\+\_\+$<$float$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Scalar\+\_\+$<$ float $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Scalar\+\_\+$<$float$>$ 的特化，从 1..4 个浮点值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_ga3339d8c469b02495305d50de4cc8de38}\label{group__pysupport_ga3339d8c469b02495305d50de4cc8de38}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Scalar\_$<$ int $>$ $>$@{pyextract$<$ cv::Scalar\_$<$ int $>$ $>$}}
+\index{pyextract$<$ cv::Scalar\_$<$ int $>$ $>$@{pyextract$<$ cv::Scalar\_$<$ int $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Scalar\_$<$ int $>$ $>$()}{pyextract< cv::Scalar\_< int > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Scalar\+\_\+$<$int$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Scalar\+\_\+$<$ int $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Scalar\+\_\+$<$int$>$ 的特化，从 1..4 个 int 值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_gaf092f9f8b5dc66da71794f4713126346}\label{group__pysupport_gaf092f9f8b5dc66da71794f4713126346}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Size\_$<$ float $>$ $>$@{pyextract$<$ cv::Size\_$<$ float $>$ $>$}}
+\index{pyextract$<$ cv::Size\_$<$ float $>$ $>$@{pyextract$<$ cv::Size\_$<$ float $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Size\_$<$ float $>$ $>$()}{pyextract< cv::Size\_< float > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Size\+\_\+$<$float$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Size\+\_\+$<$ float $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Size\+\_\+$<$float$>$ 的特化，从 2 个 float 值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_ga8b2cc1d6859055c9912c7bf34169e2b3}\label{group__pysupport_ga8b2cc1d6859055c9912c7bf34169e2b3}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ cv::Size\_$<$ int $>$ $>$@{pyextract$<$ cv::Size\_$<$ int $>$ $>$}}
+\index{pyextract$<$ cv::Size\_$<$ int $>$ $>$@{pyextract$<$ cv::Size\_$<$ int $>$ $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ cv::Size\_$<$ int $>$ $>$()}{pyextract< cv::Size\_< int > >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+cv\+::\+Size\+\_\+$<$int$>$ \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ cv\+::\+Size\+\_\+$<$ int $>$ $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Size\+\_\+$<$int$>$ 的特化，从 2 个 int 值的元组中提取 
+
+\mbox{\Hypertarget{group__pysupport_ga417d94bbf152c547c3d67155f79e15fa}\label{group__pysupport_ga417d94bbf152c547c3d67155f79e15fa}} 
+\index{Python 支持函数@{Python 支持函数}!pyextract$<$ ImColor $>$@{pyextract$<$ ImColor $>$}}
+\index{pyextract$<$ ImColor $>$@{pyextract$<$ ImColor $>$}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyextract$<$ ImColor $>$()}{pyextract< ImColor >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+Im\+Color \mbox{\hyperlink{group__pysupport_ga1f2fcc7cf24b26618a728663e1e7d2d4}{jevois\+::python\+::pyextract}}$<$ Im\+Color $>$ (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+Im\+Color 的特化，从 3..4 int 值的元组中提取（如果为 3 则 alpha=255） 
+
+\mbox{\Hypertarget{group__pysupport_gae59dd866134c4b7c754dab76465ca81b}\label{group__pysupport_gae59dd866134c4b7c754dab76465ca81b}} 
+\index{Python 支持函数@{Python 支持函数}!pyListToVec@{pyListToVec}}
+\index{pyListToVec@{pyListToVec}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyListToVec()}{pyListToVec()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$T$>$ jevois\+::python\+::py\+List\+To\+Vec (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{lst }\end{DoxyParamCaption})}
+
+
+
+将 python 列表（或任何可迭代对象）转换为 std\+::vector$<$\+T$>$ 的辅助程序 
+
+\mbox{\Hypertarget{group__pysupport_ga851e553d8bb3ad854f6a72f2d21cacc6}\label{group__pysupport_ga851e553d8bb3ad854f6a72f2d21cacc6}} 
+\index{Python 支持函数@{Python 支持函数}!pyVecToList@{pyVecToList}}
+\index{pyVecToList@{pyVecToList}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{pyVecToList()}{pyVecToList()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+boost\+::python\+::list jevois\+::python\+::py\+Vec\+To\+List (\begin{DoxyParamCaption}\item[{std\+::vector$<$ T $>$ const \&}]{v }\end{DoxyParamCaption})}
+
+
+
+将 std\+::vector$<$\+T$>$ 转换为 python 列表的辅助程序 
+
+
+
+Referenced by jevois\+::dnn\+::\+Pre\+Processor\+For\+Python\+::blobs(), jevois\+::dnn\+::\+Network\+Python\+Impl\+::doprocess(), jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+Ofor\+Python\+::yolo().
+
+\mbox{\Hypertarget{group__pysupport_ga89fd3c8c027de53532b0ab63ba9bd84b}\label{group__pysupport_ga89fd3c8c027de53532b0ab63ba9bd84b}} 
+\index{Python 支持函数@{Python 支持函数}!setEngine@{setEngine}}
+\index{setEngine@{setEngine}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{setEngine()}{setEngine()}}
+{\footnotesize\ttfamily void jevois\+::python\+::set\+Engine (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Engine}{jevois\+::\+Engine}} $\ast$}]{e }\end{DoxyParamCaption})}
+
+
+
+初始化 Python、numpy，并允许 python 模块通过 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 发送串行输出 
+
+此命令不适用于一般用途，只有 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 才应该使用它。 
+
+Definition at line 102 of file Python\+Support.\+C.
+
+
+
+References jevois\+::python\+::engine\+For\+Python\+Module.
+
+
+
+Referenced by jevois\+::\+Engine\+::post\+Init().
+
+\mbox{\Hypertarget{group__pysupport_gaf422b158b87551344a609cf00d565419}\label{group__pysupport_gaf422b158b87551344a609cf00d565419}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Point\+\_\+$<$ float $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Point$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_ga93c8f7221a6bffe3fc183963e81e700b}\label{group__pysupport_ga93c8f7221a6bffe3fc183963e81e700b}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Point\+\_\+$<$ int $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Point$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_gad7841f6fbaa2d636b7189c549e211ac3}\label{group__pysupport_gad7841f6fbaa2d636b7189c549e211ac3}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Scalar\+\_\+$<$ float $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Scalar$<$float$>$ 的特化，返回一个有 4 个浮点元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_ga76307bdb32c40ee62a394276641f4eb0}\label{group__pysupport_ga76307bdb32c40ee62a394276641f4eb0}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Scalar\+\_\+$<$ int $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Scalar$<$int$>$ 的特化，返回一个包含 4 个 int 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_ga0bdf6f519c8a68fb811ae707c3dd43dd}\label{group__pysupport_ga0bdf6f519c8a68fb811ae707c3dd43dd}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Size\+\_\+$<$ float $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+cv\+::\+Size$<$float$>$ 的特化，返回一个包含 2 个 float 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_gacf2bb5c5469a2c97b0f0341cd8a71495}\label{group__pysupport_gacf2bb5c5469a2c97b0f0341cd8a71495}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{cv\+::\+Size\+\_\+$<$ int $>$ const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+对 cv\+::\+Size$<$int$>$ 的特化，返回一个包含 2 个 int 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_ga75c60823494fe158f5663a0e2a090832}\label{group__pysupport_ga75c60823494fe158f5663a0e2a090832}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily template$<$$>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{Im\+Color const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+对 Im\+Color 的特化，返回一个包含 4 个 int 元素的元组 
+
+\mbox{\Hypertarget{group__pysupport_ga4f18ce4c0271e61810cb876a267e7e7e}\label{group__pysupport_ga4f18ce4c0271e61810cb876a267e7e7e}} 
+\index{Python 支持函数@{Python 支持函数}!topyobj@{topyobj}}
+\index{topyobj@{topyobj}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{topyobj()}{topyobj()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+boost\+::python\+::object jevois\+::python\+::topyobj (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+将值转换为 python，传递到 python\+::object(val) 
+
+\mbox{\Hypertarget{group__pysupport_gaa0b5c0e59acd608244ab06a80f2d73cd}\label{group__pysupport_gaa0b5c0e59acd608244ab06a80f2d73cd}} 
+\index{Python 支持函数@{Python 支持函数}!tupleToArray@{tupleToArray}}
+\index{tupleToArray@{tupleToArray}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{tupleToArray()}{tupleToArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t N$>$ \\
+std\+::array$<$T, N$>$ jevois\+::python\+::tuple\+To\+Array (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o }\end{DoxyParamCaption})}
+
+
+
+辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 
+
+\mbox{\Hypertarget{group__pysupport_gae325e307bbc6b533c57dd06f018b0e9e}\label{group__pysupport_gae325e307bbc6b533c57dd06f018b0e9e}} 
+\index{Python 支持函数@{Python 支持函数}!tupleToArray@{tupleToArray}}
+\index{tupleToArray@{tupleToArray}!Python 支持函数@{Python 支持函数}}
+\doxyparagraph{\texorpdfstring{tupleToArray()}{tupleToArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t N$>$ \\
+void jevois\+::python\+::tuple\+To\+Array (\begin{DoxyParamCaption}\item[{boost\+::python\+::object const \&}]{o,  }\item[{std\+::array$<$ T, N $>$ \&}]{arr,  }\item[{size\+\_\+t}]{minN = {\ttfamily N} }\end{DoxyParamCaption})}
+
+
+
+辅助程序，将具有统一类型 T 元素的元组提取到 std\+::array 中 
+
+minN 是所需的元组元素的最小数量，允许部分元组。如果 minN$<$N，我们假定数组已使用默认值初始化，并且我们允许接收 小于 N 的元组，在这种情况下我们只分配数组的第一个元素。用于提取可以包含 1 到 4 个元素的 cv\+::\+Scalar 之类的东 西。 

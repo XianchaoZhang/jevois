@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1IMUspi">
+<title>jevois::IMUspi Class Reference</title>
+<indexterm><primary>jevois::IMUspi</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Core/IMUspi.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>具有 SPI 接口的 IMU，例如 JeVois-Pro IMX290 摄像头传感器板上的 <link linkend="_classjevois_1_1ICM20948">ICM20948</link> <link linkend="_classjevois_1_1IMU">IMU</link> </para>
+<para>
+Definition at line 29 of file IMUspi.H.</para>
+Inheritance diagram for jevois::IMUspi:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1IMUspi__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::IMUspi:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1IMUspi__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1IMUspi_1ac4a08e72a659e3f004537365801656a6">IMUspi</link> (std::string const &amp;devname)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1IMUspi_1a7835dda94f0e8738ced35f390600aece">~IMUspi</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1IMUspi_1a7f0689c24ba1e0ae2c1a03d30e726d2a">isSPI</link> () const override</para>
+
+<para>如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写入时使用； </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect><title>IMU 寄存器的访问函数</title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1IMUspi_1a5c0192150901a6ac87a2bf2d3c073cd8">writeRegister</link> (unsigned short reg, unsigned char val) override</para>
+
+<para>将值写入 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一 </para>
+</listitem>
+            <listitem><para>unsigned char <link linkend="_classjevois_1_1IMUspi_1a829c91f77c78ead9bd98390002314dee">readRegister</link> (unsigned short reg) override</para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一读取一个值 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMUspi_1a16dfdbafeb959a9faba96d57d1bd3321">writeRegisterArray</link> (unsigned short reg, unsigned char const *vals, size_t num) override</para>
+
+<para>将值数组写入相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器 </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMUspi_1ad29a0ae407351e2c0522495ecb5eeb85">readRegisterArray</link> (unsigned short reg, unsigned char *vals, size_t num) override</para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器读取值数组 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1IMUspi_1a98b157c5a8b5edd54b3a1b1e79880538">selectBank</link> (unsigned short reg)</para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1IMUspi_1af2bb090978af540b83d3821727198e5c">spi_xfer</link> (unsigned char addr, unsigned char dir, size_t siz, unsigned char *datain, unsigned char const *dataout)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const std::string <link linkend="_classjevois_1_1IMUspi_1a715869d4667619c255b0b9c719a672a1">itsDevName</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_classjevois_1_1IMUspi_1a11bef1f8a8a37fe7bb26b154007bfdd9">itsFd</link></para>
+</listitem>
+            <listitem><para>uint8_t <link linkend="_classjevois_1_1IMUspi_1a80b9dbbf69665369cbd03611b799dd01">itsIMUbank</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1IMUspi_1ac4a08e72a659e3f004537365801656a6"/>    <section>
+    <title>IMUspi()</title>
+<indexterm><primary>IMUspi</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>IMUspi</secondary></indexterm>
+<para><computeroutput>jevois::IMUspi::IMUspi (std::string const &amp; devname)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 33 of file IMUspi.C.</para>
+<para>
+References itsFd, LERROR, LFATAL, LINFO, jevois::IMU::loadDMPfirmware(), readRegister(), writeRegister(), and XIOCTL.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a7835dda94f0e8738ced35f390600aece"/>    <section>
+    <title>~IMUspi()</title>
+<indexterm><primary>~IMUspi</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>~IMUspi</secondary></indexterm>
+<para><computeroutput>jevois::IMUspi::~IMUspi ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 96 of file IMUspi.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1IMUspi_1a7f0689c24ba1e0ae2c1a03d30e726d2a"/>    <section>
+    <title>isSPI()</title>
+<indexterm><primary>isSPI</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>isSPI</secondary></indexterm>
+<para><computeroutput>bool jevois::IMUspi::isSPI ( ) const<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>如果我们使用 SPI 进行传输，则返回 true。当 ICM20948_REG_USER_CTRL 写入时使用； </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1IMU_1a73e0a55b34109ae3f91a87c72ac810c3">jevois::IMU</link>.</para>
+<para>
+Definition at line 102 of file IMUspi.C.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a829c91f77c78ead9bd98390002314dee"/>    <section>
+    <title>readRegister()</title>
+<indexterm><primary>readRegister</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>readRegister</secondary></indexterm>
+<para><computeroutput>unsigned char jevois::IMUspi::readRegister (unsigned short reg)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一读取一个值 </para>
+</para>
+
+<para>请参阅基类 <link linkend="_classjevois_1_1IMU">jevois::IMU</link> 以获取完整文档。 </para>
+<para>
+Implements <link linkend="_classjevois_1_1IMU_1a1acc20be96d27b69cb9b8eaf00352a30">jevois::IMU</link>.</para>
+<para>
+Definition at line 210 of file IMUspi.C.</para>
+<para>
+References ICM20948_SPI_READ, and LDEBUG.</para>
+<para>
+Referenced by IMUspi().</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1ad29a0ae407351e2c0522495ecb5eeb85"/>    <section>
+    <title>readRegisterArray()</title>
+<indexterm><primary>readRegisterArray</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>readRegisterArray</secondary></indexterm>
+<para><computeroutput>void jevois::IMUspi::readRegisterArray (unsigned short reg, unsigned char * vals, size_t num)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>从相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器读取值数组 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1IMU_1abd15f4725196633a11363240e3681515">jevois::IMU</link>.</para>
+<para>
+Definition at line 229 of file IMUspi.C.</para>
+<para>
+References ICM20948_SPI_READ, LDEBUG, and LFATAL.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a98b157c5a8b5edd54b3a1b1e79880538"/>    <section>
+    <title>selectBank()</title>
+<indexterm><primary>selectBank</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>selectBank</secondary></indexterm>
+<para><computeroutput>void jevois::IMUspi::selectBank (unsigned short reg)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 146 of file IMUspi.C.</para>
+<para>
+References ICM20948_SPI_WRITE, and LDEBUG.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1af2bb090978af540b83d3821727198e5c"/>    <section>
+    <title>spi_xfer()</title>
+<indexterm><primary>spi_xfer</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>spi_xfer</secondary></indexterm>
+<para><computeroutput>void jevois::IMUspi::spi_xfer (unsigned char addr, unsigned char dir, size_t siz, unsigned char * datain, unsigned char const * dataout)<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 106 of file IMUspi.C.</para>
+<para>
+References XIOCTL.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a5c0192150901a6ac87a2bf2d3c073cd8"/>    <section>
+    <title>writeRegister()</title>
+<indexterm><primary>writeRegister</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>writeRegister</secondary></indexterm>
+<para><computeroutput>void jevois::IMUspi::writeRegister (unsigned short reg, unsigned char val)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将值写入 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器之一 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1IMU_1a95f5a6feafb3cf43ba5873bc3897027c">jevois::IMU</link>.</para>
+<para>
+Definition at line 158 of file IMUspi.C.</para>
+<para>
+References ICM20948_SPI_WRITE, LDEBUG, and LERROR.</para>
+<para>
+Referenced by IMUspi().</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a16dfdbafeb959a9faba96d57d1bd3321"/>    <section>
+    <title>writeRegisterArray()</title>
+<indexterm><primary>writeRegisterArray</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>writeRegisterArray</secondary></indexterm>
+<para><computeroutput>void jevois::IMUspi::writeRegisterArray (unsigned short reg, unsigned char const * vals, size_t num)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>将值数组写入相机的 <link linkend="_classjevois_1_1IMU">IMU</link> 寄存器 </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1IMU_1a80c3dc139500b71acbca22752b8041c9">jevois::IMU</link>.</para>
+<para>
+Definition at line 220 of file IMUspi.C.</para>
+<para>
+References ICM20948_SPI_WRITE, LDEBUG, and LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1IMUspi_1a715869d4667619c255b0b9c719a672a1"/>    <section>
+    <title>itsDevName</title>
+<indexterm><primary>itsDevName</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>itsDevName</secondary></indexterm>
+<para><computeroutput>const std::string jevois::IMUspi::itsDevName<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 63 of file IMUspi.H.</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a11bef1f8a8a37fe7bb26b154007bfdd9"/>    <section>
+    <title>itsFd</title>
+<indexterm><primary>itsFd</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>itsFd</secondary></indexterm>
+<para><computeroutput>int jevois::IMUspi::itsFd<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 64 of file IMUspi.H.</para>
+<para>
+Referenced by IMUspi().</para>
+    </section><anchor xml:id="_classjevois_1_1IMUspi_1a80b9dbbf69665369cbd03611b799dd01"/>    <section>
+    <title>itsIMUbank</title>
+<indexterm><primary>itsIMUbank</primary><secondary>jevois::IMUspi</secondary></indexterm>
+<indexterm><primary>jevois::IMUspi</primary><secondary>itsIMUbank</secondary></indexterm>
+<para><computeroutput>uint8_t jevois::IMUspi::itsIMUbank<computeroutput>[protected]</computeroutput></computeroutput></para><para>
+Definition at line 66 of file IMUspi.H.</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Core/<link linkend="_IMUspi_8H">IMUspi.H</link>src/jevois/Core/<link linkend="_IMUspi_8C">IMUspi.C</link></section>
+</section>

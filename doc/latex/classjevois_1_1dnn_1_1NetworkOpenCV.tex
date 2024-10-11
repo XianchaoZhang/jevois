@@ -1,0 +1,192 @@
+\hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV}{}\doxysubsection{jevois\+::dnn\+::Network\+Open\+CV Class Reference}
+\label{classjevois_1_1dnn_1_1NetworkOpenCV}\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+Open\+C\+V.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+围绕 Open\+CV D\+NN 神经网络的包装器 
+
+Definition at line 31 of file Network\+Open\+C\+V.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+Open\+CV\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkOpenCV__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+Open\+CV\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkOpenCV__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_aa968dedcb1f7da19d46b1537cb21b2f6}{$\sim$\+Network\+Open\+CV}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_abe548296057d9ef38122343505e45f5c}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻参数，用户在运行时不应更改 \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a61a283e643a8a22e0cf5e743da59d1f4}{input\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all input tensors. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a32dd046edba29972d0d8c4b82ea7d02c}{output\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all output tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a80147b1b468931c226f85c959c522805}{load}} () override
+\begin{DoxyCompactList}\small\item\em Load from disk. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a11dbdabb2b67c48da768be109d65fb1a}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info) override
+\begin{DoxyCompactList}\small\item\em Process input blobs and obtain output blobs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_aa968dedcb1f7da19d46b1537cb21b2f6}\label{classjevois_1_1dnn_1_1NetworkOpenCV_aa968dedcb1f7da19d46b1537cb21b2f6}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!````~NetworkOpenCV@{$\sim$NetworkOpenCV}}
+\index{````~NetworkOpenCV@{$\sim$NetworkOpenCV}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{$\sim$NetworkOpenCV()}{~NetworkOpenCV()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Open\+C\+V\+::$\sim$\+Network\+Open\+CV (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 22 of file Network\+Open\+C\+V.\+C.
+
+
+
+References jevois\+::dnn\+::\+Network\+::wait\+Before\+Destroy().
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_a11dbdabb2b67c48da768be109d65fb1a}\label{classjevois_1_1dnn_1_1NetworkOpenCV_a11dbdabb2b67c48da768be109d65fb1a}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+Open\+C\+V\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Process input blobs and obtain output blobs. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 94 of file Network\+Open\+C\+V.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and jevois\+::num2str().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_abe548296057d9ef38122343505e45f5c}\label{classjevois_1_1dnn_1_1NetworkOpenCV_abe548296057d9ef38122343505e45f5c}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Open\+C\+V\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻参数，用户在运行时不应更改 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 26 of file Network\+Open\+C\+V.\+C.
+
+
+
+References jevois\+::dnn\+::\+Network\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_a61a283e643a8a22e0cf5e743da59d1f4}\label{classjevois_1_1dnn_1_1NetworkOpenCV_a61a283e643a8a22e0cf5e743da59d1f4}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!inputShapes@{inputShapes}}
+\index{inputShapes@{inputShapes}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{inputShapes()}{inputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Open\+C\+V\+::input\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all input tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 39 of file Network\+Open\+C\+V.\+C.
+
+
+
+References jevois\+::dnn\+::parse\+Tensor\+Specs().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_a80147b1b468931c226f85c959c522805}\label{classjevois_1_1dnn_1_1NetworkOpenCV_a80147b1b468931c226f85c959c522805}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!load@{load}}
+\index{load@{load}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Open\+C\+V\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Load from disk. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 51 of file Network\+Open\+C\+V.\+C.
+
+
+
+References jevois\+::absolute\+Path(), and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkOpenCV_a32dd046edba29972d0d8c4b82ea7d02c}\label{classjevois_1_1dnn_1_1NetworkOpenCV_a32dd046edba29972d0d8c4b82ea7d02c}} 
+\index{jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}!outputShapes@{outputShapes}}
+\index{outputShapes@{outputShapes}!jevois::dnn::NetworkOpenCV@{jevois::dnn::NetworkOpenCV}}
+\doxyparagraph{\texorpdfstring{outputShapes()}{outputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Open\+C\+V\+::output\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all output tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 45 of file Network\+Open\+C\+V.\+C.
+
+
+
+References jevois\+::dnn\+::parse\+Tensor\+Specs().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkOpenCV_8H}{Network\+Open\+C\+V.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkOpenCV_8C}{Network\+Open\+C\+V.\+C}}\end{DoxyCompactItemize}

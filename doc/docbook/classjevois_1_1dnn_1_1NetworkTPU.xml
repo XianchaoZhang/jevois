@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1dnn_1_1NetworkTPU">
+<title>jevois::dnn::NetworkTPU Class Reference</title>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/DNN/NetworkTPU.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>围绕 Coral TPU 神经网络的包装器 </para>
+<para>
+Definition at line 31 of file NetworkTPU.H.</para>
+Inheritance diagram for jevois::dnn::NetworkTPU:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkTPU__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::dnn::NetworkTPU:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1dnn_1_1NetworkTPU__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>virtual <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a6679ea14c19e8803dbb1349ac3cff562">~NetworkTPU</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a51e003b0fd31a7ee237458685ac7416a">freeze</link> (bool doit) override</para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a93688abe7c4824e4fb4d1b95a6787a48">inputShapes</link> () override</para>
+
+<para>Get shapes of all input tensors. </para>
+</listitem>
+            <listitem><para>virtual std::vector&lt; vsi_nn_tensor_attr_t &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a71ebc1fe4a9f247a039616ed077c0832">outputShapes</link> () override</para>
+
+<para>Get shapes of all output tensors. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Protected Member Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a4cd29b0560e0f9a094b902d5bc40f694">load</link> () override</para>
+
+<para>Load from disk. </para>
+</listitem>
+            <listitem><para>std::vector&lt; cv::Mat &gt; <link linkend="_classjevois_1_1dnn_1_1NetworkTPU_1a98da6191103197084c93a069e54a29e0">doprocess</link> (std::vector&lt; cv::Mat &gt; const &amp;blobs, std::vector&lt; std::string &gt; &amp;info) override</para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a6679ea14c19e8803dbb1349ac3cff562"/>    <section>
+    <title>~NetworkTPU()</title>
+<indexterm><primary>~NetworkTPU</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>~NetworkTPU</secondary></indexterm>
+<para><computeroutput>jevois::dnn::NetworkTPU::~NetworkTPU ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 40 of file NetworkTPU.C.</para>
+<para>
+References jevois::dnn::Network::waitBeforeDestroy().</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a98da6191103197084c93a069e54a29e0"/>    <section>
+    <title>doprocess()</title>
+<indexterm><primary>doprocess</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>doprocess</secondary></indexterm>
+<para><computeroutput>std::vector&lt; cv::Mat &gt; jevois::dnn::NetworkTPU::doprocess (std::vector&lt; cv::Mat &gt; const &amp; blobs, std::vector&lt; std::string &gt; &amp; info)<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Process input blobs and obtain output blobs. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a0715f8cd89af48245f39ed1bd00c0849">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 167 of file NetworkTPU.C.</para>
+<para>
+References jevois::cvBytesPerPix(), jevois::getFileString(), LFATAL, o, jevois::sformat(), jevois::dnn::shapestr(), jevois::dnn::tf2cv(), and jevois::to_string().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a51e003b0fd31a7ee237458685ac7416a"/>    <section>
+    <title>freeze()</title>
+<indexterm><primary>freeze</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>freeze</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkTPU::freeze (bool doit)<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>冻结/解冻参数，用户在运行时不应更改 </para>
+</para>
+<para>
+Reimplemented from <link linkend="_classjevois_1_1dnn_1_1Network_1af49aabe3e1317946de848f356970fa8d">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 44 of file NetworkTPU.C.</para>
+<para>
+References jevois::dnn::Network::freeze().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a93688abe7c4824e4fb4d1b95a6787a48"/>    <section>
+    <title>inputShapes()</title>
+<indexterm><primary>inputShapes</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>inputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkTPU::inputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all input tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a5c4daabb6b084f87ce330f98159ebaa7">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 56 of file NetworkTPU.C.</para>
+<para>
+References jevois::dnn::attrstr(), LFATAL, LINFO, jevois::dnn::parseTensorSpecs(), and jevois::dnn::tensorattr().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a4cd29b0560e0f9a094b902d5bc40f694"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::dnn::NetworkTPU::load ( )<computeroutput>[override]</computeroutput>, <computeroutput>[protected]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Load from disk. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a2aff2f5a849ddd5ce91ae454bf9375ec">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 102 of file NetworkTPU.C.</para>
+<para>
+References jevois::absolutePath(), LFATAL, LINFO, and jevois::dnn::shapestr().</para>
+    </section><anchor xml:id="_classjevois_1_1dnn_1_1NetworkTPU_1a71ebc1fe4a9f247a039616ed077c0832"/>    <section>
+    <title>outputShapes()</title>
+<indexterm><primary>outputShapes</primary><secondary>jevois::dnn::NetworkTPU</secondary></indexterm>
+<indexterm><primary>jevois::dnn::NetworkTPU</primary><secondary>outputShapes</secondary></indexterm>
+<para><computeroutput>std::vector&lt; vsi_nn_tensor_attr_t &gt; jevois::dnn::NetworkTPU::outputShapes ( )<computeroutput>[override]</computeroutput>, <computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Get shapes of all output tensors. </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1dnn_1_1Network_1a98a8d50e49ba4d9f827ff9b5d4c8b68f">jevois::dnn::Network</link>.</para>
+<para>
+Definition at line 79 of file NetworkTPU.C.</para>
+<para>
+References jevois::dnn::attrstr(), LFATAL, LINFO, jevois::dnn::parseTensorSpecs(), and jevois::dnn::tensorattr().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/DNN/<link linkend="_NetworkTPU_8H">NetworkTPU.H</link>src/jevois/DNN/<link linkend="_NetworkTPU_8C">NetworkTPU.C</link></section>
+</section>

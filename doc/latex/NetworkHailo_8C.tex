@@ -1,0 +1,38 @@
+\hypertarget{NetworkHailo_8C}{}\doxysubsection{src/jevois/\+D\+N\+N/\+Network\+Hailo.C File Reference}
+\label{NetworkHailo_8C}\index{src/jevois/DNN/NetworkHailo.C@{src/jevois/DNN/NetworkHailo.C}}
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+Hailo.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$hailo/hailort.\+h$>$}\newline
+{\ttfamily \#include $<$hailo/hailort.\+hpp$>$}\newline
+Include dependency graph for Network\+Hailo.\+C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{NetworkHailo_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{NetworkHailo_8C_ace4e444f6c83fdaf3b940cabdbcd382e}{H\+A\+I\+L\+O\+\_\+\+C\+H\+E\+CK}}(obj,  msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{NetworkHailo_8C_ace4e444f6c83fdaf3b940cabdbcd382e}\label{NetworkHailo_8C_ace4e444f6c83fdaf3b940cabdbcd382e}} 
+\index{NetworkHailo.C@{NetworkHailo.C}!HAILO\_CHECK@{HAILO\_CHECK}}
+\index{HAILO\_CHECK@{HAILO\_CHECK}!NetworkHailo.C@{NetworkHailo.C}}
+\doxyparagraph{\texorpdfstring{HAILO\_CHECK}{HAILO\_CHECK}}
+{\footnotesize\ttfamily \#define H\+A\+I\+L\+O\+\_\+\+C\+H\+E\+CK(\begin{DoxyParamCaption}\item[{}]{obj,  }\item[{}]{msg }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{                                                    \textcolor{keywordflow}{do} \{ \textcolor{keywordflow}{if} (!obj) \mbox{\hyperlink{group__debugging_ga07fea0c726b5acfbb6c0d5483dd15d0d}{LFATAL}}(msg << \textcolor{stringliteral}{": "} << obj.status() << \textcolor{stringliteral}{" ["} << \(\backslash\)}
+\DoxyCodeLine{                                                    hailo\_get\_status\_message(obj.status()) << \textcolor{charliteral}{']'}); \} \textcolor{keywordflow}{while} (0)}
+
+\end{DoxyCode}
+
+
+Definition at line 31 of file Network\+Hailo.\+C.
+

@@ -1,68 +1,51 @@
-/*! \page History Historical background behind the JeVois framework
+/*! \page History JeVois 框架背后的历史背景
 \tableofcontents
 
 
 
-\section invt The iLab Neuromorphic Vision C++ Toolkit
+\section invt iLab 神经形态（Neuromorphic）视觉 C++ 工具包
 
-Back in 1995, we started what has become the iLab Neuromorphic Vision C++ Toolkit. The toolkit allows one to develop
-neuroscience-inspired computer vision models. The core elements provided by this toolkit are:
+早在 1995 年，我们就推出 iLab Neuromorphic Vision C++ 工具包。该工具包可以开发受神经科学启发的计​​算机视觉模型。该工具包提供的核心元素是：
 
-- Low-level helper classes, including Point2D, Rectangle, PixRGB<T>, Range, Timer, XWindow, etc.
+- 低级帮助类，包括 Point2D, Rectangle, PixRGB<T>, Range, Timer, XWindow, etc.
 
-- Template Image<T> and ImageSet<T> classes with hundreds of image processing functions and copy-on-write / ref-counting
-  semantics.
+- Image<T> and ImageSet<T> 模板类，有数百个图像处理函数和 copy-on-write / ref-counting 语义的类。
 
-- Image I/O functions for read/write to image files or video streams (various formats).
+- 用于读/写图像文件或视频流（各种格式）的图像 I/O 函数。
 
-- Low-level neural network simulation classes, such as LeakyInterator and LeakyIntFire neurons and backprop perceptron
-  classes.
+- 低级神经网络模拟类，例如 LeakyInterator 和 LeakyIntFire 神经元以及反向传播感知器类。
 
-- High-level neuromorphic classes, including a hierarchy of low-level visual feature Channels for the computation of
-  neural maps responding to color, intensity, orientation, motion, corners, T-junctions, etc; a Winner-Take-All maximum
-  selector network; a Saliency Map network to represent conspicuous locations in a visual scene; a Visual Buffer
-  short-term visual memory endowed with internal competitive dynamics; a Visual Cortex class that orchestrates the
-  computations of a variable collection of feature channels; a Brain class that holds a Visual Cortex, Saccade
-  Controller for the simulation of eye/head movements, Task-Relevance Map to memorize locations of interest in a scene,
-  Shape Estimator to roughly segment objects in a scene, a set of SIFT classes that implement David Lowe's
-  Scale-Invariant Feature Transform model for object/scene recognition, etc.
+- 高级神经形态类，包括低级视觉特征的层次结构用于计算响应 color, intensity, orientation, motion, corners, T-junctions 等的神经
+  图的通道；赢者通吃的最大选择器网络；Saliency Map 网络表示视觉场景中的显着位置；具有内部竞争动力的 Visual Buffer 短期视觉记忆；
+  一个 Visual Cortex 类，用于协调特征通道变量集合的计算；包含视觉皮层的 Brain 类、用于模拟眼睛/头部运动的扫视控制器（Saccade Controller）、
+  用于记住场景中感兴趣位置的任务相关性图（Task-Relevance Map）、用于粗略分割场景中的目标的形状估计器（Shape Estimator）、一组实现的 SIFT 
+  类 David Lowe 的用于物体/场景识别等的尺度不变特征变换（Scale-Invariant Feature Transform）模型。
 
-- Neuromorphic models of visual attention (to find locations in an image or video stream that are likely to attract the
-  eyes of a human observer or to surprise the observer), contour integration (to simulate how elongated contours are
-  strong attractors of attention in human observers), object recognition (using various strategies including matching
-  feature vectors, backprop perceptrons, hierarchical feedforward feature extraction models, etc), intelligent
-  knowledge-based vidual agents that perform high-level scene understanding, rapid computation of the ``gist'' or coarse
-  semantic category of an entire scene (e.g., indoors vs. outdoors), and many more!
+- 视觉注意力的神经形态模型（寻找图像或视频流中可能吸引人类观察者眼睛或让观察者感到 surprise 的位置）、轮廓整合（模拟细长的轮廓如何
+  强烈吸引人类观察者的注意力） 、目标识别（使用各种策略，包括匹配特征向量、反向传播感知器、分层前馈特征提取模型等）、执行高级场景理解
+  的基于知识的智能视觉代理、 ``gist'' 或粗略语义的快速计算整个场景的类别（例如，室内与室外），等等！
 
-- Hardware interfacing, to Video4Linux and IEEE-1394 (FireWire) cameras, audio/dsp, serial ports, serial servo
-  controllers, GPS units, etc. This only works under Linux.
+- 与 Video4Linux 和 IEEE-1394 (FireWire) camera、audio/DSP、串行端口、串行伺服控制器、GPS 单元等的硬件接口。这只适用于 Linux。
 
-- Parallel processing classes for the simulation of complex models over Beowulf clusters of computers.
+- 在 Beowulf 计算机集群上模拟复杂模型的并行处理类。
 
-- Neuromorphic modeling environment which facilitates the run-time selection of plug-in model components, the management
-  of persistent model tuning parameters, and the generation/parsing of command-line options for various models based on
-  the collection of model components which they implement.
-
-This toolkit has been used by thousands of major universities, research labs, and corporations worldwide. It is fully
-open-source (GPL). The toolkit is available at http://iLab.usc.edu/toolkit/
+- 神经形态建模环境，有助于插件模型组件的运行时选择、持久模型（persistent model）调整参数的管理，以及基于其实现的模型组件集合
+  生成/解析各种模型的命令行选项。
+  
+该工具包已被全球数千所主要大学、研究实验室和公司使用。它是完全开源的（GPL）。该工具包可从 http://iLab.usc.edu/toolkit/ 获取。
 
 \image html cnca.gif
 \image html saliency-maemo.png
 
 \section nrt The Neuromorphic Robotics Toolkit
 
-In 2010, we started the Neuromorphic Robotics Toolkit. The main goal was to facilitate the deployment of more complex
-models that would run on collections of computers with mixed architectures (different CPU models, various CPU+GPU
-combinations, etc). NRT provides a Blackboard-based message passing architecture that allows one to easily transfer any
-C++ data structure from one computer to another. When running multiple threads on a single machine, those transfers come
-at negligible cost (zero-copy of the data), and when they are between physically distinct machines on a network, the
-framework handles the serialization (or marshalling) of the data transparently (it makes no difference to a user whether
-a particular model runs on one machine or on a network of machines, except for execution speed).
+2010 年，我们启动了 Neuromorphic Robotics Toolkit。主要目标是促进更复杂模型的部署，这些模型将在混合架构（不同 CPU 模型、各种 CPU+GPU 
+组合等）的计算机集合上运行。 NRT 提供了一种基于 Blackboard 的消息传递架构，允许人们轻松地将任何 C++ 数据结构从一台计算机传输到另一台
+计算机。当在一台机器上运行多个线程时，这些传输的成本可以忽略不计（数据的零拷贝），并且当它们位于网络上物理上不同的机器之间时，框架透明
+地处理数据的序列化（或编组 marshalling）（对于用户来说，特定模型无论是在一台机器上运行还是在机器网络上运行都没有区别，除了执行速度之外）。
 
-At its heart, the Neuromorphic Robotics Toolkit is a C++ library and a set of tools to help you write high-performance
-modular software. NRT provides a framework in which developers can design lightweight, interchangeable processing
-modules which communicate by passing messages. NRT also provides libraries for performing various robotics related
-processing such as Image Processing, PointCloud Processing, etc.
+神经形态机器人工具包的核心是一个 C++ 库和一组工具，可帮助您编写高性能模块化软件。 NRT 提供了一个框架，开发人员可以在其中设计轻量级、
+可互换的处理模块，这些模块通过传递消息进行通信。 NRT 还提供用于执行各种机器人相关处理的库，例如图像处理、点云处理等。
 
 \image html nrt1.png
 
@@ -70,102 +53,74 @@ processing such as Image Processing, PointCloud Processing, etc.
 
 NRT is a C++-14 framework.
 
-Modular programming is a technique in which a software system is composed of self-contained, interchangeable components
-with defined interfaces. Because each module is self-contained, it can be tested independently from the rest of the
-system. Furthermore, having well-defined interfaces between modules allows researchers to effectively communicate their
-components' requirements and capabilities to the rest of the team.
+模块化编程是一种软件系统，由自包含、可互换组件的接口定义组成的技术。由于每个模块都是自包含的，因此可以独立于系统的其余部分进行测试。
+此外，模块之间有明确定义的接口使研究人员能够有效地将其组件的需求和功能传达给团队的其他成员。
 
-After reviewing several existing modular programming frameworks, we determined the following set of requirements:
+在审查了几个现有的模块化编程框架后，我们确定了以下一组需求：
 
--# Transmission of arbitrary C++ data types between modules. You are not limited to a small list of simple types like
-   in many other message-passing frameworks, which often force you to convert your native complex data structures into
-   their simple types.
--# Zero-copy transmission of messages when modules are instantiated on the same machine.
--# Transparent serialization (marshalling) of messages over the network when modules are instantiated on different
-machines, with no difference to a user or a programmer whether a message is transmitted locally or across a network
-(apart, of course, from transmission time).
--# Statically (compile-time) defined module interfaces to avoid the sprawling of error-prone, string-based naming of
-module ports or publish/subscribe topics that plague most existing message passing frameworks.
--# Enhanced ability to re-use modules by allowing (1) generic messages concepts and generic modules that can
-manipulate any message type (e.g., message queues) and (2) splittable messages such that complex composite messages
-can be broken down into elementary parts, which may then be processed independently before being re-assembled.
+-# 在模块之间传输任意 C++ 数据类型。不像许多其他消息传递框架那样局限于一小部分简单类型，这通常会被迫将本机复杂数据结构转换为其简单类型。
+-# 当模块在同一台机器上实例化时，消息的零拷贝传输。
+-# 当模块在不同的机器上实例化时，消息在网络上的透明序列化（编组 marshalling），对于用户或程序员来说，无论消息是在本地还是通过网络传输
+（当然，除了传输时间），都没有区别。
+-# 静态（编译时）定义的模块接口，以避免容易出错、基于字符串的模块端口命名或发布/订阅主题的蔓延，这些主题困扰着大多数现有的消息传递框架。
+-# 通过允许 (1) 可以操纵任何消息类型（例如消息队列）的通用消息概念和通用模块和 (2) 可拆分消息，从而增强重用模块的能力，以便可以将复杂的
+复合消息分解为基本部分，然后可以在重新组装之前进行独立处理。
 
-The Neuromorphic Robotics Toolkit is our solution to this list of requirements. Beyond these, it also provides a
-graphical tool for managing and creating networks of connected modules, and a suite of administration tools for
-starting, configuring, and stopping systems.
+神经形态机器人工具包是我们满足此要求列表的解决方案。除此之外，它还提供了一个用于管理和创建连接模块网络的图形工具，以及一套用于启动、配置
+和停止系统的管理工具。
 
 \subsection progmodel Programming model of NRT
 
-The core inspiration for NRT is to consider the brain as an agency of concurrent specialized knowledge
-sources, whereby multiple such sources work together towards solving a complex problem. This vision is
-not new, and has been implemented in many early artificial intelligence systems, including VISIONS
-(Hanson & Riseman, 1978), HEARSAY-II (Erman et al., 1980), and Copycat (Hofstadter & Mitchell, 1995).
+NRT 的核心灵感是将大脑视为并行专业知识源的机构，多个此类源共同努力解决复杂问题。这个愿景并不新鲜，并且已经在许多早期的人工智能系统中实现，
+包括 VISIONS (Hanson & Riseman, 1978)、HEARSAY-II (Erman et al., 1980) 和 Copycat (Hofstadter & Mitchell, 1995)。
 
-In this computing paradigm, a common knowledge base, <a href="http://en.wikipedia.org/wiki/Blackboard_system">the
-blackboard</a>, is iteratively updated:
+在这个计算范式中，公共知识库，<a href="http://en.wikipedia.org/wiki/Blackboard_system"> blackboard </a>被迭代更新：
 
-- beginning with a problem definition and prior knowledge;
+- 从问题定义和先验知识开始；
 
-- each knowledge source (i.e., software agent or module) is triggered as its pre-requisites for processing are met
-  by the current contents of the blackboard (i.e., appropriate messages are posted);
+- 每个知识源（即软件代理或模块）在 blackboard 的当前内容满足其处理先决条件（即发送适当的消息）时被触发；
 
-- working in parallel, each specialist knowledge source may update the blackboard with a partial solution,
-  suggestions, or additional information, allowing other knowledge sources to trigger;
+- 并行工作时，每个专业知识源可以用部分解决方案、建议或附加信息更新 blackboard，从而允许触发其他知识源；
 
-- Over time, the specialists hence work together towards a solution.
+- 随着时间的推移，专家们将共同努力寻找解决方案。
 
-Other groups have also explored schema-based and blackboard architectures in robotics (e.g., Arkin, 1989; Brooks,
-1991; Xu & van Brussel, 1997) as well as in cognitive science (e.g., van der Velde & de Kamps, 2006). Here, with NRT
-we developed the necessary tools to bring these kinds of architectures to a new level of user friendliness through the
-use of highly modular, transparently distributed, graphical-oriented programming.
+其他小组也探索了 schema-based and blackboard 架构的机器人技术（例如，Arkin，1989；Brooks，1991；Xu & van Brussel，1997）
+以及认知科学（例如，van der Velde & de Kamps，2006）。在这里，我们通过 NRT 开发了必要的工具，通过使用高度模块化、透明分布、
+面向图形的编程，将这些类型的架构提升到用户友好性的新水平。
 
-Novice users can assemble complex systems running on collections of computers by simply dragging and connecting
-software modules (the blackboard agents), where the modules interact via a distributed Blackboard Federation system
-behind the scenes (connections represent posting/subscribing of/to messages). Similar graphical programming metaphors
-have proven particularly effective in previous systems, including Khoros/Cantata, AVS (Advanced Visual Systems Inc.),
-Lego Mindstorms, Flowstone, and many others. While these previous frameworks have often been limited to single-CPU
-systems and simpler point-to-point information flow between modules, we have used our blackboard-based NRT framework
-on machines ranging from clusters with 288 CPU cores + 2048 GPU cores, to a single laptop, or even a 10-Watt netbook
-(Intel Atom).
+新手用户可以通过简单地拖动和连接软件模块（blackboard 代理）来组装在计算机集合上运行的复杂系统，其中模块通过幕后的分布式
+ Blackboard Federation 系统进行交互（连接代表消息的发布/订阅）。类似的图形编程隐喻已被证明在以前的系统中特别有效，包括 
+ Khoros/Cantata、AVS（高级视觉系统公司）、Lego Mindstorms、Flowstone 等。虽然这些以前的框架通常仅限于单 CPU 系统和模块之间更
+简单的点对点信息流，但我们已经在从 288 个 CPU 核心 + 2048 个 GPU 核心的集群到一台笔记本电脑，甚至一台 10 瓦上网本（Intel Atom）。
 
-A number of new features allow NRT to eliminate some of the major caveats of similar previous systems, described
-throughout this documentation.
+许多新功能允许 NRT 消除以前类似系统的一些主要注意事项，如本文档中所述。
 
-Initial development of NRT started under the DARPA Neovision2 project. NRT was developed to allow us to build a
-neuro-inspired machine vision system that can attend to, track, and recognize up to 10 object categories (cars,
-trucks, boats, people, etc) in high-definition aerial video.
+NRT 的初步开发是在 DARPA Neovision2 项目下开始的。 NRT 的开发是为了让我们能够构建一个受神经启发的机器视觉系统，该系统可以处理、
+跟踪和识别高清航拍视频中的多达 10 个对象类别 (cars, trucks, boats, people, etc) 。
 
-NRT is still mainly for internal development in Prof Itti's lab at the University of Southern California. But it is
-open-source (GPL license) and will be released for public use once all features are deemed sufficiently robust. In the
-meantime, interested readers may want to check out the documentation at http://nrtkit.org
+NRT 仍主要用于南加州大学 Itti 教授实验室的内部开发。但它是开源的（GPL 许可证），一旦所有功能都被认为足够强大，就会发布供公众使用。
+同时，感兴趣的读者可能想查看 http://nrtkit.org 上的文档
 
-\image html neo2-diagram.png "Above: Flowchart of how different visual processes may give rise to visual scene understanding."
+\image html neo2-diagram.png "上图: 不同视觉过程如何产生视觉场景理解的流程图。"
 
-\image html neo2-net.png "Above: Corresponding implementation as a large NRT system."
+\image html neo2-net.png "上图: 大型 NRT 系统的相应实现。"
 
-\image html neo2-demo.png "Above: Sample system output. Cars are marked in blue, people in yellow, cyclists in pink."
+\image html neo2-demo.png "上图: 系统输出示例。汽车用蓝色标记，人用黄色标记，骑自行车的人用粉红色标记。"
 
 \section jevois The JeVois Smart Embedded Machine Vision Toolkit
 
-The JeVois framework benefits from our previous research with INVT and NRT. It is mainly geared towards embedded systems
-with a single processor, and towards stream-based processing (one image in form the camera, one image out to USB). Many
-of the innovations which we have developed for INVT and NRT have been ported to JeVois, including chiefly the ability to
-construct complex machine vision pipelines using re-usable components which have runtime-tunable parameters, and
-providing a framework to ease the development of new components and their parameters.
+JeVois 框架受益于我们之前对 INVT 和 NRT 的研究。它主要面向单处理器的嵌入式系统，以及基于流的处理（一张图像来自相机，一张图像输出至 USB）。
+我们为 INVT 和 NRT 开发的许多创新已移植到 JeVois，主要包括使用运行时可调参数的可重复使用组件构建复杂机器视觉管道的能力，以及提供一个框架
+来简化组件及其参数的开发。
 
-JeVois is a C++-17 framework.
+JeVois 是一个 C++-17 框架。
 
-Some features of our previous frameworks have been dropped but could be quite easily added, including a powerful Image
-class template (JeVois only provides a minimal RawImage class, and conversions to OpenCV's image class), blackboard
-architecture, and message passing including serialization.
+我们之前框架的一些功能已删除，但可以很容易地添加，包括强大的 Image 类模板（JeVois 只提供最小的 RawImage 类，以及到 OpenCV 图像类的转换）、
+blackboard 架构和包括序列化在内的消息传递。
 
-New features specific to JeVois include kernel-level USB Gadget driver, kernel-level full-featured camera chip driver,
-user interface classes, and a new Engine component to orchestrate the flow of data from camera to processing to output
-over a USB link.
+JeVois 特有的新功能包括内核级 USB Gadget 驱动程序、内核级全功能相机芯片驱动程序、用户界面类以及新的引擎组件，用于协调从相机到处理再到通过 USB 链路输出的数据流。
 
-These features are presented in more details throughout this documentation. JeVois is open-source (GPL
-license). Development of JeVois was in part made possible through a research and outreach grant from the National
-Science Foundation, Expeditions in Computing program.
+本文档中更详细地介绍了这些功能。 JeVois 是开源的（GPL 许可证）。 JeVois 的开发部分得益于美国国家科学基金会计算探险项目的研究和推广资助。
 
 
 */

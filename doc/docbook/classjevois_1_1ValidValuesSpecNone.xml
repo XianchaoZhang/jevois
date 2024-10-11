@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1ValidValuesSpecNone">
+<title>jevois::ValidValuesSpecNone&lt; T &gt; Class Template Reference</title>
+<indexterm><primary>jevois::ValidValuesSpecNone&lt; T &gt;</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Component/ValidValuesSpec.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+<simplesect><title>template&lt;typename T&gt;
+class jevois::ValidValuesSpecNone&lt; T &gt;</title></simplesect>
+
+
+<para>Open/None 有效值规范，T 可以采用的任何值都有效 </para>
+<para>
+Definition at line 65 of file ValidValuesSpec.H.</para>
+Inheritance diagram for jevois::ValidValuesSpecNone&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecNone__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::ValidValuesSpecNone&lt; T &gt;:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1ValidValuesSpecNone__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1ValidValuesSpecNone_1a4549421159ee0c8f2d3721db6a707e83">ValidValuesSpecNone</link> ()</para>
+
+<para>构造时没有规范，T 可以采用的任何值 </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1ValidValuesSpecNone_1a3465a91905e0b4e1dcb11215b53f353d">~ValidValuesSpecNone</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecNone_1af4b999b1a9b817e3a6b5ef8ecbcfc2fc">checkValueValidity</link> (T const &amp;val) const</para>
+
+<para>检查提议的值是否有效，这里总是返回 true </para>
+</listitem>
+            <listitem><para>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecNone_1ad1da5d6bc713b7b87842561310fb80b1">str</link> () const</para>
+
+<para>转换为可读字符串 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecNone_1a4549421159ee0c8f2d3721db6a707e83"/>    <section>
+    <title>ValidValuesSpecNone()</title>
+<indexterm><primary>ValidValuesSpecNone</primary><secondary>jevois::ValidValuesSpecNone&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecNone&lt; T &gt;</primary><secondary>ValidValuesSpecNone</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput><link linkend="_classjevois_1_1ValidValuesSpecNone">jevois::ValidValuesSpecNone</link>&lt; T &gt;::<link linkend="_classjevois_1_1ValidValuesSpecNone">ValidValuesSpecNone</link> ( )<computeroutput>[explicit]</computeroutput></computeroutput></para><para>
+
+<para>构造时没有规范，T 可以采用的任何值 </para>
+</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecNone_1a3465a91905e0b4e1dcb11215b53f353d"/>    <section>
+    <title>~ValidValuesSpecNone()</title>
+<indexterm><primary>~ValidValuesSpecNone</primary><secondary>jevois::ValidValuesSpecNone&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecNone&lt; T &gt;</primary><secondary>~ValidValuesSpecNone</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual <link linkend="_classjevois_1_1ValidValuesSpecNone">jevois::ValidValuesSpecNone</link>&lt; T &gt;::~<link linkend="_classjevois_1_1ValidValuesSpecNone">ValidValuesSpecNone</link> ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1ValidValuesSpecNone_1af4b999b1a9b817e3a6b5ef8ecbcfc2fc"/>    <section>
+    <title>checkValueValidity()</title>
+<indexterm><primary>checkValueValidity</primary><secondary>jevois::ValidValuesSpecNone&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecNone&lt; T &gt;</primary><secondary>checkValueValidity</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual bool <link linkend="_classjevois_1_1ValidValuesSpecNone">jevois::ValidValuesSpecNone</link>&lt; T &gt;::checkValueValidity (T const &amp; val) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>检查提议的值是否有效，这里总是返回 true </para>
+</para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac1198c7ddd9c246cc9f6e68b0c20b4f9">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+    </section><anchor xml:id="_classjevois_1_1ValidValuesSpecNone_1ad1da5d6bc713b7b87842561310fb80b1"/>    <section>
+    <title>str()</title>
+<indexterm><primary>str</primary><secondary>jevois::ValidValuesSpecNone&lt; T &gt;</secondary></indexterm>
+<indexterm><primary>jevois::ValidValuesSpecNone&lt; T &gt;</primary><secondary>str</secondary></indexterm>
+<computeroutput>template&lt;typename T &gt; </computeroutput><para><computeroutput>virtual const std::string <link linkend="_classjevois_1_1ValidValuesSpecNone">jevois::ValidValuesSpecNone</link>&lt; T &gt;::str ( ) const<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>转换为可读字符串 </para>
+</para>
+
+<para>返回 None:[] </para>
+<para>
+Implements <link linkend="_classjevois_1_1ValidValuesSpecBase_1ac354706e1ae5638204584d660b0b6f47">jevois::ValidValuesSpecBase&lt; T &gt;</link>.</para>
+</section>
+<para>
+The documentation for this class was generated from the following file:</para>
+include/jevois/Component/<link linkend="_ValidValuesSpec_8H">ValidValuesSpec.H</link></section>
+</section>

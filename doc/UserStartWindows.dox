@@ -1,58 +1,45 @@
-/*! \page UserStartWindows JeVois-A33: Getting started with Windows host computer
+/*! \page UserStartWindows JeVois-A33：开始使用 Windows 主机 
 \tableofcontents
 
-The easiest to get started is to use \ref JeVoisInventor
+最简单的入门方法是使用 \ref JeVoisInventor
 
-Below are alternative approaches.
+以下是替代方法。
 
-The JeVois smart camera is used like a regular USB camera. To get started with a Windows host:
+JeVois 智能相机的使用方式与普通 USB 相机相同。要开始使用 Windows 主机：
 
-<ul>
-<li>Download a disk image from http://jevois.org and flash it to a MicroSD card.
+<ul> <li>从 http://jevois.org 下载磁盘映像并将其刷入 MicroSD 卡。
 
-<li>Insert MicroSD card into JeVois smart camera, with the MicroSD contacts pointing up as shown below.
+<li>将 MicroSD 卡插入 JeVois 智能相机，MicroSD 触点朝上，如下所示。
 
 \jvimg{sd-insert.png, 40%}
 
 \jvimg{microsd-fully-inserted.jpg, 60%}
 
-<li>Connect camera to a host computer. The smart camera requires up to 3.5 Watts of power, which is above the limit of
-what a single USB 2.0 port is designed to supply, but is within the limits of a single USB 3.0 port. It is important to
-use a high-quality USB-to-miniUSB cable that can carry that full power without loss. Look for a cable with 24awg power
-wires. It is recommended that you use a USB 3.0 port on your host computer, as those provide more power. If that is not
-available, you can use a USB Y-cable to connect to two USB 2.0 ports on your host computer, or to one USB 2.0 port and
-one external USB power supply (e.g., phone charger). Make sure that you do not use a USB hub, unless that hub has a
-strong external power supply (transformer, wall adapter).
+<li>将相机连接到主机。智能相机需要高达 3.5 瓦的功率，这超出了单个 USB 2.0 端口的设计供电限制，但在单个 USB 3.0 端口的限制范围内。使用能够无损传输全部功率的高质量 USB-miniUSB 电缆非常重要。寻找带有 24awg 电源线的电缆。建议您在主机上使用 USB 3.0 端口，因为它们可以提供更多功率。如果没有，您可以使用 USB Y 型电缆连接到主机上的两个 USB 2.0 端口，或者连接到一个 USB 2.0 端口和一个外部 USB 电源（例如，手机充电器）。请确保不要使用 USB 集线器，除非该集线器具有强大的外部电源（变压器、壁式适配器）。
 
-<li>Observe the LED on the smart camera next to the USB connector:
-  - Green: Power is on and is strong enough.
-  - After about 3 seconds: Flash orange: The camera sensor chip has been detected and initialized.
-  - After about 5 seconds: Solid orange: The smart camera is ready for use.
-  - Wait a few more seconds for your host computer to detect the camera and prepare itself for video capture.
+<li>观察 USB 连接器旁边的智能相机上的 LED：
+- 绿色：电源已打开且足够强。
+- 约 3 秒后：橙色闪烁：相机传感器芯片已被检测到并初始化。
+- 约 5 秒后：橙色常亮：智能相机已准备就绪。
+- 再等待几秒钟，让主机检测到相机并准备好进行视频捕获。
 
-<li>Start a video capture software. You may want to try VLC, skype, etc. Here we will use \b AMCap.
+<li>启动视频捕获软件。您可能想尝试 VLC、Skype 等。这里我们将使用 \b AMCap。
 
-- Download and install the AMCap software. You can get it for free at http://noeld.com/updates.asp
+- 下载并安装 AMCap 软件。您可以在 http://noeld.com/updates.asp 免费获取。
 
-- Start the AMCap software. Under "Devices" make sure you select your JeVois smart camera (if you have several cameras,
-  for example also a built-in webcam in your laptop computer). Here for example we run the ArUco demo on JeVois and view
-  the results on a host PC using AMCap:
+- 启动 AMCap 软件。在“设备”下，确保选择 JeVois 智能相机（如果您有多个相机，例如笔记本电脑中还有一个内置网络摄像头）。例如，我们在 JeVois 上运行 ArUco 演示，并使用 AMCap 在主机 PC 上查看结果：
 
 \image html amcap-aruco.png
 
-- Selection of different machine vision algorithms is achieved by selecting different video resolutions in your video
-  capture software. To change video resolutions, select "Options", "Video Device", "Capture Format" as shown below:
+- 通过在视频捕获软件中选择不同的视频分辨率来选择不同的机器视觉算法。要更改视频分辨率，请选择“选项”、“视频设备”、“捕获格式”，如下所示：
 
 \image html amcap-menu.png
 
-- Once you see the Properties dialog, select one of the available "Color Space / Compression" (most machine vision
-  modules output \b YUY2 video), and one "Output Size" resolutions as shown below to launch the corresponding machine
-  vision algorithm on your JeVois camera:
+- 看到“属性”对话框后，选择可用的“颜色空间/压缩”之一（大多数机器视觉模块输出 \b YUY2 视频）和一个“输出尺寸”分辨率（如下所示），以在 JeVois 相机上启动相应的机器视觉算法：
 
 \image html amcap-setres.png
 
-- To Access the camera's controls such as brightness, contrast, etc can be done by selecting "Options", "Video Device",
-  "Properties", as shown below:
+- 要访问相机的控制（如亮度、对比度等），可以通过选择“选项”、“视频设备”、“属性”来完成，如下所示：
 
 \image html amcap-properties.png
 
@@ -60,97 +47,78 @@ strong external power supply (transformer, wall adapter).
 
 
 
-Note that on Windows and for some video software like VLC, the latency (delay or lag between capture and display) is
-horrible with many video capture apps. This is not a limitation of JeVois. When used with a Linux host, there is no lag.
 
-<li>Make sure you quit your camera viewing software before you unplug your JeVois smart camera. Otherwise your host
-computer may become awfully confused trying to use a camera that does not exist anymore.
+请注意，在 Windows 上以及对于 VLC 等某些视频软件，许多视频捕获应用程序的延迟（捕获和显示之间的延迟或滞后）非常严重。这不是 JeVois 的限制。与 Linux 主机一起使用时，不会出现延迟。
 
-<li>No shutdown procedure is needed before powering off your JeVois camera. Just close your video capture software and
-unplug the camera.
+<li>拔下 JeVois 智能相机之前，请确保退出相机查看软件。否则，您的主机可能会在尝试使用不再存在的相机时变得非常困惑。
+
+<li>关闭 JeVois 相机前无需执行关机程序。只需关闭视频捕捉软件并拔下相机电源即可。
 
 </ul>
 
-// ##############################################################################################################
-\section windows10 Special instructions for Windows 10
+// ############################################################################################################# 
+\section windows10 针对 Windows 10 的特殊说明
 
-Some users (but not all) of Windows 10 have reported issues with using JeVois. The camera is correctly detected and
-setup, but one cannot capture video from it.
+部分 Windows 10 用户（但不是全部）报告了使用 JeVois 的问题。摄像头被正确检测和设置，但无法从中捕获视频。
 
-Starting with \jvversion{1.6.0}, we have enabled a workaround which should hopefully solve the problem. It had to
-do with Windows 10 sending illegal requests to JeVois, to which JeVois replied with a USB stall (as it whould in such
-case), but Windows 10 got upset with that.
+从 \jvversion{1.6.0} 开始，我们启用了一种解决方法，希望可以解决这个问题。它与 Windows 10 向 JeVois 发送非法请求有关，JeVois 对此回应为 USB 停顿（在这种情况下应该如此），但 Windows 10 对此感到不满。
 
-Under Windows 10, you should see the following devices when you plug JeVois in and let Windows configure it:
-- a video camera
-- a storage device (empty by default, you need to tell JeVois to export its microSD card to actually see some files there)
-- a serial port which you can use to send commands to JeVois.
+在 Windows 10 下，当您插入 JeVois 并让 Windows 配置它时，您应该会看到以下设备：
+- 摄像机
+- 存储设备（默认情况下为空，您需要告诉 JeVois 导出其 microSD 卡才能实际看到那里的一些文件）
+- 串行端口，您可以使用它向 JeVois 发送命令。
 
 \image html win10-devices.png
 
-If you are using a version of JeVois software older than \jvversion{1.6.0}, the video camera will be named "Video
-Control" instead (it's another bug of Windows; it is using the name of the control unit of the camera instead of the
-manufacturer and product names). This is an indication that you should update to \jvversion{1.6.0} or later.
+如果您使用的 JeVois 软件版本早于 \jvversion{1.6.0}，则摄像机将被命名为“Video Control”（这是 Windows 的另一个错误；它使用摄像机控制单元的名称，而不是制造商和产品名称）。这表明您应该更新到 \jvversion{1.6.0} 或更高版本。
 
-// ##############################################################################################################
-\section obswindows Using Open Broadcaster Studio for Windows
+// ############################################################################################################# 
+\section obswindows 使用适用于 Windows 的 Open Broadcaster Studio
 
-Open Broadcaster Studio is a great free program that allows you to select different video resolutions, as needed by
-JeVois.
+Open Broadcaster Studio 是一款出色的免费程序，允许您根据 JeVois 的需要选择不同的视频分辨率。
 
-- Download OBS Studio from https://obsproject.com
+- 从 https://obsproject.com 下载 OBS Studio
 
-- Install it, during installation, just say that you will not be streaming video.
+- 安装它，在安装过程中，只需说您不会流式传输视频。
 
-- Connect JeVois to your computer and allow it to start up.
+- 将 JeVois 连接到您的计算机并允许其启动。
 
-- Open OBS Studio, towards the bottom left of the screen, click the `+` icon under \b Sources to add a new <b>video
-  capture device</b>.
-  \image html wobs1.png
+- 打开 OBS Studio，在屏幕左下方，单击 \b 来源下的 `+` 图标以添加新的<b>视频捕获设备</b>。\image html wobs1.png
 
-- Create a new source
-  \image html wobs2.png
+- 创建一个新的源 \image html wobs2.png
 
-- When you double-click on that source, a dialog comes up. In there, select:
-  + Device: JeVois-A33 Video Camera (this is the name Windows assigns to JeVois; it may differ on different Windows
-    versions, just pick the device that you know is not your built-in webcam if you have one).
-  + Resolution/FPS type: custom
-  + Resolution: pick any that you want to try out
-  + FPS: Highest FPS
-  \image html wobs4.png
+- 双击该源时，会出现一个对话框。在其中，选择：
++ 设备：JeVois-A33 摄像机（这是 Windows 分配给 JeVois 的名称；在不同的 Windows 版本上可能会有所不同，如果您有内置网络摄像头，只需选择您知道不是内置网络摄像头的设备即可）。
++ 分辨率/FPS 类型：自定义
++ 分辨率：选择您想要尝试的任何分辨率
++ FPS：最高 FPS 
+\image html wobs4.png
 
-- Enjoy! You can drag and resize the video preview for best viewing experience.
+- 尽情享受吧！您可以拖动并调整视频预览的大小，以获得最佳观看体验。
 
 
-Here is \jvversion{1.6.0} happily working with Windows 10:
+以下是 \jvversion{1.6.0} 在 Windows 10 上的顺利运行：
 
 \image html win10-obs.png
 
-// ##############################################################################################################
-\section enablegreywindows Enabling greyscale capture
+// ############################################################################################################# 
+\section enablegreywindows 启用灰度捕获
 
-In addition to being able to output color streaming video, JeVois can, when some machine vision algorithms are enabled,
-also stream greyscale video. This is particularly useful when running machine vision algorithms that produce intended
-for further processing on the host computer. For example, see the [Edge Detection
-Module](/moddoc/EdgeDetection/modinfo.html) or the [Optical Flow Module](/moddoc/OpticalFlow/modinfo.html). Under
-windows, AMCap requires an additional filter to be installed in order to be able to capture greyscale video (in USB
-video specifications, greyscale is called Y800 mode).
+除了能够输出彩色流式视频外，当启用某些机器视觉算法时，JeVois 还可以流式传输灰度视频。这在运行机器视觉算法时特别有用，这些算法会产生要在主机上进一步处理的结果。例如，请参阅 [边缘检测模块](/moddoc/EdgeDetection/modinfo.html) 或 [光流模块](/moddoc/OpticalFlow/modinfo.html)。在 Windows 下，AMCap 需要安装额外的过滤器才能捕获灰度视频（在 USB 视频规范中，灰度称为 Y800 模式）。
 
-The instructions below were [contributed](/qa/index.php?qa=346&qa_1=grey-mode-in-amcap-on-windows-10-causes-error) by
-JeVois user [pelrun](/qa/index.php?qa=user&qa_1=pelrun). Many thanks, pelrun!
+以下说明由 JeVois 用户 [pelrun](/qa/index.php?qa=user&qa_1=pelrun) [贡献](/qa/index.php?qa=346&qa_1=grey-mode-in-amcap-on-windows-10-causes-error)。非常感谢，pelrun！
 
-- Download http://www.gdcl.co.uk/YUVxfm.zip. A mirror copy is [here](/data/YUVxfm.zip).
-- Extract it to <b>c:\\windows\\system32</b>
-- Open a command prompt window with administrator privileges
-- Enter <code>regsvr32 c:\\windows\\system32\\YUVxfm.dll</code> in the command window.
+- 下载 http://www.gdcl.co.uk/YUVxfm.zip。镜像副本位于 [此处](/data/YUVxfm.zip)。
+- 将其解压至 <b>c:\\windows\\system32</b>
+- 以管理员权限打开命令提示符窗口
+- 在命令窗口中输入 <code>regsvr32 c:\\windows\\system32\\YUVxfm.dll</code>。
 
-This will install a directshow filter which supports the Y800 mode and will allow you to use the JeVois machine vision
-modules that output greyscale video.
+这将安装一个支持 Y800 模式的 directshow 过滤器，并允许您使用输出灰度视频的 JeVois 机器视觉模块。
 
-// ##############################################################################################################
-\section troubleshootwindows Troubleshooting
+// ############################################################################################################# 
+\section troubleshootwindows 故障排除
 
-If you are having issues and use Windows 10, make sure you update to \jvversion{1.6.0} or later, as we have
-enabled some workarounds in these later versions to deal with some bugs in Windows 10.
+如果您遇到问题并使用 Windows 10，请确保您更新到 \jvversion{1.6.0} 或更高版本，因为我们在这些更高版本中启用了一些解决方法来处理 Windows 10 中的一些错误。
 
 */
+

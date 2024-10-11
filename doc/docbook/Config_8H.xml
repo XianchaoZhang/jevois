@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Config_8H">
+<title>include/jevois/Config/Config.H File Reference</title>
+<indexterm><primary>include/jevois/Config/Config.H</primary></indexterm>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>   1</para>
+
+<para>Variables set by CMake. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>   20</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9">JEVOIS_VERSION_PATCH</link>   0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a132e28df9d621b55de9228283d33c12e">JEVOIS_VENDOR</link>   &quot;JeVois&quot;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1af958880a9f793ef43804681bcae13bb3">JEVOIS_OPENCV_MAJOR</link>   4</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a1aeb18646421263c9cefa844a09d2db5">JEVOIS_OPENCV_MINOR</link>   8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1aebc2e6a6929f0113ec2e4d6b05c1d9fe">JEVOIS_OPENCV_PATCH</link>   0</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a6e3f1098ce52589777d8462943e64820">JEVOIS_PYTHON_MAJOR</link>   3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a6312326d21459ad24a6ab2ffdc89c266">JEVOIS_PYTHON_MINOR</link>   8</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a6b8ca169c8febd0dfb7b52d10794ba66">JEVOIS_A33</link></para>
+
+<para>Target hardware selection: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1ae46c451d7b624cf6232a195bfec1baed">JEVOIS_PLATFORM_PRO</link></para>
+
+<para>Shortcuts to allow detection of a specific platform instead of testing JEVOIS_PLATFORM and JEVOIS_[A33|PRO|...]. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a3771a7b2b149ecea8542e294b5ae4a48">JEVOIS</link>   &quot;jevois&quot;</para>
+
+<para>Helper string that evaluates to &quot;jevois&quot; or &quot;jevoispro&quot; depending on values of JEVOIS_A33 and JEVOIS_PRO: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1aad8a7e928fbc07781f9a1890ef08778c">JEVOIS_VERSION</link>   ( ((<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>) &lt;&lt; 16) + ((<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>) &lt;&lt; 8) + (<link linkend="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9">JEVOIS_VERSION_PATCH</link>) )</para>
+
+<para>Software version, combined. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(s)   <link linkend="_Config_8H_1a2e30bac9e6fe1870c8d85b1d74418444">JEVOIS_MACRO_STR</link>(s)</para>
+
+<para>Macro to stringify a value. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a2e30bac9e6fe1870c8d85b1d74418444">JEVOIS_MACRO_STR</link>(s)   #s</para>
+
+<para>Macro to stringify a value. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a5b4e916cd4073891cefa5f14efafdba9">JEVOIS_VERSION_STRING</link>   <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>) &quot;.&quot; <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>) &quot;.&quot; <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9">JEVOIS_VERSION_PATCH</link>)</para>
+
+<para>Software version, as string. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link>   &quot;/jevois&quot;</para>
+
+<para>Root path for runtime jevois config files, videomappings.cfg, modules, etc. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a0ccd158cf6aec5f3291d277bfd056298">JEVOIS_MODULE_PATH</link>   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/modules&quot;</para>
+
+<para>Base path for modules. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link>   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/config&quot;</para>
+
+<para>Base path for config files. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link>   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/share&quot;</para>
+
+<para>Base path for shared files (e.g., neural network weights, etc) </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a698371fad542c01cf515e9bedfb66754">JEVOIS_CUSTOM_DNN_PATH</link>   <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> &quot;/dnn/custom&quot;</para>
+
+<para>Directory where custom DNN models are stored: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1adc34ac56d67aa02a152bcffbf38ab0e7">JEVOIS_PYDNN_PATH</link>   <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> &quot;/pydnn&quot;</para>
+
+<para>Directory where python pre/net/post DNN processors are stored: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a0fc6e35e1f36801cacff702d7d2121ef">JEVOIS_CUSTOM_DNN_URL</link>   &quot;https://jevois.usc.edu/mc/d&quot;</para>
+
+<para>URL where custom converted DNN models can be downloaded: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a71b90ca71bf68f8526f0d23e9c4106b6">JEVOIS_ENGINE_CONFIG_FILE</link>   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/videomappings.cfg&quot;</para>
+
+<para>Location of the engine videomappings.cfg definition file. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1ac3526046ce60a164f567df0e04d2b782">JEVOIS_ENGINE_INIT_SCRIPT</link>   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/initscript.cfg&quot;</para>
+
+<para>Location of the engine init script file. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1aaa5fef920568ebcf30257298f8bbdb32">JEVOISPRO_DEMO_DATA_FILE</link>   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/demodata.yml&quot;</para>
+
+<para>Location of the jevois-pro demo data definition file. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a23dbc45a1bb2824da64faca468247c1a">JEVOIS_MODULE_PARAMS_FILENAME</link>   &quot;params.cfg&quot;</para>
+
+<para>Relative name of optinal default parameters to load for each Module. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1af1a4569a2d3e50adb4fad726a8c1621d">JEVOIS_MODULE_SCRIPT_FILENAME</link>   &quot;script.cfg&quot;</para>
+
+<para>Relative name of an Engine script to load for each Module. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a011babbef4150f308b2e193cc7ee25e5">JEVOIS_USBSD_FILE</link>   &quot;/dev/mmcblk0p3&quot;</para>
+
+<para>Disk partition or file that we can export over USB using Engine command &apos;usbsd&apos;. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a6241d5865d4df3096f0359c327b78524">JEVOIS_USBSD_SYS</link>   &quot;/sys/devices/platform/sunxi_usb_udc/gadget/lun0/file&quot;</para>
+
+<para>Sysfs location to change the exported partition or file over USB using Engine command &apos;usbsd&quot;. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a69af30fab530dc8e6b12238351347440">JEVOISPRO_GSERIAL_FILE</link>   &quot;/.jevoispro_use_gserial&quot;</para>
+
+<para>Flag file for whether to enable g_serial at boot on jevoispro. </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1abda868905a1c9bf94f03db009e7a06d9">JEVOIS_OPENCV_PREFIX</link>   &quot;/usr&quot;</para>
+
+<para>Installed location of OpenCV compiled for JeVois, needed for Python to find cv2 module: </para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a434ba505c47776472ef68d2810f22131">JEVOIS_OPENCV_PYTHON_PATH</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1a5274a06482c1a0c5c03ca1865429fbae">JEVOIS_UNUSED_PARAM</link>(x)   x</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Config_8H_1aed07fedb0ed03848ed96860264e58aa1">JEVOIS_UNUSED_FUNC</link>(x)   x</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Config_8H_1a3771a7b2b149ecea8542e294b5ae4a48"/>    <section>
+    <title>JEVOIS</title>
+<indexterm><primary>JEVOIS</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS</secondary></indexterm>
+<para><computeroutput>#define JEVOIS   &quot;jevois&quot;</computeroutput></para><para>
+
+<para>Helper string that evaluates to &quot;jevois&quot; or &quot;jevoispro&quot; depending on values of JEVOIS_A33 and JEVOIS_PRO: </para>
+</para>
+<para>
+Definition at line 58 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a6b8ca169c8febd0dfb7b52d10794ba66"/>    <section>
+    <title>JEVOIS_A33</title>
+<indexterm><primary>JEVOIS_A33</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_A33</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_A33</computeroutput></para><para>
+
+<para>Target hardware selection: </para>
+</para>
+<para>
+Definition at line 36 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914"/>    <section>
+    <title>JEVOIS_CONFIG_PATH</title>
+<indexterm><primary>JEVOIS_CONFIG_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_CONFIG_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CONFIG_PATH   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/config&quot;</computeroutput></para><para>
+
+<para>Base path for config files. </para>
+</para>
+<para>
+Definition at line 79 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a698371fad542c01cf515e9bedfb66754"/>    <section>
+    <title>JEVOIS_CUSTOM_DNN_PATH</title>
+<indexterm><primary>JEVOIS_CUSTOM_DNN_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_CUSTOM_DNN_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CUSTOM_DNN_PATH   <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> &quot;/dnn/custom&quot;</computeroutput></para><para>
+
+<para>Directory where custom DNN models are stored: </para>
+</para>
+<para>
+Definition at line 85 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a0fc6e35e1f36801cacff702d7d2121ef"/>    <section>
+    <title>JEVOIS_CUSTOM_DNN_URL</title>
+<indexterm><primary>JEVOIS_CUSTOM_DNN_URL</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_CUSTOM_DNN_URL</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_CUSTOM_DNN_URL   &quot;https://jevois.usc.edu/mc/d&quot;</computeroutput></para><para>
+
+<para>URL where custom converted DNN models can be downloaded: </para>
+</para>
+<para>
+Definition at line 91 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a71b90ca71bf68f8526f0d23e9c4106b6"/>    <section>
+    <title>JEVOIS_ENGINE_CONFIG_FILE</title>
+<indexterm><primary>JEVOIS_ENGINE_CONFIG_FILE</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_ENGINE_CONFIG_FILE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_ENGINE_CONFIG_FILE   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/videomappings.cfg&quot;</computeroutput></para><para>
+
+<para>Location of the engine videomappings.cfg definition file. </para>
+</para>
+<para>
+Definition at line 94 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1ac3526046ce60a164f567df0e04d2b782"/>    <section>
+    <title>JEVOIS_ENGINE_INIT_SCRIPT</title>
+<indexterm><primary>JEVOIS_ENGINE_INIT_SCRIPT</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_ENGINE_INIT_SCRIPT</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_ENGINE_INIT_SCRIPT   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/initscript.cfg&quot;</computeroutput></para><para>
+
+<para>Location of the engine init script file. </para>
+</para>
+<para>
+Definition at line 97 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a2e30bac9e6fe1870c8d85b1d74418444"/>    <section>
+    <title>JEVOIS_MACRO_STR</title>
+<indexterm><primary>JEVOIS_MACRO_STR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_MACRO_STR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_MACRO_STR( s)   #s</computeroutput></para><para>
+
+<para>Macro to stringify a value. </para>
+</para>
+<para>
+Definition at line 67 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71"/>    <section>
+    <title>JEVOIS_MACRO_STRING</title>
+<indexterm><primary>JEVOIS_MACRO_STRING</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_MACRO_STRING</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_MACRO_STRING( s)   <link linkend="_Config_8H_1a2e30bac9e6fe1870c8d85b1d74418444">JEVOIS_MACRO_STR</link>(s)</computeroutput></para><para>
+
+<para>Macro to stringify a value. </para>
+</para>
+<para>
+Definition at line 64 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a23dbc45a1bb2824da64faca468247c1a"/>    <section>
+    <title>JEVOIS_MODULE_PARAMS_FILENAME</title>
+<indexterm><primary>JEVOIS_MODULE_PARAMS_FILENAME</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_MODULE_PARAMS_FILENAME</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_MODULE_PARAMS_FILENAME   &quot;params.cfg&quot;</computeroutput></para><para>
+
+<para>Relative name of optinal default parameters to load for each Module. </para>
+</para>
+<para>
+Definition at line 103 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a0ccd158cf6aec5f3291d277bfd056298"/>    <section>
+    <title>JEVOIS_MODULE_PATH</title>
+<indexterm><primary>JEVOIS_MODULE_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_MODULE_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_MODULE_PATH   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/modules&quot;</computeroutput></para><para>
+
+<para>Base path for modules. </para>
+</para>
+<para>
+Definition at line 76 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1af1a4569a2d3e50adb4fad726a8c1621d"/>    <section>
+    <title>JEVOIS_MODULE_SCRIPT_FILENAME</title>
+<indexterm><primary>JEVOIS_MODULE_SCRIPT_FILENAME</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_MODULE_SCRIPT_FILENAME</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_MODULE_SCRIPT_FILENAME   &quot;script.cfg&quot;</computeroutput></para><para>
+
+<para>Relative name of an Engine script to load for each Module. </para>
+</para>
+<para>
+Definition at line 106 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1af958880a9f793ef43804681bcae13bb3"/>    <section>
+    <title>JEVOIS_OPENCV_MAJOR</title>
+<indexterm><primary>JEVOIS_OPENCV_MAJOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_OPENCV_MAJOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_OPENCV_MAJOR   4</computeroutput></para><para>
+Definition at line 29 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a1aeb18646421263c9cefa844a09d2db5"/>    <section>
+    <title>JEVOIS_OPENCV_MINOR</title>
+<indexterm><primary>JEVOIS_OPENCV_MINOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_OPENCV_MINOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_OPENCV_MINOR   8</computeroutput></para><para>
+Definition at line 30 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1aebc2e6a6929f0113ec2e4d6b05c1d9fe"/>    <section>
+    <title>JEVOIS_OPENCV_PATCH</title>
+<indexterm><primary>JEVOIS_OPENCV_PATCH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_OPENCV_PATCH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_OPENCV_PATCH   0</computeroutput></para><para>
+Definition at line 31 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1abda868905a1c9bf94f03db009e7a06d9"/>    <section>
+    <title>JEVOIS_OPENCV_PREFIX</title>
+<indexterm><primary>JEVOIS_OPENCV_PREFIX</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_OPENCV_PREFIX</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_OPENCV_PREFIX   &quot;/usr&quot;</computeroutput></para><para>
+
+<para>Installed location of OpenCV compiled for JeVois, needed for Python to find cv2 module: </para>
+</para>
+<para>
+Definition at line 119 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a434ba505c47776472ef68d2810f22131"/>    <section>
+    <title>JEVOIS_OPENCV_PYTHON_PATH</title>
+<indexterm><primary>JEVOIS_OPENCV_PYTHON_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_OPENCV_PYTHON_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_OPENCV_PYTHON_PATH</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;<link linkend="_Config_8H_1abda868905a1c9bf94f03db009e7a06d9">JEVOIS_OPENCV_PREFIX</link>&#32;<emphasis role="stringliteral">&quot;/lib/python&quot;</emphasis>&#32;<link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a6e3f1098ce52589777d8462943e64820">JEVOIS_PYTHON_MAJOR</link>)&#32;<emphasis role="stringliteral">&quot;.&quot;</emphasis>&#32;\
+&#32;&#32;JEVOIS_MACRO_STRING(<link linkend="_Config_8H_1a6312326d21459ad24a6ab2ffdc89c266">JEVOIS_PYTHON_MINOR</link>)&#32;<emphasis role="stringliteral">&quot;/site-packages&quot;</emphasis>
+</programlisting><para>
+Definition at line 120 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1ae46c451d7b624cf6232a195bfec1baed"/>    <section>
+    <title>JEVOIS_PLATFORM_PRO</title>
+<indexterm><primary>JEVOIS_PLATFORM_PRO</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_PLATFORM_PRO</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PLATFORM_PRO</computeroutput></para><para>
+
+<para>Shortcuts to allow detection of a specific platform instead of testing JEVOIS_PLATFORM and JEVOIS_[A33|PRO|...]. </para>
+</para>
+
+<para>Use #ifdef JEVOIS_PLATFORM_A33 as you would #if defined(JEVOIS_PLATFORM) &amp;&amp; defined(JEVOIS_A33). Use #ifdef JEVOIS_HOST_A33 as you would #if !defined(JEVOIS_PLATFORM) &amp;&amp; defined(JEVOIS_A33) </para>
+<para>
+Definition at line 44 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1adc34ac56d67aa02a152bcffbf38ab0e7"/>    <section>
+    <title>JEVOIS_PYDNN_PATH</title>
+<indexterm><primary>JEVOIS_PYDNN_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_PYDNN_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYDNN_PATH   <link linkend="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719">JEVOIS_SHARE_PATH</link> &quot;/pydnn&quot;</computeroutput></para><para>
+
+<para>Directory where python pre/net/post DNN processors are stored: </para>
+</para>
+<para>
+Definition at line 88 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a6e3f1098ce52589777d8462943e64820"/>    <section>
+    <title>JEVOIS_PYTHON_MAJOR</title>
+<indexterm><primary>JEVOIS_PYTHON_MAJOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_PYTHON_MAJOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_MAJOR   3</computeroutput></para><para>
+Definition at line 32 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a6312326d21459ad24a6ab2ffdc89c266"/>    <section>
+    <title>JEVOIS_PYTHON_MINOR</title>
+<indexterm><primary>JEVOIS_PYTHON_MINOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_PYTHON_MINOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PYTHON_MINOR   8</computeroutput></para><para>
+Definition at line 33 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b"/>    <section>
+    <title>JEVOIS_ROOT_PATH</title>
+<indexterm><primary>JEVOIS_ROOT_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_ROOT_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_ROOT_PATH   &quot;/jevois&quot;</computeroutput></para><para>
+
+<para>Root path for runtime jevois config files, videomappings.cfg, modules, etc. </para>
+</para>
+<para>
+Definition at line 73 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a889b40a51e60ddc7f6c48be36edb3719"/>    <section>
+    <title>JEVOIS_SHARE_PATH</title>
+<indexterm><primary>JEVOIS_SHARE_PATH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_SHARE_PATH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_SHARE_PATH   <link linkend="_Config_8H_1af46b2b7cac52d5c6102ef36c2ddab49b">JEVOIS_ROOT_PATH</link> &quot;/share&quot;</computeroutput></para><para>
+
+<para>Base path for shared files (e.g., neural network weights, etc) </para>
+</para>
+<para>
+Definition at line 82 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1aed07fedb0ed03848ed96860264e58aa1"/>    <section>
+    <title>JEVOIS_UNUSED_FUNC</title>
+<indexterm><primary>JEVOIS_UNUSED_FUNC</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_UNUSED_FUNC</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_UNUSED_FUNC( x)   x</computeroutput></para><para>
+Definition at line 131 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a5274a06482c1a0c5c03ca1865429fbae"/>    <section>
+    <title>JEVOIS_UNUSED_PARAM</title>
+<indexterm><primary>JEVOIS_UNUSED_PARAM</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_UNUSED_PARAM</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_UNUSED_PARAM( x)   x</computeroutput></para><para>
+Definition at line 130 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a011babbef4150f308b2e193cc7ee25e5"/>    <section>
+    <title>JEVOIS_USBSD_FILE</title>
+<indexterm><primary>JEVOIS_USBSD_FILE</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_USBSD_FILE</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_USBSD_FILE   &quot;/dev/mmcblk0p3&quot;</computeroutput></para><para>
+
+<para>Disk partition or file that we can export over USB using Engine command &apos;usbsd&apos;. </para>
+</para>
+<para>
+Definition at line 109 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a6241d5865d4df3096f0359c327b78524"/>    <section>
+    <title>JEVOIS_USBSD_SYS</title>
+<indexterm><primary>JEVOIS_USBSD_SYS</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_USBSD_SYS</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_USBSD_SYS   &quot;/sys/devices/platform/sunxi_usb_udc/gadget/lun0/file&quot;</computeroutput></para><para>
+
+<para>Sysfs location to change the exported partition or file over USB using Engine command &apos;usbsd&quot;. </para>
+</para>
+<para>
+Definition at line 112 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a132e28df9d621b55de9228283d33c12e"/>    <section>
+    <title>JEVOIS_VENDOR</title>
+<indexterm><primary>JEVOIS_VENDOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VENDOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VENDOR   &quot;JeVois&quot;</computeroutput></para><para>
+Definition at line 23 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1aad8a7e928fbc07781f9a1890ef08778c"/>    <section>
+    <title>JEVOIS_VERSION</title>
+<indexterm><primary>JEVOIS_VERSION</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VERSION</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VERSION   ( ((<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>) &lt;&lt; 16) + ((<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>) &lt;&lt; 8) + (<link linkend="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9">JEVOIS_VERSION_PATCH</link>) )</computeroutput></para><para>
+
+<para>Software version, combined. </para>
+</para>
+<para>
+Definition at line 61 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09"/>    <section>
+    <title>JEVOIS_VERSION_MAJOR</title>
+<indexterm><primary>JEVOIS_VERSION_MAJOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VERSION_MAJOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VERSION_MAJOR   1</computeroutput></para><para>
+
+<para>Variables set by CMake. </para>
+</para>
+<para>
+Definition at line 20 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35"/>    <section>
+    <title>JEVOIS_VERSION_MINOR</title>
+<indexterm><primary>JEVOIS_VERSION_MINOR</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VERSION_MINOR</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VERSION_MINOR   20</computeroutput></para><para>
+Definition at line 21 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9"/>    <section>
+    <title>JEVOIS_VERSION_PATCH</title>
+<indexterm><primary>JEVOIS_VERSION_PATCH</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VERSION_PATCH</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VERSION_PATCH   0</computeroutput></para><para>
+Definition at line 22 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a5b4e916cd4073891cefa5f14efafdba9"/>    <section>
+    <title>JEVOIS_VERSION_STRING</title>
+<indexterm><primary>JEVOIS_VERSION_STRING</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOIS_VERSION_STRING</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_VERSION_STRING   <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a8edfdbe0ea168418ee4db6ca35b23c09">JEVOIS_VERSION_MAJOR</link>) &quot;.&quot; <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a6ff8cf01f1f2ea926783950e5839fa35">JEVOIS_VERSION_MINOR</link>) &quot;.&quot; <link linkend="_Config_8H_1a1467da9977bb4bf6f1e784dac6668c71">JEVOIS_MACRO_STRING</link>(<link linkend="_Config_8H_1a5f4c8f93e184487b8304d1b07c4af3b9">JEVOIS_VERSION_PATCH</link>)</computeroutput></para><para>
+
+<para>Software version, as string. </para>
+</para>
+<para>
+Definition at line 70 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1aaa5fef920568ebcf30257298f8bbdb32"/>    <section>
+    <title>JEVOISPRO_DEMO_DATA_FILE</title>
+<indexterm><primary>JEVOISPRO_DEMO_DATA_FILE</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOISPRO_DEMO_DATA_FILE</secondary></indexterm>
+<para><computeroutput>#define JEVOISPRO_DEMO_DATA_FILE   <link linkend="_Config_8H_1a83b3d845e173fbb5fe93589c0c716914">JEVOIS_CONFIG_PATH</link> &quot;/demodata.yml&quot;</computeroutput></para><para>
+
+<para>Location of the jevois-pro demo data definition file. </para>
+</para>
+<para>
+Definition at line 100 of file Config.H.</para>
+    </section><anchor xml:id="_Config_8H_1a69af30fab530dc8e6b12238351347440"/>    <section>
+    <title>JEVOISPRO_GSERIAL_FILE</title>
+<indexterm><primary>JEVOISPRO_GSERIAL_FILE</primary><secondary>Config.H</secondary></indexterm>
+<indexterm><primary>Config.H</primary><secondary>JEVOISPRO_GSERIAL_FILE</secondary></indexterm>
+<para><computeroutput>#define JEVOISPRO_GSERIAL_FILE   &quot;/.jevoispro_use_gserial&quot;</computeroutput></para><para>
+
+<para>Flag file for whether to enable g_serial at boot on jevoispro. </para>
+</para>
+<para>
+Definition at line 115 of file Config.H.</para>
+</section>
+</section>
+</section>

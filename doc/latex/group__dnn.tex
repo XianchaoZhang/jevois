@@ -1,0 +1,735 @@
+\hypertarget{group__dnn}{}\doxysubsection{张量/神经处理网络}
+\label{group__dnn}\index{张量/神经处理网络@{张量/神经处理网络}}
+
+
+\doxysubsubsection{ }
+深度神经网络提供抽象的 Classes and utilities。提供与 Open\+CV 后端（\+C\+P\+U、\+Open\+C\+L）、张量处理单元（\+T\+P\+U）（例如 Coral Edge T\+P\+U）和神经处理单元（\+N\+P\+U）（例如 Amlogic A311D N\+P\+U）的接口。 
+
+Collaboration diagram for 张量/神经处理网络\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{group__dnn}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{jevois\+::dnn\+::\+Network}}
+\begin{DoxyCompactList}\small\item\em 表示神经网络的抽象类。 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo}{jevois\+::dnn\+::\+Network\+Hailo}}
+\begin{DoxyCompactList}\small\item\em 在 Hailo8 神经加速器上运行的 D\+NN 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU}{jevois\+::dnn\+::\+Network\+N\+PU}}
+\begin{DoxyCompactList}\small\item\em 在 Amlogic A311D N\+PU 加速器 (Verisilicon) 上运行的 D\+NN 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}
+\begin{DoxyCompactList}\small\item\em 围绕 O\+N\+N\+X-\/\+Runtime 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV}{jevois\+::dnn\+::\+Network\+Open\+CV}}
+\begin{DoxyCompactList}\small\item\em 围绕 Open\+CV D\+NN 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython}{jevois\+::dnn\+::\+Network\+Python}}
+\begin{DoxyCompactList}\small\item\em 通过 python 调用的 D\+NN 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU}{jevois\+::dnn\+::\+Network\+T\+PU}}
+\begin{DoxyCompactList}\small\item\em 围绕 Coral T\+PU 神经网络的包装器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline}{jevois\+::dnn\+::\+Pipeline}}
+\begin{DoxyCompactList}\small\item\em 神经处理管道 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor}{jevois\+::dnn\+::\+Post\+Processor}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorClassify}{jevois\+::dnn\+::\+Post\+Processor\+Classify}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorPython}{jevois\+::dnn\+::\+Post\+Processor\+Python}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorSegment}{jevois\+::dnn\+::\+Post\+Processor\+Segment}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorStub}{jevois\+::dnn\+::\+Post\+Processor\+Stub}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessorYuNet}{jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net}}
+\begin{DoxyCompactList}\small\item\em Yu\+Net 人脸特征点检测器的后处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{jevois\+::dnn\+::\+Pre\+Processor}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的预处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorBlob}{jevois\+::dnn\+::\+Pre\+Processor\+Blob}}
+\begin{DoxyCompactList}\small\item\em 神经网络管道的预处理器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython}{jevois\+::dnn\+::\+Pre\+Processor\+Python}}
+\begin{DoxyCompactList}\small\item\em 用 python 编写的神经网络管道预处理器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__pydnn}{用 python 编写的 D\+N\+N 相关处理器}}
+\begin{DoxyCompactList}\small\item\em 除了用 C++ 编写 pre/net/post processors 之外，\+Je\+Vois 还支持用 Python 编写。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ int, std\+::string $>$ \mbox{\hyperlink{group__dnn_ga56f17dd747d44f13a9e1f7085a3d9469}{jevois\+::dnn\+::read\+Labels\+File}} (std\+::string const \&fname)
+\begin{DoxyCompactList}\small\item\em 读取标签文件 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gab9823d8696c5547a1ae5e6a12262098a}{jevois\+::dnn\+::get\+Label}} (std\+::map$<$ int, std\+::string $>$ const \&labels, int id)
+\begin{DoxyCompactList}\small\item\em 从 id 获取标签 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_gaa4745ed932b27371704c95921b170e8a}{jevois\+::dnn\+::string\+To\+R\+G\+BA}} (std\+::string const \&label, unsigned char alpha=128)
+\begin{DoxyCompactList}\small\item\em 根据标签名称计算颜色 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_gad145daee8d4e5bb273e9088056d19405}{jevois\+::dnn\+::topK}} (float const $\ast$pf\+Prob, float $\ast$pf\+Max\+Prob, uint32\+\_\+t $\ast$p\+Max\+Class, uint32\+\_\+t output\+Count, uint32\+\_\+t top\+Num)
+\begin{DoxyCompactList}\small\item\em 获取前 k 个条目及其索引 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gad9c3f395bec79145589fd39488f884ec}{jevois\+::dnn\+::shapestr}} (cv\+::\+Mat const \&m)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 cv\+::\+Mat 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_gaac2cb8a2fe11b45299e8c4c6eea9b865}{jevois\+::dnn\+::shapestr}} (Tf\+Lite\+Tensor const $\ast$t)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 Tf\+Lite\+Tensor 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc}{jevois\+::dnn\+::shapestr}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 N\+PU 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+std\+::vector$<$ size\+\_\+t $>$ \mbox{\hyperlink{group__dnn_gae60b5b58375993db5c9e51f46b6bf428}{jevois\+::dnn\+::strshape}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从包含 Ax\+BxC... 的字符串中获取 size\+\_\+t 的向量 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_ga124e654d215055679eb24323ebaee202}{jevois\+::dnn\+::tf2cv}} (Tf\+Lite\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 Tensor\+Flow 数据类型转换为 Open\+CV \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_gacff04669a655ea47c1eac3eeaa9a8ab4}{jevois\+::dnn\+::tf2vsi}} (Tf\+Lite\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 Tensor\+Flow 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{group__dnn_ga2fbb284d549bdd6e69c18436a294f38c}{jevois\+::dnn\+::vsi2cv}} (vsi\+\_\+nn\+\_\+type\+\_\+e t)
+\begin{DoxyCompactList}\small\item\em 从\+N\+P\+U数据类型转换为 Open\+CV \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_ga82f43e88e1e64aa6a97b0bdc85747afb}{jevois\+::dnn\+::clamp}} (cv\+::\+Rect \&r, int width, int height)
+\begin{DoxyCompactList}\small\item\em 将矩形限制在给定的图像宽度和高度内 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__dnn_ga44ad3cd1fee2ce347dc215585cd8e20b}{jevois\+::dnn\+::clamp}} (cv\+::\+Rect2f \&r, float width, float height)
+\begin{DoxyCompactList}\small\item\em 将矩形限制在给定的图像宽度和高度内 \end{DoxyCompactList}\item 
+std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{group__dnn_ga7fa178a1b984edc8cd9b5f761d691d5f}{jevois\+::dnn\+::parse\+Tensor\+Specs}} (std\+::string const \&specs)
+\begin{DoxyCompactList}\small\item\em 解析张量规范 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga8a6f29ea2202a325d0c99111488d7b67}{jevois\+::dnn\+::attrmat}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr, void $\ast$dataptr=nullptr)
+\begin{DoxyCompactList}\small\item\em 从 attr 和可能的数据指针构造一个 cv\+::\+Mat。 \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{group__dnn_gae40b6505b2d82fa2a580e787f0503308}{jevois\+::dnn\+::attrdims}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 获取一个张量 dims 作为 int 向量，用于构造匹配的 cv\+::\+Mat \end{DoxyCompactList}\item 
+cv\+::\+Size \mbox{\hyperlink{group__dnn_gab724bef5b8efd2446a0600cf269bcbe3}{jevois\+::dnn\+::attrsize}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 以 cv\+::\+Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga831921dbaf6ac75427bc68156ebb0bc8}{jevois\+::dnn\+::attrstr}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__dnn_gaf83f2f4f42ec0efefa6f3dda166660b4}{jevois\+::dnn\+::attrmatch}} (vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr, cv\+::\+Mat const \&blob)
+\begin{DoxyCompactList}\small\item\em 检查 cv\+::\+Mat blob 是否与 attr 的规范完全匹配 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_ga51841d296531fc366c5091863a9141fe}{jevois\+::dnn\+::tensorattr}} (Tf\+Lite\+Tensor const $\ast$t)
+\begin{DoxyCompactList}\small\item\em 获取 Tensor\+Flow Lite 张量的张量形状和类型属性 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__dnn_ga452497353f71ffe559e02da85c78896b}{jevois\+::dnn\+::softmax}} (float const $\ast$input, size\+\_\+t const n, size\+\_\+t const stride, float const fac, float $\ast$output, bool maxonly)
+\begin{DoxyCompactList}\small\item\em 将 softmax 应用于浮点向量。 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga55a15be28c64149fdb2762b71fb344a0}{jevois\+::dnn\+::quantize}} (cv\+::\+Mat const \&m, vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 根据 attr 中的量化规范从 float32 量化为定点 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_gac5c65bee7351c37b9500cad0292f8cc9}{jevois\+::dnn\+::dequantize}} (cv\+::\+Mat const \&m, vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&attr)
+\begin{DoxyCompactList}\small\item\em 根据 attr 中的量化规范将输出反量化为 float32 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__dnn_ga8da769aea616ace74e265fbc06770439}{jevois\+::dnn\+::effective\+Dims}} (cv\+::\+Mat const \&m)
+\begin{DoxyCompactList}\small\item\em 返回 cv\+::\+Mat 中非单位暗淡的数量 \end{DoxyCompactList}\item 
+cv\+::\+Mat \mbox{\hyperlink{group__dnn_ga97ca13925a9abe3bc80251a61cf18960}{jevois\+::dnn\+::concatenate}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&tensors, int axis)
+\begin{DoxyCompactList}\small\item\em 将多个张量连接成一个。 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga705e4633e47b4b39f01a710baf5acc29}{jevois\+::dnn\+::shapestr}} (hailo\+\_\+vstream\+\_\+info\+\_\+t const \&vi)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 Hailo 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_ga69f343327103557c67e6559e72a5fe09}{jevois\+::dnn\+::tensorattr}} (hailo\+\_\+vstream\+\_\+info\+\_\+t const \&vi)
+\begin{DoxyCompactList}\small\item\em 获取 Hailo 张量的张量形状和类型属性 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_ga8f572d133c52e5eb2fe81d8bf72ebefe}{jevois\+::dnn\+::hailo2vsi}} (hailo\+\_\+format\+\_\+type\+\_\+t t)
+\begin{DoxyCompactList}\small\item\em 从 Hailo 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+type\+\_\+e \mbox{\hyperlink{group__dnn_ga5f1e444edfb3bffbf851b41ae3112b23}{jevois\+::dnn\+::onnx2vsi}} (O\+N\+N\+X\+Tensor\+Element\+Data\+Type t)
+\begin{DoxyCompactList}\small\item\em 从 O\+N\+N\+X-\/\+Runtime 数据类型转换为 vsi\+\_\+nn \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__dnn_ga39970f486d748880bb2286dafd38d341}{jevois\+::dnn\+::shapestr}} (Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&ti)
+\begin{DoxyCompactList}\small\item\em 从数据类型为 T\+Y\+PE 的 n 维 O\+N\+NX 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 \end{DoxyCompactList}\item 
+vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t \mbox{\hyperlink{group__dnn_gaf77c85c3d7329994fdf6ab1caffef5f0}{jevois\+::dnn\+::tensorattr}} (Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&ti)
+\begin{DoxyCompactList}\small\item\em 获取 O\+N\+NX 运行时张量的张量形状和类型属性 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__dnn_gae40b6505b2d82fa2a580e787f0503308}\label{group__dnn_gae40b6505b2d82fa2a580e787f0503308}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!attrdims@{attrdims}}
+\index{attrdims@{attrdims}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{attrdims()}{attrdims()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ jevois\+::dnn\+::attrdims (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+获取一个张量 dims 作为 int 向量，用于构造匹配的 cv\+::\+Mat 
+
+
+
+Definition at line 478 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::attrmat(), jevois\+::dnn\+::\+Network\+Hailo\+::load(), jevois\+::dnn\+::\+Network\+::process(), and jevois\+::dnn\+::quantize().
+
+\mbox{\Hypertarget{group__dnn_ga8a6f29ea2202a325d0c99111488d7b67}\label{group__dnn_ga8a6f29ea2202a325d0c99111488d7b67}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!attrmat@{attrmat}}
+\index{attrmat@{attrmat}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{attrmat()}{attrmat()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::dnn\+::attrmat (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr,  }\item[{void $\ast$}]{dataptr = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+从 attr 和可能的数据指针构造一个 cv\+::\+Mat。 
+
+如果 dataptr 为 nullptr，将为 cv\+::\+Mat 分配新内存。调用者必须确保数据比 cv\+::\+Mat 更长寿，并负责最终释放数据。通 常，对于非空 dataptr，这仅用作临时 re-\/casting，例如，在 dequantizing 之前将接收到的张量 recast 为 Mat，然后忘 记该 Mat。 
+
+Definition at line 471 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::attrdims(), and jevois\+::dnn\+::vsi2cv().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess(), jevois\+::dnn\+::\+Network\+Hailo\+::load(), and jevois\+::dnn\+::\+Network\+::process().
+
+\mbox{\Hypertarget{group__dnn_gaf83f2f4f42ec0efefa6f3dda166660b4}\label{group__dnn_gaf83f2f4f42ec0efefa6f3dda166660b4}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!attrmatch@{attrmatch}}
+\index{attrmatch@{attrmatch}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{attrmatch()}{attrmatch()}}
+{\footnotesize\ttfamily bool jevois\+::dnn\+::attrmatch (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr,  }\item[{cv\+::\+Mat const \&}]{blob }\end{DoxyParamCaption})}
+
+
+
+检查 cv\+::\+Mat blob 是否与 attr 的规范完全匹配 
+
+
+
+Definition at line 704 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::vsi2cv().
+
+
+
+Referenced by jevois\+::dnn\+::dequantize(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), and jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess().
+
+\mbox{\Hypertarget{group__dnn_gab724bef5b8efd2446a0600cf269bcbe3}\label{group__dnn_gab724bef5b8efd2446a0600cf269bcbe3}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!attrsize@{attrsize}}
+\index{attrsize@{attrsize}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{attrsize()}{attrsize()}}
+{\footnotesize\ttfamily cv\+::\+Size jevois\+::dnn\+::attrsize (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+以 cv\+::\+Size 格式获取张量的 (宽度, 高度) 大小，跳过其他维度 
+
+
+
+Definition at line 487 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::attrstr().
+
+
+
+Referenced by jevois\+::dnn\+::\+Pre\+Processor\+::blobsize(), and jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga831921dbaf6ac75427bc68156ebb0bc8}\label{group__dnn_ga831921dbaf6ac75427bc68156ebb0bc8}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!attrstr@{attrstr}}
+\index{attrstr@{attrstr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{attrstr()}{attrstr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::attrstr (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+获取描述张量规格的字符串，包括量化规格（shapestr() 未提供） 
+
+
+
+Definition at line 512 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::attrsize(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+Hailo\+::load(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::output\+Shapes(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::process(), and jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga82f43e88e1e64aa6a97b0bdc85747afb}\label{group__dnn_ga82f43e88e1e64aa6a97b0bdc85747afb}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!clamp@{clamp}}
+\index{clamp@{clamp}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{clamp()}{clamp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::clamp (\begin{DoxyParamCaption}\item[{cv\+::\+Rect \&}]{r,  }\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})}
+
+
+
+将矩形限制在给定的图像宽度和高度内 
+
+
+
+Definition at line 367 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga44ad3cd1fee2ce347dc215585cd8e20b}\label{group__dnn_ga44ad3cd1fee2ce347dc215585cd8e20b}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!clamp@{clamp}}
+\index{clamp@{clamp}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{clamp()}{clamp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::clamp (\begin{DoxyParamCaption}\item[{cv\+::\+Rect2f \&}]{r,  }\item[{float}]{width,  }\item[{float}]{height }\end{DoxyParamCaption})}
+
+
+
+将矩形限制在给定的图像宽度和高度内 
+
+
+
+Definition at line 377 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__dnn_ga97ca13925a9abe3bc80251a61cf18960}\label{group__dnn_ga97ca13925a9abe3bc80251a61cf18960}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!concatenate@{concatenate}}
+\index{concatenate@{concatenate}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{concatenate()}{concatenate()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::dnn\+::concatenate (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{tensors,  }\item[{int}]{axis }\end{DoxyParamCaption})}
+
+
+
+将多个张量连接成一个。 
+
+对于第一个维度，\+Axis 可能从 0 开始为正（当从左到右读取 dims 时），对于最后一个维度，\+Axis 可能从 -\/1 开始为负。例 如，对于 10x20x30 张量，\+Axis 0 的大小为 10，也是 Axis -\/3，\+Axis 1 的大小为 20，也是 Axis -\/2，\+Axis 2 的大小为 30， 也是 Axis -\/1。输入张量必须都有相同的维度数、相同的像素类型，并且除要连接的维度之外的所有维度的大小必须匹配。 
+
+Definition at line 842 of file Utils.\+C.
+
+
+
+References jevois\+::cv\+Bytes\+Per\+Pix(), jevois\+::cvtypestr(), and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__dnn_gac5c65bee7351c37b9500cad0292f8cc9}\label{group__dnn_gac5c65bee7351c37b9500cad0292f8cc9}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!dequantize@{dequantize}}
+\index{dequantize@{dequantize}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{dequantize()}{dequantize()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::dnn\+::dequantize (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{m,  }\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+根据 attr 中的量化规范将输出反量化为 float32 
+
+attr 应具有 m 的类型和量化细节，返回的张量为 float32 
+
+Definition at line 793 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::attrmatch(), L\+F\+A\+T\+AL, and jevois\+::dnn\+::shapestr().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), and jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess().
+
+\mbox{\Hypertarget{group__dnn_ga8da769aea616ace74e265fbc06770439}\label{group__dnn_ga8da769aea616ace74e265fbc06770439}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!effectiveDims@{effectiveDims}}
+\index{effectiveDims@{effectiveDims}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{effectiveDims()}{effectiveDims()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::dnn\+::effective\+Dims (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{m }\end{DoxyParamCaption})}
+
+
+
+返回 cv\+::\+Mat 中非单位暗淡的数量 
+
+例如，对于大小为 1x1x224x224 的 4D Mat，返回 2，因为它实际上是一个 224x224 的 2D 数组 
+
+Definition at line 832 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__dnn_gab9823d8696c5547a1ae5e6a12262098a}\label{group__dnn_gab9823d8696c5547a1ae5e6a12262098a}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!getLabel@{getLabel}}
+\index{getLabel@{getLabel}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{getLabel()}{getLabel()}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::get\+Label (\begin{DoxyParamCaption}\item[{std\+::map$<$ int, std\+::string $>$ const \&}]{labels,  }\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+从 id 获取标签 
+
+
+
+Definition at line 68 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Classify\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga8f572d133c52e5eb2fe81d8bf72ebefe}\label{group__dnn_ga8f572d133c52e5eb2fe81d8bf72ebefe}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!hailo2vsi@{hailo2vsi}}
+\index{hailo2vsi@{hailo2vsi}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{hailo2vsi()}{hailo2vsi()}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+type\+\_\+e jevois\+::dnn\+::hailo2vsi (\begin{DoxyParamCaption}\item[{hailo\+\_\+format\+\_\+type\+\_\+t}]{t }\end{DoxyParamCaption})}
+
+
+
+从 Hailo 数据类型转换为 vsi\+\_\+nn 
+
+
+
+Definition at line 353 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{group__dnn_ga5f1e444edfb3bffbf851b41ae3112b23}\label{group__dnn_ga5f1e444edfb3bffbf851b41ae3112b23}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!onnx2vsi@{onnx2vsi}}
+\index{onnx2vsi@{onnx2vsi}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{onnx2vsi()}{onnx2vsi()}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+type\+\_\+e jevois\+::dnn\+::onnx2vsi (\begin{DoxyParamCaption}\item[{O\+N\+N\+X\+Tensor\+Element\+Data\+Type}]{t }\end{DoxyParamCaption})}
+
+
+
+从 O\+N\+N\+X-\/\+Runtime 数据类型转换为 vsi\+\_\+nn 
+
+
+
+Definition at line 208 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{group__dnn_ga7fa178a1b984edc8cd9b5f761d691d5f}\label{group__dnn_ga7fa178a1b984edc8cd9b5f761d691d5f}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!parseTensorSpecs@{parseTensorSpecs}}
+\index{parseTensorSpecs@{parseTensorSpecs}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{parseTensorSpecs()}{parseTensorSpecs()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::parse\+Tensor\+Specs (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{specs }\end{DoxyParamCaption})}
+
+
+
+解析张量规范 
+
+
+
+Definition at line 387 of file Utils.\+C.
+
+
+
+References jevois\+::split(), and jevois\+::dnn\+::strshape().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Python\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+Open\+C\+V\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::load(), jevois\+::dnn\+::\+Network\+::on\+Param\+Change(), jevois\+::dnn\+::\+Network\+Python\+::output\+Shapes(), jevois\+::dnn\+::\+Network\+Open\+C\+V\+::output\+Shapes(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::output\+Shapes(), and jevois\+::dnn\+::\+Network\+N\+P\+U\+::output\+Shapes().
+
+\mbox{\Hypertarget{group__dnn_ga55a15be28c64149fdb2762b71fb344a0}\label{group__dnn_ga55a15be28c64149fdb2762b71fb344a0}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!quantize@{quantize}}
+\index{quantize@{quantize}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{quantize()}{quantize()}}
+{\footnotesize\ttfamily cv\+::\+Mat jevois\+::dnn\+::quantize (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{m,  }\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+根据 attr 中的量化规范从 float32 量化为定点 
+
+
+
+Definition at line 718 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::attrdims(), L\+F\+A\+T\+AL, jevois\+::dnn\+::shapestr(), and jevois\+::dnn\+::vsi2cv().
+
+
+
+Referenced by jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga56f17dd747d44f13a9e1f7085a3d9469}\label{group__dnn_ga56f17dd747d44f13a9e1f7085a3d9469}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!readLabelsFile@{readLabelsFile}}
+\index{readLabelsFile@{readLabelsFile}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{readLabelsFile()}{readLabelsFile()}}
+{\footnotesize\ttfamily std\+::map$<$ int, std\+::string $>$ jevois\+::dnn\+::read\+Labels\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{fname }\end{DoxyParamCaption})}
+
+
+
+读取标签文件 
+
+允许两种格式：每行一个类名，或每个文件一个类号后跟一个类名。 
+
+Definition at line 25 of file Utils.\+C.
+
+
+
+References L\+E\+R\+R\+OR, L\+F\+A\+T\+AL, L\+I\+N\+FO, and jevois\+::replace\+String\+All().
+
+\mbox{\Hypertarget{group__dnn_gad9c3f395bec79145589fd39488f884ec}\label{group__dnn_gad9c3f395bec79145589fd39488f884ec}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!shapestr@{shapestr}}
+\index{shapestr@{shapestr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{shapestr()}{shapestr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::shapestr (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{m }\end{DoxyParamCaption})}
+
+
+
+从数据类型为 T\+Y\+PE 的 n 维 cv\+::\+Mat 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 
+
+
+
+Definition at line 105 of file Utils.\+C.
+
+
+
+References jevois\+::cvtypestr(), and jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::dequantize(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess(), jevois\+::\+G\+U\+Ihelper\+::draw\+Poly(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::load(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::load(), jevois\+::dnn\+::\+Post\+Processor\+Segment\+::process(), jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process(), jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process(), jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::dnn\+::\+Network\+::process(), jevois\+::dnn\+::quantize(), jevois\+::dnn\+::\+Pre\+Processor\+::sendreport(), jevois\+::dnn\+::shapestr(), jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::yolo().
+
+\mbox{\Hypertarget{group__dnn_ga705e4633e47b4b39f01a710baf5acc29}\label{group__dnn_ga705e4633e47b4b39f01a710baf5acc29}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!shapestr@{shapestr}}
+\index{shapestr@{shapestr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{shapestr()}{shapestr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::shapestr (\begin{DoxyParamCaption}\item[{hailo\+\_\+vstream\+\_\+info\+\_\+t const \&}]{vi }\end{DoxyParamCaption})}
+
+
+
+从数据类型为 T\+Y\+PE 的 n 维 Hailo 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 
+
+
+
+Definition at line 252 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::shapestr(), and jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{group__dnn_ga39970f486d748880bb2286dafd38d341}\label{group__dnn_ga39970f486d748880bb2286dafd38d341}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!shapestr@{shapestr}}
+\index{shapestr@{shapestr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{shapestr()}{shapestr()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::shapestr (\begin{DoxyParamCaption}\item[{Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&}]{ti }\end{DoxyParamCaption})}
+
+
+
+从数据类型为 T\+Y\+PE 的 n 维 O\+N\+NX 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 
+
+
+
+Definition at line 174 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{group__dnn_gaac2cb8a2fe11b45299e8c4c6eea9b865}\label{group__dnn_gaac2cb8a2fe11b45299e8c4c6eea9b865}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!shapestr@{shapestr}}
+\index{shapestr@{shapestr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{shapestr()}{shapestr()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::shapestr (\begin{DoxyParamCaption}\item[{Tf\+Lite\+Tensor const $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+从数据类型为 T\+Y\+PE 的 n 维 Tf\+Lite\+Tensor 获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 
+
+
+
+Definition at line 115 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{group__dnn_ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc}\label{group__dnn_ga5fcee70d9f1fbb8d6fcbd7cc0c3ef0cc}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!shapestr@{shapestr}}
+\index{shapestr@{shapestr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{shapestr()}{shapestr()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily std\+::string jevois\+::dnn\+::shapestr (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t const \&}]{attr }\end{DoxyParamCaption})}
+
+
+
+从数据类型为 T\+Y\+PE 的 n 维 N\+PU 张量中获取形式为 \char`\"{}n\+D Ax\+Bx\+C... T\+Y\+P\+E\char`\"{} 的字符串 
+
+
+
+Definition at line 144 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{group__dnn_ga452497353f71ffe559e02da85c78896b}\label{group__dnn_ga452497353f71ffe559e02da85c78896b}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!softmax@{softmax}}
+\index{softmax@{softmax}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{softmax()}{softmax()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::dnn\+::softmax (\begin{DoxyParamCaption}\item[{float const $\ast$}]{input,  }\item[{size\+\_\+t const}]{n,  }\item[{size\+\_\+t const}]{stride,  }\item[{float const}]{fac,  }\item[{float $\ast$}]{output,  }\item[{bool}]{maxonly }\end{DoxyParamCaption})}
+
+
+
+将 softmax 应用于浮点向量。 
+
+n 是要处理的元素数量，stride 是数组中从一个元素到下一个元素的增量。因此数组的大小应为 n $\ast$ stride。返回得分最高 的元素在 \mbox{[}0..n$\ast$stride\mbox{]} 中的索引。如果 maxonly 为 true，则仅输出 \mbox{[}returned index\mbox{]} 有效。 
+
+Definition at line 668 of file Utils.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Classify\+::process().
+
+\mbox{\Hypertarget{group__dnn_gaa4745ed932b27371704c95921b170e8a}\label{group__dnn_gaa4745ed932b27371704c95921b170e8a}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!stringToRGBA@{stringToRGBA}}
+\index{stringToRGBA@{stringToRGBA}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{stringToRGBA()}{stringToRGBA()}}
+{\footnotesize\ttfamily int jevois\+::dnn\+::string\+To\+R\+G\+BA (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{label,  }\item[{unsigned char}]{alpha = {\ttfamily 128} }\end{DoxyParamCaption})}
+
+
+
+根据标签名称计算颜色 
+
+
+
+Definition at line 76 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report().
+
+\mbox{\Hypertarget{group__dnn_gae60b5b58375993db5c9e51f46b6bf428}\label{group__dnn_gae60b5b58375993db5c9e51f46b6bf428}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!strshape@{strshape}}
+\index{strshape@{strshape}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{strshape()}{strshape()}}
+{\footnotesize\ttfamily std\+::vector$<$ size\+\_\+t $>$ jevois\+::dnn\+::strshape (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+从包含 Ax\+BxC... 的字符串中获取 size\+\_\+t 的向量 
+
+
+
+Definition at line 277 of file Utils.\+C.
+
+
+
+References jevois\+::split().
+
+
+
+Referenced by jevois\+::dnn\+::parse\+Tensor\+Specs(), and jevois\+::dnn\+::\+Network\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga69f343327103557c67e6559e72a5fe09}\label{group__dnn_ga69f343327103557c67e6559e72a5fe09}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!tensorattr@{tensorattr}}
+\index{tensorattr@{tensorattr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{tensorattr()}{tensorattr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t jevois\+::dnn\+::tensorattr (\begin{DoxyParamCaption}\item[{hailo\+\_\+vstream\+\_\+info\+\_\+t const \&}]{vi }\end{DoxyParamCaption})}
+
+
+
+获取 Hailo 张量的张量形状和类型属性 
+
+
+
+Definition at line 602 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::hailo2vsi(), and jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{group__dnn_gaf77c85c3d7329994fdf6ab1caffef5f0}\label{group__dnn_gaf77c85c3d7329994fdf6ab1caffef5f0}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!tensorattr@{tensorattr}}
+\index{tensorattr@{tensorattr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{tensorattr()}{tensorattr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t jevois\+::dnn\+::tensorattr (\begin{DoxyParamCaption}\item[{Ort\+::\+Const\+Tensor\+Type\+And\+Shape\+Info const \&}]{ti }\end{DoxyParamCaption})}
+
+
+
+获取 O\+N\+NX 运行时张量的张量形状和类型属性 
+
+
+
+Definition at line 234 of file Utils.\+C.
+
+
+
+References jevois\+::dnn\+::onnx2vsi().
+
+\mbox{\Hypertarget{group__dnn_ga51841d296531fc366c5091863a9141fe}\label{group__dnn_ga51841d296531fc366c5091863a9141fe}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!tensorattr@{tensorattr}}
+\index{tensorattr@{tensorattr}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{tensorattr()}{tensorattr()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t jevois\+::dnn\+::tensorattr (\begin{DoxyParamCaption}\item[{Tf\+Lite\+Tensor const $\ast$}]{t }\end{DoxyParamCaption})}
+
+
+
+获取 Tensor\+Flow Lite 张量的张量形状和类型属性 
+
+
+
+Definition at line 563 of file Utils.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and jevois\+::dnn\+::tf2vsi().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+T\+P\+U\+::input\+Shapes(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::load(), jevois\+::dnn\+::\+Network\+Hailo\+::load(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::output\+Shapes(), and jevois\+::dnn\+::shapestr().
+
+\mbox{\Hypertarget{group__dnn_ga124e654d215055679eb24323ebaee202}\label{group__dnn_ga124e654d215055679eb24323ebaee202}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!tf2cv@{tf2cv}}
+\index{tf2cv@{tf2cv}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{tf2cv()}{tf2cv()}}
+{\footnotesize\ttfamily int jevois\+::dnn\+::tf2cv (\begin{DoxyParamCaption}\item[{Tf\+Lite\+Type}]{t }\end{DoxyParamCaption})}
+
+
+
+从 Tensor\+Flow 数据类型转换为 Open\+CV 
+
+
+
+Definition at line 286 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess().
+
+\mbox{\Hypertarget{group__dnn_gacff04669a655ea47c1eac3eeaa9a8ab4}\label{group__dnn_gacff04669a655ea47c1eac3eeaa9a8ab4}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!tf2vsi@{tf2vsi}}
+\index{tf2vsi@{tf2vsi}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{tf2vsi()}{tf2vsi()}}
+{\footnotesize\ttfamily vsi\+\_\+nn\+\_\+type\+\_\+e jevois\+::dnn\+::tf2vsi (\begin{DoxyParamCaption}\item[{Tf\+Lite\+Type}]{t }\end{DoxyParamCaption})}
+
+
+
+从 Tensor\+Flow 数据类型转换为 vsi\+\_\+nn 
+
+
+
+Definition at line 330 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{group__dnn_gad145daee8d4e5bb273e9088056d19405}\label{group__dnn_gad145daee8d4e5bb273e9088056d19405}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!topK@{topK}}
+\index{topK@{topK}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{topK()}{topK()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::topK (\begin{DoxyParamCaption}\item[{float const $\ast$}]{pf\+Prob,  }\item[{float $\ast$}]{pf\+Max\+Prob,  }\item[{uint32\+\_\+t $\ast$}]{p\+Max\+Class,  }\item[{uint32\+\_\+t}]{output\+Count,  }\item[{uint32\+\_\+t}]{top\+Num }\end{DoxyParamCaption})}
+
+
+
+获取前 k 个条目及其索引 
+
+
+
+Definition at line 85 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Classify\+::process().
+
+\mbox{\Hypertarget{group__dnn_ga2fbb284d549bdd6e69c18436a294f38c}\label{group__dnn_ga2fbb284d549bdd6e69c18436a294f38c}} 
+\index{张量/神经处理网络@{张量/神经处理网络}!vsi2cv@{vsi2cv}}
+\index{vsi2cv@{vsi2cv}!张量/神经处理网络@{张量/神经处理网络}}
+\doxyparagraph{\texorpdfstring{vsi2cv()}{vsi2cv()}}
+{\footnotesize\ttfamily int jevois\+::dnn\+::vsi2cv (\begin{DoxyParamCaption}\item[{vsi\+\_\+nn\+\_\+type\+\_\+e}]{t }\end{DoxyParamCaption})}
+
+
+
+从\+N\+P\+U数据类型转换为 Open\+CV 
+
+
+
+Definition at line 308 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::attrmat(), jevois\+::dnn\+::attrmatch(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess(), jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process(), and jevois\+::dnn\+::quantize().
+

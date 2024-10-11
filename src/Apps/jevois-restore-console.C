@@ -26,9 +26,9 @@
 #include <unistd.h>
 #include <cctype>
 
-//! Restore console operation after a violent crash of jevoispro-daemon
-/*! This utility is useful when debugging jevoispro-daemon on JeVois-Pro platform, as it mutes the keyboard and console
-    framebuffer for direct access to the framebuffer device and keyboard/mouse/etc. */
+//! 在 jevoispro-daemon 剧烈崩溃后恢复控制台操作
+/*！此实用程序在 JeVois-Pro 平台上调试 jevoispro-daemon 时很有用，因为它会使键盘和控制台帧缓冲区静音，以便直接访问帧缓冲区设备
+    和键盘/鼠标/等。 */
 int main(int, char const **)
 {
   int ret = 0;
@@ -49,7 +49,7 @@ int main(int, char const **)
   }
   catch (...)
   {
-    // stdin is not a tty, probably we were launched remotely, so we try to disable the active tty:
+    // stdin 不是 tty，可能我们是远程启动的，因此我们尝试禁用活动 tty：
     try
     {
       int tty = jevois::getActiveTTY();

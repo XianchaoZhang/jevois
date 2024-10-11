@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Serial_8C">
+<title>src/jevois/Core/Serial.C File Reference</title>
+<indexterm><primary>src/jevois/Core/Serial.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/Serial.H&gt;
+#include &lt;jevois/Core/Engine.H&gt;
+#include &lt;fstream&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;sys/types.h&gt;
+</programlisting>Include dependency graph for Serial.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Serial_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Serial_8C_1afaf07f46c5de8f0e8d95ae19cb841fdd">SERFATAL</link>(msg)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Serial_8C_1aaddc5d4c1bf5487381952d2777787e8a">SERTHROW</link>(msg)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Serial_8C_1afaf07f46c5de8f0e8d95ae19cb841fdd"/>    <section>
+    <title>SERFATAL</title>
+<indexterm><primary>SERFATAL</primary><secondary>Serial.C</secondary></indexterm>
+<indexterm><primary>Serial.C</primary><secondary>SERFATAL</secondary></indexterm>
+<para><computeroutput>#define SERFATAL( msg)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;if&#32;(itsErrno.load()&#32;==&#32;0)&#32;itsErrno&#32;=&#32;errno;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(&apos;[&apos;&#32;&lt;&lt;&#32;instanceName()&#32;&lt;&lt;&#32;&quot;]&#32;&quot;&#32;&lt;&lt;&#32;msg&#32;&lt;&lt;&#32;&quot;&#32;(&quot;&#32;&lt;&lt;&#32;strerror(errno)&#32;&lt;&lt;&#32;&apos;)&apos;);&#32;\
+&#32;&#32;}&#32;while&#32;(0)
+</programlisting><para>
+Definition at line 29 of file Serial.C.</para>
+    </section><anchor xml:id="_Serial_8C_1aaddc5d4c1bf5487381952d2777787e8a"/>    <section>
+    <title>SERTHROW</title>
+<indexterm><primary>SERTHROW</primary><secondary>Serial.C</secondary></indexterm>
+<indexterm><primary>Serial.C</primary><secondary>SERTHROW</secondary></indexterm>
+<para><computeroutput>#define SERTHROW( msg)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;if&#32;(itsErrno.load()&#32;==&#32;0)&#32;itsErrno&#32;=&#32;errno;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;std::ostringstream&#32;ostr;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;ostr&#32;&lt;&lt;&#32;&apos;[&apos;&#32;&lt;&lt;&#32;instanceName()&#32;&lt;&lt;&#32;&quot;]&#32;&quot;&#32;&lt;&lt;&#32;msg&#32;&lt;&lt;&#32;&quot;&#32;(&quot;&#32;&lt;&lt;&#32;strerror(errno)&#32;&lt;&lt;&#32;&apos;)&apos;;&#32;\
+&#32;&#32;&#32;&#32;throw&#32;std::runtime_error(ostr.str());&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;}&#32;while&#32;(0)
+</programlisting><para>
+Definition at line 34 of file Serial.C.</para>
+</section>
+</section>
+</section>

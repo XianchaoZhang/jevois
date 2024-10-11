@@ -1,0 +1,146 @@
+\hypertarget{classjevois_1_1ValidValuesSpecRange}{}\doxysubsection{jevois\+::Valid\+Values\+Spec\+Range$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1ValidValuesSpecRange}\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Component/\+Valid\+Values\+Spec.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Valid\+Values\+Spec\+Range$<$ T $>$}
+
+基于范围的有效值规范，包含边界 
+
+Definition at line 111 of file Valid\+Values\+Spec.\+H.
+
+
+
+Inheritance diagram for jevois\+::Valid\+Values\+Spec\+Range$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classjevois_1_1ValidValuesSpecRange__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Valid\+Values\+Spec\+Range$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{classjevois_1_1ValidValuesSpecRange__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_ac2617aa8ff3d1232d98f29d87290a612}{Valid\+Values\+Spec\+Range}} ()=delete
+\begin{DoxyCompactList}\small\item\em 没有默认构造函数，始终需要提供一个范围 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a9c4cee0f3f64c371436669a83430609f}{Valid\+Values\+Spec\+Range}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&valid\+\_\+range)
+\begin{DoxyCompactList}\small\item\em 从有效值范围构造（约定：边界包含在内） \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_ab596c1793e35ff9daf3c9136faf2c246}{$\sim$\+Valid\+Values\+Spec\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a2c3c2fe52507913ca04e836b13698410}{check\+Value\+Validity}} (T const \&val) const
+\begin{DoxyCompactList}\small\item\em 检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true \end{DoxyCompactList}\item 
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a8a49658bf1c3fade28f574f615a5943a}{str}} () const
+\begin{DoxyCompactList}\small\item\em 转换为可读字符串：\+Range\+:\mbox{[}M\+I\+N-\/\+M\+AX\mbox{]}，其中 M\+IN 和 M\+AX 由实际范围边界替换。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange_a97f423e0d8cf61a09ed7ba5b18ba670f}{its\+Valid\+Range}}
+\begin{DoxyCompactList}\small\item\em 我们的有效值范围 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_ac2617aa8ff3d1232d98f29d87290a612}\label{classjevois_1_1ValidValuesSpecRange_ac2617aa8ff3d1232d98f29d87290a612}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!ValidValuesSpecRange@{ValidValuesSpecRange}}
+\index{ValidValuesSpecRange@{ValidValuesSpecRange}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecRange()}{ValidValuesSpecRange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{Valid\+Values\+Spec\+Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+没有默认构造函数，始终需要提供一个范围 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_a9c4cee0f3f64c371436669a83430609f}\label{classjevois_1_1ValidValuesSpecRange_a9c4cee0f3f64c371436669a83430609f}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!ValidValuesSpecRange@{ValidValuesSpecRange}}
+\index{ValidValuesSpecRange@{ValidValuesSpecRange}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{ValidValuesSpecRange()}{ValidValuesSpecRange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{Valid\+Values\+Spec\+Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{valid\+\_\+range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+从有效值范围构造（约定：边界包含在内） 
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_ab596c1793e35ff9daf3c9136faf2c246}\label{classjevois_1_1ValidValuesSpecRange_ab596c1793e35ff9daf3c9136faf2c246}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!````~ValidValuesSpecRange@{$\sim$ValidValuesSpecRange}}
+\index{````~ValidValuesSpecRange@{$\sim$ValidValuesSpecRange}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{$\sim$ValidValuesSpecRange()}{~ValidValuesSpecRange()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{Valid\+Values\+Spec\+Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_a2c3c2fe52507913ca04e836b13698410}\label{classjevois_1_1ValidValuesSpecRange_a2c3c2fe52507913ca04e836b13698410}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!checkValueValidity@{checkValueValidity}}
+\index{checkValueValidity@{checkValueValidity}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{checkValueValidity()}{checkValueValidity()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual bool \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::check\+Value\+Validity (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+检查提议的值是否有效，当且仅当值在我们的范围内（包括边界）时返回 true 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac1198c7ddd9c246cc9f6e68b0c20b4f9}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_a8a49658bf1c3fade28f574f615a5943a}\label{classjevois_1_1ValidValuesSpecRange_a8a49658bf1c3fade28f574f615a5943a}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!str@{str}}
+\index{str@{str}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+virtual const std\+::string \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::str (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+转换为可读字符串：\+Range\+:\mbox{[}M\+I\+N-\/\+M\+AX\mbox{]}，其中 M\+IN 和 M\+AX 由实际范围边界替换。 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1ValidValuesSpecBase_ac354706e1ae5638204584d660b0b6f47}{jevois\+::\+Valid\+Values\+Spec\+Base$<$ T $>$}}.
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ValidValuesSpecRange_a97f423e0d8cf61a09ed7ba5b18ba670f}\label{classjevois_1_1ValidValuesSpecRange_a97f423e0d8cf61a09ed7ba5b18ba670f}} 
+\index{jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}!itsValidRange@{itsValidRange}}
+\index{itsValidRange@{itsValidRange}!jevois::ValidValuesSpecRange$<$ T $>$@{jevois::ValidValuesSpecRange$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{itsValidRange}{itsValidRange}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$T$>$ \mbox{\hyperlink{classjevois_1_1ValidValuesSpecRange}{jevois\+::\+Valid\+Values\+Spec\+Range}}$<$ T $>$\+::its\+Valid\+Range\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+我们的有效值范围 
+
+
+
+Definition at line 130 of file Valid\+Values\+Spec.\+H.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Component/\mbox{\hyperlink{ValidValuesSpec_8H}{Valid\+Values\+Spec.\+H}}\end{DoxyCompactItemize}

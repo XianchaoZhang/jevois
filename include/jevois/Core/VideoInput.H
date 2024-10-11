@@ -22,12 +22,10 @@
 
 namespace jevois
 {
-  //! Base class for video input, which will get derived into Camera and MovieInput
-  /*! Engine uses a VideoInput to capture input frames and pass them to its currently loaded machine vision Module for
-      processing. The VideoInput class is abstract and simply defines the interface. For live video processing, Engine
-      will implement its VideoInput as a Camera, and for processing of pre-recorded videos or image sequences (useful to
-      debug or tune an algorithm on reproducible image sequences), it can also implement its VideoInout as a
-      MovieInput. \ingroup core */
+  //! 视频输入的基类，将派生为 Camera 和 MovieInput 
+  /*! Engine 使用 VideoInput 捕获输入帧并将它们传递给其当前加载的机器视觉模块进行处理。VideoInput 类是抽象的，仅定义接
+      口。对于实时视频处理，Engine 将其 VideoInput 实现为 Camera，对于预先录制的视频或图像序列的处理（可用于调试或调整
+	  可重现图像序列的算法），它还可以将其 VideoInout 实现为 MovieInput。\ingroup core */
   class VideoInput
   {
     public:
@@ -42,65 +40,59 @@ namespace jevois
       //! Start streaming
       virtual void streamOn() = 0;
 
-      //! Abort streaming
-      /*! This only cancels future get() and done() calls, one should still call streamOff() to turn off streaming. */
+      //! 中止流式传输
+      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       virtual void abortStream() = 0;
       
       //! Stop streaming
       virtual void streamOff() = 0;
 
-      //! Get the next captured buffer
-      /*! Throws if we are not streaming or blocks until an image is available (has been captured). The image img should
-          have been allocated by the caller and will be filled in by what we receive from the device here. */
+      //! 获取下一个捕获的缓冲区
+      /*! 如果我们未进行流式传输或阻塞直到图像可用（已捕获），则抛出。图像 img 应该由调用者分配，并将由我们从此处的设
+          备接收到的内容填充。 */
       virtual void get(RawImage & img) = 0;
 
-      //! Check whether a second input image scaled by the JeVoisPro Platform ISP is available
-      /*! Returns false unless we are on JeVois-Pro Platform and the camera format modifier jevois::CropType::CropScale
-          is currently in use. */
-      virtual bool hasScaledImage() const;
+      //！检查 JeVoisPro 平台 ISP 缩放的第二个输入图像是否可用 
+	  /*！除非我们在 JeVois-Pro 平台上并且相机格式修饰符 jevois::CropType::CropScale 当前正在使用中，否则返回 false。 */ 
+	  virtual bool hasScaledImage() const;
 
-      //! Get the next captured ISP-scaled secondary buffer
-      /*! On JeVois-Pro Platform only, the camera ISP can output 2 frames: 1) raw from sensor, 2) scaled by ISP. This
-          function is to access the ISP scaled frame. Throws if not JeVois-Pro Platform or the camera crop type is not
-          jevois::CropType::CropScale. Throws if we are not streaming or blocks until an image is available (has
-          been captured). The image img should have been allocated by the caller and will be filled in by what we
-          receive from the device here. Default implementation throws. */
-      virtual void get2(RawImage & img);
+      //！获取下一个捕获的 ISP 缩放辅助缓冲区
+	  /*！仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此功能用于访问 ISP 
+	      缩放的帧。如果不是 JeVois-Pro 平台或相机裁剪类型不是 jevois::CropType::CropScale，则抛出。如果我们没有流式
+		  传输或阻塞直到图像可用（已捕获），则抛出。图像 img 应该由调用者分配，并将由我们从此处的设备收到的内容填充。
+		  默认实现抛出。*/ 
+	  virtual void get2(RawImage & img);
 
-      //! Indicate that user processing is done with an image previously obtained via get()
-      /*! You should call this as soon after get() as possible, once you are finished with the RawImage data so that it
-          can be recycled.
+      //！指示用户已完成先前通过 get() 获取的图像的处理 
+	  /*！处理完 RawImage 数据后，应在 get() 之后尽快调用此方法，以便可以回收利用。
+	  
+	  \note 这也会使图像无效，特别是其像素缓冲区无效！ */ 
+	  virtual void done(RawImage & img) = 0;
 
-          \note This also invalidates the image and in particular its pixel buffer! */
-      virtual void done(RawImage & img) = 0;
+      //！指示用户已完成先前通过 get2() 获得的第二个 ISP 缩放图像的处理 
+	  /*！处理完 RawImage 数据后，应尽快在 get2() 之后调用此函数，以便可以回收该数据。默认实现会抛出异常。
+	  
+	  \note 这也会使图像无效，特别是其像素缓冲区无效！ */ 
+	  virtual void done2(RawImage & img);
 
-      //! Indicate that user processing is done with a second ISP-scaled image previously obtained via get2()
-      /*! You should call this as soon after get2() as possible, once you are finished with the RawImage data so that it
-          can be recycled. Default implementation throws.
+      //！获取有关 control 的信息，如果硬件不支持则抛出
+	  /*！调用者应将 qc 清零，然后将 id 字段设置为所需的 control id。有关更多信息，请参阅 VIDIOC_QUERYCTRL。*/ 
+	  virtual void queryControl(struct v4l2_queryctrl & qc) const = 0;
 
-          \note This also invalidates the image and in particular its pixel buffer! */
-      virtual void done2(RawImage & img);
+      //! 获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 
+	  /*! 调用者应将 qm 清零，然后将 id 和 index 字段设置为所需的控件 id 和菜单项索引。有关更多信息，请参阅 VIDIOC_QUERYMENU。 */ 
+	  virtual void queryMenu(struct v4l2_querymenu & qm) const = 0; 
+	  
+	  //! 获取 control 的当前值，如果硬件不支持则抛出 
+	  /*! 这只是传递到 VIDIOC_G_CTRL */ 
+	  virtual void getControl(struct v4l2_control & ctrl) const = 0; 
+	  
+	  //! 设置 control，如果硬件拒绝该值则抛出 
+	  /*! 这只是传递到 VIDIOC_S_CTRL */ 
+	  virtual void setControl(struct v4l2_control const & ctrl) = 0;
 
-      //! Get information about a control, throw if unsupported by hardware
-      /*! Caller should zero-out qc and then set the id field to the desired control id. See VIDIOC_QUERYCTRL for more
-          information. */
-      virtual void queryControl(struct v4l2_queryctrl & qc) const = 0;
-
-      //! Get the available menu entry names for a menu-type control, throw if unsupported by hardware
-      /*! Caller should zero-out qm and then set the id and index fields to the desired control id and menu item
-          index. See VIDIOC_QUERYMENU for more information. */
-      virtual void queryMenu(struct v4l2_querymenu & qm) const = 0;
-     
-      //! Get a control's current value, throw if unsupported by hardware
-      /*! This is just a pass-through to VIDIOC_G_CTRL */
-      virtual void getControl(struct v4l2_control & ctrl) const = 0;
-      
-      //! Set a control, throw if the hardware rejects the value
-      /*! This is just a pass-through to VIDIOC_S_CTRL */
-      virtual void setControl(struct v4l2_control const & ctrl) = 0;
-
-      //! Set the video format and frame rate
-      virtual void setFormat(VideoMapping const & m) = 0;
+      //! 设置视频格式和帧率 
+	  virtual void setFormat(VideoMapping const & m) = 0;
 
     protected:
       std::string const itsDevName; //!< Our device or movie file name

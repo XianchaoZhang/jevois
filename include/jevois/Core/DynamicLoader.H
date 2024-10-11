@@ -57,41 +57,36 @@
 
 namespace jevois
 {
-  //! Class to open shared object (.so) files and load functions contained in them
-  /*! This class allows one to open a shared library (.so file) and to invoke functions or classes that are in that
-      library.
-
-      Engine uses DynamicLoader to load the appropriate vision processing Module each time the user selects a new
-      VideoMapping (i.e., changes image resolution in a USB webcam program running on a host computer, or invokes the
-      \c setmapping command over Serial port).
-
-      This class is modified from DynamicLoader in the Neuromorphic Robotics Toolkit (NRT). \ingroup core */
+  //! 用于打开共享对象 (.so) 文件并加载其中包含的函数的类
+  /*! 此类允许打开共享库 (.so 文件) 并调用该库中的函数或类。
+  
+      每次用户选择新的 VideoMapping（即，更改主机上运行的 USB 网络摄像头程序中的图像分辨率，或通过串行端口调用 
+	  \c setmapping 命令）时，引擎都会使用 DynamicLoader 加载适当的视觉处理模块。
+	  
+	  此类是从 Neuromorphic Robotics Toolkit (NRT) 中的 DynamicLoader 修改而来的。 \ingroup core */
   class DynamicLoader
   {
     public:
-      //! Open the shared object located at filename, throws if fail
-      /*! If closeOnDestroy is true, the .so file will be closed when the DynamicLoader object is destroyed. If you want
-          to maintain access to the functions and classes in a .so file after the loader has run out of scope, set
-          closeOnDestroy to false (and you will then have no way of ever unloading that .so file until termination of
-          your program). */
+      //! 打开位于 filename 的共享对象，如果失败则抛出
+      /*! 如果 closeOnDestroy 为 true，则在 DynamicLoader 对象被销毁时将关闭 .so 文件。如果您想在加载器超出范围后仍能访
+		  问 .so 文件中的函数和类，请将 closeOnDestroy 设置为 false（这样，在程序终止之前，您将无法卸载该 .so 文件）。
+		   */
       DynamicLoader(std::string const & filename, bool closeOnDestroy);
 
-      //! Retrieve the path to the .so file of this loader, useful to avoid closing and re-loading the same .so file
+      //! 检索此加载器的 .so 文件的路径，有助于避免关闭并重新加载相同的 .so 文件
       std::string const & sopath() const;
       
-      //! Destructor, may close the object on destroy (see constructor arguments)
+      //! 析构函数，可在销毁时关闭对象（参见构造函数参数）
       ~DynamicLoader();
       
-      //! Close the shared object file
-      /*! Beware that closing the object file will remove all links to any objects/functions/etc that have been created
-          from the shared object.  Use this function only if you want nothing more to do with anything created from this
-          object file. */
+      //! 关闭共享对象文件
+      /*! 请注意，关闭对象文件将删除从共享对象创建的任何对象/函数/等的所有链接。仅当您不想再处理从此对象文件创建的任何内
+	      容时才使用此函数。 */
       void close();
 
-      //! Load the symbol named functionName
-      /*! This method returns an std::function that points to the requested name in the shared object opened by this
-          DynamicLoader. For example, to load the function <code>int foo(double x, bool y)</code> from the file
-          "mySharedObject.so" you should write:
+      //! 加载名为 functionName 的符号
+      /*! 此方法返回一个 std::function，它指向此 DynamicLoader 打开的共享对象中请求的名称。例如，要从文件 
+		  "mySharedObject.so" 加载函数 <code>int foo(double x, bool y)</code>，您应该这样写：
 
           @code
           jevois::DynamicLoader loader("./mySharedObject.so");
@@ -106,10 +101,9 @@ namespace jevois
           }
           @endcode
 
-          You should not try to use anything returned by load() after the DynamicLoader has been close()'d (or
-          destroyed, see constructor arguments).
+          在 DynamicLoader 被 close()（或销毁，参见构造函数参数）之后，您不应尝试使用 load() 返回的任何内容。
 
-          Throws if the requested symbol could not be found in the opened shared object. */
+          如果在打开的共享对象中找不到请求的符号，则抛出。 */
       template <class Signature>
       std::function<Signature> load(std::string const & functionName);
 

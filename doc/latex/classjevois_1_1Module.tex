@@ -1,0 +1,256 @@
+\hypertarget{classjevois_1_1Module}{}\doxysubsection{jevois\+::Module Class Reference}
+\label{classjevois_1_1Module}\index{jevois::Module@{jevois::Module}}
+
+
+{\ttfamily \#include $<$jevois/\+Core/\+Module.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+视觉处理模块的虚基类 
+
+\mbox{\hyperlink{classjevois_1_1Module}{Module}} 是实现摄像头到 U\+SB 逐帧视频处理的基类。 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 根据最终用户选择的当前 Video\+Mapping（例如，主机上的网络摄像 头查看程序设置的当前图像分辨率、格式和帧速率）实例化一个从 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 派生的类。 根据 videomappings.\+cfg 中的 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 定义和用户选择的当前 Video\+Mapping，\+Module 被加载为共享对象 (.so) 文件。
+
+\mbox{\hyperlink{classjevois_1_1Module}{Module}} 自 Component，因此可以包含：
+
+
+\begin{DoxyItemize}
+\item 任意数量的 Parameter 设置
+\item 任意复杂的 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 对象子层次结构，用于实现各种功能。所有子组件的 Parameter 设置均可供 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 和 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 使用。
+\end{DoxyItemize}
+
+这样，人们就可以高效地实现复杂的视觉处理管道，并大量重复使用代码。例如，人们可能首先想要实现一个 Edge\+Detector 或 Saliency 组件，并为各种阈值、特征等设置 Parameter。然后，人们可以创建任意数量的顶级对象，这些对象派生自 Module， 并且可能在子组件层次结构中包含一个或多个 Edge\+Detector、\+Saliency 等组件，模块中的实现只是将图像从一个 \mbox{\hyperlink{classjevois_1_1Component}{Component}} 路由到另一个，以创建处理管道。
+
+从 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 派生的类应该实现最多四个函数：
+
+
+\begin{DoxyItemize}
+\item 当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 同时指定特定的相机分辨率和格式以及 U\+SB 分辨率和格式时，\+Engine 主循环每次迭代都会调用一次 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process(\+Input\+Frame \&\& inframe, Output\+Frame \&\& outframe)}}。此函数应处理接收到的输入帧并用结果填充输出帧的像素缓冲 区。在调用 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 之前，已经为输入和输出图像分配了内存。由于输出图像实际上是由 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 驱动程序（最终由 Linux 内核）分配的，因此其像素内存位置无法移动（因此，不要尝试复制输出图像或用另一个图像替换它等；只需将像素数 据写入输出图像的像素阵列）。视频模式或帧速率没有限制，除非 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 硬件支持，并且受 U\+SB 带宽限制。对于大多数实现 ，匹配输入和输出帧速率是最简单的，这意味着每次调用 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 都会访问和使用提供的 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 和 Output\+Frame（一 输入一输出处理管道）。但这不是强制性的。例如，用于飞行无人机的运动流计算 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 可能具有 320x240 Y\+U\+YV 53.\+0fps 输入和 100x142 G\+R\+EY 10.\+6fps 输出（由于此示例中的输出帧速率比输入低 5 倍，因此 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 函数每调用 5 次才会获取 、填充和发送一次 Output\+Frame；process() 函数的实现应该跟踪这一点，例如，通过每次调用 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 时递增的成员变量 ）。除了填充 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 的像素数据之外，process() 还可以使用 \mbox{\hyperlink{classjevois_1_1Module_a25fcd554bf1ee47e02c51ff1844f5482}{send\+Serial()}} 通过串行端口发送结果（例如，供连接到 Je\+Vois 平台硬件的 Arduino 使用）。
+\item 当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定特定的相机分辨率和格式，并且 U\+SB 输出格式为 N\+O\+NE 时，每个 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 帧调用一次 \mbox{\hyperlink{classjevois_1_1Module_a81c140e6db5945679845aa9108b8ecd4}{process(\+Input\+Frame \&\& inframe)}}。此函数应处理接收到的输入帧，然后通常使用 \mbox{\hyperlink{classjevois_1_1Module_a25fcd554bf1ee47e02c51ff1844f5482}{send\+Serial()}} 将结果发送到串行端口（例 如，供连接到 Je\+Vois 平台硬件的 Arduino 使用）。对视频模式或帧速率没有限制，除非 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 硬件支持。
+\item \mbox{\hyperlink{classjevois_1_1Module_a4fa64441f85b9a23f17d972b1d9b2c51}{parse\+Serial(std\+::string const \& str, std\+::shared\+\_\+ptr$<$\+User\+Interface$>$ s)}} 允许 \mbox{\hyperlink{classjevois_1_1Module}{Module}} 支持自定义用户命令。\+Engine 会将串行或其他它 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 收到的不理解的任何命令转发给此函数。您应该将其用于超出 Parameter 设置（ \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 本身已经支持）或 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 内置命令（参见 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} ）的范围。例如，可以在此处实现一个名为 \char`\"{}start\char`\"{} 的命令 ，以允许用户启动某些特定的东西。
+\item supports\+Commands(std\+::ostream \& os) 应输出 \mbox{\hyperlink{classjevois_1_1Module_a4fa64441f85b9a23f17d972b1d9b2c51}{parse\+Serial()}} 支持的任何自定义命令的可读描述。当用户通过 \mbox{\hyperlink{classjevois_1_1Serial}{Serial}} 端口 输入 \char`\"{}help\char`\"{} 时，将显示这些描述。
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+每个模块实现文件都应包含对模块类的 \mbox{\hyperlink{Module_8H_a19a74668397740a2cd4813240e547179}{J\+E\+V\+O\+I\+S\+\_\+\+R\+E\+G\+I\+S\+T\+E\+R\+\_\+\+M\+O\+D\+U\+L\+E(\+M\+O\+D\+U\+L\+E\+N\+A\+M\+E)}} 的调用。这会创建一些纯 C 入口点，当 从动态库 (.so) 文件加载模块以实例化模块时，将使用这些入口点。有关示例，请参阅 \mbox{\hyperlink{ModuleTutorial}{关于如何为 Je\+Vois 编写新的机器视觉模块的教程}} 。 
+\end{DoxyNote}
+
+
+Definition at line 89 of file Module.\+H.
+
+
+
+Inheritance diagram for jevois\+::Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=324pt]{classjevois_1_1Module__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::Module\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classjevois_1_1Module__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Module_a54270630932fa6c82953ae2ce29048f4}{Module}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1Module_abf23791ed64fa61f8e85339da72291cd}{$\sim$\+Module}} ()
+\begin{DoxyCompactList}\small\item\em 用于安全继承的虚拟析构函数 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&inframe, \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} \&\&outframe)
+\begin{DoxyCompactList}\small\item\em 处理函数，从相机接收帧并通过 U\+SB 发送帧的版本 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_a81c140e6db5945679845aa9108b8ecd4}{process}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&inframe)
+\begin{DoxyCompactList}\small\item\em 处理函数，从相机接收帧但不使用 U\+SB 的版本 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_a9f9619482c39de5a86b99600b4cf9020}{process}} (\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&inframe, \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} \&helper)
+\begin{DoxyCompactList}\small\item\em 处理函数，从相机接收帧的版本，没有 U\+S\+B，但在 Je\+Vois-\/\+Pro 上有 G\+UI 输出 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_a25fcd554bf1ee47e02c51ff1844f5482}{send\+Serial}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 通过 \textquotesingle{}serout\textquotesingle{} 串行端口发送字符串 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_a4fa64441f85b9a23f17d972b1d9b2c51}{parse\+Serial}} (std\+::string const \&str, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$ s)
+\begin{DoxyCompactList}\small\item\em 从串行端口接收包含用户命令的字符串 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1Module_a2734260ac62a4b5b6d5806c30631562d}{supported\+Commands}} (std\+::ostream \&os)
+\begin{DoxyCompactList}\small\item\em 此模块支持的自定义命令的可读描述 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Module_a54270630932fa6c82953ae2ce29048f4}\label{classjevois_1_1Module_a54270630932fa6c82953ae2ce29048f4}} 
+\index{jevois::Module@{jevois::Module}!Module@{Module}}
+\index{Module@{Module}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{Module()}{Module()}}
+{\footnotesize\ttfamily jevois\+::\+Module\+::\+Module (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+instance 是一个用户定义的字符串，可用于区分同一模块的多个实例。 
+
+Definition at line 31 of file Module.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Module_abf23791ed64fa61f8e85339da72291cd}\label{classjevois_1_1Module_abf23791ed64fa61f8e85339da72291cd}} 
+\index{jevois::Module@{jevois::Module}!````~Module@{$\sim$Module}}
+\index{````~Module@{$\sim$Module}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{$\sim$Module()}{~Module()}}
+{\footnotesize\ttfamily jevois\+::\+Module\+::$\sim$\+Module (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+用于安全继承的虚拟析构函数 
+
+
+
+Definition at line 36 of file Module.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Module_a4fa64441f85b9a23f17d972b1d9b2c51}\label{classjevois_1_1Module_a4fa64441f85b9a23f17d972b1d9b2c51}} 
+\index{jevois::Module@{jevois::Module}!parseSerial@{parseSerial}}
+\index{parseSerial@{parseSerial}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{parseSerial()}{parseSerial()}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::parse\+Serial (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} $>$}]{s }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+从串行端口接收包含用户命令的字符串 
+
+
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_ac13d3c929ebab9aea708576cdb50c420}{jevois\+::\+Python\+Module}}.
+
+
+
+Definition at line 63 of file Module.\+C.
+
+
+
+Referenced by jevois\+::\+Python\+Module\+::parse\+Serial().
+
+\mbox{\Hypertarget{classjevois_1_1Module_a81c140e6db5945679845aa9108b8ecd4}\label{classjevois_1_1Module_a81c140e6db5945679845aa9108b8ecd4}} 
+\index{jevois::Module@{jevois::Module}!process@{process}}
+\index{process@{process}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{process()}{process()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&}]{inframe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+处理函数，从相机接收帧但不使用 U\+SB 的版本 
+
+此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。\+Input\+Frame 对象是一个简单的包装器，以确 保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随 时从 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared\+\_\+ptr 和类似的包装器来实现。 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} （它为您的模块调用每个帧的 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}}）将捕获任何异常并继续下一帧。
+
+基类中的默认实现只是抛出。派生类应该覆盖它。 
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_a611eeb138989c87e696128ff54efd154}{jevois\+::\+Python\+Module}}.
+
+
+
+Definition at line 44 of file Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Module_a9f9619482c39de5a86b99600b4cf9020}\label{classjevois_1_1Module_a9f9619482c39de5a86b99600b4cf9020}} 
+\index{jevois::Module@{jevois::Module}!process@{process}}
+\index{process@{process}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{process()}{process()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&}]{inframe,  }\item[{\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} \&}]{helper }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+处理函数，从相机接收帧的版本，没有 U\+S\+B，但在 Je\+Vois-\/\+Pro 上有 G\+UI 输出 
+
+此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。\+Input\+Frame 对象是一个简单的包装器，以确保 即使处理函数在处理过程中的任何时候抛出，低级视频缓冲区也将始终返回到低级相机驱动程序。如果发生任何错误，因此可以随时从 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared\+\_\+ptr 和类似的包装器来实现。 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} （ 它为您的模块的每一帧调用 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}}）将捕获任何异常并继续下一帧。
+
+基类中的默认实现只是抛出。派生类应该覆盖它。 
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_aa15495d16fa453eeff122334e8bd6be5}{jevois\+::\+Python\+Module}}.
+
+
+
+Definition at line 49 of file Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}\label{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}} 
+\index{jevois::Module@{jevois::Module}!process@{process}}
+\index{process@{process}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{process()}{process()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} \&\&}]{inframe,  }\item[{\mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} \&\&}]{outframe }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+处理函数，从相机接收帧并通过 U\+SB 发送帧的版本 
+
+此函数对相机抓取的每个视频帧调用一次，并且应在相机的帧周期内完成以避免丢帧。\+Input\+Frame 和 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 对象是简单的 包装器，以确保即使处理函数在处理过程中的任何时间点抛出，低级视频缓冲区也将始终返回到低级相机和 U\+SB 驱动程序。如果发生 任何错误，可以随时从 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 中抛出，只需确保您的本地分配资源将被释放，这通常最好通过使用 shared\+\_\+ptr 和类似的包装器 来实现。 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} （它为您的模块调用每个帧的 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}}）将捕获任何异常并继续下一帧。
+
+基类中的默认实现只是抛出。派生类应该覆盖它。 
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_a58900c6b311c9a740d969125839ab474}{jevois\+::\+Python\+Module}}.
+
+
+
+Definition at line 40 of file Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1Module_a25fcd554bf1ee47e02c51ff1844f5482}\label{classjevois_1_1Module_a25fcd554bf1ee47e02c51ff1844f5482}} 
+\index{jevois::Module@{jevois::Module}!sendSerial@{sendSerial}}
+\index{sendSerial@{sendSerial}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{sendSerial()}{sendSerial()}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::send\+Serial (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+通过 \textquotesingle{}serout\textquotesingle{} 串行端口发送字符串 
+
+默认实现只是将字符串发送到 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 中 \textquotesingle{}serout\textquotesingle{} Parameter 指定的串行端口（可以是硬件串行端口、\+U\+SB 串行端口、两者或都不是 ；有关 {\ttfamily serout} 的信息，请参阅 \mbox{\hyperlink{UserCli}{命令行界面用户指南}} ）。大多数情况下无需覆盖。通常，您会在 \mbox{\hyperlink{classjevois_1_1Module_aeee04cc9f45ee39774e7f2ce6116059a}{process()}} 中使用此函数来发送一些处 理结果。
+
+请注意，\+Engine 中默认的 \textquotesingle{}serout\textquotesingle{} Parameter 设置为 None。这是为了让用户在视觉处理的串行输出流开始之前配置参数、获取参数 值、可能阅读帮助消息等。一旦准备好接收串行输出，通常会通过 Je\+Vois 命令行发出命令 \textquotesingle{}setpar serout Hard \textquotesingle{}以启用到硬件串行 端口的串行输出。\+Arduino 会在准备好工作时发出该 setpar 命令。有关示例，请参阅 Arduino\+Tutorial。 
+
+Definition at line 54 of file Module.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and jevois\+::\+Engine\+::send\+Serial().
+
+\mbox{\Hypertarget{classjevois_1_1Module_a2734260ac62a4b5b6d5806c30631562d}\label{classjevois_1_1Module_a2734260ac62a4b5b6d5806c30631562d}} 
+\index{jevois::Module@{jevois::Module}!supportedCommands@{supportedCommands}}
+\index{supportedCommands@{supportedCommands}!jevois::Module@{jevois::Module}}
+\doxyparagraph{\texorpdfstring{supportedCommands()}{supportedCommands()}}
+{\footnotesize\ttfamily void jevois\+::\+Module\+::supported\+Commands (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+此模块支持的自定义命令的可读描述 
+
+此处的格式是免费的。只需使用 std\+::endl 来划分行，这些行将由串行端口转换为适当的行尾。默认实现将 \char`\"{}\+None\char`\"{} 写入 os。 
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1PythonModule_aaee2b1ee201fdeebe73a2287c35ea83f}{jevois\+::\+Python\+Module}}.
+
+
+
+Definition at line 67 of file Module.\+C.
+
+
+
+Referenced by jevois\+::\+Python\+Module\+::supported\+Commands().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Core/\mbox{\hyperlink{Module_8H}{Module.\+H}}\item 
+src/jevois/\+Core/\mbox{\hyperlink{Module_8C}{Module.\+C}}\end{DoxyCompactItemize}

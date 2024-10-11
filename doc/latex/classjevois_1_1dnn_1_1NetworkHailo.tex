@@ -1,0 +1,228 @@
+\hypertarget{classjevois_1_1dnn_1_1NetworkHailo}{}\doxysubsection{jevois\+::dnn\+::Network\+Hailo Class Reference}
+\label{classjevois_1_1dnn_1_1NetworkHailo}\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network\+Hailo.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+在 Hailo8 神经加速器上运行的 D\+NN 神经网络的包装器 
+
+请注意，此网络类型不支持在外部设置张力器或输出张力器，这些在 H\+EF 文件中已修复。 
+
+Definition at line 33 of file Network\+Hailo.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+Hailo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkHailo__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+Hailo\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1NetworkHailo__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_aa55c62f560a4077cd2a4b080e62f6a2d}{Network\+Hailo}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a6b9b7cb59146eea88ff6db29a0b47a50}{$\sim$\+Network\+Hailo}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a7928fd357d2f109b44d43e5a0b6bd1a4}{freeze}} (bool doit) override
+\begin{DoxyCompactList}\small\item\em 冻结/解冻参数，用户在运行时不应更改 \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a9e4569480c55437139e7bfd0988c700a}{input\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all input tensors. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_aa7b970fa3ecc6ffe76ca1e83c2ad078c}{output\+Shapes}} () override
+\begin{DoxyCompactList}\small\item\em Get shapes of all output tensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a33faa2d76284bfd55d80c40135fbb7f2}{load}} () override
+\begin{DoxyCompactList}\small\item\em Load from disk. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a2220cd1364ff986705a09399dd04481c}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info) override
+\begin{DoxyCompactList}\small\item\em Process input blobs and obtain output blobs. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a725842f25ce98439ba8545c69ae627e4}{on\+Param\+Change}} (network\+::turbo const \&par, bool const \&newval) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_acd790480035e13fb5c1067079bcbcc29}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (turbo, bool, \char`\"{}Turbo mode. Has no significant effect on small or \char`\"{} \char`\"{}fast networks. Use with caution as it may lead to overheating, not \char`\"{} \char`\"{}recommended for production\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_aa55c62f560a4077cd2a4b080e62f6a2d}\label{classjevois_1_1dnn_1_1NetworkHailo_aa55c62f560a4077cd2a4b080e62f6a2d}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!NetworkHailo@{NetworkHailo}}
+\index{NetworkHailo@{NetworkHailo}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{NetworkHailo()}{NetworkHailo()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Hailo\+::\+Network\+Hailo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 35 of file Network\+Hailo.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a6b9b7cb59146eea88ff6db29a0b47a50}\label{classjevois_1_1dnn_1_1NetworkHailo_a6b9b7cb59146eea88ff6db29a0b47a50}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!````~NetworkHailo@{$\sim$NetworkHailo}}
+\index{````~NetworkHailo@{$\sim$NetworkHailo}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{$\sim$NetworkHailo()}{~NetworkHailo()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+Hailo\+::$\sim$\+Network\+Hailo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 64 of file Network\+Hailo.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a2220cd1364ff986705a09399dd04481c}\label{classjevois_1_1dnn_1_1NetworkHailo_a2220cd1364ff986705a09399dd04481c}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+Hailo\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Process input blobs and obtain output blobs. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 168 of file Network\+Hailo.\+C.
+
+
+
+References jevois\+::async(), jevois\+::dnn\+::attrmatch(), jevois\+::dnn\+::attrstr(), jevois\+::dnn\+::dequantize(), jevois\+::joinall(), L\+F\+A\+T\+AL, jevois\+::sformat(), jevois\+::dnn\+::shapestr(), and jevois\+::to\+\_\+string().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a7928fd357d2f109b44d43e5a0b6bd1a4}\label{classjevois_1_1dnn_1_1NetworkHailo_a7928fd357d2f109b44d43e5a0b6bd1a4}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Hailo\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+冻结/解冻参数，用户在运行时不应更改 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 72 of file Network\+Hailo.\+C.
+
+
+
+References jevois\+::dnn\+::\+Network\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a9e4569480c55437139e7bfd0988c700a}\label{classjevois_1_1dnn_1_1NetworkHailo_a9e4569480c55437139e7bfd0988c700a}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!inputShapes@{inputShapes}}
+\index{inputShapes@{inputShapes}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{inputShapes()}{inputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Hailo\+::input\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all input tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 56 of file Network\+Hailo.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a33faa2d76284bfd55d80c40135fbb7f2}\label{classjevois_1_1dnn_1_1NetworkHailo_a33faa2d76284bfd55d80c40135fbb7f2}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!load@{load}}
+\index{load@{load}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Hailo\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Load from disk. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 80 of file Network\+Hailo.\+C.
+
+
+
+References jevois\+::absolute\+Path(), jevois\+::dnn\+::attrdims(), jevois\+::dnn\+::attrmat(), jevois\+::dnn\+::attrstr(), H\+A\+I\+L\+O\+\_\+\+C\+H\+E\+CK, L\+E\+R\+R\+OR, L\+F\+A\+T\+AL, L\+I\+N\+FO, and jevois\+::dnn\+::tensorattr().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_a725842f25ce98439ba8545c69ae627e4}\label{classjevois_1_1dnn_1_1NetworkHailo_a725842f25ce98439ba8545c69ae627e4}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+Hailo\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{network\+::turbo const \&}]{par,  }\item[{bool const \&}]{newval }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 162 of file Network\+Hailo.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_aa7b970fa3ecc6ffe76ca1e83c2ad078c}\label{classjevois_1_1dnn_1_1NetworkHailo_aa7b970fa3ecc6ffe76ca1e83c2ad078c}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!outputShapes@{outputShapes}}
+\index{outputShapes@{outputShapes}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{outputShapes()}{outputShapes()}}
+{\footnotesize\ttfamily std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ jevois\+::dnn\+::\+Network\+Hailo\+::output\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Get shapes of all output tensors. 
+
+
+
+Implements \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}{jevois\+::dnn\+::\+Network}}.
+
+
+
+Definition at line 60 of file Network\+Hailo.\+C.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1NetworkHailo_acd790480035e13fb5c1067079bcbcc29}\label{classjevois_1_1dnn_1_1NetworkHailo_acd790480035e13fb5c1067079bcbcc29}} 
+\index{jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::NetworkHailo@{jevois::dnn::NetworkHailo}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{turbo}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Turbo mode. Has no significant effect on small or \char`\"{} \char`\"{}fast networks. Use with caution as it may lead to}]{overheating,  }\item[{not \char`\"{} \char`\"{}recommended for production\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkHailo_8H}{Network\+Hailo.\+H}}\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{Network_8H}{Network.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{NetworkHailo_8C}{Network\+Hailo.\+C}}\end{DoxyCompactItemize}

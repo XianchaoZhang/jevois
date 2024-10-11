@@ -1,0 +1,459 @@
+\hypertarget{classjevois_1_1Range}{}\doxysubsection{jevois\+::Range$<$ T $>$ Class Template Reference}
+\label{classjevois_1_1Range}\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+
+
+{\ttfamily \#include $<$jevois/\+Types/\+Range.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+\subsubsection*{template$<$typename T$>$\newline
+class jevois\+::\+Range$<$ T $>$}
+
+通用 \mbox{\hyperlink{classjevois_1_1Range}{Range}} 类 
+
+\mbox{\hyperlink{classjevois_1_1Range}{Range}} 类用于表示从 \mbox{[}min .. max\mbox{]} 的范围
+
+请注意，\+Range 的运算符不使用类型提升。这是为了最大限度地减少模板负担，也是为了减少程序员的困惑。例如，虽然原则上可以定义 Range$<$int$>$ + float 并返回 Range$<$float$>$，但这里我们没有定义这样的运算符。通过首先转换范围然后添加常量可以实现相同的结 果：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Range}{jevois::Range<int>}} r1(0, 100);}
+\DoxyCodeLine{\textcolor{comment}{// NOT ALLOWED: jevois::Range<float> r2 = r1 + 1.23F;}}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Range}{jevois::Range<float>}} r2 = \mbox{\hyperlink{classjevois_1_1Range}{jevois::Range<float>}}(r1) + 1.23F; \textcolor{comment}{// OK, 没有隐藏转换，易于阅读，明确}}
+\end{DoxyCode}
+
+
+\mbox{\hyperlink{classjevois_1_1Range}{Range}} 上的运算符在内部使用范围检查和限制。因此，使用 Range$<$byte$>$ 时要小心。例如： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Range}{jevois::Range<jevois::byte>}} r(jevois::byte(0), jevois::byte(250));}
+\DoxyCodeLine{r += jevois::byte(100); \textcolor{comment}{// new range is 100-\/255}}
+\end{DoxyCode}
+ 
+
+Definition at line 78 of file Range.\+H.
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Range_a2e4ec9033f659f54d6a39f31198ad4be}{Range}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor, range is \mbox{[}0 .. 0\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Range_add3b8affc73769fe5dba0de6d9095858}{Range}} (T const mini, T const maxi)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Range_a34867aa2cd7fdd4c3e9cba1d7834bee6}{Range}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&other)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Range_a3710d9d2e56086ffb9dd4b4400ae30a9}{Range}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{classjevois_1_1Range_a8b9a5f2b87ded2b216e968d3e2a09852}{Range}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ U $>$ const \&other)
+\begin{DoxyCompactList}\small\item\em 复制转换构造函数，内部使用 \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert$<$\+T,\+U$>$}} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_a73726994e4d23f6b9b3e141264f69310}{operator=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&other)=default
+\begin{DoxyCompactList}\small\item\em Assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_aabca48f2414d21724afe3139f1a51072}{operator=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&\&other)=default
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classjevois_1_1Range_a6b13d7f40e04d40f7e3a046581eb54a6}{min}} () const
+\begin{DoxyCompactList}\small\item\em Return the minimum value. \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classjevois_1_1Range_a4a549ba093c640c573a0053458e38176}{max}} () const
+\begin{DoxyCompactList}\small\item\em Return the maximum value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1Range_a58b5b7edc3efc6040fe4aaedd9522a8f}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Return whether \mbox{\hyperlink{classjevois_1_1Range_a6b13d7f40e04d40f7e3a046581eb54a6}{min()}} == \mbox{\hyperlink{classjevois_1_1Range_a4a549ba093c640c573a0053458e38176}{max()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Range_a635e2a93a55a2bd2a8b5220decd4930f}{extend}} (T const val)
+\begin{DoxyCompactList}\small\item\em Extend the range, if needed, so that it includes val. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1Range_ae8e0b115e011c415b303d067624d8c68}{contains}} (T const \&val) const
+\begin{DoxyCompactList}\small\item\em Return true if val is within \mbox{[}min ... max\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_a87ca731ef4a775a97877d8f4cf4e0d5f}{merge}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&r1, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&r2)
+\begin{DoxyCompactList}\small\item\em Merge two ranges. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::ostream \& \mbox{\hyperlink{classjevois_1_1Range_ad1edbe7f3a6e61e3dfc264bbd1f3c55a}{operator$<$$<$}} (std\+::ostream \&out, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&r)
+\begin{DoxyCompactList}\small\item\em Stream out as \char`\"{}\mbox{[}min ... max\mbox{]}\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::istream \& \mbox{\hyperlink{classjevois_1_1Range_af91d990582481eab9a2cc3bea435163c}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&r)
+\begin{DoxyCompactList}\small\item\em Stream in as \char`\"{}\mbox{[}min ... max\mbox{]}\char`\"{}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classjevois_1_1Range_a12eaf41523c56fb9077b8e925e694ef7}{param\+Val\+To\+String}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&val, std\+::string \&result)
+\begin{DoxyCompactList}\small\item\em 机器可读的输出为字符串，用于 jevois\+::\+Parameter：outputs {\ttfamily min}...max (e.\+g., 0...100) \end{DoxyCompactList}\item 
+{\footnotesize template$<$class T $>$ }\\void \mbox{\hyperlink{classjevois_1_1Range_a2f1086da6d93a653fcf5108c7b8e7130}{param\+String\+To\+Val}} (std\+::string const \&valstring, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&result)
+\begin{DoxyCompactList}\small\item\em 来自字符串的机器可读输入， 用于 jevois\+::\+Parameter\+: reads {\ttfamily min}...max (e.\+g., 0...100) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classjevois_1_1Range_aca58491e6bc6518b779d44f564329a0c}{operator==}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range1, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range2)
+\begin{DoxyCompactList}\small\item\em 相等性测试： Range$<$\+T$>$ == Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\bool \mbox{\hyperlink{classjevois_1_1Range_a88ee26977ee29b8f752791039f76ff78}{operator!=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range1, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range2)
+\begin{DoxyCompactList}\small\item\em 不等式测试： Range$<$\+T$>$ != Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_abb29c7835c518c5d7ab531669a3bdbcf}{operator+}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 在范围的两端添加常数： Range$<$\+T$>$ + T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_a300623c28968367cfec22be853f2077b}{operator+}} (T const \&scalar, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range)
+\begin{DoxyCompactList}\small\item\em 在范围的两端添加常数： T + Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_a0f97c64b23314fea674e8afc2006270a}{operator-\/}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 从范围的两端减去常数：\+Range$<$\+T$>$ -\/ T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_abba5270c728ba66bd9f8b143c04e2e65}{operator-\/}} (T const \&scalar, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range)
+\begin{DoxyCompactList}\small\item\em 从范围的两端减去常数：T -\/ Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_afb316085a3c0683e533e81ab8703c193}{operator/}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em Divide both ends of a range by a factor\+: Range$<$\+T$>$ / T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_ac0bca80e0650381a7a5003a885e3a7d0}{operator/}} (T const \&scalar, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range)
+\begin{DoxyCompactList}\small\item\em 将范围的两端除以一个因子： T / Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_a8df1ba5f21d170ce2f51686b7ae356c8}{operator$\ast$}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 将范围的两端乘以一个因子： Range$<$\+T$>$ $\ast$ T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \mbox{\hyperlink{classjevois_1_1Range_a23c52a20b93fc01a0e803016b2d8186f}{operator$\ast$}} (T const \&scalar, \mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&range)
+\begin{DoxyCompactList}\small\item\em 将一个因子乘以范围的两端： T $\ast$ Range$<$\+T$>$ \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_ae8c53045167c09b4ebbcfcf3f486b660}{operator+=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 在范围的两端添加常数：\+Range$<$\+T$>$ += T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_af18a38563e9096105df7b04f2393f9e0}{operator-\/=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 从范围的两端减去常数：\+Range$<$\+T$>$ -\/= T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_a9ecf4f3f28bbc3fb360e449d5f1d9fe0}{operator$\ast$=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 将范围的两端乘以一个因子： Range$<$\+T$>$ $\ast$= T \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& \mbox{\hyperlink{classjevois_1_1Range_a60d90127864115c4ef72b402c096a082}{operator/=}} (\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&range, T const \&scalar)
+\begin{DoxyCompactList}\small\item\em 将范围的两端除以一个因子：\+Range$<$\+T$>$ /= T \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Range_a2e4ec9033f659f54d6a39f31198ad4be}\label{classjevois_1_1Range_a2e4ec9033f659f54d6a39f31198ad4be}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!Range@{Range}}
+\index{Range@{Range}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Range}{Range}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Default constructor, range is \mbox{[}0 .. 0\mbox{]}. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_add3b8affc73769fe5dba0de6d9095858}\label{classjevois_1_1Range_add3b8affc73769fe5dba0de6d9095858}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!Range@{Range}}
+\index{Range@{Range}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Range}{Range}} (\begin{DoxyParamCaption}\item[{T const}]{mini,  }\item[{T const}]{maxi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a34867aa2cd7fdd4c3e9cba1d7834bee6}\label{classjevois_1_1Range_a34867aa2cd7fdd4c3e9cba1d7834bee6}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!Range@{Range}}
+\index{Range@{Range}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Range}{Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a3710d9d2e56086ffb9dd4b4400ae30a9}\label{classjevois_1_1Range_a3710d9d2e56086ffb9dd4b4400ae30a9}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!Range@{Range}}
+\index{Range@{Range}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Range}{Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Move constructor. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a8b9a5f2b87ded2b216e968d3e2a09852}\label{classjevois_1_1Range_a8b9a5f2b87ded2b216e968d3e2a09852}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!Range@{Range}}
+\index{Range@{Range}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{Range()}{Range()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename U $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::\mbox{\hyperlink{classjevois_1_1Range}{Range}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ U $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+复制转换构造函数，内部使用 \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert$<$\+T,\+U$>$}} 
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Range_ae8e0b115e011c415b303d067624d8c68}\label{classjevois_1_1Range_ae8e0b115e011c415b303d067624d8c68}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!contains@{contains}}
+\index{contains@{contains}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::contains (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption}) const}
+
+
+
+Return true if val is within \mbox{[}min ... max\mbox{]}. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a58b5b7edc3efc6040fe4aaedd9522a8f}\label{classjevois_1_1Range_a58b5b7edc3efc6040fe4aaedd9522a8f}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!empty@{empty}}
+\index{empty@{empty}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return whether \mbox{\hyperlink{classjevois_1_1Range_a6b13d7f40e04d40f7e3a046581eb54a6}{min()}} == \mbox{\hyperlink{classjevois_1_1Range_a4a549ba093c640c573a0053458e38176}{max()}} 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a635e2a93a55a2bd2a8b5220decd4930f}\label{classjevois_1_1Range_a635e2a93a55a2bd2a8b5220decd4930f}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!extend@{extend}}
+\index{extend@{extend}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{extend()}{extend()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::extend (\begin{DoxyParamCaption}\item[{T const}]{val }\end{DoxyParamCaption})}
+
+
+
+Extend the range, if needed, so that it includes val. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a4a549ba093c640c573a0053458e38176}\label{classjevois_1_1Range_a4a549ba093c640c573a0053458e38176}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!max@{max}}
+\index{max@{max}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T\& \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the maximum value. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a6b13d7f40e04d40f7e3a046581eb54a6}\label{classjevois_1_1Range_a6b13d7f40e04d40f7e3a046581eb54a6}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!min@{min}}
+\index{min@{min}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+const T\& \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::min (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Return the minimum value. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_aabca48f2414d21724afe3139f1a51072}\label{classjevois_1_1Range_aabca48f2414d21724afe3139f1a51072}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$T$>$\& \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&\&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Move assignment. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a73726994e4d23f6b9b3e141264f69310}\label{classjevois_1_1Range_a73726994e4d23f6b9b3e141264f69310}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$T$>$\& \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Assignment. 
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Range_a87ca731ef4a775a97877d8f4cf4e0d5f}\label{classjevois_1_1Range_a87ca731ef4a775a97877d8f4cf4e0d5f}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!merge@{merge}}
+\index{merge@{merge}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{merge()}{merge()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ merge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{r1,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{r2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Merge two ranges. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a88ee26977ee29b8f752791039f76ff78}\label{classjevois_1_1Range_a88ee26977ee29b8f752791039f76ff78}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range1,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+不等式测试： Range$<$\+T$>$ != Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a8df1ba5f21d170ce2f51686b7ae356c8}\label{classjevois_1_1Range_a8df1ba5f21d170ce2f51686b7ae356c8}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator$\ast$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将范围的两端乘以一个因子： Range$<$\+T$>$ $\ast$ T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a23c52a20b93fc01a0e803016b2d8186f}\label{classjevois_1_1Range_a23c52a20b93fc01a0e803016b2d8186f}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$\ast$()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator$\ast$ (\begin{DoxyParamCaption}\item[{T const \&}]{scalar,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将一个因子乘以范围的两端： T $\ast$ Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a9ecf4f3f28bbc3fb360e449d5f1d9fe0}\label{classjevois_1_1Range_a9ecf4f3f28bbc3fb360e449d5f1d9fe0}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$\ast$=()}{operator*=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& operator$\ast$= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将范围的两端乘以一个因子： Range$<$\+T$>$ $\ast$= T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_abb29c7835c518c5d7ab531669a3bdbcf}\label{classjevois_1_1Range_abb29c7835c518c5d7ab531669a3bdbcf}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+在范围的两端添加常数： Range$<$\+T$>$ + T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a300623c28968367cfec22be853f2077b}\label{classjevois_1_1Range_a300623c28968367cfec22be853f2077b}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator+()}{operator+()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator+ (\begin{DoxyParamCaption}\item[{T const \&}]{scalar,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+在范围的两端添加常数： T + Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_ae8c53045167c09b4ebbcfcf3f486b660}\label{classjevois_1_1Range_ae8c53045167c09b4ebbcfcf3f486b660}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& operator+= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+在范围的两端添加常数：\+Range$<$\+T$>$ += T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a0f97c64b23314fea674e8afc2006270a}\label{classjevois_1_1Range_a0f97c64b23314fea674e8afc2006270a}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+从范围的两端减去常数：\+Range$<$\+T$>$ -\/ T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_abba5270c728ba66bd9f8b143c04e2e65}\label{classjevois_1_1Range_abba5270c728ba66bd9f8b143c04e2e65}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator-\/ (\begin{DoxyParamCaption}\item[{T const \&}]{scalar,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+从范围的两端减去常数：T -\/ Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_af18a38563e9096105df7b04f2393f9e0}\label{classjevois_1_1Range_af18a38563e9096105df7b04f2393f9e0}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& operator-\/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+从范围的两端减去常数：\+Range$<$\+T$>$ -\/= T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_afb316085a3c0683e533e81ab8703c193}\label{classjevois_1_1Range_afb316085a3c0683e533e81ab8703c193}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Divide both ends of a range by a factor\+: Range$<$\+T$>$ / T. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_ac0bca80e0650381a7a5003a885e3a7d0}\label{classjevois_1_1Range_ac0bca80e0650381a7a5003a885e3a7d0}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator/@{operator/}}
+\index{operator/@{operator/}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator/()}{operator/()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ operator/ (\begin{DoxyParamCaption}\item[{T const \&}]{scalar,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将范围的两端除以一个因子： T / Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a60d90127864115c4ef72b402c096a082}\label{classjevois_1_1Range_a60d90127864115c4ef72b402c096a082}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \& operator/= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{range,  }\item[{T const \&}]{scalar }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+将范围的两端除以一个因子：\+Range$<$\+T$>$ /= T 
+
+\mbox{\Hypertarget{classjevois_1_1Range_ad1edbe7f3a6e61e3dfc264bbd1f3c55a}\label{classjevois_1_1Range_ad1edbe7f3a6e61e3dfc264bbd1f3c55a}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Stream out as \char`\"{}\mbox{[}min ... max\mbox{]}\char`\"{}. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_aca58491e6bc6518b779d44f564329a0c}\label{classjevois_1_1Range_aca58491e6bc6518b779d44f564329a0c}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+bool operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range1,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{range2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+相等性测试： Range$<$\+T$>$ == Range$<$\+T$>$ 
+
+\mbox{\Hypertarget{classjevois_1_1Range_af91d990582481eab9a2cc3bea435163c}\label{classjevois_1_1Range_af91d990582481eab9a2cc3bea435163c}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!operator$>$$>$@{operator$>$$>$}}
+\index{operator$>$$>$@{operator$>$$>$}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{operator$>$$>$()}{operator>>()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::istream \& operator$>$$>$ (\begin{DoxyParamCaption}\item[{std\+::istream \&}]{in,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{r }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Stream in as \char`\"{}\mbox{[}min ... max\mbox{]}\char`\"{}. 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a2f1086da6d93a653fcf5108c7b8e7130}\label{classjevois_1_1Range_a2f1086da6d93a653fcf5108c7b8e7130}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!paramStringToVal@{paramStringToVal}}
+\index{paramStringToVal@{paramStringToVal}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{paramStringToVal()}{paramStringToVal()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void param\+String\+To\+Val (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{valstring,  }\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+来自字符串的机器可读输入， 用于 jevois\+::\+Parameter\+: reads {\ttfamily min}...max (e.\+g., 0...100) 
+
+\mbox{\Hypertarget{classjevois_1_1Range_a12eaf41523c56fb9077b8e925e694ef7}\label{classjevois_1_1Range_a12eaf41523c56fb9077b8e925e694ef7}} 
+\index{jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}!paramValToString@{paramValToString}}
+\index{paramValToString@{paramValToString}!jevois::Range$<$ T $>$@{jevois::Range$<$ T $>$}}
+\doxyparagraph{\texorpdfstring{paramValToString()}{paramValToString()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void param\+Val\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1Range}{Range}}$<$ T $>$ const \&}]{val,  }\item[{std\+::string \&}]{result }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+机器可读的输出为字符串，用于 jevois\+::\+Parameter：outputs {\ttfamily min}...max (e.\+g., 0...100) 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Types/\mbox{\hyperlink{Range_8H}{Range.\+H}}\end{DoxyCompactItemize}

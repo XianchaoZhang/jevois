@@ -23,16 +23,16 @@
 
 namespace jevois
 {
-  //! Functions for RawImage conversion, processing, drawing
+  //! 用于 RawImage 转换、处理、绘制的函数
   namespace rawimage
   {
-    //! Create an OpenCV image from the existing RawImage data, sharing the pixel memory rather than copying it
-    /*! The pixel data is not copied, just pointed to, and no pixel format conversion is done. You should destroy the
-        cv::Mat before the RawImage to avoid that your cv::Mat ends up with de-allocated pixel memory. \ingroup image */
+    //! 从现有 RawImage 数据创建 OpenCV 图像，共享像素内存而不是复制它 
+    /*! 像素数据不会被复制，只是指向，并且不会进行像素格式转换。您应该在 RawImage 之前销毁 cv::Mat，以避免您的 cv::Mat 最终导
+        致像素内存被释放。 \ingroup image */
     cv::Mat cvImage(RawImage const & src);
 
-    //! Convert RawImage to OpenCV doing color conversion from any RawImage source pixel to OpenCV gray byte
-    /*! Supported RawImage pixel formats:
+    //! 将 RawImage 转换为 OpenCV，从任何 RawImage 源像素执行颜色转换为 OpenCV 灰度字节 
+    /*！支持的 RawImage 像素格式：
 
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
@@ -43,11 +43,10 @@ namespace jevois
         \ingroup image */
     cv::Mat convertToCvGray(RawImage const & src);
     
-    //! Convert RawImage to OpenCV doing color conversion from any RawImage source pixel to OpenCV BGR byte
-    /*! For historical reasons, BGR is the "native" color format of OpenCV, check whether your algorithm needs RGB or
-        BGR and use the appropriate conversion for it.
+    //! 将 RawImage 转换为 OpenCV，从任何 RawImage 源像素执行颜色转换为 OpenCV BGR 字节 
+    /*! 由于历史原因，BGR 是 OpenCV 的 "native" 颜色格式，请检查您的算法是否需要 RGB 或 BGR，并使用适当的转换。
 
-        Supported RawImage pixel formats:
+        支持的 RawImage 像素格式：
 
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
@@ -58,11 +57,11 @@ namespace jevois
         \ingroup image */
     cv::Mat convertToCvBGR(RawImage const & src);
 
-    //! Convert RawImage to OpenCV doing color conversion from any RawImage source pixel to OpenCV RGB byte
-    /*! For historical reasons, BGR is the "native" color format of OpenCV, not RGB as created here, check whether your
-        algorithm needs RGB or BGR and use the appropriate conversion for it.
+    //! 将 RawImage 转换为 OpenCV，从任何 RawImage 源像素到 OpenCV RGB 字节进行颜色转换 
+    /*! 由于历史原因，BGR 是 OpenCV 的 "native" 颜色格式，而不是此处创建的 RGB，请检查您的算法是否需要 RGB 或 BGR，并使用适当
+        的转换。
         
-        Supported RawImage pixel formats:
+        支持的 RawImage 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -72,11 +71,11 @@ namespace jevois
         \ingroup image */
     cv::Mat convertToCvRGB(RawImage const & src);
 
-    //! Convert RawImage to OpenCV doing color conversion from any RawImage source pixel to OpenCV RGB-A byte
-    /*! RGBA is seldom used by OpenCV itself, but is useful for many NEON and OpenGL (GPU) algorithms. For these
-        algorithms, we here just use cv::Mat as a convenient container for raw pixel data.
+    //! 将 RawImage 转换为 OpenCV，从任何 RawImage 源像素到 OpenCV RGB-A 字节进行颜色转换 
+    /*! OpenCV 本身很少使用 RGBA，但对许多 NEON 和 OpenGL (GPU) 算法很有用。对于这些算法，我们在这里仅使用 cv::Mat 作
+        为原始像素数据的便捷容器。
 
-        Supported RawImage pixel formats:
+        支持的 RawImage 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -86,69 +85,63 @@ namespace jevois
         \ingroup image */
     cv::Mat convertToCvRGBA(RawImage const & src);
 
-    //! Swap pairs of bytes in a RawImage
-    /*! This should never be needed, except maybe for RGB565 images, mainly for internal debugging, or to directly pass
-        an RGB565 camera image (which is big endian) to USB (which assumes little endian when using RGBP UVC
-        format). This function is NEON-accelerated when compiled for the platform hardware. \ingroup image */
+    //! 交换 RawImage 中的字节对 
+    /*! 这永远都不需要，除非是 RGB565 图像，主要用于内部调试，或者直接将 RGB565 相机图像（大端字节序）传递到 USB（使用 RGBP UVC
+         格式时假定为小端字节序）。此函数在为平台硬件编译时是 NEON 加速的。 \ingroup image */
     void byteSwap(RawImage & img);
     
-    //! Paste an image within another of same pixel type
-    /*! To keep this function fast, throws if the source image does not fully fit within the destination image, or if
-        the two images do not have the same pixel format. \ingroup image */
+    //! 将一张图像粘贴到另一张相同像素类型的图像中 
+    /*! 为保持此功能快速运行，如果源图像不完全适合目标图像，或者两张图像的像素格式不同，则会抛出异常。 \ingroup image */
     void paste(RawImage const & src, RawImage & dest, int dx, int dy);
 
-    //! Paste a grey byte image into a YUYV image
+    //! 将灰度字节图像粘贴到 YUYV 图像中
     /*! \ingroup image */
     void pasteGreyToYUYV(cv::Mat const & src, RawImage & dest, int dx, int dy);
 
-    //! Paste a BGR byte image into a YUYV image
+    //! 将 BGR 字节图像粘贴到 YUYV 图像中
     /*! \ingroup image */
     void pasteBGRtoYUYV(cv::Mat const & src, RawImage & dst, int dx, int dy);
 
-    //! Paste a RGB byte image into a YUYV image
+    //! 将 RGB 字节图像粘贴到 YUYV 图像中
     /*! \ingroup image */
     void pasteRGBtoYUYV(cv::Mat const & src, RawImage & dst, int dx, int dy);
     
-    //! Paste an ROI from an image to within another of same pixel type
-    /*! To keep this function fast, throws if the source image does not fully fit within the destination image or if the
-        pixel formats differ.  \ingroup image */
+    //! 将图像中的 ROI 粘贴到相同像素类型的另一个图像中 
+    /*! 为了保持此功能的快速运行，如果源图像不完全适合目标图像或像素格式不同，则会抛出。  \ingroup image */
     void roipaste(RawImage const & src, int x, int y, unsigned int w, unsigned int h, RawImage & dest, int dx, int dy);
 
-    //! Draw a disk in a YUYV image
+    //! 在 YUYV 图像中绘制一个圆盘 disk
     /*! \ingroup image */
     void drawDisk(RawImage & img, int x, int y, unsigned int rad, unsigned int col);
 
-    //! Draw a circle in a YUYV image
+    //! 在YUYV图像中绘制一个圆圈
     /*! \ingroup image */
     void drawCircle(RawImage & img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col);
 
-    //! Clip a line to fit inside a viewport [wxmin...wxmax[ x [wymin...wymax[
-    /*! This uses the Liang-Barsky line clipping algorithm. Returns false if the line is entirely outside the viewport
-        (nothing to draw). \ingroup image */
+    //! 剪裁一条线以适合 viewport [wxmin...wxmax[ x [wymin...wymax] 
+    /*! 这使用 Liang-Barsky 线剪裁算法。如果线完全在 viewport 之外（没有可绘制的内容），则返回 false。 \ingroup image */
     bool clipLine(int wxmin, int wymin, int wxmax, int wymax, int & x1, int & y1, int & x2, int & y2);
 
-    //! Draw a line in a YUYV image
+    //! 在 YUYV 图像中绘制一条线
     /*! \ingroup image */
     void drawLine(RawImage & img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col);
     
-    //! Draw a rectangle in a YUYV image
-    /*! The pixels drawn go from (x,y) included to (x+w-1,y+h-1) included. If w or h is 0, it is replaced by 1.
+    //! 在 YUYV 图像中绘制一个矩形 
+    /*! 绘制的像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则用 1 替换。
         \ingroup image */
     void drawRect(RawImage & img, int x, int y, unsigned int w, unsigned int h, unsigned int thick, unsigned int col);
 
-    //! Draw a rectangle in a YUYV image
-    /*! This is really not flexible and is optimized for speed only. col will be used for both YU and YV pixels. For
-        more demanding drawings, use openCV functions. The pixels drawn go from (x,y) included to (x+w-1,y+h-1)
-        included. If w or h is 0, it is replaced by 1. \ingroup image */
+    //! 在 YUYV 图像中绘制矩形 
+    /*! 这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 openCV 函数。绘制的
+        像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则将其替换为 1。 \ingroup image */
     void drawRect(RawImage & img, int x, int y, unsigned int w, unsigned int h, unsigned int col);
 
-    //! Draw a filled rectangle in a YUYV image
-    /*! This is really not flexible and is optimized for speed only. col will be used for both YU and YV pixels. For
-        more demanding drawings, use openCV functions. The pixels drawn go from (x,y) included to (x+w-1,y+h-1)
-        included. If w or h is 0, it is replaced by 1. \ingroup image */
+    //! 在 YUYV 图像中绘制填充矩形 
+    /*! 这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 openCV 函数。绘制的
+        像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则将其替换为 1。 \ingroup image */
     void drawFilledRect(RawImage & img, int x, int y, unsigned int w, unsigned int h, unsigned int col);
 
-    //! Available fonts for writeText()
+    //! 可用于 writeText() 的字体
     /*! \ingroup image */
     enum Font
     {
@@ -166,32 +159,29 @@ namespace jevois
       Font20x38,
     };
     
-    //! Write some text in an image
+    //! 在图像中写一些文字
     /*! \ingroup image */
     void writeText(RawImage & img, std::string const & txt, int x, int y, unsigned int col, Font font = Font6x10);
 
-    //! Write some text in an image
+    //! 在图像中写一些文字
     /*! \ingroup image */
     void writeText(RawImage & img, char const * txt, int x, int y, unsigned int col, Font font = Font6x10);
 
-    //! Shorthand to write some text in an image, with x = 3 and return the next y position
-    /*! Used to show several lines of text messages on top of a video image. The given y position is initialized to 3 if
-        < 3; then the returned value is the y that should be used for the next line. \ingroup image */
+    //! 在图像中简写一些文本，x = 3 并返回下一个 y 位置 
+    /*！用于在视频图像顶部显示几行文本消息。如果 < 3，则给定的 y 位置初始化为 3；然后返回的值是下一行应该使用的 y。 \ingroup image */
     int itext(RawImage & img, std::string const & txt, int y = 3, unsigned int col = jevois::yuyv::White,
               Font font = Font6x10);
     
-    //! Shorthand to write some text in an image, with x = 3 and return the next y position
-    /*! Used to show several lines of text messages on top of a video image. The given y position is initialized to 3 if
-        < 3; then the returned value is the y that should be used for the next line. \ingroup image */
+    //! 在图像中简写一些文本，x = 3 并返回下一个 y 位置 
+    /*！用于在视频图像顶部显示几行文本消息。如果 < 3，则给定的 y 位置初始化为 3；然后返回的值是下一行应该使用的 y。 \ingroup image */
     int itext(RawImage & img, char const * txt, int y = 3, unsigned int col = jevois::yuyv::White,
               Font font = Font6x10);
     
-    //! Convert a BGR cv::Mat to RawImage with already-allocated pixels and pixel type
-    /*! This is used to output video frames over USB from internally computed results in opencv BGR format.  dst should
-        already have an allocated pixel buffer (typically, it should be obtained from the USB gadget), and its size
-        must match that of the src image.
+    //! 将 BGR cv::Mat 转换为具有已分配像素和像素类型的 RawImage 
+    /*! 这用于通过 USB 从内部计算的 opencv BGR 格式的结果输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 USB 
+        gadget中获取），并且它的大小必须与 src 图像的大小相匹配。
         
-        Supported dst pixel formats:
+        支持的 dst 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -199,15 +189,14 @@ namespace jevois
         - V4L2_PIX_FMT_MJPG
         - V4L2_PIX_FMT_BGR24
         
-        quality is used only when dst is MJPG and should be between 1 and 100. \ingroup image */
+        质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 \ingroup image */
     void convertCvBGRtoRawImage(cv::Mat const & src, RawImage & dst, int quality);
 
-    //! Convert a RGB cv::Mat to RawImage with already-allocated pixels and pixel type
-    /*! This is used to output video frames over USB from internally computed results in opencv BGR format.  dst should
-        already have an allocated pixel buffer (typically, it should be obtained from the USB gadget), and its size
-        must match that of the src image.
+    //! 将 RGB cv::Mat 转换为具有已分配像素和像素类型的 RawImage 
+    /*! 这用于通过 USB 从内部计算的结果以 opencv BGR 格式输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 USB 
+        gadget中获取），并且它的大小必须与 src 图像的大小相匹配。
         
-        Supported dst pixel formats:
+        支持的 dst 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -215,15 +204,14 @@ namespace jevois
         - V4L2_PIX_FMT_MJPG
         - V4L2_PIX_FMT_BGR24
         
-        quality is used only when dst is MJPG and should be between 1 and 100. \ingroup image */
+        质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 \ingroup image */
     void convertCvRGBtoRawImage(cv::Mat const & src, RawImage & dst, int quality);
     
-    //! Convert an RGBA cv::Mat to RawImage with already-allocated pixels and pixel type
-    /*! This is used to output video frames over USB from internally computed results in opencv RGB-A format (which is
-        often the format of choice for NEON or OpenGL processing).  dst should already have an allocated pixel buffer
-        (typically, it should be obtained from the USB gadget), and its size must match that of the src image.
+    //! 使用已分配的像素和像素类型将 RGBA cv::Mat 转换为 RawImage 
+    /*! 这用于通过 USB 从内部计算的结果以 opencv RGB-A 格式（通常是 NEON 或 OpenGL 处理的首选格式）输出视频帧。 dst 应该已经
+        有一个分配的像素缓冲区（通常，它应该从 USB 小工具中获取），并且其大小必须与 src 图像的大小相匹配。
         
-        Supported dst pixel formats:
+        支持的 dst 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -231,15 +219,14 @@ namespace jevois
         - V4L2_PIX_FMT_MJPG
         - V4L2_PIX_FMT_BGR24
         
-        quality is used only when dst is MJPG and should be between 1 and 100. \ingroup image */
+        质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 \ingroup image */
     void convertCvRGBAtoRawImage(cv::Mat const & src, RawImage & dst, int quality);
     
-    //! Convert a Gray cv::Mat to RawImage with already-allocated pixels and pixel type
-    /*! This is used to output video frames over USB from internally computed results in opencv Gray format.  dst should
-        already have an allocated pixel buffer (typically, it should be obtained from the USB gadget), and its size
-        must match that of the src image.
+    //! 使用已分配的像素和像素类型将灰色 cv::Mat 转换为 RawImage 
+    /*! 这用于通过 USB 输出内部计算结果为 opencv 灰度格式的视频帧。dst 应该已经分配了一个像素缓冲区（通常，它应该从 USB 小工具中获
+        取），并且其大小必须与 src 图像的大小相匹配。
         
-        Supported dst pixel formats:
+        支持的 dst 像素格式：
         - V4L2_PIX_FMT_YUYV
         - V4L2_PIX_FMT_GREY
         - V4L2_PIX_FMT_SRGGB8 (Bayer)
@@ -247,50 +234,47 @@ namespace jevois
         - V4L2_PIX_FMT_MJPG
         - V4L2_PIX_FMT_BGR24
         
-        quality is used only when dst is MJPG and should be between 1 and 100. \ingroup image */
+        质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 \ingroup image */
     void convertCvGRAYtoRawImage(cv::Mat const & src, RawImage & dst, int quality);
     
-    //! Split an RGBA cv::Mat into a 4x taller grey RawImage with already-allocated pixels
-    /*! This is used to run GPU shaders that apply different filters to an image and store their results separately into
-        the R, G, B and A components of an RGBA output image. Here, we just unpack the 4 components and stuff them into
-        the output image one above the other: R on top, then G below it, then B below it, then A below it. The
-        destination RawImage must be at least as wide as src and at least 4 times as tall as src, and must have
-        V4L2_PIX_FMT_GREY pixels. \ingroup image */
+    //! 将 RGBA cv::Mat 分割成 4 倍高的灰色 RawImage，其中已分配像素 
+    /*！这用于运行 GPU 着色器，该着色器将不同的过滤器应用于图像并将其结果分别存储到 RGBA 输出图像的 R、G、B 和 A 组件中。在这里，
+        我们只需解压 4 个组件并将它们一个接一个地塞入输出图像中：R 在顶部，G 在下方，B 在下方，A 在下方。目标 RawImage 必须至少
+        与 src 一样宽，至少是 src 的 4 倍高，并且必须具有 V4L2_PIX_FMT_GREY 像素。 \ingroup image */
     void unpackCvRGBAtoGrayRawImage(cv::Mat const & src, RawImage & dst);
 
-    //! Flip a YUYV RawImage horizontally while preserving color information
-    /*! This function is to allow one to use JeVois with the PhotoBooth app on a Mac, whih flips the image horizontally
-        (about the vertical axis). Only YUYV pixels are supported. You might be able to use cv::flip() from OpenCV
-        instead with other pixel types. \ingroup image */
+    //! 水平翻转 YUYV RawImage 同时保留颜色信息 
+    /*! 此函数允许在 Mac 上使用 JeVois 和 PhotoBooth 应用程序，水平翻转图像（围绕垂直轴）。仅支持 YUYV 像素。您可能能够将 
+        OpenCV 中的 cv::flip() 与其他像素类型一起使用。 \ingroup image */
     void hFlipYUYV(RawImage & img);
 
-    //! OpenCV does not provide conversion from RGB to YUYV in cvtColor(), so this function provides it
+    //! OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它
     /*! \ingroup image */
     void convertCvRGBtoCvYUYV(cv::Mat const & src, cv::Mat & dst);
 
-    //! OpenCV does not provide conversion from BGR to YUYV in cvtColor(), so this function provides it
+    //! OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它
     /*! \ingroup image */
     void convertCvBGRtoCvYUYV(cv::Mat const & src, cv::Mat & dst);
 
-    //! OpenCV does not provide conversion from GRAY to YUYV in cvtColor(), so this function provides it
+    //! OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它
     /*! \ingroup image */
     void convertCvGRAYtoCvYUYV(cv::Mat const & src, cv::Mat & dst);
 
-    //! OpenCV does not provide conversion from RGBA to YUYV in cvtColor(), so this function provides it
+    //! OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它
     /*! \ingroup image */
     void convertCvRGBAtoCvYUYV(cv::Mat const & src, cv::Mat & dst);
 
-    //! Convert from Bayer to YUYV, only used internally by Camera class
-    /*! Both src and dst should already have allocated buffers of correct sizes. */
+    //! 从 Bayer 转换为 YUYV，仅供 Camera 类内部使用 
+    /*！src 和 dst 都应该已经分配了正确大小的缓冲区。 */
     void convertBayerToYUYV(RawImage const & src, RawImage & dst);
     
-    //! Convert from Grey (monochrome) to YUYV, only used internally by Camera class
-    /*! Both src and dst should already have allocated buffers of correct sizes. */
+    //! 从灰色（单色）转换为 YUYV，仅供 Camera 类内部使用 
+    /*！src 和 dst 都应该已经分配了正确大小的缓冲区。 */
     void convertGreyToYUYV(RawImage const & src, RawImage & dst);
     
   } // namespace rawimage
 
-  //! Rescale an OpenCV image, choosing the right kind of interpolation
+  //! 重新缩放 OpenCV 图像，选择正确的插值类型
   /*! \ingroup image */
   cv::Mat rescaleCv(cv::Mat const & img, cv::Size const & newdims);
 

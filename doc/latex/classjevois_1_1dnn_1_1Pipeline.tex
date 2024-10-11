@@ -1,0 +1,618 @@
+\hypertarget{classjevois_1_1dnn_1_1Pipeline}{}\doxysubsection{jevois\+::dnn\+::Pipeline Class Reference}
+\label{classjevois_1_1dnn_1_1Pipeline}\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Pipeline.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经处理管道 
+
+Je\+Vois 中的神经处理管道包括：
+
+
+\begin{DoxyItemize}
+\item pre-\/processing 输入图像以提取一个或多个 blobs，用作深度神经网络的输入 tensors
+\item 通过深度网络处理输入 blob 并获得输出 blob
+\item post-\/processing 输出 blob，显示结果并发送串行消息
+\end{DoxyItemize}
+
+Pipline 通常通过解析 Y\+A\+ML 配置文件（zoo 文件）来配置，该文件确定要使用哪种类型的 pre-\/processing、network 和 post-\/processing，并为其设置参数。 
+
+Definition at line 133 of file Pipeline.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Pipeline\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1Pipeline__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Pipeline\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1Pipeline__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a9060d07b8b22587c002870232a0d0bbd}{Pipeline}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a7e6cf1725a38e1c6ffbe09d73c464c40}{$\sim$\+Pipeline}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a809d7e4b90b9b3e920888aaad7bd1c5d}{ready}} () const
+\begin{DoxyCompactList}\small\item\em 当 preproc、net、postproc 三者都准备就绪时返回 true \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a6aaf351c8508d34b2c6fbf9acf8b927f}{process}} (\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&inimg, \mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper, bool idle=false)
+\begin{DoxyCompactList}\small\item\em 处理输入图像，将结果发送到 serial/image/gui \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_aaa13a44e7dba5671ed17d6de6e8f3fc0}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em 冻结/解冻运行时用户不应更改的参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ae13fed0f9c31f30edcf07e9a5abeed81}{post\+Init}} () override
+\begin{DoxyCompactList}\small\item\em Called after all sub-\/\+Components are init()ed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a2afcca8091eba25f532cdaac0916c55e}{pre\+Uninit}} () override
+\begin{DoxyCompactList}\small\item\em Called before all sub-\/\+Components are uninit()ed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_aced2d29527e2979b29ac558f6a348727}{reload\+Zoo}} (std\+::string const \&root, std\+::string const \&filt, std\+::string const \&zoofile)
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a7e0181b12741aa704c717a59f7162744}{on\+Param\+Change}} (pipeline\+::zooroot const \&param, std\+::string const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a7e84f7a4467a4ceb83e10c1071c343d6}{on\+Param\+Change}} (pipeline\+::zoo const \&param, std\+::string const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_aeb4f05c6e0d1fcb0ca7cfd27798aad41}{on\+Param\+Change}} (pipeline\+::filter const \&param, pipeline\+::\+Filter const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a74ba915e5837127ffe03f81b20fdcf87}{on\+Param\+Change}} (pipeline\+::pipe const \&param, std\+::string const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a4f51ed15546cdbe821e11b055b8e22d1}{on\+Param\+Change}} (pipeline\+::nettype const \&param, pipeline\+::\+Net\+Type const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a98ccc8002d5c409cfd5ca8f54c0bf601}{on\+Param\+Change}} (pipeline\+::preproc const \&param, pipeline\+::\+Pre\+Proc const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a2afd12795bea5d54115c4ba8d85e5339}{on\+Param\+Change}} (pipeline\+::postproc const \&param, pipeline\+::\+Post\+Proc const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a6e460d02f8cc184fa0a2a2361df64228}{on\+Param\+Change}} (pipeline\+::benchmark const \&param, bool const \&val) override
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a0f4103dc49bd7d1ade442066484c7157}{show\+Info}} (std\+::vector$<$ std\+::string $>$ const \&info, \mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper, bool ovl, bool idle)
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a4545b6c2858eeb6be7236acb8f72b431}{async\+Net\+Wait}} ()
+\item 
+bool \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a0c0b17ccff7dad5f546bb04cdce144a1}{check\+Async\+Net\+Complete}} ()
+\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a34d45d6e2b6c48de7672f9594ebf5032}{show\+Data\+Peek\+Window}} (\mbox{\hyperlink{classjevois_1_1GUIhelper}{jevois\+::\+G\+U\+Ihelper}} $\ast$helper, bool refresh)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_adc7615f7d5a3f8a82ec27c317bc27332}{its\+Pre\+Processor}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{Network}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a181c123110a952cb8454e9d900a14d50}{its\+Network}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor}{Post\+Processor}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_acd64d915faeeb788d76b567ea8aff902}{its\+Post\+Processor}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_afb712cc154c66256e04c3216209937f7}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (zooroot, std\+::string, \char`\"{}Path where to find zoo files (.yml). \char`\"{} \char`\"{}If not absolute, it is relative to this module\textquotesingle{}s path\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH \char`\"{}/dnn\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_aae3562edcd5dccb475ed3b40ad93b72d}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (zoo, std\+::string, \char`\"{}Filename for neural network zoo file (.yml). \char`\"{} \char`\"{}If not absolute, it is relative to zooroot\char`\"{}, \char`\"{}models.\+yml\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a9dc5d8db42ecd9d38108147dc65b7f56}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Filter,(All)(Open\+CV)(T\+PU)(N\+PU)(V\+PU)(V\+P\+UX)(N\+P\+UX)(S\+PU)(O\+RT))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a2144c097fa7ce9fd89546139a2f5fad3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (filter, Filter, \char`\"{}Filter to possibly only show as options in \char`\"{} \char`\"{}the \textquotesingle{}pipe\textquotesingle{} parameter some class of models from the zoo\char`\"{}, Filter\+::\+All, Filter\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a91301848dc19798667ae9fb9bd503900}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (pipe, std\+::string, \char`\"{}Pipeline to use, which should correspond to a \char`\"{} \char`\"{}top-\/level entry in the zoo file. \mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{Network}} execution types are\+: Open\+C\+V\+: \char`\"{} \char`\"{}on C\+PU, N\+P\+U\+: on Je\+Vois N\+PU accelerator, T\+P\+U\+: on Coral Edge T\+PU if \char`\"{} \char`\"{}available, V\+P\+U\+: on MyriadX V\+PU if available, N\+P\+U\+X\+: on N\+PU via Tim\+VX \char`\"{} \char`\"{}Open\+CV extension, V\+P\+U\+X\+: on C\+PU via A\+RM-\/Compute Open\+Vino emulation \char`\"{} \char`\"{}of V\+PU, and S\+P\+U\+: on Hailo8 S\+PU if available.\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ac6950659d78b76b9ad79c5e35194a99c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Pre\+Proc,(Blob)(Python))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a00d16c0555a750869bfcad0038f136c3}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (preproc, Pre\+Proc, \char`\"{}Pre-\/Processor to use, usually set automatically \char`\"{} \char`\"{}by selecting a pipeline from the zoo file\char`\"{}, Pre\+Proc\+::\+Blob, Pre\+Proc\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ae7416f7e2da7ccb1b0915887f5b89cb0}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Net\+Type,(Open\+CV)(O\+RT)(N\+PU)(T\+PU)(S\+PU)(Python))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a03f6a5f40475764e249d8375ca331adc}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (nettype, Net\+Type, \char`\"{}Network runtime framework to use, usually set \char`\"{} \char`\"{}automatically by selecting a pipeline from the zoo file\char`\"{}, Net\+Type\+::\+Open\+CV, Net\+Type\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_aa81149cffa98351c8e8c06f1a98e204b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Post\+Proc,(Classify)(Detect)(Segment)(Yu\+Net)(Python)(Stub))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ab17337f02c31aad5d1e734ecaf53a960}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (postproc, Post\+Proc, \char`\"{}Post-\/Processor to use, usually set automatically \char`\"{} \char`\"{}by selecting a pipeline from the zoo file\char`\"{}, Post\+Proc\+::\+Classify, Post\+Proc\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a93abdf9c2a71a05e87c3339112e68b97}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Processing,(Sync)(Async))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a1ed426522cc3c569ca4597b83335578f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (processing, Processing, \char`\"{}Type of processing\+: Sync runs pre-\/processing, \char`\"{} \char`\"{}network, and post-\/processing sequentially for every frame. Use for fast \char`\"{} \char`\"{}networks only, otherwise it will slow down the G\+U\+I... Async runs the network in \char`\"{} \char`\"{}a thread and should be used for networks slower than the camera framerate.\char`\"{}, Processing\+::\+Async, Processing\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_af382e701c6073913619f6a41ec5baf5f}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (overlay, bool, \char`\"{}Show some pipeline info as an overlay over output or G\+UI video\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_ae93d2289ac0ab27cffa5c7a8c6575e6e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (paramwarn, bool, \char`\"{}Issue warning if parameters are specified in the zoo file for \char`\"{} \char`\"{}a pipeline, but the pipeline\textquotesingle{}s component is not using them. Warnings appear \char`\"{} \char`\"{}in the console when the pipeline is loaded.\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_a1bb98c6b0d951fac28e487a070eec3f4}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (statsfile, std\+::string, \char`\"{}Append pre/net/post timing statistics in H\+T\+ML table format \char`\"{} \char`\"{}to the specified file if not empty. If path is relative, it is to \char`\"{} J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Pipeline_af95960f9995022a4f6ca9efabf6ea1e9}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (benchmark, bool, \char`\"{}Cycle through all networks specified by filter and, \char`\"{} \char`\"{}for each, run it for a while and append pre/net/post timing statistics \char`\"{} \char`\"{}in H\+T\+ML table format to \char`\"{} J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH \char`\"{}/benchmark.\+html\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a9060d07b8b22587c002870232a0d0bbd}\label{classjevois_1_1dnn_1_1Pipeline_a9060d07b8b22587c002870232a0d0bbd}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!Pipeline@{Pipeline}}
+\index{Pipeline@{Pipeline}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{Pipeline()}{Pipeline()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pipeline\+::\+Pipeline (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 104 of file Pipeline.\+C.
+
+
+
+References jevois\+::get\+Num\+Installed\+N\+P\+Us(), jevois\+::get\+Num\+Installed\+S\+P\+Us(), jevois\+::get\+Num\+Installed\+T\+P\+Us(), jevois\+::get\+Num\+Installed\+V\+P\+Us(), and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a7e6cf1725a38e1c6ffbe09d73c464c40}\label{classjevois_1_1dnn_1_1Pipeline_a7e6cf1725a38e1c6ffbe09d73c464c40}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!````~Pipeline@{$\sim$Pipeline}}
+\index{````~Pipeline@{$\sim$Pipeline}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{$\sim$Pipeline()}{~Pipeline()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pipeline\+::$\sim$\+Pipeline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 153 of file Pipeline.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a4545b6c2858eeb6be7236acb8f72b431}\label{classjevois_1_1dnn_1_1Pipeline_a4545b6c2858eeb6be7236acb8f72b431}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!asyncNetWait@{asyncNetWait}}
+\index{asyncNetWait@{asyncNetWait}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{asyncNetWait()}{asyncNetWait()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::async\+Net\+Wait (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 160 of file Pipeline.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a0c0b17ccff7dad5f546bb04cdce144a1}\label{classjevois_1_1dnn_1_1Pipeline_a0c0b17ccff7dad5f546bb04cdce144a1}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!checkAsyncNetComplete@{checkAsyncNetComplete}}
+\index{checkAsyncNetComplete@{checkAsyncNetComplete}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{checkAsyncNetComplete()}{checkAsyncNetComplete()}}
+{\footnotesize\ttfamily bool jevois\+::dnn\+::\+Pipeline\+::check\+Async\+Net\+Complete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 641 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_aaa13a44e7dba5671ed17d6de6e8f3fc0}\label{classjevois_1_1dnn_1_1Pipeline_aaa13a44e7dba5671ed17d6de6e8f3fc0}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+冻结/解冻运行时用户不应更改的参数 
+
+
+
+Definition at line 127 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a6e460d02f8cc184fa0a2a2361df64228}\label{classjevois_1_1dnn_1_1Pipeline_a6e460d02f8cc184fa0a2a2361df64228}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::benchmark const \&}]{param,  }\item[{bool const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 192 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_aeb4f05c6e0d1fcb0ca7cfd27798aad41}\label{classjevois_1_1dnn_1_1Pipeline_aeb4f05c6e0d1fcb0ca7cfd27798aad41}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::filter const \&}]{param,  }\item[{pipeline\+::\+Filter const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a4f51ed15546cdbe821e11b055b8e22d1}\label{classjevois_1_1dnn_1_1Pipeline_a4f51ed15546cdbe821e11b055b8e22d1}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::nettype const \&}]{param,  }\item[{pipeline\+::\+Net\+Type const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 543 of file Pipeline.\+C.
+
+
+
+References L\+F\+A\+T\+AL, and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a74ba915e5837127ffe03f81b20fdcf87}\label{classjevois_1_1dnn_1_1Pipeline_a74ba915e5837127ffe03f81b20fdcf87}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::pipe const \&}]{param,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 333 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a2afd12795bea5d54115c4ba8d85e5339}\label{classjevois_1_1dnn_1_1Pipeline_a2afd12795bea5d54115c4ba8d85e5339}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::postproc const \&}]{param,  }\item[{pipeline\+::\+Post\+Proc const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 602 of file Pipeline.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a98ccc8002d5c409cfd5ca8f54c0bf601}\label{classjevois_1_1dnn_1_1Pipeline_a98ccc8002d5c409cfd5ca8f54c0bf601}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::preproc const \&}]{param,  }\item[{pipeline\+::\+Pre\+Proc const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 523 of file Pipeline.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a7e84f7a4467a4ceb83e10c1071c343d6}\label{classjevois_1_1dnn_1_1Pipeline_a7e84f7a4467a4ceb83e10c1071c343d6}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::zoo const \&}]{param,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 207 of file Pipeline.\+C.
+
+
+
+References jevois\+::absolute\+Path(), and L\+I\+N\+FO.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a7e0181b12741aa704c717a59f7162744}\label{classjevois_1_1dnn_1_1Pipeline_a7e0181b12741aa704c717a59f7162744}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{pipeline\+::zooroot const \&}]{param,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 184 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_ae13fed0f9c31f30edcf07e9a5abeed81}\label{classjevois_1_1dnn_1_1Pipeline_ae13fed0f9c31f30edcf07e9a5abeed81}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!postInit@{postInit}}
+\index{postInit@{postInit}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{postInit()}{postInit()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::post\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after all sub-\/\+Components are init()ed. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_ae33c39b7b433a471c76f841a725aca8c}{jevois\+::\+Component}}.
+
+
+
+Definition at line 139 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a2afcca8091eba25f532cdaac0916c55e}\label{classjevois_1_1dnn_1_1Pipeline_a2afcca8091eba25f532cdaac0916c55e}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!preUninit@{preUninit}}
+\index{preUninit@{preUninit}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{preUninit()}{preUninit()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::pre\+Uninit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called before all sub-\/\+Components are uninit()ed. 
+
+
+
+Reimplemented from \mbox{\hyperlink{classjevois_1_1Component_aa2389e9024d8157b3025bced8bb6c95c}{jevois\+::\+Component}}.
+
+
+
+Definition at line 146 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a6aaf351c8508d34b2c6fbf9acf8b927f}\label{classjevois_1_1dnn_1_1Pipeline_a6aaf351c8508d34b2c6fbf9acf8b927f}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!process@{process}}
+\index{process@{process}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{inimg,  }\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg,  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper,  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+处理输入图像，将结果发送到 serial/image/gui 
+
+如果网络未 ready，则不会进行任何处理。当 helper 不为null时（即使用 G\+UI 显示），当 idle 为 true 时隐藏信息 窗口。该函数捕获所有异常并报告它们。 
+
+Definition at line 656 of file Pipeline.\+C.
+
+
+
+References jevois\+::absolute\+Path(), jevois\+::async(), jevois\+::\+G\+U\+Ihelper\+::itext(), J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, jevois\+::join(), L\+I\+N\+FO, jevois\+::replace\+All(), jevois\+::\+G\+U\+Ihelper\+::report\+And\+Ignore\+Exception(), jevois\+::\+G\+U\+Ihelper\+::report\+Error(), jevois\+::secs2str(), jevois\+::dnn\+::shapestr(), jevois\+::split(), jevois\+::warn\+And\+Ignore\+Exception(), jevois\+::yuyv\+::\+White, and jevois\+::rawimage\+::write\+Text().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a809d7e4b90b9b3e920888aaad7bd1c5d}\label{classjevois_1_1dnn_1_1Pipeline_a809d7e4b90b9b3e920888aaad7bd1c5d}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!ready@{ready}}
+\index{ready@{ready}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{ready()}{ready()}}
+{\footnotesize\ttfamily bool jevois\+::dnn\+::\+Pipeline\+::ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+当 preproc、net、postproc 三者都准备就绪时返回 true 
+
+
+
+Definition at line 635 of file Pipeline.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_aced2d29527e2979b29ac558f6a348727}\label{classjevois_1_1dnn_1_1Pipeline_aced2d29527e2979b29ac558f6a348727}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!reloadZoo@{reloadZoo}}
+\index{reloadZoo@{reloadZoo}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{reloadZoo()}{reloadZoo()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::reload\+Zoo (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{root,  }\item[{std\+::string const \&}]{filt,  }\item[{std\+::string const \&}]{zoofile }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a34d45d6e2b6c48de7672f9594ebf5032}\label{classjevois_1_1dnn_1_1Pipeline_a34d45d6e2b6c48de7672f9594ebf5032}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!showDataPeekWindow@{showDataPeekWindow}}
+\index{showDataPeekWindow@{showDataPeekWindow}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{showDataPeekWindow()}{showDataPeekWindow()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1GUIhelper}{jevois\+::\+G\+U\+Ihelper}} $\ast$}]{helper,  }\item[{bool}]{refresh }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 1032 of file Pipeline.\+C.
+
+
+
+References jevois\+::\+G\+U\+Ihelper\+::combo(), jevois\+::\+G\+U\+Ihelper\+::report\+Error(), jevois\+::dnn\+::shapestr(), jevois\+::to\+\_\+string(), and jevois\+::\+G\+U\+Ihelper\+::toggle\+Button().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a0f4103dc49bd7d1ade442066484c7157}\label{classjevois_1_1dnn_1_1Pipeline_a0f4103dc49bd7d1ade442066484c7157}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!showInfo@{showInfo}}
+\index{showInfo@{showInfo}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{showInfo()}{showInfo()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pipeline\+::show\+Info (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ const \&}]{info,  }\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg,  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper,  }\item[{bool}]{ovl,  }\item[{bool}]{idle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 997 of file Pipeline.\+C.
+
+
+
+References jevois\+::string\+Starts\+With(), jevois\+::yuyv\+::\+White, and jevois\+::rawimage\+::write\+Text().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_af382e701c6073913619f6a41ec5baf5f}\label{classjevois_1_1dnn_1_1Pipeline_af382e701c6073913619f6a41ec5baf5f}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{overlay}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Show some pipeline info as an overlay over output or G\+UI video\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_ae93d2289ac0ab27cffa5c7a8c6575e6e}\label{classjevois_1_1dnn_1_1Pipeline_ae93d2289ac0ab27cffa5c7a8c6575e6e}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{paramwarn}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Issue warning if parameters are specified in the zoo file for \char`\"{} \char`\"{}a}]{pipeline,  }\item[{but the pipeline \textquotesingle{}s component is not using them. Warnings appear \char`\"{} \char`\"{}in the console when the pipeline is loaded.\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a1ed426522cc3c569ca4597b83335578f}\label{classjevois_1_1dnn_1_1Pipeline_a1ed426522cc3c569ca4597b83335578f}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{processing}]{,  }\item[{Processing}]{,  }\item[{\char`\"{}Type of processing\+: Sync runs pre-\/}]{processing,  }\item[{\char`\"{} \char`\"{}}]{network,  }\item[{and post-\/processing sequentially for every frame. Use for fast \char`\"{} \char`\"{}networks}]{only,  }\item[{otherwise it will slow down the G\+U\+I... Async runs the network in \char`\"{} \char`\"{}a thread and should be used for networks slower than the camera framerate.\char`\"{}}]{,  }\item[{Processing\+::\+Async}]{,  }\item[{Processing\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a1bb98c6b0d951fac28e487a070eec3f4}\label{classjevois_1_1dnn_1_1Pipeline_a1bb98c6b0d951fac28e487a070eec3f4}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{statsfile}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Append pre/net/post timing statistics in H\+T\+ML table format \char`\"{} \char`\"{}to the specified file if not empty. If path is}]{relative,  }\item[{it is to \char`\"{}}]{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_af95960f9995022a4f6ca9efabf6ea1e9}\label{classjevois_1_1dnn_1_1Pipeline_af95960f9995022a4f6ca9efabf6ea1e9}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{benchmark}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Cycle through all networks specified by filter}]{and,  }\item[{\char`\"{} \char`\"{}for}]{each,  }\item[{run it for a while and append pre/net/post timing statistics \char`\"{} \char`\"{}in H\+T\+ML table format to \char`\"{} J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH \char`\"{}/benchmark.\+html\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a2144c097fa7ce9fd89546139a2f5fad3}\label{classjevois_1_1dnn_1_1Pipeline_a2144c097fa7ce9fd89546139a2f5fad3}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{filter}]{,  }\item[{Filter}]{,  }\item[{\char`\"{}Filter to possibly only show as options in \char`\"{} \char`\"{}the \textquotesingle{}pipe\textquotesingle{} parameter some class of models from the zoo\char`\"{}}]{,  }\item[{Filter\+::\+All}]{,  }\item[{Filter\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a03f6a5f40475764e249d8375ca331adc}\label{classjevois_1_1dnn_1_1Pipeline_a03f6a5f40475764e249d8375ca331adc}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{nettype}]{,  }\item[{Net\+Type}]{,  }\item[{\char`\"{}Network runtime framework to}]{use,  }\item[{usually set \char`\"{} \char`\"{}automatically by selecting a pipeline from the zoo file\char`\"{}}]{,  }\item[{Net\+Type\+::\+Open\+CV}]{,  }\item[{Net\+Type\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a91301848dc19798667ae9fb9bd503900}\label{classjevois_1_1dnn_1_1Pipeline_a91301848dc19798667ae9fb9bd503900}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{pipe}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Pipeline to}]{use,  }\item[{which should correspond to a \char`\"{} \char`\"{}top-\/level entry in the zoo file. \mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{Network}} execution types are\+:\+Open\+C\+V\+:\char`\"{} \char`\"{}on}]{C\+PU,  }\item[{N\+P\+U\+:on Je\+Vois N\+PU}]{accelerator,  }\item[{T\+P\+U\+:on Coral Edge T\+PU if \char`\"{} \char`\"{}}]{available,  }\item[{V\+P\+U\+:on MyriadX V\+PU if}]{available,  }\item[{N\+P\+U\+X\+:on N\+PU via Tim\+VX \char`\"{} \char`\"{}Open\+CV}]{extension,  }\item[{V\+P\+U\+X\+:on C\+PU via A\+RM-\/Compute Open\+Vino emulation \char`\"{} \char`\"{}of}]{V\+PU,  }\item[{and S\+P\+U\+:on Hailo8 S\+PU if available.\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_ab17337f02c31aad5d1e734ecaf53a960}\label{classjevois_1_1dnn_1_1Pipeline_ab17337f02c31aad5d1e734ecaf53a960}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{postproc}]{,  }\item[{Post\+Proc}]{,  }\item[{\char`\"{}Post-\/Processor to}]{use,  }\item[{usually set automatically \char`\"{} \char`\"{}by selecting a pipeline from the zoo file\char`\"{}}]{,  }\item[{Post\+Proc\+::\+Classify}]{,  }\item[{Post\+Proc\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a00d16c0555a750869bfcad0038f136c3}\label{classjevois_1_1dnn_1_1Pipeline_a00d16c0555a750869bfcad0038f136c3}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{preproc}]{,  }\item[{Pre\+Proc}]{,  }\item[{\char`\"{}Pre-\/Processor to}]{use,  }\item[{usually set automatically \char`\"{} \char`\"{}by selecting a pipeline from the zoo file\char`\"{}}]{,  }\item[{Pre\+Proc\+::\+Blob}]{,  }\item[{Pre\+Proc\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_aae3562edcd5dccb475ed3b40ad93b72d}\label{classjevois_1_1dnn_1_1Pipeline_aae3562edcd5dccb475ed3b40ad93b72d}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{zoo}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Filename for neural network zoo file (.yml). \char`\"{} \char`\"{}If not}]{absolute,  }\item[{it is relative to zooroot\char`\"{}}]{,  }\item[{\char`\"{}models.\+yml\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_afb712cc154c66256e04c3216209937f7}\label{classjevois_1_1dnn_1_1Pipeline_afb712cc154c66256e04c3216209937f7}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{zooroot}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Path where to find zoo files (.yml). \char`\"{} \char`\"{}If not}]{absolute,  }\item[{it is relative to this module \textquotesingle{}s path\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}} \char`\"{}/dnn\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a9dc5d8db42ecd9d38108147dc65b7f56}\label{classjevois_1_1dnn_1_1Pipeline_a9dc5d8db42ecd9d38108147dc65b7f56}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Filter}]{,  }\item[{(All)(Open\+CV)(T\+PU)(N\+PU)(V\+PU)(V\+P\+UX)(N\+P\+UX)(S\+PU)(O\+RT)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_ae7416f7e2da7ccb1b0915887f5b89cb0}\label{classjevois_1_1dnn_1_1Pipeline_ae7416f7e2da7ccb1b0915887f5b89cb0}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Net\+Type}]{,  }\item[{(Open\+CV)(O\+RT)(N\+PU)(T\+PU)(S\+PU)(Python)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_aa81149cffa98351c8e8c06f1a98e204b}\label{classjevois_1_1dnn_1_1Pipeline_aa81149cffa98351c8e8c06f1a98e204b}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Post\+Proc}]{,  }\item[{(Classify)(Detect)(Segment)(Yu\+Net)(Python)(Stub)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_ac6950659d78b76b9ad79c5e35194a99c}\label{classjevois_1_1dnn_1_1Pipeline_ac6950659d78b76b9ad79c5e35194a99c}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Pre\+Proc}]{,  }\item[{(Blob)(Python)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a93abdf9c2a71a05e87c3339112e68b97}\label{classjevois_1_1dnn_1_1Pipeline_a93abdf9c2a71a05e87c3339112e68b97}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Processing}]{,  }\item[{(Sync)(Async)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_a181c123110a952cb8454e9d900a14d50}\label{classjevois_1_1dnn_1_1Pipeline_a181c123110a952cb8454e9d900a14d50}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!itsNetwork@{itsNetwork}}
+\index{itsNetwork@{itsNetwork}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{itsNetwork}{itsNetwork}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{Network}}$>$ jevois\+::dnn\+::\+Pipeline\+::its\+Network\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 162 of file Pipeline.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_acd64d915faeeb788d76b567ea8aff902}\label{classjevois_1_1dnn_1_1Pipeline_acd64d915faeeb788d76b567ea8aff902}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!itsPostProcessor@{itsPostProcessor}}
+\index{itsPostProcessor@{itsPostProcessor}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{itsPostProcessor}{itsPostProcessor}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1PostProcessor}{Post\+Processor}}$>$ jevois\+::dnn\+::\+Pipeline\+::its\+Post\+Processor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 163 of file Pipeline.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Pipeline_adc7615f7d5a3f8a82ec27c317bc27332}\label{classjevois_1_1dnn_1_1Pipeline_adc7615f7d5a3f8a82ec27c317bc27332}} 
+\index{jevois::dnn::Pipeline@{jevois::dnn::Pipeline}!itsPreProcessor@{itsPreProcessor}}
+\index{itsPreProcessor@{itsPreProcessor}!jevois::dnn::Pipeline@{jevois::dnn::Pipeline}}
+\doxyparagraph{\texorpdfstring{itsPreProcessor}{itsPreProcessor}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor}{Pre\+Processor}}$>$ jevois\+::dnn\+::\+Pipeline\+::its\+Pre\+Processor\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 161 of file Pipeline.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{Pipeline_8H}{Pipeline.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{Pipeline_8C}{Pipeline.\+C}}\end{DoxyCompactItemize}

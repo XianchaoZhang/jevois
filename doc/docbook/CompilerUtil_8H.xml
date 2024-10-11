@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_CompilerUtil_8H">
+<title>include/jevois/Util/CompilerUtil.H File Reference</title>
+<indexterm><primary>include/jevois/Util/CompilerUtil.H</primary></indexterm>
+<programlisting>#include &lt;boost/preprocessor/stringize.hpp&gt;
+#include &lt;boost/preprocessor/if.hpp&gt;
+</programlisting>Include dependency graph for CompilerUtil.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="CompilerUtil_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1a839f55edd2f7b247493fc32f476d58db">JEVOIS_COMPILER_GCC</link>   1</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1a7691e47f09033294b37aea91667a68f5">JEVOIS_COMPILER_CLANG</link>   2</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1aecbd4e9f5c11254ef88dba927612f2f2">JEVOIS_COMPILER_OTHER</link>   3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1a6b7398b505ce224cceac1381f04986aa">JEVOIS_COMPILER</link>   <link linkend="_CompilerUtil_8H_1aecbd4e9f5c11254ef88dba927612f2f2">JEVOIS_COMPILER_OTHER</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1a56ba01377856b9a2badb5424fdbeeb58">JEVOIS_COMPILER_NAME</link>   other</para>
+</listitem>
+            <listitem><para>#define <link linkend="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367">JEVOIS_PRAGMA</link>(x)   _Pragma(BOOST_PP_STRINGIZE(<link linkend="_CompilerUtil_8H_1a56ba01377856b9a2badb5424fdbeeb58">JEVOIS_COMPILER_NAME</link> x))</para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__compilerutil_1ga63d1052bb64ba1d6d28317fc52c4a8f7">JEVOIS_BEGIN_UNCHECKED_INCLUDES</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_group__compilerutil_1ga03b352fa0cf830470c4b8fdbf810f81e">JEVOIS_END_UNCHECKED_INCLUDES</link>   <link linkend="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367">JEVOIS_PRAGMA</link>(diagnostic pop)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_CompilerUtil_8H_1a6b7398b505ce224cceac1381f04986aa"/>    <section>
+    <title>JEVOIS_COMPILER</title>
+<indexterm><primary>JEVOIS_COMPILER</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_COMPILER</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_COMPILER   <link linkend="_CompilerUtil_8H_1aecbd4e9f5c11254ef88dba927612f2f2">JEVOIS_COMPILER_OTHER</link></computeroutput></para><para>
+Definition at line 70 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_CompilerUtil_8H_1a7691e47f09033294b37aea91667a68f5"/>    <section>
+    <title>JEVOIS_COMPILER_CLANG</title>
+<indexterm><primary>JEVOIS_COMPILER_CLANG</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_COMPILER_CLANG</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_COMPILER_CLANG   2</computeroutput></para><para>
+Definition at line 60 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_CompilerUtil_8H_1a839f55edd2f7b247493fc32f476d58db"/>    <section>
+    <title>JEVOIS_COMPILER_GCC</title>
+<indexterm><primary>JEVOIS_COMPILER_GCC</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_COMPILER_GCC</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_COMPILER_GCC   1</computeroutput></para><para>
+Definition at line 59 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_CompilerUtil_8H_1a56ba01377856b9a2badb5424fdbeeb58"/>    <section>
+    <title>JEVOIS_COMPILER_NAME</title>
+<indexterm><primary>JEVOIS_COMPILER_NAME</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_COMPILER_NAME</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_COMPILER_NAME   other</computeroutput></para><para>
+Definition at line 71 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_CompilerUtil_8H_1aecbd4e9f5c11254ef88dba927612f2f2"/>    <section>
+    <title>JEVOIS_COMPILER_OTHER</title>
+<indexterm><primary>JEVOIS_COMPILER_OTHER</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_COMPILER_OTHER</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_COMPILER_OTHER   3</computeroutput></para><para>
+Definition at line 61 of file CompilerUtil.H.</para>
+    </section><anchor xml:id="_CompilerUtil_8H_1aa7cebf172bd2a8571a05d99ea258b367"/>    <section>
+    <title>JEVOIS_PRAGMA</title>
+<indexterm><primary>JEVOIS_PRAGMA</primary><secondary>CompilerUtil.H</secondary></indexterm>
+<indexterm><primary>CompilerUtil.H</primary><secondary>JEVOIS_PRAGMA</secondary></indexterm>
+<para><computeroutput>#define JEVOIS_PRAGMA( x)   _Pragma(BOOST_PP_STRINGIZE(<link linkend="_CompilerUtil_8H_1a56ba01377856b9a2badb5424fdbeeb58">JEVOIS_COMPILER_NAME</link> x))</computeroutput></para><para>
+Definition at line 74 of file CompilerUtil.H.</para>
+</section>
+</section>
+</section>

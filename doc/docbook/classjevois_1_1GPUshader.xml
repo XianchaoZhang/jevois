@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GPUshader">
+<title>jevois::GPUshader Class Reference</title>
+<indexterm><primary>jevois::GPUshader</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GPUshader.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Simple class to load and compile some OpenGL-ES shader code. </para>
+<para>
+Definition at line 25 of file GPUshader.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GPUshader_1a2973eedaabde3aa207fbadb59581f61d">GPUshader</link> ()</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GPUshader_1ad0c7d94a6b2d007ace33d326999e6d2c">~GPUshader</link> ()</para>
+
+<para>Destructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GPUshader_1a1d6b40660b4a4e6516ad3ef17318e02c">load</link> (char const *filename, GLuint type)</para>
+
+<para>Load a shader from file. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GPUshader_1ab3edb68dd55c72b9fc2ee00fec943c6b">set</link> (char const *name, char const *str, GLuint type)</para>
+
+<para>Load a shader from inlined code in a C-string. </para>
+</listitem>
+            <listitem><para>GLuint <link linkend="_classjevois_1_1GPUshader_1afcebe92f5f77d06bda983c2f4d0d16fc">id</link> () const</para>
+
+<para>Get the shader&apos;s ID. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUshader_1a2973eedaabde3aa207fbadb59581f61d"/>    <section>
+    <title>GPUshader()</title>
+<indexterm><primary>GPUshader</primary><secondary>jevois::GPUshader</secondary></indexterm>
+<indexterm><primary>jevois::GPUshader</primary><secondary>GPUshader</secondary></indexterm>
+<para><computeroutput>jevois::GPUshader::GPUshader ( )</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 21 of file GPUshader.C.</para>
+    </section><anchor xml:id="_classjevois_1_1GPUshader_1ad0c7d94a6b2d007ace33d326999e6d2c"/>    <section>
+    <title>~GPUshader()</title>
+<indexterm><primary>~GPUshader</primary><secondary>jevois::GPUshader</secondary></indexterm>
+<indexterm><primary>jevois::GPUshader</primary><secondary>~GPUshader</secondary></indexterm>
+<para><computeroutput>jevois::GPUshader::~GPUshader ( )</computeroutput></para><para>
+
+<para>Destructor. </para>
+</para>
+<para>
+Definition at line 26 of file GPUshader.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUshader_1afcebe92f5f77d06bda983c2f4d0d16fc"/>    <section>
+    <title>id()</title>
+<indexterm><primary>id</primary><secondary>jevois::GPUshader</secondary></indexterm>
+<indexterm><primary>jevois::GPUshader</primary><secondary>id</secondary></indexterm>
+<para><computeroutput>GLuint jevois::GPUshader::id ( ) const</computeroutput></para><para>
+
+<para>Get the shader&apos;s ID. </para>
+</para>
+<para>
+Definition at line 32 of file GPUshader.C.</para>
+<para>
+Referenced by jevois::GPUprogram::GPUprogram().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUshader_1a1d6b40660b4a4e6516ad3ef17318e02c"/>    <section>
+    <title>load()</title>
+<indexterm><primary>load</primary><secondary>jevois::GPUshader</secondary></indexterm>
+<indexterm><primary>jevois::GPUshader</primary><secondary>load</secondary></indexterm>
+<para><computeroutput>void jevois::GPUshader::load (char const * filename, GLuint type)</computeroutput></para><para>
+
+<para>Load a shader from file. </para>
+</para>
+
+<para>type should be GL_VERTEX_SHADER or GL_FRAGMENT_SHADER </para>
+<para>
+Definition at line 36 of file GPUshader.C.</para>
+<para>
+References LFATAL, PLFATAL, and jevois::warnAndIgnoreException().</para>
+<para>
+Referenced by jevois::GPUprogram::GPUprogram().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUshader_1ab3edb68dd55c72b9fc2ee00fec943c6b"/>    <section>
+    <title>set()</title>
+<indexterm><primary>set</primary><secondary>jevois::GPUshader</secondary></indexterm>
+<indexterm><primary>jevois::GPUshader</primary><secondary>set</secondary></indexterm>
+<para><computeroutput>void jevois::GPUshader::set (char const * name, char const * str, GLuint type)</computeroutput></para><para>
+
+<para>Load a shader from inlined code in a C-string. </para>
+</para>
+
+<para>type should be GL_VERTEX_SHADER or GL_FRAGMENT_SHADER. Name is only used for info and error messages, so typically can just be &quot;vertex&quot; or &quot;fragment&quot; or something describing which instantiation of those. </para>
+<para>
+Definition at line 57 of file GPUshader.C.</para>
+<para>
+References GL_CHECK, LDEBUG, and LFATAL.</para>
+<para>
+Referenced by jevois::GPUprogram::GPUprogram().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GPUshader_8H">GPUshader.H</link>src/jevois/GPU/<link linkend="_GPUshader_8C">GPUshader.C</link></section>
+</section>

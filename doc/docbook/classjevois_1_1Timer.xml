@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1Timer">
+<title>jevois::Timer Class Reference</title>
+<indexterm><primary>jevois::Timer</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Debug/Timer.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>简单计时器类 </para>
+
+
+
+<para>此类以指定的间隔报告 <link linkend="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852">start()</link> 和 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 之间所花费的时间。由于 JeVois 模块通常以视频速率工作，因此此类仅报告通过 <link linkend="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852">start()</link> 和 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 进行一定次数迭代后的平均时间。因此，即使 <link linkend="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852">start()</link> 和 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 之间的操作时间只有几微秒，通过每 100 帧仅报告一次，也不会使整体帧速率降低太多。请参阅 <link linkend="_classjevois_1_1Profiler">Profiler</link> 以了解在 <link linkend="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852">start()</link> 和 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 之间提供额外检查点的类。 </para>
+<para>
+Definition at line 33 of file Timer.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1Timer_1a4582d851b7c8aa47094c2db044add747">Timer</link> (char const *prefix, size_t interval=100, int loglevel=LOG_INFO)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852">start</link> ()</para>
+
+<para>Start a time measurement period. </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1Timer_1a541947e3469954b7d72f8bd9c6219df0">stop</link> (double *seconds)</para>
+
+<para>结束时间测量期，如果达到报告间隔，则报告所花费的时间 </para>
+</listitem>
+            <listitem><para>const std::string &amp; <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop</link> ()</para>
+
+<para>与 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 的其他签名相同，但不提供秒数，用于 python 绑定 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1Timer_1a4582d851b7c8aa47094c2db044add747"/>    <section>
+    <title>Timer()</title>
+<indexterm><primary>Timer</primary><secondary>jevois::Timer</secondary></indexterm>
+<indexterm><primary>jevois::Timer</primary><secondary>Timer</secondary></indexterm>
+<para><computeroutput>jevois::Timer::Timer (char const * prefix, size_t interval = <computeroutput>100</computeroutput>
+, int loglevel = <computeroutput>LOG_INFO</computeroutput>
+)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+<para>
+Definition at line 29 of file Timer.C.</para>
+<para>
+References LFATAL.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1Timer_1aec4def2ab2f31c18f4935ebb61285852"/>    <section>
+    <title>start()</title>
+<indexterm><primary>start</primary><secondary>jevois::Timer</secondary></indexterm>
+<indexterm><primary>jevois::Timer</primary><secondary>start</secondary></indexterm>
+<para><computeroutput>void jevois::Timer::start ( )</computeroutput></para><para>
+
+<para>Start a time measurement period. </para>
+</para>
+<para>
+Definition at line 40 of file Timer.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc"/>    <section>
+    <title>stop()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>stop</primary><secondary>jevois::Timer</secondary></indexterm>
+<indexterm><primary>jevois::Timer</primary><secondary>stop</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::Timer::stop ( )</computeroutput></para><para>
+
+<para>与 <link linkend="_classjevois_1_1Timer_1a521cd5a99ec0ddb20b597d685601c7bc">stop()</link> 的其他签名相同，但不提供秒数，用于 python 绑定 </para>
+</para>
+<para>
+Definition at line 139 of file Timer.C.</para>
+    </section><anchor xml:id="_classjevois_1_1Timer_1a541947e3469954b7d72f8bd9c6219df0"/>    <section>
+    <title>stop()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>stop</primary><secondary>jevois::Timer</secondary></indexterm>
+<indexterm><primary>jevois::Timer</primary><secondary>stop</secondary></indexterm>
+<para><computeroutput>const std::string &amp; jevois::Timer::stop (double * seconds)</computeroutput></para><para>
+
+<para>结束时间测量期，如果达到报告间隔，则报告所花费的时间 </para>
+</para>
+<para>
+Definition at line 47 of file Timer.C.</para>
+<para>
+References LDEBUG, LERROR, LFATAL, LINFO, and jevois::secs2str().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Debug/<link linkend="_Timer_8H">Timer.H</link>src/jevois/Debug/<link linkend="_Timer_8C">Timer.C</link></section>
+</section>

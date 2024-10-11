@@ -1,0 +1,201 @@
+\hypertarget{classjevois_1_1GUIeditor}{}\doxysubsection{jevois\+::G\+U\+Ieditor Class Reference}
+\label{classjevois_1_1GUIeditor}\index{jevois::GUIeditor@{jevois::GUIeditor}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+G\+U\+Ieditor.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+Editor panel for Je\+Vois-\/\+Pro G\+UI. 
+
+This panel allows one to select one of several files, and to edit it. 
+
+Definition at line 46 of file G\+U\+Ieditor.\+H.
+
+
+
+Inheritance diagram for jevois\+::G\+U\+Ieditor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classjevois_1_1GUIeditor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::G\+U\+Ieditor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classjevois_1_1GUIeditor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1GUIeditor_a0a9c15b70fa00740468744c62a58487a}{G\+U\+Ieditor}} (\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $\ast$helper, std\+::string const \&imguiid, std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1EditorItem}{Editor\+Item}} $>$ \&\&fixeditems, std\+::string const \&scanpath, std\+::string const \&prefix, std\+::set$<$ std\+::string $>$ \&\&extensions)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1GUIeditor_a80a8535160fd57f8783d77ac048733a3}{$\sim$\+G\+U\+Ieditor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIeditor_adc20942ade23a56da23230eccd0f6203}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Draw the editor into Im\+Gui. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIeditor_acd32d4103482d0b78b655e9209bbed0c}{load\+File}} (std\+::filesystem\+::path const \&fn)
+\begin{DoxyCompactList}\small\item\em Load a file and set it as the current file. \end{DoxyCompactList}\item 
+const std\+::filesystem\+::path \& \mbox{\hyperlink{classjevois_1_1GUIeditor_a701d6375396844bb70f0772449c1379c}{get\+Loaded\+File\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Get path of file last loaded with \mbox{\hyperlink{classjevois_1_1GUIeditor_acd32d4103482d0b78b655e9209bbed0c}{load\+File()}}, may be empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1GUIeditor_abe340740b32bd38a101247ebbd76d6ee}{refresh}} ()
+\begin{DoxyCompactList}\small\item\em Refresh list of files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1GUIeditor_a91cafbba64beffe0bca87557f0bc0c1d}{save\+File}} ()
+\begin{DoxyCompactList}\small\item\em Save a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}{Editor\+Save\+Action}} 
+\begin{DoxyCompactList}\small\item\em Helper enum for actions to execute after saving a config file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a0a9c15b70fa00740468744c62a58487a}\label{classjevois_1_1GUIeditor_a0a9c15b70fa00740468744c62a58487a}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!GUIeditor@{GUIeditor}}
+\index{GUIeditor@{GUIeditor}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{GUIeditor()}{GUIeditor()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Ieditor\+::\+G\+U\+Ieditor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} $\ast$}]{helper,  }\item[{std\+::string const \&}]{imguiid,  }\item[{std\+::vector$<$ \mbox{\hyperlink{structjevois_1_1EditorItem}{Editor\+Item}} $>$ \&\&}]{fixeditems,  }\item[{std\+::string const \&}]{scanpath,  }\item[{std\+::string const \&}]{prefix,  }\item[{std\+::set$<$ std\+::string $>$ \&\&}]{extensions }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 31 of file G\+U\+Ieditor.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, and save\+File().
+
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a80a8535160fd57f8783d77ac048733a3}\label{classjevois_1_1GUIeditor_a80a8535160fd57f8783d77ac048733a3}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!````~GUIeditor@{$\sim$GUIeditor}}
+\index{````~GUIeditor@{$\sim$GUIeditor}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{$\sim$GUIeditor()}{~GUIeditor()}}
+{\footnotesize\ttfamily jevois\+::\+G\+U\+Ieditor\+::$\sim$\+G\+U\+Ieditor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 46 of file G\+U\+Ieditor.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_adc20942ade23a56da23230eccd0f6203}\label{classjevois_1_1GUIeditor_adc20942ade23a56da23230eccd0f6203}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!draw@{draw}}
+\index{draw@{draw}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ieditor\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Draw the editor into Im\+Gui. 
+
+
+
+Definition at line 112 of file G\+U\+Ieditor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a701d6375396844bb70f0772449c1379c}\label{classjevois_1_1GUIeditor_a701d6375396844bb70f0772449c1379c}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!getLoadedFilePath@{getLoadedFilePath}}
+\index{getLoadedFilePath@{getLoadedFilePath}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{getLoadedFilePath()}{getLoadedFilePath()}}
+{\footnotesize\ttfamily const std\+::filesystem\+::path \& jevois\+::\+G\+U\+Ieditor\+::get\+Loaded\+File\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get path of file last loaded with \mbox{\hyperlink{classjevois_1_1GUIeditor_acd32d4103482d0b78b655e9209bbed0c}{load\+File()}}, may be empty. 
+
+
+
+Definition at line 494 of file G\+U\+Ieditor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_acd32d4103482d0b78b655e9209bbed0c}\label{classjevois_1_1GUIeditor_acd32d4103482d0b78b655e9209bbed0c}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!loadFile@{loadFile}}
+\index{loadFile@{loadFile}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{loadFile()}{loadFile()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ieditor\+::load\+File (\begin{DoxyParamCaption}\item[{std\+::filesystem\+::path const \&}]{fn }\end{DoxyParamCaption})}
+
+
+
+Load a file and set it as the current file. 
+
+
+
+Definition at line 361 of file G\+U\+Ieditor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_abe340740b32bd38a101247ebbd76d6ee}\label{classjevois_1_1GUIeditor_abe340740b32bd38a101247ebbd76d6ee}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!refresh@{refresh}}
+\index{refresh@{refresh}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{refresh()}{refresh()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ieditor\+::refresh (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Refresh list of files. 
+
+
+
+Definition at line 50 of file G\+U\+Ieditor.\+C.
+
+
+
+References jevois\+::\+Video\+Mapping\+::cmakepath(), and jevois\+::\+Video\+Mapping\+::path().
+
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a91cafbba64beffe0bca87557f0bc0c1d}\label{classjevois_1_1GUIeditor_a91cafbba64beffe0bca87557f0bc0c1d}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!saveFile@{saveFile}}
+\index{saveFile@{saveFile}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{saveFile()}{saveFile()}}
+{\footnotesize\ttfamily void jevois\+::\+G\+U\+Ieditor\+::save\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Save a file. 
+
+
+
+Definition at line 498 of file G\+U\+Ieditor.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+
+
+Referenced by G\+U\+Ieditor().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}\label{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}} 
+\index{jevois::GUIeditor@{jevois::GUIeditor}!EditorSaveAction@{EditorSaveAction}}
+\index{EditorSaveAction@{EditorSaveAction}!jevois::GUIeditor@{jevois::GUIeditor}}
+\doxyparagraph{\texorpdfstring{EditorSaveAction}{EditorSaveAction}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classjevois_1_1GUIeditor_a3c72a4e20c54a79e897c98c9390429c0}{Editor\+Save\+Action}}\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Helper enum for actions to execute after saving a config file. 
+
+
+
+Definition at line 34 of file G\+U\+Ieditor.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIeditor_8H}{G\+U\+Ieditor.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{GUIeditor_8C}{G\+U\+Ieditor.\+C}}\end{DoxyCompactItemize}

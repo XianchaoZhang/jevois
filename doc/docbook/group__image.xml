@@ -1,0 +1,788 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_group__image">
+<title>Raw 零拷贝/内存映射视频图像和支持函数</title>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary></indexterm>
+<section>
+<title> </title>
+
+<para>支持图像的类和函数的主要目的是允许处理内存映射到硬件（相机或 USB 驱动程序）的图像缓冲区，而无需复制数据。还有许多其他库和框 架可用，它们定义了更完整的图像类和相关的图像处理和机器视觉功能。这里提供的函数允许您将原始图像缓冲区重新解释为 OpenCV cv::Mat 图像等，而无需复制图像像素数据。为了创建演示显示，还提供了将图像复制、粘贴、绘制、文本等简单复制到原始 YUYV 图像缓 冲区（通常从 USB 驱动程序获得，需要填充一些像素数据才能通过 USB 链路发送）的功能。 </para>
+
+<para>表示具有像素缓冲区的图像的类称为 RawImage，相机或 USB 硬件可直接访问该缓冲区（参见 VideoBuf）。为了避免再次定义像素类型（ 大多数与图像相关的库已经这样做了），我们在 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中只使用 Video4Linux2 提供的定义。</para>
+
+<para>因此，对 <link linkend="_classjevois_1_1RawImage">RawImage</link> 进行操作的函数主要有两个目的：1) 从 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中获取像素数据并将其转换为另一种格式（如 OpenCV），或从其 他格式转换为 RawImage；2) 允许简单绘制线条、圆形、矩形等，以便直接在 <link linkend="_classjevois_1_1RawImage">RawImage</link> 缓冲区中进行简单的演示显示，并通过 USB 链 接发送。 </para>
+Collaboration diagram for Raw 零拷贝/内存映射视频图像和支持函数:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="group__image.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Classes    </title>
+        <itemizedlist>
+            <listitem><para>class <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link></para>
+
+<para>来自 V4L2 <link linkend="_classjevois_1_1Camera">Camera</link> 和/或发送到 USB <link linkend="_classjevois_1_1Gadget">Gadget</link> 的原始图像 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois_1_1yuyv">jevois::yuyv</link></para>
+
+<para>辅助 YUYV 颜色 </para>
+</listitem>
+            <listitem><para> <link linkend="_namespacejevois_1_1rgb565">jevois::rgb565</link></para>
+
+<para>辅助 RGB565 颜色 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Modules    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__jpeg">Jpeg 相关的类和函数</link></para>
+
+<para>Jpeg 类和函数，主要用于支持从相机捕获的原始未压缩图像通过 USB 发送 MJPEG 视频输出。 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Enumerations    </title>
+        <itemizedlist>
+            <listitem><para>enum <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">jevois::rawimage::Font</link> { 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e">jevois::rawimage::Font5x7</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">jevois::rawimage::Font6x10</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388">jevois::rawimage::Font7x13</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b">jevois::rawimage::Font8x13bold</link>, 
+
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8">jevois::rawimage::Font9x15bold</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4">jevois::rawimage::Font10x20</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69">jevois::rawimage::Font11x22</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340">jevois::rawimage::Font12x22</link>, 
+
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494">jevois::rawimage::Font14x26</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0">jevois::rawimage::Font15x28</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b">jevois::rawimage::Font16x29</link>, 
+<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c">jevois::rawimage::Font20x38</link>
+ }</para>
+
+<para>可用于 <link linkend="_group__image_1ga893e982b449643c8853afe424fb72c09">writeText()</link> 的字体 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>void <link linkend="_group__image_1gabc1de0ec8bdb25ffacf5b0d25dc11469">convertYUYVtoRGBYL</link> (unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned char const *src, int *dstrg, int *dstby, int *dstlum, int thresh, int inputbits)</para>
+
+<para>将 YUYV 转换为 RG、BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga20c3651602d9b2d003988b9bcd674f03">jevois::rawimage::cvImage</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>从现有 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据创建 OpenCV 图像，共享像素内存而不是复制它 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga6f005034f93fc03530498eae898f9b22">jevois::rawimage::convertToCvBGR</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素执行颜色转换为 OpenCV BGR 字节 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga41c623fdf6e26eca8908b1129b56312f">jevois::rawimage::convertToCvRGB</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB 字节进行颜色转换 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga028f56e85446eef9d27bd51c71867dd2">jevois::rawimage::convertToCvRGBA</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src)</para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB-A 字节进行颜色转换 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gac56b219fa6df460b3a9beaf7712d5c77">jevois::rawimage::byteSwap</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>交换 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中的字节对 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga05c4650464e447a89a2a2c60d1956748">jevois::rawimage::paste</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将一张图像粘贴到另一张相同像素类型的图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae83668f61639d6a6f4de5e11d02ca015">jevois::rawimage::pasteGreyToYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将灰度字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae9f19d7535b689d5c0b4bb31133463da">jevois::rawimage::pasteBGRtoYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int dx, int dy)</para>
+
+<para>将 BGR 字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga3ff72f69a31242d3d77ac1c61e82c4d6">jevois::rawimage::pasteRGBtoYUYV</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int dx, int dy)</para>
+
+<para>将 RGB 字节图像粘贴到 YUYV 图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa8a5444f39661f76fb160f1f6eead381">jevois::rawimage::roipaste</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> const &amp;src, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dest, int dx, int dy)</para>
+
+<para>将图像中的 ROI 粘贴到相同像素类型的另一个图像中 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga529a42aed4e4681e38910e8793e6064c">jevois::rawimage::drawDisk</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int rad, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一个圆盘 disk </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gae7d102e1c456f87337d66a9a2fc11a58">jevois::rawimage::drawCircle</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col)</para>
+
+<para>在YUYV图像中绘制一个圆圈 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__image_1ga0d1d1903484f89b7a8db5485fe1784a7">jevois::rawimage::clipLine</link> (int wxmin, int wymin, int wxmax, int wymax, int &amp;x1, int &amp;y1, int &amp;x2, int &amp;y2)</para>
+
+<para>剪裁一条线以适合 viewport [wxmin...wxmax[ x [wymin...wymax] </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga7cf2b2c4e6460835fbc671367a60feb9">jevois::rawimage::drawLine</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一条线 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa32b3e227c9904699d616e2a32c9506d">jevois::rawimage::drawRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int thick, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制一个矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa023840c2ca7c4997b4b456927131cdf">jevois::rawimage::drawRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga458eebde298cccaa70c778878223c17b">jevois::rawimage::drawFilledRect</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, int x, int y, unsigned int w, unsigned int <link linkend="_GUIhelper_8C_1a16611451551e3d15916bae723c3f59f7">h</link>, unsigned int col)</para>
+
+<para>在 YUYV 图像中绘制填充矩形 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga2696d3febc217f295d5532c26255c26b">jevois::rawimage::writeText</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, std::string const &amp;txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中写一些文字 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga893e982b449643c8853afe424fb72c09">jevois::rawimage::writeText</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img, char const *txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font=<link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link>)</para>
+
+<para>在图像中写一些文字 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga748b79664f7d9c00f2706e726276a09f">jevois::rawimage::convertCvBGRtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>将 BGR cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga8d0578936bcb62de35eec980b933de52">jevois::rawimage::convertCvRGBtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>将 RGB cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga5c34b763c90ed987d80a1dc58e75524c">jevois::rawimage::convertCvRGBAtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>使用已分配的像素和像素类型将 RGBA cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gad05785dce156be8a1e4d473ea07e3f67">jevois::rawimage::convertCvGRAYtoRawImage</link> (cv::Mat const &amp;src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;dst, int quality)</para>
+
+<para>使用已分配的像素和像素类型将灰色 cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gaa830449161c068b13cd986844a2c428e">jevois::rawimage::hFlipYUYV</link> (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp;img)</para>
+
+<para>水平翻转 YUYV <link linkend="_classjevois_1_1RawImage">RawImage</link> 同时保留颜色信息 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga887e3d1b0329cc864014c04a90689f59">jevois::rawimage::convertCvRGBtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga2865d43005acc85a1f49b868eedc76cc">jevois::rawimage::convertCvBGRtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1ga13704ff98cb3e041adea2154fd42499c">jevois::rawimage::convertCvGRAYtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__image_1gad00957ca65ed08071e6b05d6cfe19fc3">jevois::rawimage::convertCvRGBAtoCvYUYV</link> (cv::Mat const &amp;src, cv::Mat &amp;dst)</para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</listitem>
+            <listitem><para>cv::Mat <link linkend="_group__image_1ga6607626cad0258d69b6ead8d1ced4f52">jevois::rescaleCv</link> (cv::Mat const &amp;img, cv::Size const &amp;newdims)</para>
+
+<para>重新缩放 OpenCV 图像，选择正确的插值类型 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Enumeration Type Documentation</title>
+<anchor xml:id="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a"/>    <section>
+    <title>Font</title>
+<indexterm><primary>Font</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font</secondary></indexterm>
+<para><computeroutput>enum <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">jevois::rawimage::Font</link></computeroutput></para><para>
+
+<para>可用于 <link linkend="_group__image_1ga2696d3febc217f295d5532c26255c26b">writeText()</link> 的字体 </para>
+</para>
+<informaltable frame="all">
+<title>Enumerator</title>
+    <tgroup cols="2" align="left" colsep="1" rowsep="1">
+      <colspec colname='c1'/>
+      <colspec colname='c2'/>
+<tbody>
+<row><entry><indexterm><primary>Font5x7</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font5x7</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa09b950d7e64ce748c7639ce20a80747e"/>Font5x7</entry><entry></entry></row><row><entry><indexterm><primary>Font6x10</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font6x10</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af"/>Font6x10</entry><entry></entry></row><row><entry><indexterm><primary>Font7x13</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font7x13</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa76ebb36d3e9ba8fd65ae9923f2ab1388"/>Font7x13</entry><entry></entry></row><row><entry><indexterm><primary>Font8x13bold</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font8x13bold</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa38976b6bad1b46558afe1ae07ede3a4b"/>Font8x13bold</entry><entry></entry></row><row><entry><indexterm><primary>Font9x15bold</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font9x15bold</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac8e5b48e4e8193b2e46e8e8b2e4a29c8"/>Font9x15bold</entry><entry></entry></row><row><entry><indexterm><primary>Font10x20</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font10x20</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa5d80b0ff63cde8fed4837165c505b9a4"/>Font10x20</entry><entry></entry></row><row><entry><indexterm><primary>Font11x22</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font11x22</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa52a4ce58e19bd05f7e8d7343b6e09f69"/>Font11x22</entry><entry></entry></row><row><entry><indexterm><primary>Font12x22</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font12x22</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacb8298d56b99ed8eba270081e9fc8340"/>Font12x22</entry><entry></entry></row><row><entry><indexterm><primary>Font14x26</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font14x26</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa46ecbe4d10ec7c1026be260cc8c13494"/>Font14x26</entry><entry></entry></row><row><entry><indexterm><primary>Font15x28</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font15x28</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aac3aaac1a0d6b3d4e005e5910f7fd9bc0"/>Font15x28</entry><entry></entry></row><row><entry><indexterm><primary>Font16x29</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font16x29</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aacfd299434ff1f2bccef33bdb3a23fc5b"/>Font16x29</entry><entry></entry></row><row><entry><indexterm><primary>Font20x38</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>Font20x38</secondary></indexterm>
+<anchor xml:id="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aab3edd86e1668b19fcf5f4369f13dd60c"/>Font20x38</entry><entry></entry></row>    </tbody>
+    </tgroup>
+</informaltable>
+<para>
+Definition at line 146 of file RawImageOps.H.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_group__image_1gac56b219fa6df460b3a9beaf7712d5c77"/>    <section>
+    <title>byteSwap()</title>
+<indexterm><primary>byteSwap</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>byteSwap</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::byteSwap (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img)</computeroutput></para><para>
+
+<para>交换 <link linkend="_classjevois_1_1RawImage">RawImage</link> 中的字节对 </para>
+</para>
+
+<para>这永远都不需要，除非是 RGB565 图像，主要用于内部调试，或者直接将 RGB565 相机图像（大端字节序）传递到 USB（使用 RGBP UVC 格式时假定为小端字节序）。此函数在为平台硬件编译时是 NEON 加速的。 </para>
+<para>
+Definition at line 368 of file RawImageOps.C.</para>
+<para>
+References jevois::async(), jevois::RawImage::bytesize(), jevois::RawImage::bytesperpix(), jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga0d1d1903484f89b7a8db5485fe1784a7"/>    <section>
+    <title>clipLine()</title>
+<indexterm><primary>clipLine</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>clipLine</secondary></indexterm>
+<para><computeroutput>bool jevois::rawimage::clipLine (int wxmin, int wymin, int wxmax, int wymax, int &amp; x1, int &amp; y1, int &amp; x2, int &amp; y2)</computeroutput></para><para>
+
+<para>剪裁一条线以适合 viewport [wxmin...wxmax[ x [wymin...wymax] </para>
+</para>
+
+<para>这使用 Liang-Barsky 线剪裁算法。如果线完全在 viewport 之外（没有可绘制的内容），则返回 false。 </para>
+<para>
+Definition at line 533 of file RawImageOps.C.</para>
+<para>
+Referenced by jevois::rawimage::drawLine().</para>
+    </section><anchor xml:id="_group__image_1ga2865d43005acc85a1f49b868eedc76cc"/>    <section>
+    <title>convertCvBGRtoCvYUYV()</title>
+<indexterm><primary>convertCvBGRtoCvYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvBGRtoCvYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvBGRtoCvYUYV (cv::Mat const &amp; src, cv::Mat &amp; dst)</computeroutput></para><para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</para>
+<para>
+Definition at line 1062 of file RawImageOps.C.</para>
+<para>
+References jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_group__image_1ga748b79664f7d9c00f2706e726276a09f"/>    <section>
+    <title>convertCvBGRtoRawImage()</title>
+<indexterm><primary>convertCvBGRtoRawImage</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvBGRtoRawImage</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvBGRtoRawImage (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality)</computeroutput></para><para>
+
+<para>将 BGR cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</para>
+
+<para>这用于通过 USB 从内部计算的 opencv BGR 格式的结果输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 USB gadget中获取），并且它的大小必须与 src 图像的大小相匹配。</para>
+
+<para>支持的 dst 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_MJPG</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24</para>
+</listitem></itemizedlist>
+</para>
+
+<para>质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 </para>
+<para>
+Definition at line 1302 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::compressBGRtoJpeg(), jevois::rawimage::cvImage(), jevois::cvtypestr(), jevois::fccstr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::MovieInput::get(), jevois::MovieInput::get2(), jevois::OutputFrame::sendCvBGR(), and jevois::OutputFrame::sendScaledCvBGR().</para>
+    </section><anchor xml:id="_group__image_1ga13704ff98cb3e041adea2154fd42499c"/>    <section>
+    <title>convertCvGRAYtoCvYUYV()</title>
+<indexterm><primary>convertCvGRAYtoCvYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvGRAYtoCvYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvGRAYtoCvYUYV (cv::Mat const &amp; src, cv::Mat &amp; dst)</computeroutput></para><para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</para>
+<para>
+Definition at line 1220 of file RawImageOps.C.</para>
+<para>
+References jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_group__image_1gad05785dce156be8a1e4d473ea07e3f67"/>    <section>
+    <title>convertCvGRAYtoRawImage()</title>
+<indexterm><primary>convertCvGRAYtoRawImage</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvGRAYtoRawImage</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvGRAYtoRawImage (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality)</computeroutput></para><para>
+
+<para>使用已分配的像素和像素类型将灰色 cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</para>
+
+<para>这用于通过 USB 输出内部计算结果为 opencv 灰度格式的视频帧。dst 应该已经分配了一个像素缓冲区（通常，它应该从 USB 小工具中获 取），并且其大小必须与 src 图像的大小相匹配。</para>
+
+<para>支持的 dst 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_MJPG</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24</para>
+</listitem></itemizedlist>
+</para>
+
+<para>质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 </para>
+<para>
+Definition at line 1395 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::compressGRAYtoJpeg(), jevois::rawimage::cvImage(), jevois::cvtypestr(), jevois::fccstr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::OutputFrame::sendCvGRAY(), and jevois::OutputFrame::sendScaledCvGRAY().</para>
+    </section><anchor xml:id="_group__image_1gad00957ca65ed08071e6b05d6cfe19fc3"/>    <section>
+    <title>convertCvRGBAtoCvYUYV()</title>
+<indexterm><primary>convertCvRGBAtoCvYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvRGBAtoCvYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvRGBAtoCvYUYV (cv::Mat const &amp; src, cv::Mat &amp; dst)</computeroutput></para><para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</para>
+<para>
+Definition at line 1292 of file RawImageOps.C.</para>
+<para>
+References jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_group__image_1ga5c34b763c90ed987d80a1dc58e75524c"/>    <section>
+    <title>convertCvRGBAtoRawImage()</title>
+<indexterm><primary>convertCvRGBAtoRawImage</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvRGBAtoRawImage</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvRGBAtoRawImage (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality)</computeroutput></para><para>
+
+<para>使用已分配的像素和像素类型将 RGBA cv::Mat 转换为 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</para>
+
+<para>这用于通过 USB 从内部计算的结果以 opencv RGB-A 格式（通常是 NEON 或 OpenGL 处理的首选格式）输出视频帧。 dst 应该已经 有一个分配的像素缓冲区（通常，它应该从 USB 小工具中获取），并且其大小必须与 src 图像的大小相匹配。</para>
+
+<para>支持的 dst 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_MJPG</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24</para>
+</listitem></itemizedlist>
+</para>
+
+<para>质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 </para>
+<para>
+Definition at line 1373 of file RawImageOps.C.</para>
+<para>
+References jevois::compressRGBAtoJpeg(), jevois::rawimage::cvImage(), jevois::cvtypestr(), jevois::fccstr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::OutputFrame::sendCvRGBA(), and jevois::OutputFrame::sendScaledCvRGBA().</para>
+    </section><anchor xml:id="_group__image_1ga887e3d1b0329cc864014c04a90689f59"/>    <section>
+    <title>convertCvRGBtoCvYUYV()</title>
+<indexterm><primary>convertCvRGBtoCvYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvRGBtoCvYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvRGBtoCvYUYV (cv::Mat const &amp; src, cv::Mat &amp; dst)</computeroutput></para><para>
+
+<para>OpenCV 没有在 cvtColor() 中提供从 RGB 到 YUYV 的转换，因此此函数提供它 </para>
+</para>
+<para>
+Definition at line 1148 of file RawImageOps.C.</para>
+<para>
+References jevois::cvtypestr(), and LFATAL.</para>
+    </section><anchor xml:id="_group__image_1ga8d0578936bcb62de35eec980b933de52"/>    <section>
+    <title>convertCvRGBtoRawImage()</title>
+<indexterm><primary>convertCvRGBtoRawImage</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertCvRGBtoRawImage</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::convertCvRGBtoRawImage (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; dst, int quality)</computeroutput></para><para>
+
+<para>将 RGB cv::Mat 转换为具有已分配像素和像素类型的 <link linkend="_classjevois_1_1RawImage">RawImage</link> </para>
+</para>
+
+<para>这用于通过 USB 从内部计算的结果以 opencv BGR 格式输出视频帧。dst 应该已经有一个分配的像素缓冲区（通常，它应该从 USB gadget中获取），并且它的大小必须与 src 图像的大小相匹配。</para>
+
+<para>支持的 dst 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_MJPG</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24</para>
+</listitem></itemizedlist>
+</para>
+
+<para>质量仅在 dst 为 MJPG 时使用，并且应介于 1 到 100 之间。 </para>
+<para>
+Definition at line 1325 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::compressRGBtoJpeg(), jevois::rawimage::cvImage(), jevois::cvtypestr(), jevois::fccstr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::OutputFrame::sendCvRGB(), and jevois::OutputFrame::sendScaledCvRGB().</para>
+    </section><anchor xml:id="_group__image_1ga6f005034f93fc03530498eae898f9b22"/>    <section>
+    <title>convertToCvBGR()</title>
+<indexterm><primary>convertToCvBGR</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertToCvBGR</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rawimage::convertToCvBGR (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src)</computeroutput></para><para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素执行颜色转换为 OpenCV BGR 字节 </para>
+</para>
+
+<para>由于历史原因，BGR 是 OpenCV 的 &quot;native&quot; 颜色格式，请检查您的算法是否需要 RGB 或 BGR，并使用适当的转换。</para>
+
+<para>支持的 <link linkend="_classjevois_1_1RawImage">RawImage</link> 像素格式：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24 </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line 282 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::InputFrame::getCvBGR(), jevois::InputFrame::getCvBGRp(), jevois::dnn::PreProcessor::process(), and jevois::MovieOutput::send().</para>
+    </section><anchor xml:id="_group__image_1ga41c623fdf6e26eca8908b1129b56312f"/>    <section>
+    <title>convertToCvRGB()</title>
+<indexterm><primary>convertToCvRGB</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertToCvRGB</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rawimage::convertToCvRGB (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src)</computeroutput></para><para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB 字节进行颜色转换 </para>
+</para>
+
+<para>由于历史原因，BGR 是 OpenCV 的 &quot;native&quot; 颜色格式，而不是此处创建的 RGB，请检查您的算法是否需要 RGB 或 BGR，并使用适当 的转换。</para>
+
+<para>支持的 <link linkend="_classjevois_1_1RawImage">RawImage</link> 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24 </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line 307 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::InputFrame::getCvRGB(), jevois::InputFrame::getCvRGBp(), and jevois::dnn::PreProcessor::process().</para>
+    </section><anchor xml:id="_group__image_1ga028f56e85446eef9d27bd51c71867dd2"/>    <section>
+    <title>convertToCvRGBA()</title>
+<indexterm><primary>convertToCvRGBA</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertToCvRGBA</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rawimage::convertToCvRGBA (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src)</computeroutput></para><para>
+
+<para>将 <link linkend="_classjevois_1_1RawImage">RawImage</link> 转换为 OpenCV，从任何 <link linkend="_classjevois_1_1RawImage">RawImage</link> 源像素到 OpenCV RGB-A 字节进行颜色转换 </para>
+</para>
+
+<para>OpenCV 本身很少使用 RGBA，但对许多 NEON 和 OpenGL (GPU) 算法很有用。对于这些算法，我们在这里仅使用 cv::Mat 作 为原始像素数据的便捷容器。</para>
+
+<para>支持的 <link linkend="_classjevois_1_1RawImage">RawImage</link> 像素格式：<itemizedlist>
+<listitem>
+<para>V4L2_PIX_FMT_YUYV</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_GREY</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_SRGGB8 (Bayer)</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_RGB565</para>
+</listitem><listitem>
+<para>V4L2_PIX_FMT_BGR24 </para>
+</listitem></itemizedlist>
+</para>
+<para>
+Definition at line 332 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::cvImage(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::InputFrame::getCvRGBA(), and jevois::InputFrame::getCvRGBAp().</para>
+    </section><anchor xml:id="_group__image_1gabc1de0ec8bdb25ffacf5b0d25dc11469"/>    <section>
+    <title>convertYUYVtoRGBYL()</title>
+<indexterm><primary>convertYUYVtoRGBYL</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>convertYUYVtoRGBYL</secondary></indexterm>
+<para><computeroutput>void convertYUYVtoRGBYL (unsigned int w, unsigned int h, unsigned char const * src, int * dstrg, int * dstby, int * dstlum, int thresh, int inputbits)</computeroutput></para><para>
+
+<para>将 YUYV 转换为 RG、BY 和亮度，以供 jevoisbase 中的 Saliency 模块使用。供内部使用。 </para>
+</para>
+<para>
+Definition at line 89 of file ColorConversion.c.</para>
+<para>
+References convertYUYVtoRGBYLinternal(), G, and h.</para>
+    </section><anchor xml:id="_group__image_1ga20c3651602d9b2d003988b9bcd674f03"/>    <section>
+    <title>cvImage()</title>
+<indexterm><primary>cvImage</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>cvImage</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rawimage::cvImage (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src)</computeroutput></para><para>
+
+<para>从现有 <link linkend="_classjevois_1_1RawImage">RawImage</link> 数据创建 OpenCV 图像，共享像素内存而不是复制它 </para>
+</para>
+
+<para>像素数据不会被复制，只是指向，并且不会进行像素格式转换。您应该在 <link linkend="_classjevois_1_1RawImage">RawImage</link> 之前销毁 cv::Mat，以避免您的 cv::Mat 最终导 致像素内存被释放。 </para>
+<para>
+Definition at line 31 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::v4l2BytesPerPix(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::rawimage::convertBayerToYUYV(), jevois::rawimage::convertCvBGRtoRawImage(), jevois::rawimage::convertCvGRAYtoRawImage(), jevois::rawimage::convertCvRGBAtoRawImage(), jevois::rawimage::convertCvRGBtoRawImage(), jevois::rawimage::convertGreyToYUYV(), jevois::rawimage::convertToCvBGR(), jevois::rawimage::convertToCvGray(), jevois::rawimage::convertToCvRGB(), jevois::rawimage::convertToCvRGBA(), and jevois::dnn::PreProcessor::process().</para>
+    </section><anchor xml:id="_group__image_1gae7d102e1c456f87337d66a9a2fc11a58"/>    <section>
+    <title>drawCircle()</title>
+<indexterm><primary>drawCircle</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawCircle</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawCircle (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x, int y, unsigned int rad, unsigned int thick, unsigned int col)</computeroutput></para><para>
+
+<para>在YUYV图像中绘制一个圆圈 </para>
+</para>
+<para>
+Definition at line 483 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::drawDisk().</para>
+<para>
+Referenced by jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_group__image_1ga529a42aed4e4681e38910e8793e6064c"/>    <section>
+    <title>drawDisk()</title>
+<indexterm><primary>drawDisk</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawDisk</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawDisk (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x, int y, unsigned int rad, unsigned int col)</computeroutput></para><para>
+
+<para>在 YUYV 图像中绘制一个圆盘 disk </para>
+</para>
+<para>
+Definition at line 465 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::coordsOk(), jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::rawimage::drawCircle(), jevois::drawErrorImage(), and jevois::rawimage::drawLine().</para>
+    </section><anchor xml:id="_group__image_1ga458eebde298cccaa70c778878223c17b"/>    <section>
+    <title>drawFilledRect()</title>
+<indexterm><primary>drawFilledRect</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawFilledRect</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawFilledRect (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x, int y, unsigned int w, unsigned int h, unsigned int col)</computeroutput></para><para>
+
+<para>在 YUYV 图像中绘制填充矩形 </para>
+</para>
+
+<para>这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 openCV 函数。绘制的 像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则将其替换为 1。 </para>
+<para>
+Definition at line 646 of file RawImageOps.C.</para>
+<para>
+References h, jevois::RawImage::height, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga7cf2b2c4e6460835fbc671367a60feb9"/>    <section>
+    <title>drawLine()</title>
+<indexterm><primary>drawLine</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawLine</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawLine (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x1, int y1, int x2, int y2, unsigned int thick, unsigned int col)</computeroutput></para><para>
+
+<para>在 YUYV 图像中绘制一条线 </para>
+</para>
+<para>
+Definition at line 564 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::clipLine(), jevois::rawimage::drawDisk(), h, jevois::RawImage::height, LFATAL, and jevois::RawImage::width.</para>
+<para>
+Referenced by jevois::drawErrorImage(), jevois::rawimage::drawRect(), and jevois::dnn::PostProcessorYuNet::report().</para>
+    </section><anchor xml:id="_group__image_1gaa023840c2ca7c4997b4b456927131cdf"/>    <section>
+    <title>drawRect()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>drawRect</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawRect</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawRect (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x, int y, unsigned int w, unsigned int h, unsigned int col)</computeroutput></para><para>
+
+<para>在 YUYV 图像中绘制矩形 </para>
+</para>
+
+<para>这实际上并不灵活，并且仅针对速度进行了优化。col 将用于 YU 和 YV 像素。对于要求更高的绘图，请使用 openCV 函数。绘制的 像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则将其替换为 1。 </para>
+<para>
+Definition at line 624 of file RawImageOps.C.</para>
+<para>
+References h, jevois::RawImage::height, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1gaa32b3e227c9904699d616e2a32c9506d"/>    <section>
+    <title>drawRect()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>drawRect</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>drawRect</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::drawRect (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, int x, int y, unsigned int w, unsigned int h, unsigned int thick, unsigned int col)</computeroutput></para><para>
+
+<para>在 YUYV 图像中绘制一个矩形 </para>
+</para>
+
+<para>绘制的像素从 (x,y) 包含到 (x+w-1,y+h-1) 包含。如果 w 或 h 为 0，则用 1 替换。 </para>
+<para>
+Definition at line 607 of file RawImageOps.C.</para>
+<para>
+References jevois::rawimage::drawLine(), and h.</para>
+<para>
+Referenced by jevois::dnn::PostProcessorDetect::report(), jevois::dnn::PostProcessorYuNet::report(), and jevois::dnn::PreProcessor::sendreport().</para>
+    </section><anchor xml:id="_group__image_1gaa830449161c068b13cd986844a2c428e"/>    <section>
+    <title>hFlipYUYV()</title>
+<indexterm><primary>hFlipYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>hFlipYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::hFlipYUYV (<link linkend="_classjevois_1_1RawImage">RawImage</link> &amp; img)</computeroutput></para><para>
+
+<para>水平翻转 YUYV <link linkend="_classjevois_1_1RawImage">RawImage</link> 同时保留颜色信息 </para>
+</para>
+
+<para>此函数允许在 Mac 上使用 JeVois 和 PhotoBooth 应用程序，水平翻转图像（围绕垂直轴）。仅支持 YUYV 像素。您可能能够将 OpenCV 中的 cv::flip() 与其他像素类型一起使用。 </para>
+<para>
+Definition at line 1452 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga05c4650464e447a89a2a2c60d1956748"/>    <section>
+    <title>paste()</title>
+<indexterm><primary>paste</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>paste</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::paste (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; dest, int dx, int dy)</computeroutput></para><para>
+
+<para>将一张图像粘贴到另一张相同像素类型的图像中 </para>
+</para>
+
+<para>为保持此功能快速运行，如果源图像不完全适合目标图像，或者两张图像的像素格式不同，则会抛出异常。 </para>
+<para>
+Definition at line 403 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixels(), jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1gae9f19d7535b689d5c0b4bb31133463da"/>    <section>
+    <title>pasteBGRtoYUYV()</title>
+<indexterm><primary>pasteBGRtoYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>pasteBGRtoYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::pasteBGRtoYUYV (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; dst, int dx, int dy)</computeroutput></para><para>
+
+<para>将 BGR 字节图像粘贴到 YUYV 图像中 </para>
+</para>
+<para>
+Definition at line 1072 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::cvtypestr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1gae83668f61639d6a6f4de5e11d02ca015"/>    <section>
+    <title>pasteGreyToYUYV()</title>
+<indexterm><primary>pasteGreyToYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>pasteGreyToYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::pasteGreyToYUYV (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; dest, int dx, int dy)</computeroutput></para><para>
+
+<para>将灰度字节图像粘贴到 YUYV 图像中 </para>
+</para>
+<para>
+Definition at line 448 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga3ff72f69a31242d3d77ac1c61e82c4d6"/>    <section>
+    <title>pasteRGBtoYUYV()</title>
+<indexterm><primary>pasteRGBtoYUYV</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>pasteRGBtoYUYV</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::pasteRGBtoYUYV (cv::Mat const &amp; src, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; dst, int dx, int dy)</computeroutput></para><para>
+
+<para>将 RGB 字节图像粘贴到 YUYV 图像中 </para>
+</para>
+<para>
+Definition at line 1158 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::cvtypestr(), jevois::RawImage::fmt, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga6607626cad0258d69b6ead8d1ced4f52"/>    <section>
+    <title>rescaleCv()</title>
+<indexterm><primary>rescaleCv</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>rescaleCv</secondary></indexterm>
+<para><computeroutput>cv::Mat jevois::rescaleCv (cv::Mat const &amp; img, cv::Size const &amp; newdims)</computeroutput></para><para>
+
+<para>重新缩放 OpenCV 图像，选择正确的插值类型 </para>
+</para>
+<para>
+Definition at line 1660 of file RawImageOps.C.</para>
+<para>
+Referenced by jevois::ImGuiImage::load(), jevois::OutputFrame::sendScaledCvBGR(), jevois::OutputFrame::sendScaledCvGRAY(), jevois::OutputFrame::sendScaledCvRGB(), and jevois::OutputFrame::sendScaledCvRGBA().</para>
+    </section><anchor xml:id="_group__image_1gaa8a5444f39661f76fb160f1f6eead381"/>    <section>
+    <title>roipaste()</title>
+<indexterm><primary>roipaste</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>roipaste</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::roipaste (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> const &amp; src, int x, int y, unsigned int w, unsigned int h, <link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; dest, int dx, int dy)</computeroutput></para><para>
+
+<para>将图像中的 ROI 粘贴到相同像素类型的另一个图像中 </para>
+</para>
+
+<para>为了保持此功能的快速运行，如果源图像不完全适合目标图像或像素格式不同，则会抛出。 </para>
+<para>
+Definition at line 425 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::RawImage::fmt, h, jevois::RawImage::height, LFATAL, jevois::RawImage::pixels(), jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga893e982b449643c8853afe424fb72c09"/>    <section>
+    <title>writeText()<computeroutput>[1/2]</computeroutput></title>
+<indexterm><primary>writeText</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>writeText</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::writeText (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, char const * txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font = <computeroutput><link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>在图像中写一些文字 </para>
+</para>
+<para>
+Definition at line 697 of file RawImageOps.C.</para>
+<para>
+References jevois::RawImage::bytesperpix(), jevois::font::font10x20, jevois::rawimage::Font10x20, jevois::font::font11x22, jevois::rawimage::Font11x22, jevois::font::font12x22, jevois::rawimage::Font12x22, jevois::font::font14x26, jevois::rawimage::Font14x26, jevois::font::font15x28, jevois::rawimage::Font15x28, jevois::font::font16x29, jevois::rawimage::Font16x29, jevois::font::font20x38, jevois::rawimage::Font20x38, jevois::font::font5x7, jevois::rawimage::Font5x7, jevois::font::font6x10, jevois::rawimage::Font6x10, jevois::font::font7x13, jevois::rawimage::Font7x13, jevois::font::font8x13bold, jevois::rawimage::Font8x13bold, jevois::font::font9x15bold, jevois::rawimage::Font9x15bold, jevois::RawImage::height, LFATAL, jevois::RawImage::pixelsw(), and jevois::RawImage::width.</para>
+    </section><anchor xml:id="_group__image_1ga2696d3febc217f295d5532c26255c26b"/>    <section>
+    <title>writeText()<computeroutput>[2/2]</computeroutput></title>
+<indexterm><primary>writeText</primary><secondary>Raw 零拷贝/内存映射视频图像和支持函数</secondary></indexterm>
+<indexterm><primary>Raw 零拷贝/内存映射视频图像和支持函数</primary><secondary>writeText</secondary></indexterm>
+<para><computeroutput>void jevois::rawimage::writeText (<link linkend="_classjevois_1_1RawImage">jevois::RawImage</link> &amp; img, std::string const &amp; txt, int x, int y, unsigned int col, <link linkend="_group__image_1ga6c3b4288b23ae5c03a7f625ec0b1409a">Font</link> font = <computeroutput><link linkend="_group__image_1gga6c3b4288b23ae5c03a7f625ec0b1409aa7475b4baacd9c97421b0f0e3edc189af">Font6x10</link></computeroutput>
+)</computeroutput></para><para>
+
+<para>在图像中写一些文字 </para>
+</para>
+<para>
+Definition at line 690 of file RawImageOps.C.</para>
+<para>
+Referenced by jevois::drawErrorImage(), jevois::rawimage::itext(), jevois::dnn::Pipeline::process(), jevois::dnn::PostProcessorClassify::report(), jevois::dnn::PostProcessorDetect::report(), jevois::dnn::PostProcessorYuNet::report(), and jevois::dnn::Pipeline::showInfo().</para>
+</section>
+</section>
+</section>

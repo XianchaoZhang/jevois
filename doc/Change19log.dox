@@ -1,59 +1,47 @@
-/*! \page Change19log Changes and new features in JeVois 1.9
+/*! \page Change19log JeVois 1.9 中的变化和新功能
 
 
-JeVois 1.9 brings the following new features:
+JeVois 1.9 带来以下新功能：
 
-- Introduced the new \ref JeVoisInventor which makes programming JeVois using full OpenCV and full Python 3.6 much
-  easier than ever before.
+- 引入了新的 \ref JeVoisInventor ，它使使用完整的 OpenCV 和完整的 Python 3.6 编程 JeVois 比以往更加容易。
 
-- Bumped to OpenCV 3.4.2, with all contrib modules including deep neural networks (DNN)
+- 升级至 OpenCV 3.4.2，所有贡献模块包括深度神经网络 (DNN)
 
-- YOLO v3 is now supported by \jvmod{DarknetYOLO}, faster, more accurate, less memory, and 80 object classes.
+- \jvmod{DarknetYOLO} 现在支持 YOLO v3，速度更快、更准确、占用内存更少，并有 80 个目标类别。
 
-- New modules \jvmod{DetectionDNN} and \jvmod{PyDetectionDNN} show how to use object detection + recognition deep neural
-  networks using the OpenCV DNN framework, in C++ and Python. Supported network formats are Caffe, TensorFlow, Darknet,
-  and Torch. Examples are provided which include:
-  + OpenCV Face Detector, Caffe model
-  + MobileNet + SSD trained on Pascal VOC (20 object classes), Caffe model
-  + MobileNet + SSD trained on Coco (80 object classes), TensorFlow model
-  + MobileNet v2 + SSD trained on Coco (80 object classes), TensorFlow model
-  + Darknet Tiny YOLO v3 trained on Coco (80 object classes), Darknet model
-  + Darknet Tiny YOLO v2 trained on Pascal VOC (20 object classes), Darknet model
+- 新模块 \jvmod{DetectionDNN} 和 \jvmod{PyDetectionDNN} 展示了如何使用 OpenCV DNN 框架（C++ 和 Python）使用目标检测 + 识别深度神经网络。支持的网络格式为 Caffe、TensorFlow、Darknet 和 Torch。提供的示例包括：
+  + OpenCV 人脸检测器，Caffe 模型
+  + MobileNet + 在 Pascal VOC 上训练的 SSD（20 个目标类），Caffe 模型
+  + MobileNet + 在 Coco 上训练的 SSD（80 个目标类），TensorFlow 模型
+  + MobileNet v2 + 在 Coco 上训练的 SSD（80 个目标类），TensorFlow 模型
+  + Darknet Tiny YOLO v3 在 Coco 上训练的 Darknet Tiny YOLO v3（80 个目标类），Darknet 模型
+  + Darknet Tiny YOLO v2 在 Pascal VOC 上训练的 Darknet Tiny YOLO v2（20 个目标类），Darknet 模型
 
-- Added pre-trained MobileNet v2 networks to \jvmod{TensorFlowEasy}
+- 将预先训练的 MobileNet v2 网络添加到 \jvmod{TensorFlowEasy}
 
-- New standardized messages for object recognition results, and for object box detection + recognition defined in \ref
-  UserSerialStyle and used in all deep network modules.
+- 用于目标识别结果以及目标框检测 + 识别的新标准化消息，该消息在 \ref UserSerialStyle 中定义并用于所有深度网络模块。
 
-- Two new tutorials explain how to decode these messages on Arduino, with sample Arduino code: \ref UserArduinoBlink and
-  \ref UserArduinoYOLO
+- 两个新教程解释了如何在 Arduino 上解码这些消息，并附有示例 Arduino 代码：\ref UserArduinoBlink 和 \ref UserArduinoYOLO
 
-- Added support for different camera sensors. ov7725 is working great, still work in progress for ov2640. More on that
-  coming in the next release.
+- 增加了对不同相机传感器的支持。ov7725 运行良好，ov2640 仍在开发中。下一版本中将提供更多信息。
 
-- Added a frame counter in the main loop, and access to it using jevois::Module::frameNum(). Modules that need to keep
-  track of frame number do not need to implement their own counter anymore and can use this one.
+- 在主循环中添加了一个帧计数器，并使用 jevois::Module::frameNum() 访问它。需要跟踪帧号的模块不再需要实现自己的计数器，可以使用这个计数器。
 
-- Added parameter \p serstamp to jevois::StdModule to optionally prepend all standardized serial messages with frame
-  number, time, frame+time, etc
+- 向 jevois::StdModule 添加了参数 \p serstamp，可选择在所有标准化串行消息前面添加帧号、时间、帧+时间等
 
-- Added parameter \p serlimit to jevois::Engine to allow limiting the number of serial messages sent per video frame, to
-  avoid overloading a serial link.
+- 向 jevois::Engine 添加了参数 \p serlimit，以限制每个视频帧发送的串行消息数量，避免串行链路过载。
 
-- Added parameter \p sermark to optionally mark start and end of each frame. Useful if one needs to know when a frame
-  has been processed but no results were found and hence no other serial messages were sent.
+- 添加了参数 \p sermark，可选择标记每帧的开始和结束。如果需要知道何时处理了一帧但未找到结果，因此未发送其他串行消息，则很有用。
 
-- Added standardized messages for object recognition and using them in the neural network modules (TensorFlow, Darknet)
+- 添加了用于目标识别的标准化消息并将其用于神经网络模块（TensorFlow，Darknet）
 
-- new command-line interface command: shell (allows to run Unix commands on JeVois)
+- 新的命令行界面命令：shell（允许在 JeVois 上运行 Unix 命令）
 
-- new command-line interface commands to get machine-oriented info about the camera: cmdinfo, caminfo, modcmdinfo,
-  paraminfo
+- 新的命令行界面命令用于获取有关相机的机器信息：cmdinfo、caminfo、modcmdinfo、paraminfo
 
-- Fixed bug in \jvmod{RoadNavigation} which was sending incorrect data when operating with no USB output.
+- 修复了 \jvmod{RoadNavigation} 中的错误，该错误在无 USB 输出的情况下操作时会发送不正确的数据。
 
-- Enabled swap support in the JeVois kernel. Swap is not turned on by default to not slow down boot time, but, if
-  needed, one can easily create a swap file and activate it using the \c shell command of the JeVois command-line
-  interface.
+- 在 JeVois 内核中启用了 swap 支持。默认情况下不启用，以免减慢启动时间，但如果需要，可以轻松创建 swap 文件并使用 JeVois 命令行界面的 \c shell 命令激活它。
 
 */
+

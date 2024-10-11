@@ -1,0 +1,500 @@
+\hypertarget{classjevois_1_1dnn_1_1PreProcessor}{}\doxysubsection{jevois\+::dnn\+::Pre\+Processor Class Reference}
+\label{classjevois_1_1dnn_1_1PreProcessor}\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Pre\+Processor.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+神经网络管道的预处理器 
+
+这是深度神经网络处理管道的第一步。
+
+派生类必须实现纯虚拟方法：
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}}：处理输入图像并生成一些张量 (blob)
+\item \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}{report()}}：描述 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 对人类做了什么
+\item \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a72917bb3bcf01737deaa85e545bcf215}{freeze()}}：冻结/解冻用户在运行时不应更改的参数
+\end{DoxyItemize}
+
+它们应该保留一些关于要报告的内容的内部状态，因为 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}{report()}} 总是在每一帧上被调用，但是如果网络速度较慢，则 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 的调用频率可能会较低。 
+
+Definition at line 107 of file Pre\+Processor.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Pre\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PreProcessor__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Pre\+Processor\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1PreProcessor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a31269c81e3f1ecc1bc98482cf135f3df}{Pre\+Processor}} (std\+::string const \&instance)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_af2180a14662488d6fe376b10935fa578}{$\sim$\+Pre\+Processor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a72917bb3bcf01737deaa85e545bcf215}{freeze}} (bool doit)=0
+\begin{DoxyCompactList}\small\item\em 冻结/解冻运行时用户不应更改的参数 \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process}} (\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&img, std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&attrs)
+\begin{DoxyCompactList}\small\item\em 从输入图像中提取 blob \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a756dba15be6389e8fd773e7bce9d6d6a}{sendreport}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false)
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\item 
+const cv\+::\+Size \& \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a146de314f411fdccbb007de56114945d}{imagesize}} () const
+\begin{DoxyCompactList}\small\item\em 访问最后处理的图像大小 \end{DoxyCompactList}\item 
+const std\+::vector$<$ cv\+::\+Mat $>$ \& \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a3ead2199062666efc8e1815dc2d19a0d}{blobs}} () const
+\begin{DoxyCompactList}\small\item\em 访问最后计算的 blob（如果尚未调用 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}}，则为空） \end{DoxyCompactList}\item 
+cv\+::\+Size \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_afb6d50de0b157e25736031c3a0fe90fe}{blobsize}} (size\+\_\+t num) const
+\begin{DoxyCompactList}\small\item\em 访问给定 blob 的宽度和高度，考虑 N\+C\+HW 或 N\+H\+WC \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_af3f4668117e37f2109d482b6f6511261}{b2i}} (float \&x, float \&y, size\+\_\+t blobnum=0)
+\begin{DoxyCompactList}\small\item\em 将 blob 中的坐标转换回原始图像 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a2366489ae9aa9058048bd6d16dd2f53c}{b2i}} (float \&x, float \&y, cv\+::\+Size const \&bsiz, bool letterboxed)
+\begin{DoxyCompactList}\small\item\em 将 blob 的坐标转换回原始图像，给定一个已知的 blob 大小 \end{DoxyCompactList}\item 
+cv\+::\+Rect \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a2bef3a5bb57250f2b487a2cf51d1f544}{get\+Unscaled\+Crop\+Rect}} (size\+\_\+t blobnum=0)
+\begin{DoxyCompactList}\small\item\em 在图像坐标中获取未缩放的裁剪矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab2d1f44c81418cb9a3b91ee5da84a05c}{get\+Unscaled\+Crop\+Rect}} (size\+\_\+t blobnum, int \&tlx, int \&tly, int \&brx, int \&bry)
+\begin{DoxyCompactList}\small\item\em 在图像坐标中获取未缩放的裁剪矩形 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a63fe5d3748e433687cc435321d5a2f46}{i2b}} (float \&x, float \&y, size\+\_\+t blobnum=0)
+\begin{DoxyCompactList}\small\item\em 将坐标从图像转换为 blob \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7fe82c8c0d787da1846858b504329a5e}{i2b}} (float \&x, float \&y, cv\+::\+Size const \&bsiz, bool letterboxed)
+\begin{DoxyCompactList}\small\item\em 将坐标从图像转换为 blob \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython}{Pre\+Processor\+For\+Python}} $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a185fd5f10802adbeb87da637bfc86064}{get\+Pre\+Proc\+For\+Py}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向我们的 python 友好接口的指针 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a0f9703abfd50ab9a363ad9d44ec8224a}{process}} (cv\+::\+Mat const \&img, bool isrgb, std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&attrs, std\+::vector$<$ cv\+::\+Rect $>$ \&crops)=0
+\begin{DoxyCompactList}\small\item\em 从输入图像中提取 blob \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}{report}} (\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$mod, \mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$outimg=nullptr, \mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$helper=nullptr, bool overlay=true, bool idle=false)=0
+\begin{DoxyCompactList}\small\item\em 将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a07e56edf6759d1d6e84d37d6495302bc}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (rgb, bool, \char`\"{}When true, model works with R\+GB input images instead B\+GR ones\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7c10da01d06e703c3cb9dac79a58dfbc}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (scale, float, \char`\"{}Value scaling factor applied to input pixels after mean subtraction, \char`\"{} \char`\"{}or 0.\+0 to extract an unscaled U\+I\+N\+T8 blob, typically for use with quantized networks\char`\"{}, 2.\+0F/255.\+0F, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a8035c8fc94d7772603bb3b37d7c506e0}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (mean, cv\+::\+Scalar, \char`\"{}Mean values subtracted from input image, in the same R\+GB/B\+GR \char`\"{} \char`\"{}order as the network\textquotesingle{}s input\char`\"{}, cv\+::\+Scalar(127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, 127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, 127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_addb0d7f0cfb7c251eff8f30b48d8a2ac}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (stdev, cv\+::\+Scalar, \char`\"{}Input image is divided by stdev after mean subtraction and scale \char`\"{} \char`\"{}factor are applied. This is rarely used. Same R\+GB/B\+GR order as the network\textquotesingle{}s input\char`\"{}, cv\+::\+Scalar(1.\+0F, 1.\+0F, 1.\+0F), Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_aa235cb65db70a9878609492c80ca8175}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (letterbox, bool, \char`\"{}When true, extract the largest possible box from the input image \char`\"{} \char`\"{}with same aspect ratio as the network\textquotesingle{}s input tensor, and then rescale it to that \char`\"{} \char`\"{}tensor\textquotesingle{}s width and height (hence with cropping but no distortion). Otherwise, use \char`\"{} \char`\"{}the whole image and rescale it to the network\textquotesingle{}s input width and height with some \char`\"{} \char`\"{}possible stretching.\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a692152838c1e21d653ecd30109834dc9}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (showin, bool, \char`\"{}Show outline of cropped image fed to network\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a9a4fa89ef038bc17b95d60c1c4ad9f07}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (details, bool, \char`\"{}Show more details about the pre-\/processing steps\char`\"{}, false, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_a7cb8150ba2f64fecbb134b882ccf3e1b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Interp\+Mode,(Nearest)(Linear)(Cubic)(Area)(Lanczos4))
+\begin{DoxyCompactList}\small\item\em Enum for image resizing modes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_aa1cbaf0d37576a63aade6834514bdd3b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (interp, Interp\+Mode, \char`\"{}Image interpolation to use when resizing the input image \char`\"{} \char`\"{}from camera to network input dims\char`\"{}, Interp\+Mode\+::\+Nearest, Interp\+Mode\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a31269c81e3f1ecc1bc98482cf135f3df}\label{classjevois_1_1dnn_1_1PreProcessor_a31269c81e3f1ecc1bc98482cf135f3df}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!PreProcessor@{PreProcessor}}
+\index{PreProcessor@{PreProcessor}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{PreProcessor()}{PreProcessor()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pre\+Processor\+::\+Pre\+Processor (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{instance }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 26 of file Pre\+Processor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_af2180a14662488d6fe376b10935fa578}\label{classjevois_1_1dnn_1_1PreProcessor_af2180a14662488d6fe376b10935fa578}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!````~PreProcessor@{$\sim$PreProcessor}}
+\index{````~PreProcessor@{$\sim$PreProcessor}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{$\sim$PreProcessor()}{~PreProcessor()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Pre\+Processor\+::$\sim$\+Pre\+Processor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 31 of file Pre\+Processor.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a2366489ae9aa9058048bd6d16dd2f53c}\label{classjevois_1_1dnn_1_1PreProcessor_a2366489ae9aa9058048bd6d16dd2f53c}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!b2i@{b2i}}
+\index{b2i@{b2i}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{b2i()}{b2i()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::b2i (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{cv\+::\+Size const \&}]{bsiz,  }\item[{bool}]{letterboxed }\end{DoxyParamCaption})}
+
+
+
+将 blob 的坐标转换回原始图像，给定一个已知的 blob 大小 
+
+给定的坐标 x,y 应该在 \mbox{[}0..w-\/1\mbox{]}x\mbox{[}0..h-\/1\mbox{]} 中，其中 w,h 是 blob 的宽度和高度。这对于将检测到的框转换回原始输入坐 标很有用。 
+
+Definition at line 60 of file Pre\+Processor.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_af3f4668117e37f2109d482b6f6511261}\label{classjevois_1_1dnn_1_1PreProcessor_af3f4668117e37f2109d482b6f6511261}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!b2i@{b2i}}
+\index{b2i@{b2i}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{b2i()}{b2i()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::b2i (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{size\+\_\+t}]{blobnum = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+将 blob 中的坐标转换回原始图像 
+
+
+
+Definition at line 50 of file Pre\+Processor.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a3ead2199062666efc8e1815dc2d19a0d}\label{classjevois_1_1dnn_1_1PreProcessor_a3ead2199062666efc8e1815dc2d19a0d}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!blobs@{blobs}}
+\index{blobs@{blobs}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{blobs()}{blobs()}}
+{\footnotesize\ttfamily const std\+::vector$<$ cv\+::\+Mat $>$ \& jevois\+::dnn\+::\+Pre\+Processor\+::blobs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+访问最后计算的 blob（如果尚未调用 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}}，则为空） 
+
+
+
+Definition at line 35 of file Pre\+Processor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_afb6d50de0b157e25736031c3a0fe90fe}\label{classjevois_1_1dnn_1_1PreProcessor_afb6d50de0b157e25736031c3a0fe90fe}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!blobsize@{blobsize}}
+\index{blobsize@{blobsize}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{blobsize()}{blobsize()}}
+{\footnotesize\ttfamily cv\+::\+Size jevois\+::dnn\+::\+Pre\+Processor\+::blobsize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{num }\end{DoxyParamCaption}) const}
+
+
+
+访问给定 blob 的宽度和高度，考虑 N\+C\+HW 或 N\+H\+WC 
+
+
+
+Definition at line 43 of file Pre\+Processor.\+C.
+
+
+
+References jevois\+::dnn\+::attrsize(), and L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a72917bb3bcf01737deaa85e545bcf215}\label{classjevois_1_1dnn_1_1PreProcessor_a72917bb3bcf01737deaa85e545bcf215}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Pre\+Processor\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+冻结/解冻运行时用户不应更改的参数 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorBlob_ab7e8c771814ccefdfabdad7069f9c11d}{jevois\+::dnn\+::\+Pre\+Processor\+Blob}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a511d2fa7d4bf242e4116e0b021729f79}{jevois\+::dnn\+::\+Pre\+Processor\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a185fd5f10802adbeb87da637bfc86064}\label{classjevois_1_1dnn_1_1PreProcessor_a185fd5f10802adbeb87da637bfc86064}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!getPreProcForPy@{getPreProcForPy}}
+\index{getPreProcForPy@{getPreProcForPy}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{getPreProcForPy()}{getPreProcForPy()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorForPython}{jevois\+::dnn\+::\+Pre\+Processor\+For\+Python}} $>$ jevois\+::dnn\+::\+Pre\+Processor\+::get\+Pre\+Proc\+For\+Py (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取指向我们的 python 友好接口的指针 
+
+
+
+Definition at line 127 of file Pre\+Processor.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Python\+Impl\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_ab2d1f44c81418cb9a3b91ee5da84a05c}\label{classjevois_1_1dnn_1_1PreProcessor_ab2d1f44c81418cb9a3b91ee5da84a05c}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!getUnscaledCropRect@{getUnscaledCropRect}}
+\index{getUnscaledCropRect@{getUnscaledCropRect}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{getUnscaledCropRect()}{getUnscaledCropRect()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::get\+Unscaled\+Crop\+Rect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{blobnum,  }\item[{int \&}]{tlx,  }\item[{int \&}]{tly,  }\item[{int \&}]{brx,  }\item[{int \&}]{bry }\end{DoxyParamCaption})}
+
+
+
+在图像坐标中获取未缩放的裁剪矩形 
+
+
+
+Definition at line 88 of file Pre\+Processor.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a2bef3a5bb57250f2b487a2cf51d1f544}\label{classjevois_1_1dnn_1_1PreProcessor_a2bef3a5bb57250f2b487a2cf51d1f544}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!getUnscaledCropRect@{getUnscaledCropRect}}
+\index{getUnscaledCropRect@{getUnscaledCropRect}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{getUnscaledCropRect()}{getUnscaledCropRect()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily cv\+::\+Rect jevois\+::dnn\+::\+Pre\+Processor\+::get\+Unscaled\+Crop\+Rect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{blobnum = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+在图像坐标中获取未缩放的裁剪矩形 
+
+
+
+Definition at line 81 of file Pre\+Processor.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Segment\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a7fe82c8c0d787da1846858b504329a5e}\label{classjevois_1_1dnn_1_1PreProcessor_a7fe82c8c0d787da1846858b504329a5e}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!i2b@{i2b}}
+\index{i2b@{i2b}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{i2b()}{i2b()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::i2b (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{cv\+::\+Size const \&}]{bsiz,  }\item[{bool}]{letterboxed }\end{DoxyParamCaption})}
+
+
+
+将坐标从图像转换为 blob 
+
+给定坐标 x、y 应位于 \mbox{[}0..w-\/1\mbox{]}x\mbox{[}0..h-\/1\mbox{]} 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转 换为图像坐标之后）转换为输入 blob 内的位置很有用。 
+
+Definition at line 105 of file Pre\+Processor.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a63fe5d3748e433687cc435321d5a2f46}\label{classjevois_1_1dnn_1_1PreProcessor_a63fe5d3748e433687cc435321d5a2f46}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!i2b@{i2b}}
+\index{i2b@{i2b}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{i2b()}{i2b()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::i2b (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{size\+\_\+t}]{blobnum = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+将坐标从图像转换为 blob 
+
+给定坐标 x、y 应位于 \mbox{[}0..w-\/1\mbox{]}x\mbox{[}0..h-\/1\mbox{]} 中，其中 w、h 是图像的宽度和高度。这对于将鼠标坐标（在从屏幕坐标转 换为图像坐标之后）转换为输入 blob 内的位置很有用。 
+
+Definition at line 95 of file Pre\+Processor.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a146de314f411fdccbb007de56114945d}\label{classjevois_1_1dnn_1_1PreProcessor_a146de314f411fdccbb007de56114945d}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!imagesize@{imagesize}}
+\index{imagesize@{imagesize}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{imagesize()}{imagesize()}}
+{\footnotesize\ttfamily const cv\+::\+Size \& jevois\+::dnn\+::\+Pre\+Processor\+::imagesize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+访问最后处理的图像大小 
+
+
+
+Definition at line 39 of file Pre\+Processor.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Post\+Processor\+Detect\+::process(), and jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::process().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a0f9703abfd50ab9a363ad9d44ec8224a}\label{classjevois_1_1dnn_1_1PreProcessor_a0f9703abfd50ab9a363ad9d44ec8224a}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!process@{process}}
+\index{process@{process}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{process()}{process()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual std\+::vector$<$cv\+::\+Mat$>$ jevois\+::dnn\+::\+Pre\+Processor\+::process (\begin{DoxyParamCaption}\item[{cv\+::\+Mat const \&}]{img,  }\item[{bool}]{isrgb,  }\item[{std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&}]{attrs,  }\item[{std\+::vector$<$ cv\+::\+Rect $>$ \&}]{crops }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+从输入图像中提取 blob 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorBlob_aa9783db0f5b8c8be3fdfa230b4353a1a}{jevois\+::dnn\+::\+Pre\+Processor\+Blob}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a3d59fafa2aece57c8b44d6f3f29a2427}{jevois\+::dnn\+::\+Pre\+Processor\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}\label{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!process@{process}}
+\index{process@{process}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{process()}{process()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Pre\+Processor\+::process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} const \&}]{img,  }\item[{std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ const \&}]{attrs }\end{DoxyParamCaption})}
+
+
+
+从输入图像中提取 blob 
+
+
+
+Definition at line 131 of file Pre\+Processor.\+C.
+
+
+
+References jevois\+::rawimage\+::convert\+To\+Cv\+B\+G\+R(), jevois\+::rawimage\+::convert\+To\+Cv\+R\+G\+B(), jevois\+::rawimage\+::cv\+Image(), jevois\+::\+Raw\+Image\+::fmt, jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, and jevois\+::\+Raw\+Image\+::width.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}\label{classjevois_1_1dnn_1_1PreProcessor_a7f6bb6482d8bd5b22be49185aed3c2a4}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!report@{report}}
+\index{report@{report}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{report()}{report()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Pre\+Processor\+::report (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorBlob_a8bbc88440016a12ddbdef6d680414684}{jevois\+::dnn\+::\+Pre\+Processor\+Blob}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessorPython_a035eb07051345a634219486127a7e916}{jevois\+::dnn\+::\+Pre\+Processor\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a756dba15be6389e8fd773e7bce9d6d6a}\label{classjevois_1_1dnn_1_1PreProcessor_a756dba15be6389e8fd773e7bce9d6d6a}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!sendreport@{sendreport}}
+\index{sendreport@{sendreport}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{sendreport()}{sendreport()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Pre\+Processor\+::sendreport (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classjevois_1_1StdModule}{jevois\+::\+Std\+Module}} $\ast$}]{mod,  }\item[{\mbox{\hyperlink{classjevois_1_1RawImage}{jevois\+::\+Raw\+Image}} $\ast$}]{outimg = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacejevois_a3cecc6a65147ea01f0f710f5b54b45ce}{jevois\+::\+Opt\+G\+U\+Ihelper}} $\ast$}]{helper = {\ttfamily nullptr},  }\item[{bool}]{overlay = {\ttfamily true},  }\item[{bool}]{idle = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+将上一个 \mbox{\hyperlink{classjevois_1_1dnn_1_1PreProcessor_ab3a6c1968c2b3f580413b653c6bd96f7}{process()}} 中发生的事情报告给控制台/输出视频/\+G\+UI 
+
+
+
+Definition at line 155 of file Pre\+Processor.\+C.
+
+
+
+References jevois\+::rawimage\+::draw\+Rect(), jevois\+::fccstr(), jevois\+::\+G\+U\+Ihelper\+::i2d(), jevois\+::yuyv\+::\+Med\+Grey, jevois\+::dnn\+::shapestr(), and jevois\+::\+Raw\+Image\+::width.
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a9a4fa89ef038bc17b95d60c1c4ad9f07}\label{classjevois_1_1dnn_1_1PreProcessor_a9a4fa89ef038bc17b95d60c1c4ad9f07}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{details}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Show more details about the pre-\/processing steps\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_aa1cbaf0d37576a63aade6834514bdd3b}\label{classjevois_1_1dnn_1_1PreProcessor_aa1cbaf0d37576a63aade6834514bdd3b}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{interp}]{,  }\item[{Interp\+Mode}]{,  }\item[{\char`\"{}Image interpolation to use when resizing the input image \char`\"{} \char`\"{}from camera to network input dims\char`\"{}}]{,  }\item[{Interp\+Mode\+::\+Nearest}]{,  }\item[{Interp\+Mode\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_aa235cb65db70a9878609492c80ca8175}\label{classjevois_1_1dnn_1_1PreProcessor_aa235cb65db70a9878609492c80ca8175}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{letterbox}]{,  }\item[{bool}]{,  }\item[{\char`\"{}When}]{true,  }\item[{extract the largest possible box from the input image \char`\"{} \char`\"{}with same aspect ratio as the network \textquotesingle{}s input}]{tensor,  }\item[{and then rescale it to that \char`\"{} \char`\"{}tensor \textquotesingle{}s width and height(hence with cropping but no distortion).}]{Otherwise,  }\item[{use \char`\"{} \char`\"{}the whole image and rescale it to the network \textquotesingle{}s input width and height with some \char`\"{} \char`\"{}possible stretching.\char`\"{}}]{,  }\item[{false}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a8035c8fc94d7772603bb3b37d7c506e0}\label{classjevois_1_1dnn_1_1PreProcessor_a8035c8fc94d7772603bb3b37d7c506e0}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{mean}]{,  }\item[{cv\+::\+Scalar}]{,  }\item[{\char`\"{}Mean values subtracted from input}]{image,  }\item[{in the same R\+GB/B\+GR \char`\"{} \char`\"{}order as the network \textquotesingle{}s input\char`\"{}}]{,  }\item[{cv\+::\+Scalar(127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, 127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}}, 127.\+5\mbox{\hyperlink{GUIhelper_8C_a7cdc542a5f48cf4bed4e6a3e4282182f}{F}})}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a07e56edf6759d1d6e84d37d6495302bc}\label{classjevois_1_1dnn_1_1PreProcessor_a07e56edf6759d1d6e84d37d6495302bc}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{rgb}]{,  }\item[{bool}]{,  }\item[{\char`\"{}When}]{true,  }\item[{model works with R\+GB input images instead B\+GR ones\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a7c10da01d06e703c3cb9dac79a58dfbc}\label{classjevois_1_1dnn_1_1PreProcessor_a7c10da01d06e703c3cb9dac79a58dfbc}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{scale}]{,  }\item[{float}]{,  }\item[{\char`\"{}Value scaling factor applied to input pixels after mean}]{subtraction,  }\item[{\char`\"{} \char`\"{}or 0.\+0 to extract an unscaled U\+I\+N\+T8}]{blob,  }\item[{typically for use with quantized networks\char`\"{}}]{,  }\item[{2.\+0F/255.}]{0F,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a692152838c1e21d653ecd30109834dc9}\label{classjevois_1_1dnn_1_1PreProcessor_a692152838c1e21d653ecd30109834dc9}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{showin}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Show outline of cropped image fed to network\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_addb0d7f0cfb7c251eff8f30b48d8a2ac}\label{classjevois_1_1dnn_1_1PreProcessor_addb0d7f0cfb7c251eff8f30b48d8a2ac}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{stdev}]{,  }\item[{cv\+::\+Scalar}]{,  }\item[{\char`\"{}Input image is divided by stdev after mean subtraction and scale \char`\"{} \char`\"{}factor are applied. This is rarely used. Same R\+GB/B\+GR order as the network\textquotesingle{}s input\char`\"{}}]{,  }\item[{cv\+::\+Scalar(1.\+0F, 1.\+0F, 1.\+0F)}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1PreProcessor_a7cb8150ba2f64fecbb134b882ccf3e1b}\label{classjevois_1_1dnn_1_1PreProcessor_a7cb8150ba2f64fecbb134b882ccf3e1b}} 
+\index{jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::PreProcessor@{jevois::dnn::PreProcessor}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Interp\+Mode}]{,  }\item[{(Nearest)(Linear)(Cubic)(Area)(Lanczos4)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum for image resizing modes. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{PreProcessor_8H}{Pre\+Processor.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{PreProcessor_8C}{Pre\+Processor.\+C}}\end{DoxyCompactItemize}

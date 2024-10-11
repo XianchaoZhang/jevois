@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_CameraSensor_8H">
+<title>include/jevois/Core/CameraSensor.H File Reference</title>
+<indexterm><primary>include/jevois/Core/CameraSensor.H</primary></indexterm>
+<programlisting>#include &lt;jevois/Types/Enum.H&gt;
+</programlisting>Include dependency graph for CameraSensor.H:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="CameraSensor_8H__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+This graph shows which files directly or indirectly include this file:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="CameraSensor_8H__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_group__camerasensor_1ga3bb4c5f1d277f41f06b4e689d9f3b1dd">jevois::JEVOIS_DEFINE_ENUM_CLASS</link> (CameraSensor,(any)(imx290)(os08a10)(ar0234))</para>
+
+<para>不同传感器型号的枚举 </para>
+</listitem>
+            <listitem><para><link linkend="_group__camerasensor_1ga07ea2c95fcfd090f0afa39305ba0720c">jevois::JEVOIS_DEFINE_ENUM_CLASS</link> (CameraLens,(standard)(custom1)(custom2)(custom3)(custom4)(custom5))</para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__camerasensor_1gaee01f42d6948f5d178890b28663806af">jevois::sensorSupportsFormat</link> (CameraSensor s, VideoMapping const &amp;m)</para>
+
+<para>检查传感器是否支持给定的分辨率和帧速率 </para>
+</listitem>
+            <listitem><para>bool <link linkend="_group__camerasensor_1ga6bc708204f2eb1175885c149ced0b4fd">jevois::sensorHasIMU</link> (CameraSensor s)</para>
+
+<para>检查传感器是否有 IMU（惯性测量单元） </para>
+</listitem>
+            <listitem><para>void <link linkend="_group__camerasensor_1ga241cf199fdeeac006a137918af9bab0b">jevois::sensorPrepareSetFormat</link> (CameraSensor s, VideoMapping const &amp;m, unsigned int &amp;capw, unsigned int &amp;caph, int &amp;preset)</para>
+
+<para>加载传感器预设（仅限 JeVois-Pro）并返回原生传感器抓取尺寸（裁剪和/或缩放时） </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>

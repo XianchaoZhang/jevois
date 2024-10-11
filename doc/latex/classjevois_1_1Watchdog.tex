@@ -1,0 +1,169 @@
+\hypertarget{classjevois_1_1Watchdog}{}\doxysubsection{jevois\+::Watchdog Class Reference}
+\label{classjevois_1_1Watchdog}\index{jevois::Watchdog@{jevois::Watchdog}}
+
+
+{\ttfamily \#include $<$jevois/\+Debug/\+Watchdog.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+简单的看门狗类 
+
+如果至少每超时秒不调用 \mbox{\hyperlink{classjevois_1_1Watchdog_ae7eec59faaae3fad15ffb096580e419d}{reset()}}，则此类将终止当前进程。 如果超时 $<$= 0.\+0，则看门狗处于非活动状态（永远不会超时并终 止进程）。 请注意，为了尽可能轻量，此类运行一个后台线程，循环每超时秒迭代一次，因此确切的终止时间是近似的。 
+
+Definition at line 28 of file Watchdog.\+H.
+
+
+
+Collaboration diagram for jevois\+::Watchdog\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classjevois_1_1Watchdog__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1Watchdog_acd34bd8e63e8dd720c590278af072476}{Watchdog}} (double timeout)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1Watchdog_a9e830e6fd03d6500bea0f2245af5e802}{$\sim$\+Watchdog}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe inheritance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1Watchdog_ae7eec59faaae3fad15ffb096580e419d}{reset}} ()
+\begin{DoxyCompactList}\small\item\em 重置我们的内部计时器。如果这种情况至少每超时秒不发生一次，则进程将被终止 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classjevois_1_1Watchdog_a6b0d1fea2f3472f561a08e6cde87098f}{run}} (double timeout)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::future$<$ void $>$ \mbox{\hyperlink{classjevois_1_1Watchdog_ab525661f43747fe4127d872a960640b3}{its\+Run\+Fut}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1Watchdog_a08efab030b3bcb8c5ec5ec10c0354ec0}{its\+Reset}} = true
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classjevois_1_1Watchdog_a94a2219ac5b4ad5447d0c4b8f3170089}{its\+Running}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1Watchdog_acd34bd8e63e8dd720c590278af072476}\label{classjevois_1_1Watchdog_acd34bd8e63e8dd720c590278af072476}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!Watchdog@{Watchdog}}
+\index{Watchdog@{Watchdog}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{Watchdog()}{Watchdog()}}
+{\footnotesize\ttfamily jevois\+::\+Watchdog\+::\+Watchdog (\begin{DoxyParamCaption}\item[{double}]{timeout }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 27 of file Watchdog.\+C.
+
+
+
+References jevois\+::async\+\_\+little(), its\+Run\+Fut, its\+Running, and run().
+
+\mbox{\Hypertarget{classjevois_1_1Watchdog_a9e830e6fd03d6500bea0f2245af5e802}\label{classjevois_1_1Watchdog_a9e830e6fd03d6500bea0f2245af5e802}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!````~Watchdog@{$\sim$Watchdog}}
+\index{````~Watchdog@{$\sim$Watchdog}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{$\sim$Watchdog()}{~Watchdog()}}
+{\footnotesize\ttfamily jevois\+::\+Watchdog\+::$\sim$\+Watchdog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Virtual destructor for safe inheritance. 
+
+
+
+Definition at line 37 of file Watchdog.\+C.
+
+
+
+References J\+E\+V\+O\+I\+S\+\_\+\+W\+A\+I\+T\+\_\+\+G\+E\+T\+\_\+\+F\+U\+T\+U\+RE.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1Watchdog_ae7eec59faaae3fad15ffb096580e419d}\label{classjevois_1_1Watchdog_ae7eec59faaae3fad15ffb096580e419d}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!reset@{reset}}
+\index{reset@{reset}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void jevois\+::\+Watchdog\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+重置我们的内部计时器。如果这种情况至少每超时秒不发生一次，则进程将被终止 
+
+
+
+Definition at line 47 of file Watchdog.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1Watchdog_a6b0d1fea2f3472f561a08e6cde87098f}\label{classjevois_1_1Watchdog_a6b0d1fea2f3472f561a08e6cde87098f}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!run@{run}}
+\index{run@{run}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void jevois\+::\+Watchdog\+::run (\begin{DoxyParamCaption}\item[{double}]{timeout }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 51 of file Watchdog.\+C.
+
+
+
+References L\+E\+R\+R\+OR, jevois\+::system(), and jevois\+::to\+\_\+string().
+
+
+
+Referenced by Watchdog().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1Watchdog_a08efab030b3bcb8c5ec5ec10c0354ec0}\label{classjevois_1_1Watchdog_a08efab030b3bcb8c5ec5ec10c0354ec0}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!itsReset@{itsReset}}
+\index{itsReset@{itsReset}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{itsReset}{itsReset}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Watchdog\+::its\+Reset = true\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 43 of file Watchdog.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1Watchdog_ab525661f43747fe4127d872a960640b3}\label{classjevois_1_1Watchdog_ab525661f43747fe4127d872a960640b3}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!itsRunFut@{itsRunFut}}
+\index{itsRunFut@{itsRunFut}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{itsRunFut}{itsRunFut}}
+{\footnotesize\ttfamily std\+::future$<$void$>$ jevois\+::\+Watchdog\+::its\+Run\+Fut\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 42 of file Watchdog.\+H.
+
+
+
+Referenced by Watchdog().
+
+\mbox{\Hypertarget{classjevois_1_1Watchdog_a94a2219ac5b4ad5447d0c4b8f3170089}\label{classjevois_1_1Watchdog_a94a2219ac5b4ad5447d0c4b8f3170089}} 
+\index{jevois::Watchdog@{jevois::Watchdog}!itsRunning@{itsRunning}}
+\index{itsRunning@{itsRunning}!jevois::Watchdog@{jevois::Watchdog}}
+\doxyparagraph{\texorpdfstring{itsRunning}{itsRunning}}
+{\footnotesize\ttfamily std\+::atomic$<$bool$>$ jevois\+::\+Watchdog\+::its\+Running = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 44 of file Watchdog.\+H.
+
+
+
+Referenced by Watchdog().
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+Debug/\mbox{\hyperlink{Watchdog_8H}{Watchdog.\+H}}\item 
+src/jevois/\+Debug/\mbox{\hyperlink{Watchdog_8C}{Watchdog.\+C}}\end{DoxyCompactItemize}

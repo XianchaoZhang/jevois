@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1JpegCompressor">
+<title>jevois::JpegCompressor Class Reference</title>
+<indexterm><primary>jevois::JpegCompressor</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/Image/Jpeg.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>turbojpeg 压缩器的简单单例包装器 </para>
+
+
+
+<para>大多数用户不需要使用此类，compressBRGtoJpeg() 在内部使用它来避免在每个视频帧上重新创建 turbojpeg 压缩器对象。 </para>
+<para>
+Definition at line 40 of file Jpeg.H.</para>
+Inheritance diagram for jevois::JpegCompressor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1JpegCompressor__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+Collaboration diagram for jevois::JpegCompressor:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="classjevois_1_1JpegCompressor__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1JpegCompressor_1af4e52c6452a7fad2de68a0971fc702ab">JpegCompressor</link> ()</para>
+
+<para>Constructor, create the turbojpeg object. </para>
+</listitem>
+            <listitem><para>virtual <link linkend="_classjevois_1_1JpegCompressor_1af30a3507a4189212d531c61a36a5534a">~JpegCompressor</link> ()</para>
+
+<para>Destructor, frees the turbojpeg object. </para>
+</listitem>
+            <listitem><para>void * <link linkend="_classjevois_1_1JpegCompressor_1add919f60bc762ef7b9d1c820d1237fcd">compressor</link> ()</para>
+
+<para>Access the compressor handle. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Additional Inherited Members    </title>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1JpegCompressor_1af4e52c6452a7fad2de68a0971fc702ab"/>    <section>
+    <title>JpegCompressor()</title>
+<indexterm><primary>JpegCompressor</primary><secondary>jevois::JpegCompressor</secondary></indexterm>
+<indexterm><primary>jevois::JpegCompressor</primary><secondary>JpegCompressor</secondary></indexterm>
+<para><computeroutput>jevois::JpegCompressor::JpegCompressor ( )</computeroutput></para><para>
+
+<para>Constructor, create the turbojpeg object. </para>
+</para>
+<para>
+Definition at line 23 of file Jpeg.C.</para>
+    </section><anchor xml:id="_classjevois_1_1JpegCompressor_1af30a3507a4189212d531c61a36a5534a"/>    <section>
+    <title>~JpegCompressor()</title>
+<indexterm><primary>~JpegCompressor</primary><secondary>jevois::JpegCompressor</secondary></indexterm>
+<indexterm><primary>jevois::JpegCompressor</primary><secondary>~JpegCompressor</secondary></indexterm>
+<para><computeroutput>jevois::JpegCompressor::~JpegCompressor ( )<computeroutput>[virtual]</computeroutput></computeroutput></para><para>
+
+<para>Destructor, frees the turbojpeg object. </para>
+</para>
+<para>
+Definition at line 27 of file Jpeg.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1JpegCompressor_1add919f60bc762ef7b9d1c820d1237fcd"/>    <section>
+    <title>compressor()</title>
+<indexterm><primary>compressor</primary><secondary>jevois::JpegCompressor</secondary></indexterm>
+<indexterm><primary>jevois::JpegCompressor</primary><secondary>compressor</secondary></indexterm>
+<para><computeroutput>void * jevois::JpegCompressor::compressor ( )</computeroutput></para><para>
+
+<para>Access the compressor handle. </para>
+</para>
+<para>
+Definition at line 31 of file Jpeg.C.</para>
+<para>
+Referenced by jevois::compressBGRtoJpeg(), jevois::compressGRAYtoJpeg(), jevois::compressRGBAtoJpeg(), and jevois::compressRGBtoJpeg().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/Image/<link linkend="_Jpeg_8H">Jpeg.H</link>src/jevois/Image/<link linkend="_Jpeg_8C">Jpeg.C</link></section>
+</section>

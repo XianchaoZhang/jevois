@@ -1,0 +1,439 @@
+\hypertarget{classjevois_1_1dnn_1_1Network}{}\doxysubsection{jevois\+::dnn\+::Network Class Reference}
+\label{classjevois_1_1dnn_1_1Network}\index{jevois::dnn::Network@{jevois::dnn::Network}}
+
+
+{\ttfamily \#include $<$jevois/\+D\+N\+N/\+Network.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+表示神经网络的抽象类。 
+
+派生类通过 Open\+C\+V（\+C\+P\+U、\+Open\+CL 或 Open\+Vino/\+Myriad-\/\+X）、\+Amlogic/\+Vivante N\+P\+U、\+Hailo-\/8、\+Python 或 Google Coral T\+PU 提供实现。 
+
+Definition at line 159 of file Network.\+H.
+
+
+
+Inheritance diagram for jevois\+::dnn\+::Network\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1Network__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for jevois\+::dnn\+::Network\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1dnn_1_1Network__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_ae8e8da054f338bc7bbfd11403f7b7a2c}{$\sim$\+Network}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a8f31a32c93d1e70452a613dbdc77f376}{wait\+Before\+Destroy}} ()
+\begin{DoxyCompactList}\small\item\em 如果网络正在加载，则等待加载完成后再销毁 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a3955dd0ca172bb88ed4a11124c561dcd}{ready}} ()
+\begin{DoxyCompactList}\small\item\em 当网络准备好运行（加载并初始化）时返回 true \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}{input\+Shapes}} ()=0
+\begin{DoxyCompactList}\small\item\em Get shapes of all input tensors. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}{output\+Shapes}} ()=0
+\begin{DoxyCompactList}\small\item\em Get shapes of all output tensors. \end{DoxyCompactList}\item 
+std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a4fe49556638054d16929006261409867}{process}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info)
+\begin{DoxyCompactList}\small\item\em 处理输入 blob 并获取输出 blob。 \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em 冻结/解冻用户在运行时不应更改的参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{load}} ()=0
+\begin{DoxyCompactList}\small\item\em Load from disk. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ cv\+::\+Mat $>$ \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}{doprocess}} (std\+::vector$<$ cv\+::\+Mat $>$ const \&blobs, std\+::vector$<$ std\+::string $>$ \&info)=0
+\begin{DoxyCompactList}\small\item\em 处理输入 blobs 并获取输出 blobs \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af40220590d16906a2af262dd36dbdaed}{on\+Param\+Change}} (network\+::outreshape const \&param, std\+::string const \&val) override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Related Functions}
+(Note that these are not member functions.) \begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_ae55d9497ee2f51920d8c194ceec25e08}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (comment, std\+::string, \char`\"{}Optional comment about the network\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a03adf97d50b510a0692e41b74d183446}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (url, std\+::string, \char`\"{}Optional U\+RL for the network\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_afbc231f63c49a5e6eecdb0fe4213619d}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (dataroot, std\+::string, \char`\"{}Root directory to use when config or model parameters \char`\"{} \char`\"{}are relative paths.\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a5da11b72aafbce2f8bb964fb8408c578}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (config, std\+::string, \char`\"{}Path to a text file that contains network configuration. \char`\"{} \char`\"{}Can have extension .prototxt (Caffe), .pbtxt (Tensor\+Flow), or .cfg (Darknet). \char`\"{} \char`\"{}If path is relative, it will be prefixed by dataroot.\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a8b3c224e5ec0e8d5d36f867ffbfd483e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (model, std\+::string, \char`\"{}Path to a binary file of model contains trained weights. \char`\"{} \char`\"{}Can have extension .caffemodel (Caffe), .pb (Tensor\+Flow), .t7 or .net (Torch), \char`\"{} \char`\"{}.tflite (Tensor\+Flow Lite), or .weights (Darknet). If path is relative, it will be \char`\"{} \char`\"{}prefixed by dataroot.\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_aeac422385e973cc8595019e3dfba1b2b}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Target,(C\+PU)(Open\+CL)(Open\+C\+L\+\_\+\+F\+P16)(Myriad)(N\+PU))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a7b02bca60cd633dccc803386c4b4b18c}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (target, Target, \char`\"{}Open\+CV compute target to use. Changes will take effect \char`\"{} \char`\"{}next time you \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{load}} a different model.\char`\"{}, Target\+::\+C\+PU, Target\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_af4549a2cb4cbe421b85a521e56ae2e2d}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS}} (Backend,(Open\+CV)(Inference\+Engine)(Tim\+VX))
+\begin{DoxyCompactList}\small\item\em Enum. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a9f9c7ff2aaffcbbbe67b6a6c58df839a}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (backend, Backend, \char`\"{}Open\+CV compute backend to use. Default will use the inference \char`\"{} \char`\"{}engine if available, otherwise Open\+CV (note that inference engine only works on Intel \char`\"{} \char`\"{}processors or MyriadX hardware, thus you should normally select Open\+CV when running \char`\"{} \char`\"{}on Je\+Vois-\/Pro Platform, unless you want to use an optional MyriadX accelerator). \char`\"{} \char`\"{}Changes will take effect next time you \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{load}} a model.\char`\"{}, J\+E\+V\+O\+I\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+D\+E\+F\+A\+U\+LT, Backend\+\_\+\+Values, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a6ff20f851ba5b6726e8cebab68ed3217}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (intensors, std\+::string, \char`\"{}Specification of input tensors\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_ad5d18da2ad6b47d128004cf8f103874e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (extraintensors, std\+::string, \char`\"{}Specification of extra fixed input tensors that will be \char`\"{} \char`\"{}added after the regular intensors. Format is\+: \char`\"{} \char`\"{}$<$type$>$\+:$<$shape$>$\+:val1 val2 ... valN, $<$type$>$\+:$<$shape$>$\+:val1 ... val\+N. For example, for \char`\"{} \char`\"{}U\+Retinex-\/Net\+: 32F\+:1x1x1\+:3.\+0\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_aabab4001278fba2a835f538c23678c1e}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (outtensors, std\+::string, \char`\"{}Specification of output tensors\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a3df396b10ead42f546e12052e6b404b8}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK}} (outreshape, std\+::string, \char`\"{}Specification of reshaped output tensors \char`\"{} \char`\"{}sometimes useful to re-\/interpret tensors to what a post-\/processor expects for \char`\"{} \char`\"{}example, T\+PU Yolo\+V4-\/Int-\/V\+OC outputs 5D tensors 32F\+:1x52x52x3x85, 32F\+:1x26x26x3x85, \char`\"{} \char`\"{}32F\+:1x13x13x3x85 but the Y\+O\+LO post-\/processor expects 4D, which would be specified here \char`\"{} \char`\"{}as 32F\+:1x52x52x255, 32F\+:1x26x26x255, 32F\+:1x13x13x255. Note that this only changes \char`\"{} \char`\"{}the description of dimensions, but does not move any pixel data around (e.\+g., cannot \char`\"{} \char`\"{}convert from N\+C\+HW to N\+H\+WC, convert data types, etc). Use sparingly and with caution.\char`\"{}, \char`\"{}\char`\"{}, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a455c68d54087e8430dad4045df5749a5}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (dequant, bool, \char`\"{}Dequantize output tensors to float32 from their native quantized type\char`\"{}, true, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_ac2b66ca8b2a61d4154a7c9ed38bbe014}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (tpunum, size\+\_\+t, \char`\"{}Coral Edge\+T\+PU number to use to run this model, typically 0, or can be \char`\"{} \char`\"{}1 when using a dual-\/T\+PU add-\/on board, or more when using additional T\+P\+Us connected \char`\"{} \char`\"{}to U\+SB ports\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a4fe2a06fe83a699a344ee12f587172f6}{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER}} (spunum, size\+\_\+t, \char`\"{}Hailo8 device number to use to run this model, typically 0 unless \char`\"{} \char`\"{}several Hailo8 accelerators are connected to the \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{system}}\char`\"{}, 0, Param\+Categ)
+\begin{DoxyCompactList}\small\item\em Parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_ae8e8da054f338bc7bbfd11403f7b7a2c}\label{classjevois_1_1dnn_1_1Network_ae8e8da054f338bc7bbfd11403f7b7a2c}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!````~Network@{$\sim$Network}}
+\index{````~Network@{$\sim$Network}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{$\sim$Network()}{~Network()}}
+{\footnotesize\ttfamily jevois\+::dnn\+::\+Network\+::$\sim$\+Network (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+C\+A\+U\+T\+I\+ON\+: 派生类必须在其析构函数中调用 \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a8f31a32c93d1e70452a613dbdc77f376}{wait\+Before\+Destroy()}} 
+
+Definition at line 23 of file Network.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}\label{classjevois_1_1dnn_1_1Network_a0715f8cd89af48245f39ed1bd00c0849}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!doprocess@{doprocess}}
+\index{doprocess@{doprocess}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{doprocess()}{doprocess()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$cv\+::\+Mat$>$ jevois\+::dnn\+::\+Network\+::doprocess (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+处理输入 blobs 并获取输出 blobs 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU_a9d284f745c6c98178f81ba77764191be}{jevois\+::dnn\+::\+Network\+N\+PU}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a2220cd1364ff986705a09399dd04481c}{jevois\+::dnn\+::\+Network\+Hailo}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a21f98be54505be1a17303ecbfba147b1}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a11dbdabb2b67c48da768be109d65fb1a}{jevois\+::dnn\+::\+Network\+Open\+CV}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU_a98da6191103197084c93a069e54a29e0}{jevois\+::dnn\+::\+Network\+T\+PU}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a04c84253cef99f51a21a862e4ae04a8f}{jevois\+::dnn\+::\+Network\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}\label{classjevois_1_1dnn_1_1Network_af49aabe3e1317946de848f356970fa8d}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+冻结/解冻用户在运行时不应更改的参数 
+
+注意：派生类可以通过重写此函数来冻结自己的参数，并且应该记住仍然调用基类 jevois\+::dnn\+::\+Network\+::freeze(doit) 
+
+Reimplemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU_accf0020410f345569848d7c058cdafce}{jevois\+::dnn\+::\+Network\+N\+PU}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a7928fd357d2f109b44d43e5a0b6bd1a4}{jevois\+::dnn\+::\+Network\+Hailo}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a25d2005cbbdc106b91005e56de6f09ed}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_abe548296057d9ef38122343505e45f5c}{jevois\+::dnn\+::\+Network\+Open\+CV}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU_a51e003b0fd31a7ee237458685ac7416a}{jevois\+::dnn\+::\+Network\+T\+PU}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_ae278bb994f487efa4634cda9954cd540}{jevois\+::dnn\+::\+Network\+Python}}.
+
+
+
+Definition at line 27 of file Network.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Python\+::freeze(), jevois\+::dnn\+::\+Network\+Open\+C\+V\+::freeze(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::freeze(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::freeze(), jevois\+::dnn\+::\+Network\+Hailo\+::freeze(), and jevois\+::dnn\+::\+Network\+N\+P\+U\+::freeze().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}\label{classjevois_1_1dnn_1_1Network_a5c4daabb6b084f87ce330f98159ebaa7}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!inputShapes@{inputShapes}}
+\index{inputShapes@{inputShapes}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{inputShapes()}{inputShapes()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t$>$ jevois\+::dnn\+::\+Network\+::input\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get shapes of all input tensors. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU_a224fdf64248311c3249cda899f9c2c27}{jevois\+::dnn\+::\+Network\+N\+PU}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a9e4569480c55437139e7bfd0988c700a}{jevois\+::dnn\+::\+Network\+Hailo}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a7833c8a7a47da08081db9d8fa46219a8}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a61a283e643a8a22e0cf5e743da59d1f4}{jevois\+::dnn\+::\+Network\+Open\+CV}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU_a93688abe7c4824e4fb4d1b95a6787a48}{jevois\+::dnn\+::\+Network\+T\+PU}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a94f56f4d22e117cab06a1fe626ba8ffe}{jevois\+::dnn\+::\+Network\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}\label{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!load@{load}}
+\index{load@{load}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily virtual void jevois\+::dnn\+::\+Network\+::load (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Load from disk. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU_adf4c6a47ab88ec64c630c98fd343122c}{jevois\+::dnn\+::\+Network\+N\+PU}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_a33faa2d76284bfd55d80c40135fbb7f2}{jevois\+::dnn\+::\+Network\+Hailo}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a427de85b73859743dd471bce63bb17e5}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a80147b1b468931c226f85c959c522805}{jevois\+::dnn\+::\+Network\+Open\+CV}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU_a4cd29b0560e0f9a094b902d5bc40f694}{jevois\+::dnn\+::\+Network\+T\+PU}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_a4f293d1210df3aac0fdafe1a7fb574a0}{jevois\+::dnn\+::\+Network\+Python}}.
+
+
+
+Referenced by ready().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_af40220590d16906a2af262dd36dbdaed}\label{classjevois_1_1dnn_1_1Network_af40220590d16906a2af262dd36dbdaed}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!onParamChange@{onParamChange}}
+\index{onParamChange@{onParamChange}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{onParamChange()}{onParamChange()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+::on\+Param\+Change (\begin{DoxyParamCaption}\item[{network\+::outreshape const \&}]{param,  }\item[{std\+::string const \&}]{val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}}
+
+
+
+Definition at line 35 of file Network.\+C.
+
+
+
+References jevois\+::dnn\+::parse\+Tensor\+Specs().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}\label{classjevois_1_1dnn_1_1Network_a98a8d50e49ba4d9f827ff9b5d4c8b68f}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!outputShapes@{outputShapes}}
+\index{outputShapes@{outputShapes}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{outputShapes()}{outputShapes()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$vsi\+\_\+nn\+\_\+tensor\+\_\+attr\+\_\+t$>$ jevois\+::dnn\+::\+Network\+::output\+Shapes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Get shapes of all output tensors. 
+
+
+
+Implemented in \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkNPU_a29cf0728bb86204b856576b0f058f769}{jevois\+::dnn\+::\+Network\+N\+PU}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkHailo_aa7b970fa3ecc6ffe76ca1e83c2ad078c}{jevois\+::dnn\+::\+Network\+Hailo}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkONNX_a992be87c56f00419fb9ee96d90daf964}{jevois\+::dnn\+::\+Network\+O\+N\+NX}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkOpenCV_a32dd046edba29972d0d8c4b82ea7d02c}{jevois\+::dnn\+::\+Network\+Open\+CV}}, \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkTPU_a71ebc1fe4a9f247a039616ed077c0832}{jevois\+::dnn\+::\+Network\+T\+PU}}, and \mbox{\hyperlink{classjevois_1_1dnn_1_1NetworkPython_acc2212571cfa68babaec3612fb2c80f8}{jevois\+::dnn\+::\+Network\+Python}}.
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a4fe49556638054d16929006261409867}\label{classjevois_1_1dnn_1_1Network_a4fe49556638054d16929006261409867}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!process@{process}}
+\index{process@{process}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{process()}{process()}}
+{\footnotesize\ttfamily std\+::vector$<$ cv\+::\+Mat $>$ jevois\+::dnn\+::\+Network\+::process (\begin{DoxyParamCaption}\item[{std\+::vector$<$ cv\+::\+Mat $>$ const \&}]{blobs,  }\item[{std\+::vector$<$ std\+::string $>$ \&}]{info }\end{DoxyParamCaption})}
+
+
+
+处理输入 blob 并获取输出 blob。 
+
+\mbox{\hyperlink{classjevois_1_1dnn_1_1Network}{Network}} 实现可以将信息数据推送到信息字符串中，该字符串将显示给用户。约定是：如果信息行以 \textquotesingle{}$\ast$ \textquotesingle{} 开头，则它 是标题，如果以 \textquotesingle{}-\/ \textquotesingle{} 开头，则它是项目符号。信息应始终组织到顶层的标题中。 
+
+Definition at line 82 of file Network.\+C.
+
+
+
+References jevois\+::dnn\+::attrdims(), jevois\+::dnn\+::attrmat(), L\+F\+A\+T\+AL, jevois\+::dnn\+::shapestr(), jevois\+::split(), and jevois\+::dnn\+::strshape().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a3955dd0ca172bb88ed4a11124c561dcd}\label{classjevois_1_1dnn_1_1Network_a3955dd0ca172bb88ed4a11124c561dcd}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!ready@{ready}}
+\index{ready@{ready}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{ready()}{ready()}}
+{\footnotesize\ttfamily bool jevois\+::dnn\+::\+Network\+::ready (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+当网络准备好运行（加载并初始化）时返回 true 
+
+
+
+Definition at line 57 of file Network.\+C.
+
+
+
+References jevois\+::async(), L\+I\+N\+FO, load(), and jevois\+::warn\+And\+Rethrow\+Exception().
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a8f31a32c93d1e70452a613dbdc77f376}\label{classjevois_1_1dnn_1_1Network_a8f31a32c93d1e70452a613dbdc77f376}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!waitBeforeDestroy@{waitBeforeDestroy}}
+\index{waitBeforeDestroy@{waitBeforeDestroy}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{waitBeforeDestroy()}{waitBeforeDestroy()}}
+{\footnotesize\ttfamily void jevois\+::dnn\+::\+Network\+::wait\+Before\+Destroy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+如果网络正在加载，则等待加载完成后再销毁 
+
+C\+A\+U\+T\+I\+ON\+: 派生类必须在其析构函数中调用 \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a8f31a32c93d1e70452a613dbdc77f376}{wait\+Before\+Destroy()}} 
+
+Definition at line 44 of file Network.\+C.
+
+
+
+References L\+I\+N\+FO.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Open\+C\+V\+::$\sim$\+Network\+Open\+C\+V(), and jevois\+::dnn\+::\+Network\+T\+P\+U\+::$\sim$\+Network\+T\+P\+U().
+
+
+
+\doxysubsubsection{Friends And Related Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a9f9c7ff2aaffcbbbe67b6a6c58df839a}\label{classjevois_1_1dnn_1_1Network_a9f9c7ff2aaffcbbbe67b6a6c58df839a}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [1/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{backend}]{,  }\item[{Backend}]{,  }\item[{\char`\"{}Open\+CV compute backend to use. Default will use the inference \char`\"{} \char`\"{}engine if}]{available,  }\item[{otherwise Open\+CV(note that inference engine only works on Intel \char`\"{} \char`\"{}processors or MyriadX hardware, thus you should normally select Open\+CV when running \char`\"{} \char`\"{}on Je\+Vois-\/Pro Platform, unless you want to use an optional MyriadX accelerator). \char`\"{} \char`\"{}Changes will take effect next time you \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{load}} a model.\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Network_8H_a46077bf4745c7d6a0ada6b7a97129e51}{J\+E\+V\+O\+I\+S\+\_\+\+B\+A\+C\+K\+E\+N\+D\+\_\+\+D\+E\+F\+A\+U\+LT}}}]{,  }\item[{Backend\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_ae55d9497ee2f51920d8c194ceec25e08}\label{classjevois_1_1dnn_1_1Network_ae55d9497ee2f51920d8c194ceec25e08}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [2/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{comment}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Optional comment about the network\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a5da11b72aafbce2f8bb964fb8408c578}\label{classjevois_1_1dnn_1_1Network_a5da11b72aafbce2f8bb964fb8408c578}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [3/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{config}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Path to a text file that contains network configuration. \char`\"{} \char`\"{}Can have extension .prototxt }]{Caffe,  }\item[{.}]{pbtxtTensor\+Flow,  }\item[{or .cfg(Darknet). \char`\"{} \char`\"{}If path is}]{relative,  }\item[{it will be prefixed by dataroot.\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_afbc231f63c49a5e6eecdb0fe4213619d}\label{classjevois_1_1dnn_1_1Network_afbc231f63c49a5e6eecdb0fe4213619d}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [4/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{dataroot}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Root directory to use when config or model parameters \char`\"{} \char`\"{}are relative paths.\char`\"{}}]{,  }\item[{\mbox{\hyperlink{Config_8H_a889b40a51e60ddc7f6c48be36edb3719}{J\+E\+V\+O\+I\+S\+\_\+\+S\+H\+A\+R\+E\+\_\+\+P\+A\+TH}}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a455c68d54087e8430dad4045df5749a5}\label{classjevois_1_1dnn_1_1Network_a455c68d54087e8430dad4045df5749a5}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [5/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{dequant}]{,  }\item[{bool}]{,  }\item[{\char`\"{}Dequantize output tensors to float32 from their native quantized type\char`\"{}}]{,  }\item[{true}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_ad5d18da2ad6b47d128004cf8f103874e}\label{classjevois_1_1dnn_1_1Network_ad5d18da2ad6b47d128004cf8f103874e}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [6/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{extraintensors}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Specification of extra fixed input tensors that will be \char`\"{} \char`\"{}added after the regular intensors. Format is\+: \char`\"{} \char`\"{}$<$type$>$\+:$<$shape$>$\+:val1 val2 ...}]{valN,  }\item[{$<$ type $>$\+:$<$ shape $>$\+:val1 ... val\+N. For}]{example,  }\item[{for \char`\"{} \char`\"{}U\+Retinex-\/Net\+:32\+F\+:1x1x1\+:3.\+0\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a6ff20f851ba5b6726e8cebab68ed3217}\label{classjevois_1_1dnn_1_1Network_a6ff20f851ba5b6726e8cebab68ed3217}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [7/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{intensors}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Specification of input tensors\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a8b3c224e5ec0e8d5d36f867ffbfd483e}\label{classjevois_1_1dnn_1_1Network_a8b3c224e5ec0e8d5d36f867ffbfd483e}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [8/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{model}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Path to a binary file of model contains trained weights. \char`\"{} \char`\"{}Can have extension .caffemodel }]{Caffe,  }\item[{.}]{pbTensor\+Flow,  }\item[{.t7 or .}]{netTorch,  }\item[{\char`\"{} \char`\"{}.}]{tfliteTensor\+Flow Lite,  }\item[{or .weights(Darknet). If path is}]{relative,  }\item[{it will be \char`\"{} \char`\"{}prefixed by dataroot.\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_aabab4001278fba2a835f538c23678c1e}\label{classjevois_1_1dnn_1_1Network_aabab4001278fba2a835f538c23678c1e}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [9/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{outtensors}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Specification of output tensors\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a4fe2a06fe83a699a344ee12f587172f6}\label{classjevois_1_1dnn_1_1Network_a4fe2a06fe83a699a344ee12f587172f6}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [10/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{spunum}]{,  }\item[{size\+\_\+t}]{,  }\item[{\char`\"{}Hailo8 device number to use to run this}]{model,  }\item[{typically 0 unless \char`\"{} \char`\"{}several Hailo8 accelerators are connected to the \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{system}}\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a7b02bca60cd633dccc803386c4b4b18c}\label{classjevois_1_1dnn_1_1Network_a7b02bca60cd633dccc803386c4b4b18c}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [11/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{target}]{,  }\item[{Target}]{,  }\item[{\char`\"{}Open\+CV compute target to use. Changes will take effect \char`\"{} \char`\"{}next time you \mbox{\hyperlink{classjevois_1_1dnn_1_1Network_a2aff2f5a849ddd5ce91ae454bf9375ec}{load}} a different model.\char`\"{}}]{,  }\item[{Target\+::\+C\+PU}]{,  }\item[{Target\+\_\+\+Values}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_ac2b66ca8b2a61d4154a7c9ed38bbe014}\label{classjevois_1_1dnn_1_1Network_ac2b66ca8b2a61d4154a7c9ed38bbe014}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [12/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{tpunum}]{,  }\item[{size\+\_\+t}]{,  }\item[{\char`\"{}Coral Edge\+T\+PU number to use to run this}]{model,  }\item[{typically}]{0,  }\item[{or can be \char`\"{} \char`\"{}1 when using a dual-\/T\+PU add-\/on}]{board,  }\item[{or more when using additional T\+P\+Us connected \char`\"{} \char`\"{}to U\+SB ports\char`\"{}}]{,  }\item[{0}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a03adf97d50b510a0692e41b74d183446}\label{classjevois_1_1dnn_1_1Network_a03adf97d50b510a0692e41b74d183446}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}}
+\index{JEVOIS\_DECLARE\_PARAMETER@{JEVOIS\_DECLARE\_PARAMETER}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER()}{JEVOIS\_DECLARE\_PARAMETER()}\hspace{0.1cm}{\footnotesize\ttfamily [13/13]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+ER (\begin{DoxyParamCaption}\item[{url}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Optional U\+RL for the network\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_a3df396b10ead42f546e12052e6b404b8}\label{classjevois_1_1dnn_1_1Network_a3df396b10ead42f546e12052e6b404b8}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}}
+\index{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK@{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}{JEVOIS\_DECLARE\_PARAMETER\_WITH\_CALLBACK()}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+C\+L\+A\+R\+E\+\_\+\+P\+A\+R\+A\+M\+E\+T\+E\+R\+\_\+\+W\+I\+T\+H\+\_\+\+C\+A\+L\+L\+B\+A\+CK (\begin{DoxyParamCaption}\item[{outreshape}]{,  }\item[{std\+::string}]{,  }\item[{\char`\"{}Specification of reshaped output tensors \char`\"{} \char`\"{}sometimes useful to re-\/interpret tensors to what a post-\/processor expects for \char`\"{} \char`\"{}}]{example,  }\item[{T\+PU Yolo\+V4-\/Int-\/V\+OC outputs 5D tensors 32F\+:1x52x52x3x85}]{,  }\item[{32F\+:1x26x26x3x85}]{,  }\item[{\char`\"{} \char`\"{}32F\+:1x13x13x3x85 but the Y\+O\+LO post-\/processor expects}]{4D,  }\item[{which would be specified here \char`\"{} \char`\"{}as 32F\+:1x52x52x255}]{,  }\item[{32F\+:1x26x26x255}]{,  }\item[{32F\+:1x13x13x255. Note that this only changes \char`\"{} \char`\"{}the description of}]{dimensions,  }\item[{but does not move any pixel data around(e.\+g., cannot \char`\"{} \char`\"{}convert from N\+C\+HW to N\+H\+WC, convert data types, etc). Use sparingly and with caution.\char`\"{}}]{,  }\item[{\char`\"{}\char`\"{}}]{,  }\item[{Param\+Categ}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Parameter. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_af4549a2cb4cbe421b85a521e56ae2e2d}\label{classjevois_1_1dnn_1_1Network_af4549a2cb4cbe421b85a521e56ae2e2d}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Backend}]{,  }\item[{(Open\+CV)(Inference\+Engine)(Tim\+VX)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+\mbox{\Hypertarget{classjevois_1_1dnn_1_1Network_aeac422385e973cc8595019e3dfba1b2b}\label{classjevois_1_1dnn_1_1Network_aeac422385e973cc8595019e3dfba1b2b}} 
+\index{jevois::dnn::Network@{jevois::dnn::Network}!JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}}
+\index{JEVOIS\_DEFINE\_ENUM\_CLASS@{JEVOIS\_DEFINE\_ENUM\_CLASS}!jevois::dnn::Network@{jevois::dnn::Network}}
+\doxyparagraph{\texorpdfstring{JEVOIS\_DEFINE\_ENUM\_CLASS()}{JEVOIS\_DEFINE\_ENUM\_CLASS()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+SS (\begin{DoxyParamCaption}\item[{Target}]{,  }\item[{(C\+PU)(Open\+CL)(Open\+C\+L\+\_\+\+F\+P16)(Myriad)(N\+PU)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [related]}}
+
+
+
+Enum. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+D\+N\+N/\mbox{\hyperlink{Network_8H}{Network.\+H}}\item 
+src/jevois/\+D\+N\+N/\mbox{\hyperlink{Network_8C}{Network.\+C}}\end{DoxyCompactItemize}

@@ -1,0 +1,77 @@
+\hypertarget{jevois-camtest_8C}{}\doxysubsection{src/\+Apps/jevois-\/camtest.C File Reference}
+\label{jevois-camtest_8C}\index{src/Apps/jevois-\/camtest.C@{src/Apps/jevois-\/camtest.C}}
+{\ttfamily \#include $<$jevois/\+Core/\+Camera.\+H$>$}\newline
+{\ttfamily \#include $<$jevois/\+Debug/\+Log.\+H$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$linux/videodev2.\+h$>$}\newline
+{\ttfamily \#include $<$opencv2/core/core.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/imgproc/imgproc.\+hpp$>$}\newline
+{\ttfamily \#include $<$opencv2/imgcodecs.\+hpp$>$}\newline
+{\ttfamily \#include $<$jevois/\+Util/\+Utils.\+H$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+Include dependency graph for jevois-\/camtest.C\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{jevois-camtest_8C__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{jevois-camtest_8C_acf521737a73bef011da86106a78870e8}{U\+S\+E\+\_\+\+R\+A\+W\+\_\+\+C\+A\+M\+E\+RA}}
+\item 
+\#define \mbox{\hyperlink{jevois-camtest_8C_aa6bea0d4732cdf7372ab40a28f68d5dd}{N\+B\+\_\+\+B\+U\+F\+F\+ER}}~4
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{jevois-camtest_8C_abf9e6b7e6f15df4b525a2e7705ba3089}{main}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em 从相机抓取视频帧，并将它们作为 P\+NG 文件写入磁盘 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{jevois-camtest_8C_aa6bea0d4732cdf7372ab40a28f68d5dd}\label{jevois-camtest_8C_aa6bea0d4732cdf7372ab40a28f68d5dd}} 
+\index{jevois-\/camtest.C@{jevois-\/camtest.C}!NB\_BUFFER@{NB\_BUFFER}}
+\index{NB\_BUFFER@{NB\_BUFFER}!jevois-\/camtest.C@{jevois-\/camtest.C}}
+\doxyparagraph{\texorpdfstring{NB\_BUFFER}{NB\_BUFFER}}
+{\footnotesize\ttfamily \#define N\+B\+\_\+\+B\+U\+F\+F\+ER~4}
+
+
+
+Definition at line 36 of file jevois-\/camtest.\+C.
+
+\mbox{\Hypertarget{jevois-camtest_8C_acf521737a73bef011da86106a78870e8}\label{jevois-camtest_8C_acf521737a73bef011da86106a78870e8}} 
+\index{jevois-\/camtest.C@{jevois-\/camtest.C}!USE\_RAW\_CAMERA@{USE\_RAW\_CAMERA}}
+\index{USE\_RAW\_CAMERA@{USE\_RAW\_CAMERA}!jevois-\/camtest.C@{jevois-\/camtest.C}}
+\doxyparagraph{\texorpdfstring{USE\_RAW\_CAMERA}{USE\_RAW\_CAMERA}}
+{\footnotesize\ttfamily \#define U\+S\+E\+\_\+\+R\+A\+W\+\_\+\+C\+A\+M\+E\+RA}
+
+
+
+Definition at line 33 of file jevois-\/camtest.\+C.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{jevois-camtest_8C_abf9e6b7e6f15df4b525a2e7705ba3089}\label{jevois-camtest_8C_abf9e6b7e6f15df4b525a2e7705ba3089}} 
+\index{jevois-\/camtest.C@{jevois-\/camtest.C}!main@{main}}
+\index{main@{main}!jevois-\/camtest.C@{jevois-\/camtest.C}}
+\doxyparagraph{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char const $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+从相机抓取视频帧，并将它们作为 P\+NG 文件写入磁盘 
+
+
+
+Definition at line 45 of file jevois-\/camtest.\+C.
+
+
+
+References jevois\+::\+Raw\+Image\+::buf, jevois\+::\+Video\+Mapping\+::cfmt, jevois\+::\+Video\+Mapping\+::cfps, jevois\+::\+Video\+Mapping\+::ch, jevois\+::\+Video\+Mapping\+::cw, jevois\+::\+Camera\+::done(), jevois\+::\+Camera\+::get(), jevois\+::\+Raw\+Image\+::height, L\+F\+A\+T\+AL, L\+I\+N\+FO, jevois\+::log\+End(), jevois\+::log\+Level, N\+B\+\_\+\+B\+U\+F\+F\+ER, jevois\+::\+Camera\+::set\+Format(), jevois\+::\+Camera\+::stream\+Off(), jevois\+::\+Camera\+::stream\+On(), jevois\+::to\+\_\+string(), jevois\+::\+Raw\+Image\+::width, and X\+I\+O\+C\+TL.
+

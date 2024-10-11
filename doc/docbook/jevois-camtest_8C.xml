@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_jevois-camtest_8C">
+<title>src/Apps/jevois-camtest.C File Reference</title>
+<indexterm><primary>src/Apps/jevois-camtest.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/Camera.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;string.h&gt;
+#include &lt;linux/videodev2.h&gt;
+#include &lt;opencv2/core/core.hpp&gt;
+#include &lt;opencv2/imgproc/imgproc.hpp&gt;
+#include &lt;opencv2/imgcodecs.hpp&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+</programlisting>Include dependency graph for jevois-camtest.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="jevois-camtest_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_jevois-camtest_8C_1acf521737a73bef011da86106a78870e8">USE_RAW_CAMERA</link></para>
+</listitem>
+            <listitem><para>#define <link linkend="_jevois-camtest_8C_1aa6bea0d4732cdf7372ab40a28f68d5dd">NB_BUFFER</link>   4</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int <link linkend="_jevois-camtest_8C_1abf9e6b7e6f15df4b525a2e7705ba3089">main</link> (int argc, char const *argv[])</para>
+
+<para>从相机抓取视频帧，并将它们作为 PNG 文件写入磁盘 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_jevois-camtest_8C_1aa6bea0d4732cdf7372ab40a28f68d5dd"/>    <section>
+    <title>NB_BUFFER</title>
+<indexterm><primary>NB_BUFFER</primary><secondary>jevois-camtest.C</secondary></indexterm>
+<indexterm><primary>jevois-camtest.C</primary><secondary>NB_BUFFER</secondary></indexterm>
+<para><computeroutput>#define NB_BUFFER   4</computeroutput></para><para>
+Definition at line 36 of file jevois-camtest.C.</para>
+    </section><anchor xml:id="_jevois-camtest_8C_1acf521737a73bef011da86106a78870e8"/>    <section>
+    <title>USE_RAW_CAMERA</title>
+<indexterm><primary>USE_RAW_CAMERA</primary><secondary>jevois-camtest.C</secondary></indexterm>
+<indexterm><primary>jevois-camtest.C</primary><secondary>USE_RAW_CAMERA</secondary></indexterm>
+<para><computeroutput>#define USE_RAW_CAMERA</computeroutput></para><para>
+Definition at line 33 of file jevois-camtest.C.</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_jevois-camtest_8C_1abf9e6b7e6f15df4b525a2e7705ba3089"/>    <section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>jevois-camtest.C</secondary></indexterm>
+<indexterm><primary>jevois-camtest.C</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char const * argv[])</computeroutput></para><para>
+
+<para>从相机抓取视频帧，并将它们作为 PNG 文件写入磁盘 </para>
+</para>
+<para>
+Definition at line 45 of file jevois-camtest.C.</para>
+<para>
+References jevois::RawImage::buf, jevois::VideoMapping::cfmt, jevois::VideoMapping::cfps, jevois::VideoMapping::ch, jevois::VideoMapping::cw, jevois::Camera::done(), jevois::Camera::get(), jevois::RawImage::height, LFATAL, LINFO, jevois::logEnd(), jevois::logLevel, NB_BUFFER, jevois::Camera::setFormat(), jevois::Camera::streamOff(), jevois::Camera::streamOn(), jevois::to_string(), jevois::RawImage::width, and XIOCTL.</para>
+</section>
+</section>
+</section>

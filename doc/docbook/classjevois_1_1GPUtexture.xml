@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_classjevois_1_1GPUtexture">
+<title>jevois::GPUtexture Class Reference</title>
+<indexterm><primary>jevois::GPUtexture</primary></indexterm>
+<para>
+<computeroutput>#include &lt;jevois/GPU/GPUtexture.H&gt;</computeroutput>
+</para>
+<section>
+<title> </title>
+
+<para>Simple class to hold an OpenGL texture. </para>
+
+
+
+<para>OpenGL textures are used to transfer image data from CPU to GPU and then allow the GPU to perform some processing on the data. Processing is typically done by using &quot;shader&quot; GPU programs that transform the texture&apos;s pixel data and render it, in some user-programmable way. </para>
+<para>
+Definition at line 28 of file GPUtexture.H.</para>
+<simplesect>
+    <title>Public Member Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_classjevois_1_1GPUtexture_1af84db966d1623be0791676b750b1b604">GPUtexture</link> (GLsizei width, GLsizei height, GLenum format, bool createFramebuffer)</para>
+
+<para>Constructor. </para>
+</listitem>
+            <listitem><para><link linkend="_classjevois_1_1GPUtexture_1aa31324ac112914438192b596b2fa891a">~GPUtexture</link> ()</para>
+
+<para>Destructor, frees the texture in OpenGL. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GPUtexture_1a01c9026de6b30922b52929f169ed8746">setPixels</link> (void const *data)</para>
+
+<para>Copy pixel data from memory location to the texture. </para>
+</listitem>
+            <listitem><para>void <link linkend="_classjevois_1_1GPUtexture_1a43042ab7bb40222e7a9b8b81543c311e">getPixels</link> (void *data) const</para>
+
+<para>Copy pixel data from the texture to already-allocated memory location. </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Public Attributes    </title>
+        <itemizedlist>
+            <listitem><para>const GLsizei <link linkend="_classjevois_1_1GPUtexture_1ac872dcb438ae941b711486ffc805deff">Width</link></para>
+</listitem>
+            <listitem><para>const GLsizei <link linkend="_classjevois_1_1GPUtexture_1a4f23e11ef561ba6af839aa5b2fb0f4d8">Height</link></para>
+</listitem>
+            <listitem><para>const GLenum <link linkend="_classjevois_1_1GPUtexture_1ab22c8f36424b1897b1e92b75eb6c6f77">Format</link></para>
+</listitem>
+            <listitem><para>GLuint <link linkend="_classjevois_1_1GPUtexture_1a5f6aecbe4ee825e5656e0ec14847560e">Id</link></para>
+</listitem>
+            <listitem><para>GLuint <link linkend="_classjevois_1_1GPUtexture_1a3232b14d753e1eed889c563126ac6ee2">FramebufferId</link></para>
+</listitem>
+            <listitem><para>GLuint <link linkend="_classjevois_1_1GPUtexture_1a202e3d5533761facc08a706e735e222f">RenderBufferId</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+</section>
+<section>
+<title>Constructor &amp; Destructor Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUtexture_1af84db966d1623be0791676b750b1b604"/>    <section>
+    <title>GPUtexture()</title>
+<indexterm><primary>GPUtexture</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>GPUtexture</secondary></indexterm>
+<para><computeroutput>jevois::GPUtexture::GPUtexture (GLsizei width, GLsizei height, GLenum format, bool createFramebuffer)</computeroutput></para><para>
+
+<para>Constructor. </para>
+</para>
+
+<para>format should be as in glTexImage2D(), typically only GL_RGBA or GL_LUMINANCE are supported on embedded hardware platforms. </para>
+<para>
+Definition at line 21 of file GPUtexture.C.</para>
+<para>
+References Format, FramebufferId, GL_CHECK, Height, Id, LDEBUG, LERROR, RenderBufferId, and Width.</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1aa31324ac112914438192b596b2fa891a"/>    <section>
+    <title>~GPUtexture()</title>
+<indexterm><primary>~GPUtexture</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>~GPUtexture</secondary></indexterm>
+<para><computeroutput>jevois::GPUtexture::~GPUtexture ( )</computeroutput></para><para>
+
+<para>Destructor, frees the texture in OpenGL. </para>
+</para>
+<para>
+Definition at line 56 of file GPUtexture.C.</para>
+</section>
+</section>
+<section>
+<title>Member Function Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUtexture_1a43042ab7bb40222e7a9b8b81543c311e"/>    <section>
+    <title>getPixels()</title>
+<indexterm><primary>getPixels</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>getPixels</secondary></indexterm>
+<para><computeroutput>void jevois::GPUtexture::getPixels (void * data) const</computeroutput></para><para>
+
+<para>Copy pixel data from the texture to already-allocated memory location. </para>
+</para>
+
+<para>data should have been allocated by caller and have the correct size given the textute width, height, and format. </para>
+<para>
+Definition at line 87 of file GPUtexture.C.</para>
+<para>
+References GL_CHECK.</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1a01c9026de6b30922b52929f169ed8746"/>    <section>
+    <title>setPixels()</title>
+<indexterm><primary>setPixels</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>setPixels</secondary></indexterm>
+<para><computeroutput>void jevois::GPUtexture::setPixels (void const * data)</computeroutput></para><para>
+
+<para>Copy pixel data from memory location to the texture. </para>
+</para>
+
+<para>data should have been allocated by caller and have the correct size given the textute width, height, and format. </para>
+<para>
+Definition at line 64 of file GPUtexture.C.</para>
+<para>
+References GL_CHECK.</para>
+</section>
+</section>
+<section>
+<title>Member Data Documentation</title>
+<anchor xml:id="_classjevois_1_1GPUtexture_1ab22c8f36424b1897b1e92b75eb6c6f77"/>    <section>
+    <title>Format</title>
+<indexterm><primary>Format</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>Format</secondary></indexterm>
+<para><computeroutput>const GLenum jevois::GPUtexture::Format</computeroutput></para><para>
+Definition at line 51 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1a3232b14d753e1eed889c563126ac6ee2"/>    <section>
+    <title>FramebufferId</title>
+<indexterm><primary>FramebufferId</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>FramebufferId</secondary></indexterm>
+<para><computeroutput>GLuint jevois::GPUtexture::FramebufferId</computeroutput></para><para>
+Definition at line 53 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1a4f23e11ef561ba6af839aa5b2fb0f4d8"/>    <section>
+    <title>Height</title>
+<indexterm><primary>Height</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>Height</secondary></indexterm>
+<para><computeroutput>const GLsizei jevois::GPUtexture::Height</computeroutput></para><para>
+Definition at line 50 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1a5f6aecbe4ee825e5656e0ec14847560e"/>    <section>
+    <title>Id</title>
+<indexterm><primary>Id</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>Id</secondary></indexterm>
+<para><computeroutput>GLuint jevois::GPUtexture::Id</computeroutput></para><para>
+Definition at line 52 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1a202e3d5533761facc08a706e735e222f"/>    <section>
+    <title>RenderBufferId</title>
+<indexterm><primary>RenderBufferId</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>RenderBufferId</secondary></indexterm>
+<para><computeroutput>GLuint jevois::GPUtexture::RenderBufferId</computeroutput></para><para>
+Definition at line 54 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+    </section><anchor xml:id="_classjevois_1_1GPUtexture_1ac872dcb438ae941b711486ffc805deff"/>    <section>
+    <title>Width</title>
+<indexterm><primary>Width</primary><secondary>jevois::GPUtexture</secondary></indexterm>
+<indexterm><primary>jevois::GPUtexture</primary><secondary>Width</secondary></indexterm>
+<para><computeroutput>const GLsizei jevois::GPUtexture::Width</computeroutput></para><para>
+Definition at line 49 of file GPUtexture.H.</para>
+<para>
+Referenced by GPUtexture().</para>
+</section>
+<para>
+The documentation for this class was generated from the following files:</para>
+include/jevois/GPU/<link linkend="_GPUtexture_8H">GPUtexture.H</link>src/jevois/GPU/<link linkend="_GPUtexture_8C">GPUtexture.C</link></section>
+</section>

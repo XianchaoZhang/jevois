@@ -33,7 +33,7 @@ namespace
 {
   inline void debugCtrlReq(struct usb_ctrlrequest const & ctrl)
   {
-    (void)ctrl; // avoid compiler warning about unused param if LDEBUG is turned off
+    (void)ctrl; // 如果关闭 LDEBUG，则避免编译器发出有关未使用参数的警告
     
     LDEBUG(std::showbase << std::hex << "bRequestType " << ctrl.bRequestType << " bRequest " << ctrl.bRequest
            << " wValue " << ctrl.wValue << " wIndex " << ctrl.wIndex << " wLength " << ctrl.wLength);
@@ -41,8 +41,8 @@ namespace
 
   inline void debugStreamingCtrl(std::string const & msg, struct uvc_streaming_control const & ctrl)
   {
-    (void)ctrl; // avoid compiler warning about unused param if LDEBUG is turned off
-    (void)msg; // avoid compiler warning about unused param if LDEBUG is turned off
+    (void)ctrl; // 如果关闭 LDEBUG，则避免编译器发出有关未使用参数的警告
+    (void)msg; // 如果关闭了 LDEBUG，则避免编译器发出有关未使用参数的警告
     LDEBUG(msg << ": " << std::showbase << std::hex << "bmHint=" << ctrl.bmHint << ", bFormatIndex=" <<
            ctrl.bFormatIndex << ", bFrameIndex=" << ctrl.bFrameIndex << ", dwFrameInterval=" << ctrl.dwFrameInterval <<
            ", wKeyFrameRate=" << ctrl.wKeyFrameRate << ", wPFrameRate=" << ctrl.wPFrameRate <<
@@ -77,9 +77,9 @@ namespace
       // --   #define UVC_CT_PRIVACY_CONTROL                          0x11
       // note: UVC 1.5 has a few more...
       //
-      // Windows 10 insists on doing a GET_DEF on this 10-byte control even though we never said we support it:
+      // Windows 10 坚持对此执行 GET_DEF 10 字节控件，即使我们从未说过我们支持它：
       // --   #define UVC_CT_REGION_OF_INTEREST_CONTROL               0x14
-      // This is now handled by sending a default blank reply to all unsupported controls.
+      // 现在通过向所有不支持的控件发送默认空白回复来处理此问题。
       switch (cs)
       {
       case UVC_CT_AE_MODE_CONTROL: return V4L2_CID_EXPOSURE_AUTO;
@@ -89,11 +89,11 @@ namespace
       break;
       
     case 2: // Our processing unit
-      // From uvcvideo.h and the UVC specs, here are the available processing unit controls:
+      // 从 uvcvideo.h 和 UVC 规范中，以下是可用的处理单元控件：
       // A.9.5. Processing Unit Control Selectors
 
-      // Note one trick here: UVC_PU_WHITE_BALANCE_COMPONENT_CONTROL contains both the V4L2_CID_RED_BALANCE and
-      // V4L2_CID_BLUE_BALANCE; we handle that in the ioctl processing section, here we just return V4L2_CID_RED_BALANCE
+      // 注意这里的一个技巧：UVC_PU_WHITE_BALANCE_COMPONENT_CONTROL 同时包含 V4L2_CID_RED_BALANCE 和 
+	  // V4L2_CID_BLUE_BALANCE；我们在 ioctl 处理部分处理这个问题，这里我们只返回 V4L2_CID_RED_BALANCE
       
       // OK   #define UVC_PU_BACKLIGHT_COMPENSATION_CONTROL           0x01
       // OK   #define UVC_PU_BRIGHTNESS_CONTROL                       0x02
@@ -149,7 +149,7 @@ jevois::Gadget::Gadget(std::string const & devname, jevois::VideoInput * camera,
   fillStreamingControl(&itsProbe, m);
   fillStreamingControl(&itsCommit, m);
 
-  // Get our run() thread going and wait until it is cranking, it will flip itsRunning to true as it starts:
+  // 启动我们的 run() 线程并等待它启动，它将在启动时将 itsRunning 翻转为 true：
   itsRunFuture = jevois::async_little(std::bind(&jevois::Gadget::run, this));
   while (itsRunning.load() == false) std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
@@ -191,7 +191,7 @@ jevois::Gadget::~Gadget()
   // Tell run() thread to finish up:
   itsRunning.store(false);
 
-  // Will block until the run() thread completes:
+  // 将阻塞直到 run() 线程完成：
   if (itsRunFuture.valid()) try { itsRunFuture.get(); } catch (...) { jevois::warnAndIgnoreException(); }
 
   if (close(itsFd) == -1) PLERROR("Error closing UVC gadget -- IGNORED");
@@ -218,16 +218,16 @@ void jevois::Gadget::setFormat(jevois::VideoMapping const & m)
   // Do not do anything if ofmt is NONE:
   if (m.ofmt == 0) { LINFO("USB Gadget set video format to NONE"); return; }
   
-  // First try to set our own format, will throw if phony:
+  // 首先尝试设置我们自己的格式，如果是假的，则会抛出：
   XIOCTL(itsFd, VIDIOC_S_FMT, &itsFormat);
 
-  // Note that the format does not include fps, this is done with VIDIOC_S_PARM:
+  // 请注意，格式不包括 fps，这是通过 VIDIOC_S_PARM 完成的：
   try
   {
-    // The gadget driver may not support this ioctl...
+    // 小工具驱动程序可能不支持此 ioctl...
     struct v4l2_streamparm sparm = { };
     sparm.type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
-    sparm.parm.output.outputmode = 2; // V4L2_MODE_VIDEO not defined in our headers? its value is 2.
+    sparm.parm.output.outputmode = 2; // V4L2_MODE_VIDEO 未在我们的标题中定义？其值为 2。
     sparm.parm.output.timeperframe = jevois::VideoMapping::fpsToV4l2(m.ofps);
     XIOCTL_QUIET(itsFd, VIDIOC_S_PARM, &sparm);
   } catch (...) { }
@@ -248,28 +248,28 @@ void jevois::Gadget::run()
   // Switch to running state:
   itsRunning.store(true);
 
-  // We may have to wait until the device is opened:
+  // 我们可能必须等到设备打开：
   while (itsFd == -1) std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-  // Wait for event from the gadget kernel driver and process them:
+  // 等待来自小工具内核驱动程序的事件并处理它们：
   while (itsRunning.load())
   {
-    // Wait until we either receive an event or we are ready to send the next buffer over:
+    // 等待直到我们收到事件或准备好发送下一个缓冲区：
     FD_ZERO(&wfds); FD_ZERO(&efds); FD_SET(itsFd, &wfds); FD_SET(itsFd, &efds);
     tv.tv_sec = 0; tv.tv_usec = 10000;
     
     int ret = select(itsFd + 1, nullptr, &wfds, &efds, &tv);
     
     if (ret == -1) { PLERROR("Select error"); if (errno == EINTR) continue; else break; }
-    else if (ret > 0) // We have some events, handle them right away:
+    else if (ret > 0) // 我们有一些事件，请立即处理它们：
     {
-      // Note: we may have more than one event, so here we try processEvents() several times to be sure:
+      // 注意：我们可能有多个事件，因此我们在这里尝试 processEvents() 几次以确保无误：
       if (FD_ISSET(itsFd, &efds))
       {
-        // First event, we will report error if any:
+        // 第一个事件，如果有任何错误我们将报告：
         try { processEvents(); } catch (...) { jevois::warnAndIgnoreException(); }
 
-        // Let's try to dequeue one more, in most cases it should throw:
+        // 让我们尝试再出队一个，在大多数情况下它应该抛出：
         while (true) try { processEvents(); } catch (...) { break; }
       }
         
@@ -278,11 +278,11 @@ void jevois::Gadget::run()
 
     // We timed out
 
-    // Sometimes we miss events in the main loop, likely because more events come while we are unlocked in the USB UDC
-    // driver and processing here. So let's try to dequeue one more, in most cases it should throw:
+    // 有时我们会错过主循环中的事件，可能是因为在 USB UDC 驱动程序中解锁并在此处理时，出现了更多事件。
+	// 因此，让我们尝试再出队一次，在大多数情况下，它应该会抛出：
     while (true) try { processEvents(); } catch (...) { break; }
 
-    // While the driver is not busy in select(), queue at most one buffer that is ready to send off:
+    // 当驱动程序在 select() 中不忙时，最多排队一个准备发送的缓冲区：
     try
     {
       JEVOIS_TIMED_LOCK(itsMtx);
@@ -290,7 +290,7 @@ void jevois::Gadget::run()
       {
         LDEBUG("Queuing image " << itsDoneImgs.front() << " for sending over USB");
         
-        // We need to prepare a legit v4l2_buffer, including bytesused:
+        // 我们需要准备一个合法的 v4l2_buffer，包括 bytesused：
         struct v4l2_buffer buf = { };
         
         buf.type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
@@ -307,7 +307,7 @@ void jevois::Gadget::run()
         buf.flags = 0;
         gettimeofday(&buf.timestamp, nullptr);
         
-        // Queue it up so it can be sent to the host:
+        // 将其排队以便可以发送到主机：
         itsBuffers->qbuf(buf);
         
         // This one is done:
@@ -316,7 +316,7 @@ void jevois::Gadget::run()
     } catch (...) { jevois::warnAndIgnoreException(); std::this_thread::sleep_for(std::chrono::milliseconds(10)); }
   }
 
-  // Switch out of running state in case we did interrupt the loop here by a break statement:
+  // 如果我们确实通过 break 语句中断了循环，则切换出运行状态：
   itsRunning.store(false);
 }
 
@@ -357,11 +357,11 @@ void jevois::Gadget::processVideo()
   jevois::RawImage img;
   JEVOIS_TIMED_LOCK(itsMtx);
 
-  // If we are not streaming anymore, abort:
+  // 如果我们不再进行流式传输，则中止：
   if (itsStreaming.load() == false) LFATAL("Aborted while not streaming");
   
-  // Dequeue a buffer from the gadget driver, this is an image that has been sent to the host and hence the buffer is
-  // now available to be filled up with image data and later queued again to the gadget driver:
+  // 从小工具驱动程序中出队一个缓冲区，这是已发送到主机的图像，因此缓冲区现在可用于填充图像数据，然后再次排队到小工
+  // 具驱动程序：
   struct v4l2_buffer buf;
   itsBuffers->dqbuf(buf);
 
@@ -434,65 +434,64 @@ void jevois::Gadget::processEventControl(uint8_t req, uint8_t cs, uint8_t entity
 {
   JEVOIS_TRACE(3);
   
-  // Local function we run on successful processing of an event: we just reset our internal error code
+  // 我们在成功处理事件时运行的本地函数：我们只需重置内部错误代码
 #define success() { itsErrorCode = 0; }
 
-  // Local function we run on failed processing of an event: stall the request, set our internal error code
+  // 我们在事件处理失败时运行的本地函数：停止请求，设置我们的内部错误代码
 #define failure(code) { resp.length = -EL2HLT; itsErrorCode = code; }
 
-  // Shortcurt to successfully send a 1-byte response:
+  // 成功发送 1 字节响应的快捷方式：
 #define byteresponse(val) { resp.data[0] = val; resp.length = 1; itsErrorCode = 0; }
 
-  // Shortcurt to successfully send a 2-byte response:
+  // 成功发送 2 字节响应的快捷方式：
 #define wordresponse(val) { resp.data[0] = val & 0xff; resp.data[1] = (val >> 8) & 0xff; \
     resp.length = 2; itsErrorCode = 0; }
 
-  // Shortcurt to successfully send a 4-byte response:
+  // 成功发送 4 字节响应的快捷方式：
 #define intresponse(val) { resp.data[0] = val & 0xff; resp.data[1] = (val >> 8) & 0xff; \
     resp.data[2] = (val >> 16) & 0xff; resp.data[3] = (val >> 24) & 0xff; \
     resp.length = 4; itsErrorCode = 0; }
 
-  // Shortcurt to successfully send a blank N-byte response:
+  // 成功发送 N 字节响应的快捷方式：
 #define arrayblankresponse(len) { memset(resp.data, 0, len); resp.length = len; itsErrorCode = 0; }
 
-  // If anything throws here, we will return failure:
+  // 如果这里抛出任何异常，我们将返回 failure：
   try
   {
-    // First handle any request that is directed to entity 0:
+    // 首先处理指向实体 0 的任何请求：
     if (entity_id == 0)
     {
       switch (cs)
       {
-      case UVC_VC_REQUEST_ERROR_CODE_CONTROL: byteresponse(itsErrorCode); return; // Send error code last prepared
+      case UVC_VC_REQUEST_ERROR_CODE_CONTROL: byteresponse(itsErrorCode); return; // 发送最后准备的错误代码
       default: failure(0x06); return;
       }
     }
     
-    // Process according to the entity that this event is directed to and the control that is requested:
+    // 根据此事件指向的实体和请求的控制进行处理：
     if (req == UVC_SET_CUR)
     {
-      // We need to wait for the data phase, so for now just remember the control and return success:
+      // 我们需要等待数据阶段，因此现在只需记住控制并返回成功：
       itsEntity = entity_id; itsControl = cs;
       resp.data[0] = 0x0; resp.length = len; success();
       LDEBUG("SET_CUR ent " << itsEntity <<" ctrl "<< itsControl <<" len "<< len);
     }
     else if (req == UVC_GET_INFO)
     {
-      // FIXME: controls could also be disabled, autoupdate, or asynchronous:
+      // FIXME: 控件也可以被禁用、自动更新或异步：
       byteresponse(UVC_CONTROL_CAP_GET | UVC_CONTROL_CAP_SET);
     }
     else if (req == UVC_GET_CUR)
     {
-      // Fetch the current value from the camera. Note: both Windows and Android insist on querying some controls, like
-      // IRIS and GAMMA, which we did not declare as supported in the kernel driver. We need to handle those requests
-      // and to send some phony data:
+      // 从相机获取当前值。注意：Windows 和 Android 都坚持查询一些控件，如 IRIS 和 GAMMA，我们没有在内核驱动程序中声
+	  // 明它们受支持。我们需要处理这些请求并发送一些虚假数据：
       struct v4l2_control ctrl = { };
       try { ctrl.id = uvcToV4Lcontrol(entity_id, cs); itsCamera->getControl(ctrl); } catch (...) { ctrl.id = 0; }
 
-      // We need a special handling of white balance here:
+      // 我们在这里需要对白平衡进行特殊处理：
       if (ctrl.id == V4L2_CID_RED_BALANCE)
       {
-        unsigned int redval = (ctrl.value & 0xffff) << 16; // red is at offset 2 in PU_WHITE_BALANCE_COMPONENT_CONTROL
+        unsigned int redval = (ctrl.value & 0xffff) << 16; // 红色在 PU_WHITE_BALANCE_COMPONENT_CONTROL 中的偏移量 2 处
         
         // Also get the blue balance value:
         ctrl.id = V4L2_CID_BLUE_BALANCE;
@@ -501,13 +500,13 @@ void jevois::Gadget::processEventControl(uint8_t req, uint8_t cs, uint8_t entity
         // Combine both red and blue values:
         ctrl.value = (ctrl.value & 0xffff) | redval;
       }
-      // We also need to remap auto exposure values:
+      // 我们还需要重新映射自动曝光值：
       else if (ctrl.id == V4L2_CID_EXPOSURE_AUTO)
       {
         if (ctrl.value == V4L2_EXPOSURE_MANUAL) ctrl.value = 0x01; // manual mode, set UVC bit D0
         else if (ctrl.value == V4L2_EXPOSURE_AUTO) ctrl.value = 0x02; // auto mode, set UVC bit D1
         else ctrl.value = 0x03;
-        // Note, there are 2 more bits under CT_AE_MODE_CONTROL
+        // 注意，CT_AE_MODE_CONTROL 下还有 2 个位
       }
       // Handle the unknown controls:
       else if (ctrl.id == 0) ctrl.value = 0;
@@ -523,13 +522,12 @@ void jevois::Gadget::processEventControl(uint8_t req, uint8_t cs, uint8_t entity
     }
     else
     {
-      // It's a GET_DEF/RES/MIN/MAX let's first get the data from the camera: Note: both Windows and Android insist on
-      // querying some controls, like IRIS and GAMMA, which we did not declare as supported in the kernel driver. We
-      // need to handle those requests and to send some phony data:
+      // 这是一个 GET_DEF/RES/MIN/MAX 让我们首先从相机获取数据： 注意：Windows 和 Android 都坚持查询一些控件，如 IRIS 
+	  // 和 GAMMA，我们没有在内核驱动程序中声明它们受支持。我们需要处理这些请求并发送一些虚假数据：
       struct v4l2_queryctrl qc = { };
       try { qc.id = uvcToV4Lcontrol(entity_id, cs); itsCamera->queryControl(qc); } catch (...) { qc.id = 0; }      
 
-      // We need a special handling of white balance here:
+      // 这里我们需要对白平衡进行特殊处理：
       if (qc.id == V4L2_CID_RED_BALANCE)
       {
         // Also get the blue balance values:
@@ -546,9 +544,8 @@ void jevois::Gadget::processEventControl(uint8_t req, uint8_t cs, uint8_t entity
       // We also need to remap auto exposure values:
       else if (qc.id == V4L2_CID_EXPOSURE_AUTO)
       {
-        // Tricky: in the 'step' field, we are supposed to provide a bitmap of the modes that are supported, see UVC
-        // specs. D0=manual, D1=auto, D2=shutter priority, D3=aperture priority. Min and max are ignored for this
-        // control, default is handled.
+        // 棘手：在 'step' 字段中，我们应该提供支持模式的位图，请参阅 UVC 规格。D0=手动，D1=自动，D2=快门优先，
+		// D3=光圈优先。此 // 控件忽略最小值和最大值，处理默认值。
         qc.minimum = 0; qc.step = 3; qc.maximum = 3; qc.default_value = 1;
       }
       // Also handle the unknown controls here:
@@ -616,15 +613,14 @@ void jevois::Gadget::processEventStreaming(uint8_t req, uint8_t cs, struct uvc_r
   case UVC_SET_CUR: itsControl = cs; resp.length = datalen; break; // will finish up in data stage
     
   case UVC_GET_CUR:
-  case UVC_GET_MIN: // we have nothing to negotiate
-  case UVC_GET_MAX: // we have nothing to negotiate
+  case UVC_GET_MIN: // 我们没有什么可协商的
+  case UVC_GET_MAX: // 我们没有什么可协商的
     memcpy(ctrl, target, datalen);
     break;
     
   case UVC_GET_DEF:
   {
-    // If requested format index, frame index, or interval is bogus (including zero), initialize to our default mapping,
-    // otherwise pass down the selected mapping:
+    // 如果请求的格式索引、帧索引或间隔是假的（包括零），则初始化为我们的默认映射，否则传递选定的映射：
     size_t idx = itsEngine->getDefaultVideoMappingIdx();
     try { idx = itsEngine->getVideoMappingIdx(ctrl->bFormatIndex, ctrl->bFrameIndex, ctrl->dwFrameInterval); }
     catch (...) { }
@@ -658,7 +654,7 @@ void jevois::Gadget::processEventData(struct uvc_request_data & data)
   default:                    processEventControlData(data); return;
   }
 
-  // Find the selected format and frame info and fill-in the control data:
+  // 找到选定的格式和帧信息并填写控制数据：
   struct uvc_streaming_control * ctrl = reinterpret_cast<struct uvc_streaming_control *>(&data.data);
 
   size_t idx = itsEngine->getVideoMappingIdx(ctrl->bFormatIndex, ctrl->bFrameIndex, ctrl->dwFrameInterval);
@@ -680,10 +676,10 @@ void jevois::Gadget::processEventControlData(struct uvc_request_data & data)
   
   struct v4l2_control ctrl;
 
-  // Get the control ID for V4L or throw if unsupported:
+  // 获取 V4L 的控件 ID，如果不支持则抛出：
   ctrl.id = uvcToV4Lcontrol(itsEntity, itsControl);
     
-  // Copy the data we received into the control's value:
+  // 将我们收到的数据复制到控件的值中：
   switch (data.length)
   {
   case 1: ctrl.value = static_cast<int>(data.data[0]); break;
@@ -692,9 +688,8 @@ void jevois::Gadget::processEventControlData(struct uvc_request_data & data)
   default: LFATAL("Ooops data len is " << data.length);
   }
 
-  // Tell the camera to set the control. We do not have enough time here to do it as otherwise our USB transaction will
-  // time out while we transfer a bunch of bytes to the camera over the 400kHz serial control link, so we just push it
-  // to a queue and our run() thread will do the work. First, handle special cases:
+  // 告诉相机设置控制。我们没有足够的时间来执行此操作，否则我们的 USB 事务将超时，因为我们会通过 400kHz 串行控制链路向
+  // 相机传输一堆字节，因此我们只需将其推送到队列，然后我们的 run() 线程将完成工作。首先，处理特殊情况：
   switch (ctrl.id)
   {
   case V4L2_CID_RED_BALANCE:
@@ -729,26 +724,26 @@ void jevois::Gadget::streamOn()
   if (itsStreaming.load() || itsBuffers) { LERROR("Stream is already on -- IGNORED"); return; }
   if (itsFormat.fmt.pix.pixelformat == 0) { LINFO("Gadget output format is NONE"); return; }
   
-  // If number of buffers is zero, adjust it depending on frame size:
+  // 如果缓冲区数量为零，则根据帧大小进行调整：
   unsigned int nbuf = itsNbufs;
   if (nbuf == 0)
   {
     unsigned int framesize = jevois::v4l2ImageSize(itsFormat.fmt.pix.pixelformat, itsFormat.fmt.pix.width,
                                                    itsFormat.fmt.pix.height);
 
-    // Aim for about 4 mbyte when using small images, and no more than 4 buffers in any case:
+    // 使用小图像时，目标约为 4 MB，并且在任何情况下缓冲区不超过 4 个：
     nbuf = (4U * 1024U * 1024U) / framesize;
     if (nbuf > 4) nbuf = 4;
   }
 
-  // Force number of buffers to a sane value:
+  // 强制缓冲区数量为合理值：
   if (nbuf < 3) nbuf = 3; else if (nbuf > 16) nbuf = 16;
 
-  // Allocate our buffers for the currently selected resolution, format, etc:
+  // 用可以提供给应用程序代码的空白帧填充 
   itsBuffers = new jevois::VideoBuffers("gadget", itsFd, V4L2_BUF_TYPE_VIDEO_OUTPUT, nbuf);
   LINFO(itsBuffers->size() << " buffers of " << itsBuffers->get(0)->length() << " bytes allocated");
   
-  // Fill itsImageQueue with blank frames that can be given off to application code:
+  // 使用可以提供给应用程序代码的空白帧填充 itsImageQueue：
   for (size_t i = 0; i < nbuf; ++i)
   {
     jevois::RawImage img;
@@ -786,13 +781,11 @@ void jevois::Gadget::streamOff()
 {
   JEVOIS_TRACE(2);
   
-  // Note: we allow for several streamOff() without complaining, this happens, e.g., when destroying a Gadget that is
-  // not currently streaming.
+  // 注意：我们允许多次 streamOff() 而不会发出任何抱怨，这种情况会发生，例如，当销毁当前未流式传输的 Gadget 时。
 
   LDEBUG("Turning off gadget stream");
 
-  // Abort stream in case it was not already done, which will introduce some sleeping in our run() thread, thereby
-  // helping us acquire our needed double lock:
+  // 如果尚未完成，则中止流，这将在我们的 run() 线程中引入一些睡眠，从而帮助我们获取所需的双重锁：
   abortStream();
 
   JEVOIS_TIMED_LOCK(itsMtx);
@@ -801,7 +794,7 @@ void jevois::Gadget::streamOff()
   int type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
   try { XIOCTL_QUIET(itsFd, VIDIOC_STREAMOFF, &type); } catch (...) { }
   
-  // Nuke all our buffers:
+  // 删除所有缓冲区：
   if (itsBuffers) { delete itsBuffers; itsBuffers = nullptr; }
   itsImageQueue.clear();
   itsDoneImgs.clear();
@@ -838,7 +831,7 @@ void jevois::Gadget::get(jevois::RawImage & img)
         return;
       }
 
-      // No image in the queue, unlock and wait for one:
+      // 队列中没有图像，解锁并等待一个：
       itsMtx.unlock();
       LDEBUG("Waiting for blank UVC image...");
       std::this_thread::sleep_for(std::chrono::milliseconds(5));
@@ -872,8 +865,8 @@ void jevois::Gadget::send(jevois::RawImage const & img)
         throw std::runtime_error("Gadget send() rejected while not streaming");
       }
       
-      // Check that the format matches, this may not be the case if we changed format while the buffer was out for
-      // processing. IF so, we just drop this image since it cannot be sent to the host anymore:
+      // 检查格式是否匹配，如果我们在缓冲区用于处理时更改了格式，则可能不是这种情况。如果是这样，我们就删除此图像，
+	  // 因为它无法再发送到主机：
       if (img.width != itsFormat.fmt.pix.width ||
           img.height != itsFormat.fmt.pix.height ||
           img.fmt != itsFormat.fmt.pix.pixelformat)
@@ -883,8 +876,8 @@ void jevois::Gadget::send(jevois::RawImage const & img)
         return;
       }
       
-      // We cannot just qbuf() here as our run() thread is likely in select() and the driver will bomb the qbuf as
-      // resource unavailable. So we just enqueue the buffer index and the run() thread will handle the qbuf later:
+      // 我们不能只在这里使用 qbuf()，因为我们的 run() 线程很可能在 select() 中，驱动程序会将 qbuf 炸毁，因为资源不
+	  // 可用。因此，我们只需将缓冲区索引入队，run() 线程稍后将处理  qbuf:
       itsDoneImgs.push_back(img.bufindex);
       itsMtx.unlock();
       LDEBUG("Filled image " << img.bufindex << " received from application code");

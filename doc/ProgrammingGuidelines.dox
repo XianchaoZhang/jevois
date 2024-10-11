@@ -1,42 +1,32 @@
-/*! \page ProgrammingGuidelines General programming guidelines for contributors to core JeVois framework
+/*! \page ProgrammingGuidelines JeVois 核心框架贡献者的通用编程指南
 
 
-\note These programming guidelines are for programmers who wish to contribute to the core JeVois framework
-(libjevois.so) and are quite strict. For programmers who just wish to program a new machine vision module that uses the
-JeVois core framework, quidelines are much looser and are described in the documentation of jevoisbase.
+\note 这些编程指南适用于希望为核心 JeVois 框架 (libjevois.so) 做出贡献的程序员，并且非常严格。对于只想编写使用 JeVois 核心框架的新机器视觉模块的程序员，指导方针要宽松得多，并在 jevoisbase 的文档中进行了描述。
 
-\section general General rules and indentation
+\section general 一般规则和缩进
 
-- JeVois uses doxygen for documentation, with the exclamation mark (!) comment style. You should learn about doxygen and
-  look at how the rest of JeVois is documented before you start writing code. Undocumented or improperly documented code
-  is subject to deletion. Also see <A href="DocumentationRules.html">here</A> for more explanations of tricky
-  documentation cases (once you know the basics of doxygen).
+- JeVois 使用 doxygen 进行文档编制，使用感叹号 (!) 注释样式。在开始编写代码之前，您应该了解 doxygen 并查看 JeVois 其余部分的文档编制方式。未记录或记录不当的代码可能会被删除。另请参阅<A href="DocumentationRules.html">此处</A>，了解有关棘手文档案例的更多解释（一旦您了解 doxygen 的基础知识）。
 
-- JeVois treats all warnings as errors. So your code will not compile if you have warnings. This is a feature: if your
-  code has warnings, you are doing something wrong! If you are including files from a library not written by you and
-  that has warnings, you can use the following:
+- JeVois 将所有警告视为错误。因此，如果有警告，您的代码将无法编译。这是一个功能：如果您的代码有警告，则说明您做错了！如果您包含的文件来自不是您编写的库，并且有警告，则可以使用以下命令：
   \code
   JEVOIS_BEGIN_UNCHECKED_INCLUDES
   #include <trashystuff.h>
   JEVOIS_END_UNCHECKED_INCLUDES
   \endcode
 
-- Source code line length is 120. Add this to your <b>~/.emacs</b> to set it:
+- 源代码行长度为 120。将其添加到您的 <b>~/.emacs</b> 进行设置：
 
   \verbatim
   ;; set default line wrap len:
   (setq default-fill-column 120)
   \endverbatim
 
-- JeVois uses astyle to ensure uniform indentation styles across our various text editors. A style file is included with
-  JeVois, and can be found in jevois/scripts/astylerc. To use this style file, invoke astyle using the –options flag,
-  e.g.
+- JeVois 使用 astyle 来确保我们各种文本编辑器的缩进样式统一。JeVois 中包含一个样式文件，可以在 jevois/scripts/astylerc 中找到。要使用此样式文件，请使用 –options 标志调用 astyle，例如
   \code 
   astyle myfile --options=/path/to/jevois/scripts/astylerc
   \endcode
 
-- Indentation matching this style is as defined by the following emacs rules, on top of the default C mode of emacs
-  indentation (ad this to your \c ~/.emacs to activate):
+- 符合此样式的缩进由以下 emacs 规则定义，位于 emacs 缩进的默认 C 模式之上（将其添加到 \c ~/.emacs 以激活）：
   \verbatim
   ;; JeVois indentation style for C++ and such
   (defun my-c-mode-common-hook ()
@@ -68,7 +58,7 @@ JeVois core framework, quidelines are much looser and are described in the docum
   (add-hook 'makefile-mode-hook 'my-c-mode-common-hook)
   \endverbatim
 
-- If you use vi, use this configuration:
+- 如果您使用 vi，请使用以下配置：
   \verbatim
   
   "-------------Essential JeVois Style Compliance Settings-------------
@@ -120,56 +110,33 @@ JeVois core framework, quidelines are much looser and are described in the docum
   nmap ,o :call OpenOther()<CR>
   \endverbatim
 
-\section fileorg Files organization
+\section fileorg 文件组织
 
-- JeVois uses exclusively filename extensions .H and .C for C++ files.
+- JeVois 对 C++ 文件仅使用文件扩展名 .H 和 .C。
 
-- JeVois uses CamelCase convention for file names and for class names. An exception is helper classes used for template
-  meta-programming, which usually use lowercase_with_underscores names, to resemble the STL (see more details
-  below).
+- JeVois 使用 CamelCase 约定作为文件名和类名。模板元编程使用的辅助类是个例外，它们通常使用小写加下划线的名称，以类似于 STL（请参阅下文了解更多详细信息）。
 
-- The JeVois Library is mainly split into the jevois/include/jevois/ and jevois/src/jevois/ directories. These
-  directories are then further split into Core, Debug, Image, etc. The build system creates a shared library,
-  libjevois.so from these files. Vision modules programmers use the JeVois library by including the appropriate header
-  (.H) files under jevois/include and by linking against libjevois.so (details below). When adding to the core JeVois
-  framework (as opposed to just writing new vision modules), please keep in mind:
+- JeVois 库主要分为 jevois/include/jevois/ 和 jevois/src/jevois/ 目录。然后这些目录进一步分为 Core、Debug、Image 等。构建系统从这些文件创建共享库 libjevois.so。视觉模块程序员通过在 jevois/include 下包含适当的头文件 (.H) 并链接到 libjevois.so（详情如下）来使用 JeVois 库。在添加到核心 JeVois 框架时（而不是仅仅编写新的视觉模块），请记住：
 
-  + Each directory under jevois/ should contain files which can be logically grouped together - e.g. the Debug directory
-    is for debugging functions and classes, Image is for image processing, etc. Each of these directories contains a
-    group of classes which implement a specific feature.
+  + jevois/ 下的每个目录都应包含可以逻辑分组在一起的文件 - 例如，Debug 目录用于调试函数和类，Image 用于图像处理等。每个目录都包含一组实现特定功能的类。
 
-  + All header files must be named with a .H extension, and should go into the include directory.  Header files should
-    be split such that all backend functionality which users don't need do know about should be hidden away in a \c
-    details subdirectory.  In general, such backend functionality can be split into a Helpers file which contains any
-    helper classes and can be included before the body of a class definition, and a Impl implementation file which
-    includes any inline code. For example, the Parameter framework involves the main definitions and programming
-    interface in jevois/include/jevois/Component/Parameter.H, which relies on some helper classes (which programmers
-    using Parameter do not need to knwo about) defined in jevois/include/jevois/Component/details/ParameterHelpers.H,
-    and has some inline implementation code (which programmers using Parameter also do not need to know about) defined
-    in jevois/include/jevois/Component/details/ParameterImpl.H. This organization makes it easy to generate user
-    documentation that omits all of the nasty implementation details.
+  + 所有头文件必须以 .H 扩展名命名，并应放入包含目录中。应拆分头文件，以便用户不需要知道的所有后端功能都隐藏在 \c details 子目录中。通常，此类后端功能可以拆分为 Helpers 文件（包含任何帮助程序类，可包含在类定义主体之前）和 Impl 实现文件（包含任何内联代码）。例如，Parameter 框架涉及 jevois/include/jevois/Component/Parameter.H 中的主要定义和编程接口，它依赖于 jevois/include/jevois/Component/details/ParameterHelpers.H 中定义的一些帮助程序类（使用 Parameter 的程序员不需要知道），并且具有 jevois/include/jevois/Component/details/ParameterImpl.H 中定义的一些内联实现代码（使用 Parameter 的程序员也不需要知道）。这种组织方式使得生成省略所有令人讨厌的实施细节的用户文档变得容易。
 
-  + All non-inline, non-template implementation source files should be named with a .C extension, and should go into the
-    jevois/src/ directory following the same relative path as its .H file.
+  + 所有非内联、非模板实现源文件都应以 .C 扩展名命名，并应按照与其 .H 文件相同的相对路径进入 jevois/src/ 目录。
 
-  + As much code as possible should be moved into .C files so that users don't have to recompile our .H files over and
-    over again. The big exception to this is template code, which in most cases must go into .H files.
+  + 应将尽可能多的代码移入 .C 文件，这样用户就不必一遍又一遍地重新编译我们的 .H 文件。模板代码是例外，在大多数情况下必须将其移入 .H 文件。
 
-  + All header and source files should include the boilerplate preamble/license. Just copy it from another file.
+  + 所有头文件和源文件都应包含样板序言/许可证。只需从另一个文件复制即可。
 
-- Class member variables have names starting with "its" to indicate to humans reading the code that they are member
-  variables.
+- 类成员变量的名称以 "its" 开头，以便向阅读代码的人表明它们是成员变量。
 
-- JeVois member functions use camelCase starting with a lowercase letter.
+- JeVois 成员函数使用以小写字母开头的 camelCase。
 
-- JeVois free functions usually use name_with_underscores, or camelCase starting with a lowercase letter.
+- JeVois free 函数通常使用 name_with_underscores，或者以小写字母开头的 camelCase。
 
-- Generally speaking, one file per class. File name and class name must match exactly. If several classes conceptually
-  belong together, then it is ok to put them in the same file.
+- 一般而言，每个类一个文件。文件名和类名必须完全匹配。如果几个类在概念上属于同一类，那么可以将它们放在同一个文件中。
 
-- All .H files use include guards, which will prevent the file from being included several times, thereby generating
-  some errors about things being re-defined. No .C file uses include guards. We use a pragma supported by g++ for
-  include guards:
+- 所有 .H 文件都使用包含保护，这将防止文件被多次包含，从而产生一些关于重新定义内容的错误。没有 .C 文件使用包含保护。我们使用 g++ 支持的编译指示来包含保护：
 
   \code
 #pragma once
@@ -178,39 +145,28 @@ JeVois core framework, quidelines are much looser and are described in the docum
 
   \endcode
 
-- A new class will hence typically involve the following set of files:
 
-  + \c include/jevois/XXX/MyClass.H: only contains declarations and documentation. Absolutely no actual implementation
-    code.  Only declare in this file things of interest to programmers who will use your class and who do not need to
-    care about exactly how it works internally. Everything in this file should be documented using doxygen markup.
+- 因此，一个新类通常涉及以下一组文件：
 
-  + \c include/jevois/XXX/details/MyClassHelpers.H: contains supporting declarations that must be known before the main
-    declarations in MyClass.H can take effect. For example, if the end user will only use a derived class and the base
-    class contains no information that they should care about, declare the base class in details/MyClassHelpers.H and
-    towards the top of MyClass.H include details/MyClassHelpers.H. There is no doxygen markup in this file, and
-    documentation is optional, mainly geared towards advanced programmers.
+  + \c include/jevois/XXX/MyClass.H ：仅包含声明和文档。绝对没有实际的实现代码。仅在此文件中声明将使用您的类且不需要关心其内部工作原理的程序员感兴趣的内容。此文件中的所有内容都应使用 doxygen 标记进行记录。
 
-  + \c include/jevois/XXX/details/MyClassImpl.H: contains inlined and template implementation ONLY. There is no doxygen
-    markup in this file, and documentation is optional, mainly geared towards advanced programmers.
+  + \c include/jevois/XXX/details/MyClassHelpers.H ：包含 MyClass.H 中的主要声明生效之前必须知道的支持声明。例如，如果最终用户只使用派生类，而基类不包含他们应该关心的信息，则在 details/MyClassHelpers.H 中声明基类，并在 MyClass.H 的顶部包含 details/MyClassHelpers.H。此文件中没有 doxygen 标记，文档是可选的，主要面向高级程序员。
 
-  + \c src/jevois/XXX/MyClass.C: contains all non-template, non-inline implementation. Documentation is optional.
+  + \c include/jevois/XXX/details/MyClassImpl.H ：仅包含内联和模板实现。此文件中没有 doxygen 标记，文档是可选的，主要面向高级程序员。
 
-  See for example the following files:
+  + \c src/jevois/XXX/MyClass.C ：包含所有非模板、非内联实现。文档是可选的。
 
-   + jevois/include/jevois/Component/details/ParameterHelpers.H preliminaries of no interest to programmers just using
-   the JeVois framework
+  例如参见以下文件：
 
-   + jevois/include/jevois/Component/Parameter.H documented interface for programmers using the JeVois framework
+  + jevois/include/jevois/Component/details/ParameterHelpers.H 准备工作对只使用 JeVois 框架的程序员来说毫无意义
 
-   + jevois/include/jevois/Component/details/ParameterImpl.H inline functions and templates implementation of no
-   interest to programmers just using the JeVois framework
+  + jevois/include/jevois/Component/Parameter.H 为使用 JeVois 框架的程序员提供文档接口
 
-   + jevois/src/jevois/Component/Parameter.C does not exist because Parameter is a fully-templated, fully inline class,
-   but could contain any non-template, non-inline implementation of no interest to programmers just using the JeVois
-   framework
+  + jevois/include/jevois/Component/details/ParameterImpl.H 内联函数和模板实现对仅使用 JeVois 框架的程序员来说毫无意义
 
-- To find particular words in JeVois source code, we recommend adding the following macro to your
-`~/.bash_aliases` or `~/.bashrc`:
+  + jevois/src/jevois/Component/Parameter.C 不存在，因为 Parameter 是一个完全模板化、完全内联的类，但可能包含任何非模板、非内联的实现，而这些实现对于仅使用 JeVois 框架的程序员来说毫无意义
+
+- 要在 JeVois 源代码中查找特定单词，我们建议将以下宏添加到您的 `~/.bash_aliases` 或 `~/.bashrc`：
 \verbatim
 # do a grep on c sources (e.g., for kernel, u-boot, etc) or c++ sources (for JeVois, NRT, etc)
 xg () {
@@ -218,86 +174,59 @@ xg () {
 }
 \endverbatim
 
-You can use it as follows, for example to find all files that refer to the function \c warnAndRethrowException()
-provided by JeVois to help programmers with handling of exceptions:
-\verbatim
-itti@iLab1:~/jevois/software/jevois$ xg warnAndRethrowException
-./include/jevois/Debug/Log.H:      try { do_something_risky(); } catch (...) { jevois::warnAndRethrowException(); }
-./include/jevois/Debug/Log.H:  void warnAndRethrowException[[noreturn]]();
-./src/jevois/Debug/Log.C:void jevois::warnAndRethrowException()
-\endverbatim
-Reveals that it is declared in Log.H and implemented in Log.C, so you can now open those files for more information.
+您可以按如下方式使用它，例如，查找引用 JeVois 提供的函数 \c warnAndRethrowException() 的所有文件，该函数可帮助程序员处理异常：\verbatim itti@iLab1:~/jevois/software/jevois$ xg warnAndRethrowException ./include/jevois/Debug/Log.H: try { do_something_risky(); } catch (...) { jevois::warnAndRethrowException(); } ./include/jevois/Debug/Log.H: void warnAndRethrowException[[noreturn]](); ./src/jevois/Debug/Log.C:void jevois::warnAndRethrowException() \endverbatim 显示它是在 Log.H 中声明并在 Log.C 中实现的，因此您现在可以打开这些文件以获取更多信息。
 
-\section constcorr Const Correctness
+\section constcorr Const 正确性
 
-JeVois uses exclusively the right-to-left convention for const qualifications. This is because it is the best way to
-  unambiguously read statements that have const in them, just read them aloud from right to left. For example:
+JeVois 专门使用从右到左的约定来限定 const 限定符。这是因为这是清楚地阅读包含 const 的语句的最佳方式，只需从右到左大声朗读即可。例如：
 
-\code
-int const * prt1; // ptr1 is pointer to const int (read from right to left; can change pointer address, but not the int value pointed to)
-int * const ptr2; // ptr2 is a const pointer to int (cannot change the address, but can change the int value)
-int const * const ptr3; // ptr3 is a const pointer to a const int (const address, const value)
+\code 
+int const * prt1; // ptr1 是指向 const int 的指针（从右向左读取；可以改变指针地址，但不能改变指向的 int 值） 
+int * const ptr2; // ptr2 是指向 int 的 const 指针（不能改变地址，但可以改变 int 值） 
+int const * const ptr3; // ptr3 是指向 const int 的 const 指针（const 地址，const 值） 
 \endcode
 
-  See http://en.wikipedia.org/wiki/Const-correctness for more details and examples. Also see this one:
-  http://www.dansaks.com/articles/1999-02%20const%20T%20vs%20T%20const.pdf and that one:
-  http://www.parashift.com/c++-faq-lite/const-correctness.html
+  有关更多详细信息和示例，请参阅 http://en.wikipedia.org/wiki/Const-correctness。另请参阅此文：http://www.dansaks.com/articles/1999-02%20const%20T%20vs%20T%20const.pdf 和此文：http://www.parashift.com/c++-faq-lite/const-correctness.html
 
-- JeVois is const-correct code (except for bugs and omissions!). When writing jevois code, make sure it is
-  const-correct. For example:
-  - input arguments to a function are typically received by const reference. For example:
+- JeVois 是 const 正确的代码（除了错误和遗漏！）。编写 jevois 代码时，请确保它是 const 正确的。例如：
+  - 函数的输入参数通常由 const 引用接收。例如：
 \code
 void myfunc(std::string const & arg);
 \endcode
-  - a member function that does not modify any member variables of an object should be declared const. For example:
-\code
-class MyClass
+  - 不修改对象任何成员变量的成员函数应声明为 const。例如：
+\code 
+class MyClass 
 {
-  public:
-    int getX() const
-    { return x; } // since we do not modify x or anything else in MyClass, getX() is declared const
-  private:
-    int x;
-}
+ public:
+  int getX() const 
+  { return x; } // 由于我们不修改 x 或 MyClass 中的任何其他内容，因此 getX() 被声明为 const 
+ private:
+  int x; } 
 \endcode
-  - a temporary variable that will not be modified should be declared const. For example:
-\code
-double const perimeter = 2.0 * M_PI * radius;  // assuming perimeter will not be modified later
+  - 不会被修改的临时变量应声明为 const。例如：
+\code 
+double const perimeter = 2.0 * M_PI * radius; // 假设周长以后不会被修改 
 \endcode
-  - a mutex in a class should typically be declared \c mutable, which will allow it to be locked/unlocked on const
-    instances of the class or in const member functions of the class.
-  - For return values of functions: return a const ref if possible (i.e., you are returning a const ref to something
-    which will not disappear soon, typically use this for accessor functions of your classes, when returning one of the
-    data members of the class), otherwise return by value (non-const). While returning by non-const value may pose
-    dangers, it also allows move semantics. This is particularly important if you return a vector, a string, etc as by
-    returning it by non-const value it will actually be moved (in most cases) as opposed to copied.
+  - 类中的互斥锁通常应声明为 \c mutable ，这将允许它在类的 const 实例或类的 const 成员函数中被锁定/解锁。
+  - 对于函数的返回值：如果可能，返回一个 const ref（即，您正在返回一个不会很快消失的 const ref，通常在返回类的数据成员之一时将其用于类的访问器函数），否则按值返回（非常量）。虽然按非常量值返回可能会带来危险，但它也允许移动语义。如果您返回向量、字符串等，这一点尤其重要，因为通过按非常量值返回它，它实际上将被移动（在大多数情况下），而不是复制。
 
-  - on rare occasions, it is more desirable to keep a member function const even though it might modify some member
-    non-mutable variables of a class, if logically speaking this makes more sense. You have to use your judgments for
-    these cases, and use a \c const_cast inside the function. For example, consider the implementation of the
-    className() accessor function in Component, which returns the name of the component's class. itsClassName is
-    declared in Component.H as a const string data member of Component, which makes sense since the class name cannot be
-    modified for any Component. As for all const data members, the only way to assign a value to itsClassName is hence
-    during construction. But we would like to report the class name of any class derived from Component, which is not
-    accessible during construction of the base Component class. For this reason, we will set the class name the first
-    time it is requested (at which point we know the object derived from Component will be fully constructed):
-\code
-std::string const & jevois::Component::className() const
+  - 在极少数情况下，如果从逻辑上讲这更有意义，则更希望将成员函数保持为 const，即使它可能会修改类的一些成员非可变变量。您必须对这些情况做出判断，并在函数内部使用 \c const_cast 。例如，考虑 Component 中 className() 访问器函数的实现，该函数返回组件类的名称。itsClassName 在 Component.H 中声明为 Component 的 const 字符串数据成员，这是有道理的，因为任何 Component 的类名都不能修改。对于所有 const 数据成员，为 itsClassName 赋值的唯一方法是在构造期间。但我们希望报告从 Component 派生的任何类的类名，而该类名在基 Component 类的构造期间是无法访问的。出于这个原因，我们将在第一次请求时设置类名（此时我们知道从 Component 派生的对象将被完全构造）：
+\code 
+std::string const & jevois::Component::className() const 
 {
   boost::shared_lock<boost::shared_mutex> lck(itsMetaMtx);
 
-  // We need the (derived!) component to be fully constructed for demangle to work, hence the const_cast here:
+  // 我们需要完全构造（派生！）组件以使 demangle 正常工作，因此这里有 const_cast：
   if (itsClassName.empty()) *(const_cast<std::string *>(&itsClassName)) = jevois::demangle(typeid(*this).name());
 
-  return itsClassName;
-}
-\endcode
-    so we use \c const_cast to set the const member variable itsClassName the first time it is requested.
-  - see http://en.wikipedia.org/wiki/Const-correctness for more details and examples.
+  return itsClassName; } 
+\endcode 
+    因此我们使用 \c const_cast 在第一次请求时设置 const 成员变量 itsClassName。
+  - 有关更多详细信息和示例，请参阅http://en.wikipedia.org/wiki/Const-correctness。
 
-\section localvar Local variables
+\section localvar 局部变量
 
-- Local variable names should favor longer more descriptive names over shorter ones. E.g.
+- 局部变量名应该选择较长、更具描述性的名称，而不是较短的名称。例如
 
 \code
 // Bad...
@@ -307,15 +236,13 @@ for (int i = 0; i < c; ++i);
 for (int itemIdx = 0; itemIdx < itemCount; ++itemIdx);
 \endcode
 
-\section useinline Proper use of inline, virtual, override, final, etc
+\section useinline 正确使用 inline、virtual、override、final 等
 
-- In declarations, do not write inline (e.g., in class declarations). Inline is an implementation detail and people just
-  looking at your interface (declarations) should not be bothered with it.
+- 在声明中，不要写 inline（例如，在类声明中）。Inline 是一个实现细节，只看你的接口（声明）的人不应该被它打扰。
 
-- In definitions (implementation of functions), that's the right place to add inline. For template functions, add inline
-  to the same line as the template.
+- 在定义（函数的实现）中，这是添加 inline 的正确位置。对于模板函数，将 inline 添加到与模板相同的行。
 
-Example:
+例子：
 
 \code
   template <class T>
@@ -333,26 +260,25 @@ Example:
   { ... }
 \endcode
 
-- The rule for virtual, override, final is the opposite as for inline: specify it in your declarations (users of your
-  classes need to know what is virtual and can safely be reimplemented by derived classes), omit it from your
-  definitions (once a function has been declared virtual, it will stay that way).
 
-\section capi Capitalization rules
+- virtual、override、final 的规则与 inline 相反：在声明中指定它（类的用户需要知道什么是虚拟的，并且可以安全地由派生类重新实现），从定义中省略它（一旦函数被声明为虚拟的，它就会保持这种状态）。
 
-- Class names should be written in CamelCase starting with an uppercase character, for example:
+\section capi 大小写规则
+
+- 类名应该以大写字母开头，采用 CamelCase 命名法，例如：
 
   \code
   class MyCoolClass;
   class ImageSegmenter;
   \endcode
 
-- Variables should be camelCase starting with a lowercase character, for example:
+- 变量应采用驼峰式命名法，以小写字母开头，例如
   \code
   bool isRunning;
   size_t arraySize;
   \endcode
 
-- Member variables should be camelCase starting with the prefix “its”, for example:
+- 成员变量应采用驼峰命名法 (camelCase)，以前缀 "its" 开头，例如：
 
   \code
   class MyClass
@@ -362,7 +288,7 @@ Example:
   }
   \endcode
 
-- Function names should be camelCase starting with a lowercase character, for example:
+- 函数名称应采用驼峰命名法 (camelCase)，以小写字母开头，例如：
 
   \code
   void doSomething(int paramOne);
@@ -373,15 +299,13 @@ Example:
   }
   \endcode
 
-- Typedef's which are just simple aliases for types should be CamelCase starting with an uppercase character, for
-  example:
+- Typedef 只是类型的简单别名，应该是以大写字母开头的 CamelCase，例如：
 
   \code
   typedef jevois::Dims<float> FloatingDims;
   \endcode
 
-- Anything that is the result of any fancy metaprogramming (e.g. static const variables or typedefs set by compile-time
-  checks) should be written in all lowercase with underscores separating the words, for example:
+- 任何花哨的元编程的结果（例如，编译时检查设置的静态 const 变量或 typedef）都应全部用小写字母书写，并用下划线分隔单词，例如：
 
   \code
   template <class T1, class T2> 
@@ -394,3 +318,4 @@ Example:
   \endcode
 
 */
+

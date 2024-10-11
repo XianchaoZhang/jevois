@@ -18,20 +18,20 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
 ########################################################################################################################
-# Set vendor names, our modules will be placed in a directory by that name under /jevois/modules:
+# 设置 vendor 名称，我们的模块将被放置在 /jevois/modules 目录中：
 set(JEVOIS_VENDOR "JeVois")
 
 ########################################################################################################################
 # Project version:
 set(JEVOIS_VERSION_MAJOR 1)
-set(JEVOIS_VERSION_MINOR 21)
+set(JEVOIS_VERSION_MINOR 20)
 set(JEVOIS_VERSION_PATCH 0)
 set(JEVOIS_SOVERSION "${JEVOIS_VERSION_MAJOR}.${JEVOIS_VERSION_MINOR}.${JEVOIS_VERSION_PATCH}" )
 
 ########################################################################################################################
 # OpenCV version to use with JeVois:
 set(JEVOIS_OPENCV_MAJOR 4)
-set(JEVOIS_OPENCV_MINOR 10)
+set(JEVOIS_OPENCV_MINOR 8)
 set(JEVOIS_OPENCV_PATCH 0)
 set(JEVOIS_OPENCV_VERSION "${JEVOIS_OPENCV_MAJOR}.${JEVOIS_OPENCV_MINOR}.${JEVOIS_OPENCV_PATCH}")
 
@@ -42,12 +42,12 @@ message(STATUS "JeVois OpenCV: ${JEVOIS_OPENCV_VERSION}")
 message(STATUS "JeVois OpenVino: ${JEVOIS_OPENVINO_VERSION}")
 
 ########################################################################################################################
-# Select target hardware amd include A33/pro specific definitions.
-# The following variables get defined accordingly for use below and in C++ code:
-# JEVOIS_A33 - for the original JeVois hardware using Allwinner A33 processor. Files are installed in
-#              /jevois, /var/lib/jevois-microsd, etc. JEVOIS is set to "jevois".
-# JEVOIS_PRO - for the pro hardware using Amlogic A311D processor. Files are installed in
-#              /jevoispro, /var/lib/jevoispro-microsd, etc. JEVOIS is set to "jevoispro".
+# 选择目标硬件并引入 A33/pro 特定的定义。
+# 下列定义的变量供下面和 C++ 代码中使用
+# JEVOIS_A33 - 适用于 Allwinner A33 处理器的初代 JeVois 硬件。文件安装在 /jevois、/var/lib/jevois-microsd
+#              等中。JEVOIS 设置为 "jevois"。
+# JEVOIS_PRO - 适用于 Amlogic A311D 处理器的专业硬件。文件安装在 /jevoispro、/var/lib/jevoispro-microsd 等
+#              中。JEVOIS 设置为 "jevoispro"。
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 include(JeVoisHardware)
 
@@ -85,10 +85,10 @@ else ()
 endif ()
 
 ########################################################################################################################
-# First define all vars for both host and platform here so we can patch jevois_config.cmake.in with both sets. Then,
-# below, we will set the variables we need now to compile depending on whether JEVOIS_PLATFORM is set or not:
+# 首先在此处定义 host 和 platform 的所有变量，以便我们可以使用 jevois_config.cmake.in 修补这两组变量。然后，
+# 下面，我们将根据是否设置 JEVOIS_PLATFORM 来设置现在需要编译的变量：
 
-# On the host, install to /usr ; on platform, install to /var/lib/jevois[pro]-build/usr
+# 在 host 上，安装到 /usr ；在 platform 上，安装到 /var/lib/jevois[pro]-build/usr
 set(JEVOIS_HOST_INSTALL_PREFIX "/usr")
 set(JEVOIS_PLATFORM_INSTALL_PREFIX "/var/lib/${JEVOIS}-build/usr")
 set(JEVOIS_PLATFORM_INSTALL_PREFIX_PDEB "/var/lib/${JEVOIS}-build-pdeb/usr")
@@ -104,7 +104,7 @@ file(TO_NATIVE_PATH "/var/lib/${JEVOIS}-build-pdeb" JEVOIS_PLATFORM_MODULES_ROOT
 # Set compiler flags:
 set(JEVOIS_WARN_C_FLAGS "-W -Wall -Wextra -Wundef -Wwrite-strings -Wlogical-op -Wredundant-decls")
 set(JEVOIS_WARN_CPP_FLAGS "${JEVOIS_WARN_C_FLAGS} -Wno-deprecated-enum-enum-conversion")
-# Other available warn flags are too strict, they trip opencv, tensorflow, etc:
+# 其他可用的警告标志过于严格，它们会绊倒 opencv、tensorflow 等：
 # -Wcast-align -Wfloat-equal -Wshadow -Wmissing-declarations -Woverloaded-virtual
 
 set(JEVOIS_HOST_CFLAGS "${JEVOIS_HOST_ARCH_FLAGS} -g -O4 \
@@ -117,14 +117,14 @@ set(JEVOIS_PLATFORM_NATIVE_CFLAGS "${JEVOIS_PLATFORM_ARCH_FLAGS} -g -O4 \
 -I${JEVOIS_SRC_ROOT}/jevois/include ${JEVOIS_HOST_INCLUDE} -fPIC -Wno-psabi")
 
 ########################################################################################################################
-# Include our helper functions, this will allow selection of host or platform and set variables accordingly:
+# 包含我们的辅助函数，这将允许选择 host 或 platform 并相应地设置变量：
 include(JeVois)
 
-# Check that we are not trying to compile a newer jevois against an older jevois-sdk, which would typically fail:
+# 检查我们是否尝试根据较旧的 jevois-sdk 编译较新的 jevois，这通常会失败：
 jevois_check_sdk_version(${JEVOIS_SOVERSION})
 
 ########################################################################################################################
-# Project name, detects compiler (which has been set by our helper module) and general setup
+# 项目名称、检测编译器（已由我们的辅助模块设置）和常规设置
 project(${JEVOIS})
 
 # Set the cmake install prefix:
@@ -145,12 +145,12 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Config-${JEVOIS}.H
 configure_file(src/pyjevois.py.in pyjevois.py @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pyjevois.py DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin)
 
-# Pass the compiler flags to cmake (doing this before project() gives problems with wrong compiler detection):
+# 将编译器标志传递给 cmake（在 project() 之前执行此操作会导致错误的编译器检测问题）：
 set(CMAKE_C_FLAGS "-std=gnu99 ${JEVOIS_CFLAGS} ${JEVOIS_WARN_C_FLAGS} -include Config-${JEVOIS}.H")
 set(CMAKE_CXX_FLAGS "-std=${JEVOIS_CXX_STD} ${JEVOIS_CFLAGS} ${JEVOIS_WARN_CPP_FLAGS} -include Config-${JEVOIS}.H")
 message(STATUS "JeVois C++ standard used: ${JEVOIS_CXX_STD}")
 
-# Enable address sanitizer (to debug illegal memory accesses and such; should normally be commented out):
+# 启用地址清理器（address sanitizer）（用于调试非法内存访问等；通常应该注释掉）：
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
 # Create our cmake config file for later compilation of modules and extra libs:
@@ -160,7 +160,7 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/jevois_config.cmake DESTINATION "${JEV
 # Setup our library:
 file(GLOB_RECURSE JEVOIS_LIB_SRC_FILES src/jevois/*.C src/jevois/*.c)
 add_library(${JEVOIS} SHARED ${JEVOIS_LIB_SRC_FILES})
-# Cannot set soversion and symlink anymore since we now install in /jevois[pro] that is vfat:
+# 由于我们现在安装在 /jevois[pro] 中（即 vfat），因此无法再设置 soversion 和符号链接：
 #set_target_properties(${JEVOIS} PROPERTIES VERSION "${JEVOIS_SOVERSION}" SOVERSION ${JEVOIS_SOVERSION})
 link_libraries(${JEVOIS})
 install(TARGETS ${JEVOIS} LIBRARY DESTINATION "${JEVOIS_MODULES_ROOT}/lib/" COMPONENT libs)
@@ -218,10 +218,9 @@ if (JEVOIS_PRO)
 endif ()
 
 ########################################################################################################################
-# NPU libraries for JeVois-Pro A311D processor:
+# JeVois-Pro A311D 处理器的 NPU 库：
 
-# Note: We include the NPU includes on all architectures, so that we can use the nice attr struct of the NPU to describe
-# input and output tensor encoding and quantization:
+# 注意：我们在所有架构中都包含 NPU，以便我们可以使用 NPU 的 nice attr 结构来描述输入和输出张量编码和量化：
 include_directories(Contrib/npu/include/ovxlib)
 include_directories(Contrib/npu/include/ovxlib/utils)
 include_directories(Contrib/npu/include/ovxlib/client)

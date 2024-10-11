@@ -1,29 +1,17 @@
-/*! \page UserStartCaveats JeVois-A33: Getting started caveats
-\tableofcontents
+/*! \page UserStartCaveats JeVois-A33：入门注意事项 \tableofcontents
 
 
-- On Mac, selecting a specific webcam resolution is only available with a few free apps, such as CamTwist Studio. This
-  applies to any USB camera, not only the JeVois smart camera. Mac OSX seems to just decide which resolution to use and
-  gives you no control over it. To use your JeVois smart camera with a Mac and to ensure a specific video resolution,
-  you could edit the videomappings.cfg of your smart camera and keep only one resolution in that file. OSX will then
-  have no other choice but to use that one.  If you are a programmer, success has been reported using OpenCV to grab
-  frames from JeVois on Mac, see http://jevois.org/qa/index.php?qa=114
+- 在 Mac 上，只有少数免费应用程序（例如 CamTwist Studio）才支持选择特定的网络摄像头分辨率。这适用于任何 USB 摄像头，而不仅仅是 JeVois 智能摄像头。Mac OSX 似乎只决定使用哪种分辨率，而您无法控制它。要将 JeVois 智能摄像头与 Mac 一起使用并确保特定的视频分辨率，您可以编辑智能摄像头的 videomappings.cfg 并在该文件中仅保留一种分辨率。OSX 将别无选择，只能使用该分辨率。如果您是程序员，据报道，使用 OpenCV 从 Mac 上的 JeVois 抓取帧是成功的，请参阅 http://jevois.org/qa/index.php?qa=114
 
-- On Mac, there is no access to camera controls (exposure, contrast, etc). Some third-party apps are availeble for this,
-  however. For example the "Webcam Settings" app available on the Apple app store.
+- 在 Mac 上，无法访问相机控件（曝光、对比度等）。但是，一些第三方应用程序可用于此目的。例如，Apple 应用商店中提供的“网络摄像头设置”应用程序。
 
-- On Windows, selecting camera resolution and exposure, etc settings has become difficult too, and only a few free apps
-  like AMCap allow you to select camera resolution. You may want to explore third-party apps for that, or, like on Macs,
-  configure your videomappings.cfg with only one available video resolution. If you are a programmer, success has been
-  reported using OpenCV to grab frames from JeVois on Mac, see http://jevois.org/qa/index.php?qa=114 as this may work
-  for Windows as well.
+- 在 Windows 上，选择相机分辨率和曝光等设置也变得很困难，只有少数免费应用程序（如 AMCap）允许您选择相机分辨率。您可能想要探索第三方应用程序，或者像在 Mac 上一样，仅使用一种可用的视频分辨率配置您的 videomappings.cfg。如果您是一名程序员，据报道，使用 OpenCV 从 Mac 上的 JeVois 抓取帧是成功的，请参阅 http://jevois.org/qa/index.php?qa=114，因为这也可能适用于 Windows。
 
-- iOS support: Using an OTG cable connected to an iPad (iOs 9), the iPad reported that the devide is not supported, for
-  any USB camera (not only the JeVois smart camera). It seems that iOS does not support USB cameras.
+- iOS 支持：使用 OTG 线连接到 iPad（iOS 9），iPad 报告说不支持任何 USB 摄像头（不仅仅是 JeVois 智能摄像头）。看来 iOS 不支持 USB 摄像头。
 
-- Android support: Using an OTG cable, the JeVois smart camera was detected by some third-party apps but we were not
-  able to successfully stream from it. More investigations are necessary.
+- Android 支持：使用 OTG 电缆，JeVois 智能相机被一些第三方应用程序检测到，但我们无法成功从中流式传输。需要进行更多调查。
 
-Because of these caveats, JeVois is best used with a Linux host computer.
+由于这些注意事项，JeVois 最适合与 Linux 主机一起使用。
 
 */
+

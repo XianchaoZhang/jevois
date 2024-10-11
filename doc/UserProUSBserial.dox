@@ -1,30 +1,19 @@
-/*! \page UserProUSBserial JeVois-Pro serial-over-USB communications
+/*! \page UserProUSBserial JeVois-Pro 串行 USB 通信
 
-Starting with \jvversion{1.19.0}, you can enable sending log and module output messages to the mini-USB port of
-\jvpro. Simply check that option in the System tab of the GUI as shown below:
+从 \jvversion{1.19.0} 开始，您可以启用将日志和模块输出消息发送到 \jvpro 的 mini-USB 端口的功能。只需在 GUI 的“系统”选项卡中选中该选项即可，如下所示：
 
 \jvimg{prousbserial.jpg, 25%}
 
-and reboot your camera.
+并重新启动相机。
 
-Then use a regular USB to mini-USB cable to connect the mini-USB port of JeVois Pro to a standard USB port on a host
-computer. When \jvpro boots up, your host computer will detect a USB serial device. You can then connect to it to
-communicate with \jvpro. For example, on a Linux host, a new device \b /dev/ttyACM0 will appear on the host machine when
-\jvpro is connected. You can then connect, e.g., using the \p screen program:
+然后使用常规 USB 转 mini-USB 电缆将 JeVois Pro 的 mini-USB 端口连接到主机上的标准 USB 端口。当 \jvpro 启动时，您的主机将检测到 USB 串行设备。然后您可以连接到它以与 \jvpro 通信。例如，在 Linux 主机上，当 \jvpro 连接时，主机上会出现一个新设备 \b /dev/ttyACM0。然后您可以使用 \p screen 程序进行连接：
 
-\verbatim
-sudo screen /dev/ttyACM0 115200
-\endverbatim
+\verbatim sudo screen /dev/ttyACM0 115200 \endverbatim
 
-and then issue commands to \jvpro as described in \ref UserCli
+然后按照 \ref UserCli 中所述向 \jvpro 发出命令
 
-\jvversion{1.19.0} strengthened the serial driver in the JeVois software to be robust to cable
-disconnects/reconnects. There still are caveats, though, as it seems that there is no proper way of actually knowing
-whether a cable is connected or not from Linux user space. However, there is a small buffer associated with the serial
-port that will eventually overflow if \jvpro is sending messages and the cable is not connected. When that is the case,
-\jvpro will close the serial device and attempt to re-open it. This usually will succeed when the cable has been
-re-connected. Just beware that if your module is not writing a lot of messages, you will not know on the camera that the
-cable is disconnected until you have attempted to output enough messages to cause that buffer overflow.
+\jvversion{1.19.0} 增强了 JeVois 软件中的串行驱动程序，使其能够应对电缆断开/重新连接。但是，仍然存在一些注意事项，因为似乎没有正确的方法可以从 Linux 用户空间真正知道电缆是否已连接。但是，如果 \jvpro 正在发送消息并且电缆未连接，则与串行端口关联的小缓冲区最终会溢出。在这种情况下，\jvpro 将关闭串行设备并尝试重新打开它。这通常会在电缆重新连接后成功。请注意，如果您的模块没有写入大量消息，您将不会在相机上知道电缆已断开连接，直到您尝试输出足够的消息以导致该缓冲区溢出。
 
 
 */
+

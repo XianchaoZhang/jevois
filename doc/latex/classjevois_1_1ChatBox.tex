@@ -1,0 +1,286 @@
+\hypertarget{classjevois_1_1ChatBox}{}\doxysubsection{jevois\+::Chat\+Box Class Reference}
+\label{classjevois_1_1ChatBox}\index{jevois::ChatBox@{jevois::ChatBox}}
+
+
+{\ttfamily \#include $<$jevois/\+G\+P\+U/\+Chat\+Box.\+H$>$}
+
+
+
+\doxysubsubsection{ }
+A simple helper class for a chat box rendered in Im\+Gui. 
+
+This is used, for example, to create interactive dialogues with large language models (L\+L\+Ms). Users can input text in an input box, and answers can be shown in the main window above. This chatbox is intended to operate fully asynchronously\+:
+
+
+\begin{DoxyItemize}
+\item call \mbox{\hyperlink{classjevois_1_1ChatBox_a088a47b72df7495721c292d5d5eca7a7}{get()}} to retrieve any new input messages entered by the user. This is non-\/blocking and returns immediately. The returned string will be empty except after the user presses \mbox{[}R\+E\+T\+U\+RN\mbox{]} in the input box, in which case the whole entered input will be returned.
+\item call \mbox{\hyperlink{classjevois_1_1ChatBox_a91a7add4923f41476f706a2cdb04ea24}{write\+String()}} to add to the text that is written out in the main window.
+\item call \mbox{\hyperlink{classjevois_1_1ChatBox_a07bfd761354cd67af7aa005c36644ec5}{draw()}} on every video frame.
+\end{DoxyItemize}
+
+Note\+: because it is primarily intended for use in python, this class is not thread-\/safe (for example, calling \mbox{\hyperlink{classjevois_1_1ChatBox_a91a7add4923f41476f706a2cdb04ea24}{write\+String()}} and \mbox{\hyperlink{classjevois_1_1ChatBox_a07bfd761354cd67af7aa005c36644ec5}{draw()}} concurrently might crash the system. In most applications, the \mbox{\hyperlink{classjevois_1_1ChatBox}{Chat\+Box}} member functions would all be called sequentially from a single thread). 
+
+Definition at line 47 of file Chat\+Box.\+H.
+
+
+
+Collaboration diagram for jevois\+::Chat\+Box\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classjevois_1_1ChatBox__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classjevois_1_1ChatBox_a5cfa67975687f0d5cda7a873189476f1}{Chat\+Box}} (std\+::string title=\char`\"{}Je\+Vois-\/Pro \mbox{\hyperlink{classjevois_1_1ChatBox}{Chat\+Box}}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classjevois_1_1ChatBox_a75b79288abde8f7efee56fc4b8525577}{$\sim$\+Chat\+Box}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1ChatBox_a088a47b72df7495721c292d5d5eca7a7}{get}} ()
+\begin{DoxyCompactList}\small\item\em Get input string from user, or empty if no new input. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ChatBox_a91a7add4923f41476f706a2cdb04ea24}{write\+String}} (std\+::string const \&out)
+\begin{DoxyCompactList}\small\item\em Update text that is displayed above input box (output from the underlying chat bot) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ChatBox_a07bfd761354cd67af7aa005c36644ec5}{draw}} ()
+\begin{DoxyCompactList}\small\item\em Render into an Im\+Gui window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ChatBox_a4db96aba5ba9e812b5b91bf2ca2bf058}{freeze}} (bool doit)
+\begin{DoxyCompactList}\small\item\em Freeze/unfreeze the input box, typically to prevent new inputs until current reply is done. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classjevois_1_1ChatBox_afb3803fe04f632765c9d949e072d9888}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all displayed text\+: \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classjevois_1_1ChatBox_a76fe4a35bf6d84f0967ffcb60f7fed5a}{callback}} (Im\+Gui\+Input\+Text\+Callback\+Data $\ast$data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::deque$<$ std\+::pair$<$ bool, std\+::string $>$ $>$ \mbox{\hyperlink{classjevois_1_1ChatBox_aff13eb8ef9571365e71389fb38e1c169}{its\+Data}}
+\item 
+std\+::string \mbox{\hyperlink{classjevois_1_1ChatBox_a212080c62a03c5351c3df01d2d5e7e48}{its\+Last\+Input}}
+\item 
+char \mbox{\hyperlink{classjevois_1_1ChatBox_a2397f5c88a099fdc28a950ee51ac5167}{its\+Input\+Buf}} \mbox{[}1024\mbox{]}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classjevois_1_1ChatBox_ae690b2318e5e720de4cc1bb54efff867}{its\+History}}
+\item 
+int \mbox{\hyperlink{classjevois_1_1ChatBox_ad629e0240983287354154bb4a78c844e}{its\+History\+Pos}} = 0
+\item 
+const std\+::string \mbox{\hyperlink{classjevois_1_1ChatBox_a4751a2382e857fa0db9ba6898c33efe3}{its\+Title}}
+\item 
+bool \mbox{\hyperlink{classjevois_1_1ChatBox_af591fbf0e9aee66a05f4bc583da29827}{its\+Frozen}} = false
+\item 
+int \mbox{\hyperlink{classjevois_1_1ChatBox_aa76d24d0035a28db3551a243e5ef7592}{its\+Wait\+State}} = 10
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a5cfa67975687f0d5cda7a873189476f1}\label{classjevois_1_1ChatBox_a5cfa67975687f0d5cda7a873189476f1}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!ChatBox@{ChatBox}}
+\index{ChatBox@{ChatBox}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{ChatBox()}{ChatBox()}}
+{\footnotesize\ttfamily jevois\+::\+Chat\+Box\+::\+Chat\+Box (\begin{DoxyParamCaption}\item[{std\+::string}]{title = {\ttfamily \char`\"{}JeVois-\/Pro~\mbox{\hyperlink{classjevois_1_1ChatBox}{Chat\+Box}}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+
+Definition at line 29 of file Chat\+Box.\+C.
+
+
+
+References its\+Input\+Buf.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a75b79288abde8f7efee56fc4b8525577}\label{classjevois_1_1ChatBox_a75b79288abde8f7efee56fc4b8525577}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!````~ChatBox@{$\sim$ChatBox}}
+\index{````~ChatBox@{$\sim$ChatBox}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{$\sim$ChatBox()}{~ChatBox()}}
+{\footnotesize\ttfamily jevois\+::\+Chat\+Box\+::$\sim$\+Chat\+Box (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+
+
+Definition at line 35 of file Chat\+Box.\+C.
+
+
+
+\doxysubsubsection{Member Function Documentation}
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a76fe4a35bf6d84f0967ffcb60f7fed5a}\label{classjevois_1_1ChatBox_a76fe4a35bf6d84f0967ffcb60f7fed5a}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!callback@{callback}}
+\index{callback@{callback}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{callback()}{callback()}}
+{\footnotesize\ttfamily int jevois\+::\+Chat\+Box\+::callback (\begin{DoxyParamCaption}\item[{Im\+Gui\+Input\+Text\+Callback\+Data $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Definition at line 216 of file Chat\+Box.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_afb3803fe04f632765c9d949e072d9888}\label{classjevois_1_1ChatBox_afb3803fe04f632765c9d949e072d9888}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!clear@{clear}}
+\index{clear@{clear}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void jevois\+::\+Chat\+Box\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear all displayed text\+: 
+
+
+
+Definition at line 39 of file Chat\+Box.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a07bfd761354cd67af7aa005c36644ec5}\label{classjevois_1_1ChatBox_a07bfd761354cd67af7aa005c36644ec5}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!draw@{draw}}
+\index{draw@{draw}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void jevois\+::\+Chat\+Box\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Render into an Im\+Gui window. 
+
+
+
+Definition at line 96 of file Chat\+Box.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a4db96aba5ba9e812b5b91bf2ca2bf058}\label{classjevois_1_1ChatBox_a4db96aba5ba9e812b5b91bf2ca2bf058}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!freeze@{freeze}}
+\index{freeze@{freeze}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{freeze()}{freeze()}}
+{\footnotesize\ttfamily void jevois\+::\+Chat\+Box\+::freeze (\begin{DoxyParamCaption}\item[{bool}]{doit }\end{DoxyParamCaption})}
+
+
+
+Freeze/unfreeze the input box, typically to prevent new inputs until current reply is done. 
+
+
+
+Definition at line 83 of file Chat\+Box.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a088a47b72df7495721c292d5d5eca7a7}\label{classjevois_1_1ChatBox_a088a47b72df7495721c292d5d5eca7a7}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!get@{get}}
+\index{get@{get}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Chat\+Box\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get input string from user, or empty if no new input. 
+
+
+
+Definition at line 45 of file Chat\+Box.\+C.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a91a7add4923f41476f706a2cdb04ea24}\label{classjevois_1_1ChatBox_a91a7add4923f41476f706a2cdb04ea24}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!writeString@{writeString}}
+\index{writeString@{writeString}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{writeString()}{writeString()}}
+{\footnotesize\ttfamily void jevois\+::\+Chat\+Box\+::write\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{out }\end{DoxyParamCaption})}
+
+
+
+Update text that is displayed above input box (output from the underlying chat bot) 
+
+
+
+Definition at line 62 of file Chat\+Box.\+C.
+
+
+
+References jevois\+::split().
+
+
+
+\doxysubsubsection{Member Data Documentation}
+\mbox{\Hypertarget{classjevois_1_1ChatBox_aff13eb8ef9571365e71389fb38e1c169}\label{classjevois_1_1ChatBox_aff13eb8ef9571365e71389fb38e1c169}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsData@{itsData}}
+\index{itsData@{itsData}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsData}{itsData}}
+{\footnotesize\ttfamily std\+::deque$<$std\+::pair$<$bool , std\+::string$>$ $>$ jevois\+::\+Chat\+Box\+::its\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 72 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_af591fbf0e9aee66a05f4bc583da29827}\label{classjevois_1_1ChatBox_af591fbf0e9aee66a05f4bc583da29827}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsFrozen@{itsFrozen}}
+\index{itsFrozen@{itsFrozen}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsFrozen}{itsFrozen}}
+{\footnotesize\ttfamily bool jevois\+::\+Chat\+Box\+::its\+Frozen = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 78 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_ae690b2318e5e720de4cc1bb54efff867}\label{classjevois_1_1ChatBox_ae690b2318e5e720de4cc1bb54efff867}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsHistory@{itsHistory}}
+\index{itsHistory@{itsHistory}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsHistory}{itsHistory}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ jevois\+::\+Chat\+Box\+::its\+History\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 75 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_ad629e0240983287354154bb4a78c844e}\label{classjevois_1_1ChatBox_ad629e0240983287354154bb4a78c844e}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsHistoryPos@{itsHistoryPos}}
+\index{itsHistoryPos@{itsHistoryPos}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsHistoryPos}{itsHistoryPos}}
+{\footnotesize\ttfamily int jevois\+::\+Chat\+Box\+::its\+History\+Pos = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 76 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a2397f5c88a099fdc28a950ee51ac5167}\label{classjevois_1_1ChatBox_a2397f5c88a099fdc28a950ee51ac5167}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsInputBuf@{itsInputBuf}}
+\index{itsInputBuf@{itsInputBuf}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsInputBuf}{itsInputBuf}}
+{\footnotesize\ttfamily char jevois\+::\+Chat\+Box\+::its\+Input\+Buf\mbox{[}1024\mbox{]}\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 74 of file Chat\+Box.\+H.
+
+
+
+Referenced by Chat\+Box().
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a212080c62a03c5351c3df01d2d5e7e48}\label{classjevois_1_1ChatBox_a212080c62a03c5351c3df01d2d5e7e48}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsLastInput@{itsLastInput}}
+\index{itsLastInput@{itsLastInput}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsLastInput}{itsLastInput}}
+{\footnotesize\ttfamily std\+::string jevois\+::\+Chat\+Box\+::its\+Last\+Input\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 73 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_a4751a2382e857fa0db9ba6898c33efe3}\label{classjevois_1_1ChatBox_a4751a2382e857fa0db9ba6898c33efe3}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsTitle@{itsTitle}}
+\index{itsTitle@{itsTitle}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsTitle}{itsTitle}}
+{\footnotesize\ttfamily const std\+::string jevois\+::\+Chat\+Box\+::its\+Title\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 77 of file Chat\+Box.\+H.
+
+\mbox{\Hypertarget{classjevois_1_1ChatBox_aa76d24d0035a28db3551a243e5ef7592}\label{classjevois_1_1ChatBox_aa76d24d0035a28db3551a243e5ef7592}} 
+\index{jevois::ChatBox@{jevois::ChatBox}!itsWaitState@{itsWaitState}}
+\index{itsWaitState@{itsWaitState}!jevois::ChatBox@{jevois::ChatBox}}
+\doxyparagraph{\texorpdfstring{itsWaitState}{itsWaitState}}
+{\footnotesize\ttfamily int jevois\+::\+Chat\+Box\+::its\+Wait\+State = 10\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Definition at line 79 of file Chat\+Box.\+H.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jevois/\+G\+P\+U/\mbox{\hyperlink{ChatBox_8H}{Chat\+Box.\+H}}\item 
+src/jevois/\+G\+P\+U/\mbox{\hyperlink{ChatBox_8C}{Chat\+Box.\+C}}\end{DoxyCompactItemize}

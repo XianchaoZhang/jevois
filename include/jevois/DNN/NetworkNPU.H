@@ -27,7 +27,7 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Wrapper around a DNN neural network running on Amlogic A311D NPU accelerator (Verisilicon)
+    //! 在 Amlogic A311D NPU 加速器 (Verisilicon) 上运行的 DNN 神经网络的包装器
     /*! \ingroup dnn */
     class NetworkNPU : public jevois::dnn::Network,
                        public jevois::Parameter<network::intensors, network::outtensors, network::dataroot,
@@ -41,7 +41,7 @@ namespace jevois
         //! Destructor
         virtual ~NetworkNPU();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻参数，用户在运行时不应更改
         void freeze(bool doit) override;
 
         //! Get shapes of all input tensors

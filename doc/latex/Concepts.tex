@@ -1,0 +1,168 @@
+\hypertarget{Concepts_autotoc_md17}{}\doxysubsection{基本操作理论}\label{Concepts_autotoc_md17}
+
+
+由于 Je\+Vois 智能相机实现了完整的 Linux 计算机（尽管 Je\+Vois-\/\+A33 上没有显示屏），因此一切皆有可能，标准操作模式如下：\hypertarget{Concepts_autotoc_md18}{}\doxysubsubsection{Je\+Vois-\/\+A33：通过 U\+S\+B 进行流视频输出操作}\label{Concepts_autotoc_md18}
+
+\begin{DoxyItemize}
+\item 当 Je\+Vois-\/\+A33 智能相机通过 U\+SB 连接到主机时，它会向该计算机宣布自己是两个虚拟 U\+SB 设备：一个网络摄像头和一个串行 U\+SB 接口。
+\item 主机上的用户启动视频捕获软件并选择视频格式、分辨率和帧速率。
+\item 智能相机上运行的 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 软件通过首先查找 {\bfseries{video mapping}} 来处理此用户请求，该映射在用户选择的视频格式（这是 Je\+Vois 智能相机的 {\bfseries{output}} 视频格式）、相机传感器视频格式（这是 Je\+Vois 智能相机的 {\bfseries{camera}} 格式）和要使用的机器视觉算法（这是 Je\+Vois {\bfseries{module）之间建立对应关系。{\bfseries{camera}} 和}} {\bfseries{output}} 格式不必相同；例如，许多模块使用多个 panels 创建增强的视频输出，这些 panels 可以显示处理结果、向用户发送的消息等，以及从相机传感器抓取的视频帧。
+\item 然后，\+Engine 将板载摄像头传感器配置为所需的摄像头格式、分辨率和帧速率，并加载所需的机器视觉模块。视频流和机器视觉处理立即开始。
+\item 在每个视频帧上，
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 从相机传感器捕获一帧（图像）。
+\item 该帧连同具有选定输出分辨率和格式的空图像缓冲区一起发送到机器视觉处理模块。
+\item 机器视觉模块被调用，它应该分析相机图像并用其处理结果填充输出图像缓冲区。
+\item 然后，\+Engine 通过 U\+SB 将生成的输出图像发送到主机。
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 运行通过其 4 针串行端口（通常连接到 Arduino 或类似设备）或通过其串行 U\+SB 端口接收到的任何命令。这些命令可以是调整相机传感器参数（曝光、对比度等）或机器视觉处理参数（由每个机器视觉模块实现的各种阈值或模式）的请求。
+\item 然后，\+Engine 准备循环到下一个视频帧。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+流式视频输出操作至少在两种基本场景中很有用：
+
+
+\begin{DoxyItemize}
+\item 出于演示和调试/开发目的，\+Je\+Vois 智能相机会实时播放视频，并附加注释以显示其处理结果。人类用户可以查看这些注释，以检查算法的运行情况。但这不是完整的机器视觉管道（因为后端是人类视觉系统）。
+\item 出于预处理目的，\+Je\+Vois 智能相机会捕获并预处理图像，然后主机会捕获这些预处理过的帧并进一步处理它们。例如，在 Je\+Vois 相机上运行视觉注意算法，提取场景中最有趣的 3 个位置周围的 3 个感兴趣区域，并将这 3 个区域传输到主机。然后，主机可以在这 3 个区域中进行进一步处理，例如目标识别。主机可能不会向人类用户显示任何内容，而可能只是控制自主机器人。
+\end{DoxyItemize}\hypertarget{Concepts_autotoc_md19}{}\doxysubsubsection{Je\+Vois-\/\+Pro：带视频显示的操作}\label{Concepts_autotoc_md19}
+
+\begin{DoxyItemize}
+\item 当 Je\+Vois-\/\+Pro 连接到显示器时，它会显示摄像机看到的内容，以及它在视频流中计算和理解的内容的图形叠加（例如，检测到的物体周围的框）。
+\item 在每个视频帧上，
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 从相机传感器捕获一帧（图像）。
+\item 该帧连同图形界面引擎 (\mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}}) 的句柄一起发送到机器视觉处理模块，以帮助绘制叠加层。
+\item 机器视觉模块被调用，它应该分析相机图像并绘制任何结果。
+\item 然后，\+Engine 使用 Je\+Vois-\/\+Pro G\+PU 上的 Open\+GL 将生成的图形输出发送到 H\+D\+MI 显示器。
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 运行通过其 4 针串行端口（通常连接到 Arduino 或类似设备）或通过其串行 U\+SB 端口或集成图形用户界面 (G\+UI) 收到的任何命令。这些命令可以是调整相机传感器参数（曝光、对比度等）或机器视觉处理参数（由每个机器视觉模块实现的各种阈值或模式）的请求。
+\item 然后， \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 准备循环到下一个视频帧。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+请注意，\+Je\+Vois-\/\+Pro 还支持 \char`\"{}legacy\char`\"{} 机器视觉模块，这些模块输出的图像包含已在该图像中绘制的结果，就像上一节中的 Je\+Vois-\/\+A33 一样。唯一的区别是，此图像不会像 Je\+Vois-\/\+A33 那样通过 U\+SB 传输到主机。相反，它会显示在 H\+D\+MI 显示屏上。\hypertarget{Concepts_autotoc_md20}{}\doxysubsubsection{Je\+Vois-\/\+A33 和 Je\+Vois-\/\+Pro：无视频输出操作}\label{Concepts_autotoc_md20}
+
+\begin{DoxyItemize}
+\item Je\+Vois-\/\+A33 智能相机由 U\+SB 电源供电，例如 U\+SB 充电器或 U\+SB 电池组。\+Je\+Vois-\/\+Pro 由电源适配器或电池供电。
+\item 智能相机内部 micro\+SD 卡上的配置文件可能会指示其立即启动特定的机器视觉模块，或者连接到智能相机的 4 针串行端口的控制器（例如 Arduino）可能会指示 Je\+Vois 智能相机加载给定的机器视觉模块。
+\item 然后，引擎将为所需的相机格式、分辨率和帧速率配置板载摄像头传感器，并加载所需的机器视觉模块。
+\item 在每个视频帧上，
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 从摄像头传感器捕获一帧（图像）。
+\item 该帧被发送到机器视觉处理模块。
+\item 机器视觉模块被调用，它应该分析摄像头图像。然后，它通常还会向 4 针串行端口发送有关其处理结果的短文本消息。
+\item \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 运行通过其 4 针串行端口收到的任何命令。
+\item 然后， \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 准备循环到下一个摄像头帧。
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+无视频输出的操作通常是自主系统的首选模式。所有处理都在 Je\+Vois 相机上进行，根本不需要主机。小型控制器（例如 Arduino）通过 4 针串行链路接收视觉结果并控制各种电机或执行器。\hypertarget{Concepts_autotoc_md21}{}\doxysubsubsection{视频格式：摄像机和输出，视频映射}\label{Concepts_autotoc_md21}
+在 Je\+Vois 上运行机器视觉算法时通常会考虑两种视频格式：
+
+
+\begin{DoxyItemize}
+\item {\bfseries{相机格式}}：使用相机传感器捕获视频帧时使用的像素类型、分辨率和帧速率。相机传感器捕获的相机格式的视频帧被发送到 Je\+Vois 机器视觉 {\bfseries{module}} 进行处理。
+\item {\bfseries{输出格式}}：用于通过 U\+SB 链接将视频帧发送到 Je\+Vois-\/\+A33 的主机，或以 \char`\"{}legacy\char`\"{} 模式显示在 Je\+Vois-\/\+Pro 上的像素类型、分辨率和帧速率（见上文）。在 Je\+Vois-\/\+A33 上，此格式由主机上运行的视频捕获软件选择。在 Je\+Vois-\/\+Pro 上，它由用户使用图形用户界面选择。输出格式的视频帧由当前 Je\+Vois 机器视觉 {\bfseries{module}} 创建，并通过 U\+SB 链接（\+Je\+Vois-\/\+A33）或 H\+D\+M\+I（\+Je\+Vois-\/\+Pro）传输到主机。请注意，\+Je\+Vois-\/\+Pro 还支持一种称为 {\bfseries{J\+V\+UI}} 的特殊输出视频格式，该格式用于在相机的视频帧上绘制 Open\+GL 叠加层（而不是生成的完全光栅化的输出视频帧）。
+\end{DoxyItemize}
+
+{\bfseries{camera}} 和 {\bfseries{output}} 格式不必匹配，而且它们通常不匹配，因为机器视觉通常涉及将一个图像转换成另一个不同的图像，包括可能不同的像素类型、分辨率和帧速率。
+
+Je\+Vois 相机能够运行多种机器视觉算法。可运行哪些算法以及相机和输出视频格式的选择由名为 {\bfseries{videomappings.\+cfg}} 的配置文件定义，该文件在 {\bfseries{camera}} 分辨率、帧速率和像素格式、{\bfseries{output}} 分辨率和像素格式以及相应的机器视觉处理 {\bfseries{module}} 之间建立了映射。
+
+欲了解更多信息，请参见 \mbox{\hyperlink{PixelFormats}{高级主题：图像像素格式}} 和 Video\+Mapping。\hypertarget{Concepts_autotoc_md22}{}\doxysubsection{主机和平台模式}\label{Concepts_autotoc_md22}
+Je\+Vois 软件通常在 Je\+Vois 智能相机处理器上执行。在本文档中，这称为{\bfseries{平台模式}}。由于 Je\+Vois 智能相机内的 C\+PU 是 A\+RM 架构，而当今大多数台式计算机使用 Intel 处理器架构，因此打算在 Je\+Vois 平台上运行的代码通常是针对 A\+RM 的交叉编译。也就是说，使用一种特殊的编译器，该编译器在 Intel 台式计算机上运行，​​但生成打算在 A\+RM 计算机上运行的可执行代码。然后将编译后的代码复制到插入 Je\+Vois 智能相机的 micro\+SD 卡上。
+
+Je\+Vois 软件也可以在{\bfseries{主机模式}}下编译和运行，在这种情况下，桌面编译器用于编译和运行 Je\+Vois 机器视觉软件。这在开发新的机器视觉模块时非常有用：人们只需在桌面上编辑、编译和运行它们，而无需将编译后的文件传输到智能相机进行执行。一旦新的机器视觉模块在主机模式下运行良好，就可以在平台模式下重新编译它，并且可以复制生成的 A\+RM 可执行文件并在智能相机上运行。
+
+由于核心 Je\+Vois 软件是用可移植的 C++ 语言编写的，因此{\bfseries{平台}}和 {\bfseries{host}} 模式都是可行的。然而，由于主机和平台之间存在基本的硬件差异，因此存在一些关键差异。
+
+Je\+Vois-\/\+A33 的区别如下：
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Feature }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Platform }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Host  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Feature }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Platform }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Host  }\\\cline{1-3}
+\endhead
+C\+PU architecture &A\+R\+Mv7 &Likely Intel  \\\cline{1-3}
+G\+PU + Open\+G\+L-\/\+ES 2.\+0 &Yes, Mali-\/400\+M\+P2 &Likely not available  \\\cline{1-3}
+N\+E\+ON multimedia acceleration &Yes &No unless host has A\+RM C\+PU  \\\cline{1-3}
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} sensor controls &All supported by sensor &As supported by your desktop camera driver  \\\cline{1-3}
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} low-\/level register tweaking &Yes &No  \\\cline{1-3}
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} frame rate 0.\+1fps increments &Yes &Most likely no  \\\cline{1-3}
+\mbox{\hyperlink{classjevois_1_1Camera}{Camera}} turbo mode &Yes &No  \\\cline{1-3}
+Display output &No &Yes  \\\cline{1-3}
+U\+SB streaming video output &Yes &No  \\\cline{1-3}
+Serial-\/over-\/\+U\+SB &Yes &No  \\\cline{1-3}
+\end{longtabu}
+
+
+Je\+Vois-\/\+Pro 上的差异较少，因为它是一台完整的计算机，配有键盘、鼠标和显示器。主要的区别在于 Je\+Vois-\/\+Pro 使用 64 位 A\+RM 处理器 (aarch64) 并具有额外的硬件功能（神经加速器、下面解释的双流视频捕获等）。
+
+请注意，通常会：
+
+
+\begin{DoxyItemize}
+\item 在主机上以 {\bfseries{host}} 模式编译并运行 Je\+Vois 软件：在这种情况下，通常会使用 {\itshape dumb} 相机（任何常规网络摄像头），所有机器视觉处理都在主机 C\+PU 上运行，并且视频输出用于显示；或
+\item 在 {\bfseries{platform}} 模式下交叉编译 Je\+Vois 软件并在 Je\+Vois 智能相机内运行它：在这种情况下，使用 Je\+Vois 智能相机中的内置相机传感器，所有机器视觉算法都在 Je\+Vois 智能相机内的小型处理器上运行，视频输出通过 U\+SB 链路传输到主机 (Je\+Vois-\/\+A33) 或 H\+D\+MI (Je\+Vois-\/\+Pro)。当使用 Je\+Vois-\/\+A33 通过 U\+SB 传输时，主机计算机会运行 {\itshape dumb} 视频捕获软件并显示结果，但它不执行任何机器视觉处理。
+\end{DoxyItemize}\hypertarget{Concepts_autotoc_md23}{}\doxysubsection{Je\+Vois-\/\+Pro 独特的优化}\label{Concepts_autotoc_md23}
+Je\+Vois-\/\+Pro 已通过多种方式进行了优化，以提供流畅、高分辨率的输出。
+
+众所周知，嵌入式处理器的速度不如价格昂贵且耗电的台式机处理器或专业 G\+P\+U。芯片制造商针对特定任务优化嵌入式处理器，这些任务可以促进大批量销售，例如手机和智能电视盒。在 Je\+Vois-\/\+Pro 中，我们利用这些优化通过定制的 Je\+Vois 软件创建高吞吐量实时机器视觉功能。定制的 Je\+Vois 软件涵盖从低级 Linux 内核增强功能和硬件设备驱动程序到高级机器视觉支持代码。
+
+例如，在嵌入式处理器上通过任何非平凡的机器视觉算法处理 4K（8 MP 或 8 百万像素）甚至 1080p（2 M\+P）视频都是不可能的。大多数深度神经网络运行的分辨率要低得多，通常在 128x128（0.016 M\+P）和 513x513（0.263 M\+P）之间。
+
+   {\bfseries{上图：传统方法：\+C\+PU 将大量像素数据从摄像头复制到 G\+PU 进行显示 -\/ 帧速率慢，\+C\+PU 使用率高。}}
+
+因此，在 Je\+Vois-\/\+Pro 中，我们实现了硬件加速的双流视频捕获和显示，为用户提供了两全其美的解决方案：清晰的高分辨率显示以及通过深度神经网络或其他机器视觉算法的快速处理。我们使用了先进的技术，包括从摄像头传感器到 G\+PU 的零拷贝直接内存访问 (D\+MA) 来实现这一点。
+
+   {\bfseries{上图：\+Je\+Vois-\/\+Pro 零拷贝方法：\+C\+PU 仅将地址指针（\+D\+M\+A\+B\+UF 句柄）从相机复制到 G\+PU -\/ 帧速率更快，\+C\+PU 使用率可忽略不计。}}
+
+Je\+Vois-\/\+Pro 结合了摄像机图像信号处理器 (I\+SP)、图形处理单元 (G\+PU) 和神经处理单元 (N\+PU) 的硬件加速，即使在复杂的机器视觉管道上也能提供实时性能，从而释放 C\+PU 资源用于机器视觉处理和高级计算。
+
+   {\bfseries{上图：\+Je\+Vois-\/\+Pro 双流：使用 D\+M\+A\+B\+UF 对全分辨率图像进行零拷贝显示，使用 C\+PU 或神经加速器处理低分辨率图像，使用 Open\+GL 绘制覆盖图（线条、框、文本等）显示处理结果，并绘制 G\+U\+I。}}
+
+\href{https://www.youtube.com/watch?v=aJp-mIBytno}{\texttt{ Je\+Vois-\/\+Pro 介绍视频}} 中显示的所有演示都在 Je\+Vois-\/\+Pro 上实时运行，包括显示 4 个深度网络并行运行的演示。所有检测到的框的平铺显示都在 Je\+Vois-\/\+Pro G\+PU 上呈现，显示在 Je\+Vois-\/\+Pro C\+P\+U、\+N\+P\+U（集成在 Je\+Vois 处理器中的 5-\/T\+O\+PS 神经处理单元）、\+T\+P\+U（\+Je\+Vois-\/\+Pro 内部 P\+C\+Ie M.\+2 附加板上的 4-\/T\+O\+PS Coral Edge 张量处理单元）和外部 V\+P\+U（1-\/\+T\+O\+PS Myriad-\/X 矢量处理单元，单独作为 U\+SB 加密狗设备提供）上运行的深度网络的结果。\hypertarget{Concepts_autotoc_md24}{}\doxysubsection{jevois-\/daemon 程序和有关 Je\+Vois 引擎的更多详细信息}\label{Concepts_autotoc_md24}
+{\bfseries{jevois-\/daemon}} 是 Je\+Vois 智能相机内部运行的主要可执行程序。它负责在运行时加载机器视觉模块、配置相机传感器、\+U\+SB 流式传输 (Je\+Vois-\/\+A33) 或 Open\+GL 显示 (Je\+Vois-\/\+Pro) 以及串行通信接口。它还负责从相机传感器抓取视频帧、将这些视频帧传递到当前加载的机器视觉 {\bfseries{module，以及将模块的输出视频帧（如果有）通过}} U\+S\+B（\+Je\+Vois-\/\+A33）或 H\+D\+M\+I（\+Je\+Vois-\/\+Pro）流式传输到主机。
+
+{\bfseries{jevois-\/daemon}} 实现了一个引擎，可以协调从摄像头传感器到机器视觉处理再到 U\+SB 上的视频流的数据流。
+
+该 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 包含以下基本元素：
+
+
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classjevois_1_1VideoInput}{Video\+Input}}, 实例化为用于实时视频流的 \mbox{\hyperlink{classjevois_1_1Camera}{Camera}} 或用于处理预先录制的视频文件或图像序列的 \mbox{\hyperlink{classjevois_1_1MovieInput}{Movie\+Input}} （在算法开发期间很有用，可以对可重现的输入进行测试和优化）；
+\item \mbox{\hyperlink{classjevois_1_1VideoOutput}{Video\+Output}}, 在 Je\+Vois-\/\+A33 硬件平台上运行时可以实例化为 U\+SB \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 驱动程序，在 Je\+Vois-\/\+Pro 上实例化为 \mbox{\hyperlink{classjevois_1_1VideoDisplayGUI}{Video\+Display\+G\+UI}}, 在具有图形显示器的主机上运行时实例化为 Video\+Display, 或作为 \mbox{\hyperlink{classjevois_1_1MovieOutput}{Movie\+Output}} 以将输出视频帧保存到磁盘，或作为 \mbox{\hyperlink{classjevois_1_1VideoOutputNone}{Video\+Output\+None}} （如果需要）对视觉算法进行基准测试，同时减少与传输输出帧相关的任何工作。
+\item \mbox{\hyperlink{classjevois_1_1DynamicLoader}{Dynamic\+Loader}} 根据用户的选择在运行时加载所选的视觉处理模块；
+\item 任意数量的 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 对象，实例化为硬件串行端口（用于平台硬件上的 4 针 J\+ST 1.\+0mm 连接器）、串行 U\+SB 串行端口（在 Je\+Vois 硬件通过 U\+SB 连接到的主机上可见）或 Stdio\+Interface（用于接受命令并直接在启动 Je\+Vois \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的终端中打印结果，在通用计算机上运行时特别有用，而不是平台硬件）。在平台硬件上运行时，通常会创建两个 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 对象（一个硬件串行，一个串行 U\+SB 串行），而在通用计算机上运行时，通常只创建一个 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} （类型为 \mbox{\hyperlink{classjevois_1_1StdioInterface}{Stdio\+Interface}}, 用于直接在启动 jevois-\/daemon 的终端中接受命令）；
+\item 从 videomappings.\+cfg 文件导入的 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 定义列表。这些定义指定了哪些视频输出模式可用及其相应的相机设置和要使用的模块，以及哪些模式没有任何流式视频输出（例如，当仅将硬件平台连接到 Arduino 时）。
+\end{DoxyItemize}
+
+\mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 的主循环一直运行直到用户决定退出，基本上经过以下步骤：
+
+
+\begin{DoxyItemize}
+\item 创建一个 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 对象，它是下一个可用相机帧的异常安全包装器。该帧可能尚未被捕获。 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 可以理解为一种机制，用于在将来该帧可用时（即已被相机捕获）访问该帧。这与 C++11 的 std\+::future 框架非常相似。
+\item 当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定我们将通过 U\+SB (Je\+Vois-\/\+A33) 流式传输视频帧时，还会创建一个 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 对象，它是下一个可用 \mbox{\hyperlink{classjevois_1_1Gadget}{Gadget}} 帧的异常安全包装器。这也只是一种访问 U\+SB 驱动程序提供的下一个空白视频缓冲区的机制，我们应该在通过 U\+SB 将其发送到主机之前用有趣的像素数据填充它。在 Je\+Vois-\/\+Pro 上，可以使用 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 直接在实时摄像头视图上绘制覆盖层。
+\item 调用当前加载的模块的 process() 函数，当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定某些视频输出要通过 Je\+Vois-\/\+A33 上的 U\+S\+B（或 Je\+Vois-\/\+Pro 上的旧模​​式）发送时，调用 process(\+Input\+Frame, Output\+Frame)，或者在实时摄像头视图上绘制覆盖时，调用 Je\+Vois-\/\+Pro 上的 process(\+Input\+Frame, G\+U\+Ihelper)，或者当当前 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 不指定视频输出时，调用 process(\+Input\+Frame)。模块的 process() 函数抛出的任何异常都将被捕获、报告和忽略。process() 函数通常会通过 \mbox{\hyperlink{classjevois_1_1InputFrame}{Input\+Frame}} 包装器请求下一个可用的摄像头图像（此请求可能会阻塞，直到摄像头传感器硬件捕获该帧），然后处理该图像。在视频输出到 U\+SB 的 Je\+Vois-\/\+A33 上，它会通过 \mbox{\hyperlink{classjevois_1_1OutputFrame}{Output\+Frame}} 包装器请求下一个可用的输出图像（当 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 指定有 U\+SB 视频输出时），并将一些结果绘制到该输出图像中，然后通过 U\+SB 将其发送到主机，供某些网络摄像头程序显示或供该计算机上运行的某些自定义视觉软件进一步处理。在 Je\+Vois-\/\+Pro 上，它可能会使用 \mbox{\hyperlink{classjevois_1_1GUIhelper}{G\+U\+Ihelper}} 在实时摄像头视图上绘制框、文本、多边形等。此外，当前加载的模块可能会通过 \mbox{\hyperlink{classjevois_1_1UserInterface}{User\+Interface}} 端口发出消息（例如，指示找到对象的位置，以让 Arduino 知道它）。
+\item 读取用户通过用户界面端口发出的任何新命令并执行适当的命令。
+\item 当用户选择不同的视频模式时，处理用户更改 \mbox{\hyperlink{structjevois_1_1VideoMapping}{Video\+Mapping}} 的请求，无论是在连接到 Je\+Vois-\/\+A33 硬件的主机上运行的网络摄像头软件中，还是在 Je\+Vois-\/\+Pro 的 G\+UI 中。此类请求可能会触发当前模块的卸载和新模块的加载，以及更改相机像素格式、图像大小等。这些更改保证在模块的 process() 函数未运行时发生，即模块程序员不必担心在执行其 process() 函数期间图像尺寸或像素格式可能发生的变化。
+\item 将通过任何用户界面收到的任何用户请求传递给实际的相机硬件驱动程序，以调整相机参数（例如，当用户在其网络摄像头程序中更改对比度时，该请求将通过 U\+SB 发送到引擎，然后引擎将其转发到相机硬件驱动程序）。
+\end{DoxyItemize}
+
+欲了解更多信息，请参阅\mbox{\hyperlink{JeVoisDaemon}{jevois-\/daemon 可执行文件}} 和 \mbox{\hyperlink{classjevois_1_1Engine}{Engine}} 。\hypertarget{Concepts_autotoc_md25}{}\doxysubsection{关键概念和术语总结}\label{Concepts_autotoc_md25}
+
+\begin{DoxyItemize}
+\item {\bfseries{相机格式}}：使用相机传感器捕获视频帧时使用的像素类型、分辨率和帧速率。相机传感器捕获的相机格式的视频帧被发送到 Je\+Vois 机器视觉 {\bfseries{module}} 进行处理。
+\item {\bfseries{输出 (U\+SB) 格式}}：用于通过 U\+SB 链接将视频帧发送到主机 (Je\+Vois-\/\+A33) 或 H\+D\+MI 显示器 (Je\+Vois-\/\+Pro 传统模式) 的像素类型、分辨率和帧速率。此格式由在主机 (Je\+Vois-\/\+A33) 上运行的视频捕获软件或通过 Je\+Vois-\/\+Pro G\+UI 选择。输出格式的视频帧由当前 Je\+Vois 机器视觉 {\bfseries{module}} 创建，并通过 U\+SB 链接 (Je\+Vois-\/\+A33) 传输到主机或通过 H\+D\+MI (Je\+Vois-\/\+Pro) 显示。
+\item {\bfseries{Je\+Vois-\/\+Pro overlays}}：\+Je\+Vois-\/\+Pro 不仅输出完全光栅化的图像以通过 U\+SB 传输或通过 H\+D\+MI 显示，还允许在摄像头传感器的实时视频上绘制几何形状、文本等。这在计算上非常高效（如上所述），因为实时视频直接从传感器传输到显示器，几乎不占用任何 C\+PU 成本。同样，覆盖层由 Je\+Vois-\/\+Pro G\+PU 上的 Open\+GL 渲染，也几乎不占用任何 C\+P\+U。
+\item {\bfseries{视频映射}}：在用户选择的 {\bfseries{output}} 视频格式、{\bfseries{camera}} 传感器视频格式和机器视觉 {\bfseries{module}} 之间建立对应关系。{\bfseries{camera}} 和 {\bfseries{output}} 格式不必相同；例如，许多模块会创建增强的视频输出，其中包含多个面板，这些面板可能显示处理结果、向用户发送的消息等，以及从相机传感器抓取的视频帧。
+\item {\bfseries{jevois-\/daemon}} 是 Je\+Vois 智能相机内部运行的主要可执行程序。它负责在运行时加载机器视觉模块、配置相机传感器、\+U\+SB 流和串行通信接口。它还负责从相机传感器抓取视频帧，将这些视频帧传递给当前加载的机器视觉 {\bfseries{module，并通过}} U\+SB 将模块的输出视频帧（如果有）流式传输到主机。
+\item {\bfseries{host}} 模式：\+Je\+Vois 软件在台式计算机上本地编译，{\bfseries{jevois-\/daemon}} 在该主机上运行。视频输入来自任何兼容相机，视频输出（如果有）则输出到计算机的显示器。串行通信通过启动 {\bfseries{jevois-\/daemon}} 的终端进行。在此模式下无法将视频流式传输到 U\+S\+B。所有机器视觉处理都在主机上运行。
+\item {\bfseries{platform}} 模式：\+Je\+Vois 软件在台式计算机上针对 A\+RM 目标处理器进行交叉编译，然后 {\bfseries{jevois-\/daemon}} 被复制到插入 Je\+Vois 智能相机的 micro\+SD 卡上。为智能相机供电后，{\bfseries{jevois-\/daemon}} 会自动在 Je\+Vois 智能相机内的处理器上运行。视频输入来自 Je\+Vois 智能相机内的相机传感器，视频输出（如果有）通过 U\+SB 传输到运行某些视频捕获软件的主机。串行通信是通过 Je\+Vois 智能相机的 4 针串行连接器和/或使用串行 U\+SB 链路连接到主机。\+Je\+Vois 智能相机上没有显示器。所有机器视觉处理都在 Je\+Vois 智能相机内的处理器上运行。
+\end{DoxyItemize}\hypertarget{Concepts_autotoc_md26}{}\doxysubsection{更多详细信息}\label{Concepts_autotoc_md26}
+参见 \mbox{\hyperlink{Navigation}{如何浏览本文档}} 

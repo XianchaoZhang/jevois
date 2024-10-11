@@ -28,9 +28,8 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Wrapper around an DNN neural network running on the Hailo8 neural accelerator
-    /*! Note that this network type does not support setting intensors or outtensors externally, these are fixed in the
-        HEF file. \ingroup dnn */
+    //! 在 Hailo8 神经加速器上运行的 DNN 神经网络的包装器 
+    /*! 请注意，此网络类型不支持在外部设置张力器或输出张力器，这些在 HEF 文件中已修复。 \ingroup dnn */
     class NetworkHailo : public jevois::dnn::Network,
                          public jevois::Parameter<network::dataroot, network::model, network::dequant, network::turbo>
     {
@@ -41,7 +40,7 @@ namespace jevois
         //! Destructor
         virtual ~NetworkHailo();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻参数，用户在运行时不应更改
         void freeze(bool doit) override;
 
         //! Get shapes of all input tensors

@@ -27,22 +27,18 @@
 /*! \defgroup parameter Parameter-related classes and functions
     \ingroup component
 
-    The concept of parameter in the JeVois framework embodies wrappers around a single value of any type, with
-    associated documentation (description), default values, possible specification of valid values, accessor functions
-    to obtain or change the value, and optional callback functions that are triggered when the value is
-    changed. Parameters are intended to be used in objects that inherit from Component. The goal of parameters is to
-    expose parameters of a given vision algorithm in such a way that any piece of code that is using that algorithm will
-    automatically inherit and expose these parameters.
+    JeVois 框架中参数的概念体现为任何类型的单个值的包装器，以及相关文档（描述）、默认值、有效值的可能规范、获取或更改值的访问器函数
+    以及触发的可选回调函数当值改变时。参数用于从 Component 继承的对象中。参数的目标是公开给定视觉算法的参数，以便使用该算法的任何
+    代码段都会自动继承并公开这些参数。
 
-    How to explore this documentation module:
+    如何探索此文档模块：
     
-    - Start with a bit of general philosophy about components and parameters: \ref Component
-    - Then understand how one may specify valid values for parameters: \ref validvalues
-    - Then have a look at how one may define the name, type, description, default value, category, and optionally
-      valid values for a parameter: \ref ParameterDef<T>
-    - Then you are ready for [Parameter](classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4.html)
-    
-    The other classes in this documentation module are mainly for support of the above ones.
+    - 从一些关于组件和参数的一般原理开始： \ref Component
+    - 然后了解如何为参数指定有效值： \ref validvalues
+    - 然后看看如何定义参数的名称、类型、描述、默认值、类别和可选的有效值：\ref ParameterDef<T>
+    - 然后你就可以准备 [Parameter](classjevois_1_1Parameter_3_01Param_00_01Tail_01_8_8_8_01_4.html) 了
+
+    本文档模块中的其他类主要是为了支持上述类。
 
     Convenience macro to define a Parameter type
     --------------------------------------------
@@ -51,9 +47,8 @@
     JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...)
     \endcode
     
-    ParamName is the name chosen for the parameter. A new class type will be created with that name, so it must be
-    syntactically correct as a class name. ParamType is the type of the parameter value. The remaining arguments are
-    passed to the constructor of jevois::ParameterDef<T> with T=ParamType.
+    ParamName 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 ParamType 是参数值的类型。
+    其余参数传递给 jevois::ParameterDef<T> 的构造函数其中 T=ParamType。
     
     Convenience macro to define a Parameter type, with callback
     -----------------------------------------------------------
@@ -62,29 +57,26 @@
     JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...)
     \endcode
     
-    ParamName is the name chosen for the parameter. A new class type will be created with that name, so it must be
-    syntactically correct as a class name. ParamType is the type of the parameter value. The remaining arguments are
-    passed to the constructor of jevois::ParameterDef<T> with T=ParamType.
+    ParamName 是为参数选择的名称。将使用该名称创建新的类类型，因此它作为类名称在语法上必须正确。 ParamType 是参数值的类型。
+    其余参数传递给 jevois::ParameterDef<T> 的构造函数其中 T=ParamType。
     
-    In this version with callback, a pure virtual method is included in the new class that is defined, with the
-    following signature:
+    在带回调的版本中，定义的新类中包含纯虚方法，其签名如下：
     
     \code
     virtual void onParamChange(ParamName const & param, ParamType const & newval) = 0;
     \endcode
     
-    The host class (typically, a Component) that inherits from Parameter<ParamName> must implement an override of this
-    function. A compile-time error will be issued if that override has not been implemented. */
+    继承自 Parameter<ParamName> 的宿主类（通常是 Component）必须实现此函数的重写。如果未实现该覆盖，将发出编译时错误。 */
 
 namespace jevois
 {
   // ######################################################################
-  //! ParameterSummary provides a summary about a parameter
-  /*! This is used mainly for graphical interfaces. \ingroup parameter */
+  //! ParameterSummary 提供有关参数的摘要
+  /*! 主要用于图形界面。 \ingroup parameter */
   class ParameterSummary
   {
     public:
-      //! Descriptor. This is the name of the parameter, qualified by a chain of component names
+      //! Descriptor. 这是参数的名称，由一系列组件名称限定
       std::string descriptor;
 
       //! Plain name of the parameter
@@ -117,26 +109,25 @@ namespace jevois
 
   // ######################################################################
   //! Base class for Parameter
-  /*! This exposes the string interface to the Parameter while derived template classes will expose the
-      value-based interface. \ingroup parameter */
+  /*! 将字符串接口公开给 Parameter，而派生模板类将公开 value-based 接口。 \ingroup parameter */
   class ParameterBase
   {
     public:
       //! Constructor
       ParameterBase();
 
-      //! Destructor, will remove the parameter from its owner component
+      //! Destructor, 将从其所有者组件中删除参数
       virtual ~ParameterBase();
 
       //! Get the parameter name
       virtual std::string const & name() const = 0;
 
-      //! Get the parameter fully-qualified name, aka descriptor, including names of owning Component and all parents
+      //! 获取参数完全限定名称，也称为描述符，包括拥有 Component 和所有父组件的名称
       virtual std::string descriptor() const = 0;
 
-      //! Set the value from a string representation of it
-      /*! @throws std::range_error if the given string cannot be converted to a Parameter value, or the value is invalid
-          according to our valid values spec or rejected by the Parameter's callback (if any). */
+      //! 从其字符串表示形式设置值
+      /*! 如果给定的字符串不能转换为 Parameter 值，或者该值根据我们的有效值规范无效或被 Parameter 的回调拒绝（如果有），
+          则 @throws std::range_error。 */
       virtual void strset(std::string const & valstring) = 0;
 
       //! Get the value as a string
@@ -145,7 +136,7 @@ namespace jevois
       //! Get summary info about this parameter
       virtual ParameterSummary const summary() const = 0;
 
-      //! Freeze or un-freeze a parameter; frozen parameters cannot be set(), but get() is still allowed
+      //! 冻结或取消冻结一个参数；冻结的参数不能被 set()，但是仍然允许 get()
       void freeze(bool doit);
 
       //! Returns whether parameter is frozen
@@ -155,26 +146,25 @@ namespace jevois
       virtual void reset() = 0;
       
     protected:
-      mutable boost::shared_mutex itsMutex; //!< Mutex to protect the parameter value
-      volatile bool itsFrozen; //!< When true, parameter is frozen (read-only, does not show up in help message)
-      bool itsVirgin; //!< Param has not yet been explicitly set, need to call the callback (if any) at init time
+      mutable boost::shared_mutex itsMutex; //!< 用于保护参数值的互斥锁
+      volatile bool itsFrozen; //!< 为 true 时，参数被冻结（只读，不会显示在帮助消息中）
+      bool itsVirgin; //!< 参数尚未明确设置，需要在初始化时调用回调（如果有）
 
     private:
-      friend class ParameterRegistry; // allow the registry to call our callbacks with defaut val
+      friend class ParameterRegistry; // 允许注册表使用默认值调用我们的回调
 
-      // Call our callback with our current value, used at init() time
-      /* We cannot call the callback during parameter construction because the host Component object is not fully
-         constructed yet (since it derives from its parameters). Thus, for all parameters that have a callback, we will
-         call that callback once during init(), unless it is already called during command-line parsing. */
+      // 使用当前值调用我们的回调，在 init() 时使用
+      /* 我们不能在参数构造期间调用回调，因为宿主 Component 对象尚未完全构造（因为它是从其参数派生的）。因此，对于所有带回调的参数，
+         我们将在 init() 期间调用该回调一次，除非它在命令行解析期间已调用。 */
       virtual void callbackInitCall() = 0;
   };
 
-  // Closing and then re-opening the namespace somehow makes doxygen ignore all classes defined below...
+  // 关闭然后重新打开命名空间会以某种方式使 doxygen 忽略下面定义的所有类...
 #ifndef JEVOIS_DOXYGEN
   
 } // namespace jevois
 
-// Include ParameterDef now (it needs to know about ParameterBase):
+// 现在包含 ParameterDef（它需要了解 ParameterBase）：
 #include <jevois/Component/ParameterDef.H>
 
 namespace jevois
@@ -184,17 +174,15 @@ namespace jevois
 #endif // JEVOIS_DOXYGEN
   
   // ######################################################################
-  //! A changeable parameter for a Component, core class
-  /*! Parameters are used to expose user-configurable settings for a Component.  They can be specified from the command
-      line and will be set by the time Component::postInit() is called on the Component which owns the
-      Parameter. A Parameter may have a callback function which is invoked each time an attempt is made to change the
-      Parameter value. \ingroup parameter */
+  //! Component 的可变参数，核心类
+  /*! 用于公开 Component 的用户可配置设置的 Parameter。它们可以从命令行指定，并在拥有 Parameter 的 Component 
+      上调用 Component::postInit() 时设置。Parameter 可能有一个回调函数，每次尝试更改参数值时都会调用该函数。 \ingroup parameter */
   template <typename T>
   class ParameterCore : public ParameterBase
   {
     public:
       //! Constructor
-      /*! \param def A pointer to the definition for this parameter (given by a ParameterDef). */
+      /*! \param def 指向此参数定义的指针（由 ParameterDef 提供）。 */
       ParameterCore(ParameterDef<T> const & def);
 
       //! Destructor
@@ -209,9 +197,8 @@ namespace jevois
       //! Get the value of this Parameter
       T get() const;
 
-      //! Set the value of this Parameter
-      /*! Will throw jevois::exception::ParameterException if the new value is not accepted, in which case the old value
-          will remain in the Parameter. */
+      //! 设置此参数的值
+	  /*！如果不接受新值，将抛出 jevois::exception::ParameterException，在这种情况下旧值将保留在参数中。 */
       void set(T const & newVal);
 
       //! Set the value from a string representation of it
@@ -230,29 +217,23 @@ namespace jevois
       //! Access to our parameter def
       ParameterDef<T> const & def() const;
 
-      //! Change the ParameterDef of this parameter
-      /*! Use with caution, only people who know what they are doing should use this function. Its thread safety and
-          possible side effects are dubious. */
+      //! 更改此参数的 ParameterDef 
+	  /*! 请谨慎使用，只有知道自己在做什么的人才能使用此函数。它的线程安全性和可能的​​副作用值得怀疑。 */
       void changeParameterDef(ParameterDef<T> const & def);
 
       //! Set the parameter's callback
-      /*! The callback function is called each time one tries to change the value of the parameter. Try to avoid using
-          setCallback() so you won't confuse users of your class. In most cases, just use the convenience
-          JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK() macro.
+      /*! 每次尝试更改参数值时都会调用回调函数。尽量避免使用 setCallback()，以免让类的用户感到困惑。在大多数情况下，
+          只需使用便捷的 JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK() 宏即可。
 
-          The callback should examine the candidate value newval and (1) if it does not like it, throw an
-          std::range_error with a descriptive message of why the value is rejected, (2) otherwise, it is assumed that
-          the value is accepted and the callback can then allocate resources or do other work with that value (the
-          actual modification of the Parameter object is handled upstream and the callback does not need to worry about
-          it: if it returns without throwing, the proposed value will become the new value of the Parameter). The
-          Parameter is locked-up for writing as long as the callback is running, to avoid destruction of the parameter
-          and/or concurrent parameter value changes by several different threads. Thus, callbacks should try to execute
-          quickly, and should not call set(), etc on the parameter as this will always deadlock (get() is allowed if
-          your callback needs to know the current value of the parameter). */
+          回调应该检查候选值 newval，并且 (1) 如果不喜欢，则抛出一个 std::range_error，并附上拒绝该值的原因描述性消息，(2) 
+          否则，假定该值被接受，然后回调可以分配资源或使用该值执行其他工作（参数对象的实际修改在上游处理，回调无需担心：如果
+          它返回而没有抛出，则提议的值将成为参数的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免破坏参数和/或多
+          个不同线程同时更改参数值。因此，回调应该尝试快速执行，并且不应该对参数调用 set() 等，因为这将始终导致死锁（如果您
+          的回调需要知道参数的当前值，则允许使用 get()）。 */
       void setCallback(std::function<void(T const &)> cb);
       
     protected:
-      //! Get the Component to which this Parameter is attached, or nullptr (individual parameters must override)
+      //! 获取此参数所附加到的组件，或者 nullptr（单个参数必须覆盖）
       virtual Component const * owner() const = 0;
 
     private:
@@ -264,27 +245,21 @@ namespace jevois
   };
 
   // ######################################################################
-  //! A set of Parameters attached to a component
-  /*! This variadic template class is just for the convenience of adding several parameters to a Component in one
-      statement.
+  //! 附加到组件的一组参数。
+  /*! 这个可变参数模板类只是为了方便在一个语句中向 Component 添加多个参数。
 
-      The way in which we have implemented Parameter in the JeVois framework may seem unorthodox at first, but is the
-      best way we have found so far in terms of minimizing burden when writing new components with lots of
-      parameters. In our earlier framework, the iLab Neuromorphic Vision Toolkit (iNVT) started in 1995, parameters were
-      included in components as member variables. The burden to programmers was so high that often they just did not
-      include parameters and hardwired values instead, just to avoid that burden. The burden comes from the
-      requirements:
+      我们在 JeVois 框架中实现 Parameter 的方式乍一看似乎不正统，但这是我们迄今为止发现的最佳方法，即在编写有大量参数的新组件时最小化
+      负担。在我们早期的框架中，iLab Neuromorphic Vision Toolkit （iNVT） 始于 1995 年，参数作为成员变量包含在组件中。程序员的负担
+      如此之重，以至于他们通常不包括参数以及硬连线值，只是为了避免这种负担。负担来自以下要求：
 
-      - we want to be able to support parameters of any type
-      - we want each parameter to have a name, description, default value, specification of valid values
-      - we want parameters to appear in related groups in the help message
-      - we want to support callbacks, i.e., functions that are called when one tries to change the parameter value
-      - we typically want the callback to be a member function of the Component that owns a given parameter,
-        since changing that parameter value will typically trigger some re-organization in that Component (otherwise
-        the callback might not be needed).
-
-      Possible implementation using class data members for parameters (similar to what we used in iNVT), here shown for
-      a sample int parameter to specify the size of a queue held in a class MyComp that derives from Component:
+      - 我们希望能够支持任何类型的参数
+      - 我们希望每个参数都有名称、描述、默认值、有效值的规范
+      - 我们希望参数显示在帮助消息中的相关组中
+      - 我们希望支持回调，即在尝试更改参数值时调用的函数
+      - 我们通常希望回调是 Component 的成员函数，因为更改参数值通常会触发该组件中的一些重组（否则可能不需要回调）。
+      
+      可以使用类数据成员作为参数实现（类似于我们在 iNVT 中使用的），此处显示了一个示例 int 参数，用于指定派生自 Component 的类 MyComp 
+      中持有的队列的大小：
 
       \code
       ParamDef<int> sizeparamdef("size", "Queue size", 5, Range<int>(1, 100), categ);
@@ -304,102 +279,84 @@ namespace jevois
       };
       \endcode
 
-      So we basically end up with 3 names that people have no idea what to do with and will just use confusing names for
-      (sizeparamdef, sizeparam, sizeParamCallback), and we have to 1) specify the definition of name, description, etc
-      somewhere using some arbitrary name (here sizeparamdef), then add the member variable for the param to the
-      component using some other name (here sizeparam), then construct the param which would typically require linking
-      it to its definition so we can get the default value and such, and finally hook the callback up (note how MyComp
-      is not fully constructed yet when we construct sizeparam hence referencing sizeParamCallback() at that time is
-      dubious at best). In reality, things are even worse since typically the paramdef, component class declaration, and
-      component implementation, should be in 3 different files.
+      我们基本上最终得到了 3 个人们不知道该如何处理的名称，并且只会使用令人困惑的名称（sizeparamdef、sizeparam、sizeParamCallback），
+      我们不得不 1） 使用一些任意名称（此处为 sizeparamdef）在某处指定名称、描述等的定义，然后使用其他名称（此处为 sizeparam）将 param 
+      的成员变量添加到组件中， 然后构造参数，这通常需要将其链接到其定义，以便我们可以获取默认值等，最后挂接回调（请注意，当我们构造 
+      sizeparam 时，MyComp 尚未完全构造，因此在那个时候引用 sizeParamCallback() 充其量是可疑的）。实际上，情况更糟，因为通常 paramdef、
+      组件类声明和组件实现应该在 3 个不同的文件中。
 
-      \note <em>``There are only two hard things in Computer Science: cache invalidation and naming things.'' <b>-- Phil
-      Karlton</b></em>
+      \note <em>``计算机科学中只有两件难的事情：缓存失效和命名事物。'' <b>-- Phil Karlton</b></em>
     
-      The approach we developed for the Neuromorphic Robotics Toolkit (NRT) and refined for JeVois works as follows:
+      我们为 Neuromorphic Robotics Toolkit （NRT） 开发并为 JeVois 改进的方法如下：
 
-      - each parameter is a unique new class type. We create that type once with one name, and it holds the parameter
-        value and the definition data. This is further facilitated by the
-        JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) variadic macro.
+      - 每个参数都是一个唯一的新类类型。使用一个名称创建该类型一次，它包含参数值和定义数据。JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) 
+        可变参数宏进一步促进了这一点。
       
-      - for parameters with callbacks, their class type includes a pure virtual onParamChange(param, value) function
-        that will need to be implemented by the host component. This is facilitated by the
-        JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) variadic macro. The first argument of
-        onParamChange() is the parameter class type, so that a host component with many parameters will have many
-        different onParamChange() functions, one per parameter that has a callback.
+      - 对于带回调的参数，它们的类类型包括一个纯虚拟的 onParamChange(param, value) 函数，该函数需要由宿主组件实现。这是通过 
+        JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) 可变参数宏实现的。onParamChange() 的第一个参数
+        是 class 类型，因此有许多参数的宿主组件将有许多不同的 onParamChange() 函数，每个参数都有一个回调。
+      
+      - 组件使用可变参数模板从其参数继承，使从多个参数继承变得简短而简单。
+      
+      - 每个参数都公开了简单的函数 get(), set(), 等（参见 ParameterCore 和 ParameterBase）。在有许多参数的组件中，访问参数是通过
+        消除想要访问哪个基类（即哪个参数）的歧义来实现的，这是通过调用  paramx::get() vs paramy::get() 等来实现的。
+        等来实现的
+      
+      - 无需声明参数成员变量（我们从它们继承）。
+      
+      - 在组件的构造中无需执行任何操作。
+      
+      - 无需手动将组件宿主类中的回调函数挂接到参数上。
+      
+      - 实现回调时，宿主类的所有成员都可用（因为宿主类继承自 Parameter）。这一点至关重要，因为通常会实现回调，以便宿主组件在参数值
+        更改时采取一些操作，例如，以某种方式重新配置自身。
+      
+      - 强大的编译时检查，确保程序员没有忘记为每个声明为具有回调的参数编写回调函数。
+      
+      - 该参数及其所有关联机制（定义、回调）仅使用一个名称。
+      
+      - 编写脚本来搜索源码树以获取有关组件的所有参数的信息很容易，因为这些参数都在 Parameter< ... > 继承语句中指定。
+      
+      需要注意的是：通常需要对参数使用短名称，例如 "size", "length", "dims", "threshold" 等，这些名称可能会在多个组件之间发生冲突，
+      因为在构建使用这些组件的更复杂的组件或系统时，将包含这些组件的 .H 文件。对于 Module 来说，这不是问题，模块是一个终端实体，通常
+      编写为单个 .C 文件，没有 .H 文件。对于打算广泛使用的组件，我们目前建议将所有参数放在一个命名空间中，该命名空间是组件类名称的小
+      写版本。
 
-      - components inherit from their parameters using variadic templates to make inheriting from multiple parameters
-        short and easy.
-
-      - each parameter exposes simple functions get(), set(), etc (see ParameterCore and ParameterBase). In a component
-        that has many parameters, accessing parameters is achieved by disambiguating on which base class (i.e., which
-        parameter) one wants to access the get(), set(), etc function, which is achieved by calling paramx::get() vs
-        paramy::get(), etc
-
-      - No need to declare parameter member variables (we inherit from them instead).
-      - No need to do anything at construction of the component.
-      - No need to manually hook the callback function in the component host class to the parameter.
-      - When implementing the callback, all members of the host class are available (since the host class inherits
-        from the Parameter). This is critical since usually callbacks are implemented so that the host component
-        will take some action when a parameter value is changed, e.g., reconfigure itself in some way.
-      - Strong compile-time checking that the programmer did not forget to write the callback function for each
-        parameter that was declared as having a callback.
-      - Only one name used throughout for that parameter and all its associated machinery (definition, callback).
-      - It is easy to write scripts that search the source tree for information about all the parameters of a component,
-        since those are always all specified in the Parameter< ... > inheritance statement.
-
-      Remaining caveat: it is often desirable to use short names for parameters, such as "size", "length", "dims",
-      "threshold", etc and those names may clash between several components as the .H files for these components are
-      included when building a more complex component or system that uses those. This is not an issue for Module, which
-      is a terminal entity and is typically written as a single .C file with no .H file. For components intended for
-      broad use, we currently recommend putting all the parameters in a namespace that is the lowercase version of the
-      component class name.
-
-      Below is the resulting implementation in Manager.H. We start with declaring the parameters, and we inherit from
-      them when declaring the Manager class. We declare the parameters in a new namespace \a manager to avoid name
-      clashes with other parameters of other components:
+      下面是 Manager.H 中的实现。我们从声明参数开始，在声明 Manager 类时继承。我们在新的命名空间 \a manager 中声明参数，以避免名称
+      与其他组件的参数发生冲突：
 
       \include snip/manager1.C
 
-      For the parameters that we declared as having a callback, we further include in our definition of the Manager
-      class overrides for the pure virtual onParamChange() functions that they added to our manager class. Note the
-      signatures of these functions: The first argument is a const reference to the parameter for which this callback
-      is, and its main role is to disambiguate between the different onParamChange() functions a component may have. The
-      second argument is the proposed new parameter value. The onParamChange() function should examine the candidate new
-      value and (1) if it does not like it, throw and std::range_error with a descriptive message of why the value is
-      rejected, (2) otherwise, it is assumed that the value is accepted and the callback can then allocate resources or
-      do other work with that value (the actual modification of the Parameter object is handled upstream and the
-      callback does not need to worry about it: if it returns without throwing, the proposed value will become the new
-      value of the Parameter). The Parameter is locked-up for writing as long as the callback is running, to avoid
-      destruction of the parameter and/or concurrent parameter value changes by several different threads. Thus,
-      callbacks should try to execute quickly, and should not call set(), etc on the parameter as this will always
-      deadlock (get() is allowed if your callback needs to know the current value of the parameter).
+      对于我们声明的带回调的参数，我们在定义中进一步包含了 Manager class overrides，用于它们添加到我们的管理器类中的纯虚拟 
+      onParamChange() 函数。请注意这些函数的签名：第一个参数是对此回调所针对的参数的常量引用，其主要作用是消除组件可能有的
+      不同 onParamChange() 函数之间的歧义。第二个参数是建议的新参数值。onParamChange() 函数应该检查候选的新值，（1）如果
+      它不喜欢它，则抛出 std::range_error 并带有一条描述性消息，说明为什么该值被拒绝，（2）否则，假设该值被接受，然后回调
+      可以分配资源或使用该值进行其他工作（Parameter 对象的实际修改在上游处理，回调无需担心：如果它返回而没有抛出，则建议的
+      值将成为 Parameter 的新值）。只要回调正在运行，参数就会被锁定以进行写入，以避免多个不同的线程破坏参数和/或并发参数值
+      更改。因此，回调应该尝试快速执行，而不应该在参数上调用 set() 等，因为这将始终死锁（如果您的回调需要知道参数的当前值，
+      则允许 get()）。
 
       \include snip/manager2.C
 
-      There is nothing to do in the constructor, destructor, etc of Manager. The only thing that remains to be done is
-      to implement the onParamChange() functions in Manager.C. Note how we do not give a name to the first argument
-      (which is a ref to the parameter itself; that first argument is necessary to disambiguate among the various
-      onParamChange() functions for different parameters, but usually we only care about the new value and do not need
-      the handle to the parameter). This is to avoid compiler warnings about our callback not using that first argument:
+      Manager 的构造函数、析构函数等无需执行任何操作。唯一需要做的是在 Manager.C 中实现 onParamChange() 函数。请注意，我们不给第
+      一个参数命名（它是对参数本身的引用；第一个参数对于消除不同参数的各种 onParamChange() 函数之间的歧义是必要的，但通常我们只关心
+      新值，不需要参数的句柄）。为了避免编译器警告我们的回调不使用第一个参数：
 
       \include snip/manager3.C
 
-      The host component can use a parameter's member functions by calling them with the parameter name as a prefix
-      (this prefix is basically selecting on which base class we want to run the given function). For example, in
-      Manager, we take some action if the \p help parameter has been set at the command line, and then we freeze it. All
-      member functions defined in ParameterBase and in ParameterCore<T> are available on every Parameter (get(), set(),
-      strget(), strset(), name(), descriptor(), summary(), freeze(), etc):
+      宿主组件可以通过使用参数名称作为前缀来调用参数的成员函数来使用它们（此前缀基本上是选择我们想要运行给定函数的基类）。例如，在 
+      Manager 中，如果已在命令行中设置了 \p help 参数，我们将执行一些操作，然后冻结它。在 ParameterBase 和 ParameterCore<T> 中
+      定义的所有成员函数 (get(), set(), strget(), strset(), name(), descriptor(), summary(), freeze(), etc)在每个参数上都可用：
       
       \include snip/manager4.C
 
-      For completeness, if you wonder what JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) and 
-      JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...)  exactly do, here they are in
-      ParameterHelpers.H and reproduced here:
+      为了完整起见，如果您想知道 JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) and 
+      JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) 到底是做什么的，它们位于 ParameterHelpers.H 中，
+      并在此处复制：
 
       \include snip/parametermacros.C
 
-      Also see Engine.H or the many components in the jevoisbase library. \ingroup parameter */
+      另请参阅 Engine.H 或 jevoisbase 库中的许多组件。\ingroup parameter */
   template <class Param, class ... Tail>
   class Parameter<Param, Tail ...> : public Param, public Parameter<Tail ...>
   {
@@ -409,11 +366,10 @@ namespace jevois
   };
   
   // ######################################################################
-  //! Dynamic parameter added to a component at runtime
-  /*! Dynamic parameters can only be accessed by descriptor at the Component level (using getParamVal(), setParamVal(),
-      etc), since there is no unique class type for them and the owning Component does not inherit from them. Typically
-      for use via Component::addDynamicParameter(). Use with caution. Mainly developed to enable endowing python modules
-      with JeVois parameters. \ingroup parameter */
+  //! 运行时添加到组件的动态参数
+  /*! 动态参数只能通过 Component 级别的描述符访问（使用 getParamVal()、setParamVal() 等），因为它们没有唯一的类类型，并且拥有它们
+      的 Component 不会从它们继承。通常通过 Component::addDynamicParameter() 使用。请谨慎使用。主要是为了能够为 Python 模块赋予 
+      JeVois 参数而开发的。 \ingroup parameter */
   template <typename T>
   class DynamicParameter : public jevois::ParameterCore<T>
   {

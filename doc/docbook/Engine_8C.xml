@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_Engine_8C">
+<title>src/jevois/Core/Engine.C File Reference</title>
+<indexterm><primary>src/jevois/Core/Engine.C</primary></indexterm>
+<programlisting>#include &lt;jevois/Core/Engine.H&gt;
+#include &lt;jevois/Core/Camera.H&gt;
+#include &lt;jevois/Core/MovieInput.H&gt;
+#include &lt;jevois/Core/IMU.H&gt;
+#include &lt;jevois/Core/IMUspi.H&gt;
+#include &lt;jevois/Core/IMUi2c.H&gt;
+#include &lt;jevois/Core/Gadget.H&gt;
+#include &lt;jevois/Core/VideoOutputNone.H&gt;
+#include &lt;jevois/Core/MovieOutput.H&gt;
+#include &lt;jevois/Core/VideoDisplay.H&gt;
+#include &lt;jevois/Core/VideoDisplayGL.H&gt;
+#include &lt;jevois/Core/VideoDisplayGUI.H&gt;
+#include &lt;jevois/GPU/GUIhelper.H&gt;
+#include &lt;jevois/GPU/GUIconsole.H&gt;
+#include &lt;jevois/GPU/GUIserial.H&gt;
+#include &lt;jevois/Core/Serial.H&gt;
+#include &lt;jevois/Core/StdioInterface.H&gt;
+#include &lt;jevois/Core/Module.H&gt;
+#include &lt;jevois/Core/DynamicLoader.H&gt;
+#include &lt;jevois/Core/PythonSupport.H&gt;
+#include &lt;jevois/Core/PythonModule.H&gt;
+#include &lt;jevois/Debug/Log.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/Util/Async.H&gt;
+#include &lt;jevois/Debug/SysInfo.H&gt;
+#include &lt;cmath&gt;
+#include &lt;fstream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstdio&gt;
+#include &lt;regex&gt;
+#include &lt;imgui_internal.h&gt;
+</programlisting>Include dependency graph for Engine.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="Engine_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Namespaces    </title>
+        <itemizedlist>
+            <listitem><para> <link linkend="_namespacejevois">jevois</link></para>
+
+<para>所有 JeVois 类和函数的主命名空间 </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_Engine_8C_1a6faebfa65da32e2886409cbd2aa06559">V4L2_CTRL_CLASS_DETECT</link>   0x00a30000</para>
+</listitem>
+            <listitem><para>#define <link linkend="_Engine_8C_1a5622d5359b0fd6e3fb816fc32c2df2bb">V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE</link>   (V4L2_CID_CAMERA_CLASS_BASE+20)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_Engine_8C_1a5622d5359b0fd6e3fb816fc32c2df2bb"/>    <section>
+    <title>V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE</title>
+<indexterm><primary>V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE</primary><secondary>Engine.C</secondary></indexterm>
+<indexterm><primary>Engine.C</primary><secondary>V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE</secondary></indexterm>
+<para><computeroutput>#define V4L2_CID_AUTO_N_PRESET_WHITE_BALANCE   (V4L2_CID_CAMERA_CLASS_BASE+20)</computeroutput></para>    </section><anchor xml:id="_Engine_8C_1a6faebfa65da32e2886409cbd2aa06559"/>    <section>
+    <title>V4L2_CTRL_CLASS_DETECT</title>
+<indexterm><primary>V4L2_CTRL_CLASS_DETECT</primary><secondary>Engine.C</secondary></indexterm>
+<indexterm><primary>Engine.C</primary><secondary>V4L2_CTRL_CLASS_DETECT</secondary></indexterm>
+<para><computeroutput>#define V4L2_CTRL_CLASS_DETECT   0x00a30000</computeroutput></para><para>
+Definition at line 63 of file Engine.C.</para>
+</section>
+</section>
+</section>

@@ -1,0 +1,114 @@
+\hypertarget{group__types}{}\doxysubsection{Je\+Vois 特定类型和通用辅助类}
+\label{group__types}\index{JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}}
+
+
+\doxysubsubsection{ }
+这些类型和类支持核心 Je\+Vois 实现。请特别注意非常有用的 J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+S\+S(name, S\+E\+Q) 宏，它用于定义可在参数中使 用的新枚举，以允许菜单样式的参数。 
+
+\hypertarget{group__types_autotoc_md149}{}\doxyparagraph{J\+E\+V\+O\+I\+S\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+E\+N\+U\+M\+\_\+\+C\+L\+A\+S\+S（name，\+S\+E\+Q）}\label{group__types_autotoc_md149}
+用于定义新枚举类类型的辅助宏。\+S\+EQ 应为 B\+O\+O\+S\+T\+\_\+\+P\+P\+\_\+\+S\+E\+Q（请参阅下面的示例语法）。您将获得：
+
+
+\begin{DoxyItemize}
+\item 使用提供的名称和值声明和定义的枚举类
+\item 枚举值的静态 const std\+::vector，包含枚举可以采用的所有值，在 name\+\_\+\+Values 中
+\item std\+::string 的静态 const std\+::vector，包含枚举可以采用的所有值的字符串名称，在 name\+\_\+\+Strings 中
+\item 枚举的 operator$<$$<$ 和 operator$>$$>$。
+\end{DoxyItemize}
+
+您可以在定义参数定义时使用 name\+\_\+\+Values 来列出所有有效值，并且流运算符将允许您通过字符串设置参数值等。
+
+例如：
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classjevois_1_1Manager_a0607298fa873ec7cce4a69261787cd16}{JEVOIS\_DEFINE\_ENUM\_CLASS}}(myEnum, (One) (Two) (Three));}
+\end{DoxyCode}
+
+
+展开为：
+
+
+\begin{DoxyItemize}
+\item 首先，枚举类的实际定义，其值按顺序指定： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{enum class} myEnum \{ One, Two, Three \};}
+\end{DoxyCode}
+
+\item 第二，一个静态 const 向量，包含所有枚举值，按您指定的顺序列出： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static} std::vector<myEnum> \textcolor{keyword}{const} myEnum\_Values \{ myEnum::One, myEnum::Two, myEnum::Three \};}
+\end{DoxyCode}
+
+\item 第三个，一个静态字符串 const 向量，其中包含字符串形式的所有枚举值，按您指定的顺序列出： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static} std::vector<std::string> \textcolor{keyword}{const} myEnum\_Strings \{ \textcolor{stringliteral}{"One"}, \textcolor{stringliteral}{"Two"}, \textcolor{stringliteral}{"Three"} \};}
+\end{DoxyCode}
+
+\item 最后，两个流运算符允许您在枚举值和字符串之间进行转换： 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{inline} std::ostream \& \mbox{\hyperlink{structjevois_1_1VideoMapping_ad08d440b2fdbff06067ec4f2bfff3a79}{operator<<}}(std::ostream \& os, myEnum \textcolor{keyword}{const} \& v) \{}
+\DoxyCodeLine{  std::vector<myEnum>::const\_iterator vitr = myEnum\_Values.begin(), vend = myEnum\_Values.end();}
+\DoxyCodeLine{  std::vector<std::string>::const\_iterator sitr = myEnum\_Strings.begin();}
+\DoxyCodeLine{  \textcolor{keywordflow}{while} (vitr != vend) \textcolor{keywordflow}{if} (v == *vitr) \{ os << *sitr; \textcolor{keywordflow}{return} os; \} \textcolor{keywordflow}{else} \{ ++vitr; ++sitr; \}}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} os;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{inline} std::istream \& \mbox{\hyperlink{structjevois_1_1VideoMapping_afcc7e011125b8f51dd19affc928b6535}{operator>>}}(std::istream \& is, myEnum \& v) \{}
+\DoxyCodeLine{  std::string s; is >> s;}
+\DoxyCodeLine{  std::vector<myEnum>::const\_iterator vitr = myEnum\_Values.begin(), vend = myEnum\_Values.end();}
+\DoxyCodeLine{  std::vector<std::string>::const\_iterator sitr = myEnum\_Strings.begin();}
+\DoxyCodeLine{  \textcolor{keywordflow}{while} (vitr != vend) \textcolor{keywordflow}{if} (s == *sitr) \{ v = *vitr; \textcolor{keywordflow}{return} is; \} \textcolor{keywordflow}{else} \{ ++vitr; ++sitr; \}}
+\DoxyCodeLine{  \textcolor{keywordflow}{throw} std::range\_error(\textcolor{stringliteral}{"Invalid value ["} + s + \textcolor{stringliteral}{"] for Enum class myEnum"});}
+\DoxyCodeLine{\};}
+\end{DoxyCode}
+
+\end{DoxyItemize}
+
+请注意，如果给定的字符串与枚举值之一的字符串表示形式不匹配，则 {\ttfamily operator$>$$>$} 将如何抛出。 \doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1BoundedBuffer}{jevois\+::\+Bounded\+Buffer$<$ T, When\+Full, When\+Empty $>$}}
+\begin{DoxyCompactList}\small\item\em 线程安全同步生产者/消费者队列 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Range}{jevois\+::\+Range$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 通用 \mbox{\hyperlink{classjevois_1_1Range}{Range}} 类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Semaphore}{jevois\+::\+Semaphore$<$ B\+B $>$}}
+\begin{DoxyCompactList}\small\item\em 一个简单的信号量 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1Singleton}{jevois\+::\+Singleton$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 一个通用的 singleton 类，用于强制一个对象的单个实例 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classjevois_1_1StepRange}{jevois\+::\+Step\+Range$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em 具有 step 的通用 range 类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{group__types_ga12724887bc7648f2f888edb9c3055e3d}{jevois\+::\+Blocking\+Behavior}} \{ \mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{jevois\+::\+Blocking\+Behavior\+::\+Block}}, 
+\mbox{\hyperlink{group__types_gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f}{jevois\+::\+Blocking\+Behavior\+::\+Throw}}
+ \}
+\begin{DoxyCompactList}\small\item\em 尝试无法立即完成的操作时的行为 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{group__types_ga12724887bc7648f2f888edb9c3055e3d}\label{group__types_ga12724887bc7648f2f888edb9c3055e3d}} 
+\index{JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}!BlockingBehavior@{BlockingBehavior}}
+\index{BlockingBehavior@{BlockingBehavior}!JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}}
+\doxyparagraph{\texorpdfstring{BlockingBehavior}{BlockingBehavior}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{group__types_ga12724887bc7648f2f888edb9c3055e3d}{jevois\+::\+Blocking\+Behavior}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+尝试无法立即完成的操作时的行为 
+
+定义 Semaphore、\+Bounded\+Buffer 等的行为。 \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block@{Block}!JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}}\index{JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}!Block@{Block}}}\mbox{\Hypertarget{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}\label{group__types_gga12724887bc7648f2f888edb9c3055e3dae1e4c8c9ccd9fc39c391da4bcd093fb2}} 
+Block&阻塞直到操作可以完成 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Throw@{Throw}!JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}}\index{JeVois 特定类型和通用辅助类@{JeVois 特定类型和通用辅助类}!Throw@{Throw}}}\mbox{\Hypertarget{group__types_gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f}\label{group__types_gga12724887bc7648f2f888edb9c3055e3da8ce61dd2505effd96f937fa743b6491f}} 
+Throw&如果操作无法立即完成，则抛出 std\+::runtime\+\_\+error \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line 25 of file Blocking\+Behavior.\+H.
+

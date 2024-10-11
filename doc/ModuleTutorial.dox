@@ -1,246 +1,129 @@
-/*! \page ModuleTutorial Tutorial on how to write new machine vision modules for JeVois
+/*! \page ModuleTutorial 关于如何为 JeVois 编写新的机器视觉模块的教程
 
-\section overview Overview
+\section overview 概述
 
-Machine vision C++ modules are programmed as a single class that derives from jevois::Module, which specifies the basic
-interface.
+机器视觉 C++ 模块被编程为从 jevois::Module 派生的单个类，它指定了基本接口。
 
-As an initial (slightly over-simplified) idea, the overall workflow for JeVois vision modules is that they implement a
-processing function that will receive an image captured by the camera sensor, and a pre-allocated output image that will
-be sent to the host computer over USB. The task of the processing function is to fill in the output image with results
-that arise from processing the input image.
+作为初步（略微过于简化）的想法，JeVois 视觉模块的整体工作流程是它们实现一个处理功能，该功能将接收由相机传感器捕获的图像，以及将通过 USB 发送到主机的预分配输出图像。处理功能的任务是使用处理输入图像的结果填充输出图像。
 
-In this tutorial, we first show you how to program a few very simple modules, to bring in the necessary
-concepts. Towards the end of this tutorial, we will point you to further detailed reading.
+在本教程中，我们首先向您展示如何编写几个非常简单的模块，以引入必要的概念。在本教程的最后，我们将为您指出进一步的详细阅读内容。
 
-\jvpro: The tutorials below create modules that operate in "legacy mode" on JeVois-Pro, i.e., the module receives one
-image as input and outputs a new image that contains processing results. For examples of modules that use the new
-"Pro/GUI" mode of /jvpro, check out the source code of the many examples in jevoisbase: \ref UserDemos
+\jvpro：以下教程创建在 JeVois-Pro 上以 "legacy mode" 运行的模块，即模块接收一个图像作为输入并输出包含处理结果的新图像。有关使用 /jvpro 的新 "Pro/GUI" 模式的模块的示例，请查看 jevoisbase 中许多示例的源代码：\ref UserDemos
 
-Before you start, you should understand \ref Concepts.
+在开始之前，您应该了解 \ref Concepts 。
 
-\subsection mappings Pixel formats and video mappings
+\subsection 映射像素格式和视频映射
 
-As a reminder, the JeVois smart camera can capture images in the following camera pixel formats: YUYV, BAYER, or
-RGB565. These formats are the ones that are supported by the camera sensor chip.
+提醒一下，JeVois 智能相机可以捕捉以下相机像素格式的图像：YUYV、BAYER 或 RGB565。这些格式是相机传感器芯片支持的格式。
 
-JeVois can send a wider range of pixel formats to a host connected over USB: YUYV, GREY, MJPG, BAYER, RGB565, and BGR24.
+JeVois 可以向通过 USB 连接的主机发送更广泛的像素格式：YUYV、GREY、MJPG、BAYER、RGB565 和 BGR24。
 
-For explanations about these formats, please see \ref UserModes for details.
+有关这些格式的解释，请参阅 \ref UserModes 了解详情。
 
-\subsection videomappings Camera to USB video mappings
+\subsection videomappings 摄像头到 USB 视频映射
 
-A module is invoked when a particular image resolution and pixel format is selected by a host computer over USB on
-\jva33 or by th euser on \jvpro. A list of video mappings associate a given output resolution and pixel type to the
-corresponding camera resolution and pixel type that should be used and to the machine vision module that should be
-invoked. Again see \ref UserModes for details.
+当主机通过 \jva33 上的 USB 或 \jvpro 上的用户选择特定图像分辨率和像素格式时，将调用模块。视频映射列表将给定的输出分辨率和像素类型与应使用的相应相机分辨率和像素类型以及应调用的机器视觉模块关联起来。有关详细信息，请参见 \ref UserModes 。
 
-Because an output video format is selected by the host computer on \jva33 or the user on \jvpro, it is not
-negotiable. If a video mapping has been specified in \b videomappings.cfg that invokes a particular machine vision
-module, that module just must perform (or throw an exception), and process the images that it receives from the camera
-to generate the desired output images.
+由于输出视频格式由 \jva33 上的主机或 \jvpro 上的用户选择，因此不可协商。如果在 \b videomappings.cfg 中指定了调用特定机器视觉模块的视频映射，则该模块必须执行（或抛出异常）并处理从相机接收的图像以生成所需的输出图像。
 
-// ####################################################################################################
-\section getstarted Getting started: a pass-through module
+// #################################################################################################### 
+\section getstarted 入门：pass-through 模块
 
-Let us program a pass-through module: This module just copies the pixel data from the image received from the camera
-into the image that will be sent over USB. A pass-through module hence makes your JeVois smart camera behave like a
-regular USB camera.
+让我们编写一个 pass-through 模块：该模块只是将从相机接收的图像中的像素数据复制到将通过 USB 发送的图像中。因此，直通模块使您的 JeVois 智能相机表现得像普通的 USB 相机。
 
-Here is the complete, working code. We will look at it step-by-step below:
+以下是完整、有效的代码。我们将逐步介绍它：
 
 \includelineno tutorial1.C
 
-Explanations:
+解释：
 
-- Lines 1 - 4: All machine vision modules should derive from jevois::Module, which establishes the interface through
-  which the JeVois Engine will work with your module.
+- 第 1 至 4 行：所有机器视觉模块都应源自 jevois::Module，它建立了 JeVois Engine 与您的模块协同工作的接口。
 
-- Line 8: Our module does not need to do anything at construction time, so we just use the inherited constructor from
-  the base Module class, that is, we do nothing more at construction than what the base class needs to do. See for
-  example http://en.cppreference.com/w/cpp/language/using_declaration for more information about inheriting
-  constructors.
+- 第 8 行：我们的模块在构造时不需要做任何事情，因此我们只需使用从基础 Module 类继承的构造函数，也就是说，我们在构造时所做的只是基类需要做的事情。有关继承构造函数的更多信息，请参阅 http://en.cppreference.com/w/cpp/language/using_declaration。
 
-- Line 11: It is good practice in derived classes (like this module is) to declare and implement a destructor marked \c
-  virtual. See for example http://www.geeksforgeeks.org/g-fact-37/ for more info.
+- 第 11 行：在派生类（如本模块）中声明并实现标记为 \c virtual 的析构函数是一种很好的做法。有关更多信息，请参阅 http://www.geeksforgeeks.org/g-fact-37/。
 
-- Line 14, syntax for process(): The JeVois Engine will call the function process() on your module when it is loaded as
-  the current machine vision module. The syntax for process() is defined in the Module base class. We recommend using
-  the \c override keyword so that the compiler will check for you that you are indeed implementing this exact function
-  that Engine will use, as opposed to, if you had made a typo in your declaration of process on line 14, just declaring
-  a new function with a slightly different syntax (in which case, Engine would not call this function and your module
-  would do nothing).
+- 第 14 行，process() 的语法：当 JeVois Engine 加载为当前机器视觉模块时，它将在您的模块上调用 process() 函数。process() 的语法在 Module 基类中定义。我们建议使用 \c override 关键字，以便编译器为您检查您是否确实实现了 Engine 将使用的这个确切函数，而不是，如果您在第 14 行的 process 声明中输入了拼写错误，则只需声明一个语法略有不同的新函数（在这种情况下，Engine 不会调用此函数，您的模块也不会执行任何操作）。
 
-- Line 14, InputFrame and OutputFrame: These two classes are helpers that will allow your process() function to gain
-  access to the input and output images, when they are needed. To optimize throughput and your use of the CPU in JeVois,
-  we here adopt a design similar to that of std::future for InputFrame and OutputFrame: you can think of these as
-  handles to images which may or may not yet be available, but will be available for sure at some time in the future. By
-  the time process() is called, only those handles to those future images are given to you. If you do not need the
-  images quite yet and first want to do some preliminary setup in your process() function, you just keep those handles
-  ready for future use. When you are ready to use one of the images, you just call get() onto its handle, which will
-  return the actual image. If the image is not ready yet, for example, it is still being captured by the camera sensor,
-  then get() will block until the image is ready for you. For more information, please read and understand the concept
-  of futures and promises in C++11. You may want to check out this nice tutorial:
-  http://thispointer.com/c11-multithreading-part-8-stdfuture-stdpromise-and-returning-values-from-thread/ or others on
-  the web.
+- 第 14 行，InputFrame 和 OutputFrame：这两个类是辅助类，允许您的 process() 函数在需要时访问输入和输出图像。为了优化吞吐量和 JeVois 中的 CPU 使用率，我们在此采用与 std::future 类似的设计用于 InputFrame 和 OutputFrame：您可以将它们视为图像的句柄，这些图像可能可用也可能不可用，但肯定会在未来某个时间可用。在调用 process() 时，只会向您提供这些未来图像的句柄。如果您暂时不需要图像，并且首先想在 process() 函数中做一些初步设置，那么只需将这些句柄准备好以备将来使用。当您准备好使用其中一个图像时，只需在其句柄上调用 get()，这将返回实际图像。如果图像尚未准备好，例如，它仍在被相机传感器捕获，那么 get() 将阻塞，直到图像准备好供您使用。有关更多信息，请阅读并理解 C++11 中 Future 和 Promise 的概念。您可能想查看这个不错的教程： http://thispointer.com/c11-multithreading-part-8-stdfuture-stdpromise-and-returning-values-from-thread/ 或网络上的其他内容。
 
-- Line 14, arguments use move semantics: You probably noticed the && signs after InputFrame and OutputFrame. These mean
-  that the arguments to process() are passed using move semantics. This is not very important here, and just stems from
-  the following fact: Because InputFrame and OutputFrame connect to the camera sensor and to the USB interface directly,
-  we forbid anyone other than Engine from creating them. So you cannot construct an InputFrame, only Engine can. Engine
-  constructs the InputFrame and OutputFrame for you using its private access to the camera and USB interface. Then it
-  just hands the constructed objects over to your process() function and forgets about them. For more information about
-  move semantics, you can for example check out
-  http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html or other general C++11 tutorials
-  on the web.
+- 第 14 行，参数使用移动语义：您可能注意到了 InputFrame 和 OutputFrame 后面的 && 符号。这意味着传递给 process() 的参数使用移动语义传递。这在这里并不重要，只是源于以下事实：由于 InputFrame 和 OutputFrame 直接连接到相机传感器和 USB 接口，因此我们禁止 Engine 以外的任何人创建它们。因此您无法构造 InputFrame，只有 Engine 可以。Engine 使用其对相机和 USB 接口的私有访问权限为您构造 InputFrame 和 OutputFrame。然后，它只需将构造的对象交给您的 process() 函数并忘记它们。有关移动语义的更多信息，您可以查看 http://www.cprogramming.com/c++11/rvalue-references-and-move-semantics-in-c++11.html 或网络上的其他常规 C++11 教程。
 
-- Line 17: In the pass-through module, we have nothing to do until we have both the input and the output images. So we
-  just call get() on inimg to first get the image from the camera. The image may be available immediately, or get() may
-  block until it is available. The returned RawImage is a minimalistic data structure which basically tells you the
-  image width, height, pixel type, and gives you access to the array of pixels. It is a lightweight structure, copying a
-  RawImage object will just share the underlying pixel array rather than copying it. This is the same behavior as in
-  cv::Mat of OpenCV.
+- 第 17 行：在 pass-through 模块中，在获得输入和输出图像之前，我们无需执行任何操作。因此，我们只需在 inimg 上调用 get() 即可首先从相机获取图像。图像可能立即可用，或者 get() 可能会阻塞，直到可用为止。返回的 RawImage 是一种简约的数据结构，它基本上会告诉您图像的宽度、高度、像素类型，并允许您访问像素数组。它是一种轻量级结构，复制 RawImage 对象只会共享底层像素数组，而不是复制它。这与 OpenCV 的 cv::Mat 中的行为相同。
 
-- Line 20: Likewise, we cannot do anything in pass-through until we also have the output image, so here we just get it,
-  which may block until it is available. In more complex modules, one could start processing the input image in a thread
-  while at the same time waiting for the output image in another thread. We will study examples of this later.
+- 第 20 行：同样，在获得输出图像之前，我们无法在 pass-through 中执行任何操作，因此我们在这里只获取它，这可能会阻塞直到它可用。在更复杂的模块中，可以在一个线程中开始处理输入图像，同时在另一个线程中等待输出图像。我们稍后会研究这方面的例子。
 
-- Line 23: A vision module can enforce some requirements on the input and output image sizes and pixel formats. This is
-  achieved by using the require() function of RawImage. For pass-through, we are going to support any input image
-  dimensions and pixels, but, since we will not do any processing of the pixel data and will just copy it over to the
-  output, we must enforce that the output image dimensions and pixel type exactly match those of the input. The
-  require() function just throws an exception if the requirements are not met. The Engine will catch that exception,
-  issue some error message, safely de-allocate any memory buffers, and move on to the next video frame.
+- 第 23 行：视觉模块可以对输入和输出图像大小和像素格式强制执行一些要求。这是通过使用 RawImage 的 require() 函数实现的。对于直通，我们将支持任何输入图像尺寸和像素，但是，由于我们不会对像素数据进行任何处理，而只是将其复制到输出，因此我们必须强制输出图像尺寸和像素类型与输入的完全匹配。如果不满足要求，require() 函数只会抛出异常。引擎将捕获该异常，发出一些错误消息，安全地取消分配任何内存缓冲区，然后转到下一个视频帧。
 
-- Line 26: Now we are ready to fill-in the output image's pixel array, using pixel data from the input image. Note how
-  the output image's pixel array has already been allocated by Engine (and by the USB driver). It is not negotiable, as
-  it is set by the host computer connected to your JeVois camera, and by users on the host computer selecting a video
-  resolution and mode that they wish to receive. Do not attempt to change image size or format, or to re-allocate the
-  pixel array held by outimg. Just accept the dimensions, pixel type, and pixel array address of outimg and write pixel
-  data into the pixel array. Note some details about RawImage here:
-  - pixels<type>() returns a read-only pointer to the pixel array, cast to the desired type
-  - pixelsw<type>() returns a read-write pointer to the pixel array, cast to the desired type
-  - bytesize() returns the poxel array's size in bytes.
+- 第 26 行：现在我们准备使用输入图像中的像素数据填充输出图像的像素数组。请注意，输出图像的像素数组已由引擎（和 USB 驱动程序）分配。它是不可协商的，因为它是由连接到 JeVois 相机的主机设置的，并且由主机上的用户选择他们希望接收的视频分辨率和模式。不要尝试更改图像大小或格式，或重新分配 outimg 持有的像素数组。只需接受 outimg 的尺寸、像素类型和像素数组地址，然后将像素数据写入像素数组。请注意此处有关 RawImage 的一些详细信息：
+  - pixels<type>() 返回指向像素数组的只读指针，转换为所需类型
+  - pixelsw<type>() 返回指向像素数组的读写指针，转换为所需类型
+  - bytesize() 返回 pixel 数组的大小（以字节为单位）。
 
-- Line 29: Now that we are done with the input image, we can let the Camera know. The camera is using a fixed set of
-  pre-allocated (in the linux kernel), memory-mapped buffers, into which the hardware in the CPU chip that connects to
-  the camera sensor can directly write using direct memory access (DMA). So it is important to release a buffer as soon
-  as you do not need it anymore, so that the camera can use it to capture future video frames.
+- 第 29 行：现在我们已经处理完输入图像，我们可以通知相机了。相机使用一组固定的预分配（在 Linux 内核中）内存映射缓冲区，连接到相机传感器的 CPU 芯片中的硬件可以使用直接内存访问 (DMA) 直接写入其中。因此，一旦不再需要缓冲区，就立即释放它，这样相机就可以使用它来捕获未来的视频帧。
 
-- Line 32: The same buffer logic applies to the USB driver.
+- 第 32 行：相同的缓冲逻辑适用于 USB 驱动程序。
 
-- Line 37: This macro adds a few plain C-language hooks that will allow the module to be loaded and instantiated at
-  run-time as a C++ class, from the shared library (.so) file that is obtained by compiling this module. It is a
-  required statement for each JeVois module.
+- 第 37 行：此宏添加了一些普通的 C 语言钩子，允许模块在运行时从编译此模块获得的共享库 (.so) 文件中加载并实例化为 C++ 类。这是每个 JeVois 模块的必需语句。
 
-// ####################################################################################################
-\section addopencv Adding some image processing: an image format conversion module
+// #################################################################################################### 
+\section addopencv 添加一些图像处理：图像格式转换模块
 
-Let us now see how one can easily use OpenCV to actually process images received from the camera. We here develop a
-simple image format conversion module: It can convert from any pixel format that is available on the camera sensor
-(YUYV, BAYER, RGB565) to any pixel format that is exposed by JeVois to a host connected over USB (YUYV, GREY, MJPG,
-BAYER, RGB565, BGR24).
+现在让我们看看如何轻松使用 OpenCV 来实际处理从相机接收到的图像。我们在这里开发了一个简单的图像格式转换模块：它可以从相机传感器上可用的任何像素格式（YUYV、BAYER、RGB565）转换为 JeVois 向通过 USB 连接的主机公开的任何像素格式（YUYV、GREY、MJPG、BAYER、RGB565、BGR24）。
 
-To keep this example module simple, we will use image conversion functions in two steps:
+为了使此示例模块简单，我们将分两步使用图像转换函数：
 
-- convert from camera image format to BGR24, which is the default format for color images in OpenCV (with 8-bit for each
-  of Blue, Green, and Red channels for each pixel). Indeed, many of the pixel format conversion functions used in JeVois
-  are implemented using OpenCV.
+- 从相机图像格式转换为 BGR24，这是 OpenCV 中彩色图像的默认格式（每个像素的蓝色、绿色和红色通道各为 8 位）。事实上，JeVois 中使用的许多像素格式转换函数都是使用 OpenCV 实现的。
 
-- convert from BGR24 to the format requested by the host computer over USB.
+- 通过 USB 从 BGR24 转换为主机请求的格式。
 
-This is not always the most efficient way of doing such conversion (requires two passes), but it avoids the
-combinatorial explosion of the number of format conversion functions that need to be written, and it runs fast enough on
-the JeVois processor anyway.
+这并不总是进行这种转换的最有效方法（需要两次传递），但它避免了需要编写的格式转换函数数量的组合爆炸式增长，并且它在 JeVois 处理器上的运行速度足够快。
 
 \includelineno tutorial2.C
 
-Let us focus on the new things:
+让我们关注一下新事物：
 
-- Line 23: the RawImage class provided by JeVois is mainly intended as a smart pointer to pixel buffer data that has
-  been allocated in the Linux kernel. It is not intended for processing, except that we have written a number of
-  functions to make simple drawings (a circle, a rectangle, some text, etc) directly into raw images that will be sent
-  over USB. Hence, when one wants to process an image, usually we convert it to OpenCV or some other image format first,
-  depending on the vision algorithm which we want to implement. This conversion can happen in two ways:
-  - zero-copy: If one can directly use the camera's pixel format as is, then functions are provided by JeVois to simply
-    re-interpret a RawImage as an OpenCV cv::Mat image, by sharing the pixel data between the two. This method is not
-    shown here but is the preferred approach if you can work directly with the camera's pixel type.
+- 第 23 行：JeVois 提供的 RawImage 类主要用作已在 Linux 内核中分配的像素缓冲区数据的智能指针。它不用于处理，但我们编写了一些函数来将简单的绘图（圆形、矩形、一些文本等）直接转换为将通过 USB 发送的原始图像。因此，当想要处理图像时，通常我们首先将其转换为 OpenCV 或其他图像格式，具体取决于我们想要实现的视觉算法。这种转换可以通过两种方式进行：
+  - 零拷贝：如果可以直接使用相机的像素格式，那么 JeVois 提供的函数可以通过在两者之间共享像素数据，将 RawImage 重新解释为 OpenCV cv::Mat 图像。这里没有显示这种方法，但如果您可以直接使用相机的像素类型，则这是首选方法。
 
-  - conversion to a different pixel format: If one also wants a different pixel format that is not natively provided by
-    the camera sensor chip, then one would create a new OpenCV cv::Mat image, with its own pixel array memory distinct
-    from that of the source RawImage. JeVois then provides functions that can convert from any camera pixel format to
-    several different OpenCV pixel formats. Here we use one of these, convertToCvBGR().
+  - 转换为不同的像素格式：如果还想要相机传感器芯片本身未提供的不同像素格式，则可以创建一个新的 OpenCV cv::Mat 图像，其像素阵列内存与源 RawImage 不同。然后，​​JeVois 提供了可以从任何相机像素格式转换为几种不同 OpenCV 像素格式的函数。在这里我们使用其中之一，convertToCvBGR()。
 
-- Line 26: Once the input image has been converted to OpenCV in a newly allocated pixel array that is separate from
-  that of the raw input image, we do not need the raw input image anymore, we will keep working with the OpenCV image
-  only. So we can give the memory buffer associated with our raw input image back to the camera so that it can use it to
-  capture a future video frame.
+- 第 26 行：一旦输入图像被转换为​​ OpenCV 中新分配的像素阵列（该阵列与原始输入图像的阵列分开），我们就不再需要原始输入图像，我们将继续仅使用 OpenCV 图像。因此，我们可以将与原始输入图像关联的内存缓冲区返回给相机，以便它可以使用它来捕获未来的视频帧。
 
-- Line 29: We have already done half of the work (from camera format to BGR), but now to proceed with the second half
-  (from BGR to format requested by USB host), we need to have the output image ready. So we request it here and will
-  possibly wait for it.
+- 第 29 行：我们已经完成了一半的工作（从相机格式到 BGR），但现在要继续进行第二部分（从 BGR 到 USB 主机请求的格式），我们需要准备好输出图像。因此我们在这里请求它，并且可能会等待它。
 
-- Line 32: In this simple tutorial, we will not allow any rescaling of the image size. So we require that the output
-  resolution should be the same as the input resolution. We have no requirement on the output pixel type, hence we here
-  just specify \b outimg.fmt as the required output pixel type (that is, we just say that whichever pixel format has
-  been selected by the USB host and is already in the output image is ok with us).
+- 第 32 行：在这个简单的教程中，我们不允许对图像大小进行任何缩放。因此，我们要求输出分辨率应与输入分辨率相同。我们对输出像素类型没有要求，因此我们在这里只指定 \b outimg.fmt 作为所需的输出像素类型（也就是说，我们只是说，无论 USB 主机选择了哪种像素格式并且已经在输出图像中，我们都可以接受）。
 
-- Line 35: Now we convert from our OpenCV BGR image into the format requested by the USB host, using some helper
-  conversion function that is part of the JeVois framework.
+- 第 35 行：现在我们使用 JeVois 框架中的一些辅助转换函数将 OpenCV BGR 图像转换为 USB 主机请求的格式。
 
-- Line 38: We are done and ready to send the converted image to the host computer over USB.
+- 第 38 行：我们已完成并准备通过 USB 将转换后的图像发送到主机。
 
-// ####################################################################################################
-\section addparams Adding module parameters and using OpenCV: an edge detection module
+// #################################################################################################### 
+\section addparams 添加模块参数并使用 OpenCV：边缘检测模块
 
-Most machine vision modules provide parameters which allow one to tune their operation. These include thresholds,
-algorithm modes, accuracy settings, and others.
+大多数机器视觉模块都提供参数，允许调整其操作。这些参数包括阈值、算法模式、精度设置等。
 
-Many frameworks, such as OpenCV, thus by and large rely on functions with many parameters. For example, the way one
-invokes a Canny edge detector in OpenCV is to call the function:
+因此，许多框架（例如 OpenCV）大体上依赖于具有许多参数的函数。例如，在 OpenCV 中调用 Canny 边缘检测器的方式是调用以下函数：
 
 \code
 void Canny(InputArray image, OutputArray edges, double threshold1, double threshold2, int apertureSize = 3, bool L2gradient = false)
 \endcode
 
-Beyond possible confusion about which value goes to which argument in the long list (which languages such as Python
-solve by allowing access to arguments by name), one major issue with this approach is that either every function using
-Canny must provide a mechanism for the user to set the parameters (threshold1, threshold2, etc), or, in most cases,
-those will just end up being hardwired, limiting the applicability of the end application to different image sizes,
-environment types, etc.
+除了可能对长列表中哪个值属于哪个参数产生混淆（Python 等语言通过允许按名称访问参数来解决）之外，这种方法的一个主要问题是，每个使用 Canny 的函数都必须为用户提供一种设置参数的机制（threshold1、threshold2 等），或者在大多数情况下，这些参数最终将被硬连线，从而限制最终应用程序对不同图像大小、环境类型等的适用性。
 
-In contrast, in the JeVois framework, one would create a Canny Module, with Parameter settings for the thresholds, where
-Parameter is a rich wrapper around the actual parameter value.  The concept of parameter in the JeVois framework
-embodies a wrapper around a single value of any type, with associated documentation (description), default values,
-possible specification of valid values, accessor functions to obtain or change the value, and optional callback
-functions that are triggered when the value is changed. Parameters are intended to be used in objects that inherit from
-Component (Module inherits from Component, more about Component later - for now just equate Component with Module). The
-goal of parameters is to expose parameters of a given vision algorithm in such a way that any piece of code that is
-using that algorithm will automatically inherit and expose these parameters.
+相比之下，在 JeVois 框架中，人们将创建一个 Canny Module，并使用 Parameter 设置阈值，其中 Parameter 是实际参数值的丰富包装器。JeVois 框架中的参数概念体现了对任何类型的单个值的包装器，以及相关文档（描述）、默认值、有效值的可能规范、用于获取或更改值的访问器函数以及在值更改时触发的可选回调函数。参数旨在用于从组件继承的对象（ Module 继承自 Component ，稍后将详细介绍 Component - 现在只需将 Component 等同于 Module ）。参数的目标是以某种方式公开给定视觉算法的参数，以便使用该算法的任何代码都会自动继承和公开这些参数。
 
-Setting parameters can be done by code that will use the vision algorithm that has parameters, but, more often, it is
-left to the user. In a particular vision pipeline, resonable default values may be provided for the parameters at the
-beginning, then leaving those parameters accessible to end users who may want to modify them. Modification of parameters
-in JeVois is handled either at the start of the application by parsing command-line arguments, when a new processing
-Module is instantiated, or while it is running, by interacting with the Engine that manages the system via its Serial
-ports.
+参数设置可以通过使用具有参数的视觉算法的代码来完成，但更多时候，它留给用户。在特定的视觉管道中，可以在开始时为参数提供合理的默认值，然后将这些参数留给想要修改它们的最终用户访问。JeVois 中的参数修改是在应用程序启动时通过解析命令行参数来处理的，当实例化新的处理模块时，或者在运行时，通过与通过其串行端口管理系统的引擎交互来处理。
 
-The way in which we have implemented Parameter in the JeVois framework may seem unorthodox at first, but is the best way
-we have found so far in terms of minimizing burden when writing new algorithms with lots of parameters. In our earlier
-framework, the iLab Neuromorphic Vision Toolkit (iNVT) started in 1995, parameters were included into algorithm
-components as member variables. The burden to programmers was so high that often they just did not include parameters
-and hardwired values instead, just to avoid that burden. The burden comes from the requirements:
+我们在 JeVois 框架中实现参数的方式乍一看似乎有些不合常规，但就编写具有大量参数的新算法时尽量减少负担而言，这是我们迄今为止发现的最佳方式。在我们早期的框架中，iLab 神经形态视觉工具包 (iNVT) 于 1995 年开始使用，参数作为成员变量包含在算法组件中。程序员的负担太重了，以至于他们通常不包含参数，而是硬连线值，只是为了避免这种负担。负担来自以下要求：
 
-- we want to be able to support parameters of any type
-- we want each parameter to have a name, description, default value, specification of valid values
-- we want parameters to appear in related groups in the help message
-- we want to support callbacks, i.e., functions that are called when one tries to change the parameter value
-- we want the callback to be a member function of the Module that owns a given parameter,
-  since changing that parameter value will typically trigger some re-organization in that Module (otherwise
-  the callback might not be needed).
+- 我们希望能够支持任何类型的参数
+- 我们希望每个参数都有名称、描述、默认值、有效值的规范
+- 我们希望参数出现在帮助消息中的相关组中
+- 我们希望支持回调，即在尝试更改参数值时调用的函数
+- 我们希望回调是拥有给定参数的模块的成员函数，因为更改该参数值通常会触发该模块中的某种重新组织（否则可能不需要回调）。
 
-Possible implementation using class data members for parameters (similar to what we used in iNVT), here shown for a
-sample \b int parameter to specify the size of a queue held in a class MyModule that derives from Module:
+可以使用类数据成员作为参数的可能实现（类似于我们在 iNVT 中使用的），这里显示一个示例 \b int 参数来指定从 Module 派生的 MyModule 类中保存的队列的大小：
 
 \code
 ParamDef<int> sizeparamdef("size", "Queue size", 5, Range<int>(1, 100));
@@ -256,166 +139,102 @@ class MyModule : public jevois::Module
                                                sizeparam(sizeparamdef)  // ouch
       {
         sizeparam.setCallback(&MyModule::sizeParamCallback); // ouch
-        // We cannot set the callback in the constructor initializer list because MyModule is not yet constructed at that time
+        // 我们无法在构造函数初始化列表中设置回调，因为 MyModule 当时尚未构造
       }
 };
 \endcode
 
-So we basically end up with 3 names that people have no idea what to do with and will just use confusing names for
-(sizeparamdef, sizeparam, sizeParamCallback), and we have to 1) specify the definition of name, description, etc
-somewhere using some arbitrary name (here sizeparamdef), then add the member variable for the param to the module
-using some other name (here sizeparam), then construct the param which would typically require linking it to its
-definition so we can get the default value and such, and finally hook the callback up (note how MyComp is not fully
-constructed yet when we construct sizeparam hence referencing sizeParamCallback() at that time is dubious at best). In
-reality, things are even worse since typically the paramdef, module class declaration, and module implementation,
-could be in 3 different files.
+因此，我们最终得到了 3 个名称，人们不知道该如何处理它们，只会使用令人困惑的名称（sizeparamdef、sizeparam、sizeParamCallback），并且我们必须 1) 使用某个任意名称（此处为 sizeparamdef）在某处指定名称、描述等的定义，然后使用其他名称（此处为 sizeparam）将 param 的成员变量添加到模块，然后构造 param，这通常需要将其链接到其定义，以便我们可以获得默认值等，最后挂接回调（请注意，当我们构造 sizeparam 时，MyComp 尚未完全构造，因此当时引用 sizeParamCallback() 充其量是可疑的）。实际上，情况甚至更糟，因为通常 paramdef、模块类声明和模块实现可能位于 3 个不同的文件中。
 
-The approach we developed for the Neuromorphic Robotics Toolkit (NRT) and refined for JeVois works as follows:
+我们为神经形态机器人工具包 (NRT) 开发并针对 JeVois 改进的方法的工作原理如下：
 
-- each parameter is a unique new class type. We create that type once with one name, and it holds the parameter
-  value and the definition data. This is further facilitated by the
-  JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) variadic macro.
-      
-- for parameters with callbacks, their class type includes a pure virtual onParamChange(param, value) function
-  that will need to be implemented by the host module. This is facilitated by the
-  JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) variadic macro. The first argument of
-  onParamChange() is the parameter class type, so that a host module with many parameters will have many
-  different onParamChange() function, one per parameter that has a callback.
+- 每个参数都是一个独特的新类类型。我们用一个名称创建该类型一次，它保存参数值和定义数据。JEVOIS_DECLARE_PARAMETER(ParamName, ParamType, ...) 可变宏进一步促进了这一点。
+- 对于带有回调的参数，它们的类类型包括一个纯虚 onParamChange(param, value) 函数，该函数需要由 host 模块实现。JEVOIS_DECLARE_PARAMETER_WITH_CALLBACK(ParamName, ParamType, ...) 可变宏促进了这一点。onParamChange() 的第一个参数是参数类类型，因此具有许多参数的 host 模块将具有许多不同的 onParamChange() 函数，每参数个有一个回调。
 
-- modules inherit from their parameters using variadic templates to make inheriting from multiple parameters
-  short and easy.  
+- 模块使用可变参数模板从其参数继承，使得从多个参数继承变得简短而容易。
 
-- each parameter exposes simple functions get(), set(), etc (see ParameterCore and ParameterBase). In a module
-  that has many parameters, accessing parameters is achieved by disambiguating on which base class (i.e., which
-  parameter) one wants to access the get(), set(), etc function, which is achieved by calling param_x::get() vs
-  param_y::get(), etc
+- 每个参数都公开简单函数 get()、set() 等（参见 ParameterCore 和 ParameterBase）。在具有许多参数的模块中，访问参数是通过消除想要在哪个基类（即哪个参数）上访问 get()、set() 等函数的歧义来实现的，这可以通过调用 param_x::get() 与 param_y::get() 等来实现
 
-- No need to declare parameter member variables (we inherit from them instead).
-- No need to do anything at construction of the component.
-- No need to manually hook the callback function in the component host class to the parameter.
-- Strong compile-time checking that the programmer did not forget to write the callback function for each
-  parameter that was declared as having a callback.
-- Only one name used throughout for that parameter and all its associated machinery (definition, callback).
-- It is easy to write scripts that search the source tree for information about all the parameters of a component,
-  since those are always all specified in the Parameter< ... > inheritance statement.
+- 无需声明参数成员变量（而是从它们继承）。
+- 无需在组件构造时执行任何操作。
+- 无需手动将组件宿主类中的回调函数挂接到参数。
+- 强大的编译时检查，确保程序员没有忘记为每个声明为具有回调的参数编写回调函数。
+- 始终只使用一个名称来表示该参数及其所有相关机制（定义、回调）。
+- 编写脚本以搜索源树以获取有关组件所有参数的信息非常容易，因为这些参数始终都在 Parameter< ... > 继承语句中指定。
 
 
-Let's dive in and implement an edge detection module that uses the Canny function from OpenCV and exposes its parameters
-so that users can play with them over the serial command-line interface:
+让我们深入研究并实现一个边缘检测模块，该模块使用 OpenCV 中的 Canny 函数并公开其参数，以便用户可以通过串行命令行界面使用它们：
 
 \includelineno tutorial3.C
 
-- Line 7: It is a good idea to group all the parameters that work together under some category. To achieve that, we here
-  create a parameter category. Parameters that belong to a given category will appear together when one types \c help in
-  the command-line interface.
+- 第 7 行：将所有一起工作的参数归入某个类别是一个好主意。为了实现这一点，我们在这里创建一个参数类别。当在命令行界面中键入 \c help 时，属于给定类别的参数将一起出现。
 
-- Lines 9 - 12: We declare 4 parameters. For each one, we specify
-  - name for the parameter (needs to be syntaxically valid for use as a C++ class name).
-  - type of the parameter value (can be any valid C++ type, including any custom class you have created).
-  - description of the parameter that will appear in the help message and documentation of the module.
-  - default value for the parameter.
-  - optional: specification of valid values, from a list of accepted values, or a range, a range with a step, or a
-    regex. Here we only specify this for the \c aperture parameter, which is constrained to taking values from 3 to 53.
-  - a parameter category used to group related parameters together in the help message.
+- 第 9 - 12 行：我们声明了 4 个参数。对于每个参数，我们指定
+  - 参数的名称（需要符合语法要求才能用作 C++ 类名）。
+  - 参数值的类型（可以是任何有效的 C++ 类型，包括您创建的任何自定义类）。
+  - 参数的描述，将出现在模块的帮助消息和文档中。
+  - 参数的默认值。
+  - 可选：从可接受值列表、范围、带步长的范围或正则表达式中指定有效值。这里我们仅为 \c aperture 参数指定此项，该参数被限制为取值范围从 3 到 53。
+  - 用于在帮助消息中将相关参数分组在一起的参数类别。
 
-- Line 16: Our module inherits from <A
-  HREF="http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html">jevois::Parameter</A> with all
-  our desired parameters passed as template arguments. Indeed, <A
-  HREF="http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html">jevois::Parameter</A> is a
-  variadic class template that can take any number of template arguments; it will simply add each parameter as a base to
-  our module class one by one. Because we en up inheriting from each parameter, this means that our module 'is' a \c
-  thresh1 parameter, and also 'is' a \c thresh2 parameter, etc. While it may seem unorthodox at first that a module 'is'
-  each of its parameters (as opposed to 'having' them as would be the case using data members for parameters), this
-  greatly lessens the burden onto programmers as explained above.
+- 第 16 行：我们的模块继承自 <A HREF="http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html">jevois::Parameter</A>，并将我们所需的所有参数作为模板参数传递。事实上，<A HREF="http://jevois.org/doc/classjevois_1_1Parameter_3_01Param_00_01Tail_8_8_8_4.html">jevois::Parameter</A> 是一个可变参数类模板，可以接受任意数量的模板参数；它将简单地将每个参数作为基础逐一添加到我们的模块类中。因为我们最终从每个参数继承，这意味着我们的模块“是”一个 \c thresh1 参数，也是“是”一个 \c thresh2 参数，等等。虽然模块“是”它的每个参数（而不是像使用数据成员作为参数那样“拥有”它们）乍一看可能不合常规，但正如上面所解释的那样，这大大减轻了程序员的负担。
 
-- Line 32: We convert the input image to greyscale since we will apply the edge detection algorithm in greyscale mode.
+- 第 32 行：我们将输入图像转换为灰度，因为我们将在灰度模式下应用边缘检测算法。
 
-- Line 40: Note how here we require V4L2_PIX_FMT_GREY as our output format, since the results from the edge detection
-  algorithm will be a greyscale image.
+- 第 40 行：请注意，这里我们需要 V4L2_PIX_FMT_GREY 作为输出格式，因为边缘检测算法的结果将是灰度图像。
 
-- Line 43: Here is an example of zero-copy, reinterpretation of a RawImage as a cv::Mat image with pre-allocated, shared
-  pixel array. Thanks to this, the result of the cv::Canny function, which will be computed into the \c edges cv::Mat
-  image, can be directly sent to the host over USB, since the \c edges image shares its pixel data with our output raw
-  image.
+- 第 43 行：这是零拷贝的示例，将 RawImage 重新解释为具有预分配共享像素阵列的 cv::Mat 图像。得益于此，cv::Canny 函数的结果（将计算到 \c edge cv::Mat 图像中）可以通过 USB 直接发送到主机，因为 \c edge 图像与我们的输出原始图像共享其像素数据。
 
-- Line 44: Invoke the Canny edge detection function from OpenCV, passing our parameter values to it. Because our module
-  'is' a \c thresh1, and also 'is' a \c thresh2, etc and each of these parameters provides a get() function to access
-  its value, we need to disambiguate which get() we want to call, which is achieved by explicitly specifying onto which
-  base class (i.e., which parameter) we want to call get(). Thus, we use syntax \c thresh1::get() to invoke the get()
-  function of our \c thresh1 base class, and so on for the other parameters. Other parameter functions are disambiguated
-  in the same way, for example \c thresh1::set(value) would set the value of parameter \c thresh1 at runtime.
+- 第 44 行：从 OpenCV 调用 Canny 边缘检测函数，将参数值传递给它。由于我们的模块“是”\c thresh1 ，也是“是”\c thresh2 ，等等，并且每个参数都提供了一个 get() 函数来访问其值，因此我们需要消除要调用哪个 get() 的歧义，这可以通过明确指定要调用哪个基类（即哪个参数）来实现。因此，我们使用语法 \c thresh1::get() 来调用 \c thresh1 基类的 get() 函数，其他参数也是如此。其他参数函数以相同的方式消除歧义，例如 \c thresh1::set(value) 将在运行时设置参数 \c thresh1 的值。
 
-- Lines 51 - 54: Parameter \c l2grad was declared on line 12 as having a callback. So here is the implementation of that
-  callback. Here we just show an information message (which will show up in the command-line interface). If you have
-  declared the parameter with callback (as we did on line 12), your code will not compile unless you here provide the
-  implementation for onParamChange(), that is, we check at compile time for proper implementation of every callback that
-  has been requested for parameters.
+- 第 51 - 54 行：参数 \c l2grad 在第 12 行被声明为具有回调。因此，这里是该回调的实现。这里我们只显示一条信息消息（它将显示在命令行界面中）。如果您已使用回调声明该参数（如我们在第 12 行所做的那样），除非您在此处提供 onParamChange() 的实现，否则您的代码将无法编译，也就是说，我们在编译时检查已请求的每个回调是否正确实现参数。
 
-// ####################################################################################################
-\section multithreaded Multi-threading: running 4 edge detection algorithms in parallel
+// #################################################################################################### 
+\section multithreaded 多线程：并行运行 4 个边缘检测算法
 
-The JeVois smart camera features a quad-core processor, allowing you to run several operations in parallel.
+JeVois 智能相机配备四核处理器，可让您并行运行多个操作。
 
-C++11 provides great facilities that make writing parallel code very easy, namely:
+C++11 提供了许多便利，使得编写并行代码变得非常容易，即：
 
-- lambda functions: These are functions that are declared and defined "on the fly" just where they are needed and
-  usually with the intent that they will be used only once in that place. Importantly, they can access all variables
-  that are present in the scope under which the lambda function is created. This makes it easy to write simple functions
-  that will run in a thread of execution and will use the variables available at the time of lambda creation.
+- lambda 函数：这些函数是在需要时“即时”声明和定义的，通常目的是只在那个地方使用一次。重要的是，它们可以访问创建 lambda 函数的范围内存在的所有变量。这使得编写简单的函数变得容易，这些函数将在执行线程中运行，并使用在创建 lambda 时可用的变量。
 
-- std::async function to launch a function in a new thread of operation. std::async returns an std::future, which is a
-  handle to the possible future result of the function, once it has completed. If one calls get() on that future, the
-  caller will block until the thread executing our function has completed.
+- std::async 函数在新的操作线程中启动函数。std::async 返回 std::future，它是函数完成后可能的未来结果的句柄。如果对该未来调用 get()，则调用者将阻塞，直到执行我们函数的线程完成为止。
 
 
-Let's have a look by implementing an enhanced edge detection module, which runs 4 Canny algorithms using 4 different
-sets of parameters (e.g., from very fine to very coarse edge detections). We will place the 4 resulting edge images one
-on top of the other, resulting in an output image that is 4x as tall as the input image.
+让我们通过实现一个增强的边缘检测模块来看一下，该模块使用 4 组不同的参数（例如，从非常精细到非常粗糙的边缘检测）运行 4 种 Canny 算法。我们将 4 个得到的边缘图像一个接一个地放在另一个上面，从而得到一个高度是输入图像 4 倍的输出图像。
 
 \includelineno tutorial4.C
 
-Let us look at what is new compared to the previous example:
+让我们看看与前面的例子相比有什么新的：
 
-- Lines 7 - 14: We have two more parameters now, \c thresh1delta and \c thresh2delta which are the amount by which we
-  will increment thresh1 and thresh2 in each of the threads. So the first edge detector will use thresh1, the second
-  will use thresh1 + thresh1delta, the third thresh1 + 2 * thresh1delta, etc
+- 第 7 至 14 行：现在我们又有两个参数，\c thresh1delta 和 \c thresh2delta ，它们是我们在每个线程中增加 thresh1 和 thresh2 的量。因此，第一个边缘检测器将使用 thresh1，第二个将使用 thresh1 + thresh1delta，第三个将使用 thresh1 + 2 * thresh1delta，等等
 
-- Line 41: Our output image will store the 4 edge maps one on top of the other, hence we require the output image to be
-  the same width but 4x as tall as the input image.
+- 第 41 行：我们的输出图像将把 4 个边缘图一个叠一个地存储，因此我们要求输出图像的宽度相同，但高度是输入图像的 4 倍。
 
-- Line 44: The destructor of std::future will implicitly call get() if that has not yet been done when the future is
-  destroyed (runs out of scope). So if we do not store the futures returned when we use std::async below somewhere, they
-  will be destroyed, and our process will be blocked until the processing requested on each iteration of the loop below
-  is complete, thereby executing the 4 edge detections one after the other. To execute them in parallel, we will keep
-  the futures returned by std::async alive until we are ready to collect all the results from our 4 threads.
+- 第 44 行：如果在 Future 被销毁（超出范围）时尚未执行 get()，std::future 的析构函数将隐式调用 get()。因此，如果我们没有将使用 std::async 时返回的 Future 存储在某个地方，它们将被销毁，并且我们的进程将被阻止，直到下面循环的每次迭代所请求的处理完成，从而一个接一个地执行 4 个边缘检测。为了并行执行它们，我们将保持 std::async 返回的 Future 处于活动状态，直到我们准备好从我们的 4 个线程收集所有结果。
 
-- Line 46: we launch 3 parallel threads using std::async, and we will run the 4th edge detector in the current thread.
+- 第 46 行：我们使用 std::async 启动 3 个并行线程，并将在当前线程中运行第 4 个边缘检测器。
 
-- Line 47: Each thread will run a lambda function that will be given access (by reference) all the variables that exist
-  in the current scope ([&] notation), and that takes one \c int argument \c i (the instance number of the edge detector
-  we want to run).
+- 第 47 行：每个线程将运行一个 lambda 函数，该函数将被授予访问权限（通过引用）当前范围（[&] 符号）中存在的所有变量，并且该函数接受一个 \c int 参数 \c i （我们要运行的边缘检测器的实例编号）。
 
-- Line 50: as said in the comments, we create a cv::Mat that has pixels in our raw output imag earray, \c i images down.
+- 第 50 行：正如注释中所说，我们创建一个 cv::Mat，其中包含原始输出图像数组中的像素，\c i 图像向下。
 
-- Lines 52 - 53: We run Canny in thread \c i using parameters thresh1 + i * thresh1delta, etc
+- 第 52 - 53 行：我们在线程 \c i 中运行 Canny，使用参数 thresh1 + i * thresh1delta 等
 
-- Lines 57 - 59: This is essentially the same code as in our lambda function, but we do not need to create yet another
-  thread using std::async for our 4th edge detector, we can just run it in the current thread.
+- 第 57 - 59 行：这本质上与我们的 lambda 函数中的代码相同，但我们不需要使用 std::async 为我们的第 4 个边缘检测器创建另一个线程，我们可以在当前线程中运行它。
 
-- Line 61: by the time we get here, the 4th invovation of cv::Canny has completed. The other 3 should hence be ready as
-  well.
+- 第 61 行：当我们到达这里时，cv::Canny 的第 4 次调用已完成。因此其他 3 次调用也应该已准备就绪。
 
-- Line 66: we just wait until all threads are complete by running a get() on each future. Note that get() features
-  exception forwarding, i.e., it could throw if the function running in the thread threw. Here we just catch, warn, and
-  ignore any exception.
+- 第 66 行：我们只需在每个 Future 上运行 get() 即可等待所有线程完成。请注意，get() 具有异常转发功能，即，如果线程中运行的函数抛出异常，它也可能抛出异常。在这里，我们只需捕获、警告和忽略任何异常。
 
 
-// ####################################################################################################
-\section moremoduletutorial For more Module tutorials and examples
+// #################################################################################################### 
+\section moremoduletutorial 更多模块教程和示例
 
-For more, see:
+更多信息请参见：
 
-- \ref ProgrammerSDK for how to create and compile a new module
-- [the documentation of the JeVoisBase collection of modules](/basedoc/)
+- \ref ProgrammerSDK 介绍如何创建和编译新模块
+- [JeVoisBase 模块集合的文档](/basedoc/)
 
 */
+

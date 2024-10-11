@@ -23,8 +23,8 @@ namespace jevois
 {
   namespace dnn
   {
-    //! Post-Processor for neural network pipeline
-    /*! This is the last step in a deep neural network processing Pipeline. \ingroup dnn */
+    //! 神经网络管道的后处理器 
+    /*! 这是深度神经网络处理管道的最后一步。 \ingroup dnn */
     class PostProcessorSegment : public PostProcessor,
                                  public Parameter<postprocessor::segtype, postprocessor::alpha,
                                                   postprocessor::cthresh, postprocessor::bgid>
@@ -37,18 +37,18 @@ namespace jevois
         //! Destructor
         virtual ~PostProcessorSegment();
 
-        //! Freeze/unfreeze parameters that users should not change while running
+        //! 冻结/解冻用户在运行时不应更改的参数
         void freeze(bool doit) override;
         
-        //! Process outputs and draw/send some results
+        //! 处理输出并绘制/发送一些结果
         void process(std::vector<cv::Mat> const & outs, PreProcessor * preproc) override;
 
-        //! Report what happened in last process() to console/output video/GUI
+        //! 将上一个 process() 中发生的事情报告给控制台/输出视频/GUI
         void report(jevois::StdModule * mod, jevois::RawImage * outimg = nullptr,
                     jevois::OptGUIhelper * helper = nullptr, bool overlay = true, bool idle = false) override;
 
       protected:
-        void postInit() override; //!< Create colormap in postInit()
+        void postInit() override; //!< 在 postInit() 中创建 colormap
         std::array<uint32_t, 256> itsColor; //!< Colors for our drawings, as RGBA with zero alpha value
 
       private:

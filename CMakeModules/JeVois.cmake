@@ -14,11 +14,11 @@
 # Tel: +1 213 740 3527 - itti@pollux.usc.edu - http://iLab.usc.edu - http://jevois.org
 ######################################################################################################################
 
-# CMake helper functions for JeVois and additional libraries and modules:
+# JeVois 的 CMake helper 函数以及其他库和模块：
 
 message(STATUS "JeVois version ${JEVOIS_SOVERSION}")
 
-# Platform choice. Silence this message when compiling natively on JeVois-Pro to not confuse people:
+# Platform 选择。在 JeVois-Pro 上进行本地编译时，请忽略此消息，以免混淆：
 option(JEVOIS_PLATFORM "Cross-compile for hardware platform" OFF)
 if (NOT EXISTS /sys/class/npu/info)
   message(STATUS "JEVOIS_PLATFORM: ${JEVOIS_PLATFORM}")
@@ -34,7 +34,7 @@ if (NOT DEFINED JEVOIS_VENDOR)
 endif (NOT DEFINED JEVOIS_VENDOR)
 message(STATUS "JEVOIS_VENDOR: ${JEVOIS_VENDOR}")
 
-# Settings for native host compilation, or cross-compilation for the platform hardware:
+# 本地 host 编译或 platform 硬件的交叉编译的设置：
 if (JEVOIS_PLATFORM)
 
   # Flags for native compilation on platform from the JeVois-Pro GUI (as opposed to cross-compilation):
@@ -57,7 +57,7 @@ if (JEVOIS_PLATFORM)
     set(JEVOIS_ARCH "arm64")
 
   else (JEVOIS_NATIVE)
-    # Flags for cross-compilation running on a x86_64 host and targetting ARM hardware:
+    # 在 x86_64 主机上运行并针对 ARM 硬件的交叉编译标志：
     set(CMAKE_C_COMPILER ${JEVOIS_PLATFORM_C_COMPILER})
     set(CMAKE_CXX_COMPILER ${JEVOIS_PLATFORM_CXX_COMPILER})
     set(CMAKE_FC_COMPILER ${JEVOIS_PLATFORM_FORTRAN_COMPILER})
@@ -97,8 +97,7 @@ if (JEVOIS_PLATFORM)
         set(JEVOIS_MODULES_ROOT "../${JEVOIS}")
       endif()
       
-      # JEVOIS_ARCH is used to include/install the correct contributed libs (e.g., libtensorflowlite.so,
-      # libonnxruntime.so, etc):
+      # JEVOIS_ARCH 用于引入/安装正确的 contributed libs（例如，libtensorflowlite.so、libonnxruntime.so 等）：
       set(JEVOIS_ARCH "arm64")
     else (JEVOIS_PRO)
       set(JEVOIS_ARCH "armhf")

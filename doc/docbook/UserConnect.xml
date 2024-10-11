@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_UserConnect">
+<section xml:id="_UserConnect_1autotoc_md118">
+<title>基础知识</title>
+
+<para>JeVois-A33智能相机只有两个连接器：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>一个 mini-USB 2.0 B 型 5 针连接器，用于供电（必需）和将视频传输到主机（可选，取决于 JeVois 内部运行哪个机器视觉模块）；</para>
+</listitem><listitem>
+<para>一个 4 针 JST-SH 1.0 毫米连接器（称为<emphasis>微串行</emphasis>连接器），用于与微控制器（例如 Arduino）进行可选 TTL 级串行 (UART) 连接。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>始终需要通过 mini-USB 连接器供电才能运行。您应努力提供以下信息：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>调节5V +/- 10电压。</para>
+</listitem><listitem>
+<para>电流不低于 800mA（因此，总功率为 4 瓦）。如果您知道您将只使用一些不会完全加载 JeVois 内部 CPU 的机器视觉算法，那么电流可能会更小，因此会产生较低的功率要求。</para>
+</listitem><listitem>
+<para>没有显著的电流和功率通过微型串行端口（有关更多详细信息，请参阅 UserSerial）。因此，您无法通过微型串行端口为 JeVois 供电，而始终需要通过 Mini-USB 端口为其供电。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>可能存在多种电源和数据场景。下面给出了几个示例。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md119">
+<title>与主机的标准连接</title>
+
+<para>在标准连接中，JeVois 连接到主机的一个 USB 3.0 或两个 USB 2.0 端口。主机通过其端口为 JeVois 供电，也可以通过这些端口与 JeVois 通信（例如，将视频从 JeVois 传输到主机）。</para>
+
+<para>USB 2.0 端口的最大额定电流输出为 500mA（5V 时）。请注意，随着电流使用量的增加，电压可以降至 5V 以下。因此，将 JeVois 连接到单个 USB 2.0 端口可能无法提供足够的电力来在各种机器视觉算法下操作 JeVois。以前曾用于为需要超过 500mA 电流的外部硬盘或 CD-Rom 供电的标准技巧是使用所谓的 <emphasis role="bold">Y 型</emphasis> 电缆，该电缆连接到两个 USB 端口，从而将两个端口的电源组合起来，从而为设备提供高达 1A 的电流。Y 型电缆如下所示：</para>
+
+<para></para>
+
+<para>接线如下：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>连接到两根电线（上图中的黑色大连接器和下图中的 P1）的 USB-A 连接器（大 USB 连接器）将向 JeVois 传输电力和数据。</para>
+</listitem><listitem>
+<para>连接到一根电线（上图中的红色大连接器和下图中的 P3）的 USB-A 连接器（大 USB 连接器）将仅为 JeVois 传输电源。</para>
+</listitem><listitem>
+<para>迷你 USB 2.0 5 针连接器（上方的小黑色，下方的 P2）连接到 JeVois 并为其提供电源和数据。</para>
+</listitem></itemizedlist>
+</para>
+
+<para></para>
+
+<para>因此：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>当在仅支持 USB 2.0 的计算机上使用 Y 型电缆时，电缆的长端带有电源 + 数据，应连接到计算机（上图中的连接器 P1），而短端仅带有额外的电源，可以连接到同一台计算机上的另一个 USB 端口、USB 充电器、外部供电的 USB 集线器或 USB 电池组（上图中的连接器 P3）。迷你 USB 连接器（图中的 P2）始终连接到您的 JeVois 智能相机。</para>
+</listitem><listitem>
+<para>使用 USB 3.0，电流输出规格有所提高：单个 USB 3.0 端口现在额定提供不低于 900mA 的电流（在 5V 电压下，意味着 4.5 瓦功率）。因此，具有 USB 3.0 端口的主机仅使用一个 USB 3.0 端口即可为 JeVois 供电。当计算机上仅使用一个 USB 3.0 端口时，您只需将电缆的长端（传输电源 + 数据）连接到计算机（上图中的连接器 P1）。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>以下是使用 Y 型电缆将 JeVois 连接到主机的两个 USB 端口的示例：</para>
+
+<para></para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md120">
+<title>USB 电缆类型</title>
+
+<para>有许多类型的 mini-USB 2.0 电缆。最便宜的电缆通常使用能够传输数据的最细的电线。这些电缆可能不适合为 JeVois 传输足够的电力，因为非常细的电线无法为 JeVois 传输足够的电流。</para>
+
+<para>在美国，铜线直径使用 <link xlink:href="https://en.wikipedia.org/wiki/American_wire_gauge">美国线规</link> 或简称 AWG 来测量。AWG 值越小，表示电线越粗，可以承载更多电流，损耗越小。</para>
+
+<para>最便宜的 USB 电缆可能使用 30AWG 或 32AWG 线径（非常细）。虽然这对于数据线来说很合适，但不足以为 JeVois 供电。</para>
+
+<para>如果您购买 mini-USB 线缆，请确保线缆内部的两根电源线的线径为 24AWG 或更低（这些线缆的两根数据线的线径通常为 28AWG，因此会标记为 24/28AWG 线缆）。有时线缆上会写有以下信息：</para>
+
+<para>\图像 html UserConnectAWG.jpg</para>
+
+<para>上图显示的电缆有 1 对 28AWG 的双绞线（1P）用于传输数据，还有 2 对 24AWG 的导线（2C）用于传输电力。</para>
+
+<para><warning><title>Warning</title>
+
+<para>我们使用廉价的未知 AWG 等级的 USB 电缆无法正确为 JeVois 供电，即使长度为 20 厘米（8 英寸）。因此，电缆短并不意味着它可以正常工作。</para>
+</warning>
+如果有疑问，请查看 <link xlink:href="https://jevoisinc.com">https://jevoisinc.com</link>，因为那里的所有电缆都是定制制造的，并经过测试，可在满负荷下与 JeVois 配合使用。事实上，我们现在已经将生产线转移到所有 22AWG 电源线，以尽可能降低电源线的损耗（22AWG 甚至比 24AWG 更厚，因此更适合低损耗传输电流；但 24AWG 仍然合适）。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md121">
+<title>附加连接场景</title>
+<section xml:id="_UserConnect_1autotoc_md122">
+<title>连接到具有弱 USB 端口的主机</title>
+
+<para>虽然 USB 2.0 端口应该能够提供 500mA 电流（根据 USB 规范），但有时却不能。小型嵌入式电路板通常就是这种情况，它们本身由微型 USB 连接器供电，然后将部分电力传输到自己的 USB 端口。</para>
+
+<para>当主机为其 USB 端口供电的能力较弱时，您可以使用 Y 型电缆并将短端（仅供电）连接到稳定电源来补充供电。例如：</para>
+
+<para></para>
+
+<para>&#160;</para>
+
+<para>&#160;</para>
+
+<para></para>
+
+<para>请注意，在上述两种情况下，我们都将带有两根电线（连接器 P1）的 USB-A 插头连接到嵌入式计算机的 USB 端口，以便电源和数据在 JeVois 和嵌入式计算机之间流动。我们只用一根电线（仅用于供电，连接器 P3）将 USB-A 插头连接到辅助电源。因此：</para>
+
+<para><itemizedlist>
+<listitem>
+<para>电流将从连接器 P3 经连接器 P1 流向连接器 P2。</para>
+</listitem><listitem>
+<para>数据（从 JeVois 到嵌入式计算机的流视频）将在 JeVois（连接器 P2）和嵌入式计算机（连接器 P1）之间流动。</para>
+</listitem></itemizedlist>
+</para>
+
+<para>图片右侧嵌入式计算机连接的微型 USB 电缆用于为该计算机供电，并且应将其连接到 USB 充电器、USB 移动电源等。在这种情况下，您可能需要使用提供多个 USB 输出的 USB 移动电源，大型 USB 移动电源通常都是如此；或者，同样，使用具有多个输出的 USB 充电器（本页显示的小型白色壁式充电器有 2 个端口；许多 USB 充电器型号都有 6 个或更多端口）。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md123">
+<title>无需主机为 JeVois 供电</title>
+
+<para>JeVois 并不总是通过 USB 端口传输视频。在某些情况下，它可以作为独立计算机工作。</para>
+
+<para>例如，<link xlink:href="/moddoc/SurpriseRecorder/modinfo.html">基于 Surprise 的视频记录器机器视觉模块</link> 使用 JeVois 作为智能监控摄像头，它只会监控环境，并在每次检测到意外情况时将短视频片段保存到其 microSD 卡中。在这种情况下，我们只需为 JeVois 供电。这可以使用 USB 充电器、USB 电池组等来实现，如下所示。</para>
+
+<para></para>
+
+<para>&#160;</para>
+
+<para>&#160;</para>
+
+<para></para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md124">
+<title>没有主机，但有微控制器</title>
+
+<para>在其他情况下，JeVois 可能不会通过 USB 传输视频，但可能会通过其微型串行端口发出消息，例如向自主机器人上的微控制器提供信息。</para>
+
+<para></para>
+
+<para>对于这种情况，[分离式迷你+微型电缆]（https://www.jevoisinc.com/collections/accessories/products/mini-usb-micro-usb-splitter-cable-15cm-6-in-long）可以派上用场：</para>
+
+<para></para>
+
+<para>确保您的 USB 移动电源的额定输出电流至少为 1A。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md125">
+<title>由单个原始锂电池供电</title>
+
+<para>您可以使用方便的 <link xlink:href="https://www.jevoisinc.com/collections/accessories/products/step-up-dc-dc-boost-converter-3v-to-usb-5v-1a">升压 DC/DC 转换器</link> 从电压低于 5V 的电源（例如，额定电压为 3.7V 的单个锂电池）为 JeVois 供电。这样做，您实际上是在构建自己的 USB 电池组（其中包含锂电池和 DC/DC 转换器）。</para>
+
+<para>\图像 html UserConnectStepUp.jpg</para>
+
+<para>如果您想将视频数据传输到功率太弱而无法单独为 JeVois 供电的主机，请使用 Y 型电缆，而不是上面显示的单根电缆，就像我们在之前的场景中使用过的那样。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md126">
+<title>使用电压大于 5V 的电源供电</title>
+
+<para>您可以使用 <link xlink:href="https://www.jevoisinc.com/collections/accessories/products/step-down-6-24v-in-to-usb-5v-3a-out-dc-dc-converter">降压 DC/DC 转换器</link> 从电压大于 5V 的电源（例如 12V 汽车电池）为 JeVois 供电。这里我们展示了连接到汽车点烟器适配器的此类转换器。</para>
+
+<para>\图像 html UserConnectStepDown.jpg</para>
+
+<para>您还可以使用标准点烟器 USB 充电器（人们可以通过汽车点烟器端口为手机充电）。确保其额定电流至少为 1A。</para>
+
+<para>如果您想将视频数据传输到功率太弱而无法单独为 JeVois 供电的主机，请使用 Y 型电缆，而不是上面显示的单根电缆，就像我们在之前的场景中使用过的那样。</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md127">
+<title>使用 JeVois 和 OpenWRT 计算机通过 WIFI 传输视频</title>
+
+<para><link xlink:href="http://openwrt.org">OpenWRT</link> 是有线和无线网络路由器的开源框架。OpenWRT 支持 USB 摄像头，可以使用 <emphasis role="bold">mjpg-streamer</emphasis> OpenWRT 模块无线传输视频，请参阅 <link xlink:href="https://wiki.openwrt.org/doc/howto/webcam">https://wiki.openwrt.org/doc/howto/webcam</link></para>
+
+<para>然后，您只需使用 Y 型电缆将 JeVois 连接到 OpenWRT 盒的 USB 端口和附加电源（OpenWRT 盒上的 USB 端口不太可能为 JeVois 供电）。OpenWRT 盒将 JeVois 检测为连接的 USB 摄像头，并触发 <emphasis role="bold">mjpg-streamer</emphasis> 模块。配置文件和选项传递给 mjpg-streamer 以选择正确的分辨率，然后您就可以开始了。您可以通过将平板电脑无线连接到 OpenWRT 路由器（充当 wifi 接入点）来观看视频，然后将浏览器指向某个 URL（请参阅 mjpg-streamer 文档），您将在该 URL 上看到来自 JeVois 的视频。</para>
+
+<para>尝试搜索“GL-MT300N”或类似名称。虽然我们没有使用过这个型号，但它应该可以正常工作，因为它有 OpenWRT 以及一个 USB2.0 端口，您可以将 JeVois 连接到该端口。请注意，这些 OpenWRT 盒子中的 CPU 非常慢（例如，200MHz 单核），因此您能够观看视频的帧速率可能会受到限制。在我们的测试中，我们可以在 320x240 MJPG 上实现 15fps。由于 OpenWRT CPU 速度较慢，您最好在 JeVois 上对 MJPG 进行压缩，然后从 JeVois 流式传输 MJPG 视频，这样 OpenWRT 盒子就会通过 wifi 转发视频帧，而无需在 OpenWRT CPU 上压缩它们。</para>
+
+<para>\图像 html UserConnectOpenWRT.jpg</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md128">
+<title>测量功耗</title>
+
+<para>您可以使用 <link xlink:href="https://www.jevoisinc.com/collections/accessories/products/usb-power-meter">USB 电源测试仪</link> 测量 JeVois 的功耗。只需确保使用单个端口为 JeVois 供电（USB 3.0、充电器、电池等），而不是 Y 型电缆，否则您可能无法测量进入 JeVois 的全部功率。</para>
+
+<para></para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md129">
+<title>在哪里可以找到正确的电缆和耗材</title>
+
+<para>经认证可与 JeVois 配合使用的电缆、电池组、DC/DC 转换器等可在 <link xlink:href="http://jevoisinc.com">http://jevoisinc.com</link> 上找到</para>
+</section>
+<section xml:id="_UserConnect_1autotoc_md130">
+<title>故障排除</title>
+
+<para>使用不适合充电的<emphasis>细</emphasis> USB 电缆，有时 JeVois 似乎可以正确启动，但主机无法检测到，或者似乎工作不稳定（视频连接断开等）。</para>
+
+<para>在 Linux 上，尝试在终端中发出 <computeroutput>dmesg</computeroutput> 命令，并检查以下内容（确切的数字会发生变化，但您希望看到检测到 <emphasis role="bold">JeVois-A33 智能相机</emphasis>）：</para>
+
+<para><literallayout><computeroutput>[14985.916593] usb 1-1.2：使用 xhci_hcd 的新高速 USB 设备编号 30 [14986.021050] usb 1-1.2：发现新 USB 设备，idVendor=1d6b，idProduct=0102 [14986.021053] usb 1-1.2：新 USB 设备字符串：Mfr=1，Product=2，SerialNumber=0 [14986.021055] usb 1-1.2：产品：JeVois-A33 智能相机 [14986.021056] usb 1-1.2：制造商：JeVois Inc [14986.043758] uvcvideo：发现 UVC 1.00 设备 JeVois-A33 智能相机(1d6b:0102) [14986.045193] 输入：JeVois-A33 智能摄像头为 /devices/pci0000:00/0000:00:1c.6/0000:09:00.0/usb1/1-1/1-1.2/1-1.2:1.0/input/input48 [14986.046144] cdc_acm 1-1.2:1.2：ttyACM0：USB ACM 设备 [14986.047206] usb-storage 1-1.2:1.4：检测到 USB 大容量存储设备 [14986.047353] scsi host32：usb-storage 1-1.2:1.4 [14987.044678] scsi 32:0:0:0: 直接访问 JeVois 智能相机 0333 PQ: 0 ANSI: 2 [14987.045298] sd 32:0:0:0: 连接 scsi 通用 sg8 类型 0 [14987.046092] sd 32:0:0:0: [sdh] 连接 SCSI 可移动磁盘 </computeroutput></literallayout></para>
+
+<para>如果你看到这样的错误：</para>
+
+<para><literallayout><computeroutput>[14977.226733] uvcvideo：无法查询（129）UVC 探测器控制：-19（指数 26）。[14977.226736] uvcvideo：无法初始化设备（-5）。 </computeroutput></literallayout></para>
+
+<para>那么很可能是您的电缆有问题（无法承载足够的电流），或者您的 USB 端口太弱等等。 </para>
+</section>
+</section>
+</section>

@@ -1,0 +1,764 @@
+\hypertarget{group__utils}{}\doxysubsection{Misc utilities}
+\label{group__utils}\index{Misc utilities@{Misc utilities}}
+
+
+\doxysubsubsection{ }
+各种实用程序和辅助函数。 
+
+Collaboration diagram for Misc utilities\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__utils}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classjevois_1_1ThreadPool}{jevois\+::\+Thread\+Pool}}
+\begin{DoxyCompactList}\small\item\em 具有 C\+PU 亲和力的线程池 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{group__compilerutil}{其他与控制编译相关的预处理器实用程序}}
+\item 
+\mbox{\hyperlink{group__console}{控制台访问实用程序}}
+\begin{DoxyCompactList}\small\item\em 控制台相关的实用程序和帮助函数。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__coordhelpers}{用于将坐标从相机分辨率转换为标准坐标的辅助函数}}
+\begin{DoxyCompactList}\small\item\em Je\+Vois 中的不同机器视觉算法可能以不同的相机分辨率运行，例如 1280x1024、320x240 或 176x144。当在相机帧中检测到某些感兴 趣的物品时，人们通常希望将该物品的坐标发送到串行端口。如果直接发送物品的图像坐标，就会出现问题，即现在接收器（例如 Arduino）需要知道使用了哪种相机图像分辨率，以便能够正确解释这些坐标。例如，如果视觉注意（显著性）算法使用 640x480 相 机输入运行，则相机视野中心的显著物体的坐标为 320,240。但如果将相同的显著性算法配置为处理 320x240 输入视频（以便它可以 以更高的帧速率运行），现在视野中心的物体的坐标为 160,120。如果将控制例如云台的 Arduino 连接到 Je\+Vois，我们需要一种方法 来独立于相机使用的视频分辨率传达世界上目标物体的坐标。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{group__demangling}{Name demangling 函数}}
+\begin{DoxyCompactList}\small\item\em Name demangling 函数返回源代码中所写的类型的原始名称，而不是编译器内部使用的名称，该名称被解析以避免跨不同命名空 间、重载等的名称冲突和混淆。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}{X\+I\+O\+C\+TL}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__utils_ga30dfc52798d0b53ad1736a622759b9ff}{X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__utils_ga03db0ad166b1e653bae8910cb3d76795}{X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+E\+T\+\_\+\+O\+N\+CE}}(dev,  req,  mem)
+\begin{DoxyCompactList}\small\item\em 辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{group__utils_ga7649d6ce325acac1606bceec036f171b}{jevois\+::joinall}} (std\+::vector$<$ std\+::future$<$ T $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga019e31f64c16f1b7a51bd2676acddfb9}{jevois\+::joinall}} (std\+::vector$<$ std\+::future$<$ void $>$$>$ \&fvec, bool multiline=true)
+\begin{DoxyCompactList}\small\item\em 从多个异步线程收集结果，这些线程都返回 T 结果 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gac76ed513027efe252fe64756fae6d0b6}{jevois\+::fccstr}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 将 V4\+L2 four-\/cc 代码（\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...）转换为 4 字符字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}{jevois\+::cvtypestr}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 将 cv\+::\+Mat\+::type() 代码转换为字符串（例如 C\+V\+\_\+8\+U\+C1、\+C\+V\+\_\+32\+S\+C3 等） \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga1ce31b21602cde5b241a59b4312ee6d5}{jevois\+::cv\+Bytes\+Per\+Pix}} (unsigned int cvtype)
+\begin{DoxyCompactList}\small\item\em 返回给定 Open\+CV 像素类型每像素的字节数 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga34f3127327f6113672a16d3a041552df}{jevois\+::strfcc}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 将 Je\+Vois 视频格式字符串转换为 V4\+L2 four-\/cc 代码 (V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...) \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}{jevois\+::v4l2\+Bytes\+Per\+Pix}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+ 每像素的字节数... \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gafa5c6faaeefd12994a07c09ed748176c}{jevois\+::v4l2\+Image\+Size}} (unsigned int fcc, unsigned int width, unsigned int height)
+\begin{DoxyCompactList}\small\item\em 返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+... 的图像大小（以字节为单位）, width, height \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_gae3448a5e4bbd80efd03d6417974834d0}{jevois\+::black\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的黑色的值 \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}{jevois\+::white\+Color}} (unsigned int fcc)
+\begin{DoxyCompactList}\small\item\em 返回对应于给定视频格式的白色的值 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gad1e7ee20cd2509969dcd07acfb188f2b}{jevois\+::apply\+Letter\+Box}} (unsigned int \&imw, unsigned int \&imh, unsigned int const winw, unsigned int const winh, bool noalias)
+\begin{DoxyCompactList}\small\item\em 应用 letterbox 调整大小以使图像适合窗口 \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{group__utils_gac91eaef1908f07d3ecd6112eb12ef571}{jevois\+::split}} (std\+::string const \&input, std\+::string const \&regex=\char`\"{}\textbackslash{}\textbackslash{}s+\char`\"{})
+\begin{DoxyCompactList}\small\item\em 使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga31195f1860c3aff445df8be6e602fecd}{jevois\+::join}} (std\+::vector$<$ std\+::string $>$ const \&strings, std\+::string const \&delimiter)
+\begin{DoxyCompactList}\small\item\em 将 tokens 向量连接成字符串 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{group__utils_gac058832c57b8033f8a90e05c8ecee103}{jevois\+::string\+Starts\+With}} (std\+::string const \&str, std\+::string const \&prefix)
+\begin{DoxyCompactList}\small\item\em 如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa5a52cf5cff1d44b33db20364c07801a}{jevois\+::replace\+Whitespace}} (std\+::string const \&str, char rep=\textquotesingle{}\+\_\+\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em 用下划线（默认）或其他字符替换字符串中的空格字符 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga283968df765ce49751142cd55e0364d7}{jevois\+::strip}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串末尾去除空格（包括 C\+R、\+L\+F、tabs 等） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga4b0d94273d4e910b353a0ff999c23b7c}{jevois\+::extract\+String}} (std\+::string const \&str, std\+::string const \&startsep, std\+::string const \&endsep)
+\begin{DoxyCompactList}\small\item\em 提取两个分隔符之间的字符串部分 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_ga34ee23a47b698e960a477d9d4e2d435d}{jevois\+::replace\+String\+First}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将 \textquotesingle{}from\textquotesingle{} 的第一个实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{group__utils_gab6a5b228ce68e5634e2bb2c778b0bc34}{jevois\+::replace\+String\+All}} (std\+::string \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gafd49e84b9b5e4d95b1d4da28bdbbdb94}{jevois\+::replace\+All}} (std\+::string const \&str, std\+::string const \&from, std\+::string const \&to)
+\begin{DoxyCompactList}\small\item\em 将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga534153c7b53c07a0db4bbdcbb81b566f}{jevois\+::tolower}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em Convert string to lowercase. \end{DoxyCompactList}\item 
+std\+::filesystem\+::path \mbox{\hyperlink{group__utils_gabd49e55c0ae1f31a3f30d73284469eac}{jevois\+::absolute\+Path}} (std\+::filesystem\+::path const \&root, std\+::filesystem\+::path const \&path)
+\begin{DoxyCompactList}\small\item\em 根据两个路径计算绝对路径 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_gaa49a5ccff29adea33326680d1e22b456}{jevois\+::sformat}} (char const $\ast$fmt,...) \+\_\+\+\_\+attribute\+\_\+\+\_\+((format(\+\_\+\+\_\+printf\+\_\+\+\_\+
+\begin{DoxyCompactList}\small\item\em 使用 printf 样式参数创建字符串 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string T \mbox{\hyperlink{group__utils_ga7eb44bbb053c52395d5704aa15265632}{jevois\+::from\+\_\+string}} (std\+::string const \&str)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T $>$ }\\std\+::string \mbox{\hyperlink{group__utils_gae142fbf87f70b758581c1845c2fa58e7}{jevois\+::to\+\_\+string}} (T const \&val)
+\begin{DoxyCompactList}\small\item\em 从字符串转换为类型，适用于整数类型的版本 \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename dest\+\_\+type , typename source\+\_\+type $>$ }\\dest\+\_\+type \mbox{\hyperlink{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}{jevois\+::clamped\+\_\+convert}} (source\+\_\+type source)
+\begin{DoxyCompactList}\small\item\em Clamped numerical conversion. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga3c42b68a3562220199677eed7cdceb51}{jevois\+::flushcache}} ()
+\begin{DoxyCompactList}\small\item\em 刷新缓存，有时在 turbo 模式下运行相机时可能会有用 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}{jevois\+::system}} (std\+::string const \&cmd, bool errtoo=true)
+\begin{DoxyCompactList}\small\item\em 执行命令并将 stdout 输出抓取到字符串 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}{jevois\+::secs2str}} (double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga961f407b12b1d4a32577facc3d1f6ad9}{jevois\+::secs2str}} (std\+::vector$<$ double $>$ secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位给出的 avg+/-\/std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_gaa9401ec9d35d0669e256673c8cdeb4f4}{jevois\+::secs2str}} (std\+::ostringstream \&ss, double secs)
+\begin{DoxyCompactList}\small\item\em 报告以秒为单位的持续时间（ns、us、ms 或 s） \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}{jevois\+::num2str}} (double n)
+\begin{DoxyCompactList}\small\item\em 报告一个具有可变乘数（\+K、\+M、\+G、\+T、\+P、\+E、\+Z、\+Y）的数字，精度为小数点后 2 位 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{group__utils_ga074c42c36f209780e0420ca3b6e3bfc6}{jevois\+::num2str}} (std\+::ostringstream \&ss, double n)
+\begin{DoxyCompactList}\small\item\em 报告具有可变乘数 (K、\+M、\+G、\+T、\+P、\+E、\+Z、Y) 的数字 \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{group__utils_ga55e88d558a6aeff700099fa3180fc025}{jevois\+::get\+File\+String}} (char const $\ast$fname, int skip=0)
+\begin{DoxyCompactList}\small\item\em 从文件中读取一行并将其作为字符串返回 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}\label{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}} 
+\index{Misc utilities@{Misc utilities}!XIOCTL@{XIOCTL}}
+\index{XIOCTL@{XIOCTL}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{XIOCTL}{XIOCTL}}
+{\footnotesize\ttfamily \#define X\+I\+O\+C\+TL(\begin{DoxyParamCaption}\item[{}]{dev,  }\item[{}]{req,  }\item[{}]{mem }\end{DoxyParamCaption})}
+
+
+
+辅助宏用于执行 ioctl、忽略中断，如果发生错误，则发出致命消息并抛出 
+
+该宏假定 req 是相应 ioctl 编号的标识符 (\#define) 
+
+Definition at line 198 of file Utils.\+H.
+
+\mbox{\Hypertarget{group__utils_ga30dfc52798d0b53ad1736a622759b9ff}\label{group__utils_ga30dfc52798d0b53ad1736a622759b9ff}} 
+\index{Misc utilities@{Misc utilities}!XIOCTL\_QUIET@{XIOCTL\_QUIET}}
+\index{XIOCTL\_QUIET@{XIOCTL\_QUIET}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{XIOCTL\_QUIET}{XIOCTL\_QUIET}}
+{\footnotesize\ttfamily \#define X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+ET(\begin{DoxyParamCaption}\item[{}]{dev,  }\item[{}]{req,  }\item[{}]{mem }\end{DoxyParamCaption})}
+
+
+
+辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 
+
+这很有用，例如，对于 V4\+L2 相机格式枚举，其中应该使用增加的格式号调用 ioctl，直到失败。当发生这种情况时，我们 不想像 \mbox{\hyperlink{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}{X\+I\+O\+C\+T\+L()}} 那样显示任何致命错误消息。此宏假定 req 是相应 ioctl 编号的标识符。 
+
+Definition at line 208 of file Utils.\+H.
+
+\mbox{\Hypertarget{group__utils_ga03db0ad166b1e653bae8910cb3d76795}\label{group__utils_ga03db0ad166b1e653bae8910cb3d76795}} 
+\index{Misc utilities@{Misc utilities}!XIOCTL\_QUIET\_ONCE@{XIOCTL\_QUIET\_ONCE}}
+\index{XIOCTL\_QUIET\_ONCE@{XIOCTL\_QUIET\_ONCE}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{XIOCTL\_QUIET\_ONCE}{XIOCTL\_QUIET\_ONCE}}
+{\footnotesize\ttfamily \#define X\+I\+O\+C\+T\+L\+\_\+\+Q\+U\+I\+E\+T\+\_\+\+O\+N\+CE(\begin{DoxyParamCaption}\item[{}]{dev,  }\item[{}]{req,  }\item[{}]{mem }\end{DoxyParamCaption})}
+
+
+
+辅助宏用于执行 ioctl、忽略中断，并且如果出现错误则静默抛出 
+
+这很有用，例如，对于 V4\+L2 相机格式枚举，其中应该使用增加的格式号调用 ioctl，直到失败。当发生这种情况时，我们 不想像 \mbox{\hyperlink{group__utils_gaf8eeacf544c62a2dad5399589ef4533e}{X\+I\+O\+C\+T\+L()}} 那样显示任何致命错误消息。此宏假定 req 是相应 ioctl 编号的标识符。请注意，在此版本中，我们 会抛出任何错误。 
+
+Definition at line 219 of file Utils.\+H.
+
+
+
+\doxysubsubsection{Function Documentation}
+\mbox{\Hypertarget{group__utils_gabd49e55c0ae1f31a3f30d73284469eac}\label{group__utils_gabd49e55c0ae1f31a3f30d73284469eac}} 
+\index{Misc utilities@{Misc utilities}!absolutePath@{absolutePath}}
+\index{absolutePath@{absolutePath}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{absolutePath()}{absolutePath()}}
+{\footnotesize\ttfamily std\+::filesystem\+::path jevois\+::absolute\+Path (\begin{DoxyParamCaption}\item[{std\+::filesystem\+::path const \&}]{root,  }\item[{std\+::filesystem\+::path const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+根据两个路径计算绝对路径 
+
+参数 {\ttfamily path} 包含可以是绝对路径也可以是相对路径；参数 {\ttfamily root} 应包含根路径。如果 path 是绝对路径，则返回该路径；否则， 将 root 添加到其前面并返回结果。 
+
+Definition at line 385 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::\+Component\+::absolute\+Path(), jevois\+::dnn\+::\+Network\+Open\+C\+V\+::load(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::load(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::load(), jevois\+::dnn\+::\+Network\+Hailo\+::load(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::load(), jevois\+::dnn\+::\+Pipeline\+::on\+Param\+Change(), jevois\+::dnn\+::\+Pipeline\+::process(), and jevois\+::\+Component\+::set\+Params\+From\+File().
+
+\mbox{\Hypertarget{group__utils_gad1e7ee20cd2509969dcd07acfb188f2b}\label{group__utils_gad1e7ee20cd2509969dcd07acfb188f2b}} 
+\index{Misc utilities@{Misc utilities}!applyLetterBox@{applyLetterBox}}
+\index{applyLetterBox@{applyLetterBox}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{applyLetterBox()}{applyLetterBox()}}
+{\footnotesize\ttfamily void jevois\+::apply\+Letter\+Box (\begin{DoxyParamCaption}\item[{unsigned int \&}]{imw,  }\item[{unsigned int \&}]{imh,  }\item[{unsigned int const}]{winw,  }\item[{unsigned int const}]{winh,  }\item[{bool}]{noalias }\end{DoxyParamCaption})}
+
+
+
+应用 letterbox 调整大小以使图像适合窗口 
+
+修改给定的图像尺寸（imw，imh），以使图像适合窗口尺寸（winw，winh），同时尽可能大，但不修改图像的纵横比。如果指定了 noalias，则缩放因子将向下舍入到最接近的整数以防止显示混叠。这可能会减小显示的图像大小。例如，对于 1920x1080 的窗口，当 noalias 为 false 时，640x480 的图像将被 leterbox 化为 1440x1080。但这是 2.\+25 的比例因子，可能会产生渲染混叠。当 noalias 为 true 时，leterbox 图像大小将为 1280x960（比例因子为 2.\+0）。 
+
+Definition at line 222 of file Utils.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::\+G\+P\+Uimage\+::draw(), and jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process().
+
+\mbox{\Hypertarget{group__utils_gae3448a5e4bbd80efd03d6417974834d0}\label{group__utils_gae3448a5e4bbd80efd03d6417974834d0}} 
+\index{Misc utilities@{Misc utilities}!blackColor@{blackColor}}
+\index{blackColor@{blackColor}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{blackColor()}{blackColor()}}
+{\footnotesize\ttfamily unsigned int jevois\+::black\+Color (\begin{DoxyParamCaption}\item[{unsigned int}]{fcc }\end{DoxyParamCaption})}
+
+
+
+返回对应于给定视频格式的黑色的值 
+
+
+
+Definition at line 172 of file Utils.\+C.
+
+
+
+References jevois\+::fccstr(), J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI, and L\+F\+A\+T\+AL.
+
+\mbox{\Hypertarget{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}\label{group__utils_gaaab187d6c9387a19cc8a4efb6053f6a6}} 
+\index{Misc utilities@{Misc utilities}!clamped\_convert@{clamped\_convert}}
+\index{clamped\_convert@{clamped\_convert}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{clamped\_convert()}{clamped\_convert()}}
+{\footnotesize\ttfamily template$<$typename dest\+\_\+type , typename source\+\_\+type $>$ \\
+dest\+\_\+type jevois\+::clamped\+\_\+convert (\begin{DoxyParamCaption}\item[{source\+\_\+type}]{source }\end{DoxyParamCaption})}
+
+
+
+Clamped numerical conversion. 
+
+\mbox{\Hypertarget{group__utils_ga1ce31b21602cde5b241a59b4312ee6d5}\label{group__utils_ga1ce31b21602cde5b241a59b4312ee6d5}} 
+\index{Misc utilities@{Misc utilities}!cvBytesPerPix@{cvBytesPerPix}}
+\index{cvBytesPerPix@{cvBytesPerPix}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{cvBytesPerPix()}{cvBytesPerPix()}}
+{\footnotesize\ttfamily unsigned int jevois\+::cv\+Bytes\+Per\+Pix (\begin{DoxyParamCaption}\item[{unsigned int}]{cvtype }\end{DoxyParamCaption})}
+
+
+
+返回给定 Open\+CV 像素类型每像素的字节数 
+
+
+
+Definition at line 89 of file Utils.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::dnn\+::concatenate(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess(), and jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess().
+
+\mbox{\Hypertarget{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}\label{group__utils_ga5cf98a150bb5637de6bbbbb1607ef669}} 
+\index{Misc utilities@{Misc utilities}!cvtypestr@{cvtypestr}}
+\index{cvtypestr@{cvtypestr}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{cvtypestr()}{cvtypestr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::cvtypestr (\begin{DoxyParamCaption}\item[{unsigned int}]{cvtype }\end{DoxyParamCaption})}
+
+
+
+将 cv\+::\+Mat\+::type() 代码转换为字符串（例如 C\+V\+\_\+8\+U\+C1、\+C\+V\+\_\+32\+S\+C3 等） 
+
+
+
+Definition at line 58 of file Utils.\+C.
+
+
+
+References jevois\+::to\+\_\+string().
+
+
+
+Referenced by jevois\+::dnn\+::concatenate(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Cv\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Cv\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Cv\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Cv\+Y\+U\+Y\+V(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::dnn\+::\+Network\+O\+N\+N\+X\+::doprocess(), jevois\+::rawimage\+::paste\+B\+G\+Rto\+Y\+U\+Y\+V(), jevois\+::rawimage\+::paste\+R\+G\+Bto\+Y\+U\+Y\+V(), jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process(), jevois\+::\+Output\+Frame\+::send\+Cv(), jevois\+::dnn\+::shapestr(), and jevois\+::rawimage\+::unpack\+Cv\+R\+G\+B\+Ato\+Gray\+Raw\+Image().
+
+\mbox{\Hypertarget{group__utils_ga4b0d94273d4e910b353a0ff999c23b7c}\label{group__utils_ga4b0d94273d4e910b353a0ff999c23b7c}} 
+\index{Misc utilities@{Misc utilities}!extractString@{extractString}}
+\index{extractString@{extractString}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{extractString()}{extractString()}}
+{\footnotesize\ttfamily std\+::string jevois\+::extract\+String (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{std\+::string const \&}]{startsep,  }\item[{std\+::string const \&}]{endsep }\end{DoxyParamCaption})}
+
+
+
+提取两个分隔符之间的字符串部分 
+
+如果未找到分隔符，则返回空字符串。 
+
+Definition at line 316 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__utils_gac76ed513027efe252fe64756fae6d0b6}\label{group__utils_gac76ed513027efe252fe64756fae6d0b6}} 
+\index{Misc utilities@{Misc utilities}!fccstr@{fccstr}}
+\index{fccstr@{fccstr}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{fccstr()}{fccstr()}}
+{\footnotesize\ttfamily std\+::string jevois\+::fccstr (\begin{DoxyParamCaption}\item[{unsigned int}]{fcc }\end{DoxyParamCaption})}
+
+
+
+将 V4\+L2 four-\/cc 代码（\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...）转换为 4 字符字符串 
+
+
+
+Definition at line 45 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::black\+Color(), jevois\+::\+Video\+Mapping\+::c2str(), jevois\+::\+Camera\+Device\+::\+Camera\+Device(), jevois\+::\+Raw\+Image\+::clear(), jevois\+::rawimage\+::convert\+Cv\+B\+G\+Rto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+G\+R\+A\+Yto\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+B\+Ato\+Raw\+Image(), jevois\+::rawimage\+::convert\+Cv\+R\+G\+Bto\+Raw\+Image(), jevois\+::\+Video\+Mapping\+::cstr(), jevois\+::\+Engine\+::find\+Video\+Mapping(), jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+G\+P\+Utexture\+Dma\+Buf(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), jevois\+::\+Video\+Mapping\+::ostr(), jevois\+::\+Raw\+Image\+::require(), jevois\+::dnn\+::\+Pre\+Processor\+::sendreport(), jevois\+::\+Camera\+Device\+::set\+Format(), jevois\+::\+Gadget\+::set\+Format(), jevois\+::\+G\+P\+Uimage\+::set\+Internal(), jevois\+::\+G\+P\+Uimage\+::set\+With\+Dma\+Buf(), jevois\+::v4l2\+Bytes\+Per\+Pix(), and jevois\+::white\+Color().
+
+\mbox{\Hypertarget{group__utils_ga3c42b68a3562220199677eed7cdceb51}\label{group__utils_ga3c42b68a3562220199677eed7cdceb51}} 
+\index{Misc utilities@{Misc utilities}!flushcache@{flushcache}}
+\index{flushcache@{flushcache}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{flushcache()}{flushcache()}}
+{\footnotesize\ttfamily void jevois\+::flushcache (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+刷新缓存，有时在 turbo 模式下运行相机时可能会有用 
+
+
+
+Definition at line 449 of file Utils.\+C.
+
+
+
+References L\+E\+R\+R\+OR.
+
+\mbox{\Hypertarget{group__utils_ga7eb44bbb053c52395d5704aa15265632}\label{group__utils_ga7eb44bbb053c52395d5704aa15265632}} 
+\index{Misc utilities@{Misc utilities}!from\_string@{from\_string}}
+\index{from\_string@{from\_string}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{from\_string()}{from\_string()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::string T jevois\+::from\+\_\+string (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+从字符串转换为类型 
+
+对于整数类型，内部使用 std\+::stoll() 作为该类型，它支持前缀 0（八进制）和 0x（十六进制）。请注意八进制约定，除非您有意，否 则不要传递前导零。对于非整数类型，内部使用 operator$>$$>$ 作为该类型，因此它适用于任何支持它的类型。 \mbox{\Hypertarget{group__utils_ga55e88d558a6aeff700099fa3180fc025}\label{group__utils_ga55e88d558a6aeff700099fa3180fc025}} 
+\index{Misc utilities@{Misc utilities}!getFileString@{getFileString}}
+\index{getFileString@{getFileString}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{getFileString()}{getFileString()}}
+{\footnotesize\ttfamily std\+::string jevois\+::get\+File\+String (\begin{DoxyParamCaption}\item[{char const $\ast$}]{fname,  }\item[{int}]{skip = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+从文件中读取一行并将其作为字符串返回 
+
+有助于从虚拟内核文件系统获取信息，例如 C\+PU 温度等。参数 {\ttfamily skip} 可选地指定在返回感兴趣的行之前要跳过的行数。 
+
+Definition at line 541 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess(), jevois\+::\+G\+U\+Ihelper\+::draw\+System(), jevois\+::get\+Fan\+Speed(), jevois\+::get\+Num\+Installed\+S\+P\+Us(), jevois\+::get\+Num\+Installed\+T\+P\+Us(), jevois\+::get\+Sys\+Info\+C\+P\+U(), jevois\+::get\+Sys\+Info\+Mem(), jevois\+::get\+Sys\+Info\+Version(), jevois\+::\+G\+U\+Ihelper\+::\+G\+U\+Ihelper(), and jevois\+::\+Engine\+::post\+Init().
+
+\mbox{\Hypertarget{group__utils_ga31195f1860c3aff445df8be6e602fecd}\label{group__utils_ga31195f1860c3aff445df8be6e602fecd}} 
+\index{Misc utilities@{Misc utilities}!join@{join}}
+\index{join@{join}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{join()}{join()}}
+{\footnotesize\ttfamily std\+::string jevois\+::join (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ const \&}]{strings,  }\item[{std\+::string const \&}]{delimiter }\end{DoxyParamCaption})}
+
+
+
+将 tokens 向量连接成字符串 
+
+
+
+Definition at line 280 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process().
+
+\mbox{\Hypertarget{group__utils_ga7649d6ce325acac1606bceec036f171b}\label{group__utils_ga7649d6ce325acac1606bceec036f171b}} 
+\index{Misc utilities@{Misc utilities}!joinall@{joinall}}
+\index{joinall@{joinall}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{joinall()}{joinall()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::vector$<$T$>$ jevois\+::joinall (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::future$<$ T $>$$>$ \&}]{fvec,  }\item[{bool}]{multiline = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+从多个异步线程收集结果，这些线程都返回 T 结果 
+
+保证 get() 将在所有 futures 上运行。如果抛出任何错误，则收集所有错误消息（如果可能，例如，抛出了 std\+::exception）并将它们 组装成单个字符串，形式为 \char`\"{}\mbox{[}error 1\mbox{]}\mbox{[}error 2\mbox{]} ...\char`\"{} 或 \char`\"{}error 1\textbackslash{}nerror 2\textbackslash{}n...\char`\"{}，然后将其作为 std\+::runtime\+\_\+error 抛出 
+
+Referenced by jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::yolo().
+
+\mbox{\Hypertarget{group__utils_ga019e31f64c16f1b7a51bd2676acddfb9}\label{group__utils_ga019e31f64c16f1b7a51bd2676acddfb9}} 
+\index{Misc utilities@{Misc utilities}!joinall@{joinall}}
+\index{joinall@{joinall}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{joinall()}{joinall()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::joinall (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::future$<$ void $>$$>$ \&}]{fvec,  }\item[{bool}]{multiline = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+从多个异步线程收集结果，这些线程都返回 T 结果 
+
+保证 get() 将在所有 futures 上运行。如果出现任何异常，则收集所有错误消息（如果可能，例如，抛出了 std\+::exception）并将它们 组装成单个字符串，形式为 \char`\"{}\mbox{[}error 1\mbox{]}\mbox{[}error 2\mbox{]} ...\char`\"{} 或 \char`\"{}error 1\textbackslash{}nerror 2\textbackslash{}n...\char`\"{}，然后将其作为 std\+::runtime\+\_\+error \mbox{\Hypertarget{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}\label{group__utils_ga3d57bcea9c02b2c2b91e064d58b4b005}} 
+\index{Misc utilities@{Misc utilities}!num2str@{num2str}}
+\index{num2str@{num2str}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{num2str()}{num2str()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::string jevois\+::num2str (\begin{DoxyParamCaption}\item[{double}]{n }\end{DoxyParamCaption})}
+
+
+
+报告一个具有可变乘数（\+K、\+M、\+G、\+T、\+P、\+E、\+Z、\+Y）的数字，精度为小数点后 2 位 
+
+
+
+Definition at line 511 of file Utils.\+C.
+
+
+
+References jevois\+::sformat().
+
+
+
+Referenced by jevois\+::dnn\+::\+Network\+Open\+C\+V\+::doprocess().
+
+\mbox{\Hypertarget{group__utils_ga074c42c36f209780e0420ca3b6e3bfc6}\label{group__utils_ga074c42c36f209780e0420ca3b6e3bfc6}} 
+\index{Misc utilities@{Misc utilities}!num2str@{num2str}}
+\index{num2str@{num2str}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{num2str()}{num2str()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void jevois\+::num2str (\begin{DoxyParamCaption}\item[{std\+::ostringstream \&}]{ss,  }\item[{double}]{n }\end{DoxyParamCaption})}
+
+
+
+报告具有可变乘数 (K、\+M、\+G、\+T、\+P、\+E、\+Z、Y) 的数字 
+
+在调用此函数之前，您应该使用流中的 std\+::setprecision(n) 确定精度。 
+
+Definition at line 526 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__utils_gafd49e84b9b5e4d95b1d4da28bdbbdb94}\label{group__utils_gafd49e84b9b5e4d95b1d4da28bdbbdb94}} 
+\index{Misc utilities@{Misc utilities}!replaceAll@{replaceAll}}
+\index{replaceAll@{replaceAll}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{replaceAll()}{replaceAll()}}
+{\footnotesize\ttfamily std\+::string jevois\+::replace\+All (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{std\+::string const \&}]{from,  }\item[{std\+::string const \&}]{to }\end{DoxyParamCaption})}
+
+
+
+将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} 
+
+
+
+Definition at line 361 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process().
+
+\mbox{\Hypertarget{group__utils_gab6a5b228ce68e5634e2bb2c778b0bc34}\label{group__utils_gab6a5b228ce68e5634e2bb2c778b0bc34}} 
+\index{Misc utilities@{Misc utilities}!replaceStringAll@{replaceStringAll}}
+\index{replaceStringAll@{replaceStringAll}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{replaceStringAll()}{replaceStringAll()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::replace\+String\+All (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str,  }\item[{std\+::string const \&}]{from,  }\item[{std\+::string const \&}]{to }\end{DoxyParamCaption})}
+
+
+
+将所有 \textquotesingle{}from\textquotesingle{} 实例替换为 \textquotesingle{}to\textquotesingle{} 
+
+
+
+Definition at line 344 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::dnn\+::read\+Labels\+File().
+
+\mbox{\Hypertarget{group__utils_ga34ee23a47b698e960a477d9d4e2d435d}\label{group__utils_ga34ee23a47b698e960a477d9d4e2d435d}} 
+\index{Misc utilities@{Misc utilities}!replaceStringFirst@{replaceStringFirst}}
+\index{replaceStringFirst@{replaceStringFirst}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{replaceStringFirst()}{replaceStringFirst()}}
+{\footnotesize\ttfamily size\+\_\+t jevois\+::replace\+String\+First (\begin{DoxyParamCaption}\item[{std\+::string \&}]{str,  }\item[{std\+::string const \&}]{from,  }\item[{std\+::string const \&}]{to }\end{DoxyParamCaption})}
+
+
+
+将 \textquotesingle{}from\textquotesingle{} 的第一个实例替换为 \textquotesingle{}to\textquotesingle{} 
+
+
+
+Definition at line 331 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__utils_gaa5a52cf5cff1d44b33db20364c07801a}\label{group__utils_gaa5a52cf5cff1d44b33db20364c07801a}} 
+\index{Misc utilities@{Misc utilities}!replaceWhitespace@{replaceWhitespace}}
+\index{replaceWhitespace@{replaceWhitespace}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{replaceWhitespace()}{replaceWhitespace()}}
+{\footnotesize\ttfamily std\+::string jevois\+::replace\+Whitespace (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{char}]{rep = {\ttfamily \textquotesingle{}\+\_\+\textquotesingle{}} }\end{DoxyParamCaption})}
+
+
+
+用下划线（默认）或其他字符替换字符串中的空格字符 
+
+
+
+Definition at line 300 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::\+Std\+Module\+::send\+Serial\+Contour2\+D(), jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2\+D(), jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Reco(), jevois\+::\+Std\+Module\+::send\+Serial\+Std1\+Dx(), jevois\+::\+Std\+Module\+::send\+Serial\+Std1\+Dy(), jevois\+::\+Std\+Module\+::send\+Serial\+Std2\+D(), and jevois\+::\+Std\+Module\+::send\+Serial\+Std3\+D().
+
+\mbox{\Hypertarget{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}\label{group__utils_ga54a11682b4afc2645f69f4f0770ea1bb}} 
+\index{Misc utilities@{Misc utilities}!secs2str@{secs2str}}
+\index{secs2str@{secs2str}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{secs2str()}{secs2str()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily std\+::string jevois\+::secs2str (\begin{DoxyParamCaption}\item[{double}]{secs }\end{DoxyParamCaption})}
+
+
+
+报告以秒为单位的持续时间，单位可变（ns、us、ms 或 s），精度为小数点后 2 位 
+
+
+
+Definition at line 478 of file Utils.\+C.
+
+
+
+References jevois\+::sformat().
+
+
+
+Referenced by jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::\+Timer\+::stop(), jevois\+::\+Profiler\+::stop(), and jevois\+::\+Timer\+One\+::stop().
+
+\mbox{\Hypertarget{group__utils_gaa9401ec9d35d0669e256673c8cdeb4f4}\label{group__utils_gaa9401ec9d35d0669e256673c8cdeb4f4}} 
+\index{Misc utilities@{Misc utilities}!secs2str@{secs2str}}
+\index{secs2str@{secs2str}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{secs2str()}{secs2str()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily void jevois\+::secs2str (\begin{DoxyParamCaption}\item[{std\+::ostringstream \&}]{ss,  }\item[{double}]{secs }\end{DoxyParamCaption})}
+
+
+
+报告以秒为单位的持续时间（ns、us、ms 或 s） 
+
+在调用此函数之前，您应该使用流中的 std\+::setprecision(n) 确定精度。 
+
+Definition at line 502 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__utils_ga961f407b12b1d4a32577facc3d1f6ad9}\label{group__utils_ga961f407b12b1d4a32577facc3d1f6ad9}} 
+\index{Misc utilities@{Misc utilities}!secs2str@{secs2str}}
+\index{secs2str@{secs2str}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{secs2str()}{secs2str()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily std\+::string jevois\+::secs2str (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{secs }\end{DoxyParamCaption})}
+
+
+
+报告以秒为单位给出的 avg+/-\/std 持续时间，单位为变量（ns、us、ms 或 s），带有 1 个小数点 
+
+
+
+Definition at line 487 of file Utils.\+C.
+
+
+
+References jevois\+::sformat().
+
+\mbox{\Hypertarget{group__utils_gaa49a5ccff29adea33326680d1e22b456}\label{group__utils_gaa49a5ccff29adea33326680d1e22b456}} 
+\index{Misc utilities@{Misc utilities}!sformat@{sformat}}
+\index{sformat@{sformat}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{sformat()}{sformat()}}
+{\footnotesize\ttfamily std\+::string jevois\+::sformat (\begin{DoxyParamCaption}\item[{char const $\ast$}]{fmt,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+使用 printf 样式参数创建字符串 
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::string s = \mbox{\hyperlink{group__utils_gaa49a5ccff29adea33326680d1e22b456}{jevois::sformat}}(\textcolor{stringliteral}{"MyString\_\%f\_\%d"}, 1.0, 2);}
+\end{DoxyCode}
+
+
+通常应避免使用 \mbox{\hyperlink{group__utils_gaa49a5ccff29adea33326680d1e22b456}{sformat()}}，而应使用 C++ 的流式运算符，但有一个例外，即当发出包含浮点数的串行消息时，sformat 的类似 printf 的语法可用于快速轻松地指定数值精度。 
+
+Definition at line 439 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::\+D\+M\+Pdata\+::activity(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), jevois\+::\+G\+U\+Ihelper\+::iinfo(), jevois\+::num2str(), jevois\+::\+Camera\+::read\+Register(), jevois\+::dnn\+::\+Post\+Processor\+Classify\+::report(), jevois\+::dnn\+::\+Post\+Processor\+Detect\+::report(), jevois\+::dnn\+::\+Post\+Processor\+Yu\+Net\+::report(), jevois\+::secs2str(), jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2\+D(), jevois\+::\+Camera\+::write\+Register(), and jevois\+::dnn\+::\+Post\+Processor\+Detect\+Y\+O\+L\+O\+::yolo().
+
+\mbox{\Hypertarget{group__utils_gac91eaef1908f07d3ecd6112eb12ef571}\label{group__utils_gac91eaef1908f07d3ecd6112eb12ef571}} 
+\index{Misc utilities@{Misc utilities}!split@{split}}
+\index{split@{split}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{split()}{split()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ jevois\+::split (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{input,  }\item[{std\+::string const \&}]{regex = {\ttfamily \char`\"{}\textbackslash{}\textbackslash{}s+\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+使用正则表达式将字符串拆分为 tokens 向量以指定要拆分的内容；默认正则表达式按空格拆分 
+
+
+
+Definition at line 270 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image(), jevois\+::\+G\+U\+Ihelper\+::draw\+System(), jevois\+::\+Serial\+::file\+Put(), jevois\+::\+G\+U\+Ihelper\+::\+G\+U\+Ihelper(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::load(), jevois\+::dnn\+::\+Post\+Processor\+Classify\+::on\+Param\+Change(), jevois\+::dnn\+::\+Post\+Processor\+Detect\+::on\+Param\+Change(), jevois\+::\+Engine\+::parse\+Command(), jevois\+::dnn\+::parse\+Tensor\+Specs(), jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process(), jevois\+::dnn\+::\+Pipeline\+::process(), jevois\+::dnn\+::\+Network\+::process(), jevois\+::dnn\+::strshape(), jevois\+::warn\+And\+Ignore\+Exception(), jevois\+::warn\+And\+Rethrow\+Exception(), and jevois\+::\+Chat\+Box\+::write\+String().
+
+\mbox{\Hypertarget{group__utils_ga34f3127327f6113672a16d3a041552df}\label{group__utils_ga34f3127327f6113672a16d3a041552df}} 
+\index{Misc utilities@{Misc utilities}!strfcc@{strfcc}}
+\index{strfcc@{strfcc}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{strfcc()}{strfcc()}}
+{\footnotesize\ttfamily unsigned int jevois\+::strfcc (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+将 Je\+Vois 视频格式字符串转换为 V4\+L2 four-\/cc 代码 (V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+...) 
+
+如果 str 不是以下之一，则抛出运行时错误：\+B\+A\+Y\+E\+R、\+Y\+U\+Y\+V、\+G\+R\+E\+Y、\+G\+R\+A\+Y、\+M\+J\+P\+G、\+R\+G\+B565、\+B\+G\+R24 或 N\+O\+N\+E。 
+
+Definition at line 111 of file Utils.\+C.
+
+
+
+References I\+S\+P\+\_\+\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+E\+TA, and J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI.
+
+\mbox{\Hypertarget{group__utils_gac058832c57b8033f8a90e05c8ecee103}\label{group__utils_gac058832c57b8033f8a90e05c8ecee103}} 
+\index{Misc utilities@{Misc utilities}!stringStartsWith@{stringStartsWith}}
+\index{stringStartsWith@{stringStartsWith}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{stringStartsWith()}{stringStartsWith()}}
+{\footnotesize\ttfamily bool jevois\+::string\+Starts\+With (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str,  }\item[{std\+::string const \&}]{prefix }\end{DoxyParamCaption})}
+
+
+
+如果 str 以 prefix 开头，则返回 true（包括两个字符串相等的情况） 
+
+
+
+Definition at line 294 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::\+G\+U\+Iserial\+::draw(), jevois\+::\+G\+U\+Iconsole\+::draw(), jevois\+::\+G\+U\+Ihelper\+::draw\+System(), jevois\+::\+Serial\+::file\+Put(), jevois\+::\+Engine\+::post\+Init(), and jevois\+::dnn\+::\+Pipeline\+::show\+Info().
+
+\mbox{\Hypertarget{group__utils_ga283968df765ce49751142cd55e0364d7}\label{group__utils_ga283968df765ce49751142cd55e0364d7}} 
+\index{Misc utilities@{Misc utilities}!strip@{strip}}
+\index{strip@{strip}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{strip()}{strip()}}
+{\footnotesize\ttfamily std\+::string jevois\+::strip (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+从字符串末尾去除空格（包括 C\+R、\+L\+F、tabs 等） 
+
+
+
+Definition at line 308 of file Utils.\+C.
+
+
+
+Referenced by jevois\+::\+Engine\+::run\+Script\+From\+File().
+
+\mbox{\Hypertarget{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}\label{group__utils_ga63b839e0e7f2fa177df3755ee1205fee}} 
+\index{Misc utilities@{Misc utilities}!system@{system}}
+\index{system@{system}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{system()}{system()}}
+{\footnotesize\ttfamily std\+::string jevois\+::system (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{cmd,  }\item[{bool}]{errtoo = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+执行命令并将 stdout 输出抓取到字符串 
+
+如果 errtoo 为真，我们还通过在命令后附加 2$>$\&1 来抓取错误。如果命令无法以某种方式运行，或者以非零退出代码退出，则抛出 std\+::runtime\+\_\+error。 
+
+Definition at line 461 of file Utils.\+C.
+
+
+
+References L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::\+G\+U\+Ihelper\+::compile\+Command(), jevois\+::\+G\+U\+Ihelper\+::draw\+System(), jevois\+::get\+Num\+Installed\+T\+P\+Us(), jevois\+::get\+Num\+Installed\+V\+P\+Us(), jevois\+::\+Engine\+::parse\+Command(), jevois\+::\+Engine\+::reboot(), jevois\+::\+Watchdog\+::run(), jevois\+::\+Movie\+Output\+::stream\+Off(), and jevois\+::\+Movie\+Output\+::$\sim$\+Movie\+Output().
+
+\mbox{\Hypertarget{group__utils_gae142fbf87f70b758581c1845c2fa58e7}\label{group__utils_gae142fbf87f70b758581c1845c2fa58e7}} 
+\index{Misc utilities@{Misc utilities}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+std\+::string jevois\+::to\+\_\+string (\begin{DoxyParamCaption}\item[{T const \&}]{val }\end{DoxyParamCaption})}
+
+
+
+从字符串转换为类型，适用于整数类型的版本 
+
+
+
+Referenced by jevois\+::dnn\+::attrstr(), jevois\+::\+Camera\+Device\+::\+Camera\+Device(), jevois\+::cvtypestr(), jevois\+::dnn\+::\+Network\+T\+P\+U\+::doprocess(), jevois\+::dnn\+::\+Network\+Hailo\+::doprocess(), jevois\+::dnn\+::\+Network\+N\+P\+U\+::doprocess(), jevois\+::\+G\+U\+Ihelper\+::draw\+Image(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame(), jevois\+::\+G\+U\+Ihelper\+::draw\+Input\+Frame2(), jevois\+::\+Serial\+::file\+Get(), jevois\+::dnn\+::get\+Label(), jevois\+::get\+Num\+Installed\+S\+P\+Us(), jevois\+::get\+Num\+Installed\+T\+P\+Us(), jevois\+::\+Std\+Module\+::get\+Stamp(), jevois\+::get\+Sys\+Info\+C\+P\+U(), jevois\+::dnn\+::hailo2vsi(), jevois\+::\+Engine\+::load\+Camera\+Calibration(), main(), jevois\+::dnn\+::onnx2vsi(), jevois\+::\+Engine\+::parse\+Command(), jevois\+::dnn\+::\+Pre\+Processor\+Python\+Impl\+::process(), jevois\+::dnn\+::\+Pre\+Processor\+Blob\+::process(), jevois\+::\+Video\+Buffers\+::qbuf(), jevois\+::\+Watchdog\+::run(), jevois\+::\+Engine\+::run\+Script\+From\+File(), jevois\+::\+Camera\+Calibration\+::save(), jevois\+::\+Engine\+::save\+Camera\+Calibration(), jevois\+::\+Im\+Gui\+Backend\+M\+A\+L\+I\+::scan\+Devices(), jevois\+::\+Std\+Module\+::send\+Serial\+Obj\+Det\+Img2\+D(), jevois\+::\+Camera\+::set\+Format(), jevois\+::dnn\+::shapestr(), jevois\+::dnn\+::\+Pipeline\+::show\+Data\+Peek\+Window(), jevois\+::\+Video\+Mapping\+::sopath(), jevois\+::dnn\+::tensorattr(), and jevois\+::dnn\+::vsi2cv().
+
+\mbox{\Hypertarget{group__utils_ga534153c7b53c07a0db4bbdcbb81b566f}\label{group__utils_ga534153c7b53c07a0db4bbdcbb81b566f}} 
+\index{Misc utilities@{Misc utilities}!tolower@{tolower}}
+\index{tolower@{tolower}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{tolower()}{tolower()}}
+{\footnotesize\ttfamily std\+::string jevois\+::tolower (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{str }\end{DoxyParamCaption})}
+
+
+
+Convert string to lowercase. 
+
+
+
+Definition at line 377 of file Utils.\+C.
+
+\mbox{\Hypertarget{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}\label{group__utils_ga4f32c685308caf5e428e27b8ccaee14b}} 
+\index{Misc utilities@{Misc utilities}!v4l2BytesPerPix@{v4l2BytesPerPix}}
+\index{v4l2BytesPerPix@{v4l2BytesPerPix}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{v4l2BytesPerPix()}{v4l2BytesPerPix()}}
+{\footnotesize\ttfamily unsigned int jevois\+::v4l2\+Bytes\+Per\+Pix (\begin{DoxyParamCaption}\item[{unsigned int}]{fcc }\end{DoxyParamCaption})}
+
+
+
+返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+ 每像素的字节数... 
+
+
+
+Definition at line 141 of file Utils.\+C.
+
+
+
+References jevois\+::fccstr(), I\+S\+P\+\_\+\+V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+\+M\+E\+TA, J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI, and L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::\+Raw\+Image\+::bytesize(), jevois\+::\+Raw\+Image\+::bytesperpix(), jevois\+::rawimage\+::cv\+Image(), jevois\+::\+G\+P\+Utexture\+Dma\+Buf\+::\+G\+P\+Utexture\+Dma\+Buf(), and jevois\+::v4l2\+Image\+Size().
+
+\mbox{\Hypertarget{group__utils_gafa5c6faaeefd12994a07c09ed748176c}\label{group__utils_gafa5c6faaeefd12994a07c09ed748176c}} 
+\index{Misc utilities@{Misc utilities}!v4l2ImageSize@{v4l2ImageSize}}
+\index{v4l2ImageSize@{v4l2ImageSize}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{v4l2ImageSize()}{v4l2ImageSize()}}
+{\footnotesize\ttfamily unsigned int jevois\+::v4l2\+Image\+Size (\begin{DoxyParamCaption}\item[{unsigned int}]{fcc,  }\item[{unsigned int}]{width,  }\item[{unsigned int}]{height }\end{DoxyParamCaption})}
+
+
+
+返回给定 V4\+L2\+\_\+\+P\+I\+X\+\_\+\+F\+M\+T\+\_\+... 的图像大小（以字节为单位）, width, height 
+
+
+
+Definition at line 168 of file Utils.\+C.
+
+
+
+References jevois\+::v4l2\+Bytes\+Per\+Pix().
+
+
+
+Referenced by jevois\+::\+Video\+Mapping\+::c2size(), jevois\+::\+Video\+Mapping\+::csize(), jevois\+::\+Video\+Mapping\+::osize(), jevois\+::\+Camera\+Device\+::stream\+On(), and jevois\+::\+Gadget\+::stream\+On().
+
+\mbox{\Hypertarget{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}\label{group__utils_ga7bf3f71d614429a46eda4d9c133e2866}} 
+\index{Misc utilities@{Misc utilities}!whiteColor@{whiteColor}}
+\index{whiteColor@{whiteColor}!Misc utilities@{Misc utilities}}
+\doxyparagraph{\texorpdfstring{whiteColor()}{whiteColor()}}
+{\footnotesize\ttfamily unsigned int jevois\+::white\+Color (\begin{DoxyParamCaption}\item[{unsigned int}]{fcc }\end{DoxyParamCaption})}
+
+
+
+返回对应于给定视频格式的白色的值 
+
+
+
+Definition at line 197 of file Utils.\+C.
+
+
+
+References jevois\+::fccstr(), J\+E\+V\+O\+I\+S\+P\+R\+O\+\_\+\+F\+M\+T\+\_\+\+G\+UI, and L\+F\+A\+T\+AL.
+
+
+
+Referenced by jevois\+::draw\+Error\+Image().
+

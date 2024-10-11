@@ -1,357 +1,190 @@
-/*! \page UserDNNtpu Converting and running neural networks for Coral TPU
+/*! \page UserDNNtpu 为 Coral TPU 转换并运行神经网络
 
 
-\jvpro supports [Google Coral](https://coral.ai) 4-TOPS tensor processing units (TPU) as optional hadrware neural
-accelerator. One can use either the standard [Coral M.2 2230 A+E PCIe
-board](https://coral.ai/products/m2-accelerator-ae/), a custom JeVois board that includes 2 Coral TPUs + one eMMC flash
-disk onto a single M.2 2230 board, or any number of [Coral USB dongles](https://coral.ai/products/accelerator/). Note
-that PCIe is much faster at 5 Gbits/s data transfer compared to USB 2.0 at 480 Mbits/s (the JeVois-Pro processor only
-have one 5 GBits/s interface, which we use for PCIe).
+\jvpro 支持 [Google Coral](https://coral.ai) 4-TOPS 张量处理单元 (TPU) 作为可选的硬件神经加速器。可以使用标准 [Coral M.2 2230 A+E PCIe 板](https://coral.ai/products/m2-accelerator-ae/)、包含 2 个 Coral TPU + 一个 eMMC 闪存盘（安装在单个 M.2 2230 板上）的定制 JeVois 板或任意数量的 [Coral USB 加密狗](https://coral.ai/products/accelerator/)。请注意，与 480 Mbits/s 的 USB 2.0 相比，PCIe 的数据传输速度更快（5 Gbits/s，而 JeVois-Pro 处理器只有一个 5 GBits/s 接口，我们将其用于 PCIe）。
 
-\note \jvpro only. This accelerator is not supported on \jva33.
+\note 仅限 \jvpro。\jva33 不支持此加速器。
 
-Supported neural network frameworks
-===================================
+支持的神经网络框架====================================
 
-- TensorFlow / TensorFlow-Lite
+-TensorFlow / TensorFlow-Lite
 
-The TPU can run models quantized to int8 weights. It does not support float weights and hence quantization and
-conversion are necessary. A limited number of operations and layer types is supported by the hardware, which further
-constrains what can run on it. Further, only a small amount of RAM is on the accelerator, which further constrains the
-size of networks that can efficiently run on it. But it is manyfold faster than a standard CPU.
+TPU 可以运行量化为 int8 权重的模型。它不支持浮点权重，因此需要量化和转换。硬件支持的操作和层类型数量有限，这进一步限制了可以在其上运行的内容。此外，加速器上只有少量 RAM，这进一步限制了可以有效运行的网络规模。但它比标准 CPU 快很多倍。
 
-For execution on TPU, your model will be quantized and then converted on a Linux desktop to a blob format that can then
-be transferred to JeVois-Pro microSD for execution.
+为了在 TPU 上执行，您的模型将被量化，然后在 Linux 桌面上转换为 blob 格式，然后可以将其传输到 JeVois-Pro microSD 进行执行。
 
-Procedure
-=========
+程序 =========
 
-- Read and understand the JeVois docs about \ref UserDNNoverview
+- 阅读并理解有关 \ref UserDNNoverview 的 JeVois 文档
 
-- Make sure you understand the quantization concepts in \ref UserDNNconv
+- 确保你理解 \ref UserDNNconv 中的量化概念
 
-- Check out the [official Google Coral docs](https://coral.ai/docs/)
+- 查看 [官方 Google Coral 文档](https://coral.ai/docs/)
 
-- The TPU only supports a specific set of layer types. If you try to convert a network that contains unsupported layers,
-  the conversion may sometimes seem to succeed but your converted network may fail to run, or run very slowly using
-  CPU-based emulation. Check the [compatibility overview](https://coral.ai/docs/edgetpu/models-intro/) before you
-  attempt to convert a network. In particular, note this statement in the Coral docs: <em>Note: Currently, the Edge TPU
-  compiler cannot partition the model more than once, so as soon as an unsupported operation occurs, that operation and
-  everything after it executes on the CPU, even if supported operations occur later.</em>
+- TPU 仅支持一组特定的层类型。如果您尝试转换包含不受支持的层的网络，转换有时似乎会成功，但转换后的网络可能无法运行，或者使用基于 CPU 的模拟运行非常缓慢。在尝试转换网络之前，请检查 [兼容性概述](https://coral.ai/docs/edgetpu/models-intro/)。特别要注意 Coral 文档中的以下声明：<em>注意：目前，Edge TPU 编译器无法多次对模型进行分区，因此一旦发生不受支持的操作，该操作及其后的所有内容都会在 CPU 上执行，即使稍后发生受支持的操作也是如此。</em>
 
-- You need to download and install the [EdgeTPU compiler](https://coral.ai/docs/edgetpu/compiler/) to convert/quantize
-  your model on a desktop computer running Linux Ubuntu 20.04.
+- 你需要下载并安装 [EdgeTPU 编译器](https://coral.ai/docs/edgetpu/compiler/)，以便在运行 Linux Ubuntu 20.04 的台式计算机上转换/量化你的模型。
 
-- Everything you need for runtime inference (EdgeTPU runtime libraries, kernel drivers, PyCoral) is pre-installed on
-  your JeVois microSD.
+- 运行时推理所需的一切（EdgeTPU 运行时库、内核驱动程序、PyCoral）都已预先安装在您的 JeVois microSD 上。
 
-- Obtain a model: train your own, or download a pretrained model.
+- 获得模型：训练您自己的模型，或下载预先训练的模型。
 
-  + Beware the the TPU has only around 6.5 MBytes of available on-board RAM for model parameters, which acts as a pseudo
-    cache (see https://coral.ai/docs/edgetpu/compiler/). So, best performance will be obtained with smaller models which
-    can fit into that small RAM all at once. Larger models will require constant loading/unloading of weights over the
-    PCIe or USB links. Larger models run much better on the JeVois-Pro integrated NPU, which has direct access to the
-    main RAM (4 GBytes on JeVois-Pro).
++ 请注意，TPU 仅有大约 6.5 MB 的板载 RAM 可用于存储模型参数，这充当了伪缓存（请参阅 https://coral.ai/docs/edgetpu/compiler/）。因此，较小的模型可以一次性装入较小的 RAM 中，从而获得最佳性能。较大的模型需要通过 PCIe 或 USB 链路不断加载/卸载权重。较大的模型在 JeVois-Pro 集成 NPU 上运行得更好，它可以直接访问主 RAM（JeVois-Pro 上为 4 GB）。
 
-  + Google recommends starting from one of their models at https://coral.ai/models/ and retraining it on your own data
-    as explained in https://github.com/google-coral/tutorials
++ Google 建议从 https://coral.ai/models/ 上的一个模型开始，然后使用你自己的数据对其进行重新训练，如 https://github.com/google-coral/tutorials 中所述
 
-- Obtain some parameters about the model (e.g., pre-processing mean, stdev, scale, expected input image size, RGB or
-  BGR, packed (NWHC) or planar (NCHW) pixels, etc).
+- 获取有关模型的一些参数（例如，预处理平均值、标准差、比例、预期输入图像大小、RGB 或 BGR、打包（NWHC）或平面（NCHW）像素等）。
 
-- Copy model to JeVois microSD card under JEVOIS[PRO]:/share/dnn/custom/
+- 将模型复制到 JEVOIS[PRO]:/share/dnn/custom/ 下的 JeVois microSD 卡
 
-- Create a JeVois model zoo entry for your model, where you specify the model parameters and the location where you
-  copied your model files. Typically this is a YAML file under JEVOIS[PRO]:/share/dnn/custom/
+- 为您的模型创建一个 JeVois 模型动物园条目，在其中指定模型参数和复制模型文件的位置。通常，这是 JEVOIS[PRO]:/share/dnn/custom/ 下的 YAML 文件
 
-- Launch the JeVois \jvmod{DNN} module. It will scan the custom directory for any valid YAML file, and make your model
-  available as one available value for the \p pipe parameter of the DNN module's Pipeline component. Select that pipe to
-  run your model.
+- 启动 JeVois \jvmod{DNN} 模块。它将扫描自定义目录以查找任何有效的 YAML 文件，并使您的模型作为 DNN 模块的 Pipeline 组件的 \p 管道参数的一个可用值。选择该管道以运行您的模型。
 
-Setting up the EdgeTPU compiler
-===============================
+设置 EdgeTPU 编译器 =================================
 
-\note Everything below is to be run on a fast x86_64 desktop computer running Ubuntu 20.04 Linux, not on your JeVois-Pro
-camera. At the end, we will copy the converted model to microSD and then run inference on JeVois-Pro with that model.
+\note 以下所有内容均应在运行 Ubuntu 20.04 Linux 的快速 x86_64 台式计算机上运行，​​而不是在您的 JeVois-Pro 相机上运行。最后，我们将转换后的模型复制到 microSD，然后使用该模型在 JeVois-Pro 上运行推理。
 
-Follow the instructions at https://coral.ai/docs/edgetpu/compiler/
+按照 https://coral.ai/docs/edgetpu/compiler/ 上的说明进行操作
 
-\code{.py}
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+\code{.py} curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
-echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
+回显“deb https://packages.cloud.google.com/apt coral-edgetpu-stable main”| sudo tee /etc/apt/sources.list.d/coral-edgetpu.list
 
-sudo apt-get update
+sudo apt-get 更新
 
-sudo apt-get install edgetpu-compiler
+sudo apt-get 安装 edgetpu-编译器
 
-edgetpu_compiler --help
-\endcode
+edgetpu_compiler --help \endcode
 
-Example: Object classification using NASNetMobile
-=================================================
+示例：使用 NASNetMobile 进行对象分类 ====================================================
 
-- Many pre-trained models are available at https://coral.ai/models/
+- 许多预先训练的模型可在 https://coral.ai/models/ 上找到
 
-- Here, let's use NASNetMobile since it is not already in that list.
+- 这里，我们使用 NASNetMobile，因为它还不在列表中。
 
-- Let's try a variation on the [Coral colab on retraining a classification
-  model](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_classification_ptq_tf2.ipynb)
-  with NASNetMobile. Also check out the [other Coral tutorials](https://github.com/google-coral/tutorials).
+- 让我们尝试使用 NASNetMobile 对 [Coral colab 进行分类模型再训练](https://colab.research.google.com/github/google-coral/tutorials/blob/master/retrain_classification_ptq_tf2.ipynb) 进行改进。另请查看 [其他 Coral 教程](https://github.com/google-coral/tutorials)。
 
-- Here we skip the training part and just use a pre-trained model on ImageNet, to focus on the quantization and
-  conversion to Edge TPU.
+- 这里我们跳过训练部分，只使用 ImageNet 上的预训练模型，专注于量化和转换到 Edge TPU。
 
-1. Install TensorFlow
----------------------
+1. 安装 TensorFlow ---------------------
 
-- The preferred method is through conda, as detailed at https://www.tensorflow.org/install/pip
+- 首选方法是通过 conda，详情见https://www.tensorflow.org/install/pip
 
-- Here we will instead just get the tensorflow wheel in a python3 virtual env, which has fewer steps:
+- 在这里，我们将在 python3 虚拟环境中获取 tensorflow wheel，这样步骤更少：
 
-\code{.py}
-python3 -m venv tf_for_tpu
-source tf_for_tpu/bin/activate
-pip install --upgrade pip
-pip install tensorflow
-python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))" # test install
-\endcode
+\code{.py} python3 -m venv tf_for_tpu source tf_for_tpu/bin/activate pip install --upgrade pip pip install tensorflow python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))" # 测试安装 \endcode
 
-You may see some warnings about missing GPU libs which we just ignore here (CPU is enough to just convert a model), and
-finally something like **tf.Tensor(-337.86047, shape=(), dtype=float32)** which is the result of our test command (the
-value -337.86047 will vary since it is randomized).
+您可能会看到一些关于缺少 GPU 库的警告，我们在这里忽略这些警告（CPU 足以转换模型），最后是类似 **tf.Tensor(-337.86047, shape=(), dtype=float32)** 的东西，这是我们的测试命令的结果（值 -337.86047 会有所不同，因为它是随机的）。
 
 
-2. Get the trained model
-------------------------
+2. 获取训练好的模型 ------------------------
 
-- We find a Keras/Tensorflow NASNetMobile pre-trained on ImageNet at https://keras.io/api/applications/
+- 我们在 https://keras.io/api/applications/ 上找到了在 ImageNet 上预先训练的 Keras/Tensorflow NASNetMobile
 
-- We will get it loaded into TensorFlow as explained in https://keras.io/api/applications/nasnet/#nasnetmobile-function
+- 我们将按照 https://keras.io/api/applications/nasnet/#nasnetmobile-function 中的说明将其加载到 TensorFlow 中
 
-- So we start a little **convert.py** script as follows:
-  \code{.py}
-import tensorflow as tf
-import numpy as np
+- 因此我们开始一个小的**convert.py**脚本，如下所示：\code{.py} import tensorflow as tf import numpy as np
 
-model = tf.keras.applications.NASNetMobile()
-  \endcode
+模型 = tf.keras.applications.NASNetMobile()
 
-- This will use all the defaults: 224x224x3 inputs, ImageNet weights, include last fully-connected layer, include final
-  softmax activation.
+- 这将使用所有默认值：224x224x3 输入、ImageNet 权重、包括最后的全连接层、包括最终的 softmax 激活。
 
-- You could retrain the model at this stage. Here we will just use it as is.
+- 您可以在此阶段重新训练模型。这里我们将按原样使用它。
 
-- If we run our **convert.py** now, it just downloads the model and exits.
+- 如果我们现在运行**convert.py**，它只会下载模型并退出。
 
-2. Get a sample dataset for quantization
-----------------------------------------
+2. 获取量化的样本数据集 ----------------------------------------
 
-- Since we are using ImageNet, we could get that dataset from some built-in TensorFlow function, but let's do it
-  manually to see how it would be done on a custom dataset.
+- 由于我们使用的是 ImageNet，我们可以从一些内置的 TensorFlow 函数中获取该数据集，但让我们手动执行此操作以查看如何在自定义数据集上执行此操作。
 
-- We still want the data to be representative of our training data, so let's download the ImageNet validation set:
+- 我们仍然希望数据能够代表我们的训练数据，因此让我们下载 ImageNet 验证集：
 
-  + We go to https://image-net.org but download is by request only even after creating an account
-  
-  + So instead we get a torrent file from http://academictorrents.com/details/5d6d0df7ed81efd49ca99ea4737e0ae5e3a5f2e5
-    and use `transmission-gtk` (pre-installed on Ubuntu) to download the dataset.
++ 我们访问 https://image-net.org，但即使创建了帐户，也只能通过请求进行下载 
++ 因此，我们从 http://academictorrents.com/details/5d6d0df7ed81efd49ca99ea4737e0ae5e3a5f2e5 获取一个 torrent 文件，并使用“transmission-gtk”（Ubuntu 上预装）下载数据集。
 
-  + We obtain ILSVRC2012_img_val.tar which we untar:
-  \code{.py}
-mkdir dataset
-cd dataset
-tar xvf ~/Downloads/ILSVRC2012_img_val.tar
-cd ..
-  \endcode
-
-  + We need to understand how pre-processing works and what mean, stdev, and scale should be applied to the raw pixel
-    values so that we can later set the correct pre-processing parameters. We find some info in the [TensorFlow docs for
-    NASNetMobile](https://www.tensorflow.org/api_docs/python/tf/keras/applications/nasnet/preprocess_input) which
-    suggest that nasnet.preprocess_input() will scale to [-1 .. 1]. But no mention of means... Further looking at the
-    [source code](https://github.com/keras-team/keras/blob/v2.9.0/keras/applications/nasnet.py#L817-L819),
-    nasnet.preprocess_input() calls imagenet_utils.preprocess_input() defined
-    [here](https://github.com/keras-team/keras/blob/07e13740fd181fc3ddec7d9a594d8a08666645f6/keras/applications/imagenet_utils.py#L101),
-    which calls _preprocess_numpy_input() defined
-    [here](https://github.com/keras-team/keras/blob/07e13740fd181fc3ddec7d9a594d8a08666645f6/keras/applications/imagenet_utils.py#L168)
-    where we finally learn that in 'tf' mode we will use mean=[127.5 127.5 127.5] and scale=1/127.5
-
-  + We add the following to our **convert.py**, modeled after the colab we are following, section "Convert to TFLite"
-    (we just need to change the location of our image files, and pre-processing):
-    \code{.py}
-IMAGE_SIZE = 224
-
-# A generator that provides a representative dataset
-def representative_data_gen():
-  dataset_list = tf.data.Dataset.list_files('dataset/*')        # JEVOIS modified
-  for i in range(100):
-    image = next(iter(dataset_list))
-    image = tf.io.read_file(image)
-    image = tf.io.decode_jpeg(image, channels=3)
-    image = tf.image.resize(image, [IMAGE_SIZE, IMAGE_SIZE])
-    image = tf.cast((image - 127.5) / 127.5, tf.float32)        # JEVOIS modified
-    image = tf.expand_dims(image, 0)
-    yield [image]
-    \endcode
-
-3. Quantize the model and convert to TFLite
--------------------------------------------
-
-We again add the following to our **convert.py**, modeled after the colab we are following, section "Convert to TFLite":
-
-\code{.py}
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-
-# This enables quantization
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-
-# This sets the representative dataset for quantization
-converter.representative_dataset = representative_data_gen
-
-# This ensures that if any ops can't be quantized, the converter throws an error
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-
-# For full integer quantization, though supported types defaults to int8 only, we explicitly declare it for clarity.
-converter.target_spec.supported_types = [tf.int8]
-
-# These set the input and output tensors to uint8 (added in r2.3)
-converter.inference_input_type = tf.uint8
-converter.inference_output_type = tf.uint8
-tflite_model = converter.convert()
-
-with open('NASNetMobile_quant.tflite', 'wb') as f:     # JEVOIS modified
-  f.write(tflite_model)
-\endcode
-
-We run the full **convert.py** (collating the 3 above snippets):
-
-\code{.py}
-python3 convert.py
-\endcode
-
-Which takes a while (maybe we should have installed GPU support after all), but eventually we get
-<b>NASNetMobile_quant.tflite</b> which is a quantized version of our original model.
-
-Let's do a quick check and upload our quantized model to Lutz Roeder's great [Netron](https://netron.app/) online model
-inspection tool. Upload **NASNetMobile_quant.tflite** and inspect the various layers. In particular, if you expand the
-input, weight, bias, and output details of any Conv layer, you will see how the data is int8 with some associated
-quantization parameters.
-
-4. Convert quantized TFLite model to EdgeTPU
---------------------------------------------
-
-- To convert from quantized TFLite to EdgeTPU, we wimply run:
-  \code{.py}
-edgetpu_compiler NASNetMobile_quant.tflite
-  \endcode
-
-- This will port as many layers and operations as possible for execution on the TPU. We see this:
-  \code{.unparsed}
-Edge TPU Compiler version 16.0.384591198
-Started a compilation timeout timer of 180 seconds.
-
-Model compiled successfully in 5841 ms.
-
-Input model: NASNetMobile_quant.tflite
-Input size: 6.21MiB
-Output model: NASNetMobile_quant_edgetpu.tflite
-Output size: 8.15MiB
-On-chip memory used for caching model parameters: 6.31MiB
-On-chip memory remaining for caching model parameters: 0.00B
-Off-chip memory used for streaming uncached model parameters: 635.12KiB
-Number of Edge TPU subgraphs: 1
-Total number of operations: 669
-Operation log: NASNetMobile_quant_edgetpu.log
-See the operation log file for individual operation details.
-Compilation child process completed within timeout period.
-Compilation succeeded! 
-  \endcode
-
-- And we get **NASNetMobile_quant_edgetpu.tflite** that we will copy to JeVois-Pro microSD.
-  \note Just a little bit too big! From the above messages, we are maxing out the on-board RAM, and 635 Kbytes of model
-  parameters will need to be swapped in/out between that RAM and the main processor's RAM on every inference, in
-  addition to streaming images over to the TPU.
-
-- We can check the generated NASNetMobile_quant_edgetpu.log to confirm that in this case all layers are ported to TPU:
-  \code{.unparsed}
-Edge TPU Compiler version 16.0.384591198
-Input: NASNetMobile_quant.tflite
-Output: NASNetMobile_quant_edgetpu.tflite
-
-Operator                       Count      Status
-
-PAD                            20         Mapped to Edge TPU
-ADD                            84         Mapped to Edge TPU
-MAX_POOL_2D                    4          Mapped to Edge TPU
-MEAN                           1          Mapped to Edge TPU
-QUANTIZE                       86         Mapped to Edge TPU
-CONV_2D                        196        Mapped to Edge TPU
-CONCATENATION                  20         Mapped to Edge TPU
-FULLY_CONNECTED                1          Mapped to Edge TPU
-RELU                           48         Mapped to Edge TPU
-MUL                            4          Mapped to Edge TPU
-SOFTMAX                        1          Mapped to Edge TPU
-STRIDED_SLICE                  4          Mapped to Edge TPU
-AVERAGE_POOL_2D                40         Mapped to Edge TPU
-DEPTHWISE_CONV_2D              160        Mapped to Edge TPU
-  \endcode
-
-
-5. Create a zoo YAML file for our new model
--------------------------------------------
-
-Now we need to let JeVois know about our model, by creating a small YAML file that describes the model and locations of
-the files. We just take an entry from the pre-loaded JeVois **tpu.yml** (in Config tab of the GUI) for inspiration, and
-create our new **NASNetMobile.yml**:
-
-\code{.py}
-%YAML 1.0
----
-
-NASNetMobile:
-  preproc: Blob
-  nettype: TPU
-  postproc: Classify
-  model: "dnn/custom/NASNetMobile_quant_edgetpu.tflite"
-  intensors: "NHWC:8U:1x224x224x3:AA:0.0078125:128"
-  mean: "127.5 127.5 127.5"
-  scale: 0.0078125
-  classes: "coral/classification/imagenet_labels.txt"
-  classoffset: 1
-\endcode
-
-\note For \p classes, we use an existing ImageNet label file that is already pre-loaded on our microSD, since we did not
-get one from Keras. Because that label file has a first entry for "background", which is not used in our model here, we
-use a \p classoffset of 1 to shift the class labels. You can adjust this at runtime in case labels seem off. If you use
-a custom-trained model, you should also copy a file **NASNetMobile.labels** to microSD, that describes your class names
-(one class label per line), and then set the classes parameter to that file.
-
-6. Copy to microSD and run
---------------------------
-
-- Copy **NASNetMobile_quant_edgetpu.tflite** and **NASNetMobile.yml** to /jevoispro/share/dnn/custom/ on the JeVois-Pro
-  microSD.
-
-- Launch the \jvmod{DNN} module and select \p pipe **TPU:Classify:NASNetMobile**
++ 我们获得 ILSVRC2012_img_val.tar，解压后：\code{.py} mkdir dataset cd dataset tar xvf ~/Downloads/ILSVRC2012_img_val.tar cd .. \endcode
+
++ 我们需要了解预处理的工作原理，以及应该将平均值、标准差和比例应用于原始像素值，以便我们稍后可以设置正确的预处理参数。我们在 [NASNetMobile 的 TensorFlow 文档](https://www.tensorflow.org/api_docs/python/tf/keras/applications/nasnet/preprocess_input) 中找到了一些信息，这些信息表明 nasnet.preprocess_input() 将缩放到 [-1 .. 1]。但没有提到方法......进一步查看[源代码]（https://github.com/keras-team/keras/blob/v2.9.0/keras/applications/nasnet.py#L817-L819），nasnet.preprocess_input（）调用[此处]（https://github.com/keras-team/keras/blob/07e13740fd181fc3ddec7d9a594d8a08666645f6/keras/applications/imagenet_utils.py#L101）定义的 imagenet_utils.preprocess_input（），后者调用定义的 _preprocess_numpy_input（） [这里]（https://github.com/keras-team/keras/blob/07e13740fd181fc3ddec7d9a594d8a08666645f6/keras/applications/imagenet_utils.py#L168）我们最终了解到，在 'tf' 模式下，我们将使用 mean=[127.5 127.5 127.5] 和 scale=1/127.5
+
++ 我们将以下内容添加到我们的 **convert.py** 中，以我们正在关注的 colab 为蓝本，部分“转换为 TFLite”（我们只需要更改图像文件的位置和预处理）：\code{.py} IMAGE_SIZE = 224
+
+# 提供代表性数据集的生成器 def representative_data_gen(): dataset_list = tf.data.Dataset.list_files('dataset/*') # 修改后的 JEVOIS for i in range(100): image = next(iter(dataset_list)) image = tf.io.read_file(image) image = tf.io.decode_jpeg(image, channels=3) image = tf.image.resize(image, [IMAGE_SIZE, IMAGE_SIZE]) image = tf.cast((image - 127.5) / 127.5, tf.float32) # 修改后的 JEVOIS image = tf.expand_dims(image, 0) Yield [image] \endcode
+
+3. 量化模型并转换为 TFLite ----------------------------------------------
+
+我们再次将以下内容添加到我们的 **convert.py** 中，以我们关注的 colab 中的“转换为 TFLite”部分为蓝本：
+
+\code{.py} 转换器 = tf.lite.TFLiteConverter.from_keras_model(模型)
+
+# 这将启用量化转换器。优化 = [tf.lite.Optimize.DEFAULT]
+
+# 这设置了量化的代表性数据集 converter.representative_dataset = representative_data_gen
+
+# 这确保如果任何操作无法量化，转换器就会抛出错误 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+
+# 对于完整的整数量化，虽然支持的类型默认仅为 int8，但为了清楚起见，我们明确声明了它。converter.target_spec.supported_types = [tf.int8]
+
+# 将输入和输出张量设置为 uint8（在 r2.3 中添加）converter.inference_input_type = tf.uint8 converter.inference_output_type = tf.uint8 tflite_model = converter.convert()
+
+使用 open('NASNetMobile_quant.tflite', 'wb') 作为 f: # JEVOIS 修改 f.write(tflite_model) \endcode
+
+我们运行完整的**convert.py**（整理上面的 3 个片段）：
+
+\code{.py} python3 转换.py \endcode
+
+这需要一段时间（也许我们应该安装 GPU 支持），但最终我们得到了 <b>NASNetMobile_quant.tflite</b>，它是我们原始模型的量化版本。
+
+让我们快速检查一下，并将我们的量化模型上传到 Lutz Roeder 的出色 [Netron](https://netron.app/) 在线模型检查工具。上传 **NASNetMobile_quant.tflite** 并检查各个层。特别是，如果您展开任何 Conv 层的输入、权重、偏差和输出详细信息，您将看到数据是如何通过一些相关的量化参数进行 int8 处理的。
+
+4. 将量化的TFLite模型转换为EdgeTPU --------------------------------------------
+
+- 要从量化的 TFLite 转换为 EdgeTPU，我们只需运行：\code{.py} edgetpu_compiler NASNetMobile_quant.tflite \endcode
+
+- 这将移植尽可能多的层和操作以在 TPU 上执行。我们看到这个：\code{.unparsed} Edge TPU 编译器版本 16.0.384591198 启动了 180 秒的编译超时计时器。
+
+模型在 5841 毫秒内成功编译。
+
+输入模型：NASNetMobile_quant.tflite 输入大小：6.21MiB 输出模型：NASNetMobile_quant_edgetpu.tflite 输出大小：8.15MiB 用于缓存模型参数的片上内存：6.31MiB 用于缓存模型参数的剩余片上内存：0.00B 用于流式传输未缓存模型参数的片外内存：635.12KiB Edge TPU 子图数量：1 操作总数：669 操作日志：NASNetMobile_quant_edgetpu.log 有关单个操作的详细信息，请参阅操作日志文件。 编译子进程在超时期限内完成。 编译成功！ \endcode
+
+- 我们得到了 **NASNetMobile_quant_edgetpu.tflite**，我们会将其复制到 JeVois-Pro microSD。\note 有点太大了！从上面的消息来看，我们正在最大限度地利用板载 RAM，除了将图像流式传输到 TPU 之外，每次推理时都需要在该 RAM 和主处理器的 RAM 之间交换 635 KB 的模型参数。
+
+- 我们可以检查生成的 NASNetMobile_quant_edgetpu.log 以确认在这种情况下所有层都已移植到 TPU：\code{.unparsed} Edge TPU 编译器版本 16.0.384591198 输入：NASNetMobile_quant.tflite 输出：NASNetMobile_quant_edgetpu.tflite
+
+操作员计数状态
+
+PAD 20 映射到边缘 TPU ADD 84 映射到边缘 TPU MAX_POOL_2D 4 映射到边缘 TPU MEAN 1 映射到边缘 TPU QUANTIZE 86 映射到边缘 TPU CONV_2D 196 映射到边缘 TPU CONCATENATION 20 映射到边缘 TPU FULLY_CONNECTED 1 映射到边缘 TPU RELU 48 映射到边缘 TPU MUL 4 映射到边缘 TPU SOFTMAX 1 映射到边缘 TPU STRIDED_SLICE 4 映射到边缘 TPU AVERAGE_POOL_2D 40 映射到边缘 TPU DEPTHWISE_CONV_2D 160 映射到边缘 TPU \endcode
+
+
+5. 为我们的新模型创建一个 zoo YAML 文件 ----------------------------------------------
+
+现在我们需要让 JeVois 了解我们的模型，方法是创建一个描述模型和文件位置的小型 YAML 文件。我们只需从预加载的 JeVois **tpu.yml**（在 GUI 的配置选项卡中）中获取一个条目即可获得灵感，并创建我们的新 **NASNetMobile.yml**：
+
+\code{.py} %YAML 1.0 ---
+
+NASNetMobile：预处理：Blob 网络类型：TPU 后处理：分类模型：“dnn/custom/NASNetMobile_quant_edgetpu.tflite” 强度：“NHWC：8U：1x224x224x3：AA：0.0078125：128” 平均值：“127.5 127.5 127.5” 比例：0.0078125 类：“coral/classification/imagenet_labels.txt” 类别偏移量：1 \endcode
+
+\note 对于 \p 类，我们使用已预加载到 microSD 上的现有 ImageNet 标签文件，因为我们没有从 Keras 获取该文件。由于该标签文件的第一个条目为“背景”，而我们的模型未使用此条目，因此我们使用 \p classoffset 1 来移动类标签。如果标签似乎不正确，您可以在运行时调整它。如果您使用自定义训练的模型，您还应该将文件 **NASNetMobile.labels** 复制到 microSD，该文件描述了您的类名（每行一个类标签），然后将 classes 参数设置为该文件。
+
+6. 复制到 microSD 并运行 --------------------------
+
+- 将 **NASNetMobile_quant_edgetpu.tflite** 和 **NASNetMobile.yml** 复制到 JeVois-Pro microSD 上的 /jevoispro/share/dnn/custom/。
+
+- 启动 \jvmod{DNN} 模块并选择 \p pipe **TPU:Classify:NASNetMobile**
 
 \jvimg{tpu-nasnetmobile.png, 70%}
 
-- It works! Note that a TPU connected to USB 2.0 was used for this screenshot, speed is higher when using a PCIe TPU
-  board.
+- 成功了！请注意，此屏幕截图使用的是连接到 USB 2.0 的 TPU，使用 PCIe TPU 板时速度更快。
 
-Tips
-====
+提示 ====
 
-- Models larger than 6.5 MB of weights can run quite well on the TPU, but will be slower. The caching if completely
-  transparent to users and works very well.
+- 权重大于 6.5 MB 的模型可以在 TPU 上运行得很好，但速度会更慢。缓存对用户完全透明，并且运行良好。
 
-- On JeVois-Pro, several Coral TPU pipelines can be simultaneously instantiated for several different models. The models
-  will be automatically and transparently time-multiplexed over the hardware accelerator. For example, in JeVois modules
-  \jvmod{MultiDNN} or \jvmod{MultiDNN2}, you can set several of the pipelines (in the params.cfg file of the module) to
-  TPU models without any conflicts or issues even if you only have one TPU.
+- 在 JeVois-Pro 上，可以同时为多个不同的模型实例化多个 Coral TPU 管道。这些模型将自动且透明地在硬件加速器上进行时间复用。例如，在 JeVois 模块 \jvmod{MultiDNN} 或 \jvmod{MultiDNN2} 中，您可以将多个管道（在模块的 params.cfg 文件中）设置为 TPU 模型，即使您只有一个 TPU，也不会出现任何冲突或问题。
 
-- If you have several TPUs, YAML parameter **tpunum** can be used to run a given model on a given TPU.
+- 如果您有多个 TPU，则可以使用 YAML 参数 **tpunum** 在给定的 TPU 上运行给定的模型。
 
-- Also see \ref UserDNNtips
+- 另请参阅 \ref UserDNNtips
 
 */
+

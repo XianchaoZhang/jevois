@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_NetworkNPU_8C">
+<title>src/jevois/DNN/NetworkNPU.C File Reference</title>
+<indexterm><primary>src/jevois/DNN/NetworkNPU.C</primary></indexterm>
+<programlisting>#include &lt;jevois/DNN/NetworkNPU.H&gt;
+#include &lt;jevois/Util/Utils.H&gt;
+#include &lt;jevois/DNN/Utils.H&gt;
+#include &lt;vsi_nn_version.h&gt;
+#include &lt;filesystem&gt;
+</programlisting>Include dependency graph for NetworkNPU.C:<para>
+    <informalfigure>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="0" fileref="NetworkNPU_8C__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </informalfigure>
+</para>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1ac01b499b3f17ec72c191dfa7ac7705d7">VNN_APP_DEBUG</link>   (FALSE)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1aa4e26198341e63628bd3c6f26e72c122">NEW_VXNODE</link>(_node,  _type,  _in,  _out,  _uid)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1acd32651c91b9fec17a157e7e1ce7fe3c">NEW_VIRTUAL_TENSOR</link>(_id,  _attr,  _dtype)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1a45713f94a033ce1f3bfcf64bb99b2df1">NEW_CONST_TENSOR</link>(_id,  _attr,  _dtype,  _ofst,  _size)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1a677822a5b02c848b6d8eefcc94e6ad74">NEW_NORM_TENSOR</link>(_id,  _attr,  _dtype)</para>
+</listitem>
+            <listitem><para>#define <link linkend="_NetworkNPU_8C_1ae51b2ae8cc3879dceac516d658bad628">NEW_NORM_TENSOR_FROM_HANDLE</link>(_id,  _attr,  _dtype)</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_NetworkNPU_8C_1a45713f94a033ce1f3bfcf64bb99b2df1"/>    <section>
+    <title>NEW_CONST_TENSOR</title>
+<indexterm><primary>NEW_CONST_TENSOR</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>NEW_CONST_TENSOR</secondary></indexterm>
+<para><computeroutput>#define NEW_CONST_TENSOR( _id,  _attr,  _dtype,  _ofst,  _size)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;data&#32;=&#32;load_data(fp,&#32;_ofst,&#32;_size);&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.vtl&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.is_const&#32;=&#32;TRUE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.dtype.vx_type&#32;=&#32;_dtype;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_id&#32;=&#32;vsi_nn_AddTensor(itsGraph,&#32;VSI_NN_TENSOR_ID_AUTO,&#32;&amp;&#32;_attr,&#32;data);&#32;\
+&#32;&#32;&#32;&#32;free(data);&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;if&#32;(VSI_NN_TENSOR_ID_NA&#32;==&#32;_id)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;NEW_CONST_TENSOR&#32;failed&quot;</emphasis>);&#32;&#32;\
+&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(0)
+</programlisting><para>
+Definition at line 49 of file NetworkNPU.C.</para>
+    </section><anchor xml:id="_NetworkNPU_8C_1a677822a5b02c848b6d8eefcc94e6ad74"/>    <section>
+    <title>NEW_NORM_TENSOR</title>
+<indexterm><primary>NEW_NORM_TENSOR</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>NEW_NORM_TENSOR</secondary></indexterm>
+<para><computeroutput>#define NEW_NORM_TENSOR( _id,  _attr,  _dtype)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.vtl&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.is_const&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.dtype.vx_type&#32;=&#32;_dtype;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_id&#32;=&#32;vsi_nn_AddTensor(itsGraph,&#32;VSI_NN_TENSOR_ID_AUTO,&#32;&amp;&#32;_attr,&#32;NULL);&#32;\
+&#32;&#32;&#32;&#32;if&#32;(VSI_NN_TENSOR_ID_NA&#32;==&#32;_id)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;NEW_NORM_TENSOR&#32;failed&quot;</emphasis>);&#32;&#32;&#32;\
+&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(0)
+</programlisting><para>
+Definition at line 60 of file NetworkNPU.C.</para>
+    </section><anchor xml:id="_NetworkNPU_8C_1ae51b2ae8cc3879dceac516d658bad628"/>    <section>
+    <title>NEW_NORM_TENSOR_FROM_HANDLE</title>
+<indexterm><primary>NEW_NORM_TENSOR_FROM_HANDLE</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>NEW_NORM_TENSOR_FROM_HANDLE</secondary></indexterm>
+<para><computeroutput>#define NEW_NORM_TENSOR_FROM_HANDLE( _id,  _attr,  _dtype)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.vtl&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.is_const&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.dtype.vx_type&#32;=&#32;_dtype;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_id&#32;=&#32;vsi_nn_AddTensorFromHandle(itsGraph,&#32;VSI_NN_TENSOR_ID_AUTO,&#32;&amp;&#32;_attr,&#32;NULL);&#32;\
+&#32;&#32;&#32;&#32;if&#32;(VSI_NN_TENSOR_ID_NA&#32;==&#32;_id)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;NEW_NORM_TENSOR_FROM_HANDLE&#32;failed&quot;</emphasis>);&#32;\
+&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(0)
+</programlisting><para>
+Definition at line 69 of file NetworkNPU.C.</para>
+    </section><anchor xml:id="_NetworkNPU_8C_1acd32651c91b9fec17a157e7e1ce7fe3c"/>    <section>
+    <title>NEW_VIRTUAL_TENSOR</title>
+<indexterm><primary>NEW_VIRTUAL_TENSOR</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>NEW_VIRTUAL_TENSOR</secondary></indexterm>
+<para><computeroutput>#define NEW_VIRTUAL_TENSOR( _id,  _attr,  _dtype)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;memset(_attr.size,&#32;0,&#32;VSI_NN_MAX_DIM_NUM&#32;*&#32;<emphasis role="keyword">sizeof</emphasis>(vsi_size_t));&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.dim_num&#32;=&#32;VSI_NN_DIM_AUTO;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.vtl&#32;=&#32;!<link linkend="_NetworkNPU_8C_1ac01b499b3f17ec72c191dfa7ac7705d7">VNN_APP_DEBUG</link>;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.is_const&#32;=&#32;FALSE;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_attr.dtype.vx_type&#32;=&#32;_dtype;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_id&#32;=&#32;vsi_nn_AddTensor(itsGraph,&#32;VSI_NN_TENSOR_ID_AUTO,&#32;&amp;&#32;_attr,&#32;NULL);&#32;\
+&#32;&#32;&#32;&#32;if&#32;(VSI_NN_TENSOR_ID_NA&#32;==&#32;_id)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;NEW_VIRTUAL_TENSOR&#32;failed&quot;</emphasis>);&#32;\
+&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(0)
+</programlisting><para>
+Definition at line 38 of file NetworkNPU.C.</para>
+    </section><anchor xml:id="_NetworkNPU_8C_1aa4e26198341e63628bd3c6f26e72c122"/>    <section>
+    <title>NEW_VXNODE</title>
+<indexterm><primary>NEW_VXNODE</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>NEW_VXNODE</secondary></indexterm>
+<para><computeroutput>#define NEW_VXNODE( _node,  _type,  _in,  _out,  _uid)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting>&#32;&#32;&#32;&#32;<emphasis role="keywordflow">do</emphasis>&#32;{&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_node&#32;=&#32;vsi_nn_AddNode(itsGraph,&#32;_type,&#32;_in,&#32;_out,&#32;NULL);&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;_node-&gt;uid&#32;=&#32;(uint32_t)_uid;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;&#32;&#32;if&#32;(NULL&#32;==&#32;_node)&#32;<link linkend="_group__debugging_1ga07fea0c726b5acfbb6c0d5483dd15d0d">LFATAL</link>(<emphasis role="stringliteral">&quot;NEW_VXNODE&#32;failed&quot;</emphasis>);&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;\
+&#32;&#32;}&#32;<emphasis role="keywordflow">while</emphasis>(0)
+</programlisting><para>
+Definition at line 32 of file NetworkNPU.C.</para>
+    </section><anchor xml:id="_NetworkNPU_8C_1ac01b499b3f17ec72c191dfa7ac7705d7"/>    <section>
+    <title>VNN_APP_DEBUG</title>
+<indexterm><primary>VNN_APP_DEBUG</primary><secondary>NetworkNPU.C</secondary></indexterm>
+<indexterm><primary>NetworkNPU.C</primary><secondary>VNN_APP_DEBUG</secondary></indexterm>
+<para><computeroutput>#define VNN_APP_DEBUG   (FALSE)</computeroutput></para><para>
+Definition at line 26 of file NetworkNPU.C.</para>
+</section>
+</section>
+</section>

@@ -21,12 +21,11 @@
 
 namespace jevois
 {
-  //! Abstract base class for a string-based user interface
-  /*! Users interact with the JeVois hardware by issuing text commands and receiving text answers. UserInterface is an
-      abstract base class for such communications, with derived classes Serial (on the platform hardware, using hardware
-      serial and serial-over-usb) or StdioInterface (on host, using user inputs and outputs in the terminal).
+  //! 基于字符串的用户界面的抽象基类 
+  /*! 用户通过发出文本命令和接收文本答案与 JeVois 硬件交互。UserInterface 是此类通信的抽象基类，其派生类为 Serial（在平台硬件上，
+      使用硬件串行和 USB 串行）或 StdioInterface（在主机上，使用终端中的用户输入和输出）。
 
-      See \ref UserCli for the user documentation of the command-line interface.
+      请参阅 \ref UserCli 了解命令行界面的用户文档。
 
       \ingroup core */
   class UserInterface : public Component
@@ -38,27 +37,25 @@ namespace jevois
       //! Destructor
       virtual ~UserInterface();
       
-      //! Read some bytes if available, and return true and a string when one is complete (RETURN pressed)
-      /*! str is untouched if user input is not yet complete (RETURN not yet pressed). The RETURN (end of line) marker
-          is not copied into str, only the characters received up to the end of line marker. */
+      //! 读取一些字节（如果可用），并在完成时（按下 RETURN 键）返回 true 和一个字符串 
+      /*! 如果用户输入尚未完成（尚未按下 RETURN 键），则 str 保持不变。RETURN（行尾）标记不会复制到 str 中，只会复制直到行尾标
+          记为止接收到的字符。 */
       virtual bool readSome(std::string & str) = 0;
       
-      //! Write a string
-      /*! No line terminator should be included in the string, writeString() will add one. In the Serial derived class,
-          this will be using the line termination convention of serial::linestyle to support different styles (CR, CRLF,
-          LF, etc). */
+      //! 写入字符串 
+      /*! 字符串中不应包含行终止符，writeString() 将添加一个。在 Serial 派生类中，这将使用 serial::linestyle 的行终止约定来支
+          持不同的样式（CR、CRLF、LF 等）。 */
       virtual void writeString(std::string const & str) = 0;
 
-      //! Write a string, with a prefix prepended
-      /*! No line terminator should be included in the string, writeString() will add one. In the Serial derived class,
-          this will be using the line termination convention of serial::linestyle to support different styles (CR, CRLF,
-          LF, etc). */
+      //! 写入一个字符串，并在前面添加前缀 
+      /*! 字符串中不应包含行终止符，writeString() 将添加一个。在 Serial 派生类中，这将使用 serial::linestyle 的行终止约定来支
+          持不同的样式（CR、CRLF、LF 等）。 */
       virtual void writeString(std::string const & prefix, std::string const & str);
 
-      //! Enum for the interface type
+      //! 接口类型的枚举
       enum class Type { Hard, USB, Stdio, GUI };
 
-      //! Derived classes must implement this and return their interface type
+      //! 派生类必须实现此并返回其接口类型
       virtual Type type() const = 0;
   };
 } // namespace jevois
