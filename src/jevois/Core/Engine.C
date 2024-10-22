@@ -274,7 +274,7 @@ void jevois::Engine::onParamChange(jevois::engine::serialdev const &, std::strin
       {
 #ifdef JEVOIS_PRO
         // 通常，现在还不知道我们是否会使用 GUI。在 JeVois-Pro 上，如果 serialmonitors 允许，则始终实例化 GUIserial。
-		// 稍后，如果 GUIhelper 被激活，我们将调用 // GUIserial::draw(); 否则，GUISerial 将表现得像常规串行，只是它会
+		// 稍后，如果 GUIhelper 被激活，我们将调用 GUIserial::draw(); 否则，GUISerial 将表现得像常规串行，只是它会
 		// 缓存所有数据：
         if (serialmonitors::get())
           s = addComponent<jevois::GUIserial>("serial", jevois::UserInterface::Type::Hard);

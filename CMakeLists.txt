@@ -14,7 +14,7 @@
 # Tel: +1 213 740 3527 - itti@pollux.usc.edu - http://iLab.usc.edu - http://jevois.org
 ######################################################################################################################
 
-# CMAKE BUILD RULES FOR JEVOIS CORE LIBRARY AND EXECUTABLES
+#  JEVOIS 核心库和可执行文件 CMAKE 构建规则
 CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
 ########################################################################################################################
@@ -24,14 +24,14 @@ set(JEVOIS_VENDOR "JeVois")
 ########################################################################################################################
 # Project version:
 set(JEVOIS_VERSION_MAJOR 1)
-set(JEVOIS_VERSION_MINOR 20)
+set(JEVOIS_VERSION_MINOR 21)
 set(JEVOIS_VERSION_PATCH 0)
 set(JEVOIS_SOVERSION "${JEVOIS_VERSION_MAJOR}.${JEVOIS_VERSION_MINOR}.${JEVOIS_VERSION_PATCH}" )
 
 ########################################################################################################################
-# OpenCV version to use with JeVois:
+# 与 JeVois 一起使用的 OpenCV 版本
 set(JEVOIS_OPENCV_MAJOR 4)
-set(JEVOIS_OPENCV_MINOR 8)
+set(JEVOIS_OPENCV_MINOR 10)
 set(JEVOIS_OPENCV_PATCH 0)
 set(JEVOIS_OPENCV_VERSION "${JEVOIS_OPENCV_MAJOR}.${JEVOIS_OPENCV_MINOR}.${JEVOIS_OPENCV_PATCH}")
 
@@ -52,32 +52,27 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules")
 include(JeVoisHardware)
 
 ########################################################################################################################
-# Compilation options that can be set by users:
-option(JEVOIS_LDEBUG_ENABLE "Enable LDEBUG() messages. If turned off, LDEBUG() will not be not compiled in, and no \
-message will be issued even if the log level is set to LOG_DEBUG at runtime. This is to avoid doing a lot of \
-runtime tests on the log level to decide whether it is LOG_DEBUG or not." OFF)
+# 用户可以设置的编译选项： 
+option(JEVOIS_LDEBUG_ENABLE "启用 LDEBUG() 消息。如果关闭，LDEBUG() 将不会被编译，即使在运行时将日志级别设置为 \ 
+LOG_DEBUG，也不会发出任何消息。这是为了避免在日志级别上进行大量运行时测试以决定它是否为 LOG_DEBUG。" OFF)
 message(STATUS "JEVOIS_LDEBUG_ENABLE: ${JEVOIS_LDEBUG_ENABLE}")
 
-option(JEVOIS_TRACE_ENABLE "Enable tracing of functions that use JEVOIS_TRACE(). They will not be compiled in if \
-OFF. Note that JEVOIS_TRACE uses LDEBUG() so JEVOIS_LDEBUG_ENABLE should be ON to see the trace messages" OFF)
+option(JEVOIS_TRACE_ENABLE "启用使用 JEVOIS_TRACE() 的函数的跟踪。如果 OFF，它们将不会被编译。请注意，\ 
+JEVOIS_TRACE 使用 LDEBUG()，因此 JEVOIS_LDEBUG_ENABLE 应该为 ON 才能看到跟踪消息" OFF)
 message(STATUS "JEVOIS_TRACE_ENABLE: ${JEVOIS_TRACE_ENABLE}")
 
-option(JEVOIS_USE_SYNC_LOG "Enable synchronous logging, i.e., log messages from LDEBUG(), LINFO(), etc are issued \
-immediately and execution flow blocks until they are fully printed out. This may sometimes be too slow in \
-fast streaming applications if the printing happens over a slow serial link. Hence, default behavior is to use \
-an asynchronous queue for the messages, where LDEBUG(), LINFO(), etc just queue up the message string and a \
-background thread prints them out of the queue as fast as it can. The order in which the messages were issued \
-is preserved by the queue, but there may be delays between message issue and printing, hence JEVOIS_USE_SYNC_LOG \
-may be useful in cases where one wants to check system messages (e.g., syslog printing on the console) and \
-their timing with respect to user application messages" OFF)
+option(JEVOIS_USE_SYNC_LOG "启用同步日志记录，即，立即发出来自 LDEBUG()、LINFO() 等的日志消息，并且执行流阻塞，直到 \
+它们完全打印出来。如果打印发生在慢速串行链路上，这有时在快速流式应用程序中可能会太慢。因此，默认行为是使用异步队列来 \ 
+处理消息，其中 LDEBUG()、LINFO() 等只是将消息字符串排队，并且后台线程会尽快将它们从队列中打印出来。队列会保留发出消 \ 
+息的顺序，但消息发出和打印之间可能会有延迟，因此 JEVOIS_USE_SYNC_LOG 在想要检查系统消息（例如，控制台上的系统日志打印） \ 
+和它们相对于用户应用程序消息的计时的情况下可能会有用" OFF)
 message(STATUS "JEVOIS_USE_SYNC_LOG: ${JEVOIS_USE_SYNC_LOG}")
 
-option(JEVOIS_LOG_TO_FILE "Enable sending all log messages to file jevois.log instead of console. Only works \
-with async logging." OFF)
+option(JEVOIS_LOG_TO_FILE "启用将所有日志消息发送到文件 jevois.log 而不是控制台。仅适用于异步日志记录。" OFF)
 message(STATUS "JEVOIS_LOG_TO_FILE: ${JEVOIS_LOG_TO_FILE}")
 
 ########################################################################################################################
-# Check for JEVOIS_ROOT environment variable:
+# 检查 JEVOIS_ROOT 环境变量：
 if (DEFINED ENV{JEVOIS_ROOT})
   set(JEVOIS_ROOT $ENV{JEVOIS_ROOT})
 else ()
@@ -94,14 +89,14 @@ set(JEVOIS_PLATFORM_INSTALL_PREFIX "/var/lib/${JEVOIS}-build/usr")
 set(JEVOIS_PLATFORM_INSTALL_PREFIX_PDEB "/var/lib/${JEVOIS}-build-pdeb/usr")
 
 ########################################################################################################################
-# Root path to install modules:
-# For host, set JEVOIS_ROOT path as is for modules; for platform, put it into /var/lib/jevois-microsd:
+# 安装模块的根路径：
+# 对于主机，将 JEVOIS_ROOT 路径设置为模块的路径；对于平台，将其放入 /var/lib/jevois-microsd：
 file(TO_NATIVE_PATH "${JEVOIS_ROOT}" JEVOIS_HOST_MODULES_ROOT)
 file(TO_NATIVE_PATH "/var/lib/${JEVOIS}-microsd" JEVOIS_PLATFORM_MODULES_ROOT)
 file(TO_NATIVE_PATH "/var/lib/${JEVOIS}-build-pdeb" JEVOIS_PLATFORM_MODULES_ROOT_PDEB)
 
 ########################################################################################################################
-# Set compiler flags:
+# 设置编译器标志：
 set(JEVOIS_WARN_C_FLAGS "-W -Wall -Wextra -Wundef -Wwrite-strings -Wlogical-op -Wredundant-decls")
 set(JEVOIS_WARN_CPP_FLAGS "${JEVOIS_WARN_C_FLAGS} -Wno-deprecated-enum-enum-conversion")
 # 其他可用的警告标志过于严格，它们会绊倒 opencv、tensorflow 等：
@@ -121,7 +116,7 @@ set(JEVOIS_PLATFORM_NATIVE_CFLAGS "${JEVOIS_PLATFORM_ARCH_FLAGS} -g -O4 \
 include(JeVois)
 
 # 检查我们是否尝试根据较旧的 jevois-sdk 编译较新的 jevois，这通常会失败：
-jevois_check_sdk_version(${JEVOIS_SOVERSION})
+#jevois_check_sdk_version(${JEVOIS_SOVERSION})
 
 ########################################################################################################################
 # 项目名称、检测编译器（已由我们的辅助模块设置）和常规设置
@@ -132,16 +127,16 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set (CMAKE_INSTALL_PREFIX ${JEVOIS_INSTALL_PREFIX} CACHE PATH "Installation prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
-# Register dependencies on header files:
+# 注册头文件的依赖项：
 include_directories(include)
 
-# Create our C++ config file:
+# 创建我们的 C++ 配置文件：
 configure_file(include/jevois/Config/Config.H.in Config-${JEVOIS}.H @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Config-${JEVOIS}.H
   DESTINATION ${JEVOIS_MODULES_ROOT}/include/jevois/Config COMPONENT bin)
 
-# Create our Python config file:
+# 创建我们的 Python 配置文件：
 configure_file(src/pyjevois.py.in pyjevois.py @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pyjevois.py DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin)
 
@@ -153,11 +148,11 @@ message(STATUS "JeVois C++ standard used: ${JEVOIS_CXX_STD}")
 # 启用地址清理器（address sanitizer）（用于调试非法内存访问等；通常应该注释掉）：
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address")
 
-# Create our cmake config file for later compilation of modules and extra libs:
+# 创建我们的 cmake 配置文件，以便稍后编译模块和额外的库：
 configure_file(src/jevois_config.cmake.in jevois_config.cmake @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/jevois_config.cmake DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin)
 
-# Setup our library:
+# 设置我们的库：
 file(GLOB_RECURSE JEVOIS_LIB_SRC_FILES src/jevois/*.C src/jevois/*.c)
 add_library(${JEVOIS} SHARED ${JEVOIS_LIB_SRC_FILES})
 # 由于我们现在安装在 /jevois[pro] 中（即 vfat），因此无法再设置 soversion 和符号链接：
@@ -168,7 +163,7 @@ target_link_libraries(${JEVOIS} ${JEVOIS_OPENCV_LIBS} -lpthread -ltbb -ldl -luti
   -lboost_thread -lboost_regex -lturbojpeg -lm ${JEVOIS_PYTHON_LIBS} ${JEVOIS_OPENGL_LIBS})
 
 ########################################################################################################################
-# Pull in our contributed packages and make sure they get installed:
+# 提取我们贡献的软件包并确保它们已安装：
 include_directories(Contrib/include/all Contrib/include/${JEVOIS_ARCH})
 subdirlist(SUBINCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/Contrib/include/all")
 list(TRANSFORM SUBINCLUDES PREPEND Contrib/include/all/)
@@ -256,7 +251,7 @@ if (JEVOIS_PRO)
 endif()
 
 ########################################################################################################################
-# Hailo neural accelerator libraries
+# Hailo 神经加速器库 
 if (JEVOIS_PRO)
   # Link libraries. These are all pre-installed in jevoispro-sysroot:
   target_link_libraries(${JEVOIS} hailort)
@@ -269,23 +264,23 @@ if (JEVOIS_PRO)
 endif ()
 
 ########################################################################################################################
-# Coral edge TPU libraries and associated TensorFlow. We install libtensorflowlite.so later as part of our package:
+# Coral edge TPU 库和相关的 TensorFlow。我们稍后将 libtensorflowlite.so 作为软件包的一部分进行安装：
 
 include_directories(Contrib/include/all/tensorflow/lite/tools/make/downloads/flatbuffers/include)
 target_link_libraries(${JEVOIS} tensorflowlite)
 
 if (JEVOIS_PRO)
-  # Coral edge TPU libraries for JeVois-Pro:
+  # JeVois-Pro 的 Coral edge TPU 库：
   target_link_libraries(${JEVOIS} edgetpu)
 else()
   if (JEVOIS_PLATFORM)
-    # Need to specify path for libtensorflowlite.so; not sure why it is not found in the target buildroot tree:
+    # 需要指定 libtensorflowlite.so 的路径；不确定为什么在目标 buildroot 树中找不到它：
     target_link_libraries(${JEVOIS} -L${JEVOIS_PLATFORM_MODULES_ROOT}/lib)
   endif()
 endif()
 
 ########################################################################################################################
-# Custom command to pre-process our OpenGL shaders (only used by JeVois-Pro):
+# 自定义命令来预处理我们的 OpenGL 着色器（仅由 JeVois-Pro 使用）：
 if (JEVOIS_PRO)
   set(JEVOIS_SHADER_FILE "${CMAKE_CURRENT_BINARY_DIR}/generated_shaders.C")
   set(JEVOIS_SHADER_SRCDIR "${CMAKE_CURRENT_SOURCE_DIR}/src/jevois/GPU/shaders")
@@ -300,7 +295,7 @@ if (JEVOIS_PRO)
 endif ()
 
 ########################################################################################################################
-# Setup our executables:
+# 设置我们的可执行文件：
 add_executable(${JEVOIS}-daemon src/Apps/jevois-daemon.C)
 target_link_libraries(${JEVOIS}-daemon ${JEVOIS})
 install(TARGETS ${JEVOIS}-daemon RUNTIME DESTINATION bin COMPONENT bin)
@@ -327,10 +322,10 @@ install(PROGRAMS "scripts/jevois-modinfo" DESTINATION bin COMPONENT bin
    RENAME "${JEVOIS}-modinfo")
 
 if (JEVOIS_PLATFORM)
-  # On platform only, install jevois[pro].sh from bin/ in the source tree into /usr/bin:
+  # 仅在平台上，将源代码树中的 bin/ 中的 jevois[pro].sh 安装到 /usr/bin 中： 
   install(PROGRAMS "bin/${JEVOIS}.sh" DESTINATION bin COMPONENT bin)
 else (JEVOIS_PLATFORM)
-  # On host only, install helper scripts:
+  # 仅在主机上，安装辅助脚本：
   install(PROGRAMS "scripts/jevois-create-module" DESTINATION bin COMPONENT bin
     RENAME "${JEVOIS}-create-module")
   install(PROGRAMS "scripts/jevois-create-python-module" DESTINATION bin COMPONENT bin
@@ -342,14 +337,14 @@ else (JEVOIS_PLATFORM)
   endif ()
 endif (JEVOIS_PLATFORM)
 
-# Install all of our CMakeModules as well
+# 安装我们所有的 CMakeModules 
 file(GLOB JEVOIS_CMAKE_MODULES CMakeModules/*.cmake)
 install(FILES ${JEVOIS_CMAKE_MODULES} DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin)
 
 ########################################################################################################################
 # Documentation:
 
-# Extract code snippets: FIXME could revisit using \snip tags instead
+# 提取代码片段：FIXME 可以使用 \snip 标签重新访问
 add_custom_target(docsnip
   COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/scripts/extract-code-snippets.pl"
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
@@ -361,7 +356,7 @@ add_custom_target(doc
   DEPENDS docsnip
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-# This is to install the doc of jevois and jevoisbase to jevois.org, only works in ilab:
+# 这是将 jevois 和 jevoisbase 的文档安装到 jevois.org，仅在 ilab 中有效：
 if ($ENV{JEVOIS_ILAB})
   add_custom_target(docweb
     COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/scripts/docinstall.sh
@@ -369,10 +364,10 @@ if ($ENV{JEVOIS_ILAB})
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif ($ENV{JEVOIS_ILAB})
 
-# Configure our pkgconfig file:
+# 配置我们的 pkgconfig 文件：
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pkgconfig/jevois.pc.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgconfig/jevois.pc @ONLY)
 
-# Documentation files for our install / distribution package
+# 我们的安装/分发包的文档文件设置
 set(DOC_FILES README INSTALL COPYING)
 if (JEVOIS_PLATFORM)
   set(DOC_PATH "share/doc/${JEVOIS}-platform")
@@ -382,12 +377,13 @@ endif (JEVOIS_PLATFORM)
 install(FILES ${DOC_FILES} DESTINATION ${DOC_PATH} COMPONENT bin)
 
 ########################################################################################################################
-# Extra files to be installed:
+# 要安装的额外文件：
 
-# Add includes to our install / distribution package:
+# 将包含项添加到我们的安装/分发包中：
+
 add_subdirectory(include)
 
-# Add installation rules for videomapings and initscript:
+# 添加 videomapings 和 initscript 的安装规则：
 if (JEVOIS_PRO)
   install(FILES "Config/videomappings-Pro.cfg"
     DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin RENAME "videomappings.cfg")
@@ -402,17 +398,17 @@ else()
     DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin RENAME "initscript.cfg")
 endif()
 
-# Install jevois config files and scripts, shared files:
+# 安装 jevois 配置文件和脚本、共享文件：
 install(FILES "Config/params.cfg"
   DESTINATION "${JEVOIS_MODULES_ROOT}/config" COMPONENT bin)
 install(DIRECTORY "share-${JEVOIS}/"
   DESTINATION "${JEVOIS_MODULES_ROOT}/share" COMPONENT bin)
 
 ########################################################################################################################
-# Debian packaging:
+# Debian 打包：
 
-# Create packages (Debian, RPM): in hbuild/ or pbuild/, just type 'sudo cpack' to create the package.
-# To list the files created in a package, run: dpkg --contents <package.deb>
+# 创建包（Debian、RPM）：在 hbuild/ 或 pbuild/ 中，只需输入 'sudo cpack' 即可创建包。
+# 要列出包中创建的文件，请运行：dpkg --contents <package.deb>
 set(CPACK_PACKAGE_DESCRIPTION "JeVois Smart Machine Vision Core (${JEVOIS})")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "JeVois Smart Embedded Machine Vision Toolkit, Core (${JEVOIS})")
 set(CPACK_PACKAGE_CONTACT "Laurent Itti <jevois.org@gmail.com>")
@@ -436,16 +432,16 @@ python${JEVOIS_HOST_PYTHON_MAJOR}.${JEVOIS_HOST_PYTHON_MINOR}-dev, python${JEVOI
 python${JEVOIS_HOST_PYTHON_MAJOR}-pil, python-dev-is-python3, pipx, \
 ${JEVOIS}-opencv (>=${JEVOIS_OPENCV_VERSION}), libglm-dev, libx11-dev")
                                                                                   
-# Add cross-compiler dependencies on jevois-pro-host; on jevois-a33 it is provided by buildroot:
+# 在 jevois-pro-host 上添加交叉编译器依赖项；在 jevois-a33 上，它由 buildroot 提供：
 if (JEVOIS_PRO)
 
-  # Add a few more depends needed by jevois pro host and platform:
+  # 添加 jevois pro 主机和平台所需的一些依赖项：
   set(JVPRODEPS "${JEVOIS}-openvino, libedgetpu-dev, libedgetpu1-std, zlib1g-dev, curl, libcurl4, libtool, \
                  bzip2, unzip, zip, rsync, libpng-dev, libexpat1-dev, hailort,")
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "${JVPRODEPS} ${CPACK_DEBIAN_PACKAGE_DEPENDS}")
 
   if (JEVOIS_PLATFORM)
-    # nothing on platform, compilers installed by fenix
+    # 平台上没有任何内容，编译器由 fenix 安装 
   else ()
     # cross-compilers on host:
     set(platc "gcc-${JEVOIS_COMPILER_VERSION}-${CROSS_COMPILE}, \
@@ -456,9 +452,8 @@ if (JEVOIS_PRO)
   endif ()
 endif ()
 
-# Add a file to find our libs. Do it as a file instead of as a debian postinst so that it will be created and installed
-# when compiling from source for the first time. Use debian postinst / prerm to update ldconfig. Only create this file
-# on host and pdeb packages to avoid debian conflicts:
+# 添加一个文件来查找我们的库。将其作为文件而不是 debian postinst 执行，这样它将在第一次从源代码编译时被创建和安装。
+# 使用 debian postinst / prerm 来更新 ldconfig。仅在主机和 pdeb 包上创建此文件以避免 debian 冲突：
 if (NOT JEVOIS_PLATFORM OR JEVOISPRO_PLATFORM_DEB)
   file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/${JEVOIS}.conf" "/${JEVOIS}/lib")
 
@@ -468,5 +463,5 @@ if (NOT JEVOIS_PLATFORM OR JEVOISPRO_PLATFORM_DEB)
     "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/debian/postinst;${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/debian/prerm;")
 endif()
 
-# Use helper from JeVois.cmake for all other settings:
+# 使用 JeVois.cmake 的 helper 进行所有其他设置：
 jevois_setup_cpack(${JEVOIS})

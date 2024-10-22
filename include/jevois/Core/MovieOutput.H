@@ -41,19 +41,20 @@ namespace jevois
       //! 设置视频格式和帧率
       virtual void setFormat(VideoMapping const & m) override;
 
-      //！获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去 /*！如果没有可用的缓冲区，则可能抛出，
-	      即，所有缓冲区都已排队等待发送但尚未发送。应用程序代码必须为每个 get() 平衡一个 send()。*/ 
+      //! 获取预分配的图像，以便我们可以填充像素数据，然后使用 send() 发送出去 
+	  /*！如果没有可用的缓冲区，则可能抛出, 即，所有缓冲区都已排队等待发送但尚未发送。应用程序代码必须为每个 get() 平
+	      衡一个 send(). */ 
       virtual void get(RawImage & img) override;
       
       //! 发送图像
-      /*! 如果格式不正确，则可能抛出 std::overflow_error，如果我们尚未使用前一个图像。 */
+      /*! 如果格式不正确，则可能抛出 std::overflow_error，如果我们尚未使用前一个图像. */
       virtual void send(RawImage const & img) override;
 
       //! Start streaming
       virtual void streamOn() override;
 
       //! Abort streaming
-      /*! 这只会取消将来的 get() 和 send() 调用，仍应调用 streamOff() 来关闭流式传输。 */
+      /*! 这只会取消将来的 get() 和 send() 调用，仍应调用 streamOff() 来关闭流式传输. */
       virtual void abortStream() override;
       
       //! Stop streaming

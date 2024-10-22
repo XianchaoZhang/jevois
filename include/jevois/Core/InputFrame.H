@@ -50,7 +50,7 @@ namespace jevois
       //! 移动构造函数
       InputFrame(InputFrame && other) = default;
       
-      /! 获取下一个捕获的相机图像 
+      //! 获取下一个捕获的相机图像 
 	  /*! 如果相机未流式传输或阻塞直到图像可用（已捕获），则抛出。 可以多次调用 get()，但始终会返回相同的图像。 要从相
 	      机获取连续的帧，必须由 JeVois Engine 向您提供连续的 InputFrame 包装器。 */ 
       RawImage const & get(bool casync = false) const;
@@ -77,7 +77,8 @@ namespace jevois
 		  ）。*/ 
 	  int getDmaFd(bool casync = false) const;
 
-      //! 获取 ISP 缩放的第二个摄像头帧的 DMA-BUF 文件描述符 /*! 仅在 JeVois-Pro 平台上，摄像头 ISP 可以输出 2 个帧：1) 
+      //! 获取 ISP 缩放的第二个摄像头帧的 DMA-BUF 文件描述符 
+	  /*! 仅在 JeVois-Pro 平台上，摄像头 ISP 可以输出 2 个帧：1) 
 	      来自传感器的原始帧，2) 由 ISP 缩放。此函数用于访问 ISP 缩放的帧。如果不是 JeVois-Pro 平台或摄像头流类型不是 
 		  jevois::StreamType::RawAndScaled，则抛出。此文件描述符可用于在支持 DMA-BUF 的接口之间共享像素缓冲区。JeVois 核
 		  心使用它来创建从摄像头传感器到 JeVois-Pro 上的硬件加速 OpenGL 显示器的零拷贝管道。如果不支持 DMA-BUF（在主机上

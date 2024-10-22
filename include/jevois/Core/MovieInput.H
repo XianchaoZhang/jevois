@@ -53,45 +53,45 @@ namespace jevois
       //! 从视频文件中获取下一帧，如果到达结尾，则可能循环回到开始
       void get(RawImage & img) override;
 
-      //！检查是否有由 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 /*！除非我们在 JeVois-Pro 平台上并且相机格式修饰符
-	       jevois::CropType::CropScale 当前正在使用中，否则返回 false。 */ 
+      //！检查是否有由 JeVoisPro 平台 ISP 缩放的第二个输入图像可用 
+	  /*！除非我们在 JeVois-Pro 平台上并且相机格式修饰符 jevois::CropType::CropScale 当前正在使用中，否则返回 false. */
       virtual bool hasScaledImage() const override;
 
       //！获取下一个捕获的 ISP 缩放辅助缓冲区
 	  /*！仅在 JeVois-Pro 平台上，相机 ISP 可以输出 2 帧：1) 来自传感器的原始帧，2) 由 ISP 缩放。此功能用于访问 ISP 缩
 	      放的帧。如果不是 JeVois-Pro 平台或相机裁剪类型不是 jevois::CropType::CropScale，则抛出。如果我们没有流式传输
 		  或阻塞直到图像可用（已捕获），则抛出。图像 img 应该由调用者分配，并将由我们从此处的设备收到的内容填充。默认
-		  实现抛出。*/ 
+		  实现抛出. */ 
 	  virtual void get2(RawImage & img) override;
 
       //! 表示用户处理已完成，并且之前已通过 get() 获取了图像 
 	  /*! 处理完 RawImage 数据后，应尽快在 get() 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲
-	      区无效。 */ 
+    	  区无效. */
 	  void done(RawImage & img) override;
 
       //! 表示用户处理已完成，并且之前已通过 get() 获取了图像 
 	  /*! 处理完 RawImage 数据后，应尽快在 get() 之后调用此方法，以便可以回收数据。这也会使图像无效，特别是其像素缓冲
-	      区无效。 */ 
+	      区无效. */
 	  void done2(RawImage & img) override;
 
       //! 获取有关控件的信息，如果硬件不支持则抛出 
-	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error*/
 	  void queryControl(struct v4l2_queryctrl & qc) const override;
 
       //! 获取菜单类型控件的可用菜单项名称，如果硬件不支持则抛出 
-	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */
 	  void queryMenu(struct v4l2_querymenu & qm) const override; 
 	  
 	  //! 获取控件的当前值，如果硬件不支持则抛出 
-	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */
 	  void getControl(struct v4l2_control & ctrl) const override; 
 	  
 	  //! 设置控件，如果硬件拒绝该值则抛出 
-	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */ 
+	  /*! 在 MovieInput 中，这只会抛出 std::runtime_error */
 	  void setControl(struct v4l2_control const & ctrl) override;
 
       //! 设置视频格式和帧速率 
-	  /*! 从输入影片文件读取的视频帧将重新缩放（如有必要）为该格式的分辨率，并将转换（如有必要）为该格式的像素类型。 */ 
+	  /*! 从输入影片文件读取的视频帧将重新缩放（如有必要）为该格式的分辨率，并将转换（如有必要）为该格式的像素类型. */
 	  void setFormat(VideoMapping const & m) override;
 
     protected:

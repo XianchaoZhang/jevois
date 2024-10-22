@@ -52,7 +52,7 @@ namespace jevois
       void streamOn() override;
 
       //! Abort streaming
-      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。
+      /*! 这只会取消未来的 get() 和 done() 调用，仍应调用 streamOff() 来关闭流式传输。 */
       void abortStream() override;
       
       //! Stop streaming
